@@ -1,0 +1,31 @@
+### YamlMime:Landing
+title: Dokumentation om Azure återställnings tider LevelX
+summary: Azure återställnings tider-LevelX innehåller NAND och eller Flash slitage-funktioner till inbäddade program.
+metadata:
+  title: Vad är Azure återställnings tider LevelX?
+  description: Azure återställnings tider-LevelX innehåller NAND och eller Flash slitage-funktioner till inbäddade program.
+  services: rtos
+  ms.service: rtos
+  ms.topic: landing-page
+  author: philmea
+  ms.author: philmea
+  ms.date: 07/10/2020
+  ms.openlocfilehash: 27ce4d34d53b2a6daec651dd83c648024aad0291
+  ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+  ms.translationtype: MT
+  ms.contentlocale: sv-SE
+  ms.lasthandoff: 03/22/2021
+  ms.locfileid: "104798008"
+landingContent:
+- title: Introduktion till Azure återställnings tider LevelX
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Vad är Azure återställnings tider LevelX?
+      url: chapter1.md
+- title: Installera och använda Azure återställnings tider-LevelX
+  linkLists:
+  - linkListType: get-started
+    links:
+    - text: Användar handbok för Azure återställnings tider LevelX
+      url: chapter2.md

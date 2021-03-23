@@ -1,0 +1,275 @@
+- name: Dokumentation om Azure återställnings tider NetX Duo
+  href: index.yml
+- name: Översikt över NetX Duo
+  href: overview-netx-duo.md
+- name: Användar handbok för NetX Duo
+  expanded: true
+  items:
+    - name: Om den här guiden
+      href: about-this-guide.md
+    - name: V. 1 – Introduktion till NetX Duo
+      href: chapter1.md
+    - name: V. 2 – installation och användning av NetX Duo
+      href: chapter2.md
+    - name: V. 3-funktionella komponenter i NetX Duo
+      href: chapter3.md
+    - name: V. 4 – Beskrivning av NetX Duo-tjänster
+      href: chapter4.md
+    - name: V. 5-NetX Duo-nätverks driv rutiner
+      href: chapter5.md
+    - name: Mobilappar. A-NetX Duo-tjänster
+      href: appendix-a.md
+    - name: Mobilappar. B-NetX Duo-konstanter
+      href: appendix-b.md
+    - name: Mobilappar. C-NetX Duo-datatyper
+      href: appendix-c.md
+    - name: Mobilappar. D-BSD-kompatibelt socket-API
+      href: appendix-d.md
+    - name: Mobilappar. E-ASCII-tecken koder
+      href: appendix-e.md
+- name: NetX Duo-tillägg
+  items:
+    - name: Användar handbok för NetX Duo AutoIP
+      items:
+        - name: V. 1 – Introduktion till NetX Duo AutoIP
+          href: netx-duo-auto-ip/chapter1.md
+        - name: V. 2 – installation och användning av NetX Duo-AutoIP
+          href: netx-duo-auto-ip/chapter2.md
+        - name: V. 3 – Beskrivning av NetX Duo AutoIP-tjänster
+          href: netx-duo-auto-ip/chapter3.md
+    - name: Användar guide för NetX Duo BSD-tjänster
+      items:
+        - name: V. 1 – Introduktion till NetX Duo BSD
+          href: netx-duo-bsd/chapter1.md
+        - name: V. 2 – installation och användning av NetX Duo BSD
+          href: netx-duo-bsd/chapter2.md
+        - name: V. 3-NetX Duo BSD-tjänster
+          href: netx-duo-bsd/chapter3.md
+    - name: Användar handbok för NetX-kryptografi
+      items:
+        - name: V. 1 – Introduktion till NetX-kryptografi
+          href: ../netx/netx-crypto/chapter1.md
+        - name: V. 2 – installation och användning av NetX-kryptografi
+          href: ../netx/netx-crypto/chapter2.md
+        - name: V. 3-funktionella komponenter i NetX-kryptografi
+          href: ../netx/netx-crypto/chapter3.md
+        - name: V. Beskrivning av 3-NetX-kryptografi-API
+          href: ../netx/netx-crypto/chapter4.md
+    - name: Användar guide för NetX Duo DHCP-klient
+      items:
+        - name: V. 1 – Introduktion till NetX Duo DHCP-klienten
+          href: netx-duo-dhcp-client/chapter1.md
+        - name: V. 2 – installation och användning av NetX Duo DHCP-klienten
+          href: netx-duo-dhcp-client/chapter2.md
+        - name: V. 3-Beskrivning av NetX Duo DHCP Client Services
+          href: netx-duo-dhcp-client/chapter3.md
+        - name: Mobilappar. A-Beskrivning av funktionen Restore State för NetX Duo DHCP Client Services
+          href: netx-duo-dhcp-client/appendixA.md
+    - name: Användar guide för NetX Duo DHCP-server
+      items:
+        - name: V. 1 – Introduktion till NetX Duo DHCP-server
+          href: netx-duo-dhcp-server/chapter1.md
+        - name: V. 2 – installation och användning av NetX Duo DHCP-servern
+          href: netx-duo-dhcp-server/chapter2.md
+        - name: V. 3 – Beskrivning av NetX Duo DHCP Server-tjänster
+          href: netx-duo-dhcp-server/chapter3.md
+    - name: Användar handbok för NetX Duo DHCPv6-klienten
+      items:
+        - name: V. 1 – Introduktion till NetX Duo DHCPv6-klienten
+          href: netx-duo-dhcpv6-client/chapter1.md
+        - name: V. 2 – installation och användning av NetX Duo DHCPv6-klienten
+          href: netx-duo-dhcpv6-client/chapter2.md
+        - name: V. 3-NetX Duo DHCPv6-konfigurations alternativ
+          href: netx-duo-dhcpv6-client/chapter3.md
+        - name: V. 4-NetX Duo DHCPv6-klient tjänster
+          href: netx-duo-dhcpv6-client/chapter4.md
+        - name: Mobilappar. A – Beskrivning av funktionen återställnings tillstånd
+          href: netx-duo-dhcpv6-client/appendix-a.md
+    - name: Användar guide för NetX Duo DHCPv6-server
+      items:
+        - name: V. 1 – Introduktion till NetX Duo DHCPv6-server
+          href: netx-duo-dhcpv6-server/chapter1.md
+        - name: V. 2 – installation och användning av NetX Duo DHCPv6-servern
+          href: netx-duo-dhcpv6-server/chapter2.md
+        - name: V. 3-NetX Duo konfigurations alternativ för DHCPv6-servrar
+          href: netx-duo-dhcpv6-server/chapter3.md
+        - name: V. 4-NetX Duo DHCPv6-server tjänster
+          href: netx-duo-dhcpv6-server/chapter4.md
+        - name: Mobilappar. A-NetX Duo DHCPv6-alternativ koder
+          href: netx-duo-dhcpv6-server/appendix-a.md
+        - name: Mobilappar. B-NetX Duo DHCPv6-server status kod
+          href: netx-duo-dhcpv6-server/appendix-b.md
+        - name: Mobilappar. C-NetX Duo-unika identifierare (DUIDs)
+          href: netx-duo-dhcpv6-server/appendix-c.md
+        - name: Mobilappar. D-avancerad NetX Duo DHCPv6-server exempel
+          href: netx-duo-dhcpv6-server/appendix-d.md
+    - name: Användar guide för NetX Duo DNS-klient
+      items:
+        - name: V. 1 – Introduktion till DNS-klienten NetX Duo
+          href: netx-duo-dns/chapter1.md
+        - name: V. 2 – installation och användning av NetX Duo DNS-klienten
+          href: netx-duo-dns/chapter2.md
+        - name: V. 3 – Beskrivning av NetX Duo DNS-klienttjänster
+          href: netx-duo-dns/chapter3.md
+    - name: Användar handbok för NetX Duo FTP
+      items:
+        - name: V. 1 – Introduktion till NetX Duo FTP
+          href: netx-duo-ftp/chapter1.md
+        - name: V. 2 – installation och användning av FTP
+          href: netx-duo-ftp/chapter2.md
+        - name: V. 3 – Beskrivning av FTP-tjänster
+          href: netx-duo-ftp/chapter3.md
+    - name: Användar handbok för NetX Duo HTTP
+      items:
+        - name: Kapitel 1 – Introduktion till NetX Duo HTTP
+          href: netx-duo-http/chapter1.md
+        - name: Kapitel 2 – installation och användning av NetX Duo HTTP
+          href: netx-duo-http/chapter2.md
+        - name: Kapitel 3 – Beskrivning av NetX HTTP-tjänster
+          href: netx-duo-http/chapter3.md
+    - name: Användar handbok för NetX Duo mDNS/DNS-SD
+      items:
+        - name: V. 1 – Introduktion till NetX Duo mDNS/DNS-SD
+          href: netx-duo-mdns/chapter1.md
+        - name: V. 2 – installation och användning av mDNS
+          href: netx-duo-mdns/chapter2.md
+        - name: V. 3 – Beskrivning av intern tjänst-cache
+          href: netx-duo-mdns/chapter3.md
+        - name: V. 4 – Beskrivning av mDNS-tjänster
+          href: netx-duo-mdns/chapter4.md
+    - name: Användar handbok för NetX Duo MQTT-klienten
+      items:
+        - name: V. 1 – Introduktion till NetX Duo MQTT-klienten
+          href: netx-duo-mqtt/chapter1.md
+        - name: V. 2 – installation och användning av NetX Duo MQTT-klienten
+          href: netx-duo-mqtt/chapter2.md
+        - name: V. 3 – Beskrivning av NetX Duo MQTT-klient tjänster
+          href: netx-duo-mqtt/chapter3.md
+    - name: Användar handbok för NetX Duo NAT
+      items:
+        - name: V. 1 – Introduktion till NetX Duo NAT
+          href: chapter1.md
+        - name: V. 2 – installation och användning av NAT
+          href: chapter2.md
+        - name: V. 3 – konfigurations alternativ för NAT
+          href: chapter3.md
+        - name: V. 4 – Beskrivning av NAT-tjänster
+          href: chapter4.md
+    - name: Användar handbok för NetX Duo POP3-klienten
+      items:
+        - name: V. 1 – Introduktion till NetX Duo POP3-klienten
+          href: netx-duo-pop3-client/chapter1.md
+        - name: V. 2 – installation och användning av NetX Duo POP3-klienten
+          href: netx-duo-pop3-client/chapter2.md
+        - name: V. 3 – Beskrivning av POP3-klient tjänster
+          href: netx-duo-pop3-client/chapter3.md
+    - name: Användar handbok för NetX Duo PPP
+      items:
+        - name: V. 1 – Introduktion till NetX Duo PPP
+          href: netx-duo-ppp/chapter1.md
+        - name: V. 2 – installation och användning av NetX Duo PPP
+          href: netx-duo-ppp/chapter2.md
+        - name: V. 3 – Beskrivning av NetX Duo PPP-tjänster
+          href: netx-duo-ppp/chapter3.md
+    - name: Användar handbok för NetX Duo SMTP-klienten
+      items:
+        - name: V. 1 – Introduktion till NetX Duo SMTP-klienten
+          href: netx-duo-smtp-client/chapter1.md
+        - name: V. 2 – installation och användning av NetX Duo SMTP-klienten
+          href: netx-duo-smtp-client/chapter2.md
+        - name: V. 3 – klient Beskrivning av SMTP-klienttjänster
+          href: netx-duo-smtp-client/chapter3.md
+    - name: Användar handbok för NetX Duo SNMP
+      items:
+        - name: V. 1 – Introduktion till NetX Duo SNMP
+          href: netx-duo-snmp/chapter1.md
+        - name: V. 2 – installation och användning av NetX Duo SNMP-agenten
+          href: netx-duo-snmp/chapter2.md
+        - name: V. 3 – Beskrivning av NetX Duo SNMP agent-tjänster
+          href: netx-duo-snmp/chapter3.md
+    - name: NetX Duo SNTP-klient
+      items:
+        - name: V. 1 – Introduktion till NetX Duo SNTP-klienten
+          href: netx-duo-sntp-client/chapter1.md
+        - name: V. 2 – installation och användning av NetX Duo SNTP-klienten
+          href: netx-duo-sntp-client/chapter2.md
+        - name: V. 3 – Beskrivning av NetX Duo SNTP klient tjänster
+          href: netx-duo-sntp-client/chapter3.md
+        - name: Mobilappar. A-NetX Duo SNTP – oåterkalleliga fel koder
+          href: netx-duo-sntp-client/appendix-a.md
+    - name: Användar handbok för NetX Duo Telnet
+      items:
+        - name: V. 1 – Introduktion till NetX Duo Telnet
+          href: netx-duo-telnet/chapter1.md
+        - name: V. 2 – installation och användning av NetX Duo Telnet
+          href: netx-duo-telnet/chapter2.md
+        - name: V. 3 – Beskrivning av NetX Duo Telnet-tjänster
+          href: netx-duo-telnet/chapter3.md
+    - name: NetX Duo TFTP
+      items:
+        - name: V. 1 – Introduktion till NetX Duo TFTP
+          href: netx-duo-tftp/chapter1.md
+        - name: V. 2 – installation och användning av NetX Duo TFTP
+          href: netx-duo-tftp/chapter2.md
+        - name: V. 3 – Beskrivning av NetX Duo TFTP-tjänster
+          href: netx-duo-tftp/chapter3.md
+    - name: Användar handbok för NetX Duo-webbhttp och HTTPS
+      items:
+        - name: V. 1 – Introduktion till NetX Duo HTTP och HTTPS
+          href: netx-duo-web-http/chapter1.md
+        - name: V. 2 – installation och användning av NetX Duo HTTP och HTTPS
+          href: netx-duo-web-http/chapter2.md
+        - name: V. 3 – Beskrivning av HTTP-tjänster
+          href: netx-duo-web-http/chapter3.md
+    - name: Användar handbok för NetX Secure DTLS
+      items:
+        - name: V. 1 – Introduktion till NetX Secure DTLS
+          href: netx-secure-dtls/chapter1.md
+        - name: V. 2 – installation och användning av NetX Secure DTLS
+          href: netx-secure-dtls/chapter2.md
+        - name: V. 3-funktionell beskrivning av NetX Secure DTLS
+          href: netx-secure-dtls/chapter3.md
+        - name: V. 4 – Beskrivning av NetX Secure DTLS-tjänster
+          href: netx-secure-dtls/chapter4.md
+        - name: Mobilappar. A-NetX Secure DTLS retur/Error Codes
+          href: netx-secure-dtls/appendix-a.md
+    - name: Användar handbok för NetX Secure TLS
+      items:
+        - name: V. 1 – Introduktion till NetX Secure
+          href: netx-secure-tls/chapter1.md
+        - name: V. 2 – installation och användning av NetX Secure
+          href: netx-secure-tls/chapter2.md
+        - name: V. 3-funktionell beskrivning av NetX Secure
+          href: netx-secure-tls/chapter3.md
+        - name: V. 4 – Beskrivning av NetX säkra tjänster
+          href: netx-secure-tls/chapter4.md
+        - name: Mobilappar. A-NetX säkra retur-/fel koder
+          href: netx-secure-tls/appendix-a.md
+- name: NetX Duo-lagringsplats
+  href: 'https://github.com/azure-rtos/netxduo'
+- name: Relaterade tjänster
+  items:
+    - name: Defender för IoT-återställnings tider (för hands version)
+      href: 'https://docs.microsoft.com/azure/defender-for-iot/iot-security-azure-rtos'
+- name: Microsoft Azure återställnings tider-komponenter
+  items:
+    - name: Microsoft Azure återställnings tider
+      href: ../index.yml
+    - name: ThreadX
+      href: ../threadx/index.yml
+    - name: ThreadX-moduler
+      href: ../threadx-modules/index.yml
+    - name: NetX Duo
+      href: ../netx-duo/index.yml
+    - name: NetX
+      href: ../netx/index.yml
+    - name: GUIX
+      href: ../guix/index.yml
+    - name: FileX
+      href: ../filex/index.yml
+    - name: LevelX
+      href: ../levelx/index.yml
+    - name: USBX
+      href: ../usbx/index.yml
+    - name: TraceX
+      href: ../tracex/index.yml

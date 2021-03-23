@@ -1,0 +1,41 @@
+### YamlMime:Landing
+title: Dokumentation om Azure återställnings tider GUIX
+summary: Azure återställnings tider GUIX är ett högkvalitativt kvalitets paket som har skapats för att uppfylla behoven hos inbäddade system utvecklare.
+metadata:
+  title: Vad är Azure återställnings tider GUIX?
+  description: Azure återställnings tider GUIX är ett högkvalitativt kvalitets paket som har skapats för att uppfylla behoven hos inbäddade system utvecklare.
+  services: rtos
+  ms.service: rtos
+  ms.topic: landing-page
+  author: philmea
+  ms.author: philmea
+  ms.date: 5/19/2020
+  ms.openlocfilehash: 5e3215a54a9d1d23e7f238e4bc6ffeafffdc75b4
+  ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+  ms.translationtype: MT
+  ms.contentlocale: sv-SE
+  ms.lasthandoff: 03/22/2021
+  ms.locfileid: "104798020"
+landingContent:
+- title: Introduktion till Azure återställnings tider GUIX
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Vad är Azure återställnings tider GUIX?
+      url: overview-guix.md
+- title: Kom igång med Azure återställnings tider GUIX
+  linkLists:
+  - linkListType: get-started
+    links:
+    - text: Användar handbok för Azure återställnings tider GUIX
+      url: about-guix.md
+- title: Kom igång med Azure återställnings tider GUIX Studio
+  linkLists:
+  - linkListType: get-started
+    links:
+    - text: Snabbstarts guide för Azure återställnings tider GUIX Studio
+      url: guix-studio-quick-start.md
+    - text: Användar handbok för Azure återställnings tider GUIX Studio
+      url: about-guix-studio.md
+    - text: Installations program för Azure återställnings tider GUIX Studio
+      url: https://aka.ms/azrtos-guix-installer
