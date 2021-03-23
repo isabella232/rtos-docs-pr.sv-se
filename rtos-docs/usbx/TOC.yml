@@ -1,0 +1,86 @@
+- name: Dokumentation om Azure återställnings tider USBX
+  href: index.yml
+- name: Översikt över USBX
+  href: overview-usbx.md
+- name: Användar guide för USBX Device stack
+  items:
+    - name: Om den här guiden
+      href: usbx-device-stack-about.md
+    - name: V. 1 – Introduktion till USBX
+      href: usbx-device-stack-1.md
+    - name: V. 2-USBX-installation
+      href: usbx-device-stack-2.md
+    - name: V. 3-funktionella komponenter i USBX Device-stack
+      href: usbx-device-stack-3.md
+    - name: V. 4 – Beskrivning av USBX Device Services
+      href: usbx-device-stack-4.md
+    - name: V. 5-USBX enhets klass överväganden
+      href: usbx-device-stack-5.md
+- name: 'USBX enhets stack, kompletterande'
+  items:
+    - name: V. 1 – Introduktion till användar handboken för USBX Device stack
+      href: usbx-device-stack-supplemental-1.md
+    - name: V. 2-USBX enhets klass överväganden
+      href: usbx-device-stack-supplemental-2.md
+    - name: V. USBX DPUMP-klass överväganden
+      href: usbx-device-stack-supplemental-3.md
+    - name: V. 4-USBX PictBridge-implementering
+      href: usbx-device-stack-supplemental-4.md
+    - name: V. 5-USBX OTG
+      href: usbx-device-stack-supplemental-5.md
+- name: Användar guide för USBX Host stack
+  items:
+    - name: Om den här guiden
+      href: usbx-host-stack-about.md
+    - name: V. 1 – Introduktion till USBX
+      href: usbx-host-stack-1.md
+    - name: V. 2-USBX-installation
+      href: usbx-host-stack-2.md
+    - name: V. 3-funktionella komponenter i USBX Host stack
+      href: usbx-host-stack-3.md
+    - name: V. 4 – Beskrivning av USBX-värd tjänster
+      href: usbx-host-stack-4.md
+    - name: V. 5-USBX värd Klasss-API
+      href: usbx-host-stack-5.md
+    - name: V. 6-USBX CDC-ECM-klass användning
+      href: usbx-host-stack-6.md
+- name: USBX Host stack-kompletterande
+  items:
+    - name: V. 1 – Introduktion till användar handboken för USBX Host stack-tillägg
+      href: usbx-host-stack-supplemental-1.md
+    - name: V. 2 – USBX värd Klasss-API
+      href: usbx-host-stack-supplemental-2.md
+    - name: V. USBX DPUMP-klass överväganden
+      href: usbx-host-stack-supplemental-3.md
+    - name: V. 4-USBX PictBridge-implementering
+      href: usbx-host-stack-supplemental-4.md
+    - name: V. 5-USBX OTG
+      href: usbx-host-stack-supplemental-5.md
+- name: USBX-lagringsplats
+  href: 'https://github.com/azure-rtos/usbx/'
+- name: Relaterade tjänster
+  items:
+    - name: Defender för IoT-återställnings tider (för hands version)
+      href: 'https://docs.microsoft.com/azure/defender-for-iot/iot-security-azure-rtos'
+- name: Microsoft Azure återställnings tider-komponenter
+  items:
+    - name: Microsoft Azure återställnings tider
+      href: ../index.yml
+    - name: ThreadX
+      href: ../threadx/index.yml
+    - name: ThreadX-moduler
+      href: ../threadx-modules/index.yml
+    - name: NetX Duo
+      href: ../netx-duo/index.yml
+    - name: NetX
+      href: ../netx/index.yml
+    - name: GUIX
+      href: ../guix/index.yml
+    - name: FileX
+      href: ../filex/index.yml
+    - name: LevelX
+      href: ../levelx/index.yml
+    - name: USBX
+      href: ../usbx/index.yml
+    - name: TraceX
+      href: ../tracex/index.yml

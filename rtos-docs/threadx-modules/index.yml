@@ -1,0 +1,25 @@
+### YamlMime:Landing
+title: Dokumentation om Azure återställnings tider ThreadX-moduler
+summary: Komponenten Azure återställnings tider ThreadX-moduler innehåller en infrastruktur för program för att dynamiskt läsa in moduler som skapats separat från den inhemska delen av programmet.
+metadata:
+  title: Vad är Azure återställnings tider ThreadX-moduler?
+  description: Azure återställnings tider ThreadX-moduler tillhandahåller dynamiskt inlästa moduler som har skapats separat från ditt program.
+  services: rtos
+  ms.service: rtos
+  ms.topic: landing-page
+  author: philmea
+  ms.author: philmea
+  ms.date: 07/10/2020
+  ms.openlocfilehash: 40958716dfaa14813279fbce3b63d696e3dc21d2
+  ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+  ms.translationtype: MT
+  ms.contentlocale: sv-SE
+  ms.lasthandoff: 03/22/2021
+  ms.locfileid: "104797960"
+landingContent:
+- title: Introduktion till Azure återställnings tider ThreadX-moduler
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Vad är Azure återställnings tider ThreadX-moduler?
+      url: chapter1.md

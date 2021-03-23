@@ -1,0 +1,31 @@
+### YamlMime:Landing
+title: Dokumentation om Azure återställnings tider NetX Duo
+summary: Azure återställnings tider NetX Duo är en avancerad och inbyggd TCP/IP-datastack i företags klass har utformats specifikt för djupt inbäddade real tids-och IoT-program.
+metadata:
+  title: Vad är Azure återställnings tider NetX Duo?
+  description: Azure återställnings tider NetX Duo är en avancerad och inbyggd TCP/IP-datastack i företags klass har utformats specifikt för djupt inbäddade real tids-och IoT-program.
+  services: rtos
+  ms.service: rtos
+  ms.topic: landing-page
+  author: philmea
+  ms.author: philmea
+  ms.date: 5/19/2020
+  ms.openlocfilehash: 6eca4b135a5cfa3413fc0828de4caeffa734d90a
+  ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+  ms.translationtype: MT
+  ms.contentlocale: sv-SE
+  ms.lasthandoff: 03/22/2021
+  ms.locfileid: "104798032"
+landingContent:
+- title: Introduktion till Azure återställnings tider NetX Duo
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Vad är Azure återställnings tider NetX Duo?
+      url: overview-netx-duo.md
+- title: Kom igång med Azure återställnings tider NetX Duo
+  linkLists:
+  - linkListType: get-started
+    links:
+    - text: Användar handbok för Azure återställnings tider NetX Duo
+      url: about-this-guide.md

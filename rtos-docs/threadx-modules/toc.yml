@@ -1,0 +1,45 @@
+- name: Dokumentation om Azure återställnings tider ThreadX-moduler
+  href: index.yml
+- name: Användar guide för ThreadX-moduler
+  expanded: true
+  items:
+    - name: V. 1 – Översikt
+      href: chapter1.md
+    - name: V. 2-modul-krav
+      href: chapter2.md
+    - name: V. 3 – module Manager-krav
+      href: chapter3.md
+    - name: 'V. 4-modul-API: er'
+      href: chapter4.md
+    - name: 'V. 5-moduls Manager-API: er'
+      href: chapter5.md
+    - name: Tillägg – port-/regionsspecifika exempel
+      href: appendix.md
+- name: ThreadX-lagringsplats
+  href: 'https://github.com/azure-rtos/threadx'
+- name: Relaterade tjänster
+  items:
+    - name: Defender för IoT-återställnings tider (för hands version)
+      href: 'https://docs.microsoft.com/azure/defender-for-iot/iot-security-azure-rtos'
+- name: Microsoft Azure återställnings tider-komponenter
+  items:
+    - name: Microsoft Azure återställnings tider
+      href: ../index.yml
+    - name: ThreadX
+      href: ../threadx/index.yml
+    - name: ThreadX-moduler
+      href: ../threadx-modules/index.yml
+    - name: NetX Duo
+      href: ../netx-duo/index.yml
+    - name: NetX
+      href: ../netx/index.yml
+    - name: GUIX
+      href: ../guix/index.yml
+    - name: FileX
+      href: ../filex/index.yml
+    - name: LevelX
+      href: ../levelx/index.yml
+    - name: USBX
+      href: ../usbx/index.yml
+    - name: TraceX
+      href: ../tracex/index.yml

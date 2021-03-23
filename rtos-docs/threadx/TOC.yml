@@ -1,0 +1,81 @@
+- name: Dokumentation om Azure återställnings tider ThreadX
+  href: index.yml
+- name: Översikt över ThreadX
+  href: overview-threadx.md
+- name: Användar handbok för ThreadX
+  expanded: true
+  items:
+    - name: Om den här guiden
+      href: about-this-guide.md
+    - name: V. 1 – Introduktion till ThreadX
+      href: chapter1.md
+    - name: V. 2 – installation och användning av ThreadX
+      href: chapter2.md
+    - name: V. 3-funktionella komponenter i ThreadX
+      href: chapter3.md
+    - name: V. 4 – Beskrivning av ThreadX-tjänster
+      href: chapter4.md
+    - name: V. 5-enhets driv rutiner för ThreadX
+      href: chapter5.md
+    - name: V. 6 – demonstrations system för ThreadX
+      href: chapter6.md
+    - name: Mobilappar. A – ThreadX API-tjänster
+      href: appendix-a.md
+    - name: Mobilappar. B-ThreadX konstanter
+      href: appendix-b.md
+    - name: Mobilappar. C-ThreadX data typer
+      href: appendix-c.md
+    - name: Mobilappar. D-ASCII-tecken koder
+      href: appendix-d.md
+- name: Användar handbok för ThreadX SMP
+  items:
+    - name: Om den här guiden
+      href: ./threadx-smp/about-this-guide.md
+    - name: V. 1 – Introduktion till ThreadX SMP
+      href: ./threadx-smp/chapter1.md
+    - name: V. 2-installations & användning av ThreadX SMP
+      href: ./threadx-smp/chapter2.md
+    - name: V. 3-funktionella komponenter i ThreadX SMP
+      href: ./threadx-smp/chapter3.md
+    - name: V. 4 – Beskrivning av ThreadX SMP-tjänster
+      href: ./threadx-smp/chapter4.md
+    - name: V. 5-enhets driv rutiner för ThreadX SMP
+      href: ./threadx-smp/chapter5.md
+    - name: V. 6 – demonstrations system för ThreadX SMP
+      href: ./threadx-smp/chapter6.md
+    - name: Mobilappar. A-ThreadX SMP API-tjänster
+      href: ./threadx-smp/appendix-a.md
+    - name: Mobilappar. B-ThreadX SMP-konstanter
+      href: ./threadx-smp/appendix-b.md
+    - name: Mobilappar. Data typer för C-ThreadX SMP
+      href: ./threadx-smp/appendix-c.md
+    - name: Mobilappar. D-ASCII-tecken koder
+      href: ./threadx-smp/appendix-d.md
+- name: ThreadX-lagringsplats
+  href: 'https://github.com/azure-rtos/threadx'
+- name: Relaterade tjänster
+  items:
+    - name: Defender för IoT-återställnings tider (för hands version)
+      href: 'https://docs.microsoft.com/azure/defender-for-iot/iot-security-azure-rtos'
+- name: Microsoft Azure återställnings tider-komponenter
+  items:
+    - name: Microsoft Azure återställnings tider
+      href: ../index.yml
+    - name: ThreadX
+      href: ../threadx/index.yml
+    - name: ThreadX-moduler
+      href: ../threadx-modules/index.yml
+    - name: NetX Duo
+      href: ../netx-duo/index.yml
+    - name: NetX
+      href: ../netx/index.yml
+    - name: GUIX
+      href: ../guix/index.yml
+    - name: FileX
+      href: ../filex/index.yml
+    - name: LevelX
+      href: ../levelx/index.yml
+    - name: USBX
+      href: ../usbx/index.yml
+    - name: TraceX
+      href: ../tracex/index.yml
