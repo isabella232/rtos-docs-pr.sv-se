@@ -1,0 +1,98 @@
+---
+title: Kapitel 1 – Introduktion till Azure återställnings tider NetX DHCP Client
+description: I NetX är programmets IP-adress en av de angivna parametrarna för nx_ip_create tjänst anropet.
+author: philmea
+ms.author: philmea
+ms.date: 06/04/2020
+ms.topic: article
+ms.service: rtos
+ms.openlocfilehash: 44eb764c84a15a1bc96cf94bcbc8f81be7b41eef
+ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.translationtype: MT
+ms.contentlocale: sv-SE
+ms.lasthandoff: 03/22/2021
+ms.locfileid: "104826805"
+---
+# <a name="chapter-1---introduction-to-azure-rtos-netx-dhcp-client"></a><span data-ttu-id="e8891-103">Kapitel 1 – Introduktion till Azure återställnings tider NetX DHCP Client</span><span class="sxs-lookup"><span data-stu-id="e8891-103">Chapter 1 - Introduction to Azure RTOS NetX DHCP Client</span></span>
+
+<span data-ttu-id="e8891-104">I NetX är programmets IP-adress en av de angivna parametrarna för *nx_ip_create* tjänst anropet.</span><span class="sxs-lookup"><span data-stu-id="e8891-104">In NetX, the application’s IP address is one of the supplied parameters to the *nx_ip_create* service call.</span></span> <span data-ttu-id="e8891-105">Att tillhandahålla IP-adressen innebär inget problem om IP-adressen är känd för programmet, antingen statiskt eller via användar konfiguration.</span><span class="sxs-lookup"><span data-stu-id="e8891-105">Supplying the IP address poses no problem if the IP address is known to the application, either statically or through user configuration.</span></span> <span data-ttu-id="e8891-106">Det finns dock vissa instanser där programmet inte känner till eller bryr sig om dess IP-adress.</span><span class="sxs-lookup"><span data-stu-id="e8891-106">However, there are some instances where the application doesn’t know or care what its IP address is.</span></span> <span data-ttu-id="e8891-107">I sådana fall ska en noll IP-adress anges för funktionen *nx_ip_create* och Azure-återställnings tider DHCP-klient protokollet ska användas för att dynamiskt erhålla en IP-adress.</span><span class="sxs-lookup"><span data-stu-id="e8891-107">In such situations, a zero IP address should be supplied to the *nx_ip_create* function and the Azure RTOS DHCP Client protocol should be used to dynamically obtain an IP address.</span></span>
+
+## <a name="dynamic-ip-address-assignment"></a><span data-ttu-id="e8891-108">Dynamisk IP-adresstilldelning</span><span class="sxs-lookup"><span data-stu-id="e8891-108">Dynamic IP Address Assignment</span></span>
+
+<span data-ttu-id="e8891-109">Den grundläggande tjänsten som används för att hämta en dynamisk IP-adress från nätverket är RARP (reversed Address Resolution Protocol).</span><span class="sxs-lookup"><span data-stu-id="e8891-109">The basic service used to obtain a dynamic IP address from the network is the Reverse Address Resolution Protocol (RARP).</span></span> <span data-ttu-id="e8891-110">Det här protokollet liknar ARP, förutom att det är utformat för att hämta en IP-adress för sig själv i stället för att hitta MAC-adressen för en annan nätverksmapp.</span><span class="sxs-lookup"><span data-stu-id="e8891-110">This protocol is similar to ARP, except it is designed to obtain an IP address for itself instead of finding the MAC address for another network node.</span></span> <span data-ttu-id="e8891-111">Lågnivå-RARP-meddelandet skickas i det lokala nätverket och det är ansvaret för att en server i nätverket ska svara med ett RARP-svar som innehåller en dynamiskt tilldelad IP-adress.</span><span class="sxs-lookup"><span data-stu-id="e8891-111">The low-level RARP message is broadcast on the local network and it is the responsibility of a server on the network to respond with an RARP response, which contains a dynamically allocated IP address.</span></span>
+
+<span data-ttu-id="e8891-112">Även om RARP tillhandahåller en tjänst för dynamisk allokering av IP-adresser, har den flera brister.</span><span class="sxs-lookup"><span data-stu-id="e8891-112">Although RARP provides a service for dynamic allocation of IP addresses, it has several shortcomings.</span></span> <span data-ttu-id="e8891-113">De mest avbländnings bristen är att RARP endast tillhandahåller dynamisk tilldelning av IP-adressen.</span><span class="sxs-lookup"><span data-stu-id="e8891-113">The most glaring deficiency is that RARP only provides dynamic allocation of the IP address.</span></span> <span data-ttu-id="e8891-114">I de flesta situationer krävs mer information för att en enhet ska kunna delta i ett nätverk.</span><span class="sxs-lookup"><span data-stu-id="e8891-114">In most situations, more information is necessary in order for a device to properly participate on a network.</span></span> <span data-ttu-id="e8891-115">Förutom en IP-adress behöver de flesta enheter nätverks masken och gatewayens IP-adress.</span><span class="sxs-lookup"><span data-stu-id="e8891-115">In addition to an IP address, most devices need the network mask and the gateway IP address.</span></span> <span data-ttu-id="e8891-116">IP-adressen för en DNS-server och annan nätverks information kan också behövas.</span><span class="sxs-lookup"><span data-stu-id="e8891-116">The IP address of a DNS server and other network information may also be needed.</span></span> <span data-ttu-id="e8891-117">RARP har inte möjlighet att ange den här informationen.</span><span class="sxs-lookup"><span data-stu-id="e8891-117">RARP does not have the ability to provide this information.</span></span>
+
+## <a name="rarp-alternatives"></a><span data-ttu-id="e8891-118">RARP alternativ</span><span class="sxs-lookup"><span data-stu-id="e8891-118">RARP Alternatives</span></span>
+
+<span data-ttu-id="e8891-119">För att kunna kringgå brister i RARP utvecklade forskare en mer omfattande mekanism för allokering av IP-adresser som kallas BOOTP (Bootstrap Protocol).</span><span class="sxs-lookup"><span data-stu-id="e8891-119">In order to overcome the deficiencies of RARP, researchers developed a more comprehensive IP address allocation mechanism called the Bootstrap Protocol (BOOTP).</span></span> <span data-ttu-id="e8891-120">Det här protokollet har möjlighet att dynamiskt allokera en IP-adress och även ange ytterligare viktig nätverks information.</span><span class="sxs-lookup"><span data-stu-id="e8891-120">This protocol has the ability to dynamically allocate an IP address and also provide additional important network information.</span></span> <span data-ttu-id="e8891-121">BOOTP har dock en nackdel med att utformas för statiska nätverkskonfigurationer.</span><span class="sxs-lookup"><span data-stu-id="e8891-121">However, BOOTP has the drawback of being designed for static network configurations.</span></span> <span data-ttu-id="e8891-122">Den tillåter inte snabb eller automatisk adress tilldelning.</span><span class="sxs-lookup"><span data-stu-id="e8891-122">It does not allow for quick or automated address assignment.</span></span>
+
+<span data-ttu-id="e8891-123">Det är här som Dynamic Host Configuration Protocol (DHCP) är mycket användbart.</span><span class="sxs-lookup"><span data-stu-id="e8891-123">This is where the Dynamic Host Configuration Protocol (DHCP) is extremely useful.</span></span> <span data-ttu-id="e8891-124">DHCP har utformats för att utöka de grundläggande funktionerna i BOOTP för att inkludera helt automatiserad allokering av IP-servrar och fullständig dynamisk IP-adressallokering genom att "leasa" en IP-adress till en klient under en angiven tids period.</span><span class="sxs-lookup"><span data-stu-id="e8891-124">DHCP is designed to extend the basic functionality of BOOTP to include completely automated IP server allocation and completely dynamic IP address allocation through “leasing” an IP address to a client for a specified period of time.</span></span> <span data-ttu-id="e8891-125">DHCP kan också konfigureras för att allokera IP-adresser på ett statiskt sätt som BOOTP.</span><span class="sxs-lookup"><span data-stu-id="e8891-125">DHCP can also be configured to allocate IP addresses in a static manner like BOOTP.</span></span>
+
+## <a name="dhcp-messages"></a><span data-ttu-id="e8891-126">DHCP-meddelanden</span><span class="sxs-lookup"><span data-stu-id="e8891-126">DHCP Messages</span></span>
+
+<span data-ttu-id="e8891-127">Även om DHCP avsevärt förbättrar funktionerna i BOOTP, använder DHCP samma meddelande format som BOOTP och stöder samma leverantörs alternativ som BOOTP.</span><span class="sxs-lookup"><span data-stu-id="e8891-127">Although DHCP greatly enhances the functionality of BOOTP, DHCP uses the same message format as BOOTP and supports the same vendor options as BOOTP.</span></span> <span data-ttu-id="e8891-128">För att kunna utföra sin funktion introducerar DHCP sju nya DHCP-alternativ, enligt följande:</span><span class="sxs-lookup"><span data-stu-id="e8891-128">In order to perform its function, DHCP introduces seven new DHCP-specific options, as follows:</span></span>
+
+- <span data-ttu-id="e8891-129">IDENTIFIERA (1) (skickas av DHCP-klienten)</span><span class="sxs-lookup"><span data-stu-id="e8891-129">DISCOVER (1) (sent by DHCP Client)</span></span>
+
+- <span data-ttu-id="e8891-130">ERBJUDANDE (2) (skickas av DHCP-server)</span><span class="sxs-lookup"><span data-stu-id="e8891-130">OFFER (2) (sent by DHCP Server)</span></span>
+
+- <span data-ttu-id="e8891-131">BEGÄRAN (3) (skickas av DHCP-klienten)</span><span class="sxs-lookup"><span data-stu-id="e8891-131">REQUEST (3) (sent by DHCP Client)</span></span>
+
+- <span data-ttu-id="e8891-132">NEKA (4) (skickas av DHCP-klienten)</span><span class="sxs-lookup"><span data-stu-id="e8891-132">DECLINE (4) (sent by DHCP Client)</span></span>
+
+- <span data-ttu-id="e8891-133">ACK (5) (skickas av DHCP-server)</span><span class="sxs-lookup"><span data-stu-id="e8891-133">ACK (5) (sent by DHCP Server)</span></span>
+
+- <span data-ttu-id="e8891-134">NACK (6) (skickas av DHCP-server)</span><span class="sxs-lookup"><span data-stu-id="e8891-134">NACK (6) (sent by DHCP Server)</span></span>
+
+- <span data-ttu-id="e8891-135">VERSION (7) (skickas av DHCP-klienten)</span><span class="sxs-lookup"><span data-stu-id="e8891-135">RELEASE (7) (sent by DHCP Client)</span></span>
+
+- <span data-ttu-id="e8891-136">INFORMERA (8) (skickas av DHCP-klienten)</span><span class="sxs-lookup"><span data-stu-id="e8891-136">INFORM (8) (sent by DHCP Client)</span></span>
+
+- <span data-ttu-id="e8891-137">FORCERENEW (9) (skickas av DHCP-klienten)</span><span class="sxs-lookup"><span data-stu-id="e8891-137">FORCERENEW (9) (sent by DHCP Client)</span></span>
+
+## <a name="dhcp-communication"></a><span data-ttu-id="e8891-138">DHCP-kommunikation</span><span class="sxs-lookup"><span data-stu-id="e8891-138">DHCP Communication</span></span>
+
+<span data-ttu-id="e8891-139">DHCP använder UDP-protokollet för att skicka begär Anden och fält svar.</span><span class="sxs-lookup"><span data-stu-id="e8891-139">DHCP utilizes the UDP protocol to send requests and field responses.</span></span> <span data-ttu-id="e8891-140">Innan du använder en IP-adress skickas och tas UDP-meddelanden med DHCP-informationen genom att använda IP-broadcast-adressen 255.255.255.255.</span><span class="sxs-lookup"><span data-stu-id="e8891-140">Prior to having an IP address, UDP messages carrying the DHCP information are sent and received by utilizing the IP broadcast address of 255.255.255.255.</span></span>
+
+## <a name="dhcp-client-state-machine"></a><span data-ttu-id="e8891-141">Klient tillstånds dator för DHCP</span><span class="sxs-lookup"><span data-stu-id="e8891-141">DHCP Client State Machine</span></span>
+
+<span data-ttu-id="e8891-142">DHCP-klienten implementeras som en tillstånds dator.</span><span class="sxs-lookup"><span data-stu-id="e8891-142">The DHCP Client is implemented as a state machine.</span></span> <span data-ttu-id="e8891-143">Tillstånds datorn bearbetas av en intern DHCP-tråd som skapas under *nx_dhcp_create* bearbetning.</span><span class="sxs-lookup"><span data-stu-id="e8891-143">The state machine is processed by an internal DHCP thread that is created during *nx_dhcp_create* processing.</span></span> <span data-ttu-id="e8891-144">Huvud tillstånden för DHCP-klienten är följande:</span><span class="sxs-lookup"><span data-stu-id="e8891-144">The main states of DHCP Client are as follows:</span></span>
+
+
+- <span data-ttu-id="e8891-145">**NX_DHCP_STATE_BOOT** Börja med en tidigare IP-adress</span><span class="sxs-lookup"><span data-stu-id="e8891-145">**NX_DHCP_STATE_BOOT** Starting with a previous IP address</span></span>
+
+- <span data-ttu-id="e8891-146">**NX_DHCP_STATE_INIT** Startar utan föregående IP-adress värde</span><span class="sxs-lookup"><span data-stu-id="e8891-146">**NX_DHCP_STATE_INIT** Starting with no previous   IP address value</span></span>
+
+- <span data-ttu-id="e8891-147">**NX_DHCP_STATE_SELECTING** Väntar på svar från valfri DHCP-server</span><span class="sxs-lookup"><span data-stu-id="e8891-147">**NX_DHCP_STATE_SELECTING** Waiting for a response from any DHCP server</span></span>
+
+- <span data-ttu-id="e8891-148">**NX_DHCP_STATE_REQUESTING** DHCP-server identifierad, begäran om IP-adress har skickats</span><span class="sxs-lookup"><span data-stu-id="e8891-148">**NX_DHCP_STATE_REQUESTING** DHCP Server identified, IP address request sent</span></span>
+
+- <span data-ttu-id="e8891-149">**NX_DHCP_STATE_BOUND** IP-adresslån upprättat för DHCP</span><span class="sxs-lookup"><span data-stu-id="e8891-149">**NX_DHCP_STATE_BOUND** DHCP IP Address lease established</span></span>
+
+- <span data-ttu-id="e8891-150">**NX_DHCP_STATE_RENEWING** Förnyelse tid för DHCP IP-adresslån har förflutit, förnyelse begärd</span><span class="sxs-lookup"><span data-stu-id="e8891-150">**NX_DHCP_STATE_RENEWING** DHCP IP Address lease renewal time elapsed, renewal requested</span></span>
+
+- <span data-ttu-id="e8891-151">**NX_DHCP_STATE_REBINDING** Förfluten tid för DHCP-IP-adresslån har förflutit, förnyelse begärd</span><span class="sxs-lookup"><span data-stu-id="e8891-151">**NX_DHCP_STATE_REBINDING** DHCP IP Address lease rebind time elapsed, renewal requested</span></span>
+
+- <span data-ttu-id="e8891-152">**NX_DHCP_STATE_FORCERENEW** DHCP IP-adresslån upprättat, framtvinga förnyelse av Server (stöds inte för närvarande) eller av programmet som anropar nx_dhcp_force_renew</span><span class="sxs-lookup"><span data-stu-id="e8891-152">**NX_DHCP_STATE_FORCERENEW** DHCP IP Address lease established, force renewal by server (currently not supported) or by the application calling nx_dhcp_force_renew</span></span>
+
+- <span data-ttu-id="e8891-153">**NX_DHCP_STATE_ADDRESS_PROBING** DHCP IP Address probing, skicka ARP-avsökningen för att identifiera IP-adresskonflikt.</span><span class="sxs-lookup"><span data-stu-id="e8891-153">**NX_DHCP_STATE_ADDRESS_PROBING** DHCP IP Address probing, send the ARP probe to detect IP address conflict.</span></span>
+
+## <a name="dhcp-client-multiple-interface-support"></a><span data-ttu-id="e8891-154">Stöd för flera gränssnitt för DHCP-klienter</span><span class="sxs-lookup"><span data-stu-id="e8891-154">DHCP Client Multiple Interface Support</span></span>
+
+<span data-ttu-id="e8891-155">DHCP-klienten har tidigare implementerats för att köras endast på ett enda nätverks gränssnitt.</span><span class="sxs-lookup"><span data-stu-id="e8891-155">The DHCP Client was previously implemented to run on only a single network interface.</span></span> <span data-ttu-id="e8891-156">Standard beteendet var (och fortfarande) för DHCP-klienten att köras på det primära gränssnittet.</span><span class="sxs-lookup"><span data-stu-id="e8891-156">The default behavior was (and still is) for the DHCP Client to run on the primary interface.</span></span> <span data-ttu-id="e8891-157">Genom att anropa *nx_dhcp_set_interface_index* kan programmet (och fortfarande köra) köra DHCP på ett sekundärt nätverks gränssnitt i stället för det primära gränssnittet.</span><span class="sxs-lookup"><span data-stu-id="e8891-157">By calling *nx_dhcp_set_interface_index*, the application could (and still can) run DHCP on a secondary network interface instead of the primary interface.</span></span>
+
+<span data-ttu-id="e8891-158">Det stöder nu DHCP som körs på flera gränssnitt parallellt.</span><span class="sxs-lookup"><span data-stu-id="e8891-158">It now supports DHCP running on multiple interfaces in parallel.</span></span> <span data-ttu-id="e8891-159">Se **DHCP-klienten på flera gränssnitt samtidigt** i kapitel två för detaljerad information om hur du kör DHCP-klienten på fler än ett fysiskt gränssnitt samtidigt.</span><span class="sxs-lookup"><span data-stu-id="e8891-159">See **DHCP Client on Multiple Interfaces Simultaneously** in Chapter Two for specific details how to run DHCP Client on more than one physical interface simultaneously.</span></span>
+
+## <a name="dhcp-user-request"></a><span data-ttu-id="e8891-160">Begäran om DHCP-användare</span><span class="sxs-lookup"><span data-stu-id="e8891-160">DHCP User Request</span></span>
+
+<span data-ttu-id="e8891-161">När DHCP-servern tilldelar en IP-adress kan DHCP-klienten begära ytterligare parametrar, en i taget, med hjälp av tjänsten *nx_dhcp_user_option_request* .</span><span class="sxs-lookup"><span data-stu-id="e8891-161">Once the DHCP server grants an IP address, the DHCP client processing can request additional parameters — one at a time — by using the *nx_dhcp_user_option_request* service.</span></span>
+
+## <a name="dhcp-client-socket-queue"></a><span data-ttu-id="e8891-162">DHCP-klientens socket-kö</span><span class="sxs-lookup"><span data-stu-id="e8891-162">DHCP Client Socket Queue</span></span> 
+
+<span data-ttu-id="e8891-163">DHCP-klienten rensar automatiskt broadcast-paket från DHCP-servrar som är avsedda för andra DHCP-klienter från socket Receive-kön och väntar på att servern ska svara på sig själv.</span><span class="sxs-lookup"><span data-stu-id="e8891-163">The DHCP Client automatically clears broadcast packets from DHCP Servers intended for other DHCP Clients from its socket receive queue while waiting for Server to respond to itself.</span></span> <span data-ttu-id="e8891-164">I ett upptaget nätverk kan det hända att paket som är avsedda för klienten släpps.</span><span class="sxs-lookup"><span data-stu-id="e8891-164">In a busy network, not doing so could cause packets intended for the Client to be dropped.</span></span>
+
+## <a name="dhcp-rfcs"></a><span data-ttu-id="e8891-165">DHCP-rapporter</span><span class="sxs-lookup"><span data-stu-id="e8891-165">DHCP RFCs</span></span>
+
+<span data-ttu-id="e8891-166">NetX DHCP är kompatibelt med RFC2132, RFC2131 och relaterade RFC: er.</span><span class="sxs-lookup"><span data-stu-id="e8891-166">NetX DHCP is compliant with RFC2132, RFC2131, and related RFCs.</span></span>
+
