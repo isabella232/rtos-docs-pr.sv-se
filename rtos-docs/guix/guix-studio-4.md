@@ -6,12 +6,12 @@ ms.author: philmea
 ms.date: 5/19/2020
 ms.service: rtos
 ms.topic: article
-ms.openlocfilehash: 3c3769c3ddf0eef73546627f1f50fa3d11b16948
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 7dd3485f112bce379ab7d6b11a808605bca191a0
+ms.sourcegitcommit: 1d90854d1da01f4b65e54d732ee9190b57a531e1
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104827156"
+ms.lasthandoff: 03/26/2021
+ms.locfileid: "105569005"
 ---
 # <a name="chapter-4-guix-studio-resources"></a>Kapitel 4: resurser för GUIX Studio
 
@@ -193,6 +193,24 @@ När du har angett alla alternativ som du vill, klickar du på knappen OK för a
 Om du vill lägga till en ny pixel kart resurs, från `Pixelmaps` avsnittet av ***vyn resurser*** väljer du följande knapp:
 
 ![Lägg till ny pixel – Map-knapp.](./media/guix-studio/image50.jpg)
+
+**Redigera batch-Pixelmap**
+
+Om du vill ändra egenskaperna för en bunt med pixelmaps högerklickar du på Pixelmap-grupp eller-mapp och väljer **Redigera Pixelmap (s)** -menyn för att aktivera dialog rutan **Redigera Pixelmap** .
+
+![Skärm bild av dialog rutan Redigera flera bild punkter – kartor.](./media/guix-studio/batch_pixelmap_edit.jpg)
+
+Beskrivning av kryss rutans status:
+
+![Markerad knapp.](./media/guix-studio/checkbox_checked.jpg)
+Den här statusen innebär att alla pixelmaps har egenskapen markerad, du kan avmarkera knappen om du vill ändra egenskapen för alla pixelmaps.
+
+![Omarkerad knapp.](./media/guix-studio/checkbox_unchecked.jpg)
+Denna status innebär att alla pixelmaps har egenskapen avmarkerad, du kan kontrol lera om du vill ändra egenskapen för alla pixelmaps.
+
+![Obestämd knapp.](./media/guix-studio/checkbox_undetermined.jpg)
+Den här statusen innebär att pixelmaps har olika status för egenskapen, du kan markera eller avmarkera knappen för att ändra egenskapen för alla pixelmaps, annars förblir egenskapen oförändrad.
+
 
 ## <a name="string-resources"></a>Sträng resurser
 
