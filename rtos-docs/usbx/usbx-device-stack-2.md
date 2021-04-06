@@ -1,17 +1,17 @@
 ---
 title: Kapitel 2 – installation av enhets stack för Azure återställnings tider USBX
-description: Lär dig hur du installerar USBX.
+description: Lär dig hur du installerar USBX Device-stacken.
 author: philmea
 ms.author: philmea
 ms.date: 5/19/2020
 ms.service: rtos
 ms.topic: article
-ms.openlocfilehash: 097fdd3c6f09c666ec3ad6eda9e5ba3fa159cb4d
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 62f036af27c5da29baf9cba58b5b26631167c3a1
+ms.sourcegitcommit: d8edbb3207fe99f8afb431597dac063e73383e68
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104828449"
+ms.lasthandoff: 04/05/2021
+ms.locfileid: "106377160"
 ---
 # <a name="chapter-2---azure-rtos-usbx-device-stack-installation"></a>Kapitel 2 – installation av enhets stack för Azure återställnings tider USBX
 

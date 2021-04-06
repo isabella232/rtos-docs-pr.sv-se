@@ -1,17 +1,17 @@
 ---
 title: Kapitel 1 – Introduktion till Azure återställnings tider USBX Device stack
-description: USBX är en USB-stack med full funktionalitet för djupt inbäddade program. I det här kapitlet introduceras USBX som beskriver dess program och fördelar.
+description: I det här kapitlet introduceras enhets stacken USBX, som beskriver program och fördelar.
 author: philmea
 ms.author: philmea
 ms.date: 5/19/2020
 ms.service: rtos
 ms.topic: article
-ms.openlocfilehash: 6965303f1fbf19212b9f7ff20f811a71fb207f54
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 383651bb0af42842329ad15b212e597f63a916aa
+ms.sourcegitcommit: d8edbb3207fe99f8afb431597dac063e73383e68
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104828623"
+ms.lasthandoff: 04/05/2021
+ms.locfileid: "106377075"
 ---
 # <a name="chapter-1---introduction-to-azure-rtos-usbx-device-stack"></a>Kapitel 1 – Introduktion till Azure återställnings tider USBX Device stack
 
