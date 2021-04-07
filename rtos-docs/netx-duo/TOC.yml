@@ -137,6 +137,16 @@
           href: netx-duo-mdns/chapter3.md
         - name: V. 4 – Beskrivning av mDNS-tjänster
           href: netx-duo-mdns/chapter4.md
+    - name: Användar handbok för NetX Duo LWM2M-klienten
+      items:
+        - name: V. 1 – Introduktion till LWM2M-klienten
+          href: netx-duo-lwm2m/chapter1.md
+        - name: V. 2 – installation och användning av LWM2M-klienten
+          href: netx-duo-lwm2m/chapter2.md
+        - name: V. 3-funktionell beskrivning av LWM2M-klienten
+          href: netx-duo-lwm2m/chapter3.md
+        - name: V. 4 – Beskrivning av LWM2M klient tjänster
+          href: netx-duo-lwm2m/chapter4.md
     - name: Användar handbok för NetX Duo MQTT-klienten
       items:
         - name: V. 1 – Introduktion till NetX Duo MQTT-klienten
@@ -171,6 +181,14 @@
           href: netx-duo-ppp/chapter2.md
         - name: V. 3 – Beskrivning av NetX Duo PPP-tjänster
           href: netx-duo-ppp/chapter3.md
+    - name: Användar handbok för NetX Duo PTP
+      items:
+        - name: V. 1 – Introduktion till NetX Duo PTP-klienten
+          href: netx-duo-ptp-client/chapter1.md
+        - name: V. 2 – installation och användning av NetX Duo PTP-klienten
+          href: netx-duo-ptp-client/chapter2.md
+        - name: V. 3 – Beskrivning av NetX Duo PTP-klienttjänster
+          href: netx-duo-ptp-client/chapter3.md
     - name: Användar handbok för NetX Duo SMTP-klienten
       items:
         - name: V. 1 – Introduktion till NetX Duo SMTP-klienten
