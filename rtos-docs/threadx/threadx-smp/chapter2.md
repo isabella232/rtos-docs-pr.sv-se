@@ -6,12 +6,12 @@ ms.author: philmea
 ms.date: 06/04/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 53d73789d93cac7bed241a54b1dde20b8610ef13
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: cc352ebd7965c84c341d25dfa7bff2671dfb5e66
+ms.sourcegitcommit: 60ad844b58639d88830f2660ab0c4ff86b92c10f
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104826568"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106550260"
 ---
 # <a name="chapter-2---installation--use-of-azure-rtos-threadx-smp"></a>Kapitel 2 – installation & användning av Azure återställnings tider ThreadX SMP
 
@@ -51,7 +51,7 @@ Den här PDF-filen innehåller en enkel, fyra stegs procedur för att få Thread
 
 Textfil som innehåller detaljerad information om ThreadX SMP-port, inklusive information om mål processorn och utvecklingsverktyg.
 
-|                 |                     |
+| Verktyg | Beskrivning |
 | -------------- | ------------------------------------------------------------------------------------------------- |
 | **tx_api. h**  | C-huvudfilen som innehåller alla system likställda, data strukturer och tjänst prototyper.             |
 | **tx_port. h** | C-huvudfil som innehåller alla utvecklings verktyg och targetspecific data definitioner och strukturer. |

@@ -6,12 +6,12 @@ ms.author: philmea
 ms.date: 05/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 8e1c23892c4360ddc8783b04ae8f23e371899f1d
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 01077e3315e87b918cdfd47423d8e0c1b6bbdbbd
+ms.sourcegitcommit: 60ad844b58639d88830f2660ab0c4ff86b92c10f
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104826919"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106550277"
 ---
 # <a name="about-the-azure-rtos-netx-user-guide"></a>Om användar handboken för Azure återställnings tider NetX
 
@@ -47,7 +47,7 @@ Förutom de anpassade data typerna för kontroll strukturen i Azure återställn
 
 Följande är en lista över data typer för Azure återställnings tider NetX service Call och deras associerade betydelser:
 
-| <!-- -->    | <!-- -->    |
+| Datatyper | Description  |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------- |
 | **UINT**  | Basic-osignerat heltal. Den här typen måste ha stöd för 32-bitars osignerade data. den är dock mappad till den mest användbara osignerade data typen. |
 | **ULONG** | Osignerad lång typ. Den här typen måste ha stöd för 32-bitars osignerade data.                                                                      |

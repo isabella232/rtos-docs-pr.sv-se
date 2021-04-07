@@ -1,16 +1,17 @@
 ---
 title: Bilaga D – Azure återställnings tider FileX ASCII-tecken koder
+description: Lär dig mer om kod koderna för Azure återställnings tider-FileX i HEX genom att granska det här ASCII-tecken kod diagrammet.
 author: philmea
 ms.author: philmea
 ms.date: 05/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 2f7f498ba99f7efc57e9244229e03343e22de86b
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 1c4ea55d1668d12dc8bf9e0e908899f9b76a164c
+ms.sourcegitcommit: 60ad844b58639d88830f2660ab0c4ff86b92c10f
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104825545"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106550124"
 ---
 # <a name="appendix-d---azure-rtos-filex-ascii-character-codes"></a>Bilaga D – Azure återställnings tider FileX ASCII-tecken koder
 

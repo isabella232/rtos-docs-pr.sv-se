@@ -6,12 +6,12 @@ ms.author: philmea
 ms.date: 05/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 1e1e1a1dbd844d811c7ee3122113f28162639fb4
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: a94344a7079e3f0e3e451bc678c369fee543aef6
+ms.sourcegitcommit: 60ad844b58639d88830f2660ab0c4ff86b92c10f
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104825533"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106550175"
 ---
 # <a name="chapter-3---functional-components-of-azure-rtos-filex"></a>Kapitel 3 – funktionella komponenter i Azure återställnings tider FileX
 
@@ -42,6 +42,7 @@ Den exakta sektor förskjutningen för de andra områdena i den logiska sektor v
 - **Sektorer per kluster** I fältet *sektorer per kluster* i medie start posten definieras antalet sektorer som tilldelats ett kluster. Klustret är det grundläggande fördelnings elementet i ett FAT-kompatibelt fil system. All Filinformation och under kataloger tilldelas från mediets tillgängliga kluster som definieras av filallokeringstabellen (FAT).
 
     **TABELL 1. FileX Media Boot Record**
+    
     |Offset  |Fält  |Antal byte|
     |----------|-----------|------------|
     |0x00|Hopp instruktion (E9, XX, XX eller EB, XX, 90)|3|
@@ -161,6 +162,7 @@ De två första posterna i FAT-tabellen används inte och har vanligt vis följa
 FAT-post nummer 2 representerar det första klustret i mediets data området. Innehållet i varje kluster post bestämmer om det är kostnads fritt eller inte ingår i en länkad lista över kluster som har allokerats för en fil eller under katalog. Om kluster posten innehåller en annan giltig kluster post allokeras klustret och dess värde pekar på nästa kluster som allokeras i kluster kedjan.
 
 Möjliga kluster poster definieras enligt följande.
+
 |Innebörd|12-bitars FAT|16-bitars FAT|32-bitars FAT| exFAT|
 |----------|-----------|------------|-------|------|
 |Kostnads fritt kluster|0x000|0x0000|0x00000000|0x00000000|
@@ -283,26 +285,26 @@ FileX stöder namn formaten både 8,3 och Windows Long File name (LFN). Förutom
 
     **TABELL 4. Katalog post för långt fil namn**
 
-    |Offset|Fält|Antal byte|
+    | Offset | Fält | Antal byte |
     |------------|-----------|------------|
-    0x00|Ordnings fält|1|
-    0x01|Unicode-tecken 1|2|
-    0x03|Unicode-tecken 2|2|
-    0x05|Unicode-tecken 3|2|
-    0x07|Unicode-tecken 4|2|
-    0x09|Unicode-tecken 5|2|
-    0x0B|LFN-attribut|1|
-    0x0C|LFN-typ (reserverad Always Always 0)|1|
-    0x0D|LFN-kontrollsumma|1|
-    0x0E|Unicode-tecken 6|2|
-    0x10|Unicode-tecken 7|2|
-    0x12|Unicode-tecken 8|2|
-    0x14|Unicode-tecken 9|2|
-    0x16|Unicode-tecken 10|2|
-    0x18|Unicode-tecken 11|2|
-    0x1A|LFN-kluster (används alltid 0)|2|
-    0x1C|Unicode-tecken 12|2|
-    0x1E|Unicode-tecken |13|2|
+    | 0x00 | Ordnings fält | 1 |
+    | 0x01 | Unicode-tecken 1 | 2 |
+    | 0x03 | Unicode-tecken 2 | 2 |
+    | 0x05 | Unicode-tecken 3 | 2 |
+    | 0x07 | Unicode-tecken 4 | 2 |
+    | 0x09 | Unicode-tecken 5 | 2 |
+    | 0x0B | LFN-attribut | 1 |
+    | 0x0C | LFN-typ (reserverad Always Always 0) | 1 |
+    | 0x0D | LFN-kontrollsumma | 1 |
+    | 0x0E | Unicode-tecken 6 | 2 | 
+    | 0x10 | Unicode-tecken 7 | 2 |
+    | 0x12 | Unicode-tecken 8 | 2 |
+    | 0x14 | Unicode-tecken 9 | 2 |
+    | 0x16 | Unicode-tecken 10 | 2 |
+    | 0x18 | Unicode-tecken 11 | 2 |
+    | 0x1A | LFN-kluster (används alltid 0) | 2 |
+    | 0x1C | Unicode-tecken 12 | 2 |
+    | 0x1E | Unicode-tecken 13 | 2 |
 
 - **Unicode-tecken**
 
@@ -472,6 +474,7 @@ En beskrivning av katalog posten för Stream-tillägget och dess innehåll finns
 - **Flagg**
 
     Det här fältet innehåller en serie bitar som anger olika egenskaper:
+    
     |Flagg bit|Innebörd    |
     |-----------------|-----------|
     |0x01            |Det här fältet anger om tilldelning av kluster är möjlig eller inte. Det här fältet ska vara 1.|

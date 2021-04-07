@@ -6,12 +6,12 @@ ms.author: philmea
 ms.date: 05/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 0ebcebdd2b227ed8d9ccf8b3078b716f90f35bef
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 640d9ed4c8037d3af6c5f45158c9496ad1258a3c
+ms.sourcegitcommit: 60ad844b58639d88830f2660ab0c4ff86b92c10f
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104825560"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106550107"
 ---
 # <a name="about-this-filex-user-guide"></a>Om den här användar handboken för FileX
 
@@ -56,7 +56,8 @@ Den här guiden innehåller omfattande information om Azure återställnings tid
 Förutom de anpassade data typerna för kontroll strukturen i Azure återställnings tider-FileX, finns det en serie särskilda data typer som används i Azure återställnings tider FileX service Call-gränssnitt. Dessa särskilda data typer mappar direkt till data typer för den underliggande C-kompilatorn. Detta görs för att säkerställa portabilitet mellan olika C-kompilatorer. Den exakta implementeringen ärvs från Azure återställnings tider ThreadX och finns i filen tx_port. h som ingår i Azure återställnings tider ThreadX-distributionen.
 
 Följande är en lista över data typer för Azure återställnings tider FileX service Call och deras associerade betydelser.
-| Typ  | Beskrivning  |
+
+| Typ  | Description  |
 |---|---|
 | **UINT** | Basic-osignerat heltal. Den här typen måste ha stöd för 8-bitars osignerade data. den är dock mappad till den mest användbara osignerade data typen. |
 | **ULONG** | Osignerad lång typ. Den här typen måste ha stöd för 32-bitars osignerade data. |

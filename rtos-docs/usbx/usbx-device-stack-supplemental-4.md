@@ -1,17 +1,17 @@
 ---
 title: Kapitel 4 – USBX PictBridge-implementering
-description: UBSX stöder fullständig PictBridge-implementering både på värden och på enheten. PictBridge är ovanpå USBX PIMA-klassen på båda sidor.
+description: UBSX stöder fullständig PictBridge-implementering både på enheten och värden. PictBridge är ovanpå USBX PIMA-klassen på båda sidor.
 author: philmea
 ms.author: philmea
 ms.date: 5/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 2ef1809dac046d49b15aba000cabed6c9fd458a3
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 4fdf1e46a7123c10d17e11d09c1b16c2f68f4a31
+ms.sourcegitcommit: 60ad844b58639d88830f2660ab0c4ff86b92c10f
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104828554"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106550243"
 ---
 # <a name="chapter-4---usbx-pictbridge-implementation"></a>Kapitel 4 – USBX PictBridge-implementering
 
@@ -208,7 +208,7 @@ UINT ux_pictbridge_jobinfo_object_data_read(
     ULONG *actual_length)
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här funktionen anropas när DPS-klienten behöver hämta ett data block för att skriva ut till mål PictBridge-skrivaren.
 
@@ -347,7 +347,7 @@ UINT ux_pictbridge_application_object_data_write(
     ULONG length);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här funktionen anropas när DPS-servern behöver hämta ett data block från DPS-klienten för att skriva ut till den lokala skrivaren.
 

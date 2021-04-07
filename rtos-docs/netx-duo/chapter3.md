@@ -6,12 +6,12 @@ ms.author: philmea
 ms.date: 05/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 07e51643c828afc8e6c0b968e78380316e84ccd7
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 31900c7b822c88079e4b9fe28a8a388d20f819aa
+ms.sourcegitcommit: 60ad844b58639d88830f2660ab0c4ff86b92c10f
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104826211"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106549852"
 ---
 # <a name="chapter-3---functional-components-of-azure-rtos-netx-duo"></a>Kapitel 3 – funktionella komponenter i Azure återställnings tider NetX Duo
 
@@ -204,7 +204,7 @@ Fälten i paket rubriken definieras enligt följande. Observera att den här tab
 > [!CAUTION]
 > *Av prestanda skäl förutsätter NetX Duo att när paketet skickas till NetX Duo-tjänster för överföring, pekar lägga pekar på lång Word-justerad adress.*
 
-|   |   |
+| Paket huvud | Syfte |
 |---|---|
 |***nx_packet_append_ptr** _|Det här fältet pekar på slutet av de data som för närvarande finns i paketets nytto Last område. Det måste ligga mellan minnes platsen som _nx_packet_prepend_ptr * och *nx_packet_data_end.* Skillnaden mellan det här fältet och fältet *nx_packet_prepend_ptr* representerar mängden data i det här paketet.|
 |***nx_packet_packet_pad** _|I det här fältet definieras längden på utfyllnad i 4 byte-ord för att uppnå det önskade justerings kravet. Det här fältet tas bort om _*_NX_PACKET_HEADER_PAD_*_ inte har definierats. Du kan också använda _*_NX_PACKET_ALIGNMENT_*_ i stället för att definiera _nx_packet_header_pad. *|
@@ -759,7 +759,7 @@ Se RFC 2464 (överföring av IPv6-paket över Ethernet-nätverk) för mer inform
 
 Det finns några särskilda multicast-adresser för att skicka multicast-meddelanden till en eller flera värdar i IPv6:
 
-| Group  | Adress   | Beskrivning  |
+| Group  | Adress   | Description  |
 |---|---|---|
 |Gruppen alla noder |**FF02:: 1** |Alla värdar i det lokala nätverket|
 |Gruppen alla routrar |**FF02:: 2** |Alla routrar i det lokala nätverket|

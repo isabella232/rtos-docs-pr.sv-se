@@ -6,12 +6,12 @@ ms.author: philmea
 ms.date: 06/04/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 468f1dc8a8334dc89064594b29dc8cfabd7d8fae
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 347bd83fa8c72ced2e8678a92ec5c5f8393c136d
+ms.sourcegitcommit: 60ad844b58639d88830f2660ab0c4ff86b92c10f
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104826979"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106550209"
 ---
 # <a name="chapter-3-functional-description-of-azure-rtos-netx-secure-dtls"></a>Kapitel 3: funktionell beskrivning av Azure återställnings tider NetX Secure DTLS
 
@@ -64,14 +64,14 @@ Alla giltiga DTLS-handskaknings poster måste ha ett DTLS-huvud, som visas i bil
 
 Fälten i post huvudet för DTLS-handskakning definieras enligt följande:
 
-| Fält för TLS-huvud | Syfte |
+| Fält för TLS-huvud | Syfte  |
 | ---------------- | ------------------------------------------------ |
 | **8-bitars meddelande typ** | Det här fältet innehåller den typ av DTLS-post som skickas. Giltiga typer är följande:<br />- ChangeCipherSpec: 0x14<br />-Avisering: 0x15<br />-Hand skakning: 0x16<br />– Program data: 0x17 |
 |  **16-bitars epok** | Det här fältet innehåller DTLS "epok" som är en räknare som ökas varje gång krypterings statusen ändras (t. ex. när nya sessionsnycklar genereras). |
 |  **48-bitars sekvensnummer** | Det här fältet innehåller ett sekvensnummer som identifierar den här posten. Den används av DTLS för att underhålla post beställningar och kontrol lera återöverförings behov. |
 |  **16-bitars protokoll version** | Det här fältet innehåller DTLS-protokollets version. Giltiga värden är följande:<br />-DTLS 1,1:0xFEFD |
 | **16-bitars längd** | Det här fältet innehåller längden på de data som kapslats i DTLS-posten. |
-| **8-bitars hand Skaknings typ** | Det här fältet innehåller meddelande typen hand skakning. Giltiga värden är följande:<br />-HelloRequest: 0x00<br />-Sitt hälsnings: 0x01<br />-ServerHello: protokollnumret 0x02<br />-Certifikat: 0x0B<br />- ServerKeyExchange: 0x0C<br />- CertificateRequest: 0x0D<br />- ServerHelloDone: 0x0E<br />- CertificateVerify: 0x0F<br />-ClientKeyExchange: 0x10<br />- Färdig | 0x14 |
+| **8-bitars hand Skaknings typ** | Det här fältet innehåller meddelande typen hand skakning. Giltiga värden är följande:<br />-HelloRequest: 0x00<br />-Sitt hälsnings: 0x01<br />-ServerHello: protokollnumret 0x02<br />-Certifikat: 0x0B<br />- ServerKeyExchange: 0x0C<br />- CertificateRequest: 0x0D<br />- ServerHelloDone: 0x0E<br />- CertificateVerify: 0x0F<br />-ClientKeyExchange: 0x10<br />-Färdig: 0x14 |
 | **24-bitars längd** | Det här fältet innehåller längden på hand skaknings meddelande data. |
 | **16-bitars sekvensnummer** | Det här fältet innehåller ett sekvensnummer. |
 

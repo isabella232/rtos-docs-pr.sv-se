@@ -6,12 +6,12 @@ ms.author: philmea
 ms.date: 05/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: b44822b9d8f16208cf470a84013be5a5ff833325
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 8f2ef697f68a269b24a34147a4bc076b8a2b1660
+ms.sourcegitcommit: 60ad844b58639d88830f2660ab0c4ff86b92c10f
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104826538"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106550090"
 ---
 # <a name="chapter-5---io-drivers-for-azure-rtos-filex"></a>Kapitel 5-I/O-drivrutiner för Azure återställnings tider FileX
 
@@ -93,8 +93,7 @@ FileX skriver en eller flera sektorer till de fysiska medierna genom att utfärd
 |fx_media_driver_sectors|Antal sektorer att skriva|
 |fx_media_driver_buffer|Source buffer för sektor (er) att skriva|
 |fx_media_driver_system_write| Ange till FX_TRUE om en system sektor begärs (FAT eller katalog sektor). Annars FX_FALSE om en fil data sektor begärs.|
-|fx_media_driver_sector_type|Definierar den explicita typ av sektor som begärs enligt följande:
-FX_FAT_SECTOR (2) FX_DIRECTORY_SECTOR (3) FX_DATA_SECTOR (4) |
+|fx_media_driver_sector_type|Definierar den explicita typ av sektor som begärs enligt följande:<br> <br>FX_FAT_SECTOR (2) <br> FX_DIRECTORY_SECTOR (3) <br>FX_DATA_SECTOR (4).|
 
 ### <a name="driver-flush"></a>Driv rutins tömning
 

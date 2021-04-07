@@ -6,12 +6,12 @@ ms.author: philmea
 ms.date: 05/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 03a10aeb65017befaf5e7b440046dbff9f9252ef
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: dc7775cdde8f1aa89ca650561713f54ac6c069eb
+ms.sourcegitcommit: 60ad844b58639d88830f2660ab0c4ff86b92c10f
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104827210"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106550226"
 ---
 # <a name="appendix-i---guix-information-structures"></a>Bilaga I – GUIX informations strukturer 
 
@@ -27,10 +27,7 @@ typedef struct GX_BIDI_TEXT_INFO_STRUCT
     GX_VALUE  gx_bidi_text_info_display_width;
 } GX_BIDI_TEXT_INFO;
 ```
-
-### <a name="members"></a>Medlemmar
-
-|                                    |                                                            |
+| Medlemmar | Description |
 | ---------------------------------- | ---------------------------------------------------------- |
 | **gx_bidi_text_info_text**               | Text för att ordna om |
 | **gx_bidi_text_info_font**               | Teckensnitt som används för att visa text, ange det som GX_NULL om rad brytning inte behövs |
@@ -49,9 +46,7 @@ typedef struct GX_BIDI_RESOLVED_TEXT_INFO_STRUCT
 } GX_BIDI_RESOLVED_TEXT_INFO;
 ```
 
-### <a name="members"></a>Medlemmar
-
-|                                    |                                                            |
+| Medlemmar | Description |
 | ---------------------------------- | ---------------------------------------------------------- |
 | **gx_bidi_resolved_text_info_text**             | Pekare till matrisen med omordningen dubbelriktad text |
 | **gx_bidi_resolved_text_info_total_lines**      | Totalt antal rader matchad dubbelriktad text för ett stycke |
@@ -73,9 +68,8 @@ typedef struct GX_CIRCULAR_GAUGE_INFO_STRUCT
     GX_RESOURCE_ID  gx_circular_gauge_info_needle_pixelmap;
 } GX_CIRCULAR_GAUGE_INFO;
 ```
-### <a name="members"></a>Medlemmar
 
-|                                                  |                                              |
+| Medlemmar | Description |
 | ------------------------------------------------ | -------------------------------------------- |
 | **gx_circular_gauge_info_animation_steps**       | Totalt antal steg som nål färdas genom att flytta från den aktuella nålventil till en nyligen tilldelad bänk |
 | **gx_circular_gauge_info_animation_delay**       | Antalet GUIX klock Tick som ska förskjutas mellan animeringssekvenser |
@@ -112,9 +106,7 @@ typedef struct GX_LINE_CHART_INFO_STRUCT
 } GX_LINE_CHART_INFO;
 ```
 
-### <a name="members"></a>Medlemmar
-
-|                                    |                                                            |
+| Medlemmar | Description |
 | ---------------------------------- | ---------------------------------------------------------- |
 | **gx_line_chart_min_val**          | Det minsta data värde som används för att beräkna skalning
 | **gx_line_chart_max_val**          | Maximalt data värde, som används för att beräkna skalning |
@@ -140,9 +132,7 @@ typedef struct GX_MOUSE_CURSOR_INFO_STRUCT
 } GX_MOUSE_CURSOR_INFO;
 ```
 
-### <a name="members"></a>Medlemmar
-
-|                                    |                                                            |
+| Medlemmar | Description |
 | ---------------------------------- | ---------------------------------------------------------- |
 | **gx_mouse_cursor_image_id**       | Resurs-ID för mus bilden |
 | **gx_mouse_cursor_hotspot_x**      | Förskjutningen från vänster om musen till klickbar bild punkt |
@@ -160,9 +150,7 @@ typedef struct GX_PEN_CONFIGURATION_STRUCT
 }GX_PEN_CONFIGURATION;
 ```
 
-### <a name="members"></a>Medlemmar
-
-|                                              |                                                  |
+| Medlemmar | Description |
 | -------------------------------------------- | ------------------------------------------------ |
 | **gx_pen_configuration_min_drag_dist**       | Minsta drag avstånd per GUIX timer för att utlösa ett SNÄRTNING-händelse. Anropa GX_FIXED_VAL_MAKE för att skapa ett fast punkt värde för data typen |
 | **gx_pen_configuration_max_pen_speed_ticks** | Den maximala dra hastigheten i GUIX timer-Tick för att utlösa en SNÄRTNING-händelse | 
@@ -180,9 +168,7 @@ typedef struct GX_PIXELMAP_SLIDER_INFO_STRUCT
 } GX_PIXELMAP_SLIDER_INFO;
 ```
 
-### <a name="members"></a>Medlemmar
-
-|                                                       |                                          |
+| Medlemmar | Description |
 | ----------------------------------------------------- | ---------------------------------------- |
 | **gx_pixelmap_slider_info_lower_background_pixelmap** | Resurs-ID för Pixelmap som fyller bakgrunden före nål. Om den övre bakgrunds Pixelmap inte har angetts används den för att fylla bakgrunden både före och efter nål |
 | **gx_pixelmap_slider_info_upper_background_pixelmap** | Resurs-ID för Pixelmap som fyller bakgrunden efter nål |
@@ -206,9 +192,7 @@ typedef struct GX_PROGRESS_BAR_INFO_STRUCT
 } GX_PROGRESS_BAR_INFO;
 ```
 
-### <a name="members"></a>Medlemmar
-
-|                                              |                                                  |
+| Medlemmar | Description |
 | -------------------------------------------- | ------------------------------------------------ |
 | **gx_progress_bar_info_min_val**             | Lägsta rapporterade värde |
 | **gx_progress_bar_info_max_val**             | Maximalt rapporterat värde |
@@ -242,9 +226,7 @@ typedef struct GX_RADIAL_PROGRESS_BAR_INFO_STRUCT
 } GX_RADIAL_PROGRESS_BAR_INFO;
 ```
 
-### <a name="members"></a>Medlemmar
-
-|                                                   |                                              |
+| Medlemmar | Description |
 | ------------------------------------------------- | -------------------------------------------- |
 | **gx_radial_progress_bar_info_xcenter**           | Widgetens position i x-koordinaten |
 | **gx_radial_progress_bar_info_ycenter**           | Widgetens position i y-koordinaten  |
@@ -281,9 +263,7 @@ typedef struct GX_RADIAL_SLIDER_INFO_STRUCT
 } GX_RADIAL_SLIDER_INFO;
 ```
 
-### <a name="members"></a>Medlemmar
-
-|                                               |                                                  |
+| Medlemmar | Description |
 | --------------------------------------------- | ------------------------------------------------ |
 **gx_radial_slider_info_xcenter**               | Avstånd från vänster om skjutreglagets widget till rotations punkten för skjutreglaget |
 | **gx_radial_slider_info_ycenter**             | Avstånd från skjutreglagets överkant till rotations punkten för skjutreglaget |
@@ -311,9 +291,7 @@ typedef struct GX_RECTANGLE_STRUCT
 } GX_RECTANGLE;
 ```
 
-### <a name="members"></a>Medlemmar
-
-|                                  |                         |
+| Medlemmar | Description |
 | -------------------------------- | ------------------------|
 | **gx_rectangle_left**            | Vänster om rektangeln   |  
 | **gx_rectangle_top**             | Övre delen av rektangeln    | 
@@ -334,9 +312,7 @@ typedef struct GX_RICH_TEXT_FONTS_STRUCT
 } GX_RICH_TEXT_FONTS;
 ```
 
-### <a name="members"></a>Medlemmar
-
-|                                    |                                                            |
+| Medlemmar | Description |
 | ---------------------------------- | ---------------------------------------------------------- |
 | **gx_rich_text_fonts_normal_id**   | Resurs-ID för normalt text teckensnitt |
 | **gx_rich_text_fonts_bold_id**     | Resurs-ID med fet text teckensnitt |
@@ -357,9 +333,7 @@ typedef struct GX_SCROLL_INFO_STRUCT
 } GX_SCROLL_INFO;
 ```
 
-### <a name="members"></a>Medlemmar
-
-|                         |                               |
+| Medlemmar | Description |
 | ----------------------- | ----------------------------- |
 | **gx_scroll_value**     | Aktuell rullnings position       |
 | **gx_scroll_minimum**   | Lägsta rapporterade position     |
@@ -389,9 +363,7 @@ typedef struct GX_SCROLLBAR_APPEARANCE_STRUCT
 } GX_SCROLLBAR_APPEARANCE;
 ```
 
-### <a name="members"></a>Medlemmar
-
-|                                          |                                                       |
+| Medlemmar | Description |
 | ---------------------------------------- | ----------------------------------------------------- |
 | **gx_scroll_width**                      | Bredd på widgeten rullnings List, i bild punkter |
 | **gx_scroll_thumb_width**                | Bredden på knapp tummen som bilder på rullnings listen visas i bild punkter. Det här värdet är vanligt vis ett antal pixlar som är mindre än den totala rullnings listens bredd |
@@ -426,9 +398,7 @@ typedef struct GX_SLIDER_INFO_STRUCT
 } GX_SLIDER_INFO;
 ```
 
-### <a name="members"></a>Medlemmar
-
-|                                         |                                                        |
+| Medlemmar | Description |
 | --------------------------------------- | ------------------------------------------------------ |
 | **gx_slider_info_min_val**              | Lägsta rapporterade värde |
 | **gx_slider_info_max_val**              | Maximalt rapporterat värde |
@@ -456,9 +426,7 @@ typedef struct GX_SPRITE_FRAME_STRUCT
 } GX_SPRITE_FRAME;
 ```
 
-### <a name="members"></a>Medlemmar
-
-|                                          |                                                       |
+| Medlemmar | Description |
 | ---------------------------------------- | ----------------------------------------------------- |
 | **gx_sprite_frame_pixelmap**             | Resurs-ID för Pixelmap som ska visas för den här ramen. ID: t kan vara 0. |
 | **gx_sprite_frame_x_offset**             | Förskjut från widgeten Sprite till vänster för att Visa Pixelmap |

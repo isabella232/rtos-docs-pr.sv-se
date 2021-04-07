@@ -6,12 +6,12 @@ ms.author: philmea
 ms.date: 05/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 2057b86e6f44912fe8ca349cdf0ad2cc10f5c4cd
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 53ffc900debd3bfaa1a38d792ddf294b2ce92461
+ms.sourcegitcommit: 60ad844b58639d88830f2660ab0c4ff86b92c10f
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104827201"
+ms.lasthandoff: 04/07/2021
+ms.locfileid: "106550311"
 ---
 # <a name="chapter-3---functional-overview-of-guix"></a>Kapitel 3 – funktionell översikt över GUIX
 
@@ -310,7 +310,7 @@ Slutligen kan kontroll blocken för GUIX-skärmar och-widgetar statiskt eller dy
 
 GUIX-API: er delas och organiseras i flera grundläggande grupper som motsvarar de grundläggande komponenterna i GUIX-systemet. De grundläggande komponenterna är:
 
-| <!-- -->    | <!-- -->    |
+| Komponenter  | Description  |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | GX_SYSTEM  | System komponenten GUIX, som ansvarar för initiering, händelser, timers, sträng tabeller och synlig hantering av widgeten.                                                                                                                                                                                                                                                                      |
 | GX_CANVAS  | Ett rit utrymme. En arbets yta kan vara en tunn abstraktion av maskin varu Rams bufferten eller också kan den vara en ren minnes arbets yta. Arbets ytans typ bestäms av parametrar som skickas till gx_canvas_create API-funktionen.                                                                                                                                                                                   |
@@ -477,7 +477,7 @@ GUIX tillhandahåller ritnings funktioner för börs eller allmän visnings driv
 
 GUIX stöder färg djup upp till 32-BPP samt svartvit och gråskala. Typen av färgdjup stöder i stort sett av funktionerna i den underliggande fysiska visningen och påverkar också hur mycket minne som krävs för arbets ytans ritnings område. Följande är en lista med stöd för färgdjup tillsammans med en kort beskrivning av variationerna i det här färg djupet.
 
-| Färg &nbsp; format       | Beskrivning                                                                                                   |
+| Färg &nbsp; format       | Description                                                                                                   |
 | ------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
 | 1-bitars monokrom   | 1-bitars per bild punkt i packat format.                                                                                                   |
 | 2-bitars gråskala    | 4 grå nivåer, förpackade fyra bild punkter per byte.                                                                                      |
@@ -532,7 +532,7 @@ GUIX-visnings komponenten tillhandahåller också standard definitioner för oli
 
 Standard färg inställningarna definieras av färg tabellen som tilldelas varje bildskärm och de fördefinierade standardfärg-ID: na. Följande standardfärg-ID: n är följande:
 
-| Färg-ID | Beskrivning |
+| Färg-ID | Description |
 | ------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
 | GX_COLOR_ID_CANVAS | Standard arbets yta (t. ex. visnings bakgrunds färg) |
 | GX_COLOR_ID_WIDGET_FILL | Standard fyllnings färg för widget |
@@ -567,7 +567,7 @@ Dessa färg-ID-värden mappas till ett speciellt färg värde som definieras av 
 
 GUIX-display-komponenten underhåller också en standard teckensnitts tabell. Standard teckensnitts tabellen definierar teckensnittet som används av varje widgets typ, såvida det inte uttryckligen anges av programmet. De fördefinierade visnings teckensnitts tabell-ID: na innehåller följande värden.
 
-| Teckensnitts &nbsp; -ID | Beskrivning |
+| Teckensnitts &nbsp; -ID | Description |
 | ------------------ | --------------------------------------------------------------------------------------------------------------------------------|
 | GX_FONT_ID_DEFAULT | Standard teckensnitt som används när inget speciellt teckensnitt har definierats |
 | GX_FONT_ID_BUTTON | Standard teckensnitt som används för all text på knappar |
@@ -596,7 +596,7 @@ typedef struct GX_SCROLLBAR_APPEARANCE_STRUCT
     GX_RESOURCE_ID gx_scroll_button_color;
 } GX_SCROLLBAR_APPEARANCE;
 ```
-| GX_SCROLLBAR_APPEARANCE struktur medlem | Beskrivning |
+| GX_SCROLLBAR_APPEARANCE struktur medlem | Description |
 | --- | --- |
 | gx_scroll_width | Bredden på en lodrät rullnings list eller höjd för en vågrät rullnings List i bild punkter. |
 | gx_scroll_thumb_width | Bredden på hissen och slut knapparna i bild punkter. |
@@ -1078,14 +1078,14 @@ Den **gx_animation_screen_list** medlemmen definierar en widgets lista för bild
 
 **Gx_animation_style** är en bitmask som definierar vilken typ av animering som ska utföras och associerade alternativ. Animeringens stil flaggor innehåller följande.
 
-| Flagga för animering &nbsp; &nbsp; | Beskrivning |
+| Flagga för animering &nbsp; &nbsp; | Description |
 | --- | --- |
 | GX_ANIMATION_TRANSLATE | Begär en animering av en bild-eller tonings typ. |
 | GX_ANIMATION_SCREEN_DRAG | Begär en Penn indata driven skärm som drar animering. |
 
 Följande flaggor kan användas tillsammans med **SCREEN_DRAG** av typen animeringar.
 
-| Skärm &nbsp; drar &nbsp; flaggor | Beskrivning |
+| Skärm &nbsp; drar &nbsp; flaggor | Description |
 | --- | --- |
 | GX_ANIMATION_WRAP | Skärm listan ska radbrytas från slut punkt till Start. |
 | GX_ANIMATION_HORIZONTAL | Skärm drag tillåts i vågrät riktning.  |
@@ -1093,7 +1093,7 @@ Följande flaggor kan användas tillsammans med **SCREEN_DRAG** av typen animeri
 
 Följande flagga kan användas tillsammans med Översätt animeringar.
 
-| Översätt &nbsp; animeringar &nbsp; flaggor | Beskrivning |
+| Översätt &nbsp; animeringar &nbsp; flaggor | Description |
 | --- | --- |
 | GX_ANIMATION_DETACH | Koppla bort animeringens mål från den överordnade animeringen när animeringen är klar. Om målet har tilldelats dynamiskt och skapats av den genererade automatiserade händelse hanteringen i GUIX Studio tas målet bort när det har kopplats från. |
 | GX_ANIMATION_TRANSLATE | Typer av animering är timer drivna animeringar. Programmet definierar start-och slut position och inledande och avslutande alfa värde för widgeten mål, och animeringssekvensen skapar en timer för att betjäna och som drivande kraft för att köra animeringen.
