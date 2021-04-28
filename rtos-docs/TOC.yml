@@ -1,18 +1,18 @@
-- name: Dokumentation om Microsoft Azure återställnings tider
+- name: Microsoft Azure RTOS-dokumentation
   href: index.yml
-- name: Översikt över Microsoft Azure återställnings tider
+- name: Översikt över Microsoft Azure RTOScd
   href: overview-rtos.md
 - name: Kom igång-guider
   href: getting-started.md
-- name: Microsoft Azure återställnings tider-databaser
+- name: Microsoft Azure RTOS-lagringsplatsen
   href: 'https://github.com/azure-rtos/'
 - name: Relaterade tjänster
   items:
-    - name: Defender för IoT-återställnings tider (för hands version)
+    - name: Defender for IoT – RTOS (förhandsversion)
       href: 'https://docs.microsoft.com/azure/defender-for-iot/iot-security-azure-rtos'
-- name: Microsoft Azure återställnings tider-komponenter
+- name: Microsoft Azure RTOS-komponenter
   items:
-    - name: Microsoft Azure återställnings tider
+    - name: Microsoft Azure RTOS
       href: ./index.yml
     - name: ThreadX
       href: ./threadx/index.yml
@@ -20,7 +20,7 @@
       href: ./threadx-modules/index.yml
     - name: NetX Duo
       href: ./netx-duo/index.yml
-    - name: NetX
+    - name: Netx
       href: ./netx/index.yml
     - name: GUIX
       href: ./guix/index.yml
