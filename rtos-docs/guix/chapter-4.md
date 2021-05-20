@@ -6,38 +6,38 @@ ms.author: philmea
 ms.date: 05/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 2513c1b6f349260c615abbc4056fb856005446c9
-ms.sourcegitcommit: 5c870219b8e7e3f303acc8ddc70320ef3506a3f0
+ms.openlocfilehash: b07e275468484ccc905655dcd13197de42b2ac86
+ms.sourcegitcommit: 4ebe7c51ba850951c6a9d0f15e22d07bb752bc28
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 05/19/2021
-ms.locfileid: "110027970"
+ms.lasthandoff: 05/20/2021
+ms.locfileid: "110223417"
 ---
 # <a name="chapter-4---description-of-guix-services"></a>Kapitel 4 – Beskrivning av GUIX-tjänster
 
 Det här kapitlet innehåller en beskrivning av alla GUIX-tjänster (visas nedan) i alfabetisk ordning.  
 
-I avsnittet "Returvärden" i följande API-beskrivningar påverkas värden i **BOLD** inte av **den GX_DISABLE_ERROR_CHECKING-definition** som används för att inaktivera API-felkontroll, medan värden som inte är fetstilta är helt inaktiverade. 
+I avsnittet "Returvärden" i följande API-beskrivningar påverkas inte värden i **BOLD** av **den GX_DISABLE_ERROR_CHECKING-definition** som används för att inaktivera API-felkontroll, medan värden som inte är i fetstil är helt inaktiverade. 
 
 | **GUIX-tjänst**                      | **Beskrivning**                                                                             |
 | -------------------------------------- | -------------------------------------------------------------------------------------------- |
-| gx_accordion_menu_create            | Skapa avtalsmeny                                                                        |
-| gx_accordion_menu_draw              | Menyn Rita dragning                                                                          |
+| gx_accordion_menu_create            | Skapa dragspelsmeny                                                                        |
+| gx_accordion_menu_draw              | Menyn Rita dragspel                                                                          |
 | gx_accordion_menu_event_process    | Processspelarmenyhändelse                                                                 |
 | gx_accordion_menu_position          | Placera menyalternativ                                                                          |
 | gx_animation_canvas_define          | Ange minne till en animeringskontrollant för en arbetsyta som ska användas för efterföljande animeringar. |
 | gx_animation_create                  | Skapa en animeringskontrollant                                                               |
-| gx_animation_delete                  | Ta bort en animeringskontrollant                                                               |
+| gx_animation_delete                  | Ta bort en eller flera animeringskontrollanter |
 | gx_animation_drag_disable           | Inaktivera dra animerings hook på skärmen                                                           |
 | gx_animation_drag_enable            | Aktivera skärm dra animering hook                                                            |
 | gx_animation_landing_speed_set     | Ange landningshastighet för animering med skärm dra                                                  |
 | gx_animation_start                   | Initiera en animeringssekvens                                                               |
 | gx_animation_stop                    | Pausa en animeringssekvens                                                                |
 | gx_binres_language_count_get      |  Hämta språkantal från en binär resursfil                                          |
-| gx_binres_language_info_load      |  Läs språknamn och storleksinformation från binär resursfil.                           |
+| gx_binres_language_info_load      |  Läsa språknamn och storleksinformation från binär resursfil.                           |
 | gx_binres_language_table_load      | (inaktuell) Läsa in en språktabell från en binär resursdatabuffert                          |
 | gx_binres_language_table_load_ext | Läsa in en språktabell från en binär resursdatabuffert                                       |
-| gx_binres_theme_load                | Läsa in ett tema från databufferten för binär resurs                                                |
+| gx_binres_theme_load                | Läsa in ett tema från en binär resursdatabuffert                                                |
 | gx_brush_default                     | Initiera aktuell pensel till standardvärden                                                         |
 | gx_brush_define                      | Definiera pensel                                                                                 |
 | gx_button_background_draw           | Bakgrund för knappen Rita                                                                       |
@@ -868,11 +868,11 @@ if (status == GX_SUCCESS)
 
 ### <a name="see-also"></a>Se även
 
-- gx_animation_create,
+- gx_animation_create
 - gx_animation_delete
-- gx_animation_drag_disable,
+- gx_animation_drag_disable
 - gx_animation_drag_enable
-- gx_animation_landing_speed_set,
+- gx_animation_landing_speed_set
 - gx_animation_start
 - gx_animation_stop
 
@@ -917,7 +917,7 @@ gx_system_animation_get(&animation);
 
 if (animation)
 {
-    status = gx_animation_create(&animation);
+    status = gx_animation_create(animation);
 }
 
 /* If status is GX_SUCCESS the new animation controller was successfully created and initialized. */
@@ -926,8 +926,81 @@ if (animation)
 
 ### <a name="see-also"></a>Se även
 
-- gx_animation_canvas_define,
+- gx_animation_canvas_define
 - gx_animation_delete
+- gx_animation_drag_disable
+- gx_animation_drag_enable
+- gx_animation_start
+- gx_animation_landing_speed_set
+- gx_animation_stop
+- gx_system_animation_get
+- gx_system_animation_free
+
+## <a name="gx_animation_delete"></a>gx_animation_delete
+
+Ta bort en eller flera animeringskontrollanter
+
+### <a name="prototype"></a>Prototyp
+
+```C
+UINT gx_animation_delete(GX_ANIMATION *animation, GX_WIDGET *parent);
+```
+
+### <a name="description"></a>Description
+
+Den här tjänsten tar bort en animeringssekvens om pekaren för indataanimering har angetts. Annars tas alla animeringar som tillhör den angivna överordnade widgeten bort.
+
+### <a name="parameters"></a>Parametrar
+
+- **animering** Pekare till kontrollblock för animering
+- **överordnad** Pekare till överordnad widget
+
+
+### <a name="return-values"></a>Returvärden
+
+- **GX_SUCCESS** (0x00) Animeringskontrollanter har tagits bort
+- **GX_PTR_ERROR** (0x07) Ogiltig pekare
+
+### <a name="allowed-from"></a>Tillåts från
+
+Initiering och trådar
+
+### <a name="example"></a>Exempel
+
+- Ta bort en animering
+
+```C
+GX_ANIMATION *animation;
+
+/* Allocate an animaton control from system pool */
+gx_system_animation_get(&animation);
+
+if (animation)
+{
+    /* Create an animation.  */
+    gx_animation_create(animation);
+
+    /* Delete an animation.  */
+    status = gx_animation_delete(animation, GX_NULL);
+}
+
+/* If status is GX_SUCCESS the animation controller was successfully deleted and returned back to system animation pool. */
+
+```
+
+- Ta bort flera animeringar
+```C
+
+status = gx_animation_delete(GX_NULL, parent);
+
+/* If status is GX_SUCCESS all the animations belong to the parent were successfully deleted. */
+
+```
+
+### <a name="see-also"></a>Se även
+
+- gx_animation_canvas_define,
+- gx_animation_create
 - gx_animation_drag_disable,
 - gx_animation_drag_enable
 - gx_animation_start
@@ -950,7 +1023,7 @@ UINT gx_animation_drag_disable(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten tar bort proceduren dra animeringen från widgetens standardhändelseprocessfunktion och stoppar animeringssekvensen. Proceduren dra animering hook hanterar händelser för en skärm dra animering.
+Den här tjänsten tar bort proceduren dra animering hook på skärmen från widgetens standardhändelseprocessfunktion och stoppar animeringssekvensen. På skärmen kan du dra en animering med en hook-procedur hantera händelser för en animering som drar skärmen.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -983,14 +1056,15 @@ status = gx_animation_drag_disable(&animation, animation_parent);
 
 ### <a name="see-also"></a>Se även
 
-- gx_animation_canvas_define,
-- gx__animation_create
+- gx_animation_canvas_define
+- gx_animation_create
+- gx_animation_delete
 - gx_animation_drag_enable
-- gx_animation_landing_speed_set,
-- gx__animation_start
+- gx_animation_landing_speed_set
+- gx_animation_start
 - gx_animation_stop
-- gx_system_animation_get,
-- gx__system_animation_free
+- gx_system_animation_get
+- gx_system_animation_free
 
 ## <a name="gx_animation_drag_enable"></a>gx_animation_drag_enable
 
@@ -1007,9 +1081,9 @@ UINT gx_animation_drag_enable(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten anger den internt definierade funktionen för att dra animeringshändelsen som en hook-procedur för en widgets standardhändelseprocessfunktion. Funktionen för att dra animeringens händelseprocess på skärmen hanterar händelser för en animering som drar skärmen.
+Den här tjänsten anger den internt definierade funktionen för att dra animeringshändelsen som en hook-procedur för en widgets standardhändelseprocessfunktion. Funktionen för att dra animeringshändelser hanterar händelser för en animering som drar skärmen.
 
-Dra hook-proceduren på skärmen blir standardhanteraren för pennhändelser som skickas till målwidgeten. Den ursprungliga funktionen för händelsebearbetning av widget anropas i en seriekedja efter kontroll av händelsetyper för skärm dra indata.
+Proceduren dra hook på skärmen blir standardhanterare för pennindatahändelser som skickas till målwidgeten. Den ursprungliga widgetens händelsebearbetningsfunktion anropas i seriekedja efter kontroll av händelsetyper med skärmfördrång.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -1062,13 +1136,14 @@ status = gx_animation_drag_enable(&animation, animation_parent,
 
 ### <a name="see-also"></a>Se även
 
-- gx_animation_canvas_define,
-- gx__animation_create
-- gx_animation_drag_disable,
-- gx__animation_landing_speed_set
-- gx_animation_start,
-- gx__animation_stop,
-- gx__system_animation_get
+- gx_animation_canvas_define
+- gx_animation_create
+- gx_animation_delete
+- gx_animation_drag_disable
+- gx_animation_landing_speed_set
+- gx_animation_start
+- gx_animation_stop
+- gx_system_animation_get
 - gx_system_animation_free
 
 ## <a name="gx_animation_landing_speed_set"></a>gx_animation_landing_speed_set
@@ -1112,13 +1187,14 @@ status = gx_animation_landing_peed_set(&my_animation, 20);
 
 ### <a name="see-also"></a>Se även
 
-- gx_animation_canvas_define,
-- gx__animation_create
-- gx_animation_slide_disable,
-- gx__animation_slide_enable
-- gx_animation_start,
-- gx__animation_stop,
-- gx__system_animation_get
+- gx_animation_canvas_define
+- gx_animation_create
+- gx_animation_delete
+- gx_animation_slide_disable
+- gx_animation_slide_enable
+- gx_animation_start
+- gx_animation_stop
+- gx_system_animation_get
 - gx_system_animation_free
 
 ## <a name="gx_animation_start"></a>gx_animation_start
@@ -1137,7 +1213,7 @@ UINT gx_animation_start(
 
 Den här tjänsten initierar en animeringssekvens med hjälp av en tidigare skapad animeringsinstans och en ny uppsättning animeringsparametrar. Den här funktionen gör en lokal kopia av parametrarna, vilket innebär att parameterstrukturen inte behöver definieras statiskt.
 
-Kontrollstrukturen GX_ANIMATION kan definieras statiskt av programmet eller hämtas med hjälp av API:et gx_system_animation_get().
+Den GX_ANIMATION kontrollstrukturen kan definieras statiskt av programmet eller hämtas med hjälp av API:gx_system_animation_get().
 
 Den GX_ANIMATION_INFO strukturen definierar parametrarna för animeringen som ska köras. En fullständig beskrivning av den här strukturen och innebörden av varje fält finns i avsnittet GUIX-animeringskomponent i kapitel 3 i den här handboken.
 
@@ -1221,7 +1297,7 @@ Stoppa en animering som startats tidigare. Om blockeringspekaren för animerings
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Felaktig pekare GX_PTR_ERROR (0x07)
+- **GX_SUCCESS** (0x00) GX_PTR_ERROR (0x07) Ogiltig pekare
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_INVALID_STATUS** (0x26) Ogiltig kontrollantstatus
 
@@ -1242,12 +1318,13 @@ status = gx_animation_stop(&animation);
 
 ### <a name="see-also"></a>Se även
 
-- gx_animation_canvas_define,
-- gx__animation_create
-- gx_animation_drag_disable,
-- gx__animation_drag_enable
-- gx_animation_start,
-- gx__system_animation_get
+- gx_animation_canvas_define
+- gx_animation_create
+- gx_animation_delete
+- gx_animation_drag_disable
+- gx_animation_drag_enable
+- gx_animation_start
+- gx_system_animation_get
 - gx_system_animation_free
 
 ## <a name="gx_binres_language_count_get"></a>gx_binres_language_count_get
@@ -1314,9 +1391,9 @@ UINT gx_binres_language_info_load(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten parsar en binär resursdatablob för att fylla i en matris med GX_LANGUAGE_HEADER-strukturer, vilket informerar tillämpningen av språknamnen och strängtabellstorleken för varje språk som finns i binära data. Programmet bör först anropa gx_binres_language_count_get() för att fastställa antalet språk i binära data och försäkra att put_info-pekaren som skickas till den här funktionen pekar på en matris med language_count GX_LANGUAGE_HEADER strukturer.
+Den här tjänsten parsar en binär resursdatablob för att fylla i en matris med GX_LANGUAGE_HEADER-strukturer, vilket informerar tillämpningen av språknamnen och strängtabellstorleken för varje språk som finns i binärdata. Programmet bör först anropa gx_binres_language_count_get() för att fastställa antalet språk i binära data och försäkra sig om att put_info-pekaren som skickas till den här funktionen pekar på en matris med language_count GX_LANGUAGE_HEADER strukturer.
 
-Den här tjänsten används av programmet för att vid körning fastställa innehållet i ett segment med binär resursdata.
+Den här tjänsten används av programmet för att vid körning fastställa innehållet i ett binärt resursdata segment.
 
 Strukturen GX_LANGUAGE_HEADER definieras som:
 
@@ -1329,7 +1406,7 @@ typedef struct GX_LANGUAGE_HEADER_STRUCT{
 } GX_LANGUAGE_HEADER;
 ```
 
-- Fältet *magic_number* används för intern validering av binär resursdataformatet.
+- Fältet *magic_number* används för intern validering av binärresursdataformatet.
 - Fältet *header_index* anger i vilken ordning språken definieras i binärdata.
 - Fältet *header_name* innehåller språknamnet.
 - Fältet *header_data_size* innehåller datastorleken för språksträngtabellen.
@@ -1369,7 +1446,7 @@ status = gx_binres_language_info_load(root_address,
 
 ## <a name="gx_binres_language_table_load"></a>gx_binres_language_table_load
 
-Resurs för inläsningsspråktabell (inaktuell)
+Läsa in resurs för språktabell (inaktuell)
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1385,7 +1462,7 @@ Med det här inaktuella API:et kan program läsa in strängtabelldata från äld
 
 Nya program bör använda gx_binres_language_table_load_ext().
 
-Den här tjänsten skapar en språktabellstruktur som innehåller pekare till tabellresurser, de genererade datastrukturerna pekar på resursdata "på plats". Resursdata kopieras inte. Resursdata måste placeras på en allmän minnesplats för åtkomst och basadressen för den här minnesplatsen skickas till det här API:et.
+Den här tjänsten skapar en språktabellstruktur som innehåller pekare till tabellresurser, de genererade datastrukturerna pekar på resursdata "på plats" och kopierar inte resursdata. Resursdata måste placeras på en allmän minnesplats för åtkomst och basadressen för den här minnesplatsen skickas till det här API:et.
 
 Den här tjänsten kräver ett allokerat minnesblock för körning som är tillräckligt stort för att rymma språktabellstrukturen, och därför måste gx_system_memory_allocator_set-API:et anropas en gång innan den här tjänsten begärs.
 
@@ -1440,7 +1517,7 @@ UINT gx_binres_language_table_load_ext(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten skapar en språktabellstruktur som innehåller pekare till tabellresurser, de genererade datastrukturerna pekar på resursdata "på plats" och kopierar inte resursdata. Resursdata måste placeras på en allmän minnesplats för åtkomst och basadressen för den här minnesplatsen skickas till det här API:et.
+Den här tjänsten skapar en språktabellstruktur som innehåller pekare till tabellresurser, de genererade datastrukturerna pekar på resursdata "på plats". Resursdata kopieras inte. Resursdata måste placeras på en allmän minnesplats för åtkomst och basadressen för den här minnesplatsen skickas till det här API:et.
 
 Den här tjänsten kräver ett allokerat minnesblock för körning som är tillräckligt stort för att rymma språktabellstrukturen, och därför måste gx_system_memory_allocator_set-API:et anropas en gång innan den här tjänsten begärs.
 
@@ -1456,7 +1533,7 @@ Den returnerade språktabellen definierar en eller flera strängtabeller, varje 
 - **GX_SUCCESS** (0x00) Lyckades
 - **GX_INVALID_FORMAT** (0x24) Ogiltig binär resurs
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
-- **GX_SYSTEM_MEMPRY_ERROR** (0x30) Minnesbefriare eller kostnadsfri funktion har inte definierats
+- **GX_SYSTEM_MEMPRY_ERROR** (0x30) Minnes allocator eller kostnadsfri funktion har inte definierats
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -1495,14 +1572,14 @@ UINT gx_binres_theme_load(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten skapar en GX_THEME struktur som innehåller pekare till resurstabellerna för det begärda temat. De genererade datastrukturerna pekar på resursdata "på plats", utan kopierar inte resursdata. Resursdata måste placeras på en allmän minnesplats för åtkomst och basadressen för den här minnesplatsen skickas till det här API:et.
+Den här tjänsten skapar en GX_THEME struktur som innehåller pekare till resurstabellerna för det begärda temat. De genererade datastrukturerna pekar på resursdata "på plats", utan kopierar inte resursdata. Resursdata måste placeras på en allmän minnesplats för åtkomst och basadressen för den här minnesplatsen skickas till detta API.
 
 Den här tjänsten kräver ett allokerat minnesblock för körning som är tillräckligt stort för att innehålla tematabellstrukturen, och därför måste gx_system_memory_allocator_set-API:et anropas en gång innan den här tjänsten begärs.
 
 ### <a name="parameters"></a>Parametrar
 
 - **root_address** Adress för binära resursdata i minnet
-- **theme_id** Temats identifierare
+- **theme_id** Identifieraren för temat
 - **returned_theme** Pekare till inläst tema
 
 ### <a name="return-values"></a>Returvärden
@@ -1511,7 +1588,7 @@ Den här tjänsten kräver ett allokerat minnesblock för körning som är tillr
 - **GX_INVALID_FORMAT** (0x24) Ogiltig binär resurs
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_VALUE** (0x22) Ogiltigt tema-ID
-- **GX_SYSTEM_MEMORY_ERROR** (0x30) Minnes allocator eller kostnadsfri funktion har inte definierats
+- **GX_SYSTEM_MEMORY_ERROR** (0x30) Minnesbefriare eller kostnadsfri funktion har inte definierats
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -1588,11 +1665,11 @@ UINT gx_brush_define(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten definierar en pensel med den angivna linjefärgen, fyllningsfärg och format.
+Den här tjänsten definierar en pensel med angiven linjefärg, fyllningsfärg och format.
 
 ### <a name="parameters"></a>Parametrar
 
-- **brush** Pekare till penselkontrollblock
+- **pensla** Pekare till penselkontrollblock
 - **line_color** Färg på pensellinjen. **Bilaga A** innehåller fördefinierade färger. Observera att programmet kan lägga till anpassade färger också.
 - **fill_color** Färg på penselfyllning. **Bilaga A** innehåller fördefinierade färger. Observera att programmet kan lägga till anpassade färger också.
 - **style (stil)** Penselformat. **Bilaga D** beskriver de penselformat som stöds. Penselformat kan kombineras till en variabel med hjälp av en bitvis OR-åtgärd.
@@ -1632,7 +1709,7 @@ VOID gx_button_background_draw(GX_BUTTON *button);
 
 ### <a name="description"></a>Description
 
-Den här tjänsten ritar knappbakgrunden. Den här funktionen anropas vanligtvis internt av gx_button_draw-funktionen, men exponeras för programmet för att hjälpa till att skriva anpassade ritningsfunktioner.
+Den här tjänsten ritar knappbakgrunden. Den här funktionen anropas vanligtvis internt gx_button_draw funktionen, men exponeras för programmet för att hjälpa till att skriva anpassade ritningsfunktioner.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -1695,14 +1772,14 @@ UINT gx_button_create(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten skapar en knapp som angetts och associerar knappen med den angivna överordnade widgeten.
+Den här tjänsten skapar en knapp som anges och associerar knappen med den angivna överordnade widgeten.
 
 ### <a name="parameters"></a>Parametrar
 
 - **knapp** Pekare till knappkontrollblock
 - **namn** Knappens logiska namn
 - **överordnad** Pekare till överordnad widget för knappen
-- **style (stil)** Knappformat. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
+- **style** Knappformat. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
 - **button_id** Programdefinierat ID för knappen
 - **storlek** Knappens storlek
 
@@ -1777,11 +1854,11 @@ Den här tjänsten avmarkerar den angivna knappen och genererar en signalhändel
 ### <a name="parameters"></a>Parametrar
 
 - **knapp** Pekare till knappkontrollblock
-- **gen_event** Om GX_TRUE genererar knappen en händelse GX_EVENT_CLICKED, GX_EVENT_DESELECT eller GX_EVENT_TOGGLE_OFFSET beroende på knappformatet. Om GX_FALSE genererar inte knappen någon händelse på högre nivå även om den normalt gör det.
+- **gen_event** Om GX_TRUE genererar knappen en händelse GX_EVENT_CLICKED, GX_EVENT_DESELECT eller GX_EVENT_TOGGLE_OFFSET beroende på knappstilen. Om GX_FALSE genererar knappen ingen händelse på högre nivå även om den normalt gör det.
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Knappen Lyckades avmarkeras
+- **knappen GX_SUCCESS** (0x00) Lyckades avmarkeras
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
@@ -1827,7 +1904,7 @@ VOID gx_button_draw(GX_BUTTON *button);
 
 ### <a name="description"></a>Description
 
-Den här tjänsten ritar den angivna knappen. Den här funktionen anropas vanligtvis internt av GUIX-mekanismen för arbetsyteuppdatering, men exponeras för programmet för att hjälpa till med implementeringen av anpassade ritningsfunktioner för anpassade knappwidgetar.
+Den här tjänsten ritar den angivna knappen. Den här funktionen anropas vanligtvis internt av GUIX-arbetsyteuppdateringsmekanismen, men exponeras för programmet för att hjälpa till med implementeringen av anpassade ritningsfunktioner för anpassade knappwidgetar.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -1874,7 +1951,7 @@ VOID custom_button_draw(GX_BUTTON *button)
 ## <a name="gx_button_event_process"></a>gx_button_event_process
 
 
-Händelse för processknapp
+Processknapphändelse
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1891,7 +1968,7 @@ Den här tjänsten bearbetar en händelse för den angivna knappen.
 ### <a name="parameters"></a>Parametrar
 
 - **knapp** Pekare till knappkontrollblock
-- **event_ptr** Pekare till händelse att bearbeta
+- **event_ptr** Pekare till händelse som ska bearbetas
 
 ### <a name="return-values"></a>Returvärden
 
@@ -2024,7 +2101,7 @@ Den här tjänsten anger värdet för alpha-blend för den angivna arbetsytan. A
 
 Att blanda överläggsarbetsytan kräver antingen stöd för maskinvarugrafiklager eller programvarustöd genom att skapa en sammansatt arbetsyta.
 
-Maskinvarustöd för blandning av arbetsyta aktiveras genom att anropa API:et gx_canvas_hardware_layer_bind() innan du anger alfavärdet för arbetsytan. När en arbetsyta är bunden till ett maskinvarugrafiklager anropar API:et gx_canvas_alpha_set() direkt maskinvarugrafiklagret som blandar tjänster.
+Maskinvarustöd för blandning av arbetsyta aktiveras genom att anropa API:et gx_canvas_hardware_layer_bind() innan du anger alfavärdet för arbetsytan. När en arbetsyta är bunden till ett maskinvarugrafiklager anropar API:et gx_canvas_alpha_set() direkt maskinvarugrafiklagret med tjänster som blandas.
 
 Om du vill använda programvarustöd för blandning av arbetsyta måste programmet skapa en arbetsyta med GX_CANVAS_COMPOSITE stil, där alla andra hanterade arbetsyta är sammansatta före den slutliga visningen. Programvarustöd för arbetsyteblandning tillhandahålls endast när du kör med en visningsdrivrutin på 16 bpp eller högre färgdjup.
 
@@ -2081,15 +2158,15 @@ UINT gx_canvas_arc_draw(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten ritar en cirkelbåg på arbetsytan med hjälp av den aktuella penseln. Cirkelbågen klipps till arbetsytans ogiltiga region. Den här GX_ARC_DRAWING_SUPPORT måste definieras.
+Den här tjänsten ritar en cirkelbåge på arbetsytan med hjälp av den aktuella penseln. Cirkelbågen klipps till arbetsytans ogiltiga region. Den här GX_ARC_DRAWING_SUPPORT måste definieras.
 
 ### <a name="parameters"></a>Parametrar
 
 - **xcenter** x-position i mitten av cirkel arc
 - **ycenter** y-position för mitten av cirkel arc
 - **r** Radie för cirkel arc
-- **start_angle** Startvinkel för cirkelbåge
-- **end_angle** Slutvinkel för cirkelbåge
+- **start_angle** Cirkel arcens startvinkel
+- **end_angle** Slut vinkel för cirkel arc
 
 ### <a name="return-values"></a>Returvärden
 
@@ -2138,7 +2215,7 @@ UINT gx_canvas_block_move(GX_RECTANGLE *block,
 
 ### <a name="description"></a>Description
 
-Den här tjänsten flyttar ett block med pixeldata för arbetsytan i den riktning som anges. Den här tjänsten används internt av GUIX för att utföra snabb bläddring, men kan också användas av programprogramvaran.
+Den här tjänsten flyttar ett block med pixeldata för arbetsytan i den riktning som anges. Den här tjänsten används internt av GUIX för att utföra snabb bläddring, men kan också användas av programmet.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -2274,7 +2351,7 @@ Den här tjänsten skapar arbetsytan med de angivna egenskaperna och tillhörand
 
 - **arbetsyta** Pekare till kontrollblock för arbetsyta
 - **namn** Logiskt namn för arbetsytan
-- **visa** Pekare till tidigare skapad visning
+- **visa** Pekare till visning som skapats tidigare
 - **typ** Typ av arbetsytaArbetsytans typer är:
 - **GX_CANVAS_SIMPLE:** En minnesarbetsyta som används för att rita utanför skärmen.
 - **GX_CANVAS_MANAGED:** En arbetsyta som automatiskt rensas till den aktiva visningen, antingen som en del av den sammansatta byggprocessen eller som en del av buffertreglageåtgärden för en enda arbetsytearkitektur.
@@ -2345,7 +2422,7 @@ Den här tjänsten tar bort arbetsytan. Arbetsytan tas bort från den interna l�
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad arbetsyte skapas
+- **GX_SUCCESS** (0x00) Lyckad arbetsyte create
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_CANVAS** (0x20) Ogiltig arbetsyta
@@ -2386,20 +2463,20 @@ UINT gx_canvas_drawing_complete(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten meddelar GUIX att programmets ritning på den angivna arbetsytan har slutförts.
+Den här tjänsten meddelar GUIX att programmets ritning på den angivna arbetsytan är klar.
 
-Programmet kan använda den här tjänsten för att tvinga fram en omedelbar ritning till en arbetsyta. Detta tömer arbetsytan till den synliga rambufferten och/eller utlöser en växlingsåtgärd för bugger, beroende på systemets minnesarkitektur.
+Programmet kan använda den här tjänsten för att tvinga omedelbar ritning till en arbetsyta. Detta rensar arbetsytan till den synliga rambufferten och/eller utlöser en växlingsåtgärd för bugger, beroende på systemets minnesarkitektur.
 
-Den här tjänsten bör endast anropas av programmet för att stänga en ritningssekvens som har påbörjats med gx_canvas_drawing_initiate().
+Den här tjänsten bör endast anropas av programmet för att stänga en ritningssekvens som börjar med gx_canvas_drawing_initiate().
 
 ### <a name="parameters"></a>Parametrar
 
 - **arbetsyta** Pekare till kontrollblock för arbetsyta
-- **flush (rensa)** Om **_GX_TRUE_** rensas arbetsyteändringarna till skärmen
+- **flush** Om **_GX_TRUE_** rensas ändringar i arbetsytan till skärmen
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Slutförd ritning
+- **GX_SUCCESS** (0x00) Slutförande av ritningen
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 
@@ -2560,7 +2637,7 @@ Den här tjänsten binder en GUIX-ritningsarbetsyta till ett maskinvarugrafiklag
 
 Om du binder en arbetsyta till ett maskinvarugrafiklager implementeras API:erna gx_canvas_show(), gx_canvas_hide(), gx_canvas_alpha_set() och gx_canvas_offset_set() direkt av drivrutinstjänster för maskinvaruvisning.
 
-Om drivrutinen för maskinvaruvisning inte stöder flera grafiklager kommer den här tjänsten inte att returnera GX_INVALID_DISPLAY.
+Om drivrutinen för maskinvaruvisning inte stöder flera grafiklager returnerar den här tjänsten inte GX_INVALID_DISPLAY.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -2611,7 +2688,7 @@ Den här tjänsten döljer en GUIX-arbetsyta. Om arbetsytan har bundets till ett
 
 ### <a name="parameters"></a>Parametrar
 
-- **arbetsytearbetsyta** som ska döljas
+- **arbetsytearbetsyta** som ska vara dold
 
 ### <a name="return-values"></a>Returvärden
 
@@ -2665,10 +2742,10 @@ Den här tjänsten ritar en linje på arbetsytan med hjälp av den aktuella pens
 
 ### <a name="parameters"></a>Parametrar
 
-- **x_start** Starta x-position för linjen
+- **x_start** Starta x-position för raden
 - **y_end** Starta radens y-position
 - **x_start** Avslutande x-position för raden
-- **y_end** Avsluta radens y-position
+- **y_end** Avslutande y-position för raden
 
 ### <a name="return-values"></a>Returvärden
 
@@ -2707,7 +2784,7 @@ status = gx_canvas_line_draw(0, 1, 320, 480);
 
 ## <a name="gx_canvas_memory_define"></a>gx_canvas_memory_define
 
-Definiera arbetsytans minne
+Definiera arbetsyteminne
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2902,7 +2979,7 @@ hidden successfully. */
 ## <a name="gx_canvas_offset_set"></a>gx_canvas_offset_set
 
 
-Tilldela skärmförskjutning för arbetsyta x,y
+Tilldela visningsförskjutning för arbetsyta x,y
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3252,11 +3329,11 @@ UINT gx_canvas_pixelmap_rotate(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten roterar en pixelkarta vid den angivna vinkeln och renderar pixelkartan till arbetsytan direkt när rotationen utförs. Den här tjänsten skiljer sig från gx_utility_pixelmap_rotate eftersom utdata från rotationen återges direkt till arbetsytans minne och den roterade pixelkartan inte returneras till anroparen.
+Den här tjänsten roterar en pixelkarta vid den angivna vinkeln och renderar pixelkartan till arbetsytan direkt när rotationen utförs. Den här tjänsten skiljer sig gx_utility_pixelmap_rotate på så sätt att rotationens utdata återges direkt till arbetsytans minne och den roterade pixelkartan inte returneras till anroparen.
 
 Fördelen med den här tjänsten jämfört gx_utility_pixelmap_rotate är att inget ytterligare minne krävs för att hålla den roterade pixelkartan. Nackdelen är att rotationskoden måste köras varje gång pixelkartan ritas.
 
-Verifiering av cklippning och visningsport framtvingas under återgivningen av den roterade pixelkartan.
+Verifiering av urklipp och visningsområdet framtvingas under återgivningen av den roterade pixelkartan.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -3491,9 +3568,9 @@ Den här tjänsten ska endast användas för att rendera roterad text "en gång"
 ### <a name="parameters"></a>Parametrar
 
 - **text** Textsträng som ska ritas
-- **xCenter** Centrera kring vilken text som ska roteras.
+- **xCenter** Centrera positon kring vilken text som ska roteras.
 - **yCenter** Centrera positionen runt vilken text som ska roteras.
-- **vinkel** Den önskade textrotationsvinkeln i grader.
+- **vinkel** Önskad rotationsvinkel för text i grader.
 
 ### <a name="return-values"></a>Returvärden
 
@@ -3544,7 +3621,7 @@ void my_window_draw(GX_WINDOW *window)
 ## <a name="gx_canvas_rotated_text_draw_ext"></a>gx_canvas_rotated_text_draw_ext
 
 
-Rita text roterad runt en mittpunkt
+Rita text som roterats runt en mittpunkt
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3558,7 +3635,7 @@ UINT gx_canvas_rotated_text_draw_ext(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten ritar text på arbetsytan. Texten ritas roteras om den begärda mittpunkten. Teckensnittet för den aktuella ritningskontexten och den aktuella kontextlinjefärgen används för att återge texten.
+Den här tjänsten ritar text till arbetsytan. Texten ritas roteras om den begärda mittpunkten. Teckensnittet för den aktuella ritningskontexten och den aktuella kontextlinjefärgen används för att återge texten.
 
 Den här tjänsten använder funktionen gx_utility_string_to_alphamap att rendera textsträngen till en tillfällig 8bpp-pixelkarta som endast innehåller alfavärde. Tjänsten roterar sedan alfakartan med hjälp av funktionen gx_utility_pixelmap_rotate. När den sista alfakartan har renderats på arbetsytan frigör den här tjänsten den tillfälliga alfakartan och tillhörande minne.
 
@@ -3874,7 +3951,7 @@ UINT gx_checkbox_create(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten skapar en kryssruta med de angivna egenskaperna. GX_CHECKBOX härleds från GX_TEXT_BUTTON och alla gx_text_button-tjänster kan användas med GX_CHECKBOX widgetar.
+Den här tjänsten skapar en kryssruta med de angivna egenskaperna. GX_CHECKBOX härleds från GX_TEXT_BUTTON och alla gx_text_button tjänster kan användas med GX_CHECKBOX widgetar.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -3984,7 +4061,7 @@ Den här tjänsten bearbetar en händelse för den angivna kryssrutan. Den här 
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Händelseprocessen lyckades
+- **GX_SUCCESS** (0x00) Lyckad händelseprocess för kryssruta
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
@@ -4055,7 +4132,7 @@ Den här tjänsten tilldelar pixelkartor som ska visas av den angivna kryssrutan
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Markerad
+- **GX_SUCCESS** (0x00) Kryssrutan Lyckades
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
 
@@ -4141,7 +4218,7 @@ UINT gx_circular_gauge_angle_get(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten hämtar den aktuella nålvinkeln för widgeten för cirkelmätare.
+Den här tjänsten hämtar den aktuella nålvinkeln för cirkelmåttswidgeten.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -4192,7 +4269,7 @@ UINT gx_circular_gauge_angle_set(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten anger målvinkeln för en cirkelformad mätarwidget.
+Den här tjänsten anger målvinkeln för en widget för cirkelmätare.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -4253,7 +4330,7 @@ Den här tjänsten anger animeringssteg och fördröjningstid för en widget fö
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Kryssrutan Lyckades
+- **GX_SUCCESS** (0x00) Markerad
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_VALUE** (0x22) Ogiltigt värde
@@ -4359,11 +4436,11 @@ Den här tjänsten skapar en widget för cirkelformad mätare med de angivna ege
 - **style (stil)** Format för cirkelformad mätare. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
 - **circular_gauge_id** Programdefinierat ID för cirkulär mätare
 - **xpos** Mätarposition för x-koordinat
-- **ypos** Position för mätare y-koordinat
+- **ypos** Mätarposition för y-koordinat
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Kryssrutan Lyckades
+- **GX_SUCCESS** (0x00) Markerad
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_SIZE** (0x19) Ogiltig blockstorlek för kontroll
@@ -4593,11 +4670,11 @@ Den här tjänsten definierar penseln för den aktuella ritningskontexten.
 
 - **line_color_id** Resurs-ID för linjefärg. **Bilaga B** innehåller fördefinierade färgresurs-ID:er. Observera att programmet kan lägga till anpassade resurs-ID:n för färg också.
 - **fill_color_id** Resurs-ID för fyllningsfärg. **Bilaga B** innehåller fördefinierade färgresurs-ID:er. Observera att programmet kan lägga till anpassade resurs-ID:n för färg också.
-- **style (stil)** Penselformat. **Bilaga D** beskriver de penselformat som stöds. Penselformat kan kombineras till en variabel med hjälp av en bitvis OR-åtgärd.
+- **style (stil)** Penselformat. **Bilaga D** beskriver de penselformat som stöds. Penselformat kan kombineras till en variabel med hjälp av bitvis OR-åtgärd.
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Definiera lyckad kontextborste
+- **GX_SUCCESS** (0x00) Definiera en lyckad kontextborste
 - **GX_INVALID_RESOURCE_ID** (0x33) Ogiltigt resurs-ID
 - **GX_INVALID_CONTEXT** (0x06) Ingen aktiv ritningskontext definierar
 - **GX_INVALID_RESOURCE_ID** (0x33) Ogiltigt resurs-ID
@@ -4845,7 +4922,7 @@ Den här tjänsten anger penselformatet för den aktuella ritningskontexten.
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad formatuppsättning för kontextborstning
+- **GX_SUCCESS** (0x00) Lyckad kontextborsteformatuppsättning
 - **GX_INVALID_CONTEXT** (0x06) Ingen aktiv ritningskontext
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -4898,7 +4975,7 @@ Den här tjänsten anger bredden på den aktiva penseln i den aktuella ritningsk
 
 ### <a name="return-values"></a>Returvärden
 
-**GX_SUCCESS** (0x00) Lyckad kontextborstebreddsuppsättning
+**GX_SUCCESS** (0x00) Lyckad kontextborstningsbreddsuppsättning
 
 **GX_INVALID_CONTEXT** (0x06) Ingen aktiv ritningskontext
 
@@ -4946,11 +5023,11 @@ UINT gx_context_color_get(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten hämtar färgvärdet som är associerat med det angivna färg-ID:t. Färgvärdet returneras i färgformatet för den aktiva kontextvisningen. Den här tjänsten ska bara anropas inifrån en aktiv ritningsåtgärd.
+Den här tjänsten hämtar det färgvärde som är associerat med det angivna färg-ID:t. Färgvärdet returneras i färgformatet för den aktiva kontextvisningen. Den här tjänsten ska bara anropas inifrån en aktiv ritningsåtgärd.
 
 ### <a name="parameters"></a>Parametrar
 
-**color_id** Resurs-ID för färg som begärts.
+**color_id** Resurs-ID för färg som begärdes.
 
 **return_color** Adressen till variabeln som ska innehålla det returnerade färgvärdet.
 
@@ -5174,7 +5251,7 @@ Den här tjänsten anger linjefärgen för den aktiva penseln i den aktuella rit
 
 ### <a name="parameters"></a>Parametrar
 
-- **line_color_id** Linjefärg för aktuell kontext. **Bilaga B** innehåller fördefinierade färgresurs-ID:er. Observera att programmet även kan lägga till anpassade resurs-ID:n för färg.
+- **line_color_id** Linjefärg för aktuell kontext. **Bilaga B** innehåller fördefinierade resurs-ID:er för färg. Observera att programmet även kan lägga till anpassade resurs-ID:n för färg.
 
 ### <a name="return-values"></a>Returvärden
 
@@ -5344,7 +5421,7 @@ Den här tjänsten definierar den råa penseln för den aktuella skärmkontexten
 
 - **line_color** Linjefärg i 32-bitars ARGB-färgformat. **Bilaga A** innehåller fördefinierade färger. Observera att programmet kan lägga till anpassade färger också.
 - **fill_color** Fyllningsfärg i 32-bitars argb-färgformat. **Bilaga A** innehåller fördefinierade färger. Observera att programmet kan lägga till anpassade färger också.
-- **style (stil)** Penselformat. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
+- **style** Penselformat. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
 
 ### <a name="return-values"></a>Returvärden
 
@@ -5542,16 +5619,16 @@ UINT gx_context_string_get_ext(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten returnerar strängen som är associerad med ett visst sträng-ID. Den här tjänsten kan bara anropas när det finns en aktiv ritningskontext, det vill säga inifrån ritningsfunktionen för en widget. Den här tjänsten identifierar den aktiva arbetsytan och visar och hämtar strängen från den visningsinstans som finns.
+Den här tjänsten returnerar strängen som är associerad med ett visst sträng-ID. Den här tjänsten kan bara anropas när det finns en aktiv ritningskontext, dvs. inifrån ritningsfunktionen för en widget. Den här tjänsten identifierar den aktiva arbetsytan och visar och hämtar strängen från den visningsinstans som finns.
 
 ### <a name="parameters"></a>Parametrar
 
 - **string_id** Sträng-ID som används för att identifiera strängen, som genereras av GUIX Studio i programmets resurshuvudfil.
-- **return_string** Adressen GX_STRING variabel där sträng pekaren och stränglängden returneras.
+- **return_string** Adressen till GX_STRING variabel där strängpekaren och stränglängden returneras.
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad färguppsättning för kontextrå linje
+- **GX_SUCCESS** (0x00) Lyckad färguppsättning för kontext raw-linje
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_INVALID_CONTEXT** (0X06) Ingen aktiv ritningskontext
@@ -5591,7 +5668,7 @@ string.gx_string_length values have been returned. */
 
 ## <a name="gx_display_active_language_set"></a>gx_display_active_language_set
 
-Tilldela visningsaktivt språk
+Tilldela det aktiva visningsspråket
 
 ### <a name="prototype"></a>Prototyp
 
@@ -5699,7 +5776,7 @@ UINT gx_display_color_table_set(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten åter tilldelar färgtabellen som ska användas av visningen. Den här tjänsten anropas vanligtvis av den GUIX Studio-genererade konfigurationsfunktionen för visning, men kan även anropas av programprogramvaran.
+Den här tjänsten tilldelar om färgtabellen som ska användas av visningen. Den här tjänsten anropas vanligtvis av den GUIX Studio-genererade visningskonfigurationsfunktionen, men kan även anropas av programmet.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -5750,13 +5827,13 @@ UINT gx_display_create(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten skapar en visning och anropar funktionen för att konfigurera visningsdrivrutiner. GUIX tar den här visningen och lägger till den i sin interna lista över skärmar.
+Den här tjänsten skapar en visning och anropar funktionen för att konfigurera visningsdrivrutiner. GUIX tar den här visningen och lägger till den i sin interna lista över visningar.
 
 ### <a name="parameters"></a>Parametrar
 
 - **visa** Pekare för att visa kontrollblock
 - **namn** Namnet på visningen
-- **display_driver_setup** Pekare för att visa funktionen för drivrutinsinstallation
+- **display_driver_setup** Pekare för att visa funktionen för drivrutinskonfiguration
 - **optional_driver_info** Pekare till valfri drivrutinsinformation
 - **color_format** Färgformat enligt definitionen i **bilaga C**
 - **bredd** Antal bildpunkter på x-axeln
@@ -5815,7 +5892,7 @@ Den här tjänsten stänger av en visning och rensar allokerade resurser.
 ### <a name="parameters"></a>Parametrar
 
 - **visa** Pekare för att visa kontrollblock
-- **display_driver_cleanup** Pekare för att visa funktionen för drivrutinsrensning
+- **display_driver_cleanup** Pekare för att visa funktionen för att rensa drivrutiner
 
 ### <a name="return-values"></a>Returvärden
 
@@ -5868,7 +5945,7 @@ UINT gx_display_font_table_set(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten tilldelar om teckensnittstabellen som ska användas av visningen. Den här tjänsten anropas vanligtvis av den GUIX Studio-genererade visningskonfigurationsfunktionen, men kan även anropas av programmet.
+Den här tjänsten tilldelar om teckensnittstabellen som ska användas av visningen. Den här tjänsten anropas vanligtvis av den GUIX Studio-genererade konfigurationsfunktionen för visning, men kan även anropas av programprogramvaran.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -5878,7 +5955,7 @@ Den här tjänsten tilldelar om teckensnittstabellen som ska användas av visnin
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad teckensnittstabelluppsättning
+- **GX_SUCCESS** (0x00) Lyckad teckentabelluppsättning
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 
@@ -5921,18 +5998,18 @@ UINT gx_display_language_table_get(
 
 Den här tjänsten hämtar språktabellen från den angivna visningen. Den här tjänsten kan användas av ett program för att ändra visningsspråktabellen vid körning med hjälp av dynamiskt definierade strängar.
 
-Detta API är inaktuellt och stöds endast för program som använder den gamla formatspråktabellen (dvs. den Studio-genererade resursfilen genereras för biblioteksversion före version 5.6). Nya program bör använda gx_display_language_table_get_ext().
+Det här API:et är inaktuellt och stöds endast för program som använder den gamla formatspråktabellen (d.v.s. den Studio-genererade resursfilen genereras för biblioteksversion före version 5.6). Nya program bör använda gx_display_language_table_get_ext().
 
 ### <a name="parameters"></a>Parametrar
 
 - **visa** Pekare för att visa kontrollblock
-- **tabell** Pekare för adress att ta emot tabell
+- **tabell** Adress för att ta emot tabell pekare
 - **language_count** Adress för att ta emot språkantal
 - **string_table_size** Adress för att ta emot strängtabellens storlek
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad teckentabelluppsättning
+- **GX_SUCCESS** (0x00) Lyckad teckensnittstabelluppsättning
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 
@@ -5982,13 +6059,13 @@ Den här tjänsten hämtar språktabellen från den angivna visningen. Den här 
 ### <a name="parameters"></a>Parametrar
 
 - **visa** Pekare för att visa kontrollblock
-- **tabell** Adress för att ta emot tabell pekare
+- **tabell** Pekare för adress att ta emot tabell
 - **language_count** Adress för att ta emot språkantal
 - **string_table_size** Adress för att ta emot strängtabellens storlek
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad teckensnittstabelluppsättning
+- **GX_SUCCESS** (0x00) Lyckad teckentabelluppsättning
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 
@@ -6045,7 +6122,7 @@ Den här tjänsten tilldelar språktabellen som ska användas av visningen. Den 
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad teckentabelluppsättning
+- **GX_SUCCESS** (0x00) Lyckad teckensnittstabelluppsättning
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 
@@ -6072,7 +6149,7 @@ status = gx_display_language_table_set(&my_display, language_table,
 
 ## <a name="gx_display_language_table_set_ext"></a>gx_display_language_table_set_ext
 
-Tilldela visningsspråktabell
+Tilldela visningsspråkstabell
 
 ### <a name="prototype"></a>Prototyp
 
@@ -6086,7 +6163,7 @@ UINT gx_display_language_table_set_ext(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten tilldelar språktabellen som ska användas av visningen. Den här tjänsten anropas vanligtvis av den GUIX Studio-genererade funktionen gx_studio_display_configure, men kan även anropas av programmet.
+Den här tjänsten tilldelar språktabellen som ska användas av visningen. Den här tjänsten anropas vanligtvis av den GUIX Studio-genererade funktionen gx_studio_display_configure, men kan även anropas av programmets programvara.
 
 Tabelltilldelning för körningsspråk görs vanligtvis när språk läses in från en binär resursfil med hjälp av gx_binres_language_table_load().
 
@@ -6099,7 +6176,7 @@ Tabelltilldelning för körningsspråk görs vanligtvis när språk läses in fr
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad teckensnittstabelluppsättning
+- **GX_SUCCESS** (0x00) Lyckad teckentabelluppsättning
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_STRING_LENGTH** (0x34) Ogiltig stränglängd
@@ -6194,13 +6271,13 @@ Den här tjänsten är inaktuell till förmån för gx_display_string_get_ext().
 
 Den här tjänsten hämtar en sträng från den aktiva strängtabellen för den angivna visningen. Det aktiva språket används för att välja strängen från språktabellen som är tilldelad till visningen.
 
-Sträng-ID:er genereras av GUIX Studio och finns i programmets resources.h-huvudfil.
+Sträng-ID:er genereras av GUIX Studio och finns i programresurser.h-huvudfilen.
 
 ### <a name="parameters"></a>Parametrar
 
 - **visa** Pekare för att visa kontrollblock
 - **string_id** Sträng-ID, genererat av GUIX Studio.
-- **sträng** Adress för strängpekarvariabel
+- **sträng** Adress för sträng pekarvariabel
 
 ### <a name="return-values"></a>Returvärden
 
@@ -6248,13 +6325,13 @@ UINT gx_display_string_get_ext(
 
 Den här tjänsten hämtar en sträng från den aktiva strängtabellen för den angivna visningen. Det aktiva språket används för att välja strängen från språktabellen som är tilldelad till visningen.
 
-Sträng-ID:er genereras av GUIX Studio och finns i programresurser.h-huvudfilen.
+Sträng-ID:er genereras av GUIX Studio och finns i programmets resources.h-huvudfil.
 
 ### <a name="parameters"></a>Parametrar
 
 - **visa** Pekare för att visa kontrollblock
 - **string_id** Sträng-ID, genererat av GUIX Studio.
-- **sträng** Adress för GX_STRING i
+- **sträng** Adress för GX_STRING variabel i
 - **som** string.gx_string_ptr och
 - **string.gx_string_length** returneras.
 
@@ -6312,12 +6389,12 @@ Den här tjänsten hämtar strängtabellen som är associerad med det aktiva spr
 
 - **visa** Pekare för att visa kontrollblock
 - **språk** Tabellkolumn som ska hämtas.
-- **tabell** Adressen till variabeln som pekaren ska returneras till.
-- **table_size** Adress för variabeln som ska returnera tabellstorleken
+- **tabell** Adressen för variabeln som ska returnera pekaren.
+- **table_size** Adress för variabel för att returnera tabellstorlek
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad teckentabelluppsättning
+- **GX_SUCCESS** (0x00) Lyckad teckensnittstabelluppsättning
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_NOT_FOUND** (0x09) Ogiltigt språkindex
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
@@ -6368,12 +6445,12 @@ Den här tjänsten hämtar strängtabellen som är associerad med det aktiva spr
 
 - **visa** Pekare för att visa kontrollblock
 - **språk** Tabellkolumn som ska hämtas.
-- **tabell** Adressen för variabeln som ska returnera pekaren.
-- **table_size** Adress för variabel för att returnera tabellstorlek
+- **tabell** Adressen till variabeln som pekaren ska returneras till.
+- **table_size** Adress för variabeln som ska returnera tabellstorleken
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad teckensnittstabelluppsättning
+- **GX_SUCCESS** (0x00) Lyckad teckentabelluppsättning
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_NOT_FOUND** (0x09) Ogiltigt språkindex
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
@@ -6563,9 +6640,9 @@ UINT gx_drop_list_create(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten skapar en listrutan. En listruta är en kombination av listwidgeten och en lodrät popup-lista som visas när listrutan öppnas. Den lodräta popup-listan skapas automatiskt när listr listwidgeten skapas och visas eller döljs när listlistewidgeten öppnas respektive stängs.
+Den här tjänsten skapar en listrutan. En listruta är en kombination av widgeten för listrutan och en lodrät popup-lista som visas när listrutan öppnas. Den lodräta popup-listan skapas automatiskt när widgeten för listrutan skapas och visas eller döljs när listrutans widget öppnas respektive stängs.
 
-Listlistewidgeten stöder två associerade pixelkartor. Den första, som beskrivs som "List wallpaper" (Lista bakgrundsbild) i studioegenskaperna, är den valfria pixelkartan för bakgrundsbilder som visas som bakgrund till den lodräta listan som visas när listr listwidgeten öppnas. Den andra pixelkartan, som beskrivs som "Bakgrundsbild" i Studio-egenskapsvyn, är en valfri bild som visas som bakgrund i själva listrutan.
+Widgeten för listrutan stöder två associerade pixelkartor. Den första, som beskrivs som "List wallpaper" (Lista bakgrundsbild) i studioegenskaperna, är den valfria pixelkartan för bakgrundsbilder som visas som bakgrund till den lodräta listan som visas när listr listwidgeten öppnas. Den andra pixelkartan, som beskrivs som "Bakgrundsbild" i Studio-egenskapsvyn, är en valfri bild som visas som bakgrund i själva listrutan.
 
 En widget i listrutan kan ha (men krävs inte) en underordnad widget som används för att öppna och stänga listrutan. Detta är vanligtvis en ikon- eller knappwidget, men även en anpassad widget kan användas som växlingsknapp för att öppna/stänga för den överordnade listrutan. Nyckelinställningen som gör att den här underordnade widgeten använder listrutan är att den underordnade widgeten måste ha det fördefinierade widget-ID:t ID_DROP_LIST_BUTTON.
 
@@ -6583,10 +6660,10 @@ Använd sedan Studio-egenskapsvyn för att tilldela den underordnade widgeten ID
 - **överordnad** Pekare till den överordnade widgeten
 - **total_rows** Totalt antal rader i listrutan
 - **open_height** Höjden på den lodräta listan som visas när listrutan öppnas.
-- **motringning** Funktion som anropas av den lodräta listan när listan rullas. Se dokumentationen för GX_VERTICAL_LIST för mer information.
-- **style** Kantlinjeformatet i listrutan.
+- **motringning** Funktionen anropas av den lodräta listan när listan rullas. Se dokumentationen för GX_VERTICAL_LIST mer information.
+- **style (stil)** Kantlinjeformatet i listrutan.
 - **drop_list_id** Programdefinierat ID för listrutan
-- **storlek** Mått för listrutan
+- **storlek** Dimensioner i listrutan
 
 ### <a name="return-values"></a>Returvärden
 
@@ -6633,7 +6710,7 @@ status = gx_drop_list_create(&my_drop_list,
 ## <a name="gx_drop_list_event_process"></a>gx_drop_list_event_process
 
 
-Processlistehändelse
+Bearbeta drop list-händelse
 
 ### <a name="prototype"></a>Prototyp
 
@@ -6650,11 +6727,11 @@ Den här tjänsten bearbetar en händelse för listrutan.
 ### <a name="parameters"></a>Parametrar
 
 - **drop_list** Kontrollblock för listwidget
-- **händelse** Pekare till händelse att bearbeta
+- **händelse** Pekare till händelse som ska bearbetas
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Drop List-händelse har bearbetats
+- **GX_SUCCESS** (0x00) En hanterad drop list-händelse har bearbetats
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 
@@ -6763,11 +6840,11 @@ Tilldela en bakgrundsbild till listrutan. Den här pixelkartan används som bakg
 ### <a name="parameters"></a>Parametrar
 
 - **drop_list** Pekare till kontrollblocket för listrutan
-- **id** Resurs-ID till pixlemap
+- **id** resurs-ID till pixlemap
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad bildpunktsuppsättning för släpplista
+- **GX_SUCCESS** (0x00) Lyckad bildpunktsuppsättning för listrutan
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_RESOURCE_ID** (0x33) Ogiltigt pixlemap-ID
@@ -6813,7 +6890,7 @@ UINT gx_drop_list_popup_get(
 
 ### <a name="description"></a>Description
 
-En widget i listrutan består av själva widgeten för listrutan och en lodrät popup-lista som visas när widgeten för listrutan öppnas. Den här tjänsten hämtar en pekare till den lodräta listkomponenten i listrutan, så att programmet kan anropa API-tjänster direkt på den här lodräta listan.
+En widget i listrutan består av själva listlistewidgeten och en lodrät popup-lista som visas när listr listwidgeten öppnas. Den här tjänsten hämtar en pekare till den lodräta listkomponenten i listrutan, så att programmet kan anropa API-tjänster direkt på den här lodräta listan.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -6868,7 +6945,7 @@ Den här funktionen placerar underordnade för det allmänna rullningshjulet enl
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Placerade de underordnade för det allmänna rullningshjulet
+- **GX_SUCCESS** (0x00) De underordnade för det allmänna rullningshjulet har placerades
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
@@ -6927,16 +7004,16 @@ Ett allmänt rullningshjul är en typ av widget för rullningshjul som består a
 
 GX_GENERIC_SCROLL_WHEEL härleds från GX_SCROLL_WHEEL och stöder alla gx_scroll_wheel tjänster.
 
-Alla typer av rullningshjul GX_EVENT_LIST_SELECT händelser till sin överordnade när rullningshjulet rullas.
+Alla typer av rullningshjul GX_EVENT_LIST_SELECT händelser till sina överordnade när rullningshjulet rullas.
 
 ### <a name="parameters"></a>Parametrar
 
 - **hjul** Pekare till allmänt kontrollblock för rullningshjul
 - **namn** Logiskt namn på allmän widget för rullningshjul
 - **överordnad** Pekare till den överordnade widgeten
-- **total_rows** Totalt antal rader i rullningshjulet.
-- **motringning** Återanropsfunktion för att skapa en widgetrad. Det kan vara GX_NULL om antalet totalt antal rader matchar det underordnade antalet. Den bör anges för återanvändning av widget när det underordnade antalet är mindre än antalet rader eller om GX_STYLE_WRAP har angetts. Och se i det här fallet till att det underordnade antalet är 1 mer än antalet synliga rader.
-- **style** Stil på ett allmänt rullningshjul. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar och widgetspecifika format.
+- **total_rows** Totalt antal rader med rullningshjulet.
+- **motringning** Återanropsfunktionen för att skapa en widgetrad. Det kan GX_NULL om antalet rader totalt matchar det underordnade antalet. Den bör anges för widgetåteranvänt när det underordnade antalet är mindre än antalet rader eller om GX_STYLE_WRAP har angetts. Och se i det här fallet till att det underordnade antalet är 1 mer än antalet synliga rader.
+- **style (stil)** Format för allmänt rullningshjul. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar och widgetspecifika format.
 - **id** Programdefinierat ID för allmänt rullningshjul
 - **storlek** Dimensioner för allmän widget för rullningshjul
 
@@ -6945,7 +7022,7 @@ Alla typer av rullningshjul GX_EVENT_LIST_SELECT händelser till sin överordnad
 - **GX_SUCCESS** (0x00) Ett allmänt rullningshjul har skapats
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
-- **GX_ALREADY_CREATED** (0x13) Widget har redan skapats
+- **GX_ALREADY_CREATED** widgeten (0x13) har redan skapats
 - **GX_INVALID_SIZE** (0x19) Ogiltig blockstorlek för widgetkontroll
 - **GX_INVALID_VALUE** (0x22) Ogiltigt antal rader
 - **GX_INVALID_WIDGET** (0x12) Ogiltig överordnad widget
@@ -7019,7 +7096,7 @@ VOID gx_generic_scroll_wheel_draw(GX_GENERIC_SCROLL_WHEEL *wheel);
 
 ### <a name="description"></a>Description
 
-Den här tjänsten ritar ett allmänt rullningshjul. Den här tjänsten anropas vanligtvis internt under arbetsyteuppdateringen, men kan även anropas från anpassade allmänna rullningshjulsritningsfunktioner.
+Den här tjänsten ritar ett allmänt rullningshjul. Den här tjänsten kallas vanligtvis internt under arbetsyteuppdatering, men kan även anropas från anpassade allmänna rullningshjulsritningsfunktioner.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -7079,11 +7156,11 @@ Den här tjänsten bearbetar en händelse för det här fönstret.
 ### <a name="parameters"></a>Parametrar
 
 - **hjul** Pekare till allmänt kontrollblock för rullningshjul
-- **händelse** Pekare till händelse att bearbeta
+- **händelse** Pekare till händelse som ska bearbetas
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad allmän bearbetning av rullningshjulshändelse
+- **GX_SUCCESS** (0x00) Lyckad generisk bearbetning av rullningshjulshändelse
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
@@ -7153,7 +7230,7 @@ Den här tjänsten tilldelar radhöjden för varje rad i rullningshjulet.
 
 ### <a name="parameters"></a>Parametrar
 
-- **hjul** Pekare till det allmänna kontrollblocket för rullningshjulet
+- **hjul** Pekare till det allmänna kontrollblocket för rullningshjul
 - **row_height** Radhöjdsvärde i bildpunkter.
 
 ### <a name="return-values"></a>Returvärden
@@ -7210,12 +7287,12 @@ Den här tjänsten tilldelar eller ändrar det totala antalet generiska rader me
 
 ### <a name="parameters"></a>Parametrar
 
-- **hjul** Pekare till allmänt allmänt kontrollblock för rullningshjul
+- **hjul** Pekare till allmänt kontrollblock för rullningshjul
 - **total_rows** Totalt antal hjulrader som ska visas för användaren.
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Har angett allmän rad för totalt antal rullningshjul
+- **GX_SUCCESS** (0x00) Ange generisk rad för totalt antal rullningshjul
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
@@ -7260,7 +7337,7 @@ UINT gx_horizontal_list_children_position(GX_HORIZONTAL_LIST *horizontal_list);
 
 ### <a name="description"></a>Description
 
-Den här funktionen placerar underordnade för den vågräta listan. Den här funktionen anropas automatiskt när listan tar emot GX_EVENT_SHOW händelse, men bör anropas direkt om listan ändras efter att den har gjorts synlig.
+Den här funktionen placerar underordnade för den vågräta listan. Den här funktionen anropas automatiskt när listan tar GX_EVENT_SHOW händelse, men bör anropas direkt om listan ändras när den har gjorts synlig.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -7324,8 +7401,8 @@ Den här tjänsten skapar en vågrät lista.
 - **horizontal_list** Kontrollblock för vågrät lista
 - **namn** Namn på vågrät lista
 - **överordnad** Pekare till överordnad widget
-- **total_columns** Totalt antal comumn i vågrät lista
-- **motringning** Det här är en pekare till en återanropsfunktion som tillhandahålls av programmet. Motringningsfunktionen anropas när den vågräta listan rullas för att skapa de nyligen synliga listobjekten. På så sätt kan den vågräta listan visa alla användardefinierade widgettyper som listobjekt.
+- **total_columns** Totalt antal kommatecken i vågrät lista
+- **motringning** Det här är en pekare till en återanropsfunktion som tillhandahålls av programmet. Återanropsfunktionen anropas när den vågräta listan rullas för att skapa de nyligen synliga listobjekten. På så sätt kan den vågräta listan visa alla användardefinierade widgettyper som listobjekt.
 - **style (stil)** Stil på rullningslistswidgeten. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
 - **horizontal_list_id** Programdefinierat ID för vågrät lista
 - **storlek** Dimensioner för horizonallistan
@@ -7335,7 +7412,7 @@ Den här tjänsten skapar en vågrät lista.
 - **GX_SUCCESS** (0x00) Den vågräta listan har skapats
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
-- **GX_ALREADY_CREATED** widgeten (0x13) har redan skapats
+- **GX_ALREADY_CREATED** (0x13) Widget har redan skapats
 - **GX_INVALID_SIZE** (0x19) Ogiltig blockstorlek för widgetkontroll
 - **GX_INVALID_VALUE** (0x22) Antal kolumner som inte är giltiga
 
@@ -7383,7 +7460,7 @@ Den här tjänsten bearbetar en händelse för den vågräta listan.
 ### <a name="parameters"></a>Parametrar
 
 - **lista** Kontrollblock för vågrät lista
-- **händelse** Pekare till händelse att bearbeta
+- **händelse** Pekare till händelse som ska bearbetas
 
 ### <a name="return-values"></a>Returvärden
 
@@ -7456,7 +7533,7 @@ Den här tjänsten anger startindexet för den vågräta listan.
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Har angett startsideindex för den vågräta listan
+- **GX_SUCCESS** (0x00) Har angett index för startsidan för den vågräta listan
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_VALUE** (0x22) Ogiltigt värde
@@ -7540,7 +7617,7 @@ status = gx_horizontal_list_selected_index_get(&my_list,
 ## <a name="gx_horizontal_list_selected_set"></a>gx_horizontal_list_selected_set
 
 
-Tilldela den valda posten i en vågrät lista
+Tilldela den markerade posten i en vågrät lista
 
 ### <a name="prototype"></a>Prototyp
 
@@ -7605,7 +7682,7 @@ UINT gx_horizontal_list_selected_widget_get(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten returnerar den valda listposten i den vågräta listan. Observera att om den vågräta listan har fler rader än underordnade widgetar och den valda posten har rullats från vyn, returnerar detta API GX_NULL eftersom underordnade widgetar används igen när listinnehållet bläddras. Funktionen gx_horizontal_list_selected_index_get returnerar indexet för det valda objektet på ett tillförlitligt sätt, även om objektet har bläddrats från vyn.
+Den här tjänsten returnerar den markerade listposten för den vågräta listan. Observera att om den vågräta listan har fler rader än underordnade widgetar och den valda posten har rullats från vyn, returnerar detta API GX_NULL eftersom de underordnade widgetarna används igen när listinnehållet rullas. Funktionen gx_horizontal_list_selected_index_get returnerar indexet för det valda objektet på ett tillförlitligt sätt, även om objektet har rullats från vyn.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -7614,7 +7691,7 @@ Den här tjänsten returnerar den valda listposten i den vågräta listan. Obser
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckades fick du den vågräta listposten
+- **GX_SUCCESS** (0x00) Lyckades fick den vågräta listposten
 - **GX_FAILURE** (0x10) Vald widget har rullats från vyn i en lista med fler rader än underordnade klient.
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
@@ -7713,7 +7790,7 @@ UINT gx_horizontal_scrollbar_create(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten skapar en vågrät rullningslist. ID:t för en vågrät rullningslist är fördefinierat (eftersom ett fönster måste veta hur händelser ska fångas upp från den) och storleken är automatisk (eftersom det måste fylla det överordnade fönstrets klientbredd). Om vi bestämmer oss för att tillåta rullningslisterna i klientområdet måste vi lägga till ytterligare en create-funktion med id- och storleksparametrarna.
+Den här tjänsten skapar en vågrät rullningslist. ID:t för en vågrät rullningslist är fördefinierat (eftersom ett fönster måste veta hur händelser ska fångas upp från den) och storleken är automatisk (eftersom det måste fylla det överordnade fönstrets klientbredd). Om vi bestämmer oss för att tillåta rullningslisterna för klientområdet måste vi lägga till ytterligare en create-funktion med id- och storleksparametrarna.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -7843,11 +7920,11 @@ VOID gx_icon_button_draw(GX_ICON_BUTTON *button);
 
 ### <a name="description"></a>Description
 
-Den här tjänsten ritar ikonknappen. Den här funktionen anropas vanligtvis internt av GUIX som en del av en uppdateringsåtgärd för arbetsytan, men den exponeras även för programmet som kanske vill tillhandahålla en anpassad ritningsfunktion och anropar standardikonknappritningen som anpassad ritningsbas.
+Den här tjänsten ritar ikonknappen. Den här funktionen anropas vanligtvis internt av GUIX som en del av en uppdateringsåtgärd för arbetsytan, men den exponeras även för det program som kanske vill tillhandahålla en anpassad ritningsfunktion och anropar standardikonens knappritning som anpassad ritningsbas.
 
 ### <a name="parameters"></a>Parametrar
 
-- **knapp** Pekare till ikonknappkontrollblock
+- **knapp** Pekare till ikonknappens kontrollblock
 
 ### <a name="return-values"></a>Returvärden
 
@@ -7907,7 +7984,7 @@ Den här tjänsten tilldelar en ny pixelkarta till ikonknappwidgeten.
 
 ### <a name="parameters"></a>Parametrar
 
-- **knapp** Pekare till ikonknappens kontrollblock
+- **knapp** Pekare till ikonknappkontrollblock
 - **icon_id** Resurs-ID för pixelkarta
 
 ### <a name="return-values"></a>Returvärden
@@ -8027,7 +8104,7 @@ Den här tjänsten skapar den angivna ikonwidgeten.
 - **namn** Logiskt namn på ikonwidget
 - **överordnad** Pekare till den överordnade widgeten
 - **pixelmap_id** Resurs-ID för pixelkarta
-- **style** Ikonformat
+- **style (stil)** Ikonformat
 - **icon_id** Programdefinierat ID för ikon
 - **x** Starta x-koordinatposition
 - **y** Startar y-koordinatposition
@@ -8074,11 +8151,11 @@ VOID gx_icon_draw(GX_ICON *icon);
 
 ### <a name="description"></a>Description
 
-Den här tjänsten ritar den angivna ikonwidgeten. Den här tjänsten anropas vanligtvis internt av GUIX som en del av en uppdateringsåtgärd för arbetsytan, men den exponeras även för programmet som kanske vill tillhandahålla en anpassad ritningsfunktion och anropa standardikonen som ritar som anpassad ritningsbas.
+Den här tjänsten ritar den angivna ikonwidgeten. Den här tjänsten anropas vanligtvis internt av GUIX som en del av en uppdateringsåtgärd för arbetsytan, men den exponeras även för programmet som kanske vill tillhandahålla en anpassad ritningsfunktion och anropa standardikonritningen som anpassad ritningsbas.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ikon** Kontrollblock för pekare till ikonwidget
+- **ikon** Pekare till kontrollblock för ikonwidget
 
 ### <a name="return-values"></a>Returvärden
 
@@ -8213,7 +8290,7 @@ status = gx_icon_pixelmap_set(&my_icon,
 ## <a name="gx_image_reader_create"></a>gx_image_reader_create
 
 
-Skapa bildläsarmodulinstans
+Skapa en instans av bildläsarmodulen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -8294,8 +8371,8 @@ Den här tjänsten anger paletten för bildläsarkontrollblock. Den här tjänst
 ### <a name="parameters"></a>Parametrar
 
 - **image_reader** Kontrollblock för bildläsare
-- **pal** Pekare till paletten
-- **palsize** Storleken på paletten
+- **pal** Pekare till palette
+- **palsize** Palettens storlek
 
 ### <a name="return-values"></a>Returvärden
 
@@ -8346,7 +8423,7 @@ Den här tjänsten avkodar en raw-bild till ett angivet färgformat. För närva
 ### <a name="return-values"></a>Returvärden
 
 - **GX_SUCCESS** (0x00) Lyckad avbildningsavkodning
-- **GX_SYSTEM_MEMORY_ERROR** (0x30) Minnestilldelning har inte definierats eller så misslyckades minnesallokeringen
+- **GX_SYSTEM_MEMORY_ERROR** (0x30) Minnestilldelning har inte definierats eller minnesallokeringen misslyckades
 - **GX_NOT_SUPPORTED** (0x28) Bildtyp eller format för utdatafärg stöds inte
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
@@ -8470,7 +8547,7 @@ GX_LINE_CHART baseras på GX_WINDOW och stöder alla GX_WINDOW API:er.
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_SIZE** (0x19) Ogiltig blockstorlek för widgetkontroll
-- **GX_ALREADY_CREATED** (0x13) Widget har redan skapats
+- **GX_ALREADY_CREATED** widgeten (0x13) har redan skapats
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -8587,7 +8664,7 @@ UINT gx_line_chart_draw(GX_LINE_CHART *chart);
 
 ### <a name="description"></a>Description
 
-Det här är standardritningsfunktionen för linjediagram, som ritar diagramaxeln och datalinjen. Program tillhandahåller vanligtvis en anpassad ritningsfunktion som ersätter standardritningen för att lägga till saker som bockmarkeringar, skalning eller annan information till diagramaxeln och datalinjen som ritas av baslinjediagramswidgeten.
+Det här är standardfunktionen för ritning av linjediagram, som ritar diagramaxeln och datalinjen. Program tillhandahåller vanligtvis en anpassad ritningsfunktion som ersätter standardritningen för att lägga till saker som bockmarkeringar, skalning eller annan information till diagramaxeln och datalinjen som ritas av baslinjediagramswidgeten.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -8648,7 +8725,7 @@ Den här tjänsten uppdaterar datamatrisen som ritats av linjediagramsfönstret 
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckades textknappen skapa
+- **GX_SUCCESS** (0x00) Skapa en textknapp
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 
@@ -8678,7 +8755,7 @@ status = gx_line_chart_update(&chart, chart_data, 100);
 ## <a name="gx_line_chart_y_scale_calculate"></a>gx_line_chart_y_scale_calculate
 
 
-Beräkna skalningsvärde för y-axeln med fast punkt
+Beräkna skalningsvärde för fast punkt-y-axel
 
 ### <a name="prototype"></a>Prototyp
 
@@ -8695,11 +8772,11 @@ Den här tjänsten beräknar det skalningsvärde med fast punkt som används fö
 ### <a name="parameters"></a>Parametrar
 
 - **diagram** Kontrollblock för linjediagram
-- **return_val** Adressen till värdet som ska innehålla returvärdet för fast punkt.
+- **return_val** Adress för värdet som ska innehålla returvärdet för fast punkt.
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Ett lyckat y-skalningsvärde beräknas
+- **GX_SUCCESS** (0x00) Beräkna ett lyckat y-skalningsvärde
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -8745,7 +8822,7 @@ UINT gx_menu_create(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten skapar en meny som anges och associerar menyn med den angivna överordnade widgeten. Den accepterar alla typer av widget som underordnade menyalternativ. Om du vill infoga en widget som ett underobjekt, **anropar du gx_menu_insert**.
+Den här tjänsten skapar en meny som anges och associerar menyn med den angivna överordnade widgeten. Den accepterar alla typer av widget som underordnade menyalternativ. Om du vill infoga en widget som ett undermenyalternativ **anropar du gx_menu_insert**.
 
 GX_MENU härleds från GX_PIXELMAP_PROMPT och stöder alla gx_pixelmap_prompt API-tjänster.
 
@@ -8756,7 +8833,7 @@ GX_MENU härleds från GX_PIXELMAP_PROMPT och stöder alla gx_pixelmap_prompt AP
 - **överordnad** Pekare till överordnad widget
 - **text_id** Resurs-ID för text
 - **fill_id** Resurs-ID för fyllning
-- **style** Widgetens format. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
+- **style (stil)** Widgetens stil. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
 - **menu_id** Programdefinierat ID för menyn
 - **storlek** Menyns storlek
 
@@ -8811,7 +8888,7 @@ VOID gx_menu_draw(GX_MENU *menu);
 
 ### <a name="description"></a>Description
 
-Den här tjänsten ritar den angivna menyn. Den här funktionen anropas vanligtvis internt av GUIX-mekanismen för arbetsyteuppdatering, men exponeras för programmet för att hjälpa till med implementeringen av anpassade ritningsfunktioner för anpassade menywidgetar.
+Den här tjänsten ritar den angivna menyn. Den här funktionen anropas vanligtvis internt av GUIX-arbetsyteuppdateringsmekanismen, men exponeras för programmet för att hjälpa till med implementeringen av anpassade ritningsfunktioner för anpassade menywidgetar.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -9169,10 +9246,10 @@ GX_MULTI_LINE_TEXT_BUTTON härleds från GX_TEXT_BUTTON och stöder alla gx_text
 ### <a name="parameters"></a>Parametrar
 
 - **text_button** Pekare till textknappkontrollblock
-- **namn** Textknappens logiska namn
+- **namn** Logiskt namn på textknappen
 - **överordnad** Pekare till överordnad widget för knappen
 - **text_id** Resurs-ID för text
-- **style** Textknappstil. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
+- **style (stil)** Textknappstil. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
 - **text_button_id** Programdefinierat ID för textknappen
 - **storlek** Knappens storlek
 
@@ -9181,7 +9258,7 @@ GX_MULTI_LINE_TEXT_BUTTON härleds från GX_TEXT_BUTTON och stöder alla gx_text
 - **GX_SUCCESS** (0x00) Skapa en textknapp med flera linjer
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
-- **GX_ALREADY_CREATED** widgeten (0x13) har redan skapats
+- **GX_ALREADY_CREATED** (0x13) Widget har redan skapats
 - **GX_INVALID_SIZE** (0x19) Ogiltig blockstorlek för widgetkontroll
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -9222,11 +9299,11 @@ VOID gx_multi_line_text_button_draw(GX_MULTI_LINE_TEXT_BUTTON *button);
 
 ### <a name="description"></a>Description
 
-Den här tjänsten ritar textknappen med flera linjer. Den här funktionen anropas vanligtvis internt av GUIX som en del av en uppdateringsåtgärd för arbetsytan, men den exponeras även för programmet som kanske vill tillhandahålla en anpassad ritningsfunktion och anropar standardritningen med flerradig textknapp som anpassad ritningsbas.
+Den här tjänsten ritar textknappen med flera linjer. Den här funktionen anropas vanligtvis internt av GUIX som en del av en uppdateringsåtgärd för arbetsytan, men den exponeras även för det program som kanske vill tillhandahålla en anpassad ritningsfunktion och anropar standardritningen av flerradiga textknapp som anpassad ritningsbas.
 
 ### <a name="parameters"></a>Parametrar
 
-- **knapp** Pekare till textknappkontrollblock
+- **knapp** Pekare till textknappens kontrollblock
 
 ### <a name="return-values"></a>Returvärden
 
@@ -9387,11 +9464,11 @@ UINT gx_multi_line_text_button_text_id_set(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten anger det angivna strängresurs-ID:t till textknappen. Strängen kan innehålla tecken på ny rad som fungerar för att visa texten på flera rader i knappområdet.
+Den här tjänsten anger det angivna strängresurs-ID:t till textknappen. Strängen kan innehålla tecken på ny rad som visar texten på flera rader i knappområdet.
 
 ### <a name="parameters"></a>Parametrar
 
-- **text_button** Pekare till textknappkontrollblock
+- **text_button** Pekare till textknappens kontrollblock
 - **string_id** Resurs-ID för strängen
 
 ### <a name="return-values"></a>Returvärden
@@ -9440,12 +9517,12 @@ UINT gx_mult_line_text_button_text_set(
 
 Den här tjänsten är inaktuell till förmån för gx_multi_line_text_button_text_set_ext().
 
-Den här tjänsten tilldelar den angivna strängen till textknappen. Om text_button-widgeten har skapats med GX_STYLE_TEXT_COPY skapar widgeten en privat kopia av textsträngen som tilldelats, och därför måste gx_system_memmory_allocate_set-API:et anropas en gång innan den här tjänsten begärs. Om GX_STYLE_TEXT_COPY inte är aktiv, gör widgeten inte en privat kopia av den inkommande strängen och därför måste strängen allokeras statiskt eller globalt, dvs. det kanske inte är en automatisk eller tillfällig variabel.
+Den här tjänsten tilldelar den angivna strängen till textknappen. Om text_button-widgeten har skapats med format GX_STYLE_TEXT_COPY skapar widgeten en privat kopia av den tilldelade textsträngen och därför måste gx_system_memmory_allocate_set-API:et anropas en gång innan den här tjänsten begärs. Om GX_STYLE_TEXT_COPY inte är aktiv, gör widgeten inte en privat kopia av den inkommande strängen och därför måste strängen vara statisk eller globalt allokerad, det vill säga det kanske inte är en automatisk eller tillfällig variabel.
 
 ### <a name="parameters"></a>Parametrar
 
-- **text_button** Pekare till textknappens kontrollblock
-- **text pekare** till den NULL-avslutade strängen
+- **text_button** Pekare till textknappkontrollblock
+- **text** pekare till den NULL-avslutade strängen
 
 ### <a name="return-values"></a>Returvärden
 
@@ -9494,11 +9571,11 @@ UINT gx_mult_line_text_button_text_set_ext(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten tilldelar den angivna strängen till textknappen. Om text_button-widgeten har skapats med format GX_STYLE_TEXT_COPY skapar widgeten en privat kopia av den tilldelade textsträngen och därför måste gx_system_memmory_allocate_set-API:et anropas en gång innan den här tjänsten begärs. Om GX_STYLE_TEXT_COPY inte är aktiv, gör widgeten inte en privat kopia av den inkommande strängen och därför måste strängen vara statisk eller globalt allokerad, det vill säga det kanske inte är en automatisk eller tillfällig variabel.
+Den här tjänsten tilldelar den angivna strängen till textknappen. Om text_button-widgeten har skapats med GX_STYLE_TEXT_COPY skapar widgeten en privat kopia av textsträngen som tilldelats, och därför måste gx_system_memmory_allocate_set-API:et anropas en gång innan den här tjänsten begärs. Om GX_STYLE_TEXT_COPY inte är aktiv, gör widgeten inte en privat kopia av den inkommande strängen och därför måste strängen allokeras statiskt eller globalt, dvs. det kanske inte är en automatisk eller tillfällig variabel.
 
 ### <a name="parameters"></a>Parametrar
 
-- **text_button** Pekare till textknappkontrollblock
+- **text_button** Pekare till textknappens kontrollblock
 - **sträng pekare** till GX_STRING variabel
 
 ### <a name="return-values"></a>Returvärden
@@ -9538,7 +9615,7 @@ status = gx_multi_line_text_button_text_set_ext(&my_text_button, string);
 ## <a name="gx_multi_line_text_input_backspace"></a>gx_multi_line_text_input_backspace
 
 
-Ta bort ett tecken före markörpositionen för textindata på flera rader
+Ta bort ett tecken före textindatamarkörens position på flera rader
 
 ### <a name="prototype"></a>Prototyp
 
@@ -9549,7 +9626,7 @@ UINT gx_multi_line_text_input_backspace(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten tar bort tecknet före markörpositionen för textinmatning med flera rader. Den här tjänsten anropas internt när en backstegsnyckel nedåt-händelse tas emot, men kan också anropas av programmet.
+Den här tjänsten tar bort tecknet före markörpositionen för textinmatning med flera rader. Den här tjänsten anropas internt när en down-händelse för backstegsnyckel tas emot, men kan även anropas av programmet.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -9702,7 +9779,7 @@ Den här tjänsten hämtar buffertinformation för en flerradig textinmatningswi
 ### <a name="parameters"></a>Parametrar
 
 - **text_input** Kontrollblock för textinmatningswidget med flera linjer
-- **buffer_address** Indatabuffertens adress
+- **buffer_address** Adressen för indatabufferten
 - **content_size** Byteantalet för indata
 - **buffer_size** Storleken på indatabufferten
 
@@ -9767,7 +9844,7 @@ status = gx_multi_line_text_input_buffer_get(&my_text_input,
 ## <a name="gx_multi_line_text_input_char_insert"></a>gx_multi_line_text_input_char_insert
 
 
-Infoga en teckensträng vid aktuell textindatamarkörposition med flera linjer (inaktuell)
+Infoga en teckensträng vid aktuell textindatamarkörsposition med flera linjer (inaktuell)
 
 ### <a name="prototype"></a>Prototyp
 
@@ -9788,7 +9865,7 @@ Den här tjänsten infogar en teckensträng i bufferten för textinmatningssträ
 
 - **text_input** Kontrollblock för textinmatningswidget med flera linjer
 - **insert_str** Teckensträng i UTF-8-format som ska infogas
-- **insert_size** Antal byte som ska infogas
+- **insert_size** Byteantal som ska infogas
 
 ### <a name="return-values"></a>Returvärden
 
@@ -9822,7 +9899,7 @@ status = gx_multi_line_text_input_char_insert(&my_text_input,
 ## <a name="gx_multi_line_text_input_char_insert_ext"></a>gx_multi_line_text_input_char_insert_ext
 
 
-Infoga en teckensträng vid aktuell textindatamarkörsposition med flera linjer (inaktuell)
+Infoga en teckensträng vid aktuell textindatamarkörposition med flera linjer (inaktuell)
 
 ### <a name="prototype"></a>Prototyp
 
@@ -9834,7 +9911,7 @@ UINT gx_multi_line_text_input_char_insert_ext(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten infogar en teckensträng i indatasträngsbufferten med flera linjer vid den aktuella markörpositionen. Den här tjänsten anropas internt när specifika ned-/ned-händelser tas emot, men kan också anropas av programmet.
+Den här tjänsten infogar en teckensträng i bufferten för textinmatningssträngar med flera linjer vid den aktuella markörpositionen. Den här tjänsten anropas internt när specifika nyckel ned-händelser tas emot, men kan också anropas av programmet.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -9931,17 +10008,17 @@ GX_MULTI_LINE_TEXT_INPUT härleds från GX_MULTI_LINE_TEXT_VIEW och stöder alla
 - **namn** Namn på textinmatningswidget
 - **överordnad** Pekare till överordnad widget
 - **input_buffer** Pekare till textindatabuffert
-- **buffer_size** Storleken på textindatabufferten i byte
-- **style** Format för textinmatningswidget. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
+- **buffer_size** Storlek på indatabuffert i byte
+- **style (stil)** Stil på textinmatningswidgeten. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
 - **text_input_id** Programdefinierat ID för textinmatning
 - **storlek** Dimensioner för textinmatningswidget
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad flerrads skapa textinmatning
+- **GX_SUCCESS** (0x00) Lyckad flerradstextinmatning
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
-- **GX_ALREADY_CREATED** widgeten (0x13) har redan skapats
+- **GX_ALREADY_CREATED** (0x13) Widget har redan skapats
 - **GX_INVALID_WIDGET** (0x12) Överordnad widget är inte giltig
 - **GX_INVALID_SIZE** (0x19) Ogiltig blockstorlek för widgetkontroll
 
@@ -10004,7 +10081,7 @@ status = gx_multi_line_text_input_create(&my_text_input,
 ## <a name="gx_multi_line_text_input_cursor_pos_get"></a>gx_multi_line_text_input_cursor_pos_get
 
 
-Hämta textindatamarkörens position på flera rad
+Hämta markörpositionen för textinmatning med flera linjer
 
 ### <a name="prototype"></a>Prototyp
 
@@ -10081,7 +10158,7 @@ status = gx_multi_line_text_input_cursor_pos_get(&my_text_input,
 ## <a name="gx_multi_line_text_input_delete"></a>gx_multi_line_text_input_delete
 
 
-Ta bort tecknet vid markörpositionen för textinmatning på flera rader
+Ta bort tecknet vid textindatamarkörens position med flera rader
 
 ### <a name="prototype"></a>Prototyp
 
@@ -10299,7 +10376,7 @@ status = gx_multi_line_text_input_end(&my_text_input);
 ## <a name="gx_multi_line_text_input_event_process"></a>gx_multi_line_text_input_event_process
 
 
-Standardhändelsehantering för textinmatning med flera linjer
+Standardhändelsehantering för textinmatning med flera rad
 
 ### <a name="prototype"></a>Prototyp
 
@@ -10311,7 +10388,7 @@ UINT gx_multi_line_text_input_event_process(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten är standardfunktionen för händelsehantering för flerradig textinmatningswidget. Den här funktionen görs tillgänglig för program som vill tillhandahålla anpassad händelsehantering för en flerradswidget för textinmatning.
+Den här tjänsten är standardfunktionen för händelsehantering för flerradig textinmatningswidget. Den här funktionen görs tillgänglig för program som vill tillhandahålla anpassad händelsehantering för en textinmatningswidget med flera linjer.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -10413,7 +10490,7 @@ Den här tjänsten tilldelar fyllningsfärger för flerradig textinmatningswidge
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Har angett färger för flerradstextinmatningen
+- **GX_SUCCESS** (0x00) Har angett färger för flerradstextinmatning
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 
@@ -10553,7 +10630,7 @@ UINT gx_multi_line_text_input_left_arrow(GX_MULTI_LINE_TEXT_INPUT *text_input);
 
 ### <a name="description"></a>Description
 
-Den här tjänsten flyttar textindatamarkören med flera linjer ett tecken till vänster. Den här tjänsten anropas internt när en vänsternyckel nedåt-händelse tas emot, men kan även anropas av programmet.
+Den här tjänsten flyttar textindatamarkören med flera linjer ett tecken till vänster. Den här tjänsten anropas internt när en left key down-händelse tas emot, men kan också anropas av programmet.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -10776,12 +10853,12 @@ UINT gx_multi_line_text_input_remove(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten tar bort de angivna formaten från flerradig textinmatningswidget.
+Den här tjänsten tar bort de angivna formaten från widgeten för textinmatning med flera linjer.
 
 ### <a name="parameters"></a>Parametrar
 
 - **text_input** Kontrollblock för textinmatningswidget med flera linjer
-- **style** Format som ska tas bort. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar
+- **style (stil)** Format som ska tas bort. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar
 
 ### <a name="return-values"></a>Returvärden
 
@@ -10855,11 +10932,11 @@ Den här tjänsten anger format för en flerradig textinmatningswidget.
 ### <a name="parameters"></a>Parametrar
 
 - **text_input** Kontrollblock för textinmatningswidget med flera linjer
-- **style** Format som ska anges. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar
+- **style (stil)** Format som ska anges. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad uppsättning flerradstextinmatning
+- **GX_SUCCESS** (0x00) Lyckad uppsättning textinmatningsformat med flera linjer
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 
@@ -10940,7 +11017,7 @@ Den här tjänsten tilldelar textfärger för flerradig textinmatningswidget.
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Har angett färger för flerradstextinmatning
+- **GX_SUCCESS** (0x00) Har angett färger för flerradstextinmatningen
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 
@@ -11090,12 +11167,12 @@ UINT gx_mult_line_text_input_text_set(
 
 Det här API:et är inaktuellt och ersätts av gx_multi_line_text_input_text_set_ext().
 
-Den här tjänsten tilldelar den angivna strängen till flerradig textinmatning. Om multi_line_text_input widgetens indatabuffertstorlek är mindre än stränglängden trunkeras strängen.
+Den här tjänsten tilldelar den angivna strängen till textinmatningen med flera linjer. Om multi_line_text_input widgetens indatabuffertstorlek är mindre än stränglängden trunkeras strängen.
 
 ### <a name="parameters"></a>Parametrar
 
 - **text_input** Pekare till kontrollblock för textinmatning med flera linjer
-- **text pekare** till den NULL-avslutade strängen
+- **text** pekare till den NULL-avslutade strängen
 
 ### <a name="return-values"></a>Returvärden
 
@@ -11215,7 +11292,7 @@ UINT gx_multi_line_text_input_up_arrow(GX_MULTI_LINE_TEXT_INPUT *text_input);
 
 ### <a name="description"></a>Description
 
-Den här tjänsten flyttar textindatamarkören med flera linjer till föregående textrad. Den här tjänsten anropas internt när en uppåtpil nedåt-händelse tas emot, men kan även anropas av programmet.
+Den här tjänsten flyttar textindatamarkören med flera linjer till föregående textrad. Den här tjänsten anropas internt när en uppåtpil nedåt-händelse tas emot, men kan också anropas av programmet.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -11304,16 +11381,16 @@ Den här tjänsten skapar en GX_MULTI_LINE_TEXT_VIEW widget. Den här widgettype
 - **namn** Namnet på textvywidgeten
 - **överordnad** Pekare till överordnad widget
 - **text_id** Resurs-ID för textsträngen
-- **style** Format för textvywidgeten. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
+- **style (stil)** Textvisningswidgetens format. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
 - **text_view_id** Programdefinierat ID för textvyn
-- **storlek** Dimensioner för textvywidget
+- **storlek** Dimensioner för textvisningswidget
 
 ### <a name="return-values"></a>Returvärden
 
 - **GX_SUCCESS** (0x00) Widgeten för flerradstextvy har skapats
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
-- **GX_ALREADY_CREATED** widgeten (0x13) har redan skapats
+- **GX_ALREADY_CREATED** (0x13) Widget har redan skapats
 - **GX_INVALID_SIZE** (0x19) Ogiltig blockstorlek för widgetkontroll
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -11368,7 +11445,7 @@ status = gx_multi_line_text_view_create(&my_text_view,
 ## <a name="gx_multi_line_text_view_draw"></a>gx_multi_line_text_view_draw
 
 
-Rita en flerradswidget för textvy
+Rita en widget för textvy med flera linjer
 
 ### <a name="prototype"></a>Prototyp
 
@@ -11378,11 +11455,11 @@ VOID gx_multi_line_text_view_draw(GX_MULTI_LINE_TEXT_VIEW * text_view);
 
 ### <a name="description"></a>Description
 
-Den här tjänsten ritar en widget för textvyer med flera linjer. Den här tjänsten anropas vanligtvis internt under arbetsyteuppdateringen, men kan även anropas från anpassade ritningsfunktioner för flerradig textvy.
+Den här tjänsten ritar en widget för textvy med flera linjer. Den här tjänsten anropas vanligtvis internt under arbetsyteuppdateringen, men kan även anropas från anpassade funktioner för ritning av flerradsvyer.
 
 ### <a name="parameters"></a>Parametrar
 
-- **text_view** Kontrollblock för flerradswidget för textvy
+- **text_view** Kontrollblock för widget med flerradsvy
 
 ### <a name="return-values"></a>Returvärden
 
@@ -11454,16 +11531,16 @@ UINT gx_multi_line_text_view_event_process(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten bearbetar en händelse för en flerradig textvisningswidget.
+Den här tjänsten bearbetar en händelse för en widget med flerradig textvy.
 
 ### <a name="parameters"></a>Parametrar
 
-- **text_view** Kontrollblock för flerradswidget för textvy
-- **händelse** Pekare till händelse som ska bearbetas
+- **text_view** Kontrollblock för widget med flerradsvy
+- **händelse** Pekare till händelse att bearbeta
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad flerradshändelseprocess för textvisning
+- **GX_SUCCESS** (0x00) Lyckad händelseprocess för textvisning med flera linjer
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
@@ -11540,16 +11617,16 @@ UINT gx_multi_line_text_view_text_id_set(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten anger teckensnittet för en widget för flerradig textvy.
+Den här tjänsten anger teckensnittet för en widget med flerradig textvy.
 
 ### <a name="parameters"></a>Parametrar
 
-- **text_view** Kontrollblock för flerradswidget för textvy
+- **text_view** Kontrollblock för widget med flerradsvy
 - **font_id** Resurs-ID för teckensnittet
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Teckensnittet har angetts för flerradstextvyn
+- **GX_SUCCESS** (0x00) Har angett teckensnitt för textvyn med flera linjer
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 
@@ -11618,7 +11695,7 @@ Den här tjänsten anger avståndet mellan textrader för widgeten för flerradi
 
 ### <a name="parameters"></a>Parametrar
 
-- **visa** Kontrollblock för flerradswidget för textvy
+- **visa** Kontrollblock för widget med flerradsvy
 - **line_space** Värde att ange
 
 ### <a name="return-values"></a>Returvärden
@@ -11673,7 +11750,7 @@ status = gx_multi_line_text_view_line_space_set(&my_text_view, 2);
 
 ## <a name="gx_multi_line_text_view_scroll_info_get"></a>gx_multi_line_text_view_scroll_info_get
 
-Hämta information om rullningslisten för flerradsvyn
+Hämta information om bläddring i flerradsvy
 
 
 ### <a name="prototype"></a>Prototyp
@@ -11686,18 +11763,18 @@ UINT gx_multi_line_text_view_scroll_info_get(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten hämtar rullningsinformationen för flerradig textvy.
+Den här tjänsten hämtar bläddringsinformationen för textvisning med flera linjer.
 
 ### <a name="parameters"></a>Parametrar
 
-- **text_view** Kontrollblock för flerradswidget för textvy
+- **text_view** Kontrollblock för widget med flerradsvy
 - **Stil** GX_SCROLLBAR_HORIZONTAL eller GX_SCROLLBAR_VERTICAL
-- **Information** Pekare till mål för rullningsinformation. **Bilaga I** innehåller en definition GX_SCROLL_INFO struktur.
+- **Information** Pekare till mål för rullningsinformation. **Bilaga I** innehåller definition för GX_SCROLL_INFO struktur.
 
 ### <a name="return-values"></a>Returvärden
 
 - **GX_SUCCESS** (0x00) Rullningsinformationen för textvyn har hämtats
-- **GX_FAILURE** (0x10) Widget är inte synlig eller textvisningens teckensnitts-ID är inte giltigt
+- **GX_FAILURE** (0x10) Widget visas inte eller teckensnitts-ID för textvisning är inte giltigt
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -11752,7 +11829,7 @@ status = gx_multi_line_text_view_scroll_info_get(&my_text_view,
 ## <a name="gx_multi_line_text_view_text_color_set"></a>gx_multi_line_text_view_text_color_set
 
 
-Ange textfärgen för flerradstextvyn
+Ange textfärgen för textvyn med flera linjer
 
 ### <a name="prototype"></a>Prototyp
 
@@ -11766,18 +11843,18 @@ UINT gx_multi_line_text_view_text_color_set(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten tilldelar textfärg till flerradig textvisningswidget.
+Den här tjänsten tilldelar textfärg till widgeten för flerradig textvy.
 
 ### <a name="parameters"></a>Parametrar
 
-- **text_view** Kontrollblock för flerradswidget för textvy
+- **text_view** Kontrollblock för widget med flerradsvy
 - **normal_text_color_id** Resurs-ID för den normala textfärgen som används i normalt tillstånd
 - **selected_text_color_id** Resurs-ID för den valda textfärgen som används när widgeten får fokus
 - **disabled_text_color_id** Resurs-ID för den inaktiverade textfärgen som GX_STYLE_ENABLED är inte aktiv
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Har angett färger för flerradstextvyn
+- **GX_SUCCESS** (0x00) Har angett färger för textvyn med flera linjer
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 
@@ -11845,11 +11922,11 @@ UINT gx_multi_line_text_view_text_id_set(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten anger resurs-ID:t för en sträng till widgeten för flerradig textvy.
+Den här tjänsten anger resurs-ID för en sträng till widgeten för flerradig textvy.
 
 ### <a name="parameters"></a>Parametrar
 
-- **text_view** Kontrollblock för flerradswidget för textvy
+- **text_view** Kontrollblock för widget med flerradsvy
 - **text_id** Resurs-ID för textsträngen
 
 ### <a name="return-values"></a>Returvärden
@@ -11920,11 +11997,11 @@ UINT gx_multi_line_text_view_text_set(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten tilldelar en textsträng till widgeten för flerradig textvy. Om text_view-widgeten har skapats med format GX_STYLE_TEXT_COPY skapar widgeten en privat kopia av den tilldelade textsträngen och därför måste gx_system_memory_allocate_set-API:et anropas en gång innan den här tjänsten begärs. Om GX_STYLE_TEXT_COPY inte är aktiv, gör widgeten inte en privat kopia av den inkommande strängen och därför måste den tilldelade strängen allokeras statiskt eller globalt, dvs. det kanske inte är en automatisk eller tillfällig variabel.
+Den här tjänsten tilldelar en textsträng till widgeten för flerradig textvy. Om text_view-widgeten har skapats med format GX_STYLE_TEXT_COPY skapar widgeten en privat kopia av den tilldelade textsträngen och därför måste gx_system_memory_allocate_set-API:et anropas en gång innan den här tjänsten begärs. Om GX_STYLE_TEXT_COPY inte är aktiv, gör widgeten inte en privat kopia av den inkommande strängen och därför måste den tilldelade strängen allokeras statiskt eller globalt, det vill säga det kanske inte är en automatisk eller tillfällig variabel.
 
 ### <a name="parameters"></a>Parametrar
 
-- **text_view** Kontrollblock för flerradswidget för textvy
+- **text_view** Kontrollblock för widget med flerradsvy
 - **text** NULL-avslutad textsträng
 
 ### <a name="return-values"></a>Returvärden
@@ -11995,11 +12072,11 @@ UINT gx_multi_line_text_view_whitespace_set(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten anger avståndet mellan widgetens konturer och klientområdet för en flerradig textvywidget.
+Den här tjänsten anger avståndet mellan widgetens konturer och klientområdet för en widget med flerradig textvy.
 
 ### <a name="parameters"></a>Parametrar
 
-- **text_view** Kontrollblock för flerradswidget för textvy
+- **text_view** Kontrollblock för widget med flerradsvy
 - **tomt utrymme** Bredd på marginalen mellan text_view widget och den visade texten, i bildpunkter.
 
 ### <a name="return-values"></a>Returvärden
@@ -12083,16 +12160,16 @@ GX_NUMERIC_PIXELMAP_PROMPT härleds från GX_PIXELMAP_PROMPT och stöder alla gx
 - **överordnad** Kontrollblock för överordnad widget
 - **text_id** Resurssträngs-ID
 - **fill_id** Pixelkartans ID för fyllningsområdet
-- **style (stil)** Stil för numerisk pixelkarta, **bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widget-specifika format.
+- **style** Stil för numerisk pixelkarta prompt, **bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widget-specifika format.
 - **pixelmap_prompt_id** Programdefinierat ID för prompt
-- **storlek** Dimensioner för fråga om numerisk pixelkarta
+- **storlek** Fråga om dimensioner för numerisk pixelkarta
 
 ### <a name="return-values"></a>Returvärden
 
 - **GX_SUCCESS** (0x00) Skapa en numerisk pixlemap-prompt
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
-- **GX_ALREADY_CREATED** (0x13) Widget har redan skapats
+- **GX_ALREADY_CREATED** widgeten (0x13) har redan skapats
 - **GX_INVALID_SIZE** (0x19) Ogiltig blockstorlek för widgetkontroll
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -12137,7 +12214,7 @@ Den här tjänsten åsidosätter standardformatfunktionen för widgeten för num
 ### <a name="parameters"></a>Parametrar
 
 - **prompt** Kontrollblock för numerisk pixelkarta
-- **format_func** Formatfunktion som ska anges
+- **format_func** Funktionen Format som ska anges
 
 ### <a name="return-values"></a>Returvärden
 
@@ -12196,7 +12273,7 @@ UINT gx_numeric_pixelmap_prompt_value_set(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten ger ett heltalsvärde till en numerisk pixelkarta.
+Den här tjänsten är ett heltalsvärde till en numerisk bildpunktskarta.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -12245,17 +12322,17 @@ UINT gx_numeric_prompt_create(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten skapar en widget för numerisk prompt. En numeric_ fråga är bara en prompt som behåller sin egen buffert och tillhandahåller ett GX_NUMERIC_ PROMPT_VALUE_SET(INT)-API. Buffertstorleken definieras av konstanten GX_NUMERIC_PROMPT_BUFFER_SIZE, som standard är 16.
+Den här tjänsten skapar en widget för numeriska frågor. En numeric_ prompt är bara en prompt som behåller sin egen buffert och tillhandahåller ett gx_numeric_ prompt_value_set(INT)-API. Buffertstorleken definieras av konstanten GX_NUMERIC_PROMPT_BUFFER_SIZE, som standard är 16.
 
 GX_NUMERIC_PROMPT härleds från GX_PROMPT och stöder alla gx_prompt API-tjänster.
 
 ### <a name="parameters"></a>Parametrar
 
 - **prompt** Kontrollblock för numerisk prompt
-- **namn** Namn på fråga
+- **namn** Namn på prompten
 - **överordnad** Kontrollblock för överordnad widget
 - **text_id** Resurssträngs-ID
-- **style (stil)** Format för numerisk prompt, **bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widget-specifika format.
+- **style** Format för numerisk prompt, **bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
 - **prompt_id** Programdefinierat ID för prompt
 - **storlek** Dimensioner för numerisk prompt
 
@@ -12291,7 +12368,7 @@ status = gx_numeric_prompt_create(&my_numeric_prompt,
 ## <a name="gx_numeric_prompt_format_function_set"></a>gx_numeric_prompt_format_function_set
 
 
-Funktionen Override format för numerisk prompt
+Funktionen Åsidosätt format för numerisk prompt
 
 ### <a name="prototype"></a>Prototyp
 
@@ -12303,12 +12380,12 @@ UINT gx_numeric_format_function_set(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten åsidosätter standardformatfunktionen för en widget för numerisk prompt. Standardformatfunktionen konverterar det numeriska promptvärdet till en sträng och lagrar det i widgetens privata buffert. Med den här tjänsten kan programmet definiera en egen formatfunktion för att formatera och lagra det numeriska promptvärdet i widgetens privata buffert.
+Den här tjänsten åsidosätter standardformatfunktionen för en numerisk promptwidget. Standardformatfunktionen konverterar det numeriska promptvärdet till en sträng och lagrar det i widgetens privata buffert. Med den här tjänsten kan programmet definiera en egen formatfunktion för att formatera och lagra det numeriska promptvärdet i widgetens privata buffert.
 
 ### <a name="parameters"></a>Parametrar
 
 - **prompt** Kontrollblock för numerisk prompt
-- **format_func** Formatfunktion som ska anges
+- **format_func** Funktionen Format som ska anges
 
 ### <a name="return-values"></a>Returvärden
 
@@ -12398,7 +12475,7 @@ status = gx_numeric_prompt_value_set(&my_numeric_prompt, 1000);
 ## <a name="gx_numeric_scroll_wheel_create"></a>gx_numeric_scroll_wheel_create
 
 
-Skapa numeriskt rullningshjul
+Skapa numeriska rullningshjul
 
 ### <a name="prototype"></a>Prototyp
 
@@ -12415,9 +12492,9 @@ GX_NUMERIC_SCROLL_WHEEL härleds från GX_TEXT_SCROLL_WHEEL och stöder alla gx_
 
 Alla typer av rullningshjul GX_EVENT_LIST_SELECT händelser till sina överordnade när rullningshjulet rullas.
 
-Ett numeriskt rullningshjul har som standard abs(end_val – start_val) + 1 rader. Med andra ord visar rullningshjulet varje värde mellan start_val och end_val öka eller minska med 1 för varje rad. Observera att start_val kan vara större eller mindre end_val, beroende på hur programmet vill att intervallet ska visas.
+Ett numeriskt rullningshjul har som standard abs(end_val – start_val) + 1 rader. Med andra ord visar rullningshjulet varje värde mellan start_val och end_val öka eller minska med 1 för varje rad. Observera att start_val kan vara större eller mindre än end_val, beroende på hur programmet vill att intervallet ska visas.
 
-Om programmet vill ändra radökningen kan det göra detta genom att anropa gx_scroll_wheel_total_rows_set() när du har skapat det numeriska rullningshjulet. Till exempel kan ett program som vill skapa ett rullningshjul som visar värdena år 1980 till 2020, öka med 5, göra detta:
+Om programmet vill ändra radsteget kan det göra detta genom att anropa gx_scroll_wheel_total_rows_set() när du har skapat det numeriska rullningshjulet. Till exempel kan ett program som vill skapa ett rullningshjul som visar värdena år 1980 till 2020, öka med 5, göra detta:
 
 ```C
 gx_numeric_scroll_wheel_create(&wheel, GX_NULL, parent, 1980,
@@ -12432,12 +12509,12 @@ gx_scroll_wheel_total_rows_set(&wheel, 9);
 ### <a name="parameters"></a>Parametrar
 
 - **hjul** Pekare till kontrollblock för numeriska rullningshjul
-- **namn** Logiskt namn på widgeten för pixelkarta-knappen
+- **namn** Logiskt namn på knappwidgeten pixelkarta
 - **överordnad** Pekare till den överordnade widgeten
 - **start_val** Starta numeriskt värde
-- **end_val** Slut på numeriskt värde
-- **style** Kryssrutans format. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
-- **wheel_id** Programdefinierat ID för rullningshjulet
+- **end_val** Avslutande numeriskt värde
+- **style (stil)** Kryssrutasstil. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
+- **wheel_id** Programdefinierat ID för rullningshjul
 - **storlek** Dimensioner för widget för rullningshjul
 
 ### <a name="return-values"></a>Returvärden
@@ -12490,7 +12567,7 @@ status = gx_numeric_scroll_wheel_create(&year_wheel,
 ## <a name="gx_numeric_scroll_wheel_range_set"></a>gx_numeric_scroll_wheel_range_set
 
 
-Tilldela värdeintervall för numeriska rullningshjul
+Tilldela värdeintervall för numeriskt rullningshjul
 
 ### <a name="prototype"></a>Prototyp
 
@@ -12505,19 +12582,19 @@ gx_numeric_scroll_wheel_range_set(
 
 Den här tjänsten ändrar det värdeintervall som tillåts och visas av en widget med numeriska rullningshjul.
 
-Ett numeriskt rullningshjul är en typ av widget för rullningshjul som används specifikt för att visa ett intervall med siffror. Andra typer av widgetar för rullningshjul är också tillgängliga. Se API:et gx_scroll_wheel_create() för mer information om hierarkin för rullningshjulswidget, widgettyper och widgetar.
+Ett numeriskt rullningshjul är en typ av rullningshjulswidget som används specifikt för att visa ett intervall med siffror. Andra typer av widgetar för rullningshjul är också tillgängliga. Mer information om widgethierarkin för rullningshjul, widgettyper och widgetar finns i API:et för gx_scroll_wheel_create().
 
-När du anropar detta API återställs det totala antalet rader med rullningshjulet till abs(end_val – start_val) + 1, vilket innebär att rullningshjulet ökar med 1 för varje rad. Om du vill ändra detta kan programmet anropa gx_scroll_wheel_total_rows_set() för att ändra det totala antalet rader, vilket effektivt ändrar värdesteget mellan rader.
+Genom att anropa det här API:et återställs rader med totalt antal rullningshjul till abs(end_val–start_val) + 1, vilket innebär att rullningshjulet ökar med 1 för varje rad. För att ändra detta kan programmet anropa gx_scroll_wheel_total_rows_set() för att ändra det totala antalet rader, vilket effektivt ändrar värdesteget mellan rader.
 
 ### <a name="parameters"></a>Parametrar
 
 - **hjul** Pekare till kontrollblock för numeriska rullningshjul
 - **start_val** Starta numeriskt värde 
-- **end_val** Slut på numeriskt värde
+- **end_val** Avslutande numeriskt värde
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Ange intervall för numeriska rullningshjul
+- **GX_SUCCESS** (0x00) Har angett intervall för numeriska rullningshjul
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 
@@ -12577,7 +12654,7 @@ UINT gx_pixelmap_button_create(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten skapar en widget för pixelkarta-knappen.
+Den här tjänsten skapar en widget för pixelkartan.
 
 GX_PIXELMAP_BUTTON härleds från GX_BUTTON och stöder alla gx_button tjänster.
 
@@ -12589,16 +12666,16 @@ GX_PIXELMAP_BUTTON härleds från GX_BUTTON och stöder alla gx_button tjänster
 - **normal_id** Resurs-ID för normalt tillstånd
 - **selected_id** Resurs-ID för valt tillstånd
 - **disabled_id** Resurs-ID för inaktiverat tillstånd
-- **style** Kryssrutans format. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
-- **pixelmap_button_id** Programdefinierat ID för knappen pixelkarta
-- **storlek** Knappen Dimensions of pixelmap (Mått för pixelkarta)
+- **style (stil)** Kryssrutasstil. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
+- **pixelmap_button_id** Programdefinierat ID för pixelkarta-knappen
+- **storlek** Knappen Dimensioner för pixelkarta
 
 ### <a name="return-values"></a>Returvärden
 
 - **GX_SUCCESS** (0x00) Knappen Pixelkarta har skapats
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
-- **GX_ALREADY_CREATED** widgeten (0x13) har redan skapats
+- **GX_ALREADY_CREATED** (0x13) Widget har redan skapats
 - **GX_INVALID_SIZE** (0x19) Ogiltig blockstorlek för widgetkontroll
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -12709,7 +12786,7 @@ VOID my_pixelmap_button_draw(GX_PIXELMAP_BUTTON *button)
 ## <a name="gx_pixelmap_button_event_process"></a>gx_pixelmap_button_event_process
 
 
-Bildpunktskarta för händelsebearbetning
+Händelsebearbetning för bildpunktskarta
 
 ### <a name="prototype"></a>Prototyp
 
@@ -12730,7 +12807,7 @@ Den här tjänsten tillhandahåller standardhändelsehantering för widgettypen 
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Knappmarkering för lyckad pixelkarta
+- **GX_SUCCESS** (0x00) Knapp draw för lyckad pixelkarta
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 
@@ -12778,7 +12855,7 @@ switch(event_ptr->gx_event_type)
 ## <a name="gx_pixelmap_button_pixelmap_set"></a>gx_pixelmap_button_pixelmap_set
 
 
-Knappen Tilldela pixelkartor
+Knappen Tilldela pixelkartor till
 
 ### <a name="prototype"></a>Prototyp
 
@@ -12803,7 +12880,7 @@ Den här tjänsten anger pixelkartor till knappen pixelkarta.
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckades anger pixelkartan till knappen
+- **GX_SUCCESS** (0x00) Anger pixelkartan till knappen
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 
@@ -12866,18 +12943,18 @@ UINT gx_pixelmap_prompt_create(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten skapar en widget för pixelkartan. En pixelkarta skiljer sig från en standard GX_PROMPT på så sätt att den färgar bakgrunden i prompten med pixelkartor. Funktionen create accepterar ett pixelkarta-ID, det normala tillståndet fyllnings pixelkarta. Upp till sex pixelkartor kan tilldelas till pixelkartan.
+Den här tjänsten skapar en widget för pixelkartan. En pixelkarta skiljer sig från en standard GX_PROMPT på så sätt att den färgar bakgrunden i prompten med pixelkartor. Funktionen create accepterar ett pixelkarta-ID, det normala tillståndet, pixelkarta. Upp till sex pixelkartor kan tilldelas till pixelkartan.
 
 ### <a name="parameters"></a>Parametrar
 
 - **prompt** Pekare till kontrollblock för pixelkarta
-- **namn** Logiskt namn för widgeten för pixelkartan
+- **namn** Logiskt namn på widgeten för pixelkartan
 - **överordnad** Pekare till den överordnade widgeten
 - **text_id** Resurs-ID för text
 - **fill_id** Resurs-ID för fyllning
 - **style** Kryssrutans format. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
 - **pixelmap_prompt_id** Programdefinierat ID för bildpunktskarta
-- **storlek** Uppmaning om dimensioner för pixelkarta
+- **storlek** Dimensions för bildpunktskarta
 
 ### <a name="return-values"></a>Returvärden
 
@@ -12885,7 +12962,7 @@ Den här tjänsten skapar en widget för pixelkartan. En pixelkarta skiljer sig 
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_SIZE** (0x19) Ogiltig blockstorlek för widgetkontroll
-- **GX_ALREADY_CREATED** (0x13) Widget har redan skapats
+- **GX_ALREADY_CREATED** widgeten (0x13) har redan skapats
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -12925,7 +13002,7 @@ status = gx_pixelmap_prompt_create(&my_pixelmap_prompt,
 ## <a name="gx_pixelmap_prompt_draw"></a>gx_pixelmap_prompt_draw
 
 
-Fråga efter bildpunktskarta
+Fråga om att rita pixelkarta
 
 ### <a name="prototype"></a>Prototyp
 
@@ -12935,7 +13012,7 @@ VOID gx_pixelmap_prompt_draw(GX_PIXELMAP_PROMPT *prompt);
 
 ### <a name="description"></a>Description
 
-Den här tjänsten ritar en widget för pixelkartan. Den här funktionen anropas vanligtvis internt av GUIX-mekanismen för arbetsyteuppdatering, men exponeras för programmet för att hjälpa till med implementeringen av anpassade ritningsfunktioner för anpassade widgetar för pixelkartan.
+Den här tjänsten ritar en widget för pixelkartan. Den här funktionen anropas vanligtvis internt av GUIX-arbetsytans uppdateringsmekanism, men exponeras för programmet för att hjälpa till med implementeringen av anpassade ritningsfunktioner för anpassade widgetar för pixelkartan.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -13000,7 +13077,7 @@ UINT gx_pixelmap_prompt_pixelmap_set(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten tilldelar pixelkartans ID:n till pixelkartan. Id:n för vänster, fyllning och höger bildpunktskarta används för att tillåta att programmet använder en uppsättning pixelkartor för frågor med olika bredd men en gemensam höjd för att spara på lagringskraven. Om vänster- och höger-ID:erna inte används ska de anges till 0. Om uppmaningen ska rita sig själv på ett annat sätt när den får indatafokus används de valda pixelkartans ID:n för detta ändamål. Om de valda ID:na inte används eller är samma som de vanliga ID:na anger du dem till 0.
+Den här tjänsten tilldelar pixelkartans ID:n till pixelkartan. Id:n för vänster, fyllning och höger pixelkarta används för att programmet ska kunna använda en uppsättning pixelkartor för frågor med olika bredd, men en gemensam höjd för att spara på lagringskraven. Om vänster och höger-ID inte används ska de anges till 0. Om uppmaningen ska rita sig själv på ett annat sätt när den får indatafokus, används de valda pixelkartans ID:n för detta ändamål. Om de valda ID:na inte används eller är samma som vanliga ID:n anger du dem till 0.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -13014,7 +13091,7 @@ Den här tjänsten tilldelar pixelkartans ID:n till pixelkartan. Id:n för väns
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Anger pixelkartan till prompten
+- **GX_SUCCESS** (0x00) Lyckades anger pixelkartan till prompten
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_RESOURCE_ID** (0x33) Resurs-ID är inte giltigt
@@ -13080,21 +13157,21 @@ Den här tjänsten skapar en skjutreglagewidget för pixelkarta.
 
 ### <a name="parameters"></a>Parametrar
 
-- **skjutreglage** Pekare till skjutreglagets skjutreglage för pixelkarta
-- **namn** Logiskt namn på skjutreglagewidgeten för pixelkarta
+- **skjutreglage** Pekare till skjutreglagets pixelkarta
+- **namn** Logiskt namn på widgeten för skjutreglaget för pixelkarta
 - **överordnad** Pekare till den överordnade widgeten
-- **info** Pekare till en GX_SLIDER_INFO struktur som innehåller värden som definierar skjutreglagets lägsta värde, högsta värde, aktuellt värde och nålgränser. **Bilaga I** innehåller definition GX_SLIDER_INFO struktur.
-- **pixelmap_info** Pekare till en GX_PIXELMAP_SLIDER_INFO struktur som definierar pixelkartor som används för att dra skjutreglagets bakgrund och nål. **Bilaga I** innehåller definition för GX_PIXELMAP_SLIDER_INFO struktur. Skjutreglagets bakgrund kan använda en eller två pixelkartor. Om den ena ändras inte bakgrunden när nålen rör sig. Om två bakgrunder definieras använder bakgrunden före nålen den första pixelkartan i bakgrunden och bakgrunden efter nålen använder den andra pixelkartan i bakgrunden.
+- **info** Pekare till GX_SLIDER_INFO struktur som innehåller värden som definierar skjutreglagets minsta värde, högsta värde, aktuellt värde och nålgränser. **Bilaga I** innehåller definition GX_SLIDER_INFO struktur.
+- **pixelmap_info** Pekare till en GX_PIXELMAP_SLIDER_INFO struktur som definierar pixelkartor som används för att rita skjutreglagets bakgrund och nål. **Bilaga I** innehåller definition för GX_PIXELMAP_SLIDER_INFO struktur. Skjutreglagets bakgrund kan använda en eller två pixelkartor. Om den ena ändras inte bakgrunden när nålen rör sig. Om två bakgrunder definieras använder bakgrunden före nålen den första pixelkartan i bakgrunden och bakgrunden efter nålen använder den andra pixelkartan i bakgrunden.
 - **style (stil)** Skjutreglagets stil. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
 - **pixelmap_slider_id** Programdefinierat ID för skjutreglaget pixelkarta
-- **storlek** Dimensions för bildpunktskarta
+- **storlek** Uppmaning om dimensioner för pixelkarta
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Skjutreglaget för pixelkartan har skapats
+- **GX_SUCCESS** (0x00) Skjutreglaget pixelkarta har skapats
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
-- **GX_ALREADY_CREATED** widgeten (0x13) har redan skapats
+- **GX_ALREADY_CREATED** (0x13) Widget har redan skapats
 - **GX_INVALID_SIZE** (0x19) Ogiltig blockstorlek för widgetkontroll
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -13170,11 +13247,11 @@ VOID gx_pixelmap_slider_draw(GX_PIXELMAP_SLIDER *slider);
 
 ### <a name="description"></a>Description
 
-Den här tjänsten ritar en skjutreglagewidget för pixelkarta. Den här funktionen anropas vanligtvis internt av GUIX-arbetsytans uppdateringsmekanism, men exponeras för programmet för att hjälpa till med implementeringen av anpassade ritningsfunktioner för anpassade skjutreglagewidgetar för pixelkarta.
+Den här tjänsten ritar en skjutreglagewidget för pixelkarta. Den här funktionen anropas vanligtvis internt av GUIX-mekanismen för arbetsyteuppdatering, men exponeras för programmet för att hjälpa till med implementeringen av anpassade ritningsfunktioner för anpassade skjutreglagewidgetar för pixelkarta.
 
 ### <a name="parameters"></a>Parametrar
 
-- **skjutreglage** Pekare till skjutreglagets skjutreglage för pixelkarta
+- **skjutreglage** Pekare till skjutreglagets pixelkarta
 
 ### <a name="return-values"></a>Returvärden
 
@@ -13240,11 +13317,11 @@ Den här tjänsten bearbetar en händelse för den angivna skjutreglagewidgeten 
 ### <a name="parameters"></a>Parametrar
 
 - **skjutreglage** Pekare till pixelkarta
-- **skjutreglage** för blockhändelse Pekare till händelse att bearbeta
+- slider control block event Pointer to event to process **(skjutreglaget** blockerar händelse pekaren till den händelse som ska bearbetas)
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad händelseprocess för bildpunktskarta
+- **GX_SUCCESS** (0x00) Lyckad händelseprocess för skjutreglaget för pixelkarta
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
@@ -13318,8 +13395,8 @@ Den här tjänsten anger pixelkartor till skjutreglaget för pixelkarta.
 
 ### <a name="parameters"></a>Parametrar
 
-- **skjutreglage** Pekare till skjutreglagets pixelkarta
-- **pixinfo** Pekare till en GX_PIXELMAP_SLIDER_INFO struktur som definierar pixelkartor som används för att rita skjutreglagets bakgrund och nål. **Bilaga I** innehåller definition GX_PIXELMAP_SLIDER_INFO struktur. Skjutreglagets bakgrund kan använda en eller två pixelkartor. Om det finns en sådan ändras inte bakgrunden när nålen rör sig. Om två bakgrunder definieras använder bakgrunden före nålen den första pixelkartan i bakgrunden och bakgrunden efter nålen använder den andra pixelkartan i bakgrunden.
+- **skjutreglage** Pekare till skjutreglagets skjutreglage för pixelkarta
+- **pixinfo** Pekare till en GX_PIXELMAP_SLIDER_INFO struktur som definierar pixelkartor som används för att dra skjutreglagets bakgrund och nål. **Bilaga I** innehåller definition för GX_PIXELMAP_SLIDER_INFO struktur. Skjutreglagets bakgrund kan använda en eller två pixelkartor. Om den ena ändras inte bakgrunden när nålen rör sig. Om två bakgrunder definieras använder bakgrunden före nålen den första pixelkartan i bakgrunden och bakgrunden efter nålen använder den andra pixelkartan i bakgrunden.
 
 ### <a name="return-values"></a>Returvärden
 
@@ -13377,7 +13454,7 @@ status = gx_pixelmap_slider _pixelmap_set (&my_pixelmap_slider,
 ## <a name="gx_progress_bar_background_draw"></a>gx_progress_bar_background_draw
 
 
-Bakgrund för förloppsstapeln ritas
+Bakgrund av förloppsfältet Rita
 
 ### <a name="prototype"></a>Prototyp
 
@@ -13387,7 +13464,7 @@ VOID gx_progress_bar_background_draw(GX_PROGRESS_BAR *progress_bar)
 
 ### <a name="description"></a>Description
 
-Den här tjänsten ritar bakgrunden till den angivna förloppsfältet. Den här funktionen anropas internt som en del av gx_progress_bar_draw(), men exponeras för programmet för att stödja de fall där programmet definierar en anpassad förloppsritning.
+Den här tjänsten ritar bakgrunden i den angivna förloppsfältet. Den här funktionen anropas internt som en del av gx_progress_bar_draw(), men exponeras för programmet för att stödja de fall där programmet definierar en anpassad förloppsritning.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -13454,12 +13531,12 @@ Den här tjänsten skapar en widget för förloppsfältet.
 
 ### <a name="parameters"></a>Parametrar
 
-- **progress_bar** Förloppsfältets kontrollblock
+- **progress_bar** Kontrollblock för förloppskontroller
 - **namn** Logiskt namn
 - **överordnad** Pekare till den överordnade widgeten
 - **progress_bar_info** Pekare till en GX_PROGRESS_BAR_INFO struktur. **Bilaga I** innehåller definition GX_PROGRESS_BAR_INFO struktur.
-- **style (stil)** Förloppsfältets format. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
-- **progress_bar_id** Programdefinierat ID för förloppsfältet
+- **style** Förloppsfältets format. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
+- **progress_bar_id** Programdefinierad ID för förloppsfältet
 - **storlek** Förloppsfältets dimensioner
 
 ### <a name="return-values"></a>Returvärden
@@ -13527,11 +13604,11 @@ VOID gx_progress_bar_draw(GX_PROGRESS_BAR *progress_bar);
 
 ### <a name="description"></a>Description
 
-Den här tjänsten ritar en widget för förloppsfältet. Den här funktionen anropas vanligtvis internt av GUIX-mekanismen för arbetsyteuppdatering, men exponeras för programmet för att hjälpa till med implementeringen av anpassade ritningsfunktioner för anpassade förloppslistwidgetar.
+Den här tjänsten ritar en widget för förloppsfältet. Den här funktionen anropas vanligtvis internt av GUIX-arbetsytans uppdateringsmekanism, men exponeras för programmet för att hjälpa till med implementeringen av anpassade ritningsfunktioner för anpassade förloppslistwidgetar.
 
 ### <a name="parameters"></a>Parametrar
 
-- **progress_bar** Kontrollblock för förloppskontroller
+- **progress_bar** Förloppsfältets kontrollblock
 
 ### <a name="return-values"></a>Returvärden
 
@@ -13586,12 +13663,12 @@ Den här tjänsten bearbetar en förloppshändelse.
 
 ### <a name="parameters"></a>Parametrar
 
-- **progress_bar** Förloppsfältets kontrollblock
+- **progress_bar** Kontrollblock för förloppskontroller
 - **event_ptr** Pekare till GX_EVENT struktur
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Prompten skapas
+- **GX_SUCCESS** (0x00) Skapa en kommandotolk
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Ogiltig widget
@@ -13655,7 +13732,7 @@ Den här tjänsten anger teckensnittet för en förloppsfältwidget.
 
 ### <a name="parameters"></a>Parametrar
 
-- **progress_bar** Kontrollblock för förloppskontroller
+- **progress_bar** Förloppsfältets kontrollblock
 - **font_id** Resurs-ID för teckensnitt
 
 ### <a name="return-values"></a>Returvärden
@@ -13708,7 +13785,7 @@ Den här tjänsten återställer informationsstrukturen för en förloppsfältwi
 
 ### <a name="parameters"></a>Parametrar
 
-- **progress_bar** Förloppsfältets kontrollblock
+- **progress_bar** Kontrollblock för förloppskontroller
 - **info** Pekare till en GX_PROGRESS_BAR_INFO struktur. **Bilaga I** innehåller definition GX_PROGRESS_BAR_INFO struktur.
 
 ### <a name="return-values"></a>Returvärden
@@ -13770,12 +13847,12 @@ Den här tjänsten anger pixelkartan som används för att fylla förloppsfälte
 
 ### <a name="parameters"></a>Parametrar
 
-- **progress_bar** Kontrollblock för förloppskontroller
+- **progress_bar** Förloppsfältets kontrollblock
 - **pixelmap_id** Resurs-ID för pixelkarta
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad förloppsdiagramsuppsättning för stapeldiagram
+- **GX_SUCCESS** (0x00) Förloppsfältets pixelkarta har angetts
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 
@@ -13824,9 +13901,9 @@ Den här tjänsten anger förloppsfältets värdeintervall.
 
 ### <a name="parameters"></a>Parametrar
 
-- **progress_bar** Förloppsfältets kontrollblock
-- **min_value** Minimivärde för förloppsfält
-- **max_value** Maximalt värde för förloppsstapel
+- **progress_bar** Kontrollblock för förloppskontroller
+- **min_value** Minsta värde för förloppsstapel
+- **max_value** Maxvärde för förloppsstapel
 
 ### <a name="return-values"></a>Returvärden
 
@@ -13879,7 +13956,7 @@ Den här tjänsten anger textfärgen för en förloppsfältwidget.
 
 ### <a name="parameters"></a>Parametrar
 
-- **progress_bar** Kontrollblock för förloppskontroller
+- **progress_bar** Förloppsfältets kontrollblock
 - **normal_text_color** Resurs-ID för normal textfärg som används i normalt tillstånd
 - **selected_text_color** Resurs-ID för vald textfärg som används när widgeten får fokus
 - **disabled_text_color** Resurs-ID för inaktiverad textfärg som används när GX_STYLE_ENABLED inte är aktiv
@@ -13921,7 +13998,7 @@ UINT status = gx_progress_bar_text_color_set(&my_progress_bar,
 ## <a name="gx_progress_bar_text_draw"></a>gx_progress_bar_text_draw
 
 
-Rita förloppsfälttext
+Rita förloppsfältstext
 
 ### <a name="prototype"></a>Prototyp
 
@@ -13989,11 +14066,11 @@ UINT gx_progress_bar_value_set(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten tilldelar det aktuella förloppsfältets värde. Widgeten för förloppsfältet ogiltigförklaras automatiskt och ritas om när förloppsfältets värde ändras.
+Den här tjänsten tilldelar det aktuella värdet för förloppsfältet. Widgeten för förloppsfältet ogiltigförklaras automatiskt och ritas om när förloppsfältets värde ändras.
 
 ### <a name="parameters"></a>Parametrar
 
-- **progress_bar** Kontrollblock för förloppskontroller
+- **progress_bar** Förloppsfältets kontrollblock
 - **värde** Aktuellt värde för förloppsfältet
 
 ### <a name="return-values"></a>Returvärden
@@ -14060,10 +14137,10 @@ GX_PROMPT härleds från GX_WIDGET och stöder alla gx_widget tjänster.
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Skapa en kommandotolk
+- **GX_SUCCESS** (0x00) Prompten skapas
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
-- **GX_ALREADY_CREATED** widgeten (0x13) har redan skapats
+- **GX_ALREADY_CREATED** (0x13) Widget har redan skapats
 - **GX_INVALID_SIZE** (0x19) Ogiltig blockstorlek för widgetkontroll
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -14111,7 +14188,7 @@ Den här tjänsten ritar en promptwidget. Den här tjänsten anropas internt av 
 
 ### <a name="parameters"></a>Parametrar
 
-- **prompt** Pekare för att fråga widgetkontrollblock
+- **prompt** Pekare för att uppmana widgetkontrollblock
 
 ### <a name="return-values"></a>Returvärden
 
@@ -14235,12 +14312,12 @@ Den här tjänsten anger teckensnittet för en promptwidget.
 
 ### <a name="parameters"></a>Parametrar
 
-- **prompt** Pekare för att fråga widgetkontrollblock
+- **prompt** Pekare för att uppmana widgetkontrollblock
 - **font_id** Resurs-ID för teckensnitt
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad teckensnittsuppsättning för prompt
+- **GX_SUCCESS** (0x00) Teckensnittsuppsättning för lyckad prompt
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
@@ -14292,14 +14369,14 @@ Den här tjänsten anger textfärgen för en promptwidget.
 
 ### <a name="parameters"></a>Parametrar
 
-- **prompt** Pekare för att uppmana widgetkontrollblock
-- **normal_color** Resurs-ID för färg för normal text. **Bilaga A** innehåller fördefinierade färgresurs-ID:er. Observera att programmet även kan lägga till anpassade resurs-ID:n för färg.
-- **selected_color** Resurs-ID för färg för vald text som används när widgeten får fokus. **Bilaga A** innehåller fördefinierade färgresurs-ID:er. Observera att programmet även kan lägga till anpassade resurs-ID:n för färg.
-- **disabled_color** Resurs-ID för färg för inaktiverad text som används när GX_STYLE_ENABLED inte är aktiv. **Bilaga A** innehåller fördefinierade resurs-ID:er för färg. Observera att programmet även kan lägga till anpassade resurs-ID:n för färg.
+- **prompt** Pekare för att fråga widgetkontrollblock
+- **normal_color** Resurs-ID för färg för normal text. **Bilaga A** innehåller fördefinierade resurs-ID:er för färg. Observera att programmet kan lägga till anpassade resurs-ID:n för färg också.
+- **selected_color** Resurs-ID för färg för vald text som används när widgeten får fokus. **Bilaga A** innehåller fördefinierade resurs-ID:er för färg. Observera att programmet kan lägga till anpassade resurs-ID:n för färg också.
+- **disabled_color** Resurs-ID för färg för inaktiverad text som används när GX_STYLE_ENABLED inte är aktiv. **Bilaga A** innehåller fördefinierade resurs-ID:er för färg. Observera att programmet kan lägga till anpassade resurs-ID:n för färg också.
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Textfärguppsättningen Prompt har lyckats
+- **GX_SUCCESS** (0x00) Lyckad textfärguppsättning för prompt
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET_SIZE** (0x14) Ogiltig widgetstorlek
@@ -14346,7 +14423,7 @@ VOID gx_prompt_text_draw(GX_PROMPT *prompt);
 
 ### <a name="description"></a>Description
 
-Den här stödfunktionen ritar textdelen av en prompt. Den här funktionen anropas internt av gx_prompt_draw() och tillhandahålls som ett separat API som en bekvämlighet för program som definierar en anpassad promptritningsfunktion. Program som vill anpassa promptens bakgrundsritning kan tillhandahålla sin anpassade ritningsfunktion och anropa gx_prompt_text_draw-tjänsten som en del av sin anpassade ritning för att rita prompttexten över bakgrunden.
+Den här stödfunktionen ritar textdelen av en prompt. Den här funktionen anropas internt av gx_prompt_draw() och tillhandahålls som ett separat API för program som definierar en anpassad promptritningsfunktion. Program som vill anpassa promptens bakgrundsritning kan tillhandahålla sin anpassade ritningsfunktion och anropa gx_prompt_text_draw-tjänsten som en del av sin anpassade ritning för att rita prompttexten över bakgrunden.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -14410,7 +14487,7 @@ Den här tjänsten hämtar texten i en promptwidget.
 
 ### <a name="parameters"></a>Parametrar
 
-- **prompt** Pekare för att uppmana widgetkontrollblock
+- **prompt** Pekare för att fråga widgetkontrollblock
 - **return_text** Pekare till mål för text
 
 ### <a name="return-values"></a>Returvärden
@@ -14467,7 +14544,7 @@ Den här tjänsten hämtar strängen för en promptwidget.
 
 ### <a name="parameters"></a>Parametrar
 
-- **prompt** Pekare för att fråga widgetkontrollblock
+- **prompt** Pekare för att uppmana widgetkontrollblock
 - **return_string** Pekare till mål för sträng
 
 ### <a name="return-values"></a>Returvärden
@@ -14508,7 +14585,7 @@ status = gx_prompt_text_get_ext(&my_prompt, &my_prompt_string);
 ## <a name="gx_prompt_text_id_set"></a>gx_prompt_text_id_set
 
 
-Ange text-ID för prompt
+Ange text-ID för fråga
 
 ### <a name="prototype"></a>Prototyp
 
@@ -14533,7 +14610,7 @@ Den här tjänsten anger sträng-ID:t för widgeten för textuppfråga.
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_RESOURCE_ID** (0x33) Ogiltigt resurs-ID
-- **GX_SYSTEM_MEMORY_ERROR** (0x30) Minnesfri funktion har inte definierats
+- **GX_SYSTEM_MEMORY_ERROR** (0x30) Funktionen Minnesfri har inte definierats
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -14583,7 +14660,7 @@ GX_PROMPT härleds från GX_WIDGET och därför kan alla GX_WIDGET API-tjänster
 
 ### <a name="parameters"></a>Parametrar
 
-- **prompt** Pekare för att uppmana widgetkontrollblock
+- **prompt** Pekare för att fråga widgetkontrollblock
 - **text** Pekare till text
 
 ### <a name="return-values"></a>Returvärden
@@ -14591,7 +14668,7 @@ GX_PROMPT härleds från GX_WIDGET och därför kan alla GX_WIDGET API-tjänster
 - **GX_SUCCESS** (0x00) Prompttextuppsättningen lyckades
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
-- **funktionen GX_SYSTEM_MEMORY_ERROR** (0x30) Minnes allokera har inte definierats
+- **GX_SYSTEM_MEMORY_ERROR** (0x30) Minnes allokerande funktion har inte definierats
 - **GX_INVALID_STRING_LENGTH** (0x34) Ogiltig stränglängd
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -14634,13 +14711,13 @@ UINT gx_prompt_text_set_ext(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten anger texten för en promptwidget. Om promptwidgeten skapades med GX_STYLE_TEXT_COPY skapar widgeten en privat kopia av den tilldelade textsträngen. Om GX_STYLE_TEXT_COPY inte är aktiv, gör widgeten inte en privat kopia av den inkommande strängen och därför måste strängen vara statisk eller globalt allokerad, det vill säga det kanske inte är en automatisk eller tillfällig variabel.
+Den här tjänsten anger texten för en promptwidget. Om promptwidgeten skapades med GX_STYLE_TEXT_COPY skapar widgeten en privat kopia av textsträngen som tilldelats. Om GX_STYLE_TEXT_COPY inte är aktiv, gör widgeten inte en privat kopia av den inkommande strängen och därför måste strängen allokeras statiskt eller globalt, dvs. det kanske inte är en automatisk eller tillfällig variabel.
 
 GX_PROMPT härleds från GX_WIDGET och därför kan alla GX_WIDGET API-tjänster användas med GX_PROMPT.
 
 ### <a name="parameters"></a>Parametrar
 
-- **prompt** Pekare för att fråga widgetkontrollblock
+- **prompt** Pekare för att uppmana widgetkontrollblock
 - **text** Pekare till text
 
 ### <a name="return-values"></a>Returvärden
@@ -14648,7 +14725,7 @@ GX_PROMPT härleds från GX_WIDGET och därför kan alla GX_WIDGET API-tjänster
 - **GX_SUCCESS** (0x00) Prompttextuppsättningen lyckades
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
-- **GX_SYSTEM_MEMORY_ERROR** (0x30) Minnes allokerande funktion har inte definierats
+- **funktionen GX_SYSTEM_MEMORY_ERROR** (0x30) Minnes allokera har inte definierats
 - **GX_INVALID_STRING_LENGTH** (0x34) Ogiltig stränglängd
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -14700,12 +14777,12 @@ Den här tjänsten anger startvinkeln för radiell förloppsstapel.
 
 ### <a name="parameters"></a>Parametrar
 
-- **förloppsfält** Pekare till kontrollblock för radiell förloppsstapel
-- **vinkel** Startvinkel för cirkelformad båge
+- **förloppsfält** Pekare till kontrollblock för radiell förloppsfält
+- **vinkel** Start vinkel för cirkelformad båge
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad radiell förloppslist för ankaruppsättning
+- **GX_SUCCESS** (0x00) Lyckad radiell förloppslist för fästpunktsuppsättning
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Ogiltig widget
@@ -14750,11 +14827,11 @@ VOID gx_radial_progress_bar_background_draw(GX_RADIAL_PROGRESS_BAR *progress_bar
 
 ### <a name="description"></a>Description
 
-Den här tjänsten ritar en bakgrund för radiell förloppsstapel. Den här tjänsten refereras internt av gx_radial_progress_bar_draw-funktionen, men exponeras för användning av programmet i de fall där programmet definierar en anpassad förloppsstapel för radiell ritningsfunktion
+Den här tjänsten ritar en bakgrund i radiell förloppsstapel. Den här tjänsten refereras internt av gx_radial_progress_bar_draw-funktionen, men exponeras för användning av programmet i de fall där programmet definierar en anpassad ritningsfunktion för radiell förloppsstapel
 
 ### <a name="parameters"></a>Parametrar
 
-- **förloppsfält** Pekare till kontrollblock för radiell förloppsfält
+- **förloppsfält** Pekare till kontrollblock för radiell förloppsstapel
 
 ### <a name="return-values"></a>Returvärden
 
@@ -14813,15 +14890,15 @@ UINT gx_radial_progress_bar_create(
 
 Den här tjänsten skapar en radiell förloppsstapel.
 
-Om widgetformatet GX_STYLE_ENABLED tillämpas på förloppsfältet accepterar förloppsfältet pen_down, pen_drag och pen_up indata för att ändra det aktuella värdet för förloppsfältet.
+Om widgetformatet GX_STYLE_ENABLED tillämpas på förloppsfältet accepterar förloppsfältet pen_down, pen_drag och pen_up indata för att ändra det aktuella förloppsfältets värde.
 
-Widgetstilen GX_STYLE_PROGRESS_TEXT_DRAW användas för att aktivera ritning av förloppsstapelvärdet som text i förloppsfältet. Om det här formatet används i kombination med GX_STYLE_PROGRESS_PERCENT visas förloppsfältets värde i procent. Annars visas förloppsfältets värde som det aktuella angular-värdet.
+Widgetformatet GX_STYLE_PROGRESS_TEXT_DRAW användas för att aktivera ritning av förloppsstapelvärdet som text i förloppsfältet. Om det här formatet används i kombination med GX_STYLE_PROGRESS_PERCENT visas förloppsfältets värde i procent. Annars visas förloppsfältet som det aktuella angularvärdet.
 
 ### <a name="parameters"></a>Parametrar
 
-- **förloppsfält** Pekare till kontroll av radiell förloppsstapel
-- **förloppsfält** Pekare till kontrollblock för radiell förloppsstapel
-- **namn** Namn på radiell förloppsstapel
+- **förloppsfält** Pekare till radiell förloppskontroller
+- **förloppsfält** Pekare till kontrollblock för radiell förloppsfält
+- **namn** Namn på radiell förloppsfält
 - **överordnad** Pekare till överordnad widget
 - **info** Pekare till en GX_RADIAL_PROGRESS_BAR struktur. **Bilaga I** innehåller definition GX_RADIAL_PROGRESS_BAR struktur.
 - **style** Format för radiell förloppsstapel
@@ -14829,10 +14906,10 @@ Widgetstilen GX_STYLE_PROGRESS_TEXT_DRAW användas för att aktivera ritning av 
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad radiell förloppsstapel skapa
+- **GX_SUCCESS** (0x00) Lyckad radiell förloppsstapel för att skapa
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
-- **GX_ALREADY_CREATED** (0x13) Widget har redan skapats
+- **GX_ALREADY_CREATED** widgeten (0x13) har redan skapats
 - **GX_INVALID_WIDGET** (0x12) Ogiltig överordnad widget
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -14898,11 +14975,11 @@ VOID gx_radial_progress_bar_draw(GX_RADIAL_PROGRESS_BAR *progress_bar);
 
 ### <a name="description"></a>Description
 
-Den här tjänsten ritar en radiell förloppsstapel. Den här tjänsten används internt refererad av gx_radial_progress_bar_create-funktionen, men exponeras för användning av programmet i de fall där programmet definierar en anpassad ritningsfunktion för radiell förloppsstapel.
+Den här tjänsten ritar en radiell förloppsstapel. Den här tjänsten används internt refererad av gx_radial_progress_bar_create-funktionen, men exponeras för användning av programmet i de fall där programmet definierar en anpassad förloppsritningsfunktionen för radiella förlopp.
 
 ### <a name="parameters"></a>Parametrar
 
-- **förloppsfält** Pekare till kontrollblock för radiell förloppsstapel
+- **förloppsfält** Pekare till kontrollblock för radiell förloppsfält
 
 ### <a name="return-values"></a>Returvärden
 
@@ -14962,11 +15039,11 @@ Den här tjänsten bearbetar en radiell förloppshändelse. Den här funktionen 
 ### <a name="parameters"></a>Parametrar
 
 - **förloppsfält** Pekare till kontrollblock för radiell förloppsstapel
-- **event_ptr** Pekare till händelse att bearbeta
+- **event_ptr** Pekare till händelse som ska bearbetas
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad radiell förloppshändelseprocess
+- **GX_SUCCESS** (0x00) Lyckad process för radiell förloppsstapel
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Ogiltig widget
@@ -15030,7 +15107,7 @@ Den här tjänsten anger teckensnittet för en widget för radiell förloppsfäl
 
 ### <a name="parameters"></a>Parametrar
 
-- **förloppsfält** Pekare till kontrollblock för radiell förloppsstapel
+- **förloppsfält** Pekare till kontrollblock för radiell förloppsfält
 - **font_id** Resurs-ID för teckensnitt
 
 ### <a name="return-values"></a>Returvärden
@@ -15080,16 +15157,16 @@ UINT gx_radial_progress_bar_info_set(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten återställer informationsparametrarna som tilldelats till radialförloppsfältet.
+Den här tjänsten återställer informationsparametrarna som tilldelats till den radiella förloppsfältet.
 
 ### <a name="parameters"></a>Parametrar
 
-- **förloppsfält** Pekare till kontrollblock för radiell förloppsfält
-- **info** Pekare till informationsstrukturen för radiella förloppsfält. **Bilaga I** innehåller definition för GX_RADIAL_PROGRESS_BAR_INFO struktur.
+- **förloppsfält** Pekare till kontrollblock för radiell förloppsstapel
+- **info** Pekare till informationsstrukturen för radiella förloppsfält. **Bilaga I** innehåller definition GX_RADIAL_PROGRESS_BAR_INFO struktur.
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Infouppsättning för lyckad radiell förloppsfält
+- **GX_SUCCESS** (0x00) Information om lyckad radiell förloppsfält
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Ogiltig widget
@@ -15157,14 +15234,14 @@ UINT gx_radial_progress_bar_text_color_set(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten anger textfärgen för radiell förloppsstapel. Det här värdet används bara om GX_STYLE_PROGRESS_TEXT_DRAW har angetts.
+Den här tjänsten anger textfärgen för radiell förloppsstapel. Det här värdet används bara om formatet GX_STYLE_PROGRESS_TEXT_DRAW har angetts.
 
 ### <a name="parameters"></a>Parametrar
 
-- **förloppsfält** Pekare till kontrollblock för radiell förloppsstapel
-- **normal_color** Resurs-ID för textfärg i normalt tillstånd. **Bilaga A** innehåller fördefinierade färgresurs-ID:er. Observera att programmet även kan lägga till anpassade resurs-ID:n för färg.
-- **selected_color** Resurs-ID för textfärg när widgeten får fokus. **Bilaga A** innehåller fördefinierade färgresurs-ID:er. Observera att programmet även kan lägga till anpassade resurs-ID:n för färg.
-- **disabled_color** Resurs-ID för textfärg när GX_STYLE_ENABLED inte har angetts. **Bilaga A** innehåller fördefinierade färgresurs-ID:er. Observera att programmet även kan lägga till anpassade resurs-ID:n för färg.
+- **förloppsfält** Pekare till kontrollblock för radiell förloppsfält
+- **normal_color** Resurs-ID för textfärg i normalt tillstånd. **Bilaga A** innehåller fördefinierade resurs-ID:er för färg. Observera att programmet kan lägga till anpassade resurs-ID:n för färg också.
+- **selected_color** Resurs-ID för textfärg när widgeten får fokus. **Bilaga A** innehåller fördefinierade resurs-ID:er för färg. Observera att programmet kan lägga till anpassade resurs-ID:n för färg också.
+- **disabled_color** Resurs-ID för textfärg när GX_STYLE_ENABLED inte har angetts. **Bilaga A** innehåller fördefinierade resurs-ID:er för färg. Observera att programmet kan lägga till anpassade resurs-ID:n för färg också.
 
 ### <a name="return-values"></a>Returvärden
 
@@ -15276,9 +15353,9 @@ UINT gx_radial_progress_bar_value_set(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten anger värdet för radiell förloppsstapel. Det tilldelade värdet är begränsat till intervallet [-360, 360] och definierar det möjliga intervallet för angularvärden för den aktuella platsen i förloppsfältet. Programmet måste skala det verkliga värdet som anges för att tilldela ett angular-värde till förloppsfältets widget.
+Den här tjänsten anger radiellt förloppsfältvärde. Det tilldelade värdet är begränsat till intervallet [-360, 360] och definierar det möjliga intervallet för angularvärden för den aktuella platsen i förloppsfältet. Programmet måste skala det verkliga värdet som anges för att tilldela ett angularvärde till förloppsfältets widget.
 
-Förloppsfältet ritas så att det aktuella värdet anger vinkeldeltan mellan fästpunkten och slutpunkten för den övre bågen. Negativa värden gör att bågen ritas i en medurs riktning med början vid fästpunktspositionen. Ett positivt aktuellt värde gör att bågen ritas i en moturs riktning med början vid fästpunktspositionen.
+Förloppsfältet ritas så att det aktuella värdet anger angular-delta mellan fästpunktspositionen och slutpunkten för den övre båge. Negativa värden gör att båge ritas i en medurs riktning med början vid fästpunktspositionen. Positivt aktuellt värde gör att båge ritas i en moturs riktning med början vid fästpunktspositionen.
 
 Om du till exempel vill rita en båge som börjar överst i bågen (klockan 12) och slutar till höger (klockan tre), tilldelar du ett ankarvärde på 90 grader och ett aktuellt värde på -90 grader.
 
@@ -15348,17 +15425,17 @@ Den här tjänsten skapar en alternativknappswidget. GX_RADIO_BUTTON härleds fr
 - **knapp** Pekare till alternativknappskontrollblock
 - **namn** Logiskt namn på alternativknappswidget
 - **överordnad** Pekare till den överordnade widgeten
-- **text_id** Alternativknappens resurs-ID
-- **style** Alternativknappsformat. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
+- **text_id** Alternativknapps resurs-ID
+- **style (stil)** Stil på alternativknappen. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
 - **radio_button_id** Programdefinierat ID för alternativknappen
 - **storlek** Alternativknappen Dimensioner
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Skapa en lyckad alternativknapp
+- **GX_SUCCESS** (0x00) Lyckades med att skapa alternativknappen
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
-- **GX_ALREADY_CREATED** widgeten (0x13) har redan skapats
+- **GX_ALREADY_CREATED** (0x13) Widget har redan skapats
 - **GX_INVALID_** STORLEK (0x19) Ogiltig blockstorlek för widgetkontroll
 - **GX_INVALID_RESOURCE_ID** (0x33) Ogiltigt resurs-ID
 - **GX_INVALID_WIDGET** (0x12) Ogiltig widget
@@ -15475,7 +15552,7 @@ Den här tjänsten tilldelar pixelkartor som ska visas med den angivna alternati
 
 ### <a name="parameters"></a>Parametrar
 
-- **off_id** Pixelkarta som används för alternativknappens inaktiverade tillstånd
+- **off_id** Pixelkarta som används för alternativknappens av-tillstånd
 - **on_id** Pixelkarta som används för alternativknapp i tillstånd
 - **off_disabled_id** Pixelkarta som används för alternativknappen inaktiverat och inaktiverat tillstånd
 - **on_disabled_id** Pixelkarta som används för alternativknappen inaktiverad och i tillstånd
@@ -15536,11 +15613,11 @@ UINT gx_radial_slider_anchor_angles_set(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten anger fästvinklar för radiellt skjutreglage. Om listan med fästpunktsvinklar har angetts är den radiella skjutreglagets vinkel en av definierade fästpunktsvinklar.
+Den här tjänsten anger fästvinklar för radiellt skjutreglage. Om du anger en lista över ankarvinklar är den radiella skjutreglagets vinkel en av definierade fästpunktsvinklar.
 
 ### <a name="parameters"></a>Parametrar
 
-- **skjutreglage** Kontrollblock för radiellt skjutreglage
+- **skjutreglage** Kontrollblock för radiell skjutreglage
 - **anchor_angles** Vinkellista att ställa in
 - **anchor_count** Antal fästpunktsvinklar
 
@@ -15604,12 +15681,12 @@ Den här tjänsten anger nytt vinkelvärde för radiellt skjutreglage.
 
 ### <a name="parameters"></a>Parametrar
 
-- **skjutreglage** Pekare till kontrollblock för radiell skjutreglage
+- **skjutreglage** Pekare till kontrollblock för radiellt skjutreglage
 - **new_angle** Nytt vinkelvärde som ska anges
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad radiell skjutreglagets vinkeluppsättning
+- **GX_SUCCESS** (0x00) Lyckad radiell skjutreglage vinkeluppsättning
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Ogiltig widget
@@ -15642,7 +15719,7 @@ status = gx_radial_slider_angle_set(&my_radial_slider, 0);
 ## <a name="gx_radial_slider_animation_set"></a>gx_radial_slider_animation_set
 
 
-Skapa information om animering med radiellt skjutreglage
+Skapa information om animering av radiellt skjutreglage
 
 ### <a name="prototype"></a>Prototyp
 
@@ -15656,14 +15733,14 @@ UINT gx_radial_slider_animation_set(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten anger animeringssteg, fördröjningstid och animeringsstilar för animering med radiella skjutreglage.
+Den här tjänsten anger animeringssteg, fördröjningstid och animeringsformat för animering med radiellt skjutreglage.
 
 ### <a name="parameters"></a>Parametrar
 
-- **skjutreglage** Pekare till kontrollblock för radiellt skjutreglage
+- **skjutreglage** Pekare till kontrollblock för radiell skjutreglage
 - **steg** Totalt antal steg för en animering
 - **fördröjning** Fördröjningstid för varje animeringssteg
-- **animation_style** Easing function type (Underlätta funktionstypen) innehåller:
+- **animation_style** Funktionen Easing innehåller:
   - GX_ANIMATION_BACK_EASE_IN
   - GX_ANIMATION_BACK_EASE_OUT
   - GX_ANIMATION_BACK_EASE_IN_OUT
@@ -15698,7 +15775,7 @@ Den här tjänsten anger animeringssteg, fördröjningstid och animeringsstilar 
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad animering med radiellt skjutreglage
+- **GX_SUCCESS** (0x00) Animeringsuppsättning för lyckat radiellt skjutreglage
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Ogiltig widget
@@ -15766,7 +15843,7 @@ Den här tjänsten startar en animering för att flytta skjutreglagets nål frå
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad animering med radiellt skjutreglage
+- **GX_SUCCESS** (0x00) Animering med lyckat radiellt skjutreglage startar
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Ogiltig widget
@@ -15821,20 +15898,20 @@ Den här tjänsten skapar en widget för radiellt skjutreglage.
 
 ### <a name="parameters"></a>Parametrar
 
-- **skjutreglage** Pekare till kontrollblock för radiellt skjutreglage
+- **skjutreglage** Pekare till kontrollblock för radiell skjutreglage
 - **namn** Logiskt namn på widget för radiellt skjutreglage
 - **överordnad** Pekare till den överordnade widgeten
-- **info** Utseendedefinition för radiellt **skjutreglage, bilaga I** innehåller definition GX_RADIAL_SLIDER_INFO.
-- **style** Alternativknappsformat. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
+- **info** Definition av radiellt **skjutreglages utseende, bilaga I** innehåller definition GX_RADIAL_SLIDER_INFO.
+- **style (stil)** Stil på alternativknappen. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
 - **radio_button_id** Programdefinierat ID för radiellt skjutreglage
-- **storlek** Skjutreglagets dimensioner
+- **storlek** Dimensioner för skjutreglaget för radiell
 
 ### <a name="return-values"></a>Returvärden
 
 - **GX_SUCCESS** (0x00) Skapa ett lyckat radiellt skjutreglage
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
-- **GX_ALREADY_CREATED** widgeten (0x13) har redan skapats
+- **GX_ALREADY_CREATED** (0x13) Widget har redan skapats
 - **GX_INVALID_** STORLEK (0x19) Ogiltig blockstorlek för widgetkontroll
 - **GX_INVALID_WIDGET** (0x12) Ogiltig överordnad widget
 
@@ -15922,7 +15999,7 @@ Den här tjänsten drar ett radiellt skjutreglage. Den här tjänsten anropas in
 
 ### <a name="parameters"></a>Parametrar
 
-- **skjutreglage** Pekare till kontrollblock för radiell skjutreglage
+- **skjutreglage** Pekare till kontrollblock för radiellt skjutreglage
 
 ### <a name="return-values"></a>Returvärden
 
@@ -15962,7 +16039,7 @@ VOID my_radial_slider_draw(GX_RADIAL_SLIDER *radial_slider)
 ## <a name="gx_radial_slider_event_process"></a>gx_radial_slider_event_process
 
 
-Händelse för processradiellt skjutreglage
+Händelse för skjutreglage för processradial
 
 ### <a name="prototype"></a>Prototyp
 
@@ -15978,8 +16055,8 @@ Den här tjänsten bearbetar en radiell skjutreglagehändelse. Den här tjänste
 
 ### <a name="parameters"></a>Parametrar
 
-- **skjutreglage** Pekare till kontrollblock för radiellt skjutreglage
-- **event_ptr** Pekare till händelse som ska bearbetas
+- **skjutreglage** Pekare till kontrollblock för radiell skjutreglage
+- **event_ptr** Pekare till händelse att bearbeta
 
 ### <a name="return-values"></a>Returvärden
 
@@ -16043,12 +16120,12 @@ UINT gx_radial_slider_info_get(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten hämtar informationspekaren för radiell skjutreglage.
+Den här tjänsten hämtar pekaren för radiell skjutreglageinformation.
 
 ### <a name="parameters"></a>Parametrar
 
-- **skjutreglage** Pekare till kontrollblock för radiell skjutreglage
-- **info** Informationspekaren för det radiella skjutreglaget hämtades
+- **skjutreglage** Pekare till kontrollblock för radiellt skjutreglage
+- **info** Pekare för hämtad radiell skjutreglageinformation
 
 ### <a name="return-values"></a>Returvärden
 
@@ -16103,8 +16180,8 @@ Den här tjänsten anger radiell skjutreglageinformation.
 
 ### <a name="parameters"></a>Parametrar
 
-- **skjutreglage** Pekare till kontrollblock för radiellt skjutreglage
-- **info** Radiell skjutreglageinformation att ställa in
+- **skjutreglage** Pekare till kontrollblock för radiell skjutreglage
+- **info** Radiell skjutreglageinformation att ange
 
 ### <a name="return-values"></a>Returvärden
 
@@ -16176,7 +16253,7 @@ status = gx_radial_slider_info_set(&my_radial_slider, &info);
 ## <a name="gx_radial_slider_pixelmap_set"></a>gx_radial_slider_pixelmap_set
 
 
-Ange radiella skjutreglage för pixelkartor
+Ange pixelkartor för radiellt skjutreglage
 
 ### <a name="prototype"></a>Prototyp
 
@@ -16189,17 +16266,17 @@ UINT gx_radial_slider_pixelmap_set(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten anger bakgrund och bildpunktskartor för radiellt skjutreglage.
+Den här tjänsten anger bakgrund och pixelkartor för nålar med radiell skjutreglage.
 
 ### <a name="parameters"></a>Parametrar
 
-- **skjutreglage** Pekare till kontrollblock för radiell skjutreglage
+- **skjutreglage** Pekare till kontrollblock för radiellt skjutreglage
 - **background_pixelmap** Resurs-ID för pixelkarta i bakgrunden
 - **needle_pixelmap** Resurs-ID för pixelkarta med nål
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad radiell skjutreglage för pixelkarta
+- **GX_SUCCESS** (0x00) Lyckad radiell skjutreglage pixelkarta uppsättning
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Ogiltig widget
@@ -16278,7 +16355,7 @@ Den här tjänsten skapar en rtf-textvy som anges.
 - **överordnad** Pekare till överordnad widget
 - **text_id** Resurs-ID för textsträngen
 - **teckensnitt** Pekare till teckensnittsinformationen för RTF-vyn. **Apendix I innehåller** en definition för GX_RICH_TEXT_FONTS struktur.
-- **style (stil)** Widgetens stil. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
+- **style** Widgetens format. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
 - **id** Programdefinierat ID för RTF-vyn
 - **storlek** Storlek på RTF-vyn
 
@@ -16287,7 +16364,7 @@ Den här tjänsten skapar en rtf-textvy som anges.
 - **GX_SUCCESS** (0x00) Lyckad generering av RTF-vy
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
-- **GX_ALREADY_CREATED** widgeten (0x13) har redan skapats
+- **GX_ALREADY_CREATED** (0x13) Widget har redan skapats
 - **GX_INVALID_SIZE** (0x19) Ogiltig blockstorlek för widgetkontroll
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -16321,7 +16398,7 @@ status = gx_rich_text_view_create(&rich_view, “my_rich_view”,
 
 ```
 
-Demoprogrammet är demo_guix_widget_types ingår i GUIX Studio-installationen och ger ett komplett exempel på hur du använder widgeten för rtf-textvy.
+Demoprogrammets demo_guix_widget_types ingår i GUIX Studio-installationen och ger ett komplett exempel på hur du använder widgeten för rtf-textvy.
 
 ### <a name="see-also"></a>Se även
 
@@ -16342,7 +16419,7 @@ VOID gx_rich_text_view_draw(GX_RICH_TEXT_VIEW *text_view);
 
 ### <a name="description"></a>Description
 
-Den här tjänsten ritar den angivna RTF-widgeten. Den här tjänsten anropas vanligtvis internt av GUIX som en del av en uppdateringsåtgärd för arbetsytan, men den exponeras även för programmet som kanske vill tillhandahålla en anpassad ritningsfunktion och anropa standardritningen för RTF-vyn som anpassad ritningsbas.
+Den här tjänsten ritar den angivna rtf-textvywidgeten. Den här tjänsten anropas vanligtvis internt av GUIX som en del av en uppdateringsåtgärd för arbetsytan, men den exponeras även för programmet som kanske vill tillhandahålla en anpassad ritningsfunktion och anropa standardritningen för RTF-vyn som anpassad ritningsbas.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -16378,7 +16455,7 @@ VOID my_rich_text_view_draw(GX_RICH_TEXT_VIEW *text_view)
 
 ## <a name="gx_rich_text_view_fonts_set"></a>gx_rich_text_view_fonts_set
 
-Ange teckensnitt för rtf-textvy
+Ange teckensnitt för RTF-vy
 
 ### <a name="prototype"></a>Prototyp
 
@@ -16397,7 +16474,7 @@ Den här tjänsten anger teckensnitten för en widget för rtf-textvy.
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Teckensnitt för RTF-visning har angetts
+- **GX_SUCCESS** (0x00) Lyckad teckensnittsuppsättning för RTF-visning
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
@@ -16442,7 +16519,7 @@ VOID gx_rich_text_view_text_draw(GX_RICH_TEXT_VIEW *text_view);
 
 ### <a name="description"></a>Description
 
-Den här stödfunktionen ritar textdelen av en RTF-vy. Den här funktionen anropas internt av gx_rich_text_view_draw() och tillhandahålls som ett separat API för program som definierar en anpassad funktion för rtf-vyritning. Program som vill anpassa bakgrundsritningen för RTF-vyn kan tillhandahålla sin anpassade ritningsfunktion och anropa gx_rich_text_view_text_draw-tjänsten som en del av sin anpassade ritning för att rita rtf-textvyns text över bakgrunden.
+Den här stödfunktionen ritar textdelen av en RTF-vy. Den här funktionen anropas internt av gx_rich_text_view_draw() och tillhandahålls som ett separat API som en bekvämlighet för program som definierar en anpassad funktion för rtf-vyritning. Program som vill anpassa bakgrundsritningen i RTF-vyn kan tillhandahålla sin anpassade ritningsfunktion och anropa gx_rich_text_view_text_draw-tjänsten som en del av sin anpassade ritning för att rita text i RTF-vyn över bakgrunden.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -16498,7 +16575,7 @@ UINT gx_screen_stack_create(
 Den här tjänsten initierar en skärmstack. Programmet måste definiera minnesblocket och buffertstorleken som används för att implementera skärmstacksfunktionen.
 
 > [!NOTE]
-> *Detta API är inaktuellt och ersätts med gx_system_screen_stack_create(). Den här versionen tillhandahålls endast för bakåtkompatibilitet med tidigare biblioteksutgåningar..*
+> *Det här API:et är inaktuellt och ersätts med gx_system_screen_stack_create(). Den här versionen tillhandahålls endast för bakåtkompatibilitet med tidigare biblioteksversion.*
 
 ### <a name="parameters"></a>Parametrar
 
@@ -16553,7 +16630,7 @@ UINT gx_screen_stack_pop(GX_SCREEN_STACK_CONTROL *control);
 Den här tjänsten tar bort posten längst upp från skärmstacken och kopplar den skärm som visas till dess föregående överordnade. Det här API:et tar även bort eventuella befintliga underordnade objekt från den överordnade.
 
 > [!NOTE]
-> *Detta API är inaktuellt och ersätts med gx_system_screen_stack_pop(). Den här versionen tillhandahålls endast för bakåtkompatibilitet med tidigare biblioteksversion.*
+> *Detta API är inaktuellt och ersätts med gx_system_screen_stack_pop(). Den här versionen tillhandahålls endast för bakåtkompatibilitet med tidigare biblioteksutgåningar..*
 
 ### <a name="parameters"></a>Parametrar
 
@@ -16561,7 +16638,7 @@ Den här tjänsten tar bort posten längst upp från skärmstacken och kopplar d
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckat popup-fönster
+- **GX_SUCCESS** (0x00) Lyckad pop-skärmstack
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 
@@ -16601,17 +16678,17 @@ UINT gx_screen_stack_push(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten tar bort skärmen från dess överordnade objekt och flyttar skärmpekaren och den överordnade pekaren till skärmstacken. Den nya skärmpekaren kopplas sedan till den överordnade.
+Den här tjänsten tar bort skärmen från dess överordnade objekt och flyttar skärmpekaren och den överordnade pekaren till skärmstacken. Den nya skärmpekaren kopplas sedan till den överordnade skärmen.
 
 
 > [!NOTE]
-> *Detta API är inaktuellt och ersätts med gx_system_screen_stack_pop(). Den här versionen tillhandahålls endast för bakåtkompatibilitet med tidigare biblioteksutgåningar..*
+> *Detta API är inaktuellt och ersätts med gx_system_screen_stack_pop(). Den här versionen tillhandahålls endast för bakåtkompatibilitet med tidigare biblioteksversion.*
 
 ### <a name="parameters"></a>Parametrar
 
 - **kontroll** Kontrollblock för skärmstack
 - **skärm** Skärmbild som ska push-flyttas
-- **new_screen** Pekare över den nya skärmen
+- **new_screen** Pekare för den nya skärmen
 
 ### <a name="return-values"></a>Returvärden
 
@@ -16655,7 +16732,7 @@ UINT gx_screen_stack_reset(GX_SCREEN_STACK_CONTROL *control);
 Den här tjänsten tar bort alla poster från skärmstacken.
 
 > [!NOTE]
-> *Detta API är inaktuellt och ersätts med gx_system_screen_stack_pop(). Den här versionen tillhandahålls endast för bakåtkompatibilitet med tidigare biblioteksversion.*
+> *Detta API är inaktuellt och ersätts med gx_system_screen_stack_pop(). Den här versionen tillhandahålls endast för bakåtkompatibilitet med tidigare biblioteksutgåningar..*
 
 ### <a name="parameters"></a>Parametrar
 
@@ -16663,7 +16740,7 @@ Den här tjänsten tar bort alla poster från skärmstacken.
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad rullningstums skapas
+- **GX_SUCCESS** (0x00) Lyckad bläddringstum skapa
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -16688,7 +16765,7 @@ status = gx_screen_stack_reset(&my_stack_control);
 ## <a name="gx_scroll_thumb_create"></a>gx_scroll_thumb_create
 
 
-Skapa bläddringstum
+Skapa rullningstum
 
 ### <a name="prototype"></a>Prototyp
 
@@ -16700,7 +16777,7 @@ UINT gx_scroll_thumb_create(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten skapar ett tumhjul för rullning. Den här tjänsten anropas vanligtvis internt när en GX_SCROLLBAR skapas, men görs offentlig för att tillåta anpassade implementeringar av rullningslisten.
+Den här tjänsten skapar ett tumhjul för rullning. Den här tjänsten anropas vanligtvis internt när GX_SCROLLBAR skapas, men görs offentlig för att tillåta anpassade implementeringar av rullningslisten.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -16710,10 +16787,10 @@ Den här tjänsten skapar ett tumhjul för rullning. Den här tjänsten anropas 
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad bläddringstum skapa
+- **GX_SUCCESS** (0x00) Lyckad rullningstums skapas
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
-- **GX_ALREADY_CREATED** widgeten (0x13) har redan skapats
+- **GX_ALREADY_CREATED** (0x13) Widget har redan skapats
 - **GX_INVALID_SIZE** (0x19) Ogiltig blockstorlek för widgetkontroll
 - **GX_INVALID_WIDGET** (0x12) Överordnad widget är inte giltig
 
@@ -16804,7 +16881,7 @@ Den här tjänsten hanterar händelser som skickas till ett tumhjul i rullningsl
 ### <a name="parameters"></a>Parametrar
 
 - **scroll_thumb** Kontrollblock för bläddringswidget
-- **händelse** Pekare till händelse att bearbeta
+- **händelse** Pekare till händelse som ska bearbetas
 
 ### <a name="return-values"></a>Returvärden
 
@@ -16869,9 +16946,9 @@ Den här tjänsten skapar en widget för basrullningshjul.
 
 Ett grundläggande rullningshjul är baswidgeten för alla typer av rullningshjulswidgetar, inklusive **gx_generic_scroll_wheel** och **gx_text_scroll_wheel** som är basen för gx_numeric_scroll_wheel **och gx_string_ scroll_wheel** widgetar.  Widgeten för basrullningshjul ger händelsehantering, rullningsanimering och vald radberäkning för alla typer av rullningshjulswidgetar.
 
-Program skulle normalt inte skapa en instans av en allmän widget för rullningshjul, eftersom den här widgettypen inte har någon ritningsfunktion. Åtkomst till detta API tillhandahålls dock för att hjälpa program som behöver skapa en anpassad typ av rullningshjulswidget.
+Program skulle normalt inte skapa en instans av en allmän rullningshjulswidget, eftersom den här widgettypen inte innehåller någon ritningsfunktion. Åtkomst till det här API:et tillhandahålls dock för att hjälpa program som behöver skapa en anpassad typ av rullningshjulswidget.
 
-GX_SCROLL_WHEEL baseras på GX_WINDOW, och därför kan alla GX_WINDOW API:er användas med GX_SCROLL_WHEEL och widgetar som härletts från GX_SCROLL_WHEEL.
+GX_SCROLL_WHEEL baseras på GX_WINDOW, och därför kan alla GX_WINDOW API:er användas med GX_SCROLL_WHEEL och widgetar härledda från GX_SCROLL_WHEEL.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -16879,7 +16956,7 @@ GX_SCROLL_WHEEL baseras på GX_WINDOW, och därför kan alla GX_WINDOW API:er an
 - **namn** Namn på program tilldelad widget
 - **överordnad** Överordnad widget eller GX_NULL
 - **total_rows** Totalt antal tillgängliga rader
-- **style** Flaggor för widgetformat
+- **style (stil)** Flaggor för widgetformat
 - **id Program-ID** för tilldelad widget
 - **storlek** Rektangel som definierar den inledande widgetstorleken.
 
@@ -16963,7 +17040,7 @@ Den här funktionen exponeras för programprogramvaran för att hjälpa till med
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Händelseprocess för rullningshjul
+- **GX_SUCCESS** (0x00) Händelseprocessen för rullningshjul
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
@@ -17034,11 +17111,11 @@ UINT gx_scroll_wheel_gradient_alpha_set(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten definierar start- och slutvärdena för alfavärden för ett valfritt toningsöverlägg för widgeten för rullningshjul.
+Den här tjänsten definierar start- och slutvärdena för alfavärden för ett valfritt överlägg för rullningshjulswidgeten.
 
-Alla rullningshjulswidgetar stöder en "tona"-effekt av rullningshjulsraderna som raderna nära den övre och nedre kanten av rullningshjulswidgeten. Den här tonande effekten uppnås genom att rita en gradient pixelkarta över rullningshjulsraderna, vilket gör att raderna verkar tona ut när raderna ritas upptill och längst ned i widgeten för rullningshjul.
+Alla rullningshjulswidgetar stöder en "tona"-effekt av rullningshjulsraderna som raderna nära den övre och nedre kanten av rullningshjulswidgeten. Den här toningseffekten uppnås genom att rita en toningspunktskarta över rullningshjulsraderna, vilket gör att raderna verkar tona ut när raderna ritas nära upp- och nedrullningshjulswidgeten.
 
-Med den här API-tjänsten kan programmet ändra den tonande effektens intensitet eller inaktivera den här effekten helt genom att ange start- och slutvärdena för alfa till 0.
+Med den här API-tjänsten kan programmet ändra den toningseffektintensitet eller inaktivera den här effekten helt genom att ange start- och slutvärdena för alfa till 0.
 
 Den tonade pixelkartan skapas vid körning när rullningshjulet först blir synligt. Detta kräver att en minnesallokeringstjänst för körning har definierats med hjälp av _gx_system_memory_allocator_set(). Om ingen minnesbetoningsfunktion har definierats skapas inte toningsbilden och ingen toningseffekt blir tillgänglig.
 
@@ -17046,11 +17123,11 @@ Den tonade pixelkartan skapas vid körning när rullningshjulet först blir synl
 
 - **hjul** Pekare till allmänt kontrollblock för rullningshjul
 - **start_alpha** Överläggstoningen som börjar med alfavärdet.
-- **end_alpha** Överläggstoningen som slutar på alfavärdet.
+- **end_alpha** Överläggstoningen som slutar med alfavärdet.
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Ange rullningshjulets toning alfa
+- **GX_SUCCESS** (0x00) Ange alfa för rullningshjulets toning
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
@@ -17166,12 +17243,12 @@ UINT gx_scroll_wheel_selected_background_set(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten tilldelar ett valfritt pixelkarta-ID som ritas bakom den valda raden i rullningshjulet. Detta kan användas för att markera den markerade raden så att användaren enkelt kan se vilken rad i rullningshjulet som har valts.
+Den här tjänsten tilldelar ett valfritt pixelkarta-ID som ritas bakom den valda raden i rullningshjulet. Detta kan användas för att markera den markerade raden så att användaren enkelt kan urskilja vilken rad i rullningshjulet som har valts.
 
 ### <a name="parameters"></a>Parametrar
 
 - **hjul** Pekare till allmänt kontrollblock för rullningshjul
-- **image_id** Pixelkarta-ID som ska användas som vald radbakgrundsbild.
+- **image_id** Pixelkartans ID som ska användas som vald radbakgrundsbild.
 
 ### <a name="return-values"></a>Returvärden
 
@@ -17235,7 +17312,7 @@ Den här tjänsten frågar rullningshjulet för att hämta den markerade raden. 
 ### <a name="parameters"></a>Parametrar
 
 - **hjul** Pekare till allmänt kontrollblock för rullningshjul
-- **rad** Den plats där det valda radvärdet returneras.
+- **rad** Plats där det valda radvärdet returneras.
 
 ### <a name="return-values"></a>Returvärden
 
@@ -17294,12 +17371,12 @@ UINT gx_scroll_wheel_selected_set(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten tilldelar den markerade raden med rullningshjul.
+Den här tjänsten tilldelar den markerade rullningshjulsraden.
 
 ### <a name="parameters"></a>Parametrar
 
 - **hjul** Pekare till allmänt kontrollblock för rullningshjul
-- **rad** Rad i rullningshjulet som ska väljas.
+- **rad** Rad på rullningshjulet som ska väljas.
 
 ### <a name="return-values"></a>Returvärden
 
@@ -17360,13 +17437,13 @@ UINT gx_scroll_wheel_speed_set(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten tilldelar rullningshastigheten för widgeten för rullningshjul.
+Den här tjänsten tilldelar rullningshastigheten för widgeten för rullningshjulet.
 
 ### <a name="parameters"></a>Parametrar
 
 - **hjul** Pekare till allmänt kontrollblock för rullningshjul
-- **start_speed_rate** Hastigheten för att rulla starthastighet till hastighet.
-- **end_speed_rate** Hastigheten för att rulla sluthastighet till hastighet
+- **start_speed_rate** Hastigheten för rullningsstarthastigheten till speed (hastighet).
+- **end_speed_rate** Hastigheten för rullningssluthastighet till hastighet
 - **max_steps** Maximalt antal steg för rullning.
 - **fördröjning** Fördröjningstid för varje steg.
 
@@ -17428,7 +17505,7 @@ UINT gx_scroll_wheel_total_rows_set(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten tilldelar antalet rader som är tillgängliga i det angivna rullningshjulet. Widgeten för rullningshjul tar vanligtvis emot radinnehållet från programmet i form av en matris med strängar eller strängdata som användaren har angett. Detta API informerar rullningshjulet om det totala antalet rader som ska visas för användaren.
+Den här tjänsten tilldelar antalet rader som är tillgängliga i det angivna rullningshjulet. Widgeten för rullningshjul tar vanligtvis emot radinnehållet från programmet i form av en matris med strängar eller strängdata från användaren. Detta API informerar rullningshjulet om det totala antalet rader som ska visas för användaren.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -17437,7 +17514,7 @@ Den här tjänsten tilldelar antalet rader som är tillgängliga i det angivna r
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Ange totalt antal rader med rullningshjul
+- **GX_SUCCESS** (0x00) Ange rullningshjulets totala rad
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
@@ -17492,7 +17569,7 @@ Den här tjänsten ritar en rullningslist. En vanlig ritningsfunktion används f
 
 ### <a name="parameters"></a>Parametrar
 
-- **rullningslist** Rullningslistswidget att rita
+- **rullningslist** Widget för rullningslist att rita
 
 ### <a name="return-values"></a>Returvärden
 
@@ -17539,12 +17616,12 @@ UINT gx_scrollbar_event_process(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten bearbetar en rullningslistshändelse. En vanlig händelsehanteringsfunktion som används för både lodräta och vågräta rullningslistswidgetar.
+Den här tjänsten bearbetar en rullningslisthändelse. En vanlig händelsehanteringsfunktion som används för både lodräta och vågräta rullningslistwidgetar.
 
 ### <a name="parameters"></a>Parametrar
 
 - **rullningslist** Kontrollblock för rullningslistswidget
-- **händelse** Pekare till händelse att bearbeta
+- **händelse** Pekare till händelse som ska bearbetas
 
 ### <a name="return-values"></a>Returvärden
 
@@ -17590,7 +17667,7 @@ UINT custom_scrollbar_event_process(GX_SCROLLBAR *scrollbar,
 ## <a name="gx_scrollbar_limit_check"></a>gx_scrollbar_limit_check
 
 
-Kontrollera rullningslistgränsen
+Kontrollera rullningslistsgränsen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -17600,7 +17677,7 @@ UINT gx_scrollbar_limit_check(GX_SCROLLBAR *scrollbar);
 
 ### <a name="description"></a>Description
 
-Den här tjänsten kontrollerar rullningslistens gräns och förhindrar att tumhjulet för rullningslisten rör sig utanför de fördefinierade gränserna.
+Den här tjänsten kontrollerar gränsen för rullningslisten och förhindrar att rullningslistens tumhjul går utanför de fördefinierade gränserna.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -17654,7 +17731,7 @@ Den här tjänsten återställer rullningslisten.
 ### <a name="parameters"></a>Parametrar
 
 - **rullningslist** Kontrollblock för rullningslistswidget
-- **info** Pekare till GX_SCROLL_INFO struktur som definierar rullningslistens gränser, aktuellt värde och steg eller ökning. **Bilaga I** innehåller definition för GX_SCROLL_INFO struktur.
+- **info** Pekare GX_SCROLL_INFO struktur som definierar rullningslistens gränser, aktuellt värde och steg eller ökning. **Bilaga I** innehåller en definition GX_SCROLL_INFO struktur.
 
 ### <a name="return-values"></a>Returvärden
 
@@ -17697,7 +17774,7 @@ status = gx_scrollbar_reset(&my_scrollbar, &my_info);
 ## <a name="gx_scrollbar_value_set"></a>gx_scrollbar_value_set
 
 
-Tilldela rullningslistvärde
+Tilldela rullningslistens värde
 
 ### <a name="prototype"></a>Prototyp
 
@@ -17709,16 +17786,16 @@ UINT gx_scrollbar_value_set(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten tilldelar det aktuella rullningslistvärdet. En GX_EVENT_VERTICAL_SCROLL eller GX_EVENT_HORIZONTAL_SCROLL-händelse genereras till det överordnade fönstret.
+Den här tjänsten tilldelar det aktuella rullningslistsvärdet. En GX_EVENT_VERTICAL_SCROLL eller GX_EVENT_HORIZONTAL_SCROLL-händelse genereras till det överordnade fönstret.
 
 ### <a name="parameters"></a>Parametrar
 
 - **rullningslist** Kontrollblock för rullningslistswidget
-- **värde** Nytt värde för rullningslisten
+- **värde** Nytt rullningslistvärde
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad process för rullningslist
+- **GX_SUCCESS** (0x00) Lyckad rullningslisthändelseprocess
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
@@ -17750,7 +17827,7 @@ status = gx_scrollbar_value_set(&my_scrollbar, 0);
 ## <a name="gx_single_line_text_input_backspace"></a>gx_single_line_text_input_backspace
 
 
-Bearbeta ett blankstegstecken i textinmatningswidgeten
+Bearbeta ett backstegstecken i textinmatningswidgeten
 
 ### <a name="prototype"></a>Prototyp
 
@@ -17760,7 +17837,7 @@ UINT gx_single_line_text_input_backspace(GX_SINGLE_LINE_TEXT_INPUT *text_input);
 
 ### <a name="description"></a>Description
 
-Den här tjänsten tar bort tecknet före markörpositionen för textinmatning. Den här tjänsten anropas internt när en down-händelse för backstegsnyckel tas emot, men kan även anropas av programmet.
+Den här tjänsten tar bort tecknet före markörpositionen för textinmatning. Den här tjänsten anropas internt när en backstegsnyckel nedåt-händelse tas emot, men kan också anropas av programmet.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -17894,7 +17971,7 @@ Den här tjänsten hämtar buffertinformation för textinmatningswidgeten.
 ### <a name="parameters"></a>Parametrar
 
 - **text_input** Kontrollblock för enradswidget för textinmatning
-- **buffer_address** Indatabuffertens adress
+- **buffer_address** Adressen för indatabufferten
 - **content_size** Byteantalet för indata
 - **buffer_size** Storleken på indatabufferten
 
@@ -17959,7 +18036,7 @@ UINT gx_single_line_text_input_character_delete(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten tar bort tecknet efter markörpositionen för textinmatningen. Den här tjänsten anropas internt när en borttagningsnyckel nedåt-händelse tas emot, men kan även anropas av programmet.
+Den här tjänsten tar bort tecknet efter markörpositionen för textinmatningen. Den här tjänsten anropas internt när en borttagningsnyckel tas emot, men kan även anropas av programmet.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -18025,7 +18102,7 @@ UINT gx_single_line_text_input_character_insert(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten infogar en teckensträng i strängbufferten för textinmatning vid den aktuella markörpositionen.
+Den här tjänsten infogar en teckensträng i textinmatningssträngens buffert vid den aktuella markörpositionen.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -18083,7 +18160,7 @@ status = gx_single_line_text_input_character_insert(&my_text_input,
 ## <a name="gx_single_line_text_input_create"></a>gx_single_line_text_input_create
 
 
-Skapa en textinmatningswidget
+Skapa en widget för textinmatning
 
 ### <a name="prototype"></a>Prototyp
 
@@ -18097,9 +18174,9 @@ UINT gx_single_line_text_input_create(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten skapar en textinmatningswidget. Anroparen måste ange lagring för indatasträngen och ange strängens maximala längd.
+Den här tjänsten skapar en widget för textinmatning. Anroparen måste ange lagring för indatasträngen och ange strängens maximala längd.
 
-GX_SINGLE_LINE_TEXT_INPUT härleds från GX_PROMPT och därför kan alla gx_prompt-tjänster användas med GX_SINGLE_LINE_TEXT_INPUT widgetar.
+GX_SINGLE_LINE_TEXT_INPUT härleds från GX_PROMPT och därför kan alla gx_prompt tjänster användas med GX_SINGLE_LINE_TEXT_INPUT widgetar.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -18108,7 +18185,7 @@ GX_SINGLE_LINE_TEXT_INPUT härleds från GX_PROMPT och därför kan alla gx_prom
 - **överordnad** Valfri överordnad widget
 - **input_buffer** Lagring för indatasträng
 - **buffer_size** Storlek på lagringsområdet för indatasträngen, i byte.
-- **style (stil)** Formatflaggor för textinmatning
+- **style** Formatflaggor för textinmatning
 - **text_input_id** Valfritt ID för indatawidgeten
 - **storlek** Rektangel som definierar den inledande widgetstorleken
 
@@ -18117,7 +18194,7 @@ GX_SINGLE_LINE_TEXT_INPUT härleds från GX_PROMPT och därför kan alla gx_prom
 - **GX_SUCCESS** (0x00) Lyckad textinmatning med en rad
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
-- **GX_ALREADY_CREATED** widgeten (0x13) har redan skapats
+- **GX_ALREADY_CREATED** (0x13) Widget har redan skapats
 - **GX_INVALID_SIZE** (0x19) Ogiltig blockstorlek för widgetkontroll
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
 
@@ -18179,7 +18256,7 @@ VOID gx_single_line_text_input_draw(GX_SINGLE_LINE_TEXT_INPUT *text_input);
 
 ### <a name="description"></a>Description
 
-Den här tjänsten ritar en widget för textinmatning. Den här tjänsten anropas vanligtvis internt under arbetsyteuppdateringen, men kan även anropas från anpassade ritningsfunktioner för textinmatning.
+Den här tjänsten ritar en textinmatningswidget. Den här tjänsten anropas vanligtvis internt under arbetsyteuppdateringen, men kan även anropas från anpassade ritningsfunktioner för textinmatning.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -18233,7 +18310,7 @@ VOID my_sl_text_input_draw(GX_SINGLE_LINE_TEXT_INPUT *input)
 ## <a name="gx_single_line_text_input_draw_position_get"></a>gx_single_line_text_input_draw_position_get
 
 
-Hämta startpositionen för text draw
+Hämta startpositionen för textr rita
 
 ### <a name="prototype"></a>Prototyp
 
@@ -18310,7 +18387,7 @@ GX_VALUE ypos;
 ## <a name="gx_single_line_text_input_end"></a>gx_single_line_text_input_end
 
 
-Flytta textindatamarkören till slutet av strängen
+Flytta textinmatningsmarkören till strängslutet
 
 ### <a name="prototype"></a>Prototyp
 
@@ -18393,7 +18470,7 @@ Den här tjänsten bearbetar en textindatahändelse med en rad. Den här funktio
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Korrekt bearbetad textinmatningshändelse
+- **GX_SUCCESS** (0x00) Bearbetad textinmatningshändelse
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
@@ -18475,14 +18552,14 @@ Den här tjänsten anger fyllningsfärgen för textinmatningen på en rad.
 ### <a name="parameters"></a>Parametrar
 
 - **text_input** Pekare till kontrollblock för textinmatning med en rad
-- **normal_fill_color_id** Resurs-ID för widgeten fyller färgen i normalt tillstånd. **Bilaga A** innehåller fördefinierade resurs-ID:er för färg. Observera att programmet kan lägga till anpassade resurs-ID:n för färg också.
+- **normal_fill_color_id** Resurs-ID för widgeten fyller i färg i normalt tillstånd. **Bilaga A** innehåller fördefinierade färgresurs-ID:er. Observera att programmet kan lägga till anpassade resurs-ID:n för färg också.
 - **selected_fill_color_id** Resurs-ID för widgetens fyllningsfärg när widgeten får fokus. **Bilaga A** innehåller fördefinierade resurs-ID:er för färg. Observera att programmet kan lägga till anpassade resurs-ID:n för färg också.
-- **disabled_fill_color_id** Resurs-ID för widgetens fyllningsfärg när GX_STYLE_ENABLED inte har angetts. **Bilaga A** innehåller fördefinierade färgresurs-ID:er. Observera att programmet även kan lägga till anpassade resurs-ID:n för färg.
-- **readonly_fill_color_id** Resurs-ID för widgetens fyllningsfärg när både GX_STYLE_ENABLED och GX_STYLE_TEXT_INPUT_READYONLY har angetts. **Bilaga A** innehåller fördefinierade färgresurs-ID:er. Observera att programmet även kan lägga till anpassade resurs-ID:n för färg.
+- **disabled_fill_color_id** Resurs-ID för widgetens fyllningsfärg när GX_STYLE_ENABLED inte har angetts. **Bilaga A** innehåller fördefinierade resurs-ID:er för färg. Observera att programmet kan lägga till anpassade resurs-ID:n för färg också.
+- **readonly_fill_color_id** Resurs-ID för widgetens fyllningsfärg när både GX_STYLE_ENABLED och GX_STYLE_TEXT_INPUT_READYONLY har angetts. **Bilaga A** innehåller fördefinierade resurs-ID:er för färg. Observera att programmet kan lägga till anpassade resurs-ID:n för färg också.
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad färguppsättning för textinmatning med en rad
+- **GX_SUCCESS** (0x00) Lyckad textinmatningsfärguppsättning för en rad
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
@@ -18531,7 +18608,7 @@ set. */
 ## <a name="gx_single_line_text_input_home"></a>gx_single_line_text_input_home
 
 
-Flytta textinmatningsmarkören till hempositionen
+Flytta textindatamarkören till hempositionen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -18602,7 +18679,7 @@ UINT gx_single_line_text_input_left_arrow(GX_SINGLE_LINE_TEXT_INPUT *text_input)
 
 ### <a name="description"></a>Description
 
-Den här tjänsten flyttar textindatamarkören ett tecken till vänster. Den här tjänsten anropas internt när en vänsternyckel nedåt-händelse tas emot, men kan även anropas av programmet.
+Den här tjänsten flyttar textindatamarkören ett tecken till vänster. Den här tjänsten anropas internt när en left key down-händelse tas emot, men kan också anropas av programmet.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -18674,7 +18751,7 @@ Den här tjänsten placerar textindatamarkören baserat på den begärda pixelpo
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Har ställt in markören på den begärda positionen
+- **GX_SUCCESS** (0x00) Ange markören till den begärda positionen
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Ogiltig widget
@@ -18730,7 +18807,7 @@ UINT gx_single_line_text_input_right_arrow(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten flyttar textindatamarkören ett tecken till höger. Den här tjänsten anropas internt när en högernyckel nedåt-händelse tas emot, men kan också anropas av programmet.
+Den här tjänsten flyttar textinmatningsmarkören ett tecken till höger. Den här tjänsten anropas internt när en högernyckel nedåt-händelse tas emot, men kan även anropas av programmet.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -18793,12 +18870,12 @@ UINT gx_single_line_text_input_style_add(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten lägger till de angivna formaten till textinmatningswidgeten med en rad.
+Den här tjänsten lägger till de angivna formaten i widgeten för textinmatning på en rad.
 
 ### <a name="parameters"></a>Parametrar
 
 - **text_input** Kontrollblock för enradswidget för textinmatning
-- **style** Nytt format att lägga till. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar
+- **style (stil)** Nytt format att lägga till. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar
 
 ### <a name="return-values"></a>Returvärden
 
@@ -18926,7 +19003,7 @@ Den här tjänsten anger de angivna formaten till textinmatningswidgeten med en 
 ### <a name="parameters"></a>Parametrar
 
 - **text_input** Kontrollblock för enradswidget för textinmatning
-- **style** style flags to assign
+- **style** style-flaggor att tilldela
 
 ### <a name="return-values"></a>Returvärden
 
@@ -18993,10 +19070,10 @@ Den här tjänsten anger textfärgen för textinmatningen på en rad.
 ### <a name="parameters"></a>Parametrar
 
 - **text_input** Pekare till kontrollblock för textinmatning med en rad
-- **normal_text_color_id** Resurs-ID för textfärgen i normalt tillstånd. **Bilaga A** innehåller fördefinierade färgresurs-ID:er. Observera att programmet kan lägga till anpassade resurs-ID:n för färg också.
-- **selected_text_color_id** Resurs-ID för textfärgen när widgeten får fokus. **Bilaga A** innehåller fördefinierade resurs-ID:er för färg. Observera att programmet kan lägga till anpassade resurs-ID:n för färg också.
-- **disabled_text_color_id** Resurs-ID för textfärgen när GX_STYLE_ENABLED inte har angetts. **Bilaga A** innehåller fördefinierade resurs-ID:er för färg. Observera att programmet kan lägga till anpassade resurs-ID:n för färg också.
-- **readonly_text_color_id** Resurs-ID för textfärgen när både GX_STYLE_ENABLED och GX_STYLE_TEXT_INPUT_READONLY anges. **Bilaga A** innehåller fördefinierade resurs-ID:er för färg. Observera att programmet kan lägga till anpassade resurs-ID:n för färg också.
+- **normal_text_color_id** Resurs-ID för textfärgen i normalt tillstånd. **Bilaga A** innehåller fördefinierade färgresurs-ID:er. Observera att programmet även kan lägga till anpassade resurs-ID:n för färg.
+- **selected_text_color_id** Resurs-ID för textfärgen när widgeten får fokus. **Bilaga A** innehåller fördefinierade färgresurs-ID:er. Observera att programmet även kan lägga till anpassade resurs-ID:n för färg.
+- **disabled_text_color_id** Resurs-ID för textfärgen när GX_STYLE_ENABLED inte har angetts. **Bilaga A** innehåller fördefinierade färgresurs-ID:er. Observera att programmet även kan lägga till anpassade resurs-ID:n för färg.
+- **readonly_text_color_id** Resurs-ID för textfärgen när både GX_STYLE_ENABLED och GX_STYLE_TEXT_INPUT_READONLY anges. **Bilaga A** innehåller fördefinierade färgresurs-ID:er. Observera att programmet även kan lägga till anpassade resurs-ID:n för färg.
 
 ### <a name="return-values"></a>Returvärden
 
@@ -19126,7 +19203,7 @@ UINT gx_single_line_text_input_text_set(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten har gjorts inaktuell och ersatts av gx_single_line_text_input_text_set_ext()
+Den här tjänsten har gjorts inaktuell till förmån för gx_single_line_text_input_text_set_ext()
 
 Den här tjänsten anger texten i textinmatningen på en rad.
 
@@ -19254,7 +19331,7 @@ UINT gx_slider_create(
 
 Den här tjänsten skapar en skjutreglagewidget.
 
-GX_SLIDER härleds från GX_WIDGET, och därför kan alla GX_WIDGET API-tjänster användas med GX_SLIDER-widgetar.
+GX_SLIDER härleds från GX_WIDGET och därför kan alla GX_WIDGET API-tjänster användas med GX_SLIDER typwidgetar.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -19262,14 +19339,14 @@ GX_SLIDER härleds från GX_WIDGET, och därför kan alla GX_WIDGET API-tjänste
 - **name**: Namnet på skjutreglaget
 - **överordnad:** Pekare till överordnad widget
 - **tick_count:** Antal tick för skjutreglage
-- **slider_info: Pekare** till skjutreglagets information som är en struktur som används för att överföra gränserna för skjutreglagets värde, skjutreglagets nålstorlek och position samt andra skjutreglageparametrar. **Bilaga I** innehåller definition för GX_SLIDER_INFO struktur.
+- **slider_info: Pekare** till skjutreglagets information som är en struktur som används för att överföra skjutreglagets värdegränser, skjutreglagets nålstorlek och position samt andra skjutreglageparametrar. **Bilaga I** innehåller definition GX_SLIDER_INFO struktur.
 - **style**: Skjutreglagets format. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
 - **slider_id:** Programdefinierat ID för skjutreglaget
 - **storlek:** Skjutreglagets dimensioner
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS**: (0x00) Skapa skjutreglaget
+- **GX_SUCCESS**: (0x00) Skapa skjutreglage
 - **GX_CALLER_ERROR**: (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR**: (0x07) Ogiltig pekare
 - **GX_ALREADY_CREATED**: (0x13) Widget har redan skapats
@@ -19399,10 +19476,10 @@ Den här tjänsten bearbetar en skjutreglagehändelse. Den här funktionen refer
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS:**(0x00) Händelseprocess med lyckat skjutreglage
+- **GX_SUCCESS**: (0x00) Lyckad händelseprocess för skjutreglage
 - **GX_CALLER_ERROR**: (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR**: (0x07) Ogiltig pekare
-- **GX_INVALID_WIDGET:**(0x12) Widget är inte giltig
+- **GX_INVALID_WIDGET**: (0x12) Widget är inte giltig
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -19461,19 +19538,19 @@ UINT gx_slider_info_set(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten tilldelar den angivna skjutreglageinformationen, till exempel lägsta skjutreglage, högsta skjutreglage och aktuellt skjutreglagevärde till det angivna skjutreglaget. Skjutreglaget uppdaterar nålpositionen och ritar om baserat på den nya skjutreglageinformationen.
+Den här tjänsten tilldelar den angivna skjutreglageinformationen, till exempel lägsta skjutreglage, högsta skjutreglage och aktuellt värde för skjutreglaget till det angivna skjutreglaget. Skjutreglaget uppdaterar nålens position och ritar om baserat på den nya skjutreglageinformationen.
 
 ### <a name="parameters"></a>Parametrar
 
 - **slider**: Kontrollblock för skjutreglage
-- **info**: Pekare till skjutreglagets informationsstruktur. **Bilaga I** innehåller definition för GX_SLIDER_INFO struktur.
+- **info**: Pekare till skjutreglagets informationsstruktur. **Bilaga I** innehåller definition GX_SLIDER_INFO struktur.
 
 ### <a name="return-values"></a>Returvärden
 
 - **GX_SUCCESS**: (0x00) Information om skjutreglaget har ställts in
 - **GX_CALLER_ERROR**: (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR**: (0x07) Ogiltig pekare
-- **GX_INVALID_WIDGET**: (0x12) Widget är inte giltig
+- **GX_INVALID_WIDGET:**(0x12) Widget är inte giltig
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -19519,7 +19596,7 @@ status = gx_slider_info_set (&my_slider, &my_slider_info);
 
 ## <a name="gx_slider_needle_draw"></a>gx_slider_needle_draw
 
-Dra skjutreglagets nål
+Rita skjutreglagets nål
 
 ### <a name="prototype"></a>Prototyp
 
@@ -19529,7 +19606,7 @@ VOID gx_slider_needle_draw(GX_SLIDER *slider);
 
 ### <a name="description"></a>Description
 
-Den här tjänsten drar ett skjutreglage med en nål. Den här tjänsten anropas automatiskt av gx_slider_draw,men kan också anropas av programmet som en del av en anpassad skjutreglageritningsfunktion.
+Den här tjänsten ritar ett skjutreglage med en nål. Den här tjänsten anropas automatiskt gx_slider_draw funktionen, men kan också anropas av programmet som en del av en anpassad skjutreglageritning.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -19595,7 +19672,7 @@ Den här tjänsten beräknar skjutreglagets nålposition baserat på det aktuell
 ### <a name="parameters"></a>Parametrar
 
 - **slider**: Kontrollblock för skjutreglage
-- **slider_info: Pekare** till skjutreglagets informationsstruktur som definierar skjutreglagets gränser, nålstorlek och förskjutning samt andra skjutreglageparametrar. **Bilaga I** innehåller definition för GX_SLIDER_INFO struktur.
+- **slider_info: Pekare** till skjutreglagets informationsstruktur som definierar skjutreglagets gränser, nålstorlek och förskjutning och andra skjutreglageparametrar. **Bilaga I** innehåller definition GX_SLIDER_INFO struktur.
 - **return_position:** Pekare till mål för nålposition
 
 ### <a name="return-values"></a>Returvärden
@@ -19604,7 +19681,7 @@ Den här tjänsten beräknar skjutreglagets nålposition baserat på det aktuell
 - **GX_CALLER_ERROR**: (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR**: (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET**: (0x12) Widget är inte giltig
-- **GX_INVALID_VALUE:**(0x22) Skjutreglageinformation är inte giltig
+- **GX_INVALID_VALUE:**(0x22) Skjutreglageinformation är ogiltig
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -19717,17 +19794,17 @@ Den här tjänsten hämtar skjutreglagets färd.
 ### <a name="parameters"></a>Parametrar
 
 - **slider**: Kontrollblock för skjutreglage
-- **info**: Pekare till skjutreglagets informationsstruktur. **Bilaga I** innehåller definition GX_SLIDER_INFO struktur.
+- **info**: Pekare till skjutreglagets informationsstruktur. **Bilaga I** innehåller definition för GX_SLIDER_INFO struktur.
 - **return_min_travel:** Pekare till mål för minsta resevärde</td>
 - **return_max_travell:** Pekare till mål för högsta resevärde</td>
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS**: (0x00) Lyckat skjutreglage för att hämta
+- **GX_SUCCESS**: (0x00) Lyckat skjutreglage för att få
 - **GX_CALLER_ERROR**: (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR**: (0x07) Ogiltig pekare
-- **GX_INVALID_WIDGET:**(0x12) Widget är inte giltig
-- **GX_INVALID_VALUE:**(0x22) Skjutreglageinformation är inte giltig
+- **GX_INVALID_WIDGET**: (0x12) Widget är inte giltig
+- **GX_INVALID_VALUE:**(0x22) Skjutreglageinformation är ogiltig
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -19779,8 +19856,8 @@ Den här tjänsten beräknar skjutreglagets värde baserat på skjutreglagets n�
 ### <a name="parameters"></a>Parametrar
 
 - **slider**: Kontrollblock för skjutreglage
-- **info**: Pekare till skjutreglagets information. **Bilaga I** innehåller definition för GX_LISDER_INFO struktur.
-- **new_position: Ny** position för skjutreglaget
+- **info**: Pekare till skjutreglagets information. **Bilaga I** innehåller en definition GX_LISDER_INFO struktur.
+- **new_position: Ny** skjutreglageposition
 
 ### <a name="return-values"></a>Returvärden
 
@@ -19841,15 +19918,15 @@ Den här tjänsten anger skjutreglagets värde. Det här API:et kan anropas av p
 ### <a name="parameters"></a>Parametrar
 
 - **slider**: Kontrollblock för skjutreglage
-- **info**: Pekare till skjutreglagets informationsstruktur. **Bilaga I** innehåller definition för GX_SLIDER_INFO struktur
-- **new_value:** Nytt skjutreglagevärde
+- **info**: Pekare till skjutreglagets informationsstruktur. **Bilaga I** innehåller en definition GX_SLIDER_INFO struktur
+- **new_value: Nytt** skjutreglagevärde
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS**: (0x00) Värdeuppsättning för lyckat skjutreglage
+- **GX_SUCCESS**: (0x00) Skjutreglagets värde har angetts
 - **GX_CALLER_ERROR**: (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR**: (0x07) Ogiltig pekare
-- **GX_INVALID_WIDGET**: (0x12) Widget är inte giltig
+- **GX_INVALID_WIDGET:**(0x12) Widget är inte giltig
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -19883,7 +19960,7 @@ status = gx_slider_value_set(&my_slider,
 
 ##  <a name="gx_sprite_create"></a>gx_sprite_create
 
-Skapa en widget för din widget
+Skapa en figurerarwidget
 
 ### <a name="prototype"></a>Prototyp
 
@@ -19899,15 +19976,15 @@ UINT gx_sprite_create(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten skapar en GX_SPRITE widget. En webbplats används för att visa en sekvens med pixelkartor som i en animering, eller kan användas som en widget för visning av pixelkartor med flera tillstånd.
+Den här tjänsten skapar en GX_SPRITE widget. En sås används för att visa en sekvens med pixelkartor som i en animering, eller kan användas som en widget för visning av pixelkartor med flera tillstånd.
 
 GX_SPRITE härleds från GX_WIDGET och stöder alla gx_widget API-tjänster.
 
-Widgeten GX_SPRITE kräver en matris med GX_SPRITE_FRAME strukturer för att definiera den första animeringen. **Bilaga I** innehåller definition GX_PRITE_FRAME struktur.
+Widgeten GX_SPRITE kräver en matris med GX_SPRITE_FRAME strukturer för att definiera den andra animeringen. **Bilaga I** innehåller definition för GX_PRITE_FRAME struktur.
 
 ### <a name="parameters"></a>Parametrar
 
-- **widgete:** Kontrollblock för Widget
+- **widgete:** Widget widget kontrollblock
 - **name**: Valfritt tilläggsnamn
 - **överordnad:** Pekare till överordnad widget
 - **frame_list:** En matris med GX_SPRITE_FRAME strukturer
@@ -19918,10 +19995,10 @@ Widgeten GX_SPRITE kräver en matris med GX_SPRITE_FRAME strukturer för att def
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS**: (0x00) Lyckat att skapa
+- **GX_SUCCESS**: (0x00) Lyckad lyckat skapa
 - **GX_CALLER_ERROR**: (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR**: (0x07) Ogiltig pekare
-- **GX_ALREADY_CREATED**: (0x13) Widget har redan skapats
+- **GX_ALREADY_CREATED:**(0x13) Widget har redan skapats
 - **GX_INVALID_WIDGET**: (0x12) Överordnad widget är inte giltig
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -19951,7 +20028,7 @@ status = gx_sprite_create(&my_sprite, “my_sprite”,
 
 ## <a name="gx_sprite_current_frame_set"></a>gx_sprite_current_frame_set
 
-Tilldela en stomme
+Tilldela diner-ram
 
 ### <a name="prototype"></a>Prototyp
 
@@ -19975,7 +20052,7 @@ Den här tjänsten tilldelar den aktuella ramen. Om en GX_SPRITE widget inte kö
 - **GX_SUCCESS**: (0x00) Lyckades
 - **GX_CALLER_ERROR**: (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR**: (0x07) Ogiltig pekare
-- **GX_INVALID_WIDGET:**(0x12) Widget är inte giltig
+- **GX_INVALID_WIDGET**: (0x12) Widget är inte giltig
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -19999,7 +20076,7 @@ status = gx_sprite_current_frame_set(&my_sprite, 3);
 
 ## <a name="gx_sprite_frame_list_set"></a>gx_sprite_frame_list_set
 
-Tilldela eller ändra en listruta
+Tilldela eller ändra en figurramlista
 
 ### <a name="prototype"></a>Prototyp
 
@@ -20012,11 +20089,11 @@ UINT gx_sprite_frame_list_set(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten kan användas för att tilldela eller tilldela om bildrutelistan som används av en widget för att hitta efter att widgeten har skapats. Information om innehållet i en webbplatsramlista finns i dokumentationen gx_sprite_create API.
+Den här tjänsten kan användas för att tilldela eller tilldela om bildrutelistan som används av en vält widget efter att widgeten har skapats. Information om innehållet i en listruta finns i dokumentationen gx_sprite_create API.
 
 ### <a name="parameters"></a>Parametrar
 
-- **widgete:** Kontrollblock för Widget
+- **widgete:** Widget widget kontrollblock
 - **frame_list:** Matris med GX_SPRITE_FRAME strukturer eller GX_NULL om det inte finns någon ramlista.
 - **frame_count:** Antal bildrutor i matrisen med bildrutor
 
@@ -20061,16 +20138,16 @@ UINT gx_sprite_start(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten startar en automatisk körningssekvens. Den här widgeten går igenom de första bildrutorna tills den sista bildrutan har nåtts, eller körs kontinuerligt om GX_SPRITE_LOOP har angetts.
+Den här tjänsten startar en automatisk körningssekvens. Den första widgeten går igenom de första bildrutorna tills den sista bildrutan har nåtts, eller körs kontinuerligt om GX_SPRITE_LOOP har angetts.
 
 ### <a name="parameters"></a>Parametrar
 
-- **widgete:** Widget widget kontrollblock
-- **frame**: Inledande stomme som ska visas, vanligtvis bildruta 0
+- **widgete:** Kontrollblock för Widget
+- **frame**: Inledande initierad ram som ska visas, vanligtvis bildruta 0
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS**: (0x00) Har startats och körts
+- **GX_SUCCESS**: (0x00) Har startat körningen av lyckat resultat
 - **GX_CALLER_ERROR**: (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR**: (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET**: (0x12) Widget är inte giltig
@@ -20107,18 +20184,18 @@ UINT gx_sprite_stop(GX_SPRITE *sprite);
 
 ### <a name="description"></a>Description
 
-Den här tjänsten stoppar en automatisk körningssekvens.
+Den här tjänsten stoppar en autokörningssekvens.
 
 ### <a name="parameters"></a>Parametrar
 
-- **widgete:** Kontrollblock för Widget
+- **widgete:** Widget widget kontrollblock
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS:**(0x00) Har stoppat körningen av ditt resultat
+- **GX_SUCCESS**: (0x00) Har stoppats vid körningen
 - **GX_CALLER_ERROR**: (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR**: (0x07) Ogiltig pekare
-- **GX_INVALID_WIDGET:**(0x12) Widget är inte giltig
+- **GX_INVALID_WIDGET**: (0x12) Widget är inte giltig
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -20162,22 +20239,22 @@ UINT gx_string_scroll_wheel_create(
 
 Den här tjänsten skapar ett rullningshjul av strängtyp.
 
-GX_STRING_SCROLL_WHEEL härleds från GX_TEXT_SCROLL_WHEEL, och därför kan alla API gx_text_scroll_wheel funktioner användas med GX_STRING_SCROLL_WHEEL widgetar.
+GX_STRING_SCROLL_WHEEL härleds från GX_TEXT_SCROLL_WHEEL och därför kan alla GX_TEXT_SCROLL_WHEEL API-funktioner användas med GX_STRING_SCROLL_WHEEL widgetar.
 
 Programmet kan skicka en enkel strängmatris till funktionen create som definierar de strängar som ska visas av rullningshjulet, eller så kan programmet skicka GX_NULL som string_list-parameter och anropa API:et för att tillhandahålla en matris med `gx_string_scroll_wheel_string_id_list_set()` sträng-ID:n. Om den senare metoden används växlar strängrullningshjulet automatiskt de visade strängarna om det aktiva programspråket ändras.
 
-Alternativt, om de strängar som ska visas inte definieras statiskt eller inte vet när rullningshjulet skapas, kan programmet skicka GX_NULL som stränglistparameter och anropa API-funktionen gx_text_scroll_wheel_callback_set() för att definiera en återanropsfunktion som tillhandahåller de strängar som ska visas i realtid efter behov..
+Om de strängar som ska visas inte är statiska eller inte vet när rullningshjulet skapas kan programmet skicka GX_NULL som stränglistparameter och anropa API-funktionen gx_text_scroll_wheel_callback_set() för att definiera en återanropsfunktion som tillhandahåller de strängar som ska visas i realtid efter behov..
 
 ### <a name="parameters"></a>Parametrar
 
-- **wheel**: Blockadress för kontroll av rullningshjul för strängar
+- **wheel**: Adress till kontrollblock för rullningshjulssträng
 - **name**: Programdefinierat widgetnamn
-- **överordnad:** Överordnat eller GX_NULL
+- **överordnad:** Hjulparent eller GX_NULL
 - **total_rows:** Totalt antal rader som ska visas för användaren
 - **string_list:** Statiskt definierad strängmatris eller GX_NULL
-- **style**: Önskade formatflaggor
-- **Id:** Programdefinierade flaggor för hjulformat
-- **storlek:** Ursprunglig storlek på rullningshjulet
+- **style:** Desired style flags (Önskade formatflaggor)
+- **Id:** Programdefinierade flaggor i hjulformat
+- **size**: Ursprunglig storlek på rullningshjulet
 
 ### <a name="return-values"></a>Returvärden
 
@@ -20253,16 +20330,16 @@ UINT gx_string_scroll_wheel_string_id_list_set(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten bearbetar en händelse för det angivna rullningshjulet för strängar. Den här tjänsten ska anropas som standardhändelsehanterare av anpassade funktioner för bearbetning av rullningshjulssträngar.
+Den här tjänsten bearbetar en händelse för det angivna strängrullningshjulet. Den här tjänsten ska anropas som standardhändelsehanterare av anpassade funktioner för bearbetning av rullningshjulet för strängar.
 
 ### <a name="parameters"></a>Parametrar
 
-- **hjul** Pekare till kontrollblock för strängrullningshjul
+- **hjul** Pekare till kontrollblocket för rullningshjulet för strängar
 - **event_ptr** Pekare till den händelse som ska bearbetas
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Händelseprocess för strängrullningshjul
+- **GX_SUCCESS** (0x00) Lyckad händelseprocess för strängrullningshjul
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
@@ -20329,11 +20406,11 @@ UINT gx_string_scroll_wheel_string_id_list_set(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten tilldelar en matris med sträng-ID:er till en widget med rullningshjul för strängar. Den här metoden för att tilldela strängar till ett rullningshjul för strängar rekommenderas om strängarna har definierats statiskt och widgeten måste fungera på flera språk. Om detta API ska användas bör widgeten för rullningshjul först skapas med en GX_NULL stränglista.
+Den här tjänsten tilldelar en matris med sträng-IP-nummer till en widget med rullningshjul för strängar. Den här metoden för att tilldela strängar till ett rullningshjul för strängar rekommenderas om strängarna har definierats statiskt och widgeten måste fungera på flera språk. Om detta API ska användas bör widgeten för rullningshjul först skapas med en GX_NULL stränglista.
 
 ### <a name="parameters"></a>Parametrar
 
-- **wheel**: Adress till kontrollblock för rullningshjulssträng
+- **wheel**: Blockadress för kontroll av rullningshjul för strängar
 - **string_id_list:** Matris med sträng-ID:er
 - **id_count:** ID-listans storlek.
 
@@ -20342,7 +20419,7 @@ Den här tjänsten tilldelar en matris med sträng-ID:er till en widget med rull
 - **GX_SUCCESS**: (0x00) Ange sträng-ID-matris
 - **GX_CALLER_ERROR**: (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR**: (0x07) Ogiltig pekare
-- **GX_INVALID_WIDGET**: (0x12) Widget är inte giltig
+- **GX_INVALID_WIDGET:**(0x12) Widget är inte giltig
 - **GX_INVALID_VALUE**: 0x22) Ogiltig ID-liststorlek
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -20412,16 +20489,16 @@ Observera att string_scroll_wheel inte stöder GX_STYLE_TEXT_COPY, och därför 
 
 ### <a name="parameters"></a>Parametrar
 
-- **wheel**: Adress till kontrollblock för rullningshjulssträng
-- **string_list:** Matris med strängpekare
+- **wheel**: Blockadress för kontroll av rullningshjul för strängar
+- **string_list:** Matris med sträng pekare
 - **string_count:** Strängmatrisens storlek.
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS:**(0x00) Har ändrat strängar för rullningshjulet
+- **GX_SUCCESS**: (0x00) Har ändrat strängar för rullningshjulet
 - **GX_CALLER_ERROR**: (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR**: (0x07) Ogiltig pekare
-- **GX_INVALID_WIDGET:**(0x12) Widget är inte giltig
+- **GX_INVALID_WIDGET**: (0x12) Widget är inte giltig
 - **GX_INVALID_VALUE**: (0x22) Ogiltig strängliststorlek
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -20489,15 +20566,15 @@ Den här tjänsten skapar en widget och widgetens underordnade med hjälp av en 
 
 Den GX_STUDIO_WIDGET strukturen definieras i programspecifikationens rubrikfil som genereras av GUIX Studio.
 
-För statiskt allokerade widgetar definieras widgetkontrollblocket i den genererade specifications.c-filen och ges widgetnamnet som definierats i GUIX Studio. För dynamiskt allokerade widgetar ska programmet skicka GX_NULL som widgetkontrollblockets adress och funktionen försöker dynamiskt allokera widgetkontrollblocket med hjälp av funktionen , som också definieras av och tillhandahålls av `gx_system_memory_allocate()` programmet.
+För statiskt allokerade widgetar definieras widgetkontrollblocket i den genererade specifications.c-filen och ges widgetnamnet som definierats i GUIX Studio. För dynamiskt allokerade widgetar bör programmet skicka GX_NULL som widgetkontrollblockets adress och funktionen försöker dynamiskt allokera widgetkontrollblocket med hjälp av funktionen , som också definieras av och tillhandahålls av `gx_system_memory_allocate()` programmet.
 
-För att ett program ska kunna referera direkt till GUIX Studio-widgetdefinitionen i den genererade specifikationsfilen måste du följa namngivningskonventionen som används av GUI Studio-kodgeneratorn. Den GX_STUDIO_WIDGET struktur som genereras i filen specifications.c namnges alltid enligt den här konventionen: <widget_name>_define, där <widget_name>-fältet kan upprepas flera gånger om widgeten är underordnad en underordnad widget.
+För att ett program ska kunna referera direkt till GUIX Studio-widgetdefinitionen i den genererade specifikationsfilen är det nödvändigt att följa namngivningskonventionen som används av GUI Studio-kodgeneratorn. Den GX_STUDIO_WIDGET struktur som genereras i filen specifications.c namnges alltid enligt den här konventionen: <widget_name>_define, där <widget_name>-fältet kan upprepas flera gånger om widgeten är underordnad en underordnad widget.
 
 ### <a name="parameters"></a>Parametrar
 
-- **kontroll** Pekare till widgetkontrollblock eller GX_NULL tilldelas dynamiskt.
+- **kontroll** Pekare till widgetkontrollblock eller GX_NULL om det allokeras dynamiskt.
 - **definition** Definitionsstruktur för Studio-genererad widget
-- **överordnad** pekare till widgetens överordnade, om det finns någon
+- **överordnad** pekare till den överordnade widgeten, om någon
 
 ### <a name="return-values"></a>Returvärden
 
@@ -20598,14 +20675,14 @@ UINT *gx_studio_display_configure(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten initierar en GX_DISPLAY så att den är redo att användas. Den här funktionen konsoliderar funktionerna för att initiera ett GX_DISPLAY-kontrollblock, skapa en arbetsyta som passar visningen och skapa ett rotfönster för arbetsytan. Den här funktionen installerar även det språk och det resurstema som efterfrågas när visningen har initierats.
+Den här tjänsten initierar en GX_DISPLAY så att den är redo att användas. Den här funktionen konsoliderar funktionerna för att GX_DISPLAY ett kontrollblock, skapa en arbetsyta som passar visningen och skapa ett rotfönster för arbetsytan. Den här funktionen installerar också det språk och resurstema som begärdes efter att visningen har initierats.
 
 Den här funktionen konsoliderar det programmeringsarbete som oftast krävs för att förbereda en visning för användning. Funktionen anropar funktionerna gx_display_create(), gx_display_color_table_set, gx_display_font_table_set, gx_display_pixelmap_table_set, gx_system_language_table_set, gx_system_active_language_set, gx_system_scroll_appearance_set, gx_canvas_create och gx_window_root_create, som annars skulle krävas av programmet.
 
 ### <a name="parameters"></a>Parametrar
 
 - **display**: Indexera till visningstabellen, vilket motsvarar visningsdefinitionerna i Studio-projektfilen.
-- **driver**: pekare för att visa initieringsfunktionen för drivrutinen. Den här funktionen anropas för att initiera de indirekta funktions pekarna för GX_DISPLAY-kontrollblocket, samt utföra alla maskinvaruinställningar som krävs.
+- **driver**: pekare för att visa initieringsfunktionen för drivrutiner. Den här funktionen anropas för att initiera pekare för den indirekta funktionen GX_DISPLAY för kontrollblocket, samt för att utföra alla maskinvaruinställningar som krävs.
 - **language**: initial language table index
 - **språk:** initialt temaindex
 - **root**: pekare till variabel där du vill returnera rotfönsteradressen eller GX_NULL.
@@ -20670,7 +20747,7 @@ Den här tjänsten anger det aktuella språket. Språkindexet måste vara mindre
 
 - **GX_SUCCESS:**(0x00) Har angetts aktivt språk
 - **GX_CALLER_ERROR:**** (0x11) Ogiltig anropare för den här funktionen
-- **GX_PTR_ERROR**: ** (0x07) Ogiltig pekare
+- **GX_PTR_ERROR:**** (0x07) Ogiltig pekare
 - **GX_INVALID_VALUE:**** (0x22) Ogiltigt språkindex
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -20704,9 +20781,9 @@ UINT gx_system_animation_get(GX_ANIMATION **animation);
 
 ### <a name="description"></a>Description
 
-Den här tjänsten kan användas för att hämta ett animeringskontrollblock från en pool med sådana kontrollblock som underhålls av gx_system komponenten. Animeringskontrollblockpoolen och relaterade API-tjänster tillhandahålls bara om konstanten GX_ANIMATION_POOL_SIZE definieras med värdet 0. Standardinställningen för det här värdet är 6, vilket innebär att systemanimeringskontrollens blockpool innehåller storlek GX_ANIMATION kontrollblocket.
+Den här tjänsten kan användas för att hämta ett animeringskontrollblock från en pool med sådana kontrollblock som underhålls av gx_system komponenten. Animeringskontrollblockpoolen och relaterade API-tjänster tillhandahålls endast om konstanten GX_ANIMATION_POOL_SIZE definieras med värdet 0. Standardinställningen för det här värdet är 6, vilket innebär att blockpoolen för systemanimeringskontrollen innehåller GX_ANIMATION kontrollblocket.
 
-Ett animeringskontrollblock som allokerats med hjälp av det här API:et returneras automatiskt till den kostnadsfria poolen om animeringen har slutförts. Om animeringen stoppas med gx_animation_stop eller inte kan startas på grund av ett returnerat fel, ska animeringskontrollblocket returneras till den kostnadsfria poolen av programmet med hjälp av gx_system_animation_free.
+Ett kontrollblock för animering som allokerats med hjälp av detta API returneras automatiskt till den kostnadsfria poolen om animeringen har slutförts. Om animeringen stoppas med gx_animation_stop eller inte kan startas på grund av ett returnerat fel, ska animeringskontrollblocket returneras till den kostnadsfria poolen av programmet med hjälp av gx_system_animation_free.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -20755,9 +20832,9 @@ UINT gx_system_animation_free(GX_ANIMATION *animation);
 
 ### <a name="description"></a>Description
 
-Den här tjänsten kan användas för att returnera ett kontrollblock för animering till systempoolen. Animeringskontrollblockpoolen och relaterade API-tjänster tillhandahålls endast om konstanten GX_ANIMATION_POOL_SIZE definieras med värdet 0. Standardinställningen för det här värdet är 6, vilket innebär att blockpoolen för systemanimeringskontrollen innehåller GX_ANIMATION kontrollblocket.
+Den här tjänsten kan användas för att returnera ett animeringskontrollblock till systempoolen. Animeringskontrollblockpoolen och relaterade API-tjänster tillhandahålls bara om konstanten GX_ANIMATION_POOL_SIZE definieras med värdet 0. Standardinställningen för det här värdet är 6, vilket innebär att systemanimeringskontrollens blockpool innehåller storlek GX_ANIMATION kontrollblocket.
 
-Ett kontrollblock för animering som allokerats med gx_system_animation_get() returneras automatiskt till den kostnadsfria poolen om animeringen har slutförts. Det har ingen effekt att försöka returnera ett kontrollblock för animering till den kostnadsfria poolen som redan har returnerats till den kostnadsfria poolen.
+Ett animeringskontrollblock som allokeras med gx_system_animation_get() returneras automatiskt till den kostnadsfria poolen om animeringen har slutförts. Det har ingen effekt att försöka returnera ett animeringskontrollblock till den kostnadsfria poolen som redan har returnerats till den kostnadsfria poolen.
 
 Om animeringen stoppas med gx_animation_stop eller inte kan startas på grund av ett returnerat fel, ska animeringskontrollblocket som har erhållits med gx_system_animation_get() returneras till den kostnadsfria poolen av programmet med hjälp av gx_system_animation_free().
 
@@ -20771,7 +20848,7 @@ Animeringen måste vara i inaktivt tillstånd innan den kan returneras till den 
 
 - **GX_SUCCESS**: (0x00) har publicerat animeringsblocket
 - **GX_CALLER_ERROR**: (0x11) Ogiltig anropare för den här funktionen
-- **GX_PTR_ERROR**: (0x07) Ogiltig animeringspekare
+- **GX_PTR_ERROR**: (0x07) Markör för ogiltig animering
 - **GX_INVALID_ANIMATION**: (0x32) Animeringen är inte inaktiv eller har inte allokerats från systempoolen
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -20816,7 +20893,7 @@ UINT gx_system_bidi_text_disable(VOID);
 
 ### <a name="description"></a>Description
 
-Den här tjänsten inaktiverar dynamiskt dubbelriktad textstöd. Den här GX_DYNAMIC_BIDI_TEXT_SUPPORT måste definieras när GUIX-biblioteket byggs och krävs endast om du behöver ändra ordning på BiDi-strängdata under körningen. De flesta program använder GUIX Studio för att skapa korrekt sorterade BiDi-textsträngar.
+Den här tjänsten inaktiverar stöd för dynamisk dubbelriktad text. Den här GX_DYNAMIC_BIDI_TEXT_SUPPORT måste definieras när GUIX-biblioteket byggs och krävs endast om du behöver ändra ordning på BiDi-strängdata. De flesta program använder GUIX Studio för att skapa korrekt sorterade BiDi-textsträngar.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -20857,7 +20934,7 @@ UINT gx_system_bidi_text_enable(VOID);
 
 ### <a name="description"></a>Description
 
-Den här tjänsten möjliggör stöd för dynamisk dubbelriktad text. Den här GX_DYNAMIC_BIDI_TEXT_SUPPORT måste definieras när GUIX-biblioteket byggs och krävs endast om du behöver ändra ordning på BiDi-strängdata. De flesta program använder GUIX Studio för att skapa korrekt sorterade BiDi-textsträngar.
+Den här tjänsten möjliggör dynamiskt dubbelriktad textstöd. Den här GX_DYNAMIC_BIDI_TEXT_SUPPORT måste definieras när GUIX-biblioteket byggs och krävs endast om du behöver ändra ordning på BiDi-strängdata under körningen. De flesta program använder GUIX Studio för att skapa korrekt sorterade BiDi-textsträngar.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -20888,7 +20965,7 @@ status = gx_system_bidi_text_enable();
 
 ## <a name="gx_system_canvas_refresh"></a>gx_system_canvas_refresh
 
-Uppdatera alla arbetsyta med oskadlig information
+Uppdatera alla oskadliga arbetsyta
 
 ### <a name="prototype"></a>Prototyp
 
@@ -20898,7 +20975,7 @@ UINT gx_system_canvas_refresh(VOID);
 
 ### <a name="description"></a>Description
 
-Den här tjänsten tvingar fram en omedelbar omritning av alla felgrafiska widgetar och arbetsyta. Den här tjänsten anropas vanligtvis internt av GUIX-systemkomponenten, men kan anropas av programmet för att tvinga fram en omedelbar systemredrareringsåtgärd.
+Den här tjänsten tvingar fram en omedelbar omritning av alla felgrafiska widgetar och arbetsyta. Den här tjänsten anropas vanligtvis internt av GUIX-systemkomponenten, men kan anropas av programmet för att tvinga fram en omedelbar systemreritningsåtgärd.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -20951,7 +21028,7 @@ status = gx_system_canvas_refresh();
 
 ## <a name="gx_system_dirty_mark"></a>gx_system_dirty_mark
 
-Markera område som är grovt
+Mark area dirty (Markera område)
 
 ### <a name="prototype"></a>Prototyp
 
@@ -20961,7 +21038,7 @@ UINT gx_system_dirty_mark(GX_WIDGET *widget);
 
 ### <a name="description"></a>Description
 
-Den här tjänsten markerar området för den här widgeten som grovt. Detta köar i praktiken widgeten för att rita om när systemhändelsebearbetningen har slutförts.
+Den här tjänsten markerar området för den här widgeten som dirty (grovt). Detta köar i praktiken widgeten för att rita om när systemhändelsebearbetningen har slutförts.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -20969,10 +21046,10 @@ Den här tjänsten markerar området för den här widgeten som grovt. Detta kö
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS:**(0x00) Widgeten har markerats som felig
+- **GX_SUCCESS**: (0x00) Har markerats som en widget
 - **GX_CALLER_ERROR**: (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR**: (0x07) Ogiltig pekare
-- **GX_INVALID_WIDGET:**(0x12) Widget är inte giltig
+- **GX_INVALID_WIDGET**: (0x12) Widget är inte giltig
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -21028,7 +21105,7 @@ UINT gx_system_dirty_partial_add(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten markerar det partiella området för den här widgeten som grovt. Detta köar widgeten för att rita om av GUIX-arbetsytans uppdateringsåtgärd när systemhändelsebearbetningen har slutförts.
+Den här tjänsten markerar det partiella området för den här widgeten som grovt. Detta köar widgeten för att ritas om av GUIX-arbetsytans uppdateringsåtgärd när systemhändelsebearbetningen har slutförts.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -21037,10 +21114,10 @@ Den här tjänsten markerar det partiella området för den här widgeten som gr
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS**: (0x00) Lyckades partiella dirty area mark
+- **GX_SUCCESS**: (0x00) Ett delvis grovt områdesmärke har lyckats
 - **GX_CALLER_ERROR**: (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR**: (0x07) Ogiltig pekare
-- **GX_INVALID_WIDGET:**(0x12) Widget är inte giltig
+- **GX_INVALID_WIDGET**: (0x12) Widget är inte giltig
 - **GX_INVALID_SIZE**: (0x19) Ogiltig storlek på felaktigt område
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -21165,7 +21242,7 @@ UINT gx_system_event_fold(GX_EVENT *event);
 
 Den här tjänsten söker i GUIX-händelsekön efter en händelse av samma typ. Om det finns en händelse av samma typ uppdateras händelsenyttolasten så att den matchar den nya händelsen. Om ingen matchande händelse hittas anropas gx_system_event_send för att lägga till den nya händelsen i slutet av händelsekön.
 
-Den här funktionen används ofta av fast touch-indatadrivrutiner för att förhindra att händelsekön fylls med flera PEN_DRAG händelser. Den här funktionen kan också anropas av programmet för att förhindra att flera händelser av samma typ läggs till i GUIX-händelsekön.
+Den här funktionen används ofta av fast touch-indatadrivrutiner för att förhindra att händelsekön fylls med PEN_DRAG händelser. Den här funktionen kan också anropas av programmet för att förhindra att flera händelser av samma typ läggs till i GUIX-händelsekön.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -21245,7 +21322,7 @@ Den här tjänsten skickar den angivna händelsen till GUIX-systemhändelsekön.
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS:**(0x00) Lyckad händelsesändning
+- **GX_SUCCESS**: (0x00) Lyckad händelsesändning
 - **GX_CALLER_ERROR**: (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR**: (0x07) Ogiltig pekare
 
@@ -21311,7 +21388,7 @@ UINT gx_system_focus_claim(GX_WIDGET *widget);
 
 ### <a name="description"></a>Description
 
-Den här tjänsten gör anspråk på fokus för den angivna widgeten. Om widgeten inte har fokus tidigare får den en GX_EVENT_FOCUS_GAINED händelse.
+Den här tjänsten gör anspråk på fokus för den angivna widgeten. Om widgeten inte tidigare har fokus, får den en GX_EVENT_FOCUS_GAINED händelse.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -21319,7 +21396,7 @@ Den här tjänsten gör anspråk på fokus för den angivna widgeten. Om widgete
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS**: (0x00) Lyckades fokusanspråk
+- **GX_SUCCESS:**(0x00) Lyckad fokusanspråk
 - **GX_PTR_ERROR**: (0x07) Ogiltig pekare
 - **GX_NO_CHANGE**: (0x08) Widget äger redan fokus
 - **GX_CALLER_ERROR**: (0x11) Ogiltig anropare för den här funktionen
@@ -21430,7 +21507,7 @@ status = gx_system_initialize();
 
 ## <a name="gx_system_language_table_get"></a>gx_system_language_table_get
 
-Hämta aktiv språktabell
+Hämta tabell med aktivt språk
 
 ### <a name="prototype"></a>Prototyp
 
@@ -21447,9 +21524,9 @@ Den här tjänsten hämtar den aktiva språktabellen. Den här funktionen är in
 
 ### <a name="parameters"></a>Parametrar
 
-- **language_table:** Adressen till pekaren som ska returnera språktabellen.
+- **language_table: Adressen** till pekaren för att returnera språktabellen.
 - **languages_count:** Adressen till variabeln som ska returnera tabellkolumner.
-- **string_count:** Adressen till pekaren för att returnera tabellrader.
+- **string_count:** Pekarens adress för att returnera tabellrader.
 
 ### <a name="return-values"></a>Returvärden
 
@@ -21496,7 +21573,7 @@ UINT gx_system_language_table_set(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten installerar den aktiva språktabellen. Den här funktionen har gjorts inaktuell till förmån för gx_display_language_table_set. Alla nya program bör använda gx_display_language_table_set.
+Den här tjänsten installerar den aktiva språktabellen. Den här funktionen har gjorts inaktuell och ersatts av gx_display_language_table_set. Alla nya program bör använda gx_display_language_table_set.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -21506,7 +21583,7 @@ Den här tjänsten installerar den aktiva språktabellen. Den här funktionen ha
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS**: (0x00) Har angett språktabell
+- **GX_SUCCESS**: (0x00) Språktabellen har angetts
 - **GX_CALLER_ERROR**: (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR**: (0x07) Ogiltig pekare
 
@@ -21546,21 +21623,21 @@ Den här tjänsten tilldelar programmet en återanropsfunktion för dynamisk min
 
 Om ingen GUIX-tjänst som använder dynamisk minnesallokering krävs av programmet behöver den här tjänsten inte anropas.
 
-Om den här tjänsten används ska den anropas efter gx_system_initialize() som rensar GUIX-tjänst pekare och före en GUIX-tjänst som kräver användning av dynamisk minnesallokering.
+Om den används ska den här tjänsten anropas efter gx_system_initialize() som rensar GUIX-tjänst pekare och före en GUIX-tjänst som kräver användning av dynamisk minnesallokering.
 
-GUIX-tjänster som kräver en minnesallokerings- och avallokeringstjänst för körning inkluderar:
+GUIX-tjänster som kräver en körningsminnesallokering och avallokeringstjänst omfattar:
 
 - Läsa in binära resurser från extern lagring i GUIX-körningsmiljön.
 - Jpeg-bildavkodaren för programkörning.
 - Png-bildavkodaren för programkörning.
 - Använda textwidgetar med GX_STYLE_TEXT_COPY.
-- Funktioner för storleksändring och rotationsverktyg för runtime pixemap.
+- Funktioner för storleksändring och rotationsverktyg för körningsdiagram.
 - Körningsskärmen och widgeten styr blockallokeringen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **allocator:** Funktionen Minnes allocator
-- **release**: Minnesfri funktion
+- **allocator:** Funktionen Memory Allocator
+- **version:** Funktionen Minnesfri
 
 ### <a name="return-values"></a>Returvärden
 
@@ -21656,15 +21733,15 @@ UINT gx_system_pen_configure(GX_PEN_CONFIGURATION *pen_configuration);
 
 ### <a name="description"></a>Description
 
-Den här tjänsten anger pennkonfigurationen för att styra pennhastigheten och avståndsparametrarna som används för att utlösa genereringen GX_EVENT_FLICK av händelsetyper.
+Den här tjänsten anger pennkonfiguration för att styra pennhastigheten och avståndsparametrarna som används för att utlösa genereringen av GX_EVENT_FLICK händelsetyper.
 
-Den gx_pen_configuration_min_drag_dist medlem i GX_PEN_CONFIGURATION är en datatyp med fast punkt och du bör använda GX_FIXED_VAL_MAKE(value) för att konvertera från INT till GX_FIXED_VAL. Om du till exempel vill ange ett minsta dra avstånd till 0,5 bildpunkt per tick måste du ange gx_pen_configuration_min_drag_dist till `GX_FIXED_VAL_MAKE(1) / 2` .
+Den gx_pen_configuration_min_drag_dist medlem GX_PEN_CONFIGURATION är en fast punktdatatyp och du bör använda GX_FIXED_VAL_MAKE(value) för att konvertera från INT till GX_FIXED_VAL. Om du till exempel vill ange det minsta dra avståndet till 0,5 pixel per tick måste du ange gx_pen_configuration_min_drag_dist till `GX_FIXED_VAL_MAKE(1) / 2` .
 
 I GUIX-versionerna 5.4.0 och äldre var gx_pen_configuration_min_drag_dist-medlemmen i GX_PEN_CONFIGURATION av typen (INT << 8) i stället för GX_FIXED_VAL typ. Om ditt projekt med GUIX-biblioteket i version 5.4.0 använder det här API:et måste du ändra min_drag_dist-parametern eller #define GUIX_5_4_0_COMPATIBILITY när du skapar GUIX-biblioteket.
 
 ### <a name="parameters"></a>Parametrar
 
-- **pen_configuration** Pekare till pennkonfigurationsstrukturen. **Bilaga I** innehåller definition GX_PEN_CONFIGURATION struktur
+- **pen_configuration** Pekare till pennkonfigurationsstruktur. **Bilaga I** innehåller definition för GX_PEN_CONFIGURATION struktur
 
 ### <a name="return-values"></a>Returvärden
 
@@ -21715,12 +21792,12 @@ UINT gx_system_screen_stack_create(
 
 Den här tjänsten definierar en minnespool som ska användas för systemskärmstacken. Systemskärmstacken är en valfri funktion som kan användas av programmet för att hantera programmets skärmflödesutseende.
 
-Om programmet har för avsikt att använda tjänsterna för skärmstackar måste gx_system_screen_stack_create först anropas för att konfigurera skärmstackens minnesregion.
+Om programmet har för avsikt att använda tjänsterna för skärmstacken måste gx_system_screen_stack_create först anropas för att konfigurera skärmstackens minnesregion.
 
 ### <a name="parameters"></a>Parametrar
 
 - **memory**: Pekare till det reserverade minnesblocket.
-- **storlek:** Storleken i byte för det reserverade minnesblocket.
+- **size**: Storleken i byte för det reserverade minnesblocket.
 
 ### <a name="return-values"></a>Returvärden
 
@@ -21775,7 +21852,7 @@ Den här funktionen visar stackpekaren över den översta skärmen och returnera
 ### <a name="parameters"></a>Parametrar
 
 - **popped_parent: Plats** där den överordnade widgetens pekare ska lagras.
-- **popped_screen:** Plats för att lagra pekaren på den överskärmade skärmen.
+- **popped_screen:** Plats där den skärmpekaren ska lagras.
 
 ### <a name="return-values"></a>Returvärden
 
@@ -21871,11 +21948,11 @@ UINT gx_system_screen_stack_push(GX_WIDGET *screen)
 
 ### <a name="description"></a>Description
 
-Den här tjänsten placerar en pekare till den angivna widgeten, som vanligtvis är en skärm på den översta nivån, på skärmstacken. Om widgeten har ett överordnat objekt är den frånkopplad från den överordnade widgeten. Den överordnade widgetens pekare skickas också till skärmstacken. Den överordnade widgeten kan vara NULL, vilket innebär att en skärm som inte är synlig eller ansluten till någon överordnad kan push-kopplas till skärmstacken. Om en widget utan överordnad push-skickas till skärmstacken ska API:et screen_stack_get() användas för att hämta pekaren för push-skärmen i stället för att använda API:et screen_stack_pop() som försöker återansluta widgeten till den föregående överordnade widgeten.
+Den här tjänsten placerar en pekare till den angivna widgeten, som vanligtvis är en skärm på den översta nivån, på skärmstacken. Om widgeten har ett överordnat objekt är den frånkopplad från den överordnade widgeten. Den överordnade widgetens pekare skickas också till skärmstacken. Den överordnade widgeten kan vara NULL, vilket innebär att en skärm som inte är synlig eller ansluten till någon överordnad kan pushas till skärmstacken. Om en widget utan överordnat objekt push-skickas till skärmstacken ska API:et screen_stack_get() användas för att hämta pekaren för push-skärmen i stället för att använda API:et screen_stack_pop() som försöker återansluta widgeten till den föregående överordnade widgeten.
 
 ### <a name="parameters"></a>Parametrar
 
-- **screen**: Pekare till widgeten som ska push-skickas till skärmstacken.
+- **screen**: Pekare till widgeten som ska pushas till skärmstacken.
 
 ### <a name="return-values"></a>Returvärden
 
@@ -21917,7 +21994,7 @@ UINT gx_system_screen_stack_reset();
 
 ### <a name="description"></a>Description
 
-Den här funktionen tar bort alla poster från systemskärmstacken. Om skärmarna som visas från stacken har dynamiskt allokerade kontrollblock som allokerats av GUIX Studio frigörs minnet för dessa kontrollblock.
+Den här funktionen tar bort alla poster från systemskärmstacken. Om skärmarna från stacken har dynamiskt allokerat kontrollblock som allokerats av GUIX Studio frigörs minnet för dessa kontrollblock.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -21964,12 +22041,12 @@ UINT gx_system_scroll_appearance_get(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten får rullningslistens utseende.
+Den här tjänsten ser ut som rullningslisten.
 
 ### <a name="parameters"></a>Parametrar
 
 - **style**: Rullningsliststil: `GX_SCROLLBAR_HORIZONTAL` eller `GX_SCROLLBAR_VERTICAL`
-- **return_appearance**: Pekare till mål för utseende. **Bilaga I** innehåller definition för GX_SCROLLBAR_APPERANCE
+- **return_appearance:** Pekare till mål för utseende. **Bilaga I** innehåller definition för GX_SCROLLBAR_APPERANCE
 
 ### <a name="return-values"></a>Returvärden
 
@@ -22176,7 +22253,7 @@ UINT gx_system_string_get(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten hämtar strängen för det angivna resurs-ID:t med hjälp av den första definierade visningen och det aktiva språket. Den här funktionen har gjorts inaktuell och ersatts av gx_display_string_get. Alla nya program bör använda gx_display_string_get.
+Den här tjänsten hämtar strängen för det angivna resurs-ID:t med hjälp av den första definierade visningen och det aktiva språket. Den här funktionen har gjorts inaktuell till förmån för gx_display_string_get. Alla nya program bör använda gx_display_string_get.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -22187,8 +22264,8 @@ Den här tjänsten hämtar strängen för det angivna resurs-ID:t med hjälp av 
 
 - **GX_SUCCESS**: (0x00) Lyckad sträng get
 - **GX_CALLER_ERROR**: (0x11) Ogiltig anropare för den här funktionen
-- **GX_PTR_ERROR (0x07): Ogiltig** pekare
-- **GX_INVALID_RESOURCE_ID:**(0x33) Ogiltigt resurs-ID
+- **GX_PTR_ERROR (0x07)**: Ogiltig pekare
+- **GX_INVALID_RESOURCE_ID**: (0x33) Ogiltigt resurs-ID
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -22226,12 +22303,12 @@ UINT gx_system_string_table_get(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten hämtar strängtabellen för det begärda språket från den första visningen. Den här funktionen har gjorts inaktuell till förmån för gx_display_string_table_get. Alla nya program bör använda gx_display_string_table_get.
+Den här tjänsten hämtar strängtabellen för det begärda språket från den första visningen. Den här funktionen har gjorts inaktuell och ersatts av gx_display_string_table_get. Alla nya program bör använda gx_display_string_table_get.
 
 ### <a name="parameters"></a>Parametrar
 
 - **language**: Språkindex
-- **string_table:** Pekare till lagringsutrymmet för strängtabellspekaren, eller NULL om anroparen inte behöver hämta pekaren till strängtabellen.
+- **string_table:** Pekare till lagringsutrymmet för strängtabellens pekare eller NULL om anroparen inte behöver hämta pekaren till strängtabellen.
 - **get_size:** Pekare till lagringen för antalet strängar i strängtabellen, eller NULL om anroparen inte behöver hämta antalet strängar i strängtabellen.
 
 ### <a name="return-values"></a>Returvärden
@@ -22281,7 +22358,7 @@ UINT gx_system_string_width_get(
 
 Den här tjänsten är inaktuell till förmån för gx_system_string_width_get_ext().
 
-Den här tjänsten beräknar visningsbredden för den angivna strängen i bildpunkter med det angivna teckensnittet. Om parametern string_length är >= 0 inkluderas endast antalet tecken för begäran i beräkningen. Om parametern string_length -1 används hela strängen upp till NULL-terminatorn i beräkningen.
+Den här tjänsten beräknar visningsbredden för den angivna strängen i bildpunkter med det angivna teckensnittet. Om parametern string_length är >= 0 inkluderas endast antalet tecken för begäran i beräkningen. Om string_length parametern är -1 används hela strängen upp till NULL-terminatorn i beräkningen.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -22292,7 +22369,7 @@ Den här tjänsten beräknar visningsbredden för den angivna strängen i bildpu
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS**: (0x00) Lyckad strängbredd get
+- **GX_SUCCESS:**(0x00) Lyckad strängbredd get
 - **GX_PTR_ERROR**: (0x07) Ogiltig pekare
 - **GX_CALLER_ERROR**: (0x11) Ogiltig anropare för den här funktionen
 - **GX_INVALID_FONT**: (0x16) Ogiltigt teckensnitt
@@ -22343,7 +22420,7 @@ Den här tjänsten beräknar visningsbredden för den angivna strängen i bildpu
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS:**(0x00) Lyckad strängbredd get
+- **GX_SUCCESS**: (0x00) Lyckad strängbredd get
 - **GX_PTR_ERROR**: (0x07) Ogiltig pekare
 - **GX_CALLER_ERROR**: 0x11) Ogiltig anropare för den här funktionen
 - **GX_INVALID_FONT**: (0x16) Ogiltigt teckensnitt
@@ -22469,7 +22546,7 @@ UINT gx_system_timer_stop(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten stoppar timern med den angivna timer_id som är associerad med den anropande widgeten. För att stoppa alla timers som är länkade till en viss widget kan programmet skicka timer_id värdet 0.
+Den här tjänsten stoppar timern med den angivna timer_id som är associerad med den anropande widgeten. Om du vill stoppa alla timers som är länkade till en viss widget kan programmet skicka timer_id värdet 0.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -22482,7 +22559,7 @@ Den här tjänsten stoppar timern med den angivna timer_id som är associerad me
 - **GX_NOT_FOUND:**(0x09) Timer-ID hittades inte
 - **GX_CALLER_ERROR**: (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR**: (0x07) Ogiltig pekare
-- **GX_INVALID_WIDGET:**(0x12) Widget är inte giltig
+- **GX_INVALID_WIDGET**: (0x12) Widget är inte giltig
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -22519,7 +22596,7 @@ stopped. */
 
 ## <a name="gx_system_version_string_get"></a>gx_system_version_string_get
 
-Hämta GUIX-biblioteksversionssträngen (inaktuell)
+Hämta VERSIONSsträngen för GUIX-biblioteket (inaktuell)
 
 ### <a name="prototype"></a>Prototyp
 
@@ -22531,7 +22608,7 @@ UINT gx_system_version_string_get(GX_CHAR **version);
 
 Den här tjänsten är inaktuell till förmån för gx_system_version_string_get_ext().
 
-Den här tjänsten hämtar VERSIONSsträngen för GUIX-biblioteket.
+Den här tjänsten hämtar GUIX-biblioteksversionssträngen.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -22572,7 +22649,7 @@ UINT gx_system_version_string_get(GX_STRING *version);
 
 ### <a name="description"></a>Description
 
-Den här tjänsten hämtar GUIX-biblioteksversionssträngen.
+Den här tjänsten hämtar VERSIONSsträngen för GUIX-biblioteket.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -22728,15 +22805,15 @@ GX_TEXT_BUTTON härleds från GX_BUTTON och stöder alla gx_button API-tjänster
 - **text_id:** Resurs-ID för text
 - **style**: Textknappstil. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
 - **text_button_id:** Programdefinierat ID för textknappen
-- **size**: Knappens storlek
+- **storlek:** Knappens storlek
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS**: (0x00) Lyckades textknappen skapa
+- **GX_SUCCESS**: (0x00) Textknapp skapas
 - **GX_CALLER_ERROR**: (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR**: (0x07) Ogiltig pekare
-- **GX_ALREADY_CREATED:**(0x13) Widget har redan skapats
-- **GX_INVALID_SIZE:**(0x19) Ogiltig blockstorlek för widgetkontroll
+- **GX_ALREADY_CREATED**: (0x13) Widget har redan skapats
+- **GX_INVALID_SIZE**: (0x19) Ogiltig blockstorlek för widgetkontroll
 - **GX_INVALID_WIDGET**: (0x12) Överordnad widget är inte giltig
 
 
@@ -22796,7 +22873,7 @@ VOID gx_text_button_draw(GX_TEXT_BUTTON *button);
 
 ### <a name="description"></a>Description
 
-Den här tjänsten ritar textknappen. Den här tjänsten kallas vanligtvis internt under arbetsyteuppdatering, men kan även anropas från anpassade textknappritningsfunktioner.
+Den här tjänsten ritar textknappen. Den här tjänsten anropas vanligtvis internt under arbetsyteuppdateringen, men kan även anropas från anpassade textknappritningsfunktioner.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -22865,7 +22942,7 @@ Den här tjänsten bearbetar en händelse för den angivna textknappen. Den här
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad textknapphändelseprocess
+- **GX_SUCCESS** (0x00) Lyckad textknappshändelseprocess
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
@@ -22943,7 +23020,7 @@ Den här tjänsten tilldelar ett teckensnitt till den angivna knappen.
 - **GX_SUCCESS**: (0x00) Ange teckensnittet
 - **GX_CALLER_ERROR**: (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR**: (0x07) Ogiltig pekare
-- **GX_INVALID_WIDGET:**(0x12) Widget är inte giltig
+- **GX_INVALID_WIDGET**: (0x12) Widget är inte giltig
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -22998,17 +23075,17 @@ Den här tjänsten anger textknappens färg.
 
 ### <a name="parameters"></a>Parametrar
 
-- **text_button:** Pekare till textknappkontrollblock
+- **text_button:** Pekare till textknappskontrollblock
 - **normal_text_color_id:** Resurs-ID för normal text. **Bilaga A** innehåller fördefinierade resurs-ID:er för färg. Observera att programmet kan lägga till anpassade resurs-ID:n för färg också.
 - **selected_text_color_id:** Resurs-ID för markerad text. **Bilaga A** innehåller fördefinierade resurs-ID:er för färg. Observera att programmet kan lägga till anpassade resurs-ID:n för färg också.
-- **disabled_text_color_id:** Resurs-ID för färg för inaktiverad text. **Bilaga A** innehåller fördefinierade färgresurs-ID:er. Observera att programmet även kan lägga till anpassade resurs-ID:n för färg.
+- **disabled_text_color_id:** Resurs-ID för färg för inaktiverad text. **Bilaga A** innehåller fördefinierade resurs-ID:er för färg. Observera att programmet kan lägga till anpassade resurs-ID:n för färg också.
 
 ### <a name="return-values"></a>Returvärden
 
 - **GX_SUCCESS:**(0x00) Lyckad textknappsfärguppsättning
 - **GX_CALLER_ERROR**: (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR**: (0x07) Ogiltig pekare
-- **GX_INVALID_WIDGET:**(0x12) Widget är inte giltig
+- **GX_INVALID_WIDGET**: (0x12) Widget är inte giltig
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -23057,11 +23134,11 @@ VOID gx_text_button_text_draw(GX_TEXT_BUTTON *text_button);
 
 ### <a name="description"></a>Description
 
-Den här stödfunktionen ritar textdelen av en textknapp. Den här funktionen anropas internt av gx_text_button_draw och tillhandahålls som ett separat API som en bekvämlighet för program som definierar en anpassad knappritningsfunktion. Program som vill anpassa knappbakgrundsritningen kan tillhandahålla sin anpassade ritningsfunktion och anropa gx_text_button_text_draw-tjänsten som en del av den anpassade ritningen för att rita knapptexten över bakgrunden.
+Den här stödfunktionen ritar textdelen av en textknapp. Den här funktionen anropas internt av gx_text_button_draw och tillhandahålls som ett separat API för program som definierar en anpassad knappritningsfunktion. Program som vill anpassa knappbakgrundsritningen kan tillhandahålla sin anpassade ritningsfunktion och anropa gx_text_button_text_draw-tjänsten som en del av sin anpassade ritning för att rita knapptexten över bakgrunden.
 
 ### <a name="parameters"></a>Parametrar
 
-- **text_button:** Pekare till textknappkontrollblock
+- **text_button:** Pekare till textknappskontrollblock
 
 ### <a name="return-values"></a>Returvärden
 
@@ -23126,7 +23203,7 @@ Den här tjänsten hämtar den angivna strängen från textknappen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **text_button:** Pekare till textknappskontrollblock
+- **text_button:** Pekare till textknappkontrollblock
 - **return_text:** Pekare till strängen som hämtats från textknappen
 
 ### <a name="return-values"></a>Returvärden
@@ -23174,15 +23251,15 @@ Den här tjänsten hämtar den angivna strängen från textknappen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **text_button:** Pekare till textknappkontrollblock
-- **return_string**: Pekare till strängen som hämtats från textknappen
+- **text_button:** Pekare till textknappskontrollblock
+- **return_string:** Pekare till strängen som hämtats från textknappen
 
 ### <a name="return-values"></a>Returvärden
 
 - **GX_SUCCESS**: (0x00) Hämta texten från knappen
 - **GX_CALLER_ERROR**: (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR**: (0x07) Ogiltig pekare
-- **GX_INVALID_WIDGET**: (0x12) Widget är inte giltig
+- **GX_INVALID_WIDGET:**(0x12) Widget är inte giltig
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -23236,7 +23313,7 @@ Den här tjänsten anger det angivna strängresurs-ID:t till textknappen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **text_button:** Pekare till textknappskontrollblock
+- **text_button:** Pekare till textknappkontrollblock
 - **string_id:** Strängens resurs-ID
 
 ### <a name="return-values"></a>Returvärden
@@ -23297,11 +23374,11 @@ UINT gx_text_button_text_set(
 
 Den här tjänsten är inaktuell till förmån för gx_text_button_text_set_ext().
 
-Den här tjänsten tilldelar den angivna strängen till textknappen. Om text_button widgeten har skapats med GX_STYLE_TEXT_COPY skapar widgeten en privat kopia av den tilldelade textsträngen. Om GX_STYLE_TEXT_COPY inte är aktiv, gör widgeten inte en privat kopia av den inkommande strängen och därför måste strängen allokeras statiskt eller globalt, dvs. det kanske inte är en automatisk eller tillfällig variabel.
+Den här tjänsten tilldelar den angivna strängen till textknappen. Om text_button widgeten har skapats med GX_STYLE_TEXT_COPY skapar widgeten en privat kopia av den tilldelade textsträngen. Om GX_STYLE_TEXT_COPY inte är aktiv, gör widgeten inte en privat kopia av den inkommande strängen och därför måste strängen vara statisk eller globalt allokerad, det vill säga det kanske inte är en automatisk eller tillfällig variabel.
 
 ### <a name="parameters"></a>Parametrar
 
-- **text_button:** Pekare till textknappskontrollblock
+- **text_button:** Pekare till textknappkontrollblock
 - **text**: pekare till den NULL-avslutade strängen
 
 ### <a name="return-values"></a>Returvärden
@@ -23309,7 +23386,7 @@ Den här tjänsten tilldelar den angivna strängen till textknappen. Om text_but
 - **GX_SUCCESS**: (0x00) Ange texten till knappen
 - **GX_CALLER_ERROR**: (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR**: (0x07) Ogiltig pekare
-- **GX_INVALID_WIDGET:**(0x12) Widget är inte giltig
+- **GX_INVALID_WIDGET**: (0x12) Widget är inte giltig
 - **GX_SYSTEM_MEMORY_ERROR:**(0x30) Minnestilldelningen har inte definierats eller minnesallokeringen misslyckades
 - **GX_INVALID_STRING_LENGTH**: (0x34) Ogiltig stränglängd
 
@@ -23349,19 +23426,19 @@ UINT gx_text_button_text_set_ext(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten tilldelar den angivna strängen till textknappen. Om widgeten text_button har skapats med GX_STYLE_TEXT_COPY skapar widgeten en privat kopia av den tilldelade textsträngen. Om GX_STYLE_TEXT_COPY inte är aktiv, gör widgeten inte en privat kopia av den inkommande strängen och därför måste strängen vara statisk eller globalt allokerad, det vill säga det kanske inte är en automatisk eller tillfällig variabel.
+Den här tjänsten tilldelar den angivna strängen till textknappen. Om widgeten text_button har skapats med GX_STYLE_TEXT_COPY skapar widgeten en privat kopia av den tilldelade textsträngen. Om GX_STYLE_TEXT_COPY inte är aktiv, gör widgeten inte en privat kopia av den inkommande strängen och därför måste strängen allokeras statiskt eller globalt, dvs. det kanske inte är en automatisk eller tillfällig variabel.
 
 ### <a name="parameters"></a>Parametrar
 
-- **text_button:** Pekare till textknappkontrollblock
-- **sträng**: pekare till GX_STRING variabeln
+- **text_button:** Pekare till textknappskontrollblock
+- **string**: pekare till GX_STRING variabeln
 
 ### <a name="return-values"></a>Returvärden
 
 - **GX_SUCCESS**: (0x00) Ange texten till knappen
 - **GX_CALLER_ERROR**: (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR**: (0x07) Ogiltig pekare
-- **GX_INVALID_WIDGET**: (0x12) Widget är inte giltig
+- **GX_INVALID_WIDGET:**(0x12) Widget är inte giltig
 - **GX_SYSTEM_MEMORY_ERROR:**(0x30) Minnestilldelningen har inte definierats eller minnesallokeringen misslyckades
 - **GX_INVALID_STRING_LENGTH**: (0x34) Ogiltig stränglängd
 
@@ -23458,7 +23535,7 @@ status = gx_text_input_cursor_blink_interval_set(input_cursor, 2);
 
 ## <a name="gx_text_input_cursor_height_set"></a>gx_text_input_cursor_height_set
 
-Ange markörhöjd
+Ange markörens höjd
 
 ### <a name="prototype"></a>Prototyp
 
@@ -23479,7 +23556,7 @@ Den här tjänsten anger markörens höjd.
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS**: (0x00) Markörhöjd har angetts
+- **GX_SUCCESS**: (0x00) Ange markörens höjd
 - **GX_PTR_ERROR**: (0x07) Ogiltig pekare
 - **GX_INVALID_VALUE**: (0x22) Höjd-värdet är inte giltigt
 
@@ -23579,13 +23656,13 @@ UINT gx_text_scroll_wheel_callback_set(
 
 Den här tjänsten är inaktuell till förmån för gx_text_scroll_wheel_callback_set_ext().
 
-Den här tjänsten tilldelar återanropsfunktionen som ett rullningshjul av texttyp anropar för att fastställa textsträngen som ska visas på varje rad i rullningshjulet.
+Den här tjänsten tilldelar återanropsfunktionen som en texttyps rullningshjul anropar för att fastställa textsträngen som ska visas på varje rad i rullningshjulet.
 
 För GX_NUMERIC_SCROLL_WHEEL och GX_STRING_SCROLL_WHEEL tillhandahålls standardfunktioner för återanrop och programmet behöver inte göra några ändringar för att använda dessa standardimplementeringar.
 
 Det här API:et tillhandahålls så att programmet kan anpassa formateringen eller andra parametrar för strängen som visas på varje rad i widgeten för rullningshjul.
 
-Återanropsfunktionen tar emot som indata en pekare till rullningshjulets kontrollblock och radnumret som visas. Funktionen ska returnera en pekare till en textsträng.
+Återanropsfunktionen får som indata en pekare till rullningshjulets kontrollblock och radnumret som visas. Funktionen ska returnera en pekare till en textsträng.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -23596,7 +23673,7 @@ Det här API:et tillhandahålls så att programmet kan anpassa formateringen ell
 
 - **GX_SUCCESS**: (0x00) Ange återanrop
 - **GX_PTR_ERROR**: (0x07) Ogiltig pekare
-- **GX_INVALID_WIDGET**: (0x12) Widget är inte giltig
+- **GX_INVALID_WIDGET:**(0x12) Widget är inte giltig
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -23666,24 +23743,24 @@ UINT gx_text_scroll_wheel_callback_set_ext(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten tilldelar återanropsfunktionen som ett rullningshjul av texttyp anropar för att fastställa textsträngen som ska visas på varje rad i rullningshjulet.
+Den här tjänsten tilldelar återanropsfunktionen som en texttyps rullningshjul anropar för att fastställa textsträngen som ska visas på varje rad i rullningshjulet.
 
 För GX_NUMERIC_SCROLL_WHEEL och GX_STRING_SCROLL_WHEEL tillhandahålls standardfunktioner för återanrop och programmet behöver inte göra några ändringar för att använda dessa standardimplementeringar.
 
 Det här API:et tillhandahålls så att programmet kan anpassa formateringen eller andra parametrar för strängen som visas på varje rad i widgeten för rullningshjul.
 
-Återanropsfunktionen tar emot som indata en pekare till rullningshjulets kontrollblock och radnumret som visas. Funktionen ska returnera en pekare till en textsträng.
+Återanropsfunktionen får som indata en pekare till rullningshjulets kontrollblock och radnumret som visas. Funktionen ska returnera en pekare till en textsträng.
 
 ### <a name="parameters"></a>Parametrar
 
-- **hjul** Blockadress för kontroll av rullningshjul för strängar
-- **motringning** Pekare till återanropsfunktionen
+- **hjul** Blockadress för kontrollblock för rullningshjul för strängar
+- **motringning** Pekare till återanropsfunktion
 
 ### <a name="return-values"></a>Returvärden
 
 - **GX_SUCCESS**: (0x00) Ange återanrop
 - **GX_PTR_ERROR**: (0x07) Ogiltig pekare
-- **GX_INVALID_WIDGET:**(0x12) Widget är inte giltig
+- **GX_INVALID_WIDGET**: (0x12) Widget är inte giltig
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -23764,11 +23841,11 @@ UINT gx_text_scroll_wheel_create(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten skapar ett textrullningshjul. Textrullningshjulet är en baswidget för GX_STRING_SCROLL_WHEEL och GX_NUMERIC_SCROLL_WHEEL typwidgetar. Den här funktionen anropas internt av gx_string_scroll_wheel_create och gx_numeric_scroll_wheel_create och tillhandahålls som ett separat API som en bekvämlighet för program som definierar en anpassad rullningshjulswidget.
+Den här tjänsten skapar ett textrullningshjul. Textrullningshjulet är en baswidget för GX_STRING_SCROLL_WHEEL och GX_NUMERIC_SCROLL_WHEEL typwidgetar. Den här funktionen anropas internt av gx_string_scroll_wheel_create och gx_numeric_scroll_wheel_create och tillhandahålls som ett separat API för program som definierar en anpassad widget för rullningshjul.
 
 ### <a name="parameters"></a>Parametrar
 
-- **wheel**: Blockadress för textrullningshjulskontroll
+- **wheel**: Adress till kontrollblock för textrullningshjul
 - **name**: Programdefinierat widgetnamn
 - **överordnad:** Överordnat eller GX_NULL
 - **total_rows:** Totalt antal rader som ska visas för användaren
@@ -23781,8 +23858,8 @@ Den här tjänsten skapar ett textrullningshjul. Textrullningshjulet är en basw
 - **GX_SUCCESS**: (0x00) Textrullningshjulet har skapats
 - **GX_CALLER_ERROR**: (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR**: (0x07) Ogiltig pekare
-- **GX_ALREADY_CREATED:**(0x13) Widget har redan skapats
-- **GX_INVALID_WIDGET:**(0x12) Widget är inte giltig
+- **GX_ALREADY_CREATED**: (0x13) Widget har redan skapats
+- **GX_INVALID_WIDGET**: (0x12) Widget är inte giltig
 
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -23857,13 +23934,13 @@ VOID gx_text_scroll_wheel_draw(GX_TEXT_SCROLL_WHEEL *wheel);
 
 ### <a name="description"></a>Description
 
-Det här är standardritningsfunktionen för alla hjultyper baserat på GX_TEXT_SCROLL_WHEEL. Den här funktionen kan åsidosättas av program som kräver anpassning av rullningshjulsritningens utseende.
+Det här är standardritningsfunktionen för alla hjultyper baserat på GX_TEXT_SCROLL_WHEEL. Den här funktionen kan åsidosättas av program som kräver anpassning av utseendet på textens rullningshjulsritning.
 
 GX_STRING_SCROLL_WHEEL och GX_NUMERIC_SCROLL_WHEEL är både baserade på eller härledda från GX_TEXT_SCROLL_WHEEL.
 
 ### <a name="parameters"></a>Parametrar
 
-- **wheel**: Blockadress för kontroll av rullningshjul för strängar
+- **wheel**: Adress till kontrollblock för rullningshjulssträng
 
 ### <a name="return-values"></a>Returvärden
 
@@ -23907,7 +23984,7 @@ UINT my_wheel_draw(GX_TEXT_SCROLL_WHEEL *wheel)
 ## <a name="gx_text_scroll_wheel_event_process"></a>gx_text_scroll_wheel_event_process
 
 
-Processhändelse för textrullningshjul
+Bearbeta rullningshjulshändelse för text
 
 ### <a name="prototype"></a>Prototyp
 
@@ -23917,7 +23994,7 @@ UINT gx_text_scroll_wheel_event_process(GX_TEXT_SCROLL_WHEEL *wheel, GX_EVENT *e
 
 ### <a name="description"></a>Description
 
-Den här tjänsten bearbetar en händelse för det angivna textrullningshjulet. Den här tjänsten ska anropas som standardhändelsehanterare av anpassade funktioner för bearbetning av textrullningshjulshändelse.
+Den här tjänsten bearbetar en händelse för det angivna textrullningshjulet. Den här tjänsten ska anropas som standardhändelsehanterare av anpassade funktioner för bearbetning av texthjulshändelse.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -23996,14 +24073,14 @@ Tilldela teckensnitten som används för att rita texten i en textrullningshjuls
 
 ### <a name="parameters"></a>Parametrar
 
-- **wheel**: Adress till kontrollblock för rullningshjulssträng
+- **wheel**: Blockadress för kontroll av rullningshjul för strängar
 
 ### <a name="return-values"></a>Returvärden
 
 - **GX_SUCCESS:**(0x00) Har tilldelats hjulteckensnitt
 - **GX_CALLER_ERROR**: (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR**: (0x07) Ogiltig pekare
-- **GX_INVALID_WIDGET:**(0x12) Widget är inte giltig
+- **GX_INVALID_WIDGET**: (0x12) Widget är inte giltig
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -24055,18 +24132,18 @@ UINT gx_text_scroll_wheel_text_color_set(
 
 ### <a name="description"></a>Description
 
-Den här funktionen tilldelar textfärgerna som används för att rita en textbaserad rullningshjulsrad.
+Den här funktionen tilldelar textfärgerna som används för att rita en textbaserad rad med rullningshjul.
 
 ### <a name="parameters"></a>Parametrar
 
-- **wheel**: Blockadress för kontroll av rullningshjul för strängar
+- **wheel**: Adress till kontrollblock för rullningshjulssträng
 - **normal_text_color:** Färg som används för att rita icke-valda rader
 - **selected_text_color:** Färg som används för att rita vald rad.
 - **disabled_text_color: Färg** som används för att rita text för inaktiverad widget.
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS**: (0x00) Textfärg för rullningshjul har tilldelats
+- **GX_SUCCESS**: (0x00) Textfärg för rullningshjulet har tilldelats
 - **GX_CALLER_ERROR**: (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR**: (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET**: (0x12) Widget är inte giltig
@@ -24133,18 +24210,18 @@ GX_TREE_VIEW härleds från GX_WINDOW och stöder alla GX_WINDOW API-tjänster.
 - **träd:** Pekare till kontrollblock för trädvy
 - **name**: Namnet på trädvyn
 - **överordnad:** Pekare till överordnad widget
-- **style**: Stil på widgeten. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
+- **style**: Widgetens format. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
 - **menu_id:** Programdefinierat ID för trädvyn
-- **storlek:** Trädvyns storlek
+- **size**: Storlek på trädvyn
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS**: (0x00) Trädvyn har skapats
+- **GX_SUCCESS**: (0x00) Skapa trädvyn
 - **GX_CALLER_ERROR**: (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR**: (0x07) Ogiltig pekare
-- **GX_ALREADY_CREATED**: (0x13) Widget har redan skapats
-- **GX_INVALID_SIZE**: (0x19) Ogiltig blockstorlek för widgetkontroll
-- **GX_INVALID_WIDGET**: (0x12) Widget är inte giltig
+- **GX_ALREADY_CREATED:**(0x13) Widget har redan skapats
+- **GX_INVALID_SIZE:**(0x19) Ogiltig blockstorlek för widgetkontroll
+- **GX_INVALID_WIDGET:**(0x12) Widget är inte giltig
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -24189,11 +24266,11 @@ VOID gx_tree_view_draw(GX_TREE_VIEW *tree);
 
 ### <a name="description"></a>Description
 
-Den här tjänsten ritar den angivna trädvyn. Den här funktionen anropas vanligtvis internt av GUIX-mekanismen för arbetsyteuppdatering, men exponeras för programmet för att hjälpa till med implementeringen av anpassade ritningsfunktioner för anpassade trädvywidgetar.
+Den här tjänsten ritar den angivna trädvyn. Den här funktionen anropas vanligtvis internt av GUIX-arbetsyteuppdateringsmekanismen, men exponeras för programmet för att hjälpa till med implementeringen av anpassade ritningsfunktioner för anpassade trädvywidgetar.
 
 ### <a name="parameters"></a>Parametrar
 
-- **träd** Pekare till trädvyns kontrollblock
+- **träd** Pekare till trädvykontrollblock
 
 ### <a name="return-values"></a>Returvärden
 
@@ -24234,7 +24311,7 @@ UINT my_tree_view_draw(GX_TREE_VIEW *tree_view)
 
 ## <a name="gx_tree_view_event_process"></a>gx_tree_view_event_process
 
-Händelse för processträdsvy
+Processträdvyhändelse
 
 ### <a name="prototype"></a>Prototyp
 
@@ -24332,7 +24409,7 @@ Den här tjänsten anger indrag för trädvyn.
 - **GX_SUCCESS:**(0x00) Ange indrag för trädvy
 - **GX_CALLER_ERROR**: (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR**: (0x07) Ogiltig pekare
-- **GX_INVALID_WIDGET**: (0x12) Widget är inte giltig
+- **GX_INVALID_WIDGET:**(0x12) Widget är inte giltig
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -24387,7 +24464,7 @@ Den här tjänsten placerar trädvyobjekt.
 - **GX_SUCCESS**: (0x00) Objekt i trädvyn har positionerats
 - **GX_CALLER_ERROR**: (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR**: (0x07) Ogiltig pekare
-- **GX_INVALID_WIDGET:**(0x12) Widget är inte giltig
+- **GX_INVALID_WIDGET**: (0x12) Widget är inte giltig
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -24421,7 +24498,7 @@ been positioned. */
 
 ## <a name="gx_tree_view_root_line_color_set"></a>gx_tree_view_root_line_color_set
 
-Ange trädvyns rotlinjefärg
+Ange rotlinjefärg för trädvy
 
 ### <a name="prototype"></a>Prototyp
 
@@ -24445,7 +24522,7 @@ Den här tjänsten tilldelar rotlinjefärg för trädvyn.
 - **GX_SUCCESS**: (0x00) Lyckad uppsättning rotlinjefärg
 - **GX_CALLER_ERROR**: (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR**: (0x07) Ogiltig pekare
-- **GX_INVALID_WIDGET**: (0x12) Widget är inte giltig
+- **GX_INVALID_WIDGET:**(0x12) Widget är inte giltig
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -24566,7 +24643,7 @@ Den här tjänsten hämtar det aktuella markerade objektet i trädvyn.
 
 - **GX_SUCCESS**: (0x00) Det valda objektet har hämtats
 - **GX_PTR_ERROR**: (0x07) Ogiltig pekare
-- **GX_INVALID_WIDGET:**(0x12) Widget är inte giltig
+- **GX_INVALID_WIDGET**: (0x12) Widget är inte giltig
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -24624,10 +24701,10 @@ Den här tjänsten anger det valda objektet för trädvyn.
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS:**(0x00) Menyn Har ritats
+- **GX_SUCCESS:**(0x00) Menyn Har ritat
 - **GX_CALLER_ERROR**: (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR**: (0x07) Ogiltig pekare
-- **GX_INVALID_WIDGET**: (0x12) Widget är inte giltig
+- **GX_INVALID_WIDGET:**(0x12) Widget är inte giltig
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -24661,7 +24738,7 @@ been set to “tree_view_item”. */
 
 ## <a name="gx_utility_canvas_to_bmp"></a>gx_utility_canvas_to_bmp
 
-Konvertera anteckningsnott för arbetsyta till bitmapp
+Konvertera arbetsytans anteckningsnota till bitmapp
 
 ### <a name="prototype"></a>Prototyp
 
@@ -24674,17 +24751,17 @@ UINT gx_utility_canvas_to_bmp(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten konverterar arbetsytans minne till en bitmappfil.
+Den här tjänsten konverterar arbetsytans minne till en bitmappsfil.
 
 ### <a name="parameters"></a>Parametrar
 
 - **canvas**: Block pekare för arbetsytekontroll
 - **rect:** Rektangel som ska konverteras
-- **write_data:** Pekare för återanropsfunktionen för att skriva data till
+- **write_data: Pekare** för återanropsfunktion för att skriva data till
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS**: (0x00) Konverterat heltalsvärde till sträng
+- **GX_SUCCESS**: (0x00) Heltalsvärdet har konverterats till sträng
 - **GX_PTR_ERROR**: (0x07) Ogiltig pekare för returbuffert
 - **GX_INVALID_SIZE**: (0x19) Ogiltig returbuffertstorlek
 
@@ -24834,21 +24911,21 @@ INT gx_utility_gradient_create(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten skapar en tonad pixelkarta vid körning. En toningsbild kan användas för att åstadkomma toning och andra intressanta visuella ändringar.
+Den här tjänsten skapar en tonad pixelkarta vid körning. En toningsbild kan användas för toning och andra intressanta visuella ändringar.
 
 Bredden och höjden på den begärda toningen får inte vara mindre än 2 x 2 bildpunkter.
 
-GUIX upprätthåller internt en lista över skapade toningar, och den här funktionen söker först igenom toningslistan för att hitta en matchande toningspunktskarta innan den skapar en ny pixelkarta. Med andra ord behövs samma toningspunktskarta flera gånger, bara en pixelkarta skapas faktiskt och varje toning som kräver den här pixelkartan delar den skapade pixelkartan.
+GUIX upprätthåller internt en lista över skapade toningar, och den här funktionen söker först igenom toningslistan för att hitta en matchande toningsbildpunktskarta innan en ny pixelkarta skapas. Med andra ord krävs samma toning av pixelkarta flera gånger, bara en pixelkarta skapas faktiskt och varje toning som kräver den här pixelkartan delar den skapade pixelkartan.
 
-Detta API kräver att gx_system_memory_allocator-funktionen definieras för att tillåta minnesallokering vid körning.
+Detta API kräver att gx_system_memory_allocator-funktionen definieras för att tillåta minnesallokering för körning.
 
-Flaggor av toningstyp innehåller GX_GRADIENT_TYPE_ALPHA och GX_GRADIENT_TYPE_MIRROR. Endast GX_GRADIENT_TYPE_ALPHA toningar stöds för närvarande (dvs. den här typens flagga måste anges). Flaggan GX_GRADIENT_TYPE_MORROR är valfri och när den har angetts instruerar logiken för toning att skapa en toning som ändras från start_alpha till end_alpha och tillbaka till start_alpha. Annars skapas en linjär toning.
+Flaggor av toningstyp innehåller GX_GRADIENT_TYPE_ALPHA och GX_GRADIENT_TYPE_MIRROR. Endast GX_GRADIENT_TYPE_ALPHA toningar stöds för närvarande (dvs. den här typflaggan måste anges). Flaggan GX_GRADIENT_TYPE_MORROR är valfri och när den har angetts instrueras logiken för toning att skapa en toning som ändras från start_alpha till end_alpha och tillbaka till start_alpha. Annars skapas en linjär toning.
 
 ### <a name="parameters"></a>Parametrar
 
 - **gradient**: Pekare till toningskontrollens blockstruktur
-- **width**: Begärd pixelkarta-bredd
-- **höjd:** Begärd pixelkarta-höjd
+- **width**: Begärd bredd på pixelkarta
+- **height**: Begärd pixelkartans höjd
 - type : Requested gradient type **(Begärd** toningstyp)
 - **start_alpha:** Starta alfavärdet
 - **end_alpha:** Slut alfavärde
@@ -24858,11 +24935,11 @@ Flaggor av toningstyp innehåller GX_GRADIENT_TYPE_ALPHA och GX_GRADIENT_TYPE_MI
 - **GX_SUCCESS**: (0x00) Toning skapades
 - **GX_INVALID_SIZE**: (0x19) Toning är inte minst 2 x 2 bildpunkter
 - **GX_NOT_SUPPORTED**: (0x28) Toning är inte typen GX_GRADIENT_TYPE_ALPHA
-- **GX_FAILURE:**(0x10) Minnestilldelningen har inte definierats eller så misslyckas minnesallokeringen
+- **GX_FAILURE:**(0x10) Minnestilldelning har inte definierats eller så misslyckas minnesallokeringen
 - **GX_CALLER_ERROR**: (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR**: (0x07) Toningspekaren är inte giltig<
-- **GX_INVALID_VALUE**: (0x22) Värdet för Bredd och höjd är inte giltigt
-- **GX_INVALID_TYPE:**(0x1B) Toningstypen är inte giltig
+- **GX_INVALID_VALUE**: (0x22) Värdet bredd och höjd är inte giltigt
+- **GX_INVALID_TYPE**: (0x1B) Toningstypen är inte giltig
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -24912,7 +24989,7 @@ INT gx_utility_gradient_delete(GX_GRADIENT *gradient);
 
 ### <a name="description"></a>Description
 
-Den här tjänsten tar bort en toning som skapats tidigare. Om pixelkartan som är associerad med den här toningen inte används av andra toningar tas även pixelkartan bort.
+Den här tjänsten tar bort en toning som skapats tidigare. Om pixelkartan som är associerad med den här toningen inte används av andra toningar tas även pixelkartans data bort.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -25040,16 +25117,16 @@ INT gx_utility_math_acos(GX_FIXED_VAL x);
 
 Den här tjänsten beräknar vinkelvärdet för arc cosinus x.
 
-Indatavärdet är en datatyp med fast punkt, anropa GX_FIXED_VAL_MAKE konvertera från INT till GX_FIXED_VAL typ. Om du till exempel vill beräkna arc cosine för 0,5 gör du indata som GX_FIXED_VAL_MAKE(1) / 2.
+Indatavärdet är en datatyp med fast punkt, anropa GX_FIXED_VAL_MAKE konvertera från INT till GX_FIXED_VAL typ. Om du till exempel vill beräkna arc cosinus på 0,5 gör du indata som GX_FIXED_VAL_MAKE(1) /2.
 
-I GUIX-versionen 5.4.0 eller mindre är indatavärdestypen för den här funktionen INT och värdet är begränsat till intervallet [-256, 256]. Programmet måste skala värdet från intervallet [-1, 1] till intervallet [-256, 256] innan den här tjänsten anropas. Om ditt projekt med GUIX-version lika med eller mindre än 5.4.0 har referens till detta API och du vill uppgradera projektet med det senaste guix-biblioteket. Du har två alternativ.
+I 5.4.0 eller lägre version GUIX är den här funktionens indatavärdetyp INT och värdet är begränsat till intervallet [-256, 256]. Programmet måste skala värdet från intervallet [-1, 1] till intervallet [-256, 256] innan den här tjänsten anropas. Om ditt projekt med GUIX-version lika med eller mindre än 5.4.0 har referens till detta API och du vill uppgradera projektet med det senaste guix-biblioteket. Du har två alternativ.
 
-1. Åtgärda indatavärdet för det här API-anropet för att GX_FIXED_VAL datatypsvärdet.
+1. Åtgärda indatavärdet för det här API-anropet för att GX_FIXED_VAL värdet för datatypen.
 1. Definiera GUIX_5_4_0_COMPATIBILITY.
 
 ### <a name="parameters"></a>Parametrar
 
-- **x**: Värde vars arc-cosinus beräknas
+- **x**: Värde vars arc cosinus beräknas
 
 ### <a name="return-values"></a>Returvärden
 
@@ -25108,9 +25185,9 @@ INT gx_utility_math_asin(GX_FIXED_VAL x);
 
 Den här tjänsten beräknar vinkelvärdet för arc sinus x.
 
-Indatavärdet är en datatyp med fast punkt, anropa GX_FIXED_VAL_MAKE konvertera från INT till GX_FIXED_VAL typ. Om du till exempel vill beräkna arcus för 0,5 gör du indata som GX_FIXED_VAL_MAKE(1) /2.
+Indatavärdet är en datatyp med fast punkt, anropa GX_FIXED_VAL_MAKE konvertera från INT till GX_FIXED_VAL typ. Om du till exempel vill beräkna arc-sinus på 0,5 gör du indata som GX_FIXED_VAL_MAKE(1) / 2.
 
-I 5.4.0 eller lägre version GUIX är den här funktionens indatavärdetyp INT och värdet är begränsat till intervallet [-256, 256]. Programmet måste skala värdet från intervallet [-1, 1] till intervallet [-256, 256] innan den här tjänsten anropas. Om ditt projekt med GUIX-version är lika med eller mindre än 5.4.0 och du vill uppgradera projektet med det senaste guix-biblioteket. Du har två alternativ.
+I GUIX-versionen 5.4.0 eller mindre är indatavärdestypen för den här funktionen INT och värdet är begränsat till intervallet [-256, 256]. Programmet måste skala värdet från intervallet [-1, 1] till intervallet [-256, 256] innan den här tjänsten anropas. Om ditt projekt med GUIX-version är lika med eller mindre än 5.4.0 och du vill uppgradera projektet med det senaste guix-biblioteket. Du har två alternativ.
 
 1. Åtgärda indatavärdet för det här API-anropet för att GX_FIXED_VAL värdet för datatypen.
 1. Definiera GUIX_5_4_0_COMPATIBILITY.
@@ -25176,13 +25253,13 @@ GX_FIXED_VAL gx_utility_math_cos(GX_FIXED_VAL angle);
 
 Den här tjänsten beräknar cosinus för den angivna vinkeln.
 
-Indatavärdet är en datatyp med fast punkt, anropa GX_FIXED_VAL_MAKE konvertera från INT till GX_FIXED_VAL. Om du till exempel vill beräkna cosinus för 90 grad gör du indata som GX_FIXED_VAL_MAKE(90).
+Indatavärdet är en datatyp med fast punkt, anropa GX_FIXED_VAL_MAKE konvertera från INT till GX_FIXED_VAL. Om du till exempel vill beräkna cosinus på 90 grader gör du indata som GX_FIXED_VAL_MAKE(90).
 
 Returvärdet är en datatyp med fast punkt, anropa GX_FIXED_VAL_TO_INT konvertera från GX_FIXED_VAL till INT.
 
-I GUIX-versionen 5.4.0 eller mindre är indatavärdet och returvärdestypen för den här tjänsten INT, indatavärdet och returvärdet förstoras med 256. Programmet måste därför skala vinkelvärdet med 256 innan den här tjänsten anropas. Om ditt projekt med GUIX-version är lika med eller mindre än 5.4.0 och du vill uppgradera projektet med det senaste guix-biblioteket har du två alternativ.
+I GUIX-versionen 5.4.0 eller mindre är indatavärdet och returvärdestypen för den här tjänsten INT, indatavärdet och returvärdet förstoras med 256. Programmet måste därför skala vinkelvärdet med 256 innan den här tjänsten anropas. Om ditt projekt med GUIX-versionen är lika med eller mindre än 5.4.0 och du vill uppgradera projektet med det senaste guix-biblioteket har du två alternativ.
 
-1. Åtgärda indatavärdet och hanteringen till returvärdet för det här API-anropet för att GX_FIXED_VAL värdet för datumtyp.
+1. Korrigera indatavärdet och hanteringen till returvärdet för det här API-anropet för att GX_FIXED_VAL värdet för datumtyp.
 1. Definiera GUIX_5_4_0_COMPATIBILITY.
 
 ### <a name="parameters"></a>Parametrar
@@ -25248,11 +25325,11 @@ GX_FIXED_VAL gx_utility_math_sin(GX_FIXED_VAL angle);
 
 Den här tjänsten beräknar sinus för den angivna vinkeln.
 
-Indatavärdet är en datatyp med fast punkt, anropa GX_FIXED_VAL_MAKE konvertera från INT till GX_FIXED_VAL. Om du till exempel vill beräkna sinus för 90 grader gör du indata som GX_FIXED_VAL_MAKE(90). 
+Indatavärdet är en datatyp med fast punkt, anropa GX_FIXED_VAL_MAKE konvertera från INT till GX_FIXED_VAL. Om du till exempel vill beräkna sinus för 90 grad gör du indata som GX_FIXED_VAL_MAKE(90). 
 
 Returvärdet är en datatyp med fast punkt, anropa GX_FIXED_VAL_TO_INT konvertera från GX_FIXED_VAL till INT.
 
-I GUIX-versionen 5.4.0 eller mindre är indatavärdet och returvärdestypen INT, indatavärdet och returvärdet förstoras med 256. Programmet måste därför skala vinkelvärdet med 256 innan den här tjänsten anropas. Om ditt projekt med GUIX-versionen är lika med eller mindre än 5.4.0 och du vill uppgradera projektet med det senaste guix-biblioteket har du två alternativ.
+I 5.4.0 eller lägre version GUIX är indatavärdet och returvärdestypen INT, indatavärdet och returvärdet förstoras med 256. Programmet måste därför skala vinkelvärdet med 256 innan den här tjänsten anropas. Om ditt projekt med GUIX-versionen är lika med eller mindre än 5.4.0 och du vill uppgradera projektet med det senaste guix-biblioteket har du två alternativ.
 
 1. Korrigera indatavärdet och handskriften till returvärdet för det här API-anropet för att GX_FIXED_VAL datatypsvärde.
 1. Definiera GUIX_5_4_0_COMPATIBILITY.
@@ -25263,7 +25340,7 @@ I GUIX-versionen 5.4.0 eller mindre är indatavärdet och returvärdestypen INT,
 
 ### <a name="return-values"></a>Returvärden
 
-- **sinus:** Sinus för asynlig vinkel
+- **sinus:** Sinus för den angivna vinkeln
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -25318,7 +25395,7 @@ UINT gx_utility_math_sqrt(UINT value);
 
 ### <a name="description"></a>Description
 
-Den här tjänsten beräknar kvadratroten av det angivna värdet.
+Den här tjänsten beräknar kvadratroten för det angivna värdet.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -25326,7 +25403,7 @@ Den här tjänsten beräknar kvadratroten av det angivna värdet.
 
 ### <a name="return-values"></a>Returvärden
 
-- **kvadratrot:** Kvadratrot av an angett värde
+- **kvadratrot:** Kvadratrot för an angett värde
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -25360,7 +25437,7 @@ my_square_root = gx_utility_math_sqrt(my_value);
 
 ## <a name="gx_utility_bidi_paragraph_reorder"></a>gx_utility_bidi_paragraph_reorder
 
-Ändra ordning på BiDi-text till dess visningsordning
+Ändra ordningen på BiDi-text till dess visningsordning
 
 ### <a name="prototype"></a>Prototyp
 
@@ -25371,11 +25448,11 @@ UINT gx_utility_bidi_paragraph_reorder(GX_BIDI_TEXT_INFO *input_info,
 
 ### <a name="description"></a>Description
 
-Den här tjänsten ordnar om BiDi-text till visningsordningen. Om teckensnitt och visningsbredd för text ritas tillämpas radbrytning först, och omsorteringsprocessen tillämpas baserat på varje rad. Om den angivna texten innehåller fler än ett stycke delar tjänsten upp texten i stycken, radbrytningen och omsorteringsresultatet för varje stycke länkas som en lista.
+Den här tjänsten sorterar om BiDi-text till sin visningsordning. Om teckensnitt och visningsbredd anges tillämpas radbrytning först, och omsorteringsprocessen tillämpas baserat på varje rad. Om den angivna texten innehåller fler än ett stycke, kommer tjänsten att dela upp texten i stycken, radbrytningen och omsorteringsresultatet för varje stycke länkas som en lista.
 
 ### <a name="parameters"></a>Parametrar
 
-- **input_info**: Pekare till information om radbrytning och omsortering av text
+- **input_info:** Pekare till informationen för radbrytning och omsortering av text
 - **resolved_info_head:** Pekare till den länkade listan som innehåller radbrytning och omsortering av resultat för varje stycke i den angivna texten
 
 ### <a name="return-values"></a>Returvärden
@@ -25417,7 +25494,7 @@ VOID custom_widget_draw(GX_WIDGET *widget)
     }
 }
 ```
-#### <a name="draw-multi-line-bidi-text-to-canvas"></a>Rita flerrads-bidi-text till arbetsyta
+#### <a name="draw-multi-line-bidi-text-to-canvas"></a>Rita flerrads-bidi-text till arbetsytan
 ```C
 VOID custom_widget_draw(GX_WIDGET *widget)
 {
@@ -25603,14 +25680,14 @@ UINT gx_utility_pixelmap_resize(
 
 Den här tjänsten ändrar storlek på en pixelkarta och returnerar en pekare till en ny pixelkarta, vilket är resultatet av storleksändringen av pixelkartan.
 
-Den här tjänsten kräver tidigare användning av gx_system_memory_allocator_set för att tillåta allokering av minne för att lagra storleksändrat pixelkarta-data.
+Den här tjänsten kräver att du använder gx_system_memory_allocator_set för att tillåta allokering av minne för att lagra storleksändrat pixelkarta-data.
 
 ### <a name="parameters"></a>Parametrar
 
 - **src:** Pekare till pixelkartan för att ändra storlek
 - **mål:** Målbufferten för den resulterande pixelkartan
 - **width**: Bredden på den resulterande pixelkartan, i bildpunkter
-- **height**(höjd): Höjden på den resulterande pixelkartan, i bildpunkter
+- **height**:Hieght of the resulting pixelmap, in pixels
 
 ### <a name="return-values"></a>Returvärden
 
@@ -25673,22 +25750,22 @@ UINT gx_utility_pixelmap_rotate(
 
 Den här tjänsten roterar en pixelkarta och returnerar en pekare till en ny pixelkarta, vilket är resultatet av rotationen av pixelkartan. Om du vill rotera en pixelkarta direkt till arbetsytan använder du gx_canvas_pixelmap_rotate().
 
-Den här tjänsten kräver tidigare användning av gx_system_memory_allocator_set för att tillåta allokering av minne för att lagra roterade pixelkarta-data.
+Den här tjänsten kräver att du använder gx_system_memory_allocator_set för att tillåta allokering av minne för att lagra roterade pixelkarta-data.
 
 ### <a name="parameters"></a>Parametrar
 
 - **src:** Pixelkartan som ska roteras
-- **angle**: Rotationsvinkel i grader
+- **vinkel:** Rotationsvinkel i grader
 - **mål:** Målbufferten för den resulterande pixelkartan
-- **rot_cx:** Hämtade x koordinaten för rotationscentret med avseende på målpunktskartan. Bör initieras med x-koordinaten för rotationscentret med avseende på källans pixelkarta. Om rot_cx är GX_NULL hämtas inte värdet.
-- **rot_cy:** Hämtad y-koordinat för rotationscentret med avseende på målpunktskarta. Bör initieras med rotationscentrets y-koordinat med avseende på käll pixelkarta. Om rot_cy är GX_NULL hämtas inte värdet.
+- **rot_cx:** Hämtade x koordinaten för rotationscentret med avseende på målpunktskartan. Bör initieras med x-koordinaten för rotationscentret med avseende på käll pixelkarta. Om rot_cx är GX_NULL hämtas inte värdet.
+- **rot_cy:** Hämtad y-koordinat för rotationscenter med avseende på målpunktskarta. Bör initieras med rotationscentrets y-koordinat med avseende på käll pixelkarta. Om rot_cy är GX_NULL hämtas inte värdet.
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS**: (0x00) Lyckad pixelkarta-rotation
-- **GX_PTR_ERROR**: (0x07) Ogiltig pekare för källa eller mål pixelkarta
+- **GX_SUCCESS**: (0x00) Lyckad pixelkartarotering
+- **GX_PTR_ERROR**: (0x07) Ogiltig pekare för käll- eller målpunktskarta
 - **GX_INVALID_VALUE**: (0x22) Vinkelvärdet är 0
-- **GX_INVALID_FORMAT:**(0x28) Käll pixelkartan är komprimerat format, vilket inte stöds
+- **GX_INVALID_FORMAT:**(0x28) Käll pixelkarta är komprimerat format, vilket inte stöds
 - **GX_SYSTEM_MEMORY_ERROR:**(0x30) Minnestilldelningen har inte definierats eller så misslyckas minnesallokeringen
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -25752,14 +25829,14 @@ Den här tjänsten roterar en pixelkarta med 90 grader, 180 grader eller 270 gra
 - **vinkel:** Rotationsvinkel i grader
 - **mål:** Målbufferten för den resulterande pixelkartan
 - **rot_cx:** Hämtade x koordinaten för rotationscentret med avseende på målpunktskartan. Bör initieras med x-koordinaten för rotationscentret med avseende på käll pixelkarta. Om rot_cx är GX_NULL hämtas inte värdet.
-**rot_cy:** Hämtad y-koordinat för rotationscentret med avseende på målpunktskarta. Bör initieras med rotationscentrets y-koordinat med avseende på käll pixelkarta. Om rot_cy är GX_NULL hämtas inte värdet.
+**rot_cy:** Hämtad y-koordinat för rotationscenter med avseende på målpunktskarta. Bör initieras med rotationscentrets y-koordinat med avseende på käll pixelkarta. Om rot_cy är GX_NULL hämtas inte värdet.
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS**: (0x00) Lyckad pixelkarta-rotation
-- **GX_PTR_ERROR**: (0x07) Ogiltig pekare för källa eller mål pixelkarta
+- **GX_SUCCESS**: (0x00) Lyckad pixelkartarotering
+- **GX_PTR_ERROR**: (0x07) Ogiltig pekare för käll- eller målpunktskarta
 - **GX_INVALID_VALUE:**(0x22) Vinkelvärdet är 0 eller inte en enkel vinkel som 90, 180, 270
-- **GX_INVALID_FORMAT:**(0x28) Käll pixelkartan är komprimerat format, vilket inte stöds
+- **GX_INVALID_FORMAT:**(0x28) Käll pixelkarta är komprimerat format, vilket inte stöds
 - **GX_SYSTEM_MEMORY_ERROR:**(0x30) Minnestilldelningen har inte definierats eller så misslyckas minnesallokeringen
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -25800,7 +25877,7 @@ resulting pixelmap of rotation. */
 
 ## <a name="gx_utility_rectangle_center"></a>gx_utility_rectangle_center
 
-Center-rektangel inom en annan rektangel
+Centrera rektangeln i en annan rektangel
 
 ### <a name="prototype"></a>Prototyp
 
@@ -25812,12 +25889,12 @@ UINT gx_utility_rectangle_center(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten centrerar rektangeln inom en annan rektangel.
+Den här tjänsten centrerar rektangeln i en annan rektangel.
 
 ### <a name="parameters"></a>Parametrar
 
 - **rektangel**: Rektangel till mitten
-- **within_rectangle:** Rektangel som ska centreras inom
+- **within_rectangle:** Rektangel till mitten inom
 
 ### <a name="return-values"></a>Returvärden
 
@@ -25951,7 +26028,7 @@ Den här tjänsten kombinerar den första och andra rektangeln till den första 
 ### <a name="return-values"></a>Returvärden
 
 - **GX_SUCCESS**: (0x00) Två rektanglar har kombinerats
-- **GX_PTR_ERROR**: (0x07) Ogiltig indatapekare
+- **GX_PTR_ERROR**: (0x07) Ogiltig indata pekare
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -26007,16 +26084,16 @@ GX_BOOL gx_utility_rectangle_compare(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten jämför den första och andra rektangeln. Om de är lika returneras värdet GX_TRUE värde.
+Den här tjänsten jämför den första och andra rektangeln. Om de är lika returneras GX_TRUE värde.
 
 ### <a name="parameters"></a>Parametrar
 
 - **first_rectangle:** Första rektangeln
-- **second_rectangle**: Andra rektangeln
+- **second_rectangle:** Andra rektangeln
 
 ### <a name="return-values"></a>Returvärden
 
-- **result**: GX_TRUE rektanglar är lika, annars GX_FALSE returneras.
+- **result**: GX_TRUE om rektanglar är lika, GX_FALSE returneras.
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -26072,14 +26149,14 @@ Den här tjänsten definierar en rektangel som anges.
 
 - **rektangel:** Rektangelkontrollblock
 - **left**: Vänster mest koordinat
-- **översta:** Översta koordinaten
-- **right**: Höger mest koordinat
+- **översta:** Högst upp i koordinaten
+- **höger:** Höger mest koordinat
 - **längst ned:** Längst ned i koordinaten
 
 ### <a name="return-values"></a>Returvärden
 
 - **GX_SUCCESS**: (0x00) En rektangel har definierats
-- **GX_PTR_ERROR**: (0x07) Ogiltig rektangelpekare
+- **GX_PTR_ERROR**: (0x07) Ogiltig rektangel pekare
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -26131,12 +26208,12 @@ GX_BOOL gx_utility_rectangle_overlap_detect(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten identifierar eventuell överlappning av de angivna rektanglarna. Om överlappningen hittas returnerar tjänsten GX_TRUE och den överlappande rektangeln.
+Den här tjänsten identifierar eventuell överlappning av de angivna rektanglarna. Om överlappning hittas returnerar tjänsten en GX_TRUE överlappande rektangel.
 
 ### <a name="parameters"></a>Parametrar
 
 - **first_rectangle:** Första rektangeln
-- **second_rectangle**: Andra rektangeln
+- **second_rectangle:** Andra rektangeln
 - **return_overlap_area: Överlappande** rektangelområde
 
 ### <a name="return-values"></a>Returvärden
@@ -26263,7 +26340,7 @@ Den här tjänsten ökar storleken på rektangeln som anges.
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS**: (0x00) Rektangelns storlek har ändrats
+- **GX_SUCCESS**: (0x00) Rektangeln har ändrat storlek
 - **GX_PTR_ERROR**: (0x07) Ogiltig rektangel för indata
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -26317,7 +26394,7 @@ Den här tjänsten flyttar rektangeln med de angivna värdena.
 
 ### <a name="parameters"></a>Parametrar
 
-- **rektangel**: Rektangel att skifta
+- **rektangel:** Rektangel för att flytta
 - **x_shif:** Antal bildpunkter som ska flyttas på x-axeln
 - **y_shift:** Antal bildpunkter som ska flyttas på y-axeln
 
@@ -26374,13 +26451,13 @@ UINT gx_utility_string_to_alphamap(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten har gjorts inaktuell och ersatts av gx_utility_string_to_alphamap_ext().
+Den här tjänsten har gjorts inaktuell till förmån för gx_utility_string_to_alphamap_ext().
 
-Den här tjänsten renderar en textsträng till en alfakarta, som är en särskild form av 8bpp pixelkarta som endast innehåller alfavärden. Den här tjänsten används vanligtvis tillsammans med gx_utility_pixelmap_rotate och gx_canvas_pixelmap_draw för att rita roterad text på arbetsytan.
+Den här tjänsten återger en textsträng till en alfakarta, som är en särskild form av 8bpp pixelmap som endast innehåller alfavärden. Den här tjänsten används vanligtvis tillsammans med gx_utility_pixelmap_rotate och gx_canvas_pixelmap_draw för att rita roterad text till arbetsytan.
 
-Den här tjänsten beräknar den minnesstorlek som krävs för den resulterande alfakartan och anropar funktionen gx_system_memory_allocator() som definieras av programmet för att dynamiskt allokera minne. Programmet måste anropa gx_system_memory_allocator_set() någon gång, vanligtvis under programstart, innan den här tjänsten används.
+Den här tjänsten beräknar den minnesstorlek som behövs för den resulterande alfakartan och anropar funktionen gx_system_memory_allocator() som definieras av programmet för att dynamiskt allokera minne. Programmet måste anropa gx_system_memory_allocator_set() någon gång, vanligtvis under programstart, innan den här tjänsten används.
 
-Om en textsträng ska roteras och dras till arbetsytan bara en gång tillhandahålls tjänsten gx_canvas_rotated_text_draw() som ett alternativ. gx_canvas_rotated_text_draw() anropar gx_utility_string_to_alphamap(), gx_utility_pixelmap_rotate() och gx_canvas_pixelmap_draw() för att rendera den roterade texten i en enda åtgärd. Men om samma text ritas flera gånger roteras i olika vinklar är det mer effektivt att skapa alfakartan när du använder gx_utility_string_to_alphmap-API:et och sedan rotera den resulterande alfakartan flera gånger efter behov.
+Om en textsträng ska roteras och dras till arbetsytan bara en gång tillhandahålls tjänsten gx_canvas_rotated_text_draw() som ett alternativ. gx_canvas_rotated_text_draw() anropar gx_utility_string_to_alphamap(), gx_utility_pixelmap_rotate() och gx_canvas_pixelmap_draw() för att återge den roterade texten i en åtgärd. Men om samma text kommer att ritas flera gånger roteras i olika vinklar är det effektivare att skapa alfakartan när du använder gx_utility_string_to_alphmap-API:et och sedan rotera den resulterande alfakartan flera gånger efter behov.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -26440,7 +26517,7 @@ gx_canvas_pixelmap_draw(200, 200, &rotated_text);
 
 ## <a name="gx_utility_string_to_alphamap_ext"></a>gx_utility_string_to_alphamap_ext
 
-Rendera sträng till en 8bpp alphamap-typ pixelkarta
+Rendera sträng till en pixelkarta med 8bpp-alfakarta
 
 ### <a name="prototype"></a>Prototyp
 
@@ -26453,11 +26530,11 @@ UINT gx_utility_string_to_alphamap_ext(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten återger en textsträng till en alfakarta, som är en särskild form av 8bpp pixelmap som endast innehåller alfavärden. Den här tjänsten används vanligtvis tillsammans med gx_utility_pixelmap_rotate och gx_canvas_pixelmap_draw för att rita roterad text till arbetsytan.
+Den här tjänsten renderar en textsträng till en alfakarta, som är en särskild form av 8bpp pixelkarta som endast innehåller alfavärden. Den här tjänsten används vanligtvis tillsammans med gx_utility_pixelmap_rotate och gx_canvas_pixelmap_draw för att rita roterad text på arbetsytan.
 
-Den här tjänsten beräknar den minnesstorlek som behövs för den resulterande alfakartan och anropar funktionen gx_system_memory_allocator() som definieras av programmet för att dynamiskt allokera minne. Programmet måste anropa gx_system_memory_allocator_set() någon gång, vanligtvis under programstart, innan den här tjänsten används.
+Den här tjänsten beräknar den minnesstorlek som krävs för den resulterande alfakartan och anropar funktionen gx_system_memory_allocator() som definieras av programmet för att dynamiskt allokera minne. Programmet måste anropa gx_system_memory_allocator_set() någon gång, vanligtvis under programstart, innan den här tjänsten används.
 
-Om en textsträng ska roteras och dras till arbetsytan bara en gång tillhandahålls tjänsten gx_canvas_rotated_text_draw() som ett alternativ. gx_canvas_rotated_text_draw() anropar gx_utility_string_to_alphamap(), gx_utility_pixelmap_rotate() och gx_canvas_pixelmap_draw() för att återge den roterade texten i en åtgärd. Men om samma text kommer att ritas flera gånger roteras i olika vinklar är det effektivare att skapa alfakartan när du använder gx_utility_string_to_alphmap-API:et och sedan rotera den resulterande alfakartan flera gånger efter behov.
+Om en textsträng ska roteras och dras till arbetsytan bara en gång tillhandahålls tjänsten gx_canvas_rotated_text_draw() som ett alternativ. gx_canvas_rotated_text_draw() anropar gx_utility_string_to_alphamap(), gx_utility_pixelmap_rotate() och gx_canvas_pixelmap_draw() för att rendera den roterade texten i en enda åtgärd. Men om samma text ritas flera gånger roteras i olika vinklar är det mer effektivt att skapa alfakartan när du använder gx_utility_string_to_alphmap-API:et och sedan rotera den resulterande alfakartan flera gånger efter behov.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -26608,8 +26685,8 @@ GX_VERTICAL_LIST härleds från GX_WINDOW och stöder alla gx_window API-tjänst
 - **namn** Namn på lodrät lista
 - **överordnad** Pekare till överordnad widget
 - **total_rows** Totalt antal rader i lodrät lista
-- **motringning** En funktion som anropas av den lodräta listan när listan rullas. Anroparen bör först skapa tillräckligt många GX_WIDGET underordnade för att fylla de synliga listraderna. När listan rullas anropas den här funktionen för att skapa de underordnade listan som motsvarar det angivna listindexet
-- **style** Stil på rullningslistswidgeten. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
+- **motringning** En funktion som anropas av den lodräta listan när listan rullas. Anroparen bör först skapa tillräckligt med GX_WIDGET underordnade för att fylla de synliga listraderna. När listan rullas anropas den här funktionen för att skapa om listans underordnade som motsvarar det angivna listindexet
+- **style (stil)** Stil på rullningslistswidgeten. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
 - **vertical_list_id** Programdefinierat ID för lodrät lista
 - **storlek** Dimensioner för lodrät lista
 
@@ -26665,11 +26742,11 @@ Den här tjänsten bearbetar en händelse för den lodräta listan.
 ### <a name="parameters"></a>Parametrar
 
 - **lista** Kontrollblock för lodrät lista
-- **händelse** Pekare till händelse att bearbeta
+- **händelse** Pekare till händelse som ska bearbetas
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Den lodräta listhändelsen har bearbetats
+- **GX_SUCCESS** (0x00) Bearbetade den lodräta listhändelsen
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
@@ -26718,7 +26795,7 @@ Den här tjänsten anger startindexet för den lodräta listan.
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Har angett startsida för den lodräta listan
+- **GX_SUCCESS** (0x00) Har angett startsideindex för den lodräta listan
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Felaktig widget-pekare
 - **GX_INVALID_VALUE** (0x22) Ogiltigt indexvärde
@@ -26797,7 +26874,7 @@ status = gx_vertical_list_selected_index_get(&my_list, &current_selected_index);
 - gx_vertical_list_total_rows_set
 
 ## <a name="gx_vertical_list_selected_set"></a>gx_vertical_list_selected_set
-### <a name="assign-the-selected-entry-in-a-vertical-list"></a>Tilldela den markerade posten i en lodrät lista
+### <a name="assign-the-selected-entry-in-a-vertical-list"></a>Tilldela den valda posten i en lodrät lista
 
 ### <a name="prototype"></a>Prototyp
 
@@ -26898,7 +26975,7 @@ status = gx_vertical_list_selected_widget_get(&my_list, &current_selected_widget
 - gx_vertical_list_total_rows_set
 
 ## <a name="gx_vertical_list_total_rows_set"></a>gx_vertical_list_total_rows_set
-### <a name="set-total-number-of-vertical-list-rows"></a>Ange totalt antal rader med lodrät lista
+### <a name="set-total-number-of-vertical-list-rows"></a>Ange totalt antal lodräta listrader
 
 ### <a name="prototype"></a>Prototyp
 
@@ -26909,7 +26986,7 @@ UINT gx_vertical_list_total_rows_set(
 ```
 ### <a name="description"></a>Description
 
-Den här tjänsten tilldelar eller ändrar det totala antalet rader i listan.
+Den här tjänsten tilldelar eller ändrar det totala antalet listrader.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -26918,7 +26995,7 @@ Den här tjänsten tilldelar eller ändrar det totala antalet rader i listan.
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Ange antalet rader i den lodräta listan
+- **GX_SUCCESS** (0x00) Ange antalet rader i lodrät lista
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
@@ -26968,8 +27045,8 @@ Den här tjänsten skapar en lodrät rullningslist.
 - **rullningslist** Kontrollblock för rullningslistswidget
 - **namn** Namn på rullningslist
 - **överordnad** Pekare till överordnad widget
-- **utseende** Utseendet på den lodräta rullningslistswidgeten.
-- **style (stil)** Rullningslistens format.
+- **utseende** Utseendet på en lodrät rullningslistwidget.
+- **style** Rullningslistens format.
 
 ### <a name="return-values"></a>Returvärden
 
@@ -27020,7 +27097,7 @@ Den här tjänsten allokerar dynamiskt ett widgetkontrollblock genom att anropa 
 ### <a name="parameters"></a>Parametrar
 
 - **control_block** Pekare till returnerad kontrollblockspekare
-- **memsize** Kontrollera blockstorleken i byte
+- **memsize** Kontrollera blockstorlek i byte
 
 ### <a name="return-values"></a>Returvärden
 
@@ -27094,9 +27171,9 @@ UINT gx_widget_attach(
 ```
 ### <a name="description"></a>Description
 
-Den här tjänsten kopplar widgeten till den angivna överordnade komponenten. Om widgeten redan är kopplad till en annan överordnad, kopplas den först från. Om widgeten redan är ansluten till samma överordnade funktion gör funktionen ingenting.
+Den här tjänsten kopplar widgeten till den angivna överordnade komponenten. Om widgeten redan är kopplad till en annan överordnad, kopplas den först från. Om widgeten redan är kopplad till samma överordnade funktion gör funktionen ingenting.
 
-Widgeten blir det överordnade objektet längst fram när det gäller z-ordning. Om widgetar på samma sätt överlappar varandra ritas den här widgeten ovanpå på samma sätt. Om du vill placera den nya widgeten i z-ordningen använder du gx_widget_back_attach eller gx_widget_back_move.
+Widgeten blir först-underordnad till sin överordnade när det gäller z-ordning. Om widgetar på samma sätt överlappar varandra ritas den här widgeten ovanpå på samma sätt. Om du vill placera den nya widgeten i z-ordningen använder du gx_widget_back_attach eller gx_widget_back_move.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -27105,7 +27182,7 @@ Widgeten blir det överordnade objektet längst fram när det gäller z-ordning.
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad widget-anslutning
+- **GX_SUCCESS** (0x00) Lyckad widget
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Överordnad eller widget är inte giltig
@@ -27172,7 +27249,7 @@ VOID gx_widget_background_draw(GX_WIDGET *widget);
 ```
 ### <a name="description"></a>Description
 
-Den här tjänsten utför en heldragen färgfyllning av en widgetbakgrund. Den här tjänsten anropas automatiskt av gx_widget_draw-funktionen, men kan också anropas av programmet som en del av en anpassad widgetritning.
+Den här tjänsten utför en heldragen färgfyllning av en widgetbakgrund. Den här tjänsten anropas automatiskt av gx_widget_draw,men kan också anropas av programmet som en del av en anpassad widgetritning.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -27264,7 +27341,7 @@ Widgeten blir det underordnade objektet till den överordnade widgeten när det 
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad widget
+- **GX_SUCCESS** (0x00) Lyckad widget-anslutning
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Överordnad eller widget är inte giltig
@@ -27337,7 +27414,7 @@ Den här tjänsten flyttar widgeten till bakåt i den överordnades Z-ordning f�
 ### <a name="parameters"></a>Parametrar
 
 - **överordnad** Pekare till överordnad widget
-- **return_widget_moved** Pekare till mål för flaggan som anger att widgeten har flyttats
+- **return_widget_moved** Pekare till mål för flagga som anger att widgeten har flyttats
 
 ### <a name="return-values"></a>Returvärden
 
@@ -27418,7 +27495,7 @@ Den här tjänsten flyttar ett rektangulärt block med bildpunkter. Den här tj�
 - **widget** Pekare till widget som begär blockflyttning
 - **blockera** Rektangel-begränsningsblock som ska flyttas
 - **xshift** X-skiftbeloppet i bildpunkter
-- **yshift** Y-skiftbeloppet i bildpunkter
+- **yshift** y-skift-beloppet i bildpunkter
 
 ### <a name="return-values"></a>Returvärden
 
@@ -27480,7 +27557,7 @@ status = gx_widget_block_move(&my_widget, &size, 20, 0);
 - gx_widget_width_get
 
 ## <a name="gx_widget_border_draw"></a>gx_widget_border_draw
-### <a name="draw-widget-border"></a>Rita widget-kantlinje
+### <a name="draw-widget-border"></a>Rita widgetkantlinje
 
 ### <a name="prototype"></a>Prototyp
 
@@ -27495,7 +27572,7 @@ VOID gx_widget_border_draw(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten ritar widgetens kantlinje. Den här tjänsten anropas vanligtvis som en del av en widgetritning. Den här tjänsten tolkar widgetens kantlinjeflaggor så att de inte ritar någon kantlinje, en tunn kantlinje, en upphöjd kantlinje, en flaggad kantlinje eller en tjock kantlinje.
+Den här tjänsten ritar widgetens kantlinje. Den här tjänsten anropas vanligtvis som en del av en widgetritning. Den här tjänsten tolkar widgetens flaggor för kantlinjeformat så att de inte ritar någon kantlinje, en tunn kantlinje, en upphöjd kantlinje, en flaggad kantlinje eller en tjock kantlinje.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -27503,7 +27580,7 @@ Den här tjänsten ritar widgetens kantlinje. Den här tjänsten anropas vanligt
 - **border_color** Färg på kantlinje. **Bilaga A** innehåller fördefinierade färger. Observera att programmet kan lägga till anpassade färger också.
 - **upper_fill** Färg på övre fyllning. **Bilaga A** innehåller fördefinierade färger. Observera att programmet kan lägga till anpassade färger också.
 - **lower_fill** Färg på lägre fyllning. **Bilaga A** innehåller fördefinierade färger. Observera att programmet kan lägga till anpassade färger också.
-- **fill** Den här booleska flaggan anger om widgetområdet ska fyllas med angivna fyllningsfärger. Om det här värdet GX_FALSE ritas endast widgetens kantlinje.
+- **fyll i** Den här booleska flaggan anger om widgetområdet ska fyllas med angivna fyllningsfärger. Om det här värdet GX_FALSE ritas endast widgetens kantlinje.
 
 ### <a name="return-values"></a>Returvärden
 
@@ -27570,7 +27647,7 @@ VOID my_widget_draw(GX_WIDGET * widget)
 - gx_widget_width_get
 
 ## <a name="gx_widget_border_style_set"></a>gx_widget_border_style_set
-### <a name="set-widget-border-style"></a>Ange kantformat för widget
+### <a name="set-widget-border-style"></a>Ange widgetkantlinjeformat
 
 ### <a name="prototype"></a>Prototyp
 
@@ -27587,11 +27664,11 @@ Den här tjänsten anger widgetens kantlinjeformat.
 ### <a name="parameters"></a>Parametrar
 
 - **widget** Pekare till widget
-- **style** Kantlinjeformat. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
+- **style (stil)** Stil på kantlinje. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad stiluppsättning för widget-kantlinje
+- **GX_SUCCESS** (0x00) Lyckad textuppsättning för widgetkantlinje
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
@@ -27747,7 +27824,7 @@ Den här tjänsten returnerar en pekare till arbetsytan där widgeten återges.
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad widget-arbetsyta hämta
+- **GX_SUCCESS** (0x00) Lyckad widget-arbetsyta få
 - **GX_FAILURE** (0x10) Widget-arbetsytan hittades inte
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
@@ -27805,7 +27882,7 @@ status = gx_widget_canvas_get(&my_widget, &my_canvas);
 - gx_widget_width_get
 
 ## <a name="gx_widget_child_detect"></a>gx_widget_child_detect
-### <a name="detect-widget-child"></a>Identifiera underordnad widget
+### <a name="detect-widget-child"></a>Identifiera widget underordnad
 
 ### <a name="prototype"></a>Prototyp
 
@@ -27895,7 +27972,7 @@ VOID gx_widget_children_draw(GX_WIDGET *widget);
 
 ### <a name="description"></a>Description
 
-Den här tjänsten ritar alla underordnade till den överordnade widgeten. Den här tjänsten anropas vanligtvis av alla standardwidgetritningsfunktioner för att rita befintliga underordnade widgetar och bör anropas av alla anpassade ritningsfunktioner för att tillåta att underordnade widgetar kopplas till din anpassade överordnade widgettyp.
+Den här tjänsten drar alla underordnade till den överordnade widgeten. Den här tjänsten anropas vanligtvis av alla standardwidgetritningsfunktioner för att rita befintliga underordnade widgetar och bör anropas av alla anpassade ritningsfunktioner för att tillåta att underordnade widgetar kopplas till din anpassade överordnade widgettyp.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -27986,7 +28063,7 @@ Den här tjänsten beräknar klientområdet för widgeten genom att subtrahera w
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckade widgetklientområdet get
+- **GX_SUCCESS** (0x00) Lyckade widgetklientområde get
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
 - **GX_INVALID_VALUE** (0x22) Widget-kantlinjen är inte giltig
@@ -28062,7 +28139,7 @@ Den här tjänsten hämtar färgen som är associerad med det angivna resurs-ID:
 ### <a name="parameters"></a>Parametrar
 
 - **widget** Pekare till widgetkontrollblock
-- **resource_id** Resurs-ID för färg. **Bilaga B** innehåller fördefinierade resurs-ID:er för färg. Observera att programmet även kan lägga till anpassade resurs-ID:n för färg.
+- **resource_id** Resurs-ID för färg. **Bilaga B** innehåller fördefinierade färgresurs-ID:er. Observera att programmet kan lägga till anpassade resurs-ID:n för färg också.
 - **return_color** Pekare till mål för färg. **Bilaga A** innehåller fördefinierade färger. Observera att programmet kan lägga till anpassade färger också.
 
 ### <a name="return-values"></a>Returvärden
@@ -28116,7 +28193,7 @@ Den här tjänsten skapar en widget.
 - **widget** Pekare till widget
 - **namn** Logiskt namn på widget
 - **överordnad** Pekare till överordnad widget
-- **style (stil)** Stil. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
+- **style** Stil. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
 - **widget_id** Programdefinierat ID för widgeten
 - **storlek** Widgetens storlek
 
@@ -28273,7 +28350,7 @@ UINT gx_widget_delete(GX_WIDGET *widget);
 
 ### <a name="description"></a>Description
 
-Den här tjänsten tar bort widgeten. Om widgetkontrollblocket tilldelas dynamiskt anropas gx_system_memory_free till fri dynamiskt allokerad lagring.
+Den här tjänsten tar bort widgeten. Om widgetkontrollblocket allokeras dynamiskt anropas gx_system_memory_free till fri dynamiskt allokerad lagring.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -28281,10 +28358,10 @@ Den här tjänsten tar bort widgeten. Om widgetkontrollblocket tilldelas dynamis
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad widget ta bort GX_CALLER_ERROR (0x11) Ogiltig anropare för den här funktionen
+- **GX_SUCCESS** (0x00) Lyckades widgeten tar bort GX_CALLER_ERROR (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
-- **GX_SYSTEM_MEMORY_ERROR** (0x30) Funktionen Minnesfri har inte definierats
+- **GX_SYSTEM_MEMORY_ERROR** (0x30) Minnesfri funktion har inte definierats
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -28507,7 +28584,7 @@ Den här tjänsten åsidosätter standardritningsfunktionen för widgeten.
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Åsidosättning av funktion för att rita widget
+- **GX_SUCCESS** (0x00) Åsidosättning av funktionen för att rita en widget
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
@@ -28583,7 +28660,7 @@ UINT gx_widget_event_generate(
 
 Den här tjänsten genererar GX_SIGNAL typ av händelse, som är en viss typ eller klass av GX_EVENT. gx_widget_event_generate() kodar 16-bitars widget-ID:t tillsammans med det som skickas i event_type till ett enda 32-bitars GX_EVENT.gx_event_type-värde. Värdeparametern kodas till den genererade gx_event. gx_event_payload.gx_event_longdata.
 
-Det genererade event.gx_event_target alltid läses in med den anropande widgetens överordnade, vilket innebär att den genererade händelsen alltid skickas först till den överordnade widgeten för den genererande widgeten.
+Det genererade event.gx_event_target läses alltid in med den anropande widgetens överordnade, vilket innebär att den genererade händelsen alltid skickas först till den överordnade widgeten för den genererande widgeten.
 
 Observera att gx_widget_event_generate endast ska användas för att skicka GX_SIGNAL intervallhändelsetyper. För alla andra händelsetyper, inklusive användardefinierade händelsetyper, använder du API:et gx_system_event_send() som ger fullständig kontroll över alla fält i händelsen som pushas i GUIX-händelsekön.
 
@@ -28595,7 +28672,7 @@ Observera att gx_widget_event_generate endast ska användas för att skicka GX_S
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad widget-händelsegenerering
+- **GX_SUCCESS** (0x00) Lyckad widgethändelsegenerering
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
@@ -28664,12 +28741,12 @@ UINT gx_widget_event_process(
 
 ### <a name="description"></a>Description
 
-Det här är standardfunktionen för händelsebearbetning för alla widgetar. När en anpassad händelsebearbetningsfunktion skrivs bör standardåtgärden för alla händelsetyper alltid vara att skicka händelsen till den widgettyp som en widget baseras på. Widgetar som baseras på de mest grundläggande GX_WIDGET typ använder gx_widget_event_process som standardfunktion för händelsebearbetning.
+Det här är standardfunktionen för händelsebearbetning för alla widgetar. När en anpassad händelsebearbetningsfunktion skrivs bör standardåtgärden för alla händelsetyper alltid vara att skicka händelsen till den widgettyp som en widget baseras på. Widgetar som baseras på den mest grundläggande GX_WIDGET typ använder gx_widget_event_process som standardhändelsebearbetningsfunktion.
 
 ### <a name="parameters"></a>Parametrar
 
 - **widget** Pekare till widget
-- **händelse** Pekare till händelse som ska bearbetas
+- **händelse** Pekare till händelse att bearbeta
 
 ### <a name="return-values"></a>Returvärden
 
@@ -28914,13 +28991,13 @@ UINT gx_widget_fill_color_set(
 ```
 ### <a name="description"></a>Description
 
-Den här tjänsten anger bakgrundsfärgerna för widgeten.
+Den här tjänsten anger widgetens bakgrundsfärger.
 
 ### <a name="parameters"></a>Parametrar
 
 - **widget** Pekare till widget
-- **normal_color_id** Resurs-ID för fyllningsfärgen i normalt tillstånd. **Bilaga A** innehåller fördefinierade resurs-ID:er för färg. Observera att programmet kan lägga till anpassade resurs-ID:n för färg också.
-- **selected_color_id** Resurs-ID för fyllningsfärgen när widgeten får fokus. **Bilaga A** innehåller fördefinierade resurs-ID:er för färg. Observera att programmet kan lägga till anpassade resurs-ID:n för färg också.
+- **normal_color_id** Resurs-ID för fyllningsfärgen i normalt tillstånd. **Bilaga A** innehåller fördefinierade färgresurs-ID:er. Observera att programmet även kan lägga till anpassade resurs-ID:n för färg.
+- **selected_color_id** Resurs-ID för fyllningsfärgen när widgeten får fokus. **Bilaga A** innehåller fördefinierade färgresurs-ID:er. Observera att programmet även kan lägga till anpassade resurs-ID:n för färg.
 - **disabled_color_id** Resurs-ID för fyllningsfärgen när GX_STYLE_ENABLED inte har angetts. **Bilaga A** innehåller fördefinierade resurs-ID:er för färg. Observera att programmet kan lägga till anpassade resurs-ID:n för färg också.
 
 ### <a name="return-values"></a>Returvärden
@@ -28998,19 +29075,19 @@ UINT gx_widget_find(
 ```
 ### <a name="description"></a>Description
 
-Den här tjänsten söker igenom underordnade objekt till den angivna överordnade och letar efter en widget med det begärda ID-värdet.
+Den här tjänsten söker igenom underordnade till den angivna överordnade och letar efter en widget med det begärda ID-värdet.
 
 ### <a name="parameters"></a>Parametrar
 
 - **överordnad** Pekare till överordnad widget som sökningen startas från
 - **widget_id** Widget-ID att söka efter
-- **search_depth** Definierar den rekursiva kapslingsnivå där funktionen söker efter underordnade widgetar. Om det här värdet <= 0 genomsöks endast omedelbara underordnade till den överordnade widgeten. Om det här GX_SEARCH_DEPTH_INFINITE söks alla underordnade till alla underordnade widgetar igenom. För andra värden > 0 begränsar det här värdet hur djupt kapslat funktionen söker igenom underordnade widgetar som har sökts efter det begärda widget-ID:t.
+- **search_depth** Definierar den rekursiva kapslingsnivå som funktionen söker efter underordnade widgetar i. Om det här värdet <= 0 genomsöks endast omedelbara underordnade till den överordnade widgeten. Om det här GX_SEARCH_DEPTH_INFINITE söks alla underordnade till alla underordnade widgetar igenom. För andra värden > 0 begränsar det här värdet hur djupt kapslad funktionen ska söka igenom underordnade widgetar som söker efter det begärda widget-ID:t.
 - **return_widget** Pekare till mål för hittad widget
 
 ### <a name="return-values"></a>Returvärden
 
 - **GX_SUCCESS** (0x00) Hitta en lyckad widget
-- **GX_NOT_FOUND** widget (0x09) inte
+- **GX_NOT_FOUND** widget (0x09)
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
 
@@ -29068,7 +29145,7 @@ status = gx_widget_find(&my_widget, GX_SEARCH_DEPTH_INFINITE
 - gx_widget_width_get
 
 ## <a name="gx_widget_first_child_get"></a>gx_widget_first_child_get
-### <a name="return-pointer-to-first-child-widget"></a>Gå tillbaka till den första underordnade widgeten
+### <a name="return-pointer-to-first-child-widget"></a>Återgå till den första underordnade widgeten
 
 ### <a name="prototype"></a>Prototyp
 
@@ -29079,7 +29156,7 @@ UINT gx_widget_first_child_get(
 ```
 ### <a name="description"></a>Description
 
-GUIX har en trädstrukturerad lista över överordnade och underordnade widgetar. Den här tjänsten returnerar en pekare till den första underordnade widgeten för den överordnade widgeten.
+GUIX har en trädstrukturerad lista över över- och underordnade widgetar. Den här tjänsten returnerar en pekare till den första underordnade widgeten för den överordnade widgeten.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -29141,8 +29218,8 @@ Den här tjänsten flyttar fokus till nästa widget på samma nivå i den länka
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) fokus har flyttats
-- **GX_FAILURE** (0x00) fokus har inte flyttats
+- **GX_SUCCESS** (0x00) har flyttats
+- **GX_FAILURE** (0x00) flyttades inte
 - **GX_PTR_ERROR** (0x07) Ogiltig widget-pekare
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_INVALID_WIDGET** (0x12) Ogiltig widget
@@ -29183,8 +29260,8 @@ Den här tjänsten flyttar fokus till föregående widget i navigeringsordningen
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) har flyttats
-- **GX_FAILURE** (0x00) flyttades inte
+- **GX_SUCCESS** (0x00) fokus har flyttats
+- **GX_FAILURE** (0x00) fokus har inte flyttats
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -29229,7 +29306,7 @@ Den här tjänsten hämtar teckensnittet som är associerat med det angivna resu
 - **GX_SUCCESS** (0x00) Teckensnittet har hämtats
 - **GX_INVALID_RESOURCE_ID** (0x33) Ogiltigt resurs-ID
 - **GX_INVALID_CANVAS** (0x20) Widget-arbetsytan är inte giltig eller widgeten är osynlig
-- **GX_PTR_ERROR** (0x07) Ogiltig widget-pekare
+- **GX_PTR_ERROR** (0x07) Felaktig widget-pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -29354,7 +29431,7 @@ Den här tjänsten flyttar widgeten till fronten i den överordnade Z-ordningens
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad widget flytta fram
+- **GX_SUCCESS** (0x00) Lyckad widget flytta till front
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_NO_CHANGE** widget (0x08) redan framför
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
@@ -29435,7 +29512,7 @@ Den här tjänsten hämtar widgetens höjd.
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad widgethöjd får
+- **GX_SUCCESS** (0x00) Lyckad widgethöjd få
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
@@ -29504,7 +29581,7 @@ UINT gx_widget_hide(GX_WIDGET *widget);
 
 ### <a name="description"></a>Description
 
-Den här tjänsten döljer widgeten. Den här widgeten är fortfarande kopplad till den överordnade, men den är inte tillåten att rita på arbetsytan.
+Den här tjänsten döljer widgeten. Den här widgeten är fortfarande kopplad till den överordnade widgeten, men den får inte ritas på arbetsytan.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -29568,7 +29645,7 @@ status = gx_widget_hide(&my_widget);
 - gx_widget_width_get
 
 ## <a name="gx_widget_last_child_get"></a>gx_widget_last_child_get
-### <a name="return-pointer-to-last-child-widget"></a>Återgå pekaren till den senaste underordnade widgeten
+### <a name="return-pointer-to-last-child-widget"></a>Återgå pekaren till den sista underordnade widgeten
 
 ### <a name="prototype"></a>Prototyp
 
@@ -29589,7 +29666,7 @@ GUIX har en trädstrukturerad lista över överordnade och underordnade widgetar
 ### <a name="return-values"></a>Returvärden
 
 - **GX_SUCCESS** (0x00) returnerad pekare
-- **GX_PTR_ERROR** (0x07) Ogiltig widget-pekare
+- **GX_PTR_ERROR** (0x07) Felaktig widget-pekare
 - **GX_INVALID_WIDGET** (0x12) Ogiltig widget
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -29645,7 +29722,7 @@ GUIX har en trädstrukturerad lista över överordnade och underordnade widgetar
 ### <a name="return-values"></a>Returvärden
 
 - **GX_SUCCESS** (0x00) returnerad pekare
-- **GX_PTR_ERROR** (0x07) Felaktig widget-pekare
+- **GX_PTR_ERROR** (0x07) Ogiltig widget-pekare
 - **GX_INVALID_WIDGET** (0x12) Ogiltig widget
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -29690,7 +29767,7 @@ UINT gx_widget_parent_get(
 ```
 ### <a name="description"></a>Description
 
-GUIX har en trädstrukturerad lista över överordnade och underordnade widgetar. Den här tjänsten returnerar en pekare till den överordnade widgeten för den aktuella widgeten.
+GUIX har en trädstrukturerad lista över överordnade och underordnade widgetar. Den här tjänsten returnerar en pekare till den överordnade widgeten.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -29747,13 +29824,13 @@ UINT gx_widget_pixelmap_get(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten hämtar pixelkartan som är associerad med det angivna resurs-ID:t. Den här tjänsten ska bara anropas för synliga widgetar.
+Den här tjänsten hämtar pixelkartan som är associerad med det angivna resurs-ID:t. Den här tjänsten bör endast anropas för synliga widgetar.
 
 ### <a name="parameters"></a>Parametrar
 
 - **widget** Pekare till widgetkontrollblock
 - **pixelmap_id** Resurs-ID för pixelkarta
-- **return_pixelmap** Pekare till mål pekare för pixelkarta
+- **return_pixelmap** Pekare till målpekaren för pixelkarta
 
 ### <a name="return-values"></a>Returvärden
 
@@ -29806,7 +29883,7 @@ GUIX har en trädstrukturerad lista över överordnade och underordnade widgetar
 ### <a name="return-values"></a>Returvärden
 
 - **GX_SUCCESS** (0x00) returnerad pekare
-- **GX_PTR_ERROR** (0x07) Felaktig widget-pekare
+- **GX_PTR_ERROR** (0x07) Ogiltig widget-pekare
 - **GX_INVALID_WIDGET** (0x12) Ogiltig widget
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -29851,7 +29928,7 @@ UINT gx_widget_resize(
 ```
 ### <a name="description"></a>Description
 
-Den här tjänsten ändrar storlek på widgeten. Om widgeten visas blir den automatiskt ogiltig och köas för omritning.
+Den här tjänsten ändrar storlek på widgeten. Om widgeten visas ogiltigförklaras den automatiskt och läggs i kö för omritning.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -29860,7 +29937,7 @@ Den här tjänsten ändrar storlek på widgeten. Om widgeten visas blir den auto
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Storleksändring av lyckad widget
+- **GX_SUCCESS** (0x00) Ändra storlek på en lyckad widget
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
@@ -30011,7 +30088,7 @@ UINT gx_widget_show(GX_WIDGET *widget);
 
 ### <a name="description"></a>Description
 
-Den här tjänsten visar widgeten. Widgeten blir bara synlig om den är kopplad till en överordnad och den överordnade widgeten också visas.
+Den här tjänsten visar widgeten. Widgeten blir bara synlig om den är kopplad till en överordnad widget och den överordnade widgeten också visas.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -30019,7 +30096,7 @@ Den här tjänsten visar widgeten. Widgeten blir bara synlig om den är kopplad 
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Widgeten har lyckats
+- **GX_SUCCESS** (0x00) Lyckad widget visas
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
@@ -30250,7 +30327,7 @@ Den här tjänsten tar bort de angivna statusflaggorna från widgetens interna s
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad widgetstatusborttagning
+- **GX_SUCCESS** (0x00) Lyckad statusborttagning av widget
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
 
@@ -30324,7 +30401,7 @@ Den här tjänsten testar statusflaggorna för den angivna widgeten och lagrar r
 
 - **widget** Pekare till widget
 - **status** Status att testa
-- **return_status** Pekare till mål för testresultat
+- **return_status** Pekare till mål för testresultatet
 
 ### <a name="return-values"></a>Returvärden
 
@@ -30374,13 +30451,13 @@ UINT gx_widget_string_get(
 
 Den här tjänsten är inaktuell till förmån för gx_widget_string_get_ext().
 
-Den här tjänsten returnerar strängtabellposten för det angivna sträng-ID-värdet. Den här tjänsten liknar gx_display_string_get, förutom att den aktiva visningen fastställs automatiskt i stället för att skickas av anroparen. Den här tjänsten kan bara användas för widgetar som är synliga, dvs. visningen som är associerad med den här widgeten är känd.
+Den här tjänsten returnerar strängtabellposten för det angivna sträng-ID-värdet. Den här tjänsten liknar den gx_display_string_get, förutom att den aktiva visningen fastställs automatiskt i stället för att skickas av anroparen. Den här tjänsten kan bara användas för widgetar som är synliga, dvs. visningen som är associerad med den här widgeten är känd.
 
 ### <a name="parameters"></a>Parametrar
 
 - **widget** Pekare till widget
 - **string_id** Sträng-ID-värde från resurshuvud
-- **sträng** Adressen till variabeln som ska returnera strängen
+- **sträng** Adressen för variabeln som ska returneras av strängen
 
 ### <a name="return-values"></a>Returvärden
 
@@ -30422,13 +30499,13 @@ UINT gx_widget_string_get(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten returnerar strängtabellposten för det angivna sträng-ID-värdet. Den här tjänsten liknar den gx_display_string_get, förutom att den aktiva visningen fastställs automatiskt i stället för att skickas av anroparen. Den här tjänsten kan bara användas för widgetar som är synliga, dvs. visningen som är associerad med den här widgeten är känd.
+Den här tjänsten returnerar strängtabellposten för det angivna sträng-ID-värdet. Den här tjänsten liknar gx_display_string_get, förutom att den aktiva visningen fastställs automatiskt i stället för att skickas av anroparen. Den här tjänsten kan bara användas för widgetar som är synliga, dvs. visningen som är associerad med den här widgeten är känd.
 
 ### <a name="parameters"></a>Parametrar
 
 - **widget** Pekare till widget
 - **string_id** Sträng-ID-värde från resurshuvud
-- **sträng** Adressen för variabeln som ska returneras av strängen
+- **sträng** Adressen till variabeln som ska returnera strängen
 
 ### <a name="return-values"></a>Returvärden
 
@@ -30482,11 +30559,11 @@ Om widgeten visas blir den automatiskt ogiltig och köas för omritning.
 ### <a name="parameters"></a>Parametrar
 
 - **widget** Pekare till widget
-- **style** Nytt format att lägga till. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
+- **style (stil)** Nytt format att lägga till. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Successful widget style add
+- **GX_SUCCESS** (0x00) Lyckat widgetformat lägg till
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
@@ -30560,7 +30637,7 @@ Den här tjänsten hämtar formatflaggan från widgeten.
 ### <a name="parameters"></a>Parametrar
 
 - **widget** Pekare till widget
-- **return_style** Pekare till formatet som returneras.
+- **return_style** Pekare till det format som returneras.
 
 ### <a name="return-values"></a>Returvärden
 
@@ -30645,11 +30722,11 @@ Om widgeten visas ogiltigförklaras den automatiskt och läggs i kö för omritn
 ### <a name="parameters"></a>Parametrar
 
 - **widget** Pekare till widget
-- **style (stil)** Format som ska tas bort. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
+- **style** Stil som ska tas bort. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Bort ett lyckat widgetformat
+- **GX_SUCCESS** (0x00) Stil för lyckad widget ta bort
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
@@ -30721,16 +30798,16 @@ UINT gx_widget_style_set(
 
 Den här tjänsten anger ett format till widgeten.
 
-Om set-formatet GX_STYLE_TRANSPARENT läggs statusen GX_STATUS_TRANSPARENT, annars tas statusen bort.
+Om uppsättningsformatet GX_STYLE_TRANSPARENT läggs statusen GX_STATUS_TRANSPARENT, annars tas statusen bort.
 
-Om set-formatet GX_STYLE_ENABLED läggs statusen GX_STATUS_SELECTABLE, annars tas statusen bort.
+Om uppsättningsformatet GX_STYLE_ENABLED läggs statusen GX_STATUS_SELECTABLE, annars tas statusen bort.
 
-Om widgeten visas blir den automatiskt ogiltig och köas för omritning.
+Om widgeten visas ogiltigförklaras den automatiskt och läggs i kö för omritning.
 
 ### <a name="parameters"></a>Parametrar
 
 - **widget** Pekare till widget
-- **style (stil)** Stil att ange. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
+- **style** Stil som ska anges. **Bilaga D** innehåller fördefinierade allmänna format för alla widgetar samt widgetspecifika format.
 
 ### <a name="return-values"></a>Returvärden
 
@@ -30820,7 +30897,7 @@ Den här tjänsten blandar den angivna texten över en widget med hjälp av aktu
 - **sträng** Ritningssträng
 - **x_offset** Justering av ritningsposition
 - **y_offset** Justering av ritningsposition
-- **alpha** Blandningsvärde 0–255
+- **alfa** Blandningsvärde 0–255
 
 ### <a name="return-values"></a>Returvärden
 
@@ -30878,7 +30955,7 @@ Den här tjänsten återger en sträng över den angivna widgeten med den aktuel
 - **sträng** Ritningssträng
 - **x_offset** Justering av ritningsposition
 - **y_offset** Justering av ritningsposition
-- **alfa** Blandningsvärde 0–255
+- **alpha** Blandningsvärde 0–255
 
 ### <a name="return-values"></a>Returvärden
 
@@ -31048,7 +31125,7 @@ VOID gx_widget_text_id_draw(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten ritar text över en widget givet ett text-ID.
+Den här tjänsten ritar text över en widget med ett text-ID.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -31111,7 +31188,7 @@ Den här tjänsten returnerar en pekare till den översta synliga underordnade t
 ### <a name="return-values"></a>Returvärden
 
 - **GX_SUCCESS** (0x00) returnerad pekare
-- **GX_PTR_ERROR** (0x07) Felaktig widget-pekare
+- **GX_PTR_ERROR** (0x07) Ogiltig widget-pekare
 - **GX_INVALID_WIDGET** (0x12) Ogiltig widget
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -31319,12 +31396,12 @@ UINT gx_window_client_height_get(
 
 ### <a name="description"></a>Description
 
-Den här tjänsten hämtar klientens höjd för fönstret.
+Den här tjänsten hämtar klientens fönsterhöjd.
 
 ### <a name="parameters"></a>Parametrar
 
 - **fönster** Pekare till fönster
-- **return_height** Pekare till mål för klientens höjd
+- **return_height** Pekare till mål för klienthöjd
 
 ### <a name="return-values"></a>Returvärden
 
@@ -31389,7 +31466,7 @@ Den här tjänsten bläddrar fönsterklienterna med det angivna beloppet.
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Bläddra i fönsterklienten
+- **GX_SUCCESS** (0x00) Lyckade fönsterklientrullningar
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
@@ -31446,7 +31523,7 @@ Den här tjänsten hämtar klientbredden för det angivna fönstret.
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Lyckad fönsterklientbredd get
+- **GX_SUCCESS** (0x00) Lyckad fönsterklientbredd hämta
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
@@ -31493,7 +31570,7 @@ UINT gx_window_close(GX_WINDOW *window);
 
 ### <a name="description"></a>Description
 
-Den här tjänsten tvingar ett modalt fönster att koppla från dess överordnade fönster och returnera från den modala körningsloopen.
+Den här tjänsten tvingar ett modalt fönster att koppla från det överordnade fönstret och returnera från den modala körningsloopen.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -31501,7 +31578,7 @@ Den här tjänsten tvingar ett modalt fönster att koppla från dess överordnad
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Fönstret Har stängts
+- **GX_SUCCESS** (0x00) Fönstret har stängts
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
@@ -31537,7 +31614,7 @@ status = gx_window_close(&my_window);
 - gx_window_wallpaper_set
 
 ## <a name="gx_window_create"></a>gx_window_create
-### <a name="create-window"></a>Fönstret Skapa
+### <a name="create-window"></a>Skapa fönster
 
 ### <a name="prototype"></a>Prototyp
 
@@ -31571,7 +31648,7 @@ GX_WINDOW härleds från GX_WIDGET och stöder alla gx_widget API-tjänster.
 - **GX_SUCCESS** (0x00) Skapa ett fönster
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
-- **GX_ALREADY_CREATED** (0x13) Widget har redan skapats
+- **GX_ALREADY_CREATED** widgeten (0x13) har redan skapats
 - **GX_INVALID_SIZE** (0x19) Ogiltig blockstorlek för widgetkontroll
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
 
@@ -31683,7 +31760,7 @@ Den här tjänsten bearbetar en händelse för det här fönstret.
 ### <a name="parameters"></a>Parametrar
 
 - **fönster** Pekare till fönsterkontrollblock
-- **händelse** Pekare till händelse att bearbeta
+- **händelse** Pekare till händelse som ska bearbetas
 
 ### <a name="return-values"></a>Returvärden
 
@@ -31827,7 +31904,7 @@ Den här tjänsten skapar ett rotfönster.
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_SIZE** (0x19) Ogiltig blockstorlek för widgetkontroll
-- **GX_ALREADY_CREATED** widgeten (0x13) har redan skapats
+- **GX_ALREADY_CREATED** (0x13) Widget har redan skapats
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -31877,7 +31954,7 @@ Den här tjänsten tar bort ett rotfönster.
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
-- **GX_SYSTEM_MEMORY_ERROR** (0x30) Minnesfri funktion har inte definierats
+- **GX_SYSTEM_MEMORY_ERROR** (0x30) Funktionen Minnesfri har inte definierats
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -31910,7 +31987,7 @@ status = gx_window_root_delete(&root_window);
 - gx_window_wallpaper_set
 
 ## <a name="gx_window_root_event_process"></a>gx_window_root_event_process
-### <a name="process-event-for-the-root-window"></a>Bearbeta händelse för rotfönstret
+### <a name="process-event-for-the-root-window"></a>Processhändelse för rotfönstret
 
 ### <a name="prototype"></a>Prototyp
 
@@ -31931,7 +32008,7 @@ Den här tjänsten bearbetar händelser för det angivna rotfönstret.
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Korrekt bearbetad rotfönsterhändelse
+- **GX_SUCCESS** (0x00) Rotfönsterhändelsen har bearbetats
 - **GX_CALLER_ERROR** (0x11) Ogiltig anropare för den här funktionen
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 
@@ -32057,8 +32134,8 @@ Den här tjänsten hämtar rullningsinformationen för fönstret.
 ### <a name="parameters"></a>Parametrar
 
 - **fönster** Pekare till fönster
-- **style (stil)** GX_SCROLLBAR_HORIZONTAL eller GX_SCROLLBAR_VERTICAL
-- **return_scroll_info** Pekare till mål för rullningsinformation. Det överordnade fönstret initierar den här strukturen för att informera rullningslisten för det överordnade fönstrets totala storlek, visningsbart område och inkrement och gränser för rullning. Standardimplementering använder Windows-klientområdet som visningsbart område och bläddrar efter bildpunkter, men anpassad fönsterimplementering kan använda rullningsparametrarna. **Bilaga I** innehåller definitionen av GX_SCROLL_INFO struktur
+- **style** GX_SCROLLBAR_HORIZONTAL eller GX_SCROLLBAR_VERTICAL
+- **return_scroll_info** Pekare till mål för rullningsinformation. Det överordnade fönstret initierar den här strukturen för att informera rullningslisten för det överordnade fönstrets totala storlek, visningsbart område och rullningssteg och gränser. Standardimplementering använder Windows-klientområdet som visningsbart område och rullar med bildpunkter, men anpassad fönsterimplementering kan använda rullningsparametrarna. **Bilaga I** innehåller definitionen av GX_SCROLL_INFO struktur
 
 ### <a name="return-values"></a>Returvärden
 
@@ -32100,7 +32177,7 @@ status = gx_window_scroll_info_get(&my_window,
 - gx_window_wallpaper_set
 
 ## <a name="gx_window_scrollbar_find"></a>gx_window_scrollbar_find
-### <a name="find-window-scrollbar"></a>Hitta rullningslisten för fönster
+### <a name="find-window-scrollbar"></a>Hitta rullningslist för fönster
 
 ### <a name="prototype"></a>Prototyp
 
@@ -32123,7 +32200,7 @@ Den här tjänsten hittar rullningslisten för det angivna fönstret.
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Hitta rullningslisten i fönstret
+- **GX_SUCCESS** (0x00) Lyckad rullningslist för fönster
 - **Rullningslisten** GX_NOT_FOUND (0x09) hittades inte
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
@@ -32182,7 +32259,7 @@ Den här tjänsten hämtar skrivbordsunderlägget för det angivna fönstret.
 
 ### <a name="return-values"></a>Returvärden
 
-- **GX_SUCCESS** (0x00) Fönsterbakgrund hämta
+- **GX_SUCCESS** (0x00) Hämta skrivbordsunderlägg för fönstret
 - **GX_PTR_ERROR** (0x07) Ogiltig pekare
 - **GX_INVALID_WIDGET** (0x12) Widget är inte giltig
 
@@ -32219,7 +32296,7 @@ status = gx_window_wallpaper_get(&my_window, &my_window_wallpaper);
 - gx_window_wallpaper_set
 
 ## <a name="gx_window_wallpaper_set"></a>gx_window_wallpaper_set
-### <a name="set-window-wallpaper"></a>Ange skrivbordsunderlägg för fönster
+### <a name="set-window-wallpaper"></a>Ange fönsterbakgrund
 
 ### <a name="prototype"></a>Prototyp
 

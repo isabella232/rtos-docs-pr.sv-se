@@ -1,120 +1,120 @@
 ---
-title: Kapitel 4 – Beskrivning av Azure återställnings tider NetX Secure Services
-description: Det här kapitlet innehåller en beskrivning av alla NetX säkra tjänster (visas nedan) i alfabetisk ordning.
+title: Kapitel 4 – Beskrivning Azure RTOS NetX Secure-tjänster
+description: Det här kapitlet innehåller en beskrivning av alla NetX Secure-tjänster (visas nedan) i alfabetisk ordning.
 author: philmea
 ms.author: philmea
 ms.date: 06/04/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 89761ec3438b1b16c1a603764bf7d4e1eac1b4ea
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 80ec22058ab64ed0c6258bb3d9364ec44f9a741b
+ms.sourcegitcommit: 4ebe7c51ba850951c6a9d0f15e22d07bb752bc28
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104826949"
+ms.lasthandoff: 05/20/2021
+ms.locfileid: "110223400"
 ---
-# <a name="chapter-4---description-of-azure-rtos-netx-secure-services"></a>Kapitel 4 – Beskrivning av Azure återställnings tider NetX Secure Services
+# <a name="chapter-4---description-of-azure-rtos-netx-secure-services"></a>Kapitel 4 – Beskrivning Azure RTOS NetX Secure-tjänster
 
-Det här kapitlet innehåller en beskrivning av alla Azure återställnings tider NetX-säkra tjänster (visas nedan) i alfabetisk ordning.
+Det här kapitlet innehåller en beskrivning av alla Azure RTOS NetX Secure-tjänster (anges nedan) i alfabetisk ordning.
 
-I avsnittet "returnera värden" i följande API-beskrivningar påverkas inte värden i **fetstil** av **NX_SECURE_DISABLE_ERROR_CHECKING** makro som används för att inaktivera API-felkontroll, medan icke-Fetstilade värden är helt inaktiverade.
+I avsnittet "Returvärden" i följande API-beskrivningar påverkas inte värden i **BOLD** av **NX_SECURE_DISABLE_ERROR_CHECKING-makrot** som används för att inaktivera API-felkontroll, medan värden som inte är fetstilta är helt inaktiverade.
 
 - [nx_secure_crypto_table_self_test](#nx_secure_crypto_table_self_test)
-  - Utför self_test på krypterings metoderna
+  - Utföra self_test på kryptografimetoderna
 - [nx_secure_module_hash_compute](#nx_secure_module_hash_compute)
-  - Beräknar hash-värde med user_supplied hash-funktion
+  - Beräknar hash-värdet med hjälp user_supplied hash-funktion
 - [nx_secure_tls_active_certificate_set](#nx_secure_tls_active_certificate_set)
-  - Ange det aktiva identitets certifikatet för en NetX Secure TLS-session
+  - Ange det aktiva identitetscertifikatet för en NetX Secure TLS-session
 - [nx_secure_tls_client_psk_set](#nx_secure_tls_client_psk_set)
   - Ange en Pre_Shared nyckel för en NetX Secure TLS-klientsession
 - [nx_secure_tls_initialize](#nx_secure_tls_initialize)
   - Initierar NetX Secure TLS-modulen]
 - [nx_secure_tls_local_certificate_add](#nx_secure_tls_local_certificate_add)
-  - Lägg till ett lokalt certifikat till NetX Secure TLS-session
+  - Lägga till ett lokalt certifikat i NetX Secure TLS-session
 - [nx_secure_tls_local_certificate_find](#nx_secure_tls_local_certificate_find)
   - Hitta ett lokalt certifikat i en NetX Secure TLS-session efter eget namn
 - [nx_secure_tls_local_certificate_remove](#nx_secure_tls_local_certificate_remove)
-  - Ta bort det lokala certifikatet från NetX Secure TLS-sessionen
+  - Ta bort lokalt certifikat från NetX Secure TLS-session
 - [nx_secure_tls_metadata_size_calculate](#nx_secure_tls_metadata_size_calculate)
-  - Beräkna storleken på kryptografiska metadata för en NetX säker TLS-session
+  - Beräkna storleken på kryptografiska metadata för en NetX Secure TLS-session
 - [nx_secure_tls_packet_allocate](#nx_secure_tls_packet_allocate)
-  - Allokera ett paket för en NetX säker TLS-session
+  - Allokera ett paket för en NetX Secure TLS-session
 - [nx_secure_tls_psk_add](#nx_secure_tls_psk_add)
-  - Lägga till en Pre_Shared nyckel till en NetX Secure TLS-session
+  - Lägga till Pre_Shared nyckel i en NetX Secure TLS-session
 - [nx_secure_tls_remote_certificate_allocate](#nx_secure_tls_remote_certificate_allocate)
-  - Allokera utrymme för certifikatet som tillhandahålls av en fjärran sluten TLS-värd
+  - Allokera utrymme för certifikatet som tillhandahålls av en fjärransluten TLS-värd
 - [nx_secure_tls_remote_certificate_buffer_allocate](#nx_secure_tls_remote_certificate_buffer_allocate)
-  - Allokera utrymme för alla certifikat som tillhandahålls av en fjärran sluten TLS-värd
+  - Allokera utrymme för alla certifikat som tillhandahålls av en fjärransluten TLS-värd
 - [nx_secure_tls_remote_certificate_free_all](#nx_secure_tls_remote_certificate_free_all)
   - Ledigt utrymme allokerat för inkommande certifikat
 - [nx_secure_tls_server_certificate_add](#nx_secure_tls_server_certificate_add)
-  - Lägg till ett certifikat specifikt för TLS-servrar med hjälp av en numerisk identifierare
+  - Lägga till ett certifikat specifikt för TLS-servrar med hjälp av en numerisk identifierare
 - [nx_secure_tls_server_certificate_find](#nx_secure_tls_server_certificate_find)
-  - Hitta ett certifikat med en numerisk identifierare
+  - Hitta ett certifikat med hjälp av en numerisk identifierare
 - [nx_secure_tls_server_certificate_remove](#nx_secure_tls_server_certificate_remove)
-  - Ta bort ett lokalt Server certifikat med en numerisk identifierare
+  - Ta bort ett lokalt servercertifikat med hjälp av en numerisk identifierare
 - [nx_secure_tls_session_certificate_callback_set](#nx_secure_tls_session_certificate_callback_set)
-  - Konfigurera en motringning för TLS som ska användas för ytterligare certifikat validering
+  - Konfigurera ett återanrop för TLS som ska användas för ytterligare certifikatverifiering
 - [nx_secure_tls_session_client_callback_set](#nx_secure_tls_session_client_callback_set)
-  - Konfigurera ett motanrop för TLS som ska anropas i början av en TLS-klient hand skakning
+  - Konfigurera ett återanrop för TLS som ska anropas i början av en TLS-klienthandskakning
 - [nx_secure_tls_session_x509_client_verify_configure](#nx_secure_tls_session_x509_client_verify_configure)
-  - Aktivera client X. 509-verifiering och allokera utrymme för klient certifikat
+  - Aktivera X.509-klientverifiering och allokera utrymme för klientcertifikat
 - [nx_secure_tls_session_client_verify_disable](#nx_secure_tls_session_client_verify_disable)
-  - Inaktivera autentisering av klient certifikat för en NetX säker TLS-session
+  - Inaktivera klientcertifikatautentisering för en NetX Secure TLS-session
 - [nx_secure_tls_session_client_verify_enable](#nx_secure_tls_session_client_verify_enable)
-  - Aktivera autentisering av klient certifikat för en NetX säker TLS-session
+  - Aktivera klientcertifikatautentisering för en NetX Secure TLS-session
 - [nx_secure_tls_session_create](#nx_secure_tls_session_create)
   - Skapa en NetX Secure TLS-session för säker kommunikation
 - [nx_secure_tls_session_delete](#nx_secure_tls_session_delete)
   - Ta bort en NetX Secure TLS-session
 - [nx_secure_tls_session_end](#nx_secure_tls_session_end)
-  - Avsluta en aktiv NetX säker TLS-session
+  - Avsluta en aktiv NetX Secure TLS-session
 - [nx_secure_tls_session_packet_buffer_set](#nx_secure_tls_session_packet_buffer_set)
-  - Ställ in bufferten för paket ommontering för en NetX Secure TLS-session
+  - Ange paketsammansättningsbufferten för en Säker NetX-TLS-session
 - [nx_secure_tls_session_protocol_version_override](#nx_secure_tls_session_protocol_version_override)
-  - Åsidosätt standard versionen av TLS-protokollet för en NetX säker TLS-session
+  - Åsidosätt standardversionen av TLS-protokollet för en NetX Secure TLS-session
 - [nx_secure_tls_session_receive](#nx_secure_tls_session_receive)
   - Ta emot data från en NetX Secure TLS-session
 - [nx_secure_tls_session_renegotiate_callback_set](#nx_secure_tls_session_renegotiate_callback_set)
-  - Tilldela ett återanrop som ska anropas i början av en omförhandling av en session
+  - Tilldela ett återanrop som anropas i början av en omförhandling av sessionen
 - [nx_secure_tls_session_renegotiate](#nx_secure_tls_session_renegotiate)
-  - Starta en handhandlings hand skakning med fjärrvärden
+  - Initiera en omförhandling av sessionshandskakning med fjärrvärden
 - [nx_secure_tls_session_reset](#nx_secure_tls_session_reset)
-  - Ta bort och Återställ en NetX säker TLS-session
+  - Rensa och återställa en NetX Secure TLS-session
 - [nx_secure_tls_session_send](#nx_secure_tls_session_send)
   - Skicka data via en NetX Secure TLS-session
 - [nx_secure_tls_session_server_callback_set](#nx_secure_tls_session_server_callback_set)
-  - Konfigurera ett motanrop för TLS som ska anropas i början av en TLS-servers hand skakning
+  - Konfigurera ett återanrop för TLS som ska anropas i början av en TLS-serverhandskakning
 - [nx_secure_tls_session_sni_extension_parse](#nx_secure_tls_session_sni_extension_parse)
-  - Parsa ett Servernamnindikator-tillägg (SNI) som tagits emot från en TLS-klient
+  - Parsa ett Servernamnindikator (SNI)-tillägg som tagits emot från en TLS-klient
 - [nx_secure_tls_session_sni_extension_set](#nx_secure_tls_session_sni_extension_set)
-  - Ange ett Servernamnindikator-tillägg (SNI) som ska skickas till en fjärrserver
+  - Ange ett DNS Servernamnindikator tillägg (SNI) som ska skickas till en fjärrserver
 - [nx_secure_tls_session_start](#nx_secure_tls_session_start)
   - Starta en NetX Secure TLS-session
 - [nx_secure_tls_session_time_function_set](#nx_secure_tls_session_time_function_set)
-  - Tilldela en timestamp-funktion till en NetX Secure TLS-session
+  - Tilldela en tidsstämpelfunktion till en Säker NetX-TLS-session
 - [nx_secure_tls_trusted_certificate_add](#nx_secure_tls_trusted_certificate_add)
-  - Lägg till betrott certifikat i NetX Secure TLS-session
+  - Lägga till betrott certifikat i NetX Secure TLS-session
 - [nx_secure_tls_trusted_certificate_remove](#nx_secure_tls_trusted_certificate_remove)
   - Ta bort betrott certifikat från NetX Secure TLS-session
 - [nx_secure_x509_certificate_initialize](#nx_secure_x509_certificate_initialize)
-  - Initiera X. 509-certifikat för NetX Secure TLS
+  - Initiera X.509-certifikat för NetX Secure TLS
 - [nx_secure_x509_common_name_dns_check](#nx_secure_x509_common_name_dns_check)
-  - Kontrol lera DNS-namn mot X. 509-certifikat
+  - Kontrollera DNS-namn mot X.509-certifikat
 - [nx_secure_x509_crl_revocation_check](#nx_secure_x509_crl_revocation_check)
-  - Kontrol lera X. 509-certifikatet mot en angiven lista över återkallade certifikat (CRL)]
+  - Kontrollera X.509-certifikat mot en agen lista över återkallade certifikat (CRL)]
 - [nx_secure_x509_dns_name_initialize](#nx_secure_x509_dns_name_initialize)
-  - Initiera en X. 509 DNS-namn struktur
+  - Initiera en X.509 DNS-namnstruktur
 - [nx_secure_x509_extended_key_usage_extension_parse](#nx_secure_x509_extended_key_usage_extension_parse)
-  - Hitta och parsa ett tillägg för utökad nyckel användning i X. 509 i ett X. 509-certifikat
+  - Hitta och parsa ett utökat X.509-nyckelanvändningstillägg i ett X.509-certifikat
 - [nx_secure_x509_extension_find](#nx_secure_x509_extension_find)
-  - Hitta och returnera ett X. 509-tillägg i ett X. 509-certifikat
+  - Hitta och returnera ett X.509-tillägg i ett X.509-certifikat
 - [nx_secure_x509_key_usage_extension_parse](#nx_secure_x509_key_usage_extension_parse)
-  - Hitta och parsa ett tillägg för nyckel användning i X. 509 i ett X. 509-certifikat
+  - Hitta och parsa ett X.509-nyckelanvändningstillägg i ett X.509-certifikat
 
 ## <a name="nx_secure_crypto_table_self_test"></a>nx_secure_crypto_table_self_test
 
-Utför självtest på krypterings metoderna
+Utföra självtest på krypteringsmetoderna
 
 ### <a name="prototype"></a>Prototyp
 
@@ -124,41 +124,41 @@ UINT nx_secure_crypto_table_self_test(
                                   VOID *metadata, UINT metadata_size);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten körs via de självtester som används av krypterings metod för att verifiera. Själv testet är bara tillgängligt om NetX-biblioteket har skapats med symbolen NX_SECURE_POWER_ON_SELF_TEST_MODULE_INTEGRITY_CHECK definierat.
+Den här tjänsten kör via kryptografimetodens självtester för att verifiera. Självtestet är bara tillgängligt om NetX Secure-biblioteket har skapats med symbolen NX_SECURE_POWER_ON_SELF_TEST_MODULE_INTEGRITY_CHECK definieras.
 
-För varje krypterings metod som stöds tillhandahåller självtesten fördefinierade indata och verifierade utdata matchar det fördefinierade förväntade värdet.
+För varje kryptografimetod som stöds tillhandahåller självtestet fördefinierade indata och verifierar att utdata matchar det fördefinierade förväntade värdet.
 
-NetX för säker kryptering stöder följande algoritmer och nyckel storlekar:
+NetX Secure crypto self test har stöd för följande algoritmer och nyckelstorlekar:
 
 - DES: kryptering och dekryptering
-- Tredubbel DES (3DES): kryptering och dekryptering
-- AES: 128-, 192-, 256-bitars nyckel storlek, kryptering och dekryptering i CBC-läge och räknar läge.
+- Triple DES (3DES): kryptering och dekryptering
+- AES: 128-, 192-, 256-bitars nyckelstorlek, kryptering och dekryptering i CBC-läge och räknarläge.
 - HMAC-MD5: autentisering och hash-beräkning
-- HMAC-SHA: SHA1-96, SHA1-160, SHA2-256, SHA2-384, SHA2-512, autentisering och hash-beräkning
+- HMAC-SHA: SHA1-96, SHA1-160, SHA2-256, SHA2-384, SHA2- 512, autentisering och hash-beräkning
 - MD5: autentisering
-- Pseudo – slumpmässig funktion (PRF): PRF_HMAC_SHA1 och PRF_HMAC_SHA2-256
-- RSA: 1024-, 2048-, 4096-bitars RSA-åtgärd för PowerPivot-modul
-- SHA: SHA1 (96-och 160-bitars), SHA2 (256bit, 384bit, 512bit)-autentisering
+- Pseudoslumpfunktion (PRF): PRF_HMAC_SHA1 och PRF_HMAC_SHA2-256
+- RSA: 1024-, 2048-, 4096-bitars RSA power-modulus operation
+- SHA: SHA1-autentisering (96- och 160-bitars), SHA2-autentisering (256-bitars, 384-bitars, 512-bitars)
 
-Den här funktionen har inbyggda vektorer för de krypteringsalgoritmer som anges ovan. Det testar dock bara de som anges i *cipher_table* som har skickats till den här funktionen. För en TLS-session används till exempel endast ciphersuite TLS_RSA_WITH_AES_128_CBC_SHA, den här funktionen utför självtest på RSA (1024-, 2048-, 4096-bitars), AES-CBC (128-bit) och SHA1.
+Den här funktionen har de inbyggda vektorerna för de krypteringsalgoritmer som anges ovan. Den testar dock bara de som listas i *cipher_table skickas* till den här funktionen. För en TLS-session används till exempel bara chiffer-TLS_RSA_WITH_AES_128_CBC_SHA, den här funktionen utför självtest på RSA (1024-, 2048-, 4096-bitars), AES-CBC (128-bitars) och SHA1.
 
 ### <a name="parameters"></a>Parametrar
 
-- **crypto_table** Pekare till tabellen för kryptografi som används av TLS-sessionen. Detta är samma crypto_table som skickas till **_nx_secure_tls_session_create ()-_** anropet.
-- **metadata** Pekar på utrymme för området för kryptografiska metadata. .
-- **metadata_size** Storlek på bufferten för metadata.
+- **crypto_table** Pekare till kryptografitabellen som används av TLS-sessionen. Det här är samma crypto_table skickas till **_nx_secure_tls_session_create()-anropet._**
+- **metadata** Pekare till blanksteg för kryptografimetadataområdet. .
+- **metadata_size** Storleken på metadatabufferten.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SECURE_TLS_SUCCESS** (0X00) har testat de kryptografiska metoder som angetts.
-- **NX_PTR_ERROR** (0X07) ogiltig struktur för kryptografisk metod
-- Det gick inte att kontrol lera **NX_NOT_SUCCESSFUL** (0x43).
+- **NX_SECURE_TLS_SUCCESS** (0x00) Har testat de angivna kryptografimetoderna.
+- **NX_PTR_ERROR** (0x07) Ogiltig kryptografimetodstruktur
+- **NX_NOT_SUCCESSFUL** (0x43) Crypto-självtest misslyckas.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar
+Initiering, Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -190,7 +190,7 @@ else
 
 ## <a name="nx_secure_module_hash_compute"></a>nx_secure_module_hash_compute
 
-Beräknar hash-värde med hjälp av en användardefinierad hash-funktion
+Beräknar hash-värdet med hjälp av en hash-funktion som användaren har angett
 
 ### <a name="prototype"></a>Prototyp
 
@@ -204,29 +204,29 @@ UINT nx_secure_module_hash_compute(
                       UINT *actual_size);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen beräknar hash-värdet för data strömmen i det angivna minnes området med hjälp av den angivna HMAC-kryptografi metoden och nyckel strängen. Compute-funktionen modul-hash är bara tillgänglig om NetX Secure Library skapas med följande symbol som definieras: NX_SECURE_POWER_ON_SELF_TEST_MODULE_INTEGRITY_CHECK
+Den här funktionen beräknar hash-värdet för dataströmmen i det angivna minnesområdet med hjälp av den angivna kryptografimetoden HMAC och nyckelsträngen. Modulens hash-beräkningsfunktion är bara tillgänglig om NetX Secure-biblioteket har skapats med följande symbol som definieras: NX_SECURE_POWER_ON_SELF_TEST_MODULE_INTEGRITY_CHECK
 
 ### <a name="parameters"></a>Parametrar
 
-- **hmac_ptr** Pekar på den HMAC-kryptografiska metod som används för beräkning av hash-värde.
-- **start_address** Start adressen för databufferten
-- **end_address** Den avslutande adressen för databufferten. Observera att hash-beräkningen inte omfattar data i den här end_address.
-- **nyckel** Den nyckel sträng som används i HMAC-beräkningen.
-- **key_length** Nyckel strängens storlek i byte
-- **metadata** Pekar på utrymmet som används av HMAC-algoritmen.
-- **metadata_size** Storlek på bufferten för metadata.
-- **output_buffer** Minnes platsen där hash-utdata lagras.
-- **output_buffer_size** Tillgängligt utrymme för utdatabufferten i byte
-- **actual_size** Returneras av funktionen som indikerar det faktiska antalet byte som skrivs till output_buffer.
+- **hmac_ptr** Pekare till den HMAC-kryptografimetod som används för hash-värdeberäkningen.
+- **start_address** Startadressen för databufferten
+- **end_address** Slutadressen för databufferten. Observera att hashberäkningen inte omfattar data i den här end_address.
+- **nyckel** Nyckelsträngen som används i HMAC-beräkningen.
+- **key_length** Nyckelsträngens storlek i byte
+- **metadata** Pekare till blanksteg som används av HMAC-algoritmen.
+- **metadata_size** Storleken på metadatabufferten.
+- **output_buffer** Den minnesplats där hash-utdata lagras.
+- **output_buffer_size** Tillgängligt utrymme i utdatabufferten, i byte
+- **actual_size** Returneras av funktionen som anger det faktiska antalet byte som skrivs till output_buffer.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **0** beräknade hash-värdet.
-- **1** det gick inte att beräkna hashen.
+- **0** Hash-värdet har beräknats.
+- **1** Hash-beräkningen misslyckades.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
@@ -284,7 +284,7 @@ nx_secure_module_hash_compute(&hmac_sha256,
 
 ## <a name="nx_secure_tls_active_certificate_set"></a>nx_secure_tls_active_certificate_set
 
-Ange det aktiva identitets certifikatet för en NetX Secure TLS-session
+Ange det aktiva identitetscertifikatet för en NetX Secure TLS-session
 
 ### <a name="prototype"></a>Prototyp
 
@@ -294,27 +294,27 @@ UINT  nx_secure_tls_active_certificate_set(
                    NX_SECURE_X509_CERT *certificate);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten är avsedd att anropas inifrån en motringning för session (se nx_secure_tls_session_client_callback_set och nx_secure_tls_session_server_callback_set). När det anropas med en tidigare initierad NX_SECURE_X509_CERT-struktur, kommer certifikatet att användas i stället för standard identitets certifikatet. I de flesta fall måste certifikatet ha lagts till i det lokala arkivet (se nx_secure_tls_local_certificate_add) eller så kan TLS-handskakningen Miss lyckas.
+Den här tjänsten är avsedd att anropas inifrån ett sessionsanrop (se nx_secure_tls_session_client_callback_set och nx_secure_tls_session_server_callback_set). När det anropas med en tidigare initierad NX_SECURE_X509_CERT-struktur används det certifikatet i stället för standardidentitetscertifikatet. I de flesta fall måste certifikatet ha lagts till i det lokala arkivet (se nx_secure_tls_local_certificate_add) annars kan TLS-handskakningen misslyckas.
 
-Den här tjänsten är avsedd att tillåta TLS att stödja flera identitets certifikat. Detta är användbart för en TLS-server som hanterar flera nätverks adresser så att servern kan välja ett lämpligt certifikat för att tillhandahålla fjärrklienten beroende på klientens start punkt. För en TLS-klient kan den här rutinen användas för att ändra certifikatet som skickas till en fjärrserver vid körning när servern har identifierat sig själv i TLS-handskakningen (detta är mer sällsynt än TLS-serverns användnings fall).
+Den här tjänsten är avsedd att tillåta att TLS stöder flera identitetscertifikat. Detta är användbart för en TLS-server som hanterar flera nätverksadresser så att servern kan välja ett lämpligt certifikat som ska tillhandahållas till fjärrklienten beroende på klientens startpunkt. För en TLS-klient kan den här rutinen användas för att ändra certifikatet som skickas till en fjärrserver vid körning när servern har identifierat sig själv i TLS-handskakningen (detta är mer ovanligt än TLS-serverns användningsfall).
 
-Om flera certifikat kan dela samma X. 509-unika namn måste certifikaten läggas till med nx_secure_tls_server_certificate_add, vilket ger en numerisk identifierare separat från certifikatet.
+Om flera certifikat kan dela samma unika X.509-namn måste certifikat läggas till med hjälp av nx_secure_tls_server_certificate_add, vilket introducerar en numerisk identifierare som är separat från certifikatet.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till en TLS-sessionsbiljett som överförts till återanropet i sessionen.
-- **certifikat** Pekar på ett initierat X. 509-certifikat som ska användas för den aktuella sessionen.
+- **session_ptr** Pekare till en TLS-sessionsinstans som skickas till sessionsanropet.
+- **certifikat** Pekare till ett initierat X.509-certifikat som ska användas för den aktuella sessionen.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) har slutfört tilldelningen av certifikat till sessionen.
-- **NX_PTR_ERROR** (0X07) ogiltig TLS-session eller certifikat pekare.
+- **NX_SUCCESS** (0x00) Lyckad tilldelning av certifikat till session.
+- **NX_PTR_ERROR** (0x07) Ogiltig TLS-session eller certifikat pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -470,31 +470,31 @@ UINT  nx_secure_tls_client_psk_set(NX_SECURE_TLS_SESSION *session_ptr,
                               UCHAR *hint, UINT hint_length);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten lägger till en i förväg delad nyckel (PSK), dess identitets sträng och ett identitets tips till ett kontroll block för TLS-session och anger att PSK ska användas i efterföljande TLS-klientanslutningar. PSK används i stället för ett digitalt certifikat när PSK-krypteringssviter är aktiverade och används.
+Den här tjänsten lägger till en I förväg delad nyckel (PSK), dess identitetssträng och en identitetstips till ett TLS-sessionskontrollblock och anger att PSK ska användas i efterföljande TLS-klientanslutningar. PSK används i stället för ett digitalt certifikat när PSK-chiffer har aktiverats och används.
 
-I det här fallet är PSK associerat med en speciell fjärran sluten TLS-server som TLS-klienten vill kommunicera med. Det PSK-värde som anges via denna API kommer att tillhandahållas till värden för fjärr-TLS-servern under nästa TLS-handskakning.
+I det här fallet är PSK associerad med en specifik TLS-fjärrserver som TLS-klienten vill kommunicera med. PSK-uppsättningen via detta API kommer att tillhandahållas till den fjärranslutna TLS-servervärden under nästa TLS-handskakning.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till en tidigare skapad TLS-session.
+- **session_ptr** Pekare till en tidigare skapad TLS-sessionsinstans.
 - **pre_shared_key** Det faktiska PSK-värdet.
-- **psk_length** PSK-värdets längd.
+- **psk_length** Längden på PSK-värdet.
 - **psk_identity** En sträng som används för att identifiera det här PSK-värdet.
-- **identity_length** PSK-identitetens längd.
-- **tips** En sträng som används för att ange vilken grupp av PSKs som ska väljas på en TLS-server.
-- **hint_length** Längden på tips strängen.
+- **identity_length** Längden på PSK-identiteten.
+- **tips** En sträng som används för att ange vilken grupp av PSK:er som ska väljas på en TLS-server.
+- **hint_length** Längden på tipssträngen.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) tillägget av PSK lyckades.
-- **NX_PTR_ERROR** (0X07) ogiltig TLS-session pekare.
-- **NX_SECURE_TLS_NO_MORE_PSK_SPACE** (0X125) kan inte lägga till en annan PSK.
+- **NX_SUCCESS** (0x00) Lyckad addition av PSK.
+- **NX_PTR_ERROR** (0x07) Ogiltig TLS-sessionspekare.
+- **NX_SECURE_TLS_NO_MORE_PSK_SPACE** (0x125) Det går inte att lägga till ytterligare en PSK.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -528,21 +528,21 @@ Initierar NetX Secure TLS-modulen
 VOID nx_secure_tls_initialize(VOID);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten initierar NetX Secure TLS-modulen. Det måste anropas innan andra NetX-säkra tjänster kan nås.
+Den här tjänsten initierar NetX Secure TLS-modulen. Den måste anropas innan andra NetX Secure-tjänster kan nås.
 
 ### <a name="parameters"></a>Parametrar
 
 Ingen
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-Inget
+Ingen
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar
+Initiering, Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -557,7 +557,7 @@ Nx_secure_tls_initialize();
 
 ## <a name="nx_secure_tls_local_certificate_add"></a>nx_secure_tls_local_certificate_add
 
-Lägg till ett lokalt certifikat till NetX Secure TLS-session
+Lägga till ett lokalt certifikat i NetX Secure TLS-session
 
 ### <a name="prototype"></a>Prototyp
 
@@ -567,33 +567,33 @@ UINT  nx_secure_tls_local_certificate_add(
               NX_SECURE_X509_CERT *certificate_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten lägger till en initierad NX_SECURE_X509_CERT struktur instans i det lokala arkivet i en TLS-session. Det här certifikatet kan användas av TLS-stacken för att identifiera enheten under TLS-handskakningen (om den har marker ATS som ett identitets certifikat när certifikat strukturen initierades med nx_secure_x509_certificate_initialize) eller som en utfärdare som en del av en certifikat kedja som tillhandahölls till fjärrvärden under TLS-handskakningen.
+Den här tjänsten lägger till en NX_SECURE_X509_CERT instans av en struktur till det lokala arkivet för en TLS-session. Det här certifikatet kan användas av TLS-stacken för att identifiera enheten under TLS-handskakningen (om den har markerats som ett identitetscertifikat under initieringen av certifikatstrukturen med nx_secure_x509_certificate_initialize) eller som en utfärdare som en del av en certifikatkedja som tillhandahålls till fjärrvärden under TLS-handskakningen.
 
-Om flera lokala certifikat med samma namn krävs kan certifikat läggas till med hjälp av *nx_secure_tls_server_certificate_add* tjänsten (se varning nedan).
+Om flera lokala certifikat med samma eget namn behövs kan certifikat läggas till med hjälp *nx_secure_tls_server_certificate_add* tjänsten (se varningen nedan).
 
-Ett certifikat **krävs** för TLS-server läge.
+Ett certifikat krävs **för** TLS-serverläge.
 
-Ett certifikat är *valfritt* för TLS-klient läge.
+Ett certifikat är *valfritt* för TLS-klientläge.
 
 > [!IMPORTANT]
-> *Detta API bör inte användas med samma TLS-session när du använder nx_secure_tls_server_certificate_add. Server certifikatets API använder en unik numerisk identifierare för varje certifikat och nx_secure_tls_local_certificate_add index baserat på det 509-namn som används i X. De lokala certifikat tjänsterna är ett bekvämt alternativ till den numeriska identifieraren för program som bara använder ett enda identitets certifikat – genom att använda det egna namnet behöver programmet inte hålla koll på numeriska identifierare.*
+> *Detta API bör inte användas med samma TLS-session när du använder nx_secure_tls_server_certificate_add. API:et för servercertifikat använder en unik numerisk identifierare för varje certifikat och nx_secure_tls_local_certificate_add index baserat på X.509-namnet. De lokala certifikattjänsterna är ett praktiskt alternativ till den numeriska identifieraren för program som endast använder ett enda identitetscertifikat – med hjälp av eget namn behöver programmet inte hålla reda på numeriska identifierare.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till en tidigare skapad TLS-session.
-- **certificate_ptr** Pekar mot en initierad TLS-certifikat instans.
+- **session_ptr** Pekare till en tidigare skapad TLS-sessionsinstans.
+- **certificate_ptr** Pekare till en initierad TLS-certifikatinstans.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) tillägget av certifikatet har slutförts.
-- **NX_INVALID_PARAMETERS** (0X4D) försökte lägga till ett ogiltigt eller duplicerat certifikat.
-- **NX_PTR_ERROR** (0X07) ogiltig TLS-session eller certifikat pekare.
+- **NX_SUCCESS** (0x00) Lyckad tillägg av certifikat.
+- **NX_INVALID_PARAMETERS** (0x4D) Försökte lägga till ett ogiltigt eller duplicerat certifikat.
+- **NX_PTR_ERROR** (0x07) Ogiltig TLS-session eller certifikat pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -630,31 +630,31 @@ UINT  nx_secure_tls_local_certificate_find(NX_SECURE_TLS_SESSION
                         name_length);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hittar ett certifikat i certifikat arkivet för den lokala enheten för en TLS-session och returnerar en pekare till NX_SECURE_X509_CERT strukturen i arkivet. Common_name-parametern och dess längd (name_length) används för att identifiera certifikatet i arkivet genom att matcha certifikatets namn för fältet X. 509 subject.
+Den här tjänsten hittar ett certifikat i det lokala enhetscertifikatarkivet för en TLS-session och returnerar en pekare till NX_SECURE_X509_CERT strukturen i arkivet. Parametern common_name och dess längd (name_length) används för att identifiera certifikatet i arkivet genom att matcha certifikatets X.509-ämnesnamnfält.
 
-Om det finns mer än ett certifikat med samma egna namn kommer endast det första att returneras – Använd *nx_secure_tls_server_certificate_find* i stället.
+Om det finns fler än ett certifikat med samma eget namn returneras bara det första certifikatet – använd *nx_secure_tls_server_certificate_find* stället.
 
 > [!IMPORTANT]
-> *Detta API bör inte användas med samma TLS-session när du använder nx_secure_tls_server_certificate_add. Server certifikatets API använder en unik numerisk identifierare för varje certifikat och nx_secure_tls_local_certificate_add index baserat på det 509-namn som används i X. De lokala certifikat tjänsterna är ett bekvämt alternativ till den numeriska identifieraren för program som bara använder ett enda identitets certifikat – genom att använda det egna namnet behöver programmet inte hålla koll på numeriska identifierare.*
+> *Det här API:et ska inte användas med samma TLS-session när du använder nx_secure_tls_server_certificate_add. Servercertifikat-API:et använder en unik numerisk identifierare för varje certifikat och nx_secure_tls_local_certificate_add index baserat på X.509-namnet. De lokala certifikattjänsterna är ett praktiskt alternativ till den numeriska identifieraren för program som endast använder ett enda identitetscertifikat – med hjälp av eget namn behöver programmet inte hålla reda på numeriska identifierare.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till en tidigare skapad TLS-session.
+- **session_ptr** Pekare till en tidigare skapad TLS-sessionsinstans.
 - **certifikat** Returnera pekare till matchat certifikat.
-- **common_name** Gemensam namn sträng som ska matchas (DNS-namn).
-- **name_length** Längden på common_name sträng data.
+- **common_name** Gemensam namnsträng som ska matchas (DNS-namn).
+- **name_length** Längden på common_name strängdata.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) certifikat hittades och pekaren returnerades i "Certificate"-parametern.
-- **NX_SECURE_TLS_CERTIFICATE_NOT_FOUND** (0x119) Det gick inte att hitta något certifikat med det angivna nätverks namnet.
-- **NX_PTR_ERROR** (0X07) ogiltig TLS-session, certifikat pekare eller gemensam namn sträng.
+- **NX_SUCCESS** (0x00) Certifikatet hittades och pekaren returnerades i parametern "certifikat".
+- **NX_SECURE_TLS_CERTIFICATE_NOT_FOUND** (0x119) Inget certifikat med det angivna gemensamma namnet hittades.
+- **NX_PTR_ERROR** (0x07) Ogiltig TLS-session, certifikat pekare eller namnsträng.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -688,7 +688,7 @@ status = nx_secure_tls_local_certificate_find(&tls_session, &certificate_ptr,
 
 ## <a name="nx_secure_tls_local_certificate_remove"></a>nx_secure_tls_local_certificate_remove
 
-Ta bort det lokala certifikatet från NetX Secure TLS-sessionen
+Ta bort lokalt certifikat från NetX Secure TLS-session
 
 ### <a name="prototype"></a>Prototyp
 
@@ -698,28 +698,28 @@ UINT  nx_secure_tls_local_certificate_remove(NX_SECURE_TLS_SESSION
                   common_name_length);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar bort en lokal certifikat instans från en TLS-session, som är nyckelbaserad i fältet eget namn i certifikatet.
+Den här tjänsten tar bort en lokal certifikatinstans från en TLS-session som är nyckelad i fältet Eget namn i certifikatet.
 
 > [!IMPORTANT]
-> *Detta API bör inte användas med samma TLS-session när du använder nx_secure_tls_server_certificate_add. Server certifikatets API använder en unik numerisk identifierare för varje certifikat och nx_secure_tls_local_certificate_add index baserat på det 509-namn som används i X. De lokala certifikat tjänsterna är ett bekvämt alternativ till den numeriska identifieraren för program som bara använder ett enda identitets certifikat – genom att använda det egna namnet behöver programmet inte hålla koll på numeriska identifierare.*
+> *Detta API bör inte användas med samma TLS-session när du använder nx_secure_tls_server_certificate_add. API:et för servercertifikat använder en unik numerisk identifierare för varje certifikat och nx_secure_tls_local_certificate_add index baserat på X.509-namnet. De lokala certifikattjänsterna är ett praktiskt alternativ till den numeriska identifieraren för program som endast använder ett enda identitetscertifikat – med hjälp av eget namn behöver programmet inte hålla reda på numeriska identifierare.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till en tidigare skapad TLS-session.
-- **common_name** Värdet för eget namn för det certifikat som ska tas bort.
-- **common_name_length** Längden på den gemensamma namn strängen.
+- **session_ptr** Pekare till en tidigare skapad TLS-sessionsinstans.
+- **common_name** Värdet för Eget namn för certifikatet som ska tas bort.
+- **common_name_length** Längden på strängen Eget namn.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) tillägget av certifikatet har slutförts.
-- **NX_PTR_ERROR** (0X07) ogiltig TLS-session pekare.
-- Det gick inte att hitta **NX_SECURE_TLS_CERTIFICATE_NOT_FOUND** -certifikat (0x119).
+- **NX_SUCCESS** (0x00) Lyckad tillägg av certifikat.
+- **NX_PTR_ERROR** (0x07) Ogiltig TLS-sessionspekare.
+- **NX_SECURE_TLS_CERTIFICATE_NOT_FOUND** (0x119)-certifikatet hittades inte.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -741,7 +741,7 @@ status =  nx_secure_tls_local_certificate_remove(&tls_session,
 
 ## <a name="nx_secure_tls_metadata_size_calculate"></a>nx_secure_tls_metadata_size_calculate
 
-Beräkna storleken på kryptografiska metadata för en NetX säker TLS-session
+Beräkna storleken på kryptografiska metadata för en NetX Secure TLS-session
 
 ### <a name="prototype"></a>Prototyp
 
@@ -751,25 +751,25 @@ UINT  nx_secure_tls_metadata_size_calculate(
                         ULONG *metadata_size);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten beräknar och returnerar storleken på de kryptografiska metadata som behövs för en viss TLS-session och TLS-kryptografisk tabell (se avsnittet "initiera TLS med kryptografiska metoder" för mer information om tabellen för kryptografi kryptering).
+Den här tjänsten beräknar och returnerar storleken på de kryptografiska metadata som behövs för en viss TLS-session och TLS-kryptografitabell (se avsnittet "Initiera TLS med kryptografiska metoder" för mer information om den kryptografiska chiffertabellen).
 
-Den här tjänsten ska anropas med önskad kryptografiska tabell för att beräkna storleken på den metadata-buffert som överfördes till nx_secure_tls_session_create.
+Den här tjänsten ska anropas med önskad kryptografitabell för att beräkna storleken på metadatabufferten som skickas till nx_secure_tls_session_create.
 
 ### <a name="parameters"></a>Parametrar
 
-- **crypto_table** Pekar till en fullständig NetX Secure TLS-kryptografi tabell.
-- **metadata_size** Resultatet av storleks beräkningen i byte.
+- **crypto_table** Pekare till en komplett NetX Secure TLS-kryptografitabell.
+- **metadata_size** Utdata från storleksberäkningen i byte.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) utförde beräkningen av metadata-storlek.
-- **NX_PTR_ERROR** (0X07) ogiltig-pekare för kryptografi tabell eller RETUR storlek.
+- **NX_SUCCESS** (0x00) Lyckad beräkning av metadatastorlek.
+- **NX_PTR_ERROR** (0x07) Ogiltig kryptografitabell eller pekare för returstorlek.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -793,46 +793,9 @@ status =  nx_secure_tls_metadata_size_calculate(&nx_crypto_tls_ciphers,
 
 - nx_secure_tls_session_create
 
-## <a name="nx_secure_module_hash_compute"></a>nx_secure_module_hash_compute
-
-Beräkna hash-värdet för NetX säkra biblioteks rutiner
-
-### <a name="prototype"></a>Prototyp
-
-```C
-VOID nx_secure_module_hash_compute(VOID);
-```
-
-### <a name="description"></a>Beskrivning
-
-Den här tjänsten initierar NetX Secure TLS-modulen. Det måste anropas innan andra NetX-säkra tjänster kan nås.
-
-### <a name="parameters"></a>Parametrar
-
-Ingen
-
-### <a name="return-values"></a>Retur värden
-
-Inget
-
-### <a name="allowed-from"></a>Tillåten från
-
-Initiering, trådar
-
-### <a name="example"></a>Exempel
-
-```C
-/* Initializes the TLS module. */
-Nx_secure_tls_initialize();
-```
-
-### <a name="see-also"></a>Se även
-
-- nx_secure_tls_session_create
-
 ## <a name="nx_secure_tls_packet_allocate"></a>nx_secure_tls_packet_allocate
 
-Allokera ett paket för en NetX säker TLS-session
+Allokera ett paket för en NetX Secure TLS-session
 
 ### <a name="prototype"></a>Prototyp
 
@@ -843,28 +806,28 @@ UINT  nx_secure_tls_packet_allocate(NX_SECURE_TLS_SESSION *session_ptr,
                                     ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten allokerar en NX_PACKET för den angivna aktiva TLS-sessionen från den angivna NX_PACKET_POOL. Den här tjänsten ska anropas av programmet för att allokera data paket som ska skickas via en TLS-anslutning. TLS-sessionen måste initieras innan den här tjänsten anropas.
+Den här tjänsten allokerar NX_PACKET för den angivna aktiva TLS-sessionen från den angivna NX_PACKET_POOL. Den här tjänsten ska anropas av programmet för att allokera datapaket som ska skickas via en TLS-anslutning. TLS-sessionen måste initieras innan den här tjänsten anropas.
 
-Det allokerade paketet initieras korrekt så att TLS-sidhuvudet och sid fots data kan läggas till efter att paket data har fyllts i. Beteendet är annars identiskt med *nx_packet_allocate*.
+Det allokerade paketet initieras korrekt så att TLS-sidhuvud- och sidfotsdata kan läggas till när paketdata har fyllts i. Beteendet är i övrigt identiskt *med nx_packet_allocate*.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till en instans av TLS-session.
-- **pool_ptr** Pekar till en NX_PACKET_POOL som paketet ska allokeras från.
-- **packet_ptr** Utmatnings pekare till det nyligen allokerade paketet.
-- **wait_option** Uppehålls alternativ för paket tilldelning.
+- **session_ptr** Pekare till en TLS-sessionsinstans.
+- **pool_ptr** Pekare till NX_PACKET_POOL som paketet ska allokeras från.
+- **packet_ptr** Utdata pekare till det nyligen allokerade paketet.
+- **wait_option** Indragningsalternativ för paketallokering.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) paket tilldelningen lyckades.
-- **NX_SECURE_TLS_ALLOCATE_PACKET_FAILED** (0x111) den underliggande paket tilldelningen misslyckades.
-- **NX_SECURE_TLS_SESSION_UNINITIALIZED** (0X101) den angivna TLS-sessionen initierades inte.
+- **NX_SUCCESS** (0x00) Lyckat paket allokeras.
+- **NX_SECURE_TLS_ALLOCATE_PACKET_FAILED** (0x111) Underliggande paketallokering misslyckades.
+- **NX_SECURE_TLS_SESSION_UNINITIALIZED** (0x101) Den angivna TLS-sessionen initierades inte.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -893,7 +856,7 @@ variable packet_ptr.  */
 
 ## <a name="nx_secure_tls_psk_add"></a>nx_secure_tls_psk_add
 
-Lägga till en i förväg delad nyckel till en NetX Secure TLS-session
+Lägga till en i förväg delad nyckel i en NetX Secure TLS-session
 
 ### <a name="prototype"></a>Prototyp
 
@@ -905,29 +868,29 @@ UINT  nx_secure_tls_psk_add(NX_SECURE_TLS_SESSION *session_ptr,
                             hint_length);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten lägger till en i förväg delad nyckel (PSK), dess identitets sträng och ett identitets tips till ett kontroll block för TLS-session. PSK används i stället för ett digitalt certifikat när PSK-krypteringssviter är aktiverade och används.
+Den här tjänsten lägger till en I förväg delad nyckel (PSK), dess identitetssträng och en identitetstips till ett TLS-sessionskontrollblock. PSK används i stället för ett digitalt certifikat när PSK-chiffer har aktiverats och används.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till en tidigare skapad TLS-session.
+- **session_ptr** Pekare till en tidigare skapad TLS-sessionsinstans.
 - **pre_shared_key** Det faktiska PSK-värdet.
-- **psk_length** PSK-värdets längd.
+- **psk_length** Längden på PSK-värdet.
 - **psk_identity** En sträng som används för att identifiera det här PSK-värdet.
-- **identity_length** PSK-identitetens längd.
-- **tips** En sträng som används för att ange vilken grupp av PSKs som ska väljas på en TLS-server.
-- **hint_length** Längden på tips strängen.
+- **identity_length** Längden på PSK-identiteten.
+- **tips** En sträng som används för att ange vilken grupp av PSK:er som ska väljas på en TLS-server.
+- **hint_length** Längden på tipssträngen.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) tillägget av PSK lyckades.
-- **NX_PTR_ERROR** (0X07) ogiltig TLS-session pekare.
-- **NX_SECURE_TLS_NO_MORE_PSK_SPACE** (0X125) kan inte lägga till en annan PSK.
+- **NX_SUCCESS** (0x00) Lyckad addition av PSK.
+- **NX_PTR_ERROR** (0x07) Ogiltig TLS-sessionspekare.
+- **NX_SECURE_TLS_NO_MORE_PSK_SPACE** (0x125) Det går inte att lägga till ytterligare en PSK.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -953,7 +916,7 @@ status =  nx_secure_tls_psk_add(&tls_session, psk, sizeof(psk), “psk_1”, 4,
 
 ## <a name="nx_secure_tls_remote_certificate_allocate"></a>nx_secure_tls_remote_certificate_allocate
 
-Allokera utrymme för certifikatet som tillhandahålls av en fjärran sluten TLS-värd
+Allokera utrymme för certifikatet som tillhandahålls av en fjärransluten TLS-värd
 
 ### <a name="prototype"></a>Prototyp
 
@@ -965,35 +928,35 @@ UINT  nx_secure_tls_remote_certificate_allocate(
                  UINT raw_buffer_size);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten lägger till en oinitierad NX_SECURE_X509_CERT struktur instans till en TLS-session för att allokera utrymme för certifikat som tillhandahålls av en fjärrvärd under en TLS-session. Fjärrcertifikatets data parsas av NetX Secure TLS och den informationen används för att fylla i den certifikat struktur instans som anges för den här funktionen. Certifikat som läggs till på det här sättet placeras i en länkad lista.
+Den här tjänsten lägger till en instans NX_SECURE_X509_CERT en oiniterad NX_SECURE_X509_CERT struktur till en TLS-session för att allokera utrymme för certifikat som tillhandahålls av en fjärrvärd under en TLS-session. Fjärrcertifikatdata parsas av NetX Secure TLS och den informationen används för att fylla i den certifikatstrukturinstans som tillhandahålls till den här funktionen. Certifikat som läggs till på det här sättet placeras i en länkad lista.
 
-Om det är förväntat att fjärrvärden ska tillhandahålla flera certifikat, ska den här funktionen anropas flera gånger för att allokera utrymme för alla certifikat. De ytterligare certifikaten läggs till i slutet av den länkade listan över certifikat.
+Om det förväntas att fjärrvärden kommer att tillhandahålla flera certifikat ska den här funktionen anropas upprepade gånger för att allokera utrymme för alla certifikat. De ytterligare certifikaten läggs till i slutet av den länkade listan med certifikat.
 
-Om ett fjärrcertifikat inte allokeras kan ett klient läge för TLS Miss lyckas under TLS-handskakningen om inte en i förväg delad nyckel (PSK) ciphersuite används.
+Om ett fjärrcertifikat inte allokeras misslyckas TLS-klientläget under TLS-handskakningen, såvida inte PSK-chiffer (Pre-Shared Key) används.
 
-Parametern *raw_certificate_buffer* pekar på utrymmet som allokerats för att lagra det inkommande Fjärrcertifikatet. Typiska certifikat med RSA-nycklar på 2048-bitar som använder SHA-256 för signaturer är i intervallet 1000-2000 byte. Bufferten bör vara tillräckligt stor för att minst innehålla den storlek som används, men beroende på vilka fjärrcertifikaten kan vara betydligt mindre eller större. Observera att om bufferten är för liten för att rymma det inkommande certifikatet, avslutas TLS-handskakningen med ett fel.
+Den *raw_certificate_buffer pekar* på allokerat utrymme för att lagra det inkommande fjärrcertifikatet. Vanliga certifikat med RSA-nycklar på 2 048 bitar som använder SHA-256 för signaturer är i intervallet 1 000–2 000 byte. Bufferten bör vara tillräckligt stor för att minst innehålla den storleken, men beroende på fjärrvärdcertifikaten kan vara betydligt mindre eller större. Observera att om bufferten är för liten för att innehålla det inkommande certifikatet, slutar TLS-handskakningen med ett fel.
 
-För TLS-serverinställningar behövs endast en tilldelning av fjärrcertifikat om autentisering av klient certifikat är aktiverat.
+I TLS-serverläge behövs endast en fjärrcertifikatsallokering om klientcertifikatautentisering är aktiverat.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till en tidigare skapad TLS-session.
-- **certificate_ptr** Pekar mot en oinitierad X. 509-certifikat instans.
-- **raw_certificate_buffer** Pekar på en buffert för att lagra det icke-parsade certifikatet som togs emot från fjärrvärden.
-- **raw_buffer_size** Storlek på den råa certifikatets buffert.
+- **session_ptr** Pekare till en tidigare skapad TLS-sessionsinstans.
+- **certificate_ptr** Pekare till en oiniterad X.509-certifikatinstans.
+- **raw_certificate_buffer** Pekare till en buffert för att lagra det oparsade certifikat som tagits emot från fjärrvärden.
+- **raw_buffer_size** Storleken på råcertifikatbufferten.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) allokering av certifikat har slutförts.
-- **NX_PTR_ERROR** (0X07) ogiltig TLS-session pekare.
-- **NX_SECURE_TLS_INSUFFICIENT_CERT_SPACE** (0X12D) den angivna bufferten var för liten.
-- **NX_INVALID_PARAMETERS** (0X4D) försökte lägga till ett ogiltigt certifikat.
+- **NX_SUCCESS** (0x00) Lyckad allokering av certifikat.
+- **NX_PTR_ERROR** (0x07) Ogiltig TLS-sessionspekare.
+- **NX_SECURE_TLS_INSUFFICIENT_CERT_SPACE** (0x12D) Den angivna bufferten var för liten.
+- **NX_INVALID_PARAMETERS** (0x4D) Försökte lägga till ett ogiltigt certifikat.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -1020,7 +983,7 @@ status =  nx_secure_tls_remote_certificate_allocate(&tls_session, &certificate,
 
 ## <a name="nx_secure_tls_remote_certificate_buffer_allocate"></a>nx_secure_tls_remote_certificate_buffer_allocate
 
-Allokera utrymme för alla certifikat som tillhandahålls av en fjärran sluten TLS-värd
+Allokera utrymme för alla certifikat som tillhandahålls av en fjärransluten TLS-värd
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1031,38 +994,38 @@ UINT  nx_secure_tls_remote_certificate_buffer_allocate(
                   ULONG buffer_size);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten allokerar utrymme för att bearbeta inkommande certifikat kedjor från fjärranslutna Server värdar för att utföra X. 509-autentisering och verifiering i en TLS-klient instans. För TLS-serverinställningar behövs endast fjärrtilldelning av certifikat om klienten X. 509-certifikatautentisering är aktive rad – för TLS Server-instanser bör tjänsten *nx_secure_tls_session_x509_client_verify_configure* användas i stället.
+Den här tjänsten allokerar utrymme för att bearbeta inkommande certifikatkedjor från fjärrservervärdar för att utföra X.509-autentisering och verifiering i en TLS-klientinstans. För TLS-serverläge behövs endast fjärrcertifikatallokering om X.509-klientcertifikatautentisering är aktiverat – för TLS-serverinstanser ska *tjänsttilldelningen nx_secure_tls_session_x509_client_verify_configure* användas i stället.
 
-Om du inte allokerar fjärrcertifikat, Miss lyckas TLS-klientens läge under TLS-handskakningen om inte en i förväg delad nyckel (PSK) ciphersuite används.
+Om du inte allokerar fjärrcertifikat misslyckas TLS-klientläget under TLS-handskakningen, såvida inte PSK-chiffer (Pre-Shared Key) används.
 
-*Certificate_buffer* -parametern pekar på utrymme som allokerats för att lagra inkommande fjärrcertifikat och kontroll block som behövs för dessa certifikat. Bufferten kommer att divideras med antalet certifikat (*certs_number*) med samma del som varje certifikat. Parametern *buffer_size*  anger buffertens storlek. Utrymmet som behövs hittar du i följande formel:
+Parametern *certificate_buffer* pekar på allokerat utrymme för att lagra inkommande fjärrcertifikat och de kontrollblock som behövs för dessa certifikat. Bufferten divideras med antalet certifikat *(* certs_number ) med en lika stor del som ges till varje certifikat. Parametern *buffer_size*  anger storleken på bufferten. Utrymmet som behövs finns med följande formel:
 
 ```C
 buffer_size = (<expected max number of certificates in chain>) *
                  (sizeof(NX_SECURE_X509_CERT) + <max cert size>)
 ```
 
-Typiska certifikat med RSA-nycklar på 2048-bitar som använder SHA-256 för signaturer är i intervallet 1000-2000 byte. Bufferten bör vara tillräckligt stor för att minst innehålla den storlek som används för varje certifikat, men beroende på fjärrdatorns certifikat kan vara betydligt mindre eller större. Observera att om bufferten är för liten för att rymma det inkommande certifikatet, avslutas TLS-handskakningen med ett fel.
+Vanliga certifikat med RSA-nycklar på 2 048 bitar som använder SHA-256 för signaturer är i intervallet 1 000–2 000 byte. Bufferten bör vara tillräckligt stor för att minst innehålla den storleken för varje certifikat, men beroende på fjärrvärdcertifikaten kan vara betydligt mindre eller större. Observera att om bufferten är för liten för att innehålla det inkommande certifikatet slutar TLS-handskakningen med ett fel.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till en tidigare skapad TLS-session.
+- **session_ptr** Pekare till en tidigare skapad TLS-sessionsinstans.
 - **certs_number** Antal certifikat som ska allokeras från den angivna bufferten.
-- **certificate_buffer** Pekar till en buffert för att lagra certifikat som tagits emot från en fjärrvärd.
-- **buffer_size** Storlek på certifikatets buffert.
+- **certificate_buffer** Pekare till en buffert för att lagra certifikat som tagits emot från en fjärrvärd.
+- **buffer_size** Certifikatbuffertens storlek.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) allokering av certifikat har slutförts.
-- **NX_PTR_ERROR** (0X07) ogiltig TLS-session eller buffert pekare.
-- **NX_SECURE_TLS_INSUFFICIENT_CERT_SPACE** (0X12D) den angivna bufferten var för liten.
-- **NX_INVALID_PARAMETERS** (0X4D) bufferten var för liten för att rymma det önskade antalet certifikat.
+- **NX_SUCCESS** (0x00) Lyckad allokering av certifikat.
+- **NX_PTR_ERROR** (0x07) Ogiltig TLS-session eller buffertpekare.
+- **NX_SECURE_TLS_INSUFFICIENT_CERT_SPACE** (0x12D) Den angivna bufferten var för liten.
+- **NX_INVALID_PARAMETERS** (0x4D) Bufferten var för liten för att innehålla det önskade antalet certifikat.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -1100,25 +1063,25 @@ UINT  nx_secure_tls_remote_certificate_free_all(
                   NX_SECURE_TLS_SESSION *session_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten används för att frigöra alla certifikat-buffertar som tilldelas till en viss TLS-session genom att nx_secure_tls_remote_certificate_allocated genom att returnera dem till det lediga certifikat utrymmet i den aktuella sessionen. Detta kan vara nödvändigt om ett program återanvänder ett TLS-sessionsobjekt utan att ta bort det och återskapa det med nx_secure_tls_session_delete och nx_secure_tls_session_create.
+Den här tjänsten används för att frigöra alla certifikatbuffertar som allokerats till en viss TLS-session genom nx_secure_tls_remote_certificate_allocated genom att returnera dem till sessionens lediga certifikatutrymme. Detta kan vara nödvändigt om ett program återanvänder ett TLS-sessionsobjekt utan att ta bort det och återskapa det med nx_secure_tls_session_delete och nx_secure_tls_session_create.
 
-Observera att det fjärranslutna certifikat utrymmet återställs automatiskt när TLS-sessionen återställs i nx_secure_tls_session_end så att de flesta program inte behöver anropa den här tjänsten.
+Observera att fjärrcertifikatutrymmet återställs automatiskt när TLS-sessionen återställs som i nx_secure_tls_session_end så att de flesta program inte behöver anropa den här tjänsten.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till en tidigare skapad TLS-session.
+- **session_ptr** Pekare till en tidigare skapad TLS-sessionsinstans.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckades.
-- **NX_PTR_ERROR** (0X07) ogiltig TLS-session pekare.
-- **NX_INVALID_PARAMETERS** (0X4D) internt fel – certifikat arkivet är antagligen skadat.
+- **NX_SUCCESS** (0x00) Åtgärden lyckades.
+- **NX_PTR_ERROR** (0x07) Ogiltig TLS-sessionspekare.
+- **NX_INVALID_PARAMETERS** (0x4D) Internt fel – certifikatarkivet är sannolikt skadat.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -1155,7 +1118,7 @@ nx_secure_tls_remote_certificate_free_all(&tls_session);
 
 ## <a name="nx_secure_tls_server_certificate_add"></a>nx_secure_tls_server_certificate_add
 
-Lägg till ett certifikat specifikt för TLS-servrar med hjälp av en numerisk identifierare
+Lägga till ett certifikat specifikt för TLS-servrar med hjälp av en numerisk identifierare
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1165,32 +1128,32 @@ UINT  nx_secure_tls_server_certificate_add(
                   NX_SECURE_X509_CERT *certificate, UINT cert_id);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten används för att lägga till ett certifikat i en TLS-sessions lokala arkiv (se nx_secure_tls_local_certificate_add) med en numerisk identifierare i stället för att indexera lagret med hjälp av X. 509-ämnet (eget namn) i certifikatet. Den numeriska identifieraren är separat från certifikatet och gör det möjligt att lägga till flera certifikat som identitets certifikat till en TLS-server, samt tillåta att flera certifikat med samma eget namn läggs till i samma lokala TLS-session. Samma tjänst kan användas för klient certifikat, men det är sällsynt att en TLS-klient har flera identitets certifikat.
+Den här tjänsten används för att lägga till ett certifikat i en TLS-sessions lokala arkiv (se nx_secure_tls_local_certificate_add) med hjälp av en numerisk identifierare i stället för att indexera arkivet med hjälp av X.509-ämne (eget namn) i certifikatet. Den numeriska identifieraren är separat från certifikatet och tillåter att flera certifikat läggs till som identitetscertifikat på en TLS-server, samt att flera certifikat med samma eget namn kan läggas till i samma lokala TLS-sessionsarkiv. Samma tjänst kan användas för klientcertifikat, men det är ovanligt att en TLS-klient har flera identitetscertifikat.
 
-Parametern cert_id är ett positivt heltal som inte är noll som tilldelats av programmet. Det faktiska värdet spelar ingen roll (förutom noll) men det måste vara unikt i arkivet för den angivna TLS-sessionen. Cert_id-värdet kan användas för att söka efter och ta bort certifikat från det lokala arkivet med nx_secure_tls_server_certificate_find respektive nx_secure_tls_server_certificate_remove.
+Parametern cert_id är ett positivt heltal utan noll som tilldelats av programmet. Det faktiska värdet spelar ingen roll (förutom noll) men det måste vara unikt i arkivet för den angivna TLS-sessionen. Värdet cert_id kan användas för att hitta och ta bort certifikat från det lokala arkivet med hjälp nx_secure_tls_server_certificate_find och nx_secure_tls_server_certificate_remove, respektive.
 
 > [!IMPORTANT]
-> *Detta API bör inte användas med samma TLS-session när du använder nx_secure_tls_local_certificate_add. Nx_secure_tls_server_certificate_add-API: et använder en unik numerisk identifierare för varje certifikat, och det lokala Certificate Services-indexet baserat på det X. 509-delade namnet. Server certifikat tjänsterna tillåter att flera certifikat med delade data (särskilt nätverks namn) finns i samma lokala arkiv – detta är användbart för en server med flera identiteter.*
+> *Det här API:et ska inte användas med samma TLS-session när du använder nx_secure_tls_local_certificate_add. API:nx_secure_tls_server_certificate_add använder en unik numerisk identifierare för varje certifikat och lokala certifikattjänstindex baserat på X.509-namnet. Servercertifikattjänsterna tillåter att flera certifikat med delade data (särskilt eget namn) finns i samma lokala arkiv – detta är användbart för en server med flera identiteter.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till en tidigare skapad TLS-session.
-- **certifikat** Pekar till en tidigare initierad X. 509-certifikat instans.
+- **session_ptr** Pekare till en tidigare skapad TLS-sessionsinstans.
+- **certifikat** Pekare till en tidigare initierad X.509-certifikatinstans.
 - **cert_id** Positivt, icke-noll, relativt unikt certifikat-ID-nummer.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckades.
-- **NX_PTR_ERROR** (0X07) ogiltig TLS session orcertificate-pekare.
-- **NX_SECURE_TLS_CERT_ID_INVALID** (0X138) det tillhandahållna certifikat-ID: t hade ett ogiltigt värde (troligen 0).
-- **NX_SECURE_TLS_CERT_ID_DUPLICATE** (0X139) det tillhandahållna certifikat-ID: t fanns redan i det lokala arkivet.
-- **NX_INVALID_PARAMETERS (0X4D)** Internt fel – certifikat arkivet är antagligen skadat.
+- **NX_SUCCESS** (0x00)Lyckad åtgärd.
+- **NX_PTR_ERROR** (0x07) Ogiltig TLS-session eller certifikat pekare.
+- **NX_SECURE_TLS_CERT_ID_INVALID** (0x138) Det angivna certifikat-ID:t hade ett ogiltigt värde (sannolikt 0).
+- **NX_SECURE_TLS_CERT_ID_DUPLICATE** (0x139) Det angivna certifikat-ID:t fanns redan i det lokala arkivet.
+- **NX_INVALID_PARAMETERS(0x4D)** Internt fel – certifikatarkivet är sannolikt skadat.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -1217,7 +1180,7 @@ status =  nx_secure_tls_server_certificate_add(&tls_session, &certificate, 0x12)
 
 ## <a name="nx_secure_tls_server_certificate_find"></a>nx_secure_tls_server_certificate_find
 
-Hitta ett certifikat med en numerisk identifierare
+Hitta ett certifikat med hjälp av en numerisk identifierare
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1227,30 +1190,30 @@ UINT  nx_secure_tls_server_certificate_find(
                   NX_SECURE_X509_CERT **certificate, UINT cert_id);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten används för att hitta ett certifikat i en TLS-sessions lokala arkiv (se nx_secure_tls_local_certificate_add) med en numerisk identifierare i stället för att indexera lagret med hjälp av X. 509-ämnet (eget namn) i certifikatet.
+Den här tjänsten används för att hitta ett certifikat i en TLS-sessions lokala arkiv (se nx_secure_tls_local_certificate_add) med hjälp av en numerisk identifierare i stället för att indexera arkivet med hjälp av X.509-ämne (eget namn) i certifikatet.
 
-Parametern cert_id är ett positivt heltal som inte är noll och som tilldelas av programmet när certifikatet läggs till i det lokala arkivet för TLS-sessionen med hjälp av nx_secure_tls_server_certificate_add.
+Parametern cert_id är ett positivt heltal som inte är noll och tilldelas av programmet när certifikatet läggs till i det lokala TLS-sessionsarkivet med hjälp av nx_secure_tls_server_certificate_add.
 
 > [!IMPORTANT]
-> *Detta API bör inte användas med samma TLS-session när du använder nx_secure_tls_local_certificate_add. Nx_secure_tls_server_certificate_add-API: et använder en unik numerisk identifierare för varje certifikat, och det lokala Certificate Services-indexet baserat på det X. 509-delade namnet. Server certifikat tjänsterna tillåter att flera certifikat med delade data (särskilt nätverks namn) finns i samma lokala arkiv – detta är användbart för en server med flera identiteter.*
+> *Detta API bör inte användas med samma TLS-session när du använder nx_secure_tls_local_certificate_add. I nx_secure_tls_server_certificate_add-API:et används en unik numerisk identifierare för varje certifikat och lokala certifikattjänstindex baserat på X.509-namnet. Servercertifikattjänsterna tillåter att flera certifikat med delade data (särskilt eget namn) finns i samma lokala arkiv – detta är användbart för en server med flera identiteter.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till en tidigare skapad TLS-session.
-- **certifikat** Pekar på en X. 509-certifikat pekare för att returnera en referens till det påträffade certifikatet.
-- **cert_id** Positivt värde för certifikat-ID som inte är noll.
+- **session_ptr** Pekare till en tidigare skapad TLS-sessionsinstans.
+- **certifikat** Pekare till en X.509-certifikat pekare för att returnera en referens till det hittade certifikatet.
+- **cert_id** Värde för positivt certifikat-ID som inte är noll.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckades.
-- **NX_PTR_ERROR** (0X07) ogiltig TLS-session eller certifikat pekare.
-- **NX_SECURE_TLS_CERTIFICATE_NOT_FOUND** (0X119) det angivna certifikat-ID: t matchade inte några i det lokala arkivet i den angivna TLS-sessionen.
+- **NX_SUCCESS** (0x00)Åtgärden lyckades.
+- **NX_PTR_ERROR** (0x07) Ogiltig TLS-session eller certifikat pekare.
+- **NX_SECURE_TLS_CERTIFICATE_NOT_FOUND** (0x119) Det angivna certifikat-ID:t matchade inte något i det lokala arkivet för den angivna TLS-sessionen.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -1276,7 +1239,7 @@ returned in the certificate parameter.  */
 
 ##  <a name="nx_secure_tls_server_certificate_remove"></a>nx_secure_tls_server_certificate_remove
 
-Ta bort ett lokalt Server certifikat med en numerisk identifierare
+Ta bort ett lokalt servercertifikat med hjälp av en numerisk identifierare
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1285,26 +1248,26 @@ UINT  nx_secure_tls_server_certificate_remove(
                   NX_SECURE_TLS_SESSION *session_ptr, UINT cert_id);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten används för att ta bort ett certifikat från en TLS-sessions lokala arkiv (se nx_secure_tls_local_certificate_add) med en numerisk identifierare i stället för att indexera lagret med hjälp av X. 509-ämnet (eget namn) i certifikatet.
+Den här tjänsten används för att ta bort ett certifikat från en TLS-sessions lokala arkiv (se nx_secure_tls_local_certificate_add) med hjälp av en numerisk identifierare i stället för att indexera arkivet med hjälp av X.509-certifikatutfärdaren (eget namn) i certifikatet.
 
-Parametern cert_id är ett positivt heltal som inte är noll och som tilldelas av programmet när certifikatet läggs till i det lokala arkivet för TLS-sessionen med hjälp av nx_secure_tls_server_certificate_add.
+Parametern cert_id är ett positivt heltal som inte är noll och tilldelas av programmet när certifikatet läggs till i det lokala TLS-sessionsarkivet med hjälp av nx_secure_tls_server_certificate_add.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till en tidigare skapad TLS-session.
-- **cert_id** Positivt värde för certifikat-ID som inte är noll.
+- **session_ptr** Pekare till en tidigare skapad TLS-sessionsinstans.
+- **cert_id** Värde för positivt certifikat-ID som inte är noll.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckades.
-- **NX_PTR_ERROR** (0X07) ogiltig TLS-session.
-- **NX_SECURE_TLS_CERTIFICATE_NOT_FOUND** (0X119) det angivna certifikat-ID: t matchade inte några i det lokala arkivet i den angivna TLS-sessionen.
+- **NX_SUCCESS** (0x00)Lyckad åtgärd.
+- **NX_PTR_ERROR** (0x07) Ogiltig TLS-session.
+- **NX_SECURE_TLS_CERTIFICATE_NOT_FOUND** (0x119) Det angivna certifikat-ID:t matchade inte något i det lokala arkivet för den angivna TLS-sessionen.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -1334,7 +1297,7 @@ status =  nx_secure_tls_server_certificate_remove(&tls_session, 0x12);
 
 ## <a name="nx_secure_tls_session_alert_value_get"></a>nx_secure_tls_session_alert_value_get
 
-Hämta TLS-avisering svärdet och nivån som skickas av den fjärranslutna värden
+Hämta TLS-aviseringsvärdet och nivån som skickas av fjärrvärden
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1344,60 +1307,60 @@ UINT  nx_secure_tls_session_alert_value_get(
                    UINT *alert_level, UINT *alert_value);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten används för att hämta TLS-aviserings nivån och värdet när fjärrvärden skickar en avisering som svar på ett problem eller fel.
+Den här tjänsten används för att hämta TLS-aviseringsnivå och -värde när fjärrvärden skickar en avisering som svar på ett problem eller fel.
 
-Värdena för parametrarna alert_level och alert_value är bara giltiga om den här funktionen anropas omedelbart efter ett TLS API-anrop som returnerade statusen NX_SECURE_TLS_ALERT_RECEIVED (0x114) som indikerar att en avisering togs emot från fjärrvärden.
+Värdena för parametrarna alert_level och alert_value är bara giltiga om den här funktionen anropas omedelbart efter ett TLS API-anrop som returnerade statusen NX_SECURE_TLS_ALERT_RECEIVED (0x114) som anger att en avisering togs emot från fjärrvärden.
 
-Observera att om den lokala värd-TLS skickar en avisering, är de returnerade fel koderna mycket mer beskrivande av det faktiska felet än TLS-aviseringen, eftersom TLS-aviserings värden oavsiktligt utelämnas för att förhindra vissa typer av angrepp (t. ex. ett "utfyllnad för Oracle"-angrepp eller liknande).
+Observera att om den lokala värdens TLS skickar en avisering är de returnerade felkoderna mycket mer beskrivande för det faktiska felet än själva TLS-aviseringen eftersom TLS-aviseringsvärden avsiktligt lämnas tvetydiga för att förhindra vissa typer av angrepp (till exempel ett utfyllnadsoraklet" eller liknande).
 
-Aviserings nivån har bara ett av två värden: NX_SECURE_TLS_ALERT_LEVEL_WARNING (0x1) eller NX_SECURE_TLS_ALERT_LEVEL_FATAL (0x2). I allmänhet får endast CloseNotify-aviseringen (som används för att visa en lyckad slut punkt till en TLS-session) en nivå av "varning", även om vissa konfigurations situationer för tillägg också kan anses vara varningar. De flesta aviseringar är "oåterkallelig" som indikerar ett potentiellt säkerhets fel och som resulterar i omedelbar avslutning av TLS-anslutningen (hand skakning eller session).
+Aviseringsnivån tar bara ett av två värden: NX_SECURE_TLS_ALERT_LEVEL_WARNING (0x1) eller NX_SECURE_TLS_ALERT_LEVEL_FATAL (0x2). I allmänhet ges endast CloseNotify-aviseringen (används för att ange ett lyckat slut på en TLS-session) en nivå av "Varning" även om vissa tilläggskonfigurationssituationer också kan betraktas som varningar. De allra flesta aviseringar är "Allvarliga" som anger ett potentiellt säkerhetsfel och resulterar i omedelbar stängning av TLS-anslutningen (handskakning eller session).
 
-TLS-aviseringens värden definieras i TLS-rapporterna, här är listan från RFC 5246 (TLSv 1.2) som referens:
+TLS-aviseringsvärdena definieras i TLS RFCs. Här är listan från RFC 5246 (TLSv1.2) som referens:
 
 | Aviseringsnamn                     | Värde | Beskrivning                                                                                                                                                  |
 | ---------------------------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| close_notify                  | 0     | Inget fel, indikerar lyckad session slut                                                                                                                   |
-| unexpected_message            | 10    | TLS tog emot ett oväntat eller meddelande som inte är i ordning                                                                                                           |
+| close_notify                  | 0     | Inget fel, indikerar att sessionen har avslutas                                                                                                                   |
+| unexpected_message            | 10    | TLS tog emot ett oväntat eller oväntad meddelande                                                                                                           |
 | bad_record_mac               | 20    | Dekryptering och/eller MAC-verifiering misslyckades                                                                                                                    |
-| decryption_failed_RESERVED   | 21    | **Föråldrad** Det gick inte att dekryptera (inaktuellt på grund av att Oracle-attacker för utfyllnad)                                                                                      |
-| record_overflow               | 22    | En post som är större än den största tillåtna storleken för TLS-data har tagits emot                                                                                        |
-| decompression_failure         | 30    | Ett problem påträffades vid komprimering/expandering av en TLS-post                                                                                       |
-| handshake_failure             | 40    | Ett ospecificerat hand skaknings fel inträffade som inte omfattas av en annan avisering                                                                            |
-| no_certificate_RESERVED      | 41    | **Föråldrad** i TLS (endast SSL)                                                                                                                                 |
-| bad_certificate               | 42    | Ett certifikat som tagits emot innehöll ogiltig formatering eller signaturer                                                                                   |
-| unsupported_certificate       | 43    | Ett certifikat togs emot som har en ogiltig typ (t. ex. endast signerings certifikat som används för TLS-serverautentisering)                                    |
-| certificate_revoked           | 44    | Certifikat statusen (som anges av en CRL eller OCSP) indikeras som "återkallad"                                                                       |
-| certificate_expired           | 45    | Det mottagna certifikatet var utanför det giltiga datum intervallet (antingen inte giltigt ännu eller har gått ut)                                                                 |
-| certificate_unknown           | 46    | Vissa okända certifikat problem påträffades som inte omfattas av andra aviseringar                                                                          |
-| illegal_parameter             | 47    | En del konfiguration eller förhandlat värde i TLS-handskakningen var ogiltigt eller utanför intervallet                                                                      |
-| unknown_ca                    | 48    | Mottaget identitets certifikat kunde inte spåras via en certifikat kedja till ett betrott rot certifikat för certifikat utfärdare.                                              |
-| access_denied                 | 49    | Anger att ett giltigt certifikat togs emot men program åtkomst kontrollen angav att certifikatet inte var giltigt för de begärda resurserna.            |
-| decode_error                  | 50    | Ett fält eller värde i ett TLS-huvud eller hand skaknings meddelande låg utanför intervallet eller är ogiltigt, vilket ledde till ett fel vid avkodning av en TLS-post.                      |
-| decrypt_error                 | 51    | Det gick inte att verifiera en signatur eller en färdig meddelande-hash under TLS-handskakningen.                                                                         |
-| export_restriction_RESERVED  | 60    | Föråldrad i TLSv 1.2                                                                                                                                        |
-| protocol_version              | 70    | Den TLS-protokollversion som förhandlas under hand skakningen känns igen men stöds inte (t. ex. TLSv 1.0 har presenter ATS men inte Aktiver ATS).                       |
-| insufficient_security         | 71    | Skickas varje gång en hand skakning Miss lyckas på grund av att det inte finns några säkra chiffer (till exempel att nyckel storleken är för liten för program kraven)                                |
-| internal_error                | 80    | Vissa icke-TLS-fel (t. ex. problem med minnesallokering, program problem) uppstod i en bruten TLS-session.                                         |
-| user_canceled                 | 90    | Returneras om TLS-sessionen avbryts av en användare eller ett program innan hand skakningen är slutförd (liknar CloseNotify).                                 |
-| no_renegotiation              | 100   | Indiates att den fjärranslutna värddatorn inte kan utföra en TLS renegotiation-handskakning som svar på en begäran om omförhandling.                                 |
-| unsupported_extension         | 110   | Skickas om en TLS-klient tar emot en ServerHello som innehåller tillägg som inte uttryckligen efterfrågats i den inledande sitt hälsnings (vilket indikerar att servern har problem). |
+| decryption_failed_RESERVED   | 21    | **INAKTUELL** Dekrypteringen misslyckades (inaktuell på grund av utfyllnad av orakelattacker)                                                                                      |
+| record_overflow               | 22    | En post togs emot som är större än den maximala TLS-poststorleken                                                                                        |
+| decompression_failure         | 30    | Ett problem inträffade vid komprimering/dekomprimering av en TLS-post                                                                                       |
+| handshake_failure             | 40    | Det uppstod ett ospecificerat handskakningsfel som inte omfattas av en annan avisering                                                                            |
+| no_certificate_RESERVED      | 41    | **INAKTUELL I** TLS (endast SSL)                                                                                                                                 |
+| bad_certificate               | 42    | Ett certifikat som togs emot innehöll ogiltig formatering eller signaturer                                                                                   |
+| unsupported_certificate       | 43    | Ett certifikat togs emot som var av en ogiltig typ (t.ex. signeringscertifikat som användes för TLS-serverautentisering)                                    |
+| certificate_revoked           | 44    | Certifikatstatusen (som anges av en CRL eller OCSP) angavs som "återkallad"                                                                       |
+| certificate_expired           | 45    | Det mottagna certifikatet låg utanför det giltiga datumintervallet (antingen inte giltigt ännu eller har upphört att gälla)                                                                 |
+| certificate_unknown           | 46    | Ett okänt certifikatproblem påträffades som inte omfattas av andra aviseringar                                                                          |
+| illegal_parameter             | 47    | Vissa konfigurationer eller förhandlade värden i TLS-handskakningen var ogiltiga eller utanför intervallet                                                                      |
+| unknown_ca                    | 48    | Det mottagna identitetscertifikatet kunde inte spåras via en certifikatkedja till ett betrott rotcertifikatutfärdarcertifikat.                                              |
+| access_denied                 | 49    | Anger att ett giltigt certifikat togs emot men programåtkomstkontrollen angav att certifikatet var ogiltigt för de begärda resurserna.            |
+| decode_error                  | 50    | Ett fält eller värde i ett TLS-huvud eller handskakningsmeddelande var utanför intervallet eller ogiltigt, vilket ledde till ett fel vid avkodning av en TLS-post.                      |
+| decrypt_error                 | 51    | Det gick inte att verifiera en signatur eller slutfört meddelande-hash under TLS-handskakningen.                                                                         |
+| export_restriction_RESERVED  | 60    | INAKTUELL I TLSv1.2                                                                                                                                        |
+| protocol_version              | 70    | Den TLS-protokollversion som förhandlades under handskakningen känns igen men stöds inte (t.ex. TLSv1.0 visades men aktiverades inte).                       |
+| insufficient_security         | 71    | Skickas när en handskakning misslyckas på grund av brist på säkra chiffer (t.ex. nyckelstorleken är för liten för programkraven)                                |
+| internal_error                | 80    | Vissa icke-TLS-fel (t.ex. problem med minnesallokering eller program) inträffade, vilket resulterade i en bruten TLS-session.                                         |
+| user_canceled                 | 90    | Returneras om TLS-sessionen avbryts av en användare eller ett program innan handskakningen är klar (liknar CloseNotify).                                 |
+| no_renegotiation              | 100   | Indiates att fjärrvärden inte är beredd att utföra TLS-omförhandlingshandskakningar som svar på en omförhandlingsbegäran.                                 |
+| unsupported_extension         | 110   | Skickas om en TLS-klient tar emot en ServerHello som innehåller tillägg som inte uttryckligen efterfrågas i den första ClientHello (vilket indikerar att servern har ett problem). |
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till en instans av TLS-session.
-- **alert_level** Returnera nivån för den mottagna aviseringen (varning eller allvarligt).
-- **alert_value** Returnera värdet för den mottagna aviseringen (se tabellen).
+- **session_ptr** Pekare till en TLS-sessionsinstans.
+- **alert_level** Returnera nivån för den mottagna aviseringen (varning eller allvarliga).
+- **alert_value** Returnera värdet för den mottagna aviseringen (se tabell).
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckades.
-- **NX_PTR_ERROR** (0X07) ogiltig TLS-session.
+- **NX_SUCCESS** (0x00) Åtgärden lyckades.
+- **NX_PTR_ERROR** (0x07) Ogiltig TLS-session.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -1435,7 +1398,7 @@ else if(status != NX_SUCCESS)
 
 ## <a name="nx_secure_tls_session_certificate_callback_set"></a>nx_secure_tls_session_certificate_callback_set
 
-Konfigurera en motringning för TLS som ska användas för ytterligare certifikat validering
+Konfigurera ett återanrop för TLS som ska användas för ytterligare certifikatverifiering
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1446,27 +1409,27 @@ UINT  nx_secure_tls_ session_certificate_callback_set (
                                     NX_SECURE_X509_CERT *certificate));
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tilldelar en-funktions pekare till en TLS-session som TLS kommer att anropa när ett certifikat tas emot från en fjärrvärd, så att programmet kan utföra verifierings kontroller, till exempel DNS-validering, certifikat återkallning och tillämpning av certifikat principer.
+Den här tjänsten tilldelar en funktionspekare till en TLS-session som TLS anropar när ett certifikat tas emot från en fjärrvärd, vilket gör att programmet kan utföra verifieringskontroller som DNS-verifiering, återkallelse av certifikat och tillämpning av certifikatprincip.
 
-NetX Secure TLS utför grundläggande X. 509-sökvägar på certifikatet innan återanropet anropas för att säkerställa att certifikatet kan spåras till ett certifikat i det betrodda TLS-certifikatarkivet, men alla andra verifieringar hanteras av återanropet.
+NetX Secure TLS utför grundläggande X.509-sökvägsverifiering på certifikatet innan återanrop anropas för att säkerställa att certifikatet kan spåras till ett certifikat i TLS betrodda certifikatarkiv, men all annan validering hanteras av det här återanropet.
 
-Återanropet innehåller TLS-sessionens pekare och en pekare till fjärrvärdets identitets certifikat (löv i certifikat kedjan). Återanropet ska returnera NX_SUCCESS om all verifiering lyckas, annars bör den returnera en felkod som indikerar verifierings felet. Ett annat värde än NX_SUCCESS gör att TLS-handskakningen avbryts omedelbart.
+Motringningen ger TLS-sessionspekaren och en pekare till fjärrvärdidentitetscertifikatet (lövnoden i certifikatkedjan). Motringningen ska returnera NX_SUCCESS om all validering lyckas, annars bör den returnera en felkod som anger verifieringsfelet. Ett annat värde än NX_SUCCESS kommer att orsaka att TLS-handskakningen avbryts omedelbart.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till en tidigare skapad TLS-session.
-- **func_ptr** Pekar mot funktionen motringning för certifikat validering.
+- **session_ptr** Pekare till en tidigare skapad TLS-sessionsinstans.
+- **func_ptr** Pekare till återanropsfunktionen för certifikatverifiering.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) allokering av funktions pekare.
-- **NX_PTR_ERROR** (0X07) ogiltig TLS-session pekare.
+- **NX_SUCCESS** (0x00) Lyckad allokering av funktionspekaren.
+- **NX_PTR_ERROR** (0x07) Ogiltig TLS-sessionspekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -1497,7 +1460,7 @@ ULONG certificate_callback(NX_SECURE_TLS_SESSION *session, NX_SECURE_X509_CERT
 
 ## <a name="nx_secure_tls_session_client_callback_set"></a>nx_secure_tls_session_client_callback_set
 
-Konfigurera ett motanrop för TLS som ska anropas i början av en TLS-klient hand skakning
+Konfigurera ett återanrop för TLS som ska anropas i början av en TLS-klienthandskakning
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1509,27 +1472,27 @@ UINT  nx_secure_tls_ session_client_callback_set (
                                     *extensions, UINT num_extensions));
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tilldelar en-funktions pekare till en TLS-session som TLS kommer att anropa när en TLS-klients hand skakning har tagit emot ett ServerHelloDone-meddelande. Funktionen motringning gör att ett program kan bearbeta alla TLS-tillägg från det mottagna ServerHello-meddelandet som kräver indatamängds-eller besluts fattande.
+Den här tjänsten tilldelar en funktions pekare till en TLS-session som TLS anropar när en TLS-klienthandskakning har tagit emot ett ServerHelloDone-meddelande. Med återanropsfunktionen kan ett program bearbeta TLS-tillägg från det mottagna ServerHello-meddelandet som kräver indata eller beslutsfattande.
 
-Återanropet körs med inaktive ring av TLS-sessionens kontroll block och en matris med NX_SECURE_TLS_HELLO_EXTENSION objekt. Matrisen med tilläggs objekt är avsedd att skickas till en hjälp funktion som söker efter och tolkar ett särskilt tillägg. För närvarande finns det inga specifika tillägg som stöds i NetX säkra som kräver indataport av TLS-klienten, men motringningen är tillgänglig för programkonstruktörer för att hantera anpassade eller nya tillägg som kan bli tillgängliga. En exempel hjälp funktion som analyserar TLS-tillägg som finns i Hello-meddelanden finns *nx_secure_tls_session_sni_extension_parse*.
+Motringningen körs med det anropande TLS-sessionskontrollblocket och en matris med NX_SECURE_TLS_HELLO_EXTENSION objekt. Matrisen med tilläggsobjekt är avsedd att skickas till en hjälpfunktion som hittar och parsar ett visst tillägg. Det finns för närvarande inga specifika tillägg som stöds i NetX Secure som kräver TLS-klientindata, men återanropet är tillgängligt för programdesigners för att hantera anpassade eller nya tillägg som kan bli tillgängliga. Ett exempel på en hjälpfunktion som parsar TLS-tillägg som finns i hello messages finns *i nx_secure_tls_session_sni_extension_parse*.
 
-Klient återanrop kan också användas för att välja det aktiva identitets certifikatet med *nx_secure_tls_active_certificate_set* för TLS-klienten i händelse av att fjärrservern har begärt ett certifikat och angett information för att tillåta TLS-klienten att välja ett särskilt certifikat. Mer information finns i referensen för nx_secure_tls_active_certificate_set.
+Återanropet av klienten kan också användas för att välja det aktiva identitetscertifikatet med *hjälp av nx_secure_tls_active_certificate_set* för TLS-klienten i händelse av att fjärrservern har begärt ett certifikat och angett information som gör att TLS-klienten kan välja ett specifikt certifikat. Se referensen för nx_secure_tls_active_certificate_set mer information.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till en tidigare skapad TLS-session.
-- **func_ptr** Pekar mot funktionen motringning i TLS-klienten.
+- **session_ptr** Pekare till en tidigare skapad TLS-sessionsinstans.
+- **func_ptr** Pekare till funktionen för återanrop av TLS-klient.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) allokering av funktions pekare.
-- **NX_PTR_ERROR** (0X07) ogiltig TLS-session pekare.
+- **NX_SUCCESS** (0x00) Lyckad allokering av funktionspekare.
+- **NX_PTR_ERROR** (0x07) Ogiltig TLS-sessionspekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -1575,7 +1538,7 @@ UINT tls_setup(NX_SECURE_TLS_SESSION *tls_session)
 
 ## <a name="nx_secure_tls_session_x509_client_verify_configure"></a>nx_secure_tls_session_x509_client_verify_configure
 
-Aktivera client X. 509-verifiering och allokera utrymme för klient certifikat
+Aktivera X.509-klientverifiering och allokera utrymme för klientcertifikat
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1586,38 +1549,38 @@ UINT  nx_secure_tls_session_x509_client_verify_configure(
                   ULONG buffer_size);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten aktiverar den valfria klientautentisering för X. 509 för en TLS-serverinstans. Den allokerar också utrymmet som krävs för att bearbeta inkommande certifikat kedjor från den fjärranslutna klient värden. De certifikat som anges av fjärrklienten verifieras mot betrodda certifikat för TLS-serverinstansen, tilldelade till tjänsten *nx_secure_tls_trusted_certificate_add.*
+Den här tjänsten aktiverar valfri X.509-klientautentisering för en TLS-serverinstans. Den allokerar också det utrymme som behövs för att bearbeta inkommande certifikatkedjor från fjärrklientvärden. Certifikaten som tillhandahålls av fjärrklienten kommer att verifieras mot TLS-serverinstansens betrodda certifikat, som tilldelas med *nx_secure_tls_trusted_certificate_add.*
 
-För TLS-klientcertifikat krävs fjärrtilldelning av certifikat och tjänsten *nx_secure_tls_remote_certificate_buffer_allocate* ska användas i stället. Att aktivera X. 509-klientautentisering på en TLS-klientsession har ingen påverkan.
+För TLS-klientläge krävs fjärrcertifikatallokering och *nx_secure_tls_remote_certificate_buffer_allocate* bör användas i stället. Aktivering av X.509-klientautentisering på en TLS-klientinstans har ingen effekt.
 
-*Certificate_buffer* -parametern pekar på utrymme som allokerats för att lagra inkommande fjärrcertifikat och kontroll block som behövs för dessa certifikat. Bufferten kommer att divideras med antalet certifikat (*certs_number*) med samma del som varje certifikat. Parametern *buffer_size* anger buffertens storlek. Utrymmet som behövs hittar du i följande formel:
+Den *certificate_buffer pekar* på allokerat utrymme för att lagra de inkommande fjärrcertifikaten och de kontrollblock som behövs för dessa certifikat. Bufferten divideras med antalet certifikat *(* certs_number ) med en lika stor del som ges till varje certifikat. Parametern *buffer_size* anger storleken på bufferten. Utrymmet som behövs finns med följande formel:
 
 ```C
 buffer_size = (<expected max number of certificates in chain>) *
              (sizeof(NX_SECURE_X509_CERT) + <max cert size>)
 ```
 
-Typiska certifikat med RSA-nycklar på 2048-bitar som använder SHA-256 för signaturer är i intervallet 1000-2000 byte. Bufferten bör vara tillräckligt stor för att minst innehålla den storlek som används för varje certifikat, men beroende på fjärrdatorns certifikat kan vara betydligt mindre eller större. Observera att om bufferten är för liten för att rymma det inkommande certifikatet, avslutas TLS-handskakningen med ett fel.
+Vanliga certifikat med RSA-nycklar på 2 048 bitar som använder SHA-256 för signaturer är i intervallet 1 000–2 000 byte. Bufferten bör vara tillräckligt stor för att minst innehålla den storleken för varje certifikat, men beroende på fjärrvärdcertifikaten kan vara betydligt mindre eller större. Observera att om bufferten är för liten för att innehålla det inkommande certifikatet, slutar TLS-handskakningen med ett fel.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till en tidigare skapad TLS-session.
+- **session_ptr** Pekare till en tidigare skapad TLS-sessionsinstans.
 - **certs_number** Antal certifikat som ska allokeras från den angivna bufferten.
-- **certificate_buffer** Pekar till en buffert för att lagra certifikat som tagits emot från en fjärrvärd.
-- **buffer_size** Storlek på certifikatets buffert.
+- **certificate_buffer** Pekare till en buffert för att lagra certifikat som tagits emot från en fjärrvärd.
+- **buffer_size** Certifikatbuffertens storlek.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) allokering av certifikat har slutförts.
-- **NX_PTR_ERROR** (0X07) ogiltig TLS-session eller buffert pekare.
-- **NX_SECURE_TLS_INSUFFICIENT_CERT_SPACE** (0X12D) den angivna bufferten var för liten.
-- **NX_INVALID_PARAMETERS** (0X4D) bufferten var för liten för att rymma det önskade antalet certifikat.
+- **NX_SUCCESS** (0x00)Lyckad allokering av certifikat.
+- **NX_PTR_ERROR** (0x07) Ogiltig TLS-session eller buffertpekare.
+- **NX_SECURE_TLS_INSUFFICIENT_CERT_SPACE** (0x12D) Den angivna bufferten var för liten.
+- **NX_INVALID_PARAMETERS** (0x4D) Bufferten var för liten för att innehålla önskat antal certifikat.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -1648,7 +1611,7 @@ status =  nx_secure_tls_session_x509_client_verify_configure(&tls_session,
 
 ## <a name="nx_secure_tls_session_client_verify_disable"></a>nx_secure_tls_session_client_verify_disable
 
-Inaktivera autentisering av klient certifikat för en NetX säker TLS-session
+Inaktivera klientcertifikatautentisering för en Säker NetX-TLS-session
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1657,22 +1620,22 @@ UINT  nx_secure_tls_session_client_verify_disable(
                               NX_SECURE_TLS_SESSION *session_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten inaktiverar autentisering av klient certifikat för en angiven TLS-session. Se nx_secure_tls_session_client_verify_enable för mer information.
+Den här tjänsten inaktiverar klientcertifikatautentisering för en specifik TLS-session. Mer information nx_secure_tls_session_client_verify_enable finns i nx_secure_tls_session_client_verify_enable information.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till en instans av TLS-session.
+- **session_ptr** Pekare till en TLS-sessionsinstans.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) status ändring har slutförts.
-- **NX_PTR_ERROR** (0X07) ogiltig TLS-session pekare.
+- **NX_SUCCESS** (0x00) Lyckad tillståndsändring.
+- **NX_PTR_ERROR** (0x07) Ogiltig TLS-sessionspekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -1692,7 +1655,7 @@ request certificates from the remote TLS client.  */
 
 ## <a name="nx_secure_tls_session_client_verify_enable"></a>nx_secure_tls_session_client_verify_enable
 
-Aktivera autentisering av klient certifikat för en NetX säker TLS-session
+Aktivera klientcertifikatautentisering för en NetX Secure TLS-session
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1701,27 +1664,27 @@ UINT  nx_secure_tls_session_client_verify_enable(
                                 NX_SECURE_TLS_SESSION *session_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten aktiverar autentisering av klient certifikat för en angiven TLS-session. Om du aktiverar autentisering av klient certifikat för en TLS-serverinstans kan TLS-servern begära ett certifikat från valfri fjärran sluten TLS-klient under den första TLS-handskakningen. Certifikatet som togs emot från fjärr-TLS-klienten åtföljs av ett CertificateVerify-meddelande som TLS-servern använder för att kontrol lera att klienten äger certifikatet (har åtkomst till den privata nyckel som är kopplad till certifikatet).
+Den här tjänsten aktiverar klientcertifikatautentisering för en specifik TLS-session. Om du aktiverar klientcertifikatautentisering för en TLS-serverinstans kommer TLS-servern att begära ett certifikat från valfri TLS-fjärrklient under den första TLS-handskakningen. Certifikatet som tas emot från den fjärranslutna TLS-klienten åtföljs av ett CertificateVerify-meddelande som TLS-servern använder för att verifiera att klienten äger certifikatet (har åtkomst till den privata nyckel som är associerad med certifikatet).
 
-Om det tillhandahållna certifikatet kan verifieras och spåras tillbaka till ett certifikat i det betrodda certifikat arkivet i TLS-servern via en X. 509-certifikat kedja, autentiseras fjärr-TLS-klienten och hand skakningen fortsätter. Om det uppstår fel vid bearbetning av certifikatet eller CertificateVerify-meddelandet slutar TLS-handskakningen med ett fel.
+Om det angivna certifikatet kan verifieras och spåras tillbaka till ett certifikat i TLS-serverns betrodda certifikatarkiv via en X.509-certifikatkedja autentiseras den fjärranslutna TLS-klienten och handskakningen fortsätter. Om det uppstår fel vid bearbetning av certifikatet eller CertificateVerify-meddelandet slutar TLS-handskakningen med ett fel.
 
 > [!NOTE]
-> *TLS-servern måste ha minst ett certifikat i det betrodda arkivet som har lagts till med nx_secure_tls_trusted_certificate_add eller autentiseringen fungerar alltid.*
+> *TLS-servern måste ha minst ett certifikat i det betrodda arkivet som läggs till med nx_secure_tls_trusted_certificate_add eller så misslyckas autentiseringen alltid.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till en instans av TLS-session.
+- **session_ptr** Pekare till en TLS-sessionsinstans.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) status ändring har slutförts.
-- **NX_PTR_ERROR** (0X07) ogiltig TLS-session pekare.
+- **NX_SUCCESS** (0x00) Lyckad tillståndsändring.
+- **NX_PTR_ERROR** (0x07) Ogiltig TLS-sessionspekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -1757,29 +1720,29 @@ UINT  nx_secure_tls_session_create(NX_SECURE_TLS_SESSION *session_ptr
                                    ULONG encryption_metadata_size);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten initierar en NX_SECURE_TLS_SESSION struktur instans som ska användas för att upprätta säker TLS-kommunikation över en nätverks anslutning.
+Den här tjänsten initierar en NX_SECURE_TLS_SESSION-strukturinstans för användning vid etablering av säker TLS-kommunikation via en nätverksanslutning.
 
-Metoden tar ett NX_SECURE_TLS_CRYPTO-objekt som är ifyllt med de tillgängliga kryptografiska metoder som ska användas för TLS. *Encryption_metadata_area* pekar på en buffert som tilldelats för användning av TLS för "metadata" som används av kryptografiska metoder i NX_SECURE_TLS_CRYPTOs tabellen för beräkningar. Tabellens storlek kan fastställas med hjälp av nx_secure_tls_metadata_size_calculate tjänsten. Mer information finns i avsnittet "kryptografi i NetX Secure TLS" i kapitel 3.
+Metoden tar ett NX_SECURE_TLS_CRYPTO objekt som fylls i med de tillgängliga kryptografiska metoder som ska användas för TLS. Den *encryption_metadata_area* pekar på en buffert som allokerats för användning av TLS för de "metadata" som används av de kryptografiska metoderna i NX_SECURE_TLS_CRYPTO för beräkningar. Tabellens storlek kan fastställas med hjälp av nx_secure_tls_metadata_size_calculate tjänsten. Mer information finns i avsnittet "Kryptografi i NetX Secure TLS" i kapitel 3.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till en instans av TLS-session.
-- **cipher_table** Pekare till TLS-kryptografiska metoder.
-- **encryption_metadata_area** Pekar på plats för kryptografiska metadata.
-- **encryption_metadata_size** Storlek på bufferten för metadata.
+- **session_ptr** Pekare till en TLS-sessionsinstans.
+- **cipher_table** Pekare till kryptografiska TLS-metoder.
+- **encryption_metadata_area** Pekare till blanksteg för kryptografimetadata.
+- **encryption_metadata_size** Storleken på metadatabufferten.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckades initiera TLS-sessionen.
-- **NX_PTR_ERROR** (0X07) försökte använda en ogiltig pekare.
-- **NX_INVALID_PARAMETERS** (0X4D) metadata-bufferten var för liten för de metoder som angavs.
-- **NX_SECURE_TLS_UNSUPPORTED_CIPHER** (0X106) en obligatorisk cipher-metod för den aktiverade versionen av TLS angavs inte i tabellen Cipher.
+- **NX_SUCCESS** (0x00)Lyckad initiering av TLS-sessionen.
+- **NX_PTR_ERROR** (0x07) Försökte använda en ogiltig pekare.
+- **NX_INVALID_PARAMETERS** (0x4D) Metadatabufferten var för liten för de angivna metoderna.
+- **NX_SECURE_TLS_UNSUPPORTED_CIPHER** (0x106) En obligatorisk chiffermetod för den aktiverade versionen av TLS angavs inte i chiffertabellen.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -1823,22 +1786,22 @@ Ta bort en NetX Secure TLS-session
 UINT  nx_secure_tls_session_delete(NX_SECURE_TLS_SESSION *session_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar bort en TLS-session som representeras av en NX_SECURE_TLS_SESSIONs struktur instans och frigör alla system resurser som ägs av den sessionen.
+Den här tjänsten tar bort en TLS-session som representeras av en NX_SECURE_TLS_SESSION-strukturinstans och släpper alla systemresurser som ägs av den sessionsinstansen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till en instans av TLS-session.
+- **session_ptr** Pekare till en TLS-sessionsinstans.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckades initiera TLS-sessionen.
-- **NX_PTR_ERROR** (0X07) försökte använda en ogiltig pekare.
+- **NX_SUCCESS** (0x00) Lyckad initiering av TLS-sessionen.
+- **NX_PTR_ERROR** (0x07) Försökte använda en ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -1862,7 +1825,7 @@ status =  nx_secure_tls_session_delete(&tls_session);
 
 ## <a name="nx_secure_tls_session_end"></a>nx_secure_tls_session_end
 
-Avsluta en aktiv NetX säker TLS-session
+Avsluta en aktiv NetX Secure TLS-session
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1871,28 +1834,28 @@ UINT  nx_secure_tls_session_end(NX_SECURE_TLS_SESSION *session_ptr,
                                     ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten avslutar en TLS-session som representeras av en NX_SECURE_TLS_SESSION-struktur instans genom att skicka TLS CloseNotify-meddelandet till fjärrvärden. Tjänsten väntar sedan på att fjärrvärden ska svara med sitt eget CloseNotify-meddelande.
+Den här tjänsten avslutar en TLS-session som representeras av en NX_SECURE_TLS_SESSION-strukturinstans genom att skicka TLS CloseNotify-meddelandet till fjärrvärden. Tjänsten väntar sedan på att fjärrvärden ska svara med ett eget CloseNotify-meddelande.
 
-Om fjärrvärden inte skickar ett CloseNotify-meddelande, betraktas TLS som ett fel och en möjlig säkerhets överträdelse, så det är viktigt att kontrol lera returvärdet för en säker anslutning. Parametern **wait_option** kan användas för att styra hur länge tjänsten ska vänta på svaret innan kontrollen återgår till anrops tråden.
+Om fjärrvärden inte skickar ett CloseNotify-meddelande betraktar TLS detta som ett fel och en möjlig säkerhetsöverträdelse, så det är viktigt att kontrollera returvärdet för en säker anslutning. Parametern **wait_option** kan användas för att styra hur länge tjänsten ska vänta på svaret innan kontrollen returneras till den anropande tråden.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till en instans av TLS-session.
-- **wait_option** Anger hur länge tjänsten ska vänta på svar från den fjärranslutna värden.
+- **session_ptr** Pekare till en TLS-sessionsinstans.
+- **wait_option** Anger hur länge tjänsten ska vänta på svaret från fjärrvärden.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckades initiera TLS-sessionen.
-- **NX_SECURE_TLS_NO_CLOSE_RESPONSE** (0x113) fick inget svar från fjärrvärden innan tids gränsen nåddes.
-- **NX_SECURE_TLS_ALLOCATE_PACKET_FAILED** (0X111) kunde inte allokera ett paket för att skicka CloseNotify-meddelandet.
-- **NX_SECURE_TLS_TCP_SEND_FAILED** (0X109) kunde inte skicka CloseNotify-meddelandet via TCP-socketen.
-- **NX_PTR_ERROR** (0X07) försökte använda en ogiltig pekare.
+- **NX_SUCCESS** (0x00) Lyckad initiering av TLS-sessionen.
+- **NX_SECURE_TLS_NO_CLOSE_RESPONSE** (0x113) Fick inget svar från fjärrvärden innan det tog slut.
+- **NX_SECURE_TLS_ALLOCATE_PACKET_FAILED** (0x111) Det gick inte att allokera ett paket för att skicka CloseNotify-meddelandet.
+- **NX_SECURE_TLS_TCP_SEND_FAILED** (0x109) Det gick inte att skicka CloseNotify-meddelandet via TCP-socketen.
+- **NX_PTR_ERROR** (0x07) Försökte använda en ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -1916,7 +1879,7 @@ status =  nx_secure_tls_session_end(&tls_session, NX_WAIT_FOREVER);
 
 ## <a name="nx_secure_tls_session_packet_buffer_set"></a>nx_secure_tls_session_packet_buffer_set
 
-Ställ in bufferten för paket ommontering för en NetX Secure TLS-session
+Ange paketsammansättningsbufferten för en Säker NetX-TLS-session
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1927,27 +1890,27 @@ UINT  nx_secure_tls_session_packet_buffer_set(
                                     ULONG buffer_size);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten associerar en paket omassembly-buffert till en TLS-session. För att dekryptera och tolka inkommande TLS-poster måste data i varje post monteras från de underliggande TCP-paketen. TLS-poster kan vara upp till 16 KB i storlek (även om de ofta är mycket mindre) så att de inte får plats i ett enda TCP-paket.
+Den här tjänsten associerar ett paket med en återmonteringsbuffert till en TLS-session. För att kunna dekryptera och parsa inkommande TLS-poster måste data i varje post sammanställas från de underliggande TCP-paketen. TLS-poster kan vara upp till 16 kB stora (men är vanligtvis mycket mindre) så de kanske inte får plats i ett enda TCP-paket.
 
-Om du vet att det inkommande meddelandets storlek är mindre än TLS-postgränsen på 16 KB kan buffertstorleken bli mindre, men för att hantera okända inkommande data måste bufferten göras så stor som möjligt. Om en inkommande post är större än den angivna bufferten avslutas TLS-sessionen med ett fel.
+Om du vet att den inkommande meddelandestorleken kommer att vara mindre än TLS-postgränsen på 16 kB, kan buffertstorleken göras mindre, men för att hantera okända inkommande data bör bufferten göras så stor som möjligt. Om en inkommande post är större än den angivna bufferten avslutas TLS-sessionen med ett fel.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till en instans av TLS-session.
-- **buffer_ptr** Pekare för att buffra för TLS som ska användas för paket ommontering.
-- **buffer_size** Storlek på angiven buffert i byte.
+- **session_ptr** Pekare till en TLS-sessionsinstans.
+- **buffer_ptr** Pekare till buffert för TLS som ska användas för paket som ska sättas ihop på ett annat sätt.
+- **buffer_size** Storleken på den angivna bufferten i byte.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckades initiera TLS-sessionen.
-- **NX_INVALID_PARAMETERS** (0X4D) ogiltig buffert eller TLS-session pekare.
-- **NX_PTR_ERROR** (0X07) försökte använda en ogiltig pekare.
+- **NX_SUCCESS** (0x00) Lyckad initiering av TLS-sessionen.
+- **NX_INVALID_PARAMETERS** (0x4D) Ogiltig buffert eller TLS-sessionspekare.
+- **NX_PTR_ERROR** (0x07) Försökte använda en ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -1974,7 +1937,7 @@ status =  nx_secure_tls_session_packet_buffer_set(&tls_session, tls_packet_buffe
 
 ## <a name="nx_secure_tls_session_protocol_version_override"></a>nx_secure_tls_session_protocol_version_override
 
-Åsidosätt standard versionen av TLS-protokollet för en NetX säker TLS-session
+Åsidosätt standardversionen av TLS-protokollet för en Säker NetX-TLS-session
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1984,41 +1947,41 @@ UINT  nx_secure_tls_session_protocol_version_override(
                               USHORT protocol_version);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten åsidosätter standard versionen (nyaste) TLS-protokollet som används av en viss session. Detta gör att NetX Secure TLS kan använda en äldre version av TLS för en speciell TLS-session utan att inaktivera nya TLS-versioner vid kompilering. Detta kan vara användbart i program som kan behöva kommunicera med en äldre värd som inte stöder den senaste versionen av TLS.
-
-> [!IMPORTANT]
-> *Från och med version 5.11 SP3 stöder NetX Secure TLS RFC 7507 (se OBS! nedan) och alla åsidosättningar till en äldre version med detta API leder till att en återställnings SCSV skickas i sitt hälsnings. Om servern har stöd för en nyare version av TLS och återställnings SCSV ingår i sitt hälsnings, kommer servern att avbryta TLS-handskakningen med en "olämplig återställning"-avisering. SCSV skickas endast när den åsidosättande versionen är en äldre version av TLS än vad som är aktiverat (t. ex. om du åsidosätter versionen till TLS 1,2 kommer inga SCSV att skickas).*
-
-Giltiga värden för parametern protocol_version är följande makron: NX_SECURE_TLS_VERSION_TLS_1_0, NX_SECURE_TLS_VERSION_TLS_1_1 och NX_SECURE_TLS_VERSION_TLS_1_2.
-
-Makron NX_SECURE_TLS_DISABLE_TLS_1_1 och NX_SECURE_TLS_ENABLE_TLS_1_0 kan användas för att kontrol lera vilka versioner av TLS som kompileras i programmet. TLS version 1,2 är alltid aktiverat.
-
-Observera att om fjärrvärden inte stöder den angivna versionen kommer anslutningen att Miss Miss läge – endast den angivna åsidosättning-versionen kommer att förhandlas av NetX Secure TLS.
+Den här tjänsten åsidosätter standardversionen av TLS-protokollet (senaste) som används av en viss session. Detta gör att NetX Secure TLS kan använda en äldre version av TLS för en specifik TLS-session utan att inaktivera nyare TLS-versioner vid kompileringen. Detta kan vara användbart i program som kan behöva kommunicera med en äldre värd som inte stöder den senaste versionen av TLS.
 
 > [!IMPORTANT]
-> RFC 7507: TLS fallback SCSV. Den här RFC introducerades för att minimera ett säkerhets problem som ursprungligen orsakades av servrar som felaktigt hanterade protokoll nedgradering, och som i stället avvisade andra giltiga sitt hälsnings-meddelanden. I ett försök att fortsätta att vara kompatibelt med dessa gamla servrar startade vissa TLS-klientprogram att nya försök misslyckades med och äldre TLS-version (t. ex. TLS 1,2 misslyckades, så testa TLS 1,1). Den här lösningen introducerade dock ett nytt problem – en angripare kan tvinga en klient att nedgradera genom att artificiellt introducera ett nätverks-eller paket fel som orsakar att Server anslutningen kraschar – även om den nya TLS-versionen stöds av servern. Genom att nedgradera till en äldre version kan angriparen utnyttja svagheter i den versionen (SSLv3<sup>21</sup> är särskilt beroende av Poodle-attacken). För att förhindra den här situationen är RFC 7507 introdued "fallback SCSV", en pseudo-ciphersuite<sup>22</sup> som skickas i sitt hälsnings som meddelar en TLS-server när en TLS-klient använder en TLS-version som inte stöds av den senaste versionen. På så sätt kan en server som har stöd för en nyare version avvisa en sitt hälsnings som innehåller återställnings-SCSV och förhindra nedgradering av angrepp.
+> *Från och med version 5.11SP3 stöder NetX Secure TLS RFC 7507 (se anmärkning nedan) och eventuella åsidosättningar till en äldre version med det här API:et resulterar i att en ÅTERSTÄLLNINGs-SCSV skickas i ClientHello. Om servern stöder en nyare version av TLS och återställnings-SCSV ingår i ClientHello avbryter servern TLS-handskakningen med en avisering om olämplig återställning. SCSV skickas endast när versionsåsidosättning är en äldre version av TLS än aktiverad (t.ex. om du åsidosätter versionen till TLS 1.2 skickas ingen SCSV).*
 
-21. NetX Secure implementerar inte SSLv3 på grund av kända allvarliga svagheter som POODLE.
+Giltiga värden för protocol_version är följande makron: NX_SECURE_TLS_VERSION_TLS_1_0, NX_SECURE_TLS_VERSION_TLS_1_1 och NX_SECURE_TLS_VERSION_TLS_1_2.
 
-22. Ett pseudo-ciphersuite-eller SCSV-värde (Signaling cipher Suite) är ett reserverat ciphersuite-nummer som används för att signalera aktiverade TLS-implementeringar om funktioner som inte är tillgängliga i äldre TLS-versioner. Återställnings SCSV och TLS_EMPTY_RENEGOTIATION_INFO_SCSV (RFC 5746) är exempel.
+Makron som NX_SECURE_TLS_DISABLE_TLS_1_1 och NX_SECURE_TLS_ENABLE_TLS_1_0 kan användas för att styra vilka versioner av TLS som kompileras i programmet. TLS version 1.2 är alltid aktiverat.
+
+Observera att om fjärrvärden inte stöder den angivna versionen misslyckas anslutningen – endast den angivna åsidosättningsversionen förhandlas av NetX Secure TLS.
+
+> [!IMPORTANT]
+> RFC 7507: TLS Fallback SCSV. Den här RFC:en introducerades för att minimera ett säkerhetsproblem som ursprungligen orsakades av servrar som felaktigt hanterade protokoll nedgradering av förhandling och i stället avvisade giltiga ClientHello-meddelanden. I ett försök att fortsätta vara kompatibelt med dessa gamla servrar började vissa TLS-klientprogram att försöka utföra misslyckade handskakningar på nytt med och äldre TLS-version (t.ex. misslyckades TLS 1.2 så försök med TLS 1.1). Den här lösningen introducerade dock ett nytt problem – en angripare kan tvinga en klient att nedgradera genom att artificiellt införa ett nätverks- eller paketfel som orsakar att serveranslutningen misslyckas – även om servern hade stöd för den nyare TLS-versionen. Genom att nedgradera till en äldre version kan angriparen utnyttja svagheter i den versionen (särskilt SSLv3<sup>21</sup> är svag förDLE-attacken). För att förhindra den här situationen har RFC 7507 introduduerat "återställnings-SCSV", en pseudo-chiffersuite<sup>22</sup> som skickas i ClientHello som meddelar en TLS-server när en TLS-klient använder en TLS-version som inte är den senaste versionen som stöds. På så sätt kan en server som stöder en nyare version avvisa en ClientHello som innehåller återställnings-SCSV och förhindra att nedgraderingsattacken lyckas.
+
+21. NetX Secure implementerar inte SSLv3 på grund av att det finns kända allvarliga svagheter, till exempelDLE.
+
+22. En pseudociphersuite, eller SCSV (Signaling Cipher Suite Value), är ett reserverat chiffersvitnummer som används för att signalera aktiverade TLS-implementeringar om funktioner som inte var tillgängliga i äldre TLS-versioner. Återställnings-SCSV och TLS_EMPTY_RENEGOTIATION_INFO_SCSV (RFC 5746) är exempel.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till en instans av TLS-session.
-- **protocol_version** TLS-version makro för den angivna TLS-versionen som ska användas.
+- **session_ptr** Pekare till en TLS-sessionsinstans.
+- **protocol_version** TLS-versions makro för den specifika TLS-version som ska användas.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) status ändring har slutförts.
-- **NX_PTR_ERROR** (0X07) ogiltig TLS-session pekare.
-- **NX_SECURE_TLS_UNSUPPORTED_TLS_VERSION** (0X110) känd men TLS-version som inte stöds.
-- **NX_SECURE_TLS_UNKNOWN_TLS_VERSION** (0X10F) ogiltig protokoll version.
+- **NX_SUCCESS** (0x00) Lyckad tillståndsändring.
+- **NX_PTR_ERROR** (0x07) Ogiltig TLS-sessionspekare.
+- **NX_SECURE_TLS_UNSUPPORTED_TLS_VERSION** (0x110) Känd men inte TLS-version stöds.
+- **NX_SECURE_TLS_UNKNOWN_TLS_VERSION** (0x10F) Ogiltig protokollversion.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -2048,33 +2011,33 @@ UINT  nx_secure_tls_session_receive(NX_SECURE_TLS_SESSION *session_ptr,
                                     ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar emot data från den angivna aktiva TLS-sessionen och hanterar Dekrypteringen av dessa data innan den tillhandahålls till anroparen i NX_PACKET-parametern. Om inga data har ställts i kö i den angivna sessionen pausas anropet baserat på det angivna wait-alternativet.
+Den här tjänsten tar emot data från den angivna aktiva TLS-sessionen och hanterar dekrypteringen av dessa data innan de anges för anroparen i NX_PACKET-parametern. Om inga data köas i den angivna sessionen pausas anropet baserat på det angivna väntealternativet.
 
 > [!IMPORTANT]
 > *Om NX_SUCCESS returneras ansvarar programmet för att släppa det mottagna paketet när det inte längre behövs.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till en instans av TLS-session.
-- **packet_ptr** Pekare till en tilldelad TLS-paket-pekare.
-- **wait_option** Anger hur länge tjänsten ska vänta på ett paket från den fjärranslutna värden innan den returneras.
+- **session_ptr** Pekare till en TLS-sessionsinstans.
+- **packet_ptr** Pekare till en allokerad TLS-paket pekare.
+- **wait_option** Anger hur länge tjänsten ska vänta på ett paket från fjärrvärden innan den returneras.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckades initiera TLS-sessionen.
-- **NX_NO_PACKET** (0X01) inga data togs emot.
-- **NX_NOT_CONNECTED** (0X38) den underliggande TCP-socketen är inte längre ansluten.
-- **NX_SECURE_TLS_HASH_MAC_VERIFY_FAILURE** (0X108) ett mottaget meddelande misslyckades med en hash-kontroll för autentisering.
-- **NX_SECURE_TLS_UNKNOWN_TLS_VERSION** (0X10F) ett mottaget meddelande innehöll en okänd protokoll version i huvudet.
-- **NX_SECURE_TLS_ALERT_RECEIVED** (0X114) tog emot en TLS-avisering från fjärrvärden.
-- **NX_PTR_ERROR** (0X07) försökte använda en ogiltig pekare.
-- **NX_SECURE_TLS_SESSION_UNINITIALIZED** (0X101) den angivna TLS-sessionen initierades inte.
+- **NX_SUCCESS** (0x00) Lyckad initiering av TLS-sessionen.
+- **NX_NO_PACKET** (0x01) Inga data tas emot.
+- **NX_NOT_CONNECTED** (0x38) Den underliggande TCP-socketen är inte längre ansluten.
+- **NX_SECURE_TLS_HASH_MAC_VERIFY_FAILURE** (0x108) Ett mottaget meddelande misslyckades med en autentiseringshasharkontroll.
+- **NX_SECURE_TLS_UNKNOWN_TLS_VERSION** (0x10F) Ett mottaget meddelande innehöll en okänd protokollversion i rubriken.
+- **NX_SECURE_TLS_ALERT_RECEIVED** (0x114) Tog emot en TLS-avisering från fjärrvärden.
+- **NX_PTR_ERROR** (0x07) Försökte använda en ogiltig pekare.
+- **NX_SECURE_TLS_SESSION_UNINITIALIZED** (0x101) Den angivna TLS-sessionen initierades inte.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -2102,7 +2065,7 @@ NX_WAIT_FOREVER);
 
 ## <a name="nx_secure_tls_session_renegotiate_callback_set"></a>nx_secure_tls_session_renegotiate_callback_set
 
-Tilldela ett återanrop som ska anropas i början av en omförhandling av en session
+Tilldela ett återanrop som anropas i början av en omförhandling av sessionen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2113,30 +2076,30 @@ UINT  nx_secure_tls_ session_renegotiate_callback_set (
                   *session));
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tilldelar en motringning till en TLS-session som ska anropas varje gång det första meddelandet i en handhandlings hand skakning tas emot från den fjärranslutna värden.
+Den här tjänsten tilldelar ett återanrop till en TLS-session som anropas när det första meddelandet i en omförhandling av session tas emot från fjärrvärden.
 
-Motringningsfunktionen är avsedd som ett meddelande till programmet som en handhandlings hand skakning startar – programmet kan välja att avsluta TLS-sessionen genom att returnera ett värde som inte är noll från återanropet, vilket gör att TLS avslutar TLS-sessionen med ett fel. Om programmet vill fortsätta med omförhandlingen bör återanropet returnera NX_SUCCESS.
+Återanropsfunktionen är avsedd som ett meddelande till programmet om att en omförhandling av handskakningen har börjat – programmet kan välja att avsluta TLS-sessionen genom att returnera ett värde som inte är noll från återanropet, vilket gör att TLS avslutar TLS-sessionen med ett fel. Om programmet vill fortsätta med omförhandlingen ska återanropet returnera NX_SUCCESS.
 
 > [!NOTE]
-> *På grund av semantiken för TLS-omförhandling anropas återanropet för NetX-säkra TLS-klienter när en HelloRequest tas emot från fjärrservern, men inte när klienten initierar omförhandlingar. På NetX säkra TLS-servrar anropas återanropet varje gång en sitt hälsnings tas emot (alla sitt hälsnings som tas emot i kontexten för en aktiv TLS-session). Det innebär att återanropet anropas om fjärrvärden eller det lokala programmet har initierat omförhandlingaret eftersom TLS-servern skickar en HelloRequest som fjärrklienten svarar på.*
+> *På grund av semantiken för TLS-omförhandling anropas motringningen för NetX Secure TLS-klienter när en HelloRequest tas emot från fjärrservern, men inte när klienten initierar omförhandlingen. På NetX Secure TLS-servrar anropas motringningen när en omförhandling av ClientHello tas emot (alla ClientHello tas emot i samband med en aktiv TLS-session). Det innebär att återanropet anropas oavsett om fjärrvärden eller det lokala programmet har initierat omförhandlingen eftersom TLS-servern skickar en HelloRequest som fjärrklienten svarar på.*
 
-NetX Secure TLS implementerar tillägget för säker omförhandling inidication från RFC 5746 för att säkerställa att hand skaknings hand skakningar inte omfattas av man-in-the-middle-attacker.
+NetX Secure TLS implementerar Secure Renegotiation Incation Extension från RFC 5746 för att säkerställa att omförhandling av handskakningar inte utsätts för man-in-the-middle-attacker.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till instans av TLS-session.
-- **func_ptr** Pekare till callback-funktion.
+- **session_ptr** Pekare till TLS-sessionsinstans.
+- **func_ptr** Pekare till återanropsfunktionen.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) återanrops tilldelningen lyckades.
-- **NX_PTR_ERROR** (0X07) försökte använda en ogiltig pekare för callback-funktionen eller TLS-sessionen.
+- **NX_SUCCESS** (0x00) Lyckad tilldelning av återanrop.
+- **NX_PTR_ERROR** (0x07) Försökte använda en ogiltig pekare för återanropsfunktionen eller TLS-sessionen.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -2171,7 +2134,7 @@ status = nx_secure_tls_session_renegotiate_callback_set(&tls_session,
 
 ## <a name="nx_secure_tls_session_renegotiate"></a>nx_secure_tls_session_renegotiate
 
-Starta en handhandlings hand skakning med fjärrvärden
+Initiera en omförhandling av sessionshandskakning med fjärrvärden
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2181,39 +2144,39 @@ UINT  nx_secure_tls_ session_renegotiate (
                   UINT wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten initierar en *handhandlings* hand skakning med en ansluten fjärran SLUTen TLS-värd. En omförhandling består av en andra TLS-handskakning inom kontexten för en tidigare upprättad TLS-session. Var och en av de nya hand skaknings meddelandena krypteras med TLS-sessionen tills nya sessionsnycklar skapas och ChangeCipherSpec-meddelanden byts ut, då de nya nycklarna används för att kryptera alla meddelanden.
+Den här tjänsten initierar en *omförhandling av session* med en ansluten fjärransluten TLS-värd. En omförhandling består av en andra TLS-handskakning i kontexten för en tidigare etablerad TLS-session. Vart och ett av de nya handskakningsmeddelandena krypteras med TLS-sessionen tills nya sessionsnycklar genereras och ChangeCipherSpec-meddelanden utbyts, då de nya nycklarna används för att kryptera alla meddelanden.
 
-En omförhandling kan initieras när som helst när en TLS-session har upprättats. Om det görs ett försök till en omförhandling vid en TLS-handskakning eller innan en TLS-session upprättas utförs ingen åtgärd.
+En omförhandling kan initieras när som helst när en TLS-session har upprättats. Om en omförhandling görs under en TLS-handskakning eller innan en TLS-session upprättas vidtas ingen åtgärd.
 
 > [!NOTE]
-> *En hel TLS-handskakning kommer att utföras när den här tjänsten anropas så att statusen slutförd och returnerad status varierar beroende på de aktuella TLS-inställningarna och session parametrarna.*
+> *En hel TLS-handskakning utförs när den här tjänsten anropas, så tiden till slutförande och returnerad status varierar beroende på de aktuella TLS-inställningarna och sessionsparametrarna.*
 
-NetX Secure TLS implementerar tillägget för säker omförhandling inidication från RFC 5746 för att säkerställa att hand skaknings hand skakningar inte omfattas av man-in-the-middle-attacker.
+NetX Secure TLS implementerar tillägget För säker omförhandling från RFC 5746 för att säkerställa att omförhandlingshandskakningar inte utsätts för man-in-the-middle-attacker.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till instans av TLS-session.
-- **wait_option** Anger hur länge tjänsten ska vänta på ett paket från den fjärranslutna värden innan den returneras. Detta skickas till alla NetX-tjänster i TLS.
+- **session_ptr** Pekare till TLS-sessionsinstans.
+- **wait_option** Anger hur länge tjänsten ska vänta på ett paket från fjärrvärden innan den returneras. Detta skickas till alla NetX-tjänster i TLS.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) omförhandlingar.
-- **NX_NO_PACKET** (0X01) inga data togs emot.
-- **NX_NOT_CONNECTED** (0X38) den underliggande TCP-socketen är inte längre ansluten.
-- **NX_SECURE_TLS_HASH_MAC_VERIFY_FAILURE** (0X108) ett mottaget meddelande misslyckades med en hash-kontroll för autentisering.
-- **NX_SECURE_TLS_UNKNOWN_TLS_VERSION** (0X10F) ett mottaget meddelande innehöll en okänd protokoll version i huvudet.
-- **NX_SECURE_TLS_ALERT_RECEIVED** (0X114) tog emot en TLS-avisering från fjärrvärden.
-- **NX_SECURE_TLS_RENEGOTIATION_SESSION_INACTIVE** (0X134) den lokala eller fjärranslutna TLS-sessionen är inaktiv, vilket gör det omöjligt att göra en omförhandling.
-- **NX_SECURE_TLS_RENEGOTIATION_FAILURE** (0x13A) angavs inte fjärrvärden antingen SCSV eller säkert omförhandlat tillägg och därför kan omförhandla inte utföras.
-- **NX_PTR_ERROR** (0X07) försökte använda en ogiltig pekare.
-- **NX_SECURE_TLS_SESSION_UNINITIALIZED** (0X101) den angivna TLS-sessionen initierades inte.
-- **NX_SECURE_TLS_ALLOCATE_PACKET_FAILED** (0x111) den underliggande paket tilldelningen misslyckades.
+- **NX_SUCCESS** (0x00) Lyckad omförhandling.
+- **NX_NO_PACKET** (0x01) Inga data tas emot.
+- **NX_NOT_CONNECTED** (0x38) Den underliggande TCP-socketen är inte längre ansluten.
+- **NX_SECURE_TLS_HASH_MAC_VERIFY_FAILURE** (0x108) Ett mottaget meddelande misslyckades med en autentiseringshasharkontroll.
+- **NX_SECURE_TLS_UNKNOWN_TLS_VERSION** (0x10F) Ett mottaget meddelande innehöll en okänd protokollversion i rubriken.
+- **NX_SECURE_TLS_ALERT_RECEIVED** (0x114) Tog emot en TLS-avisering från fjärrvärden.
+- **NX_SECURE_TLS_RENEGOTIATION_SESSION_INACTIVE** (0x134) Den lokala eller fjärranslutna TLS-sessionen är inaktiv, vilket gör omförhandling omöjligt.
+- **NX_SECURE_TLS_RENEGOTIATION_FAILURE** (0x13A) Fjärrvärden tillhandahåller inte antingen SCSV eller Secure Renegotiation Extension och därför går det inte att utföra omförhandling.
+- **NX_PTR_ERROR** (0x07) Försökte använda en ogiltig pekare.
+- **NX_SECURE_TLS_SESSION_UNINITIALIZED** (0x101) Den angivna TLS-sessionen initierades inte.
+- **NX_SECURE_TLS_ALLOCATE_PACKET_FAILED** (0x111) Underliggande paketallokering misslyckades.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -2265,7 +2228,7 @@ status = nx_secure_tls_session_send(&tls_session, send_packet,
 
 ## <a name="nx_secure_tls_session_reset"></a>nx_secure_tls_session_reset
 
-Ta bort och Återställ en NetX säker TLS-session
+Rensa och återställa en NetX Secure TLS-session
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2273,23 +2236,23 @@ Ta bort och Återställ en NetX säker TLS-session
 UINT  nx_secure_tls_session_reset (NX_SECURE_TLS_SESSION *session_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten rensar en TLS-session och återställer statusen som om sessionen hade skapats så att ett befintligt TLS-sessionsobjekt kan återanvändas för en ny session.
+Den här tjänsten tar bort en TLS-session och återställer tillståndet som om sessionen just hade skapats så att ett befintligt TLS-sessionsobjekt kan användas igen för en ny session.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till en instans av TLS-session.
+- **session_ptr** Pekare till en TLS-sessionsinstans.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckades initiera TLS-sessionen.
-- **NX_INVALID_PARAMETERS** (0X4D) ogiltig TLS-session pekare.
-- **NX_PTR_ERROR** (0X07) försökte använda en ogiltig pekare.
+- **NX_SUCCESS** (0x00) Lyckad initiering av TLS-sessionen.
+- **NX_INVALID_PARAMETERS** (0x4D) Ogiltig TLS-sessionspekare.
+- **NX_PTR_ERROR** (0x07) Försökte använda en ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -2323,31 +2286,31 @@ UINT  nx_secure_tls_session_send(NX_SECURE_TLS_SESSION *session_ptr,
                                     ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skickar data i den angivna NX_PACKET, använder den angivna aktiva TLS-sessionen och hanterar krypteringen av dessa data innan den skickas till fjärrvärden. Om mottagarens senaste annonserade fönster storlek är mindre än den här begäran, pausas tjänsten, om det finns ett alternativ för den angivna vänte tiden.
+Den här tjänsten skickar data i den NX_PACKET, med hjälp av den angivna aktiva TLS-sessionen och hanterar krypteringen av dessa data innan de skickas till fjärrvärden. Om mottagarens senast annonserade fönsterstorlek är mindre än den här begäran, pausar tjänsten eventuellt baserat på de angivna väntealternativen.
 
 > [!IMPORTANT]
-> *Om ett fel returneras ska programmet inte släppa paketet efter det här anropet. På så sätt kan oväntade resultat uppstå, eftersom nätverks driv rutinen kommer att släppa paketet efter överföringen.*
+> *Om inget fel returneras ska programmet inte släppa paketet efter det här anropet. Detta leder till oförutsägbara resultat eftersom nätverksdrivrutinen släpper paketet efter överföringen.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till en instans av TLS-session.
-- **packet_ptr** Pekar på ett TLS-paket som innehåller data som ska skickas.
-- **wait_option** Definierar hur tjänsten fungerar om begäran är större än mottagarens fönster storlek.
+- **session_ptr** Pekare till en TLS-sessionsinstans.
+- **packet_ptr** Pekare till ett TLS-paket som innehåller data som ska skickas.
+- **wait_option** Definierar hur tjänsten beter sig om begäran är större än mottagarens fönsterstorlek.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckades initiera TLS-sessionen.
-- **NX_NO_PACKET** (0X01) inga data togs emot.
-- **NX_NOT_CONNECTED** (0X38) den underliggande TCP-socketen är inte längre ansluten.
-- **NX_SECURE_TLS_TCP_SEND_FAILED** (0X109) den underliggande TCP-socketen kunde inte skickas.
-- **NX_PTR_ERROR** (0X07) försökte använda en ogiltig pekare.
-- **NX_SECURE_TLS_SESSION_UNINITIALIZED** (0X101) den angivna TLS-sessionen initierades inte.
+- **NX_SUCCESS** (0x00) Lyckad initiering av TLS-sessionen.
+- **NX_NO_PACKET** (0x01) Inga data har tagits emot.
+- **NX_NOT_CONNECTED** (0x38) Den underliggande TCP-socketen är inte längre ansluten.
+- **NX_SECURE_TLS_TCP_SEND_FAILED** (0x109) Det gick inte att skicka underliggande TCP-socket.
+- **NX_PTR_ERROR** (0x07) Försökte använda en ogiltig pekare.
+- **NX_SECURE_TLS_SESSION_UNINITIALIZED** (0x101) Den angivna TLS-sessionen initierades inte.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -2374,7 +2337,7 @@ status =  nx_secure_tls_session_send(&tls_session, &packet_ptr, NX_WAIT_FOREVER)
 
 ## <a name="nx_secure_tls_session_server_callback_set"></a>nx_secure_tls_session_server_callback_set
 
-Konfigurera ett motanrop för TLS som ska anropas i början av en TLS-servers hand skakning
+Konfigurera ett återanrop för TLS som ska anropas i början av en TLS-serverhandskakning
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2386,27 +2349,27 @@ UINT  nx_secure_tls_ session_server_callback_set (
                                    *extensions, UINT num_extensions));
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tilldelar en funktion pekare till en TLS-session som TLS kommer att anropa när en TLS-servers hand skakning har tagit emot ett sitt hälsnings-meddelande. Funktionen motringning gör att ett program kan bearbeta alla TLS-tillägg från det mottagna sitt hälsnings-meddelandet som kräver indatamängds-eller besluts fattande.
+Den här tjänsten tilldelar en funktions pekare till en TLS-session som TLS anropar när en TLS-serverhandskakning har tagit emot ett ClientHello-meddelande. Med återanropsfunktionen kan ett program bearbeta alla TLS-tillägg från det mottagna ClientHello-meddelandet som kräver indata eller beslutsfattande.
 
-Återanropet körs med inaktive ring av TLS-sessionens kontroll block och en matris med NX_SECURE_TLS_HELLO_EXTENSION objekt. Matrisen med tilläggs objekt är avsedd att skickas till en hjälp funktion som söker efter och tolkar ett särskilt tillägg. En exempel hjälp funktion som analyserar TLS-tillägg som finns i Hello-meddelanden finns *nx_secure_tls_session_sni_extension_parse*.
+Motringningen körs med det anropande TLS-sessionskontrollblocket och en matris med NX_SECURE_TLS_HELLO_EXTENSION objekt. Matrisen med tilläggsobjekt är avsedd att skickas till en hjälpfunktion som hittar och parsar ett visst tillägg. Ett exempel på en hjälpfunktion som parsar TLS-tillägg som finns i hello messages finns *i nx_secure_tls_session_sni_extension_parse*.
 
-Server återanrop kan också användas för att välja det aktiva identitets certifikatet med hjälp av *nx_secure_tls_active_certificate_set* för TLS-servern. Detta inträffar ofta som svar på ett Servernamnindikator-tillägg (SNI), vilket gör att en TLS-klient kan ange vilken server som försöker kontaktas. Mer information finns i referenserna för *nx_secure_tls_session_sni_extension_parse* och *nx_secure_tls_active_certificate_set* .
+Serveranropet kan också användas för att välja det aktiva identitetscertifikatet *med hjälp nx_secure_tls_active_certificate_set* för TLS-servern. Detta inträffar oftast som svar på ett Servernamnindikator-tillägg (SNI) som gör att en TLS-klient kan ange vilken server den försöker kontakta. Se referenserna för *nx_secure_tls_session_sni_extension_parse* *och nx_secure_tls_active_certificate_set* mer information.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till en tidigare skapad TLS-session.
-- **func_ptr** Pekar till funktionen motringning för TLS-server.
+- **session_ptr** Pekare till en tidigare skapad TLS-sessionsinstans.
+- **func_ptr** Pekare till funktionen för återanrop av TLS-server.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) allokering av funktions pekare.
-- **NX_PTR_ERROR** (0X07) ogiltig TLS-session pekare.
+- **NX_SUCCESS** (0x00) Lyckad allokering av funktionspekaren.
+- **NX_PTR_ERROR** (0x07) Ogiltig TLS-sessionspekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -2511,7 +2474,7 @@ UINT tls_setup(NX_SECURE_TLS_SESSION *tls_session)
 
 ## <a name="nx_secure_tls_session_sni_extension_parse"></a>nx_secure_tls_session_sni_extension_parse
 
-Parsa ett Servernamnindikator-tillägg (SNI) som tagits emot från en TLS-klient
+Parsa ett Servernamnindikator (SNI)-tillägg som tagits emot från en TLS-klient
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2524,31 +2487,31 @@ UINT  nx_secure_tls_session_sni_extension_parse(
                                     NX_SECURE_X509_DNS_NAME *dns_name);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten är avsedd att anropas inifrån en motringning till en TLS-server som har lagts till i en TLS-session med hjälp av nx_secure_tls_session_server_callback_set. Återanropet anropas när ett sitt hälsnings-meddelande togs emot från en fjärran sluten TLS-klient och anges en matris med tillgängliga tillägg (och antalet tillägg i matrisen). Matrisen och dess längd kan skickas direkt till den här rutinen för att avgöra om det finns ett SNI-tillägg, annars returneras NX_SECURE_TLS_EXTENSION_NOT_FOUND som anger att klienten inte valde att Provice SNI-tillägget (detta är inte ett fel).
+Den här tjänsten är avsedd att anropas inifrån en TLS-serversession som läggs till i en TLS-session med nx_secure_tls_session_server_callback_set. Motringning anropas efter mottagningen av ett ClientHello-meddelande från en fjärransluten TLS-klient och tillhandahålls en matris med tillgängliga tillägg (och antalet tillägg i matrisen). Matrisen och dess längd kan skickas direkt till den här rutinen för att avgöra om det finns ett SNI-tillägg – om inte returneras NX_SECURE_TLS_EXTENSION_NOT_FOUND, vilket betyder att klienten valde att inte visa SNI-tillägget (detta är inte ett fel).
 
-Om SNI-tillägget hittas returneras X. 509 DNS-namnet som anges av TLS-klienten i dns_names strukturen. För närvarande tillhandahåller SNI-tillägget endast en enda DNS-namns post som kan användas av TLS-servern för att avgöra vilket identitets certifikat som ska skickas till fjärrklienten. * *
+Om SNI-tillägget hittas returneras X.509 DNS-namnet som tillhandahålls av TLS-klienten dns_name strukturen. SNI-tillägget tillhandahåller för närvarande bara en enda DNS-namnpost som kan användas av TLS-servern för att avgöra vilket identitetscertifikat som ska skickas till fjärrklienten.**
 
-NX_SECURE_X509_DNS_NAME strukturen innehåller bara DNS-namnet som en UCHAR-sträng i fältet *nx_secure_x509_dns_name* och längden på namn strängen i *nx_secure_x509_dns_name_length*. Makro NX_SECURE_X509_DNS_NAME_MAX kontrollerar storleken på nx_secure_x509_dns_name bufferten.
+Den NX_SECURE_X509_DNS_NAME strukturen innehåller helt enkelt DNS-namnet som en UCHAR-sträng *i fältet nx_secure_x509_dns_name* och längden på namnsträngen i *nx_secure_x509_dns_name_length*. Makro-NX_SECURE_X509_DNS_NAME_MAX styr storleken på nx_secure_x509_dns_name bufferten.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till en instans av TLS-session.
-- **tillägg** Pekar mot en matris med TLS Hello-tillägg (från motringning till session).
-- **num_extensions** Antal tillägg i matrisen (från motringning till session).
+- **session_ptr** Pekare till en TLS-sessionsinstans.
+- **tillägg** Pekare till en matris med TLS Hello-tillägg (från sessionsanrop).
+- **num_extensions** Antal tillägg i matrisen (från sessionsanrop).
 - **dns_name** Returnera DNS-namnet som anges i SNI-tillägget.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) parsning av tillägget har slutförts.
-- **NX_PTR_ERROR** (0X07) ogiltig tillägg mat ris eller TLS-session pekare.
-- Det gick inte att hitta **NX_SECURE_TLS_EXTENSION_NOT_FOUND** (0X136) SNI-tillägget.
-- **NX_SECURE_TLS_SNI_EXTENSION_INVALID** (0X137) SNI Extension-formatet var ogiltigt.
+- **NX_SUCCESS** (0x00) Lyckad parsning av tillägget.
+- **NX_PTR_ERROR** (0x07) Ogiltig tilläggsmatris eller TLS-sessionspekare.
+- **NX_SECURE_TLS_EXTENSION_NOT_FOUND** (0x136) SNI-tillägg hittades inte.
+- **NX_SECURE_TLS_SNI_EXTENSION_INVALID** (0x137) SNI-tilläggsformatet var ogiltigt.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -2561,7 +2524,7 @@ Konversation
 
 ## <a name="nx_secure_tls_session_sni_extension_set"></a>nx_secure_tls_session_sni_extension_set
 
-Ange ett Servernamnindikator-tillägg (SNI) som ska skickas till en fjärrserver
+Ange ett DNS Servernamnindikator tillägg (SNI) som ska skickas till en fjärrserver
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2571,28 +2534,28 @@ UINT  nx_secure_tls_session_sni_extension_set(
                                     NX_SECURE_X509_DNS_NAME *dns_name);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Med den här tjänsten kan ett TLS-klientcertifikat tillhandahålla ett DNS-namn för önskad server till en fjärr-TLS-server med hjälp av tillägget Servernamnindikator (SNI) TLS. SNI-tillägget gör att servern kan välja rätt identitets certifikat och parametrar baserat på klientens angivna Server inställningar. SNI-tillägget har för närvarande endast stöd för ett enda DNS-namn som ska skickas, och därför parametern för singular Name. Parametern dns_name måste initieras med *nx_secure_x509_dns_name_initialize* och kommer att innehålla klientens primära server. Om du vill ta bort tilläggets namn, anropar du bara den här tjänsten med parametervärdet "dns_name" för NX_NULL.
+Med den här tjänsten kan ett TLS-klientprogram ange ett dns-namn för servern till en fjärransluten TLS-server med hjälp av TLS-tillägget för Servernamnindikator (SNI). Med SNI-tillägget kan servern välja rätt identitetscertifikat och parametrar baserat på klientens angivna serverpreferenser. SNI-tillägget stöder för närvarande bara ett enda DNS-namn som ska skickas, därav parametern singular name. Parametern dns_name måste initieras *med nx_secure_x509_dns_name_initialize* och innehåller klientens föredragna server. Om du vill ta bort namn på tillägget anropar du den här tjänsten med parametervärdet "dns_name" NX_NULL.
 
-NX_SECURE_X509_DNS_NAME strukturen innehåller bara DNS-namnet som en UCHAR-sträng i fältet  *nx_secure_x509_dns_name* och längden på namn strängen i *nx_secure_x509_dns_name_length*. Makro NX_SECURE_X509_DNS_NAME_MAX kontrollerar storleken på nx_secure_x509_dns_name bufferten.
+Den NX_SECURE_X509_DNS_NAME strukturen innehåller helt enkelt DNS-namnet som en UCHAR-sträng  *i fältet nx_secure_x509_dns_name* och längden på namnsträngen i *nx_secure_x509_dns_name_length*. Makron NX_SECURE_X509_DNS_NAME_MAX kontrollerar storleken på nx_secure_x509_dns_name bufferten.
 
 > [!NOTE]
-> *Den här rutinen måste anropas innan nx_secure_tls_session_start anropas eller så innehåller sitt hälsnings inte SNI-tillägget.*
+> *Den här rutinen måste anropas nx_secure_tls_session_start anropas, annars innehåller ClientHello inte SNI-tillägget.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till en instans av TLS-session.
-- **dns_name** DNS-namnet som angavs av programmet.
+- **session_ptr** Pekare till en TLS-sessionsinstans.
+- **dns_name** DNS-namnet som anges av programmet.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) tillägget av DNS-servernamnet är klart.
-- **NX_PTR_ERROR** (0X07) ogiltigt DNS-namn eller en TLS-session.
+- **NX_SUCCESS** (0x00) Lyckades tillägg av DNS-servernamnet.
+- **NX_PTR_ERROR** (0x07) Ogiltigt DNS-namn eller TLS-sessionspekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -2642,46 +2605,46 @@ UINT  nx_secure_tls_session_start(NX_SECURE_TLS_SESSION *session_ptr,
                                   ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten startar en TLS-session med det angivna TLS-sessionens kontroll block och en ansluten TCP-socket. TCP-anslutningen måste redan ha slutförts efter ett lyckat anrop till antingen nx_tcp_client_socket_connect eller nx_tcp_server_socket_accept.
+Den här tjänsten startar en TLS-session med hjälp av det angivna TLS-sessionskontrollblocket och en ansluten TCP-socket. TCP-anslutningen måste redan slutföras efter ett lyckat anrop till antingen nx_tcp_client_socket_connect eller nx_tcp_server_socket_accept.
 
 Den här tjänsten avgör typen av TLS-session (klient eller server) från TCP-socketen.
 
-Alternativet wait definierar hur tjänsten fungerar medan TLS-handskakningen pågår.
+Väntealternativet definierar hur tjänsten beter sig medan TLS-handskakningen pågår.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till en instans av TLS-session.
-- **tcp_socket_ptr** Pekar till en ansluten TCP-socket.
-- **wait_option** Definierar hur tjänsten fungerar medan TLS-handskakningen pågår.
+- **session_ptr** Pekare till en TLS-sessionsinstans.
+- **tcp_socket_ptr** Pekare till en ansluten TCP-socket.
+- **wait_option** Definierar hur tjänsten beter sig medan TLS-handskakningen pågår.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckades initiera TLS-sessionen.
-- **NX_NOT_CONNECTED** (0X38) den underliggande TCP-socketen är inte längre ansluten.
-- **NX_SECURE_TLS_UNRECOGNIZED_MESSAGE_TYPE** (0X102) en mottagen TLS-meddelande typ är felaktig.
-- **NX_SECURE_TLS_UNSUPPORTED_CIPHER** (0X106) ett chiffer som tillhandahålls av fjärrvärden stöds inte.
-- **NX_SECURE_TLS_HANDSHAKE_FAILURE** (0x107) Det gick inte att bearbeta meddelande bearbetningen under TLS-handskakningen.
-- **NX_SECURE_TLS_HASH_MAC_VERIFY_FAILURE** (0X108) ett inkommande meddelande misslyckades med en hash Mac-kontroll.
+- **NX_SUCCESS** (0x00) Lyckad initiering av TLS-sessionen.
+- **NX_NOT_CONNECTED** (0x38) Den underliggande TCP-socketen är inte längre ansluten.
+- **NX_SECURE_TLS_UNRECOGNIZED_MESSAGE_TYPE** (0x102) En mottagen TLS-meddelandetyp är felaktig.
+- **NX_SECURE_TLS_UNSUPPORTED_CIPHER** (0x106) Chiffer som tillhandahålls av fjärrvärden stöds inte.
+- **NX_SECURE_TLS_HANDSHAKE_FAILURE** (0x107) Meddelandebearbetningen under TLS-handskakningen misslyckades.
+- **NX_SECURE_TLS_HASH_MAC_VERIFY_FAILURE** (0x108) Ett inkommande meddelande misslyckades med en hash-MAC-kontroll.
 - **NX_SECURE_TLS_TCP_SEND_FAILED** (0x109) Det gick inte att skicka en underliggande TCP-socket.
-- **NX_SECURE_TLS_INCORRECT_MESSAGE_LENGTH** (0X10A) ett inkommande meddelande hade ett ogiltigt längd fält.
-- **NX_SECURE_TLS_BAD_CIPHERSPEC** (0X10B) ett inkommande ChangeCipherSpec-meddelande var felaktigt.
-- **NX_SECURE_TLS_INVALID_SERVER_CERT** (0X10C) ett inkommande TLS-certifikat kan inte användas för att identifiera fjärr-TLS-servern.
-- **NX_SECURE_TLS_UNSUPPORTED_PUBLIC_CIPHER** (0X10D) den offentliga nyckel chiffer som tillhandahålls av fjärrvärden stöds inte.
-- **NX_SECURE_TLS_NO_SUPPORTED_CIPHERS** (0x10E) fjärrvärden har angett Inga krypteringssviter som stöds av netx Secure TLS-stacken.
-- **NX_SECURE_TLS_UNKNOWN_TLS_VERSION** (0X10F) ett MOTTAGet TLS-meddelande hade en okänd TLS-version i huvudet.
-- **NX_SECURE_TLS_UNSUPPORTED_TLS_VERSION** (0X110) ett MOTTAGet TLS-meddelande hade en känd men TLS-version som inte stöds i huvudet.
-- **NX_SECURE_TLS_ALLOCATE_PACKET_FAILED** (0x111) Det gick inte att tilldela en intern TLS-paket.
-- **NX_SECURE_TLS_INVALID_CERTIFICATE** (0x112) fjärrvärden tillhandahöll ett ogiltigt certifikat.
-- **NX_SECURE_TLS_ALERT_RECEIVED** (0X114) den fjärranslutna värden skickade en avisering som indikerar ett fel och att TLS-sessionen avslutas.
-- **NX_SECURE_TLS_MISSING_CRYPTO_ROUTINE** (0X13B) en post i ciphersuite-tabellen hade en funktion pekare till null.
-- **NX_SECURE_TLS_INAPPROPRIATE_FALLBACK** (0X146) en fjärr-TLS-sitt hälsnings inkluderade reserv SCSV andattempted en versions återställning.
-- **NX_PTR_ERROR** (0X07) försökte använda en ogiltig pekare.
+- **NX_SECURE_TLS_INCORRECT_MESSAGE_LENGTH** (0x10A) Ett inkommande meddelande hade ett ogiltigt längdfält.
+- **NX_SECURE_TLS_BAD_CIPHERSPEC** (0x10B) Ett inkommande ChangeCipherSpec-meddelande var felaktigt.
+- **NX_SECURE_TLS_INVALID_SERVER_CERT** (0x10C) Ett inkommande TLS-certifikat kan inte användas för att identifiera TLS-fjärrservern.
+- **NX_SECURE_TLS_UNSUPPORTED_PUBLIC_CIPHER** (0x10D) Chiffer med offentlig nyckel som tillhandahålls av fjärrvärden stöds inte.
+- **NX_SECURE_TLS_NO_SUPPORTED_CIPHERS** (0x10E) Fjärrvärden har inte angett några chiffer som stöds av NetX Secure TLS-stacken.
+- **NX_SECURE_TLS_UNKNOWN_TLS_VERSION** (0x10F) Ett mottaget TLS-meddelande hade en okänd TLS-version i huvudet.
+- **NX_SECURE_TLS_UNSUPPORTED_TLS_VERSION** (0x110) Ett mottaget TLS-meddelande hade en känd men inte stöds TLS-version i huvudet.
+- **NX_SECURE_TLS_ALLOCATE_PACKET_FAILED** (0x111) En intern TLS-paketallokering misslyckades.
+- **NX_SECURE_TLS_INVALID_CERTIFICATE** (0x112) Fjärrvärden tillhandahöll ett ogiltigt certifikat.
+- **NX_SECURE_TLS_ALERT_RECEIVED** (0x114) Fjärrvärden skickade en avisering som anger ett fel och avslutar TLS-sessionen.
+- **NX_SECURE_TLS_MISSING_CRYPTO_ROUTINE** (0x13B) En post i chiffertabellen hade en NULL-funktionspekare.
+- **NX_SECURE_TLS_INAPPROPRIATE_FALLBACK** (0x146) En fjärransluten TLS ClientHello innehöll återställnings-SCSV och ett återställningsförsök för en version.
+- **NX_PTR_ERROR** (0x07) Försökte använda en ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -2802,7 +2765,7 @@ nx_tcp_socket_delete(&tcp_socket);
 
 ## <a name="nx_secure_tls_session_time_function_set"></a>nx_secure_tls_session_time_function_set
 
-Tilldela en timestamp-funktion till en NetX Secure TLS-session
+Tilldela en tidsstämpelfunktion till en NetX Secure TLS-session
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2812,28 +2775,28 @@ UINT  nx_secure_tls_time_function_set(
                               ULONG (*time_func_ptr)(void));
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen ställer in en funktions pekare som TLS anropar när den måste hämta den aktuella tiden, som används i olika TLS-handskaknings meddelanden och för att verifiera certifikat.
+Den här funktionen ställer in en funktionspekare som TLS anropar när den behöver hämta den aktuella tiden, som används i olika TLS-handskakningsmeddelanden och för verifiering av certifikat.
 
-Funktionen förväntas returnera aktuellt GMT i UNIX 32-bitars format (sekunder sedan den 1 januari 1970, UTC, som ignorerar skottår) enligt sitt hälsnings-kraven i TLS RFC 5246.
+Funktionen förväntas returnera aktuell GMT i UNIX-32-bitarsformat (sekunder sedan midnatt från den 1 januari 1970, UTC, ignorerar skottsekunder), enligt ClientHello-kraven i TLS RFC 5246.
 
-Om ingen tidsstämpel-funktion har tilldelats används värdet 0 för tidsstämpeln i TLS-handskakningen och kontroll av certifikatets giltighets tid fungerar inte.
+Om ingen tidsstämpelfunktion tilldelas används värdet 0 för tidsstämpeln i TLS-handskakningen och kontrollen av förfallodatum för certifikat fungerar inte.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till en instans av TLS-session.
-- **time_func_ptr** Pekar till en funktion som returnerar aktuell tid (GMT) i UNIX 32-bitars format.
+- **session_ptr** Pekare till en TLS-sessionsinstans.
+- **time_func_ptr** Pekare till en funktion som returnerar den aktuella tiden (GMT) i UNIX 32-bitarsformat.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckades initiera TLS-sessionen.
-- **NX_INVALID_PARAMETERS** (0X4D) ogiltig TLS-session pekare.
-- **NX_PTR_ERROR** (0X07) försökte använda en ogiltig pekare.
+- **NX_SUCCESS** (0x00) Lyckad initiering av TLS-sessionen.
+- **NX_INVALID_PARAMETERS** (0x4D) Ogiltig TLS-sessionspekare.
+- **NX_PTR_ERROR** (0x07) Försökte använda en ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -2867,7 +2830,7 @@ status =  nx_secure_tls_timestamp_function_set(&tls_session, get_gmt_time);
 
 ## <a name="nx_secure_tls_trusted_certificate_add"></a>nx_secure_tls_trusted_certificate_add
 
-Lägg till betrott certifikat i NetX Secure TLS-session
+Lägga till betrott certifikat i NetX Secure TLS-session
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2876,28 +2839,28 @@ UINT  nx_secure_tls_trusted_certificate_add(NX_SECURE_TLS_SESSION
                             *session_ptr, NX_SECURE_X509_CERT *certificate_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten lägger till en initierad NX_SECURE_X509_CERT struktur instans till en TLS-session. Det här certifikatet används av TLS-stacken för att verifiera certifikat som tillhandahålls av fjärrvärden under TLS-handskakningen.
+Den här tjänsten lägger till en NX_SECURE_X509_CERT instans av en struktur i en TLS-session. Det här certifikatet används av TLS-stacken för att verifiera certifikat som tillhandahålls av fjärrvärden under TLS-handskakningen.
 
-Betrodda certifikat krävs för TLS-klient läge.
+Betrodda certifikat krävs för TLS-klientläge.
 
-Betrodda certifikat krävs bara för TLS server-läge om autentisering av klient certifikat är aktiverat.
+Betrodda certifikat krävs endast för TLS-serverläge om autentisering med klientcertifikat är aktiverat.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till en tidigare skapad TLS-session.
-- **certificate_ptr** Pekar mot en initierad TLS-certifikat instans.
+- **session_ptr** Pekare till en tidigare skapad TLS-sessionsinstans.
+- **certificate_ptr** Pekare till en initierad TLS-certifikatinstans.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) tillägget av certifikatet har slutförts.
-- **NX_INVALID_PARAMETERS** (0X4D) försökte lägga till ett ogiltigt certifikat.
-- **NX_PTR_ERROR** (0X07) ogiltig TLS-session pekare.
+- **NX_SUCCESS** (0x00) Lyckad tillägg av certifikat.
+- **NX_INVALID_PARAMETERS** (0x4D) Försökte lägga till ett ogiltigt certifikat.
+- **NX_PTR_ERROR** (0x07) Ogiltig TLS-sessionspekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -2935,25 +2898,25 @@ UINT  nx_secure_tls_trusted_certificate_remove(
                                     UINT common_name_length);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar bort ett betrott certifikat från en TLS-session, som anges i fältet eget namn i certifikatet.
+Den här tjänsten tar bort ett betrott certifikat från en TLS-session som är nyckelad i fältet Eget namn i certifikatet.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till en tidigare skapad TLS-session.
-- **common_name** Värdet för eget namn för det certifikat som ska tas bort.
-- **common_name_length** Längden på den gemensamma namn strängen.
+- **session_ptr** Pekare till en tidigare skapad TLS-sessionsinstans.
+- **common_name** Värdet för Eget namn för certifikatet som ska tas bort.
+- **common_name_length** Längden på strängen Eget namn.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) tillägget av certifikatet har slutförts.
-- **NX_PTR_ERROR** (0X07) ogiltig TLS-session pekare.
-- Det gick inte att hitta **NX_SECURE_TLS_CERTIFICATE_NOT_FOUND** -certifikat (0x119).
+- **NX_SUCCESS** (0x00) Lyckad tillägg av certifikat.
+- **NX_PTR_ERROR** (0x07) Ogiltig TLS-sessionspekare.
+- **NX_SECURE_TLS_CERTIFICATE_NOT_FOUND** (0x119) Det gick inte att hitta certifikatet.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -2975,7 +2938,7 @@ status =  nx_secure_tls_trusted_certificate_remove(&tls_session,
 
 ## <a name="nx_secure_x509_certificate_initialize"></a>nx_secure_x509_certificate_initialize
 
-Initiera X. 509-certifikat för NetX Secure TLS
+Initiera X.509-certifikat för NetX Secure TLS
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2991,48 +2954,48 @@ UINT  nx_secure_x509_certificate_initialize(
                   UINT private_key_type);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten initierar en NX_SECURE_X509_CERT-struktur från ett binärt kodat X. 509-certifikat för användning i en TLS-session.
+Den här tjänsten initierar NX_SECURE_X509_CERT en struktur från ett binärt kodat digitalt X.509-certifikat för användning i en TLS-session.
 
-Certifikat data **måste** vara ett giltigt X. 509-digitalt certifikat i der-kodat binärt format. Datan kan vara en del av vilken källa som helst (t. ex. fil system, kompilerad konstant buffert osv.) så länge en UCHAR pekar på dessa data.
+Certifikatdata måste **vara** ett giltigt digitalt X.509-certifikat i DER-kodat binärt format. Data kan komma från valfri källa (t.ex. filsystem, kompilerad konstant buffert osv.) så länge en UCHAR-pekare till dessa data tillhandahålls.
 
-Parametern *raw_data_buffer* och dess storlek är valfria parametrar som anger en dedikerad buffert som certifikat data kopieras till före parsning. Om raw_data_buffer skickas som NX_NULL kommer NX_SECURE_X509_CERTs strukturen att peka direkt i certificate_data matrisen (buffer_size ignoreras i det här fallet). Om raw_data_buffer skickas som NX_NULL ska du ***inte*** ändra de data som pekar på certificate_data pekare eller certifikat bearbetningen kommer troligen att Miss lyckat!
+Parametern *raw_data_buffer* och dess storlek är valfria parametrar som anger en dedikerad buffert som certifikatdata kopieras till innan parsning. Om raw_data_buffer skickas som NX_NULL pekar NX_SECURE_X509_CERT struktur direkt i certificate_data -matrisen (i det buffer_size fallet ignoreras den). Om raw_data_buffer skickas som NX_NULL ***ska*** du inte ändra de data som pekar certificate_data pekaren eller certifikatbearbetningen kommer troligen att misslyckas!
 
-Den privata nyckel parametern är för lokala identitets certifikat – den privata nyckeln används av servrar för att dekryptera inkommande nyckel data från en klient (krypterad med serverns offentliga nyckel) och av klienter för att verifiera sin identitet på en server när servern begär ett klient certifikat. Om du lägger till en privat nyckel med det här API: et så markeras automatiskt det associerade certifikatet som ett identitets certifikat för ett TLS-program. Vid initiering av certifikat för andra syfte (t. ex. det betrodda arkivet) ska parametern *private_key_data* skickas som NULL, *private_key_data_length* som 0 och *private_key_type* ska skickas som NX_SECURE_X509_KEY_TYPE_NONE.
+Den privata nyckelparametern gäller för lokala identitetscertifikat – den privata nyckeln används av servrar för att dekryptera inkommande nyckeldata från en klient (krypterade med serverns offentliga nyckel) och av klienter för att verifiera sin identitet till en server när servern begär ett klientcertifikat. Om du lägger till en privat nyckel med det här API:et markeras det associerade certifikatet automatiskt som ett identitetscertifikat för ett TLS-program. När du initierar certifikat för andra syften (t.ex. det betrodda arkivet) ska *private_key_data-parametern* skickas som NULL, *private_key_data_length* som 0 och *private_key_type* ska skickas som NX_SECURE_X509_KEY_TYPE_NONE.
 
-Parametern *private_key_type* anger formateringen för den privata nyckeln. Om den privata nyckeln till exempel är en DER-kodad PKCS # 1-format-RSA-nyckel, ska private_key_type skickas som NX_SECURE_X509_KEY_TYPE_RSA_PKCS1_DER, en typ som är känd för att tolkas omedelbart och sparas för senare användning.
+Parametern *private_key_type* anger formateringen av den privata nyckeln. Om den privata nyckeln till exempel är en PRIVAT RSA-nyckel med DER-kodad PKCS#1-format ska private_key_type skickas som NX_SECURE_X509_KEY_TYPE_RSA_PKCS1_DER, en typ som är känd för NetX Secure som parsas omedelbart och sparas för senare användning.
 
-Private_key_type har även stöd för användardefinierade nyckel typer<sup>23</sup> för plattformar och program som har vissa nyckel format eller andra behov. En maskinvarubaserad krypterings motor kan till exempel använda ett speciellt format som inte kan tolkas av NetX-säkra program, eller så kan en privat nyckel krypteras eller representeras av en kryptografisk token som kan vara fallet med en Trusted Platform Module (TPM) eller PKCS # 11-kryptografisk maskin vara. När en användardefinierad nyckel typ används skickas nyckel data till orda Grant till lämplig kryptografisk rutin – till exempel skulle en privat RSA-nyckel skickas, utan någon parsning eller bearbetning, direkt till den RSA-kryptografiska rutinen som tillhandahålls TLS i tabellen ciphersuite. Den användardefinierade nyckel typen skickas också till den kryptografiska rutinen (vad gäller RSA, detta är "OP"-parametern).
+Den private_key_type också stöd för användardefinierade nyckeltyper<sup>23</sup> för plattformar och program som har specifika nyckelformat eller andra behov. En maskinvarubaserad krypteringsmotor kan till exempel använda ett visst format som inte kan tolkas av NetX Secure-programvaran, eller så kan en privat nyckel krypteras eller representeras av en kryptografitoken, vilket kan vara fallet med en kryptografisk Trusted Platform Module (TPM) eller PKCS#11-maskinvara. När en användardefinierad nyckeltyp används skickas nyckeldata ordagrant till lämplig kryptografirutin. Till exempel skulle en privat RSA-nyckel skickas, utan parsning eller bearbetning, direkt till den kryptografiska RSA-rutinen som tillhandahålls till TLS i chiffersvittabellen. Den användardefinierade nyckeltypen skickas också till den kryptografiska rutinen (när det gäller RSA är det här parametern "op").
 
-Intervallet för användardefinierade nycklar täcker den övre halvan av ett 32-bitars heltal utan tecken från 0x0001 0000-0xFFFF FFFF. Värden som är mindre än 0x0001 0000 är reserverade för NetX-säker användning.
+Intervallet med användardefinierade nycklar omfattar den övre halvan av ett 32-bitars heltal utansignerat heltal, från 0x0001 0000-0xFFFF FFFF. Värden som är mindre 0x0001 0000 är reserverade för NetX Secure-användning.
 
-Användardefinierade nyckel typer är en avancerad funktion som kräver anpassade kryptografiska rutiner för att hantera rå data för den privata nyckeln. Kontakta din Express Logic-representant om du behöver den här funktionen.
+Användardefinierade nyckeltyper är en avancerad funktion som kräver anpassade kryptografiska rutiner för att hantera rådata för privata nycklar. Kontakta din Express Logic-representant om du behöver den här funktionen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **certificate_ptr** Pekar mot en oinitierad X. 509-certifikat instans.
-- **certificate_data** Pekare till DER-kodade X. 509 binära data.
-- **raw_data_buffer** Pekare till valfri dedikerad certifikat data buffert.
-- **buffer_size** Storlek på valfri dedikerad certifikat data buffert.
-- **certificate_data_length** Längden på certifikatets binära data i byte.
-- **private_key_data** Pekare till valfria privata nyckel data.
-- **private_key_data_length** Längd på data för privata nycklar.
-- **private_key_type** Nyckel typs identifierare.
+- **certificate_ptr** Pekare till en oiniterad X.509-certifikatinstans.
+- **certificate_data** Pekare till DER-kodade X.509-binära data.
+- **raw_data_buffer** Pekare till valfri dedikerad certifikatdatabuffert.
+- **buffer_size** Storleken på valfri dedikerad certifikatdatabuffert.
+- **certificate_data_length** Längden på binära certifikatdata i byte.
+- **private_key_data** Pekare till valfria privata nyckeldata.
+- **private_key_data_length** Längden på privata nyckeldata.
+- **private_key_type** Nyckeltypsidentifierare.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) tillägget av certifikatet har slutförts.
-- **NX_PTR_ERROR** (0X07) försökte använda en ogiltig pekare.
-- **NX_SECURE_TLS_INVALID_CERTIFICATE** (0X112) certifikat data innehöll inte något der-kodat X. 509-certifikat.
-- **NX_SECURE_TLS_UNSUPPORTED_PUBLIC_CIPHER** -certifikatet (0x10D) saknar ett offentligt nyckels chiffer som stöds av netx Secure.
-- **NX_SECURE_X509_INVALID_CERTIFICATE_SEQUENCE** (0X186) privat nyckel eller certifikat innehåller ingen giltig ASN. 1-sekvens.
-- **NX_SECURE_PKCS1_INVALID_PRIVATE_KEY** (0X18A) den angivna privata nyckeln var inte en giltig PKCS # 1 RSA-nyckel.
-- **NX_SECURE_X509_INVALID_PRIVATE_KEY_TYPE** (0X19D) den angivna privata nyckel typen var inte användardefinierad och matchade inte någon känd typ.
+- **NX_SUCCESS** (0x00) Ett lyckat tillägg av certifikat.
+- **NX_PTR_ERROR** (0x07) Försökte använda en ogiltig pekare.
+- **NX_SECURE_TLS_INVALID_CERTIFICATE** (0x112) Certifikatdata innehöll inte ett DER-kodat X.509-certifikat.
+- **NX_SECURE_TLS_UNSUPPORTED_PUBLIC_CIPHER** (0x10D)-certifikatet hade inget chiffer med offentlig nyckel som stöds av NetX Secure.
+- **NX_SECURE_X509_INVALID_CERTIFICATE_SEQUENCE** (0x186) Privat nyckel eller certifikat innehöll inte en giltig ASN.1-sekvens.
+- **NX_SECURE_PKCS1_INVALID_PRIVATE_KEY** (0x18A) Den angivna privata nyckeln var inte en giltig PKCS#1 RSA-nyckel.
+- **NX_SECURE_X509_INVALID_PRIVATE_KEY_TYPE** (0x19D) Den angivna privata nyckeltypen var inte användardefinierad och matchade inte någon känd typ.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -3053,11 +3016,11 @@ status =  nx_secure_x509_certificate_initialize(&certificate, certificate_data,
 - nx_secure_local_certificate_add
 - nx_secure_tls_session_create
 - nx_secure_tls_remote_certificate_allocate
-- Importerar X. 509-certifikat till NetX Secure i kapitel 3.
+- Importera X.509-certifikat till NetX Secure i kapitel 3.
 
 ## <a name="nx_secure_x509_common_name_dns_check"></a>nx_secure_x509_common_name_dns_check
 
-Kontrol lera DNS-namn mot X. 509-certifikat
+Kontrollera DNS-namn mot X.509-certifikat
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3067,29 +3030,29 @@ UINT  nx_secure_x509_common_name_dns_check(
                         const UCHAR *dns_tld, UINT dns_tld_length);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten kontrollerar ett certifikats nätverks namn mot ett topp domän namn (topp domän namn) som anroparen tillhandahåller för DNS-validering av en fjärrvärd. Den här verktygs funktionen är avsedd att anropas inifrån en rutin för återanrop från certifikat validering som tillhandahålls av programmet. Namn på TOPPnivå ska vara den övre delen av den URL som används för att komma åt fjärrvärden ("." -separerad sträng före det första snedstrecket. Om det egna namnet innehåller ett jokertecken (till exempel *. example.com) matchar jokertecknet alla med samma suffix. Observera att endast det första jokertecknet (*"") som påträffas (läsning från höger till vänster) kommer att beaktas för matchning av jokertecken, till exempel ABC. *. example. com matchar *alla* namn som slutar på ". example.com".
+Den här tjänsten kontrollerar ett certifikats eget namn mot ett toppdomännamn (TLD) som tillhandahålls av anroparen i syfte att DNS-verifiering av en fjärrvärd. Den här verktygsfunktionen är avsedd att anropas inifrån en återanropsrutin för certifikatverifiering som tillhandahålls av programmet. TLD-namnet ska vara den översta delen av URL:en som används för att komma åt fjärrvärden (.) -avgränsad sträng före det första snedstrecket). Om eget namn innehåller ett jokertecken (till exempel .example.com) matchar jokertecknet alla med *samma suffix. Observera att* endast det första jokertecknet (" ") som påträffas (läsning från höger till vänster) beaktas för  matchning av jokertecken – till exempel matchar abc.*.example.com alla namn som slutar på ".example.com".
 
-Om det egna namnet inte matchar den angivna strängen, parsas "subjectAltName"-tillägget (om det finns i certifikatet) och alla DNSName-poster också jämförs. Om ingen av dessa poster matchar returneras ett fel.
+Om det gemensamma namnet inte matchar den angivna strängen parsas tillägget "subjectAltName" (om det finns i certifikatet) och eventuella DNSName-poster jämförs också. Om ingen av dessa poster matchar returneras ett fel.
 
-Det är viktigt att förstå formatet på det egna namnet (och subjectAltName-poster) i förväntade certifikat. Vissa certifikat kan till exempel använda en rå IP-adress eller ett jokertecken. DNS-topp strängen måste vara formaterad så att den matchar de förväntade värdena i mottagna certifikat.
+Det är viktigt att förstå formatet för eget namn (och subjectAltName-poster) i förväntade certifikat. Vissa certifikat kan till exempel använda en rå IP-adress eller ett jokertecken. DNS TLD-strängen måste vara formaterad så att den matchar förväntade värden i mottagna certifikat.
 
 ### <a name="parameters"></a>Parametrar
 
-- **certificate_ptr** Pekare till en X. 509-certifikat instans.
-- **dns_tld** Top-Level domän namn som ska jämföras med.
-- **dns_tld_length** Längd på TOPPnivå sträng.
+- **certificate_ptr** Pekare till en X.509-certifikatinstans.
+- **dns_tld** Top-Level domännamn att jämföra med.
+- **dns_tld_length** Längden på TLD-strängen.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) jämförelse med eget namn eller subjectAltName.
-- **NX_SECURE_X509_CERTIFICATE_DNS_MISMATCH** (0X195) inget matchande namn hittades.
-- **NX_PTR_ERROR** (0X07) försökte använda en ogiltig pekare.
+- **NX_SUCCESS** (0x00) Lyckad jämförelse med Eget namn eller subjectAltName.
+- **NX_SECURE_X509_CERTIFICATE_DNS_MISMATCH** (0x195) Inget matchande namn hittades.
+- **NX_PTR_ERROR** (0x07) Försökte använda en ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -3130,7 +3093,7 @@ status =  nx_secure_tls_session_certificate_callback_set(&tls_session,
 
 ## <a name="nx_secure_x509_crl_revocation_check"></a>nx_secure_x509_crl_revocation_check
 
-Kontrol lera X. 509-certifikatet mot en angiven lista över återkallade certifikat (CRL)
+Kontrollera X.509-certifikat mot en agen lista över återkallade certifikat (CRL)
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3141,33 +3104,33 @@ UINT  nx_secure_x509_crl_revocation_check(const UCHAR *crl_data,
                               NX_SECURE_X509_CERT *certificate);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar en DER-kodad lista över återkallade certifikat och söker efter ett särskilt certifikat i listan. Utfärdaren av listan över återkallade certifikat verifieras mot ett angivet certifikat arkiv. CRL-utfärdaren verifieras vara densamma som för det certifikat som kontrol leras och serie numret för det aktuella certifikatet används för att söka i listan över återkallade certifikat. Om utfärdarna matchar kontrollerar signaturen och certifikatet **inte** finns i listan. anropet lyckas. Alla andra fall orsakar att ett fel returneras.
+Den här tjänsten tar en DER-kodad lista över återkallade certifikat och söker efter ett specifikt certifikat i listan. Utfärdaren av listan över återkallade certifikat verifieras mot ett ansett certifikatarkiv, CRL-utfärdaren verifieras att vara samma som den för certifikatet som kontrolleras och serienumret för certifikatet i fråga används för att söka i listan över återkallade certifikat. Om utfärdarna matchar, signaturen checkar ut och certifikatet **inte finns** i listan, lyckas anropet. Alla andra fall gör att ett fel returneras.
 
 ### <a name="parameters"></a>Parametrar
 
 - **crl_data** Pekare till en DER-kodad CRL.
 - **crl_length** Längd i byte för CRL-data.
-- **lagra** Pekar på ett X. 509-certifikat arkiv.
-- **certificate_ptr** Pekare till en X. 509-certifikat instans.
+- **store** Pekare till ett X.509-certifikatarkiv.
+- **certificate_ptr** Pekare till en X.509-certifikatinstans.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) verifieringen av att certifikatet inte har återkallats.
-- Det gick inte att hitta **NX_SECURE_TLS_CERTIFICATE_NOT_FOUND** (0x119) för CRL-utfärdarcertifikat.
-- **NX_SECURE_TLS_ISSUER_CERTIFICATE_NOT_FOUND** 0x11B) Det gick inte att hitta certifikatet för certifikat utfärdare.
-- **NX_SECURE_X509_ASN1_LENGTH_TOO_LONG** (0X182) CRL ASN. 1 innehåller ett ogiltigt längd-fält.
-- **NX_SECURE_X509_UNEXPECTED_ASN1_TAG (0x189)** Listan över återkallade certifikat innehöll ogiltig ASN. 1.
-- **NX_SECURE_X509_CHAIN_VERIFY_FAILURE** (0x18C) Det gick inte att verifiera certifikat kedjan.
-- **NX_SECURE_X509_CRL_ISSUER_MISMATCH** (0X197) CRL-och certifikat utfärdare matchade inte.
-- **NX_SECURE_X509_CRL_SIGNATURE_CHECK_FAILED** 0x198) signaturen för återkallade certifikat var ogiltig.
-- **NX_SECURE_X509_CRL_CERTIFICATE_REVOKED** (0X199) Det gick inte att hitta det certifikat som kontrol leras i CRL och därför återkallas.
-- **NX_PTR_ERROR** (0X07) försökte använda en ogiltig pekare.
+- **NX_SUCCESS** (0x00) Lyckad validering av att certifikatet inte återkallades.
+- **NX_SECURE_TLS_CERTIFICATE_NOT_FOUND** (0x119) det går inte att hitta certifikatutfärdaren för listan över återkallade certifikat.
+- **NX_SECURE_TLS_ISSUER_CERTIFICATE_NOT_FOUND** 0x11B) Det går inte att hitta certifikatets certifikatutfärdare.
+- **NX_SECURE_X509_ASN1_LENGTH_TOO_LONG** (0x182) CRL ASN.1 innehöll ett ogiltigt längdfält.
+- **NX_SECURE_X509_UNEXPECTED_ASN1_TAG(0x189)** Listan över återkallade certifikat innehöll ogiltig ASN.1.
+- **NX_SECURE_X509_CHAIN_VERIFY_FAILURE** (0x18C) Verifieringen av certifikatkedjan misslyckades.
+- **NX_SECURE_X509_CRL_ISSUER_MISMATCH** (0x197) CRL och certifikatutfärdare matchade inte.
+- **NX_SECURE_X509_CRL_SIGNATURE_CHECK_FAILED** 0x198) CRL-signaturen var ogiltig.
+- **NX_SECURE_X509_CRL_CERTIFICATE_REVOKED** (0x199) Certifikatet som kontrolleras hittades i listan över återkallade certifikat och återkallas därför.
+- **NX_PTR_ERROR** (0x07) Försökte använda en ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -3231,7 +3194,7 @@ status =  nx_secure_tls_session_certificate_callback_set(&tls_session,
 
 ## <a name="nx_secure_x509_dns_name_initialize"></a>nx_secure_x509_dns_name_initialize
 
-Initiera en X. 509 DNS-namn struktur
+Initiera en X.509 DNS-namnstruktur
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3241,25 +3204,25 @@ UINT  nx_secure_x509_dns_name_initialize(
                         const UCHAR *name_string, UINT length);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten initierar ett X. 509 DNS-namn för användning med vissa API-tjänster som kräver ett specifikt namn format. *Nx_secure_tls_sni_extension_parses* tjänsten förväntar sig till exempel ett NX_SECURE_X509_DNS_NAME-objekt för att matcha namnet som tillhandahålls av en fjärrvärd i servernamnindikator tillägget under TLS-handskakningen. Ett DNS-namn är helt enkelt en charater-sträng med en längd – den maximalt tillåtna längden på ett DNS-namn (och storleken på den interna bufferten i NX_SECURE_X509_DNS_NAME) styrs av makro NX_SECURE_X509_DNS_NAME_MAX (standard 100 byte).
+Den här tjänsten initierar ett X.509 DNS-namn för användning med vissa API-tjänster som kräver ett visst namnformat. Till exempel *förväntar nx_secure_tls_sni_extension_parse tjänsten* ett NX_SECURE_X509_DNS_NAME-objekt för att matcha namnet som tillhandahålls av en fjärrvärd i Servernamnindikator-tillägget under TLS-handskakningen. Ett DNS-namn är helt enkelt en teckensträng med en längd – den maximala tillåtna längden för ett DNS-namn (och storleken på den interna bufferten i NX_SECURE_X509_DNS_NAME) styrs av makro-NX_SECURE_X509_DNS_NAME_MAX (standardvärdet är 100 byte).
 
 ### <a name="parameters"></a>Parametrar
 
-- **dns_name** DNS-namn strukturen att initiera.
-- **name_string** DNS-namn sträng data.
-- **längd** Namn strängens längd.
+- **dns_name** DNS-namnstruktur som ska initieras.
+- **name_string** DNS-namnsträngsdata.
+- **längd** Längden på namnsträngen.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckades.
-- **NX_SECURE_X509_NAME_STRING_TOO_LONG** (0X19E) den tilldelade namn strängen överskred NX_SECURE_X509_DNS_NAME_MAX.
-- **NX_PTR_ERROR** (0X07) försökte använda en ogiltig pekare.
+- **NX_SUCCESS** (0x00) Lyckad initiering.
+- **NX_SECURE_X509_NAME_STRING_TOO_LONG** (0x19E) Den angivna namnsträngen överskreds NX_SECURE_X509_DNS_NAME_MAX.
+- **NX_PTR_ERROR** (0x07) Försökte använda en ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -3283,7 +3246,7 @@ status = nx_secure_tls_session_sni_extension_set(&tls_session, &dns_name);
 
 ## <a name="nx_secure_x509_extended_key_usage_extension_parse"></a>nx_secure_x509_extended_key_usage_extension_parse
 
-Hitta och parsa ett tillägg för utökad nyckel användning i X. 509 i ett X. 509-certifikat
+Hitta och parsa ett utökat X.509-nyckelanvändningstillägg i ett X.509-certifikat
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3293,43 +3256,43 @@ UINT  nx_secure_x509_extended_key_usage_extension_parse(
                         UINT key_usage);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten är avsedd att anropas inifrån ett motanrop för certifikat verifiering (se *nx_secure_tls_session_certificate_callback_set)*. Den söker efter ett angivet OID för utökad nyckel användning i ett X. 509-certifikat och returnerar om OID finns. Parametern key_usage är en heltals mappning av OID: er som används internt av NetX Secure X. 509 och TLS för att undvika att skicka OID-strängar med variabel längd som parametrar.
+Den här tjänsten är avsedd att anropas inifrån ett återanrop för certifikatverifiering *(se nx_secure_tls_session_certificate_callback_set).* Den söker efter ett specifikt utökat nyckelanvändnings-OID i ett X.509-certifikat och returnerar om OID:t finns. Parametern key_usage är en heltalsmappning av OID:erna som används internt av NetX Secure X.509 och TLS för att undvika att OID-strängar med variabel längd anges som parametrar.
 
-Relevanta OID för tillägget för utökad nyckel användning anges i tabellen nedan. En typisk TLS-klientkonfiguration som vill kontrol lera den utökade nyckel användningen i ett mottaget TLS-servercertifikat skulle kunna söka efter förekomsten av OID-NX_SECURE_TLS_X509_TYPE_PKIX_KP_SERVER_AUTH – om tillägget finns men att OID inte är det, skulle certifikatet anses vara ogiltigt för diskfel-värden som en TLS-server och återanropet av certifikat verifiering ska returnera ett fel. Om själva tillägget saknas är det upp till programmet om du vill fortsätta med TLS-handskakningen.
+Relevanta OID:er för tillägget för utökad nyckelanvändning anges i tabellen nedan. En typisk TLS-klientimplementering som vill kontrollera användningen av utökad nyckel i ett mottaget TLS-servercertifikat skulle kontrollera om OID-NX_SECURE_TLS_X509_TYPE_PKIX_KP_SERVER_AUTH finns . Om tillägget finns men inte OID:n skulle certifikatet anses vara ogiltigt för att identifiera värden som en TLS-server och återanropet för certifikatverifiering bör returnera ett fel. Om själva tillägget saknas är det upp till programmet om TLS-handskakningen ska fortsätta eller inte.
 
-I återanropet av certifikat verifieringen är felet returkod NX_SECURE_X509_KEY_USAGE_ERROR reserverat för användning av program. Om det uppstår ett fel när nyckel användningen kontrol leras kan det här värdet returneras från återanropet för att indikera orsaken till felet.
+I återanropet för certifikatverifiering är felreturkoden NX_SECURE_X509_KEY_USAGE_ERROR reserverad för programanvändning. Om det uppstår ett fel vid kontroll av nyckelanvändning kan det här värdet returneras från återanropet för att ange orsaken till felet.
 
-| NetX Secure Identifier                                | OID-värde         | Beskrivning                                      |
+| NetX Secure Identifier                                | OID-värde         | Description                                      |
 | --------------------------------------------------------- | --------------------- | ---------------------------------------------------- |
-| NX_SECURE_TLS_X509_TYPE_PKIX_KP_SERVER_AUTH   | 1.3.6.1.5.5.7.3.1 | Certifikat kan användas för att identifiera en TLS-server |
-| NX_SECURE_TLS_X509_TYPE_PKIX_KP_CLIENT_AUTH   | 1.3.6.1.5.5.7.3.2 | Certifikat kan användas för att identifiera en TLS-klient |
-| NX_SECURE_TLS_X509_TYPE_PKIX_KP_CODE_SIGNING  | 1.3.6.1.5.5.7.3.3 | Certifikat kan användas för att signera kod             |
-| NX_SECURE_TLS_X509_TYPE_PKIX_KP_EMAIL_PROTECT | 1.3.6.1.5.5.7.3.4 | Certifikat kan användas för att signera e-postmeddelanden           |
-| NX_SECURE_TLS_X509_TYPE_PKIX_KP_TIME_STAMPING | 1.3.6.1.5.5.7.3.8 | Certifikat kan användas för att signera tidsstämplar       |
-| NX_SECURE_TLS_X509_TYPE_PKIX_KP_OCSP_SIGNING  | 1.3.6.1.5.5.7.3.9 | Certifikat kan användas för att signera OCSP-svar   |
+| NX_SECURE_TLS_X509_TYPE_PKIX_KP_SERVER_AUTH   | 1.3.6.1.5.5.7.3.1 | Certifikatet kan användas för att identifiera en TLS-server |
+| NX_SECURE_TLS_X509_TYPE_PKIX_KP_CLIENT_AUTH   | 1.3.6.1.5.5.7.3.2 | Certifikatet kan användas för att identifiera en TLS-klient |
+| NX_SECURE_TLS_X509_TYPE_PKIX_KP_CODE_SIGNING  | 1.3.6.1.5.5.7.3.3 | Certifikatet kan användas för att signera kod             |
+| NX_SECURE_TLS_X509_TYPE_PKIX_KP_EMAIL_PROTECT | 1.3.6.1.5.5.7.3.4 | Certifikatet kan användas för att signera e-post           |
+| NX_SECURE_TLS_X509_TYPE_PKIX_KP_TIME_STAMPING | 1.3.6.1.5.5.7.3.8 | Certifikatet kan användas för att signera tidsstämplar       |
+| NX_SECURE_TLS_X509_TYPE_PKIX_KP_OCSP_SIGNING  | 1.3.6.1.5.5.7.3.9 | Certifikatet kan användas för att signera OCSP-svar   |
 
-OID och mappningar för tillägg för utökad nyckel användning i X. 509
+OID:er och mappningar för utökat nyckelanvändningstillägg för X.509
 
 ### <a name="parameters"></a>Parametrar
 
-- **certifikat** Pekare till certifikat som verifieras.
-- **key_usage** OID-heltals mappning från tabellen ovan.
+- **certifikat** Pekare till certifikatet som verifieras.
+- **key_usage** OID-heltalsmappning från tabellen ovan.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) angiven OID för nyckel användning hittades.
-- **NX_SECURE_X509_MULTIBYTE_TAG_UNSUPPORTED** (0X181) ASN. 1 kod för flera byte påträffades (certifikat som inte stöds).
-- **NX_SECURE_X509_ASN1_LENGTH_TOO_LONG** (0x182) ett inidentifierat ASN. 1-fält påträffades (ogiltigt certifikat).
-- **NX_SECURE_X509_INVALID_TAG_CLASS** (0X190) ogiltig ASN. 1-tagg klass påträffades (ogiltigt certifikat).
-- **NX_SECURE_X509_INVALID_EXTENSION_SEQUENCE** (0X192) ogiltigt tillägg påträffades (ogiltigt certifikat).
-- **NX_SECURE_X509_EXTENSION_NOT_FOUND** (0X19B) Det gick inte att hitta tillägget för utökad nyckel användning i det angivna certifikatet.
-- **NX_PTR_ERROR** (0X07) ogiltig certifikat pekare.
+- **NX_SUCCESS** (0x00) Angivet nyckelanvändnings-OID hittades.
+- **NX_SECURE_X509_MULTIBYTE_TAG_UNSUPPORTED** (0x181) ASN.1-tagg för flera byte påträffade (certifikat stöds inte).
+- **NX_SECURE_X509_ASN1_LENGTH_TOO_LONG** (0x182) Invaild ASN.1-fält (ogiltigt certifikat).
+- **NX_SECURE_X509_INVALID_TAG_CLASS** (0x190) Ogiltig ASN.1-taggklass påträffades (ogiltigt certifikat).
+- **NX_SECURE_X509_INVALID_EXTENSION_SEQUENCE** (0x192) Ogiltigt tillägg påträffades (ogiltigt certifikat).
+- **NX_SECURE_X509_EXTENSION_NOT_FOUND** (0x19B) Tillägget för utökad nyckelanvändning hittades inte i det angivna certifikatet.
+- **NX_PTR_ERROR** (0x07) Ogiltig certifikat pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -3374,7 +3337,7 @@ UINT status;
 
 ## <a name="nx_secure_x509_extension_find"></a>nx_secure_x509_extension_find
 
-Hitta och returnera ett X. 509-tillägg i ett X. 509-certifikat
+Hitta och returnera ett X.509-tillägg i ett X.509-certifikat
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3385,66 +3348,66 @@ UINT  nx_secure_x509_extension_find(
                         USHORT extension_id);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten är avsedd att anropas inifrån ett motanrop för certifikat verifiering (se *nx_secure_tls_session_certificate_callback_set)* och är en avancerad X. 509-tjänst.
+Den här tjänsten är avsedd att anropas inifrån ett återanrop för *certifikatverifiering* (se nx_secure_tls_session_certificate_callback_set) och är en avancerad X.509-tjänst.
 
-Funktionen söker efter ett särskilt tillägg i ett X. 509-certifikat baserat på en OID och returnerar om OID finns, tillsammans med en struktur som innehåller referenser till relevanta rå Extension-data. Parametern extension_id är en heltals mappning av OID: er som används internt av NetX Secure X. 509 och TLS för att undvika att skicka OID-strängar med variabel längd som parametrar.
+Funktionen söker efter ett specifikt tillägg inom ett X.509-certifikat baserat på ett OID och returnerar om OID:t finns, tillsammans med en struktur som innehåller referenser till relevanta rådata för tillägg. Parametern extension_id är en heltalsmappning av OID:erna som används internt av NetX Secure X.509 och TLS för att undvika att OID-strängar med variabel längd anges som parametrar.
 
-Hjälp funktioner som tillhandahålls för vissa tillägg (till exempel *nx_secure_x509_key_usage_extension_parse*) anropa nx_secure_x509_extension_find internt för att hämta tilläggs data.
+Hjälpfunktionerna som tillhandahålls för specifika tillägg (till exempel *nx_secure_x509_key_usage_extension_parse*) anropar nx_secure_x509_extension_find internt för att hämta tilläggsdata.
 
-Relevanta OID för kända X. 509-tillägg anges i tabellen nedan.
+Relevanta OID:er för kända X.509-tillägg anges i tabellen nedan.
 
-NX_SECURE_X509_EXTENSION-strukturen innehåller pekare i X. 509-certifikatet som gör att hjälp funktioner som *nx_secure_x509_key_usage_extension_parse* snabbt kan avkoda de der-kodade ASN. 1-data som finns i RAW.
+Den NX_SECURE_X509_EXTENSION strukturen innehåller pekare till X.509-certifikatet som gör att hjälpfunktioner som *nx_secure_x509_key_usage_extension_parse* snabbt kan avkoda RÅ-tilläggets DER-kodade ASN.1-data.
 
-Information om vissa tillägg finns i RFC 5280 (X. 509 Specification) eller referens för lämpliga hjälp funktioner om det är tillgängligt.
+Information om specifika tillägg finns i RFC 5280 (X.509-specifikation) eller referensen för lämpliga hjälpfunktioner om det finns.
 
-Den aktuella versionen av NetX Secure X. 509 har begränsat stöd för X. 509-tillägg. Fler hjälp funktioner kommer att läggas till i framtiden.
+Den aktuella versionen av NetX Secure X.509 har begränsat stöd för X.509-tillägg. Fler hjälpfunktioner kommer att läggas till i framtiden.
 
 > [!IMPORTANT]
-> *Den här tjänsten är en avancerad funktion för användare som är bekanta med X. 509-tillägg och DER-kodat ASN. 1. Det ges möjlighet att ge dessa användare åtkomst till tillägg som NetX Secure X. 509 inte tillhandahåller hjälp funktioner för för närvarande. För dessa tillägg utan hjälp funktioner måste du själv parsa den råa DER-kodade ASN. 1.*
+> *Den här tjänsten är en avancerad funktion för användare som är bekanta med X.509-tillägg och DER-kodad ASN.1. Den tillhandahålls för att göra det möjligt för de användare att komma åt tillägg som NetX Secure X.509 för närvarande inte tillhandahåller hjälpfunktioner för. För dessa tillägg utan hjälpfunktioner måste du parsa rå-DER-kodad ASN.1 själv.*
 
-| NetX Secure Identifier                              | OID-värde | Beskrivning                                                                    | Hjälp funktion? |
+| NetX Secure Identifier                              | OID-värde | Description                                                                    | Hjälpfunktion? |
 | ------------------------------------------------------- | ------------- | ---------------------------------------------------------------------------------- | -------------------- |
-| NX_SECURE_TLS_X509_TYPE_DIRECTORY_ATTRIBUTES  | 2.5.29.9  | Katalogattribut – grundläggande information om certifikat ämne  | Inga               |
-| NX_SECURE_TLS_X509_TYPE_SUBJECT_KEY_ID       | 2.5.29.14 | Används för att identifiera en enskild offentlig nyckel                                         | Inga               |
-| NX_SECURE_TLS_X509_TYPE_KEY_USAGE             | 2.5.29.15 | Innehåller information om giltiga användnings områden för certifikatets offentliga nyckel              | Ja              |
-| NX_SECURE_TLS_X509_TYPE_SUBJECT_ALT_NAME     | 2.5.29.17 | Innehåller alternativa DNS-namn för att identifiera certifikatet                     | Ja<sup>24</sup>        |
-| NX_SECURE_TLS_X509_TYPE_ISSUER_ALT_NAME      | 2.5.29.18 | Innehåller alternativa DNS-namn för att identifiera certifikat utfärdaren            | Inga               |
-| NX_SECURE_TLS_X509_TYPE_BASIC_CONSTRAINTS     | 2.5.29.19 | Tillhandahåller information om grundläggande användnings villkor för certifikat                        | Inga               |
-| NX_SECURE_TLS_X509_TYPE_NAME_CONSTRAINTS      | 2.5.29.30 | Används för att begränsa certifikat namn till vissa domäner                        | Inga               |
-| NX_SECURE_TLS_X509_TYPE_CRL_DISTRIBUTION      | 2.5.29.31 | Tillhandahåller URI: er för CRL-distribution                                             | Inga               |
-| NX_SECURE_TLS_X509_TYPE_CERTIFICATE_POLICIES  | 2.5.29.32 | Lista över certifikat principer för stora PKI-system                             | Inga               |
-| NX_SECURE_TLS_X509_TYPE_CERT_POLICY_MAPPINGS | 2.5.29.33 | Lista över principer för certifikat utfärdare                                                | Inga               |
-| NX_SECURE_TLS_X509_TYPE_AUTHORITY_KEY_ID     | 2.5.29.35 | Används för att identifiera en enskild offentlig nyckel som är kopplad till en certifikatets signatur | Inga               |
-| NX_SECURE_TLS_X509_TYPE_POLICY_CONSTRAINTS    | 2.5.29.36 | Begränsningar för CA-principer                                                          | Inga               |
-| NX_SECURE_TLS_X509_TYPE_EXTENDED_KEY_USAGE   | 2.5.29.37 | Ytterligare OID-baserad nyckel användnings information                                     | Ja              |
-| NX_SECURE_TLS_X509_TYPE_FRESHEST_CRL          | 2.5.29.46 | Innehåller information om hur du hämtar delta-CRL: er                                  | Inga               |
-| NX_SECURE_TLS_X509_TYPE_INHIBIT_ANYPOLICY     | 2.5.29.54 | Fältet CA-certifikat indikerar att AnyPolicy inte kan användas                  | Inga               |
+| NX_SECURE_TLS_X509_TYPE_DIRECTORY_ATTRIBUTES  | 2.5.29.9  | Katalogattribut – grundläggande informationsattribut om certifikatämne  | No               |
+| NX_SECURE_TLS_X509_TYPE_SUBJECT_KEY_ID       | 2.5.29.14 | Används för att identifiera en specifik offentlig nyckel                                         | No               |
+| NX_SECURE_TLS_X509_TYPE_KEY_USAGE             | 2.5.29.15 | Innehåller information om giltiga användningsområden för certifikatets offentliga nyckel              | Yes              |
+| NX_SECURE_TLS_X509_TYPE_SUBJECT_ALT_NAME     | 2.5.29.17 | Tillhandahåller alternativa DNS-namn för att identifiera certifikatet                     | Ja<sup>24</sup>        |
+| NX_SECURE_TLS_X509_TYPE_ISSUER_ALT_NAME      | 2.5.29.18 | Tillhandahåller alternativa DNS-namn för att identifiera certifikatets utfärdare            | No               |
+| NX_SECURE_TLS_X509_TYPE_BASIC_CONSTRAINTS     | 2.5.29.19 | Innehåller grundläggande information om begränsning av certifikatanvändning                        | No               |
+| NX_SECURE_TLS_X509_TYPE_NAME_CONSTRAINTS      | 2.5.29.30 | Används för att begränsa certifikatnamn till specifika domäner                        | No               |
+| NX_SECURE_TLS_X509_TYPE_CRL_DISTRIBUTION      | 2.5.29.31 | Tillhandahåller URI:er för CRL-distribution                                             | No               |
+| NX_SECURE_TLS_X509_TYPE_CERTIFICATE_POLICIES  | 2.5.29.32 | Lista över certifikatprinciper för stora PKI-system                             | No               |
+| NX_SECURE_TLS_X509_TYPE_CERT_POLICY_MAPPINGS | 2.5.29.33 | Lista över certifikatprinciper för certifikatutfärdare                                                | No               |
+| NX_SECURE_TLS_X509_TYPE_AUTHORITY_KEY_ID     | 2.5.29.35 | Används för att identifiera en specifik offentlig nyckel som är associerad med en certifikatsignatur | No               |
+| NX_SECURE_TLS_X509_TYPE_POLICY_CONSTRAINTS    | 2.5.29.36 | Begränsningar för CA-princip                                                          | No               |
+| NX_SECURE_TLS_X509_TYPE_EXTENDED_KEY_USAGE   | 2.5.29.37 | Ytterligare information om OID-baserad nyckelanvändning                                     | Yes              |
+| NX_SECURE_TLS_X509_TYPE_FRESHEST_CRL          | 2.5.29.46 | Innehåller information om hur du hämtar delta-CRL:er                                  | No               |
+| NX_SECURE_TLS_X509_TYPE_INHIBIT_ANYPOLICY     | 2.5.29.54 | Fältet CERTIFIKATUTFÄRDARE som anger att AnyPolicy inte kan användas                  | No               |
 
-OID och mappningar för X. 509-tillägg
+OID:er och mappningar för X.509-tillägg
 
-24. SubjectAltName-tillägget parsas som en del av DNS-namns kontrollen i tjänst nx_secure_x509_common_name_dns_check.
+24. SubjectAltName-tillägget parsas som en del av DNS-namnkontrollen i nx_secure_x509_common_name_dns_check.
 
 ### <a name="parameters"></a>Parametrar
 
-- **certifikat** Pekare till certifikat som verifieras.
-- **tillägg** Retur struktur som innehåller tilläggs data pekare och längd.
-- **extension_id** OID-heltals mappning från tabellen ovan.
+- **certifikat** Pekare till certifikatet som verifieras.
+- **tillägg** Returstruktur som innehåller pekare och längd för tilläggsdata.
+- **extension_id** OID-heltalsmappning från tabellen ovan.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) angivet tillägg-OID hittades och returnerade data.
-- **NX_SECURE_X509_MULTIBYTE_TAG_UNSUPPORTED** (0X181) ASN. 1 kod för flera byte påträffades (certifikat som inte stöds).
-- **NX_SECURE_X509_ASN1_LENGTH_TOO_LONG** (0x182) ett inidentifierat ASN. 1-fält påträffades (ogiltigt certifikat).
-- **NX_SECURE_X509_INVALID_TAG_CLASS** (0X190) ogiltig ASN. 1-tagg klass påträffades (ogiltigt certifikat).
-- **NX_SECURE_X509_INVALID_EXTENSION_SEQUENCE** (0X192) ogiltigt tillägg påträffades
-- **NX_SECURE_X509_EXTENSION_NOT_FOUND** (0X19B) det angivna tilläggets OID hittades inte i det angivna certifikatet.
-- **NX_PTR_ERROR** (0X07) ogiltig certifikat-eller tilläggs pekare.
+- **NX_SUCCESS** (0x00) Angivet tilläggs-OID hittades och returnerade data.
+- **NX_SECURE_X509_MULTIBYTE_TAG_UNSUPPORTED** (0x181) ASN.1-tagg för flera byte påträffade (certifikat stöds inte).
+- **NX_SECURE_X509_ASN1_LENGTH_TOO_LONG** (0x182) Invaild ASN.1-fält (ogiltigt certifikat).
+- **NX_SECURE_X509_INVALID_TAG_CLASS** (0x190) Ogiltig ASN.1-taggklass påträffades (ogiltigt certifikat).
+- **NX_SECURE_X509_INVALID_EXTENSION_SEQUENCE** (0x192) Ogiltigt tillägg påträffades
+- **NX_SECURE_X509_EXTENSION_NOT_FOUND** (0x19B) Det angivna tilläggs-OID:t hittades inte i det angivna certifikatet.
+- **NX_PTR_ERROR** (0x07) Ogiltigt certifikat eller tilläggspekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -3488,7 +3451,7 @@ NX_SECURE_X509_EXTENSION extension_data;
 
 ## <a name="nx_secure_x509_key_usage_extension_parse"></a>nx_secure_x509_key_usage_extension_parse
 
-Hitta och parsa ett tillägg för nyckel användning i X. 509 i ett X. 509-certifikat
+Hitta och parsa ett X.509-nyckelanvändningstillägg i ett X.509-certifikat
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3498,48 +3461,48 @@ UINT  nx_secure_x509_key_usage_extension_parse(
                         USHORT *bitfield);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten är avsedd att anropas inifrån ett motanrop för certifikat verifiering (se *nx_secure_tls_session_certificate_callback_set)*. Den söker efter tillägget för nyckel användning och returnerar den nyckel användnings bitfield som finns i parametern "bitfield".
+Den här tjänsten är avsedd att anropas inifrån ett återanrop för certifikatverifiering *(se nx_secure_tls_session_certificate_callback_set).* Den söker efter nyckelanvändningstillägget och returnerar bitfältet Nyckelanvändning i parametern "bitfield".
 
-Bitarna, som definieras av specifikationen X. 509 (RFC 5280), anges i tabellen nedan. En bitvis och med lämplig bitmask (och genom att kontrol lera om det inte är noll) ger värdet för varje bit.
+Bitarna, som definieras av X.509-specifikationen (RFC 5280) anges i tabellen nedan. Ett bitvis AND med lämplig bitmask (och kontroll av icke-noll) ger värdet för varje bit.
 
-Observera att DER-encoding för bitfield eliminerar extra nollor, så den faktiska positionen för bitarna i rå certifikat data kommer sannolikt att skilja sig från deras position i den avkodade bitfield. De angivna bitmaskna är endast avsedda att användas på de avkodade bitfield som returneras av *nx_secure_x509_key_usage_extension_parse* och inte med RAW der-kodade certifikat data.
+Observera att DER-kodningen för bitfältet eliminerar extra nollor, så den faktiska positionen för bitarna i rådatacertifikatdata skiljer sig troligen från deras positioner i det avkodade bitfältet. De angivna bitmaskerna är endast avsedda att användas på det avkodade bitfält som *returneras av nx_secure_x509_key_usage_extension_parse* och inte med råa DER-kodade certifikatdata.
 
-I återanropet av certifikat verifieringen är felet returkod NX_SECURE_X509_KEY_USAGE_ERROR reserverat för användning av program. Om det uppstår ett fel när nyckel användningen kontrol leras kan det här värdet returneras från återanropet för att indikera orsaken till felet.
+I återanropet för certifikatverifiering är felreturkoden NX_SECURE_X509_KEY_USAGE_ERROR reserverad för programanvändning. Om det uppstår ett fel vid kontroll av nyckelanvändning kan det här värdet returneras från återanropet för att ange orsaken till felet.
 
-| NetX Secure Identifier                            | Bit position | Beskrivning                                                                                                                                                  |
+| NetX Secure Identifier                            | Bitposition | Description                                                                                                                                                  |
 | ----------------------------------------------------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| NX_SECURE_X509_KEY_USAGE_DIGITAL_SIGNATURE  | 0            | Certifikat kan användas för digitala signaturer                                                                                                               |
-| NX_SECURE_X509_KEY_USAGE_NON_REPUDIATION    | 1            | Certifikat kan användas för att verifiera digitala signaturer förutom dem för certifikat och CRL: er                                                              |
-| NX_SECURE_X509_KEY_USAGE_KEY_ENCIPHERMENT   | 2            | Certifikat kan användas för att kryptera symmetriska nycklar (nyckel transport)                                                                                            |
-| NX_SECURE_X509_KEY_USAGE_DATA_ENCIPHERMENT  | 3            | Certifikat kan användas för att kryptera rå användar data direkt (ovanligt)                                                                                         |
-| NX_SECURE_X509_KEY_USAGE_KEY_AGREEMENT      | 4            | Certifikat kan användas för nyckel avtal (som med Diffie-Hellman)                                                                                           |
-| NX_SECURE_X509_KEY_USAGE_KEY_CERT_SIGN     | 5            | Certifikat kan användas för att signera och verifiera andra certifikat (certifikatet är ett CA-eller ICA-certifikat).                                                  |
-| NX_SECURE_X509_KEY_USAGE_CRL_SIGN           | 6            | Certifikatets offentliga nyckel används för att verifiera signaturer i listor över återkallade certifikat                                                                                                  |
-| NX_SECURE_X509_KEY_USAGE_ENCIPHER_ONLY      | 7            | Används med nyckel avtals bit (bit 4) – när den anges kan certifikat nyckeln endast användas för kryptering under nyckel avtal. Odefinierad om nyckel avtals bit inte har angetts. |
-| NX_SECURE_X509_KEY_USAGE_DECIPHER_ONLY      | 8            | Används med nyckel avtals bit (bit 4) – när den anges kan certifikat nyckeln endast användas för att dekryptera under nyckel avtal. Odefinierad om nyckel avtals bit inte har angetts. |
+| NX_SECURE_X509_KEY_USAGE_DIGITAL_SIGNATURE  | 0            | Certifikatet kan användas för digitala signaturer                                                                                                               |
+| NX_SECURE_X509_KEY_USAGE_NON_REPUDIATION    | 1            | Certifikat kan användas för att verifiera andra digitala signaturer än de för certifikat och listor över återkallade certifikat                                                              |
+| NX_SECURE_X509_KEY_USAGE_KEY_ENCIPHERMENT   | 2            | Certifikatet kan användas för att kryptera symmetriska nycklar (nyckeltransport)                                                                                            |
+| NX_SECURE_X509_KEY_USAGE_DATA_ENCIPHERMENT  | 3            | Certifikatet kan användas för att direkt kryptera rådata för användare (ovanligt)                                                                                         |
+| NX_SECURE_X509_KEY_USAGE_KEY_AGREEMENT      | 4            | Certifikatet kan användas för nyckelavtal (som med Diffie-Hellman)                                                                                           |
+| NX_SECURE_X509_KEY_USAGE_KEY_CERT_SIGN     | 5            | Certifikatet kan användas för att signera och verifiera andra certifikat (certifikatet är ett CA- eller ICA-certifikat).                                                  |
+| NX_SECURE_X509_KEY_USAGE_CRL_SIGN           | 6            | Certifikatets offentliga nyckel används för att verifiera signaturer på CRL:er                                                                                                  |
+| NX_SECURE_X509_KEY_USAGE_ENCIPHER_ONLY      | 7            | Används med nyckelavtalsbit (bit 4) – när den har angetts kan certifikatnyckeln endast användas för kryptering under nyckelavtalet. Odefinierat om nyckelavtalsbit inte har angetts. |
+| NX_SECURE_X509_KEY_USAGE_DECIPHER_ONLY      | 8            | Används med nyckelavtalsbit (bit 4) – när det har angetts kan certifikatnyckeln endast användas för att dekryptera under nyckelavtalet. Odefinierat om Nyckelavtalsbit inte har angetts. |
 
-Bitmask och värden för tillägg för nyckel användning i X. 509
+Bitmasker och värden för X.509-nyckelanvändningstillägg
 
 ### <a name="parameters"></a>Parametrar
 
 - **certifikat** Pekare till certifikat som verifieras.
-- **bitfield** Returnera hela bitfield från tillägget.
+- **bitfield** Returnera hela bitfältet från tillägget.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) nyckel användnings tillägg hittades och bitfield returnerades.
-- **NX_SECURE_X509_MULTIBYTE_TAG_UNSUPPORTED** (0X181) ASN. 1 kod för flera byte påträffades (certifikat som inte stöds).
-- **NX_SECURE_X509_ASN1_LENGTH_TOO_LONG** (0x182) ett inidentifierat ASN. 1-fält påträffades (ogiltigt certifikat).
-- **NX_SECURE_X509_INVALID_TAG_CLASS** (0X190) ogiltig ASN. 1-tagg klass påträffades (ogiltigt certifikat).
-- **NX_SECURE_X509_INVALID_EXTENSION_SEQUENCE** (0X192) ogiltigt tillägg påträffades (ogiltigt certifikat).
-- **NX_SECURE_X509_EXTENSION_NOT_FOUND** (0X19B) Det gick inte att hitta nyckel användnings tillägget i det angivna certifikatet.
-- **NX_PTR_ERROR** (0X07) ogiltig certifikat-eller bitfield-pekare.
+- **NX_SUCCESS** (0x00) Nyckelanvändningstillägg hittades och bitfält returnerades.
+- **NX_SECURE_X509_MULTIBYTE_TAG_UNSUPPORTED** (0x181) ASN.1-tagg med flera byte (stöds inte certifikat).
+- **NX_SECURE_X509_ASN1_LENGTH_TOO_LONG** (0x182) Invaild ASN.1-fält påträffades (ogiltigt certifikat).
+- **NX_SECURE_X509_INVALID_TAG_CLASS** (0x190) Ogiltig ASN.1-taggklass påträffades (ogiltigt certifikat).
+- **NX_SECURE_X509_INVALID_EXTENSION_SEQUENCE** (0x192) Ogiltigt tillägg påträffades (ogiltigt certifikat).
+- **NX_SECURE_X509_EXTENSION_NOT_FOUND** (0x19B)Nyckelanvändningstillägget hittades inte i det angivna certifikatet.
+- **NX_PTR_ERROR** (0x07) Ogiltigt certifikat eller pekare för bitfält.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
