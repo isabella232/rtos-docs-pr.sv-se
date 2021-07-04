@@ -6,12 +6,12 @@ ms.author: philmea
 ms.date: 5/19/2020
 ms.service: rtos
 ms.topic: overview
-ms.openlocfilehash: e3fe3bcc602f409cc76f3be47aca865bf8116697
-ms.sourcegitcommit: 19d50693d8f5287ba6938ae1d23eef88435ed7b1
+ms.openlocfilehash: 6112ab5cb711ca1a5c83fd5cd4b43abc0302c6c5
+ms.sourcegitcommit: f9d8cf23becf96d5bd6d31dd54f89c48962fd09b
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 04/28/2021
-ms.locfileid: "108171343"
+ms.lasthandoff: 06/06/2021
+ms.locfileid: "111549346"
 ---
 # <a name="overview-of-azure-rtos-netx-duo"></a>Översikt över Azure RTOS NetX Duo
 
@@ -40,18 +40,18 @@ Azure RTOS Inbäddad TCP/IP-nätverksstack i NetX Duo är Microsofts avancerade,
 #### <a name="httphttps-11"></a>HTTP/HTTPS 1.1
 
 * Hypertext Transfer Protocol(HTTP)
-* Minimalt 3,0 TILL 9,5 KB FLASH/0,5 KB till 2 KB RAM
-* Stöd för klient och server
+* Minimalt 3,0 KB till 9,5 KB FLASH/0,5 KB till 2 KB RAM
+* Stöd för klienter och servrar
 * Flera inkommande klientsessioner
 * Oformaterad text och krypterad HTTPS
-* Stöd för beständig anslutning
+* Stöd för beständiga anslutningar
 * Filuppladdning med flera delar
 * Helt integrerad med Azure RTOS NetX Secure TLS
 
 ### <a name="smtp"></a>SMTP
 
 * Simple Mall Transfer Protocol (SMTP)
-* Minimalt RAM-fotavtryck på 4,1 kB och 0,6 kB
+* Minimalt RAM-fotavtryck på 4,1 kB och 0,6 KB
 * Klientstöd
 
 ### <a name="dhcp"></a>DHCP
@@ -64,14 +64,14 @@ Azure RTOS Inbäddad TCP/IP-nätverksstack i NetX Duo är Microsofts avancerade,
 ### <a name="nat"></a>NAT
 
 * NAT (Network Address Translation)
-* Minimalt RAM-fotavtryck på 3,5 K6 och 0,6 kB
+* Minimalt RAM-fotavtryck på 3,5 K6 och 0,6 KB
 * Stöd för IPv4-adresser
 * NAT är endast tillgängligt med Azure RTOS NetX Duo
 
 ### <a name="snmp"></a>SNMP
 
 * Simple Network Management Protocol (SNMP)
-* Minimalt RAM-fotavtryck på 10,9 kB och 2,6 kB
+* Minimalt RAM-fotavtryck på 10,9 kB och 2,6 KB
 * Agentstöd för VI, V2 och V3
 
 ### <a name="dns-mdns-dns-sd"></a>DNS, mDNS, DNS-SD
@@ -83,7 +83,7 @@ Azure RTOS Inbäddad TCP/IP-nätverksstack i NetX Duo är Microsofts avancerade,
 * Klientstöd
 * mDNS och DNS-SD är endast tillgängliga med Azure RTOS NetX Duo
 
-### <a name="p0p3"></a>P0P3
+### <a name="pop3"></a>POP3
 
 * Post Office Protocol Version 3 (POP3)
 * Minimalt RAM-fotavtryck på 8,1 kB och 1,4 KB
@@ -108,7 +108,7 @@ Azure RTOS Inbäddad TCP/IP-nätverksstack i NetX Duo är Microsofts avancerade,
 
 * Polnt-to-PoInt Protocol (PPP)
 * Point-to-Point Protocol over Ethernet(PPPoE)
-* Minimalt RAM-fotavtryck på 7,1 kB och 3,8 kB
+* Minimalt RAM-fotavtryck på 7,1 kB och 3,8 KB
 * Intuitiva PPP-API:er: *nx_ppp_ \**
 
 * PPPoE är endast tillgängligt med Azure RTOS NetX Duo
@@ -116,7 +116,7 @@ Azure RTOS Inbäddad TCP/IP-nätverksstack i NetX Duo är Microsofts avancerade,
 ### <a name="sntp"></a>Sntp
 
 * Simple Network Time Protocol (SNTP)
-* Minimalt RAM-minne på 4 kB och 0,5 kB
+* Minimalt 4 KB och 0,5 KB RAM
 * Klientstöd
 * Intuitiva SNTP-API:er: *nx_sntp_ \**
 
@@ -124,10 +124,10 @@ Azure RTOS Inbäddad TCP/IP-nätverksstack i NetX Duo är Microsofts avancerade,
 
 * Intuitivt och konsekvent API
 * Namngivningskonvention för substantiv-verb
-* Snabb IMPLEMENTERING av API med nollkopiering
+* Snabb IMPLEMENTERING av API:et nollkopiering
 * Alla API:er har ledande <i>nx_*</i> för att enkelt identifiera som Azure RTOS NetX
 * Blockerande API:er har valfri tidsgräns för tråd
-* Se [Azure RTOS netX Duo användarhandbok](about-this-guide.md) för mer information
+* Mer Azure RTOS finns i användarhandboken för [NetX Duo](about-this-guide.md)
 * Valfritt BSD-lager för portning av äldre socketkod
 
 ### <a name="igmp"></a>Igmp
@@ -156,7 +156,7 @@ Azure RTOS Inbäddad TCP/IP-nätverksstack i NetX Duo är Microsofts avancerade,
 
 * Transport Layer Security (TLS) 1.0, 1.1 och 1.2
 * Minimal 8,8 KB FLASH
-* Snabb, programvara RSA 2048-bitars nyckelstorlek ~ 1 sekund @120MHz
+* Snabb RSA 2048-bitars nyckelstorlek för programvara ~ 1 sekund @120MHz
 * Effektiviserad X.509-implementering
 * Helt integrerad med Azure RTOS NetX Duo TCP-sockets
 * Stöd för maskinvarukryptutor
@@ -188,7 +188,7 @@ Azure RTOS Inbäddad TCP/IP-nätverksstack i NetX Duo är Microsofts avancerade,
 * Inga gränser för antalet UDP
 * IXIA IxANVL-verifierad
 * Valfri stängning vid socket-mottagning
-* Valfri tidsgräns för all låsning
+* Valfri tidsgräns vid all låsning
 * Valfri UDP-statistik
 * Spårning på systemnivå via Azure RTOS TraceX
 * Intuitiva UDP-API:er: *nx_udp_ \**
@@ -197,14 +197,14 @@ Azure RTOS Inbäddad TCP/IP-nätverksstack i NetX Duo är Microsofts avancerade,
 
 * Transmission Control Protocol (TCP)
 * Minimal 10,5K8 till 12,5 KB FLASH, 280 byte RAM-minne per socket
-* Snabb, nästan wlre tcp-paketbearbetning:
+* Snabb, nära wlre speed TCP-paketbearbetning:
     * RX 93 Mbit/s på 100 Mbit/s Ethernet, @100MHz MCU, 20 % MCU-användning
     * TX 94 Mbit/s på 100 Mbit/s Ethernet, @100MHz MCU, 27 % MCU-användning
 * Tillförlitlig anslutning
-* Inga gränser för antalet TCP-sockets
+* Inga gränser för antalet TCP-socketar
 * IXIA IxANVL-verifierad
-* Valfri uppstängning vid socket-mottagning/-överföring
-* Valfri tidsgräns för all låsning
+* Valfri stängning vid socket-mottagning/-överföring
+* Valfri tidsgräns vid all låsning
 * Valfri TCP-statistik
 * Spårning på systemnivå via Azure RTOS TraceX
 * Intuitiva TCP-API:er: *nx_tcp_ \**
@@ -234,32 +234,32 @@ Azure RTOS Inbäddad TCP/IP-nätverksstack i NetX Duo är Microsofts avancerade,
 * Stöd för IP-fragmentering/återmontering
 * Stöd för IPv4- och IPv6-adresser
 * IXIA IxANVL-verifierad
-* Phase II IPv6 Ready Logo Certification
+* Fas II IPv6 Ready Logo Certification (IPv6-redo logotypcertifiering)
 * Valfri IP-statistik
 * Väldefinierat, intuitivt drivrutinsgränssnitt på fysiskt lager
 * Spårning på systemnivå via Azure RTOS TraceX
-* Intuitiva API:er för *IP-lager: \* nx_ip_,* *nxd_ip_ \** *\** , nxd_ipv6_
-* Förcertifierat av TUV och UL till IEC 61508 SIL 4, IEC 62304 klass C, ISO 26262 ASIL D och EN 50128 SW-SIL4
+* Intuitiva API:er för *IP-lager: \* nx_ip_*, *nxd_ip_ \** *\** , nxd_ipv6_
+* Förcertifierat av TUV och UL till IEC 61508 SIL 4, IEC 62304 Klass C, ISO 26262 ASIL D och EN 50128 SW-SIL4
 
 ### <a name="azure-rtos-netx-secure-ipsec"></a>Azure RTOS NetX Secure IPSEC
 
 * Internet Protocol Security (IPSEC)
 * IP-lager
 * Stöd för maskinvarukryptutor
-* Kryptografistöd för programvara, inklusive:
+* Stöd för kryptografiprogram, inklusive:
     * DES, 3DES
     * AES
     * HMAC-MD5
     * HMAC-SHA1
-* stöd Internet Key Exchange (IKE) version 2
+* Stöd för Internet Key Exchange (IKE) Version 2
 * Intuitiva IPsec-API:er: *nx_ipsec_ \**
 * IPsec är endast tillgängligt med Azure RTOS NetX Duo
 
-## <a name="safe-and-secure"></a>Säker och säker
+## <a name="safe-and-secure"></a>Valv och säkert
 
 Azure RTOS NetX Duo är säker. Den här säkerheten tillhandahålls via tilläggssäkerhetsprodukter, inklusive IPsec, SSL, TLS och DTLS. Dessutom har programmet fullständig kontroll över all extern åtkomst till Azure RTOS NetX Duo, vilket gör det mycket enklare att fastställa säkerhetsrisker.
 
-Microsoft Azure RTOS ger OEM-tillverkare komponenter för säker kommunikation och för att skapa kod- och dataisolering med underliggande MCU/MPU-maskinvaruskyddsmekanismer. Det är i slutänden enhetsbyggaren som ansvarar för att säkerställa att enheten uppfyller de föränderliga säkerhetskrav som är associerade med dess specifika användningsfall.
+Microsoft Azure RTOS tillhandahåller OEM-tillverkare med komponenter för säker kommunikation och för att skapa kod- och dataisolering med underliggande MCU/MPU-maskinvaruskyddsmekanismer. Det är i slutänden enhetsbyggarens ansvar att se till att enheten uppfyller de föränderliga säkerhetskrav som är associerade med dess specifika användningsfall.
 
 
 ## <a name="interoperability-verification"></a>Interoperabilitetsverifiering
@@ -268,7 +268,7 @@ NetX Duo följer RFC-standarder och erbjuder fullständig samverkan med enheter 
 
 ![Logotyp för IPv6-klar](./media/overview-netx-duo/ipv6-ready-logo.png)
 
-Azure RTOS NetX Duo är en av de enda inbäddade TCP/IP-stackarna för att uppnå rigorös IPv6-Ready Logo-certifiering, bevis på att den har klarat överensstämmelse- och samverkanstester som administreras och verifierats av IPv6-forumet. NetX Duo använder också branschstandarden IxANVL (Automated Network Validation Library) för netX Duo core TCP/IP-protokollimplementering.
+Azure RTOS NetX Duo är en av de enda inbäddade TCP/IP-stackarna för att uppnå rigorös IPv6-Ready Logo-certifiering, bevis på att den har klarat överensstämmelse- och samverkanstester som administreras och verifierats av IPv6-forumet. NetX Duo använder också branschstandarden IxANVL (Automated Network Validation Library) för netX Duo-kärnimplementeringen av TCP/IP-protokollet.
 
 ## <a name="comprehensive-iot-solution"></a>Omfattande IoT-lösning
 
@@ -286,15 +286,38 @@ Azure RTOS NetX Duo är avancerad teknik som omfattar:
 * Flexibel pakethantering
 * API med nollkopiering och implementering
 * Stöd för flera start
-* Valfri tidsgräns för all låsning
+* Valfri tidsgräns vid all låsning
 * Stöd för statisk routning
 * IPsec
 * SSL/TLS/DTLS
-* Azure RTOS TraceX-systemanalysstöd
+* Azure RTOS traceX-systemanalysstöd
 
 ## <a name="related-services"></a>Relaterade tjänster
 
-Säkerhetsmodulen Azure Security Center IoT RTOS innehåller en omfattande säkerhetslösning för Azure RTOS enheter. Säkerhetsmodulen för Azure RTOS erbjuder identifiering av aktiviteter i skadliga nätverk, anpassad aviseringsbaserad enhetsbeteendegrundning och hjälper till att förbättra enhetens säkerhetshygien. Läs mer om [säkerhetsmodulen för Azure RTOS](https://docs.microsoft.com/azure/asc-for-iot/iot-security-azure-rtos) eller kom igång med [snabbstarten Configure Security Module for Azure RTOS](https://docs.microsoft.com/azure/asc-for-iot/quickstart-azure-rtos-security-module) (Konfigurera säkerhetsmodul för Azure RTOS).
+### <a name="azure-iot"></a>Azure IoT
+
+NetX Duo innehåller [Azure IoT Middleware för Azure RTOS](https://github.com/azure-rtos/netxduo/blob/master/addons/azure_iot/docs/README.md), ett plattformsspecifikt bibliotek som fungerar som ett bindningslager mellan Azure RTOS och Azure SDK för Embedded C för att underlätta anslutningen till Azure IoT-tjänster. Målen med Azure IoT Middleware är följande.
+* Tillhandahåll de smarta klientgränssnitt (IoTHub_Client, DeviceProvisioning_Client) som utvecklare behöver för sina program.
+* Samordna interaktionen mellan Embedded C SDK och plattformen.
+* Tillhandahåll Azure RTOS plattformsinitiering.
+* IoT Plug and Play support.
+* Säkerhetsfunktioner.
+* Resursbegränsningsmedveten.
+* Protokollstöd.
+
+![Azure RTOS NetX Duo Related Services](./media/overview-netx-duo/related-services.png)
+
+### <a name="azure-defender"></a>Azure Defender
+
+Säkerhetsmodulen Azure Defender for IoT innehåller en omfattande säkerhetslösning för Azure RTOS enheter. Säkerhetsmodulen för Azure RTOS erbjuder identifiering av aktiviteter i skadliga nätverk, anpassade aviseringsbaserade enhetsbeteenden som baserar sig på och hjälper till att förbättra enhetens säkerhetshygien. Läs mer om [säkerhetsmodulen för Azure RTOS](https://docs.microsoft.com/azure/asc-for-iot/iot-security-azure-rtos) eller kom igång med [snabbstarten Configure Security Module for Azure RTOS](https://docs.microsoft.com/azure/asc-for-iot/quickstart-azure-rtos-security-module) (Konfigurera säkerhetsmodul för Azure RTOS).
+
+### <a name="device-update-for-iot-hub"></a>Enhetsuppdatering för IoT Hub
+
+[Azure Device Update for IoT Hub](https://docs.microsoft.com/azure/iot-hub-device-update/understand-device-update) är en tjänst som gör att du kan distribuera trådlösa uppdateringar (OTA) för dina IoT-enheter. Modulen Enhetsuppdatering för IoT Hub är implementeringen av Enhetsuppdatering för IoT Hub Agent i Azure RTOS NetX Duo. Den innehåller enkla API:er som gör att enhetsbyggare kan integrera funktionen Enhetsuppdatering i sina program.
+
+Se exempel på viktiga utvärderingstavlor som innehåller kom igång-guiderna för att lära dig att konfigurera, bygga och distribuera trådlösa uppdateringar (OTA) till enheterna.
+
+Du kan också läsa mer om hur du [använder Enhetsuppdatering för IoT Hub med Azure RTOS](https://docs.microsoft.com/azure/iot-hub-device-update/device-update-azure-real-time-operating-system).
 
 ## <a name="next-steps"></a>Nästa steg
 

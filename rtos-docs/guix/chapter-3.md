@@ -1,196 +1,196 @@
 ---
-title: Kapitel 3 – funktionell översikt över GUIX
-description: Det här kapitlet innehåller en funktionell översikt över produkten GUIX User Interface med hög prestanda.
+title: Kapitel 3 – Funktionell översikt över GUIX
+description: Det här kapitlet innehåller en funktionell översikt över produkten med högpresterande GUIX-användargränssnitt.
 author: philmea
 ms.author: philmea
 ms.date: 05/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 53ffc900debd3bfaa1a38d792ddf294b2ce92461
-ms.sourcegitcommit: 60ad844b58639d88830f2660ab0c4ff86b92c10f
+ms.openlocfilehash: 2a53da048b18d35b6b15a4ad8d4138e1a2acd4e8
+ms.sourcegitcommit: 95f4ae0842a486fec8f10d1480203695faa9592d
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 04/07/2021
-ms.locfileid: "106550311"
+ms.lasthandoff: 06/09/2021
+ms.locfileid: "111875262"
 ---
-# <a name="chapter-3---functional-overview-of-guix"></a>Kapitel 3 – funktionell översikt över GUIX
+# <a name="chapter-3---functional-overview-of-guix"></a>Kapitel 3 – Funktionell översikt över GUIX
 
-Det här kapitlet innehåller en funktionell översikt över produkten GUIX User Interface med hög prestanda. 
+Det här kapitlet innehåller en funktionell översikt över produkten med högpresterande GUIX-användargränssnitt. 
 
-## <a name="execution-overview"></a>Översikt över körning
+## <a name="execution-overview"></a>Körningsöversikt
 
-GUIX implementerar en händelse driven programmerings modell. Det innebär att GUIX-ramverket främst styrs av mottagandet av händelser i händelse kön för GUIX. Bearbetningen av dessa händelser sker i kontexten för GUIX-tråden, som är en ThreadX-tråd som skapas under system initieringen av GUIX.
+GUIX implementerar en händelsedriven programmeringsmodell. Det innebär att GUIX-ramverket främst drivs av mottagandet av händelser som skickas till GUIX-händelsekön. Bearbetningen av dessa händelser sker i kontexten för GUIX-tråden, som är en ThreadX-tråd som skapas under GUIX-system initieringen.
 
-GUIX-program definierar användar gränssnittet genom att anropa GUIX API-funktioner för att skapa Windows och underordnade widgetar och anpassa utseendet på dessa widgetar genom att anropa ytterligare API-funktioner som används för att definiera färger, format, teckensnitt och olika attribut för varje fönster eller widget. Om du använder GUIX Studio för att skapa utseendet på dina användar gränssnitts skärmar, är det mycket av det här arbetet med att anropa GUIX API-funktioner för att skapa din visning som du gör av GUIX Studio-programmet.
+GUIX-program definierar användargränssnittet genom att anropa GUIX API-funktioner för att skapa fönster och underordnade widgetar och anpassa utseendet på dessa widgetar genom att anropa ytterligare API-funktioner som används för att definiera färger, format, teckensnitt och olika andra attribut för varje fönster eller widgettyp. Om du använder GUIX Studio för att skapa utseendet på dina användargränssnittsskärmar utförs mycket av det här arbetet med att anropa GUIX API-funktioner för att skapa din skärm åt dig av GUIX Studio-programmet.
 
-GUIX-program interagerar med system användaren och med en extern affärs logik genom att hantera händelser som hämtats från händelse kön GUIX.
-Dessa händelser skapas vanligt vis av GUIX-widgetar, men de kan också skapas av externa trådar. När en typisk GUIX-knapp skickas skickar den här knappen en händelse till knappens överordnade fönster. Ditt program kommer att agera på knappen push genom att tillhandahålla en hanterare för knapp-push-händelsen.
+GUIX-program interagerar med systemanvändaren och med extern affärslogik genom att hantera händelser som hämtats från GUIX-händelsekön.
+Dessa händelser skapas vanligtvis av GUIX-widgetar, men de kan också skapas av externa trådar. När en typisk GUIX-knapp pushas skickar knappen en händelse till knappens överordnade fönster. Ditt program agerar på knapp-push-knappen genom att tillhandahålla en hanterare för knappens push-händelse.
 
-Ytterligare GUIX-trådar skapas ofta för sådant som indatamängds driv rutiner. En typisk driv rutin för touch-indatamängden körs som en fristående tråd utanför den huvudsakliga GUIX-tråden. Driv rutinen för touch-indata skickar touch-information till GUIX-tråden genom att skicka händelser till händelse kön för GUIX.
+Ytterligare GUIX-trådar skapas ofta för saker som indatadrivrutiner. En typisk drivrutin för pekskärmsinmatning körs som en fristående tråd som är extern till guix-huvudtråden. Touch-indatadrivrutinen skickar pekinformation till GUIX-tråden genom att skicka händelser till GUIX-händelsekön.
 
-Eftersom många användar gränssnitts åtgärder, t. ex. animeringar kräver korrekt tids information, implementerar GUIX också ett enkelt och lätt att använda timer-gränssnittet. Detta timer-gränssnitt skapas på ThreadX timer-tjänsten och konfigureras automatiskt vid system start.
+Eftersom många användargränssnittsåtgärder som animeringar kräver korrekt tidsinformation implementerar GUIX också ett enkelt och lättanvändargränssnitt. Det här timergränssnittet bygger på ThreadX-timertjänsten och konfigureras automatiskt vid systemstart.
 
-Den stora delen av GUIX-programvaran är oberoende av eventuella maskin varu beroenden. Ramverket kräver maskinvarubaserade indrivmedel och maskinvarubaserade grafik driv rutiner. Information om hur dessa maskinvaruspecifika driv rutiner implementeras härleds till kapitel 5.
+Merparten av GUIX-programvaran är oberoende av eventuella maskinvaruberoenden. Ramverket kräver maskinvaruspecifika indatadrivrutiner och maskinvaruspecifika grafikdrivrutiner. Information om hur dessa maskinvaruspecifika drivrutiner implementeras skjuts upp till kapitel 5.
 
 ## <a name="initialization"></a>Initiering 
 
-Tjänst ***gx_system_initialize*** måste anropas innan någon annan GUIX-tjänst anropas. GUIX system initiering kan anropas från ThreadX ***tx_application_define*** rutinen (initierings kontext) eller från program trådar. Funktionen ***gx_system_initialize*** skapar händelse kön GUIX, initierar GUIX timer, skapar den huvudsakliga GUIX system-tråden och initierar olika data strukturer som underhålls av GUIX under körningen av ditt program.
+Tjänsten måste ***gx_system_initialize*** anropas innan någon annan GUIX-tjänst anropas. GUIX-systeminitiering kan anropas ***från*** ThreadX tx_application_define rutinen (initieringskontext) eller från programtrådar. Funktionen ***gx_system_initialize*** skapar GUIX-händelsekön, initierar GUIX-timerfunktionen, skapar den huvudsakliga GUIX-systemtråden och initierar olika datastrukturer som underhålls av GUIX under körningen av ditt program.
 
-När ***gx_system_initialize*** har returnerat är programmet redo att skapa skärmar, arbets ytor, Windows, widgetar och anpassa egenskaperna för alla GUIX-objekt. Många av GUIX-API: et för att skapa objekt kan anropas från ***tx_application_define*** eller från program trådar.
+När ***gx_system_initialize*** returneras är programmet redo att skapa skärmar, arbetsyteobjekt, fönster, widgetar och anpassa egenskaperna för alla GUIX-objekt. Mycket av API:et för att skapa GUIX-objekt ***kan anropas från tx_application_define*** eller från programtrådar.
 
-## <a name="application-interface-calls"></a>Program gränssnitts anrop 
+## <a name="application-interface-calls"></a>Anrop till programgränssnitt 
 
-Anrop från programmet görs i stort sett från ***tx_application_define*** (initierings kontext) eller från program trådar. Se avsnittet "tillåten från" i varje GUIX-API som beskrivs i kapitel 4 för att avgöra vilken kontext det kan anropas från.
+Anrop från programmet görs huvudsakligen från ***tx_application_define*** (initieringskontext) eller från programtrådar. Se avsnittet "Tillåten från" i varje GUIX-API som beskrivs i kapitel 4 för att avgöra vilken kontext det kan anropas från.
 
-För det mesta är bearbetningen av intensiva aktiviteter härledd till den interna GUIX-tråden, inklusive alla ritningar för händelse bearbetning och widget/fönster.
+I de flesta fall skjuts bearbetningsintensiva aktiviteter upp till den interna GUIX-tråden, inklusive all händelsebearbetning och widget/fönsterritning.
 
-GUIX API-funktioner kan anropas från alla trådar när som helst.
-Det anses dock vanligt vis vara bättre arkitektur för att skilja din tids kritiska affärs logik från användar gränssnitts logiken. Eftersom rit åtgärder för användar gränssnittet ibland kan ta lång tid beroende på din visnings storlek och CPU-prestanda skulle du normalt inte behöva ha tids kritiska trådar fördröjda i väntan på att en rit åtgärd ska slutföras.
+GUIX API-funktionerna kan anropas från vilken tråd som helst när som helst.
+Det anses dock vanligtvis vara en bättre arkitektur för att separera din tidskritiska affärslogik från logiken i användargränssnittet. Eftersom ritningsåtgärder i användargränssnittet ibland kan ta lång tid beroende på din visningsstorlek och CPU-prestanda vill du normalt inte ha tidskritiska trådar som väntar på att en ritningsåtgärd ska slutföras.
 
 ## <a name="internal-guix-thread"></a>Intern GUIX-tråd 
 
-Som nämnts har GUIX en intern tråd som utför Mass bearbetningen av GUI. Den här tråden skapas av program varan genom att anropa ***gx_system_initialize** _ följt av _ *_gx_system_start_* *.
+Som tidigare nämnts har GUIX en intern tråd som utför den största delen av GUI-bearbetningen. Den här tråden skapas av programmet genom att anropa ***gx_system_initialize** _ följt av _*_gx_system_start_**.
 
-Prioriteten för den interna GUIX-tråden bestäms av `#define GX_SYSTEM_THREAD_PRIORITY` . Standardvärdet är 16 (mellan prioritet), men kan ändras genom att ange det här värdet i sidhuvud filen gx_port. h eller gx_user. h. åsidosätter standardvärdet.
+Prioriteten för den interna GUIX-tråden bestäms av `#define GX_SYSTEM_THREAD_PRIORITY` . Det här värdet är som standard 16 (mellanprioritet), men kan ändras genom att det här värdet anges i gx_port.h- eller gx_user.h-huvudfilen, vilket åsidosätter standardvärdet.
 
-GUIX trådens tids sektor definieras på samma sätt som `#define GX_SYSTEM_THREAD_TIMESLICE` , som som standard är värdet 10 MS.
+GUIX-trådtidssegmentet definieras på liknande sätt av `#define GX_SYSTEM_THREAD_TIMESLICE` , som har värdet 10 ms som standard.
 
-System trådens stack-SIE bestäms av `#define GX_THREAD_STACK_SIZE` , som finns i huvud filen ***gx_port. h*** , men kan också åsidosättas genom att ange det här värdet i filen gx_user. h.
+Stack-sie för systemtråden bestäms av , som finns i gx_port.h-huvudfilen, men kan också åsidosättas genom att ange det här värdet i `#define GX_THREAD_STACK_SIZE` gx_user.h-huvudfilen. 
 
-Den interna tråden för GUIX tråd körning består av tre åtgärder.
-Först hämtar GUIX händelser från händelse kön GUIX och skickar händelser för bearbetning av GUIX-Fönstren och-widgetarna. Händelser skickas vanligt vis till händelse kön för GUIX med regelbundna timers, indata-enheter som pekskärmar eller tangent bord och av GUIX-widgetar själva när de bearbetar indata från användaren. Efter att alla händelser har bearbetats bestämmer GUIX om en skärm uppdatering behövs, och om så är fallet utförs bearbetningen för att uppdatera visnings grafik data, huvudsakligen genom att anropa rit funktionerna i de fönster och widgetar som har marker ATS som skadade. Slutligen avbryter GUIX GUIX-tråden tills en ny inlogg eller händelser tas emot.
+Den interna GUIX-trådkörningsloopen består av tre åtgärder.
+Först hämtar GUIX händelser från GUIX-händelsekön och skickar dessa händelser för bearbetning av GUIX-fönster och widgetar. Händelser pushas vanligtvis till GUIX-händelsekön av periodiska timers, indataenheter som en pekskärm eller knappsats och av GUIX-widgetar själva när de bearbetar användarindata. Efter att alla händelser har bearbetats avgör GUIX om en skärmuppdatering krävs och i så fall utför den bearbetning som krävs för att uppdatera visningsgrafikdata, främst genom att anropa ritningsfunktionerna i de fönster och widgetar som har markerats som dirty (dirty). Slutligen pausar GUIX GUIX-tråden tills en ny indatahändelse eller händelser anländer.
 
-## <a name="event-processing"></a>Händelse bearbetning 
+## <a name="event-processing"></a>Händelsebearbetning 
 
-Indata för touch-eller Penn indata bearbetas genom att fastställa det översta fönstret eller widgeten under touch-bildningens pixel position och anropar funktionen för händelse bearbetning i Window/widgeten. Om widgeten förstår Penn inmatade händelser, kommer den att bearbeta händelsen som lämplig för widgeten. Om inte, kommer den översta widgeten att skicka händelsen touch eller Penn indata till widgetens överordnade för bearbetning. Detta pass i händelse av att kedjan fortsätter tills händelsen hanteras eller händelsen kommer till rot fönstret, i vilket fall händelsen ignoreras.
+Touch- eller pennindatahändelser bearbetas genom att fastställa det översta fönstret eller widgeten under pek- eller pennindatapunktspositionen och anropa fönstrets/widgetens händelsebearbetningsfunktion. Om widgeten förstår pennindatahändelser bearbetas händelsen efter behov för den widgettypen. Annars skickar widgeten längst upp touch- eller penninmatningshändelsen till widgetens överordnade för bearbetning. Det här avfallet av händelsen uppåt i kedjan fortsätter tills antingen händelsen hanteras eller tills händelsen kommer till rotfönstret, i vilket fall händelsen ignoreras.
 
-Knapp knappar skickas till det fönster/den widget som har fokus. Status för inGUIX underhålls av komponenten gx_system.
+Tangenthändelser skickas till fönstret/widgeten som har indatafokus. Fokusstatus för indata underhålls av GUIX-gx_system komponenten.
 
-Timer-händelser skickas alltid till fönstret eller widgeten som äger timern för bearbetning.
+Timerhändelser skickas alltid till fönstret eller widgeten som äger timern för bearbetning.
 
-Internt genererade händelser, t. ex. När knapp klickar på händelser eller värde ändrings händelser för skjutreglaget, skickas alltid till den överordnade för widgeten som genererar händelsen. Om den överordnade inte bearbetar händelsen, så skickas den till kedjan som liknar touch-eller Penn ingångs händelser.
+Internt genererade händelser, till exempel knapptryckningshändelser eller ändringshändelser för skjutreglagets värde, skickas alltid till den överordnade komponenten som genererar händelsen. Om den överordnade inte bearbetar händelsen skickas den upp i kedjan som liknar pek- eller penninmatningshändelser.
 
 ## <a name="drawing"></a>Ritning 
 
-När all händelse bearbetning har slutförts fastställer den interna GUIX-tråden om det behövs någon visnings uppdatering och om så är fallet fungerar lämpliga ritnings funktioner för fönster/widget. När ritningen är klar väntar den interna GUIX-tråden bara på händelse kön vid nästa GUIX-händelse för bearbetning.
+När all händelsebearbetning är klar avgör GUIX interna tråd om någon visningsuppdatering behövs och i så fall anropas lämpliga fönster-/widgetritningsfunktioner. När ritningen är klar väntar den interna GUIX-tråden helt enkelt på händelsekön tills nästa GUIX-händelse ska bearbetas.
 
-GUIX implementerar begreppet *felaktiga områden*, som är områden som måste ritas om för varje widget och arbets yta. En widget kan bara rita till områden som tidigare har marker ATS som skadade. När en widgets ritnings funktion anropas, klipps alla ritnings åtgärder internt till den tidigare definierade ändrings ramen.
-Försök att rita utanför området ignoreras.
+GUIX implementerar begreppet *"dirty areas",* som är områden som måste ritas om för varje widget och arbetsyta. En widget kan bara ritas till områden som tidigare har markerats som dirty (dirty). När en widgetritningsfunktion anropas klipps alla ritningsåtgärder internt till den tidigare definierade dirty-rektangeln.
+Försök att rita utanför det här området ignoreras.
 
-Widgetar och Windows markerar sig själva som felaktiga genom att anropa API-funktionen ***gx_system_dirty_mark***. Den här funktionen markerar hela widgeten eller fönstret som måste ritas om. En andra funktion, ***gx_system_dirty_partial_add***, kan anropas som ett alternativ till att bara markera en del av ett fönster eller en widget som smutsig.
+Widgetar och fönster markerar sig själva som dirty genom att anropa ***API-funktionen gx_system_dirty_mark***. Den här funktionen markerar hela widgeten eller fönstret som behöver ritas om. En andra ***funktion, gx_system_dirty_partial_add***, kan anropas som ett alternativ för att bara markera en del av ett fönster eller en widget som skadad.
 
-Den här modellen för att märka widgetar som smutsig och sedan rita om dessa widgetar endast när alla inmatnings händelser har bearbetats kallas *uppskjuten ritning*. GUIX för uppskjutna ritningar och listor över skadade listor är utformad för att förbättra effektiviteten i ritningen. Eftersom rit åtgärder vanligt vis är kostsamma arbetar GUIX hårt för att förhindra onödig ritning.
+Den här modellen för att markera widgetar som dirty och sedan rita om dessa widgetar endast när alla indatahändelser har bearbetats kallas *uppskjuten ritning*. GUIX-algoritmen för uppskjuten ritning och underhåll av en dirty list har utformats för att förbättra ritningseffektiviteten. Eftersom ritningsåtgärder vanligtvis är dyra, arbetar GUIX hårt för att förhindra onödig ritning.
 
-Ritningen görs till en GUIX- *arbetsyta*. En arbets yta är ett minnes område som är reserverat för grafik data. En arbets yta kan vara direkt länkad till maskin varu Rams bufferten, beroende på system arkitektur och minnes begränsningar. Innan en ritning kan ske måste du först öppna en arbets yta för att rita genom att anropa API-funktionen ***gx_canvas_drawing_initiate*** . Det här API: et förbereder en arbets yta för ritning och upprättat den aktuella *ritnings kontexten*. När GUIX utför en system arbets ytans uppdatering, öppnas arbets ytan för ritning och ritnings kontexten som upprättats innan API: erna för Drawing-nivå anropas. Därför behöver inte widgeten starta ritningen på en arbets yta i ritnings funktionen för widgeten.
+Ritningen görs på en *GUIX-arbetsyta*. En arbetsyta är ett minnesutrymme som reserveras för att lagra grafikdata. En arbetsyta kan vara direkt kopplad till maskinvarurambufferten, beroende på systemarkitekturen och minnesbegränsningarna. Innan en ritning kan ske måste en arbetsyta först öppnas för ritning genom att anropa ***GX_CANVAS_DRAWING_INITIATE API-funktionen.*** Det här API:et förbereder en arbetsyta för ritning och upprättar den aktuella *ritningskontexten*. När GUIX utför en uppdatering av systemarbetsytan öppnas arbetsytan för ritning och den ritningskontext som upprättats innan API:erna för ritning på widgetnivå anropas. Därför behöver widgetar inte initiera ritning på en arbetsyta i widgetens ritningsfunktion.
 
-Men om ett program vill utföra omedelbar ritning på en arbets yta, utanför flödet av den standardinställda GUIX, måste programmet direkt anropa ***gx_canvas_drawing_initiate*** innan du anropar några andra funktioner i Drawing API och måste anropa ***gx_canvas_drawing_complete*** när den omedelbara ritningen har slutförts.
+Men om ett program vill utföra en omedelbar ritning till en arbetsyta, utanför flödet av standardalgoritmen för GUIX-uppskjuten ritning, måste programmet anropa ***gx_canvas_drawing_initiate*** direkt innan andra API-funktioner för ritning anropas och måste anropa ***gx_canvas_drawing_complete*** när den omedelbara ritningen har slutförts.
 
 ## <a name="user-input"></a>Användarindata 
 
-GUIX stöder touch screen, Mouse och keyboard-enheter med fördefinierade händelse typer. Ytterligare inmatade enheter kan användas genom att definiera anpassade händelse typer eller genom att mappa den anpassade Indataporten till de fördefinierade händelse typerna.
+GUIX stöder enheter med pekskärm, mus och tangentbord med fördefinierade händelsetyper. Ytterligare indataenheter kan användas genom att definiera anpassade händelsetyper eller genom att mappa den anpassade indataenheten till de fördefinierade händelsetyperna.
 
-Åtgärder som är kopplade till dessa enheter översätts till händelser som bearbetas av den interna GUIX-tråden. Program vara för driv rutins nivå som har skrivits för att stödja en pekskärm måste förbereda och skicka till händelse köns händelser för GUIX för Penn-och Penn-och Penn aktiviteter. På samma sätt måste ingångs driv rutinen för tangent bordet skapa händelser för tangenttryckning och viktig information.
+Åtgärder som är associerade med dessa enheter översätts till händelser som bearbetas av den interna GUIX-tråden. Programvara på drivrutinsnivå som skrivits för att stödja en pekskärm måste förbereda och skicka händelser i GUIX-händelsekön för penn- och penntryckningar. På samma sätt måste en drivrutin för tangenttangentens indata generera händelser för inmatning av tangenttryckningar och tangentutdata.
 
-## <a name="modal-dialog-execution"></a>Körning av modal dialog ruta 
+## <a name="modal-dialog-execution"></a>Körning av modal dialogruta 
 
-Den modala dialog körningen avser att presentera ett fönster för användaren som måste stängas på något sätt innan andra GUIX-fönster eller widgetar kan ta emot användarindata. Modala dialog rutor fångar upp alla användarindata medan dialog fönstret visas, oavsett x, y-position för touch-eller mus ingångs händelser.
+Körning av modal dialog syftar på att presentera ett fönster för användaren som måste stängas på något sätt innan andra GUIX-fönster eller widgetar kan ta emot användarindata. Modala dialogrutor samlar in alla användarindata medan dialogfönstret visas, oavsett x,y-position för touch- eller musindatahändelser.
 
-Modala dialog rutor utlöses av program varan genom att först skapa fönstret på det normala sättet genom att anropa ***gx_window_create*** och sedan anropa API-funktionen GUIX ***gx_window_execute.***
+Modala dialogrutor utlöses av programmet genom att först skapa fönstret på vanligt sätt genom att anropa ***gx_window_create*** och sedan anropa GUIX API-funktionen ***gx_window_execute.***
 
-När funktionen ***gx_window_execute*** anropas, anger GUIX en lokal händelse bearbetnings slinga. Funktionen ***gx_window_execute*** återgår inte till anroparen förrän dialog fönstret stängs, antingen genom användarindata eller genom att anropa ***gx_window_close***. Därför är det mycket viktigt att aldrig anropa funktionen ***gx_window_execute*** från någon annan tråd än den interna GUIX-tråden.
+När ***gx_window_execute*** anropas anger GUIX en lokal händelsebearbetningsloop. Funktionen ***gx_window_execute*** inte tillbaka till anroparen förrän dialogrutan stängs, antingen via användarindata eller genom att anropa ***gx_window_close***. Därför är det mycket viktigt att aldrig anropa ***gx_window_execute*** från någon annan tråd än den interna GUIX-tråden.
 
-## <a name="periodic-processing"></a>Periodisk bearbetning 
+## <a name="periodic-processing"></a>Regelbunden bearbetning 
 
-För att kunna tillhandahålla visnings effekter, Sprite-animeringar och stöd för program periodiska begär Anden, använder GUIX en ThreadX-timer. Denna enda timer används för att driva alla GUIX-tidsrelaterade behov. Som standard är frekvensen för GUIX intern timer-bearbetningen inställd på 20ms via konstanten **GX_SYSTEM_TIMER_MS**, som definieras i **_gx_api. h_**, om inte konstanten tidigare definierats i gx_port. h-eller gx_user. h-sidhuvudet. Standard frekvensen kan ändras av programmet via ett kompilerings alternativ när du skapar GUIX-biblioteket eller genom att uttryckligen omdefiniera det i ***gx_user. h***.
+Guix använder en ThreadX-timer för att ge visningseffekter, animering av programmet och stöd för program periodiska begäranden. Den här enskilda timern används för att driva alla GUIX-tidsrelaterade behov. Som standard anges frekvensen för intern GUIX-timerbearbetning till 20 ms via konstanten **GX_SYSTEM_TIMER_MS**, som definieras i **_gx_api.h_**, såvida inte konstanten tidigare har definierats i gx_port.h- eller gx_user.h-huvudet. Standardfrekvensen kan ändras av programmet via ett kompileringsalternativ när GUIX-biblioteket byggs eller genom att uttryckligen definiera om det ***i gx_user.h***.
 
 > [!IMPORTANT]
-> Observera att frekvensen för GUIX timer uttrycks i återställnings tider timer-Tick och definieras av konstanten **GX_SYSTEM_TIMER_TICKS**. Värdet för **GX_SYSTEM_TIMER_TICKS** beräknas med **GX_SYSTEM_TIMER_MS** och **TX_TIMER_TICKS_PER_SECOND**. Användaren kan omdefiniera något av dessa värden i ***gx_port. h** _ eller _ *_gx_user. h_** för att justera frekvensen och lösningen för GUIX timer.
+> Observera att GUIX-timerfrekvensen uttrycks i RTOS-timers tick och definieras av konstanten **GX_SYSTEM_TIMER_TICKS**. Värdet för **GX_SYSTEM_TIMER_TICKS** beräknas med **hjälp GX_SYSTEM_TIMER_MS** och **TX_TIMER_TICKS_PER_SECOND**. Användaren kan definiera om något av dessa värden i ***gx_port.h** _ eller _ *_gx_user.h_** för att justera GUIX-timerfrekvensen och -upplösningen.
 
-## <a name="display-driver"></a>Visa driv rutin 
+## <a name="display-driver"></a>Visningsdrivrutin 
 
-Bildskärms driv rutiner är ansvariga för att tillhandahålla en uppsättning rit funktioner till kärn GUIX-koden. Implementeringen av var och en av dessa rit funktioner bestäms av driv rutinen och om möjligt kan implementeringen utnyttja stöd för maskin varu acceleration. I allmänhet fungerar ritnings funktionen genom att skriva pixel data till en minnesbuffert, vilket kan vara den fysiska RAM-bufferten eller också kan den vara en sekundär buffert beroende på driv rutins arkitekturen. Många driv rutiner implementerar dubbel buffring med två ramtyper och dessa buffertar växlas genom att aktivera funktionen för buffring av buffert. GUIX anropar dessa funktioner internt vid lämpliga tidpunkter. För minnes begränsade system kan ritnings funktionerna bara skriva till en enda buffert för minnes ramar.
+Visningsdrivrutiner ansvarar för att tillhandahålla en uppsättning ritningsfunktioner till guix-kärnkoden. Implementeringen av var och en av dessa ritningsfunktioner bestäms av drivrutinen, och när det är möjligt utnyttjar implementeringen stöd för maskinvaruacceleration. I allmänhet fungerar ritningsfunktionen genom att skriva pixeldata till en minnesbuffert, som kan vara den fysiska rambufferten eller en sekundär buffert beroende på drivrutinsarkitekturen. Många drivrutiner implementerar dubbel buffring med hjälp av två rambuffertar, och dessa buffertar växlas genom att aktivera buffertreglagefunktionen. GUIX anropar dessa funktioner internt vid lämpliga tidpunkter. För minnesbegränsade system kan ritningsfunktionerna bara skriva till en enda buffert för minnesramen.
 
-GUIX tillhandahåller standard program varu implementeringar av varje lågnivå ritnings funktion vid varje support färgdjup och format. Dessa funktioner anropas via funktions pekare som behålls i **GX_DISPLAYs** strukturen. När maskinvaruspecifika driv rutiner skapas skriver de normalt över vissa antal av dessa funktions pekare med funktioner som är specifika för mål maskin varan.
+GUIX tillhandahåller standardprogramimplementering av varje ritningsfunktion på låg nivå vid varje stöd för färgdjup och format. Dessa funktioner anropas via funktionspekare som finns i den **GX_DISPLAY** strukturen. När maskinvaruspecifika drivrutiner skapas skriver de vanligtvis över ett visst antal av dessa funktionspekare med funktioner som är specifika för målmaskinvaran.
 
-En typisk maskin varu bildskärms driv rutin implementeras genom att först skapa standard driv rutinen GUIX för det obligatoriska färg djupet och formatet.
-Maskin varu driv rutinen ersätter sedan de funktioner som måste optimeras eller anpassas för den specifika maskin varu implementeringen.
+En typisk drivrutin för maskinvaruvisning implementeras genom att först skapa standarddrivrutinen för GUIX-visning för det färgdjup och format som krävs.
+Sedan ersätter maskinvarudrivrutinen de funktioner som behöver optimeras eller anpassas för den specifika maskinvaruimplementering.
 
-GUIX stöder pixel färg format som sträcker sig från 1 – BPP monokrom till 32-BPP a:r: g:b format. GUIX har också stöd för många variationer i varje bred färg djups kategori, till exempel r:g: b jämfört med b:g: r byte order, packad pixel jämfört med Word-justerade bild punkts format och alfa kanaler. Det finns för närvarande 25 distinkta färg format som stöds, men den här listan växer som maskin varu leverantörer levererar nya variationer.
+GUIX stöder pixelfärgformat från 1-bpp till formatet 32-bpp a:r:g:b. GUIX stöder också många varianter i varje bred färgdjupkategori, till exempel r:g:b jämfört med b:g:r byteordning, packad pixel jämfört med ordjusterade pixelformat och alfakanaler. Det finns för närvarande 25 olika färgformat som stöds, men den här listan växer när maskinvaruleverantörer levererar nya varianter.
 
-## <a name="display-memory-architectures"></a>Visa minnes arkitekturer
+## <a name="display-memory-architectures"></a>Visa minnesarkitekturer
 
-Olika maskin varu mål och skärmar använder en mängd olika grafik minnes arkitekturer, beroende på minnes begränsningar för mål-och funktions kraven för programmet. Vi kommer att beskriva några av de vanligaste minnes arkitekturerna här med en kort beskrivning av varje.
+Olika maskinvarumål och -skärmar använder en mängd olika arkitekturer för visningsminne, beroende på målets minnesbegränsningar och programmets funktionskrav. Vi kommer att beskriva några av de vanliga minnesarkitekturerna här med en kort beskrivning av var och en.
 
-Modell 1) ingen ramkant, grafik data som lagras i externa GRAM:
+Modell 1) Ingen rambuffert, grafikdata som lagras i extern GRAM:
 
-![Ingen ramkant, grafik data som lagras i externa GRAM](./media/guix/user-guide/no-frame-buffer.png)
+![Ingen rambuffert, grafikdata som lagras i extern GRAM](./media/guix/user-guide/no-frame-buffer.png)
 
-I modellen ovan finns det inget minne för en ramkant i minnet lokalt till processorn. All grafik information lagras i en extern GRAM som ingår i själva visningen. Gränssnittet till den externa utgramen kan vara parallellt eller seriellt. Den här typen av arkitektur är mycket låg kostnad. Det kan dock visa oönskade avrivnings effekter när grafik data uppdateras.
+I modellen ovan finns det inget minne för en rambuffert i minnet som är lokalt för processorn. Alla grafikdata lagras i en extern GRAM som ingår i själva visningen. Gränssnittet till den externa GRAM:n kan vara parallellt eller seriellt. Den här typen av arkitektur är mycket låg kostnad. men det kan ha oönskade retningseffekter när grafikdata uppdateras.
 
-Modell 2) en lokal RAM-buffert:
+Modell 2) En lokal rambuffert:
 
-![En lokal RAM-buffert](./media/guix/user-guide/one-local-frame-buffer.png)
+![En lokal rambuffert](./media/guix/user-guide/one-local-frame-buffer.png)
 
-I den här modellen allokeras minne för grafik data från ett slumpmässigt åtkomst minne som är direkt tillgängligt för processorn. Dedikerad maskin vara måste vara tillgänglig för att upprepade gånger skicka grafik data (tillsammans med tids signaler) från det lokala minnet till visningen. Den här modellen skiljer sig från modell 1 i att grafik minnet är ett block av den lokala SRAM eller det DRAM som är tillgängligt för processorn. Detta kan vara samma minne som stack-och programvariablerna är Live.
+I den här modellen allokeras minnet för grafikdata från ett slumpmässigt åtkomstminne som är direkt åtkomligt processorn. Dedikerad maskinvara måste finnas för att upprepade gånger överföra grafikdata (tillsammans med tidssignaler) från det lokala minnet till skärmen. Den här modellen skiljer sig från modell 1 eftersom grafikminnet är ett block av den lokala SRAM eller DRAM som är tillgänglig för processorn. Det kan vara samma minne där stack- och programvariabler finns.
 
-Modell 3) lokal RAM-buffert + extern GRAM:
+Modell 3) Lokal rambuffert + extern GRAM:
 
-![Lokal RAM-buffert + extern GRAM](./media/guix/user-guide/local-frame-buffer-external-gram.png)
+![Lokal rambuffert + extern GRAM](./media/guix/user-guide/local-frame-buffer-external-gram.png)
 
-Modell 3 är en kombination av de två första. I den här modellen finns det tillräckligt med lokalt minne för att rymma en RAM-buffert. Dessutom tillhandahåller visnings enheten en extern GRAM och uppdateras automatiskt med hjälp av de data som anges i GRAM. Den här arkitekturen drar nytta av förbättrad uppdaterings effektivitet eftersom vi kan överföra den ändrade delen av den lokala buffertens buffert till den externa GRAM i en block överföring, ofta med hjälp av inbyggda DMA-kanaler. Den här modellen eliminerar också avrivning och flimmer som kan finnas i någon av de två första modellerna, eftersom endast slutfört grafik innehåll kopieras till den externa GRAM.
+Modell 3 är en kombination av de två första. I den här modellen finns det tillräckligt med lokalt minne för att rymma en rambuffert. Dessutom tillhandahåller visningsenheten en extern GRAM och uppdaterar sig själv automatiskt med hjälp av de data som anges i GRAM. Den här arkitekturen drar nytta av förbättrad uppdateringseffektivitet eftersom vi kan överföra den ändrade delen av den lokala rambufferten till den externa GRAM:en i en blocköverföring, ofta med hjälp av inbyggda DMA-kanaler. Den här modellen eliminerar också den reducering som kan finnas i någon av de två första modellerna, eftersom endast färdigt grafikinnehåll kopieras till den externa GRAM:en.
 
-Modell 4) ping-pong-ramtyper:
+Modell 4) Ping-frame-buffertar:
 
-![Ping-Pong-ramdata](./media/guix/user-guide/ping-pong-frame-buffers.png)
+![Ping-frame-buffertar](./media/guix/user-guide/ping-pong-frame-buffers.png)
 
-I modell 4 finns det tillräckligt med minne för att tillhandahålla två lokala bildruteproportioner. I det här fallet behandlar GUIX en RAM-buffert som den aktiva bufferten och den andra som arbets Rams buffert. När en uppdaterings-eller ritnings åtgärd pågår, sker det i den arbetsbufferten. När ritningen är klar växlas buffertarna och den aktiva bufferten blir den aktiva bufferten och den aktiva bufferten blir arbetsbufferten. Den här modellen eliminerar också skärm flimmer och riva som kan observeras i ett enda buffrat system.
+I modell 4 finns det tillräckligt med minne för att tillhandahålla två lokala rambuffertar. I det här fallet behandlar GUIX en bildrutebuffert som aktiv rambuffert och den andra som arbetsramsbuffert. När en uppdaterings- eller ritningsåtgärd pågår sker den i arbetsbufferten. När ritningsåtgärden har slutförts aktiveras buffertarna, och arbetsbufferten blir den aktiva bufferten och den aktiva bufferten blir arbetsbufferten. Den här modellen eliminerar även skärmslitande som kan observeras i ett enda buffrat system.
 
-Modell 5) ping-pong buffertar med arbets ytans sammansättning:
+Modell 5) Ping-buffers med sammansättning av arbetsyta:
 
-![Ping-Pong buffertar med arbets ytans sammansättning](./media/guix/user-guide/ping-pong-buffers-canvas-composting.png)
+![Ping-buffers med sammansättning av arbetsyta](./media/guix/user-guide/ping-pong-buffers-canvas-composting.png)
 
-I modell 5 kan du skapa ett valfritt antal arbets ytor, upp till gränserna för tillgängligt minne. Arbets ytorna kan vara översatta eller blandade tillsammans som de definieras av programmet för att skapa arbets ytans sammansättning. När en ny sammansatt enhet skapas efter en skärm uppdatering, växlas aktiva och fungerande sammansatta sammansatta buffertar i en åtgärd som är identisk med standarden ping-pong buffer. Med modell 5 kan du utföra tonings-och blandnings åtgärder på skärmen genom att blanda arbets ytorna i det slutliga resultatet.
+I modell 5 kan val av antal arbetsyta skapas, upp till gränserna för tillgängligt minne. Arbetsyta kan överlagras eller blandas enligt definitionen i programmet för att skapa arbetsytans sammansatta. När en ny sammansatt skapas efter en uppdateringsåtgärd på skärmen, aktiveras aktiva och fungerande sammansatta buffertar i en åtgärd som är identisk med standardarkitekturen för ping-buffer. Modell 5 lägger till möjligheten att utföra toning och blandning av skärmåtgärder genom att blanda arbetsyta i den slutliga sammansatta utdatan.
 
-Modell 6) arbets yta med extern GRAM:
+Modell 6) Sammansättning av arbetsyta med extern GRAM:
 
-![Arbets yta som är sammansättning med extern GRAM](./media/guix/user-guide/canvas-compositing-external-gram.png)
+![Sammansättning av arbetsyta med extern GRAM](./media/guix/user-guide/canvas-compositing-external-gram.png)
 
-Modell 6 är en liten variation i modell 5, där endast en sammansatt buffert krävs och den sammansatta bufferten överförs sedan till extern GRAM. Den här modellen stöder även hel skärms blandning och överlägg.
+Modell 6 är en liten variation av modell 5, där endast en sammansatt buffert krävs och den sammansatta bufferten sedan överförs till externa GRAM. Den här modellen stöder även helskärmsblandning och överlägg.
 
-## <a name="string-encoding"></a>Sträng kodning 
+## <a name="string-encoding"></a>Strängkodning 
 
-GUIX som standard stöder UTF8-format sträng kodning. Stöd för UTF8-sträng kodning kan inaktive ras genom att definiera **GX_DISABLE_UTF8_SUPPORT** i huvud filen ***gx_user. h*** . Om UTF8-kodning är inaktive rad använder GUIX endast standard 8-bitars ASCII plus tecken kodning med latinsk tecken kodning. Inaktive ring av UTF8-Strängs kodning resulterar i ett något mindre GUIX bibliotek och påskyndas körning av funktioner för sträng hantering och text ritning.
+GUIX stöder som standard strängkodning i UTF8-format. Stöd för UTF8-strängkodning kan inaktiveras **genom att definiera GX_DISABLE_UTF8_SUPPORT** i ***gx_user.h-huvudfilen.*** Om UTF8-kodning är inaktiverad använder GUIX internt endast standardkodning för 8-bitars ASCII plus teckenkodning för tecken på latin-1-tecken. Om du inaktiverar UTF8-strängkodning resulterar det i ett något mindre GUIX-biblioteksfotavtryck och något snabbare körning av stränghanterings- och textritningsfunktioner.
 
-UTF8-sträng kodning har följande egenskaper:
+UTF8-strängkodning har följande egenskaper:
 
-  - ASCII-strängar tar inte mer lagrings utrymme än standard 7-bitars ASCII-kodning.
+  - ASCII-strängar tar inte mer lagringsutrymme än standard-7-bitars ASCII-kodning.
 
-  - De flesta ANSI-C-sträng funktioner fungerar med UTF8-sträng kodning utan modifiering.
+  - De flesta ANSI-C-strängfunktioner fungerar med UTF8-strängkodning utan modifiering.
 
-Alla aktiva teckenuppsättningar i världen, inklusive kanji Character-uppsättningar, kan representeras med UTF8-sträng kodning.
+Alla aktiva teckenuppsättningar i världen, inklusive Kanji-teckenuppsättningar, kan representeras med utf8-strängkodning.
 
 ### <a name="static-and-dynamic-strings"></a>Statiska och dynamiska strängar 
 
-De strängar som är kopplade till dina GUIX-widgetar som stöder text visning kan vara statiskt definierade strängkonstant, som normalt placeras i konstant lagring som en del av tabellen GUIX-sträng som beskrivs nedan, och dynamiskt definierade strängar, som är strängar som genereras vid körning med tjänster som ***sprintf** _ eller _ *_gx_utility_ltoa_* *.
+De strängar som tilldelas dina GUIX-widgetar som stöder textvisning kan statiskt definieras strängkonstanter, som normalt placeras i konstant lagring som en del av GUIX-strängtabellen som beskrivs nedan, och dynamiskt definierade strängar, som är strängar som genereras vid körning med hjälp av tjänster som ***sprintf** _ eller _*_gx_utility_ltoa_**.
 
-Exempel på dynamiska strängar kan innehålla ett värde som visas som ett tal i en GUIX prompt-widget eller en "tid/datum"-sträng som är dynamiskt formaterad baserat på användarens plats och format inställningar. Om du skapar strängar vid körning som ska tilldelas GUIX-widgetar, till exempel **GX_PROMPT** eller **GX_TEXT_BUTTON widgetar**, måste du välja att statiskt allokera lagringen för de här körnings bara strängarna (dvs.
-globala tecken mat ris) eller definiera och installera en funktion för dynamisk minnesallokering och Använd **GX_STYLE_TEXT_COPY** format, som instruerar dessa widgetar att skapa en privat kopia av text strängar som tilldelas.
+Exempel på dynamiska strängar kan vara ett värde som visas som ett tal i en GUIX-promptwidget eller en sträng för "tid/datum" som formateras dynamiskt baserat på användarens plats- och formatinställningar. Om du skapar strängar vid körning som ska tilldelas GUIX-widgetar som **GX_PROMPT-** eller **GX_TEXT_BUTTON-widgetar** måste du välja att antingen statiskt allokera lagringen för dessa körningsgenererade strängar (d.v.s.
+globala teckenmatriser), eller så kan du definiera och installera  en funktion för dynamisk minnes allocator och använda GX_STYLE_TEXT_COPY-formatet, som instruerar dessa widgetar att skapa en privat kopia av tilldelade textsträngar.
 
-Det är ett programmerings fel som använder temporär lagring, till exempel en automatisk tecken mat ris, som innehåller en dynamiskt genererad sträng och tilldelar sedan den här strängen till en widget som inte har **GX_STYLE_TEXT_COPY** format. När det här formatet inte har Aktiver ATS kopierar widgeten bara den angivna sträng pekaren och sträng data måste tilldelas statiskt, eller så kommer strängen för widgeten att leda till oväntade resultat.
+Det är ett programmeringsfel att använda tillfällig lagring, till exempel en automatisk teckenmatris, för att lagra en dynamiskt genererad sträng och sedan tilldela den här strängen till en widget som **inte har GX_STYLE_TEXT_COPY** format. När det här formatet inte är aktiverat kopierar widgeten bara den angivna sträng pekaren, och strängdata måste allokeras statiskt, annars kommer widgetsträngens pekare troligen att peka på skräpdata som ger oförutsägbara resultat.
 
 ### <a name="passing-gx_string-arguments"></a>Skicka GX_STRING argument 
 
-GUIX API-funktioner som accepterar en GX_STRING-parameter kontrollerar alltid att längden på strängen som anges av fältet **GX_STRING. gx_string_ptr** matchar värdet för fältet **GX_STRING. gx_string_length** . Om de två fälten inte är konsekventa returneras ett **GX_INVALID_STRING_LENGTH** fel och API: t som kallas returnerar utan att sträng tilldelningen accepteras.
+GUIX API-funktionerna som accepterar en GX_STRING-parameter kontrollerar alltid att längden på strängen som fältet **GX_STRING.gx_string_ptr** pekar på matchar värdet för fältet **GX_STRING.gx_string_length.** Om de två fälten inte är konsekventa returneras **ett GX_INVALID_STRING_LENGTH** och API:et som anropas returnerar utan att acceptera strängtilldelningen.
 
-För säkerhets överväganden använder GUIX-programvaran aldrig vanliga C-sträng funktioner som ***strlen** _ eller _ *_strcpy_* *. Dessa funktioner har visat sig vara känsliga för skadliga attacker när sträng data hämtas dynamiskt, vilket ofta är fallet med anslutna program.
+För säkerhetsöverväganden använder GUIX-programvaran aldrig internt standard C-strängfunktioner som ***strlen** _ eller _*_strcpy_**. Dessa funktioner har varit kända för att vara sårbara för skadliga attacker när strängdata inhämtas dynamiskt, vilket ofta är fallet med anslutna program.
 
-GUIX biblioteks versioner före version 5,6 definierade API-funktioner som godkändes ( `GX_CONST GX_CHAR *text` ) som en parameter. Dessa funktioner, men stöds fortfarande för bakåtkompatibilitet, har ersatts och ersatts av de prioriterade API-funktioner som accepterar ( `GX_CONST GX_STRING *string` ) som indataparameter.
+GUIX-biblioteksutgåor före version 5.6 definierade API-funktioner som accepterade ( `GX_CONST GX_CHAR *text` ) som en parameter. Dessa funktioner, även om de fortfarande stöds för bakåtkompatibilitet, har gjorts inaktuella och ersatts av de önskade API-funktionerna som accepterar ( `GX_CONST GX_STRING *string` ) som indataparameter.
 
-Som standard är den föråldrade text hanterings-API: n aktive rad så att alla tidigare skrivna program kan bygga korrekt med de senaste uppdateringarna i GUIX-biblioteket. För att inaktivera det inaktuella API: et för text hantering ska definitions **GX_DISABLE_DEPRECATED_STRING_API** läggas till i **filen _gx_user. h_*_. Alla nya program bör definiera _* GX_DISABLE_DEPRECATED_STRING_API** och ska endast använda funktioner för ERSÄTTNINGS-API. Alla utdatafiler som genereras av GUIX Studio för GUIX library version version 5,6 eller senare använder bara funktioner för byte av API.
+Som standard är det inaktuella API:et för texthantering aktiverat så att alla tidigare skrivna program kan byggas korrekt med de senaste uppdateringarna för GUIX-biblioteket. Om du vill inaktivera det inaktuella API:et för texthantering **ska** definitionen GX_DISABLE_DEPRECATED_STRING_API läggas **_till i gx_user.h_*_-huvudfilen. Alla nya program ska definiera _* GX_DISABLE_DEPRECATED_STRING_API och** bör endast använda api-ersättningsfunktionerna. Alla utdatafiler som genereras av GUIX Studio för GUIX-biblioteksversion 5.6 eller senare använder endast api-ersättningsfunktionerna.
 
-I följande tabell visas de inaktuella och nyligen definierade ersättnings API-funktions namnen:
+I följande tabell visas de inaktuella och nyligen definierade ersättnings-API-funktionsnamnen:
 
-| **Föråldrat funktions namn**              | **Ersatt med**                              |
+| **Inaktuellt funktionsnamn**              | **Ersatt med**                              |
 | ------------------------------------------ | ----------------------------------------------- |
 | gx_binres_language_table_load          | gx_binres_language_table_load_ext          |
 | gx_canvas_rotated_text_draw            | gx_canvas_rotated_text_draw_ext            |
@@ -217,233 +217,235 @@ I följande tabell visas de inaktuella och nyligen definierade ersättnings API-
 | gx_widget_text_blend                    | gx_widget_text_blend_ext                    |
 | gx_widget_text_draw                     | gx_widget_text_draw_ext                     |
 
-### <a name="guix-string-table"></a>GUIX sträng tabell 
+### <a name="guix-string-table"></a>GUIX-strängtabell 
 
-GUIX sträng tabell och sträng resurser registreras med en GUIX-visnings instans.
+GUIX-strängtabellen och strängresurserna registreras med en GUIX-visningsinstans.
 
-Varje visning i ett system med flera skärmar har en egen sträng tabell och varje visning kan köras på ett eget språk. De andra GUIX-resurs typerna (färger, teckensnitt och pixelmaps) underhålls också av GUIX display-komponenten eftersom dessa resurs typer är speciella för varje visnings färg format och färgdjup.
+Varje visning i ett system med flera skärmar har en egen strängtabell och varje visning kan köras på sitt eget valda språk. De andra GUIX-resurstyperna (färger, teckensnitt och pixelkartor) underhålls också av GUIX-visningskomponenten, eftersom dessa resurstyper är specifika för varje visningsfärgformat och färgdjup.
 
-Även om du kan skapa en program sträng tabell manuellt, är det oftast tabellen med visnings strängar som definieras av GUIX Studio-programmet som en del av projektets resurs fil. De tillgängliga språken definieras också i resurs huvud filen. Tabellen visnings sträng är en tabell med flera kolumner med pekare till program strängar. Varje kolumn i sträng tabellen representerar ett språk som stöds av programmet.
-Om ditt program stöder endast ett språk, till exempel engelska, kommer sträng tabellen bara ha en kolumn. Du kan fortfarande lägga till stöd för ytterligare språk när som helst utan att ändra program varan.
+Du kan skapa programsträngtabellen manuellt, men oftast definieras visningssträngtabellen av GUIX Studio-programmet som en del av projektresursfilen. De tillgängliga språken definieras också i resurshuvudfilen. Visningssträngstabellen är en tabell med flera kolumner med pekare till programsträngar. Varje kolumn i strängtabellen representerar ett språk som stöds av programmet.
+Om ditt program endast stöder ett språk, till exempel engelska, har strängtabellen bara en kolumn. Du kan fortfarande lägga till stöd för ytterligare språk när som helst utan att ändra din programprogramvara.
 
-Den aktiva sträng tabellen tilldelas genom att anropa API-funktionen ***gx_display_string_table_set*** . Den här funktionen anropas automatiskt av den genererade start koden i GUIX Studio, men kan också anropas direkt av programmet för att ändra den aktiva sträng tabellen.
+Den aktiva strängtabellen tilldelas genom anrop ***gx_display_string_table_set*** API-funktionen. Den här funktionen anropas automatiskt av den GUIX Studio-genererade startkoden, men kan också anropas direkt av programmet för att ändra den aktiva strängtabellen.
 
-Det aktiva språket tilldelas genom att anropa API-funktionen ***gx_display_active_language_set*** . Den här funktionen avgör vilken kolumn i tabell visnings strängen som är aktiv.
+Det aktiva språket tilldelas genom anrop ***gx_display_active_language_set*** API-funktionen. Den här funktionen avgör vilken kolumn i visningssträngtabellen som är aktiv.
 
-När den här funktionen anropas skickas en **GX_EVENT_LANGUAGE_CHANGE** -händelse till alla synliga GUIX-widgetar, så att de kan uppdateras för att visa de nya aktiva sträng data.
+När den här funktionen anropas skickas **en GX_EVENT_LANGUAGE_CHANGE-händelse** till alla synliga GUIX-widgetar, så att de kan uppdatera för att visa nyligen aktiva strängdata.
 
-Widgetar och program program vara matchar statiskt definierade strängar med sträng-ID-värden och ***gx_display_string_get_ext*** -eller ***gx_widget_string_get_ext*** API-funktioner. Dessa funktioner returnerar **GX_STRING** som associeras med ett angivet sträng-ID och det aktuella aktiva språket.
+Widgetar och programprogramvara löser statiskt definierade strängar med sträng-ID-värden och ***gx_display_string_get_ext*** eller ***gx_widget_string_get_ext*** API-funktioner. De här funktionerna returnerar **GX_STRING som** är associerade med ett visst sträng-ID och det aktiva språket.
 
-### <a name="bi-directional-text-display"></a>Dubbelriktad text visning 
+### <a name="bi-directional-text-display"></a>Dubbelriktad textvisning 
 
-GUIX tillhandahåller två strategier för dubbelriktad text support.
+GUIX tillhandahåller två strategier för dubbelriktad textsupport.
 
-Ett alternativ är att ändra ordningen för dubbelriktad text i GUIX Studio-programmet. Med det här alternativet GUIX Studio ansvarar för att generera dubbelriktad text till utdatafilen i dess visnings ordning. Den här lösningen har ingen inverkan på körnings prestanda och kräver inte några tillägg i GUIX runtime-biblioteket. Om du vill tillåta att GUIX Studio skapar displayorder dubbelriktade text strängar, bör du markera kryss rutan **generera dubbelriktad text i visnings ordning** i dialog rutan språk konfiguration för GUIX Studio:
+Ett alternativ är att ordna om bidi-text i GUIX Studio-programmet. Med det här alternativet ansvarar GUIX Studio för att generera bidi-text till utdatafilen i visningsordningen. Den här lösningen har ingen inverkan på körningsprestanda och kräver inga tillägg till GUIX-körningsbiblioteket. Om du vill tillåta att GUIX Studio genererar displayorder-bidi-textsträngar markerar du kryssrutan **Generera Bidi-text** i visningsordning i dialogrutan för guix studio-språkkonfiguration:
 
 ![Konfigurera språk](./media/guix/user-guide/configure-languages.png)
 
-När de här alternativen är markerade innehåller den genererade resurs filen dubbelriktade strängar som genereras i visnings ordningen och ingen extra bearbetning krävs inom GUIX runtime-biblioteket.
+När dessa alternativ är markerade innehåller den genererade resursfilen Bidi-strängar som genererats i visningsordning och ingen extra bearbetning krävs i GUIX-körningsbiblioteket.
 
-Det andra alternativet är att göra dubbelriktad text sortering vid körning. Det här alternativet stöds för de program som måste hantera dubbelriktad text sträng som definieras dynamiskt och som inte genereras av GUIX Studio-programmet. I det här fallet ansvarar GUIX runtime library för att ändra ordning på dubbelriktad text innan du ritar varje text sträng. Den här lösningen har en prestanda för körning och minnes påverkan. Det finns tillräckligt med dynamiskt minne för att ändra dubbelriktad text. Den här lösningen kräver att den villkorliga GX_DYNAMIC_BIDI_TEXT_SUPPORT definieras när du skapar GUIX-biblioteket. Två API Functions ***gx_system_bidi_text_enable*** och ***gx_system_bidi_text_disable*** tillhandahålls för att aktivera/inaktivera dubbelriktad text support vid körning.
+Det andra alternativet är att ordna om bidi-text vid körning. Det här alternativet stöds för de program som måste hantera bidi-textsträngar som definieras dynamiskt och som inte genereras av GUIX Studio-programmet. I det här fallet ansvarar GUIX-körningsbiblioteket för att ordna om bidi-texten innan varje textsträng ritas. Den här lösningen har en påverkan på körningsprestanda och minne. Tillräckligt med dynamiskt minne måste vara tillgängligt för omsorteringsprocessen för bidi-text. Den här lösningen kräver att den villkorliga GX_DYNAMIC_BIDI_TEXT_SUPPORT definieras när GUIX-biblioteket byggs. Två ***API-funktioner gx_system_bidi_text_enable*** och ***gx_system_bidi_text_disable*** tillhandahålls för att aktivera/inaktivera stöd för bidi-text vid körning.
 
-Du bör inte använda både **GX_DYNAMIC_BIDI_TEXT_SUPPORT** och konfigurera GUIX Studio för att generera dubbelriktad text i visnings ordning. Du måste välja en strategi eller en annan för dubbelriktad text sträng hantering.
+Du bör inte använda både **GX_DYNAMIC_BIDI_TEXT_SUPPORT** och konfigurera GUIX Studio för att generera Bidi-text i visningsordning. Du måste välja en strategi eller en annan för att hantera bidi-textsträngar.
 
 ## <a name="memory-usage"></a>Minnesanvändning 
 
-GUIX finns tillsammans med program programmet. Därför bestäms användningen av statiskt minne (eller fast minne) för GUIX av utvecklingsverktygen. t. ex. kompilatorn, länkar och lokaliserare. Användning av dynamiskt minne (eller körnings minne) är direkt kontroll över programmet.
+GUIX finns tillsammans med programmet. Därför bestäms användningen av GUIX för statiskt minne (eller fast minne) av utvecklingsverktygen. till exempel kompilatorn, länkaren och lokaliseraren. Användningen av dynamiskt minne (eller körningsminne) är under direkt kontroll av programmet.
 
-### <a name="static-memory-usage"></a>Statisk minnes användning 
+### <a name="static-memory-usage"></a>Statisk minnesanvändning 
 
-De flesta av utvecklingsverktygen delar program program avbildningen i fem grundläggande områden: *instruktion*, *konstant*, *initierade data*, oinitierade *data* och *GUIX tråds tack*. Figur X på sidan X visar ett exempel på dessa minnes områden.
+De flesta utvecklingsverktyg delar in programavbildningen i fem grundläggande *områden:* instruktion , *konstant,* *initierade data,* *oinitierade data* och *GUIX-trådstacken*.  Bilden nedan visar en möjlig layout av dessa minnesområden:
 
-Det är viktigt att förstå att det här bara är ett exempel. Den faktiska statiska minnesmodulen är specifik för processor, utvecklingsverktyg, underliggande maskin vara och själva programmet.
+![Minneslayout](./media/guix/user-guide/memory-area-example.png)
 
-Instruktions avsnittet innehåller alla programmets processor instruktioner. Det här avsnittet finns ofta i ROM.
+Det är viktigt att förstå att detta bara är ett exempel. Den faktiska statiska minneslayouten är specifik för processor, utvecklingsverktyg, underliggande maskinvara och själva programmet.
 
-Det fasta arean innehåller olika kompilerade konstanter, som i GUIX innehåller standardinställningar och alla program resurser (bilder, strängar, teckensnitt och färger). Dessutom innehåller det här avsnittet "ursprunglig kopia" av det initierade data fältet. Under kompilatorns initierings process används den här delen av det konstanta området för att ställa in globala initierade data i RAM-minnet. Konstant arean är vanligt vis störst och följer vanligt vis instruktions ytan och finns ofta i ROM.
+Instruktionsområdet innehåller alla programprocessorinstruktioner. Det här området finns ofta i ROM.
 
-GUIX-pixelmaps och-teckensnitt kräver vanligt vis stora mängder konstant data lagring. Dessa stora statiska data områden hålls normalt i ROM eller FLASH.
+Det konstanta området innehåller olika kompilerade konstanter, som i GUIX innehåller standardinställningar och alla programresurser (bilder, strängar, teckensnitt och färger). Dessutom innehåller det här området den "inledande kopian" av det initierade dataområdet. Under kompilatorns initieringsprocess används den här delen av konstantområdet för att konfigurera globala initierade data i RAM-minnet. Det konstanta området är vanligtvis det största och följer vanligtvis instruktionsområdet och finns ofta i ROM.
 
-GUIX tråds tack definieras i det oinitierade data fältet (som en global variabel) i ***gx_system. h*** -fil på följande sätt:
+GUIX-pixelkartor och teckensnitt kräver vanligtvis stora mängder konstant datalagring. Dessa stora statiska dataområden lagras normalt i ROM eller FLASH.
+
+GUIX-trådstacken definieras i det oinniterade dataområdet (som en global variabel) ***i gx_system.h-filen*** enligt följande:
 
 ```C
 _gx_system_thread_stack[GX_THREAD_STACK_SIZE];
 ```
 
-**GX_THREAD_STACK_SIZE** definieras i **_gx_port. h_**, men kan åsidosättas av programmet genom att definiera den här symbolen i sidhuvud filen ***gx_user. h*** eller via projekt alternativ eller kommando rads parametrar. Stack storleken måste vara tillräckligt stor för att hantera värsta fall händelse hantering och kapslade ritnings anrop.
+**GX_THREAD_STACK_SIZE** definieras i **_gx_port.h_**, men kan åsidosättas av programmet genom att definiera den här symbolen i ***gx_user.h-huvudfilen*** eller via projektalternativ eller kommandoradsparametrar. Stackstorleken måste vara tillräckligt stor för att hantera händelsehantering i värsta fall och kapslade ritnings-anrop.
 
 ### <a name="dynamic-memory-usage"></a>dynamiskt minne användning 
 
-Som tidigare nämnts är dynamisk minnes användning direkt kontroll av programmet. Kontroll block och minne som är kopplade till arbets ytor osv. kan placeras var som helst i målets minnes utrymme. Detta är en viktig funktion eftersom den underlättar enkel användning av olika typer av fysiskt minne – vid körning.
+Som tidigare nämnts är dynamisk minnesanvändning under direkt kontroll av programmet. Kontrollblock och minne som är associerade med arbetsytor osv. kan placeras var som helst i målets minnesutrymme. Det här är en viktig funktion eftersom den underlättar enkel användning av olika typer av fysiskt minne – vid körning.
 
-Anta till exempel att en mål maskin varu miljö har både snabbt minne och långsamt minne. Om programmet behöver extra prestanda för ritning kan arbets ytans minne placeras explicit i det snabba minnes området för bästa prestanda.
+Anta till exempel att en målmaskinvarumiljö har både snabbt minne och långsamt minne. Om programmet behöver extra prestanda för ritning kan arbetsytans minne uttryckligen placeras i området för höghastighetsminne för bästa prestanda.
 
-Flera valfria GUIX-tjänster och-funktioner kräver en mekanism för dynamisk minnesallokering för körning, som ofta kallas för en heap. Dessa tjänster och funktioner är helt valfria och många GUIX-program använder inte någon heap och definierar inte en mekanism för minnes tilldelning vid körning.
+Flera valfria GUIX-tjänster och -funktioner kräver en dynamisk minnesallokeringsmekanism för körning, vilket ofta kallas en heap. Dessa tjänster och funktioner är helt valfria och många GUIX-program använder inte någon heap och definierar inte någon mekanism för minnesallokering vid körning.
 
-Om du kommer att använda tjänster som kräver minnesallokering måste du installera funktioner som GUIX kommer att anropa när minnet måste tilldelas dynamiskt eller frigöras. Du kan implementera dessa funktioner som du föredrar, så att platsen för den dynamiska mediepoolen är under program kontroll. Om du vill installera stöd för dynamisk minnesallokering ska programmet anropa API-tjänsten ***gx_system_memory_allocator_set*** under program start för att definiera minnesallokering och minnes fria tjänster. Se dokumentationen för detta API för ett fullständigt exempel.
+Om du ska använda tjänster som kräver minnesallokering vid körning måste du installera funktioner som GUIX anropar när minnet måste allokeras dynamiskt eller frigöras. Du kan implementera dessa funktioner som du vill, så att även i det här fallet är platsen för den dynamiska minnespoolen under programkontroll. Om du vill installera stöd för dynamisk minnesallokering bör programmet anropa ***API-gx_system_memory_allocator_set*** under programstarten för att definiera din minnesallokering och minnesfria tjänster. Ett komplett exempel finns i dokumentationen för det här API:et.
 
-GUIX Services som kräver en minnesallokering för körning och tjänsten för resursallokering är:
+GUIX-tjänster som kräver en körningsminnesallokering och avallokeringstjänst omfattar:
 
-  - Läser in binära resurser från extern lagring till GUIX Runtime Environment.
+  - Läsa in binära resurser från extern lagring i GUIX-körningsmiljön.
 
-  - Bild avkodaren för program körnings-JPEG.
+  - Jpeg-bildavkodaren för programkörning.
 
-  - Bild avkodaren för program körnings png.
+  - Png-bildavkodaren för programkörning.
 
-  - Använda text-widgetar med GX_STYLE_TEXT_COPY.
+  - Använda textwidgetar med GX_STYLE_TEXT_COPY.
 
-  - Körnings pixemap funktioner för att ändra storlek och rotation.
-  - Körnings-och widgets kontroll block tilldelning.
+  - Funktioner för storleksändring och rotationsverktyg för körningsdiagram.
+  - Körningsskärmen och widgeten styr blockallokeringen.
 
-För mindre program kompileras GUIX-resurser vanligt vis och statiskt länkas som en del av program avbildningen och ingen binär resurs installation krävs. Binära resurser gör det möjligt för ett program att installera resurser (teckensnitt, bilder, språk) vid körning som läses in från vissa lagrings platser, till exempel en flashenhet eller en URL.
+För mindre program kompileras VANLIGTVIS GUIX-resurser och länkas statiskt som en del av programavbildningen, och installation av binär resurs krävs inte. Binära resurser gör att ett program kan installera resurser (teckensnitt, bilder, språk) vid körning som lästs in från en lagringsplats, till exempel ett flash-minne eller en URL.
 
-JPEG-och PNG-avkodare för körning är valfria komponenter. De flesta GUIX-program tillåter GUIX Studio-verktyget att föravkoda alla nödvändiga bildfiler och lagra dem som tillverkarspecifika GUIX Pixemap-dataresurser. Dessa tjänster tillhandahålls för att vara kompletta för de program som kräver körnings konvertering av JPEG-och/eller PNG-bilder till Pixelmap-format.
+Jpeg- och png-avkodare för körning är valfria komponenter. De flesta GUIX-program tillåter att GUIX Studio-verktyget förkodar alla nödvändiga bildfiler och lagrar dem som egna GUIX Pixemap-dataresurser. Dessa tjänster tillhandahålls för fullständighet för de program som kräver körningskonvertering av jpeg- och/eller PNG-bilder till pixelkartformat.
 
-**GX_STYLE_TEXT_COPY** gör det möjligt för användaren att ange att en viss widget eller widget ska behålla den egna privata kopia av dynamiskt tilldelad text. Om du använder det här alternativet måste du installera mekanismen för minnesallokering innan du använder. Om den här format flaggan **<span class="underline">inte</span>** anges när en widget för text typ skapas, måste programmet allokera statiska lagrings områden för alla dynamiskt skapade och tilldelade text strängar. Automatiska variabler ska inte användas i det här fallet för att lagra körnings bara sträng data. Om **GX_STYLE_TEXT_COPY** format är aktiverat kan automatiska variabler användas för att lagra sträng data som är tilldelade till GUIX-widgetar, eftersom varje widget skapar en egen kopia av den tilldelade texten.
+**GX_STYLE_TEXT_COPY** tillåter användaren att ange att en viss widget eller widget behåller sin egen privata kopia av dynamiskt tilldelad text. Om du använder det här alternativet måste minnesallokeringsmekanismen installeras innan du använder den. Om den här **<span class="underline">stilflaggan</span>** inte anges när en texttypswidget skapas måste programmet allokera statiska lagringsområden för alla dynamiskt skapade och tilldelade textsträngar. Automatiska variabler ska inte användas i det här fallet för att lagra körningsgenererade strängdata. Om formatet **GX_STYLE_TEXT_COPY** aktiverat kan automatiska variabler användas för att lagra strängdata som tilldelats GUIX-widgetar, eftersom varje widget skapar en egen kopia av den tilldelade texten.
 
-Pixelmap för storleks ändring och rotering returnerar den resulterande översatta Pixelmap som en ny Pixelmap som är tillgänglig för programmet.
-Det måste finnas tillräckligt med dynamiskt minne för att rymma dessa Pixelmap-datablock om dessa tjänster används.
+Funktionerna för storleksändring och rotation av pixelkarta returnerar den resulterande översatta pixelkartan som en ny pixelkarta som är tillgänglig för programmet.
+Tillräckligt med dynamiskt minne måste vara tillgängligt för att lagra dessa körningsgenererade pixelkarta-datablock om dessa tjänster används.
 
-Slutligen kan kontroll blocken för GUIX-skärmar och-widgetar statiskt eller dynamiskt allokeras. För mindre program är det vanligt att skapa alla program skärmar när programmet startas och använda statiskt allokerade kontroll block. För stora program är det vanligt att skapa widgeten skärm och underordnad widget dynamiskt i en as-nödvändig Base. Dynamiskt allokerade kontroll block anges genom att markera kryss rutan **Kör tids tilldelning** i GUIX Studio-egenskapsvyn eller genom att skicka in format flaggan **GX_STYLE_DYNAMICALLY_ALLOCATED** när du skapar en widget via standard-API: et. Att använda dynamiskt allokerade widgets kontroll block kräver att minnesallokering och avfördelnings tjänster definieras enligt beskrivningen ovan.
+Slutligen kan kontrollblocken för GUIX-skärmarna och widgetarna allokeras statiskt eller dynamiskt. För mindre program är det vanligt att skapa alla programskärmar under programstart och använda statiskt allokerade kontrollblock. För stora program är det vanligt att skapa skärm- och underordnade widgetkontroller dynamiskt på en efter behov-bas. Dynamiskt allokerade kontrollblock anges  genom att markera kryssrutan Allokera körning i GUIX Studio-egenskapsvyn eller genom att skicka stilflaggan **GX_STYLE_DYNAMICALLY_ALLOCATED** när du skapar en widget via standard-API:et. Användning av dynamiskt allokerade widgetkontrollblock kräver att tjänsterna för minnesallokering och avallokering definieras enligt beskrivningen ovan.
 
 ## <a name="guix-components"></a>GUIX-komponenter 
 
-GUIX-API: er delas och organiseras i flera grundläggande grupper som motsvarar de grundläggande komponenterna i GUIX-systemet. De grundläggande komponenterna är:
+GUIX-API:erna är indelade och ordnade i flera grundläggande grupper som motsvarar grundläggande komponenter i GUIX-systemet. De grundläggande komponenterna är:
 
-| Komponenter  | Description  |
+| Komponenter  | Beskrivning  |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| GX_SYSTEM  | System komponenten GUIX, som ansvarar för initiering, händelser, timers, sträng tabeller och synlig hantering av widgeten.                                                                                                                                                                                                                                                                      |
-| GX_CANVAS  | Ett rit utrymme. En arbets yta kan vara en tunn abstraktion av maskin varu Rams bufferten eller också kan den vara en ren minnes arbets yta. Arbets ytans typ bestäms av parametrar som skickas till gx_canvas_create API-funktionen.                                                                                                                                                                                   |
-| GX_CONTEXT | Rit kontext komponenten. Ritnings kontexten innehåller information om skärmen, arbets ytan och penseln och urklipps området för den aktuella ritningen.                                                                                                                                                                                                                                      |
-| GX_DISPLAY | Innehåller API: er och implementeringar av driv rutins nivå som gör att ditt program och GUIX-widgetar kan utföra ritning på en arbets yta. GX_DISPLAY implementeras för att återge grafik på rätt sätt på varje arbets yta med den arbets ytans obligatoriska färg format. GX_DISPLAY-komponenten hanterar också de resurser (färger, teckensnitt och pixelmaps) som är tillgängliga för widgets ritning till arbets ytor som är länkade till varje bildskärm. |
-| GX_WIDGET  | Objektet grundläggande synliga widget och associerade API: er. Alla typer av GUIX-widgetar baseras på eller härleds från den grundläggande GX_WIDGET typen.                                                                                                                                                                                                                                                                      |
-| GX_UTILITY | Verktyg för att arbeta med rektanglar, funktioner för sträng konvertering och icke-ANSI-matematiska funktioner ingår i den här gruppen.                                                                                                                                                                                                                                                         |
+| GX_SYSTEM  | GUIX-systemkomponenten, som ansvarar för initiering, händelser, timers, strängtabeller och synlig hantering av widgethierarki.                                                                                                                                                                                                                                                                      |
+| GX_CANVAS  | Ett ritningsområde. En arbetsyta kan vara en tunn abstraktion av maskinvarurambufferten, eller också kan det vara en ren minnesarbetsyta. Typen av arbetsyta bestäms av parametrar som skickas gx_canvas_create API-funktionen.                                                                                                                                                                                   |
+| GX_CONTEXT | Komponenten för ritningskontext. Ritningskontexten innehåller information om skärmen, arbetsytan och pensel- och urklippsområdet för de aktuella ritningsoperationerna.                                                                                                                                                                                                                                      |
+| GX_DISPLAY | Tillhandahåller API:er och implementeringar på drivrutinsnivå så att ditt program och GUIX-widgetar kan utföra ritning på en arbetsyta. GX_DISPLAY implementeras för att korrekt återge grafik på varje arbetsyta med hjälp av arbetsytans färgformat som krävs. Komponenten GX_DISPLAY hanterar också de resurser (färger, teckensnitt och pixelkartor) som är tillgängliga för widgetar som ritar på arbetsyta som är länkade till varje visning. |
+| GX_WIDGET  | Det grundläggande synliga widgetobjektet och tillhörande API:er. Alla GUIX-widgettyper baseras på eller härleds från den grundläggande GX_WIDGET typ.                                                                                                                                                                                                                                                                      |
+| GX_UTILITY | Verktygsfunktioner för att arbeta med rektanglar, funktioner för strängkonvertering och icke-ANSI-matematiska funktioner ingår i den här gruppen.                                                                                                                                                                                                                                                         |
 
-Förutom dessa grundläggande komponenter innehåller GUIX API: er som är unika för varje typ av widget som finns i biblioteket. Dessa API: er beskrivs i kapitel 4 i den här användar handboken, "Beskrivning av GUIX Services".
+Förutom dessa grundläggande komponenter innehåller GUIX API:er som är unika för varje typ av widget som finns i biblioteket. Dessa API:er beskrivs i kapitel 4 i den här användarhandboken, "Beskrivning av GUIX-tjänster".
 
-## <a name="guix-system-component"></a>GUIX system komponent
+## <a name="guix-system-component"></a>GUIX-systemkomponent
 
-System komponenten GUIX tillhandahåller flera tjänster som är globala för UI-programmet. Dessa tjänster omfattar: *initiering, händelse hantering, visnings hantering, resurs hantering, timer-hantering* och *hantering av validering*. Varje tjänst är nödvändig för organisationen av ditt program och dessa tjänster beskrivs mer ingående i följande underavsnitt.
+GUIX-systemkomponenten tillhandahåller flera tjänster som är globala för UI-programmet. Dessa tjänster omfattar: *initiering, händelsehantering, visningshantering, resurshantering, timerhantering och* *widgethantering.* Varje tjänst är viktig för organisationen av ditt program, och dessa tjänster beskrivs i detalj i följande underavsnitt.
 
 ### <a name="initialization"></a>Initiering 
 
-GUIX-initieringen utförs av programmet som anropar tjänsten ***gx_system_initialize***, som kan anropas av programmet från ThreadX- ***tx_application_define*** rutinen (initierings kontext) eller från program trådar. Funktionen ***gx_system_initialize*** initierar alla globala GUIX-datastrukturer och skapar GUIX system mutex, händelse kön, timer och tråd. När ***gx_system_initialize*** returnerar kan programmet använda GUIX.
+GUIX-initiering åstadkoms genom att programmet anropar service ***gx_system_initialize***, som kan anropas av programmet från ThreadX ***tx_application_define-rutinen*** (initieringskontext) eller från programtrådar. Funktionen ***gx_system_initialize*** initierar alla globala GUIX-datastrukturer och skapar GUIX-systemet mutex, händelsekö, timer och tråd. När ***gx_system_initialize*** returneras kan programmet använda GUIX.
 
-### <a name="thread-processing"></a>Tråd bearbetning 
+### <a name="thread-processing"></a>Trådbearbetning 
 
-Den interna GUIX-tråden som skapades under initieringen – ansvarar för det mesta av bearbetningen i GUIX. Bearbetningen i den här tråden Slutför först all ytterligare initiering som krävs av den underliggande visnings driv rutinen. När detta är klart anger GUIX-tråden en loop som först bearbetar alla händelser som finns i händelse kön GUIX och sedan uppdaterar skärmen om det behövs. Skärm uppdateringen kör de nödvändiga GUIX, baserat på vad som är synligt och har marker ATS som smutsig, vilket innebär att den måste ritas om. När det inte finns några händelser och inget kvar att uppdatera på skärmen, kommer GUIX-tråden att inaktive ras, vilket väntar tills nästa GUIX-händelse tas emot.
+Den interna GUIX-tråden – som skapades under initieringen – ansvarar för merparten av bearbetningen i GUIX. Bearbetningen i den här tråden slutför först eventuell ytterligare initiering som krävs av den underliggande visningsdrivrutinen. När detta är klart går GUIX-tråden in i en loop som först bearbetar alla händelser som finns i GUIX-händelsekön och sedan uppdaterar skärmen om det behövs. Skärmuppdateringen kör nödvändiga GUIX-ritningsfunktioner, baserat på vad som är synligt och har markerats som grovt, vilket innebär att det måste ritas om. När det inte finns några händelser och inget kvar att uppdatera på skärmen pausas GUIX-tråden och väntar på att nästa GUIX-händelse ska tas emot.
 
-### <a name="rtos-binding"></a>ÅTERSTÄLLNINGS tider-bindning 
+### <a name="rtos-binding"></a>RTOS-bindning 
 
-System komponenten GUIX är som standard konfigurerad för att använda real tids operativ systemet ThreadX för tjänster som tråd tjänster, Event Queue Services och timer-tjänster. GUIX kan enkelt hamna i andra operativ system med hjälp av Preprocessor-direktivet GX_DISABLE_THREADX_BINDING och återskapa GUIX-biblioteket. Detta tar bort ThreadX-beroenden från GUIX-källkoden och låter programutvecklaren implementera de operativ system tjänster som krävs med hjälp av den återställnings tider som tillhandahålls av mål systemet. [Bilaga F-GUIX återställnings tider binding Services](appendix-f.md) beskriver de tjänster som måste implementeras för port GUIX till ett annat operativ system än ThreadX-operativsystemet.
+GUIX-systemkomponenten är som standard konfigurerad för att använda operativsystemet ThreadX i realtid för tjänster som trådtjänster, händelsekötjänster och timertjänster. GUIX kan enkelt portas till andra operativsystem med hjälp av direktivet preprocessor GX_DISABLE_THREADX_BINDING och bygga om GUIX-biblioteket. Detta tar bort ThreadX-beroenden från GUIX-källkoden och gör att programutvecklaren kan implementera nödvändiga operativsystemtjänster med hjälp av det RTOS som tillhandahålls av målsystemet. [Bilaga F – GUIX RTOS-bindningstjänster](appendix-f.md) beskriver de tjänster som måste implementeras på port-GUIX till ett annat operativsystem än ThreadX-operativsystemet.
 
-### <a name="multithread-safety"></a>Flertrådstestning-säkerhet 
+### <a name="multithread-safety"></a>Flertrådssäkerhet 
 
-GUIX-API: et är tillgängligt från GUIX tråd kontext och andra program trådar. Program trådar kan interagera med GUIX-tråden genom att skicka och ta emot händelser, genom åtkomst till delade variabler och genom användning av GUIX API-funktioner. GUIX använder en intern ThreadX-mutex för resurs skydd med flera trådar. Dessutom förhindrar GUIX att den interna strukturen för synliga widgetar ändras när en skärm uppdatering har påbörjats. API: er som ändrar trädet för synliga objekt blockeras medan rit åtgärder pågår och släpps när skärm uppdateringen har slutförts.
+GUIX-API:et är tillgängligt från GUIX-trådkontexten samt andra programtrådar. Programtrådar kan interagera med GUIX-tråden genom att skicka och ta emot händelser, via åtkomst till delade variabler och med hjälp av GUIX API-funktionerna. GUIX använder en intern ThreadX mutex för resursskydd med flera trådar. Dessutom förhindrar GUIX att den interna strukturen för synliga widgetar ändras när en uppdateringsåtgärd har påbörjats. API:er som ändrar trädet för synliga objekt blockeras när ritningsåtgärder pågår och släpps när skärmuppdateringen är klar.
 
-### <a name="system-timers"></a>System timers 
+### <a name="system-timers"></a>Systemtimerar 
 
-GUIX förser programmet med periodiska timers, som ofta används för periodisk uppdatering av data som visas i GUIX-fönster. Detta görs via en ThreadX periodiska timer, som också används för att utföra GUIX-effekter på system nivå, som att tona in och ut, osv.
+GUIX ger programmet periodiska timers, som ofta används för regelbunden uppdatering av data som visas i GUIX-fönster. Detta åstadkoms via en periodisk ThreadX-timer, som också används för att utföra GUIX-systemnivåeffekter som skärmtoning in/ut osv.
 
-Programmet kan skapa timers och använda samma timer-funktion som används internt av GUIX. Programmet kan naturligtvis också direkt skapa och använda ThreadX timers om det behövs. Fördelen med GUIX timers är att de är mycket enkla att använda och är förkonfigurerade för att fungera i det GUIX händelse drivna bearbetnings systemet.
+Programmet kan skapa timers och använda samma timerfunktion som används internt av GUIX. Naturligtvis kan programmet också skapa och använda ThreadX-timers direkt om det behövs. Fördelen med GUIX-timers är att de är mycket enkla att använda och är förkonfigurerade att fungera i GUIX-händelsedrivna bearbetningssystem.
 
-För att skapa och starta en GUIX-timer ska programmet anropa funktionen ***gx_system_timer_start***. Parametrarna för den här funktionen innehåller en pekare till den anropande widgeten, timer-ID: t (så att en widget startar flera timers) och de inledande och omschema-timeout-värdena. Om timeout-värdet för omschemat är 0, körs timern bara en gång och tas bort från listan över aktiva timer när den upphör att gälla.
+För att skapa och starta en GUIX-timer ska programmet anropa funktionen ***gx_system_timer_start***. Parametrarna för den här funktionen innehåller en pekare till den anropande widgeten, timer-ID:t (så att en widget kan starta många timers) och de inledande och omplanerade timeout-värdena. Om tidsgränsvärdet för omplan är 0 körs timern bara en gång och tar bort sig själv från listan över aktiva timer när den upphör att gälla.
 
-När den har startats skickar GUIX-timern GX_EVENT_TIMEOUT händelser till den tidsinställda ägaren, antingen en gång eller periodiskt beroende på värdet för timer-omschemat. En GUIX-timer kan stoppas genom att anropa API-funktionen ***gx_system_timer_stop***.
+När guix-timern har startats skickar den GX_EVENT_TIMEOUT händelser till timerägaren, antingen en gång eller regelbundet beroende på timern som schemalades om. En GUIX-timer kan stoppas genom att anropa ***API-funktionen gx_system_timer_stop***.
 
-### <a name="pen-speed-configuration"></a>Konfiguration av Penn hastighet 
+### <a name="pen-speed-configuration"></a>Konfiguration av pennhastighet 
 
-System komponenten GUIX innehåller konfigurations information som rör rit hastighets spårning. GUIX skapade internt **GX_EVENT_VERTICAL_FLICK** och **GX_EVENT_HORIZONTAL_FLICK** händelser baserat på hastigheten och avståndet för PEN_DOWN händelser som genererats av driv rutinen för touch-indrivning, om det finns några. Programmet kan konfigurera det minsta avstånd och den hastighet som krävs för att utlösa dessa internt genererade händelser med hjälp av **_gx_system_pen_configure_** API-funktionen.
+GUIX-systemkomponenten innehåller konfigurationsinformation som rör spårning av pennhastighet. GUIX genereras **GX_EVENT_VERTICAL_FLICK** och **GX_EVENT_HORIZONTAL_FLICK** händelser baserat på hastighet och avstånd för PEN_DOWN-händelser som genereras av touch-indatadrivrutinen, om sådana finns. Programmet kan konfigurera det minsta avstånd och den hastighet som krävs för att utlösa dessa internt genererade händelser med hjälp **_gx_system_pen_configure_** API-funktionen.
 
-### <a name="screen-stack"></a>Skärms tack 
+### <a name="screen-stack"></a>Skärmstack 
 
-System komponenten GUIX tillhandahåller tjänster som är relaterade till GUIX-skärms stacken, som är en valfri funktion som stöder en virtuell widget till vilken skärmar kan flyttas, visas och hämtas vid körning av programmet. Skärm bilden är användbar för att hantera avancerade meny system, där skicka den väg som användaren kan komma åt i olika tillstånd i meny systemet. Att återgå till det tidigare läget i meny systemet kan enkelt utföras genom att först skicka det tidigare skärm läget och sedan Visa den nya skärmen, och så att den nya skärmen kan visa det tidigare läget från skärm bilden när den aktuella skärmen stängs.
+GUIX-systemkomponenten tillhandahåller tjänster relaterade till GUIX-skärmstacken, vilket är en valfri funktion som stöder en virtuell widgetstack på vilken skärmar kan pushas, skjutas och hämtas vid körning av programmet. Skärmstacken är användbar för att hantera komplexa menysystem, där den väg som användaren kan komma åt i olika tillstånd i menysystemet varierar. Det är enkelt att gå tillbaka till det tidigare tillståndet i menysystemet genom att först push-skicka det tidigare skärmtillståndet och sedan visa den nya skärmen och låta den nya skärmen öppna föregående tillstånd från skärmstacken när den aktuella skärmen ignoreras.
 
-### <a name="clipboard-maintenance"></a>Urklipps underhåll 
+### <a name="clipboard-maintenance"></a>Underhåll av Urklipp 
 
-GUIX stöder Urklipp för kopiering och inklistring av text under körning av körning. Det här stödet tillhandahålls av GUIX-system komponenten.
+GUIX stöder urklipp för att kopiera och klistra in text under körning. Det här stödet tillhandahålls av GUIX-systemkomponenten.
 
-### <a name="dirty-list-maintenance"></a>Underhåll av lista över skadade listor 
+### <a name="dirty-list-maintenance"></a>Underhåll av dirty list 
 
-GUIX har en lista över felaktiga widgetar, vilket innebär att widgetar som är synliga och måste ritas om på grund av status ändringar eller görs nyligen synliga. Den här skadade listan förbättrar ritnings prestanda genom att låta GUIX utföra en uppdaterings åtgärd på arbets ytan för att avspegla alla aktuella ändringar i GRÄNSSNITTets status, i stället för att göra en uppdatering av arbets ytan när varje GRÄNSSNITTs ändring görs.
-Den här listan över återkallas också av GUIX system-komponenten.
+GUIX har en lista över felgrafiska widgetar, vilket innebär att widgetar som är synliga och måste ritas om på grund av statusändringar eller nyligen synliga. Den här ändrade listan förbättrar ritningens prestanda genom att tillåta GUIX att göra en uppdateringsåtgärd för arbetsytan för att återspegla alla aktuella ändringar av ui-statusen, i stället för att göra en uppdatering av arbetsytan när varje ui-ändring görs.
+Den här listan underhålls också av GUIX-systemkomponenten.
 
-### <a name="animation-control-block-pool"></a>Animering av Control Block-pool 
+### <a name="animation-control-block-pool"></a>Blockpool för animeringskontroll 
 
-Program vill ofta köra flera animeringssekvenser, ofta parallellt. GUIX upprätthåller en pool med animerings kontroll block som programmet kan använda för att allokera och använda. Detta frigör programmet från att statiskt definiera dessa kontroll block och gör att de kan återanvändas vid olika tidpunkter, i stället för att definiera ett unikt kontroll block för animering för varje animering som programmet kan definiera. Modulen för styrnings block underhålls också av GUIX system-komponenten.
+Program vill ofta köra flera animeringssekvenser, ofta parallellt. GUIX har en pool med animeringskontrollblock som programmet kan allokera och använda från. Detta frigör programmet från att statiskt definiera dessa kontrollblock och gör att de kan återanvändas vid olika tidpunkter, i stället för att definiera ett unikt animeringskontrollblock för varje animering som programmet kan definiera. Blockpoolen för animeringskontroll underhålls också av GUIX-systemkomponenten.
 
-### <a name="system-error-handling"></a>System Fels hantering 
+### <a name="system-error-handling"></a>Systemfelhantering 
 
-Fel hanteraren för GUIX-systemet är avsedd att hjälpa programmet att hitta interna systemfel i GUIX som kan vara svårare att fastställa från API-perspektivet. När ett systemfel uppstår i GUIX anropas den interna ***_gx_system_error_process*** funktionen. Den här funktionen sparar den angivna felkoden och ökar det totala antalet systemfel som upptäckts. Systemmiljövariabler definieras enligt följande:
+GUIX-systemfelhanteraren är avsedd att hjälpa programmet att hitta interna systemfel i GUIX som kan vara svårare att fastställa ur API-perspektivet. När ett systemfel inträffar i GUIX anropas ***den _gx_system_error_process*** funktionen. Den här funktionen sparar den angivna felkoden och ökar det totala antalet identifierade systemfel. Systemfelvariablerna definieras på följande sätt:
 
 UINT **_gx_system_last_error**;
 
 ULONG **_gx_system_error_count**;
 
-Om GUIX-programmet fungerar onormalt, är det bra att titta på variabeln antal fel i fel söknings programmet. Om det är inställt är ett bra sätt att felsöka problemet är att ange en Bryt punkt i ***_gx_system_error_process*** -funktionen och se när/var den anropas från.
+Om GUIX-programmet beter sig konstigt är det bra att titta på variabeln felantal i felsökningsprogrammet. Om den har angetts är ett bra sätt att felsöka problemet att ange en ***brytpunkt i _gx_system_error_process-funktionen*** och se när/var den anropas från.
 
-## <a name="guix-canvas-component"></a>GUIX-arbetsyta
+## <a name="guix-canvas-component"></a>GUIX-arbetsytekomponent
 
-Arbets ytans komponent ansvarar för all bearbetning av arbets ytor. En arbets yta är i praktiken en virtuell RAM-buffert. Programmet måste skapa minst en arbets yta för att kunna producera grafiska utdata.
-Normalt skapar du minst en arbets yta för varje fysisk bildskärm som stöds av systemet.
+Komponenten för arbetsyta ansvarar för all arbetsyterelaterad bearbetning. En arbetsyta är i praktiken en virtuell rambuffert. Programmet måste skapa minst en arbetsyta för att kunna skapa grafiska utdata.
+Normalt skapar du minst en arbetsyta för varje fysisk skärm som stöds av systemet.
 
-All GUIX-ritning äger rum på en arbets yta. I enklare eller minnes begränsade system kommer det förmodligen bara finnas en arbets yta som kan vara direkt länkad till den synliga bufferten, medan system med mer minne och mer avancerade grafik krav kan kräva flera arbets ytor. Om du gör flera arbets ytor tillgängliga för en bildskärm kan funktioner som skärm och fönster tona in och tona ut effekter.
-Arbets ytor kan vara en av två huvud typer, enkla eller hanterade.
+All GUIX-ritning sker på en arbetsyta. I enklare system eller minnesbegränsade system finns det förmodligen bara en arbetsyta som kan vara direkt länkad till den synliga rambufferten, medan system med mer minne och mer avancerade grafikkrav kan kräva flera arbetsyta. Genom att göra flera arbetsyta tillgängliga för en visning aktiveras funktioner som skärm- och fönstertonings- och toningsfunktioner.
+Arbetsytetyper kan vara en av två huvudtyper, enkla eller hanterade.
 
-En enkel arbets yta är ett arbets område på skärmen som används av programmet.
-GUIX har inget direkt med en enkel arbets yta, men programmet kan använda en enkel arbets yta för att rendera en avancerad ritning till en buffert på låg skärm, och sedan använda den här bufferten för att uppdatera den synliga arbets ytan vid behov.
+En enkel arbetsyta är ett ritningsområde utanför skärmen som används av programmet.
+GUIX gör ingenting direkt med en enkel arbetsyta, men programmet kan använda en enkel arbetsyta för att rendera komplex ritning till en buffert utanför skärmen och sedan använda den här bufferten utanför skärmen för att uppdatera den synliga arbetsytan när det behövs.
 
-En hanterad arbets yta visas automatiskt i maskin varu fönstrets buffert med GUIX. En hanterad arbets yta ingår i att skapa en sammansatt arbets yta för de system som har tillräckligt med minne för att stödja flera hanterade arbets ytor. Hanterade arbets ytor har en Z-ordning som underhålls av GUIX och Visa Urklipp tillämpas på alla hanterade arbets ytor.
+En hanterad arbetsyta visas automatiskt i maskinvarurambufferten av GUIX. En hanterad arbetsyta ingår i att skapa en sammansatt arbetsyta för dessa system med tillräckligt med minne för att stödja flera hanterade arbetsyta. Hanterade arbetsyta har en Z-ordning som underhålls av GUIX, och visningskakt tillämpas på alla hanterade arbetsyta.
 
-En arbets yta skiljer sig från en ramkant i så är den mer generisk. I minnes begränsade system kan det finnas bara en arbets yta och minnet för den här arbets ytan kan vara det synliga RAM-minnet. Men för mer komplexa system som stöder mer avancerade grafiska överlägg och flera arbets ytor, är de hanterade arbets ytorna var och en allokerade egna minnes områden som är distinkta från maskin varu fönstrets buffertminne.
-Dessa hanterade arbets ytor återges i den synliga bildens buffert under ram-buffertens uppdatering eller växlings åtgärd.
+En arbetsyta skiljer sig från en rambuffert på så sätt att den är mer allmän. I minnesbegränsade system kan det bara finnas en arbetsyta och minnet för den här arbetsytan kan vara det synliga rambuffertminnet. Men för mer komplexa system som stöder mer avancerade grafiska överlägg och flera arbetsytor allokeras de hanterade arbetsytorna sina egna minnesområden som skiljer sig från maskinvarurambuffertminnet.
+Dessa hanterade arbetsyta återges i den synliga rambufferten under uppdatering av rambufferten eller växlingsåtgärden.
 
-För maskin vara som stöder flera bild lager, d.v.s. flera överlappande bildruteproportioner, kan programmet binda en eller flera arbets ytor till maskin varu grafik skikten med hjälp av ***gx_canvas_hardware_layer_bind*** -API: et. Den här tjänsten informerar arbets ytan som den är länkad till ett visst maskin varu grafik lager, och när den länkade arbets ytan länkas försöker att använda maskin varu stöd för arbets ytans synlighet (dvs. gx_canvas_show, gx_canvas_hide), arbets ytans alpha blending (d.v.s. ***gx_canvas_alpha_set***) och förskjutning av arbets ytan i visningen (***gx_canvas_offset_set***).
+För maskinvara som stöder flera grafiklager, dvs. flera överläggsrambuffertar, kan programmet binda en eller flera arbetsyta till maskinvarugrafikskikten med hjälp av gx_canvas_hardware_layer_bind-API:et.  Den här tjänsten informerar arbetsytan om att den är länkad till ett visst maskinvarugrafiklager, och när arbetsytan har länkats försöker den använda maskinvarustöd för synlighet för arbetsyta (dvs. gx_canvas_show, gx_canvas_hide), alfablandning av arbetsyta (d.v.s. ***gx_canvas_alpha_set***) och förskjutning av arbetsytan i ***visningen***( gx_canvas_offset_set ).
 
-För andra arkitekturer än den enklaste arbets ytan eller en enskild RAM-organisation bestäms storleken på en arbets yta av programmet och kan skilja sig från den fasta storleken på en ramkant.
-Det kan också finnas vid en förskjutning som valts av programmet. Annan information, till exempel Z-ordning, behålls på arbets ytan. När arbets ytan ritningen är klar överförs innehållet på arbets ytan till den fysiska visningen av visnings driv rutinen. I vissa system som inte har tillräckligt med minne för en separat minnes yta för arbets ytor och RAM-minne görs uppdateringen av arbets ytan direkt till den fysiska visningen via bildskärms driv rutinen.
+För andra arkitekturer än den enklaste organisationen med en enda arbetsyta/en enda rambuffert bestäms storleken på en arbetsyta av programmet och kan vara annorlunda än den fasta storleken på en rambuffert.
+Det kan också vara vid en förskjutning som valts av programmet. Annan information, till exempel Z-order, underhålls på arbetsytan. När arbetsytans ritning är klar överförs innehållet på arbetsytan till den fysiska visningen av visningsdrivrutinen. I vissa system som inte har tillräckligt med minne för en separat arbetsyta och rambuffertens minnesområden görs uppdateringen av arbetsytan direkt till den fysiska visningen via visningsdrivrutinen.
 
-### <a name="canvas-creation"></a>Skapa arbets yta 
+### <a name="canvas-creation"></a>Skapa arbetsyta 
 
-Ett arbets ytans objekt kan skapas vid initiering eller när som helst under körningen av program trådar. Det finns ingen gräns för hur många arbets ytans objekt som kan skapas av ett program. De flesta program skapar dock bara ett objekt i arbets ytan för alla GUIX-ritningar.
+Ett arbetsyteobjekt kan skapas under initieringen eller när som helst under körningen av programtrådar. Det finns ingen gräns för hur många arbetsyteobjekt som kan skapas av ett program. De flesta program skapar dock bara ett arbetsyteobjekt för all GUIX-ritning.
 
-### <a name="canvas-control-block"></a>Kontroll block för arbets yta 
+### <a name="canvas-control-block"></a>Kontrollblock för arbetsyta 
 
-Egenskaperna för varje objekt i arbets ytan finns i kontroll blocket **GX_CANVAS** och definieras i **_gx_api. h_**. Det minne som krävs för ett objekt i arbets ytan tillhandahålls av programmet och kan placeras var som helst i minnet. Det är dock vanligt att göra blocket för objekt kontroll blocket och rit området till en global struktur genom att definiera dem utanför omfånget för en funktion.
+Egenskaperna för varje arbetsyteobjekt finns i dess kontrollblock **GX_CANVAS** definieras i **_gx_api.h_**. Det minne som krävs för ett arbetsyteobjekt tillhandahålls av programmet och kan finnas var som helst i minnet. Det är dock vanligast att göra arbetsytans objektkontrollblock och ritningsområdet till en global struktur genom att definiera dem utanför omfånget för en funktion.
 
-### <a name="canvas-alpha-channel"></a>Alfa kanal för arbets yta
+### <a name="canvas-alpha-channel"></a>Alpha Channel för arbetsyta
 
-GUIX stöder alpha-blandning av förgrunds-och bakgrunds färger på många nivåer, inklusive bitmapp alpha-kanalen som anger ett blandnings förhållande per bild punkt, pensel alfa som anger blandnings förhållandet för en pensel med 16 BPP och högre färgdjup, och ytan alpha som anger blandnings förhållandet för ett överlägg.
+GUIX stöder alfablanding av förgrunds- och bakgrundsfärger på många nivåer, inklusive alfakanal för bitmapp som anger ett blandningsförhållande per pixel, borst alfa som anger blandningsförhållandet för en pensel med 16 bpp och högre färgdjup och alfa för arbetsytan som anger blandningsförhållandet för en överläggsarbetsyta.
 
-Alfa värdet för en arbets yta används när det finns flera arbets ytor som är sammansatta tillsammans för visning i den inramade bufferten. Om arbets ytans Z-ordning är sådan att arbets ytan är över andra arbets ytor kan du ange ett alfa värde för arbets ytan för att blanda arbets ytan med de som ligger bakom. Att snabbt ändra alpha-värdet för en arbets yta används för att ge "tona in"-effekter på skärmens över gång, men du kan använda arbets ytans alfa på många sätt.
+Alfavärdet för en arbetsyta används när det finns flera arbetsyta som är sammansatta tillsammans för visning i rambufferten. Om arbetsytans Z-ordning är sådan att en arbetsyta är ovanför andra arbetsyta kan du ange alfavärdet för arbetsytan för att blanda arbetsytan med de som ligger bakom. Snabb ändring av alfavärdet för en arbetsyta används för att ge "tona in"-skärmövergångseffekter, men alfa för arbetsyta kan användas på många sätt.
 
-Om en arbets yta är kopplad till ett maskin varu grafik lager med hjälp av gx_canvas_hardware_layer_bind () försöker GUIX att implementera arbets ytan alpha blending använder maskin varu support, vilket minimerar den program vara som är kopplad till att blanda en överliggande arbets yta.
+Om en arbetsyta är bunden till ett maskinvarugrafiklager med hjälp av gx_canvas_hardware_layer_bind(), försöker GUIX implementera alfablandning av arbetsyta med maskinvarustöd, vilket minimerar programvarukostnaderna som är associerade med att blanda en överläggsarbetsyta.
 
-Alfa värden sträcker sig från 0 till 255, där värdet 0 betyder att pixeln är helt transparent och värden som är större än 0 ökar det som är mindre transparent. det kan bara finnas stöd för skärm driv rutiner som körs vid 16-BPP och högre, såvida inte maskin varu hjälpen för kombination av arbets ytor tillhandahålls.
+Alfavärden sträcker sig från 0 till 255, där värdet 0 innebär att pixeln är helt transparent och värden större än 0 ökar mindre transparent alfavärde för arbetsyta kan endast stödjas för skärmdrivrutiner som körs med 16 bpp och högre om inte maskinvaruhjälp för kombination av arbetsyta tillhandahålls.
 
-### <a name="canvas-offset"></a>Förskjutning av arbets ytan 
+### <a name="canvas-offset"></a>Förskjutning av arbetsyta 
 
-En arbets yta kan förskjutas inom den synliga bildens buffert genom att anropa ***gx_canvas_offset_set*** API-tjänsten. Förskjutning av arbets ytor används vanligt vis för att implementera Sprite-animeringar. Om en arbets yta är kopplad till ett maskin varu grafik lager genom att anropa API-funktionen ***gx_canvas_hardware_layer_bind*** försöker GUIX implementera ändringar av arbets ytans förskjutning som använder maskin varu support, vilket minimerar den program vara som är kopplad till att flytta arbets ytans position.
+En arbetsyta kan förskjutas inom den synliga rambufferten genom att anropa ***gx_canvas_offset_set API-tjänsten.*** Förskjutningar för arbetsyta används vanligtvis för att implementera andra animeringar. Om en arbetsyta är bunden till ett maskinvarugrafiklager genom att anropa ***gx_canvas_hardware_layer_bind*** API-funktionen, kommer GUIX att försöka implementera ändringar av arbetsytans offset med hjälp av maskinvarustöd, vilket minimerar programvarukostnaderna som är associerade med att flytta arbetsytans position.
 
-### <a name="canvas-drawing"></a>Arbets ytans ritning 
+### <a name="canvas-drawing"></a>Arbetsyteritning 
 
-Komponenten GUIX-arbetsyta ger ett fullständigt Drawing API för programmet. Innan API: erna för Drawing, till exempel ***gx_canvas_line_draw*** eller ***gx_canvas_pixelmap_draw*** kan anropas, måste mål arbets ytan öppnas för ritning genom att anropa funktionen ***gx_canvas_drawing_initiate*** API. Den här funktionen förbereder en arbets yta för ritning och skapar en ***rit kontext***.
+KOMPONENTEN GUIX-arbetsyta tillhandahåller ett fullständigt API för ritning till programmet. Innan du kan anropa ***API:erna för*** gx_canvas_line_draw eller ***gx_canvas_pixelmap_draw*** måste målarbetsytan öppnas för ritning genom att anropa ***API gx_canvas_drawing_initiate funktionen.*** Den här funktionen förbereder en arbetsyta för ritning och skapar en ***ritningskontext***.
 
-De Drawing-API: er som återges på arbets ytan, till exempel ***gx_canvas_line_draw** _ eller _*_gx_canvas_text_draw_*_, använder parametrar som finns i den aktuella rit kontextens pensel för att definiera linje formatet, bredden och färgerna. Dessa pensel parametrar ändras genom att anropa _*_gx_context_brush_define_*_, _* _gx_context_brush_set_* *, ***gx_context_brush_style_set**_ och liknande API-funktioner när en rit kontext har upprättats genom att anropa _ *_gx_canvas_drawing_initiate_* *.
+De ritnings-API:er som återges på arbetsytan, till exempel ***gx_canvas_line_draw** _ eller _*_gx_canvas_text_draw_*_, använder parametrar som finns i den aktuella penseln för ritningskontext för att definiera linjeformat, bredd och färger. Dessa penselparametrar ändras genom att _*_anropa api-funktionerna gx_context_brush_define_*_, _* _gx_context_brush_set_**, ***gx_context_brush_style_set**_ och liknande API när en ritningskontext har upprättats genom att anropa _*_gx_canvas_drawing_initiate_**.
 
-När GUIX anropar fönster-och widgeten ritnings funktioner som en del av en uppskjuten arbets ytans uppdaterings åtgärd, öppnas mål arbets ytan för ritning innan du anropar ritnings funktionen för widgeten. Därför krävs inte standard ritnings funktionerna i widgeten för att öppna mål arbets ytan. Detta har gjorts för dem.
+När GUIX anropar fönster- och widgetritningsfunktioner som en del av en uppskjuten arbetsyteuppdatering öppnas målarbetsytan för ritning innan widgetens ritningsfunktion anropas. Därför krävs inte standardwidgetritningsfunktioner för att öppna målarbetsytan, detta har gjorts för dem.
 
-I vissa fall kanske programmet vill framtvinga en omedelbar ritning till en arbets yta. I det här fallet kan programmet utföra följande steg.
+I vissa fall kanske programmet vill tvinga fram en omedelbar ritning till en arbetsyta. I det här fallet kan programmet utföra följande steg.
 
-1. Anropa API-funktionen ***gx_canvas_drawing_initiate*** , genom att skicka in mål arbets ytan och rektangeln inom den arbets ytan där programmet vill rita. 
+1. Anropa ***gx_canvas_drawing_initiate*** API-funktionen och skicka in målarbetsytan och rektangeln i arbetsytan som programmet vill rita på. 
 
-2. Ring valfritt antal arbets ytans rit-API: er för att utföra den önskade ritningen.
+2. Anropa val annat antal API:er för arbetsyteritning för att utföra den önskade ritningen.
 
-3. Anropa ***gx_canvas_drawing_complete*** API-funktionen för att signalera att ritningen har slutförts. Detta tömmer arbets ytan till den synliga ram-bufferten och/eller utlöser en växlings åtgärd för buffert, beroende på systemets minnes arkitektur.
+3. Anropa ***API gx_canvas_drawing_complete funktionen*** för att signalera att ritningen har slutförts. Detta rensar arbetsytan till den synliga rambufferten och/eller utlöser en buffert växlingsåtgärd, beroende på systemets minnesarkitektur.
 
-### <a name="drawing-apis"></a>Drawing-API: er 
+### <a name="drawing-apis"></a>API:er för ritning 
 
-Det finns flera huvudsakliga ritnings primitiver som krävs av GUIX för att rita alla visuella element på skärmen. Dessa API: er för Drawing kan också anropas av program vara, vanligt vis som en del av en anpassad widgets ritnings funktion. Dessa GUIX-verktyg för arbets ytor utför parameter validering och Urklipp och skickar sedan ned de urklippta ritningarna nedåt till visnings driv rutinen för maskinvaru-och färg formats-speciella ritnings implementeringar. Dessa funktioner för Drawing API definieras enligt följande.
+Det finns flera primitiver för huvudritning som krävs av GUIX för att rita alla visuella element på skärmen. De här API:erna för ritning kan också anropas av programprogramvaran, vanligtvis som en del av en anpassad widgetritning. Dessa API:er för GUIX-arbetsyteritning utför parametervalidering och urklipp och skickar sedan de urklippta ritningskoordinaterna till visningsdrivrutinen för maskinvaru- och färgformatsspecifika ritningsimplementeringar. Dessa api-ritningsfunktioner definieras på följande sätt.
 
 - gx_canvas_alpha_set
 - gx_canvas_arc_draw
@@ -467,117 +469,117 @@ Det finns flera huvudsakliga ritnings primitiver som krävs av GUIX för att rit
 - gx_canvas_show
 - gx_canvas_text_draw
 
-Drawing API anropas via GUIX-arbetsyta API och all ritning görs med hjälp av gx_canvas_ * API functions. Ritningen görs med den aktuella penseln i den aktuella rit kontexten. Någon av form rit funktionerna ovan kan vara konturer, fyllda färger fyllda eller Pixelmap fyllda som definieras av den aktuella penseln. Om du vill ändra figurens kon tur bredd, färg eller fyllning använder du gx_context_brush_ * API Functions för att definiera penseln i den aktuella rit kontexten.
+Api:et för ritning anropas via API:et för GUIX-arbetsytan och all ritning görs med hjälp gx_canvas_* API-funktioner. Ritningen görs med hjälp av den aktuella penseln i den aktuella ritningskontexten. Alla formritningsfunktioner ovan kan beskrivas, en heldragen färg eller en pixelkarta som fyllts enligt definitionen i den aktuella penseln. Om du vill ändra bredd, färg eller fyllning för formkonturerna använder du API gx_context_brush_funktionerna* för att definiera penseln i den aktuella ritningskontexten.
 
-API: erna för Drawing på program nivå utför inte den faktiska ritningen på arbets ytan, utan i stället verifiera anroparens parametrar innan du anropar ritnings funktionen för visnings driv rutins nivå. Ritnings funktionen på driv rutins nivå skriver faktiskt pixel data till arbets ytans minne.
+Ovanstående API:er för ritning på programnivå gör inte själva ritningen till arbetsytan, utan verifierar i stället anroparens parametrar innan du anropar funktionen för att visa förarnivåritning. Ritningsfunktionen på drivrutinsnivå skriver faktiskt pixeldata till arbetsytans minne.
 
-GUIX tillhandahåller ritnings funktioner för börs eller allmän visnings driv rutin för olika färgdjup, inklusive 1, 2, 4, 8, 16, 24 och 32 bitar per bild punkt (BPP). I vissa fall ersätts standard implementeringen av program varu ritningen med maskin varu accelererade implementeringar för de maskin varu mål som tillhandahåller en 2D-ritnings Accelerator.
+GUIX tillhandahåller aktiebaserade eller allmänna visningsdrivrutiner för olika färgdjup, inklusive 1, 2, 4, 8, 16, 24 och 32 bitar per pixel (bpp). I vissa fall ersätts standardimplementering av programvaruritning med maskinvaruaccelererade implementeringar för de maskinvarumål som tillhandahåller en 2D-ritningsaccelerator.
 
 ### <a name="color-depth"></a>Färgdjup 
 
-GUIX stöder färg djup upp till 32-BPP samt svartvit och gråskala. Typen av färgdjup stöder i stort sett av funktionerna i den underliggande fysiska visningen och påverkar också hur mycket minne som krävs för arbets ytans ritnings område. Följande är en lista med stöd för färgdjup tillsammans med en kort beskrivning av variationerna i det här färg djupet.
+GUIX stöder färgdjup upp till 32 bpp samt gråskala och gråskala. Typen av stöd för färgdjup bestäms huvudsakligen av funktionerna i den underliggande fysiska visningen och påverkar även hur mycket minne som krävs för arbetsytans ritningsområde. Följande är en lista över stöd för färgdjup tillsammans med en kort beskrivning av variationerna inom det färgdjupet.
 
-| Färg &nbsp; format       | Description                                                                                                   |
+| &nbsp;Färgformat       | Beskrivning                                                                                                   |
 | ------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
-| 1-bitars monokrom   | 1-bitars per bild punkt i packat format.                                                                                                   |
-| 2-bitars gråskala    | 4 grå nivåer, förpackade fyra bild punkter per byte.                                                                                      |
-| 4-bitars gråskala    | 16 grå nivåer, förpackade två bild punkter per byte.                                                                                      |
-| 4-bitars färg        | Ett VGA-format plan för minnes organisation.                                                                                         |
+| 1-bitars 1-bitars   | 1 bit per pixel-paketerad format.                                                                                                   |
+| 2-bitars gråskala    | 4 grå nivåer, packade fyra bildpunkter per byte.                                                                                      |
+| 4-bitars gråskala    | 16 grå nivåer, packade två bildpunkter per byte.                                                                                      |
+| 4-bitarsfärg        | En planarminnesorganisation i VGA-format.                                                                                         |
 | 8-bitars gråskala    | 256 grå nivåer                                                                                                                  |
-| 8-bitars läge för palett | 1 byte per pixel som används som palett-index                                                                                           |
-| 8-bitars r:g: b-läge   | Ett mindre vanligt använt 2:3:2 r:g: b-format.                                                                                         |
-| 16-bitars             | Varje pixel kräver två byte. Kan vara r:g: b eller b:g: r byte order. Normalt 5:6:5-struktur, men det kan också vara 5:5:5-struktur eller 4:4:4:4 a:r: g:b-strukturen. |
-| 24-bitars             | Varje pixel kräver 3 (packat format) eller 4 (uppackat format) byte. Kan vara i r:g: b eller b:g: r byte-ordning enligt vad som krävs av maskin varan. |
-| 32-bitars             | Varje pixel kräver 4 byte med en alfa kanal. Kan vara a:r: g:b eller b:g: r:a byte order och bestäms av maskin varan.              |
+| 8-bitars paletteläge | 1 byte per pixel som används som paletteindex                                                                                           |
+| 8-bitars r:g:b-läge   | Ett mindre vanligt 2:3:2 r:g:b-format.                                                                                         |
+| 16-bitars             | Varje pixel kräver två byte. Kan vara r:g:b eller b:g:r byteordning. Normalt struktur 5:6:5, men kan också vara struktur 5:5:5 eller 4:4:4:4 a:r:g:b. |
+| 24-bitars             | Varje pixel kräver 3 (packad format) eller 4 (uppackade format) byte. Kan vara i r:g:b eller b:g:r byte ordning som krävs av maskinvaran. |
+| 32-bitars             | Varje pixel kräver 4 byte med en alfakanal. Kan vara a:r:g:b eller b:g:r:a byteordning och bestäms av maskinvara.              |
 
-### <a name="mouse-support"></a>Stöd för musen 
+### <a name="mouse-support"></a>Musstöd 
 
-GUIX har stöd för att rita en mus markör på önskad arbets yta. Mus markören kan ritas i program vara eller kan stödjas av maskin varu markören överlägg. I båda fallen är API: et för programmet som hör till stöd för mus markör detsamma om du använder ritning med program vara eller maskin varans mus markör.
+GUIX stöder ritning av en musmarkör på valfri arbetsyta. Musmarkören kan ritas i programvara eller kan ha stöd av maskinvarumarkörsöverlägg. I båda fallen är API:et som tillhandahålls till programmet relaterat till stöd för markörer detsamma oavsett om du använder programvaru- eller maskinvarumarkörsritning.
 
-Stöd för GUIX-möss är bara aktiverat om `#define GX_MOUSE_SUPPORT` har definierats i huvud filen gx_user. h innan du skapar GUIX-biblioteket.
+GUIX-musstöd är endast aktiverat om har definierats `#define GX_MOUSE_SUPPORT` i gx_user.h-huvudfilen innan GUIX-biblioteket byggs.
 
-Programmet måste definiera mus markören och hotspot med hjälp av ***gx_canvas_mouse_define*** API-funktionen. Det här API: et accepterar en pekare till den arbets yta där markörens bild ska ritas och en pekare till en **GX_MOUSE_CURSOR_INFO** -struktur, som definierar markörens bild och klickbart läge för musen i förhållande till det övre vänstra hörnet.
+Programmet måste definiera markören och hotspot med hjälp ***gx_canvas_mouse_define*** API-funktionen. Det här API:et accepterar en pekare till arbetsytan där markörbilden ska ritas och en pekare till **en GX_MOUSE_CURSOR_INFO-struktur,** som definierar musmarkörbilden och hotspot för musbilden relativt den övre vänstra bilden.
 
-## <a name="guix-display-component"></a>GUIX Visa komponent 
+## <a name="guix-display-component"></a>GUIX-visningskomponent 
 
-Visnings komponenten är fundamental i GUIX, eftersom den hanterar bearbetningen av alla visnings objekt, som i sig innehåller en eller flera arbets ytor, widgetar och Windows. Visnings komponenten samverkar också med den underliggande driv rutinen för maskin varu skärmen som är associerad med varje skärm genom en serie funktions pekare.
+Visningskomponenten är grundläggande i GUIX eftersom den hanterar bearbetningen av alla visningsobjekt, som i sig innehåller en eller flera arbetsyta, widgetar och fönster. Visningskomponenten interagerar också med den underliggande maskinvaruskärmdrivrutinen som är associerad med varje visning via en serie funktionspekare.
 
 ### <a name="display-creation"></a>Skapa visning 
 
-Ett visnings objekt kan skapas under initieringen eller när som helst under körningen av program trådar. Ett program skapar vanligt vis ett visnings objekt för att hantera varje fysisk skärm. Om du har använt GUIX Studio för att definiera programmet och de fysiska tillgängliga visar, använder du gx_studio_display_configure API-funktionen för att skapa och initiera var och en av dina skärmar.
+Ett visningsobjekt kan skapas under initieringen eller när som helst under körningen av programtrådar. Vanligtvis skapar ett program ett visningsobjekt för att hantera varje fysisk skärm. Om du har använt GUIX Studio för att definiera ditt program och de fysiska skärmarna som är tillgängliga använder du API gx_studio_display_configure funktionen för att skapa och initiera var och en av dina skärmar.
 
-### <a name="display-control-block"></a>Visa kontroll block 
+### <a name="display-control-block"></a>Visningskontrollblock 
 
-Egenskaperna för varje visnings objekt finns i dess kontroll block ***GX_DISPLAY** _ och definieras i _ *_gx_api. h_* *. Det minne som krävs för ett visnings objekt tillhandahålls av programmet och kan finnas var som helst i minnet. Det är dock vanligt att Visa kontrollen blockera en global struktur genom att definiera den utanför omfånget för en funktion.
+Egenskaperna för varje visningsobjekt finns i dess kontrollblock ***GX_DISPLAY** _ och definieras i _*_gx_api.h_**. Det minne som krävs för ett visningsobjekt tillhandahålls av programmet och kan finnas var som helst i minnet. Det är dock vanligast att göra visningskontrollblocket till en global struktur genom att definiera den utanför omfånget för en funktion.
 
 ### <a name="resource-management"></a>Resurshantering 
 
-Resurser är användar gränssnitts komponenter som behövs i programmet, men de är inte program kod. Resurser är program data och definieras vanligt vis statiskt. Resurs typer omfattar pixelmaps, teckensnitt, färger och strängar. Dessa resurser kan ändras när som helst, vanligt vis utan att program varan ändras. Det är viktigt att behålla lagringen av och referenser till resurser som är avgränsade från program program varan för att tillåta ändring av GRÄNSSNITTets utseende utan att ändra program kod eftersom ändringar i program program varan ofta kräver att den här program varan återtestas och verifieras.
+Resurser är gränssnittskomponenter som krävs av programmet, men de är inte programkod. Resurser är programdata och definieras vanligtvis statiskt. Resurstyper är pixelkartor, teckensnitt, färger och strängar. Dessa resurser kan ändras när som helst, vanligtvis utan att ändra någon programvara. Det är viktigt att hålla lagringen av och referenser till resurser åtskilda från programprogramvaran för att tillåta ändring av användargränssnittets utseende utan att ändra programkod eftersom ändringar i programprogramvaran vanligtvis kräver tillhörande omtestning och verifiering av programvaran.
 
-GUIX- ***visnings*** modulen innehåller resurser för resurs hantering för alla resurser som är beroende av bildens färgdjup och format. Dessa funktioner omfattar att underhålla den aktiva Pixelmap-tabellen, aktiva teckensnitts tabellen och den aktiva färg tabellen. Strängen för sträng tabellen underhålls av GUIX-systemmodulen, eftersom sträng resurser normalt inte behöver ändras baserat på färgdjup och format.
+***GUIX-visningsmodulen*** tillhandahåller resurshantering för alla resurser som är beroende av färgdjupet och formatet på skärmen. Dessa anläggningar omfattar att underhålla den aktiva pixelkarta-tabellen, aktiv teckensnittstabell och aktiv färgtabell. Strängtabellresursen underhålls av GUIX-systemmodulen eftersom strängresurser normalt inte behöver ändras baserat på färgdjup och format.
 
-Program varan refererar till resurser efter resurs-ID, vilket är ett index i motsvarande resurs tabell. Detta gör att tabellen kan ändras, till exempel om färg tabellen kan ändras när en produkt ändras från "dags läge" till "natt läge", men färg-ID-värdena är desamma.
+Programmet refererar till resurser efter resurs-ID, vilket är ett index i motsvarande resurstabell. Detta gör att tabellen kan ändras, till exempel kan färgtabellen ändras när en produkt ändras från "dagläge" till "nattläge", men färg-ID-värdena förblir desamma.
 
-Dina program resurser skrivs till en resurs fil (eller en uppsättning resursfiler) av GUIX Studio-programmet. Standard färger, pixelmaps och teckensnitt anges automatiskt när du skapar ett nytt GUIX Studio-projekt, men dessa standardinställningar ersätts enkelt när du definierar ditt programs utseende och känsla.
+Dina programresurser skrivs till en resursfil (eller en uppsättning resursfiler) av GUIX Studio-programmet. Standardfärger, pixelkartor och teckensnitt tillhandahålls automatiskt när du skapar ett nytt GUIX Studio-projekt, men dessa standardvärden ersätts enkelt när du definierar utseendet och känslan i ditt program.
 
-Det är viktigt att Observera att resurs-ID: n för färger, teckensnitt och pixelmaps inte kan matchas mot deras faktiska färg-, teckensnitts-eller Pixelmap-värden förrän den aktiva visnings komponenten är känd. Eftersom GUIX-arkitekturen stöder flera aktiva visar, kan resurs-ID: n bara matchas till resurs värden när en widget och dess associerade resurs-ID kan matchas mot en speciell visning. Den här egenskapen kallas dynamisk bindning. Resurs-ID för en egenskap, t. ex. en textfärg, till exempel resurs-ID **GX_COLOR_ID_TEXT,** kan matcha till ett 16-bitars R:G: B-värde för vitt när det används på en skärm, men samma färg-ID kan matcha svart färg värde för svart färg när det används på en annan bildskärm.
+Det är viktigt att observera att resurs-ID:er för färger, teckensnitt och pixelkartor inte kan matchas till deras faktiska värden för färg, teckensnitt eller pixelkarta förrän den aktiva visningskomponenten är känd. Eftersom GUIX-arkitekturen stöder flera aktiva visningar kan resurs-ID:n bara matchas till resursvärden när en widget och dess associerade resurs-ID kan matchas till en specifik visning. Den här egenskapen kallas dynamisk bindning. Resurs-ID för en egenskap, till exempel en textfärg, till exempel resurs-ID **GX_COLOR_ID_TEXT,** kan matcha till ett 16-bitars R:G:B-värde för vitt när det används på en skärm, men samma färg-ID kan matcha till ett svart färgvärde när det används på en annan visning.
 
-I praktiken innebär denna dynamiska bindning av resurs-ID: n till resurs värden att program vara och GUIX interna komponenter oftast bara löser resurs-ID: n till resurs värden inom en aktiv rit kontext. En aktiv ritnings kontext anger den aktuella aktiva visningen, vilket gör att GUIX kan matcha varje resurs-ID till ett resurs värde. Om program varan krävs för att hitta ett resurs värde utanför en rit kontext kan detta också göras för synliga widgetar. Synliga widgetar är länkade till ett rot fönster som också kan användas för att matcha den aktiva arbets ytan och Visa för widgeten.
+I praktiken innebär den här dynamiska bindningen av resurs-ID:er till resursvärden att programprogramvara och interna GUIX-komponenter oftast bara ska matcha resurs-ID:er till resursvärden i en aktiv ritningskontext. En aktiv ritningskontext anger den aktiva visningen, vilket gör att GUIX kan matcha varje resurs-ID till ett specifikt resursvärde. Om programprogramvaran krävs för att hitta ett specifikt resursvärde utanför en ritningskontext kan detta även göras för synliga widgetar. Synliga widgetar är länkade till ett rotfönster som också kan användas för att matcha den aktiva arbetsytan och visningen för widgeten.
 
-Om en widget har skapats men ännu inte har visats (dvs. inte har länkats till några rot fönster eller andra synliga överordnade), går det inte att matcha alla resurs-ID: n som är associerade med widgeten till ett annat resurs värde än genom direkt indexering i resurs tabellen som är kopplad till en speciell visning. Den här direkt åtkomsten till en specifik resurs tabell kan på ett säkert sätt göras av program varan, men görs aldrig i den interna biblioteks program varan för GUIX.
+Om en widget har skapats men ännu inte visas (d.v.s. inte har länkats till något rotfönster eller något annat synligt överordnat fönster), kan inte resurs-ID:n som är associerade med widgeten matchas till ett specifikt resursvärde förutom genom att indexera direkt till resurstabellen som är tilldelad till en specifik visning. Den här direktåtkomsten till en specifik resurstabell kan utföras på ett säkert sätt av programprogramvaran, men görs aldrig i den interna GUIX-biblioteksprogramvaran.
 
 ### <a name="widget-defaults"></a>Standardinställningar för widget 
 
-GUIX-visnings komponenten tillhandahåller också standard definitioner för olika widgetar attribut. Om inget annat anges av programmet skapas widgetar/Windows med dessa systemattribut. Dessa systemattribut består i huvudsak av teckensnitt, färger och bitmappar som finns i system resurs tabellerna. Ytterligare attribut för standard utseende för rullnings List hanteras också av GUIX display-komponenten.
+GUIX-visningskomponenten innehåller också standarddefinitioner för olika widgetattribut. Om inget annat anges av programmet skapas widgetar/fönster med dessa systemattribut. Dessa systemattribut består huvudsakligen av teckensnitt, färger och bitmappar som finns i systemets resurstabeller. Ytterligare attribut för standardutseendet av rullningslisten underhålls också av GUIX-visningskomponenten.
 
-Standard färg inställningarna definieras av färg tabellen som tilldelas varje bildskärm och de fördefinierade standardfärg-ID: na. Följande standardfärg-ID: n är följande:
+Standardfärginställningarna definieras av färgtabellen som tilldelas varje visning och de fördefinierade standardfärg-ID:erna. Dessa standardfärg-ID:n inkluderar följande.
 
-| Färg-ID | Description |
+| Färg-ID | Beskrivning |
 | ------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
-| GX_COLOR_ID_CANVAS | Standard arbets yta (t. ex. visnings bakgrunds färg) |
-| GX_COLOR_ID_WIDGET_FILL | Standard fyllnings färg för widget |
-| GX_COLOR_ID_WINDOW_FILL | Standard fönster fyllnings färg |
-| GX_COLOR_ID_DISABLED_FILL | Standard fyllnings färg för avaktiverad widget |
-| GX_COLOR_ID_DEFAULT_BORDER | Standardkant linje färg för widget |
-| GX_COLOR_ID_WINDOW_BORDER | Standard fönster kant linje färg |
-| GX_COLOR_ID_TEXT | Standard text färg |
-| GX_COLOR_ID_SELECTED_TEXT | Standard färg för markerad text |
-| GX_COLOR_ID_DISABLED_TEXT | Standard text färg för inaktiverat |
-| GX_COLOR_ID_SELECTED_TEXT_FILL | Standard fyllnings färg för markerad text |
-| GX_COLOR_ID_READONLY_TEXT | Standard text färg för ReadOnly |
-| GX_COLOR_ID_READONLY_FILL | Standard fyllnings färg för skrivskyddad text |
-| GX_COLOR_ID_SCROLL_FILL |    Fyllnings färg för rullnings List |
-| GX_COLOR_ID_SCROLL_BUTTON | Fyllnings färg för rullnings knapp |
-| GX_COLOR_ID_SHADOW | Standard skugg färg |
-| GX_COLOR_ID_SHINE | Standard markerings färg |
-| GX_COLOR_ID_BUTTON_BORDER | Kant linje färg för knapp-widget |
-| GX_COLOR_ID_BUTTON_UPPER | Den övre fyllnings färgen för knapp widgeten |
-| GX_COLOR_ID_BUTTON_LOWER | Knapp widget, nedre fyllnings färg |
-| GX_COLOR_ID_BUTTON_TEXT | Textfärg för knapp Beskrivning |
-| GX_COLOR_ID_TEXT_INPUT_TEXT | Textfärg för widgeten text text |
-| GX_COLOR_ID_TEXT_INPUT_FILL | Fyllnings färg för text ingång |
-| GX_COLOR_ID_SLIDER_TICK | Färg som används för att rita skal streck i skjutreglaget. |
-| GX_COLOR_ID_SLIDER_GROOVE_BOTTOM | Färg som används för att rita ett skjutreglage |
-| GX_COLOR_ID_SLIDER_NEEDLE_OUTLINE | Färg som används för att rita en nålventil |
-| GX_COLOR_ID_SLIDER_NEEDLE_FILL | Färg som används för att fylla skjutreglaget |
-| GX_COLOR_ID_SLIDER_NEEDLE_LINE1 | Färg som används för att rita nålventil |
-| GX_COLOR_ID_SLIDER_NEEDLE_LINE2 | Färg som används för att rita nålventil |
+| GX_COLOR_ID_CANVAS | Standardfärg för arbetsyta (d.v.s. visa bakgrund) |
+| GX_COLOR_ID_WIDGET_FILL | Fyllningsfärg för standardwidget |
+| GX_COLOR_ID_WINDOW_FILL | Standardfärg för fönsterfyllning |
+| GX_COLOR_ID_DISABLED_FILL | Standardinaktiverad widgetfyllningsfärg |
+| GX_COLOR_ID_DEFAULT_BORDER | Standardfärg för widgetens kantlinje |
+| GX_COLOR_ID_WINDOW_BORDER | Standardfärg för fönsterkantlinje |
+| GX_COLOR_ID_TEXT | Standardtextfärg |
+| GX_COLOR_ID_SELECTED_TEXT | Standardvald textfärg |
+| GX_COLOR_ID_DISABLED_TEXT | Standard inaktiverad textfärg |
+| GX_COLOR_ID_SELECTED_TEXT_FILL | Standardvald textfyllningsfärg |
+| GX_COLOR_ID_READONLY_TEXT | Standardfärg för skrivskyddade text |
+| GX_COLOR_ID_READONLY_FILL | Standardfärg för skrivskyddade textfyllningar |
+| GX_COLOR_ID_SCROLL_FILL |    Fyllningsfärg för rullningslist |
+| GX_COLOR_ID_SCROLL_BUTTON | Fyllningsfärg för knapp för rullningslist |
+| GX_COLOR_ID_SHADOW | Standardskuggfärg |
+| GX_COLOR_ID_SHINE | Standardfärg för markering |
+| GX_COLOR_ID_BUTTON_BORDER | Knappwidgetens kantlinjefärg |
+| GX_COLOR_ID_BUTTON_UPPER | Knappwidgetens övre fyllningsfärg |
+| GX_COLOR_ID_BUTTON_LOWER | Knappwidget med lägre fyllningsfärg |
+| GX_COLOR_ID_BUTTON_TEXT | Textfärg för knappwidget |
+| GX_COLOR_ID_TEXT_INPUT_TEXT | Textfärg för text i textinmatningswidgeten |
+| GX_COLOR_ID_TEXT_INPUT_FILL | Fyllningsfärg för textinmatning |
+| GX_COLOR_ID_SLIDER_TICK | Färg som används för att rita bockmarkeringar för skjutreglage. |
+| GX_COLOR_ID_SLIDER_GROOVE_BOTTOM | Färg som används för att rita skjutreglagets skjutreglage |
+| GX_COLOR_ID_SLIDER_NEEDLE_OUTLINE | Färg som används för att rita nålkontur |
+| GX_COLOR_ID_SLIDER_NEEDLE_FILL | Färg som används för att fylla på skjutreglagets nål |
+| GX_COLOR_ID_SLIDER_NEEDLE_LINE1 | Färg som används för att rita nål markeringar |
+| GX_COLOR_ID_SLIDER_NEEDLE_LINE2 | Färg som används för att rita nålskuggor |
 
-Dessa färg-ID-värden mappas till ett speciellt färg värde som definieras av den färg tabell som tilldelas varje skärm. Dessa standardvärden kan ändras som en grupp för en bildskärm genom att anropa API-funktionen ***gx_display_color_table_set*** . Om du använder GUIX Studio initieras tabellen för visnings färg automatiskt när programmet anropar funktionen ***gx_studio_display_configure*** .
+Dessa färg-ID-värden mappas till ett specifikt färgvärde som definieras av färgtabellen som är tilldelad till varje visning. Dessa standardvärden kan ändras som en grupp för en visning genom att anropa ***gx_display_color_table_set*** API-funktionen. Om du använder GUIX Studio initieras visningsfärgtabellen automatiskt  när programmet anropar gx_studio_display_configure funktionen.
 
-GUIX-display-komponenten underhåller också en standard teckensnitts tabell. Standard teckensnitts tabellen definierar teckensnittet som används av varje widgets typ, såvida det inte uttryckligen anges av programmet. De fördefinierade visnings teckensnitts tabell-ID: na innehåller följande värden.
+GUIX-visningskomponenten har också en standardtabell för teckensnitt. Standardteckensnittstabellen definierar teckensnittet som används av varje widgettyp om det inte anges specifikt av programmet. De fördefinierade tabell-ID:erna för visningsteckensnitt innehåller följande värden.
 
-| Teckensnitts &nbsp; -ID | Description |
+| &nbsp;Teckensnitts-ID | Beskrivning |
 | ------------------ | --------------------------------------------------------------------------------------------------------------------------------|
-| GX_FONT_ID_DEFAULT | Standard teckensnitt som används när inget speciellt teckensnitt har definierats |
-| GX_FONT_ID_BUTTON | Standard teckensnitt som används för all text på knappar |
-| GX_FONT_ID_TEXT_INPUT | Standard teckensnitt som används för text redigerings fält |
+| GX_FONT_ID_DEFAULT | Standardteckensnitt som används när inget specifikt teckensnitt har definierats |
+| GX_FONT_ID_BUTTON | Standardteckensnitt som används för all text på knappar |
+| GX_FONT_ID_TEXT_INPUT | Standardteckensnitt som används för textredigeringsfält |
 
-Teckensnitts-ID: t som används av en widget för text typer kan tilldelas igen med hjälp av **gx_<widget_type>_font_set** -API: et som angetts för varje textrelaterad typ av widget. Hela teckensnitts tabellen kan tilldelas på nytt genom att anropa API-funktionen **gx_display_font_table_set** .
+Teckensnitts-ID:t som används av valfri texttypswidget kan tilldelas om med hjälp av det **gx_<widget_type>_font_set-API** som tillhandahålls för varje textrelaterad widgettyp. Hela teckensnittstabellen kan tilldelas om genom att anropa **api gx_display_font_table_set funktionen.**
 
-### <a name="scrollbar-appearance"></a>Rullnings List utseende 
+### <a name="scrollbar-appearance"></a>Rullningslistens utseende 
 
-GUIX-visningen behåller också standard visnings inställningarna för rullnings listen. De här inställningarna definieras av **GX_SCROLLBAR_APPEARANCEs** strukturen som definieras nedan. GUIX display har en rullnings List struktur för lodräta rullnings lister och en andra struktur för vågräta rullnings lister. Programmet kan ändra standard rullnings listens utseende för visning genom att initiera en **GX_SCROLLBAR_APPEARANCE** -struktur och anropa API-funktionen ***gx_display_scroll_appearance_set***.
+GUIX-visning har också standardinställningar för rullningslistens utseende för den visningen. De här inställningarna definieras av **GX_SCROLLBAR_APPEARANCE** struktur som definieras nedan. GUIX-visningen har en struktur för rullningslistens utseende för lodräta rullningslister och en andra struktur för vågräta rullningslister. Programmet kan ändra standardutseendet för rullningslisten för alla skärmar genom **att initiera en GX_SCROLLBAR_APPEARANCE** struktur och anropa API-funktionen ***gx_display_scroll_appearance_set***.
 
 ```c
 typedef struct GX_SCROLLBAR_APPEARANCE_STRUCT
@@ -596,98 +598,98 @@ typedef struct GX_SCROLLBAR_APPEARANCE_STRUCT
     GX_RESOURCE_ID gx_scroll_button_color;
 } GX_SCROLLBAR_APPEARANCE;
 ```
-| GX_SCROLLBAR_APPEARANCE struktur medlem | Description |
+| GX_SCROLLBAR_APPEARANCE strukturmedlem | Beskrivning |
 | --- | --- |
-| gx_scroll_width | Bredden på en lodrät rullnings list eller höjd för en vågrät rullnings List i bild punkter. |
-| gx_scroll_thumb_width | Bredden på hissen och slut knapparna i bild punkter. |
-| gx_scroll_thumb_travel_max | Förskjut från slutet av rullnings listen till den maximala knappen för skjutreglagets slut punkt. |
-| gx_scroll_fill_pixelmap | Pixelmap används för att fylla rullnings bakgrunden. |
-| gx_scroll_thumb_pixelmap | Pixelmap används för att rita knapp för rullnings knapp. |
-| gx_scroll_up_pixelmap | Pixelmap används för att rita upp rullnings knapp. |
-| gx_scroll_down_pixelmap | Pixelmap används för att rita rullnings knapp. |
-| gx_scroll_fill_color | Färg-ID för färg som används för att fylla rullnings List bakgrunden. |
-| gx_scroll_button_color | Färg-ID för färg som används för att fylla rullnings knapp för rullnings List. |
+| gx_scroll_width | Bredden på en lodrät rullningslist eller höjden på en vågrät rullningslist, i bildpunkter. |
+| gx_scroll_thumb_width | Bredden på hiss- och slutknapparna, i bildpunkter. |
+| gx_scroll_thumb_travel_max | Förskjut från slutet av rullningslisten till den maximala respunkten för tumknappen. |
+| gx_scroll_fill_pixelmap | Pixelkarta som används för att fylla rullningsbakgrunden. |
+| gx_scroll_thumb_pixelmap | Pixelkarta som används för att rita bläddringstumknappen. |
+| gx_scroll_up_pixelmap | Pixelkarta som används för att rita upp bläddringsknappen. |
+| gx_scroll_down_pixelmap | Pixelkarta som används för att rita nedrullningsknappen. |
+| gx_scroll_fill_color | Färg-ID för färg som används för att fylla rullningslistens bakgrund. |
+| gx_scroll_button_color | Färg-ID för färg som används för att fylla rullningslistens tumknapp. |
 
-Förutom dessa standardinställningar för teckensnitt, färg och format, kan programmet ange vilken som helst av parametrarna i ett ärende per fall som önskas med hjälp av API: er som tillhandahålls av varje typ av widget.
+Förutom dessa standardinställningar för teckensnitt, färg och format kan programmet ange valfria parametrar från fall till fall efter behov med hjälp av API:et som tillhandahålls av varje widgettyp.
 
 ### <a name="skinning-and-themes"></a>Skalning och teman
 
-Skalning gör det möjligt för GUIX-widgetar och Windows att enkelt ändra sitt grundläggande utseende, dvs. om du ändrar "skalet" på en plats kommer det grundläggande utseendet för alla associerade widgetar och fönster att ändras.
+Utsnling gör att GUIX-widgetar och fönster enkelt kan ändra sitt basutseende, dvs. att ändra "hud" på en plats ändrar basutseendet för alla associerade widgetar och fönster.
 
-Om du skalar om ditt GUIX-program måste du ange en ny färg-, teckensnitts-och Pixelmap-tabell för GUIX Visa resurs tabeller. Eftersom alla GUIX-widgetar refererar till sina färger, bitmappar eller teckensnitt med resurs-ID: n, ger en ny resurs tabell automatiskt alla GUIX-widgetar att börja använda dina nya färger och pixelmaps när de ritas upp till önskad visning.
+Omskalning av GUIX-programmet kräver att du tillhandahåller en ny färg-, teckensnitts- och eller pixelkarta-tabell till GUIX-visningsresurstabellerna. Eftersom alla GUIX-widgetar refererar till färg, bitmappning eller teckensnitt efter resurs-ID gör en ny resurstabell automatiskt att alla GUIX-widgetar börjar använda dina nya färger och pixelkartor när de ritar sig till den önskade visningen.
 
-En ny uppsättning teckensnitt, färger och pixelmaps som är utformade för att samar beta för att ge ett attraktivt utseende kallas för ett *tema*. Ett tema definierar en uppsättning resurs tabeller och storleken på varje resurs tabell. Valfritt antal teman kan definieras för alla skärmar som använder GUIX Studio-programmet. Du måste skicka det första tema indexet till den genererade GUIX Studio-funktionen ***gx_studio_display_configure***, som installerar det ursprungliga temat i den skapade visningen. Det aktiva temat för visning kan ändras när som helst genom att anropa funktionen ***gx_display_theme_install***.
+En ny uppsättning teckensnitt, färger och pixelkartor som är utformade för att fungera tillsammans för att ge ett attraktivt utseende kallas för *ett tema.* Ett tema definierar en uppsättning resurstabeller och storleken på varje resurstabell. Val av antal teman kan definieras för alla skärmar med hjälp av GUIX Studio-programmet. Du måste skicka starttemaindexet till den GUIX Studio-genererade ***funktionen gx_studio_display_configure***, som installerar det första temat i den skapade visningen. Det aktiva temat för alla skärmar kan ändras när som helst genom att anropa funktionen ***gx_display_theme_install***.
 
-### <a name="root-window"></a>Rot fönster
+### <a name="root-window"></a>Rotfönster
 
-För varje synlig arbets yta som skapats av ett program måste programmet också skapa ett rot fönster för arbets ytan. Det här särskilda fönstret fungerar i princip som en behållare för alla program på den översta nivån i Windows och widgetar. Rot fönstret ritar arbets ytans bakgrund, och eftersom rot fönstret härleds från klassen **GX_WINDOW** kan rot fönstret också ha Skriv bords underlägg. Om du vill ändra bakgrunds färgen på din bildskärm eller arbets yta ändrar du bara fyllnings färgen för rot fönstret som är kopplat till arbets ytan.
+För varje synlig arbetsyta som skapats av ett program måste programmet också skapa ett rotfönster för arbetsytan. Det här särskilda fönstret fungerar i princip som en container för alla programfönster och widgetar på den översta nivån. Rotfönstret ritar arbetsytans bakgrund, och eftersom rotfönstret härleds **från GX_WINDOW-klassen** kan rotfönstret också ha skrivbordsunderlägg. Om du vill ändra bakgrundsfärgen för din skärm eller arbetsyta ändrar du helt enkelt fyllningsfärgen för rotfönstret som är kopplat till arbetsytan.
 
-Om du använder den genererade GUIX Studio-funktionen med namnet ***gx_studio_display_configure*** för att konfigurera dina skärmar, skapas arbets ytan och rot fönstret för varje visning åt dig som en del av den här initierings funktionen.
+Om du använder den GUIX Studio-genererade ***funktionen gx_studio_display_configure*** för att konfigurera dina skärmar skapas arbetsytan och rotfönstret för varje visning åt dig som en del av initieringsfunktionen.
 
-### <a name="anti-aliasing"></a>Kant utjämning 
+### <a name="anti-aliasing"></a>Antialias 
 
-Kant utjämning är en valfri funktion i GUIX som används för att jämna ut linjer, kurvor och teckensnitt. Kant utjämning stöds bara när du kör med en bildskärms driv rutin som använder 16-BPP eller högre färgdjup.
+Antialias är en valfri funktion i GUIX som används för att jämna ut linjer, kurvor och teckensnitt. Antialias stöds endast när du kör med en visningsdrivrutin med 16 bpp eller högre färgdjup.
 
-Ritning med anti-aliasad linje är aktive rad genom att ange **GX_BRUSH_ALIAS** blixt i den aktiva penseln. Detta gäller linjer som ritats direkt och till linjer som ritats som kant linje i en polygon eller cirkel.
+Antialias linjeritning aktiveras genom att ställa in **GX_BRUSH_ALIAS** flash i den aktiva penseln. Detta gäller för linjer som ritas direkt samt för linjer som ritas som kantlinje för en polygon eller cirkel.
 
-Text ritning med anti-alias aktive ras med ett eget teckensnitt som skapas av GUIX Studio-programmet. Du anger om ett teckensnitt ska genereras som ett alias eller binärt när du skapar teckensnittet.
-Kantutjämna teckensnitt i GUIX använder 16 genomskinlighets nivåer för varje bild punkt.
+Antialias textritning aktiveras med hjälp av ett antialias teckensnitt som produceras av GUIX Studio-programmet. Du anger om ett teckensnitt ska genereras som antialiased eller binär när du skapar teckensnittet.
+Antialias teckensnitt i GUIX använder 16 nivåer av transparens för varje pixel.
 
-### <a name="clipping"></a>Klippa 
+### <a name="clipping"></a>Klippning 
 
-Urklipp stöds internt av GUIX-display-komponenten, och i fönstret och i widgeten visas en överordnad-underordnad arkitektur som hanteras av GUIX-widgetar. Det finns inget fönster eller widget som kan ritas utanför widgetens yta och en widget tillåts aldrig Rita utanför området för widgetens överordnade objekt.
+Urklipp stöds internt av GUIX-visningskomponenten och i fönster- och widgetskikten av den överordnade-underordnade arkitekturen som underhålls av GUIX-widgetar. Inget fönster eller en widget tillåts någonsin rita utanför widgetens område och en widget får aldrig rita utanför området för widgetens överordnade område.
 
-Detta förhindrar också widgetar från att rita i pixel koordinater som placerar utanför arbets ytans minne, vilket förmodligen leder till minnes skada eller systemfel. Widgetar får inte rita utanför widgetens område, widgetens överordnade område eller utanför arbets ytans omfattning.
+Detta förhindrar också widgetar från att rita vid pixelkoordinater som ligger utanför arbetsytans minne, vilket sannolikt leder till minnesfel eller systemfel. Widgetar får inte rita utanför widgetens område, widgetens överordnade område eller utanför arbetsytans utrymme.
 
-Dessutom kan widgetar bara rita till områden som tidigare har marker ATS som skadade. Detta förhindrar att ett helt fönster ritas, till exempel när endast ett hörn i fönstret har visats. Endast den del av fönstret som faktiskt behöver uppdateras är markerad som smutsig och så att fönster ritnings funktionen bara uppdaterar pixlar i området smutsig.
+Dessutom kan widgetar endast ritas till områden som tidigare har markerats som dirty (dirty). Detta förhindrar att ett helt fönster ritas, till exempel när bara ett hörn av fönstret har visats. Endast den del av fönstret som faktiskt behöver uppdateras markeras som dirty (dirty) så att fönsterritningsfunktionen bara uppdaterar bildpunkter i det dirty-området.
 
-GUIX-visnings komponenten tillämpar dessa urklipps algoritmer innan du anropar ritnings funktionerna på driv rutins nivå.
+GUIX-visningskomponenten framtvingar dessa algoritmer innan ritningsfunktionerna på drivrutinsnivå används.
 
 ### <a name="views"></a>Vyer 
 
-GUIX upprätthåller alltid en uppsättning vyer för varje rot fönster och varje underordnat fönster i rot fönstret. Vyer är ett dynamiskt, definierat storleks sorterings utrymme som ändras när fönster placering och Z-ordning ändras.
-GUIX använder vyer för att förhindra att ett fönster eller en widget i bakgrunden ritas ovanpå ett fönster eller en widget i förgrunden. Vyer upprätthåller ämnes område Z-ordning. Dessutom är vyer viktiga för att effektivisera ett fönster i bakgrunden från att rita till något område på arbets ytan som inte kan visas. Om ett fönster är helt täckt av ett annat fönster, kan inte det fönster som omfattas Rita till arbets ytan alls, även om det försöker göra det.
+GUIX har alltid en uppsättning vyer för varje rotfönster och varje underfönster i rotfönstret. Vyer är ett dynamiskt, körningsbestämt urklippsområde som ändras när fönstrets position och Z-ordningen ändras.
+GUIX använder vyer för att förhindra att ett fönster eller en widget i bakgrunden ritar ovanpå ett fönster eller en widget i förgrunden. Vyer tillämpar Z-ordningsdisciplin. Dessutom är vyer viktiga för effektiviteten eftersom de förhindrar att ett fönster i bakgrunden ritas till någon del av arbetsytan som inte kan ses. Om ett fönster är helt täckt av ett annat fönster, kommer det täckta fönstret inte att kunna ritas på arbetsytan alls, även om det försöker göra det.
 
-### <a name="display-driver-interface"></a>Visa driv Rutins gränssnitt 
+### <a name="display-driver-interface"></a>Visa drivrutinsgränssnitt 
 
-GUIX-bildskärms driv rutiner ansvarar för all interaktion med den underliggande fysiska skärmen. Bildskärms driv rutinerna har tre grundläggande funktioner: initiering, ritning och inramad visning av buffertar.
-Initieringen ansvarar för att förbereda den fysiska bildskärmens maskin vara, informerar GUIX av egenskaperna för den fysiska bildskärmens maskin vara och för att informera GUIX vilka vissa ritnings funktioner ska användas. Den huvudsakliga driv rutins initieringen anropas från funktionen GUIX ***gx_display_create*** . Dessutom anropar GUIX-tråden även en sekundär bildskärms driv rutins initiering från tråd kontexten. Den här sekundära bildskärms driv rutinen behövs bara om driv rutinen kräver återställnings tider-tjänster under initieringen, t. ex., avbrott i enheten eller ***tx_thread_sleep*** begär Anden om fördröjning mellan stegen i initierings processen.
+GUIX-visningsdrivrutiner ansvarar för all interaktion med den underliggande fysiska skärmen. Visningsdrivrutinerna har tre grundläggande funktioner: initiering, ritning och bildrutebuffertvisning.
+Initieringen ansvarar för att förbereda den fysiska skärmmaskinvaran, informera GUIX om egenskaperna för den fysiska skärmmaskinvaran och informera GUIX om vilka specifika ritningsfunktioner som ska användas. Den huvudsakliga initieringen av visningsdrivrutiner anropas från ***GUIX-gx_display_create funktion.*** Dessutom anropar GUIX-tråden även en sekundär initiering av visningsdrivrutiner från trådkontexten. Den här sekundära visningsdrivrutinen behövs bara om drivrutinen behöver RTOS-tjänster under initieringen, t.ex. enhetsavbrott eller ***tx_thread_sleep-begäranden*** om fördröjning mellan stegen i initieringsprocessen.
 
-När initieringen är klar är visnings driv rutinen ansvarig för all direkt ritning som kan göras i den fysiska bildskärms maskin varan.
-Slutligen är visnings driv rutinen ansvarig för att Visa ramtypen.
+När initieringen är klar ansvarar visningsdrivrutinen för alla direkta ritningar som kan göras i den fysiska skärmmaskinvaran.
+Slutligen ansvarar visningsdrivrutinen för att visa rambufferten.
 
-## <a name="guix-widget-component"></a>Komponent för GUIX-widget
+## <a name="guix-widget-component"></a>KOMPONENT FÖR GUIX-widget
 
-En GUIX-widget är ett synligt grafiskt element. Det finns GUIX-komponenter som inte är synliga, till exempel timers och funktioner för matematik verktyg.
-Alla synliga komponenter härleds dock från komponenten Basic GUIX-widget. En GUIX-widget är det primära Bygg blocket av GUIX-visningen – alla andra grafiska element härleds från funktionen för bas-widget.
+En GUIX-widget är ett synligt grafiskt element. Det finns GUIX-komponenter som inte är synliga, till exempel timers och matematikverktygsfunktioner.
+Alla synliga komponenter härleds dock från den grundläggande GUIX-widgetkomponenten. En GUIX-widget är den primära byggstenen i GUIX-visningen – alla andra grafiska element härleds från baswidgetens funktioner.
 
-GUIX-widgetar implementeras på ett objektorienterat sätt med fullständigt stöd för arv. Detta görs med hjälp av ANSI C, vilket resulterar i minsta möjliga minnes-och bearbetnings krav. När vi pratar om en viss widget, till exempel **GX_BUTTON**, *härleds från* en annan widget, t. ex. bas **GX_WIDGET**, vad vi menar är att **GX_BUTTON** kontroll strukturen innehåller alla medlemsvariabler och funktions pekare i **GX_WIDGET**, med vissa ytterligare variabler som är specifika för **GX_BUTTON**. GUIX bygger upp lager av widgetar på det här sättet, så att fler komplexa widgetar alltid baseras på en enklare widget. Den här hierarkiska modellen av härledning gör det lättare att lära sig de API: er som används för att ändra widgets parametrar. Om du vill ändra färgen på en knapp använder du samma API som du använder för att ändra färgen på en widget, nämligen ***gx_widget_fill_color_set***.
+GUIX-widgetar implementeras på ett objektorienterat sätt med fullständigt stöd för arv. Detta åstadkoms med ansi C, vilket resulterar i minsta möjliga minne och bearbetningskrav. När vi talar om en viss widget, till  exempel **GX_BUTTON**, som härleds från en annan widget, till exempel **bas-GX_WIDGET**, är det vi menar att **GX_BUTTON-kontrollstrukturen** innehåller alla medlemsvariabler och funktionspekare för **GX_WIDGET**, med några ytterligare variabler som är specifika för **GX_BUTTON**. GUIX bygger upp lager av widgetar på det här sättet, så att mer komplexa widgetar alltid baseras på en enklare widget före dem. Den här hierarkiska modellen för härledning gör det enklare att lära sig de API:er som används för att ändra widgetparametrar. Om du vill ändra färgen på en knapp använder du samma API som du använder för att ändra färgen på en widget, ***nämligen gx_widget_fill_color_set***.
 
-Organisationen av synliga widgetar upprätthålls i ett överordnat, underordnat sätt med hjälp av träd strukturerade listor som länkar underordnade widgetar till sina överordnade. De underordnade objekten ärver egenskaper från sina föräldrar, till exempel vyer som de kan rita och den arbets yta där de ritar.
-Underordnade widgetar kan ha sina egna underordnade widgetar och sedan ärva olika egenskaper från den överordnade. Egenskaperna för en widget kan uttryckligen omdefinieras via olika GUIX-API-anrop.
+Organisationen av synliga widgetar underhålls på ett överordnat-underordnat sätt med hjälp av trädstrukturerade listor som länkar underordnade widgetar till sina föräldrar. Underordnade ärver egenskaper från sina föräldrar, till exempel vyer som de kan rita i och arbetsytan som de ritar på.
+Underordnade widgetar kan ha sina egna underordnade widgetar, som återigen ärver olika egenskaper från den överordnade widgeten. Egenskaperna för en widget kan uttryckligen omdefinieras via olika GUIX API-anrop.
 
 ### <a name="widget-creation"></a>Skapa widget 
 
-Ett widgets objekt kan skapas vid initiering eller när som helst under körningen av program trådar. Det finns ingen gräns för antalet widgets objekt som kan skapas av ett program. Det finns inte heller någon gräns för antalet underordnade alla widgetar som kan ha, inom minnes gränserna för mål maskin varan.
+Ett widgetobjekt kan skapas under initieringen eller när som helst under körningen av programtrådar. Det finns ingen gräns för hur många widgetobjekt som kan skapas av ett program. Det finns heller ingen gräns för hur många underordnade en widget kan ha, inom minnesgränserna för målmaskinvaran.
 
-Varje widget har sin egen Create-funktion, till exempel ***gx_button_create** _ eller _ *_gx_prompt_create_* *. De första tre parametrarna till dessa funktioner är alltid samma, nämligen en pekare till kontroll strukturen för widget, en sträng pekare till widgetens namn och en pekare till widgetens överordnade. Varje Create-funktion kan ha valfritt antal ytterligare parametrar beroende på kraven för den aktuella widgeten.
+Varje widgettyp har en egen create-funktion, till exempel ***gx_button_create** _ eller _*_gx_prompt_create_**. De första tre parametrarna för dessa funktioner är alltid desamma, nämligen en pekare till widgetens kontrollstruktur, en sträng pekare till widgetens namn och en pekare till widgetens överordnade. Varje create-funktion kan ha val av ytterligare parametrar beroende på kraven för den specifika widgettypen.
 
-### <a name="widget-control-block"></a>Kontroll block för widget 
+### <a name="widget-control-block"></a>Kontrollblock för widget 
 
-Egenskaperna för varje widget-objekt finns i kontroll blocket **GX_WIDGET** och definieras i **_gx_api. h_**. Det minne som krävs för ett widgets objekt tillhandahålls av programmet och kan finnas var som helst i minnet. Det är dock vanligt att göra widgeten objekt kontroll blockera en global struktur genom att definiera den utanför omfånget för en funktion. Om du använder GUIX Studio kan dina widgets kontroll block vara statiskt allokerade i din Studio genererade Specifikations fil, eller så kan de tilldelas dynamiskt av ditt program.
+Egenskaperna för varje widgetobjekt finns i dess kontrollblock och **GX_WIDGET** definieras i **_gx_api.h_**. Det minne som krävs för ett widgetobjekt tillhandahålls av programmet och kan finnas var som helst i minnet. Det är dock vanligast att göra widgetobjektets kontrollblock till en global struktur genom att definiera den utanför omfånget för en funktion. Om du använder GUIX Studio kan widgetkontrollblocken statiskt allokeras i din Studio-genererade specifikationsfil, eller så kan de allokeras dynamiskt av ditt program.
 
-### <a name="dynamic-widget-control-block-allocation-and-de-allocation"></a>Dynamisk widgets kontroll block tilldelning och avallokering 
+### <a name="dynamic-widget-control-block-allocation-and-de-allocation"></a>Blockallokering och avallokering för dynamisk widgetkontroll 
 
-Om du använder dynamisk kontroll block tilldelning måste du definiera två funktioner som GUIX ska använda för att allokera och frigöra det minne som krävs för dina widgets kontroll block. Funktionerna för minnes hantering skickas till GUIX-system komponenten via ***gx_system_memory_allocator_set*** API-funktionen. Med den här funktionen kan du skicka två funktions pekare till GUIX: den första är en pekare till en minnesallokering och den andra är en pekare till en minnes fri funktion. Oftast ska du implementera dessa funktioner med ThreadX byte-pooler, men med GUIX kan du implementera dynamisk minnes hantering på det sätt som du föredrar.
+Om du använder dynamisk blockallokering måste du definiera två funktioner som GUIX använder för att allokera och frigöra det minne som krävs för widgetkontrollblocken. Dina funktioner för minneshantering skickas till GUIX-systemkomponenten via gx_system_memory_allocator_set  API-funktionen. Med den här funktionen kan du skicka två funktionspekare till GUIX: den första är en pekare till en minnesallokeringsfunktion och den andra är en pekare till en minnesfri funktion. Oftast implementerar du dessa funktioner med ThreadX-bytepooler, men med designen av GUIX kan du implementera dynamisk minneshantering på det sätt du föredrar.
 
-Allokering av dynamiska widgetar används oftast i filen med program specifikationer för Studio som har genererats, när du väljer alternativet "dynamiskt allokerat" i egenskaps fältet för Studio-widgeten. Du kan dock också använda dynamisk kontroll block tilldelning i ditt program. Om du använder dynamisk kontroll block tilldelning i ditt program bör du anropa API-funktionen ***gx_widget_allocate** _ för att allokera kontroll blocket för widgeten. När du sedan skapar widgeten ska du kontrol lera att du skickar flaggan _ *GX_WIDGET_STYLE_DYNAMICALLY_ALLOCATED** (tillsammans med andra nödvändiga format flaggor) till funktionen för att skapa widgeten. Den här flaggan används för att markera widgeten som dynamiskt allokerad i fältet widgets status. När och om widgeten senare raderas med hjälp av **_gx_widget_delete_**, kommer GUIX att kontrol lera detta status fält och automatiskt anropa funktionen för inallokering av minne för att se till att det inte finns några minnes läckor.
+Dynamisk widgetallokering används oftast i din Studio-genererade programspecifikationsfil när du väljer alternativet "dynamiskt allokerad" i egenskapsfältet för Studio-widgeten. Men du kan också använda dynamisk kontrollblocksallokering i ditt program. Om du använder dynamisk blockallokering i ditt program bör du anropa **API-funktionen*** gx_widget_allocate _ för att allokera widgetkontrollblocket. När du sedan skapar widgeten ska du kontrollera att du skickar formatflaggan _ *GX_WIDGET_STYLE_DYNAMICALLY_ALLOCATED** (tillsammans med andra formatflaggor som behövs) till widgetens create-funktion. Den här flaggan används för att markera widgeten som dynamiskt allokerad i widgetens statusfält. När och om widgeten senare tas bort med **_hjälp av gx_widget_delete_**, kontrollerar GUIX det här statusfältet och anropar automatiskt funktionen för avkrypterare av minne för att försäkra att det inte finns några minnesläckor.
 
 > [!IMPORTANT]
-> En widget som skapats med ett dynamiskt tilldelat kontroll block måste skapas med flaggan **GX_WIDGET_STYLE_DYNAMICALLY_ALLOCATED** Style för att förhindra minnes förlust.
+> En widget som skapas med hjälp av ett dynamiskt allokerat kontrollblock måste skapas **med flaggan GX_WIDGET_STYLE_DYNAMICALLY_ALLOCATED** för att förhindra minnesförlust.
 
 ### <a name="types"></a>Typer
 
-GUIX innehåller en omfattande, helt funktionell uppsättning inbyggda widgetar. Som tidigare nämnts härleds alla specialiserade widgetar från bas-widgeten. Följande är en lista över inbyggda widgetar i GUIX:
+GUIX ger en omfattande, fullt funktionell uppsättning inbyggda widgetar. Som tidigare nämnts härleds alla specialiserade widgetar från baswidgeten. Följande är en lista över inbyggda widgetar i GUIX:
 
 **GX_TYPE_WIDGET**
 
@@ -776,49 +778,49 @@ GUIX innehåller en omfattande, helt funktionell uppsättning inbyggda widgetar.
 
 ### <a name="styles"></a>Format
 
-Widgetar format består av saker som kant linje egenskaper (upphöjt, nedsänkt, tunn, tjock eller ingen bräda alls) samt egenskaper för vissa typer av widget, enligt listan ovan. Format flaggor för widget är den enklaste metoden för att ändra utseendet på en widget.
-Den ursprungliga widgeten är alltid en parameter som skickas till den widgets typ som är en speciell Create-funktion.
+Widgetformat består av saker som kantlinjeegenskaper (upphöjt, upphöjt, tunt, tjockt eller ingen boarder alls) samt egenskaper för specifika widgettyper, enligt listan ovan. Widgetens stilflaggor är den enklaste metoden för att ändra utseendet på en widget.
+Det inledande widgetformatet är alltid en parameter som skickas till widgettypen för specifik create-funktion.
 
 ### <a name="colors"></a>Färger 
 
-Widgetar ritar sig själva med färger som definierats i tabellen system färg.
-Färg-ID: n definieras för arbets ytans bakgrund, standard fyllnings färg för widget, knapp fyllnings färg, fyllnings färg för TextWidget, fönster fyllnings färg och flera andra standard färg värden. Dessutom har **GX_WINDOW** objekt stöd för att visa en bitmapp eller tapet när fönster klienten är ifylld.
+Widgetar ritar sig själva med hjälp av färger som definierats i systemfärgtabellen.
+Färg-ID:er definieras för arbetsytans bakgrund, standardfyllningsfärg för widget, knappfyllningsfärg, fyllningsfärg för textwidget, fönsterfyllningsfärg och flera andra standardfärgvärden. Dessutom stöder **GX_WINDOW** visning av en bitmapp eller skrivbordsunderlägg när fönsterklienten fylls.
 
-Den enklaste metoden att ändra standard färg schema är att använda GUIX Studio och skapa eller definiera ett färg schema som uppfyller dina krav.
-Du kan också definiera ditt färg schema manuellt genom att skapa en matris med GX_COLOR värden och anropa funktionen gx_system_color_table_set API.
+Den enklaste metoden för att ändra standardfärgschemat är att använda GUIX Studio och skapa eller definiera ett färgschema som uppfyller dina krav.
+Du kan också definiera färgschemat manuellt genom att skapa en matris med GX_COLOR och anropa API gx_system_color_table_set funktion.
 
-### <a name="event-notification"></a>Händelse meddelande 
+### <a name="event-notification"></a>Händelseavisering 
 
-GUIX-händelser är begär Anden som görs till en eller flera widgetar för att utföra en viss åtgärd och aviseringar för att meddela widgetar om användarindata och ändringar i interna system status. Om en widget till exempel får fokus, skickas **GX_EVENT_FOCUS_GAINED** till widgeten via tjänsten ***gx_system_event_send*** API.
+GUIX-händelser är begäranden som görs till en eller flera widgetar för att utföra en viss åtgärd och meddelanden för att meddela widgetar om användarindata och interna systemstatusändringar. När en widget till exempel får fokus skickas **GX_EVENT_FOCUS_GAINED** till widgeten via ***API gx_system_event_send tjänsten.***
 
-Händelser skickas via GUIX-händelse kön och varje händelse är en instans av **GX_EVENT** data strukturen. **GX_EVENT** data strukturen definieras i ***gx_api. h***, men de viktigaste fälten i strukturen är **gx_event_type**, **gx_event_sender**, **gx_event_target** och **gx_event_payload**.
+Händelser skickas via GUIX-händelsekön och varje händelse är en instans av den **GX_EVENT** datastrukturen. Den **GX_EVENT** datastrukturen definieras ***i gx_api.h***, men de viktigaste fälten i strukturen är **gx_event_type**, **gx_event_sender**, **gx_event_target** **och gx_event_payload**.
 
-Fältet **gx_event_type** används för att identifiera en viss händelse klass. Händelse typen anger om detta är till exempel en **GX_EVENT_PEN_DOWN** händelse eller en **GX_EVENT_TIMER** -händelse. **Gx_event_payload** är en union av olika data fält och de är inte alla giltiga för varje händelse typ.
-Du använder först fältet händelse typ innan du undersöker de andra händelse data fälten.
+Fältet **gx_event_type** används för att identifiera den specifika händelseklassen. Händelsetypen anger om detta till exempel är en **GX_EVENT_PEN_DOWN** händelse eller en **GX_EVENT_TIMER** händelse. Den **gx_event_payload** är en union av olika datafält och alla är inte giltiga för varje händelsetyp.
+Du använder fältet händelsetyp först innan du undersöker de andra fälten för händelsedata.
 
-Fältet **gx_event_sender** innehåller ID: t för widgeten som skapade händelsen om händelsen är ett underordnat widgets meddelande.
+Fältet **gx_event_sender** innehåller ID:t för widgeten som genererade händelsen om händelsen är ett meddelande för underordnad widget.
 
-Fältet **gx_event_target** kan användas för att dirigera användardefinierade händelser till ett visst fönster eller widget. Om du vill skicka en händelse till ett visst fönster, bör du ge fönstret ett unikt ID-värde (så att det kan identifieras positivt) och när du skapar händelsen placeras värdet för fönster-ID i fältet **gx_event_target** . Om du inte känner till mål-ID: t eller om du bara vill att händelsen ska dirigeras till widgeten med fokus, måste du ange **gx_event_target** fältet till 0.
+Fältet **gx_event_target** kan användas för att dirigera användardefinierade händelser till ett visst fönster eller en viss widget. Om du vill skicka en händelse till ett visst fönster bör du ge fönstret ett unikt ID-värde (så att det kan identifieras positivt) och när du skapar händelsen placerar du fönster-ID-värdet **i gx_event_target fältet.** Om du inte känner till mål-ID:t eller om du bara vill att händelsen ska dirigeras till widgeten som har indatafokus ska du ange **gx_event_target** fältet till 0.
 
-Slutligen är fältet **gx_event_payload** en union av olika data typer. För **GX_EVENT_PEN_DOWN** -och **GX_EVENT_PEN_UP** -händelser innehåller fältet **gx_event_pointdata** x, y-pixeln pennans position. För timer-händelser innehåller fältet **GX_EVENT_TIMER_ID** ID för den utgångna timern. Andra nytto Last data fält används för andra händelse typer. Den fullständiga listan över fördefinierade händelse typer och deras nytto Last fält definieras i [bilaga E-GUIX händelse beskrivningar](appendix-e.md).
+Slutligen är **gx_event_payload** en union av olika datatyper. För **GX_EVENT_PEN_DOWN** och **GX_EVENT_PEN_UP** händelser **innehåller gx_event_pointdata** fältet x,y pixelkoordinaten pennpositionen. För timerhändelser innehåller **fältet gx_event_timer_id** ID för den utgångna timern. Andra nyttolastdatafält används för andra händelsetyper. Den fullständiga listan över fördefinierade händelsetyper och deras nyttolastfält definieras i [bilaga E – GUIX-händelsebeskrivningar](appendix-e.md).
 
-Programmet kan också lägga till egna anpassade händelser som börjar numeriskt efter konstanten **GX_FIRST_APP_EVENT**. Alla händelse nummer efter den här konstanten är reserverade för programmets användning. Programmets händelse hanterare för widget måste naturligtvis ha bearbetning för sådana program händelser.
+Programmet kan också lägga till egna anpassade händelser, som startar numeriskt efter konstanten **GX_FIRST_APP_EVENT**. Alla händelsenummer efter den här konstanten är reserverade för programmets användning. Naturligtvis måste programmets widget-händelsehanterare ha bearbetning för sådana programhändelser.
 
-### <a name="event-processing"></a>Händelse bearbetning 
+### <a name="event-processing"></a>Händelsebearbetning 
 
-Det finns en standard funktion för widgets händelse bearbetning för varje widget, med namnet ***gx_<widget-typ>_event_process***. I de flesta fall behöver programmet inte bekymra sig om händelse hanteringen av någon bestämd widget. I situationer där programmet kräver anpassad eller kompletterande händelse bearbetning kan programmet dock åsidosätta standard bearbetnings funktionen med sin egen via GUIX API- ***gx_widget_event_process_set***. Den här funktionen åsidosätter standard funktionen för händelse bearbetning med funktionen process bearbetning som anges i API: et.
+Det finns en standardfunktion för händelsebearbetning av widgetar för varje widget med ***gx_<av widgettyp>_event_process***. I de flesta fall behöver programmet inte bekymra sig om händelsehanteringen för en viss widget. Men i situationer där programmet kräver anpassad eller kompletterande händelsebearbetning kan programmet åsidosätta standardbearbetningsfunktionen med en egen via GUIX ***API-gx_widget_event_process_set***. Den här funktionen åsidosätter standardfunktionen för händelsebearbetning med funktionen för händelsefunktionsbearbetning angiven i API:et.
 
 > [!IMPORTANT]
-> Bearbetnings funktioner för program händelser kan dra nytta av (dvs. inte duplicera bearbetningen) av standard bearbetningen genom att bara anropa standard ***gx_widget_event_process*** bearbetningen direkt.
+> Funktioner för programhändelsebearbetning kan dra nytta av (d.v.s. inte duplicera bearbetningen) av standardbearbetningen genom ***att helt enkelt anropa gx_widget_event_process*** bearbetningen direkt.
 
-Händelse bearbetning anropas exklusivt från kontexten för den interna GUIX system tråden. På det här sättet gäller stack kraven för bearbetning av händelse hanteringen bara för GUIX-tråden.
+Händelsebearbetning anropas exklusivt från kontexten för den interna GUIX-systemtråden. På så sätt gäller stackkraven för att bearbeta händelsehanteringen endast FÖR GUIX-tråden.
 
-### <a name="implementing-custom-event-processing-example"></a>Implementera anpassad händelse bearbetning (exempel) 
+### <a name="implementing-custom-event-processing-example"></a>Implementera anpassad händelsebearbetning (exempel) 
 
-Du kan ange en egen händelse bearbetnings funktion för alla widgetar eller fönster i GUIX-systemet. Om du skapar en egen anpassad widget-typ installerar du normalt din anpassade händelse hanterare i funktionen för att skapa widgeten. Om du bara utökar eller ändrar åtgärden för en befintlig widget eller ett fönster kan du anropa API-funktionen gx_widget_event_process_set när widgeten eller fönstret har skapats. Du kommer nästan alltid att tillhandahålla din egen händelse hantering för toppnivå fönster (även kallade skärmar) för att bearbeta händelser som genererats av dina underordnade kontroller. Bearbetning av händelser som genererats av de underordnade kontrollerna på en skärm är det huvudsakliga sättet som du lägger till funktioner i GUIX-programmet.
+Du kan ange en egen händelsebearbetningsfunktion för en widget eller ett fönster i GUIX-systemet. Om du skapar en egen anpassad widgettyp installerar du normalt din anpassade händelsehanterare i funktionen för widgetskapande. Om du bara utökar eller ändrar driften av en befintlig widget eller ett fönster kan du anropa API gx_widget_event_process_set-funktionen efter att widgeten eller fönstret har skapats. Du kommer nästan alltid att tillhandahålla din egen händelsehantering för dina toppnivåfönster (kallas även skärmar) för att bearbeta händelser som genereras av dina underordnade kontroller. Bearbetningshändelse som genereras av underordnade kontroller på en skärm är det huvudsakliga sättet att lägga till funktioner i GUIX-programmet.
 
 Anta till exempel att du definierar en skärm på den översta nivån med namnet "main_menu".
-Den här skärmen kan definieras med GUIX Studio, eller så kan du skapa den här skärmen i din program kod. Om du definierar skärmen i GUIX Studio skriver du bara namnet på din händelse hanterare i fältet för Studio-egenskaper för den skärmen, och koden för Studio-genererade specifikationer kommer automatiskt att installera händelse hanteraren. I det här fallet anropar vi den anpassade händelse hanteraren ***main_menu_event_handler*** och bör kodas så här:
+Den här skärmen kan definieras med hjälp av GUIX Studio, eller så kan du skapa den här skärmen i programkoden. Om du definierar skärmen i GUIX Studio skriver du helt enkelt namnet på din händelsehanterare i fältet Studio-egenskaper för skärmen så installeras händelsehanteraren automatiskt av den Studio-genererade specifikationskoden. I det här fallet anropar vi den anpassade ***main_menu_event_handler*** och den ska vara kodad så här:
 
 ```C
 int main_menu_item; /* example: variable to keep track of selected item */
@@ -852,28 +854,28 @@ UINT main_menu_event_handler(GX_WINDOW *main_screen, GX_EVENT *event_ptr)
 }
 ```
 
-I exemplet ovan är det viktigt att Observera att för system händelser som **GX_EVENT_SHOW** (händelser som genereras internt för att meddela en widget av en status ändring) måste programmet klara dessa händelser till funktionen grundläggande händelse bearbetning för att säkerställa att den normala bearbetningen sker. Programmet kan sedan lägga till ytterligare logik som du vill. Alla händelser som inte hanteras av programmet (standard fallet ovan) bör också skickas till funktionen grundläggande bearbetning av händelser. Eftersom det här exemplet var för en skärm på den översta nivån baserat på **GX_WINDOW**, är standard funktionen för händelse bearbetning gx_window_event_process.
+I exemplet ovan är det viktigt att observera att för systemhändelser som **GX_EVENT_SHOW** (händelser som genereras internt för att meddela en widget om en statusändring) måste programmet skicka dessa händelser till funktionen för händelsebearbetning av baswidgeten för att säkerställa att den normala bearbetningen sker. Programmet kan sedan lägga till ytterligare logik efter behov. Alla händelser som inte hanteras av programmet (standardfallet ovan) ska också skickas till funktionen för bashändelsebearbetning. Eftersom det här exemplet var för en toppnivåskärm **baserad GX_WINDOW** är standardfunktionen för händelsebearbetning gx_window_event_process.
 
-### <a name="drawing-function"></a>Ritnings funktion 
+### <a name="drawing-function"></a>Ritningsfunktion 
 
-Alla widgets ritningar utförs separat från händelse hanteringen. Detta är mer effektivt eftersom ritning vanligt vis är kostsamt när det gäller CPU-cykler. Genom att implementera en uppskjuten ritnings algoritm kan alla utestående händelser och associerade visnings ändringar slutföras innan en ritning görs, vilket eliminerar onödigt ritning. Precis som händelse bearbetning finns det en standard ritnings funktion för widget för de flesta widgetar, med namnet ***gx_<widget-typ>_draw***, där xxx är typen av widget. I de flesta fall behöver programmet inte bekymra sig om ritnings funktionen för någon bestämd widget. I situationer där programmet kräver anpassad eller kompletterande ritning kan programmet dock åsidosätta standard ritnings funktionen med sin egen via GUIX API- ***gx_widget_draw_set***. Med den här funktionen kan programmet tillhandahålla en egen anpassad ritnings funktion för alla widgetar. Detta gör att programmet kan definiera alla nya typer av widgetar.
+All widgetritning utförs separat från händelsehanteringen. Detta är mer effektivt eftersom ritningen vanligtvis är dyr när det gäller CPU-cykler. Genom att implementera en algoritm för uppskjuten ritning kan alla utestående händelser och associerade visningsändringar slutföras innan en ritning görs, vilket eliminerar slöseri med ritningen. På liknande sätt som vid händelsebearbetning finns det en standardfunktion för widgetritning för de flesta widgetar med ***gx_<av widgettyp>_draw***, där xxx är widgettypen. I de flesta fall behöver programmet inte bekymra sig om ritningsfunktionen för en viss widget. Men i situationer där programmet kräver anpassad eller kompletterande ritning kan programmet åsidosätta standardritningsfunktionen med en egen via GUIX ***API-gx_widget_draw_set***. Den här funktionen gör att programmet kan tillhandahålla en egen anpassad ritningsfunktion för alla widgetar. Detta gör det möjligt för programmet att definiera hela nya widgettyper.
 
 > [!IMPORTANT]
-> Program ritnings funktioner kan dra nytta av (dvs. inte duplicera kodningen) för standard ritningen genom att bara anropa den direkt från den åsidosatta ritnings funktionen.
+> Programritningsfunktioner kan dra nytta av (d.v.s. inte duplicera kodningen) för standardritningen genom att helt enkelt anropa den direkt från den åsidosättda ritningsfunktionen.
 
-Widgets ritningen anropas exklusivt från kontexten för den interna GUIX system tråden. På så sätt gäller tiden och stack kraven för att utföra ritningen endast för GUIX-tråden.
+Widgetritning kallas exklusivt för den interna GUIX-systemtråden. På så sätt gäller tidsinställning och stackkrav för att utföra ritningen endast för GUIX-tråden.
 
 ### <a name="implementing-custom-drawing-example"></a>Implementera anpassad ritning (exempel) 
 
-Ritnings funktionen för alla widgetar refereras till via en indirekt funktions pekare som är medlem i kontroll blocket GX_WIDGET. Om du använder GUIX Studio för att definiera widgeten kan du installera en egen funktions pekare genom att skriva namnet på din funktion i parametern "ritnings funktion" i egenskaperna för widgeten, så kommer Studio att installera funktions pekaren åt dig när widgeten skapas. Om du skapar widgeten i din program kod måste du använda ***gx_widget_draw_set*** API-funktionen för att installera din anpassade ritnings funktion när widgeten har skapats.
+Ritningsfunktionen för en widget refereras via en indirekt funktionspekare som är medlem i GX_WIDGET kontrollblocket. Om du använder GUIX Studio för att definiera widgeten kan du installera en egen funktionspekare genom att skriva namnet på funktionen i parametern "Ritningsfunktion" i widgetegenskaperna så installerar Studio funktionspekaren åt dig när widgeten skapas. Om du skapar widgeten i programkoden måste du använda ***API gx_widget_draw_set funktionen*** för att installera din anpassade ritningsfunktion när widgeten har skapats.
 
-I det här exemplet antar vi att du vill anpassa utseendet på en knapp. Knappen kommer att se ut ungefär som en **GX_TEXT_BUTTON**, men vi lägger till en liten grön "LED_ON"-bitmapp i mitten av knappen när knappen trycks ned och små "LED_OFF"-bitmapp när knappen inte är nedtryckt. Vi vill skapa en knapp som ser ut som illustrationerna nedan.
+I det här exemplet antar vi att du vill anpassa utseendet på en knapp. Knappen ser ut ungefär som en **GX_TEXT_BUTTON**, men vi kommer att lägga till en liten grön "LED_ON"-bitmapp i mitten till höger på knappen när knappen trycks ned och liten "LED_OFF"-knapp när knappen inte trycks ned. Vi vill skapa en knapp som ser ut som bilderna nedan.
 
-![Skärm bild av den gröna knappen för på.](./media/guix/image4.jpg) anpassad knapp "på"
+![Skärmbild av den gröna knappen för På.](./media/guix/image4.jpg) anpassad knapp "på"
 
-![Skärm bild av den röda knappen för av.](./media/guix/image5.jpg) anpassad knapp
+![Skärmbild av den röda knappen för Av.](./media/guix/image5.jpg) anpassad knapp "av"
 
-I det här fallet skulle vi skriva en knapp ritnings funktion som ser ut ungefär så här.
+I det här fallet skulle vi skriva en funktion för knappritning som ser ut ungefär så här.
 
 ```C
 UINT my_button_draw(GX_TEXT_BUTTON *button)
@@ -915,12 +917,12 @@ UINT my_button_draw(GX_TEXT_BUTTON *button)
 }
 ```
 
-## <a name="guix-drawing-context-component"></a>GUIX rit kontext komponent 
+## <a name="guix-drawing-context-component"></a>Komponent för GUIX-ritningskontext 
 
-Rit kontexten skapas dynamiskt, vid körning, eftersom GUIX utför varje uppdaterings åtgärd på arbets ytan. Rit kontexten sammanfogar arbets ytan, skärm driv rutinen och penseln som används för att utföra de aktuella rit åtgärderna.
+Ritningskontexten skapas dynamiskt vid körning, eftersom GUIX utför varje uppdateringsåtgärd för arbetsytan. Ritningskontexten kopplar samman arbetsytan, skärmdrivrutinen och penseln som används för att utföra de aktuella ritningsåtgärder.
 
-Rit kontexten definieras av **GX_DRAW_CONTEXTs** strukturen.
-Den här strukturen innehåller variabler som definierar urklippet och vyn av den aktuella ritnings åtgärden, definierar den aktuella arbets ytan och definierar den aktuella skärm driv rutinen som används. **GX_DRAW_CONTEXTs** strukturen innehåller också penseln som används för ritning. Rit kontextens pensel är den medlem som du kommer att arbeta direkt med i dina anpassade ritnings funktioner. Pensel strukturen definieras på det sätt som visas i koden nedan.
+Ritningskontexten definieras av **GX_DRAW_CONTEXT** struktur.
+Den här strukturen innehåller variabler som definierar urklipp och vy för den aktuella ritningsåtgärden, definierar den aktuella arbetsytan och definierar den aktuella skärmdrivrutinen som används. Den **GX_DRAW_CONTEXT** strukturen innehåller även penseln som används för ritning. Penseln för ritarkontext är den medlem som du arbetar direkt med i dina anpassade ritningsfunktioner. Penselstrukturen definieras enligt koden nedan.
 
 ```C
 typedef struct GX_BRUSH_STRUCT
@@ -937,11 +939,11 @@ typedef struct GX_BRUSH_STRUCT
 } GX_BRUSH;
 ```
 
-I fältet **gx_brush_pixelmap** definieras en Pixelmap som ska användas för rektangel-och polygon fyllningar. Den här medlemmen används inte om **gx_brush_style** innehåller **GX_BRUSH_PIXELMAPs** formatet.
+Fältet **gx_brush_pixelmap** definierar en pixelkarta som ska användas för rektangel- och polygonfyllningar. Den här medlemmen används inte om **inte gx_brush_style** är innehåller **GX_BRUSH_PIXELMAP** format.
 
-Den **gx_brush_font** medlemmen definierar teckensnittet som används för text ritning.
-Den **gx_brush_line_pattern** medlemmen definierar mönstret som används för streckade linjer.
-Den **gx_brush_style** medlemmen är en uppsättning stil flaggor som kan vara eller tillsammans definiera penselns attribut. Följande pensel format flaggor är tillgängliga.
+Den **gx_brush_font definierar** teckensnittet som används för textritning.
+Den **gx_brush_line_pattern medlemmen** definierar mönstret som används för streckade linjer.
+Den **gx_brush_style** är en uppsättning formatflaggor som kan vara ELLER tillsammans för att fullständigt definiera penselattributen. Tillgängliga flaggor för penselformat innehåller följande.
 
 **GX_BRUSH_OUTLINE**  
 **GX_BRUSH_SOLID_FILL**  
@@ -950,89 +952,89 @@ Den **gx_brush_style** medlemmen är en uppsättning stil flaggor som kan vara e
 **GX_BRUSH_UNDERLINE**  
 **GX_BRUSH_ROUND**
 
-Den **gx_brush_width** medlemmen definierar linjen med för linje ritning eller dispositions bredden för ritningen.
+Den **gx_brush_width** medlemmen definierar linjen med för linjeritning eller konturbredden för konturritning.
 
-Den **gx_brush_line_color** medlemmen definierar förgrunds färgen för linje ritning och text ritning.
+Den **gx_brush_line_color-medlemmen** definierar förgrundsfärgen för linjeritning och för textritning.
 
-Den **gx_brush_fill_color** medlemmen definierar den heltäckande fyllnings färgen som används för form fyllning. Kontext komponenten GUIX innehåller en uppsättning API: er utformade för att göra det mycket enkelt att ändra den aktuella penseln i den aktiva kontexten. Dessa API: er omfattar **gx_context_brush_define**, **gx_context_line_color_set**, **gx_context_fill_color_set**, **gx_context_font_set** och många andra.
+Den **gx_brush_fill_color medlemmen** definierar den heldragna fyllningsfärgen som används för formfyllning. GUIX-kontextkomponenten innehåller en uppsättning API:er som är utformade för att göra det mycket enkelt att ändra den aktuella penseln i den aktiva kontexten. Dessa API:er **gx_context_brush_define**, **gx_context_line_color_set**, **gx_context_fill_color_set**, **gx_context_font_set** och många andra.
 
-Rit kontexten för ett överordnat objekt ärvs av objektets underordnade objekt. I själva verket ärvs en klon av den överordnade ritnings kontexten av de underordnade objekten när deras ritnings funktioner anropas. Det underordnade objektet kan ändra kontexten utan att påverka den överordnade ritningen, men den kan också ärva information från överordnad, till exempel pensel färg och format om du vill.
+Rita kontexten för ett överordnat objekt ärvs av underordnade objekt. I själva verket ärvs en klon av den överordnade ritningskontexten av de underordnade objekten när deras ritningsfunktioner anropas. Den underordnade kan ändra kontexten utan att den överordnade ritningen påverkas, men den kan också ärva information från den överordnade, till exempel penselfärg och stil om så önskas.
 
-## <a name="guix-window-component"></a>GUIX-fönster komponent 
+## <a name="guix-window-component"></a>GUIX-fönsterkomponent 
 
-Fönster komponenten ansvarar för all fönster bearbetning i GUIX. Ett GUIX-fönster är i grunden ett tydligt visnings områden som kan innehålla en eller flera underordnade widgetar. I GUIX är fönstret faktiskt bara en speciell form av objektet grundläggande widget.
+Fönsterkomponenten ansvarar för all fönsterbearbetning i GUIX. Ett GUIX-fönster är i grunden ett distinkt visningsområde som kan innehålla en eller flera underordnade widgetar. I GUIX är fönstret egentligen bara en särskild form av det grundläggande widgetobjektet.
 
-GUIX Windows implementeras på ett objektorienterat sätt med fullständigt stöd för arv. Detta görs med hjälp av ANSI C, vilket resulterar i minsta möjliga minnes-och bearbetnings krav.
+GUIX-fönster implementeras på ett objektorienterat sätt med fullständigt stöd för arv. Detta åstadkoms med ansi C, vilket resulterar i minsta möjliga minne och bearbetningskrav.
 
-GUIX Windows utökar funktionerna i GUIX-widgeten främst genom att lägga till stöd för vågrät och lodrät rullning. GUIX window-objekt kan automatiskt skapa och Visa rullnings lister och svara på inmatade rullnings lister. Flyttbara fönster har även inbyggd händelse hantering så att fönstret kan flyttas eller dras baserat på Penn ingångs händelser.
-Slutligen svarar GUIX Window på att ta emot fokus genom att flytta fönstret till början av fönstret Z-ordning.
+GUIX-fönster utökar funktionerna i GUIX-widgeten främst genom att lägga till stöd för vågrät och lodrät rullning. GUIX-fönsterobjekt kan automatiskt skapa och visa rullningslister och svara på rullningslistsinmatning. Flyttbara fönster har också inbyggd händelsehantering som gör att fönstret kan flyttas eller dras baserat på pennindatahändelser.
+Slutligen svarar GUIX-fönstret på att få indatafokus genom att flytta fönstret längst fram i Z-ordningen.
 
-GUIX Window upprätthåller begreppet *klient område*, som är den inre delen av fönstret när fönster kant linjerna och icke-klient objekt, till exempel rullnings lister, tas bort från det tillgängliga området. Underordnade widgetar för klient området klipps ut mot fönstrets klient del, medan icke-klientdatorer, till exempel rullnings lister, som rullnings lister kan rita utanför klient området, men fortfarande beskärs till fönstrets yttre dimensioner.
+GUIX-fönstret underhåller begreppet klientområde *,* som är den inre delen av fönstret när fönstret kantlinjer och icke-klientobjekt som rullningslisterna tas bort från det tillgängliga området. Underordnade widgetar i klientområdet klipps till fönstrets klientområde, medan underordnade rullningslister som rullningslister tillåts rita utanför klientområdet, men de är fortfarande urklippta i fönstrets yttre dimensioner.
 
-Windows underhålls i ett överordnat-underordnat sätt, där de underordnade ärver egenskaper från deras överordnade objekt. Underordnade fönster kan ha sina egna underordnade fönster och ärver sedan olika egenskaper från den överordnade. Egenskaperna för ett fönster kan uttryckligen omdefinieras via olika GUIX-API-anrop.
+Windows underhålls på ett överordnat-underordnat sätt, där underordnade objekt ärver egenskaper från sina överordnade. Underordnade fönster kan ha egna underordnade fönster som återigen ärver olika egenskaper från det överordnade fönstret. Egenskaperna för alla fönster kan uttryckligen omdefinieras via olika GUIX API-anrop.
 
 ### <a name="window-creation"></a>Skapa fönster 
 
-Ett window-objekt kan skapas vid initiering eller när som helst under körningen av program trådar. Det finns ingen gräns för antalet fönster objekt som kan skapas av ett program. Det finns inte heller någon gräns för antalet underordnade objekt i alla fönster.
+Ett fönsterobjekt kan skapas under initieringen eller när som helst under körningen av programtrådar. Det finns ingen gräns för hur många fönsterobjekt som kan skapas av ett program. Det finns heller ingen gräns för hur många underordnade underfönster som helst.
 
-### <a name="window-control-block"></a>Fönster kontroll block 
+### <a name="window-control-block"></a>Fönsterkontrollblock 
 
-Egenskaperna för varje window-objekt finns i kontroll blocket **GX_WINDOW** och definieras i **_gx_api. h_**. Det minne som krävs för ett window-objekt tillhandahålls av programmet och kan placeras var som helst i minnet. Det är dock vanligt att göra fönstret objekt kontroll blockera en global struktur genom att definiera den utanför omfånget för en funktion.
+Egenskaperna för varje fönsterobjekt finns i dess kontrollblock **och GX_WINDOW** definieras i **_gx_api.h_**. Det minne som krävs för ett fönsterobjekt tillhandahålls av programmet och kan finnas var som helst i minnet. Det är dock vanligast att göra så att kontrollen av fönsterobjekt blockerar en global struktur genom att definiera den utanför omfånget för en funktion.
 
-### <a name="root-window"></a>Rot fönster 
+### <a name="root-window"></a>Rotfönster 
 
-GUIX kräver det som kallas för ett rot fönster för varje arbets yta. Rot fönstret är ramlösa och har samma dimensioner som den arbets yta som den är kopplad till. Den används främst som en behållare för alla widgetar och Windows på den första nivån. Rot fönstret skapas vanligt vis av programmet via API-funktionen ***gx_window_root_create***, strax efter att skärmen och arbets ytan har skapats. Om du använder den Studio-genererade funktionen gx_studio_display_configure kan adressen till rot fönstret returneras på den plats som har skickats som den sista parametern för den här funktionen.
+GUIX kräver vad som kallas ett rotfönster för varje arbetsyta. Rotfönstret är kantlöst och har samma dimensioner som arbetsytan som det är kopplat till. Den används främst som en container för alla widgetar och fönster på första nivån. Rotfönstret skapas vanligtvis av programmet via API-funktionen ***gx_window_root_create***, strax efter att skärmen och arbetsytan har skapats. Om du använder den Studio-genererade gx_studio_display_configure kan adressen till rotfönstret returneras på den plats som skickades som den sista parametern till den här funktionen.
 
-Ett rot fönster är som standard icke-flyttbart och i det enklaste fallet är rot fönstret storleken på arbets ytan. Rot fönstret som används ritar visnings bakgrunden, så om du vill ändra visnings bakgrunds färgen eller Visa bakgrunds tapeter, tilldelar du en färg eller ett Skriv bords underlägg till rot fönstret.
+Ett rotfönster är som standard oflyttningsbart, och i det enklaste fallet är rotfönstret arbetsytans storlek. Rotfönstret ritar i praktiken visningsbakgrunden, så om du vill ändra visningsbakgrundsfärgen eller visa bakgrundsbakgrunden tilldelar du en färg eller bakgrundsbild till rotfönstret.
 
-Om ett rot fönster är flyttbart, flyttas det inte genom att ändra placeringen på arbets ytan som ett underordnat fönster, men genom att flytta själva arbets ytan.
-Med den här funktionen kan GUIX-rot fönstret använda maskin vara som stöder flera ramtyper med maskin varu förskjutnings registreringar.
+Om ett rotfönster kan flyttas flyttas det inte genom att ändra dess position på arbetsytan som ett underfönster, utan genom att flytta själva arbetsytan.
+Med den här funktionen kan GUIX-rotfönstret utnyttja maskinvara som stöder flera bildrutebuffertar med maskinvaruförskjutningsregister.
 
 ### <a name="background"></a>Bakgrund 
 
-Fönster bakgrunder är antingen solida färger eller bitmappsbilder. Det finns en standard fönster bakgrund på system nivå som tillhandahåller standardinställningen för den ursprungliga uppsättningen Windows. Naturligtvis kan alla fönster bakgrunder ändras via GUIX-API: et.
+Fönsterbakgrunder är antingen solida färger eller bitmappbilder. Det finns en standardfönsterbakgrund på systemnivå som tillhandahåller standardvärdet för den första uppsättningen fönster. Naturligtvis kan alla fönsterbakgrunder ändras via GUIX-API:et.
 
-Om du vill ändra den solida färg bakgrunden i ett fönster använder du ***gx_widget_fill_color_set*** API. Om du vill tilldela ett bakgrunds-skrivbordsunderlägg till ett fönster använder du ***gx_window_wallpaper_set*** API.
+Om du vill ändra bakgrundsfärgen i ett fönster använder du ***gx_widget_fill_color_set*** API. Om du vill tilldela ett bakgrundsunderlägg till ett fönster använder du ***gx_window_wallpaper_set*** API.
 
 ### <a name="scrolling"></a>Rullning 
 
-GUIX stöder standard fönster rullning när det utrymme som krävs för att Visa fönstrets underordnade är större än den aktuella storleken för fönstret, vågrätt och/eller lodrätt. Om du vill aktivera bläddring måste programmet skapa önskade rullnings lister och koppla dem till fönstret.
+GUIX stöder standardfönsterrullning när det krävs ett område för att visa fönster underordnade överskrider den aktuella storleken på fönstret – vågrätt och/eller lodrätt. Om du vill aktivera rullning måste programmet skapa önskade rullningslister och koppla dem till fönstret.
 
-GUIX Window-komponenten innehåller en standard rullnings implementering som baseras på storleken på fönstrets klient områden och omfattningen av alla underordnade widgetar. Program kan också tillhandahålla egen rullnings implementering och tolkning genom att åsidosätta den ***gx_window_scroll_info_get*** funktionen för ett visst fönster.
+GUIX-fönsterkomponenten tillhandahåller en standardimplementering av rullning baserat på storleken på fönstrets klientområde och omfattningen för alla underordnade widgetar. Program kan också tillhandahålla sin egen rullningsimplementering och tolkning genom ***att åsidosätta gx_window_scroll_info_get*** för ett visst fönster.
 
-### <a name="event-notification"></a>Händelse meddelande 
+### <a name="event-notification"></a>Händelsemeddelande 
 
-Händelse bearbetnings funktionen för standard fönster skiljer sig från GX_WIDGET händelse bearbetning främst vid hantering av rullnings-och storleks händelser. GX_WINDOW tillhandahållna defalt-hanterare för rullning och storleks händelser.
+Standardfunktionen för händelsebearbetning i fönstret skiljer sig från GX_WIDGET händelsebearbetningen främst i hanteringen av bläddrings- och storleksändringshändelser. GX_WINDOW defalt-hanterare för bläddring och storleksändring av händelser.
 
-Programmet kan också lägga till egna anpassade händelser som börjar numeriskt efter konstanten **GX_FIRST_APP_EVENT**. Alla händelse nummer efter den här konstanten är reserverade för programmets användning. Naturligtvis måste programmets fönster händelse hanterare ha bearbetning för sådana program händelser.
+Programmet kan också lägga till egna anpassade händelser, som startar numeriskt efter **konstanten GX_FIRST_APP_EVENT**. Alla händelsenummer efter den här konstanten är reserverade för programmets användning. Naturligtvis måste programmets fönsterhändelsehanterare ha bearbetning för sådana programhändelser.
 
-### <a name="event-processing"></a>Händelse bearbetning 
+### <a name="event-processing"></a>Händelsebearbetning 
 
-Precis som alla andra typer av widgetar, finns det en standard funktion för händelse bearbetning i varje fönster som heter ***gx_window_event_process***. Du kommer normalt att åsidosätta den här händelse hanterings funktionen med din egen händelse hanterare i Windows som du skapar. Det här är hur du ska svara på händelser och vidta åtgärder baserat på händelser som genererats av underordnade kontroller i fönstret.
+Precis som alla andra widgettyper finns det en standardfunktion för bearbetning av fönsterhändelse för varje fönster med ***namnet gx_window_event_process***. Du åsidosätter vanligtvis den här händelsehanteringsfunktionen med din egen händelsehanterare i de fönster som du skapar. På så sätt svarar du på händelser och vidta åtgärder baserat på händelser som genereras av de underordnade kontrollerna i fönstret.
 
-Det är viktigt att komma ihåg att anropa bas ***gx_window_event_process*** funktionen för GUIX system händelser om du åsidosätter händelse hanteraren för att tillåta att standard händelse hanteringen inträffar förutom den åtgärd som du lägger till i händelse hanteraren. Om du till exempel tillhandahåller en anpassad hanterare för **GX_EVENT_SHOW** -händelsen och inte skickar den här händelsen till ***gx_window_event_process***, blir fönstret aldrig synligt.
-Om du vill ange en anpassad händelse hanterare för ett fönster använder du funktionen ***gx_widget_event_process_set*** för att definiera adressen för din händelse hanterare. Den här funktionen åsidosätter standard funktionen för händelse bearbetning med funktionen process bearbetning som anges i API: et.
-
-> [!IMPORTANT]
-> Bearbetnings funktioner för program händelser kan dra nytta av (dvs. inte duplicera bearbetningen) av standard bearbetningen genom att bara anropa standard ***gx_window_event_process*** direkt.
-
-Händelse bearbetning anropas exklusivt från kontexten för den interna GUIX system tråden. På det här sättet gäller stack kraven för bearbetning av händelse hanteringen bara för GUIX-tråden.
-
-## <a name="guix-image-reader-component"></a>GUIX image Reader-komponent 
-
-Komponenten image Reader innehåller verktyg och API-funktioner för att expandera obehandlade komprimerade avbildningar till GUIX Pixelmap-format. RAW-bilddata med JPEG och PNG-format stöds, med ytterligare format reserverade för framtida versioner.
-
-Observera att för de flesta GUIX-program krävs inte avbildnings läsar komponenten GUIX. De flesta program är beroende av GUIX Studio-programmet för att konvertera JPEG-och PNG-formaterade grafik till gångar till GUIX-kompatibla **GX_PIXELMAP** resurser. GUIX image Reader-komponenten används när RAW Graphics-till gångarna bara är känd vid körning eller när system lagrings begränsningarna förhindrar lagring av resurser i **GX_PIXELMAP** format. Bild data för JPEG-och PNG-format är i allmänhet mer kompakta än **GX_PIXELMAP** format, men det finns avsevärda körnings kostnader som är kopplade till komprimering och färg rymds konvertering av dessa avbildnings typer dynamiskt.
-
-Om RAW-format JPEG-eller PNG-bilder skickas till gx_canvas_pixelmap_draw API-funktionen, expanderar GUIX dynamiskt och ritar JPEG-eller PNG-data. Observera att detta kommer att ha en betydande negativ inverkan på hastigheten för körnings ritningen och att skicka OFORMATERADe bild data till gx_canvas_pixelmap_draw funktion inte rekommenderas om du inte använder ett maskin varu mål som stöder maskinvarustödd JPEG-eller PNG-dekomprimering.
+Det är viktigt att komma ihåg att anropa ***bas-gx_window_event_process-funktionen*** för GUIX-systemhändelser om du åsidosätter den händelsehanteraren, så att standardhändelsehanteringen kan ske utöver den åtgärd som du lägger till i händelsehanteraren. Om du till exempel anger en anpassad hanterare **för GX_EVENT_SHOW händelsen** och inte skickar den här händelsen till ***gx_window_event_process*** visas aldrig ditt fönster.
+Om du vill ange en anpassad händelsehanterare för ett ***fönster använder gx_widget_event_process_set*** för att definiera adressen för händelsehanteraren. Den här funktionen åsidosätter standardfunktionen för händelsebearbetning med funktionen för bearbetning av händelsefunktioner angiven i API:et.
 
 > [!IMPORTANT]
-> Att skicka RAW JPEG-eller PNG-formaterade avbildningar till gx_canvas_pixelmap_draw-API: n ådrar sig betydande körnings kostnader för de flesta mål maskin
+> Funktioner för programhändelsebearbetning kan dra nytta av (d.v.s. inte duplicera bearbetningen) av standardbearbetningen genom ***att helt enkelt anropa gx_window_event_process direkt.***
 
-Som ett alternativ kan rå JPEG-och PNG-data konverteras till GX_PIXELMAP format vid körning med hjälp av komponenten image Reader.
-Pixelmaps som produceras på det här sättet kan användas och ritas precis som Pixelmaps som produceras av Studio och som finns i din resurs fil. Detta gör att ditt program kan utföra bild dekomprimering, rastrering och färg utrymmes konvertering en gång (vanligt vis vid program start) i stället för att utföra dessa åtgärder varje gång bilden ritas.
+Händelsebearbetning anropas exklusivt från kontexten för den interna GUIX-systemtråden. På så sätt gäller stackkraven för att bearbeta händelsehanteringen endast GUIX-tråden.
 
-Komponenten image Reader innehåller:
+## <a name="guix-image-reader-component"></a>Komponent för GUIX-bildläsare 
+
+Komponenten för bildläsare innehåller verktyg och API-funktioner för att dekomprimera komprimerade raw-bilder till GUIX pixelmap-format. Rådata för JPEG- och PNG-format stöds, med ytterligare format som är reserverade för framtida versioner.
+
+Observera att för de allra flesta GUIX-program krävs inte komponenten GUIX Image Reader. De flesta program förlitar sig på GUIX Studio-programmet för att konvertera grafiktillgångar i JPEG- och PNG-format **till GUIX-kompatibla GX_PIXELMAP** resurser. KOMPONENTEN GUIX-bildläsare används när grafiktillgångarna i rådata endast är kända vid körning, eller när systemlagringsbegränsningarna förhindrar lagring av resurser **i GX_PIXELMAP** format. Bilddata i JPEG- och PNG-format är vanligtvis mer kompakta än **GX_PIXELMAP-format,** men det finns betydande körningskostnader för att utföra dekomprimering och konvertering av färgutrymme för dessa bildtyper dynamiskt.
+
+Om JPEG- eller PNG-bilder i raw-format skickas gx_canvas_pixelmap_draw API-funktionen dekomprimerar GUIX dynamiskt och ritar JPEG- eller PNG-data. Observera att detta har en betydande negativ inverkan på körningshastigheten och att skicka RAW-formatbilddata till gx_canvas_pixelmap_draw-funktionen rekommenderas inte om du inte använder ett maskinvarumål som stöder maskinvarustödd JPEG- eller PNG-dekomprimering.
+
+> [!IMPORTANT]
+> Att skicka rå JPEG- eller PNG-formaterade bilder till gx_canvas_pixelmap_draw API medför betydande körningskostnader för merparten av målmaskinvaran.
+
+Alternativt kan råa JPEG- och PNG-data konverteras till GX_PIXELMAP-format vid körning med hjälp av komponenten Bildläsare.
+Pixelkartor som skapas på det här sättet kan användas och ritas precis som pixelkartor som skapas av Studio och som finns i din resursfil. På så sätt kan ditt program utföra bilddekomprimering, dithering och konvertering av färgutrymme en gång (vanligtvis vid programstart) i stället för att utföra dessa åtgärder varje gång bilden ritas.
+
+Komponentfunktionerna för bildläsare omfattar:
 
 ***gx_image_reader_create***  
 ***gx_image_reader_palette_set***  
@@ -1040,17 +1042,17 @@ Komponenten image Reader innehåller:
 
 ## <a name="guix-animation-component"></a>Komponent för GUIX-animering 
 
-Komponenten GUIX-animering är en uppsättning funktioner och tjänster som används för att automatisera överföring av skärm och widget. Komponenten GUIX-animering stöder tonings-i-, tonar-och rörelse-eller bildtyper-animeringar av alla typer av widgetar.
+Komponenten GUIX-animering är en uppsättning funktioner och tjänster som används för att automatisera automatisering av skärm- och widgetövergångar. Komponenten GUIX-animering har stöd för att tona in, tona ut och flytta eller dra av animeringar av valfri widgettyp.
 
-Animeringar av tonings typer kan stödjas antingen genom att variera det interna alpha-värdet (om **GX_BRUSH_ALPHA_SUPPORT** har Aktiver ATS) eller genom att en samling av widgetar ritas till en separat minnes arbets yta när den sedan blandars med bakgrunden. För maskin varu mål som har stöd för flera maskinvarubaserade grafik lager, uppnås stöd för smidiga tonings effekter med hjälp av den här arbets ytans blandnings metod, ofta med mycket liten processor bandbredd som krävs. För maskin varu mål som inte har stöd för flera grafik lager, kan blandning med GUIX-penselns alpha-värde användas vid körning med 16 BPP och högre färg djup.
+Animeringar av toningstyp kan stödjas antingen genom att variera det interna alfavärdet för toningswidgeten (om **GX_BRUSH_ALPHA_SUPPORT** är aktiverat) eller genom att rita någon samling widgetar till en separat minnesarbetsyta när den sedan blandas med bakgrunden. För maskinvarumål som stöder flera maskinvarugrafikskikt uppnås bäst stöd för jämna avfasningseffekter med den här metoden för att blanda arbetsyta, ofta med mycket lite processorbandbredd som krävs. För maskinvarumål som inte har stöd för flera grafiklager stöds blending med hjälp av ALFA-värdet för GUIX-pensel vid körning med 16 bpp och högre färgdjup.
 
-Om en animering ska använda en separat arbets yta, innehåller komponenten GUIX-animering API-tjänsten gx_animation_canvas_define för detta ändamål. Andra typer av animering kräver inte en separat arbets yta, men de kommer att använda den om den är tillgänglig. Detta gör den bästa möjliga användningen av underliggande maskin varu stöd för flera maskin varu ytor.
+Om en animering ska använda en separat arbetsyta tillhandahåller KOMPONENTEN GUIX-animering API-gx_animation_canvas_define för detta ändamål. Andra animeringstyper kräver inte en separat arbetsyta, men de använder den om den är tillgänglig. På så sätt får du bästa möjliga användning av underliggande maskinvarustöd för flera maskinvaruytor.
 
-Variablerna som styr en animering definieras av två kontroll block. Först **GX_ANIMATION** kontroll blocket som definierar animeringssekvensen. Animeringssekvensen är den motor som kör den animeringssekvens som du definierar. Du kan använda en enskild animering igen flera gånger för att köra många olika animeringssekvenser. Om du behöver köra flera animeringssekvenser samtidigt kan du skapa flera styrenheter för **GX_ANIMATION** animering.
+Variablerna som styr en animering definieras av två kontrollblock. Först definierar **GX_ANIMATION** som definierar animeringskontrollanten. Animeringskontrollanten är den motor som kör animeringssekvensen som du definierar. En enda animeringskontrollant kan användas flera gånger för att köra många olika animeringssekvenser. Om du behöver köra flera animeringssekvenser samtidigt  kan du skapa flera GX_ANIMATION animeringskontrollanter.
 
-System komponenten GUIX kan tillhandahålla ett återanvändbart block med **GX_ANIMATION** kontroll strukturer, som kan begäras av programmet när och animering behövs och automatiskt returneras till mediepoolen när animeringssekvensen är klar. Detta frigör programmet från att definiera en **GX_ANIMATION** -struktur statiskt för varje animering som kan implementeras. Storleken på den här poolen med **GX_ANIMATION** strukturer definieras av den konstant **GX_ANIMATION_POOL_SIZE**, som är standardvärdet 6, vilket innebär att som standard 6 samtidiga animeringar kan tilldelas från mediepoolen. Den här konstanten kan naturligtvis anges i huvud filen gx_user. h är mer samtidiga animeringar krävs. Om **GX_ANIMATION_POOL_SIZE** har värdet noll tillhandahåller inte system komponenten GUIX en animeringssekvens eller relaterade tjänster.
+GUIX-systemkomponenten kan tillhandahålla ett återanvändargränssnittsblock **med GX_ANIMATION-kontrollstrukturer** som kan begäras av programmet när och animering behövs och som automatiskt returneras till systempoolen när animeringssekvensen har slutförts. Detta frigör programmet från att statiskt definiera en **GX_ANIMATION** struktur för varje animering som kan implementeras. Storleken på den här **poolen med GX_ANIMATION-strukturer** definieras av konstanten **GX_ANIMATION_POOL_SIZE**, som standard är 6, vilket innebär att som standard kan 6 samtidiga animeringar allokeras från systempoolen. Den här konstanten kan naturligtvis omdefinieras i gx_user.h-huvudfilen är mer samtidiga animeringar krävs. Om **GX_ANIMATION_POOL_SIZE** har angetts till noll tillhandahåller inte GUIX-systemkomponenten någon animeringspool eller relaterade tjänster.
 
-Det andra kontroll blocket eller den struktur som används för att definiera en animering är **GX_ANIMATION_INFO** -strukturen. Den här strukturen används för att definiera en viss animeringssekvens. Du skickar den här informations strukturen till din animeringssekvens för att initiera en animeringssekvens med hjälp av gx_animation_start API-tjänsten. **GX_ANIMATION_INFOs** strukturen innehåller följande fält:
+Det andra kontrollblocket eller strukturen som används för att definiera en animering är **GX_ANIMATION_INFO** struktur. Den här strukturen används för att definiera en viss animeringssekvens. Du skickar den här informationsstrukturen till animeringskontrollanten för att initiera en animeringssekvens med hjälp gx_animation_start API-tjänsten. Den **GX_ANIMATION_INFO** strukturen innehåller följande fält:
 
 ```C
 typedef struct GX_ANIMATION_INFO_STRUCT
@@ -1070,58 +1072,58 @@ typedef struct GX_ANIMATION_INFO_STRUCT
 } GX_ANIMATION_INFO;
 ```
 
-Den **gx_animation_target** medlemmen definierar den mål-widget som animeringen ska agera på.
+Den **gx_animation_target medlemmen** definierar målwidgeten som animeringskontrollanten kommer att agera på.
 
-Den **gx_animation_parent** medlemmen definierar den överordnade widgeten, om den finns, som mål-widgeten ska kopplas till när animeringssekvensen är klar. Gx_animation_parent är också mottagare av GX_ANIMATION_COMPLETE-händelsen som genereras när en animering har slutförts.
+Den **gx_animation_parent** medlemmen definierar den överordnade widgeten, om en eventuell, som målwidgeten ska kopplas till när animeringssekvensen är klar. Den gx_animation_parent är också mottagare av GX_ANIMATION_COMPLETE händelse som genereras när en animering har slutförts.
 
-Den **gx_animation_screen_list** medlemmen definierar en widgets lista för bildanimeringar med Penn bildnings skärm. Widge-listan ska avslutas med GX_NULL pekare och varje widget i listan ska ha samma x-, y-dimensioner som gx_animation_parent.
+Den **gx_animation_screen_list** definierar en widgetlista för penndrivna animeringar av skärmbild. Widge-listan bör avslutas med GX_NULL pekare och varje widget i listan bör ha samma x,y-dimensioner som gx_animation_parent.
 
-**Gx_animation_style** är en bitmask som definierar vilken typ av animering som ska utföras och associerade alternativ. Animeringens stil flaggor innehåller följande.
+Den **gx_animation_style** är en bitmask som definierar vilken typ av animering som ska utföras och associerade alternativ. Flaggor för animeringsstil inkluderar följande.
 
-| Flagga för animering &nbsp; &nbsp; | Description |
+| Flagga &nbsp; för &nbsp; animeringsstil | Beskrivning |
 | --- | --- |
-| GX_ANIMATION_TRANSLATE | Begär en animering av en bild-eller tonings typ. |
-| GX_ANIMATION_SCREEN_DRAG | Begär en Penn indata driven skärm som drar animering. |
+| GX_ANIMATION_TRANSLATE | Begär animering av en bild- eller toningstyp. |
+| GX_ANIMATION_SCREEN_DRAG | Begära en penndriven skärm dra animering. |
 
-Följande flaggor kan användas tillsammans med **SCREEN_DRAG** av typen animeringar.
+Följande flaggor kan användas i kombination med **SCREEN_DRAG** animeringar.
 
-| Skärm &nbsp; drar &nbsp; flaggor | Description |
+| Dra &nbsp; &nbsp; flaggor på skärmen | Beskrivning |
 | --- | --- |
-| GX_ANIMATION_WRAP | Skärm listan ska radbrytas från slut punkt till Start. |
-| GX_ANIMATION_HORIZONTAL | Skärm drag tillåts i vågrät riktning.  |
-| GX_ANIMATION_VERTICAL | Skärm drag tillåts i lodrät riktning. |
+| GX_ANIMATION_WRAP | Skärmlistan bör omsluta från end back till start. |
+| GX_ANIMATION_HORIZONTAL | Skärm dra tillåts i vågrät riktning.  |
+| GX_ANIMATION_VERTICAL | Skärm dra tillåts i lodrät riktning. |
 
-Följande flagga kan användas tillsammans med Översätt animeringar.
+Följande flagga kan användas i kombination med översätt animeringar.
 
-| Översätt &nbsp; animeringar &nbsp; flaggor | Description |
+| Översätta &nbsp; animeringar &nbsp; flaggor | Beskrivning |
 | --- | --- |
-| GX_ANIMATION_DETACH | Koppla bort animeringens mål från den överordnade animeringen när animeringen är klar. Om målet har tilldelats dynamiskt och skapats av den genererade automatiserade händelse hanteringen i GUIX Studio tas målet bort när det har kopplats från. |
-| GX_ANIMATION_TRANSLATE | Typer av animering är timer drivna animeringar. Programmet definierar start-och slut position och inledande och avslutande alfa värde för widgeten mål, och animeringssekvensen skapar en timer för att betjäna och som drivande kraft för att köra animeringen.
-| GX_ANIMATION_SCREEN_DRAG | Skiljer sig från **översättnings** animeringarna i att den här typen av animering drivs av Penn indata-händelser. Den här animeringseffekten spårar tillsammans med pekskärmen indata för att dra in mål-widgeten när användaren drar en penna eller en Stylus över indata-pekskärmen. Om du vill använda den här typen av animering ska programmet anropa **_gx_animation_drag_enable_** API för att aktivera den här animeringen. |
+| GX_ANIMATION_DETACH | Koppla från animeringsmålet från animeringen som är överordnat när animeringen har slutförts. Om målet dynamiskt allokerades och skapades av GUIX Studio-genererad automatiserad händelsehantering tas målet bort när det har frånkopplades. |
+| GX_ANIMATION_TRANSLATE | Animeringstyper är timerdrivna animeringar. Programmet definierar start- och slutpositionen och start- och slut alfavärdet för målwidgeten, och animeringshanteraren skapar en timer för att fungera och som drivande kraft för att köra animeringen.
+| GX_ANIMATION_SCREEN_DRAG | Skiljer sig  från TRANSLATE-animeringarna på så sätt att den här animeringstypen drivs av penninmatningshändelser. Den här animeringstypen spårar tillsammans med pekskärmens indata för att svepa målwidgeten när användaren drar en penna eller snodd över indatans pekskärm. Om du vill använda den här typen av animering ska programmet anropa **_gx_animation_drag_enable_** API för att aktivera den här animeringen. |
 
-**Gx_animation_id** -värdet skickas tillbaka till den överordnade animeringen i fältet event.gx_event_sender i händelsen **GX_ANIMATION_COMPLETE** . Det här värdet används av den överordnade animeringen för att avgöra vilken av flera underordnade animeringar som är rapporteringen slutförd. Värdet kan vara 0 och en animering med ID-värde 0 genererar ingen **ANIMATION_COMPLETE** -händelse alls.
+Värdet **gx_animation_id** skickas tillbaka till animeringens överordnade i event.gx_event_sender i **GX_ANIMATION_COMPLETE** händelse. Det här värdet används av animeringens överordnade för att avgöra vilken av eventuellt flera underordnade animeringar som rapporterar slutförande. Det här värdet kan vara 0, och en animering med ID-värde 0 genererar **inte ANIMATION_COMPLETE** händelse alls.
 
-**Gx_animation_start_delay** -värdet är ett GUIX Ticket-antal som indikerar antalet timer-Tick som ska förskjutas efter att **_gx_animation_start_*_ anropas innan animeringen körs. Värdet kan vara 0 om du vill starta animeringen direkt när du anropar _*_gx_animation_start_**.
+Det **gx_animation_start_delay** värdet är ett GUIX-tidsvärde som anger hur många timer tick som ska fördröjas efter att gx_animation_start _ anropas innan animeringen ***faktiskt körs. Värdet kan vara 0 för att starta animeringen omedelbart när den anropar _*_gx_animation_start_**.
 
-I fältet **gx_animation_frame_interval** definieras antalet GUIX timer-Tick (en multipel av underliggande OS-Ticket) för fördröjning mellan varje bild ruta i animeringssekvensen. Det minsta värdet är 1.
+Fältet **gx_animation_frame_interval** definierar antalet GUIX-timers tick (en multipel av den underliggande OS-tickfrekvensen) för att fördröja mellan varje bildruta i animeringssekvensen. Det minsta värdet är 1.
 
-**Gx_animation_start_position** definierar den övre vänstra start punkten för widgeten mål för översättnings animationer.
+I **gx_animation_start_position definieras** startpunkten längst upp till vänster för målwidgeten för översättningsanimeringar.
 
-**Gx_animation_end_position** definierar den övre vänstra placeringen för mål-widgeten för animering av översättnings typer.
+Den **gx_animation_end_position definierar** slutpositionen längst upp till vänster för målwidgeten för animeringar av översättningstyp.
 
-Fältet **gx_animation_start_alpha** definierar den Start arbets ytans alpha-värde för animering av översättnings typer.
+Fältet **gx_animation_start_alpha** definierar det första alfavärdet för arbetsytan för animeringar av översättningstyp.
 
-I fältet **gx_animation_end_alpha** definieras det sista arbets ytans alfa värde för animering av översättnings typer.
+Fältet **gx_animation_end_alpha definierar** det sista alfavärdet för arbetsytan för animeringar av översättningstyp.
 
-Fältet **gx_animation_steps** definierar hur många steg eller ramar som kontrollanten ska köras för översättnings animationer. Ett stort antal steg ger en jämnare bild och/eller tonings utseende, men kräver också större system bandbredd.
+Fältet **gx_animation_steps** definierar hur många steg eller ramar kontrollanten ska köra för översättningsanimeringar. Ett större antal steg ger ett jämnare utseende och/eller toning, men kräver också större systembandbredd.
 
-Om du vill implementera animeringseffekter i ditt program måste du först anropa ***gx_animation_create*** för att initiera din animeringssekvens. Om animeringen ska använda en sekundär arbets yta initierar du arbets ytan genom att anropa gx_animation_canvas_define. Sedan bör du initiera **GX_ANIMATION_INFOs** strukturen för att definiera den speciella typ av animering som ska utföras och andra parametrar för animering. Slutligen kan du anropa gx_animation_start för att utlösa animeringssekvensen.
+Om du vill implementera animeringseffekter i ditt program måste du först ***anropa gx_animation_create för*** att initiera animeringskontrollanten. Om animeringen ska använda en sekundär arbetsyta initierar du den här arbetsytan genom att anropa gx_animation_canvas_define. Därefter ska du initiera GX_ANIMATION_INFO **för att** definiera den specifika typen av animering som ska utföras och de andra animeringsparametrarna. Anropa slutligen gx_animation_start för att utlösa animeringssekvensen.
 
-När Controller-kontrollen har slutfört en animeringssekvens, skickar den en **GX_ANIMATION_COMPLETE** händelse till den överordnade widgeten, så att du kan göra alla önskade rensningar av animeringens arbets yta vid den tidpunkten.
+När animeringskontrollanten har slutfört en animeringssekvens skickar den en **GX_ANIMATION_COMPLETE-händelse** till den överordnade widgeten, vilket gör att du kan rensa animeringens arbetsyta vid den tidpunkten.
 
-## <a name="guix-utility-component"></a>GUIX verktygs komponent 
+## <a name="guix-utility-component"></a>GUIX-verktygskomponent 
 
-Verktygs komponenten ansvarar för alla vanliga verktyg funktioner i GUIX. Dessa är vanliga funktioner som är användbara verktyg och kan anropas från var som helst i programmet eller den interna GUIX-koden. Funktioner i verktygs komponenten innehåller följande.
+Verktygskomponenten ansvarar för alla vanliga verktygsfunktioner i GUIX. Det här är vanliga funktioner som är användbara verktyg och som kan anropas var som helst i programmet eller den interna GUIX-koden. Verktygskomponentens funktioner omfattar följande.
 
 ***gx_utility_canvas_to_bmp***
 

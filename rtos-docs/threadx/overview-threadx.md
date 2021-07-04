@@ -6,12 +6,12 @@ ms.author: philmea
 ms.date: 6/9/2020
 ms.service: rtos
 ms.topic: overview
-ms.openlocfilehash: e786e5bf1f434ec9543823dee8784b677a2b371f
-ms.sourcegitcommit: 19d50693d8f5287ba6938ae1d23eef88435ed7b1
+ms.openlocfilehash: 0fb861c2291046c2ac6edf1d03014996daa09a8e
+ms.sourcegitcommit: c1b00341e0c5ab71372f3d9cc4ee3bdd3702b805
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 04/28/2021
-ms.locfileid: "108171394"
+ms.lasthandoff: 06/10/2021
+ms.locfileid: "111988370"
 ---
 # <a name="overview-of-azure-rtos-threadx"></a>Översikt över Azure RTOS ThreadX
 
@@ -43,9 +43,9 @@ Azure RTOS ThreadX är Microsofts avancerade branschklass Real-Time RTOS (Operat
 * Inga gränser för antalet köer
 * Meddelanden som kopieras efter värde (eller som referens via pekare)
 * Meddelandestorlekar från 1 till 16 32-bitars ord
-* Valfri tråduppstängning vid tom och fullständig
-* Valfri tidsgräns för all låsning
-* HUVUD-API:er för meddelandekö:
+* Valfri tråduppstängning är tom och full
+* Valfri tidsgräns vid all låsning
+* API:er för meddelandeköer är:
   * tx_queue_create
   * tx_queue_delete
   * tx_queue_flush
@@ -75,9 +75,9 @@ Azure RTOS ThreadX är Microsofts avancerade branschklass Real-Time RTOS (Operat
 * Dynamiskt skapande av mutex
 * Inga begränsningar för antalet mutexer
 * Kapslat resursskydd stöds
-* Valfritt prioritetsarv stöds
+* Valfritt prioritetsarv som stöds
 * Valfri tråduppstängning när mutex inte är tillgängligt
-* Valfri tidsgräns för all låsning
+* Valfri tidsgräns vid all låsning
 * De viktigaste mutex-API:erna är:
   * tx_mutex_create
   * tx_mutex_delete
@@ -87,12 +87,12 @@ Azure RTOS ThreadX är Microsofts avancerade branschklass Real-Time RTOS (Operat
 
 ### <a name="event-flags"></a>Händelseflaggor
 
-* Skapande av dynamisk händelseflaggan
-* Inga begränsningar för antalet händelseflaggasgrupper
+* Skapa dynamisk händelseflaggan
+* Inga gränser för antalet händelseflaggasgrupper
 * Synkronisering av en tråd eller flera trådar
-* Atomisk get and clear stöds
-* Valfri multitrådsavstängning för AND/OR-uppsättning händelser
-* Valfri tidsgräns för all låsning
+* Atomic get and clear stöds
+* Valfri multitrådsavstängning vid AND/OR-uppsättning händelser
+* Valfri tidsgräns vid all låsning
 * Huvudhändelseflaggans API:er är:
   * tx_event_flags_create
   * tx_event_flags_delete
@@ -122,7 +122,7 @@ Azure RTOS ThreadX är Microsofts avancerade branschklass Real-Time RTOS (Operat
 * Inga gränser för antalet bytepooler
 * Inga gränser för bytepoolens storlek
 * Mest flexibel minnesallokering/avallokering med variabel längd
-* Allokeringsstorlek stöds
+* Allokeringsstorlek som stöds
 * Valfri tråduppstängning i en tom pool
 * Valfri tidsgräns för all låsning
 * API:erna för huvudbytepoolen är:
@@ -151,23 +151,23 @@ Azure RTOS ThreadX är Microsofts avancerade branschklass Real-Time RTOS (Operat
 ### <a name="azure-rtos-threadx-core-scheduler"></a>Azure RTOS ThreadX Core Scheduler
 
 * Minimalt RAM-fotavtryck på 2 kB FLASH,1 kB
-* Snabb, sub-mikrosekunderskontextväxel
-* Fullständigt deterministiskt oavsett antalet trådar
+* Snabb, sub-mikrosekunder kontextväxel
+* Helt deterministiskt oavsett antalet trådar
 * Prioritetsbaserad, helt förebyggande schemaläggning
 * 32 standardprioritetsnivåer, eventuellt upp till 1 024 nivåer
 * Schemaläggning av schemaläggning inom prioritetsnivå (FIFO)
-* Teknik för tröskelvärde för avspärrning
+* Teknik för tröskelvärde för avbrott
 * Valfria timertjänster, inklusive:
   * Valfri tidssegment per tråd
-  * Valfri tidsgräns vid all blockering
+  * Valfri tidsgräns för all blockering
   * API:er kräver avbrott i maskinvarutimern
 * Körningsprofilering
 * Spårning på systemnivå
 * Säkerhet certifierad enligt många standarder
 
-## <a name="most-deployed-rtos"></a>Mest distribuerad RTOS
+## <a name="most-deployed-rtos"></a>Mest distribuerade RTOS
 
-Azure RTOS ThreadX har över 6,2 miljarder distributioner över hela världen, enligt det ledande M2M-marknadsinformationsföretaget VDC Research. Den populära Azure RTOS ThreadX är en populär del av dess tillförlitlighet, kvalitet, storlek, prestanda, avancerade funktioner, användarvänlighet och övergripande fördelar vad gäller tid till marknad.
+Azure RTOS ThreadX har över 6,2 miljarder distributioner över hela världen, enligt det ledande M2M-marknadsinformationsföretaget VDC Research. Det populära Azure RTOS ThreadX är en av fördelarna med tillförlitlighet, kvalitet, storlek, prestanda, avancerade funktioner, användarvänlighet och övergripande fördelar med tid till marknad.
 
 > *"Vi har följt threadx-tillväxten på de trådlösa och IoT-marknader sedan företagets grundande, och är allt mer imponerande av det omfattande branschintagandet av THREADX."* – Chris Rommel, Executive Vice President, VDC Research
 
@@ -194,16 +194,16 @@ Azure RTOS ThreadX uppnår en kontextväxel på under mikrosekunder på de flest
 Här är några vanliga prestandaegenskaper för Azure RTOS ThreadX:
 
 * Snabb start: Azure RTOS ThreadX startar på mindre än 120 cykler.
-* Valfri borttagning av grundläggande felkontroll: Grundläggande Azure RTOS ThreadX-felkontroll kan hoppas över vid kompileringen. Detta kan vara användbart när programkoden har verifierats och inte längre kräver felkontroll för varje parameter. Observera att detta kan göras i en kompileringsenhet i stället för i hela systemet.
+* Valfritt Borttagning av grundläggande felkontroll: Grundläggande Azure RTOS ThreadX-felkontroll kan hoppas över vid kompileringen. Detta kan vara användbart när programkoden har verifierats och inte längre kräver felkontroll på varje parameter. Observera att detta kan göras på en kompileringsenhet i stället för i hela systemet.
 * Picokernel™ Design: Tjänsterna är inte skiktade på varandra, vilket eliminerar onödigt arbete med funktionsanrop.
-* *Optimerad avbrottsbearbetning: Endast scratch-register sparas/återställs vid ISR-in- och utpassering, om inte avinption krävs.
+* *Optimerad avbrottsbearbetning: Endast scratch-register sparas/återställs vid ISR-inmatning/-avslut, om det inte krävs avslut.
 * Optimerad API-bearbetning:
 
     |Azure RTOS ThreadX-tjänsten  |Servicetid i mikrosekunder*  |
     |---------|---------|
     |Tråd pausa  |0,6  |
-    |Tråd-ÅTERUPPTA  |0,6  |
-    |Skicka i kö  |0.3  |
+    |Tråd-RESUME  |0,6  |
+    |Skicka kö  |0.3  |
     |Kö ta emot  |0.3  |
     |Hämta Semaphore  |0,2  |
     |Placera Semaphore  |0,2  |
@@ -232,10 +232,10 @@ Azure RTOS ThreadX är avancerad teknik vars viktigaste funktion är schemalägg
 * Run-Time prestandamått
   * Antal trådantaganden
   * Antal tråduppstängningar
-  * Antal begärda trådförseningar
-  * Antal avbrottsavbrott för asynkron tråd
-  * Antal inversioner av trådprioritet
-  * Antal trådreliniker
+  * Antal begärda tråd-preemptions
+  * Antal asynkrona trådavbrottsavbrott
+  * Antal trådprioritetsinversioner
+  * Antal trådrelineringar
 * Execution Profile Kit (EPK)
 * Separat avbrottsstack
 * Run-Time Stack-analys
@@ -243,19 +243,19 @@ Azure RTOS ThreadX är avancerad teknik vars viktigaste funktion är schemalägg
 
 ## <a name="multicore-support-amp--smp"></a>Stöd för flera kärnor (AMP & SMP)
 
-Standard Azure RTOS ThreadX används ofta i asymmetrisk flerbearbetning (AMP), där en separat kopia av Azure RTOS ThreadX och programmet (eller Linux) körs på varje kärna och kommunicerar med varandra via delat minne eller en kommunikationsmekanism mellan processorer som OpenAMP (Azure RTOS ThreadX stöder OpenAMP). Detta är den vanligaste konfigurationen med flera kärnor med hjälp Azure RTOS ThreadX och kan vara det mest effektiva om programmet effektivt kan läsa in processorerna.
+Standard Azure RTOS ThreadX används ofta på ett asymmetriskt sätt med flera processer (AMP), där en separat kopia av Azure RTOS ThreadX och programmet (eller Linux) körs på varje kärna och kommunicerar med varandra via delat minne eller en kommunikationsmekanism mellan processorer som OpenAMP (Azure RTOS ThreadX stöder OpenAMP). Det här är den mest typiska konfigurationen med Azure RTOS ThreadX och kan vara det mest effektiva om programmet effektivt kan läsa in processorerna.
 
-För miljöer där inläsningen av processorerna är mycket dynamisk finns Azure RTOS ThreadX Symetric Multiprocessing (SMP) tillgängligt för följande processorfamiljer:
+För miljöer där inläsningen av processorerna är mycket dynamisk Azure RTOS ThreadX Symetric Multiprocessing (SMP) tillgänglig för följande processorfamiljer:
 
 * ARM-Cortex-Ax
 * ARM-Cortex-Rx
 * ARM Cortex-A5x 64-bitars
 * MIPS 34K, 1004K och interAptiv
-* Powerpc
+* PowerPC
 * Synopsys ARC HS
 * x86
 
-Azure RTOS ThreadX SMP utför dynamisk belastningsutjämning över *n* processorer och tillåter att alla Azure RTOS ThreadX-resurser (köer, semaforer, händelseflaggor, minnespooler osv.) kan nås av alla trådar på valfri kärna. Azure RTOS ThreadX SMP aktiverar det fullständiga Azure RTOS ThreadX-API:et på alla kärnor och introducerar följande nya API:er som gäller för SMP-åtgärden:
+Azure RTOS ThreadX SMP utför dynamisk belastningsutjämning över *n* processorer och gör att alla Azure RTOS ThreadX-resurser (köer, semaforer, händelseflaggor, minnespooler osv.) kan nås av valfri tråd på valfri kärna. Azure RTOS ThreadX SMP aktiverar det fullständiga Azure RTOS ThreadX-API:et på alla kärnor och introducerar följande nya API:er som gäller för SMP-åtgärden:
 
 * `UINT tx_thread_smp_core_exclude(TX_THREAD *thread_ptr, ULONG exclusion_map);`
 * `UINT tx_thread_smp_core_exclude_get(TX_THREAD *thread_ptr, ULONG *exclusion_map_ptr);`
@@ -270,7 +270,6 @@ Med en tilläggsprodukt som kallas Azure RTOS ThreadX MODULES kan en eller flera
 Moduler möjliggör fältuppgradering, felkorrigeringar och programpartitionering så att stora program endast kan uppta det minne som behövs av aktiva trådar.
 
 Moduler har också ett helt separat adressutrymme från Azure RTOS ThreadX. Detta gör Azure RTOS ThreadX kan placera minnesskydd (via MPU eller MMU) runt modulen så att oavsiktlig åtkomst utanför modulen inte kan skada någon annan programvarukomponent.
-
 
 ## <a name="misra-compliant"></a>MISRA-kompatibel
 
@@ -291,7 +290,7 @@ Azure RTOS ThreadX körs på de mest populära 32/64-bitars mikroprocessorer, f�
 * Cypress: RISC-V
 * EnSilica: eSi-RISC
 * Infineon: XMC1000, XMC4000, TriCore
-* Intel & Intel FPGA: x36/Pentium, XScale, NIOS II, Arria 10
+* Intel & Intel FPGA: x36/Pentium, XScale, NIOS II, Pilne, Arria 10
 * Microchip: AVR32, ARM7, ARM9, Cortex-M3/M4/M7, SAM3/4/7/9/A/C/D/E/G/L/SV, PIC24/PIC32
 * Microsemi: RISC-V
 * NXP: LPC, ARM7, ARM9, PowerPC, 68K, i.MX, ColdFire, Kinetis Cortex-M3/M4
@@ -303,6 +302,10 @@ Azure RTOS ThreadX körs på de mest populära 32/64-bitars mikroprocessorer, f�
 * Wave Computing: MIPS32 4K, 24K, 34K, 1004K, MIPS64 5K, microAptiv, interAptiv, proAptiv, M-Class
 * Xilinx: MicroBlaze, PowerPC 405, ZYNQ, ZYNQ UltraSCALE
 
-## <a name="supports-most-popular-tools"></a>Stöder de mest populära verktygen
+## <a name="supports-most-popular-tools"></a>Stöder de populäraste verktygen
 
-Azure RTOS ThreadX har stöd för de flesta populära inbäddade utvecklingsverktyg, inklusive IAR:s Embedded Workbench™, som också har den mest omfattande Azure RTOS ThreadX-kernelmedvetenhet. Ytterligare verktygsintegrering omfattar GNU (GCC), ARM DS-5/uVision®, Green Universal MULTI®, Wind River Workbench™, Imagination Codescape, Renesas e2studio, Metaware SeeCode™, NXP CodeWarrior, Lauterface TRACE32®, TI Code-Composer Studio, CrossCore och alla analoga enheter.
+Azure RTOS ThreadX har stöd för de flesta populära inbäddade utvecklingsverktyg, inklusive IAR:s Embedded Workbench™, som också har den mest omfattande Azure RTOS ThreadX-kernelmedvetenhet. Ytterligare verktygsintegrering omfattar GNU (GCC), ARM DS-5/uVision®, Green Universal MULTI®, Wind River Workbench™, Imagination Codescape, Renesas e2studio, Metaware SeeCode™, NXP CodeWarrior, Lauterlt TRACE32®, TI Code-Composer Studio, CrossCore och alla analoga enheter.
+
+## <a name="adaptation-layer-for-threadx"></a>Anpassningslager för ThreadX
+
+Azure RTOS ThreadX är ett avancerat realtidsoperativsystem (RTOS) som är särskilt utformat för djupt inbäddade program. För att underlätta programmigrering till Auzre RTOS tillhandahåller ThreadX [anpassningslager](https://github.com/azure-rtos/threadx/tree/master/utility/rtos_compatibility_layers) för olika äldre RTOS-API:er (FreeRTOS, POSIX, OSEK osv.)
