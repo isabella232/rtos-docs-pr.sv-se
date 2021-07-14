@@ -1,226 +1,178 @@
 ---
-title: Förstå Azure återställnings tider-USBX
-description: Azure återställnings tider-USBX är en högpresterande USB-värd, enhet och on-Go (OTG)-inbäddad stack, Azure återställnings tider USBX är helt integrerat med Azure återställnings tider ThreadX och är tillgängligt för alla Azure återställnings tider-ThreadX – processorer som stöds.
+title: Förstå Azure RTOS USBX
+description: Azure RTOS USBX är en inbäddad STACK med höga prestanda för USB-värd, enhet och on-the-go (OTG), är Azure RTOS USBX helt integrerat med Azure RTOS ThreadX och tillgängligt för alla Azure RTOS ThreadX-processorer som stöds.
 author: philmea
 ms.author: philmea
 ms.date: 5/19/2020
 ms.service: rtos
 ms.topic: overview
-ms.openlocfilehash: 87eb6ee9f8733db3201280d377aa832b87131871
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 3c214a49f7dd1af20c20f07412fb072dd785b16f
+ms.sourcegitcommit: dbbec3ba6a7eb6097c7888b235c433a2efd6e5b9
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104828470"
+ms.lasthandoff: 07/14/2021
+ms.locfileid: "113754836"
 ---
-# <a name="overview-of-azure-rtos-usbx"></a>Översikt över Azure återställnings tider-USBX
+# <a name="overview-of-azure-rtos-usbx"></a>Översikt över AZURE RTOS USBX
 
-Azure återställnings tider-USBX är en högpresterande USB-värd, enhet och on-Go (OTG)-inbäddad stack. Azure återställnings tider USBX är helt integrerat med Azure återställnings tider ThreadX och är tillgängligt för alla ThreadX-processorer som stöds. Precis som ThreadX är Azure återställnings tider-USBX utformad för att ha ett litet utrymme och höga prestanda, vilket gör det perfekt för djupt inbäddade program som kräver ett gränssnitt med USB-enheter.
+Azure RTOS USBX är en inbäddad STACK med höga prestanda för USB-värd, -enhet och on-the-go (OTG). Azure RTOS USBX är helt integrerat med Azure RTOS ThreadX och tillgängligt för alla ThreadX-processorer som stöds. Precis som ThreadX är Azure RTOS USBX utformat för att ha ett litet fotavtryck och höga prestanda, vilket gör det idealiskt för djupt inbäddade program som kräver ett gränssnitt med USB-enheter.
 
-## <a name="host-device-otg--extensive-class-support"></a>Värd, enhet, OTG & omfattande klass support
+## <a name="host-device-otg--extensive-class-support"></a>Värd, enhet, OTG & omfattande klasssupport
 
-Azure återställnings tider USBX-värd/inbyggda USB-protokollstacken är en inbäddad USB-lösning i närings klass som utformats specifikt för djupt inbäddade, real tids-och IoT-program. Azure återställnings tider-USBX tillhandahåller stöd för värdar, enheter och OTG samt omfattande klass support. Azure återställnings tider USBX är helt integrerat med ThreadX Real-Time-operativsystem, Azure återställnings tider FileX Embedded FAT-kompatibel fil system, Azure återställnings tider NetX och Azure återställnings tider NetX Duo Embedded TCP/IP-stackar. Allt detta, kombinerat med en mycket liten storlek, snabb körning och överlägsen enkel användning, gör Azure återställnings tider USBX det idealiska valet för de mest krävande inbäddade IoT-programmen som kräver USB-anslutning.
+Azure RTOS USBX-värd/enhetsinbäddad USB-protokollstack är en inbäddad USB-lösning i industriell klass som utformats särskilt för djupt inbäddade, realtids- och IoT-program. Azure RTOS USBX ger stöd för värd, enhet och OTG, samt omfattande klassstöd. Azure RTOS USBX är helt integrerat med operativsystemet ThreadX Real-Time, Azure RTOS FileX embedded FAT-kompatibla filsystem, Azure RTOS NetX och Azure RTOS NetX Duo inbäddade TCP/IP-stackar. Allt detta i kombination med ett mycket litet fotavtryck, snabb körning och överlägsen användarvänlighet gör Azure RTOS USBX till det perfekta valet för de mest krävande inbäddade IoT-programmen som kräver USB-anslutning.
 
-### <a name="small-footprint"></a>Små
+### <a name="usbx-memory-footprint"></a>USBX-minnesfotavtryck
 
-Azure återställnings tider USBX har ett remarkably litet minimalt utrymme på 10,5 KB FLASH och 5,1 KB RAM för Azure återställnings tider USBX Device CDC/ACM support. Azure återställnings tider USBX-värden kräver minst 18 KB av FLASH och 25 KB RAM för stöd för CDC/ACM.
+Azure RTOS USBX har ett mycket litet minimalt fotavtryck på 10,5 kB FLASH och 5,1 KB RAM för Azure RTOS USBX-enhetens CDC/ACM-stöd. Azure RTOS USBX-värden kräver minst 18 KB FLASH och 25 KB RAM för CDC/ACM-stöd.
 
-Det krävs ytterligare 10 KB till 13 KB av instruktions områdets minne för TCP-funktioner. Azure återställnings tider USBX RAM-användningen är vanligt vis mellan 2,6 KB och 3,6 KB plus det minne för Packet-poolen som definieras av programmet.
+Ytterligare 10 KB till 13 KB instruktionsområdesminne krävs för TCP-funktioner. Azure RTOS USBX RAM-användning sträcker sig vanligtvis från 2,6 kB till 3,6 kB plus paketpoolens minne, vilket definieras av programmet.
 
-Precis som ThreadX skalas storleken på Azure återställnings tider-USBX automatiskt utifrån de tjänster som faktiskt används av programmet. Detta eliminerar behovet av komplicerade konfigurations-och bygg parametrar, vilket gör det enklare för utvecklaren.
+Precis som ThreadX skalas storleken Azure RTOS USBX automatiskt baserat på de tjänster som faktiskt används av programmet. Detta eliminerar praktiskt taget behovet av komplicerad konfiguration och byggparametrar, vilket gör det enklare för utvecklaren.
 
-### <a name="fast-execution"></a>Snabb körning
+### <a name="usb-interoperability-verification"></a>USB-samverkansverifiering
 
-Azure återställnings tider USBX har utformats för snabbhet och har minimalt internt funktions anrops lager och stöd för cachelagring och DMA-användning. Allt detta och en allmän prestanda orienterad design filosofi hjälper Azure återställnings tider USBX att uppnå snabbast möjliga prestanda.
-
-### <a name="simple-easy-to-use"></a>Enkel, lätt att använda
-
-Azure återställnings tider-USBX är enkelt att använda. Azure återställnings tider USBX-API: et är både intuitivt och mycket funktionellt. API-namnen består av riktiga ord och inte "alfabet soppor" eller förkortade namn som är vanliga i andra fil system produkter. Alla Azure återställnings tider USBX-API: er har ledande "ux_" och följer en namn konvention för substantiv-verb. Det finns dessutom en funktions konsekvens i hela API: et. Till exempel har alla API: er som pausas en valfri tids gräns som fungerar på samma sätt för API: er.
-
-### <a name="usb-interoperability-verification"></a>Verifiering av USB-interoperabilitet
-
-Azure återställnings tider USBX Device stack har testats rigoröst med USB om standard test verktyg USBCV för att säkerställa full kompatibilitet med USB-specifikationer och interoperabilitet med olika värd system.
-Dessutom har Azure återställnings tider USBX OTG-stacken verifierats och certifierats av den oberoende test labb Allion i Taiwan.
+Azure RTOS USBX-enhetsstack har noggrant testats med USB IF-standardtestverktyget USBCV för att säkerställa fullständig efterlevnad av USB-specifikationerna och samverkan med olika värdsystem.
+Dessutom har Azure RTOS USBX OTG-stack verifierats och certifierats av den oberoende testlabbet Allion i Taiwan.
 
 ### <a name="usb-host-controller-support"></a>Stöd för USB-värdstyrenhet
 
-Azure återställnings tider USBX har stöd för stora USB-standarder som OHCI och EHCI. Dessutom stöder Azure återställnings tider USBX egna diskreta USB-värdstyrenheter från Atmel, mikrochip, Philips, Renesas, ST, TI och andra leverantörer. Azure återställnings tider USBX stöder också flera värd styrenheter i samma program.
-USB-enhetens styrenhet stöder Azure återställnings tider USBX har stöd för populära USB-styrenheter från analoga enheter, Atmel, mikrochip, NXP, Philips, Renesas, ST, TI och andra leverantörer.
+Azure RTOS USBX har stöd för stora USB-standarder som OHCI och EHCI. Dessutom stöder Azure RTOS USBX egna diskreta USB-värdstyrenheter från Atmel, Microchip, Chip, Renesas, ST, TI och andra leverantörer. Azure RTOS USBX stöder också flera värdstyrenheter i samma program.
+STÖD för USB-Azure RTOS USBX stöder populära USB-enhetsstyrenheter från analoga enheter, Atmel, Microchip, NXP, Tier, Renesas, ST, TI och andra leverantörer.
 
-### <a name="extensive-host-class-support"></a>Omfattande stöd för värd klass
+### <a name="extensive-host-class-support"></a>Omfattande stöd för värdklass
 
-Azure återställnings tider USBX-värd har stöd för de flesta populära klasserna, inklusive ASIX, AUDIO, CDC/ACM, CDC/ECM, GSER, HID (tangent bord, mus och fjärr styrning), hubb, PIMA (PTP/MTP), skrivare, PROLIFIC och lagring.
+Azure RTOS USBX-värd har stöd för de flesta populära klasser, inklusive ASIX, AUDIO, CDC/ACM, CDC/ECM, GSER, HID (tangentbord, mus och fjärrstyrning), HUB, PIMA (PTP/MTP), PRINTER, PROLIFIC och STORAGE.
 
-### <a name="extensive-usb-device-class-support"></a>Omfattande stöd för en USB-enhets klass
+### <a name="extensive-usb-device-class-support"></a>Omfattande stöd för USB-enhetsklass
 
-Azure återställnings tider USBX-enheten ger stöd för de flesta populära klasserna, inklusive CDC/ACM, CDC/ECM, DFU, HID, PIMA (PTP/MTP) (w/MTP), RNDIS och lagring. Stöd för anpassade klasser är också tillgängligt.
+Azure RTOS USBX-enhet har stöd för de flesta populära klasser, inklusive CDC/ACM, CDC/ECM, DFU, HID, PIMA (PTP/MTP) (w/MTP), RNDIS och STORAGE. Stöd för anpassade klasser är också tillgängligt.
 
-### <a name="pictbridge-support"></a>PictBridge-stöd
+### <a name="pictbridge-support"></a>Pictbridge-stöd
 
-Azure återställnings tider USBX stöder fullständig PictBridge-implementering både på värden och på enheten. PictBridge är ovanpå Azure återställnings tider USBX PIMA (PTP/MTP)-klassen på båda sidor. PictBridge-standarden tillåter anslutning av en digital stillbilds kamera eller en smart telefon direkt till en skrivare utan en dator, vilket möjliggör direkt utskrift till vissa PictBridge-medvetna skrivare. När en kamera eller telefon är ansluten till en skrivare är skrivaren USB-värden och kameran är USB-enheten. Men med PictBridge visas kameran som värd och kommandona drivs från kameran. Kameran är lagrings servern, skrivaren på lagrings klienten. Kameran är utskrifts klienten och skrivaren är naturligtvis utskrifts servern. PictBridge använder USB som transport lager men förlitar sig på PTP (Picture Transfer Protocol) för kommunikations protokollet.
+Azure RTOS USBX stöder den fullständiga Pictbridge-implementeringen både på värden och enheten. Pictbridge finns ovanpå klassen AZURE RTOS USBX PIMA (PTP/MTP) på båda sidor. PictBridge-standarden tillåter anslutning av en digital fortfarande kamera eller en smart telefon direkt till en skrivare utan dator, vilket möjliggör direktutskrift till vissa Pictbridge-medvetna skrivare. När en kamera eller telefon är ansluten till en skrivare är skrivaren USB-värden och kameran är USB-enheten. Men med Pictbridge visas kameran som värden och kommandona körs från kameran. Kameran är lagringsservern, skrivaren för lagringsklienten. Kameran är utskriftsklienten och skrivaren är naturligtvis utskriftsservern. Pictbridge använder USB som transportlager men förlitar sig på PTP (Picture Transfer Protocol) för kommunikationsprotokollet.
 
 ### <a name="custom-class-support"></a>Stöd för anpassade klasser
 
-Azure återställnings tider USBX-värden och-enheten stöder anpassade klasser. Ett exempel på en anpassad klass finns i Azure återställnings tider USBX-distributionen. Den här enkla data Pumps klassen kallas DPUMP och kan användas som en modell för anpassade program klasser.
-Avancerad teknik Azure återställnings tider USBX-värd och-enhet stöder anpassade klasser. Ett exempel på en anpassad klass finns i Azure återställnings tider USBX-distributionen. Azure återställnings tider-USBX är en avancerad teknik som innehåller:
+Azure RTOS USBX-värd och enhet stöder anpassade klasser. Ett exempel på en anpassad klass finns i Azure RTOS USBX-distributionen. Den här enkla datapumpklassen kallas DPUMP och kan användas som en modell för anpassade programklasser.
+Avancerad teknik Azure RTOS USBX-värd och enhet stöder anpassade klasser. Ett exempel på en anpassad klass finns i Azure RTOS USBX-distributionen. Azure RTOS USBX är avancerad teknik som omfattar:
 
-* Stöd för värd-, enhets-och OTG
-* USB-låg, fullständig och hög hastighets support
+* Stöd för värd, enhet och OTG
+* Stöd för USB med låg, fullständig och hög hastighet
 * Automatisk skalning
-* Fullständigt integrerat med ThreadX, Azure återställnings tider FileX och Azure återställnings tider NetX
-* Valfria prestanda mått
-* Azure återställnings tider TraceX system Analysis support
+* Helt integrerad med ThreadX, Azure RTOS FileX och Azure RTOS NetX
+* Valfria prestandamått
+* Azure RTOS TraceX-systemanalysstöd
 
-### <a name="fastest-time-to-market"></a>Snabbast tid till marknad
+## <a name="azure-rtos-usbx-apis"></a>Azure RTOS USBX-API:er
 
-Azure återställnings tider USBX har ett remarkably litet utrymme på 9 KB till 15 KB för grundläggande IP-och UDP-stöd. Azure återställnings tider USBX är enkelt att installera, lära sig, använda, felsöka, verifiera, certifiera och underhålla. Därför är Azure återställnings tider-USBX en av de mest populära USB-lösningarna för inbäddade IoT-enheter. Vår konsekventa tid till marknads fördelen bygger på:
+### <a name="azure-rtos-usbx-host-api"></a>Azure RTOS USBX-värd-API
 
-* Kvalitets dokumentation – Läs mer i vår Azure återställnings tider USBX-värd och enhets användar handböcker och se själv!
-* Fullständig käll kods tillgänglighet
-* Lätt att använda API
-* Omfattande och avancerad funktions uppsättning
-
-## <a name="one-simple-license"></a>En enkel licens
-
-Det kostar inget att använda och testa käll koden och ingen kostnad för produktions licenser när de distribueras till förinstallerade enheter, men alla andra enheter behöver en enkel årlig licens.
-
-## <a name="full-highest-quality-source-code"></a>Fullständig käll kod med högsta kvalitet
-
-Under åren har Azure återställnings tider NetX-källkoden ställt in kvalitet och enkel förståelse. Dessutom tillhandahåller konventionen om en funktion per fil för enkel käll navigering.
-
-### <a name="supports-most-popular-architectures"></a>Har stöd för de flesta populära arkitekturerna
-
-Azure återställnings tider-USBX körs på de flesta populära 32/64-bitars mikroprocessorer, färdiga, fullständigt testade och fullt stödda, inklusive följande:
-
-* **Analoga enheter**: SHARC, Blackfin, CM4xx
-* **Andes Core**: RISC-V
-* **Ambiqmicro**: Apollo MCU
-* **Arm**: ARM7, ARM9, ARM11, Cortex-M0/M3/M4/M7/A15/A5/A7/A8/A9/A5x 64-bi/A7x 64-bitars/R4/R5, TrustZone ARMv8-M
-* **Takt**: Xtensa, Diamond
-* **CEVA**: PSoC, PSoC 4, PSoC 5, PSoC 6, FM0 +, FM3, MF4, WICED WiFi
-* **Cypress**: RISC-V
-* **Kiseldioxid**: ESI – RISC
-* **Infineon**: XMC1000, XMC4000, TriCore
-* **Intel & Intel FPGA**: X36/Pentium, XSCALE, Nios II, Cyclone, Arria 10
-* **Mikrochip**: avr32, ARM7, ARM9, cortex-M3/M4/M7, SAM3/4/7/9/A/C/D/E/G/L/sa, PIC24/PIC32
-* **Mikrohalv**: RISC-V
-* **NXP**: LPC, ARM7, ARM9, PowerPC, 68 K, I.MX, coldfire, Kinetis cortex-M3/M4
-* **Renesas**: SH, HS, V850, RX, RZ, synergieffekt Silicon Labs: EFM32
-* **Sammanfattning**: båge 600, 700, båge EM, båg HS
-* **St**: STM32, ARM7, ARM9, cortex-M3/M4/M7
-* **TL**: C5xxx, C6xxx, Stellaris, Sitara, tiva-C
-* **Wave-bearbetning**: MIPS32 4K, 24 K, 34 k, 1004 k, MIPS64 5 K, MicroAptiv, InterAptiv, ProAptiv, M-Class **Xilinx**: mikroblixt, powerpc 405, ZYNQ, ZYNQ UltraSCALE
-
-## <a name="azure-rtos-usbx-apis"></a>Azure återställnings tider USBX-API: er
-
-### <a name="azure-rtos-usbx-host-api"></a>Azure återställnings tider USBX-värd-API
-
-Azure återställnings tider USBX-värd-API: et är ett intuitivt och konsekvent API som följer en namn konvention för substantiv-verb. Alla API: er har ledande ux_host_ * för att enkelt identifiera som USBX. Eventuella blockerings-API: er har valfria tråd-timeout.
+Det Azure RTOS USBX-värd-API:et är ett intuitivt och konsekvent API som följer en namngivningskonvention med substantivverb. Alla API:er har ledande ux_host_* som enkelt kan identifieras som USBX. Eventuella blockerande API:er har valfria tråd-timeout.
 
 * ASIX
     - Minimal 0,3 KB FLASH, 4 KB RAM
-    - Automatisk spårning på scalingSystem via Azure återställnings tider TraceX
-    - Intuitiva Azure återställnings tider USBX-värd-API: er i detta formulär: *ux_host_class_asix_**
-* IN
+    - Automatisk skalningSpårning på systemnivå via Azure RTOS TraceX
+    - Intuitiva Azure RTOS USBX-värd-API:er i det här formuläret: *ux_host_class_asix_**
+* Ljud
     - Minimal 1,2 KB FLASH, 4 KB RAM
     - Automatisk skalning
-    - Intuitiva Azure återställnings tider USBX-värd-API: er i detta formulär: *ux_host_class_audio_**
+    - Intuitiva Azure RTOS USBX-värd-API:er i det här formuläret: *ux_host_class_audio_**
 * CDC/ACM
     - Minimal 1,4 KB FLASH, 4 KB RAM
     - Automatisk skalning
-    - Spårning på system nivå via Azure återställnings tider TraceX
-    - Intuitiva Azure återställnings tider USBX-värd-API: er i detta formulär: *ux_host_class_cdc_acm_**
-* Dold
+    - Spårning på systemnivå via Azure RTOS TraceX
+    - Intuitiva Azure RTOS USBX-värd-API:er i det här formuläret: *ux_host_class_cdc_acm_**
+* Hid
     - Minimal 0,3 KB FLASH, 4 KB RAM
-    - Tangent bord, mus och fjärrsupport
+    - Stöd för tangentbord, mus och fjärrstyrning
     - Automatisk skalning
-    - Spårning på system nivå via Azure återställnings tider TraceX
-    - Intuitiva Azure återställnings tider USBX-värd-API: er i detta formulär: *ux_host_class_hid_** 
-* )
+    - Spårning på systemnivå via Azure RTOS TraceX
+    - Intuitiva Azure RTOS USBX-värd-API:er i det här formuläret: *ux_host_class_hid_** 
+* Nav
     - Minimal 1,7 KB FLASH, 2 KB RAM
     - Automatisk skalning
-    - Spårning på system nivå via Azure återställnings tider TraceX
-    - Intuitiva Azure återställnings tider USBX-värd-API: er i detta formulär: *ux_host_class_hub_**
+    - Spårning på systemnivå via Azure RTOS TraceX
+    - Intuitiva Azure RTOS USBX-värd-API:er i det här formuläret: *ux_host_class_hub_**
 * PIMA (PTP/MTP)
     - Minimal 0,9 KB FLASH, 8 KB RAM
     - Automatisk skalning
-    - Spårning på system nivå via Azure återställnings tider TraceX
-    - Intuitiva Azure återställnings tider USBX-värd-API: er i detta formulär: *ux_host_class_pima_**
-* SKRIVARKÖ
+    - Spårning på systemnivå via Azure RTOS TraceX
+    - Intuitiva Azure RTOS USBX-värd-API:er i det här formuläret: *ux_host_class_pima_**
+* Skrivare
     - Minimal 0,8 KB FLASH, 8 KB RAM
     - Automatisk skalning
-    -  Spårning på system nivå via Azure återställnings tider TraceX
-    -  Intuitiva Azure återställnings tider USBX-värd-API: er i detta formulär: *ux_host_class_printer_**
-* PROLIFIC
+    -  Spårning på systemnivå via Azure RTOS TraceX
+    -  Intuitiva Azure RTOS USBX-värd-API:er i det här formuläret: *ux_host_class_printer_**
+* Produktiv
     - Minimal 1,5 KB FLASH, 4 KB RAM
     - Automatisk skalning
-    - Spårning på system nivå via Azure återställnings tider TraceX
-    - Intuitiva Azure återställnings tider USBX-värd-API: er i detta formulär: *ux_host_class_prolific_**
-* Innsbruck
+    - Spårning på systemnivå via Azure RTOS TraceX
+    - Intuitiva Azure RTOS USBX-värd-API:er i det här formuläret: *ux_host_class_prolific_**
+* STORAG
     - Minimal 5,6 KB FLASH, 4 KB RAM
-    - Automatisk skalning<br> Integrerat med Azure återställnings tider FileX
-    - Spårning på system nivå via Azure återställnings tider TraceX
-    - Intuitiva Azure återställnings tider USBX-värd-API: er i detta formulär: *ux_host_class_storage_**
-* USB-värd, STACK
-    - Har stöd för många värd styrenheter
-    - Minst 18 KB FLASH, 25 KB RAM
+    - Automatisk skalning<br> Integrerad med Azure RTOS FileX
+    - Spårning på systemnivå via Azure RTOS TraceX
+    - Intuitiva Azure RTOS USBX-värd-API:er i det här formuläret: *ux_host_class_storage_**
+* USB-värdstack
+    - Stöder många värdstyrenheter
+    - Minimal 18 KB FLASH, 25 KB RAM
     - Automatisk skalning
-    - Stöd för flera värd styrenheter på samma plattform
-    -  USB-låg, fullständig och hög hastighets support
-    -  Spårning på system nivå via Azure återställnings tider TraceX
-    -  Intuitiva Azure återställnings tider USBX-värd-API: er i detta formulär: *ux_host_stack_* * 
-* OHCI-, EHCI-och PATENTSKYDDade värd STYRENHETer 
+    - Stöd för flera värdstyrenheter på samma plattform
+    -  Stöd för USB med låg, fullständig och hög hastighet
+    -  Spårning på systemnivå via Azure RTOS TraceX
+    -  Intuitiva Azure RTOS USBX-värd-API:er i det här formuläret: *ux_host_stack_* * 
+* OHCI, EHCI, PATENTSKYDDADE värdSTYRENHETER 
 
-### <a name="azure-rtos-usbx-device-api"></a>Azure återställnings tider USBX-enhets-API
+### <a name="azure-rtos-usbx-device-api"></a>AZURE RTOS USBX-enhets-API
 
-Azure återställnings tider USBX Device API är ett intuitivt och konsekvent API som följer en namn konvention för substantiv-verb. Alla API: er har ledande ux_device_ * för att enkelt identifiera som USBX. Blockering av API: er har valfri tråd-timeout. Mer information finns i [användar handboken för Azure återställnings tider USBX-värden](usbx-host-stack-about.md) .
+API:Azure RTOS USBX-enhet är ett intuitivt och konsekvent API som följer en namngivningskonvention med substantivverb. Alla API:er har ledande ux_device_* som enkelt kan identifieras som USBX. Blockerande API:er har valfria tråd-timeout. Se [användarhandboken Azure RTOS USBX-värd](usbx-host-stack-about.md) för mer information.
 
 * CDC/ACM
     - Minimal 0,8 KB FLASH, 2 KB RAM
     - Automatisk skalning
-    - Spårning på system nivå via Azure återställnings tider TraceX
-    - Intuitiva Azure återställnings tider USBX-enhets-API: er i detta formulär: * ux_device_class_cdc_acm_ * *.
+    - Spårning på systemnivå via Azure RTOS TraceX
+    - Intuitiva Azure RTOS USBX-enhets-API:er i det här formuläret: *ux_device_class_cdc_acm_**.
 * CDC/ECM
     - Minimal 1,5 KB FLASH, 4 KB till 8 KB RAM
     - Automatisk skalning
-    - Spårning på system nivå via Azure återställnings tider TraceX<br> Intuitiva Azure återställnings tider USBX-enhets-API: er i detta formulär: * ux_device_class_cdc_ecm_ * *.
-* DFU
+    - Spårning på systemnivå via Azure RTOS TraceX<br> Intuitiva Azure RTOS USBX-enhets-API:er i det här formuläret: *ux_device_class_cdc_ecm_**.
+* Dfu
     - Minimal 1,1 KB FLASH, 2 KB RAM
     -  Automatisk skalning
-    -  Spårning på system nivå via Azure återställnings tider TraceX
-    - Intuitiva Azure återställnings tider USBX-enhets-API: er i detta formulär: *ux_device_class_dfu_** 
+    -  Spårning på systemnivå via Azure RTOS TraceX
+    - Intuitiva Azure RTOS USBX-enhets-API:er i det här formuläret: *ux_device_class_dfu_** 
 * GSER
     - Minimal 0,6 KB FLASH, 4 KB RAM
     - Automatisk skalning
-    - Spårning på system nivå via Azure återställnings tider TraceX
-    - Intuitiva Azure återställnings tider USBX-enhets-API: er i detta formulär: *ux_device_class_gser_**
-* Dold
+    - Spårning på systemnivå via Azure RTOS TraceX
+    - Intuitiva Azure RTOS USBX-enhets-API:er i det här formuläret: *ux_device_class_gser_**
+* Hid
     - Minimal 0,9 KB FLASH, 2 KB RAM
     - Automatisk skalning
-    - Spårning på system nivå via Azure återställnings tider TraceX
-    - Intuitiva Azure återställnings tider USBX-enhets-API: er i detta formulär: *ux_device_class_hid_** PIMA (PTP/MTP)
+    - Spårning på systemnivå via Azure RTOS TraceX
+    - Intuitiva Azure RTOS USBX-enhets-API:er i *det här formuläret: ux_device_class_hid_** PIMA (PTP/MTP)
     - Minimal 5,2 KB FLASH, 8 KB RAM
     - Automatisk skalning
-    - Spårning på system nivå via Azure återställnings tider TraceX
-    - Intuitiva Azure återställnings tider USBX-enhets-API: er i detta formulär: *ux_device_class_pima_** 
+    - Spårning på systemnivå via Azure RTOS TraceX
+    - Intuitiva Azure RTOS USBX-enhets-API:er i det här formuläret: *ux_device_class_pima_** 
 * LAGRING
     - Minimal 2,3 KB FLASH, 4 KB RAM
     - Automatisk skalning
-    - Spårning på system nivå via Azure återställnings tider TraceX
-    - Intuitiva Azure återställnings tider USBX-enhets-API: er i detta formulär: *ux_device_class_storage_**
+    - Spårning på systemnivå via Azure RTOS TraceX
+    - Intuitiva Azure RTOS USBX-enhets-API:er i det här formuläret: *ux_device_class_storage_**
 * RNDIS
     - Minimal 2,3 KB FLASH, 4 KB till 8 KB RAM
     - Automatisk skalning
-    - Integrerat med Azure återställnings tider NetX och Azure återställnings tider NetX DUO
-    - Spårning på system nivå via Azure återställnings tider TraceX
-    - Intuitiva Azure återställnings tider USBX-enhets-API: er i detta formulär: *ux_device_class_rndls_**
-* Enhets STACK för Azure återställnings tider USBX
+    - Integrerad med Azure RTOS NetX och Azure RTOS NetX DUO
+    - Spårning på systemnivå via Azure RTOS TraceX
+    - Intuitiva Azure RTOS USBX-enhets-API:er i det här formuläret: *ux_device_class_rndls_**
+* Azure RTOS USBX-enhetsstack
     - Minimal 2,3 KB FLASH, 4 KB RAM
     - Automatisk skalning
-    - Spårning på system nivå via Azure återställnings tider TraceX
-    - Intuitiva Azure återställnings tider USBX-enhets-API: er i detta formulär: *ux_device_class_storage_**
-* TILLVERKARSPECIFIKA värd STYRENHETer
+    - Spårning på systemnivå via Azure RTOS TraceX
+    - Intuitiva Azure RTOS USBX-enhets-API:er i det här formuläret: *ux_device_class_storage_**
+* EGNA värdSTYRENHETER
 
 ## <a name="next-steps"></a>Nästa steg
 
-Börja arbeta med Azure återställnings tider USBX-värden och enhets stacken genom att följa vår Användar handbok för [värd stacken](usbx-host-stack-about.md) eller [användar handboken för enhets stacken](usbx-device-stack-about.md).
+Börja arbeta med Azure RTOS USBX-värden och enhetsstacken genom att följa [användarhandboken för värdstacken](usbx-host-stack-about.md) [eller användarhandboken för enhetsstacken.](usbx-device-stack-about.md)

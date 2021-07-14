@@ -6,23 +6,24 @@ ms.author: philmea
 ms.date: 5/19/2020
 ms.service: rtos
 ms.topic: overview
-ms.openlocfilehash: 7c864c23f019e4841ddb3096fde663c8039baf44
-ms.sourcegitcommit: 19d50693d8f5287ba6938ae1d23eef88435ed7b1
+ms.openlocfilehash: 63fd212249da6154926684f9bc844d2c2a78e84e
+ms.sourcegitcommit: dbbec3ba6a7eb6097c7888b235c433a2efd6e5b9
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 04/28/2021
-ms.locfileid: "108171326"
+ms.lasthandoff: 07/14/2021
+ms.locfileid: "113754853"
 ---
 # <a name="overview-of-azure-rtos-netx"></a>Översikt över Azure RTOS NetX
 
-Azure RTOS NetX är en inbäddad TCP/IP IPv4-nätverksstack i branschklass som utformats särskilt för djupt inbäddade, realtidsbaserade och IoT-program. Azure RTOS NetX är Microsofts ursprungliga IPv4-nätverksstack och är i grunden en delmängd av Azure RTOS. NetX tillhandahåller inbäddade program med kärnnätverksprotokoll som IPv4, TCP och UDP samt en komplett uppsättning ytterligare tilläggsprotokoll på högre nivå. Ett litet fotavtryck, snabb körning och överlägsen användarvänlighet gör Azure RTOS NetX till ett perfekt val för de mest krävande inbäddade IoT-programmen.
+Azure RTOS NetX är en inbäddad TCP/IP IPv4-nätverksstack i branschklass som är utformad särskilt för djupt inbäddade program, realtidsprogram och IoT-program. Azure RTOS NetX är Microsofts ursprungliga IPv4-nätverksstack och är i stort sett en delmängd av Azure RTOS. NetX tillhandahåller inbäddade program med kärnnätverksprotokoll som IPv4, TCP och UDP samt en komplett uppsättning ytterligare tilläggsprotokoll på högre nivå. Ett litet fotavtryck, snabb körning och överlägsen användarvänlighet gör Azure RTOS NetX till ett perfekt val för de mest krävande inbäddade IoT-programmen.
 
 ## <a name="api-protocols"></a>API-protokoll
+Azure RTOS NetX har stöd för följande.
 
 ### <a name="telnet"></a>Telnet
 
 * Minimalt RAM-fotavtryck på 0,5 kB och 0,3 KB.
-* Stöd för klient och server.
+* Stöd för klienter och servrar.
 
 ### <a name="auto-ip"></a>Automatisk IP-adress
 
@@ -31,21 +32,21 @@ Azure RTOS NetX är en inbäddad TCP/IP IPv4-nätverksstack i branschklass som u
 
 ### <a name="http---hypertext-transfer-protocolhttp"></a>HTTP – Hypertext Transfer Protocol(HTTP)
 
-* Minimalt RAM-fotavtryck på 2,8 kB till 4,8 kB, 0,4 kB till 1,0 kB RAM-fotavtryck.
-* Stöd för klient och server.
+* Minimalt 2,8 kB till 4,8 kBFLASH, 0,4 kB till 1,0 KB RAM-fotavtryck.
+* Stöd för klienter och servrar.
 
 ### <a name="smtp---simple-mail-transfer-protocol-smtp"></a>SMTP – Simple Mail Transfer Protocol (SMTP)
 
-* Minimalt RAM-fotavtryck på 4,1 kB och 0,6 kB
+* Minimalt RAM-fotavtryck på 4,1 kB och 0,6 KB
 * Klientstöd
 
 ### <a name="dhcp---dynamic-host-configuration-protocol-dhcp"></a>DHCP – Dynamic Host Configuration Protocol (DHCP)
 
-* Minimalt 3,6 kB till 4,6 KB FLASH, 2,7 KB RAM-fotavtryck
+* Minimalt 3,6 KB till 4,6 KB FLASH, 2,7 KB RAM-fotavtryck
 * Stöd för klienter och servrar
-* IPv4-stöd
+* Stöd för IPv4
 
-### <a name="p0p3---post-office-protocol-version-3-pop3"></a>P0P3 – Post Office Protocol version 3 (POP3)
+### <a name="p0p3---post-office-protocol-version-3-pop3"></a>P0P3 – Efter Office Protocol Version 3 (POP3)
 
 * Minimalt RAM-fotavtryck på 8,1 kB och 1,4 KB
 * Klientstöd
@@ -73,28 +74,28 @@ Azure RTOS NetX är en inbäddad TCP/IP IPv4-nätverksstack i branschklass som u
 
 ### <a name="azure-rtos-netx-api"></a>Azure RTOS NetX API
 
-* Snabb IMPLEMENTERING av API med nollkopiering
+* Snabb IMPLEMENTERING av API:et nollkopiering
 * Valfritt BSD-lager för portning av äldre socketkod
 
 ### <a name="igmp---internet-group-management-protocol-igmp"></a>IGMP – Internet Group Management Protocol (IGMP)
 
 * Minimal 2,5 KB FLASH
 * Stöd för IPv4-multicast-grupper
-* Verifierad IXIA IxANVL
+* IXIA IxANVL-verifierad
 * Valfri IGMP-statistik
 * Spårning på systemnivå via Azure RTOS TraceX
 
 ### <a name="udp---user-datagram-protocol-udp"></a>UDP – UDP (User Datagram Protocol)
 
-* Minimalt 2,5 KB FLASH, 124 sockets byte RAM-minne per socket
-* Snabb TCP-paketbearbetning med nära wire speed:
+* Minimal 2,5 KB FLASH, 124 sockets byte RAM-minne per socket
+* Snabb, nära trådad TCP-paketbearbetning:
 * RX 95 Mbit/s på 100 Mbit/s Ethernet, MCU @100MHz , 14 % MCU-användning
 * TX 94 Mbit/s på 100 Mbit/s Ethernet, MCU @100MHz , 10 % MCU-användning
 * UDP Fast Path™teknik
 * Inga gränser för antalet UDP
-* Verifierad IXIA IxANVL
+* IXIA IxANVL-verifierad
 * Valfri stängning vid socket-mottagning
-* Valfri tidsgräns vid all låsning
+* Valfri tidsgräns för all låsning
 * Valfri UDP-statistik
 * Spårning på systemnivå via Azure RTOS TraceX
 
@@ -107,7 +108,7 @@ Azure RTOS NetX är en inbäddad TCP/IP IPv4-nätverksstack i branschklass som u
 * Tillförlitlig anslutning
 * Inga gränser för antalet TCP-sockets
 * IXIA IxANVL-verifierad
-* Valfri uppstängning vid socket-mottagning/-överföring
+* Valfri stängning vid socket-mottagning/-överföring
 * Valfri tidsgräns för all låsning
 * Valfri TCP-statistik
 * Spårning på systemnivå via Azure RTOS TraceX
@@ -115,7 +116,7 @@ Azure RTOS NetX är en inbäddad TCP/IP IPv4-nätverksstack i branschklass som u
 ### <a name="icmp---internet-control-message-protocol-icmp"></a>ICMP – Internet Control Message Protocol (ICMP)
 
 * Minimal 2,5 KB FLASH
-* IPv4-stöd
+* Stöd för IPv4
 * IXIA IxANVL-verifierad
 * Pingbegäran och pingsvar
 * Valfri trådavstängning vid pingbegäranden
@@ -125,15 +126,15 @@ Azure RTOS NetX är en inbäddad TCP/IP IPv4-nätverksstack i branschklass som u
 
 ### <a name="ipv4---internet-protocol-ip"></a>IPv4 – Internet Protocol (IP)
 
-* Minimalt RAM-fotavtryck på 3,5 kB till 8,5 KB FLASH, 2 KB till 3 KB RAM- fotavtryck.
+* Minimalt 3,5 KB till 8,5 KB FLASH, 2 KB till 3 KB RAM-fotavtryck.
 * Piconet™Arkitektur.
-* Snabb, nästan trådhastighetsprestanda.
+* Snabb, nästan trådig prestanda.
 * Stöd för flera gränssnitt.
 * Stöd för flera hem.
 * Stöd för statisk routning.
 * Stöd för IP-fragmentering/återmontering.
 * IPv4-stöd.
-* IXIA IxANVL Verifierad.
+* IXIA IxANVL Validated.
 * Fas II– redo logotypcertifiering.
 * Valfri IP-statistik.
 * Väldefinierat, intuitivt drivrutinsgränssnitt på fysiskt lager.
@@ -143,7 +144,7 @@ Azure RTOS NetX är en inbäddad TCP/IP IPv4-nätverksstack i branschklass som u
 
 * Minimal 1,7 KB FLASH, RAM-storlek.
 * Dynamisk upplösning av 32-blt IPv4- och 48-blt MAC-adresser.
-* IXIA IxANVL Verifierad.
+* IXIA IxANVL Validated.
 * Flexibel, användardefinierad ARP-cache.
 * Bra ARP-stöd.
 * Valfri ARP/RARP-statistik som bestäms av programmet.
@@ -153,7 +154,7 @@ Azure RTOS NetX är en inbäddad TCP/IP IPv4-nätverksstack i branschklass som u
 
 ## <a name="interoperability-verification"></a>Interoperabilitetsverifiering
 
-Azure RTOS NetX följer RFC-standarder och erbjuder fullständig samverkan med enheter för de flesta leverantörer. Azure RTOS NetX använder även branschstandarden IxANVL (Automated Network Validation Library) för implementeringen av TCP/IP Azure RTOS NetX-kärnor.
+Azure RTOS NetX följer RFC-standarder och erbjuder fullständig samverkan med enheter från de flesta leverantörer. Azure RTOS NetX använder även branschstandarden IxANVL (Automated Network Validation Library) för implementeringen av TCP/IP-protokollet Azure RTOS NetX Core.
 
 ## <a name="advanced-technology"></a>Avancerad teknik
 

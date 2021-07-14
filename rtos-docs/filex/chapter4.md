@@ -1,19 +1,19 @@
 ---
-title: Kapitel 4 – Beskrivning av Azure RTOS FileX-tjänster
+title: Kapitel 4 – Beskrivning Azure RTOS FileX-tjänster
 description: Det här kapitlet innehåller en beskrivning av alla Azure RTOS FileX-tjänster i alfabetisk ordning.
 author: philmea
 ms.author: philmea
 ms.date: 05/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 39b31c1abae8613eb54382162504aaadc07ceebf
-ms.sourcegitcommit: 97f6724d6eee7b9c251a50c191911050c52b1c69
+ms.openlocfilehash: c24259fb9b6b212dda99422e3ee1ad0e2fd970ce
+ms.sourcegitcommit: dbbec3ba6a7eb6097c7888b235c433a2efd6e5b9
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 06/11/2021
-ms.locfileid: "112025929"
+ms.lasthandoff: 07/14/2021
+ms.locfileid: "113754887"
 ---
-# <a name="chapter-4--description-of-azure-rtos-filex-services"></a>Kapitel 4 – Beskrivning av Azure RTOS FileX-tjänster
+# <a name="chapter-4--description-of-azure-rtos-filex-services"></a>Kapitel 4 – Beskrivning Azure RTOS FileX-tjänster
 
 Det här kapitlet innehåller en beskrivning av alla Azure RTOS FileX-tjänster i alfabetisk ordning. Tjänstnamn är utformade så att alla liknande tjänster grupperas tillsammans.
 
@@ -38,7 +38,7 @@ Den här tjänsten läser katalogens attribut från det angivna mediet.
 
 - **media_ptr:** Pekare till ett mediakontrollblock.
 - **directory_name:** Pekare till namnet på den begärda katalogen (katalogsökvägen är valfri).
-- **attribut** _ptr: Pekare till målet för katalogens attribut som ska placeras. Katalogattributen returneras i ett bit-map-format med följande möjliga inställningar:
+- **attribut** _ptr: Pekare till målet för katalogens attribut som ska placeras. Katalogattributen returneras i bitkartformat med följande möjliga inställningar:
   - FX_READ_ONLY (0x01)
   - FX_HIDDEN (0x02)
   - FX_SYSTEM (0x04)
@@ -51,14 +51,14 @@ Den här tjänsten läser katalogens attribut från det angivna mediet.
 - **FX_SUCCESS** (0x00) Lyckade katalogattribut lästa
 - **FX_MEDIA_NOT_OPEN** (0x11) Det angivna mediet är inte öppet
 - **FX _NOT FOUND** (0x04) Den angivna katalogen hittades inte på mediet
-- **FX_NOT_DIRECTORY** (0x0E) Posten är inte en katalog
-- **FX_IO_ERROR** (0x90) Drivrutins-I/O
+- **FX_NOT_DIRECTORY posten** (0x0E) är inte en katalog
+- **FX_IO_ERROR** (0x90) I/O-drivrutin
 - **FX_FILE_CORRUPT** 0x08) Filen är skadad
 - **FX_SECTOR_INVALID** (0x89) Ogiltig sektor
 - **FX_FAT_READ_ERROR** (0x03) Det går inte att läsa FAT-posten
 - **FX_NO_MORE_SPACE** (0x0A) Inget mer utrymme för att slutföra åtgärden
-- **FX_MEDIA_INVALID** (0x02) Ogiltig media
-- **FX_PTR_ERROR** (0x18) Ogiltig medie pekare
+- **FX_MEDIA_INVALID** (0x02) Ogiltigt medium
+- **FX_PTR_ERROR** (0x18) Ogiltig mediepekare
 - **FX_CALLER_ERROR** (0x20) anroparen är inte en tråd.
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -116,7 +116,7 @@ UINT fx_directory_attributes_set(
 Den här tjänsten anger katalogens attribut till de som anges av anroparen.
 
 > [!WARNING]
-> *Det här programmet kan bara ändra en delmängd av katalogens attribut med den här tjänsten. Om du försöker ange ytterligare attribut resulterar det i ett fel.*
+> *Det här programmet kan bara ändra en delmängd av katalogens attribut med den här tjänsten. Alla försök att ange ytterligare attribut resulterar i ett fel.*
 
 ### <a name="input-parameters"></a>Indataparametrar
 
@@ -132,17 +132,17 @@ Den här tjänsten anger katalogens attribut till de som anges av anroparen.
 
 - **FX_SUCCESS** (0x00) Lyckad katalogattributuppsättning
 - **FX_MEDIA_NOT_OPEN** (0x11) Det angivna mediet är inte öppet
-- **FX_NOT_FOUND** (0x04) Det gick inte att hitta den angivna katalogen på mediet
-- **FX_NOT_DIRECTORY** (0x0E) Posten är inte en katalog
-- **FX_IO_ERROR** (0x90) Drivrutins-I/O
-- **FX_WRITE_PROTECT** (0x23) Angivna medier är skrivskyddade
+- **FX_NOT_FOUND** (0x04) Den angivna katalogen hittades inte på mediet
+- **FX_NOT_DIRECTORY posten** (0x0E) är inte en katalog
+- **FX_IO_ERROR** (0x90) I/O-drivrutin
+- **FX_WRITE_PROTECT** (0x23) Det angivna mediet är skrivskyddat
 - **FX_FILE_CORRUPT** (0x08) Filen är skadad
 - **FX_SECTOR_INVALID** (0x89) Ogiltig sektor
 - **FX_FAT_READ_ERROR** (0x03) Det går inte att läsa FAT-posten
 - **FX_NO_MORE_SPACE** (0x0A) Inget mer utrymme för att slutföra åtgärden
-- **FX_MEDIA_INVALID** (0x02) Ogiltig media
+- **FX_MEDIA_INVALID** (0x02) Ogiltigt medium
 - **FX_NO_MORE_ENTRIES** (0x0F) Inga fler poster i den här katalogen
-- **FX_PTR_ERROR** (0x18) Ogiltig medie pekare
+- **FX_PTR_ERROR** (0x18) Ogiltig mediepekare
 - **FX_INVALID_ATTR** (0x19) Ogiltiga attribut har valts.
 - **FX_CALLER_ERROR** (0x20) anroparen är inte en tråd.
 
@@ -196,7 +196,7 @@ UINT fx_directory_create(
 ```
 ### <a name="description"></a>Beskrivning
 
-Den här tjänsten skapar en underkatalog i den aktuella standardkatalogen eller i den sökväg som anges i katalognamnet. Till skillnad från rotkatalogen har underkatalogerna ingen gräns för hur många filer de kan innehålla. Rotkatalogen kan bara innehålla det antal poster som bestäms av startposten.
+Den här tjänsten skapar en underkatalog i den aktuella standardkatalogen eller i den sökväg som anges i katalognamnet. Till skillnad från rotkatalogen har underkatalogerna ingen gräns för antalet filer som de kan innehålla. Rotkatalogen kan bara innehålla det antal poster som bestäms av startposten.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
@@ -208,7 +208,7 @@ Den här tjänsten skapar en underkatalog i den aktuella standardkatalogen eller
 - **FX_SUCCESS** (0x00) Lyckad katalog create.
 - **FX_MEDIA_NOT_OPEN** (0x11) Det angivna mediet är inte öppet
 - **FX_NOT_FOUND** (0x04) Den angivna katalogen hittades inte på mediet
-- **FX_NOT_DIRECTORY post** (0x0E) är inte en katalog
+- **FX_NOT_DIRECTORY posten** (0x0E) är inte en katalog
 - **FX_IO_ERROR** (0x90) I/O-drivrutin
 - **FX_FILE _CORRUPT** (0x08) filen är skadad
 - **FX_SECTOR_INVALID** (0x89) Ogiltig sektor
@@ -273,7 +273,7 @@ UINT fx_directory_default_get(
 
 ### <a name="description"></a>Beskrivning
 
-Den här tjänsten returnerar pekaren till sökvägen som senast angetts ***av fx_directory_default_set***. Om standardkatalogen inte har angetts eller om den aktuella standardkatalogen är rotkatalogen returneras värdet FX_NULL.
+Den här tjänsten returnerar pekaren till den sökväg som senast angetts ***av fx_directory_default_set***. Om standardkatalogen inte har angetts eller om den aktuella standardkatalogen är rotkatalogen returneras värdet FX_NULL.
 
 > [!IMPORTANT]
 > *Standardstorleken för den interna sökvägssträngen är 256 tecken. Det kan ändras genom att ändra **FX_MAXIMUM_PATH** i **fx_api.h** och återskapa hela FileX-biblioteket. Teckensträngens sökväg underhålls för programmet och används inte internt av FileX.*
@@ -498,7 +498,7 @@ Den här tjänsten hämtar det första postnamnet i standardkatalogen och kopier
 > *Det angivna målet måste vara tillräckligt stort för att innehålla det maximala FileX-namnet, enligt definitionen i **FX_MAX_LONG_NAME_LEN.***
 
 > [!WARNING]
-> *Om du använder en icke-lokal sökväg är det viktigt att förhindra andra programtrådar från att ändra den här katalogen medan en katalog-traverserning äger rum (med en ThreadX-semaphore, mutex eller prioritetsnivåändring). Annars kan ogiltiga resultat erhållas.*
+> *Om du använder en icke-lokal sökväg är det viktigt att förhindra (med en ThreadX-semaphore, mutex eller prioritetsnivåändring) att andra programtrådar ändrar den här katalogen medan en katalogförseningar sker. Annars kan ogiltiga resultat erhållas.*
 
 ### <a name="input-parameters"></a>Indataparametrar
 
@@ -507,15 +507,15 @@ Den här tjänsten hämtar det första postnamnet i standardkatalogen och kopier
 
 ### <a name="return-values"></a>Returvärden
 
-- **FX_SUCCESS** (0x00) Lyckad första katalogpost
+- **FX_SUCCESS** (0x00) Lyckad första katalogposts find
 - **FX_MEDIA_NOT_OPEN** (0x11) Det angivna mediet är inte öppet
 - **FX_NO_MORE_ENTRIES** (0x0F) Inga fler poster i den här katalogen
-- **FX_IO_ERROR** (0x90) I/O-drivrutin
+- **FX_IO_ERROR** (0x90) Drivrutins-I/O
 - **FX_FILE_CORRUPT** (0x08) Filen är skadad
 - **FX_SECTOR_INVALID** (0x89) Ogiltig sektor
 - **FX_FAT_READ_ERROR** (0x03) Det går inte att läsa FAT-posten
 - **FX_PTR_ERROR** (0x18) Ogiltig media eller mål pekare
-- **FX_CALLER_ERROR** (0x20) anroparen är inte en tråd
+- **FX_CALLER_ERROR** (0x20) Anroparen är inte en tråd
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -574,33 +574,33 @@ UINT fx_directory_first_full_entry_find(
 
 - **media_ptr:** Pekare till ett mediakontrollblock.
 - **directory_name:** Pekare till målet för namnet på en katalogpost. Måste vara minst lika stor som FX_MAX_LONG_NAME_LEN.
-- **attribut:** Om det inte är null pekar du mot målet för postens attribut som ska placeras. Attributen returneras i bitkartformat med följande möjliga inställningar:
+- **attribut:** Om det inte är null pekar du på målet för postens attribut som ska placeras. Attributen returneras i ett bit-map-format med följande möjliga inställningar:
   - **FX_READ_ONLY** (0x01)
   - **FX_HIDDEN** (0x02)
   - **FX_SYSTEM** (0x04)
   - **FX_VOLUME** (0x08)
   - **FX_DIRECTORY** (0x10)
   - **FX_ARCHIVE** (0x20)
-- **size**: Om det inte är null pekar du till målet för postens storlek i byte.
-- **year**: Om det inte är null pekar du till målet för postens ändringsår.
-- **month**: Om det inte är null pekar du till målet för postens ändringsmånad.
-- **day**: Om det inte är null pekar du till målet för postens ändringsdag.
+- **storlek:** Om det inte är null pekar du till målet för postens storlek i byte.
+- **year**: Om det inte är null pekar du mot målet för postens ändringsår.
+- **month**: Om det inte är null pekar du på målet för postens ändringsmånad.
+- **day**: Om det inte är null pekar du mot målet för postens ändringsdag.
 - **hour**: Om det inte är null pekar du mot målet för postens ändringstimmar.
 - **minute**: Om det inte är null pekar du mot målet för postens ändringsminut.
-- **second**: Om det inte är null pekar du mot målet för postens andra ändring.
+- **second**: Om det inte är null pekar du till målet för postens andra ändring.
 
 ### <a name="return-values"></a>Returvärden
 
-- **FX_SUCCESS** (0x00) Lyckad första katalogpost
+- **FX_SUCCESS** (0x00) Lyckad första katalogposts find
 - **FX_MEDIA_NOT_OPEN** (0x11) Det angivna mediet är inte öppet
 - **FX_NO_MORE_ENTRIES** (0x0F) Inga fler poster i den här katalogen
-- **FX_IO_ERROR** (0x90) I/O-drivrutin
-- **FX_WRITE_PROTECT** (0x23) Det angivna mediet är skrivskyddat
+- **FX_IO_ERROR** (0x90) Drivrutins-I/O
+- **FX_WRITE_PROTECT** (0x23) Angivna medier är skrivskyddade
 - **FX_FILE _CORRUPT** (0x08) filen är skadad
 - **FX_SECTOR_INVALID** (0x89) Ogiltig sektor
 - **FX_FAT_READ_ERROR** (0x03) Det går inte att läsa FAT-posten
 - **FX_NO_MORE_SPACE** (0x0A) Inget mer utrymme för att slutföra åtgärden
-- **FX_MEDIA_INVALID** (0x02) Ogiltigt medium
+- **FX_MEDIA_INVALID** (0x02) Ogiltig media
 - **FX_PTR_ERROR** (0x18) Ogiltig media eller mål pekare.
 - **FX_CALLER_ERROR** (0x20) anroparen är inte en tråd.
 
@@ -672,8 +672,8 @@ UINT fx_directory_first_full_entry_find(
 - **media_ptr:** Pekare till ett mediakontrollblock.
 - **directory_name:** Pekare till namnet på katalogposten.
 - **attribut:** Pekare till målet för attributen.
-- **size**: Pekaren till målet för storleken.
-- **year**: Pekare till målet för året.
+- **storlek:** Pekare till målet för storleken.
+- **year**: Pekare till årets mål.
 - **month**: Pekare till målet för månaden.
 - **day**: Pekare till dagens mål.
 - **hour**: Pekare till målet för timmen.
@@ -682,11 +682,11 @@ UINT fx_directory_first_full_entry_find(
 
 ### <a name="return-values"></a>Returvärden
 
-- **FX_SUCCESS** (0x00) Lyckad första katalogpost
+- **FX_SUCCESS** (0x00) Lyckad första katalogposts find
 - **FX_MEDIA_NOT_OPEN** (0x11) Det angivna mediet är inte öppet
-- **FX_NOT_FOUND** (0x04) Den angivna katalogen hittades inte på mediet
-- **FX_IO_ERROR** (0x90) I/O-drivrutin
-- **FX_MEDIA_INVALID** (0x02) Ogiltigt medium
+- **FX_NOT_FOUND** (0x04) Det gick inte att hitta den angivna katalogen på mediet
+- **FX_IO_ERROR** (0x90) Drivrutins-I/O
+- **FX_MEDIA_INVALID** (0x02) Ogiltig media
 - **FX_FILE _CORRUPT** (0x08) filen är skadad
 - **FX_FAT_READ_ERROR** (0x03) Det går inte att läsa FAT-posten
 - **FX_NO_MORE_SPACE** (0x0A) Inget mer utrymme för att slutföra åtgärden
@@ -748,18 +748,18 @@ UINT fx_directory_local_path_clear(FX_MEDIA *media_ptr);
 
 ### <a name="description"></a>Beskrivning
 
-Den här tjänsten rensar den tidigare lokala sökvägen för anropstråden.
+Den här tjänsten rensar den tidigare lokala sökvägen som har ställts in för anropstråden.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **media_ptr:** Pekare till ett media som öppnats tidigare.
+- **media_ptr**: Pekare till ett media som öppnats tidigare.
 
 ### <a name="return-values"></a>Returvärden
 
 - **FX_SUCCESS** (0x00) Lyckad lokal sökväg rensas.
-- **FX_MEDIA_NOT_OPEN** (0x11) Det angivna mediet är inte öppet för tillfället
+- **FX_MEDIA_NOT_OPEN** (0x11) Det angivna mediet är inte öppet för närvarande
 - **FX_NOT_IMPLEMENTED** (0x22) FX_NO_LCOAL_PATH har definierats
-- **FX_PTR_ERROR** (0x18) Ogiltig mediepekare
+- **FX_PTR_ERROR** (0x18) Ogiltig medie pekare
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -812,7 +812,7 @@ UINT fx_directory_local_path_clear(
 
 ### <a name="description"></a>Beskrivning
 
-Den här tjänsten returnerar pekaren för den lokala sökvägen för det angivna mediet. Om det inte finns någon lokal sökväg returneras null till anroparen.
+Den här tjänsten returnerar pekaren för den lokala sökvägen för det angivna mediet. Om det inte finns någon lokal sökväg returneras null-värdet till anroparen.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
@@ -822,9 +822,9 @@ Den här tjänsten returnerar pekaren för den lokala sökvägen för det angivn
 ### <a name="return-values"></a>Returvärden
 
 - **FX_SUCCESS** (0x00) Lyckad lokal sökväg hämta.
-- **FX_MEDIA_NOT_OPEN** (0x11) Det angivna mediet är inte öppet för tillfället
+- **FX_MEDIA_NOT_OPEN** (0x11) Det angivna mediet är inte öppet för närvarande
 - **FX_NOT_IMPLEMENTED** (0x22) NX_NO_LCOAL_PATH
-- **FX_PTR_ERROR** (0x18) Ogiltig mediepekare
+- **FX_PTR_ERROR** (0x18) Ogiltig medie pekare
 
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -879,10 +879,10 @@ UINT fx_directory_local_path_restore(
 
 ### <a name="description"></a>Beskrivning
 
-Den här tjänsten återställer en tidigare konfigurerad lokal sökväg. Katalogsökpositionen som görs på den här lokala sökvägen återställs också, vilket gör den här rutinen användbar i rekursiva katalog-traverserar av programmet.
+Den här tjänsten återställer en tidigare inställd lokal sökväg. Katalogsökpositionen som görs på den här lokala sökvägen återställs också, vilket gör den här rutinen användbar i rekursiva katalog-traverserar av programmet.
 
 > [!IMPORTANT]
-> *Varje lokal sökväg innehåller en lokal sökvägssträng **FX_MAXIMUM_PATH** i storlek, som som standard är 256 tecken. Den här interna sökvägssträngen används inte av FileX och tillhandahålls endast för programmets användning. Om **FX_LOCAL_PATH** ska deklareras som en lokal variabel bör användarna se upp för stacken som växer med den här strukturens storlek. Användare är välkommen att minska storleken på FX_MAXIMUM_PATH **och** återskapa FileX-bibliotekskällan.*
+> *Varje lokal sökväg innehåller en lokal sökvägssträng **FX_MAXIMUM_PATH** i storlek, som som standard är 256 tecken. Den här interna sökvägssträngen används inte av FileX och tillhandahålls endast för programmets användning. Om **FX_LOCAL_PATH** ska deklareras som en lokal variabel bör användarna se upp för stacken som växer med den här strukturens storlek. Användarna är välkommen att minska storleken på FX_MAXIMUM_PATH **och återskapa** FileX-bibliotekskällan.*
 
 ### <a name="input-parameters"></a>Indataparametrar
 
@@ -1035,7 +1035,7 @@ Den här tjänsten hämtar det långa namnet (om det finns) som är associerat m
 
 - **media_ptr:** Pekare till mediakontrollblock.
 - **short_name**: Pekare till källans korta namn (8.3-format).
-- **long_name:** Pekare till målet för det långa namnet. Om det inte finns något långt namn returneras det korta namnet. Observera att målet för det långa namnet måste vara tillräckligt stort för att innehålla FX_MAX_LONG_NAME_LEN tecken.
+- **long_name:** Pekare till mål för det långa namnet. Om det inte finns något långt namn returneras det korta namnet. Observera att målet för det långa namnet måste vara tillräckligt stort för att innehålla FX_MAX_LONG_NAME_LEN tecken.
 
 ### <a name="return-values"></a>Returvärden
 
@@ -1048,7 +1048,7 @@ Den här tjänsten hämtar det långa namnet (om det finns) som är associerat m
 - **FX_FAT_READ_ERROR** (0x03) Det går inte att läsa FAT-posten
 - **FX_NO_MORE_SPACE** (0x0A) Inget mer utrymme för att slutföra åtgärden
 - **FX_PTR_ERROR** (0x18) Ogiltig media eller namn pekare
-- **FX_CALLER_ERROR** (0x20) anroparen är inte en tråd
+- **FX_CALLER_ERROR** (0x20) Anroparen är inte en tråd
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -1109,7 +1109,7 @@ Den här tjänsten hämtar det långa namnet (om det finns) som är associerat m
 
 - **media_ptr:** Pekare till mediakontrollblock.
 - **short_name**: Pekare till källans korta namn (8.3-format).
-- **long_name:** Pekare till målet för det långa namnet. Om det inte finns något långt namn returneras det korta namnet. Obs! Målet för det långa namnet måste vara tillräckligt stort för att innehålla **FX_MAX_LONG_NAME_LEN** tecken.
+- **long_name:** Pekare till mål för det långa namnet. Om det inte finns något långt namn returneras det korta namnet. Obs! Målet för det långa namnet måste vara tillräckligt stort för att innehålla **FX_MAX_LONG_NAME_LEN** tecken.
 - **long_file_name_buffer_length:** Längden på den långa namnbufferten.
 
 ### <a name="return-values"></a>Returvärden
@@ -1137,7 +1137,7 @@ UCHAR            my_long_name[FX_MAX_LONG_NAME_LEN];
 /* Retrieve the long name associated with "TEXT~01.TXT". */
 
 status = fx_directory_long_name_get_extended(&my_media,
-    "TEXT~01.TXT", my_long_name), sizeof(my_long_name));
+    "TEXT~01.TXT", my_long_name, sizeof(my_long_name));
 
 /* If status is FX_SUCCESS the long name was successfully retrieved. */
 ```
@@ -1191,7 +1191,7 @@ Den här tjänsten testar om det angivna namnet är en katalog. I så fall retur
 - **FX_SUCCESS** (0x00) Det angivna namnet är en katalog.
 - **FX_MEDIA_NOT_OPEN** (0x11) Det angivna mediet är inte öppet
 - **FX_NOT_FOUND** (0x04) Det gick inte att hitta katalogposten.
-- **FX_NOT_DIRECTORY post** (0x0E) är inte en katalog
+- **FX_NOT_DIRECTORY posten** (0x0E) är inte en katalog
 - **FX_IO_ERROR** (0x90) I/O-drivrutin.
 - **FX_MEDIA_INVALID** (0x02) Ogiltigt medium.
 - **FX_FILE_CORRUPT** (0x08) Filen är skadad.
@@ -1261,11 +1261,11 @@ Den här tjänsten returnerar nästa postnamn i den aktuella standardkatalogen.
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **media_ptr:** Pekare till ett mediakontrollblock.
-- **return_entry_name:** Pekare till mål för nästa postnamn i standardkatalogen. Bufferten som pekar på den här pekaren måste vara tillräckligt stor för att innehålla den maximala storleken för FileX-namn, som definieras **_av FX_MAX_LONG_NAME_LEN_**.
+- **return_entry_name:** Pekare till mål för nästa postnamn i standardkatalogen. Bufferten som pekar på måste vara tillräckligt stor för att innehålla den maximala storleken för FileX-namn, definierad **_av FX_MAX_LONG_NAME_LEN_**.
 
 ### <a name="return-values"></a>Returvärden
 
-- **FX_SUCCESS** (0x00) Lyckad nästa post
+- **FX_SUCCESS** (0x00) Lyckades nästa post
 - **FX_MEDIA_NOT_OPEN** (0x11) Det angivna mediet är inte öppet.
 - **FX_NO_MORE_ENTRIES** (0x0F) Inga fler poster i den här katalogen.
 - **FX_IO_ERROR** (0x90) I/O-drivrutin.
@@ -1345,7 +1345,7 @@ Den här tjänsten hämtar nästa postnamn i standardkatalogen och kopierar det 
 > *Det angivna målet måste vara tillräckligt stort för att innehålla det maximala FileX-namnet, enligt definitionen i FX_MAX_LONG_NAME_LEN*...
 
 > [!WARNING]
-> *Om du använder en icke-lokal sökväg är det viktigt att förhindra andra programtrådar från att ändra den här katalogen medan en katalog-traverserning äger rum (med en ThreadX-semaphore, mutex eller prioritetsnivåändring). Annars kan ogiltiga resultat erhållas.*
+> *Om du använder en icke-lokal sökväg är det viktigt att förhindra (med en ThreadX-semaphore, mutex eller prioritetsnivåändring) andra programtrådar från att ändra den här katalogen medan en katalogtratning sker. Annars kan ogiltiga resultat erhållas.*
 
 ### <a name="input-parameters"></a>Indataparametrar
 
@@ -1364,7 +1364,7 @@ Den här tjänsten hämtar nästa postnamn i standardkatalogen och kopierar det 
 - **day**: Om det inte är null pekar du till målet för postens ändringsdag.
 - **hour**: Om det inte är null pekar du mot målet för postens ändringstimmar.
 - **minute**: Om det inte är null pekar du mot målet för postens ändringsminut.
-- **second**: Om det inte är null pekar du mot målet för postens andra ändring.
+- **second**: Om det inte är null pekar du till målet för postens andra ändring.
 
 ### <a name="return-values"></a>Returvärden
 
@@ -1455,7 +1455,7 @@ Den här tjänsten ändrar katalognamnet till det angivna nya katalognamnet. Nam
 
 ### <a name="return-values"></a>Returvärden
 
-- **FX_SUCCESS** (0x00) Namnbyte av lyckad katalog.
+- **FX_SUCCESS** (0x00) Katalogen har bytt namn.
 - **FX_MEDIA_NOT_OPEN** (0x11) Det angivna mediet är inte öppet.
 - **FX_NOT_FOUND** (0x04) Det gick inte att hitta katalogposten.
 - **FX_NOT_DIRECTORY post** (0x0E) är inte en katalog.
@@ -1469,7 +1469,7 @@ Den här tjänsten ändrar katalognamnet till det angivna nya katalognamnet. Nam
 - **FX_MEDIA_INVALID** (0x02) Ogiltigt medium.
 - **FX_NO_MORE_ENTRIES** (0x0F) Inga fler poster i den här katalogen.
 - **FX_INVALID_PATH** (0x0D) Ogiltig sökväg med katalognamnet.
-- **FX_ALREADY_CREATED** (0x0B) Angiven katalog har redan skapats.
+- **FX_ALREADY_CREATED** (0x0B) Den angivna katalogen har redan skapats.
 - **FX_PTR_ERROR** (0x18) Ogiltig mediepekare.
 - **FX_CALLER_ERROR** (0x20) anroparen är inte en tråd.
 
@@ -1685,13 +1685,13 @@ UINT fx_fault_tolerant_enable(
 
 ### <a name="description"></a>Beskrivning
 
-Den här tjänsten möjliggör den feltoleranta modulen. När du startar identifierar den feltoleranta modulen om filsystemet är under ett feltolerant FileX-skydd. Om den inte är det hittar tjänsten tillgängliga sektorer i filsystemet för att lagra loggar på filsystemtransaktioner. Om filsystemet är under FileX-feltolerant skydd tillämpar det loggarna på filsystemet för att upprätthålla dess integritet.
+Den här tjänsten aktiverar den feltoleranta modulen. När du startar identifierar den feltoleranta modulen huruvida filsystemet är under feltoleransskydd i FileX. Om den inte är det hittar tjänsten tillgängliga sektorer i filsystemet för att lagra loggar på filsystemtransaktioner. Om filsystemet är under Ett feltolerant FileX-skydd tillämpar det loggarna på filsystemet för att upprätthålla dess integritet.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **media_ptr:** Pekare till ett mediakontrollblock.
-- **memory_ptr:** Pekar till ett minnesblock som används av den feltoleranta modulen som minne för scratch.
-- **memory_size:** Storleken på det scratch-minnet. För att feltoleranta ska fungera korrekt ska den scratch-minnesstorleken vara minst 3 072 byte och måste vara flera av sektorstorleken.
+- **memory_ptr:** Pekare till ett minnesblock som används av den feltoleranta modulen som ett minne som är försnåe.
+- **memory_size:** Storleken på det scratch-minnet. För att feltoleranta ska fungera korrekt ska den scratch-minnesstorleken vara minst 3072 byte och måste vara flera av sektorstorleken.
 
 ### <a name="return-values"></a>Returvärden
 
@@ -1702,8 +1702,8 @@ Den här tjänsten möjliggör den feltoleranta modulen. När du startar identif
 - **FX_NO_MORE_ENTRIES** (0x0F) Inget mer ledigt kluster tillgängligt.
 - **FX_NO_MORE_SPACE** (0x0A) Media som är associerade med den här filen har inte tillräckligt med tillgängliga kluster.
 - **FX_SECTOR_INVALID** (0x89) Sektor är ogiltig
-- **FX_IO_ERROR** (0x90) Drivrutins-I/O.
-- **FX_PTR_ERROR** (0x18) Ogiltig medie pekare.
+- **FX_IO_ERROR** (0x90) I/O-drivrutin.
+- **FX_PTR_ERROR** (0x18) Ogiltig mediepekare.
 - **FX_CALLER_ERROR** (0x20) anroparen är inte en tråd.
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -1764,7 +1764,7 @@ Om du vill allokera mer än 4 GB utrymme ska programmet använda tjänsten *fx_f
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **file_ptr:** Pekare till en fil som öppnats tidigare.
-- **storlek:** Antal byte som ska allokeras för filen.
+- **size**: Antal byte som ska allokeras för filen.
 
 ### <a name="return-values"></a>Returvärden
 
@@ -1772,13 +1772,13 @@ Om du vill allokera mer än 4 GB utrymme ska programmet använda tjänsten *fx_f
 - **FX_ACCESS_ERROR** (0x06) Angiven fil är inte öppen för skrivning.
 - **FX_FAT_READ_ERROR** (0x03) Det gick inte att läsa FAT-posten.
 - **FX_FILE_CORRUPT** (0x08) Filen är skadad.
-- **FX_NOT_OPEN** (0x07) Angiven fil är inte öppen för närvarande.
+- **FX_NOT_OPEN** (0x07) Den angivna filen är inte öppen för närvarande.
 - **FX_NO_MORE_ENTRIES** (0x0F) Inget mer ledigt kluster tillgängligt.
 - **FX_NO_MORE_SPACE** (0x0A) Media som är associerade med den här filen har inte tillräckligt med tillgängliga kluster.
 - **FX_SECTOR_INVALID** (0x89) Sektor är ogiltig
-- **FX_IO_ERROR** (0x90) Drivrutins-I/O.
-- **FX_WRITE_PROTECT** (0x23) Angivna medier är skrivskyddade.
-- **FX_PTR_ERROR** (0x18) Ogiltig fil pekare.
+- **FX_IO_ERROR** (0x90) I/O-drivrutin.
+- **FX_WRITE_PROTECT** (0x23) Det angivna mediet är skrivskyddat.
+- **FX_PTR_ERROR** (0x18) Ogiltig filpekare.
 - **FX_CALLER_ERROR** (0x20) anroparen är inte en tråd.
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -1805,7 +1805,7 @@ status = fx_file_allocate(&my_file, 1024);
 - fx_file_attributes_read
 - fx_file_attributes_set
 - fx_file_best_effort_allocate
-- fx_file_close– fx_file_create
+- fx_file_close – fx_file_create
 - fx_file_date_time_set
 - fx_file_delete
 - fx_file_extended_allocate
@@ -1816,7 +1816,7 @@ status = fx_file_allocate(&my_file, 1024);
 - fx_file_extended_truncate_release
 - fx_file_open– fx_file_read
 - fx_file_relative_seek
-- fx_file_rename– fx_file_seek
+- fx_file_rename – fx_file_seek
 - fx_file_truncate
 - fx_file_truncate_release
 - fx_file_write
@@ -2015,7 +2015,7 @@ status = fx_file_attributes_set(&my_media, "myfile.txt", FX_READ_ONLY);
 
 ## <a name="fx_file_best_effort_allocate"></a>fx_file_best_effort_allocate
 
-Bästa möjliga resultat för att allokera utrymme för en fil
+Bästa möjliga tid för att allokera utrymme för en fil
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2027,27 +2027,27 @@ UINT fx_file_best_effort_allocate(
 ```
 ### <a name="description"></a>Beskrivning
 
-Den här tjänsten allokerar och länkar ett eller flera sammanhängande kluster till slutet av den angivna filen. FileX avgör antalet kluster som krävs genom att dividera den begärda storleken med antalet byte per kluster. Resultatet avrundas sedan uppåt till nästa helt kluster. Om det inte finns tillräckligt många kluster i följd tillgängliga på mediet länkar den här tjänsten det största tillgängliga blocket med kluster i följd till filen. Mängden utrymme som faktiskt allokeras till filen returneras till anroparen.
+Den här tjänsten allokerar och länkar ett eller flera sammanhängande kluster till slutet av den angivna filen. FileX avgör antalet kluster som krävs genom att dividera den begärda storleken med antalet byte per kluster. Resultatet avrundas sedan uppåt till nästa helt kluster. Om det inte finns tillräckligt många kluster i följd tillgängliga på mediet länkar den här tjänsten det största tillgängliga blocket med kluster i följd till filen. Mängden utrymme som faktiskt allokerats till filen returneras till anroparen.
 
 Om du vill allokera mer än 4 GB utrymme ska programmet använda tjänsten *fx_file_extended_best_effort_allocate*.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **file_ptr:** Pekare till en fil som öppnats tidigare.
-- **storlek:** Antal byte som ska allokeras för filen.
+- **size**: Antal byte som ska allokeras för filen.
 
 ### <a name="return-values"></a>Returvärden
 
 - **FX_SUCCESS** (0x00) Lyckad filallokering med bästa resultat.
 - **FX_ACCESS_ERROR** (0x06) Angiven fil är inte öppen för skrivning.
-- **FX_NOT_OPEN** (0x07) Angiven fil är inte öppen för närvarande.
+- **FX_NOT_OPEN** (0x07) Den angivna filen är inte öppen för närvarande.
 - **FX_NO_MORE_SPACE** (0x0A) Media som är associerade med den här filen har inte tillräckligt med tillgängliga kluster.
 - **FX_FILE_CORRUPT** (0x08) Filen är skadad.
 - **FX_SECTOR_INVALID** (0x89) Ogiltig sektor.
 - **FX_FAT_READ_ERROR** (0x03) Det går inte att läsa FAT-posten.
 - **FX_NO_MORE_ENTRIES** (0x0F) Inga fler FAT-poster.
-- **FX_IO_ERROR** (0x90) Drivrutins-I/O.
-- **FX_WRITE_PROTECT** (0x23) Angivna medier är skrivskyddade.
+- **FX_IO_ERROR** (0x90) I/O-drivrutin.
+- **FX_WRITE_PROTECT** (0x23) Det angivna mediet är skrivskyddat.
 - **FX_PTR_ERROR** (0x18) Ogiltig fil pekare eller mål.
 - **FX_CALLER_ERROR** (0x20) anroparen är inte en tråd.
 
@@ -2112,7 +2112,7 @@ UINT fx_file_close(FX_FILE *file_ptr);
 ```
 ### <a name="description"></a>Beskrivning
 
-Den här tjänsten stänger den angivna filen. Om filen var öppen för skrivning och om den ändrades slutför den här tjänsten filändringsprocessen genom att uppdatera dess katalogpost med den nya storleken och aktuell systemtid och aktuellt datum.
+Den här tjänsten stänger den angivna filen. Om filen var öppen för skrivning och om den ändrades slutför den här tjänsten filändringsprocessen genom att uppdatera dess katalogpost med den nya storleken och systemets aktuella tid och datum.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
@@ -2120,12 +2120,12 @@ Den här tjänsten stänger den angivna filen. Om filen var öppen för skrivnin
 
 ### <a name="return-values"></a>Returvärden
 
-- **FX_SUCCESS** (0x00) Lyckades fil stäng.
+- **FX_SUCCESS** (0x00) Lyckades.
 - **FX_NOT_OPEN** (0x07) Angiven fil är inte öppen.
 - **FX_FILE_CORRUPT** (0x08) Filen är skadad.
 - **FX_SECTOR_INVALID** (0x89) Ogiltig sektor.
-- **FX_IO_ERROR** (0x90) Drivrutins-I/O.
-- **FX_PTR_ERROR** (0x18) Ogiltig media eller attribut pekare.
+- **FX_IO_ERROR** (0x90) I/O-drivrutin.
+- **FX_PTR_ERROR** (0x18) Pekaren Ogiltig media eller attribut.
 - **FX_CALLER_ERROR** (0x20) anroparen är inte en tråd.
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -2190,7 +2190,7 @@ UINT fx_file_create(
 Den här tjänsten skapar den angivna filen i standardkatalogen eller i den katalogsökväg som medföljer filnamnet.
 
 > [!WARNING]
-> *Den här tjänsten skapar en fil med ingen längd, dvs. inga kluster allokerade. Allokering sker automatiskt vid efterföljande fil skrivningar eller kan göras i förväg med tjänsten fx_file_allocate eller fx_file_extended_allocate utrymme över 4 GB).*
+> *Den här tjänsten skapar en fil med längden noll, det vill säga inga kluster allokerade. Allokering sker automatiskt vid efterföljande fil skrivningar eller kan göras i förväg med fx_file_allocate-tjänsten eller fx_file_extended_allocate utrymme över 4 GB).*
 
 ### <a name="input-parameters"></a>Indataparametrar
 
@@ -2212,8 +2212,8 @@ Den här tjänsten skapar den angivna filen i standardkatalogen eller i den kata
 - **FX_NO_MORE_SPACE** (0x0A) Inget mer utrymme för att slutföra åtgärden
 - **FX_MEDIA_INVALID** (0x02)Ogiltigt medium.
 - **FX_IO_ERROR** (0x90) I/O-drivrutin.
-- **FX_WRITE_PROTECT** (0x23) Underliggande media är skrivskyddat.
-- **FX_PTR_ERROR** (0x18) Ogiltig media- eller filnamnspekare.
+- **FX_WRITE_PROTECT** (0x23) Underliggande media är skrivskyddad.
+- **FX_PTR_ERROR** (0x18) Felaktig media- eller filnamnspekare.
 - **FX_CALLER_ERROR** (0x20) anroparen är inte en tråd.
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -2265,7 +2265,7 @@ status = fx_file_create(&my_media, "myfile.txt");
 
 ## <a name="fx_file_date_time_set"></a>fx_file_date_time_set
 
-### <a name="sets-file-date-and-time"></a>Anger filens datum och tid
+### <a name="sets-file-date-and-time"></a>Anger fildatum och -tid
 
 Ange fildatum och -tid
 
@@ -2310,22 +2310,22 @@ status = fx_file_date_time_set(&my_media, "my_file", 1999, 12, 31, 23, 59, 59);
 
 - **FX_SUCCESS** (0x00) Datum/tid har angetts.
 - **FX_MEDIA_NOT_OPEN** (0x11) Det angivna mediet är inte öppet.
-- **FX_NOT_FOUND** (0x04) hittades inte.
+- **FX_NOT_FOUND** (0x04) Hittades inte.
 - **FX_FILE_CORRUPT** (0x08) Filen är skadad.
 - **FX_SECTOR_INVALID** (0x89) Ogiltig sektor.
 - **FX_FAT_READ_ERROR** (0x03) Det går inte att läsa FAT-posten.
 - **FX_NO_MORE_ENTRIES** (0x0F) Inga fler FAT-poster.
 - **FX_NO_MORE_SPACE** (0x0A) Inget mer utrymme för att slutföra åtgärden.
-- **FX_IO_ERROR** (0x90) Drivrutins-I/O.
-- **FX_WRITE_PROTECT** (0x23) Angivna medier är skrivskyddade.
+- **FX_IO_ERROR** (0x90) I/O-drivrutin.
+- **FX_WRITE_PROTECT** (0x23) Det angivna mediet är skrivskyddat.
 - **FX_PTR_ERROR** (0x18) Ogiltig media eller namn pekare.
 - **FX_CALLER_ERROR** (0x20) anroparen är inte en tråd.
 - **FX_INVALID_YEAR** (0x12) År är ogiltigt.
-- **FX_INVALID_MONTH** (0x13) Månad är ogiltigt.
+- **FX_INVALID_MONTH** (0x13) Månad är ogiltig.
 - **FX_INVALID_DAY** (0x14) Day är ogiltig.
 - **FX_INVALID_HOUR** (0x15) Timme är ogiltigt.
 - **FX_INVALID_MINUTE** (0x16) Minut är ogiltig.
-- **FX_INVALID_SECOND** (0x17) Second är ogiltig.
+- **FX_INVALID_SECOND** (0x17) Sekund är ogiltigt.
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -2400,16 +2400,16 @@ Den här tjänsten tar bort den angivna filen.
 - **FX_MEDIA_NOT_OPEN** (0x11) Det angivna mediet är inte öppet.
 - **FX_NOT_FOUND** (0x04) Det gick inte att hitta den angivna filen.
 - **FX_NOT_A_FILE** (0x05) Det angivna filnamnet var en katalog eller volym.
-- **FX_ACCESS_ERROR** (0x06) Angiven fil är öppen för närvarande.
+- **FX_ACCESS_ERROR** (0x06) Angiven fil är öppen för tillfället.
 - **FX_FILE_CORRUPT** (0x08) Filen är skadad.
 - **FX_SECTOR_INVALID** (0x89) Ogiltig sektor.
 - **FX_FAT_READ_ERROR** (0x03) Det går inte att läsa FAT-posten.
 - **FX_NO_MORE_ENTRIES** (0x0F) Inga fler FAT-poster.
 - **FX_NO_MORE_SPACE** (0x0A) Inget mer utrymme för att slutföra åtgärden
-- **FX_IO_ERROR** (0x90) Drivrutins-I/O.
-- **FX_WRITE_PROTECT** (0x23) Angivna medier är skrivskyddade.
+- **FX_IO_ERROR** (0x90) I/O-drivrutin.
+- **FX_WRITE_PROTECT** (0x23) Det angivna mediet är skrivskyddat.
 - **FX_MEDIA_INVALID** (0x02) Ogiltigt medium.
-- **FX_PTR_ERROR** (0x18) Ogiltig medie pekare.
+- **FX_PTR_ERROR** (0x18) Ogiltig mediepekare.
 - **FX_CALLER_ERROR** (0x20) anroparen är inte en tråd.
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -2478,21 +2478,21 @@ Den här tjänsten är utformad för exFAT. Storleksparametern tar ett 64-bitars
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **file_ptr:** Pekare till en fil som öppnats tidigare.
-- **storlek:** Antal byte som ska allokeras för filen.
+- **size**: Antal byte som ska allokeras för filen.
 
 ### <a name="return-values"></a>Returvärden
 
 - **FX_SUCCESS** (0x00) Lyckad filallokering.
 - **FX_ACCESS_ERROR** (0x06) Angiven fil är inte öppen för skrivning.
-- **FX_NOT_OPEN** (0x07) Angiven fil är inte öppen för närvarande.
+- **FX_NOT_OPEN** (0x07) Den angivna filen är inte öppen för närvarande.
 - **FX_NO_MORE_SPACE** (0x0A) Media som är associerade med den här filen har inte tillräckligt med tillgängliga kluster.
 - **FX_FILE_CORRUPT** (0x08) Filen är skadad.
 - **FX_SECTOR_INVALID** (0x89) Ogiltig sektor.
 - **FX_FAT_READ_ERROR** (0x03) Det går inte att läsa FAT-posten.
 - **FX_NO_MORE_ENTRIES** (0x0F) Inga fler FAT-poster.
-- **FX_IO_ERROR** (0x90) Drivrutins-I/O.
-- **FX_WRITE_PROTECT** (0x23) Angivna medier är skrivskyddade.
-- **FX_PTR_ERROR** (0x18) Ogiltig fil pekare.
+- **FX_IO_ERROR** (0x90) I/O-drivrutin.
+- **FX_WRITE_PROTECT** (0x23) Det angivna mediet är skrivskyddat.
+- **FX_PTR_ERROR** (0x18) Ogiltig filpekare.
 - **FX_CALLER_ERROR** (0x20) anroparen är inte en tråd.
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -2545,7 +2545,7 @@ status = fx_file_extended_allocate(&my_file, 0x100000000);
 
 ## <a name="fx_file_extended_best_effort_allocate"></a>fx_file_extended_best_effort_allocate
 
-Bästa möjliga resultat för att allokera utrymme för en fil
+Bästa möjliga tid för att allokera utrymme för en fil
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2557,28 +2557,28 @@ UINT fx_file_extended best_effort_allocate(
 ```
 ### <a name="description"></a>Beskrivning
 
-Den här tjänsten allokerar och länkar ett eller flera sammanhängande kluster till slutet av den angivna filen. FileX avgör antalet kluster som krävs genom att dividera den begärda storleken med antalet byte per kluster. Resultatet avrundas sedan uppåt till nästa helt kluster. Om det inte finns tillräckligt många kluster i följd tillgängliga på mediet länkar den här tjänsten det största tillgängliga blocket med kluster i följd till filen. Mängden utrymme som faktiskt allokeras till filen returneras till anroparen.
+Den här tjänsten allokerar och länkar ett eller flera sammanhängande kluster till slutet av den angivna filen. FileX avgör antalet kluster som krävs genom att dividera den begärda storleken med antalet byte per kluster. Resultatet avrundas sedan uppåt till nästa helt kluster. Om det inte finns tillräckligt många kluster i följd tillgängliga på mediet länkar den här tjänsten det största tillgängliga blocket med kluster i följd till filen. Mängden utrymme som faktiskt allokerats till filen returneras till anroparen.
 
 Den här tjänsten är utformad för exFAT. Storleksparametern tar ett 64-bitars heltalsvärde, vilket gör att anroparen kan allokera utrymme i förväg över 4 GB. 
 
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **file_ptr:** Pekare till en fil som öppnats tidigare.
-- **storlek:** Antal byte som ska allokeras för filen.
+- **size**: Antal byte som ska allokeras för filen.
 
 ### <a name="return-values"></a>Returvärden
 
 - **FX_SUCCESS** (0x00) Lyckad filallokering.
 - **FX_ACCESS_ERROR** (0x06) Angiven fil är inte öppen för skrivning.
-- **FX_NOT_OPEN** (0x07) Angiven fil är inte öppen för närvarande.
+- **FX_NOT_OPEN** (0x07) Den angivna filen är inte öppen för närvarande.
 - **FX_NO_MORE_SPACE** (0x0A) Media som är associerade med den här filen har inte tillräckligt med tillgängliga kluster.
 - **FX_FILE_CORRUPT** (0x08) Filen är skadad.
 - **FX_SECTOR_INVALID** (0x89) Ogiltig sektor.
 - **FX_FAT_READ_ERROR** (0x03) Det går inte att läsa FAT-posten.
 - **FX_NO_MORE_ENTRIES** (0x0F) Inga fler FAT-poster.
-- **FX_IO_ERROR** (0x90) Drivrutins-I/O.
-- **FX_WRITE_PROTECT** (0x23) Angivna medier är skrivskyddade.
-- **FX_PTR_ERROR** (0x18) Ogiltig fil pekare.
+- **FX_IO_ERROR** (0x90) I/O-drivrutin.
+- **FX_WRITE_PROTECT** (0x23) Det angivna mediet är skrivskyddat.
+- **FX_PTR_ERROR** (0x18) Ogiltig filpekare.
 - **FX_CALLER_ERROR** (0x20) anroparen är inte en tråd.
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -2647,20 +2647,20 @@ UINT fx_file_extended_relative_seek(
 
 Den här tjänsten placerar den interna filläsnings-/skriv pekaren mot den angivna relativa byteförskjutningen. Alla efterföljande filläsnings- eller skrivbegäran börjar på den här platsen i filen.
 
-Den här tjänsten är utformad för exFAT. Parametern *byte_offset* ett 64-bitars heltalsvärde, vilket gör att anroparen kan flytta läs-/skriv pekaren över 4 GB.
+Den här tjänsten är utformad för exFAT. Parametern *byte_offset* tar ett 64-bitars heltalsvärde, vilket gör att anroparen kan flytta läs-/skrivpekaren över 4 GB.
 
 > [!IMPORTANT]
-> *Om sökåtgärden försöker att söka förbi slutet av filen placeras filens pekare för läsning/skrivning i slutet av filen. Om sökåtgärden försöker placera förbi början av filen placeras däremot filens läs-/skriv pekare till början av filen.*
+> *Om sökåtgärden försöker att söka förbi slutet av filen placeras filens läs-/skriv pekare i slutet av filen. Om sökåtgärden försöker placera sig förbi början av filen placeras däremot filens läs-/skriv pekare i början av filen.*
 
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **file_ptr:** Pekare till en fil som öppnats tidigare.
 - **byte_offset:** Önskad relativ byteförskjutning i filen.
-- **seek_from:** Riktning och plats för var den relativa sökingen ska utföras. Giltiga sökalternativ definieras på följande sätt:
+- **seek_from:** Riktningen och platsen för var du ska utföra det relativa söket. Giltiga sökalternativ definieras på följande sätt:
   - FX_SEEK_BEGIN (0x00)
   - FX_SEEK_END (0x01)
   - FX_SEEK_FORWARD (0x02)
-  - FX_SEEK_BACK (0x03) FX_SEEK_BEGIN har angetts utförs sökåtgärden från början av filen. Om FX_SEEK_END har angetts utförs sökåtgärden bakåt från slutet av filen. Om FX_SEEK_FORWARD har angetts utförs sökåtgärden framåt från den aktuella filpositionen. Om FX_SEEK_BACK har angetts utförs sökåtgärden bakåt från den aktuella filpositionen.
+  - FX_SEEK_BACK (0x03) Om FX_SEEK_BEGIN har angetts utförs sökåtgärden från början av filen. Om FX_SEEK_END har angetts utförs sökåtgärden bakåt från slutet av filen. Om FX_SEEK_FORWARD har angetts utförs sökåtgärden framåt från den aktuella filpositionen. Om FX_SEEK_BACK har angetts utförs sökåtgärden bakåt från den aktuella filpositionen.
 
 ### <a name="return-values"></a>Returvärden
 
@@ -2669,8 +2669,8 @@ Den här tjänsten är utformad för exFAT. Parametern *byte_offset* ett 64-bita
 - **FX_FILE_CORRUPT** (0x08) Filen är skadad.
 - **FX_SECTOR_INVALID** (0x89) Ogiltig sektor.
 - **FX_NO_MORE_SPACE** (0x0A) Inget mer utrymme för att slutföra åtgärden
-- **FX_IO_ERROR** (0x90) I/O-drivrutin.
-- **FX_PTR_ERROR** (0x18) Ogiltig filpekare.
+- **FX_IO_ERROR** (0x90) Drivrutins-I/O.
+- **FX_PTR_ERROR** (0x18) Ogiltig fil pekare.
 - **FX_CALLER_ERROR** (0x20) anroparen är inte en tråd.
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -2722,7 +2722,7 @@ status = fx_file_extended_relative_seek(&my_file, 0x100000000, FX_SEEK_FORWARD);
 
 ## <a name="fx_file_extended_seek"></a>fx_file_extended_seek
 
-Positioner för byteförskjutning
+Positioner till byte-förskjutning
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2735,12 +2735,12 @@ UINT fx_file_extended_seek(
 
 Den här tjänsten placerar den interna filläsnings-/skriv pekaren mot den angivna byteförskjutningen. Alla efterföljande filläsnings- eller skrivbegäran börjar på den här platsen i filen.
 
-Den här tjänsten är utformad för exFAT. Parametern *byte_offset* ett 64-bitars heltalsvärde, vilket gör att anroparen kan flytta läs-/skriv pekaren över 4 GB.
+Den här tjänsten är utformad för exFAT. Parametern *byte_offset* tar ett 64-bitars heltalsvärde, vilket gör att anroparen kan flytta läs-/skrivpekaren över 4 GB.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **file_ptr:** Pekare till filkontrollblocket.
-- **byte_offset:** Önskad byteförskjutning i filen. Värdet noll placerar pekaren för läsning/skrivning i början av filen, medan ett värde som är större än filens storlek placerar pekaren för läsning/skrivning i slutet av filen.
+- **byte_offset:** Önskad byteförskjutning i filen. Värdet noll placerar läs-/skriv pekaren i början av filen, medan ett värde som är större än filens storlek placerar läs-/skriv pekaren i slutet av filen.
 
 ### <a name="return-values"></a>Returvärden
 
@@ -2749,8 +2749,8 @@ Den här tjänsten är utformad för exFAT. Parametern *byte_offset* ett 64-bita
 - **FX_FILE_CORRUPT** (0x08) Filen är skadad.
 - **FX_SECTOR_INVALID** (0x89) Ogiltig sektor.
 - **FX_NO_MORE_SPACE** (0x0A) Inget mer utrymme för att slutföra åtgärden
-- **FX_IO_ERROR** (0x90) I/O-drivrutin.
-- **FX_PTR_ERROR** (0x18) Ogiltig filpekare.
+- **FX_IO_ERROR** (0x90) Drivrutins-I/O.
+- **FX_PTR_ERROR** (0x18) Ogiltig fil pekare.
 - **FX_CALLER_ERROR** (0x20) anroparen är inte en tråd.
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -2785,7 +2785,7 @@ status = fx_file_extended_seek(&my_file, 0x100000000);
 - fx_file_extended_relative_seek
 - fx_file_extended_truncate
 - fx_file_extended_truncate_release
-- fx_file_open – fx_file_read
+- fx_file_open– fx_file_read
 - fx_file_relative_seek
 - fx_file_rename
 - fx_file_seek
@@ -2800,7 +2800,7 @@ status = fx_file_extended_seek(&my_file, 0x100000000);
 
 ## <a name="fx_file_extended_truncate"></a>fx_file_extended_truncate
 
-Trunkerar filen
+Trunkeringsfil
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2814,14 +2814,14 @@ UINT fx_file_truncate(
 Den här tjänsten trunkerar storleken på filen till den angivna storleken. Om den angivna storleken är större än den faktiska filstorleken gör den här tjänsten ingenting. Inget av de mediekluster som är associerade med filen släpps.
 
 > [!WARNING]
-> *Var försiktig när du trunkerar filer som också kan vara öppna samtidigt för läsning. Att trunkera en fil som också öppnas för läsning kan resultera i läsning av ogiltiga data.*
+> *Var försiktig när du trunkerar filer som också kan vara öppna samtidigt för läsning. Trunkering av en fil som också öppnas för läsning kan resultera i läsning av ogiltiga data.*
 
-Den här tjänsten är utformad för exFAT. Storleksparametern tar ett 64-bitars heltalsvärde, vilket gör att anroparen kan arbeta längre än 4 GB. 
+Den här tjänsten är utformad för exFAT. Storleksparametern tar ett 64-bitars heltalsvärde, vilket gör att anroparen kan arbeta utanför 4 GB intervall. 
 
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **file_ptr:** Pekare till filkontrollblocket.
-- **size**: Ny filstorlek. Byte som har gått förbi den nya filstorleken tas bort.
+- **storlek:** Ny filstorlek. Byte som har gått förbi den nya filstorleken tas bort.
 
 ### <a name="return-values"></a>Returvärden
 
@@ -2832,9 +2832,9 @@ Den här tjänsten är utformad för exFAT. Storleksparametern tar ett 64-bitars
 - **FX_SECTOR_INVALID** (0x89) Ogiltig sektor.
 - **FX_NO_MORE_ENTRIES** (0x0F) Inga fler FAT-poster.
 - **FX_NO_MORE_SPACE** (0x0A) Inget mer utrymme för att slutföra åtgärden
-- **FX_IO_ERROR** (0x90) I/O-drivrutin.
-- **FX_WRITE_PROTECT** (0x23) Underliggande media är skrivskyddat.
-- **FX_PTR_ERROR** (0x18) Ogiltig filpekare.
+- **FX_IO_ERROR** (0x90) Drivrutins-I/O.
+- **FX_WRITE_PROTECT** (0x23) Underliggande media är skrivskyddad.
+- **FX_PTR_ERROR** (0x18) Ogiltig fil pekare.
 - **FX_CALLER_ERROR** (0x20) anroparen är inte en tråd.
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -2899,14 +2899,14 @@ UINT fx_file_extended_truncate_release(
 Den här tjänsten trunkerar storleken på filen till den angivna storleken. Om den angivna storleken är större än den faktiska filstorleken gör den här tjänsten ingenting. Till skillnad ***fx_file_extended_truncate*** tjänsten släpper den här tjänsten eventuella oanvända kluster.
 
 > [!WARNING]
-> *Var försiktig när du trunkerar filer som också kan vara öppna samtidigt för läsning. Att trunkera en fil som också öppnas för läsning kan resultera i läsning av ogiltiga data.*
+> *Var försiktig när du trunkerar filer som också kan vara öppna samtidigt för läsning. Trunkering av en fil som också öppnas för läsning kan resultera i läsning av ogiltiga data.*
 
-Den här tjänsten är utformad för exFAT. Storleksparametern tar ett 64-bitars heltalsvärde, vilket gör att anroparen kan arbeta längre än 4 GB. 
+Den här tjänsten är utformad för exFAT. Storleksparametern tar ett 64-bitars heltalsvärde, vilket gör att anroparen kan arbeta utanför 4 GB intervall. 
 
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **file_ptr:** Pekare till en fil som öppnats tidigare.
-- **size**: Ny filstorlek. Byte som har gått förbi den nya filstorleken tas bort.
+- **storlek:** Ny filstorlek. Byte som har gått förbi den nya filstorleken tas bort.
 
 ### <a name="return-values"></a>Returvärden
 
@@ -2918,9 +2918,9 @@ Den här tjänsten är utformad för exFAT. Storleksparametern tar ett 64-bitars
 - **FX_FAT_READ_ERROR** (0x03) Det går inte att läsa FAT-posten.
 - **FX_NO_MORE_ENTRIES** (0x0F) Inga fler FAT-poster.
 - **FX_NO_MORE_SPACE** (0x0A) Inget mer utrymme för att slutföra åtgärden
-- **FX_IO_ERROR** (0x90) I/O-drivrutin.
-- **FX_WRITE_PROTECT** (0x23) Det angivna mediet är skrivskyddat.
-- **FX_PTR_ERROR** (0x18) Ogiltig filpekare.
+- **FX_IO_ERROR** (0x90) Drivrutins-I/O.
+- **FX_WRITE_PROTECT** (0x23) Angivna medier är skrivskyddade.
+- **FX_PTR_ERROR** (0x18) Ogiltig fil pekare.
 - **FX_CALLER_ERROR** (0x20) anroparen är inte en tråd.
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -2993,7 +2993,7 @@ Den här tjänsten öppnar den angivna filen för läsning eller skrivning. En f
 
 - **media_ptr:** Pekare till ett mediakontrollblock.
 - **file_ptr:** Pekare till filkontrollblocket.
-- **file_name**: Pekare till namnet på filen som ska öppnas (katalogsökvägen är valfri).
+- **file_name:** Pekare till namnet på filen som ska öppnas (katalogsökvägen är valfri).
 - **open_type:** Typ av fil som är öppen. Giltiga alternativ för öppen typ är:
   - FX_OPEN_FOR_READ (0x00)
   - FX_OPEN_FOR_WRITE (0x01)
@@ -3001,11 +3001,11 @@ Den här tjänsten öppnar den angivna filen för läsning eller skrivning. En f
 
 Att öppna filer med FX_OPEN_FOR_READ och FX_OPEN_FOR_READ_FAST liknar följande:
 
-- FX_OPEN_FOR_READ omfattar verifiering att den länkade listan över kluster som utgör filen är intakt och FX_OPEN_FOR_READ_FAST utför inte den här verifieringen, vilket gör den snabbare.
+- FX_OPEN_FOR_READ verifiering att den länkade listan över kluster som utgör filen är intakt och FX_OPEN_FOR_READ_FAST utför inte den här verifieringen, vilket gör den snabbare.
 
 ### <a name="return-values"></a>Returvärden
 
-- **FX_SUCCESS** (0x00) Lyckad fil öppen.
+- **FX_SUCCESS** (0x00) Filen lyckades öppen.
 - **FX_MEDIA_NOT_OPEN** (0x11) Det angivna mediet är inte öppet.
 - **FX_NOT_FOUND** (0x04) Det gick inte att hitta den angivna filen.
 - **FX_NOT_A_FILE** (0x05) Det angivna filnamnet var en katalog eller volym.
@@ -3015,9 +3015,9 @@ Att öppna filer med FX_OPEN_FOR_READ och FX_OPEN_FOR_READ_FAST liknar följande
 - **FX_MEDIA_INVALID** (0x02) Ogiltigt medium.
 - **FX_FAT_READ_ERROR** (0x03) Det går inte att läsa FAT-posten.
 - **FX_NO_MORE_SPACE** (0x0A) Inget mer utrymme för att slutföra åtgärden
-- **FX_IO_ERROR** (0x90) Drivrutins-I/O.
+- **FX_IO_ERROR** (0x90) I/O-drivrutin.
 - **FX_WRITE_PROTECT** (0x23) Underliggande media är skrivskyddad.
-- **FX_PTR_ERROR** (0x18) Ogiltig media- eller fil pekare.
+- **FX_PTR_ERROR** (0x18) Ogiltig media eller fil pekare.
 - **FX_CALLER_ERROR** (0x20) anroparen är inte en tråd.
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -3045,7 +3045,7 @@ status = fx_file_open(&my_media, &my_file, "myfile.txt", FX_OPEN_FOR_READ);
 - fx_file_attributes_read
 - fx_file_attributes_set
 - fx_file_best_effort_allocate
-- fx_file_close– fx_file_create
+- fx_file_close – fx_file_create
 - fx_file_date_time_set
 - fx_file_delete
 - fx_file_extended_allocate
@@ -3082,7 +3082,7 @@ UINT fx_file_read(
 ```
 ### <a name="description"></a>Beskrivning
 
-Den här tjänsten läser byte från filen och lagrar dem i den angivna bufferten. När läsningen är klar justeras filens interna läs pekare så att den pekar på nästa byte i filen. Om det finns färre byte kvar i begäran lagras endast återstående byte i bufferten. I vilket fall returneras det totala antalet byte som placerats i bufferten till anroparen.
+Den här tjänsten läser byte från filen och lagrar dem i den angivna bufferten. När läsningen är klar justeras filens interna läs pekare så att den pekar vid nästa byte i filen. Om det finns färre byte kvar i begäran lagras bara återstående byte i bufferten. I vilket fall som helst returneras det totala antalet byte som placerats i bufferten till anroparen.
 
 > [!WARNING]
 > *Programmet måste se till att den angivna bufferten kan lagra det angivna antalet begärda byte.*
@@ -3175,13 +3175,13 @@ Den här tjänsten placerar den interna filläsnings-/skriv pekaren mot den angi
 > [!IMPORTANT]
 > *Om sökåtgärden försöker att söka förbi slutet av filen placeras filens pekare för läsning/skrivning i slutet av filen. Om sökåtgärden försöker placera förbi början av filen placeras däremot filens läs-/skriv pekare till början av filen.*
 
-Om du vill söka med ett förskjutningsvärde över 4 GB ska programmet använda *tjänsten fx_file_extended_relative_seek*.
+Om du vill söka med ett förskjutningsvärde över 4 GB ska programmet använda tjänsten *fx_file_extended_relative_seek*.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **file_ptr:** Pekare till en fil som öppnats tidigare.
 - **byte_offset:** Önskad relativ byteförskjutning i filen.
-- **seek_from:** Riktning och plats för var den relativa sökingen ska utföras. Giltiga sökalternativ definieras på följande sätt:
+- **seek_from:** Riktning och plats för var den relativa söken ska utföras. Giltiga sökalternativ definieras på följande sätt:
   - FX_SEEK_BEGIN (0x00)
   - FX_SEEK_END (0x01)
   - FX_SEEK_FORWARD (0x02)
@@ -3192,7 +3192,7 @@ Om FX_SEEK_BEGIN har angetts utförs sökåtgärden från början av filen. Om F
 ### <a name="return-values"></a>Returvärden
 
 - **FX_SUCCESS** (0x00) Lyckad relativ filsökning.
-- **FX_NOT_OPEN** (0x07) Angiven fil är inte öppen för närvarande.
+- **FX_NOT_OPEN** (0x07) Den angivna filen är inte öppen för närvarande.
 - **FX_IO_ERROR** (0x90) I/O-drivrutin.
 - **FX_FILE_CORRUPT** (0x08) Filen är skadad.
 - **FX_SECTOR_INVALID** (0x89) Ogiltig sektor.
@@ -3261,12 +3261,12 @@ UINT fx_file_rename(
 ```
 ### <a name="description"></a>Beskrivning
 
-Den här tjänsten ändrar namnet på filen som anges av *old_file_name*. Namnbyte görs också i förhållande till den angivna sökvägen eller standardsökvägen. Om en sökväg anges i det nya filnamnet flyttas den omdöpta filen till den angivna sökvägen. Om ingen sökväg anges placeras den omdöpta filen i den aktuella standardsökvägen.
+Den här tjänsten ändrar namnet på filen som anges av *old_file_name*. Namnbyte görs också i förhållande till den angivna sökvägen eller standardsökvägen. Om en sökväg anges i det nya filnamnet flyttas den omdöpta filen effektivt till den angivna sökvägen. Om ingen sökväg anges placeras den omdöpta filen i den aktuella standardsökvägen.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **media_ptr:** Pekare till ett mediakontrollblock.
-- **old_file_name:** Pekare till namnet på filen som du vill byta namn på (katalogsökvägen är valfri).
+- **old_file_name:** Pekare till namnet på filen som ska byta namn (katalogsökvägen är valfri).
 - **new_file_name**: Pekare till det nya filnamnet. Katalogsökvägen tillåts inte.
 
 ### <a name="return-values"></a>Returvärden
@@ -3275,9 +3275,9 @@ Den här tjänsten ändrar namnet på filen som anges av *old_file_name*. Namnby
 - **FX_MEDIA_NOT_OPEN** (0x11) Det angivna mediet är inte öppet.
 - **FX_NOT_FOUND** (0x04) Det gick inte att hitta den angivna filen.
 - **FX_NOT_A_FILE** (0x05) Angiven fil är en katalog.
-- **FX_ACCESS_ERROR** (0x06) Den angivna filen är redan öppen.
-- **FX_IO_ERROR** (0x90) I/O-drivrutin.
-- **FX_WRITE_PROTECT** (0x23) Det angivna mediet är skrivskyddat.
+- **FX_ACCESS_ERROR** (0x06) Angiven fil är redan öppen.
+- **FX_IO_ERROR** (0x90) Drivrutins-I/O.
+- **FX_WRITE_PROTECT** (0x23) Angivna medier är skrivskyddade.
 - **FX_INVALID_NAME** (0x0C) Angivet nytt filnamn är inte ett giltigt filnamn.
 - **FX_INVALID_PATH** (0x0D) Sökvägen är ogiltig.
 - **FX_ALREADY_CREATED** (0x0B) Det nya filnamnet används.
@@ -3287,7 +3287,7 @@ Den här tjänsten ändrar namnet på filen som anges av *old_file_name*. Namnby
 - **FX_NO_MORE_ENTRIES** (0x0F) Inga fler FAT-poster.
 - **FX_NO_MORE_SPACE** (0x0A) Inget mer utrymme för att slutföra åtgärden
 - **FX_FAT_READ_ERROR** (0x03) Det går inte att läsa FAT-tabellen.
-- **FX_PTR_ERROR** (0x18) Ogiltig mediepekare.
+- **FX_PTR_ERROR** (0x18) Ogiltig medie pekare.
 - **FX_CALLER_ERROR** (0x20) anroparen är inte en tråd.
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -3338,7 +3338,7 @@ status = fx_file_rename(&my_media, "myfile1.txt", "myfile2.txt");
 
 ## <a name="fx_file_seek"></a>fx_file_seek
 
-Positioner för byteförskjutning
+Positioner till byte-förskjutning
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3351,22 +3351,22 @@ UINT fx_file_seek(
 
 Den här tjänsten placerar den interna filläsnings-/skriv pekaren mot den angivna byteförskjutningen. Alla efterföljande filläsnings- eller skrivbegäran börjar på den här platsen i filen.
 
-Om du vill söka med ett förskjutningsvärde över 4 GB ska programmet använda *tjänsten fx_file_extended_seek*.
+Om du vill söka med ett förskjutningsvärde över 4 GB ska programmet använda tjänsten *fx_file_extended_seek*.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **file_ptr:** Pekare till filkontrollblocket.
-- **byte_offset:** Önskad byteförskjutning i filen. Värdet noll placerar pekaren för läsning/skrivning i början av filen, medan ett värde som är större än filens storlek placerar pekaren för läsning/skrivning i slutet av filen.
+- **byte_offset:** Önskad byteförskjutning i filen. Värdet noll placerar läs-/skriv pekaren i början av filen, medan ett värde som är större än filens storlek placerar läs-/skriv pekaren i slutet av filen.
 
 ### <a name="return-values"></a>Returvärden
 
 - **FX_SUCCESS** (0x00) Lyckad filsökning.
 - **FX_NOT_OPEN** (0x07) Angiven fil är inte öppen.
-- **FX_IO_ERROR** (0x90) I/O-drivrutin.
+- **FX_IO_ERROR** (0x90) Drivrutins-I/O.
 - **FX_FILE_CORRUPT** (0x08) Filen är skadad.
 - **FX_SECTOR_INVALID** (0x89) Ogiltig sektor.
 - **FX_NO_MORE_SPACE** (0x0A) Inget mer utrymme för att slutföra åtgärden
-- **FX_PTR_ERROR** (0x18) Ogiltig filpekare.
+- **FX_PTR_ERROR** (0x18) Ogiltig fil pekare.
 - **FX_CALLER_ERROR** (0x20) anroparen är inte en tråd.
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -3415,7 +3415,7 @@ status = fx_file_seek(&my_file, 0);
 
 ## <a name="fx_file_truncate"></a>fx_file_truncate
 
-Trunkerar filen
+Trunkeringsfil
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3430,27 +3430,27 @@ UINT fx_file_truncate(
 Den här tjänsten trunkerar storleken på filen till den angivna storleken. Om den angivna storleken är större än den faktiska filstorleken gör den här tjänsten ingenting. Inget av de mediekluster som är associerade med filen släpps.
 
 > [!WARNING]
-> *Var försiktig när du trunkerar filer som också kan vara öppna samtidigt för läsning. Att trunkera en fil som också öppnas för läsning kan resultera i läsning av ogiltiga data.*
+> *Var försiktig när du trunkerar filer som också kan vara öppna samtidigt för läsning. Trunkering av en fil som också öppnas för läsning kan resultera i läsning av ogiltiga data.*
 
 För att kunna arbeta mer än 4 GB ska programmet använda tjänsten *fx_file_extended_truncate*.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **file_ptr:** Pekare till filkontrollblocket.
-- **size**: Ny filstorlek. Byte som har gått förbi den nya filstorleken tas bort.
+- **storlek:** Ny filstorlek. Byte som har gått förbi den nya filstorleken tas bort.
 
 ### <a name="return-values"></a>Returvärden
 
 - **FX_SUCCESS** (0x00) Lyckad fil trunkering.
 - **FX_NOT_OPEN** (0x07) Angiven fil är inte öppen.
 - **FX_ACCESS_ERROR** (0x06) Angiven fil är inte öppen för skrivning.
-- **FX_IO_ERROR** (0x90) I/O-drivrutin.
-- **FX_WRITE_PROTECT** (0x23) Det angivna mediet är skrivskyddat.
+- **FX_IO_ERROR** (0x90) Drivrutins-I/O.
+- **FX_WRITE_PROTECT** (0x23) Angivna medier är skrivskyddade.
 - **FX_FILE_CORRUPT** (0x08) Filen är skadad.
 - **FX_SECTOR_INVALID** (0x89) Ogiltig sektor.
 - **FX_NO_MORE_ENTRIES** (0x0F) Inga fler FAT-poster.
 - **FX_NO_MORE_SPACE** (0x0A) Inget mer utrymme för att slutföra åtgärden
-- **FX_PTR_ERROR** (0x18) Ogiltig filpekare.
+- **FX_PTR_ERROR** (0x18) Ogiltig fil pekare.
 - **FX_CALLER_ERROR** (0x20) anroparen är inte en tråd.
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -3514,28 +3514,28 @@ UINT fx_file_truncate(
 Den här tjänsten trunkerar storleken på filen till den angivna storleken. Om den angivna storleken är större än den faktiska filstorleken gör den här tjänsten ingenting. Till skillnad ***fx_file_truncate*** tjänsten släpper den här tjänsten eventuella oanvända kluster.
 
 > [!WARNING]
-> *Var försiktig när du trunkerar filer som också kan vara öppna samtidigt för läsning. Att trunkera en fil som också öppnas för läsning kan resultera i läsning av ogiltiga data.*
+> *Var försiktig när du trunkerar filer som också kan vara öppna samtidigt för läsning. Trunkering av en fil som också öppnas för läsning kan resultera i läsning av ogiltiga data.*
 
 För att kunna arbeta mer än 4 GB ska programmet använda tjänsten *fx_file_extended_truncate_release*.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **file_ptr:** Pekare till en fil som öppnats tidigare.
-- **size**: Ny filstorlek. Byte som har gått förbi den nya filstorleken tas bort.
+- **storlek:** Ny filstorlek. Byte som har gått förbi den nya filstorleken tas bort.
 
 ### <a name="return-values"></a>Returvärden
 
 - **FX_SUCCESS** (0x00) Lyckad fil trunkering.
 - **FX_ACCESS_ERROR** (0x06) Angiven fil är inte öppen för skrivning.
 - **FX_NOT_OPEN** (0x07) Angiven fil är inte öppen för närvarande.
-- **FX_IO_ERROR** (0x90) I/O-drivrutin.
-- **FX_WRITE_PROTECT** (0x23) Underliggande media är skrivskyddat.
+- **FX_IO_ERROR** (0x90) Drivrutins-I/O.
+- **FX_WRITE_PROTECT** (0x23) Underliggande media är skrivskyddad.
 - **FX_FILE_CORRUPT** (0x08) Filen är skadad.
 - **FX_SECTOR_INVALID** (0x89) Ogiltig sektor.
 - **FX_FAT_READ_ERROR** (0x03) Det går inte att läsa FAT-posten.
 - **FX_NO_MORE_ENTRIES** (0x0F) Inga fler FAT-poster.
 - **FX_NO_MORE_SPACE** (0x0A) Inget mer utrymme för att slutföra åtgärden.
-- **FX_PTR_ERROR** (0x18) Ogiltig filpekare.
+- **FX_PTR_ERROR** (0x18) Ogiltig fil pekare.
 - **FX_CALLER_ERROR** (0x20) anroparen är inte en tråd.
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -3614,14 +3614,14 @@ Den här tjänsten skriver byte från den angivna bufferten med början vid file
 - **FX_SUCCESS** (0x00) Lyckad filskrivning.
 - **FX_NOT_OPEN** (0x07) Angiven fil är inte öppen.
 - **FX_ACCESS_ERROR** (0x06) Angiven fil är inte öppen för skrivning.
-- **FX_NO_MORE_SPACE** (0x0A) Det finns inte mer utrymme på mediet för att utföra den här skriven.
-- **FX_IO_ERROR** (0x90) Drivrutins-I/O.
-- **FX_WRITE_PROTECT** (0x23) Angivna medier är skrivskyddade.
+- **FX_NO_MORE_SPACE** (0x0A) Det finns inte mer utrymme tillgängligt på mediet för att utföra den här skriven.
+- **FX_IO_ERROR** (0x90) I/O-drivrutin.
+- **FX_WRITE_PROTECT** (0x23) Det angivna mediet är skrivskyddat.
 - **FX_FILE_CORRUPT** (0x08) Filen är skadad.
 - **FX_SECTOR_INVALID** (0x89) Ogiltig sektor.
 - **FX_FAT_READ_ERROR** (0x03) Det går inte att läsa FAT-posten.
 - **FX_NO_MORE_ENTRIES** (0x0F) Inga fler FAT-poster.
-- **FX_PTR_ERROR** (0x18) Ogiltig fil- eller buffertpekare.
+- **FX_PTR_ERROR** (0x18) Ogiltig fil eller buffertpekare.
 - **FX_CALLER_ERROR** (0x20) anroparen är inte en tråd.
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -3687,7 +3687,7 @@ Den här tjänsten installerar återanropsfunktionen som anropas efter en lyckad
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **file_ptr:** Pekare till filkontrollblocket.
-- **file_write_notify:** Funktionen för återanrop av filskrivning som ska installeras. Om du ställer in återanropsfunktionen på NULL inaktiveras återanropsfunktionen.
+- **file_write_notify:** Återanropsfunktionen för filskrivning som ska installeras. Om du ställer in återanropsfunktionen på NULL inaktiveras återanropsfunktionen.
 
 ### <a name="return-values"></a>Returvärden
 
@@ -3746,10 +3746,10 @@ UINT fx_media_abort(FX_MEDIA *media_ptr);
 ```
 ### <a name="description"></a>Beskrivning
 
-Den här tjänsten avbryter alla aktuella aktiviteter som är associerade med mediet, inklusive att stänga alla öppna filer, skicka en avbrottsbegäran till den associerade drivrutinen och placera mediet i ett avbrutet tillstånd. Den här tjänsten anropas vanligtvis när I/O-fel identifieras.
+Den här tjänsten avbryter alla aktuella aktiviteter som är associerade med mediet, inklusive att stänga alla öppna filer, skicka en begäran om avbrott till den associerade drivrutinen och placera mediet i ett avbrutna tillstånd. Den här tjänsten anropas vanligtvis när I/O-fel identifieras.
 
 > [!WARNING]
-> *Mediet måste öppnas igen om du vill använda det igen efter att en åtgärd har avbrutits.*
+> *Mediet måste öppnas igen för att det ska kunna användas igen när en avbrottsåtgärd har utförts.*
 
 ### <a name="input-parameters"></a>Indataparametrar
 
@@ -3759,7 +3759,7 @@ Den här tjänsten avbryter alla aktuella aktiviteter som är associerade med me
 
 - **FX_SUCCESS** (0x00) Lyckad medie abort.
 - **FX_MEDIA_NOT_OPEN** (0x11) Det angivna mediet är inte öppet.
-- **FX_PTR_ERROR** (0x18) Ogiltig medie pekare.
+- **FX_PTR_ERROR** (0x18) Ogiltig mediepekare.
 - **FX_CALLER_ERROR** (0x20) anroparen är inte en tråd.
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -3802,7 +3802,7 @@ status = fx_media_abort(&my_media);
 
 ## <a name="fx_media_cache_invalidate"></a>fx_media_cache_invalidate
 
-Ogiltigförklarar cache för logisk sektor
+Ogiltigförklarar logisk sektorcache
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3822,7 +3822,7 @@ Den här tjänsten rensar alla felaktiga sektorer i cacheminnet och ogiltigförk
 
 - **FX_SUCCESS** (0x00) Lyckad mediecache ogiltigförklaras.
 - **FX_MEDIA_NOT_OPEN** (0x11) Det angivna mediet är inte öppet.
-- **FX_IO_ERROR** (0x90) Drivrutins-I/O.
+- **FX_IO_ERROR** (0x90) I/O-drivrutin.
 - **FX_PTR_ERROR** (0x18) Ogiltig media eller scratch-pekare.
 - **FX_CALLER_ERROR** (0x20) anroparen är inte en tråd.
 
@@ -3881,17 +3881,17 @@ UINT fx_media_check(
 
 Den här tjänsten söker efter grundläggande strukturella fel i det angivna mediet, inklusive korslänkning mellan filer/kataloger, ogiltiga FAT-kedjor och förlorade kluster. Den här tjänsten ger också möjlighet att korrigera identifierade fel.
 
-Tjänsten fx_media_check för att kunna analysera kataloger och filer på mediet på djupet. Mer specifikt måste det scratch memory som tillhandahålls till mediakontrolltjänsten vara tillräckligt stort för att rymma flera katalogposter, en datastruktur för att "stapla" den aktuella katalogpostpositionen innan du går in i underkataloger och slutligen den logiska FAT-bitmappningen. Det scratchminnet bör vara minst 512–1 024 byte plus minne för den logiska FAT-bitkartan, vilket kräver lika många bitar som det finns kluster på mediet. Till exempel skulle en enhet med 8 000 kluster kräva 1 000 byte för att representera och därmed kräva en total scratch area med en ordning på 2 048 byte.
+Tjänsten fx_media_check för att kunna analysera kataloger och filer på mediet på djupet. Mer specifikt måste det scratch-minne som tillhandahålls till mediekontrolltjänsten vara tillräckligt stort för att rymma flera katalogposter, en datastruktur för att "stapla" den aktuella katalogpostpositionen innan du går in i underkataloger och slutligen den logiska FAT-bitmappningen. Det scratchminnet ska vara minst 512–1 024 byte plus minne för den logiska FAT-bitkartan, vilket kräver lika många bitar som det finns kluster på mediet. Till exempel skulle en enhet med 8 000 kluster kräva 1 000 byte för att representera och därmed kräva en total scratch area med en ordning på 2 048 byte.
 
 > [!WARNING]
-> *Den här tjänsten bör bara anropas omedelbart efter fx_media_open och utan någon annan filsystemsaktivitet.*
+> *Den här tjänsten bör bara anropas omedelbart efter fx_media_open och utan någon annan filsystemaktivitet.*
 
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **media_ptr:** Pekare till mediakontrollblock.
-- **scratch_memory_ptr:** Pekaren mot början av det scratch-minnet.
+- **scratch_memory_ptr:** Pekaren till början av det scratch-minnet.
 - **scratch_memory_size:** Storleken på det scratch-minnet i byte.
-- **error_correction_option:** Bitarna för felkorrigeringsalternativ, och när biten har angetts utförs felkorrigering. Bitarna för felkorrigeringsalternativet definieras på följande sätt:
+- **error_correction_option:** Bitarna för felkorrigeringsalternativ, när biten har angetts utförs felkorrigering. Bitarna för felkorrigeringsalternativet definieras på följande sätt:
   - FX_FAT_CHAIN_ERROR (0x01)
   - FX_DIRECTORY_ERROR (0x02)
   - FX_LOST_CLUSTER_ERROR (0x04) Helt enkelt ELLER tillsammans de felkorrigeringsalternativ som krävs. Om ingen felkorrigering krävs ska värdet 0 anges.
@@ -3907,11 +3907,11 @@ Tjänsten fx_media_check för att kunna analysera kataloger och filer på mediet
 - **FX_FILE_CORRUPT** (0x08) Filen är skadad.
 - **FX_MEDIA_NOT_OPEN** (0x11) Det angivna mediet är inte öppet.
 - **FX_NO_MORE_SPACE** (0x0A) Inget mer utrymme på mediet.
-- **FX_NOT_ENOUGH_MEMORY** (0x91) Det angivna minnet är inte tillräckligt stort.
+- **FX_NOT_ENOUGH_MEMORY** (0x91) Det tillhandahållna minnet är inte tillräckligt stort.
 - **FX_ERROR_NOT_FIXED** (0x93) Fel i FAT32-rotkatalogen som inte kunde åtgärdas.
 - **FX_IO_ERROR** (0x90) I/O-drivrutin.
 - **FX_SECTOR_INVALID** (0x89) Sektor är ogiltig.
-- **FX_PTR_ERROR** (0x18) Ogiltig media eller scratch pointer.
+- **FX_PTR_ERROR** (0x18) Ogiltig media eller scratch-pekare.
 - **FX_CALLER_ERROR** (0x20) anroparen är inte en tråd.
 
 
@@ -4022,7 +4022,7 @@ status = fx_media_close(&my_media);
 
 ## <a name="fx_media_close_notify_set"></a>fx_media_close_notify_set
 
-Anger funktionen media close notify
+Ställer in funktionen media close notify
 
 ### <a name="prototype"></a>Prototyp
 
@@ -4039,7 +4039,7 @@ Den här tjänsten anger en återanropsfunktion för att meddela som anropas nä
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **media_ptr:** Pekare till mediakontrollblock.
-- **media_close_notify: Media** Close meddelar återanropsfunktionen att installeras. Om null-värdet används som återanropsfunktion inaktiveras återanropet av media.
+- **media_close_notify: Media** Close meddelar återanropsfunktionen att installeras. Om null-värdet passerar som återanropsfunktionen inaktiveras återanropet av media.
 
 ### <a name="return-values"></a>Returvärden
 
@@ -4101,7 +4101,7 @@ UINT fx_media_exFAT_format(
 ```
 ### <a name="description"></a>Beskrivning
 
-Den här tjänsten formaterar det angivna mediet på ett exFAT-kompatibelt sätt baserat på de angivna parametrarna. Den här tjänsten måste anropas innan du öppnar mediet.
+Den här tjänsten formaterar det angivna mediet på ett exFAT-kompatibelt sätt baserat på de angivna parametrarna. Den här tjänsten måste anropas innan mediet öppnas.
 
 > [!WARNING]
 > *Om du formaterar ett redan formaterat medium raderas effektivt alla filer och kataloger på mediet.*
@@ -4448,24 +4448,24 @@ UINT fx_media_open(
 Den här tjänsten öppnar ett medium för filåtkomst med hjälp av den angivna I/O-drivrutinen.
 
 > [!WARNING]
-> *Det minne som tillhandahålls till den här tjänsten används för att implementera en intern logisk sektorcache, vilket innebär att ju mer minne som tillhandahålls desto mer fysisk I/O minskas. FileX kräver en cache med minst en logisk sektor (byte per sektor av mediet).*
+> *Det minne som tillhandahålls till den här tjänsten används för att implementera en intern logisk sektorcache, och ju mer minne som tillhandahålls desto mer fysisk I/O minskas. FileX kräver en cache med minst en logisk sektor (byte per sektor av mediet).*
 
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **media_ptr:** Pekare till mediakontrollblock.
 - **media_name:** Pekare till mediets namn.
-- **media_driver:** Pekare till I/O-drivrutin för det här mediet. I/O-drivrutinen måste uppfylla fileX-drivrutinskraven som definieras i kapitel 5.
+- **media_driver:** Pekare till I/O-drivrutin för det här mediet. I/O-drivrutinen måste uppfylla kraven för FileX-drivrutinen som definieras i kapitel 5.
 - **driver_info_ptr:** Pekare till valfri information som den angivna I/O-drivrutinen kan använda.
 - **memory_ptr:** Pekare till arbetsminnet för mediet.
 - **memory_size:** Anger storleken på arbetsmediaminnet. Storleken måste vara lika stor som mediets sektorstorlek (vanligtvis 512 byte).
 
 ### <a name="return-values"></a>Returvärden
 
-- **FX_SUCCESS** (0x00) Media öppnas.
-- **FX_BOOT_ERROR** (0x01) Fel vid läsning av medias startsektor.
-- **FX_MEDIA_INVALID** (0x02) Det angivna mediets startsektor är skadad eller ogiltig. Dessutom används den här returkoden för att ange att cachestorleken för den logiska sektorn eller FAT-poststorleken inte är en kraft på 2.
+- **FX_SUCCESS** (0x00) Lyckad media är öppen.
+- **FX_BOOT_ERROR** (0x01) Fel vid läsning av mediets startsektor.
+- **FX_MEDIA_INVALID** (0x02) Det angivna mediets startsektor är skadad eller ogiltig. Dessutom används den här returkoden för att ange att antingen cachestorleken för den logiska sektorn eller FAT-poststorleken inte är en strömförsörjning på 2.
 - **FX_FAT_READ_ERROR** (0x03) Fel vid läsning av mediet FAT.
-- **FX_IO_ERROR** (0x90) I/O-drivrutin.
+- **FX_IO_ERROR** (0x90) Drivrutins-I/O.
 - **FX_PTR_ERROR** (0x18) En eller flera pekare är NULL.
 - **FX_CALLER_ERROR** (0x20) anroparen är inte en tråd.
 
@@ -4510,7 +4510,7 @@ status = fx_media_open(&ram_disk, "RAM DISK", fx_ram_driver, 0, &buffer[0], size
 
 ## <a name="fx_media_open_notify_set"></a>fx_media_open_notify_set
 
-Ställer in media öppna notify-funktionen
+Anger media open notify-funktionen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -4521,17 +4521,17 @@ UINT fx_media_open_notify_set(
 ```
 ### <a name="description"></a>Beskrivning
 
-Den här tjänsten anger en återanropsfunktion som anropas när ett medium har öppnats.
+Den här tjänsten anger en avanropsfunktion som anropas när ett medium har öppnats.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **media_ptr:** Pekare till mediakontrollblock.
-- **media_open_notify:** Media Open meddelar återanropsfunktionen att installeras. Om null-värdet passerar som återanropsfunktion inaktiveras det öppna motringningsmediet.
+- **media_open_notify: Media** open notify callback function to be installed. Om null-värdet används som återanropsfunktion inaktiveras återanropet från mediet.
 
 ### <a name="return-values"></a>Returvärden
 
 
-- **FX_SUCCESS** (0x00) Har installerat återanropsfunktionen.
+- **FX_SUCCESS** (0x00) Successfuly installerade återanropsfunktionen.
 - **FX_PTR_ERROR** (0x18) media_ptr är NULL.
 - **FX_CALLER_ERROR**    (0x20) anroparen är inte en tråd.
 
@@ -4584,7 +4584,7 @@ Den här tjänsten läser en logisk sektor från mediet och placerar den i den a
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **media_ptr:** Pekare till ett media som öppnats tidigare.
+- **media_ptr**: Pekare till ett media som öppnats tidigare.
 - **logical_sector:** Logisk sektor att läsa.
 - **buffer_ptr:** Pekare till målet för den logiska sektorn läsa.
 
@@ -4787,7 +4787,7 @@ UINT fx_media_volume_get_extended(
 ```
 ### <a name="description"></a>Beskrivning
 
-Den här tjänsten hämtar volymnamnet för de media som öppnats tidigare.
+Den här tjänsten hämtar volymnamnet för det media som öppnades tidigare.
 
 > [!IMPORTANT]
 > Den här tjänsten är identisk med ***fx_media_volume_get()** _ förutom att anroparen skickar storleken på *bufferten* _ volume_name * .
@@ -4797,7 +4797,7 @@ Den här tjänsten hämtar volymnamnet för de media som öppnats tidigare.
 
 - **media_ptr:** Pekare till mediakontrollblock.
 - **volume_name:** Pekare till mål för volymnamn. Observera att målet måste vara minst tillräckligt stort för att innehålla 12 tecken.
-- **volume_name_buffer_length:** Storlek på volume_name buffert.
+- **volume_name_buffer_length:** Storleken på volume_name buffert.
 - **volume_source:** Anger var namnet ska hämtas, antingen från startsektorn eller rotkatalogen. Giltiga värden för den här parametern är:
   - FX_BOOT_SECTOR
   - FX_DIRECTORY_SECTOR
@@ -4806,8 +4806,8 @@ Den här tjänsten hämtar volymnamnet för de media som öppnats tidigare.
 
 - **FX_SUCCESS** (0x00) Lyckad medievolym get.
 - **FX_MEDIA_NOT_OPEN** (0x11) Det angivna mediet är inte öppet.
-- **FX_NOT_FOUND** (0x04)-volymen hittades inte.
-- **FX_IO_ERROR** (0x90) I/O-drivrutin.
+- **FX_NOT_FOUND** (0x04) Det går inte att hitta volymen.
+- **FX_IO_ERROR** (0x90) Drivrutins-I/O.
 - **FX_PTR_ERROR** (0x18) Ogiltig media- eller volymmål pekare.
 - **FX_CALLER_ERROR** (0x20) anroparen är inte en tråd.
 
@@ -4863,7 +4863,7 @@ UINT fx_media_volume_set(
 ```
 ### <a name="description"></a>Beskrivning
 
-Den här tjänsten anger volymnamnet för de media som öppnats tidigare.
+Den här tjänsten anger volymnamnet för det media som öppnades tidigare.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
@@ -4876,8 +4876,8 @@ Den här tjänsten anger volymnamnet för de media som öppnats tidigare.
 - **FX_INVALID_NAME** (0x0C) Volume_name är ogiltig.
 - **FX_MEDIA_INVALID** (0x02) Det går inte att ange volymnamnet.
 - **FX_MEDIA_NOT_OPEN** (0x11) Det angivna mediet är inte öppet.
-- **FX_IO_ERROR** (0x90) I/O-drivrutin.
-- **FX_WRITE_PROTECT** (0x23) Det angivna mediet är skrivskyddat.
+- **FX_IO_ERROR** (0x90) Drivrutins-I/O.
+- **FX_WRITE_PROTECT** (0x23) Angivna medier är skrivskyddade.
 - **FX_PTR_ERROR** (0x18) Ogiltig media- eller volymnamnspekare.
 - **FX_CALLER_ERROR** (0x20) anroparen är inte en tråd.
 
@@ -4919,7 +4919,7 @@ status = fx_media_volume_set(&ram_disk, "MY_VOLUME");
 
 ## <a name="fx_media_write"></a>fx_media_write
 
-Skriver logisk sektor
+Skrivningar av logisk sektor
 
 ### <a name="prototype"></a>Prototyp
 
@@ -4935,7 +4935,7 @@ Den här tjänsten skriver den angivna bufferten till den angivna logiska sektor
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **media_ptr:** Pekare till ett media som öppnats tidigare.
+- **media_ptr**: Pekare till ett media som öppnats tidigare.
 - **logical_sector:** Logisk sektor att skriva.
 - **buffer_ptr:** Pekare till källan för den logiska sektorskrivningen.
 
@@ -4944,9 +4944,9 @@ Den här tjänsten skriver den angivna bufferten till den angivna logiska sektor
 - **FX_SUCCESS** (0x00) Lyckad medieskrivning.
 - **FX_MEDIA_NOT_OPEN** (0x11) Det angivna mediet är inte öppet.
 - **FX_SECTOR_INVALID** (0x89) Ogiltig sektor.
-- **FX_IO_ERROR** (0x90) I/O-drivrutin.
-- **FX_WRITE_PROTECT** (0x23) Det angivna mediet är skrivskyddat.
-- **FX_PTR_ERROR** (0x18) Ogiltig mediepekare.
+- **FX_IO_ERROR** (0x90) Drivrutins-I/O.
+- **FX_WRITE_PROTECT** (0x23) Angivna medier är skrivskyddade.
+- **FX_PTR_ERROR** (0x18) Ogiltig medie pekare.
 - **FX_CALLER_ERROR**    (0x20) anroparen är inte en tråd.
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -5060,7 +5060,7 @@ UINT fx_system_date_set(
 Den här tjänsten anger systemdatumet som det anges.
 
 > [!WARNING]
-> *Den här tjänsten bör anropas strax efter **fx_system_initialize för att** ange det första systemdatumet. Som standard är systemdatumet den senaste allmänna FileX-versionen.*
+> *Den här tjänsten bör anropas strax efter **fx_system_initialize för** att ange det första systemdatumet. Som standard är systemdatumet den senaste allmänna FileX-versionen.*
 
 ### <a name="input-parameters"></a>Indataparametrar
 
@@ -5111,10 +5111,10 @@ VOID fx_system_initialize(void);
 
 ### <a name="description"></a>Beskrivning
 
-Den här tjänsten initierar alla större FileX-datastrukturer. Det bör anropas antingen ***i tx_application_define*** eller möjligen från en initieringstråd och måste anropas innan du använder någon annan FileX-tjänst.
+Den här tjänsten initierar alla större FileX-datastrukturer. Den bör anropas antingen ***i tx_application_define*** eller möjligen från en initieringstråd och måste anropas innan du använder någon annan FileX-tjänst.
 
 > [!WARNING]
-> *När det här anropet initieras bör programmet anropa fx_system_date_set _ och _ fx_system_time_set * för att börja med ett *korrekt systemdatum och en korrekt tid.*
+> *När det här anropet initieras ska programmet anropa fx_system_date_set _ och _ fx_system_time_set * för att börja med ett *korrekt systemdatum och en korrekt tid.*
 
 ### <a name="input-parameters"></a>Indataparametrar
 
@@ -5227,13 +5227,13 @@ UINT fx_system_time_set(UINT hour, UINT minute, UINT second);
 Den här tjänsten anger den aktuella systemtiden till den som anges av indataparametrarna.
 
 > [!WARNING]
-> *Den här tjänsten bör anropas strax efter **fx_system_initialize för** att ange den första systemtiden. Som standard är systemtiden 0:0:0.*
+> *Den här tjänsten ska anropas strax efter **fx_system_initialize för** att ange den första systemtiden. Som standard är systemtiden 0:0:0.*
 
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **hour**: Ny timme (0–23).
 - **minute**: Ny minut (0–59).
-- **second**: Ny sekund (0–59).
+- **second**: New second (0-59).
 
 ### <a name="return-values"></a>Returvärden
 
@@ -5283,7 +5283,7 @@ UINT fx_unicode_directory_create(
 Den här tjänsten skapar en Unicode-namngiven underkatalog i den aktuella standardkatalogen – ingen sökvägsinformation tillåts i parametern Unicode-källnamn. Om det lyckas returneras det korta namnet (8.3-format) för den nyligen skapade Unicode-underkatalogen av tjänsten.
 
 > [!WARNING]
-> *Alla åtgärder i Unicode-underkatalogen (vilket gör den till standardsökväg, borttagning osv.) ska göras genom att ange det returnerade korta namnet (8.3-format) till standardfilX-katalogtjänsterna.*
+> *Alla åtgärder i Unicode-underkatalogen (vilket gör den till standardsökväg, borttagning osv.) ska göras genom att ange det returnerade korta namnet (8.3-format) till Standard FileX-katalogtjänsterna.*
 
 > [!IMPORTANT]
 > *Den här tjänsten stöds inte på exFAT-media.*
@@ -5292,17 +5292,17 @@ Den här tjänsten skapar en Unicode-namngiven underkatalog i den aktuella stand
 
 - **media_ptr:** Pekare till mediakontrollblock.
 - **source_unicode_name:** Pekare till Unicode-namnet för den nya underkatalogen.
-- **source_unicode_length:** Längden på Unicode-namn.
+- **source_unicode_length:** Längden på Unicode-namnet.
 - **short_name:** Pekare till mål för kortnamn (8.3-format) för den nya Unicode-underkatalogen.
 
 ### <a name="return-values"></a>Returvärden
 
-- **FX_SUCCESS** (0x00) Lyckad Unicode-katalog create.
+- **FX_SUCCESS** (0x00) Lyckad Unicode-katalog skapas.
 - **FX_MEDIA_NOT_OPEN** (0x11) Det angivna mediet är inte öppet.
 - **FX_ALREADY_CREATED** (0x0B) Angiven katalog finns redan.
 - **FX_NO_MORE_SPACE** (0x0A) Inga fler kluster tillgängliga på mediet för den nya katalogposten.
 - **FX_NOT_IMPLEMENTED** (0x22) Tjänsten har inte implementerats för exFAT-filsystemet.
-- **FX_WRITE_PROTECT** (0x23) Det angivna mediet är skrivskyddat.
+- **FX_WRITE_PROTECT** (0x23) Angivna medier är skrivskyddade.
 - **FX_PTR_ERROR** (0x18) Ogiltiga medie- eller namnpekare.
 - **FX_CALLER_ERROR** (0x20) anroparen är inte en tråd.
 - **FX_IO_ERROR (0x90)** Drivrutins-I/O-fel.
@@ -5370,7 +5370,7 @@ UINT fx_unicode_directory_rename(
 ```
 ### <a name="description"></a>Beskrivning
 
-Den här tjänsten ändrar en Unicode-namngiven underkatalog till angivet nytt Unicode-namn i den aktuella arbetskatalogen. Unicode-namnparametrarna får inte innehålla sökvägsinformation.
+Den här tjänsten ändrar en Unicode-namngiven underkatalog till angivet nytt Unicode-namn i den aktuella arbetskatalogen. Unicode-namnparametrarna får inte ha sökvägsinformation.
 
 > [!IMPORTANT]
 > *Den här tjänsten stöds inte på exFAT-media.*
@@ -5382,14 +5382,14 @@ Den här tjänsten ändrar en Unicode-namngiven underkatalog till angivet nytt U
 - **old_unicode_name_length:** Längden på det aktuella Unicode-namnet.
 - **new_unicode_name**: Pekare till det nya Unicode-filnamnet.
 - **old_unicode_name_length:** Längden på det nya Unicode-namnet.
-- **new_short_name:** Pekare till mål för kortnamn (8.3-format) för Unicode-filen som bytt namn. Byt namn på katalog med Unicode
+- **new_short_name:** Pekare till mål för kortnamn (8.3-format) för den omdöpta Unicode-filen. Byt namn på katalog med Unicode
 
 ### <a name="return-values"></a>Returvärden
 
-- **FX_SUCCESS** (0x00) Media öppnas.
+- **FX_SUCCESS** (0x00) Lyckad media är öppen.
 - **FX_MEDIA_NOT_OPEN** (0x11) Det angivna mediet är inte öppet.
-- **FX_ALREADY_CREATED** (0x0B) Det angivna katalognamnet finns redan.
-- **FX_IO_ERROR** (0x90) I/O-drivrutin.
+- **FX_ALREADY_CREATED** (0x0B) Angivet katalognamn finns redan.
+- **FX_IO_ERROR** (0x90) Drivrutins-I/O.
 - **FX_PTR_ERROR** (0x18) En eller flera pekare är NULL.
 - **FX_CALLER_ERROR** (0x20) anroparen är inte en tråd.
 - **FX_WRITE_PROTECT** (0x23) Angivna medier är skrivskyddade.
@@ -5458,15 +5458,15 @@ UINT fx_unicode_file_create(
 Den här tjänsten skapar en Unicode-namngiven fil i den aktuella standardkatalogen – ingen sökvägsinformation tillåts i parametern Unicode-källnamn. Om det lyckas returneras det korta namnet (8.3-format) för den nyligen skapade Unicode-filen av tjänsten.
 
 > [!WARNING]
-> *Alla åtgärder på Unicode-filen (öppna, skriva, läsa, stänga osv.) ska göras genom att ange det returnerade korta namnet (8.3-format) till standardfiltjänsterna för FileX.*
+> *Alla åtgärder i Unicode-filen (öppna, skriva, läsa, stänga osv.) ska göras genom att ange det returnerade korta namnet (8.3-format) till standardfiltjänsterna för FileX.*
 
 ### <a name="input-parameters"></a>Indataparametrar
 
 
 - **media_ptr:** Pekare till mediakontrollblock.
 - **source_unicode_name:** Pekare till Unicode-namnet för den nya filen.
-- **source_unicode_length:** Längden på Unicode-namn.
-- **short_name:** Pekare till mål för kortnamn (8.3-format) för den nya Unicode-filen.
+- **source_unicode_length:** Längden på Unicode-namnet.
+- **short_name**: Pekare till mål för kortnamn (8.3-format) för den nya Unicode-filen.
 
 ### <a name="return-values"></a>Returvärden
 
@@ -5475,8 +5475,8 @@ Den här tjänsten skapar en Unicode-namngiven fil i den aktuella standardkatalo
 - **FX_ALREADY_CREATED** (0x0B) Angiven fil finns redan.
 - **FX_NO_MORE_SPACE** (0x0A) Inga fler kluster tillgängliga på mediet för den nya filposten.
 - **FX_NOT_IMPLEMENTED** (0x22) Tjänsten har inte implementerats för exFAT-filsystemet.
-- **FX_IO_ERROR** (0x90) I/O-drivrutin.
-- **FX_WRITE_PROTECT** (0x23) Det angivna mediet är skrivskyddat.
+- **FX_IO_ERROR** (0x90) Drivrutins-I/O.
+- **FX_WRITE_PROTECT** (0x23) Angivna medier är skrivskyddade.
 - **FX_PTR_ERROR** (0x18) Ogiltiga medie- eller namnpekare.
 - **FX_CALLER_ERROR** (0x20) anroparen är inte en tråd.
 
@@ -5550,7 +5550,7 @@ UINT fx_unicode_file_rename(
 
 ### <a name="description"></a>Beskrivning
 
-Den här tjänsten ändrar ett Unicode-namngivet filnamn till angivet nytt Unicode-namn i den aktuella standardkatalogen. Unicode-namnparametrarna får inte innehålla sökvägsinformation.
+Den här tjänsten ändrar ett Unicode-namn till angivet nytt Unicode-namn i den aktuella standardkatalogen. Unicode-namnparametrarna får inte ha sökvägsinformation.
 
 > [!IMPORTANT]
 > *Den här tjänsten stöds inte på exFAT-media.*
@@ -5562,15 +5562,15 @@ Den här tjänsten ändrar ett Unicode-namngivet filnamn till angivet nytt Unico
 - **old_unicode_name_length:** Längden på det aktuella Unicode-namnet.
 - **new_unicode_name**: Pekare till det nya Unicode-filnamnet.
 - **new_unicode_name_length:** Längden på det nya Unicode-namnet.
-- **new_short_name:** Pekare till mål för kortnamn (8.3-format) för Unicode-filen som bytt namn.
+- **new_short_name:** Pekare till mål för kortnamn (8.3-format) för den omdöpta Unicode-filen.
 
 ### <a name="return-values"></a>Returvärden
 
 
-- **FX_SUCCESS** (0x00) Media öppnas.
+- **FX_SUCCESS** (0x00) Lyckad media är öppen.
 - **FX_MEDIA_NOT_OPEN** (0x11) Det angivna mediet är inte öppet.
 - **FX_ALREADY_CREATED** (0x0B) Det angivna filnamnet finns redan.
-- **FX_IO_ERROR** (0x90) I/O-drivrutin.
+- **FX_IO_ERROR** (0x90) Drivrutins-I/O.
 - **FX_PTR_ERROR** (0x18) En eller flera pekare är NULL.
 - **FX_CALLER_ERROR** (0x20) anroparen är inte en tråd.
 - **FX_WRITE_PROTECT** (0x23) Angivna medier är skrivskyddade.
@@ -5637,7 +5637,7 @@ ULONG fx_unicode_length_get(UCHAR *unicode_name);
 ```
 ### <a name="description"></a>Beskrivning
 
-Den här tjänsten avgör längden på det angivna Unicode-namnet. Ett Unicode-tecken representeras av två byte. Ett Unicode-namn är en serie med unicode-tecken med två byte som avslutas med två NULL-byte (två byte med 0 värde).
+Den här tjänsten avgör längden på det angivna Unicode-namnet. Ett Unicode-tecken representeras av två byte. Ett Unicode-namn är en serie med Unicode-tecken med två byte som avslutas med två NULL-byte (två byte med värdet 0).
 
 ### <a name="input-parameters"></a>Indataparametrar
 
@@ -5712,10 +5712,10 @@ UINT fx_unicode_length_get_extended(
 ```
 ### <a name="description"></a>Beskrivning
 
-Den här tjänsten hämtar längden på det angivna Unicode-namnet. Ett Unicode-tecken representeras av två byte. Ett Unicode-namn är en serie med Tvåbyte Unicode-tecken som avslutas med två NULL-byte (två byte med 0-värde).
+Den här tjänsten hämtar längden på det angivna Unicode-namnet. Ett Unicode-tecken representeras av två byte. Ett Unicode-namn är en serie med Unicode-tecken på tvåbyte som avslutas med två NULL-byte (två byte med ett värde på 0).
 
 > [!IMPORTANT]
-> *Den här tjänsten är identisk **med fx_unicode_length_get()** förutom att anroparen skickar storleken på unicode_name bufferten, inklusive de två NULL-tecknen.*
+> *Den här tjänsten är **identisk med fx_unicode_length_get()** förutom att anroparen skickar storleken på unicode_name bufferten, inklusive de två NULL-tecknen.*
 
 ### <a name="input-parameters"></a>Indataparametrar
 
@@ -5794,7 +5794,7 @@ UINT fx_unicode_name_get(
 
 ### <a name="description"></a>Beskrivning
 
-Den här tjänsten hämtar Unicode-namnet som är associerat med det angivna kortnamnet (formatet 8.3) i den aktuella standardkatalogen – ingen sökvägsinformation tillåts i den korta namnparametern. Om det lyckas returneras Unicode-namnet som är associerat med det korta namnet av tjänsten.
+Den här tjänsten hämtar Unicode-namnet som är associerat med det angivna kortnamnet (8.3-format) i den aktuella standardkatalogen– ingen sökvägsinformation tillåts i den korta namnparametern. Om det lyckas returneras Unicode-namnet som är associerat med det korta namnet av tjänsten.
 
 > [!IMPORTANT]
 > *Den här tjänsten kan användas för att hämta Unicode-namn för både filer och underkataloger.*
@@ -5803,17 +5803,17 @@ Den här tjänsten hämtar Unicode-namnet som är associerat med det angivna kor
 
 - **media_ptr:** Pekare till mediakontrollblock.
 - **short_name** Pekare till kortnamn (8.3-format).
-- **destination_unicode_name:** Pekare till målet för Unicode-namnet som är associerat med det angivna korta namnet.
-- destination_unicode_length : **Pekare** till returnerad Unicode-namnlängd.
+- **destination_unicode_name: Pekare** till målet för Unicode-namnet som är associerat med det angivna kortnamnet.
+- **destination_unicode_length: Pekare** till returnerad Unicode-namnlängd.
 
 ### <a name="return-values"></a>Returvärden
 
 - **FX_SUCCESS** (0x00) Lyckad hämtning av Unicode-namn.
 - **FX_FAT_READ_ERROR** (0x03) Det går inte att läsa FAT-tabellen.
 - **FX_FILE_CORRUPT** (0x08) Filen är skadad
-- **FX_IO_ERROR** (0x90) Drivrutins-I/O.
+- **FX_IO_ERROR** (0x90) I/O-drivrutin.
 - **FX_MEDIA_NOT_OPEN** (0x11) Det angivna mediet är inte öppet.
-- **FX_NOT_FOUND** (0x04) Det gick inte att hitta ett kort namn eller så är Unicode-målstorleken för liten.
+- **FX_NOT_FOUND** (0x04) Kortnamnet hittades inte eller så är Unicode-målstorleken för liten.
 - **FX_SECTOR_INVALID** (0x89) Ogiltig sektor.
 - **FX_PTR_ERROR** (0x18) Ogiltiga medie- eller namnpekare.
 - **FX_CALLER_ERROR** (0x20) anroparen är inte en tråd.
@@ -5883,7 +5883,7 @@ UINT fx_unicode_name_get_extended(
 ```
 ### <a name="description"></a>Beskrivning
 
-Den här tjänsten hämtar Unicode-namnet som är associerat med det angivna kortnamnet (formatet 8.3) i den aktuella standardkatalogen – ingen sökvägsinformation tillåts i den korta namnparametern. Om det lyckas returneras Unicode-namnet som är associerat med det korta namnet av tjänsten.
+Den här tjänsten hämtar Unicode-namnet som är associerat med det angivna kortnamnet (8.3-format) i den aktuella standardkatalogen– ingen sökvägsinformation tillåts i den korta namnparametern. Om det lyckas returneras Unicode-namnet som är associerat med det korta namnet av tjänsten.
 
 > [!IMPORTANT]
 > *Den här tjänsten är identisk med ***fx_unicode_name_get**, förutom att anroparen tillhandahåller storleken på _Unicode-målbufferten som ett indataargument. Detta gör att tjänsten kan garantera att den inte skriver över Unicode-målbufferten_
@@ -5894,19 +5894,19 @@ Den här tjänsten hämtar Unicode-namnet som är associerat med det angivna kor
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **media_ptr:** Pekare till mediakontrollblock.
-- **short_name**: Pekare till kortnamn (8.3-format).
-- **destination_unicode_name:** Pekare till målet för Unicode-namnet som är associerat med det angivna korta namnet.
-- destination_unicode_length : **Pekare** till returnerad Unicode-namnlängd.
-- **unicode_name_buffer_length:** Storlek på Unicode-namnbufferten. Obs! En NULL-terminator krävs, vilket gör en extra byte.
+- **short_name**: Pekare till kortnamn (format 8.3).
+- **destination_unicode_name: Pekare** till målet för Unicode-namnet som är associerat med det angivna kortnamnet.
+- **destination_unicode_length: Pekare** till returnerad Unicode-namnlängd.
+- **unicode_name_buffer_length:** Storlek på Unicode-namnbufferten. Obs! En NULL-avslutning krävs, vilket gör en extra byte.
 
 ### <a name="return-values"></a>Returvärden
 
 - **FX_SUCCESS** (0x00) Lyckad hämtning av Unicode-namn.
 - **FX_FAT_READ_ERROR** (0x03) Det går inte att läsa FAT-tabellen.
 - **FX_FILE_CORRUPT** (0x08) Filen är skadad
-- **FX_IO_ERROR** (0x90) Drivrutins-I/O.
+- **FX_IO_ERROR** (0x90) I/O-drivrutin.
 - **FX_MEDIA_NOT_OPEN** (0x11) Det angivna mediet är inte öppet.
-- **FX_NOT_FOUND** (0x04) Det gick inte att hitta ett kort namn eller så är Unicode-målstorleken för liten.
+- **FX_NOT_FOUND** (0x04) Kortnamnet hittades inte eller så är Unicode-målstorleken för liten.
 - **FX_SECTOR_INVALID** (0x89) Ogiltig sektor.
 - **FX_PTR_ERROR** (0x18) Ogiltiga medie- eller namnpekare.
 - **FX_CALLER_ERROR** (0x20) anroparen är inte en tråd.
@@ -5962,7 +5962,7 @@ length = fx_unicode_name_get_extended(&ram_disk, "ABC0~111.TXT",
 
 ## <a name="fx_unicode_short_name_get"></a>fx_unicode_short_name_get
 
-Hämtar ett kort namn från Unicode-namn
+Hämtar kort namn från Unicode-namn
 
 ### <a name="prototype"></a>Prototyp
 
@@ -5982,16 +5982,16 @@ Den här tjänsten hämtar det korta namnet (formatet 8.3) som är associerat me
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **media_ptr:** Pekare till mediakontrollblock.
-- **source_unicode_name**: Pekare till Unicode-namn.
-- **source_unicode_length:** Längden på Unicode-namnet.
-- **destination_short_name:** Pekare till mål för kortnamnet (formatet 8.3). Det måste vara minst 13 byte.
+- **source_unicode_name:** Pekare till Unicode-namn.
+- **source_unicode_length:** Längden på Unicode-namn.
+- **destination_short_name:** Pekare till mål för kortnamnet (formatet 8.3). Detta måste vara minst 13 byte stort.
 
 ### <a name="return-values"></a>Returvärden
 
-- **FX_SUCCESS** (0x00) Lyckad kort namnhämtning.
+- **FX_SUCCESS** (0x00) Kortnamnhämtningen lyckades.
 - **FX_FAT_READ_ERROR** (0x03) Det går inte att läsa FAT-tabellen.
 - **FX_FILE_CORRUPT** (0x08) Filen är skadad
-- **FX_IO_ERROR** (0x90) Drivrutins-I/O.
+- **FX_IO_ERROR** (0x90) I/O-drivrutin.
 - **FX_MEDIA_NOT_OPEN** (0x11) Det angivna mediet är inte öppet.
 - **FX_NOT_FOUND** (0x04) Unicode-namn hittades inte.
 - **FX_NOT_IMPLEMENTED** (0x22) Tjänsten har inte implementerats för exFAT-filsystemet.
@@ -6052,7 +6052,7 @@ length = fx_unicode_short_name_get(&ram_disk, my_unicode_name, 17, my_short_name
 
 ## <a name="fx_unicode_short_name_get_extended"></a>fx_unicode_short_name_get_extended
 
-Hämtar ett kort namn från Unicode-namn
+Hämtar kort namn från Unicode-namn
 
 ### <a name="prototype"></a>Prototyp
 
@@ -6077,17 +6077,17 @@ Den här tjänsten hämtar det korta namnet (formatet 8.3) som är associerat me
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **media_ptr:** Pekare till mediakontrollblock.
-- **source_unicode_name**: Pekare till Unicode-namn.
-- **source_unicode_length:** Längden på Unicode-namnet.
-- **destination_short_name:** Pekare till mål för kortnamnet (formatet 8.3). Det måste vara minst 13 byte.
+- **source_unicode_name:** Pekare till Unicode-namn.
+- **source_unicode_length:** Längden på Unicode-namn.
+- **destination_short_name:** Pekare till mål för kortnamnet (formatet 8.3). Detta måste vara minst 13 byte stort.
 - **short_name_buffer_length:** Storleken på målbufferten. Buffertstorleken måste vara minst 14 byte.
 
 ### <a name="return-values"></a>Returvärden
 
-- **FX_SUCCESS** (0x00) Lyckad kort namnhämtning.
+- **FX_SUCCESS** (0x00) Kortnamnhämtningen lyckades.
 - **FX_FAT_READ_ERROR** (0x03) Det går inte att läsa FAT-tabellen.
 - **FX_FILE_CORRUPT** (0x08) Filen är skadad
-- **FX_IO_ERROR** (0x90) Drivrutins-I/O.
+- **FX_IO_ERROR** (0x90) I/O-drivrutin.
 - **FX_MEDIA_NOT_OPEN** (0x11) Det angivna mediet är inte öppet.
 - **FX_NOT_FOUND** (0x04) Unicode-namn hittades inte.
 - **FX_NOT_IMPLEMENTED** (0x22) Tjänsten har inte implementerats för exFAT-filsystemet.
