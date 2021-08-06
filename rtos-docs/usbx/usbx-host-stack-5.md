@@ -1,30 +1,30 @@
 ---
-title: Kapitel 5 – USBX värd klasser API
-description: 'Lär dig mer om API: et för värd klasser för USBX.'
+title: Kapitel 5 – API för USBX-värdklasser
+description: Lär dig mer om API:et FÖR USBX-värdklasser.
 author: philmea
 ms.author: philmea
 ms.date: 5/19/2020
 ms.service: rtos
 ms.topic: article
-ms.openlocfilehash: bf5876042e08a59979adcd429917bfc3fbfdbc20
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 2e9e2e0286300b3f79f7f9e6ad2d7fab96ba7337
+ms.sourcegitcommit: 62cfdf02628530807f4d9c390d6ab623e2973fee
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104828620"
+ms.lasthandoff: 08/05/2021
+ms.locfileid: "115177753"
 ---
-# <a name="chapter-5---usbx-host-classes-api"></a>Kapitel 5 – USBX värd klasser API
+# <a name="chapter-5---usbx-host-classes-api"></a>Kapitel 5 – API för USBX-värdklasser
 
-I det här kapitlet beskrivs alla exponerade API: er för USBX-värd klasser. Följande API: er för varje klass beskrivs i detalj.
+Det här kapitlet beskriver alla exponerade API:er för USBX-värdklasserna. Följande API:er för varje klass beskrivs i detalj.
 
 - HID-klass
 - CDC-ACM-klass
 - CDC-ECM-klass
-- Lagrings klass
+- Storage klass
 
 ## <a name="ux_host_class_hid_client_register"></a>ux_host_class_hid_client_register
 
-Registrera en HID-klient i HID-klassen.
+Registrera en HID-klient till HID-klassen.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -35,24 +35,24 @@ UINT ux_host_class_hid_client_register(
     (struct UX_HOST_CLASS_HID_CLIENT_COMMAND_STRUCT *));
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen används för att registrera en HID-klient i HID-klassen. HID-klassen behöver hitta en matchning mellan en HID-enhet och HID-klient innan data begärs från den här enheten.
+Den här funktionen används för att registrera en HID-klient till HID-klassen. HID-klassen måste hitta en matchning mellan en HID-enhet och HID-klienten innan data begärs från den här enheten.
 
 > [!NOTE]
-> C-strängen för hid_client_name måste vara NULL-terminerad och längden på den (utan själva NULL-begränsaren) får inte vara större än **UX_HOST_CLASS_HID_MAX_CLIENT_NAME_LENGTH**.
+> C-strängen för hid_client_name måste vara NULL-avslutad och längden på den (utan själva NULL-terminatorn) får inte vara **större än UX_HOST_CLASS_HID_MAX_CLIENT_NAME_LENGTH**.
 
 ### <a name="parameters"></a>Parametrar
 
-- **hid_client_name** Pekar på HID-klientcertifikatet.
-- **hid_client_handler** Pekar mot HID-klient hanteraren.
+- **hid_client_name** Pekare till HID-klientnamnet.
+- **hid_client_handler** Pekare till HID-klienthanteraren.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **UX_SUCCESS** (0x00) data överföringen har slutförts
-- **UX_MEMORY_INSUFFICIENT** -minnesallokering (0x12) för klienten misslyckades.
-- **UX_MEMORY_ARRAY_FULL** (0X1a) högsta antal klienter som redan har registrerats.
-- **UX_HOST_CLASS_ALREADY_INSTALLED** (0X58) den här klassen finns redan
+- **UX_SUCCESS** (0x00) Dataöverföringen slutfördes
+- **UX_MEMORY_INSUFFICIENT** (0x12) Minnesallokeringen för klienten misslyckades.
+- **UX_MEMORY_ARRAY_FULL** (0x1a) Maximalt antal klienter som redan har registrerats.
+- **UX_HOST_CLASS_ALREADY_INSTALLED** (0x58) Den här klassen finns redan
 
 ### <a name="example"></a>Exempel
 
@@ -70,7 +70,7 @@ status = ux_host_class_hid_client_register("ux_host_class_hid_client_mouse",
 
 ## <a name="ux_host_class_hid_report_callback_register"></a>ux_host_class_hid_report_callback_register
 
-Registrera ett motanrop från HID-klassen.
+Registrera ett återanrop från HID-klassen.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -80,20 +80,20 @@ UINT ux_host_class_hid_report_callback_register(
     UX_HOST_CLASS_HID_REPORT_CALLBACK *call_back);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen används för att registrera ett motanrop från HID-klassen till HID-klienten när en rapport tas emot.
+Den här funktionen används för att registrera ett återanrop från HID-klassen till HID-klienten när en rapport tas emot.
 
 ### <a name="parameters"></a>Parametrar
 
-- **HID** Pekare till HID-klassdrivrutinen
-- **call_back** Pekare till call_back-strukturen
+- **hid** Pekare till HID-klassinstansen
+- **call_back** Pekare till call_back struktur
 
 ### <a name="return-values"></a>Returvärden
 
-- **UX_SUCCESS** (0x00) data överföringen har slutförts
-- **UX_HOST_CLASS_INSTANCE_UNKNOWN** (0X5b) ogiltig HID-instans.
-- **UX_HOST_CLASS_HID_REPORT_ERROR** -fel (0x79) i rapportens återanrops registrering.
+- **UX_SUCCESS** (0x00) Dataöverföringen slutfördes
+- **UX_HOST_CLASS_INSTANCE_UNKNOWN** (0x5b) Ogiltig HID-instans.
+- **UX_HOST_CLASS_HID_REPORT_ERROR** (0x79) Fel i registreringen av återanrop i rapporten.
 
 ### <a name="example"></a>Exempel
 
@@ -117,7 +117,7 @@ status = ux_host_class_hid_report_callback_register(hid, &call_back);
 
 ## <a name="ux_host_class_hid_periodic_report_start"></a>ux_host_class_hid_periodic_report_start
 
-Starta den periodiska slut punkten för en HID-klass instans.
+Starta den periodiska slutpunkten för en HID-klassinstans.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -125,19 +125,19 @@ Starta den periodiska slut punkten för en HID-klass instans.
 UINT ux_host_class_hid_periodic_report_start(UX_HOST_CLASS_HID *hid);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen används för att starta den periodiska (avbryta) slut punkten för instansen av HID-klassen som är kopplad till den här HID-klienten. HID-klassen kan inte starta den periodiska slut punkten förrän HID-klienten har Aktiver ATS och därför lämnas den till HID-klienten för att starta slut punkten för att ta emot rapporter.
+Den här funktionen används för att starta den periodiska slutpunkten (avbrott) för instansen av HID-klassen som är bunden till den här HID-klienten. HID-klassen kan inte starta den periodiska slutpunkten förrän HID-klienten har aktiverats och därför är det upp till HID-klienten att starta slutpunkten för att ta emot rapporter.
 
 ### <a name="input-parameter"></a>Indataparameter
 
-- **HID** Pekare till klass instansen HID.
+- **hid** Pekare till HID-klassinstansen.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **UX_SUCCESS** (0X00) periodisk rapportering har startats.
-- **ux_host_class_hid_PERIODIC_REPORT_ERROR** -fel (0x7A) i den periodiska rapporten.
-- **UX_HOST_CLASS_INSTANCE_UNKNOWN** (0X5B) HID-tjänstinstans saknas.
+- **UX_SUCCESS** (0x00) Periodisk rapportering har startats.
+- **ux_host_class_hid_PERIODIC_REPORT_ERROR** (0x7A) Fel i den periodiska rapporten.
+- **UX_HOST_CLASS_INSTANCE_UNKNOWN** (0x5b) HID-klassinstansen finns inte.
 
 ### <a name="example"></a>Exempel
 
@@ -154,7 +154,7 @@ status = ux_host_class_hid_periodic_report_start(hid);
 
 ## <a name="ux_host_class_hid_periodic_report_stop"></a>ux_host_class_hid_periodic_report_stop
 
-Stoppa den periodiska slut punkten för en HID-klass instans.
+Stoppa den periodiska slutpunkten för en HID-klassinstans.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -162,19 +162,19 @@ Stoppa den periodiska slut punkten för en HID-klass instans.
 UINT ux_host_class_hid_periodic_report_stop(UX_HOST_CLASS_HID *hid);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen används för att stoppa den periodiska (avbryta) slut punkten för instansen av HID-klassen som är kopplad till den här HID-klienten. Den HID-klassen kan inte stoppa den periodiska slut punkten förrän HID-klienten är inaktive rad, men alla dess resurser är frigjorde och de lämnas därför till HID-klienten för att stoppa slut punkten.
+Den här funktionen används för att stoppa den periodiska slutpunkten (avbrott) för instansen av HID-klassen som är bunden till den här HID-klienten. HID-klassen kan inte stoppa den periodiska slutpunkten förrän HID-klienten har inaktiverats, alla dess resurser frigörs och därför lämnas den till HID-klienten för att stoppa den här slutpunkten.
 
 ### <a name="input-parameter"></a>Indataparameter
 
-- **HID** Pekare till klass instansen HID.
+- **hid** Pekare till HID-klassinstansen.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **UX_SUCCESS** (0X00) periodisk rapportering har stoppats.
-- **ux_host_class_hid_PERIODIC_REPORT_ERROR** -fel (0x7A) i den periodiska rapporten.
-- **UX_HOST_CLASS_INSTANCE_UNKNOWN** (0X5B) HID-tjänstinstans saknas
+- **UX_SUCCESS** (0x00) Periodisk rapportering har stoppats.
+- **ux_host_class_hid_PERIODIC_REPORT_ERROR** (0x7A) Fel i den periodiska rapporten.
+- **UX_HOST_CLASS_INSTANCE_UNKNOWN** (0x5b) HID-klassinstansen finns inte
 
 ### <a name="example"></a>Exempel
 
@@ -190,7 +190,7 @@ status = ux_host_class_hid_periodic_report_stop(hid);
 
 ## <a name="ux_host_class_hid_report_get"></a>ux_host_class_hid_report_get
 
-Hämta en rapport från en HID-klass instans.
+Hämta en rapport från en HID-klassinstans.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -200,21 +200,21 @@ UINT ux_host_class_hid_report_get(
     UX_HOST_CLASS_HID_CLIENT_REPORT *client_report);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen används för att ta emot en rapport direkt från enheten utan att förlita dig på den periodiska slut punkten. Den här rapporten kommer från kontroll slut punkten, men dess behandling är densamma som om den var den periodiska slut punkten.
+Den här funktionen används för att ta emot en rapport direkt från enheten utan att förlita sig på den periodiska slutpunkten. Den här rapporten kommer från kontrollslutpunkten, men dess behandling är densamma som om den kom till den periodiska slutpunkten.
 
 ### <a name="parameters"></a>Parametrar
 
-- **HID** Pekare till klass instansen HID.
-- **client_report** Pekare till rapporten HID client.
+- **hid** Pekare till HID-klassinstansen.
+- **client_report** Pekare till HID-klientrapporten.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **UX_SUCCESS** (0x00) rapporten har tagits emot.
-- **UX_HOST_CLASS_HID_REPORT_ERROR** (0X70) antingen var klient rapporten ogiltig eller uppstod vid överföring.
-- **UX_HOST_CLASS_INSTANCE_UNKNOWN** (0X5B) HID-tjänstinstans saknas.
-- **UX_BUFFER_OVERFLOW** (0X5d) den angivna bufferten är inte tillräckligt stor för att rymma den okomprimerade rapporten.
+- **UX_SUCCESS** (0x00) Rapporten togs emot.
+- **UX_HOST_CLASS_HID_REPORT_ERROR** (0x70) Antingen var klientrapporten ogiltig eller felaktig under överföringen.
+- **UX_HOST_CLASS_INSTANCE_UNKNOWN** (0x5b) HID-klassinstansen finns inte.
+- **UX_BUFFER_OVERFLOW** (0x5d) Den angivna bufferten är inte tillräckligt stor för att hantera den okomprimerade rapporten.
 
 ### <a name="example"></a>Exempel
 
@@ -247,21 +247,21 @@ UINT ux_host_class_hid_report_set(
     UX_HOST_CLASS_HID_CLIENT_REPORT *client_report);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här funktionen används för att skicka en rapport direkt till enheten.
 
 ### <a name="parameters"></a>Parametrar
 
-- **HID** Pekare till klass instansen HID.
-- **client_report** Pekare till rapporten HID client.
+- **hid** Pekare till HID-klassinstansen.
+- **client_report** Pekare till HID-klientrapporten.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **UX_SUCCESS** (0x00) rapporten har skickats.
-- **UX_HOST_CLASS_HID_REPORT_ERROR** (0X70) antingen var klient rapporten ogiltig eller uppstod vid överföring.
-- **UX_HOST_CLASS_INSTANCE_UNKNOWN** (0X5B) HID-tjänstinstans saknas.
-- **UX_HOST_CLASS_HID_REPORT_OVERFLOW** (0X5d) den angivna bufferten är inte tillräckligt stor för att rymma den okomprimerade rapporten.
+- **UX_SUCCESS** (0x00) Rapporten har skickats.
+- **UX_HOST_CLASS_HID_REPORT_ERROR** (0x70) Antingen var klientrapporten ogiltig eller felaktig under överföringen.
+- **UX_HOST_CLASS_INSTANCE_UNKNOWN** (0x5b) HID-klassinstansen finns inte.
+- **UX_HOST_CLASS_HID_REPORT_OVERFLOW** (0x5d) Den angivna bufferten är inte tillräckligt stor för att hantera den okomprimerade rapporten.
 
 ### <a name="example"></a>Exempel
 
@@ -282,7 +282,7 @@ status = ux_host_class_hid_report_set(hid, &input_report);
 
 ## <a name="ux_host_class_hid_mouse_buttons_get"></a>ux_host_class_hid_mouse_buttons_get
 
-Hämta mus knappar.
+Hämta musknappar.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -292,19 +292,19 @@ UINT ux_host_class_hid_mouse_buttons_get(
     ULONG *mouse_buttons);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen används för att hämta mus knappar
+Den här funktionen används för att hämta musknapparna
 
 ### <a name="parameters"></a>Parametrar
 
-- **mouse_instance** Pekare till HID Mouse-instansen.
-- **mouse_buttons** Pekare till retur knapparna.
+- **mouse_instance** Pekare till HID-musinstansen.
+- **mouse_buttons** Pekare till returknapparna.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- Mus knappen **UX_SUCCESS** (0x00) har hämtats.
-- **UX_HOST_CLASS_INSTANCE_UNKNOWN** (0X5B) HID-tjänstinstans saknas.
+- **UX_SUCCESS** (0x00) Musknappen har hämtats.
+- **UX_HOST_CLASS_INSTANCE_UNKNOWN** (0x5b) HID-klassinstansen finns inte.
 
 ### <a name="example"></a>Exempel
 
@@ -322,7 +322,7 @@ status = ux_host_class_hid_mouse_button_get(mouse_instance, &mouse_buttons);
 
 ## <a name="ux_host_class_hid_mouse_position_get"></a>ux_host_class_hid_mouse_position_get
 
-Hämta mus position.
+Hämta musposition.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -333,20 +333,20 @@ UINT ux_host_class_hid_mouse_position_get(
     SLONG *mouse_y_position);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen används för att hämta markörens position i x & y-koordinater.
+Den här funktionen används för att hämta musens position i x & y-koordinater.
 
 ### <a name="parameters"></a>Parametrar
 
-- **mouse_instance** Pekare till HID Mouse-instansen.
-- **mouse_x_position** Pekar mot x-koordinaten.
+- **mouse_instance** Pekare till HID-musinstansen.
+- **mouse_x_position** Pekare till x-koordinaten.
 - **mouse_y_position** Pekare till y-koordinaten.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **UX_SUCCESS** (0X00) X &amp; Y-koordinaterna har hämtats.
-- **UX_HOST_CLASS_INSTANCE_UNKNOWN** (0X5B) HID-tjänstinstans saknas.
+- **UX_SUCCESS** (0x00) X &amp; Y-koordinater har hämtats.
+- **UX_HOST_CLASS_INSTANCE_UNKNOWN** (0x5b) HID-klassinstansen finns inte.
 
 ### <a name="example"></a>Exempel
 
@@ -366,7 +366,7 @@ status = ux_host_class_hid_mouse_position_get(mouse_instance,
 
 ## <a name="ux_host_class_hid_keyboard_key_get"></a>ux_host_class_hid_keyboard_key_get
 
-Hämta tangent bords nyckel och tillstånd.
+Hämta tangentbordsnyckel och tillstånd.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -377,23 +377,23 @@ UINT ux_host_class_hid_keyboard_key_get(
     ULONG *keyboard_state);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen används för att hämta tangent bords nyckel och tillstånd.
+Den här funktionen används för att hämta tangentbordstangenten och tillståndet.
 
 ### <a name="parameters"></a>Parametrar
 
-- **keyboard_instance** Pekare till HID Keyboard-instansen.
-- **keyboard_key** Pekare till tangent bords nyckel behållare.
-- **keyboard_state** Pekare till behållaren med tangent bords tillstånd.
+- **keyboard_instance** Pekare till HID-tangentbordsinstansen.
+- **keyboard_key** Pekare till tangentbordsnyckelcontainer.
+- **keyboard_state** Pekare till tangentbordstillståndscontainern.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- Nyckel och tillstånd för **UX_SUCCESS** (0x00) har hämtats.
-- **UX_ERROR** (0Xff) inget att rapportera.
-- **UX_HOST_CLASS_INSTANCE_UNKNOWN** (0X5B) HID-tjänstinstans saknas.
+- **UX_SUCCESS** (0x00) Nyckel och tillstånd hämtades.
+- **UX_ERROR** (0xff) Inget att rapportera.
+- **UX_HOST_CLASS_INSTANCE_UNKNOWN** (0x5b) HID-klassinstansen finns inte.
 
-Tangent bords status kan ha följande värden.
+Tangentbordstillståndet kan ha följande värden.
 
 - **UX_HID_KEYBOARD_STATE_KEY_UP** 0x10000
 - **UX_HID_KEYBOARD_STATE_NUM_LOCK** 0x0001
@@ -452,7 +452,7 @@ while (1)
 
 ## <a name="ux_host_class_hid_keyboard_ioctl"></a>ux_host_class_hid_keyboard_ioctl
 
-Utföra en IOCTL-funktion på HID-tangentbordet.
+Utför en IOCTL-funktion på HID-tangentbordet.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -462,20 +462,20 @@ UINT ux_host_class_hid_keyboard_ioctl(
     ULONG ioctl_function, VOID *parameter);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen utför en angiven IOCTL-funktion på HID-tangentbordet. Anropet blockeras och returneras bara när det uppstår ett fel eller när kommandot har slutförts.
+Den här funktionen utför en specifik ioctl-funktion till HID-tangentbordet. Anropet blockerar och returnerar endast när det finns ett fel eller när kommandot har slutförts.
 
 ### <a name="parameters"></a>Parametrar
 
-- **keyboard_instance** Pekare till HID Keyboard-instansen.
-- den **ioctl_function** IOCTL-funktion som ska utföras. Se tabellen nedan för en av de tillåtna IOCTL-funktionerna.
-- **parameter** Pekar mot en parameter som är speciell för IOCTL.
+- **keyboard_instance** Pekare till HID-tangentbordsinstansen.
+- **ioctl_function** ioctl-funktion som ska utföras. Se tabellen nedan för en av de tillåtna ioctl-funktionerna.
+- **parameter** Pekare till en parameter som är specifik för ioctl.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **UX_SUCCESS** (0x00) IOCTL-funktionen har slutförts.
-- **UX_FUNCTION_NOT_SUPPORTED** (0X54) Okänd IOCTL-funktion
+- **UX_SUCCESS** (0x00) Ioctl-funktionen har slutförts.
+- **UX_FUNCTION_NOT_SUPPORTED** (0x54) Okänd IOCTL-funktion
 
 ### <a name="ioctl-functions"></a>IOCTL-funktioner
 
@@ -580,7 +580,7 @@ status = ux_host_class_hid_keyboard_ioctl(keyboard,
 /* If status equals UX_SUCCESS, the operation was successful. */
 ```
 
-### <a name="example--disable-keyboard-key-decode"></a>Exempel – inaktivera tangent bords kryptering
+### <a name="example--disable-keyboard-key-decode"></a>Exempel – inaktivera avkodning av tangentbordstangenten
 
 ```c
 UINT status;
@@ -594,7 +594,7 @@ status = ux_host_class_hid_keyboard_ioctl(keyboard,
 
 ## <a name="ux_host_class_hid_remote_control_usage_get"></a>ux_host_class_hid_remote_control_usage_get
 
-Hämta fjärr styrnings användning
+Hämta fjärrstyrningsanvändning
 
 ### <a name="prototype"></a>Prototyp
 
@@ -605,23 +605,23 @@ UINT ux_host_class_hid_remote_control_usage_get(
     ULONG *value);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen används för att hämta fjärr styrnings användningen.
+Den här funktionen används för att hämta fjärrstyrningsanvändningar.
 
 ### <a name="parameters"></a>Parametrar
 
-- **remote_control_instance** Pekar på HID-fjärrkontroll-instansen.
-- **användning** Pekar på användningen.
-- **värde** Pekar till värdet för användningen.
+- **remote_control_instance** Pekare till HID-fjärrstyrningsinstansen.
+- **användning** Pekare till användningen.
+- **värde** Pekare till värdet för användningen.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **UX_SUCCESS** (0x00) data överföringen har slutförts.
-- **UX_ERROR** (0Xff) inget att rapportera.
-- **UX_HOST_CLASS_INSTANCE_UNKNOWN** (0X5B) HID-tjänstinstans saknas.
+- **UX_SUCCESS** (0x00) Dataöverföringen slutfördes.
+- **UX_ERROR** (0xff) Inget att rapportera.
+- **UX_HOST_CLASS_INSTANCE_UNKNOWN** (0x5b) HID-klassinstansen finns inte.
 
-Listan över alla möjliga användnings områden är för lång för att få plats i den här användar handboken. För en fullständig beskrivning har ux_host_class_hid. h hela uppsättningen möjliga värden.
+Listan över alla möjliga användningsområden är för lång för att få plats i den här användarhandboken. En fullständig beskrivning finns i ux_host_class_hid.h innehåller hela uppsättningen möjliga värden.
 
 ### <a name="example"></a>Exempel
 
@@ -670,7 +670,7 @@ while (remote_control != UX_NULL)
 
 ### <a name="ux_host_class_cdc_acm_read"></a>ux_host_class_cdc_acm_read
 
-Läs från cdc_acm-gränssnittet.
+Läs från cdc_acm gränssnittet.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -682,22 +682,25 @@ UINT ux_host_class_cdc_acm_read(
     ULONG *actual_length);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen läser från cdc_acm-gränssnittet. Anropet blockeras och returneras bara när det uppstår ett fel eller när överföringen är klar.
+Den här funktionen läser från cdc_acm gränssnittet. Anropet blockerar och returnerar bara när det finns ett fel eller när överföringen är klar.
+
+> [!Note]
+> Den här funktionen läser massdata från enheten, så den väntar tills bufferten är full eller enheten avslutar överföringen med ett kort paket (inklusive nolllängdspaket). Mer information finns i Allmänna överväganden [**för massöverföring.**](usbx-device-stack-5.md#general-considerations-for-bulk-transfer)
 
 ### <a name="parameters"></a>Parametrar
 
-- **cdc_acm** Pekare till cdc_acm klass instansen.
-- **data_pointer** Pekar till buffertstorleken för data nytto lasten.
-- **requested_length** Längd att ta emot.
-- **actual_length** Den längd som faktiskt mottagits.
+- **cdc_acm** Pekare till cdc_acm-klassinstansen.
+- **data_pointer** Pekare till buffertadressen för datanyttolasten.
+- **requested_length** Den längd som ska tas emot.
+- **actual_length** Den längd som faktiskt har tagits emot.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **UX_SUCCESS** (0x00) data överföringen har slutförts.
-- **UX_HOST_CLASS_INSTANCE_UNKNOWN** (0x5b) cdc_acm instansen är ogiltig.
-- **UX_TRANSFER_TIMEOUT** (0x5c) timeout för överföring, Läs ofullständig.
+- **UX_SUCCESS** (0x00) Dataöverföringen slutfördes.
+- **UX_HOST_CLASS_INSTANCE_UNKNOWN** (0x5b) Instansen cdc_acm är ogiltig.
+- **UX_TRANSFER_TIMEOUT** (0x5c) Tidsgräns för överföring, läsning ofullständig.
 
 ### <a name="example"></a>Exempel
 
@@ -714,7 +717,7 @@ status = ux_host_class_cdc_acm_read(cdc_acm, data_pointer,
 
 ## <a name="ux_host_class_cdc_acm_write"></a>ux_host_class_cdc_acm_write
 
-Skriv till cdc_acm gränssnittet
+Skriva till cdc_acm gränssnittet
 
 ### <a name="prototype"></a>Prototyp
 
@@ -726,22 +729,22 @@ UINT ux_host_class_cdc_acm_write(
     ULONG *actual_length);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen skriver till cdc_acm-gränssnittet. Anropet blockeras och returneras bara när det uppstår ett fel eller när överföringen är klar.
+Den här funktionen skriver till cdc_acm gränssnittet. Anropet blockerar och returnerar bara när det finns ett fel eller när överföringen är klar.
 
 ### <a name="parameters"></a>Parametrar
 
-- **cdc_acm** Pekare till cdc_acm klass instansen.
-- **data_pointer** Pekar till buffertstorleken för data nytto lasten.
+- **cdc_acm** Pekare till cdc_acm-klassinstansen.
+- **data_pointer** Pekare till buffertadressen för datanyttolasten.
 - **requested_length** Längd som ska skickas.
-- **actual_length** Den längd som faktiskt har skickats.
+- **actual_length** Längden skickades faktiskt.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **UX_SUCCESS** (0x00) data överföringen har slutförts.
-- **UX_HOST_CLASS_INSTANCE_UNKNOWN** (0x5b) cdc_acm instansen är ogiltig.
-- **UX_TRANSFER_TIMEOUT** (0X5c) överförings tids gräns, skrivning ofullständig.
+- **UX_SUCCESS** (0x00) Dataöverföringen slutfördes.
+- **UX_HOST_CLASS_INSTANCE_UNKNOWN** (0x5b) Instansen cdc_acm är ogiltig.
+- **UX_TRANSFER_TIMEOUT** (0x5c) Tidsgräns för överföring, skriv ofullständig.
 
 ### <a name="example"></a>Exempel
 
@@ -758,7 +761,7 @@ status = ux_host_class_cdc_acm_write(cdc_acm, data_pointer,
 
 ## <a name="ux_host_class_cdc_acm_ioctl"></a>ux_host_class_cdc_acm_ioctl
 
-Utföra en IOCTL-funktion på cdc_acm-gränssnittet.
+Utför en IOCTL-funktion till cdc_acm gränssnittet.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -769,22 +772,22 @@ UINT ux_host_class_cdc_acm_ioctl(
     VOID *parameter);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen utför en angiven IOCTL-funktion till cdc_acm-gränssnittet. Anropet blockeras och returneras bara när det uppstår ett fel eller när kommandot har slutförts.
+Den här funktionen utför en specifik ioctl-funktion till cdc_acm gränssnittet. Anropet blockerar och returnerar bara när det finns ett fel eller när kommandot har slutförts.
 
 ### <a name="parameters"></a>Parametrar
 
-- **cdc_acm** Pekare till cdc_acm klass instansen.
-- den **ioctl_function** IOCTL-funktion som ska utföras. Se tabellen nedan för en av de tillåtna IOCTL-funktionerna.
-- **parameter** Pekare till en parameter som är speciell för IOCTL
+- **cdc_acm** Pekare till cdc_acm-klassinstansen.
+- **ioctl_function** ioctl-funktion som ska utföras. Se tabellen nedan för en av de tillåtna ioctl-funktionerna.
+- **parameter** Pekare till en parameter som är specifik för ioctl
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0x00) data överföringen har slutförts.
-- **UX_MEMORY_INSUFFICIENT** (0x12) det finns inte tillräckligt med minne.
-- **UX_HOST_CLASS_INSTANCE_UNKNOWN** (0X5B) CDC-ACM-instansen är i ett ogiltigt tillstånd.
-- **UX_FUNCTION_NOT_SUPPORTED** (0X54) Okänd IOCTL-funktion.
+- **UX_SUCCESS** (0x00) Dataöverföringen slutfördes.
+- **UX_MEMORY_INSUFFICIENT** (0x12) Det finns inte tillräckligt med minne.
+- **UX_HOST_CLASS_INSTANCE_UNKNOWN** (0x5b) CDC-ACM-instansen är i ett ogiltigt tillstånd.
+- **UX_FUNCTION_NOT_SUPPORTED** (0x54) Funktionen Okänd IOCTL.
 
 ### <a name="ioctl-functions"></a>IOCTL-funktioner:
 
@@ -810,7 +813,7 @@ status = ux_host_class_cdc_acm_ioctl(cdc_acm,
 
 ## <a name="ux_host_class_cdc_acm_reception_start"></a>ux_host_class_cdc_acm_reception_start
 
-Börjar ta emot data i bakgrunden från enheten.
+Påbörjar bakgrundsmottagande av data från enheten.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -820,17 +823,17 @@ UINT ux_host_class_cdc_acm_reception_start(
     UX_HOST_CLASS_CDC_ACM_RECEPTION *cdc_acm_reception);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen gör att USBX kontinuerligt läser data från enheten i bakgrunden. Vid slutförandet av varje transaktion anropas det motanrop som anges i **cdc_acm_reception** så att programmet kan utföra ytterligare bearbetning av transaktionens data.
+Den här funktionen gör att USBX kontinuerligt läser data från enheten i bakgrunden. När varje transaktion har slutförts anropas **återanropet som anges i cdc_acm_reception** så att programmet kan utföra ytterligare bearbetning av transaktionens data.
 
 > [!NOTE]
-> **ux_host_class_cdc_acm_read** får inte användas när bakgrunds mottagning används.
+> **ux_host_class_cdc_acm_read** får inte användas när bakgrundsmottagandet används.
 
 ### <a name="parameters"></a>Parametrar
 
-- **cdc_acm** Pekare till cdc_acm klass instansen.
-- **cdc_acm_reception** Pekare till parameter som innehåller värden som definierar bakgrunds mottagning. Layouten för den här parametern följer:
+- **cdc_acm** Pekare till cdc_acm-klassinstansen.
+- **cdc_acm_reception** Pekare till parameter som innehåller värden som definierar beteendet för bakgrundsmottagande. Layouten för den här parametern följer:
 
 ```c
 typedef struct UX_HOST_CLASS_CDC_ACM_RECEPTION_STRUCT
@@ -848,8 +851,8 @@ typedef struct UX_HOST_CLASS_CDC_ACM_RECEPTION_STRUCT
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0x00) bakgrunds mottagning har startats.
-- **UX_HOST_CLASS_INSTANCE _UNKNOWN** (0X5b) fel klass instans.
+- **UX_SUCCESS** (0x00) Bakgrundsmottagande har startats.
+- **UX_HOST_CLASS_INSTANCE _UNKNOWN** (0x5b) Fel klassinstans.
 
 ```c
 UINT status;
@@ -882,7 +885,7 @@ status = ux_host_class_cdc_acm_reception_start(cdc_acm_host_data, &cdc_acm_recep
 
 ## <a name="ux_host_class_cdc_acm_reception_stop"></a>ux_host_class_cdc_acm_reception_stop
 
-Stoppar bakgrunds mottagning av paket.
+Stoppar bakgrundsmottagande av paket.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -892,14 +895,14 @@ UINT ux_host_class_cdc_acm_reception_stop(
     UX_HOST_CLASS_CDC_ACM_RECEPTION *cdc_acm_reception);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen gör att USBX stoppar bakgrunds mottagning som tidigare påbörjats av **ux_host_class_cdc_acm_reception_start**.
+Den här funktionen gör att USBX stoppar bakgrundsmottagandet som tidigare startats **av ux_host_class_cdc_acm_reception_start**.
 
 ### <a name="parameters"></a>Parametrar
 
-- **cdc_acm** Pekare till cdc_acm klass instansen.
-- **cdc_acm_reception** Pekar till samma parameter som användes för att starta bakgrunds mottagning. Layouten för den här parametern följer:
+- **cdc_acm** Pekare till cdc_acm-klassinstansen.
+- **cdc_acm_reception** Pekare till samma parameter som användes för att starta bakgrundsmottagandet. Layouten för den här parametern följer:
 
 ```c
 typedef struct UX_HOST_CLASS_CDC_ACM_RECEPTION_STRUCT
@@ -918,8 +921,8 @@ typedef struct UX_HOST_CLASS_CDC_ACM_RECEPTION_STRUCT
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0x00) bakgrunds mottagning har stoppats.
-- **UX_HOST_CLASS_INSTANCE _UNKNOWN** (0X5b) fel klass instans.
+- **UX_SUCCESS** (0x00) Bakgrundsmottagande har stoppats.
+- **UX_HOST_CLASS_INSTANCE _UNKNOWN** (0x5b) Fel klassinstans.
 
 ```c
 UINT status;

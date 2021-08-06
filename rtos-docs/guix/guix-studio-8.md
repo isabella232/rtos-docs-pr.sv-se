@@ -1,120 +1,127 @@
 ---
-title: Kommentarer om hur du redigerar vissa typer av widget
-description: Detaljerade kommentarer som beskriver redigerings metoder för vissa typer av komplexa widgetar.
+title: Information om redigering av specifika widgettyper
+description: Detaljerade kommentarer som beskriver redigeringsmetoder för vissa komplexa widgettyper.
 author: jdeere5220
 ms.author: kemaxwel
 ms.date: 9/30/2020
 ms.service: rtos
 ms.topic: article
-ms.openlocfilehash: 3194a1b8c8965bf821631a8c34ac5e9961f8c8ff
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 374471df85c4cd0fffae5b5cc7ad31d2237877f2
+ms.sourcegitcommit: 62cfdf02628530807f4d9c390d6ab623e2973fee
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104827126"
+ms.lasthandoff: 08/05/2021
+ms.locfileid: "115178290"
 ---
-# <a name="chapter-8-notes-on-editing-specific-widget-types"></a>Kapitel 8: kommentarer om att redigera vissa typer av widget
+# <a name="chapter-8-notes-on-editing-specific-widget-types"></a>Kapitel 8: Kommentarer om redigering av specifika widgettyper
 
-GUIX Studio gör det möjligt för användaren att enkelt skapa och ändra GUIX-widgetar som skapar program GRÄNSSNITTs skärmarna. De flesta av dessa redigerings metoder är intuitiva och uppenbara. Om du till exempel vill ändra storlek på en widget kan du välja widgeten med musen och dra i widgetarna för widgeten. Du kan också skriva direkt i egenskaps fälten vänster/topp/bredd/höjd i den valda widgeten.
+MED GUIX Studio kan användaren enkelt skapa och ändra GUIX-widgetar som ska skapa programmets användargränssnittsskärmar. De flesta av dessa redigeringsmetoder är intuitiva och uppenbara. Om du till exempel vill ändra storlek på en widget kan du välja widgeten med musen och dra widgeten kantlinjer. Du kan också skriva direkt i egenskapsfälten vänster/topp/bredd/höjd för den valda widgeten.
 
-Vissa typer av widget kräver en mer avancerad redigerings process, eftersom dessa widgetar själva är lite mer sofistikerade i sin funktions support.
+Vissa widgettyper kräver en mer avancerad redigeringsprocess, eftersom dessa widgetar själva är lite mer avancerade i sitt funktionsstöd.
 
-Det här kapitlet innehåller information om de mer avancerade redigerings funktionerna för dessa mer komplexa typer av widgetar. Dessa anteckningar visas som funktionerna i GUIX Studio-förflyttningen tillsammans med de widgets typer som finns i GUIX-biblioteket.
+Det här kapitlet innehåller information om mer avancerade redigeringsfunktioner för dessa mer komplexa widgettyper. Dessa anteckningar kommer att expandera allt eftersom funktionerna i GUIX Studio avancerar tillsammans med widgettyperna som finns i GUIX-biblioteket.
 
 ## <a name="rich-text-view"></a>RTF-vy
 
-Den här widgeten används för att visa RTF-text som stöder text format koder med text rader. Dessa formateringsregler innehåller fetstil, kursiv stil och flera andra. Börja genom att högerklicka på den markerade överordnade vyn från *projektvyn* eller vyn *mål* och välja menyn **Infoga/text/RTF-vy** om du vill infoga en RTF-widget.
+Den här widgeten används för att visa rtf-text som stöder infogade textformateringskoder. De här formateringskoderna innehåller fetstil, kursiv stil och flera andra. Börja genom att högerklicka på den markerade överordnade vyn  *från Project* eller Målvy och välja menyn **Infoga/Text-/RTF-vy** för att infoga en widget för RTF-vy.
 
-Förutom standard uppsättningen med egenskaper som stöds av alla typer av widgetar, stöder widgeten RTF-visning ytterligare egenskaper.
+Förutom standarduppsättningen med egenskaper som stöds av alla widgettyper stöder widgettypen RTF-widget ytterligare egenskaper.
 
 ### <a name="additional-properties"></a>Ytterligare egenskaper
 
 | Egenskap | Innebörd |
 |----------|---------|
-| Text justering | Standard justering av text |
-| Normalt teckensnitt| Standard teckensnitt för text |
-| Fetstil  | Teckensnitt för text som är formaterad som fet |
-| Kursivt teckensnitt| Teckensnitt för text som är formaterad som kursiv|
-| Fet kursivt teckensnitt| Teckensnitt för text som är formaterad som fet och kursiv |
-| Privat text kopiering | Bör kontrol leras om widgeten är att behålla sin egen privata kopia av alla tilldelade text |
-| Blanksteg | Bredd på marginalen mellan widgeten och den visade texten, i bild punkter. |
-| Rad avstånd | Blank steg mellan två rader med texten, i bild punkter. |
+| Textjustera | Standardtextjustering |
+| Normalt teckensnitt| Standardteckensnitt för text |
+| Fetstil  | Textteckensnitt för text som taggats med fetstil |
+| Kursivt teckensnitt| Textteckensnitt för text som taggats som kursiv|
+| Fet kursiv stil| Textteckensnitt för text som taggats med fetstil och kursiv stil |
+| Privat textkopiering | Bör kontrolleras om widgeten ska behålla sin egen privata kopia av tilldelad text |
+| Blanksteg | Bredd på marginalen mellan widgeten och den visade texten, i bildpunkter. |
+| Radutrymme | Blanksteg mellan två rader i texten, i bildpunkter. |
 |||
 
-### <a name="the-rich-text-formatting-codes"></a>RTF-koderna för text formatering
+### <a name="the-rich-text-formatting-codes"></a>Formateringskoderna för RTF
 
-Följande format koder stöds för formatering av text.
+Följande formatkoder stöds för textformatering.
 
 |Tagg|Innebörd|
 |---|---|
-|\<b>\</b> | Återge teckensnitt med användare angivet fet tecken-ID|
-|\<i>\</i> | Återge teckensnitt med användarens angivna kursiva tecken-ID|
-|\<u>\</u> | Återge understruken text|
-|\<f GX_FONT_ID>\</f> | Återge text med angivet teckensnitts-ID. |
-|\<c GX_COLOR_ID>\</c> | Återge text med angivet färg-ID|
-|\<hc GX_COLOR_ID>\</hc> | Rendera text med angivet bakgrunds färg-ID|
-|\<align left/right/center>\</align> | Tilldela text justering|
+|\<b>\</b> | Rendera textteckensnitt med användarens angivna fetstils-ID|
+|\<i>\</i> | Rendera textteckensnitt med användarangivet kursivt teckensnitts-ID|
+|\<u>\</u> | Rendera understruken text|
+|\<f GX_FONT_ID>\</f> | Rendera text med det angivna teckensnitts-ID:t. |
+|\<c GX_COLOR_ID>\</c> | Rendera text med angivet färg-ID|
+|\<hc GX_COLOR_ID>\</hc> | Rendera text med angivet bakgrundsfärgs-ID|
+|\<align left/right/center>\</align> | Tilldela textjustering|
 |||
 
-Det finns två sätt att redigera Rich Text-strängen från GUIX Studio:
+Det finns två sätt att redigera RTF-strängen från GUIX Studio:
 
-- Använd dialog rutan redigera RTF-format, vilket är den rekommenderade och enklaste redigerings metoden.
-- Använd dialog rutan sträng tabell redigerare, som gör att du manuellt kan infoga formateringsmarkeringar som visas i tabellen ovan.
+- Använd dialogrutan Redigera RTF, vilket är den rekommenderade och enklaste redigeringsmetoden.
+- Använd dialogrutan Redigerare för strängtabell, där du kan infoga formateringstaggarna som visas i tabellen ovan manuellt.
 
-När du har valt en RTF-widget i vyn *mål* väljer du knappen **redigera RTF** i *egenskapsvyn* för att anropa RTF-redigera-dialog rutan, som visas i bild 8,1.
+När du har valt en widget för RTF-vy i  målvyn väljer du knappen Redigera **RTF** i egenskapsvyn för att anropa dialogrutan för rtf-textredigering som visas i bild 8.1.
 
-![Skärm bild av dialog rutan Redigera Rich text i GUIX Studio.](./media/guix-studio/edit_rich_text_dialog.png)
+![Skärmbild av dialogrutan Redigera RTF i GUIX Studio.](./media/guix-studio/edit_rich_text_dialog.png)
 
-**Figur 8,1**
+**Bild 8.1**
 
-Den vänstra rutan är text redigerings fältet RTF. Du kan använda verktygsfälts ikonerna för att infoga taggar som du behöver. Välj ett textblock i redigerings fältet och välj sedan verktygsfälts knapparna för att tillämpa de format och färger som krävs för det valda textblocket. Dialog rutan redigera RTF-text är ett enkelt sätt att infoga formateringsregler i test strängen. Du kan också infoga taggarna manuellt eller till och med generera dem vid körning om det behövs.
+Den vänstra rutan är rtf-textredigeringsfältet. Du kan använda verktygsfältsikonerna för att infoga taggar som du behöver. Markera ett textblock i redigeringsfältet och välj sedan knapparna i verktygsfältet för att tillämpa de format och färger som krävs för det markerade textblocket. Dialogrutan Redigera RTF är ett enkelt sätt att infoga formateringskoderna i teststrängen. Du kan också infoga taggarna manuellt eller till och med generera dem vid körning om det behövs.
 
-Den högra rutan är för hands versionen av widgeten för att visa hur texten återges i mål visningen. Bakgrunds färgen för för hands versionen av widgeten är fast, vilket kanske inte matchar widgetens tilldelade bakgrunds färg i vyn mål.
+Det högra fönstret är widgetförhandsvisningen som visar hur texten återges i målvyn. Bakgrundsfärgen för widgetens förhandsgranskning är fast, vilket kanske inte matchar widgetens tilldelade bakgrundsfärg i målvyn.
 
-Resurs-ID-namn används i RTF-format för att referera till vissa teckensnitt eller färg resurser. Om resurs namnet för ett teckensnitt eller en färg ändras efter det att text strängen har refererats till, kommer GUIX Studio automatiskt att uppdatera RTF-strängen så att den återspeglar resursens namn ändringar. Å andra sidan om du tar bort en teckensnitts-eller färg resurs som refereras till av en RTF-widget måste du redigera den påverkade RTF-texten manuellt för att ta bort eller ändra resurs-ID-namn som har tagits bort.
+Resurs-ID-namn används i RTF för att referera till specifika teckensnitts- eller färgresurser. Om resursnamnet för ett teckensnitt eller en färg ändras efter att den har refererats till av RTF-strängen uppdaterar GUIX Studio automatiskt RTF-strängen för att återspegla resursnamnsändringarna. Å andra sidan, om du tar bort ett teckensnitt eller en färgresurs som refereras av en RTF-widget, måste du redigera den berörda RTF manuellt för att ta bort eller ändra resurs-ID-namnen som har tagits bort.
 
-När du väljer knappen Spara i den här dialog rutan läggs den RTF-sträng som du har definierat till i tabellen med projekt strängar.
+När du väljer knappen Spara i den här dialogrutan läggs den RTF-sträng som du har definierat till i projektsträngstabellen.
 
-## <a name="string-scroll-wheel"></a>Sträng rullnings hjul
+## <a name="string-scroll-wheel"></a>Rullningshjul för strängar
 
-En widget för rullnings hjul för String stöder visning av en sträng mat ris. De här strängarna kan tilldelas dynamiskt eller, om programmet har stöd för flera språk, kan de tilldelade strängarna hämtas från den aktiva sträng tabellen.
+En widget för rullningshjul för strängar stöder visning av en matris med strängar. Dessa strängar kan tilldelas dynamiskt, eller, om programmet stöder flera språk, kan de tilldelade strängarna hämtas från den aktiva strängtabellen.
 
-Widgeten för rullnings hjul för String stöder en sträng mat ris. Redigera-dialog rutan för sträng rullnings hjul, som visas i bild 8,2, tillhandahålls för att tillåta att användaren tilldelar denna sträng mat ris.
+Widgeten för rullningshjul för strängar stöder en matris med strängar. Dialogrutan Redigera rullningshjul för strängar, som visas i bild 8.2, tillhandahålls så att användaren kan tilldela den här matrisen med strängar.
 
-![Skärm bild av dialog rutan Redigera rullnings hjul för GUIX Studio-sträng.](./media/guix-studio/string_scroll_wheel_edit.png)
+![Skärmbild av dialogrutan Redigera rullningshjul för strängsträng i GUIX Studio.](./media/guix-studio/string_scroll_wheel_edit.png)
 
-**Figur 8,2**
+**Bild 8.2**
 
-För att anropa den här dialog rutan väljer du en widget för String-rullnings hjul i *vyn mål* eller *projektvyn*. När den här widgeten har marker ATS innehåller *egenskapsvyn* en knapp för att **Redigera strängar** . Välj den här knappen för att aktivera redigerings dialog rutan för sträng rullnings hjul.
+Om du vill anropa den här dialogrutan väljer du en widget för *rullningshjulet* för strängar i *målvyn eller Project Visa*. När du har valt den här widgettypen *innehåller egenskapsvyn* knappen **Redigera strängar.** Välj den här knappen för att anropa dialogrutan Redigera strängrullningshjul.
 
-Om du vill tilldela en sträng för varje text index kan du antingen välja ett sträng-ID i list rutan, eller så kan du skriva ett nytt sträng värde i fältet text till höger. När du är färdig med ändringarna sparas alla nya eller ändrade strängar i den aktiva sträng tabellen.
+Om du vill tilldela en sträng för varje textindex kan du antingen välja ett sträng-ID i listrutan eller ange ett nytt strängvärde i fältet Text till höger. När du är klar med ändringarna sparas alla nya eller ändrade strängar i den aktiva strängtabellen.
 
-## <a name="sprite"></a>Sprit
+## <a name="sprite"></a>Sprite
 
-En sprite-widget används för att visa en sekvens med bilder för att skapa en animeringseffekt. En widget för Sprite kräver en ram lista, som är en matris med bild-ID: n och unika parametrar som används för varje bild i ramen. Om du vill bygga List rutan för widgeten Sprite för Sprite visas dialog rutan Redigera Sprite-ramar, som visas i bild 8,3,:
+En positive-widget används för att visa en sekvens med bilder för att ge en animeringseffekt. En personwidget kräver en bildrutelista, som är en matris med bild-ID:t och unika parametrar som tillämpas på varje bild i ramen. Om du vill skapa den här bildrutelistan för widgeten visas dialogrutan Redigera Widgete-bildrutor, som visas i bild 8.3:
 
-![Skärm bild av dialog rutan Redigera Sprite-ramar i GUIX Studio.](./media/guix-studio/edit_sprite_frames.png)
+![Skärmbild av dialogrutan REDIGERA Inställningar för GUIX Studio.](./media/guix-studio/edit_sprite_frames.png)
 
-**Figur 8,3**
+**Bild 8.3**
 
-Välj en widget för sprite i vyn *mål* eller *projektvyn* för att anropa den här dialog rutan. När den här widgeten har marker ATS innehåller *egenskapsvyn* en knapp för att **Redigera Framelist** . Välj den här knappen för att aktivera redigerings dialog rutan för sträng rullnings hjul.
+Om du vill anropa den här dialogrutan väljer du en Widgete-widget i *målvyn* *eller Project Visa*. När du har valt den här widgettypen *innehåller egenskapsvyn* knappen **Redigera bildruta.** Välj den här knappen för att anropa dialogrutan Redigera strängrullningshjul.
 
-Det *totala antalet bild Rute fält för Sprite* är ett indatafält som gör att du kan ange det totala antalet ramar som ska visas av widgeten Sprite. Bilder kan återanvändas i ram listan, vilket innebär att alla bilder måste vara unika.
+Fältet *Totalt antal Personere-bildrutor* är ett indatafält där du kan ange det totala antalet bildrutor i heltal som ska visas av widgeten för personer. Bilder kan återanvändas i bildrutelistan, vilket innebär att inte alla bilder måste vara unika.
 
-Fältet ID för bild sprites ram är ett markerings värde för ram index som sträcker sig från 1 till totalt antal ramar. Öka och minska det här värdet för att flytta från en sprite-ram till nästa.
+Fältet Förser ram-ID är ett värde för val av ramindex som sträcker sig från 1 till Totalt antal bildrutor. Öka och minska det här värdet för att flytta från en personbildruta till nästa.
 
-Varje Sprite-ram har flera parametrar. Det första är bakgrunds åtgärden. Det här fältet imiterar funktionerna i formatet populär GIF-animering. Alternativen här inkluderar:
+Varje figurram har flera parametrar. Den första är bakgrundsåtgärden. Det här fältet efterliknar funktionerna i det populära GIF-animeringsformatet. Alternativen här är:
 
-- Ingen åtgärd, vilket innebär att den aktuella bild Rute bilden ritas över föregående bild Rute bild.
-- Återställ första pixeln – kartan, vilket innebär att index 1 pixel-Map ritas före den aktuella pixel kartan och
-- Enfärgad fyllning, vilket innebär att Sprite-bakgrunden fylls med bakgrunds färgen för spriten innan den aktuella ramen ritas.
+- Ingen åtgärd, vilket innebär att den aktuella bildrutebilden ritas över föregående bildruta.
+- Återställ den första pixelkartan, vilket innebär att indexet 1 pixelkarta ritas före den aktuella pixelkartan och
+- Solid Color Fill,vilket innebär att bakgrundsfärgen har fyllts med bakgrundsfärgen för programmet innan den aktuella ramen ritas.
 
-I fältet pixel-Map-ID kan du välja en pixel karta som tidigare har lagts till i projekt resurserna. Samma pixel-kart-ID kan användas för flera ramar. Till exempel kan din Sprite-animering använda bildens rörelse (med fälten x och y offset) i stället för eller förutom att använda olika Sprite-bilder.
+Med fältet Pixelkarta-ID kan du välja valfri pixelkarta som tidigare har lagts till i projektresurserna. Samma pixelkarta-ID kan användas för flera bildrutor. Till exempel kan din favoritanimering använda bildens rörelse (med hjälp av x- och y-förskjutningsfälten) i stället för eller förutom att använda olika bakgrundsbilder.
 
-Fältet alfa värde används för hela bild punkts kart ritningen. Det här fältet har bara en funktion när du kör med 8 BPP färgdjup och högre. Alfa värdet 0 är helt transparent och alfa värdet 255 är ogenomskinligt.
+Fältet Alfa-värde tillämpas på hela pixelkartan. Det här fältet har bara en effekt när du kör med färgdjupet 8 bpp och högre. Alfavärdet 0 är helt transparent och alfavärdet 255 är täckande.
 
-Du kan ange en förskjutning i Sprite-ramen där den aktuella pixel kartan ska ritas med hjälp av fälten ram x-förskjutning och ram y-offset. Med andra ord behöver varje bild ritas inte vara full storlek för widgeten Sprite.
+Du kan ange en förskjutning inom ramen där den aktuella pixelkartan ska ritas med hjälp av fälten Frame x-offset och Frame y-offset. Med andra ord behöver varje bild som ritas inte vara den fullständiga storleken på widgeten för personer.
 
-Fördröjnings perioden anger hur lång tid det tar innan flyttas till nästa Sprite-ram. Det här värdet är i Tick, som för standard konfigurationen av GUIX/ThreadX varje Tick representerar 50 ms.
+Fördröjningsperioden anger hur lång tid det tar innan du flyttar till nästa förskjutningsram. Det här värdet är i tick, som för standardkonfigurationen av GUIX/ThreadX-timern representerar 50 ms.
 
-När du sparar ändringarna i dialog rutan Redigera Sprite-ramar kan GUIX Studio generera den kompletta mat ris listan som en del av den genererade filen med utdata.
+När du sparar ändringarna i dialogrutan Redigera Inställningarramar kan GUIX Studio generera hela matrisen med bildrutor som en del av genereringen av utdataspecifikationerna.
+
+### <a name="assign-a-sprite-widget-with-gif-resource"></a>Tilldela enfördelningswidget med GIF-resurs
+Du kan lägga till en GIF-resurs **till Pixelmap-resursgruppen** och tilldela GIF-resursen till widgeten direkt. När GIF-resursen har angetts genereras en bildrutelista automatiskt. Du kan redigera varje bildruta i ramlistan ytterligare via dialogrutan för redigering av rutor:
+
+![Skärmbild av dialogrutan GUIX Studio Redigera Inställningar för GIF-resurs.](./media/guix-studio/edit_sprite_gif_frames.jpg)
+
+**Bild 8.4**

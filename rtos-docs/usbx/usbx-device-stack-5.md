@@ -1,23 +1,23 @@
 ---
-title: Kapitel 5 – överväganden för enhets klass i USBX
-description: Lär dig mer om USBX enhets klass överväganden.
+title: Kapitel 5 – Överväganden för USBX-enhetsklass
+description: Lär dig mer om överväganden för USBX-enhetsklass.
 author: philmea
 ms.author: philmea
 ms.date: 5/19/2020
 ms.service: rtos
 ms.topic: article
-ms.openlocfilehash: 84f215ad990a2fe185a08f3876276528787ef8bc
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: ea348d94e83863c0e2652df29f92d952f2242661
+ms.sourcegitcommit: 62cfdf02628530807f4d9c390d6ab623e2973fee
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104826541"
+ms.lasthandoff: 08/05/2021
+ms.locfileid: "115178025"
 ---
-# <a name="chapter-5---usbx-device-class-considerations"></a>Kapitel 5 – överväganden för enhets klass i USBX
+# <a name="chapter-5---usbx-device-class-considerations"></a>Kapitel 5 – Överväganden för USBX-enhetsklass
 
-## <a name="device-class-registration"></a>Registrering av enhets klass
+## <a name="device-class-registration"></a>Registrering av enhetsklass
 
-Varje enhets klass följer samma princip för registrering. En struktur som innehåller vissa klass parametrar skickas till klass initierings funktionen.
+Varje enhetsklass följer samma registreringsprincip. En struktur som innehåller specifika klassparametrar skickas till funktionen class initialize.
 
 ```c
 /* Set the parameters for callback when insertion/extraction of a HID device. */
@@ -40,9 +40,9 @@ status = ux_device_stack_class_register(_ux_system_slave_class_hid_name,
     ux_device_class_hid_entry,1,0, (VOID *)&hid_parameter);
 ```
 
-Varje klass kan registreras, om du vill, en callback-funktion när en instans av klassen aktive ras. Återanropet anropas sedan av enhets stacken för att informera programmet om att en instans har skapats.
+Varje klass kan även registrera en återanropsfunktion när en instans av klassen aktiveras. Motringning anropas sedan av enhetsstacken för att informera programmet om att en instans har skapats.
 
-Programmet skulle ha i sitt innehåll 2 funktioner för aktivering och inaktive ring, som du ser i följande exempel.
+Programmet skulle i sin brödtext ha två funktioner för aktivering och inaktivering, som du ser i följande exempel.
 
 ```c
 VOID tx_demo_hid_instance_activate(VOID *hid_instance)
@@ -58,15 +58,21 @@ VOID tx_demo_hid_instance_deactivate(VOID *hid_instance)
 }
 ```
 
-Vi rekommenderar inte att du gör något i dessa funktioner, men för att komma ihåg instansen av klassen och synkronisera med resten av programmet.
+Vi rekommenderar inte att du gör något i dessa funktioner, utan att memorera instansen av klassen och synkronisera med resten av programmet.
 
-## <a name="usb-device-storage-class"></a>Lagrings klass för USB-enhet
+## <a name="general-considerations-for-bulk-transfer"></a>Allmänna överväganden för massöverföring
 
-Lagrings klassen USB-enhet gör det möjligt för en lagrings enhet som är inbäddad i systemet att göras synlig för en USB-värd.
+Enligt USB 2.0-specifikationen måste en slutpunkt alltid överföra datanyttolaster med ett datafält som är mindre än eller lika med slutpunktens rapporterade wMaxPacketSize-värde. Storleken på ett datapaket är begränsad till bMaxPacketSize. Överföringen kan utföras i följande fall
+1. Slutpunkten har överfört exakt den mängd data som förväntas
+2. När en enhet eller värdslutpunkt tar emot ett paket med en storlek som är mindre än den maximala paketstorleken (wMaxPacketSize). Det här korta paketet anger att det inte finns några fler datapaket kvar och överföringen är klar eller när alla datapaket som ska skickas är lika med wMaxPacketSize, så kan överföringens slut inte fastställas. För att överföringen ska slutföras måste ett ZLP-paket (Zero Length Packet) skickas kortpaket och nolllängdspaket betyder slutet på en massöverföring av data. Ovanstående överväganden gäller för API:er för massöverföring av rådata, t.ex. ux_device_class_cdc_acm_read().
 
-USB-enhetens lagrings klass tillhandahåller inte någon lagrings lösning. Den accepterar bara och tolkar de SCSI-begäranden som kommer från värden. När en av dessa begär Anden är ett Läs-eller Skriv kommando, anropar den ett fördefinierat anrop till en riktig lagrings enhets hanterare, till exempel en ATA-drivrutin eller en driv rutin för Flash-enheter.
+## <a name="usb-device-storage-class"></a>USB-enhetsklass Storage enhet
 
-När enhetens lagrings klass initieras, tilldelas en pekare till den klass som innehåller all information som behövs. Ett exempel anges nedan.
+Usb-enhetens lagringsklass gör att en lagringsenhet som är inbäddad i systemet kan göras synlig för en USB-värd.
+
+USB-enhetens lagringsklass tillhandahåller inte en lagringslösning på egen hand. Den accepterar och tolkar bara SCSI-begäranden som kommer från värden. När en av dessa begäranden är ett läs- eller skrivkommando anropas ett fördefinierat anrop tillbaka till en verklig lagringsenhet som en ATA-enhetsdrivrutin eller en Flash-enhetsdrivrutin.
+
+När du initierar enhetslagringsklassen ges en pekarstruktur till klassen som innehåller all information som behövs. Ett exempel visas nedan.
 
 ```c
 /* Initialize the storage class parameters to customize vendor strings. */
@@ -113,13 +119,13 @@ status = ux_device_stack_class_register(_ux_system_slave_class_storage_name,
     ux_device_class_storage_entry, ux_device_class_storage_thread, 0, (VOID *)&storage_parameter);
 ```
 
-I det här exemplet är driv Rutinens lagrings strängar anpassade genom att tilldela sträng pekare till motsvarande parameter. Om någon av sträng pekarna lämnas till UX_NULL används standard strängen för Azure-återställnings tider.
+I det här exemplet anpassas drivrutinslagringssträngarna genom att tilldela strängpekare till motsvarande parameter. Om någon av sträng pekaren lämnas till UX_NULL används standardvärdet Azure RTOS strängen.
 
-I det här exemplet anges enhetens senaste block adress eller LBA och storleken på den logiska sektorn. LBA är antalet sektorer som är tillgängliga i mediet – 1. Block längden anges till 512 i det vanliga lagrings mediet. Den kan ställas in på 2048 för optiska enheter.
+I det här exemplet anges enhetens sista blockadress eller LBA samt storleken på den logiska sektorn. Lba är antalet sektorer som är tillgängliga på mediet –1. Blocklängden är inställd på 512 på vanliga lagringsmedier. Det kan anges till 2048 för optiska enheter.
 
-Programmet måste klara tre återanrops funktions pekare för att tillåta lagrings klassen att läsa, skriva och hämta status för mediet.
+Programmet måste skicka tre återanropsfunktionspekare så att lagringsklassen kan läsa, skriva och hämta status för mediet.
 
-Prototyperna för Läs-och skriv funktionerna visas i exemplet nedan.
+Prototyperna för läs- och skrivfunktionerna visas i exemplet nedan.
 
 ```c
 UINT media_read( 
@@ -141,14 +147,14 @@ UINT media_write(
 
 Plats:
 
-- *Storage* är instansen av lagrings klassen.
-- *LUN* är den LUN som kommandot dirigeras till.
-- *data_pointer* är adressen till den buffert som ska användas för att läsa eller skriva.
+- *storage* är instansen av lagringsklassen.
+- *lun* är det LUN som kommandot dirigeras till.
+- *data_pointer* är adressen till bufferten som ska användas för läsning eller skrivning.
 - *number_blocks* är antalet sektorer som ska läsas/skrivas.
-- *LBA* är sektor adressen som ska läsas.
-- *media_status* ska fyllas i exakt som retur värde för medie status.
+- *lba* är sektoradressen att läsa.
+- *media_status* ska fyllas i exakt som returvärdet för återanrop av mediestatus.
 
-Returvärdet kan antingen ha värdet UX_SUCCESS eller UX_ERROR som anger att åtgärden lyckades eller misslyckades. Dessa åtgärder behöver inte returnera andra felkoder. Om det uppstår ett fel i en åtgärd, kommer lagrings klassen att anropa funktionen för status anrops återställning.
+Returvärdet kan antingen ha värdet UX_SUCCESS eller UX_ERROR indikerar en lyckad eller misslyckad åtgärd. De här åtgärderna behöver inte returnera några andra felkoder. Om det finns ett fel i någon åtgärd anropar lagringsklassen statusanropsfunktionen.
 
 Den här funktionen har följande prototyp.
 
@@ -160,61 +166,61 @@ ULONG media_status(
     ULONG *media_status);
 ```
 
-Den anropande parametern media_id används inte för närvarande och bör alltid vara 0. I framtiden kan det användas för att särskilja flera lagrings enheter eller lagrings enheter med flera SCSI-LUN. Den här versionen av lagrings klassen har inte stöd för flera instanser av lagrings klassen eller lagrings enheter med flera SCSI-LUN.
+Anropsparametern media_id inte används för närvarande och bör alltid vara 0. I framtiden kan den användas för att särskilja flera lagringsenheter eller lagringsenheter med flera SCSI-LUN. Den här versionen av lagringsklassen stöder inte flera instanser av lagringsklassen eller lagringsenheter med flera SCSI-LUN.
 
 Returvärdet är en SCSI-felkod som kan ha följande format.
 
-- **Bits 0-7** Sense_key
-- **Bits 8-15** Ytterligare Sense-kod
-- **Bits 16-23** Ytterligare Sense Code-kvalificerare
+- **Bitar 0–7** Sense_key
+- **Bitar 8–15** Ytterligare Sense Code
+- **Bitar 16–23** Ytterligare Sense Code-kvalificerare
 
-I följande tabell finns möjliga kombinationer för Sense/ASC/ASCQ.
+Följande tabell innehåller möjliga kombinationer av Sense/ASC/ASCQ.
 
-| Sense-nyckel | ASC | ASCQ | Beskrivning                                       |
+| Sense Key | ASC | ASCQ | Description                                       |
 | --------- | --- | ---- | ------------------------------------------------- |
-| 00        | 00  | 00   | INGEN KÄNSLA                                          |
+| 00        | 00  | 00   | INGEN MENING                                          |
 | 01        | 17  | 01   | ÅTERSTÄLLDA DATA MED ÅTERFÖRSÖK                       |
 | 01        | 18  | 00   | ÅTERSTÄLLDA DATA MED ECC                           |
-| 02        | 04  | 01   | DEN LOGISKA ENHETEN ÄR INTE KLAR – BLI KLAR          |
-| 02        | 04  | 02   | DEN LOGISKA ENHETEN ÄR INTE KLAR-INITIERING KRÄVS |
-| 02        | 04  | 04   | DEN LOGISKA ENHETEN ÄR INTE KLAR-FORMAT PÅGÅR       |
-| 02        | 04  | FF   | DEN LOGISKA ENHETEN ÄR INTE KLAR-ENHETEN ÄR UPPTAGEN          |
-| 02        | 06  | 00   | INGEN REFERENS POSITION HITTADES                       |
-| 02        | 08  | 00   | KOMMUNIKATIONS PROBLEM MED LOGISK ENHET                |
-| 02        | 08  | 01   | TIMEOUT FÖR KOMMUNIKATION AV LOGISK ENHET               |
-| 02        | 08  | 80   | BUFFERTÖVERSKRIDNING VID KOMMUNIKATION MELLAN LOGISKA ENHETER                |
-| 02        | Punkterna  | 00   | MEDIUM SAKNAS                                |
-| 02        | 54  | 00   | USB TILL VÄRD FÖR SYSTEM GRÄNSSNITTS PROBLEM              |
+| 02        | 04  | 01   | LOGISK ENHET ÄR INTE KLAR – REDO          |
+| 02        | 04  | 02   | LOGISK ENHET ÄR INTE KLAR – INITIERING KRÄVS |
+| 02        | 04  | 04   | LOGISK ENHET ÄR INTE KLAR – FORMATET PÅGÅR       |
+| 02        | 04  | Ff   | LOGISK ENHET INTE KLAR – ENHETEN ÄR UPPTAGEN          |
+| 02        | 06  | 00   | INGEN REFERENSPOSITION HITTADES                       |
+| 02        | 08  | 00   | KOMMUNIKATIONSFEL FÖR LOGISK ENHET                |
+| 02        | 08  | 01   | TIME-OUT FÖR KOMMUNIKATION FÖR LOGISK ENHET               |
+| 02        | 08  | 80   | KOMMUNIKATION MED LOGISK ENHET HAR ÖVERSKRIDITS                |
+| 02        | 3A  | 00   | MEDEL INTE NÄRVARANDE                                |
+| 02        | 54  | 00   | FEL MED USB-TILL-VÄRD-SYSTEMGRÄNSSNITTET              |
 | 02        | 80  | 00   | OTILLRÄCKLIGA RESURSER                            |
-| 02        | FF  | FF   | OKÄNT FEL                                     |
-| 03        | 02  | 00   | INGEN SÖKNING HAR SLUTFÖRTS                                  |
-| 03        | 03  | 00   | SKRIV FEL                                       |
-| 03        | 10  | 00   | ID-CRC-FEL                                      |
-| 03        | 11  | 00   | LÄSFEL SOM INTE HAR ÅTERSTÄLLTS                            |
-| 03        | 12  | 00   | ADRESS MARKERINGEN HITTADES INTE FÖR FÄLTET ID               |
-| 03        | 13  | 00   | DET GICK INTE ATT HITTA ADRESS MARKERINGEN FÖR DATA FÄLTET             |
-| 03        | 14  | 00   | DEN REGISTRERADE ENTITETEN HITTADES INTE                         |
-| 03        | 30  | 01   | DET GÅR INTE ATT LÄSA MEDIUM-OKÄNT FORMAT               |
-| 03        | 31  | 01   | FORMAT KOMMANDOT MISSLYCKADES                             |
-| 04        | 40  | NN   | DIAGNOSTISKT FEL PÅ KOMPONENTEN NN (80H-FFH)      |
-| 05        | 6.1  | 00   | PARAMETER LIST LÄNGD FEL                       |
-| 05        | 20  | 00   | OGILTIG KOMMANDO ÅTGÄRDS KOD                    |
-| 05        | 21  | 00   | LOGISK BLOCK ADRESS UTANFÖR INTERVALLET                |
-| 05        | 24  | 00   | OGILTIGT FÄLT I KOMMANDO PAKET                   |
+| 02        | Ff  | Ff   | OKÄNT FEL                                     |
+| 03        | 02  | 00   | INGEN SÖK HAR SLUTFÖRTS                                  |
+| 03        | 03  | 00   | SKRIVFEL                                       |
+| 03        | 10  | 00   | ID CRC-FEL                                      |
+| 03        | 11  | 00   | OÅTERKALLELIGT LÄSFEL                            |
+| 03        | 12  | 00   | ADRESSMARKERING HITTADES INTE FÖR ID-FÄLTET               |
+| 03        | 13  | 00   | ADRESSMARKERING HITTADES INTE FÖR DATAFÄLT             |
+| 03        | 14  | 00   | DET GÅR INTE ATT HITTA DEN REGISTRERADE ENTITETEN                         |
+| 03        | 30  | 01   | DET GÅR INTE ATT LÄSA MEDEL – OKÄNT FORMAT               |
+| 03        | 31  | 01   | FORMAT-KOMMANDOT MISSLYCKADES                             |
+| 04        | 40  | Nn   | DIAGNOSTIKFEL PÅ KOMPONENT-NN (80 H-FFH)      |
+| 05        | 1A  | 00   | LÄNGDFEL FÖR PARAMETERLISTA                       |
+| 05        | 20  | 00   | OGILTIG KOMMANDOÅTGÄRDSKOD                    |
+| 05        | 21  | 00   | LOGISK BLOCKADRESS UTANFÖR INTERVALLET                |
+| 05        | 24  | 00   | OGILTIGT FÄLT I KOMMANDOPAKET                   |
 | 05        | 25  | 00   | LOGISK ENHET STÖDS INTE                        |
-| 05        | 26  | 00   | OGILTIGT FÄLT I PARAMETER LISTAN                   |
+| 05        | 26  | 00   | OGILTIGT FÄLT I PARAMETERLISTAN                   |
 | 05        | 26  | 01   | PARAMETERN STÖDS INTE                           |
-| 05        | 26  | 02   | OGILTIGT PARAMETER VÄRDE                           |
-| 05        | 39  | 00   | ATT SPARA PARAMETRAR STÖDS INTE                     |
-| 06        | 28  | 00   | ÄR INTE REDO FÖR REDO ÖVER GÅNG – MEDIET HAR ÄNDRATS     |
-| 06        | 29  | 00   | ÅTERSTÄLLNING AV STRÖM VID ÅTERSTÄLLNING ELLER BUSS ENHETS ÅTERSTÄLLNING UTFÖRDES       |
-| 06        | 2F  | 00   | KOMMANDON SOM RENSATS AV EN ANNAN INITIERARE             |
-| 07        | 27  | 00   | SKRIV SKYDDADE MEDIA                             |
-| 0B        | 4E  | 00   | ÖVERLAPPANDE KOMMANDO FÖRSÖK                      |
+| 05        | 26  | 02   | PARAMETERVÄRDET ÄR OGILTIGT                           |
+| 05        | 39  | 00   | DET FINNS INTE STÖD FÖR ATT SPARA PARAMETRAR                     |
+| 06        | 28  | 00   | INTE REDO FÖR ÖVERGÅNG – MEDIET HAR ÄNDRATS     |
+| 06        | 29  | 00   | ÅTERSTÄLLNING AV STRÖM ELLER ÅTERSTÄLLNING AV BUSSENHET INTRÄFFADE       |
+| 06        | 2F  | 00   | KOMMANDON SOM RENSAS AV EN ANNAN INITIERARE             |
+| 07        | 27  | 00   | SKRIVA SKYDDADE MEDIA                             |
+| 0B        | 4E  | 00   | ÖVERLAPPANDE KOMMANDOFÖRSÖK                      |
 
-Det finns två ytterligare, valfria återanrop som programmet kan implementera. ett för att svara på ett **GET_STATUS_NOTIFICATION** kommando och det andra är att svara på **SYNCHRONIZE_CACHE** kommandot.
+Det finns ytterligare två valfria återanrop som programmet kan implementera. den ena är för att **GET_STATUS_NOTIFICATION** ett kommando och den andra för att svara på SYNCHRONIZE_CACHE kommandot. 
 
-Om programmet vill hantera GET_STATUS_NOTIFICATION kommandot från värden ska det implementera ett återanrop med följande prototyp.
+Om programmet vill hantera kommandot GET_STATUS_NOTIFICATION från värden bör det implementera ett återanrop med följande prototyp.
 
 ```c
 UINT ux_slave_class_storage_media_notification( 
@@ -228,18 +234,18 @@ UINT ux_slave_class_storage_media_notification(
 
 Plats:
 
-- *Storage* är instansen av lagrings klassen.
-- *media_id* används inte för närvarande. notification_class anger klassen för meddelandet.
-- *media_notification* ska anges av programmet till den buffert som innehåller svaret på aviseringen.
-- *media_notification_length* ska anges av programmet som ska innehålla längden på svars bufferten.
+- *storage* är instansen av lagringsklassen.
+- *media_id* används inte för närvarande. notification_class anger meddelandeklassen.
+- *media_notification* ska anges av programmet till bufferten som innehåller svaret för meddelandet.
+- *media_notification_length* ska anges av programmet så att det innehåller längden på svarsbufferten.
 
-Returvärdet anger om kommandot lyckades eller inte ska vara antingen **UX_SUCCESS** eller **UX_ERROR**.
+Returvärdet anger om kommandot lyckades – ska vara antingen UX_SUCCESS **eller** **UX_ERROR**.
 
-Om programmet inte implementerar det här återanropet, kommer USBX att meddela värden att kommandot inte har implementerats när du tar emot kommandot **GET_STATUS_NOTIFICATION** .
+Om programmet inte implementerar det här återanropet meddelar USBX värden **att kommandot inte har** implementerats när GET_STATUS_NOTIFICATION-kommandot tas emot.
 
-Kommandot **SYNCHRONIZE_CACHE** bör hanteras om programmet använder ett cacheminne för skrivningar från värden. En värd kan skicka det här kommandot om det vet att lagrings enheten ska kopplas från, till exempel i Windows, om du högerklickar på en enhets ikon i verktygsfältet och väljer "Mata ut \[ lagrings enhets namn \] ", kommer Windows att utfärda **SYNCHRONIZE_CACHE** kommandot till den enheten.
+Kommandot **SYNCHRONIZE_CACHE** ska hanteras om programmet använder ett cacheminne för skrivningar från värden. En värd kan skicka det här kommandot om den vet att lagringsenheten är på väg att kopplas från, till exempel i Windows. Om du högerklickar på en flash-enhetsikon i verktygsfältet och väljer "Mata ut lagringsenhetens namn" kommer Windows att utfärda SYNCHRONIZE_CACHE-kommandot till \[ \] enheten. 
 
-Om programmet vill hantera **GET_STATUS_NOTIFICATION** kommandot från värden ska det implementera ett återanrop med följande prototyp.
+Om programmet vill hantera kommandot **GET_STATUS_NOTIFICATION** från värden bör det implementera ett återanrop med följande prototyp.
 
 ```c
 UINT ux_slave_class_storage_media_flush(
@@ -252,17 +258,17 @@ UINT ux_slave_class_storage_media_flush(
 
 Plats:
 
-- *Storage* är instansen av lagrings klassen.
-- *LUN* -parameter anger vilken LUN som kommandot dirigeras till.
+- *storage* är instansen av lagringsklassen.
+- *lun-parametern* anger vilket LUN kommandot dirigeras till.
 - *number_blocks* anger antalet block som ska synkroniseras.
-- *LBA* är sektor adressen för det första blocket som ska synkroniseras.
-- *media_status* ska fyllas i exakt som retur värde för medie status.
+- *lba* är sektoradressen för det första blocket som ska synkroniseras.
+- *media_status* ska fyllas i exakt som returvärdet för återanrop av mediestatus.
 
-Returvärdet anger om kommandot lyckades eller inte ska vara antingen **UX_SUCCESS** eller **UX_ERROR**.
+Returvärdet anger om kommandot lyckades – ska vara antingen UX_SUCCESS **eller** **UX_ERROR**.
 
-### <a name="multiple-scsi-lun"></a>Flera SCSI-LUN
+### <a name="multiple-scsi-lun"></a>Flera SCSI LUN
 
-Enhetens lagrings klass för USBX stöder flera LUN. Därför är det möjligt att skapa en lagrings enhet som fungerar som en CD-ROM-skiva och en flash-disk på samma tid. I sådana fall skulle initieringen skilja sig något. Här är ett exempel på en flash-disk och CD-ROM:
+USBX-enhetens lagringsklass stöder flera LUN. Det är därför möjligt att skapa en lagringsenhet som fungerar som en CD-ROM och en Flash-disk på samma gång. I så fall skulle initieringen vara något annorlunda. Här är ett exempel på en Flash-disk och CD-ROM:
 
 ```c
 /* Store the number of LUN in this device storage instance. */
@@ -303,11 +309,11 @@ storage_parameter.ux_slave_class_storage_parameter_lun[1].ux_slave_class_storage
     ux_device_class_storage_thread,0, (VOID *) &storage_parameter);
 ```
 
-## <a name="usb-device-cdc-acm-class"></a>USB-enhet CDC-ACM-klass
+## <a name="usb-device-cdc-acm-class"></a>USB-enhetens CDC-ACM-klass
 
-USB-enhetens CDC-ACM-klass gör att ett USB-värdnamn kan kommunicera med enheten som en seriell enhet. Den här klassen baseras på USB-standarden och är en delmängd av CDC-standarden.
+USB-enhetens CDC-ACM-klass gör att ett USB-värdsystem kan kommunicera med enheten som en seriell enhet. Den här klassen baseras på USB-standarden och är en delmängd av CDC-standarden.
 
-Ett CDC-ACM-kompatibelt enhets ramverk måste deklareras av enhets stacken. Ett exempel finns här nedan.
+Ett CDC-ACM-kompatibelt enhetsramverk måste deklareras av enhetsstacken. Ett exempel finns här nedan.
 
 ```c
 unsigned char device_framework_full_speed[] = {
@@ -365,9 +371,9 @@ unsigned char device_framework_full_speed[] = {
 };
 ```
 
-Klassen CDC-ACM använder en sammansatt enhets ramverk för att gruppera gränssnitt (kontroll och data). Därför bör du vidta åtgärder när du definierar enhets beskrivningen. USBX förlitar sig på IAD-beskrivningen för att veta internt hur man binder gränssnitt. IAD-beskrivningen måste deklareras före gränssnitten och innehålla det första gränssnittet i CDC-ACM-klassen och hur många gränssnitt som är kopplade till dem.
+CDC-ACM-klassen använder ett sammansatt enhetsramverk för att gruppera gränssnitt (kontroll och data). Därför bör du vara försiktig när du definierar enhetsbeskrivningen. USBX förlitar sig på IAD-beskrivningen för att veta internt hur gränssnitt ska bindas. IAD-beskrivningen ska deklareras före gränssnitten och innehålla det första gränssnittet i CDC-ACM-klassen och hur många gränssnitt som är anslutna.
 
-Klassen CDC-ACM använder också en funktions beskrivning för union som utför samma funktion som den nyare IAD-beskrivningen. Även om en union funktions beskrivning måste deklareras för historiska orsaker och kompatibilitet med värd sidan, används den inte av USBX.
+CDC-ACM-klassen använder också en union funktionell beskrivning som utför samma funktion som den nyare IAD-beskrivningen. Även om en funktionell union-beskrivning måste deklareras av historiska skäl och kompatibilitet med värdsidan, används den inte av USBX.
 
 Initieringen av CDC-ACM-klassen förväntar sig följande parametrar.
 
@@ -385,11 +391,11 @@ status = ux_device_stack_class_register(_ux_system_slave_class_cdc_acm_name,ux_d
     1,0, &parameter);
 ```
 
-De två definierade parametrarna är callback-pekare i de användar program som anropas när stacken aktive ras eller inaktive ras i den här klassen.
+De två parametrar som definieras är återanropspekare till de användarprogram som anropas när stacken aktiverar eller inaktiverar den här klassen.
 
-Den tredje parametern som definierats är en callback-pekare till det användar program som kommer att anropas när det finns en parameter ändring i rad kod eller rad status. T. ex., om det finns en begäran från värden för att ändra DTR-tillståndet till **True**, anropas återanropet i det användar program som kan kontrol lera rad tillstånd genom IOCTL-funktionen för att Kow-värden är klar för kommunikation.
+Den tredje parametern som definieras är en återanrops pekare till användarprogrammet som anropas när det finns en radkodning eller om rad tillståndsparametern ändras. När det t.ex. finns en begäran från värden om att ändra DTR-tillstånd till **TRUE** anropas återanropet. I det kan användarprogrammet kontrollera radtillstånd via IOCTL-funktionen till host är redo för kommunikation.
 
-CDC-ACM baseras på en USB-IF-standard och identifieras automatiskt av MACOs och Linux-operativsystem. På Windows-plattformar kräver den här klassen en INF-fil för Windows-version före 10. Windows 10 kräver inte några INF-filer. Vi tillhandahåller en mall för CDC-ACM-klassen, som du hittar i ***usbx_windows_host_files*** -katalogen. För senare versioner av Windows ska filen CDC_ACM_Template_Win7_64bit. inf användas (förutom Win10). Den här filen måste ändras för att återspegla det PID/VID som används av enheten. PID/VID är specifika för den slutgiltiga kunden när företaget och produkten registreras med USB-IF. I INF-filen finns fälten som ska ändras här.
+CDC-ACM baseras på en USB-IF-standard och identifieras automatiskt av MACOs och Linux-operativsystem. På Windows-plattformar kräver den här klassen en .inf-fil för Windows tidigare än 10. Windows 10 kräver inga INF-filer. Vi tillhandahåller en mall för CDC-ACM-klassen och  den finns i usbx_windows_host_files katalogen. För den senaste versionen Windows filen CDC_ACM_Template_Win7_64bit.inf användas (utom Win10). Den här filen måste ändras för att återspegla den PID/VID som används av enheten. PID/VID är specifik för den slutliga kunden när företaget och produkten registreras med USB-IF. I inf-filen finns de fält som ska ändras här.
 
 ```INF
 [DeviceList]
@@ -399,11 +405,11 @@ CDC-ACM baseras på en USB-IF-standard och identifieras automatiskt av MACOs och
 %DESCRIPTION%=DriverInstall, USB\VID_8484&PID_0000
 ```
 
-I enhets ramverket för CDC-ACM-enheten lagras PID/VID i enhets beskrivningen (se den enhets beskrivning som anges ovan).
+I enhetsramverket för CDC-ACM-enheten lagras PID/VID i enhetsbeskrivningen (se enhetsbeskrivningen som deklareras ovan).
 
-När ett USB-värdnamn identifierar USB CDC-ACM-enheten kommer den att montera en serie klass och enheten kan användas med alla seriella terminaler-program. Se värd operativ systemet för referens.
+När ett USB-värdsystem identifierar USB CDC-ACM-enheten, monterar den en serieklass och enheten kan användas med alla seriella terminalprogram. Se värdens operativsystem som referens.
 
-API-funktionerna för CDC-ACM-klass definieras nedan.
+API-funktionerna i CDC-ACM-klassen definieras nedan.
 
 ### <a name="ux_device_class_cdc_acm_ioctl"></a>ux_device_class_cdc_acm_ioctl
 
@@ -418,20 +424,20 @@ UINT ux_device_class_cdc_acm_ioctl (
     VOID *parameter);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen anropas när ett program behöver utföra olika IOCTL-anrop till CDC ACM-gränssnittet
+Den här funktionen anropas när ett program behöver utföra olika ioctl-anrop till cdc acm-gränssnittet
 
 ### <a name="parameters"></a>Parametrar
 
-- **cdc_acm**: pekar mot CDC-klassens instans.
-- **ioctl_function**: IOCTL-funktion som ska utföras.
-- **parameter**: pekar mot en parameter som är speciell för IOCTL-anropet.
+- **cdc_acm:** Pekare till cdc-klassinstansen.
+- **ioctl_function:** Ioctl-funktionen som ska utföras.
+- **parameter**: Pekare till en parameter som är specifik för ioctl-anropet.
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0X00) den här åtgärden lyckades.
-- **UX_ERROR** (0Xff) fel från funktion
+- **UX_SUCCESS** (0x00) Den här åtgärden lyckades.
+- **UX_ERROR** (0xFF) Fel från funktion
 
 ### <a name="example"></a>Exempel
 
@@ -445,7 +451,7 @@ if(status != UX_SUCCESS)
     return;
 ```
 
-### <a name="ioctl-functions"></a>IOCTL-funktioner:
+### <a name="ioctl-functions"></a>Ioctl-funktioner:
 
 | Funktion                                        | Värde |
 | ----------------------------------------------- | - |
@@ -459,7 +465,7 @@ if(status != UX_SUCCESS)
 
 ### <a name="ux_device_class_cdc_acm_ioctl-ux_slave_class_cdc_acm_ioctl_set_line_coding"></a>ux_device_class_cdc_acm_ioctl: UX_SLAVE_CLASS_CDC_ACM_IOCTL_SET_LINE_CODING
 
-Utför IOCTL-uppsättningens rad kodning i CDC-ACM-gränssnittet
+Utföra IOCTL Set Line Coding i CDC-ACM-gränssnittet
 
 ### <a name="prototype"></a>Prototyp
 
@@ -470,15 +476,15 @@ UINT ux_device_class_cdc_acm_ioctl (
     VOID *parameter);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen anropas när ett program behöver ange rad kodnings parametrar.
+Den här funktionen anropas när ett program behöver ange parametrarna för radkodning.
 
 ### <a name="parameters"></a>Parametrar
 
-- **cdc_acm**: pekar mot CDC-klassens instans.
-- **ioctl_function**: ux_SLAVE_CLASS_CDC_ACM_IOCTL_SET_LINE_CODING
-- **parameter**: pekare till en linje parameter struktur:
+- **cdc_acm:** Pekare till cdc-klassinstansen.
+- **ioctl_function:** ux_SLAVE_CLASS_CDC_ACM_IOCTL_SET_LINE_CODING
+- **parameter**: Pekare till en radparameterstruktur:
 
 ```c
 typedef struct UX_SLAVE_CLASS_CDC_ACM_LINE_CODING_PARAMETER_STRUCT
@@ -492,7 +498,7 @@ typedef struct UX_SLAVE_CLASS_CDC_ACM_LINE_CODING_PARAMETER_STRUCT
 
 ### <a name="return-value"></a>Returvärde
 
-**UX_SUCCESS** (0X00) den här åtgärden lyckades.
+**UX_SUCCESS** (0x00) Den här åtgärden lyckades.
 
 ### <a name="example"></a>Exempel
 
@@ -517,7 +523,7 @@ if (status != UX_SUCCESS)
 
 ### <a name="ux_device_class_cdc_acm_ioctl-ux_slave_class_cdc_acm_ioctl_get_line_coding"></a>ux_device_class_cdc_acm_ioctl: UX_SLAVE_CLASS_CDC_ACM_IOCTL_GET_LINE_CODING
 
-Utför IOCTL-kodning på CDC-ACM-gränssnittet
+Utföra IOCTL Get Line Coding i CDC-ACM-gränssnittet
 
 ### <a name="prototype"></a>Prototyp
 
@@ -528,15 +534,15 @@ device_class_cdc_acm_ioctl (
     VOID *parameter);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen anropas när ett program behöver hämta rad kodnings parametrarna.
+Den här funktionen anropas när ett program behöver hämta parametrarna för radkodning.
 
 ### <a name="parameters"></a>Parametrar
 
-- **cdc_acm**: pekar mot CDC-klassens instans.
-- **ioctl_function**: ux_SLAVE_CLASS_CDC_ACM_IOCTL_GET_ LINE_CODING
-- **parameter**: pekare till en linje parameter struktur:
+- **cdc_acm:** Pekare till cdc-klassinstansen.
+- **ioctl_function:** ux_SLAVE_CLASS_CDC_ACM_IOCTL_GET_ LINE_CODING
+- **parameter**: Pekare till en radparameterstruktur:
 
 ```c
 typedef struct UX_SLAVE_CLASS_CDC_ACM_LINE_CODING_PARAMETER_STRUCT
@@ -550,7 +556,7 @@ typedef struct UX_SLAVE_CLASS_CDC_ACM_LINE_CODING_PARAMETER_STRUCT
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0X00) den här åtgärden lyckades.
+- **UX_SUCCESS** (0x00) Den här åtgärden lyckades.
 
 ### <a name="example"></a>Exempel
 
@@ -587,7 +593,7 @@ if (status == UX_SUCCESS)
 
 ### <a name="ux_device_class_cdc_acm_ioctl-ux_slave_class_cdc_acm_ioctl_get_line_state"></a>ux_device_class_cdc_acm_ioctl: UX_SLAVE_CLASS_CDC_ACM_IOCTL_GET_LINE_STATE
 
-Utför IOCTL Hämta linje tillstånd på CDC-ACM-gränssnittet
+Utför IOCTL Get Line State i CDC-ACM-gränssnittet
 
 ## <a name="prototype"></a>Prototyp
 
@@ -598,15 +604,15 @@ UINT ux_device_class_cdc_acm_ioctl (
     VOID *parameter);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen anropas när ett program behöver hämta linje tillstånds parametrarna.
+Den här funktionen anropas när ett program behöver hämta radtillståndsparametrarna.
 
 ### <a name="parameters"></a>Parametrar
 
-- **cdc_acm**: pekar mot CDC-klassens instans.
-- **ioctl_function**: ux_SLAVE_CLASS_CDC_ACM_IOCTL_GET_LINE_STATE
-- **parameter**: pekare till en linje parameter struktur:
+- **cdc_acm:** Pekare till cdc-klassinstansen.
+- **ioctl_function:** ux_SLAVE_CLASS_CDC_ACM_IOCTL_GET_LINE_STATE
+- **parameter**: Pekare till en radparameterstruktur:
 
 ```c
 typedef struct UX_SLAVE_CLASS_CDC_ACM_LINE_STATE_PARAMETER_STRUCT
@@ -618,7 +624,7 @@ typedef struct UX_SLAVE_CLASS_CDC_ACM_LINE_STATE_PARAMETER_STRUCT
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0X00) den här åtgärden lyckades.
+- **UX_SUCCESS** (0x00) Den här åtgärden lyckades.
 
 ### <a name="example"></a>Exempel
 
@@ -642,7 +648,7 @@ if (status == UX_SUCCESS)
 
 ### <a name="ux_device_class_cdc_acm_ioctl-ux_slave_class_cdc_acm_ioctl_set_line_state"></a>ux_device_class_cdc_acm_ioctl: UX_SLAVE_CLASS_CDC_ACM_IOCTL_SET_LINE_STATE
 
-Ange linje tillstånd för IOCTL-uppsättning på CDC-ACM-gränssnittet
+Utför IOCTL Set Line State i CDC-ACM-gränssnittet
 
 ### <a name="prototype"></a>Prototyp
 
@@ -653,15 +659,15 @@ UINT ux_device_class_cdc_acm_ioctl (
     VOID *parameter);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen anropas när ett program behöver hämta parametrar för linje tillstånd
+Den här funktionen anropas när ett program behöver hämta radtillståndsparametrarna
 
 ### <a name="parameters"></a>Parametrar
 
-- **cdc_acm**: pekar mot CDC-klassens instans.
-- **ioctl_function**: ux_SLAVE_CLASS_CDC_ACM_IOCTL_SET_LINE_STATE
-- **parameter**: pekare till en linje parameter struktur:
+- **cdc_acm:** Pekare till cdc-klassinstansen.
+- **ioctl_function:** ux_SLAVE_CLASS_CDC_ACM_IOCTL_SET_LINE_STATE
+- **parameter**: Pekare till en radparameterstruktur:
 
 ```c
 typedef struct UX_SLAVE_CLASS_CDC_ACM_LINE_STATE_PARAMETER_STRUCT
@@ -673,7 +679,7 @@ typedef struct UX_SLAVE_CLASS_CDC_ACM_LINE_STATE_PARAMETER_STRUCT
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0X00) den här åtgärden lyckades.
+- **UX_SUCCESS** (0x00) Den här åtgärden lyckades.
 
 ### <a name="example"></a>Exempel
 
@@ -689,7 +695,7 @@ status = _ux_device_class_cdc_acm_ioctl(cdc_acm_slave,
 
 ### <a name="ux_device_class_cdc_acm_ioctl-ux_slave_class_cdc_acm_ioctl_abort_pipe"></a>ux_device_class_cdc_acm_ioctl: UX_SLAVE_CLASS_CDC_ACM_IOCTL_ABORT_PIPE
 
-Utföra IOCTL ABORT-PIPE på CDC-ACM-gränssnittet
+Utför IOCTL ABORT PIPE på CDC-ACM-gränssnittet
 
 ### <a name="prototype"></a>Prototyp
 
@@ -700,15 +706,15 @@ UINT ux_device_class_cdc_acm_ioctl (
     VOID *parameter);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen anropas när ett program måste avbryta en pipe. Om du till exempel vill avbryta en pågående skrivning ska UX_SLAVE_CLASS_CDC_ACM_ENDPOINT_XMIT skickas som parametern.
+Den här funktionen anropas när ett program behöver avbryta en pipe. Om du till exempel vill avbryta en pågående skrivning UX_SLAVE_CLASS_CDC_ACM_ENDPOINT_XMIT skickas som parametern .
 
 ### <a name="parameters"></a>Parametrar
 
-- **cdc_acm**: pekar mot CDC-klassens instans.
-- **ioctl_function**: ux_SLAVE_CLASS_CDC_ACM_IOCTL_ABORT_PIPE
-- **parameter**: riktningen för rör:
+- **cdc_acm:** Pekare till cdc-klassinstansen.
+- **ioctl_function:** ux_SLAVE_CLASS_CDC_ACM_IOCTL_ABORT_PIPE
+- **parameter:** Rörriktningen:
 
 ```c
 UX_SLAVE_CLASS_CDC_ACM_ENDPOINT_XMIT 1
@@ -718,8 +724,8 @@ UX_SLAVE_CLASS_CDC_ACM_ENDPOINT_RCV 2
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0X00) den här åtgärden lyckades.
-- **UX_ENDPOINT_HANDLE_UNKNOWN** (0X53) ogiltig rör riktning.
+- **UX_SUCCESS** (0x00) Den här åtgärden lyckades.
+- **UX_ENDPOINT_HANDLE_UNKNOWN** (0x53) Ogiltig rörriktning.
 
 ### <a name="example"></a>Exempel
 
@@ -735,7 +741,7 @@ status = _ux_device_class_cdc_acm_ioctl(cdc_acm_slave,
 
 ### <a name="ux_device_class_cdc_acm_ioctl-ux_slave_class_cdc_acm_ioctl_transmission_start"></a>ux_device_class_cdc_acm_ioctl: UX_SLAVE_CLASS_CDC_ACM_IOCTL_TRANSMISSION_START
 
-Starta IOCTL-överföring på gränssnittet CDC-ACM
+Starta IOCTL-överföring i CDC-ACM-gränssnittet
 
 ### <a name="prototype"></a>Prototyp
 
@@ -746,15 +752,15 @@ UINT ux_device_class_cdc_acm_ioctl (
     VOID *parameter);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen anropas när ett program vill använda överföring med motringning.
+Den här funktionen anropas när ett program vill använda överföring med återanrop.
 
 ### <a name="parameters"></a>Parametrar
 
-- **cdc_acm**: pekar mot CDC-klassens instans.
-- **ioctl_function**: ux_SLAVE_CLASS_CDC_ACM_IOCTL_TRANSMISSION_START
-- **parameter**: pekare till den Start överförings parameter strukturen:
+- **cdc_acm:** Pekare till cdc-klassinstansen.
+- **ioctl_function:** ux_SLAVE_CLASS_CDC_ACM_IOCTL_TRANSMISSION_START
+- **parameter**: Pekare till parameterstrukturen Starta överföring:
 
 ```c
 typedef struct UX_SLAVE_CLASS_CDC_ACM_CALLBACK_PARAMETER_STRUCT
@@ -768,9 +774,9 @@ typedef struct UX_SLAVE_CLASS_CDC_ACM_CALLBACK_PARAMETER_STRUCT
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0X00) den här åtgärden lyckades.
-- **UX_ERROR** (0xFF)-överföringen har redan startats.
-- **UX_MEMORY_INSUFFICIENT** (0X12) en minnesallokering misslyckades.
+- **UX_SUCCESS** (0x00) Den här åtgärden lyckades.
+- **UX_ERROR** (0xFF) Överföring har redan startats.
+- **UX_MEMORY_INSUFFICIENT** (0x12) En minnesallokering misslyckades.
 
 ### <a name="example"></a>Exempel
 
@@ -792,7 +798,7 @@ status = _ux_device_class_cdc_acm_ioctl(cdc_acm_slave,
 
 ### <a name="ux_device_class_cdc_acm_ioctl-ux_slave_class_cdc_acm_ioctl_transmission_stop"></a>ux_device_class_cdc_acm_ioctl: UX_SLAVE_CLASS_CDC_ACM_IOCTL_TRANSMISSION_STOP
 
-Stoppa IOCTL-överföringen på CDC-ACM-gränssnittet
+Utföra IOCTL-överföringsstopp på CDC-ACM-gränssnittet
 
 ### <a name="prototype"></a>Prototyp
 
@@ -803,20 +809,20 @@ UINT ux_device_class_cdc_acm_ioctl(
     VOID *parameter);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen anropas när ett program vill sluta använda överföring med motringning.
+Den här funktionen anropas när ett program vill sluta använda överföring med återanrop.
 
 ### <a name="parameters"></a>Parametrar
 
-- **cdc_acm**: pekar mot CDC-klassens instans.
-- **ioctl_function**: ux_SLAVE_CLASS_CDC_ACM_IOCTL_TRANSMISSI ON_STOP
-- **parameter**: används inte
+- **cdc_acm:** Pekare till cdc-klassinstansen.
+- **ioctl_function:** ux_SLAVE_CLASS_CDC_ACM_IOCTL_TRANSMISSI ON_STOP
+- **parameter:** Används inte
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0X00) den här åtgärden lyckades.
-- **UX_ERROR** (0Xff) ingen kontinuerlig överföring.
+- **UX_SUCCESS** (0x00) Den här åtgärden lyckades.
+- **UX_ERROR** (0xFF) Ingen pågående överföring.
 
 ### <a name="example"></a>Exempel
 
@@ -843,22 +849,25 @@ UINT ux_device_class_cdc_acm_read(
     ULONG *actual_length);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen anropas när ett program behöver läsa från indata-pipen (ut från värden i från enheten). Den blockeras.
+Den här funktionen anropas när ett program behöver läsa från OUT-datapipe pipe (UT från värden, IN från enheten). Den blockerar.
+
+> [!Note]
+> Den här funktionen läser massdata från värden, så den väntar tills bufferten är full eller värden avslutar överföringen med ett kort paket (inklusive nolllängdspaket). Mer information finns i avsnittet Allmänna överväganden [**för massöverföring.**](#general-considerations-for-bulk-transfer)
 
 ### <a name="parameters"></a>Parametrar
 
-- **cdc_acm**: pekar mot CDC-klassens instans.
-- **Buffer**: buffertens adress där data ska lagras.
-- **requested_length**: den maximala längden som vi förväntar dig.
-- **actual_length**: längden som returnerades i bufferten.
+- **cdc_acm:** Pekare till cdc-klassinstansen.
+- **buffer**: Buffertadress där data ska lagras.
+- **requested_length:** Den maximala längd som vi förväntar oss.
+- **actual_length:** Längden som returneras till bufferten.
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0X00) den här åtgärden lyckades.
-- **UX_CONFIGURATION_HANDLE_UNKNOWN** -enheten (0x51) är inte längre i det konfigurerade läget.
-- **UX_TRANSFER_NO_ANSWER** (0X22) inget svar från enheten. Enheten var förmodligen frånkopplad medan överföringen väntade.
+- **UX_SUCCESS** (0x00) Den här åtgärden lyckades.
+- **UX_CONFIGURATION_HANDLE_UNKNOWN** (0x51) Enheten är inte längre i det konfigurerade tillståndet.
+- **UX_TRANSFER_NO_ANSWER** (0x22) Inget svar från enheten. Enheten kopplades förmodligen från medan överföringen väntade.
 
 ### <a name="example"></a>Exempel
 
@@ -884,21 +893,21 @@ UINT ux_device_class_cdc_acm_write(
     ULONG *actual_length);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen anropas när ett program behöver skriva till i data-pipe (från värden från-enheten). Den blockeras.
+Den här funktionen anropas när ett program behöver skriva till IN-datapipe pipe (IN från värden, OUT från enheten). Den blockerar.
 
 ### <a name="parameters"></a>Parametrar
 
-- **cdc_acm**: pekar mot CDC-klassens instans.
-- **Buffer**: buffertens adress där data lagras.
-- **requested_length**: längden på bufferten som ska skrivas.
-- **actual_length**: längden som returnerades till bufferten efter skrivning utförs.
+- **cdc_acm:** Pekare till cdc-klassinstansen.
+- **buffer**: Buffertadress där data lagras.
+- **requested_length:** Längden på bufferten som ska skrivas.
+- **actual_length:** Längden som returneras till bufferten när skrivning har utförts.
 
 ### <a name="return-value"></a>Returvärde
-- **UX_SUCCESS** (0X00) den här åtgärden lyckades.
-- **UX_CONFIGURATION_HANDLE_UNKNOWN** -enheten (0x51) är inte längre i det konfigurerade läget.
-- **UX_TRANSFER_NO_ANSWER** (0X22) inget svar från enheten. Enheten var förmodligen frånkopplad medan överföringen väntade.
+- **UX_SUCCESS** (0x00) Den här åtgärden lyckades.
+- **UX_CONFIGURATION_HANDLE_UNKNOWN** (0x51) Enheten är inte längre i det konfigurerade tillståndet.
+- **UX_TRANSFER_NO_ANSWER** (0x22) Inget svar från enheten. Enheten kopplades förmodligen från medan överföringen väntade.
 
 ### <a name="example"></a>Exempel
 
@@ -913,7 +922,7 @@ if(status != UX_SUCCESS)
 
 ### <a name="ux_device_class_cdc_acm_write_with_callback"></a>ux_device_class_cdc_acm_write_with_callback
 
-Skriver till en CDC-ACM-pipe med motringning
+Skriva till en CDC-ACM-pipe med återanrop
 
 ### <a name="prototype"></a>Prototyp
 
@@ -924,22 +933,22 @@ UINT ux_device_class_cdc_acm_write_with_callback(
     ULONG requested_length);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen anropas när ett program behöver skriva till i data-pipe (från värden från-enheten). Den här funktionen är inte blockerad och slut för ande görs via en motringning som anges i UX_SLAVE_CLASS_CDC_ACM_IOCTL_TRANSMISSION_START.
+Den här funktionen anropas när ett program behöver skriva till IN-datapipe pipe (IN från värden, OUT från enheten). Den här funktionen är icke-blockerande och slutförandet görs via en återanropsuppsättning i UX_SLAVE_CLASS_CDC_ACM_IOCTL_TRANSMISSION_START.
 
 ### <a name="parameters"></a>Parametrar
 
-- **cdc_acm**: pekar mot CDC-klassens instans.
-- **Buffer**: buffertens adress där data lagras.
-- **requested_length**: längden på bufferten som ska skrivas.
-- **actual_length**: längden som returnerades till bufferten efter skrivning utförs
+- **cdc_acm:** Pekare till cdc-klassinstansen.
+- **buffer**: Buffertadress där data lagras.
+- **requested_length:** Längden på bufferten som ska skrivas.
+- **actual_length:** Längden som returneras till bufferten efter att skrivning har utförts
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0X00) den här åtgärden lyckades.
-- **UX_CONFIGURATION_HANDLE_UNKNOWN** -enheten (0x51) är inte längre i det konfigurerade läget.
-- **UX_TRANSFER_NO_ANSWER** (0X22) inget svar från enheten. Enheten var förmodligen frånkopplad medan överföringen väntade.
+- **UX_SUCCESS** (0x00) Den här åtgärden lyckades.
+- **UX_CONFIGURATION_HANDLE_UNKNOWN** (0x51) Enheten är inte längre i det konfigurerade tillståndet.
+- **UX_TRANSFER_NO_ANSWER** (0x22) Inget svar från enheten. Enheten kopplades förmodligen från medan överföringen väntade.
 
 ### <a name="example"></a>Exempel
 
@@ -951,11 +960,11 @@ if(status != UX_SUCCESS)
     return;
 ```
 
-### <a name="usb-device-cdc-ecm-class"></a>USB-enhet CDC-ECM-klass
+### <a name="usb-device-cdc-ecm-class"></a>CDC-ECM-klass för USB-enhet
 
-USB-enhet CDC-ECM-klassen gör att ett USB-värdnamn kan kommunicera med enheten som en Ethernet-enhet. Den här klassen baseras på USB-standarden och är en delmängd av CDC-standarden.
+USB-enhetens CDC-ECM-klass gör att ett USB-värdsystem kan kommunicera med enheten som en Ethernet-enhet. Den här klassen baseras på USB-standarden och är en delmängd av CDC-standarden.
 
-Ett CDC-ACM-kompatibelt enhets ramverk måste deklareras av enhets stacken. Ett exempel finns här nedan.
+Ett CDC-ACM-kompatibelt enhetsramverk måste deklareras av enhetsstacken. Ett exempel finns här nedan.
 
 ```c
 unsigned char device_framework_full_speed[] = {
@@ -1010,9 +1019,9 @@ unsigned char device_framework_full_speed[] = {
 };
 ```
 
-CDC-ECM-klassen använder en mycket liknande enhets beskrivnings metod för CDC-ACM och kräver även en IAD-beskrivning. Se CDC-ACM-klassen för definition.
+CDC-ECM-klassen använder en liknande enhetsbeskrivningsmetod för CDC-ACM och kräver även en IAD-beskrivning. Mer information finns i CDC-ACM-klassen.
 
-Förutom det vanliga enhets ramverket kräver CDC-ECM särskilda sträng beskrivningar. Ett exempel anges nedan.
+Förutom det vanliga enhetsramverket kräver CDC-ECM särskilda strängbeskrivningar. Ett exempel visas nedan.
 
 ```c
 unsigned char string_framework[] = {
@@ -1038,7 +1047,7 @@ unsigned char string_framework[] = {
 };
 ```
 
-Beskrivningen av MAC-adress strängen används av CDC-ECM-klassen för att svara på värd frågor som den MAC-adress som enheten svarar på på TCP/IP-protokollet. Den kan ställas in på enhets valet men måste definieras här.
+MAC-adresssträngsbeskrivningen används av CDC-ECM-klassen för att svara på värdfrågorna om vilken MAC-adress enheten svarar på vid TCP/IP-protokollet. Det kan anges till enhetsvalet men måste definieras här.
 
 Initieringen av CDC-ECM-klassen är följande.
 
@@ -1068,13 +1077,13 @@ status = ux_device_stack_class_register(_ux_system_slave_class_cdc_ecm_name,
     ux_device_class_cdc_ecm_entry, 1,0,&cdc_ecm_parameter);
 ```
 
-Initieringen av den här klassen förväntar sig samma funktions återanrop för aktivering och inaktive ring, även om den är inställd på NULL så att ingen motringning utförs.
+Initieringen av den här klassen förväntar sig samma funktionsanrop för aktivering och inaktivering, men här är de inställda på NULL så att inga återanrop utförs.
 
-Nästa parametrar är för definitionen av nod-ID: n. 2 noder krävs för CDC-ECM, en lokal nod och en fjärrnod. Den lokala noden anger enhetens MAC-adress, medan fjärrnoden anger värdens MAC-adress. Fjärrnoden måste vara samma som den som har deklarerats i enhets ramverkets sträng beskrivning.
+Nästa parametrar är för definitionen av nod-ID:erna. 2 noder krävs för CDC-ECM, en lokal nod och en fjärrnod. Den lokala noden anger MAC-adressen för enheten, medan fjärrnoden anger MAC-adressen för värden. Fjärrnoden måste vara samma som den som deklareras i enhetsramverkets strängbeskrivning.
 
-CDC-ECM-klassen har inbyggda API: er för överföring av data på båda sätt, men de är dolda för programmet när användar programmet kommer att kommunicera med USB Ethernet-enheten via NetX.
+CDC-ECM-klassen har inbyggda API:er för att överföra data åt båda sätten, men de är dolda för programmet eftersom användarprogrammet kommer att kommunicera med USB Ethernet-enheten via NetX.
 
-USBX CDC-ECM-klassen är nära kopplad till Azure återställnings tider NetX Network stack. Ett program som använder både NetX och USBX CDC-ECM-klass kommer att aktivera NetX-nätverks stacken på vanligt sätt, men du måste också aktivera USB-protokollstacken på följande sätt.
+USBX CDC-ECM-klassen är nära kopplad till Azure RTOS NetX-nätverksstacken. Ett program som använder både NetX- och USBX CDC-ECM-klassen aktiverar NetX-nätverksstacken som vanligt men måste dessutom aktivera USB-nätverksstacken på följande sätt.
 
 ```c
 /* Initialize the NetX system. */
@@ -1084,17 +1093,17 @@ nx_system_initialize();
 ux_network_driver_init();
 ```
 
-USB-protokollstacken behöver bara aktive ras en gång och är inte särskilt för CDCECM, men krävs av alla USB-klasser som kräver NetX-tjänster.
+USB-nätverksstacken måste bara aktiveras en gång och är inte specifik för CDCECM, men krävs av alla USB-klasser som kräver NetX-tjänster.
 
-CDC-ECM-klassen kommer att identifieras av MAC OS-och Linux-värdar. Men det finns ingen driv rutin som tillhandahålls av Microsoft Windows för att identifiera CDC-ECM internt. Vissa kommersiella produkter finns för Windows-plattformar och de tillhandahåller sin egen. inf-fil. Den här filen måste ändras på samma sätt som inf-mallen för CDC-ACM för att matcha PID/VID-USB-enheten.
+CDC-ECM-klassen identifieras av MAC OS- och Linux-värdar. Men det finns ingen drivrutin som tillhandahålls av Microsoft Windows att identifiera CDC-ECM inbyggt. Vissa kommersiella produkter finns för Windows och de tillhandahåller en egen .inf-fil. Den här filen måste ändras på samma sätt som CDC-ACM inf-mallen så att den matchar PID/VID för USB-nätverksenheten.
 
 ## <a name="usb-device-hid-class"></a>HID-klass för USB-enhet
 
-Med HID-klassen USB-enhet kan ett USB-värdnamn ansluta till en HID-enhet med vissa funktioner för HID-klienter.
+MED USB-enhetens HID-klass kan ett USB-värdsystem ansluta till en HID-enhet med specifika HID-klientfunktioner.
 
-USBX HID-enhets klass är relativt enkel jämfört med värd sidan. Den är nära knuten till enhetens funktions sätt och dess HID-beskrivning.
+USBX HID-enhetsklassen är relativt enkel jämfört med värdsidan. Den är nära kopplad till enhetens beteende och dess HID-beskrivning.
 
-Alla HID-klienter måste först definiera ett HID Device Framework som i exemplet nedan.
+Alla HID-klienter måste först definiera ett HID-enhetsramverk enligt exemplet nedan.
 
 ```c
 UCHAR device_framework_full_speed[] = {
@@ -1118,11 +1127,11 @@ UCHAR device_framework_full_speed[] = {
 };
 ```
 
-HID-ramverket innehåller en gränssnitts beskrivning som beskriver klassen HID och underklassen HID-enhet. HID-gränssnittet kan vara en fristående klass eller en del av en sammansatt enhet.
+HID-ramverket innehåller en gränssnittsbeskrivning som beskriver HID-klassen och HID-enhetens underklass. HID-gränssnittet kan vara en fristående klass eller en del av en sammansatt enhet.
 
-För närvarande stöder USBX HID-klassen inte flera rapport-ID: n eftersom de flesta program bara kräver ett ID (ID noll). Kontakta oss om flera rapport-ID: n är en funktion som du är intresse rad av.
+FÖR närvarande stöder USBX HID-klassen inte flera rapport-ID:n, eftersom de flesta program bara kräver ett ID (ID noll). Om flera rapport-ID:er är en funktion som du är intresserad av kan du kontakta oss.
 
-Initieringen av HID-klassen är som följer med ett USB-tangentbord som exempel.
+Initieringen av HID-klassen är som följer, med hjälp av ett USB-tangentbord som exempel.
 
 ```c
 /* Initialize the hid class parameters for a keyboard. */
@@ -1139,28 +1148,28 @@ if (status!=UX_SUCCESS)
     return;
 ```
 
-Programmet måste skicka till HID-klassen en rapport beskrivning med en HID-rapport och dess längd. Rapport beskrivningen är en samling objekt som beskriver enheten. Mer information om HID-grammatiken hittar du i specifikationen HID USB-klass.
+Programmet måste skicka en HID-rapportbeskrivning till HID-klassen och dess längd. Rapportbeskrivningen är en samling objekt som beskriver enheten. Mer information om HID-grammatik finns i HID USB-klassspecifikationen.
 
-Förutom rapport beskrivningen skickar programmet ett anrop tillbaka när en HID-händelse inträffar.
+Förutom rapportbeskrivningen skickar programmet ett återanrop när en HID-händelse inträffar.
 
 USBX HID-klassen stöder följande HID-standardkommandon från värden.
 
-| Kommando namn                             | Värde | Beskrivning                                      |
+| Kommandonamn                             | Värde | Beskrivning                                      |
 | ---------------------------------------- | ----- | ------------------------------------------------ |
 | UX_DEVICE_CLASS_HID_COMMAND_GET_REPORT   | 0x01  | Hämta en rapport från enheten                     |
-| UX_DEVICE_CLASS_HID_COMMAND_GET_IDLE     | 0x02  | Hämta vilo läges frekvensen för avbrotts slut punkten |
-| UX_DEVICE_CLASS_HID_COMMAND_GET_PROTOCOL | 0x03  | Hämta protokollet som körs på enheten           |
-| UX_DEVICE_CLASS_HID_COMMAND_SET_REPORT   | 0x09  | Ställ in en rapport på enheten                       |
-| UX_DEVICE_CLASS_HID_COMMAND_SET_IDLE     | 0x0A  | Ange inaktivitet för avbrotts slut punkten |
-| UX_DEVICE_CLASS_HID_COMMAND_SET_PROTOCOL | 0x0b  | Hämta protokollet som körs på enheten           |
+| UX_DEVICE_CLASS_HID_COMMAND_GET_IDLE     | 0x02  | Hämta inaktivitetsfrekvensen för avbrottsslutpunkten |
+| UX_DEVICE_CLASS_HID_COMMAND_GET_PROTOCOL | 0x03  | Få igång protokollet på enheten           |
+| UX_DEVICE_CLASS_HID_COMMAND_SET_REPORT   | 0x09  | Ange en rapport till enheten                       |
+| UX_DEVICE_CLASS_HID_COMMAND_SET_IDLE     | 0x0a  | Ange inaktivitetsfrekvensen för avbrottsslutpunkten |
+| UX_DEVICE_CLASS_HID_COMMAND_SET_PROTOCOL | 0x0b  | Få igång protokollet på enheten           |
 
-Rapporten hämta och ange är de vanligaste kommandona av HID för att överföra data fram och tillbaka mellan värden och enheten. Oftast skickar värden data på kontroll slut punkten, men kan ta emot data antingen på avbrotts slut punkten eller genom att utfärda ett GET_REPORT-kommando för att hämta data på kontroll slut punkten.
+Rapporten Hämta och ange är de vanligaste kommandona av HID för att överföra data fram och tillbaka mellan värden och enheten. Värden skickar vanligtvis data på kontrollslutpunkten men kan ta emot data antingen på avbrottsslutpunkten eller genom att utfärda ett GET_REPORT-kommando för att hämta data på kontrollslutpunkten.
 
-Klassen HID kan skicka data tillbaka till värden på avbrotts slut punkten med hjälp av funktionen ux_device_class_hid_event_set.
+KLASSEN HID kan skicka tillbaka data till värden på avbrottsslutpunkten med hjälp av ux_device_class_hid_event_set funktionen.
 
 ### <a name="ux_device_class_hid_event_set"></a>ux_device_class_hid_event_set
 
-Ställa in en händelse på HID-klassen
+Ange en händelse till HID-klassen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1170,19 +1179,19 @@ UINT ux_device_class_hid_event_set(
     UX_SLAVE_CLASS_HID_EVENT *hid_event);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen anropas när ett program behöver skicka en HID-händelse tillbaka till värden. Funktionen blockeras inte, den placerar bara rapporten i en cirkulär kö och återgår till programmet.
+Den här funktionen anropas när ett program behöver skicka tillbaka en HID-händelse till värden. Funktionen blockerar inte, utan placerar bara rapporten i en cirkelformad kö och återgår till programmet.
 
 ### <a name="parameters"></a>Parametrar
 
-- **HID**: pekar mot klass instansen HID.
-- **hid_event**: pekaren till strukturen för HID-händelsen.
+- **hid**: Pekare till hid-klassinstansen.
+- **hid_event:** Pekare till strukturen för den dolde händelsen.
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0X00) den här åtgärden lyckades.
-- **UX_ERROR** (0Xff) fel ledigt utrymme i cirkulär kö.
+- **UX_SUCCESS** (0x00) Den här åtgärden lyckades.
+- **UX_ERROR** (0xFF) Fel: Inget tillgängligt utrymme i cirkelformad kö.
 
 ### <a name="example"></a>Exempel
 
@@ -1203,7 +1212,7 @@ hid_event.ux_device_class_hid_event_buffer[2] = key;
 ux_device_class_hid_event_set(hid, &hid_event);
 ```
 
-Återanropet som definieras vid initieringen av HID-klassen utför motsatsen till att skicka en händelse. Den tar emot den händelse som skickas av värden. Prototypen för återanropet är följande.
+Motringning som definierats vid initieringen av HID-klassen utför motsatsen till att skicka en händelse. Den får som indata den händelse som skickas av värden. Prototypen av återanropet är följande.
 
 ### <a name="hid_callback"></a>hid_callback
 
@@ -1217,14 +1226,14 @@ UINT hid_callback(
     UX_SLAVE_CLASS_HID_EVENT *hid_event);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här funktionen anropas när värden skickar en HID-rapport till programmet.
 
 ### <a name="parameters"></a>Parametrar
 
-- **HID**: pekar mot klass instansen HID.
-- **hid_event**: pekaren till strukturen för HID-händelsen.
+- **hid**: Pekare till hid-klassinstansen.
+- **hid_event:** Pekare till strukturen för den dolde händelsen.
 
 ### <a name="example"></a>Exempel
 

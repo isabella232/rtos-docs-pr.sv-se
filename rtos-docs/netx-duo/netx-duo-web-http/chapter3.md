@@ -6,12 +6,12 @@ ms.author: philmea
 ms.date: 07/14/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 6bb2743f05c5b56331d1c0e948601ad23bf340d1
-ms.sourcegitcommit: 95f4ae0842a486fec8f10d1480203695faa9592d
+ms.openlocfilehash: 0357afe7f997c84a5d031ca71dc524e381734b4a
+ms.sourcegitcommit: 62cfdf02628530807f4d9c390d6ab623e2973fee
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 06/09/2021
-ms.locfileid: "111875280"
+ms.lasthandoff: 08/05/2021
+ms.locfileid: "115178195"
 ---
 # <a name="chapter-3---description-of-http-services"></a>Kapitel 3 – Beskrivning av HTTP-tjänster
 
@@ -34,7 +34,7 @@ UINT nx_web_http_client_connect(NX_WEB_HTTP_CLIENT *client_ptr,
     UINT server_port, ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här metoden är **för KLARTEXT** HTTP.
 
@@ -118,7 +118,7 @@ UINT nx_web_http_client_create(NX_WEB_HTTP_CLIENT *client_ptr,
     ULONG window_size);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten skapar en HTTP-klientinstans på den angivna IP-instansen. Klientinstansen kan användas för HTTP eller HTTPS. Se tjänsterna *nx_web_http_client_connect() och* *nx_web_http_client_secure_connect()* för mer information om hur du startar en HTTP- eller HTTPS-instans. Se även API:et för *nx_web_http_client_get_**, *nx_web_http_client_put_**, *nx_web_http_client_post_** för enkla anrop av GET-, PUT- och POST-metoder.
 
@@ -160,7 +160,7 @@ Ta bort en HTTP-klientinstans
 UINT nx_web_http_client_delete(NX_WEB_HTTP_CLIENT *client_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten tar bort en http-klientinstans som skapats tidigare.
 
@@ -201,7 +201,7 @@ UINT nx_web_http_client_delete_start(NX_WEB_HTTP_CLIENT *client_ptr,
     ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här metoden är **för KLARTEXT** HTTP.
 
@@ -271,15 +271,15 @@ UINT nx_web_http_client_delete_start_extended(
     ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här metoden är **för KLARTEXT** HTTP.
 
-Den här tjänsten försöker skicka en DELETE-begäran för resursen som anges av "resurs"-pekaren på den tidigare skapade HTTP-klientinstansen. Om den här rutinen NX_SUCCESS kan programmet anropa *nx_web_http_client_response_body_get()* för att hämta serverns svar.
+Den här tjänsten försöker skicka en DELETE-begäran för resursen som anges av "resurs"-pekaren på den tidigare skapade HTTP-klientinstansen. Om rutinen returnerar NX_SUCCESS kan programmet anropa *nx_web_http_client_response_body_get()* för att hämta serverns svar.
 
 Observera att resurssträngen kan referera till en lokal fil, t.ex. "/index.htm" eller referera till en annan URL, t.ex. om HTTP-servern anger att den stöder refererade `http://abc.website.com/index.htm` GET-begäranden.
 
-Strängarna för resursen, värden, användarnamnet och lösenordet måste vara NULL-avslutade och längden på varje sträng matchar längden som anges i argumentlistan.
+Strängarna för resurs, värd, användarnamn och lösenord måste vara NULL-avslutade och längden på varje sträng matchar längden som anges i argumentlistan.
 
 Den här tjänsten *ersätter nx_web_http_client_delete_start* (). Den här versionen kräver att anropare tillhandahåller längdinformation till funktionen.
 
@@ -288,7 +288,7 @@ Den här tjänsten *ersätter nx_web_http_client_delete_start* (). Den här vers
 - **client_ptr** Pekare till HTTP-klientkontrollblock.
 - **ip_address** HTTP-serverns IP-adress.
 - **server_port** Port på fjärransluten HTTP-server.
-- **resurs** Pekare till URL-sträng för begärd resurs.
+- **resurs** Pekare till URL-sträng för den begärda resursen.
 - **resource_length** Stränglängd för den begärda resursen.
 - **värd** Null-avslutad sträng för serverns domännamn. Den här strängen överförs i fältet HTTP-värdrubrik. Värdsträngen får inte vara NULL.
 - **host_length** Stränglängd för värden.
@@ -296,15 +296,15 @@ Den här tjänsten *ersätter nx_web_http_client_delete_start* (). Den här vers
 - **username_length** Stränglängd för användarnamn för autentisering.
 - **lösenord** Pekare till valfritt lösenord för autentisering.
 - **password_length** Stränglängd för lösenord för autentisering.
-- **wait_option** Definierar hur länge tjänsten ska vänta på HTTP-klientens startbegäran. Väntealternativen definieras på följande sätt:
-  - **timeout-värde** (0x00000001 till 0xFFFFFFFE) Om du väljer ett numeriskt värde (0x1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan HTTP-serversvaret väntar.
+- **wait_option** Definierar hur länge tjänsten ska vänta på att HTTP-klienten hämtar startbegäran. Väntealternativen definieras på följande sätt:
+  - **timeout-värde** (0x00000001 till och med 0xFFFFFFFE) Om du väljer ett numeriskt värde (0x1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan du väntar på HTTP-serversvaret.
   - **NX_WAIT_FOREVER** (0xFFFFFFFF) Om du NX_WAIT_FOREVER här alternativet pausas anropstråden på obestämd tid tills HTTP-servern svarar på begäran.
 
 ### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) har skickat meddelandet HTTP-klientens DELETE-begäran
+- **NX_SUCCESS** (0x00) Meddelandet HTTP-klientens DELETE-begäran har skickats
 - **NX_WEB_HTTP_ERROR** (0x30000) Internt HTTP-klientfel
-- **NX_WEB_HTTP_NOT_READY** (0x3000A) HTTP-klienten inte klar
+- **HTTP-klienten** NX_WEB_HTTP_NOT_READY (0x3000A) inte klar
 - **NX_WEB_HTTP_FAILED** (0x30002) HTTP-klientfel som kommunicerar med HTTP-servern.
 - **NX_WEB_HTTP_AUTHENTICATION_ERROR** (0x3000B) Ogiltigt namn och/eller lösenord.
 - NX_PTR_ERROR (0x07) Ogiltig pekare
@@ -352,35 +352,35 @@ UINT nx_web_http_client_delete_secure_start(
     ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här metoden är för **TLS-skyddad** HTTPS.
 
-Den här tjänsten försöker skicka en DELETE-begäran för resursen som anges av "resurs"-pekaren på den tidigare skapade HTTP-klientinstansen. Om den här rutinen NX_SUCCESS kan programmet anropa *nx_web_http_client_response_body_get()* för att hämta serverns svar.
+Den här tjänsten försöker skicka en DELETE-begäran för resursen som anges av "resurs"-pekaren på den tidigare skapade HTTP-klientinstansen. Om rutinen returnerar NX_SUCCESS kan programmet anropa *nx_web_http_client_response_body_get()* för att hämta serverns svar.
 
 Observera att resurssträngen kan referera till en lokal fil, t.ex. "/index.htm" eller referera till en annan URL, t.ex. om HTTP-servern anger att den stöder refererade `http://abc.website.com/index.htm` GET-begäranden.
 
-Den här tjänsten är inaktuell. Utvecklare uppmanas att använda *nx_web_http_client_delete_secure_start_extended().*
+Den här tjänsten är inaktuell. Utvecklare uppmanas att använda *nx_web_http_client_delete_secure_start_extended()*.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **client_ptr** Pekare till HTTP-klientkontrollblock.
 - **ip_address** HTTP-serverns IP-adress.
 - **server_port** Port på fjärransluten HTTP-server.
-- **resurs** Pekare till URL-sträng för begärd resurs. resursen måste vara NULL-avslutad.
+- **resurs** Pekare till URL-sträng för den begärda resursen. -resursen måste vara NULL-avslutad.
 - **värd** Null-avslutad sträng för serverns domännamn. Den här strängen överförs i fältet HTTP-värdrubrik. Värdsträngen får inte vara NULL.
 - **användarnamn** Pekare till valfritt användarnamn för autentisering.
 - **lösenord** Pekare till valfritt lösenord för autentisering.
 - **tls_setup** Återanrop som används för att konfigurera TLS-konfiguration. Programmet definierar det här återanropet för att initiera TLS-kryptografi och autentiseringsuppgifter (t.ex. certifikat).
-- **wait_option** Definierar hur länge tjänsten ska vänta på HTTP-klientens startbegäran. Väntealternativen definieras på följande sätt:
-  - **timeout-värde** (0x00000001 till 0xFFFFFFFE) Om du väljer ett numeriskt värde (0x1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan HTTP-serversvaret väntar.
+- **wait_option** Definierar hur länge tjänsten ska vänta på att HTTP-klienten hämtar startbegäran. Väntealternativen definieras på följande sätt:
+  - **timeout-värde** (0x00000001 till och med 0xFFFFFFFE) Om du väljer ett numeriskt värde (0x1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan du väntar på HTTP-serversvaret.
   - **NX_WAIT_FOREVER** (0xFFFFFFFF) Om du NX_WAIT_FOREVER här alternativet pausas anropstråden på obestämd tid tills HTTP-servern svarar på begäran.
 
 ### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) har skickat meddelandet HTTP-klientens DELETE-begäran
+- **NX_SUCCESS** (0x00) Meddelandet HTTP-klientens DELETE-begäran har skickats
 - **NX_WEB_HTTP_ERROR** (0x30000) Internt HTTP-klientfel
-- **NX_WEB_HTTP_NOT_READY** (0x3000A) HTTP-klienten inte klar
+- **HTTP-klienten** NX_WEB_HTTP_NOT_READY (0x3000A) inte klar
 - **NX_WEB_HTTP_FAILED** (0x30002) HTTP-klientfel som kommunicerar med HTTP-servern.
 - **NX_WEB_HTTP_AUTHENTICATION_ERROR** (0x3000B) Ogiltigt namn och/eller lösenord.
 - NX_PTR_ERROR (0x07) Ogiltig pekare
@@ -424,11 +424,11 @@ UINT nx_web_http_client_delete_secure_start_extended(
     ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här metoden är för **TLS-skyddad** HTTPS.
 
-Den här tjänsten försöker skicka en DELETE-begäran för resursen som anges av "resurs"-pekaren på den tidigare skapade HTTP-klientinstansen. Om den här rutinen NX_SUCCESS kan programmet anropa *nx_web_http_client_response_body_get()* för att hämta serverns svar.
+Den här tjänsten försöker skicka en DELETE-begäran för resursen som anges av "resurs"-pekaren på den tidigare skapade HTTP-klientinstansen. Om rutinen returnerar NX_SUCCESS kan programmet anropa *nx_web_http_client_response_body_get()* för att hämta serverns svar.
 
 Observera att resurssträngen kan referera till en lokal fil, t.ex. "/index.htm" eller referera till en annan URL, t.ex. om HTTP-servern anger att den stöder refererade `http://abc.website.com/index.htm` GET-begäranden.
 
@@ -441,7 +441,7 @@ Den här tjänsten *ersätter nx_web_http_client_delete_secure_start*(). Den hä
 - **client_ptr** Pekare till HTTP-klientkontrollblock.
 - **ip_address** HTTP-serverns IP-adress.
 - **server_port** Port på fjärransluten HTTP-server.
-- **resurs** Pekare till URL-sträng för begärd resurs. resursen måste vara NULL-avslutad.
+- **resurs** Pekare till URL-sträng för den begärda resursen. -resursen måste vara NULL-avslutad.
 - **resource_length** Stränglängd för den begärda resursen.
 - **värd** Null-avslutad sträng för serverns domännamn. Den här strängen överförs i fältet HTTP-värdrubrik. Värdsträngen får inte vara NULL.
 - **host_length** Stränglängd för värden.
@@ -502,7 +502,7 @@ UINT nx_web_http_client_get_start(NX_WEB_HTTP_CLIENT *client_ptr,
     ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här metoden är **för KLARTEXT** HTTP.
 
@@ -572,7 +572,7 @@ UINT nx_web_http_client_get_start_extended(
     ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här metoden är **för KLARTEXT** HTTP.
 
@@ -652,11 +652,11 @@ UINT nx_web_http_client_get_secure_start(
         ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här metoden är för **TLS-skyddad** HTTPS.
 
-Den här tjänsten försöker hämta resursen som anges av "resurs"-pekaren på den tidigare skapade HTTP-klientinstansen. Om den här rutinen NX_SUCCESS kan programmet sedan göra flera anrop *till nx_web_http_client_response_body_get()* för att hämta datapaket som motsvarar det begärda resursinnehållet.
+Den här tjänsten försöker hämta resursen som anges av "resurs"-pekaren på den tidigare skapade HTTP-klientinstansen. Om rutinen returnerar NX_SUCCESS kan programmet sedan göra flera anrop *till nx_web_http_client_response_body_get()* för att hämta datapaket som motsvarar det begärda resursinnehållet.
 
 Observera att resurssträngen kan referera till en lokal fil, t.ex. "/index.htm" eller referera till en annan URL, t.ex. om HTTP-servern anger att den stöder refererade `http://abc.website.com/index.htm` GET-begäranden.
 
@@ -667,20 +667,20 @@ Den här tjänsten är inaktuell. Utvecklare uppmanas att använda *nx_web_http_
 - **client_ptr** Pekare till HTTP-klientkontrollblock.
 - **ip_address** HTTP-serverns IP-adress.
 - **server_port** Port på fjärransluten HTTP-server.
-- **resurs** Pekare till URL-sträng för begärd resurs.
+- **resurs** Pekare till URL-sträng för den begärda resursen.
 - **värd** Null-avslutad sträng för serverns domännamn. Den här strängen överförs i fältet HTTP-värdrubrik. Värdsträngen får inte vara NULL.
 - **användarnamn** Pekare till valfritt användarnamn för autentisering.
 - **lösenord** Pekare till valfritt lösenord för autentisering.
 - **tls_setup** Återanrop som används för att konfigurera TLS-konfiguration. Programmet definierar det här återanropet för att initiera TLS-kryptografi och autentiseringsuppgifter (t.ex. certifikat).
-- **wait_option** Definierar hur länge tjänsten ska vänta på HTTP-klientens startbegäran. Väntealternativen definieras på följande sätt:
-  - **timeout-värde** (0x00000001 till 0xFFFFFFFE) Om du väljer ett numeriskt värde (0x1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan HTTP-serversvaret väntar.
+- **wait_option** Definierar hur länge tjänsten ska vänta på att HTTP-klienten hämtar startbegäran. Väntealternativen definieras på följande sätt:
+  - **timeout-värde** (0x00000001 till och med 0xFFFFFFFE) Om du väljer ett numeriskt värde (0x1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan du väntar på HTTP-serversvaret.
   - **NX_WAIT_FOREVER** (0xFFFFFFFF) Om du NX_WAIT_FOREVER här alternativet pausas anropstråden på obestämd tid tills HTTP-servern svarar på begäran.
 
 ### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) Skickade HTTP-klientens GET-startmeddelande
+- **NX_SUCCESS** (0x00) STARTmeddelande för HTTP-klienten
 - **NX_WEB_HTTP_ERROR** (0x30000) Internt HTTP-klientfel
-- **NX_WEB_HTTP_NOT_READY** (0x3000A) HTTP-klienten inte klar
+- **HTTP-klienten** NX_WEB_HTTP_NOT_READY (0x3000A) inte klar
 - **NX_WEB_HTTP_FAILED** (0x30002) HTTP-klientfel som kommunicerar med HTTP-servern.
 - **NX_WEB_HTTP_AUTHENTICATION_ERROR** (0x3000B) Ogiltigt namn och/eller lösenord.
 - NX_PTR_ERROR (0x07) Ogiltig pekare
@@ -726,15 +726,15 @@ UINT nx_web_http_client_get_secure_start_extended(
     ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här metoden är för **TLS-skyddad** HTTPS.
 
-Den här tjänsten försöker hämta resursen som anges av "resurs"-pekaren på den tidigare skapade HTTP-klientinstansen. Om den här rutinen NX_SUCCESS kan programmet sedan göra flera anrop *till nx_web_http_client_response_body_get()* för att hämta datapaket som motsvarar det begärda resursinnehållet.
+Den här tjänsten försöker hämta resursen som anges av "resurs"-pekaren på den tidigare skapade HTTP-klientinstansen. Om rutinen returnerar NX_SUCCESS kan programmet sedan göra flera anrop *till nx_web_http_client_response_body_get()* för att hämta datapaket som motsvarar det begärda resursinnehållet.
 
 Observera att resurssträngen kan referera till en lokal fil, t.ex. "/index.htm" eller referera till en annan URL, t.ex. om HTTP-servern anger att den stöder refererade `http://abc.website.com/index.htm` GET-begäranden.
 
-Strängarna för resursen, värden, användarnamnet och lösenordet måste vara NULL-avslutade och längden på varje sträng matchar längden som anges i argumentlistan.
+Strängarna för resurs, värd, användarnamn och lösenord måste vara NULL-avslutade och längden på varje sträng matchar längden som anges i argumentlistan.
 
 Den här tjänsten *ersätter nx_web_http_client_secure_start*(). Den här versionen kräver att anropare tillhandahåller längdinformation till funktionen.
 
@@ -743,7 +743,7 @@ Den här tjänsten *ersätter nx_web_http_client_secure_start*(). Den här versi
 - **client_ptr** Pekare till HTTP-klientkontrollblock.
 - **ip_address** HTTP-serverns IP-adress.
 - **server_port** Port på fjärransluten HTTP-server.
-- **resurs** Pekare till URL-sträng för begärd resurs.
+- **resurs** Pekare till URL-sträng för den begärda resursen.
 - **resource_length** Stränglängd för den begärda resursen.
 - **värd** Null-avslutad sträng för serverns domännamn. Den här strängen överförs i fältet HTTP-värdrubrik. Värdsträngen får inte vara NULL.
 - **host_length** Stränglängd för värden.
@@ -752,15 +752,15 @@ Den här tjänsten *ersätter nx_web_http_client_secure_start*(). Den här versi
 - **lösenord** Pekare till valfritt lösenord för autentisering.
 - **password_length** Stränglängd för lösenord för autentisering.
 - **tls_setup** Återanrop som används för att konfigurera TLS-konfiguration. Programmet definierar det här återanropet för att initiera TLS-kryptografi och autentiseringsuppgifter (t.ex. certifikat).
-- **wait_option** Definierar hur länge tjänsten ska vänta på HTTP-klientens startbegäran. Väntealternativen definieras på följande sätt:
-  - **timeout-värde** (0x00000001 till 0xFFFFFFFE) Om du väljer ett numeriskt värde (0x1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan HTTP-serversvaret väntar.
+- **wait_option** Definierar hur länge tjänsten ska vänta på att HTTP-klienten hämtar startbegäran. Väntealternativen definieras på följande sätt:
+  - **timeout-värde** (0x00000001 till och med 0xFFFFFFFE) Om du väljer ett numeriskt värde (0x1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan du väntar på HTTP-serversvaret.
   - **NX_WAIT_FOREVER** (0xFFFFFFFF) Om du NX_WAIT_FOREVER här alternativet pausas anropstråden på obestämd tid tills HTTP-servern svarar på begäran.
 
 ### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) Skickade HTTP-klientens GET-startmeddelande
+- **NX_SUCCESS** (0x00) STARTmeddelande för HTTP-klienten
 - **NX_WEB_HTTP_ERROR** (0x30000) Internt HTTP-klientfel
-- **NX_WEB_HTTP_NOT_READY** (0x3000A) HTTP-klienten inte klar
+- **HTTP-klienten** NX_WEB_HTTP_NOT_READY (0x3000A) inte klar
 - **NX_WEB_HTTP_FAILED** (0x30002) HTTP-klientfel som kommunicerar med HTTP-servern.
 - **NX_WEB_HTTP_AUTHENTICATION_ERROR** (0x3000B) Ogiltigt namn och/eller lösenord.
 - NX_PTR_ERROR (0x07) Ogiltig pekare
@@ -805,34 +805,34 @@ UINT nx_web_http_client_head_start(NX_WEB_HTTP_CLIENT *client_ptr,
     ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här metoden är **för KLARTEXT** HTTP.
 
-Den här tjänsten försöker hämta HEAD-metadata för resursen som anges av "resurs"-pekaren på den tidigare skapade HTTP-klientinstansen. Om den här rutinen NX_SUCCESS kan programmet sedan anropa *nx_web_http_client_response_body_get()* för att hämta svaret.
+Den här tjänsten försöker hämta HEAD-metadata för resursen som anges av "resurs"-pekaren på den tidigare skapade HTTP-klientinstansen. Om rutinen returnerar NX_SUCCESS kan programmet sedan anropa *nx_web_http_client_response_body_get()* för att hämta svaret.
 
 Observera att resurssträngen kan referera till en lokal fil, t.ex. "/index.htm" eller referera till en annan URL, t.ex. om HTTP-servern anger att den stöder refererade `http://abc.website.com/index.htm` GET-begäranden.
 
-Den här tjänsten är inaktuell. Utvecklare uppmanas att använda *nx_web_http_client_head_start_extended()*.
+Den här tjänsten är inaktuell. Utvecklare uppmanas att använda *nx_web_http_client_head_start_extended().*
 
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **client_ptr** Pekare till HTTP-klientkontrollblock.
 - **ip_address** HTTP-serverns IP-adress.
 - **server_port** Port på fjärransluten HTTP-server.
-- **resurs** Pekare till URL-sträng för begärd resurs.
+- **resurs** Pekare till URL-sträng för den begärda resursen.
 - **värd** Null-avslutad sträng för serverns domännamn. Den här strängen överförs i fältet HTTP-värdrubrik. Värdsträngen får inte vara NULL.
 - **användarnamn** Pekare till valfritt användarnamn för autentisering.
 - **lösenord** Pekare till valfritt lösenord för autentisering.
-- **wait_option** Definierar hur länge tjänsten ska vänta på att HTTP-klienten hämtar startbegäran. Väntealternativen definieras på följande sätt:
-  - **timeout-värde** (0x00000001 till och med 0xFFFFFFFE) Om du väljer ett numeriskt värde (0x1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan du väntar på HTTP-serversvaret.
+- **wait_option** Definierar hur länge tjänsten ska vänta på HTTP-klientens startbegäran. Väntealternativen definieras på följande sätt:
+  - **timeout-värde** (0x00000001 till 0xFFFFFFFE) Om du väljer ett numeriskt värde (0x1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan HTTP-serversvaret väntar.
   - **NX_WAIT_FOREVER** (0xFFFFFFFF) Om du NX_WAIT_FOREVER här alternativet pausas anropstråden på obestämd tid tills HTTP-servern svarar på begäran.
 
 ### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** (0x00) skickade ETT MEDDELANDE om HTTP-klientens HEAD-begäran
 - **NX_WEB_HTTP_ERROR** (0x30000) Internt HTTP-klientfel
-- **HTTP-klienten** NX_WEB_HTTP_NOT_READY (0x3000A) inte klar
+- **NX_WEB_HTTP_NOT_READY** (0x3000A) HTTP-klienten inte klar
 - **NX_WEB_HTTP_FAILED** (0x30002) HTTP-klientfel som kommunicerar med HTTP-servern.
 - **NX_WEB_HTTP_AUTHENTICATION_ERROR** (0x3000B) Ogiltigt namn och/eller lösenord.
 - NX_PTR_ERROR (0x07) Ogiltig pekare
@@ -875,11 +875,11 @@ UINT nx_web_http_client_head_start_extended(
     ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här metoden är **för KLARTEXT** HTTP.
 
-Den här tjänsten försöker hämta HEAD-metadata för resursen som anges av "resurs"-pekaren på den tidigare skapade HTTP-klientinstansen. Om rutinen returnerar NX_SUCCESS kan programmet sedan anropa *nx_web_http_client_response_body_get()* för att hämta svaret.
+Den här tjänsten försöker hämta HEAD-metadata för resursen som anges av "resurs"-pekaren på den tidigare skapade HTTP-klientinstansen. Om den här rutinen NX_SUCCESS kan programmet sedan anropa *nx_web_http_client_response_body_get()* för att hämta svaret.
 
 Observera att resurssträngen kan referera till en lokal fil, t.ex. "/index.htm" eller referera till en annan URL, t.ex. om HTTP-servern anger att den stöder refererade `http://abc.website.com/index.htm` GET-begäranden.
 
@@ -892,7 +892,7 @@ Den här tjänsten *ersätter nx_web_http_client_head_start*(). Den här version
 - **client_ptr** Pekare till HTTP-klientkontrollblock.
 - **ip_address** HTTP-serverns IP-adress.
 - **server_port** Port på fjärransluten HTTP-server.
-- **resurs** Pekare till URL-sträng för den begärda resursen.
+- **resurs** Pekare till URL-sträng för begärd resurs.
 - **resource_length** Stränglängd för den begärda resursen.
 - **värd** Null-avslutad sträng för serverns domännamn. Den här strängen överförs i fältet HTTP-värdrubrik. Värdsträngen får inte vara NULL.
 - **host_length** Stränglängd för värden.
@@ -900,15 +900,15 @@ Den här tjänsten *ersätter nx_web_http_client_head_start*(). Den här version
 - **username_length** Stränglängd för användarnamn för autentisering.
 - **lösenord** Pekare till valfritt lösenord för autentisering.
 - **password_length** Stränglängd för lösenord för autentisering.
-- **wait_option** Definierar hur länge tjänsten ska vänta på att HTTP-klienten hämtar startbegäran. Väntealternativen definieras på följande sätt:
-  - **timeout-värde** (0x00000001 till och med 0xFFFFFFFE) Om du väljer ett numeriskt värde (0x1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan du väntar på HTTP-serversvaret.
+- **wait_option** Definierar hur länge tjänsten ska vänta på HTTP-klientens startbegäran. Väntealternativen definieras på följande sätt:
+  - **timeout-värde** (0x00000001 till 0xFFFFFFFE) Om du väljer ett numeriskt värde (0x1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan HTTP-serversvaret väntar.
   - **NX_WAIT_FOREVER** (0xFFFFFFFF) Om du NX_WAIT_FOREVER här alternativet pausas anropstråden på obestämd tid tills HTTP-servern svarar på begäran.
 
 ### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** (0x00) skickade ETT MEDDELANDE om HTTP-klientens HEAD-begäran
 - **NX_WEB_HTTP_ERROR** (0x30000) Internt HTTP-klientfel
-- **HTTP-klienten** NX_WEB_HTTP_NOT_READY (0x3000A) inte klar
+- **NX_WEB_HTTP_NOT_READY** (0x3000A) HTTP-klienten inte klar
 - **NX_WEB_HTTP_FAILED** (0x30002) HTTP-klientfel som kommunicerar med HTTP-servern.
 - **NX_WEB_HTTP_AUTHENTICATION_ERROR** (0x3000B) Ogiltigt namn och/eller lösenord.
 - NX_PTR_ERROR (0x07) Ogiltig pekare
@@ -955,11 +955,11 @@ UINT nx_web_http_client_head_secure_start(
     ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här metoden är för **TLS-skyddad** HTTPS.
 
-Den här tjänsten försöker hämta HEAD-metadata för resursen som anges av "resurs"-pekaren på den tidigare skapade HTTP-klientinstansen. Om rutinen returnerar NX_SUCCESS kan programmet anropa *nx_web_http_client_response_body_get()* för att hämta serverns svar som motsvarar det begärda resursinnehållet.
+Den här tjänsten försöker hämta HEAD-metadata för resursen som anges av "resurs"-pekaren på den tidigare skapade HTTP-klientinstansen. Om den här rutinen returnerar NX_SUCCESS kan programmet anropa *nx_web_http_client_response_body_get()* för att hämta serverns svar som motsvarar det begärda resursinnehållet.
 
 Observera att resurssträngen kan referera till en lokal fil, t.ex. "/index.htm" eller referera till en annan URL, t.ex. om HTTP-servern anger att den stöder refererade `http://abc.website.com/index.htm` GET-begäranden.
 
@@ -970,20 +970,20 @@ Den här tjänsten är inaktuell. Utvecklare uppmanas att använda *nx_web_http_
 - **client_ptr** Pekare till HTTP-klientkontrollblock.
 - **ip_address** HTTP-serverns IP-adress.
 - **server_port** Port på fjärransluten HTTP-server.
-- **resurs** Pekare till URL-sträng för den begärda resursen.
+- **resurs** Pekare till URL-sträng för begärd resurs.
 - **värd** Null-avslutad sträng för serverns domännamn. Den här strängen överförs i fältet HTTP-värdrubrik. Värdsträngen får inte vara NULL.
 - **användarnamn** Pekare till valfritt användarnamn för autentisering.
 - **lösenord** Pekare till valfritt lösenord för autentisering.
 - **tls_setup** Återanrop som används för att konfigurera TLS-konfiguration. Programmet definierar det här återanropet för att initiera TLS-kryptografi och autentiseringsuppgifter (t.ex. certifikat).
-- **wait_option** Definierar hur länge tjänsten ska vänta på att HTTP-klienten hämtar startbegäran. Väntealternativen definieras på följande sätt:
-  - **timeout-värde** (0x00000001 till och med 0xFFFFFFFE) Om du väljer ett numeriskt värde (0x1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan du väntar på HTTP-serversvaret.
+- **wait_option** Definierar hur länge tjänsten ska vänta på HTTP-klientens startbegäran. Väntealternativen definieras på följande sätt:
+  - **timeout-värde** (0x00000001 till 0xFFFFFFFE) Om du väljer ett numeriskt värde (0x1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan HTTP-serversvaret väntar.
   - **NX_WAIT_FOREVER** (0xFFFFFFFF) Om du NX_WAIT_FOREVER här alternativet pausas anropstråden på obestämd tid tills HTTP-servern svarar på begäran.
 
 ### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** (0x00) skickade ETT MEDDELANDE om HTTP-klientens HEAD-begäran
 - **NX_WEB_HTTP_ERROR** (0x30000) Internt HTTP-klientfel
-- **HTTP-klienten** NX_WEB_HTTP_NOT_READY (0x3000A) inte klar
+- **NX_WEB_HTTP_NOT_READY** (0x3000A) HTTP-klienten inte klar
 - **NX_WEB_HTTP_FAILED** (0x30002) HTTP-klientfel som kommunicerar med HTTP-servern.
 - **NX_WEB_HTTP_AUTHENTICATION_ERROR** (0x3000B) Ogiltigt namn och/eller lösenord.
 - NX_PTR_ERROR (0x07) Ogiltig pekare
@@ -1028,11 +1028,11 @@ CHAR *host, UINT host_length, CHAR *username,
     ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här metoden är för **TLS-skyddad** HTTPS.
 
-Den här tjänsten försöker hämta HEAD-metadata för resursen som anges av "resurs"-pekaren på den tidigare skapade HTTP-klientinstansen. Om rutinen returnerar NX_SUCCESS kan programmet anropa *nx_web_http_client_response_body_get()* för att hämta serverns svar som motsvarar det begärda resursinnehållet.
+Den här tjänsten försöker hämta HEAD-metadata för resursen som anges av "resurs"-pekaren på den tidigare skapade HTTP-klientinstansen. Om den här rutinen returnerar NX_SUCCESS kan programmet anropa *nx_web_http_client_response_body_get()* för att hämta serverns svar som motsvarar det begärda resursinnehållet.
 
 Observera att resurssträngen kan referera till en lokal fil, t.ex. "/index.htm" eller referera till en annan URL, t.ex. om HTTP-servern anger att den stöder refererade `http://abc.website.com/index.htm` GET-begäranden.
 
@@ -1106,7 +1106,7 @@ UINT nx_web_http_client_request_packet_allocate(
     ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten försöker allokera ett paket för klientens HTTP(S).
 
@@ -1157,7 +1157,7 @@ UINT nx_web_http_client_post_start(NX_WEB_HTTP_CLIENT *client_ptr,
     ULONG total_bytes, ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här metoden är **för KLARTEXT** HTTP.
 
@@ -1227,7 +1227,7 @@ UINT nx_web_http_client_post_start_extended(
     ULONG total_bytes, ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här metoden är **för KLARTEXT** HTTP.
 
@@ -1308,7 +1308,7 @@ UINT nx_web_http_client_post_secure_start(
     ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här metoden är för **TLS-skyddad** HTTPS.
 
@@ -1382,7 +1382,7 @@ UINT nx_web_http_client_post_secure_start_extended(
     ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här metoden är för **TLS-skyddad** HTTPS.
 
@@ -1462,7 +1462,7 @@ UINT nx_web_http_client_put_start(NX_WEB_HTTP_CLIENT *client_ptr,
     ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här metoden är **för KLARTEXT** HTTP.
 
@@ -1533,7 +1533,7 @@ UINT nx_web_http_client_put_start(
     ULONG total_bytes, ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här metoden är **för KLARTEXT** HTTP.
 
@@ -1615,7 +1615,7 @@ UINT nx_web_http_client_put_secure_start(
     ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här metoden är för **TLS-skyddad** HTTPS.
 
@@ -1623,7 +1623,7 @@ Den här tjänsten försöker skicka en PUT-begäran med den angivna resursen ti
 
 Observera att resurssträngen kan referera till en lokal fil, t.ex. "/index.htm" eller referera till en annan URL, t.ex. om HTTP-servern anger att den stöder refererade `http://abc.website.com/index.htm` PUT-begäranden.
 
-Den här tjänsten är inaktuell. Utvecklare uppmanas att använda *nx_web_http_client_put_secure_start_extended().*
+Den här tjänsten är inaktuell. Utvecklare uppmanas att använda *nx_web_http_client_put_secure_start_extended()*.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
@@ -1634,17 +1634,17 @@ Den här tjänsten är inaktuell. Utvecklare uppmanas att använda *nx_web_http_
 - **värd** Null-avslutad sträng för serverns domännamn. Den här strängen överförs i fältet HTTP-värdrubrik. Värdsträngen får inte vara NULL.
 - **användarnamn** Pekare till valfritt användarnamn för autentisering.
 - **lösenord** Pekare till valfritt lösenord för autentisering.
-- **total_bytes** Totalt antal byte av resurs som skickas. Observera att den kombinerade längden för alla paket som skickas via efterföljande anrop *till nx_web_http_client_put_packet() måste* vara lika med det här värdet.
+- **total_bytes** Totalt antal byte för resursen som skickas. Observera att den kombinerade längden för alla paket som skickas via efterföljande anrop *till nx_web_http_client_put_packet() måste* vara lika med det här värdet.
 - **tls_setup** Återanrop som används för att konfigurera TLS-konfiguration. Programmet definierar det här återanropet för att initiera TLS-kryptografi och autentiseringsuppgifter (t.ex. certifikat).
-- **wait_option** Definierar hur länge tjänsten ska vänta på HTTP-klientens startbegäran. Väntealternativen definieras på följande sätt:
-  - **timeout-värde** (0x00000001 till 0xFFFFFFFE) Om du väljer ett numeriskt värde (0x1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan HTTP-serversvaret väntar.
+- **wait_option** Definierar hur länge tjänsten ska vänta på att HTTP-klienten hämtar startbegäran. Väntealternativen definieras på följande sätt:
+  - **timeout-värde** (0x00000001 till och med 0xFFFFFFFE) Om du väljer ett numeriskt värde (0x1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan du väntar på HTTP-serversvaret.
   - **NX_WAIT_FOREVER** (0xFFFFFFFF) Om du NX_WAIT_FOREVER här alternativet pausas anropstråden på obestämd tid tills HTTP-servern svarar på begäran.
 
 ### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** (0x00) Put-begäran har skickats
 - **NX_WEB_HTTP_USERNAME_TOO_LONG** (0x30012) Användarnamnet är för stort för buffert
-- **NX_WEB_HTTP_NOT_READY** (0x3000A) HTTP-klienten inte klar
+- **HTTP-klienten** NX_WEB_HTTP_NOT_READY (0x3000A) inte klar
 - NX_PTR_ERROR (0x07) Ogiltig pekare
 - NX_SIZE_ERROR (0x09) Ogiltig total storlek på resursen
 - NX_CALLER_ERROR (0x11) Ogiltig anropare för den här tjänsten
@@ -1689,11 +1689,11 @@ UINT nx_web_http_client_put_secure_start(
     ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här metoden är för **TLS-skyddad** HTTPS.
 
-Den här tjänsten försöker skicka en PUT-begäran med den angivna resursen till HTTPS-servern på den angivna IP-adressen och porten. Om den här rutinen lyckas ska programkoden göra efterföljande anrop *till nx_web_http_client_put_packet()-rutinen* för att skicka resursinnehållet till HTTP-servern.
+Den här tjänsten försöker skicka en PUT-begäran med den angivna resursen till HTTPS-servern på den angivna IP-adressen och porten. Om den här rutinen lyckas bör programkoden göra efterföljande *anrop till nx_web_http_client_put_packet()-rutinen* för att skicka resursinnehållet till HTTP-servern.
 
 Observera att resurssträngen kan referera till en lokal fil, t.ex. "/index.htm" eller referera till en annan URL, t.ex. om HTTP-servern anger att den stöder refererade `http://abc.website.com/index.htm` PUT-begäranden.
 
@@ -1706,7 +1706,7 @@ Den här tjänsten *ersätter nx_web_http_client_put_secure_start*(). Den här v
 - **client_ptr** Pekare till HTTP-klientkontrollblock.
 - **ip_address** HTTP-serverns IP-adress.
 - **server_port** TCP-port på den fjärranslutna HTTP-servern.
-- **resurs** Pekare till URL-sträng för begärd resurs.
+- **resurs** Pekare till URL-sträng för den begärda resursen.
 - **resource_length** Stränglängd för den begärda resursen.
 - **värd** Null-avslutad sträng för serverns domännamn. Den här strängen överförs i fältet HTTP-värdrubrik. Värdsträngen får inte vara NULL.
 - **host_length** Stränglängd för värden.
@@ -1714,17 +1714,17 @@ Den här tjänsten *ersätter nx_web_http_client_put_secure_start*(). Den här v
 - **username_length** Stränglängd för användarnamn för autentisering.
 - **lösenord** Pekare till valfritt lösenord för autentisering.
 - **password_length** Stränglängd för lösenord för autentisering.
-- **total_bytes** Totalt antal byte av resurs som skickas. Observera att den kombinerade längden för alla paket som skickas via efterföljande anrop *till nx_web_http_client_put_packet() måste* vara lika med det här värdet.
+- **total_bytes** Totalt antal byte för resursen som skickas. Observera att den kombinerade längden för alla paket som skickas via efterföljande anrop *till nx_web_http_client_put_packet() måste* vara lika med det här värdet.
 - **tls_setup** Återanrop som används för att konfigurera TLS-konfiguration. Programmet definierar det här återanropet för att initiera TLS-kryptografi och autentiseringsuppgifter (t.ex. certifikat).
-- **wait_option** Definierar hur länge tjänsten ska vänta på HTTP-klientens startbegäran. Väntealternativen definieras på följande sätt:
-  - **timeout-värde** (0x00000001 till 0xFFFFFFFE) Om du väljer ett numeriskt värde (0x1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan HTTP-serversvaret väntar.
+- **wait_option** Definierar hur länge tjänsten ska vänta på att HTTP-klienten hämtar startbegäran. Väntealternativen definieras på följande sätt:
+  - **timeout-värde** (0x00000001 till och med 0xFFFFFFFE) Om du väljer ett numeriskt värde (0x1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan du väntar på HTTP-serversvaret.
   - **NX_WAIT_FOREVER** (0xFFFFFFFF) Om du NX_WAIT_FOREVER här alternativet pausas anropstråden på obestämd tid tills HTTP-servern svarar på begäran.
 
 ### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** (0x00) Put-begäran har skickats
 - **NX_WEB_HTTP_USERNAME_TOO_LONG** (0x30012) Användarnamnet är för stort för buffert
-- **NX_WEB_HTTP_NOT_READY** (0x3000A) HTTP-klienten inte klar
+- **HTTP-klienten** NX_WEB_HTTP_NOT_READY (0x3000A) inte klar
 - NX_PTR_ERROR (0x07) Ogiltig pekare
 - NX_SIZE_ERROR (0x09) Ogiltig total storlek på resursen
 - NX_CALLER_ERROR (0x11) Ogiltig anropare för den här tjänsten
@@ -1766,24 +1766,24 @@ UINT nx_web_http_client_put_packet(NX_WEB_HTTP_CLIENT *client_ptr,
     NX_PACKET *packet_ptr, ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten försöker skicka nästa paket med resursinnehåll till HTTP-servern för både PUT- och POST-åtgärder. Observera att den här rutinen bör anropas upprepade tills den kombinerade längden på de paket som skickas är lika med "total_bytes" som angavs i det tidigare *nx_web_http_client_put_start()* eller *nx_web_http_client_post_start()-anropet* (eller deras motsvarande säkra versioner).
+Den här tjänsten försöker skicka nästa paket med resursinnehåll till HTTP-servern för både PUT- och POST-åtgärder. Observera att den här rutinen bör anropas repetitivt tills den kombinerade längden på de paket som skickas är lika med "total_bytes" som angavs i det tidigare *nx_web_http_client_put_start() eller* *nx_web_http_client_post_start()-anropet* (eller deras motsvarande säkra versioner).
 
-Den här tjänsten söker också efter svar från servern om det uppstår problem med att upprätta HTTP-anslutningen (eller HTTPS).
+Den här tjänsten söker också efter svar från servern om det uppstod ett problem med att upprätta HTTP-anslutningen (eller HTTPS).
 
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **client_ptr** Pekare till HTTP-klientkontrollblock.
-- **packet_ptr** Pekare till nästa innehåll i resursen som skickas till HTTP-servern.
-- **wait_option** Definierar hur länge tjänsten ska vänta på HTTP-klientens startbegäran. Väntealternativen definieras på följande sätt:
-  - **timeout-värde** (0x00000001 till 0xFFFFFFFE) Om du väljer ett numeriskt värde (0x1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan HTTP-serversvaret väntar.
+- **packet_ptr** Pekar till nästa innehåll i resursen som skickas till HTTP-servern.
+- **wait_option** Definierar hur länge tjänsten ska vänta på att HTTP-klienten hämtar startbegäran. Väntealternativen definieras på följande sätt:
+  - **timeout-värde** (0x00000001 till och med 0xFFFFFFFE) Om du väljer ett numeriskt värde (0x1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan du väntar på HTTP-serversvaret.
   - **NX_WAIT_FOREVER** (0xFFFFFFFF) Om du NX_WAIT_FOREVER här alternativet pausas anropstråden på obestämd tid tills HTTP-servern svarar på begäran.
 
 ### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** (0x00) SKICKADE HTTP-klientpaket.
-- **NX_WEB_HTTP_NOT_READY** (0x3000A) HTTP-klienten inte klar
+- **HTTP-klienten** NX_WEB_HTTP_NOT_READY (0x3000A) inte klar
 - **NX_WEB_HTTP_REQUEST_UNSUCCESSFUL_CODE** (0x3000E) Felkod för mottagen server**
 - **NX_WEB_HTTP_BAD_PACKET_LENGTH** (0x3000D) Ogiltig paketlängd
 - **NX_WEB_HTTP_AUTHENTICATION_ERROR** (0x3000B) Ogiltigt namn och/eller lösenord
@@ -1820,12 +1820,12 @@ UINT nx_web_http_client_request_chunked_set(
     UINT chunk_size, NX_PACKET *packet_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten använder segmenterad överföringskodning för att skicka en anpassad HTTP(S)-begäran till den server som anges i *anropet nx_web_http_client_connect()* eller *nx_web_http_client_secure_connect()* som tidigare har upprättat socketanslutningen till fjärrvärden.
+Den här tjänsten använder chunked transfer-kodning för att skicka en anpassad HTTP(S)-begäran till servern som anges i *anropet nx_web_http_client_connect()* eller *nx_web_http_client_secure_connect(),* som tidigare har upprättat socketanslutningen till fjärrvärden.
 
 > [!NOTE]
-> Om programmet använder segmenterad överföringskodning för att skicka ett begärandedatapaket måste det anropa den här tjänsten efter *anropet nx_web_http_client_request_packet_allocate*() och *innan anropet nx_web_http_client_reqeust_packet_send* ().
+> Om programmet använder segmenterad överföringskod för att skicka ett datapaket för begäran måste det anropa den här tjänsten efter *anropet nx_web_http_client_request_packet_allocate*() och *innan anropet nx_web_http_client_reqeust_packet_send* ().
 
 ### <a name="input-parameters"></a>Indataparametrar
 
@@ -1895,11 +1895,11 @@ UINT nx_web_http_client_request_header_add(
     UINT wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten lägger till ett anpassat huvud (i form av ett fältnamn och värde) till en anpassad HTTP-begäran som skapats med n *x_web_http_client_request_initialize()*.
+Den här tjänsten lägger till ett anpassat huvud (i form av ett fältnamn och värde) i en anpassad HTTP-begäran som skapats med n *x_web_http_client_request_initialize()*.
 
-Användning av den här tjänsten gör det möjligt för ett program att lägga till val annat antal anpassade huvuden i begäran. **Detta möjliggör anpassade HTTP-begäranden som är avsedda för specifika program.**
+Användning av den här tjänsten gör att ett program kan lägga till val annat antal anpassade huvuden i begäran. **Detta möjliggör anpassade HTTP-begäranden som är avsedda för specifika program.**
 
 > [!NOTE]
 > De nx_web_http_client_ \* _start metoderna tillhandahålls för enkelhetens skull. Alla dessa funktioner använder den här rutinen internt (tillsammans med *nx_web_http_client_request_initialize()) för* att skapa och skicka HTTP-begäranden.
@@ -1907,12 +1907,12 @@ Användning av den här tjänsten gör det möjligt för ett program att lägga 
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **client_ptr** Pekare till HTTP-klientkontrollblock.
-- **field_name** Fältnamnssträng (t.ex. "Content-Type").
+- **field_name** Fältnamnssträng (t.ex. "Innehållstyp").
 - **name_length** Längden på fältnamnssträngen i byte.
-- **field_value** Fältvärdessträng (t.ex. "application/octet-stream").
+- **field_value** Fältvärdessträng (t.ex. "program/oktettström").
 - **value_length** Längden på värdesträngen i byte.
-- **wait_option** Definierar hur länge tjänsten ska vänta på HTTP-klientens startbegäran. Väntealternativen definieras på följande sätt:
-  - **timeout-värde** (0x00000001 till 0xFFFFFFFE) Om du väljer ett numeriskt värde (0x1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan HTTP-serversvaret väntar.
+- **wait_option** Definierar hur länge tjänsten ska vänta på att HTTP-klienten hämtar startbegäran. Väntealternativen definieras på följande sätt:
+  - **timeout-värde** (0x00000001 till och med 0xFFFFFFFE) Om du väljer ett numeriskt värde (0x1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan du väntar på HTTP-serversvaret.
   - **NX_WAIT_FOREVER** (0xFFFFFFFF) Om du NX_WAIT_FOREVER här alternativet pausas anropstråden på obestämd tid tills HTTP-servern svarar på begäran.
 
 ### <a name="return-values"></a>Returvärden
@@ -1979,7 +1979,7 @@ UINT nx_web_http_client_request_initialize(
     CHAR *username, CHAR *password, UINT wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten skapar en anpassad HTTP-begäran och associerar den med HTTP-klientinstansen. Till skillnad *från de enklare nx_web_http_client_get_start()* (tillsammans med metoderna för PUT, POST och de associerade säkra versionerna av dessa API) skickas inte den anpassade begäran förrän tjänsten *nx_web_http_client_request_send()* anropas.
 
@@ -1988,7 +1988,7 @@ Användning av den här tjänsten gör att ett program kan lägga till val annat
 > [!NOTE]
 > De nx_web_http_client_ \* _start metoderna tillhandahålls för enkelhetens skull. Alla dessa funktioner använder den här rutinen internt (tillsammans med *nx_web_http_client_request_send()) för* att skapa och skicka HTTP-begäranden.
 
-Den här tjänsten är inaktuell. Utvecklare uppmanas att använda *nx_web_http_client_request_initialize_extended()*.
+Den här tjänsten är inaktuell. Utvecklare uppmanas att använda *nx_web_http_client_request_initialize_extended().*
 
 ### <a name="input-parameters"></a>Indataparametrar
 
@@ -2002,12 +2002,12 @@ Den här tjänsten är inaktuell. Utvecklare uppmanas att använda *nx_web_http_
   - **NX_WEB_HTTP_METHOD_HEAD (0x5)**
 - **resurs** Namnet på den resurs som överförs.
 - **värd** Null-avslutad sträng för serverns domännamn. Den här strängen överförs i fältet HTTP-värdrubrik. Värdsträngen får inte vara NULL.
-- **input_size** Storlek på indata för PUT och POST. Skicka 0 för andra åtgärder.
+- **input_size** Storleken på indata för PUT och POST. Skicka 0 för andra åtgärder.
 - **transfer_encoding_trunked** Reserverad parameter för stöd för framtida trunkerad överföring.
 - **användarnamn** Användarnamn för skyddade resurser.
 - **lösenord** Lösenord för skyddade resurser.
-- **wait_option** Definierar hur länge tjänsten ska vänta på HTTP-klientens startbegäran. Väntealternativen definieras på följande sätt:
-  - **timeout-värde** (0x00000001 till 0xFFFFFFFE) Om du väljer ett numeriskt värde (0x1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan HTTP-serversvaret väntar.
+- **wait_option** Definierar hur länge tjänsten ska vänta på att HTTP-klienten hämtar startbegäran. Väntealternativen definieras på följande sätt:
+  - **timeout-värde** (0x00000001 till och med 0xFFFFFFFE) Om du väljer ett numeriskt värde (0x1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan du väntar på HTTP-serversvaret.
   - **NX_WAIT_FOREVER** (0xFFFFFFFF) Om du NX_WAIT_FOREVER här alternativet pausas anropstråden på obestämd tid tills HTTP-servern svarar på begäran.
 
 ### <a name="return-values"></a>Returvärden
@@ -2071,7 +2071,7 @@ UINT nx_web_http_client_request_initialize_extended(
     CHAR *password, UINT password_length, UINT wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten skapar en anpassad HTTP-begäran och associerar den med HTTP-klientinstansen. Till skillnad *från de enklare nx_web_http_client_get_start()* (tillsammans med metoderna för PUT, POST och de associerade säkra versionerna av dessa API) skickas inte den anpassade begäran förrän tjänsten *nx_web_http_client_request_send()* anropas.
 
@@ -2098,14 +2098,14 @@ Den här tjänsten *ersätter nx_web_http_client_request_initialize*(). Den här
 - **resource_length** Stränglängd för den begärda resursen.
 - **värd** Null-avslutad sträng för serverns domännamn. Den här strängen överförs i fältet HTTP-värdrubrik. Värdsträngen får inte vara NULL.
 - **host_length** Stränglängd för värden.
-- **input_size** Storleken på indata för PUT och POST. Skicka 0 för andra åtgärder.
+- **input_size** Storlek på indata för PUT och POST. Skicka 0 för andra åtgärder.
 - **transfer_encoding_trunked** Reserverad parameter för stöd för framtida trunkerad överföring.
 - **användarnamn** Pekare till valfritt användarnamn för autentisering.
 - **username_length** Stränglängd för användarnamn för autentisering.
 - **lösenord** Pekare till valfritt lösenord för autentisering.
 - **password_length** Stränglängd för lösenord för autentisering.
-- **wait_option** Definierar hur länge tjänsten ska vänta på att HTTP-klienten hämtar startbegäran. Väntealternativen definieras på följande sätt:
-  - **timeout-värde** (0x00000001 till och med 0xFFFFFFFE) Om du väljer ett numeriskt värde (0x1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan du väntar på HTTP-serversvaret.
+- **wait_option** Definierar hur länge tjänsten ska vänta på HTTP-klientens startbegäran. Väntealternativen definieras på följande sätt:
+  - **timeout-värde** (0x00000001 till 0xFFFFFFFE) Om du väljer ett numeriskt värde (0x1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan HTTP-serversvaret väntar.
   - **NX_WAIT_FOREVER** (0xFFFFFFFF) Om du NX_WAIT_FOREVER här alternativet pausas anropstråden på obestämd tid tills HTTP-servern svarar på begäran.
 
 ### <a name="return-values"></a>Returvärden
@@ -2157,7 +2157,7 @@ while(get_status != NX_WEB_HTTP_GET_DONE)
 
 ## <a name="nx_web_http_client_request_packet_send"></a>nx_web_http_client_request_packet_send
 
-Skicka HTTP(S)-begärandedatapaket till fjärrservern
+Skicka HTTP(S)-begärandedatapaket till fjärrserver
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2168,7 +2168,7 @@ UINT nx_web_http_client_request_packet_send(
     ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten skickar ett anpassat HTTP(S)-begärandedatapaket som skapats med *nx_web_http_client_request_packet_allocate* () till den server som anges i *anropet nx_web_http_client_connect()* eller *nx_web_http_client_secure_connect(*) som tidigare har upprättat socketanslutningen till fjärrvärden.
 
@@ -2176,13 +2176,13 @@ Den här tjänsten skickar ett anpassat HTTP(S)-begärandedatapaket som skapats 
 
 - **client_ptr** Pekare till HTTP-klientkontrollblock.
 - **packet_ptr** Pekare för HTTP(S)-begärandedatapaket.
-- **wait_option** Definierar hur länge tjänsten ska vänta på att HTTP-klienten hämtar startbegäran. Väntealternativen definieras på följande sätt:
-  - **timeout-värde** (0x00000001 till och med 0xFFFFFFFE) Om du väljer ett numeriskt värde (0x1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan du väntar på HTTP-serversvaret.
+- **wait_option** Definierar hur länge tjänsten ska vänta på HTTP-klientens startbegäran. Väntealternativen definieras på följande sätt:
+  - **timeout-värde** (0x00000001 till 0xFFFFFFFE) Om du väljer ett numeriskt värde (0x1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan HTTP-serversvaret väntar.
   - **NX_WAIT_FOREVER** (0xFFFFFFFF) Om du NX_WAIT_FOREVER här alternativet pausas anropstråden på obestämd tid tills HTTP-servern svarar på begäran.
 
 ### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) Skicka datapaket med begäran.
+- **NX_SUCCESS** (0x00) Lyckades skicka datapaket för begäran.
 - NX_PTR_ERROR (0x07) Ogiltig pekare
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -2237,7 +2237,7 @@ UINT nx_web_http_client_request_send(NX_WEB_HTTP_CLIENT *client_ptr,
     UINT wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten skickar en anpassad HTTP-begäran som skapats med *nx_web_http_client_request_initialize()* till den server som anges i *nx_web_http_client_connect()* eller *nx_web_http_client_secure_connect()* som båda tidigare har upprättat socketanslutningen till fjärrvärden.
 
@@ -2249,8 +2249,8 @@ Användning av den här tjänsten gör att ett program kan lägga till val annat
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **client_ptr** Pekare till HTTP-klientkontrollblock.
-- **wait_option** Definierar hur länge tjänsten ska vänta på att HTTP-klienten hämtar startbegäran. Väntealternativen definieras på följande sätt:
-  - **timeout-värde** (0x00000001 till och med 0xFFFFFFFE) Om du väljer ett numeriskt värde (0x1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan du väntar på HTTP-serversvaret.
+- **wait_option** Definierar hur länge tjänsten ska vänta på HTTP-klientens startbegäran. Väntealternativen definieras på följande sätt:
+  - **timeout-värde** (0x00000001 till 0xFFFFFFFE) Om du väljer ett numeriskt värde (0x1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan HTTP-serversvaret väntar.
   - **NX_WAIT_FOREVER** (0xFFFFFFFF) Om du NX_WAIT_FOREVER här alternativet pausas anropstråden på obestämd tid tills HTTP-servern svarar på begäran.
 
 ### <a name="return-values"></a>Returvärden
@@ -2311,39 +2311,39 @@ UINT nx_web_http_client_response_body_get(
     wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar nästa paket med innehåll i resursen som begärdes av det *tidigare nx_web_http_client_get_start() eller* *nx_web_http_client_get_secure_start()-anropet.* Efterföljande anrop till den här rutinen ska göras tills returstatusen för NX_WEB_HTTP_GET_DONE tas emot.
+Den här tjänsten hämtar nästa paket med innehåll i resursen som begärdes i föregående begäran. Efterföljande anrop till den här rutinen ska göras tills returstatusen för NX_WEB_HTTP_GET_DONE tas emot.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **client_ptr** Pekare till HTTP-klientkontrollblock.
 - **packet_ptr** Mål för paket pekare som innehåller partiellt resursinnehåll.
-- **wait_option** Definierar hur länge tjänsten ska vänta på att HTTP-klienten hämtar startbegäran. Väntealternativen definieras på följande sätt:
-  - **timeout-värde** (0x00000001 till och med 0xFFFFFFFE) Om du väljer ett numeriskt värde (0x1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan du väntar på HTTP-serversvaret.
+- **wait_option** Definierar hur länge tjänsten ska vänta på HTTP-klientens startbegäran. Väntealternativen definieras på följande sätt:
+  - **timeout-värde** (0x00000001 till 0xFFFFFFFE) Om du väljer ett numeriskt värde (0x1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan HTTP-serversvaret väntar.
   - **NX_WAIT_FOREVER** (0xFFFFFFFF) Om du NX_WAIT_FOREVER här alternativet pausas anropstråden på obestämd tid tills HTTP-servern svarar på begäran.
 
 ### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) Lyckad get av HTTP-klientpaket.
+- **NX_SUCCESS** (0x00) Hämta HTTP-klientpaket.
 - **NX_WEB_HTTP_GET_DONE** (0x3000C) HTTP-klienten hämta paket är klar
 - **NX_WEB_HTTP_NOT_READY** (0x3000A) HTTP-klienten är inte i get-läge.
 - **NX_WEB_HTTP_BAD_PACKET_LENGTH** (0x3000D) Ogiltig paketlängd
 - **NX_WEB_HTTP_STATUS_CODE_CONTINUE** (0x3001A) HTTP-statuskod 100 Fortsätt
 - **NX_WEB_HTTP_STATUS_CODE_SWITCHING_PROTOCOLS** (0x3001B) HTTP-statuskod 101 Växla protokoll
-- **NX_WEB_HTTP_STATUS_CODE_CREATED** (0x3001C) HTTP-statuskod 201 Skapad
+- **NX_WEB_HTTP_STATUS_CODE_CREATED** (0x3001C) HTTP-statuskod 201 har skapats
 - **NX_WEB_HTTP_STATUS_CODE_ACCEPTED** (0x3001D) HTTP-statuskod 202 Accepterad
-- **NX_WEB_HTTP_STATUS_CODE_NON_AUTH_INFO** (0x3001E) HTTP-statuskod 203 – icke-auktoritativ information
+- **NX_WEB_HTTP_STATUS_CODE_NON_AUTH_INFO** (0x3001E) HTTP-statuskod 203 Icke-auktoritativ information
 - **NX_WEB_HTTP_STATUS_CODE_NO_CONTENT** (0x3001F) HTTP-statuskod 204 Inget innehåll
-- **HTTP-statuskod** NX_WEB_HTTP_STATUS_CODE_RESET_CONTENT (0x30020) 205 Reset Content
+- **NX_WEB_HTTP_STATUS_CODE_RESET_CONTENT** (0x30020) HTTP-statuskod 205 Återställ innehåll
 - **NX_WEB_HTTP_STATUS_CODE_PARTIAL_CONTENT** (0x30021) HTTP-statuskod 206 Partiellt innehåll
 - **NX_WEB_HTTP_STATUS_CODE_MULTIPLE_CHOICES** (0x30022) HTTP-statuskod 300 Flera alternativ
-- **NX_WEB_HTTP_STATUS_CODE_MOVED_PERMANETLY** (0x30023) HTTP-statuskod 301 Flyttad permanent
-- **NX_WEB_HTTP_STATUS_CODE_FOUND** (0x30024) HTTP-statuskod 302 hittades
+- **NX_WEB_HTTP_STATUS_CODE_MOVED_PERMANETLY** (0x30023) HTTP-statuskod 301 flyttades permanent
+- **NX_WEB_HTTP_STATUS_CODE_FOUND** (0x30024) HTTP-statuskod 302 Hittades
 - **NX_WEB_HTTP_STATUS_CODE_SEE_OTHER** (0x30025) HTTP-statuskod 303 Se övrigt
 - **NX_WEB_HTTP_STATUS_CODE_NOT_MODIFIED** (0x30026) HTTP-statuskod 304 Har inte ändrats
 - **NX_WEB_HTTP_STATUS_CODE_USE_PROXY** (0x30027) HTTP-statuskod 305 Använd proxy
-- **NX_WEB_HTTP_STATUS_CODE_TEMPORARY_REDIRECT** (0x30028) HTTP-statuskod 307 tillfällig omdirigering
+- **NX_WEB_HTTP_STATUS_CODE_TEMPORARY_REDIRECT** (0x30028) HTTP-statuskod 307 Tillfällig omdirigering
 - **NX_WEB_HTTP_STATUS_CODE_BAD_REQUEST** (0x30029) HTTP-statuskod 400 Felaktig begäran
 - **NX_WEB_HTTP_STATUS_CODE_UNAUTHORIZED** (0x3002A) HTTP-statuskod 401 – Obehörig
 - **NX_WEB_HTTP_STATUS_CODE_PAYMENT_REQUIRED** (0x3002B) HTTP-statuskod 402 Betalning krävs
@@ -2354,12 +2354,12 @@ Den här tjänsten hämtar nästa paket med innehåll i resursen som begärdes a
 - **NX_WEB_HTTP_STATUS_CODE_PROXY_AUTH_REQUIRED** (0x30030) HTTP-statuskod 407 Proxyautentisering krävs
 - **NX_WEB_HTTP_STATUS_CODE_REQUEST_TIMEOUT** (0x30031) HTTP-statuskod 408 Time-out för begäran
 - **NX_WEB_HTTP_STATUS_CODE_CONFLICT** (0x30032) HTTP-statuskod 409 Konflikt
-- **NX_WEB_HTTP_STATUS_CODE_GONE** (0x30033) HTTP-statuskod 410 Borta
+- **NX_WEB_HTTP_STATUS_CODE_GONE** (0x30033) HTTP-statuskod 410 borta
 - **NX_WEB_HTTP_STATUS_CODE_LENGTH_REQUIRED** (0x30034) HTTP-statuskod 411 Längd krävs
-- **NX_WEB_HTTP_STATUS_CODE_PRECONDITION_FAILED** (0x30035) HTTP-statuskod 412 Förhandsvillkoret misslyckades
+- **NX_WEB_HTTP_STATUS_CODE_PRECONDITION_FAILED** (0x30035) HTTP-statuskod 412 Förhandsvillkor misslyckades
 - **NX_WEB_HTTP_STATUS_CODE_ENTITY_TOO_LARGE** (0x30036) HTTP-statuskod 413 Begärandeentiteten är för stor
-- **NX_WEB_HTTP_STATUS_CODE_URL_TOO_LARGE** (0x30037) HTTP-statuskod 414 Begärande-URL är för stor
-- **NX_WEB_HTTP_STATUS_CODE_UNSUPPORTED_MEDIA** (0x30038) HTTP-statuskod 415 Medietyp som inte stöds
+- **NX_WEB_HTTP_STATUS_CODE_URL_TOO_LARGE** (0x30037) HTTP-statuskod 414 För stor begärande-URL
+- **NX_WEB_HTTP_STATUS_CODE_UNSUPPORTED_MEDIA** (0x30038) HTTP-statuskod 415 Medietyp stöds inte
 - **NX_WEB_HTTP_STATUS_CODE_RANGE_NOT_SATISFY** (0x30039) HTTP-statuskod 416 Det begärda intervallet är inte tillåtna
 - **NX_WEB_HTTP_STATUS_CODE_EXPECTATION_FAILED** (0x3003A) HTTP-statuskod 417 Förväntan misslyckades
 - **NX_WEB_HTTP_STATUS_CODE_INTERNAL_ERROR** (0x3003B) HTTP-statuskod 500 Internt serverfel
@@ -2367,7 +2367,7 @@ Den här tjänsten hämtar nästa paket med innehåll i resursen som begärdes a
 - **NX_WEB_HTTP_STATUS_CODE_BAD_GATEWAY** (0x3003D) HTTP-statuskod 502 Felaktig gateway
 - **NX_WEB_HTTP_STATUS_CODE_SERVICE_UNAVAILABLE** (0x3003E) HTTP-statuskod 503 Tjänsten är inte tillgänglig
 - **NX_WEB_HTTP_STATUS_CODE_GATEWAY_TIMEOUT** (0x3003F) HTTP-statuskod 504 Gateway Time-out
-- **NX_WEB_HTTP_STATUS_CODE_VERSION_ERROR** (0x30040) HTTP-statuskod 505 HTTP-version stöds inte
+- **NX_WEB_HTTP_STATUS_CODE_VERSION_ERROR** (0x30040) HTTP-statuskod 505 HTTP-versionen stöds inte
 - NX_PTR_ERROR (0x07) Ogiltig pekare
 - NX_CALLER_ERROR (0x11) Ogiltig anropare för den här tjänsten
 
@@ -2389,7 +2389,7 @@ status = nx_web_http_client_response_body_get(&my_client, &next_packet, 1000);
 
 ## <a name="nx_web_http_client_response_header_callback_set"></a>nx_web_http_client_response_header_callback_set
 
-Ställ in motringning för att anropa vid bearbetning av HTTP-huvuden
+Ställ in återanrop för att anropa vid bearbetning av HTTP-huvuden
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2401,7 +2401,7 @@ UINT nx_web_http_client_response_header_callback_set(
     CHAR *field_value, UINT field_value_length));
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten tilldelar ett återanrop som anropas när NetX Web HTTP Client bearbetar ett HTTP-huvud i ett inkommande svar från en fjärransluten HTTP-server. Motringning anropas en gång för varje huvud i svaret när det bearbetas. Motringning gör att ett HTTP-klientprogram kan komma åt vart och ett av huvudena i HTTP-serversvaret för att vidta önskade åtgärder utöver den grundläggande bearbetning som NetX Web HTTP-klienten gör.
 
@@ -2409,7 +2409,7 @@ Den här tjänsten tilldelar ett återanrop som anropas när NetX Web HTTP Clien
 
 **client_ptr** Pekare till HTTP-klientkontrollblock.
 
-**callback_function** Återanrop anropas vid bearbetning av svarshuvud. Motringning anropas med fältnamnet och värdet som strängar (och deras längd). Till exempel skulle rubriken "Content-Length: 100" göra så att funktionen anropas med "Content-Length" för *field_name* och strängen "100" *för field_value*.
+**callback_function** Motringning anropas vid bearbetning av svarshuvud. Motringning anropas med fältnamnet och värdet som strängar (och deras längder). Till exempel skulle rubriken "Content-Length: 100" göra så att funktionen anropas med "Content-Length" för *field_name* och strängen "100" *för field_value*.
 
 ### <a name="return-values"></a>Returvärden
 
@@ -2470,13 +2470,13 @@ UINT nx_web_http_client_secure_connect(NX_WEB_HTTP_CLIENT *client_ptr,
     ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här metoden är för **TLS-skyddad** HTTPS.
 
 Den här tjänsten öppnar en skyddad TLS-session till en HTTPS-server men skickar inga begäranden. Begäranden skapas med n *x_web_http_client_request_initialize() och* skickas med *hjälp av nx_web_http_client_request_send().* Anpassade HTTP-huvuden kan läggas till i begäran med *hjälp av nx_web_http_client_request_header_add()*.
 
-Användning av den här tjänsten gör det möjligt för ett program att lägga till val annat antal anpassade huvuden i begäran. **Detta möjliggör anpassade HTTP-begäranden som är avsedda för specifika program.**
+Användning av den här tjänsten gör att ett program kan lägga till val annat antal anpassade huvuden i begäran. **Detta möjliggör anpassade HTTP-begäranden som är avsedda för specifika program.**
 
 > [!NOTE]
 > De nx_web_http_client_ \* _start metoderna tillhandahålls för enkelhetens skull. Alla dessa funktioner använder den här rutinen internt (tillsammans med *nx_web_http_client_request_initialize()) för* att skapa och skicka HTTP-begäranden.
@@ -2484,11 +2484,11 @@ Användning av den här tjänsten gör det möjligt för ett program att lägga 
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **client_ptr** Pekare till HTTP-klientkontrollblock.
-- **server_ip** IP-adress för https-fjärrserver.
+- **server_ip** IP-adress för fjärransluten HTTPS-server.
 - **server_port** Port på https-fjärrserver (t.ex. 443 för HTTPS).
 - **tls_setup** Återanrop som används för att konfigurera TLS-konfiguration. Programmet definierar det här återanropet för att initiera TLS-kryptografi och autentiseringsuppgifter (t.ex. certifikat).
-- **wait_option** Definierar hur länge tjänsten ska vänta på HTTP-klientens startbegäran. Väntealternativen definieras på följande sätt:
-  - **timeout-värde** (0x00000001 till 0xFFFFFFFE) Om du väljer ett numeriskt värde (0x1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan HTTP-serversvaret väntar.
+- **wait_option** Definierar hur länge tjänsten ska vänta på att HTTP-klienten hämtar startbegäran. Väntealternativen definieras på följande sätt:
+  - **timeout-värde** (0x00000001 till och med 0xFFFFFFFE) Om du väljer ett numeriskt värde (0x1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan du väntar på HTTP-serversvaret.
   - **NX_WAIT_FOREVER** (0xFFFFFFFF) Om du NX_WAIT_FOREVER här alternativet pausas anropstråden på obestämd tid tills HTTP-servern svarar på begäran.
 
 ### <a name="return-values"></a>Returvärden
@@ -2543,11 +2543,11 @@ while(get_status != NX_WEB_HTTP_GET_DONE)
 }
 ```
 
-## <a name="http-and-https-server-api"></a>HTTP och HTTPS Server API
+## <a name="http-and-https-server-api"></a>API för HTTP- och HTTPS-server
 
 ## <a name="nx_web_http_server_cache_info_callback_set"></a>nx_web_http_server_cache_info_callback_set
 
-Ange återanrop för att hämta URL:ens maximala ålder och datum
+Ange återanropet för att hämta URL:ens maximala ålder och datum
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2559,9 +2559,9 @@ UINT nx_web_http_server_cache_info_callback_set(
     NX_WEB_HTTP_SERVER_DATE *date));
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten anger återanropstjänsten som anropas för att hämta den angivna resursens högsta ålder och senaste ändringsdatum.
+Den här tjänsten anger återanropstjänsten som anropas för att hämta den högsta ålder och senaste ändringsdatum för den angivna resursen.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
@@ -2572,8 +2572,8 @@ Den här tjänsten anger återanropstjänsten som anropas för att hämta den an
 
 ### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) Har ställt in återanropet
-- **NX_PTR_ERROR** (0x07) Ogiltig pekare
+- **NX_SUCCESS** (0x00) Ange återanropet
+- **NX_PTR_ERROR** (0x07) Ogiltig pekarindata
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -2596,7 +2596,7 @@ status = nx_web_http_server_cache_info_callback_set(&my_server, cache_info_get);
 
 ## <a name="nx_web_http_server_callback_data_send"></a>nx_web_http_server_callback_data_send
 
-Funktionen Skicka data från motringning
+Skicka data från återanropsfunktionen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2606,9 +2606,9 @@ UINT nx_web_http_server_callback_data_send(
     VOID *data_ptr, ULONG data_length);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skickar data i det angivna paketet från programmets återanropsrutin. Detta används vanligtvis för att skicka dynamiska data som är associerade med GET/POST-begäranden. Observera att om den här funktionen används ansvarar motringningrutinen för att skicka hela svaret i rätt format. Dessutom måste motringning rutinen returnera statusen för NX_WEB_HTTP_CALLBACK_COMPLETED.
+Den här tjänsten skickar data i det angivna paketet från programmets återanropsrutin. Detta används vanligtvis för att skicka dynamiska data som är associerade med GET/POST-begäranden. Observera att om den här funktionen används ansvarar motringningsfunktionen för att skicka hela svaret i rätt format. Dessutom måste återanropsrutinen returnera statusen för NX_WEB_HTTP_CALLBACK_COMPLETED.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
@@ -2619,7 +2619,7 @@ Den här tjänsten skickar data i det angivna paketet från programmets återanr
 ### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** (0x00) Serverdata har skickats
-- **NX_PTR_ERROR** (0x07) Ogiltig pekare
+- **NX_PTR_ERROR** (0x07) Ogiltig pekarindata
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -2668,11 +2668,11 @@ UINT nx_web_http_server_callback_generate_response_header(
     CHAR *content_type, CHAR* additional_header);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten används i HTTP(S)-serverns återanropsrutin (definieras av programmet) för att generera ett HTTP-svarshuvud. Serveranropsrutinen anropas när HTTP-servern svarar på klientens GET-, PUT- och DELETE-begäranden som kräver ett HTTP-svar. Den här funktionen tar svarsinformationen från programmet och genererar lämpligt svarshuvud. Mer information om *rutinerna för återanrop av serverbegäran* finns i service nx_web_http_server_create().
+Den här tjänsten används i HTTP(S)-serverns återanropsrutin (definieras av programmet) för att generera ett HTTP-svarshuvud. Serverns återanropsrutin anropas när HTTP-servern svarar på klientens GET-, PUT- och DELETE-begäranden som kräver ett HTTP-svar. Den här funktionen tar svarsinformationen från programmet och genererar lämpligt svarshuvud. Mer information om *rutinerna för återanrop av* serverbegäran finns i service nx_web_http_server_create().
 
-Det här API:et är inaktuellt. Utvecklare uppmanas att använda *nx_web_http_server_callback_generate_response_header_extended().*
+Det här API:et är inaktuellt. Utvecklare uppmanas att använda *nx_web_http_server_callback_generate_response_header_extended()*.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
@@ -2688,8 +2688,8 @@ Det här API:et är inaktuellt. Utvecklare uppmanas att använda *nx_web_http_se
 
 ### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) HTML-rubrik har skapats
-- **NX_PTR_ERROR** (0x07) Ogiltig pekare
+- **NX_SUCCESS** (0x00) HTML-rubriken har skapats
+- **NX_PTR_ERROR** (0x07) Ogiltig pekarindata
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -2773,9 +2773,9 @@ UINT nx_web_http_server_callback_generate_response_header_extended(
     UINT additional_header_length);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten används i HTTP(S)-serverns återanropsrutin (definieras av programmet) för att generera ett HTTP-svarshuvud. Serveranropsrutinen anropas när HTTP-servern svarar på klientens GET-, PUT- och DELETE-begäranden som kräver ett HTTP-svar. Den här funktionen tar svarsinformationen från programmet och genererar lämpligt svarshuvud. Mer information om *rutinerna för återanrop av serverbegäran* finns i service nx_web_http_server_create().
+Den här tjänsten används i HTTP(S)-serverns återanropsrutin (definieras av programmet) för att generera ett HTTP-svarshuvud. Serverns återanropsrutin anropas när HTTP-servern svarar på klientens GET-, PUT- och DELETE-begäranden som kräver ett HTTP-svar. Den här funktionen tar svarsinformationen från programmet och genererar lämpligt svarshuvud. Mer information om *rutinerna för återanrop av* serverbegäran finns i service nx_web_http_server_create().
 
 ### <a name="input-parameters"></a>Indataparametrar
 
@@ -2794,8 +2794,8 @@ Den här tjänsten används i HTTP(S)-serverns återanropsrutin (definieras av p
 
 ### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) HTML-rubrik har skapats
-- **NX_PTR_ERROR** (0x07) Ogiltig pekare
+- **NX_SUCCESS** (0x00) HTML-rubriken har skapats
+- **NX_PTR_ERROR** (0x07) Ogiltig pekarindata
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -2876,23 +2876,23 @@ UINT nx_web_http_server_callback_packet_send(
     NX_PACKET *packet_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten skickar ett fullständigt HTTP-serversvar från ett HTTP-återanrop. HTTP-servern skickar paketet med NX_WEB_HTTP_SERVER _TIMEOUT_SEND. HTTP-huvudet och data måste läggas till i paketet. Om returstatusen indikerar ett fel måste HTTP-programmet släppa paketet.
 
 Motringning ska returnera NX_WEB_HTTP_CALLBACK_COMPLETED.
 
-I *nx_web_http_server_callback_generate_response_header() finns* ett mer detaljerat exempel.
+I *nx_web_http_server_callback_generate_response_header()* finns ett mer detaljerat exempel.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **server_ptr** Pekare till HTTP-serverkontrollblock
-- **packet_ptr** Pekare till det paket som ska skickas
+- **packet_ptr** Pekare till paketet som ska skickas
 
 ### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) SKICKADE HTTP-serverpaket
-- **NX_PTR_ERROR** (0x07) Ogiltig pekare
+- **NX_SUCCESS** (0x00) HTTP-serverpaket har skickats
+- **NX_PTR_ERROR** (0x07) Ogiltig pekarindata
 
 ### <a name="allowed-from"></a>Tillåts från
 
@@ -2927,7 +2927,7 @@ UINT nx_web_http_server_callback_response_send(
     CHAR additional_info);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten skickar den angivna svarsinformationen från programmets återanropsrutin. Detta används vanligtvis för att skicka anpassade svar som är associerade med GET/POST-begäranden. Observera att om den här funktionen används måste återanropsrutinen returnera statusen för NX_WEB_HTTP_CALLBACK_COMPLETED.
 
@@ -2936,7 +2936,7 @@ Den här tjänsten är inaktuell. Utvecklare uppmanas att använda *nx_web_http_
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **server_ptr** Pekare till HTTP-serverkontrollblock.
-- **sidhuvud** Pekare till svarshuvudsträngen.
+- **rubrik** Pekare till svarshuvudsträngen.
 - **information** Pekare till informationssträngen.
 - **additional_info** Pekare till den ytterligare informationssträngen.
 
@@ -2989,18 +2989,18 @@ UINT nx_web_http_server_callback_response_send_extended(
     UINT additional_info_length);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten skickar den angivna svarsinformationen från programmets återanropsrutin. Detta används vanligtvis för att skicka anpassade svar som är associerade med GET/POST-begäranden. Observera att om den här funktionen används måste återanropsrutinen returnera statusen för NX_WEB_HTTP_CALLBACK_COMPLETED.
 
-Strängarna i sidhuvud, information och additional_info måste vara NULL-avslutade och längden på varje sträng matchar längden som anges i argumentlistan.
+Strängarna i rubrik, information och additional_info måste vara NULL-avslutade och längden på varje sträng matchar längden som anges i argumentlistan.
 
 Den här tjänsten *ersätter nx_web_http_server_callback_response_send*(). Den här versionen kräver att anropare tillhandahåller längdinformation till funktionen.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **server_ptr** Pekare till HTTP-serverkontrollblock.
-- **rubrik** Pekare till svarshuvudsträngen.
+- **sidhuvud** Pekare till svarshuvudsträngen.
 - **header_length** Längden på svarshuvudsträngen.
 - **information** Pekare till informationssträngen.
 - **Information_length** Längden på informationssträngen.
@@ -3057,14 +3057,14 @@ UINT nx_web_http_server_content_get(NX_WEB_HTTP_SERVER *server_ptr,
     UINT *actual_size);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten försöker hämta den angivna mängden innehåll från POST- eller PUT HTTP-klientbegäran. Den ska anropas från programmets begäran för att meddela återanrop som anges när HTTP-servern skapas (*nx_web_http_server_create()*).
+Den här tjänsten försöker hämta den angivna mängden innehåll från POST- eller PUT HTTP-klientbegäran. Den ska anropas från programmets begäran för att meddela återanropet som angavs när HTTP-servern skapades (*nx_web_http_server_create()*).
 
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **server_ptr** Pekare till HTTP-serverkontrollblock.
-- **packet_ptr** Pekare till HTTP-klientens begärandepaket. Observera att det här paketet inte får släppas av begäran om att meddela återanrop.
+- **packet_ptr** Pekare till HTTP-klientens begärandepaket. Observera att det här paketet inte får släppas av begäran för att meddela återanrop.
 - **byte_offset** Antal byte som ska förskjutas till innehållsområdet.
 - **destination_ptr** Pekare till målområdet för innehållet.
 - **destination_size** Maximalt antal byte som är tillgängliga i målområdet.
@@ -3072,10 +3072,10 @@ Den här tjänsten försöker hämta den angivna mängden innehåll från POST- 
 
 ### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) Lyckat HTTP-serverinnehåll Hämta
-- **NX_WEB_HTTP_ERROR** (0x30000) internt HTTP-serverfel
+- **NX_SUCCESS** (0x00) Hämta http-serverinnehåll
+- **NX_WEB_HTTP_ERROR** (0x30000) Internt fel för HTTP-server
 - **NX_WEB_HTTP_DATA_END** (0x30007) Slut på begärandeinnehåll
-- **NX_WEB_HTTP_TIMEOUT** (0x30001) HTTP-server timeout för att hämta nästa paket med innehåll
+- **NX_WEB_HTTP_TIMEOUT** (0x30001) HTTP-server-timeout för att hämta nästa paket med innehåll
 - NX_PTR_ERROR (0x07) Ogiltig pekare
 - NX_CALLER_ERROR (0x11) Ogiltig anropare för den här tjänsten
 
@@ -3098,7 +3098,7 @@ status = nx_web_http_server_content_get(&my_server, packet_ptr,
 
 ## <a name="nx_web_http_server_content_get_extended"></a>nx_web_http_server_content_get_extended
 
-Hämta innehåll från begäran/stöder innehållslängden noll längd
+Hämta innehåll från begäran/stöder ingen innehållslängd
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3112,16 +3112,16 @@ UINT nx_web_http_server_content_get_extended(
     UINT *actual_size);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten är nästan identisk *med nx_web_http_server_content_get()*; Den försöker hämta den angivna mängden innehåll från POST- eller PUT HTTP-klientbegäran. Den hanterar dock begäranden med innehållslängden noll värde (tom begäran) som en giltig begäran. Den ska anropas från programmets begäran för att meddela återanrop som anges när HTTP-servern skapas (*nx_web_http_server_create()*).
+Den här tjänsten är nästan identisk *med nx_web_http_server_content_get()*; Den försöker hämta den angivna mängden innehåll från POST- eller PUT HTTP-klientbegäran. Den hanterar dock begäranden med innehållslängd på noll värde (tom begäran) som en giltig begäran. Den ska anropas från programmets begäran för att meddela återanropet som angavs när HTTP-servern skapades (*nx_web_http_server_create()*).
 
 Den här tjänsten *ersätter nx_web_http_server_content_get*(). Den här versionen kräver att anropare tillhandahåller längdinformation till funktionen.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **server_ptr** Pekare till HTTP-serverkontrollblock.
-- **packet_ptr** Pekare till HTTP-klientens begärandepaket. Observera att det här paketet inte får släppas av begäran om att meddela återanrop.
+- **packet_ptr** Pekare till HTTP-klientens begärandepaket. Observera att det här paketet inte får släppas av begäran för att meddela återanrop.
 - **byte_offset** Antal byte som ska förskjutas till innehållsområdet.
 - **destination_ptr** Pekare till målområdet för innehållet.
 - **destination_size** Maximalt antal byte som är tillgängliga i målområdet.
@@ -3130,7 +3130,7 @@ Den här tjänsten *ersätter nx_web_http_server_content_get*(). Den här versio
 ### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** (0x00) Http-innehåll hämta
-- **NX_WEB_HTTP_ERROR** (0x30000) internt HTTP-serverfel
+- **NX_WEB_HTTP_ERROR** (0x30000) Internt fel för HTTP-server
 - **NX_WEB_HTTP_DATA_END** (0x30007) Slut på begärandeinnehåll
 - **NX_WEB_HTTP_TIMEOUT** (0x30001) HTTP-server-timeout för att hämta nästa paket
 - NX_PTR_ERROR (0x07) Ogiltig pekare
@@ -3165,18 +3165,18 @@ UINT nx_web_http_server_content_length_get(
     UINT *content_length);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten försöker hämta HTTP-innehållslängden i det angivna paketet. Returvärdet anger slutförandestatus och det faktiska längdvärdet returneras i indata pekaren content_length. Om det inte finns något HTTP-innehåll/innehållslängd = 0 returnerar den här rutinen fortfarande en slutförandestatus och content_length pekar på en giltig längd (noll). Den ska anropas från programmets begäran för att meddela återanrop som anges när HTTP-servern skapas (*nx_web_http_server_create()*).
+Den här tjänsten försöker hämta HTTP-innehållslängden i det angivna paketet. Returvärdet anger slutförandestatus och det faktiska längdvärdet returneras i indatapekaren content_length. Om det inte finns något HTTP-innehåll/innehållslängd = 0 returnerar den här rutinen fortfarande statusen slutförd och content_length pekar på en giltig längd (noll). Den ska anropas från programmets begäran för att meddela återanropet som angavs när HTTP-servern skapades (*nx_web_http_server_create()*).
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **packet_ptr** Pekare till HTTP-klientens begärandepaket. Observera att det här paketet inte får släppas av begäran om att meddela återanrop.
+- **packet_ptr** Pekare till HTTP-klientens begärandepaket. Observera att det här paketet inte får släppas av begäran för att meddela återanrop.
 - **content_length** Pekare till värde som hämtats från fältet Innehållslängd
 
 ### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) Lyckad http-serverinnehållslängd get
+- **NX_SUCCESS** (0x00) Hämta lyckad HTTP-serverinnehållslängd
 - **NX_WEB_HTTP_INCOMPLETE_PUT_ERROR** (0x3000F) Felaktigt HTTP-huvudformat
 - NX_PTR_ERROR (0x07) Ogiltig pekare
 
@@ -3215,7 +3215,7 @@ UINT nx_web_http_server_create(NX_WEB_HTTP_SERVER *http_server_ptr,
         UINT request_type, CHAR *resource, NX_PACKET *packet_ptr));
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten skapar en HTTP-serverinstans som körs i kontexten för en egen ThreadX-tråd. De *valfria authentication_check* *och request_notify* för programanrop ger programkontroll över de grundläggande åtgärderna för HTTP-servern.
 
@@ -3265,7 +3265,7 @@ Ta bort en HTTP-serverinstans
 UINT nx_web_http_server_delete(NX_WEB_HTTP_SERVER *http_server_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten tar bort en http-serverinstans som skapats tidigare.
 
@@ -3306,7 +3306,7 @@ UINT nx_web_http_server_get_entity_content(
     ULONG *available_length);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten avgör platsen för datastarten i den aktuella multipart-entiteten i de mottagna klientmeddelandena och längden på data som inte inkluderar gränssträngen. Internt uppdaterar HTTP-servern sina egna förskjutningar så att den här funktionen kan anropas igen på samma klientdatagram för meddelanden med flera entiteter. Paketpekaren uppdateras till nästa paket där klientmeddelandet är ett datagram med flera paket.
 
@@ -3363,7 +3363,7 @@ UINT nx_web_http_server_get_entity_header(
     ULONG buffer_size);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten hämtar entitetsrubriken till den angivna bufferten. Internt uppdaterar HTTP Server sina egna pekare för att hitta nästa entitet med flera delar i ett klientdatagram med flera entitetsrubriker. Paketpekaren uppdateras till nästa paket där klientmeddelandet är ett datagram med flera paket.
 
@@ -3460,7 +3460,7 @@ UINT nx_web_http_server_gmt_callback_set(
     VOID (*gmt_get)(NX_WEB_HTTP_SERVER_DATE *date);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten ställer in återanrop för att hämta GMT-datum och -tid med en tidigare skapad HTTP-server. Den här tjänsten anropas med HTTP-servern skapar ett huvud i HTTP-serversvar till klienten.
 
@@ -3472,7 +3472,7 @@ Den här tjänsten ställer in återanrop för att hämta GMT-datum och -tid med
 
 ### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) Ange återanropet
+- **NX_SUCCESS** (0x00) Har ställt in återanropet
 - NX_PTR_ERROR (0x07) Ogiltig paket- eller parameterpekare.
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -3497,7 +3497,7 @@ status = nx_web_http_server_gmt_callback_set(&my_server, gmt_get);
 
 ## <a name="nx_web_http_server_invalid_userpassword_notify_set"></a>nx_web_http_server_invalid_userpassword_notify_set
 
-Ange motringning för att hantera ogiltig användare/lösenord
+Ange återanrop för att hantera ogiltig användare/lösenord
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3510,9 +3510,9 @@ UINT nx_web_http_server_invalid_userpassword_notify_set(
         UINT request_type));
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten anger återanropet som anropas när ett ogiltigt användarnamn och lösenord tas emot i en klientbegäran om att hämta, placera eller ta bort, antingen genom sammanfattad eller grundläggande autentisering. HTTP-servern måste ha skapats tidigare.
+Den här tjänsten anger återanropet som anropas när ett ogiltigt användarnamn och lösenord tas emot i en klient få, placera eller ta bort begäran, antingen genom sammanfattad eller grundläggande autentisering. HTTP-servern måste ha skapats tidigare.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
@@ -3527,7 +3527,7 @@ Den här tjänsten anger återanropet som anropas när ett ogiltigt användarnam
 
 ### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) Ange återanropet
+- **NX_SUCCESS** (0x00) Har ställt in återanropet
 - NX_PTR_ERROR (0x07) Ogiltig pekare
 
 ### <a name="allowed-from"></a>Tillåts från
@@ -3567,13 +3567,13 @@ UINT nx_web_http_server_mime_maps_additional_set(
     UINT mime_maps_num);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Med den här tjänsten kan HTTP-programutvecklaren lägga till ytterligare MIME-typer från de MIME-standardtyper som tillhandahålls av NetX Web HTTP Server. En *lista över definierade typer finns i nx_web_http_server_get_type().*
+Med den här tjänsten kan HTTP-programutvecklaren lägga till ytterligare MIME-typer från de MIME-standardtyper som tillhandahålls av NetX Web HTTP Server. Se *nx_web_http_server_get_type() för* en lista över definierade typer.
 
 När en klientbegäran tas emot, t.ex. en GET-begäran, parsar HTTP-servern den begärda filtypen från HTTP-huvudet med hjälp av den ytterligare MIME-mappningsuppsättningen och om ingen matchning hittas letar den efter en matchning i STANDARD-MIME-kartan för HTTP-servern. Om ingen matchning hittas får MIME-typen som standard "text/oformaterad".
 
-Om funktionen request notify är registrerad på HTTP-servern kan begäran meddela motringning *anropa nx_web_http_server_type_get_extended()* för att parsa filtypen.
+Om request notify-funktionen är registrerad på HTTP-servern kan återanropet av begäran meddela *nx_web_http_server_type_get_extended()* för att parsa filtypen.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
@@ -3583,12 +3583,12 @@ Om funktionen request notify är registrerad på HTTP-servern kan begäran medde
 
 ### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) LYCKAD MIME-kartuppsättning för HTTP-server
+- **NX_SUCCESS** (0x00) Lyckad MIME-kartuppsättning för HTTP-server
 - NX_PTR_ERROR (0x07) Ogiltig pekare
 
 ### <a name="allowed-from"></a>Tillåts från
 
-Initiering, Trådar
+Initiering, trådar
 
 ### <a name="example"></a>Exempel
 
@@ -3620,7 +3620,7 @@ UINT nx_web_http_server_response_packet_allocate(
     ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten försöker allokera ett paket för HTTP(S)-servern.
 
@@ -3633,14 +3633,14 @@ Observera att om ett efterföljande NetX- eller HTTP Server-API som använder de
 - **wait_option** Definierar väntetiden i tick om det inte finns några paket tillgängliga i paketpoolen. Väntealternativen definieras på följande sätt:
   - **NX_NO_WAIT** (0x00000000) Om du NX_NO_WAIT här alternativet returneras den anropande tråden omedelbart om begäran inte kan uppfyllas.
   - **NX_WAIT_FOREVER** (0xFFFFFFFF) Om du NX_WAIT_FOREVER här alternativet pausas anropstråden på obestämd tid tills HTTP-servern svarar på begäran.
-  - **timeout-värde** (0x00000001 till och med 0xFFFFFFFE) Om du väljer ett numeriskt värde (0x1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan du väntar på HTTP-serversvaret.
+  - **timeout-värde** (0x00000001 till 0xFFFFFFFE) Om du väljer ett numeriskt värde (0x1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan HTTP-serversvaret väntar.
 
 ### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** (0x00) Allokera ett lyckat paket
 - **NX_NO_PACKET** (0x01) Inget paket tillgängligt
 - **NX_WAIT_ABORTED** (0x1A) Den begärda instängningen avbröts av ett anrop *till tx_thread_wait_abort*.
-- **NX_INVALID_PARAMETERS** paketstorlek (0x4D) stöder inte protokoll.
+- **NX_INVALID_PARAMETERS** (0x4D) Paketstorleken stöder inte protokoll.
 - NX_PTR_ERROR (0x07) Ogiltig pekare
 - NX_CALLER_ERROR (0x11) Ogiltig anropare för den här tjänsten.
 
@@ -3672,13 +3672,13 @@ UINT nx_web_http_server_packet_content_find(
     UINT *content_length);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten extraherar innehållslängden från HTTP-huvudet. Den uppdaterar också det angivna paketet på följande sätt: paketförberedaren (början på platsen för paketbufferten att skriva till) är inställd på HTTP-innehållet (data) som precis skickade HTTP-huvudet.
+Den här tjänsten extraherar innehållslängden från HTTP-huvudet. Det uppdaterar även det angivna paketet på följande sätt: pekaren för paketförberedelser (början på platsen för paketbufferten att skriva till) är inställd på HTTP-innehållet (data) som precis skickade HTTP-huvudet.
 
-Om början av innehållet inte finns i det aktuella paketet väntar funktionen tills nästa paket tas emot med hjälp av NX_WEB_HTTP_SERVER_TIMEOUT_RECEIVE väntealternativet.
+Om början av innehållet inte hittas i det aktuella paketet väntar funktionen på att nästa paket tas emot med hjälp av NX_WEB_HTTP_SERVER_TIMEOUT_RECEIVE väntealternativet.
 
-Observera att detta inte ska anropas innan *du anropar nx_web_http_server_get_entity_header()* eftersom det ändrar paketförberedar pekaren förbi entitetsrubriken.
+Observera att detta inte ska anropas innan *du anropar nx_web_http_server_get_entity_header()* eftersom det ändrar pekaren för paketförberedelserna förbi entitetsrubriken.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
@@ -3724,7 +3724,7 @@ UINT nx_web_http_server_packet_get(NX_WEB_HTTP_SERVER *server_ptr,
     NX_PACKET **packet_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten returnerar nästa paket som tas emot på HTTP-serversocketen. Väntealternativet för att ta emot ett paket NX_WEB_HTTP_SERVER_TIMEOUT_RECEIVE.
 
@@ -3769,7 +3769,7 @@ UINT nx_web_http_server_param_get(NX_PACKET *packet_ptr,
     UINT *param_size, UINT max_param_size);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten försöker hämta den angivna HTTP-URL-parametern i det angivna begärandepaketet. Om den begärda HTTP-parametern inte finns returnerar den här rutinen statusen NX_WEB_HTTP_NOT_FOUND. Den här rutinen ska anropas från programmets begäran meddela återanrop som anges när HTTP-servern skapas (*nx_web_http_server_create()*).
 
@@ -3821,7 +3821,7 @@ UINT nx_web_http_server_query_get(NX_PACKET *packet_ptr,
     UINT max_query_size);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten försöker hämta den angivna HTTP-URL-frågan i det angivna begärandepaketet. Om den begärda HTTP-frågan inte finns returnerar den här rutinen statusen NX_WEB_HTTP_NOT_FOUND. Den här rutinen ska anropas från programmets begäran meddela återanrop som anges när HTTP-servern skapas (*nx_web_http_server_create()*).
 
@@ -3874,7 +3874,7 @@ UINT nx_web_http_server_response_chunked_set(
     UINT chunk_size, NX_PACKET *packet_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten använder segmenterad överföringskodning för att skicka ett anpassat HTTP(S)-svarsdatapaket *som skapats med nx_web_http_server_response_packet_allocate*() till klienten.
 
@@ -3939,7 +3939,7 @@ UINT nx_web_http_server_secure_configure(
     UINT remote_cert_buffer_size);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten konfigurerar en tidigare skapad NetX Web HTTP-serverinstans för att använda TLS för säker HTTPS-kommunikation. Parametrarna används för att konfigurera alla möjliga TLS-sessioner med identiskt tillstånd så att varje inkommande HTTPS-klient har konsekvent beteende. Antalet TLS-sessioner styrs med hjälp av NX_WEB_HTTP_SESSION_MAX.
 
@@ -4038,7 +4038,7 @@ Starta HTTP-servern
 UINT nx_web_http_server_start(NX_WEB_HTTP_SERVER *http_server_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten startar en http- eller HTTPS-serverinstans som skapats tidigare.
 
@@ -4076,7 +4076,7 @@ Stoppa HTTP-servern
 UINT nx_web_http_server_stop(NX_WEB_HTTP_SERVER *http_server_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten stoppar den http-serverinstans som du skapade tidigare. Den här rutinen bör anropas innan du tar bort en HTTP Server-instans.
 
@@ -4115,7 +4115,7 @@ UINT nx_web_http_server_type_get(NX_WEB_HTTP_SERVER *http_server_ptr,
     UINT *string_size);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 > [!NOTE]
 > Den här tjänsten är inaktuell. Användarna uppmanas att använda tjänsten *nx_web_http_server_type_get_extended().*
@@ -4181,9 +4181,9 @@ UINT nx_web_http_server_type_get_extended(
     UINT *string_size);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten extraherar HTTP-begärandetypen *i bufferten http_type_string* och dess längd *i string_size* från namnet på indatabufferten , vanligtvis URL:en.  Om ingen MIME-karta hittas används som standard typen "text/oformaterad". Annars jämförs den extraherade typen med HTTP-serverns standard-MIME-mappning för en matchning. MIME-standardmappningar i NetX Web HTTP Server är:
+Den här tjänsten extraherar HTTP-begärandetypen *i bufferten http_type_string* och dess längd *i string_size* från namnet på indatabufferten , vanligtvis URL:en.  Om ingen MIME-karta hittas används som standard typen "text/oformaterad". Annars jämförs den extraherade typen med HTTP-serverns standard-MIME-mappning för en matchning. Mime-standardkartorna i NetX Web HTTP Server är:
 
 - html-text/html
 - htm text/html
@@ -4192,7 +4192,7 @@ Den här tjänsten extraherar HTTP-begärandetypen *i bufferten http_type_string
 - jpg-bild/jpeg
 - ico-bild/x-ikon
 
-Om det anges söker den även efter en användardefinierad uppsättning ytterligare MIME-kartor. Se *nx_web_http_server_mime_maps_addtional_set() för* mer information om användardefinierade kartor.
+Om det anges söker den även i en användardefinierad uppsättning ytterligare MIME-kartor. Se *nx_web_http_server_mime_maps_addtional_set() för* mer information om användardefinierade kartor.
 
 Den här tjänsten *ersätter nx_web_http_server_type_get*(). Den här versionen kräver att anropare tillhandahåller längdinformation till funktionen.
 
@@ -4257,7 +4257,7 @@ UINT nx_web_http_server_digest_authenticate_notify_set(
         CHAR *authorization_cnonce));
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten anger återanropet som anropas när sammanfattad autentisering utförs.
 
@@ -4268,7 +4268,7 @@ Den här tjänsten anger återanropet som anropas när sammanfattad autentiserin
 
 ### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) Ange återanropet
+- **NX_SUCCESS** (0x00) Har ställt in återanropet
 - NX_PTR_ERROR (0x07) Ogiltig pekare
 - NX_NOT_SUPPORTED (0x4B) Sammanfattad autentisering är inte aktiverat
 
@@ -4319,7 +4319,7 @@ UINT nx_web_http_server_digest_authenticate_notify_set(
         UINT *realm_length));
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten anger återanropet som anropas när autentiseringskontrollen utförs.
 
@@ -4330,7 +4330,7 @@ Den här tjänsten anger återanropet som anropas när autentiseringskontrollen 
 
 ### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) Ange återanropet
+- **NX_SUCCESS** (0x00) Har ställt in återanropet
 - NX_PTR_ERROR (0x07) Ogiltig pekare
 
 ### <a name="allowed-from"></a>Tillåts från
