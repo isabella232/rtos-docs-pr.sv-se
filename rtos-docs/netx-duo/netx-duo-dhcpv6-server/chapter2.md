@@ -1,57 +1,57 @@
 ---
-title: Kapitel 2 – installation och användning av Azure återställnings tider NetX Duo DHCPv6-server
-description: Det här kapitlet innehåller en beskrivning av olika problem som rör Installation, konfiguration och användning av NetX Duo DHCPv6-servern.
+title: Kapitel 2 – Installation och användning av Azure RTOS NetX Duo DHCPv6-server
+description: Det här kapitlet innehåller en beskrivning av olika problem som rör installation, installation och användning av NetX Duo DHCPv6-servern.
 author: philmea
 ms.author: philmea
 ms.date: 06/08/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: dd2cf736ac7caca616f3f305c0f6f6c84625ca0d
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: d98059088c89198e3564f3b920e97c7a2491cafea628d1586594eba1aeed0a30
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104826037"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116783568"
 ---
-# <a name="chapter-2---installation-and-use-of-azure-rtos-netx-duo-dhcpv6-server"></a>Kapitel 2 – installation och användning av Azure återställnings tider NetX Duo DHCPv6-server
+# <a name="chapter-2---installation-and-use-of-azure-rtos-netx-duo-dhcpv6-server"></a>Kapitel 2 – Installation och användning av Azure RTOS NetX Duo DHCPv6-server
 
-Det här kapitlet innehåller en beskrivning av olika problem som rör Installation, konfiguration och användning av NetX Duo DHCPv6-servern.
+Det här kapitlet innehåller en beskrivning av olika problem som rör installation, installation och användning av NetX Duo DHCPv6-servern.
 
-## <a name="product-distribution"></a>Produkt distribution
+## <a name="product-distribution"></a>Produktdistribution
 
-Azure återställnings tider NetX Duo kan hämtas från vår offentliga käll kods lagrings plats på [https://github.com/azure-rtos/netxduo/](https://github.com/azure-rtos/netxduo/) .
+Azure RTOS NetX Duo kan hämtas från vår offentliga källkodsdatabas på [https://github.com/azure-rtos/netxduo/](https://github.com/azure-rtos/netxduo/) .
 
-**nxd_dhcpv6_server. h** NetX DuoDHCPv6Server huvud fil
+**nxd_dhcpv6_server.h** NetX DuoDHCPv6Server-huvudfil
 
-**nxd_dhcpv6_server. c** NetX DuoDHCPv6Server-källfil
+**nxd_dhcpv6_server.c** NetX DuoDHCPv6Server-källfil
 
-**demo_netxduo_dhcpv6. c** NetX Duo DHCPv6-server demonstrations fil
+**demo_netxduo_dhcpv6.c** Demofil för NetX Duo DHCPv6 Server
 
-**nxd_dhcpv6_server.pdf** Användar handbok för NetX Duo DHCPv6Server
+**nxd_dhcpv6_server.pdf** Användarhandbok för NetX Duo DHCPv6Server
 
-## <a name="netx-duo-dhcpv6-server-installation"></a>NetX Duo DHCPv6-server installation
+## <a name="netx-duo-dhcpv6-server-installation"></a>Installation av NetX Duo DHCPv6-server
 
-För att kunna använda NetX Duo DHCPv6Server-API: t bör hela distributionen som nämnts tidigare kopieras till samma katalog där NetX Duo är installerat. Om t. ex. NetX Duo är installerat i katalogen "*\threadx\arm7\green*", ska *nxd_dhcpv6_server. h* -och *nx_dhpcv6_server. c* -filerna kopieras till den här katalogen.
+För att kunna använda NetX Duo DHCPv6Server-API:et ska hela distributionen som nämns ovan kopieras till samma katalog där NetX Duo är installerat. Om NetX Duo till exempel är installerat i katalogen "*\threadx\arm7\green*" ska *filerna nxd_dhcpv6_server.h* *och nx_dhpcv6_server.c* kopieras till den här katalogen.
 
 ## <a name="using-netx-duo-dhcpv6-server"></a>Använda NetX Duo DHCPv6-server
 
-Det är enkelt att använda NetX Duo DHCPv6Server API. I princip måste program koden innehålla *nx_dhcpv6-Server. h* när den innehåller *tx_api. h* och *nx_api. h*, för att kunna använda ThreadX respektive netx Duo. Programmet måste även innehålla *nxd_dhcpv6_server. c* i build-processen. Den här filen måste kompileras på samma sätt som andra programfiler och dess objekt formulär måste vara länkade tillsammans med programmets filer. Detta är allt som krävs för att använda NetX Duo DHCPv6-servern.
+Det är enkelt att använda NETX Duo DHCPv6Server-API:et. I princip måste programkoden innehålla *nx_dhcpv6-server.h* efter att den innehåller *tx_api.h* och *nx_api.h*, för att kunna använda ThreadX respektive NetX Duo. Programmet måste också inkludera *nxd_dhcpv6_server.c* i byggprocessen. Den här filen måste kompileras på samma sätt som andra programfiler och dess objektformulär måste länkas tillsammans med programmets filer. Detta är allt som krävs för att använda NetX Duo DHCPv6 Server.
 
-Observera att eftersom DHCPv6 baserat på IPv6-protokollet måste IPv6 vara aktiverat på IP-instansen med hjälp av *nxd_ipv6_enable*. NetX Duo UDP-och ICMPv6-tjänster används också. UDP aktive ras genom att anropa *nx_udp_enable* och ICMPv6 som har Aktiver ATS genom att anropa *nxd_icmp_enable* innan du startar aktiviteten netx Duo DHCPv6 server Thread.
+Observera att eftersom DHCPv6is baseras på IPv6-protokollet måste IPv6 aktiveras på IP-instansen med hjälp *av nxd_ipv6_enable*. Även NetX Duo UDP- och ICMPv6-tjänster används. UDP aktiveras genom att *anropa nx_udp_enable* och ICMPv6is aktiverat genom att *anropa nxd_icmp_enable* innan du startar NetX Duo DHCPv6 Server-tråduppgiften.
 
-## <a name="small-example-system"></a>Litet exempel system
+## <a name="small-example-system"></a>Litet exempelsystem
 
-Ett exempel på hur enkelt det är att använda NetX Duo DHCPv6-servern beskrivs i det lilla exemplet nedan med en DHCPv6-klient och server som kör över en virtuell "RAM"-driv rutin. Den här demon förutsätter en enda start värd med NetX Duo-miljön.
+Ett exempel på hur enkelt det är att använda NetX Duo DHCPv6-servern beskrivs i det lilla exemplet nedan med hjälp av en DHCPv6-klient och server som körs över en virtuell RAM-drivrutin. Den här demonstrationen förutsätter att en enda värd använder NetX Duo-miljön.
 
-*tx_application_define* skapar en modempool för att skicka DHCPV6-meddelande, en tråd och en IP-instans för både klienten och servern och aktiverar UDP (DHCP körs över UDP), IPv6, ICMP och ICMPv6 för både klient-och Server-IP-uppgifter på rad 116-157.
+*tx_application_define* skapar en paketpool för att skicka DHCPv6-meddelanden, en tråd och en IP-instans för både klienten och servern och aktiverar UDP (DHCP körs över UDP), IPv6, ICMP och ICMPv6 för både klient- och server-IP-uppgifter på raderna 116–157.
 
-DHCPv6-servern skapas på rad 456. Den definierar inte de valfria hanterarna för att tacka nej eller Option Request. I funktionen Server tråd inmatning konfigureras serverns IP-adress med en länk lokala adress tjänster på rad 435-453.
+DHCPv6-servern skapas på rad 456. Den definierar inte den valfria adressminskningen eller hanteraren för alternativbegäran. I servertrådens postfunktion konfigureras Server-IP med en länk till lokala adresstjänster på raderna 435-453.
 
-Innan du startar DHCPv6-servern skapar värd programmet ett DUID för server på rad 498 och anger den lokala nätverks-DNS-servern på rad 483. Sedan skapas en tabell med tilldelnings bara IP-adresser i raderna 521. Se det **avancerade exempel systemet** i bilaga D för att lagra och hämta Server tabeller från minnet.
+Innan du startar DHCPv6-servern skapar värdprogrammet ett Server DUID på rad 498 och anger den lokala nätverkets DNS-server på rad 483. Sedan skapas en tabell med tilldelarbara IP-adresser på raderna 521. Information om **hur du lagrar och** hämtar servertabeller från minnet finns i Advanced Example System i bilaga D.
 
-DHCPv6-servern är nu klar att starta på rad 530.
+Sedan är DHCPv6-servern redo att starta på rad 530.
 
-Mer information om hur du skapar och kör NetX Duo DHCPv6-klienten finns i *nxd_dhcpv6_client.pdf* -filen distribuerad med Dhcpv6-servern.
+Mer information om hur du skapar och kör NetX Duo DHCPv6-klienten *finns inxd_dhcpv6_client.pdf* som distribueras på med DHCPv6-servern.
 
 ```
 

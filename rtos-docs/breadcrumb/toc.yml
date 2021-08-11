@@ -6,7 +6,7 @@
       tocHref: /azure/
       topicHref: /azure/index
       items:
-        - name: Microsoft Azure återställnings tider
+        - name: Microsoft Azure RTOS
           tocHref: /azure/rtos/
           topicHref: /azure/rtos/index
           items:

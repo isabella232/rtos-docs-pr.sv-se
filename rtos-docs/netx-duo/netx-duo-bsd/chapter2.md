@@ -1,63 +1,63 @@
 ---
-title: Kapitel 2 – installation och användning av Azure återställnings tider NetX Duo BSD
-description: Det här kapitlet innehåller en beskrivning av olika problem som rör Installation, konfiguration och användning av Azure återställnings tider-NetX Duo BSD-komponenten.
+title: Kapitel 2 – Installation och användning av Azure RTOS NetX Duo BSD
+description: Det här kapitlet innehåller en beskrivning av olika problem som rör installation, installation och användning av Azure RTOS NetX Duo BSD-komponenten.
 author: philmea
 ms.author: philmea
 ms.date: 06/04/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 582661bc66c51341fc098de9ff7b6fa2a7d746de
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 560621e528c8ce98013ce505ea1511f466317f4a087aa44cc0e70cb4d4b8ed1e
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104826154"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116788515"
 ---
-# <a name="chapter-2---installation-and-use-of-azure-rtos-netx-duo-bsd"></a>Kapitel 2 – installation och användning av Azure återställnings tider NetX Duo BSD
+# <a name="chapter-2---installation-and-use-of-azure-rtos-netx-duo-bsd"></a>Kapitel 2 – Installation och användning av Azure RTOS NetX Duo BSD
 
-Det här kapitlet innehåller en beskrivning av olika problem som rör Installation, konfiguration och användning av Azure återställnings tider-NetX Duo BSD-komponenten.
+Det här kapitlet innehåller en beskrivning av olika problem som rör installation, installation och användning av Azure RTOS NetX Duo BSD-komponenten.
 
-## <a name="product-distribution"></a>Produkt distribution
+## <a name="product-distribution"></a>Produktdistribution
 
-Azure återställnings tider NetX Duo BSD kan hämtas från vår offentliga käll kods lagrings plats på [https://github.com/azure-rtos/netx/](https://github.com/azure-rtos/netx/) . Paketet innehåller två källfiler och en PDF-fil som innehåller det här dokumentet, enligt följande:
+Azure RTOS NetX Duo BSD kan hämtas från vår offentliga källkodsdatabas på [https://github.com/azure-rtos/netx/](https://github.com/azure-rtos/netx/) . Paketet innehåller två källfiler och en PDF-fil som innehåller det här dokumentet, enligt följande:
 
-- **nxd_bsd. h**: rubrik fil för netx Duo BSD
-- **nxd_bsd. c**: c-källfil för netx Duo BSD
-- **nxd_bsd.pdf**: Användar handbok för netx Duo BSD
+- **nxd_bsd.h:** Rubrikfil för NetX Duo BSD
+- **nxd_bsd.c:** C-källfil för NetX Duo BSD
+- **nxd_bsd.pdf:** Användarhandbok för NetX Duo BSD
 
-Demonstrations filer:
+Demofiler:
 
-- **bsd_demo_udp. c**
-- **bsd_demo_tcp. c**
-- **bsd_demo_raw. c**
+- **bsd_demo_udp.c**
+- **bsd_demo_tcp.c**
+- **bsd_demo_raw.c**
 
-## <a name="netx-duo-bsd-installation"></a>Installation av NetX Duo BSD
+## <a name="netx-duo-bsd-installation"></a>NetX Duo BSD-installation
 
-För att kunna använda NetX Duo BSD bör hela distributionen som nämnts tidigare kopieras till samma katalog där NetX Duo är installerat. Om t. ex. NetX Duo är installerat i katalogen "*\threadx\arm7\green*", ska *nxd_bsd. h* -och *nxd_bsd. c* -filerna kopieras till den här katalogen.
+För att kunna använda NetX Duo BSD ska hela distributionen som nämns ovan kopieras till samma katalog där NetX Duo är installerat. Om NetX Duo till exempel är installerat i katalogen "*\threadx\arm7\green*" ska *filerna nxd_bsd.h* *och nxd_bsd.c* kopieras till den här katalogen.
 
-## <a name="building-the-threadx-and-netx-duo-components-of-a-bsd-application"></a>Skapa ThreadX-och NetX Duo-komponenter i ett BSD-program
+## <a name="building-the-threadx-and-netx-duo-components-of-a-bsd-application"></a>Skapa ThreadX- och NetX Duo-komponenterna i ett BSD-program
 
 ### <a name="threadx"></a>ThreadX
 
-ThreadX-biblioteket måste definiera `bsd_errno` i den lokala tråd lagringen. Vi rekommenderar följande procedur:
+ThreadX-biblioteket måste `bsd_errno` definieras i den lokala trådlagringen. Vi rekommenderar följande procedur:
 
-1. I *tx_port. h* anger du ett av TX_THREAD_EXTENSION-makron enligt följande:
+1. I *tx_port.h* anger du ett av TX_THREAD_EXTENSION makron enligt följande:
    - `#define TX_THREAD_EXTENSION_3     int bsd_errno`
 
 1. Återskapa ThreadX-biblioteket.
 
 > [!NOTE]
-> Om TX_THREAD_EXTENSION_3 redan används, är användaren kostnads fri att använda något av de andra TX_THREAD_EXTENSION-makron.
+> Om TX_THREAD_EXTENSION_3 redan används kan användaren använda något av de andra TX_THREAD_EXTENSION makron.
 
 ### <a name="netx-duo"></a>NetX Duo
 
-Innan du använder NetX Duo BSD-tjänster måste NetX Duo-biblioteket skapas med NX_ENABLE_EXTENDED_NOTIFY_SUPPORT definierat. Som standard är den inte definierad. Om BSD RAW-socketarna ska användas måste NetX Duo-biblioteket skapas med NX_ENABLE_IP_RAW_PACKET_FILTER definierat.
+Innan du använder NetX Duo BSD Services måste NetX Duo-biblioteket byggas med NX_ENABLE_EXTENDED_NOTIFY_SUPPORT definieras. Som standard definieras den inte. Om BSD-råsocketarna ska användas måste NetX Duo-biblioteket byggas med NX_ENABLE_IP_RAW_PACKET_FILTER definierat.
 
 ## <a name="using-netx-duo-bsd"></a>Använda NetX Duo BSD
 
-Ett NetX Duo BSD-programprojekt måste innehålla *nxd_bsd. h* när det innehåller *tx_api. h* och *nx_api. h* för att kunna använda BSD-tjänster som anges senare i den här hand boken. Programmet måste även innehålla *nxd_bsd. c* i build-processen. Den här filen måste kompileras på samma sätt som andra programfiler och dess objekt formulär måste vara länkade tillsammans med programmets filer. Detta är allt som krävs för att använda NetX Duo BSD.
+Ett NetX Duo BSD-programprojekt måste innehålla *nxd_bsd.h* efter att det innehåller *tx_api.h* och *nx_api.h* för att kunna använda BSD-tjänster som anges senare i den här guiden. Programmet måste även innehålla *nxd_bsd.c* i byggprocessen. Den här filen måste kompileras på samma sätt som andra programfiler och dess objektformulär måste länkas tillsammans med programmets filer. Det här är allt som krävs för att använda NetX Duo BSD.
 
-Om du vill använda NetX Duo BSD-tjänster måste programmet skapa en IP-instans, skapa en adresspool för BSD-lagret för att allokera paket från, allokera minnes utrymme för den interna BSD-trådens stack och ange prioriteten för den interna BSD-tråden. BSD-lagret initieras genom att anropa *bsd_initialize* och skicka in parametrarna. Detta visas i "små exempel" senare i det här dokumentet, men prototypen visas nedan:
+Om du vill använda NetX Duo BSD-tjänster måste programmet skapa en IP-instans, skapa en paketpool för BSD-lagret för att allokera paket från, allokera minnesutrymme för den interna BSD-trådstacken och ange prioriteten för den interna BSD-tråden. BSD-lagret initieras genom att *anropa bsd_initialize* och skicka in parametrarna. Detta visas i "Små exempel" senare i det här dokumentet, men prototypen visas nedan:
 
 ```c
 INT bsd_initialize(NX_IP *default_ip, NX_PACKET_POOL *default_pool,
@@ -66,56 +66,56 @@ INT bsd_initialize(NX_IP *default_ip, NX_PACKET_POOL *default_pool,
                     *UINT bsd_thread_priority*);
 ```
 
-Default_ip är den IP-instans som BSD-lagret arbetar med. Default_pool används av BSD-tjänsterna för att allokera paket från. Följande två parametrar: bsd_thread_stack_area, bsd_thread_stack_size definierar stackområdet som används av den interna BSD-tråden och den sista parametern, bsd_thread_priority, anger trådens prioritet.
+Den default_ip är den IP-instans som BSD-lagret fungerar på. Den default_pool används av BSD-tjänsterna för att allokera paket från. Följande två parametrar: bsd_thread_stack_area, bsd_thread_stack_size definierar det stackområde som används av den interna BSD-tråden, och den sista parametern, bsd_thread_priority, anger trådens prioritet.
 
-## <a name="netx-duo-bsd-raw-socket-support"></a>Stöd för NetX Duo BSD RAW socket
+## <a name="netx-duo-bsd-raw-socket-support"></a>Stöd för NetX Duo BSD Raw Socket
 
-NetX Duo BSD stöder också RAW-Sockets. Om du vill använda RAW-socketar i NetX Duo BSD måste NetX Duo-biblioteket kompileras med NX_ENABLE_IP_RAW_PACKET_FILTER definierat. Som standard är den inte definierad. Programmet måste sedan aktivera rå socket-bearbetning för en tidigare skapad IP-instans genom att anropa *nx_ip_raw_packet_enable.*
+NetX Duo BSD stöder även råsocketar. Om du vill använda råsocketar i NetX Duo BSD måste NetX Duo-biblioteket kompileras med NX_ENABLE_IP_RAW_PACKET_FILTER definierat. Som standard definieras den inte. Programmet måste sedan aktivera raw socket för en tidigare skapad IP-instans genom att anropa *nx_ip_raw_packet_enable.*
 
-För att skapa en RAW-socket i NetX Duo BSD använder programmet socketen skapa tjänst- *socket* och anger protokoll familjen, typ av socket och protokoll:
+För att raw socket i NetX Duo BSD använder programmet socket create service *socket* och anger protokollfamilj, sockettyp och protokoll:
 
 ```c
 sock_1 = socket(INT protocolFamily, INT socket_type, INT protocol)
 ```
 
-protocolFamily är AF_INET för IPv4-Sockets eller AF_INET6 för IPv6-Sockets förutsatt att IPv6 är aktiverat på IP-instansen. Socket_type måste anges till SOCK_RAW. protokollet är programspecifikt.
+protocolFamily är AF_INET för IPv4-sockets eller AF_INET6 för IPv6-sockets, förutsatt att IPv6 är aktiverat på IP-instansen. Den socket_type måste anges till SOCK_RAW. protokollet är programspecifikt.
 
-Om du vill skicka och ta emot obearbetade paket samt stänga en RAW-socket använder programmet vanligt vis samma BSD-tjänster som för UDP, t. ex. *SendTo, recvfrom, väljer* och *soc_close*. RAW-Sockets stöder varken *Accept* -eller *Listener* BSD-tjänster.
+För att skicka och ta emot rådatapaket samt stänga ett raw socket använder programmet vanligtvis samma BSD-tjänster som för UDP, t.ex. *sendto, recvfrom, select* *och soc_close*. Råsocketar stöder inte *antingen* BSD-tjänster eller BSD-tjänster. 
 
-- Mottagna IPv4-rå data inkluderar som standard IPv4-huvudet.  Däremot inkluderar mottagna IPv6-rå data inte IPv6-sidhuvudet.
+- Mottagna IPv4-rådata innehåller som standard IPv4-huvudet.  Däremot innehåller mottagna IPv6-rådata inte IPv6-huvudet.
 
-- När du skickar antingen obehandlade IPv6-eller IPv4-paket, lägger BSD-skiktet som standard till IPv6-eller IPv4-sidhuvudet innan data skickas.
+- När du skickar råa IPv6- eller IPv4-paket lägger BSD-omslutningslagret som standard till IPv6- eller IPv4-huvudet innan data skickas.
 
-NetX Duo BSD stöder ytterligare alternativ för RAW socket, inklusive IP_RAW_RX_NO_HEADER IP_HDRINCL och IP_RAW_IPV6_HDRINCL.
+NetX Duo BSD stöder ytterligare raw socket alternativ, inklusive IP_RAW_RX_NO_HEADER, IP_HDRINCL och IP_RAW_IPV6_HDRINCL.
 
-Om IP_RAW_RX_NO_HEADER har angetts tas IPv4-rubriken bort så att mottagna data inte innehåller IPv4-huvudet och den rapporterade meddelande längden inkluderar inte IPv4-huvudet.  För IPv6-socketar inkluderar Receive socket Receive inte IPv6-sidhuvudet, som motsvarar IP_RAW_RX_NO_HEADER alternativ uppsättning. Programmet kan använda *Setsockopt* -tjänsten för att ta bort alternativet IP_RAW_RX_NO_HEADER när alternativet IP_RAW_RX_NO_HEADER har rensats, skulle mottagna IPv6-rå data inkludera IPv6-huvudet och den rapporterade meddelande längden inkluderar IPv6-huvudet.
+Om IP_RAW_RX_NO_HEADER har angetts tas IPv4-huvudet bort så att mottagna data inte innehåller IPv4-huvudet och den rapporterade meddelandelängden inte innehåller IPv4-huvudet.  För IPv6-sockets innehåller raw socket som standard inte IPv6-huvud, vilket motsvarar att IP_RAW_RX_NO_HEADER har angetts. Programmet kan använda *tjänsten setsockopt* för att rensa IP_RAW_RX_NO_HEADER-alternativet. När alternativet IP_RAW_RX_NO_HEADER är avmarkerat innehåller mottagna IPv6-rådata IPv6-huvudet och den rapporterade meddelandelängden innehåller IPv6-huvudet.
 
-Det här alternativet har ingen påverkan på IPv4-eller IPv6-överförda data.
+Det här alternativet har ingen effekt på IPv4- eller IPv6-överförda data.
 
-Om IP_HDRINCL har angetts inkluderar programmet IPv4-sidhuvudet när data skickas.  Det här alternativet har ingen påverkan på IPv6-överföring och definieras inte som standard. Om IP_RAW_IPV6_HDRINCL har angetts inkluderar programmet IPv6-sidhuvudet när data skickas.  Det här alternativet har ingen påverkan på IPv4-överföring och definieras inte som standard.
+Om IP_HDRINCL har angetts innehåller programmet IPv4-huvudet när data skickas.  Det här alternativet har ingen effekt på IPv6-överföring och definieras inte som standard. Om IP_RAW_IPV6_HDRINCL har angetts innehåller programmet IPv6-huvudet när data skickas.  Det här alternativet har ingen effekt på IPv4-överföring och definieras inte som standard.
 
-IP_HDRINCL och IP_RAW_IPV6_HDRINCL har ingen påverkan på IPv4-eller IPv6-mottagning.
+IP_HDRINCL och IP_RAW_IPV6_HDRINCL ingen effekt på IPv4- eller IPv6-mottagning.
 
 > [!NOTE]
-> BSD 4,3-socket-specifikationen anger att kerneln måste kopiera RAW-paketet till varje socket Receive-buffert. Men i NetX Duo BSD, om flera Sockets har skapats med att dela samma protokoll, är beteendet odefinierat.
+> BSD 4.3 Socket-specifikationen anger att kerneln måste kopiera det råa paketet till varje socket-mottagningsbuffert. Men om flera socketar skapas med samma protokoll i NetX Duo BSD är beteendet odefinierat.
 
-## <a name="netx-duo-bsd-raw-packet-support"></a>Stöd för NetX Duo BSD RAW-paket
+## <a name="netx-duo-bsd-raw-packet-support"></a>Stöd för Raw-paket för NetX Duo BSD
 
-Om du vill aktivera stöd för RAW-paket för PPPoE måste NetX Duo BSD-omslutningen skapas med NX_BSD_RAW_PPPOE_SUPPORT aktiverat.
+Om du vill aktivera råpaketstöd för PPPoE måste NetX Duo BSD-wrapper byggas med NX_BSD_RAW_PPPOE_SUPPORT aktiverat.
 
-Följande kommando skapar en BSD-socket för att hantera PPPoE RAW-paket:
+Följande kommando skapar en BSD-socket för att hantera PPPoE-rådatapaket:
 
 ```c
 Sockfd = socket(AF_PACKET, SOCK_RAW, protocol);
 ```
 
-Den aktuella BSD-implementeringen stöder endast två protokoll typer i AF_PACKET-serien
+Den aktuella BSD-implementeringen stöder bara två protokolltyper i AF_PACKET familjen
 
-- `ETHERTYPE_PPPOE_DISC`: PPPoE-identifierings paket. I MAC data-ramen har identifierings paketen Ethernet-ramtypen 0x8863.
+- `ETHERTYPE_PPPOE_DISC`: PPPoE Discovery-paket. I MAC-dataramen har identifieringspaketen Ethernet-ramtypen 0x8863.
 
-- `ETHERTYPE_PPPOE_SESS`: PPP-session paket. I rutan MAC-data har sessions-paketen Ethernet-ramtyp 0x8864.
+- `ETHERTYPE_PPPOE_SESS`: PPP-sessionspaket. I MAC-dataramen har sessionspaketen Ethernet-ramtypen 0x8864.
 
-Strukturen `sockaddr_ll` används för att ange parametrar när du skickar eller tar emot PPPoE-ramar.
+Strukturen används `sockaddr_ll` för att ange parametrar när du skickar eller tar emot PPPoE-bildrutor.
 
 `struct sockaddr_ll` deklareras som:
 
@@ -133,13 +133,13 @@ struct sockaddr_ll
 ```
 
 > [!NOTE]
-> Alla fält i strukturen används inte av `sendto()` eller `recvfrom()` . Se beskrivningen nedan om hur du konfigurerar `sockaddr_ll` för att skicka och ta emot PPPoE-paket.
+> Inte alla fält i strukturen används av `sendto()` eller `recvfrom()` . Se beskrivningen nedan om hur du ställer in för `sockaddr_ll` att skicka och ta emot PPPoE-paket.
 
-Socket som skapats i AF_PACKETs familjen kan användas för att skicka PPPoE-paket eller PPP-sessionsobjekt, oavsett vilket protokoll som anges. När ett PPPoE-paket överförs måste programmet förbereda bufferten som innehåller korrekt formaterad PPPoE-ram, inklusive MAC-sidhuvuden (målets MAC-adress, käll-MAC-adress och ramtyp.) Buffertstorleken innehåller ett Ethernet-huvud på 14 byte.
+Socket som skapats i AF_PACKET-familjen kan användas för att skicka antingen PPPoE Discovery-paket eller PPP-sessionspaket, oavsett vilket protokoll som anges. När ett PPPoE-paket överförs måste programmet förbereda bufferten som innehåller en korrekt formaterad PPPoE-ram, inklusive MAC-huvudena (MÅL-MAC-adress, MAC-källadress och bildrutetyp).) Storleken på bufferten innehåller Ethernet-huvudet på 14 byte.
 
-`sockaddr_ll`Struct (struct) `sll_ifindex` används för att ange det fysiska gränssnitt som ska användas för att skicka det här paketet. Resten av fälten i strukturen används inte. Värden som används i de oanvända fälten ignoreras av den interna BSD-processen.
+`sockaddr_ll`Struct-structen `sll_ifindex` används för att ange det fysiska gränssnitt som ska användas för att skicka det här paketet. Resten av fälten i strukturen används inte. Värden som anges till oanvända fält ignoreras av den interna BSD-processen.
 
-Följande kodblock visar hur du skickar ett PPPoE-paket:
+Följande kodblock visar hur du överför ett PPPoE-paket:
 
 ```c
 struct sockaddr_ll peer_addr;
@@ -150,20 +150,20 @@ n = sendto(sockfd, frame, frame_size, 0, (struct
         sockaddr*)&peer_addr, sizeof(peer_addr));
 ```
 
-Returvärdet anger antalet byte som skickats. Eftersom PPPoE-paketen är meddelandebaserade, i en lyckad överföring, matchar antalet skickade byte paketets storlek, inklusive Ethernet-huvudet på 14 byte.
+Returvärdet anger antalet byte som överförs. Eftersom PPPoE-paket är meddelandebaserade matchar antalet byte som skickats storleken på paketet vid en lyckad överföring, inklusive Ethernet-huvudet på 14 byte.
 
-PPPoE-paket kan tas emot med hjälp av `recvfrom()` . Receive buffer måste vara tillräckligt stor för att rymma meddelande om Ethernet MTU-storlek. Det mottagna PPPoE-paketet innehåller 14 byte Ethernet-sidhuvud. Vid mottagning av PPPoE-paket kan PPPoE-identifierings paket endast tas emot av socket som skapats med protokollet `ETHERTYPE_PPPOE_DISC` . På samma sätt kan bara PPP-sessionsobjekt tas emot av socket som skapats med protokollet `ETHERTYPE_PPPOE_SESS` . Om flera Sockets skapas för samma protokoll typ, vidarebefordras inkommande PPPoE-paket till den socket som skapades först. Om den första socketen som skapas för protokollet stängs, används nästa socket i skapande ordningen för att ta emot dessa paket.
+PPPoE-paket kan tas emot med hjälp av `recvfrom()` . Mottagningsbufferten måste vara tillräckligt stor för att hantera meddelanden med Ethernet MTU-storlek. Det mottagna PPPoE-paketet innehåller Ethernet-huvud på 14 byte. Vid mottagning av PPPoE-paket kan PPPoE Discovery-paket endast tas emot av socketar som skapats med protokollet `ETHERTYPE_PPPOE_DISC` . På samma sätt kan PPP-sessionspaket endast tas emot av socketar som skapats med protokollet `ETHERTYPE_PPPOE_SESS` . Om flera sockets skapas för samma protokolltyp vidarebefordras inkommande PPPoE-paket till den socket som skapas först. Om den första socketen som skapades för protokollet stängs används nästa socket i skapandeordningen för att ta emot dessa paket.
 
-När ett PPPoE-paket tas emot är följande fält i `sockaddr_ll` strukturen giltiga:
-- **sll_family**: som anges av BSD Internal som ska AF_PACKET
-- **sll_ifindex**: anger gränssnittet som paketet tas emot från
-- **sll_protocol**: Ange till den typ av paket som tas emot: `ETHERTYPE_PPPOE_DISC` eller `ETHERTYPE_PPPOE_SESS`
+När ett PPPoE-paket har tagits emot är följande fält i `sockaddr_ll` struct-datastructen giltiga:
+- **sll_family:** Anger att BSD ska vara AF_PACKET
+- **sll_ifindex:** Anger gränssnittet som paketet tas emot från
+- **sll_protocol:** Ange till typen av paket som tas emot: `ETHERTYPE_PPPOE_DISC` eller `ETHERTYPE_PPPOE_SESS`
 
-## <a name="eliminating-internal-bsd-thread"></a>Tar bort intern BSD-tråd
+## <a name="eliminating-internal-bsd-thread"></a>Eliminera intern BSD-tråd
 
-Som standard använder BSD en intern tråd för att utföra en del bearbetning. I system med stränga minnes begränsningar kan BSD skapas med NX_BSD_TIMEOUT_PROCESS_IN_TIMER som definierats, vilket eliminerar den interna BSD-tråden och använder i stället en intern timer för att utföra samma bearbetning. Detta eliminerar det minne som krävs för det interna BSD-blocket och stacken för tråd kontroll. Övergripande timer-bearbetning ökar dock avsevärt och BSD-bearbetningen kan också köras med högre prioritet än vad som behövs.
+Som standard använder BSD en intern tråd för att utföra en del av bearbetningen. I system med begränsade minnesbegränsningar kan BSD byggas med NX_BSD_TIMEOUT_PROCESS_IN_TIMER definierade, vilket eliminerar den interna BSD-tråden och använder i stället en intern timer för att utföra samma bearbetning. Detta eliminerar det minne som krävs för det interna BSD-trådkontrollblocket och -stacken. Den övergripande timerbearbetningen ökar dock avsevärt och BSD-bearbetningen kan också köras med en högre prioritet än vad som behövs.
 
-Om du vill konfigurera BSD-Sockets så att de körs i ThreadX timer-kontexten definierar du NX_BSD_TIMEOUT_PROCESS_IN_TIMER i *nxd_bsd. h*. Om BSD-lagret har kon figurer ATS för att köra BSD-uppgifter i timer-kontexten ignoreras följande tre parametrar i anropet till *bsd_initialize* och ska anges till null:
+Om du vill konfigurera BSD-sockets att köras i ThreadX-timerkontexten definierar du NX_BSD_TIMEOUT_PROCESS_IN_TIMER *i nxd_bsd.h*. Om BSD-lagret är konfigurerat för att köra BSD-uppgifterna i timerkontexten ignoreras följande tre parametrar i anropet till *bsd_initialize* och ska anges till NULL:
 
 - **bsd_thread_stack_area**
 - **bsd_thread_stack_size**
@@ -171,9 +171,9 @@ Om du vill konfigurera BSD-Sockets så att de körs i ThreadX timer-kontexten de
 
 ## <a name="netx-duo-bsd-with-dns-support"></a>NetX Duo BSD med DNS-stöd
 
-Om NX_BSD_ENABLE_DNS har definierats kan NetX Duo BSD skicka DNS-frågor för att hämta värdnamn eller värd-IP-information. Den här funktionen kräver att en NetX DNS-klient skapas tidigare med hjälp av tjänsten *nx_dns_create* . En eller flera kända DNS-Server-IP-adresser måste registreras med DNS-instansen med hjälp av tjänsten *nx_dns_server_add* för att lägga till IPv4-serveradresser eller använda tjänsten *nxd_dns_server_add* för att lägga till IPv4-eller IPv6-serveradresser.
+Om NX_BSD_ENABLE_DNS har definierats kan NetX Duo BSD skicka DNS-frågor för att hämta information om värdnamn eller värd-IP. Den här funktionen kräver att en NetX DNS-klient har skapats tidigare med *hjälp nx_dns_create tjänsten.* En eller flera kända IP-adresser för DNS-servern måste registreras med DNS-instansen med hjälp av *nx_dns_server_add-tjänsten* för att lägga till IPv4-serveradresser eller med *hjälp av nxd_dns_server_add-tjänsten* för att lägga till Antingen IPv4- eller IPv6-serveradresser.
 
-DNS-tjänster och minnesallokering används av *getaddrinfo* -och *getnameinfo* -tjänster:
+DNS-tjänster och minnesallokering används av *getaddrinfo-* och *getnameinfo-tjänster:*
 
 ```c
 INT getaddrinfo(const CHAR *node, const CHAR *service,
@@ -183,74 +183,74 @@ INT getnameinfo(const struct sockaddr *sa, socklen_t salen,
         char *host, size_t hostlen, char *serv, size_t servlen, int flags)
 ```
 
-När BSD-programmet anropar *getaddrinfo* med ett värdnamn anropar netx BSD vilken som helst av tjänsterna nedan för att hämta IP-adressen:
+När BSD-programmet anropar *getaddrinfo* med ett värdnamn anropar NetX BSD någon av nedanstående tjänster för att hämta IP-adressen:
 
 - **nx_dns_ipv4_address_by_name_get**
 - **nxd_dns_ipv6_address_by_name_get**
 - **nx_dns_cname_get**
 
-För *nx_dns_ipv4_address_by_name_get* och *NXD_DNS_IPV6_ADDRESS_BY_NAME_GET* använder NetX BSD ipv4_addr_buffer och ipv6_addr_buffer respektive minnes område. Storleken på de här buffertarna definieras av (NX_BSD_IPV4_ADDR_PER_HOST * 4) och (NX_BSD_IPV6_ADDR_PER_HOST * 16).
+För *nx_dns_ipv4_address_by_name_get* och *nxd_dns_ipv6_address_by_name_get* använder NetX BSD ipv4_addr_buffer och ipv6_addr_buffer minnesområdena. Storleken på dessa buffertar definieras av (NX_BSD_IPV4_ADDR_PER_HOST * 4) respektive (NX_BSD_IPV6_ADDR_PER_HOST * 16).
 
-För att returnera adress information från *getaddrinfo* använder netx BSD ThreadX block minnes tabell nx_bsd_addrinfo_pool_memory, vars minnes området definieras av en annan uppsättning konfigurerbara alternativ, NX_BSD_IPV4_ADDR_MAX_NUM och NX_BSD_IPV6_ADDR_MAX_NUM.
+För att returnera adressinformation från *getaddrinfo* använder NetX BSD ThreadX-blockminnestabellen nx_bsd_addrinfo_pool_memory, vars minnesområde definieras av en annan uppsättning konfigurerbara alternativ, NX_BSD_IPV4_ADDR_MAX_NUM och NX_BSD_IPV6_ADDR_MAX_NUM.
 
-Se **allmänna konfigurations alternativ** för mer information om konfigurations alternativen ovan.
+Se **Allmänna konfigurationsalternativ** för mer information om konfigurationsalternativen ovan.
 
-Om NX_DNS_ENABLE_EXTENDED_RR_TYPES har definierats och värd indatatypen är ett kanoniskt namn, allokerar NetX Duo BSD dynamiskt minne från en tidigare skapad block pool _nx_bsd_cname_block_pool
+Om NX_DNS_ENABLE_EXTENDED_RR_TYPES har definierats och värdindata är ett kanoniskt namn, allokerar NetX Duo BSD minne dynamiskt från en tidigare skapad blockpool "_nx_bsd_cname_block_pool
 
 > [!NOTE]
-> Efter att ha anropat *getaddrinfo* är BSD-programmet ansvarigt för att släppa det minne som pekas på av res argumentet tillbaka till block tabellen med hjälp av *freeaddrinfo* -tjänsten.
+> När *du har anropat getaddrinfo* ansvarar BSD-programmet för att frigöra minnet som res-argumentet pekar på tillbaka till blocktabellen med hjälp av *freeaddrinfo-tjänsten.*
 
 ## <a name="netx-duo-bsd-limitations"></a>Begränsningar för NetX Duo BSD
 
-På grund av prestanda-och arkitektur problem har NetX Duo BSD inte stöd för alla BSD 4,3-socket-funktioner:
+På grund av prestanda- och arkitekturproblem stöder NetX Duo BSD inte alla BSD 4.3 socket-funktioner:
 
-Det finns inte stöd för INT *-flaggor för sändnings-, Recv-, SendTo-* och *recvfrom* -anrop.
+INT-flaggor stöds inte för *anropen send, recv, sendto* *och recvfrom.*
 
-## <a name="general-configuration-options"></a>Allmänna konfigurations alternativ
+## <a name="general-configuration-options"></a>Allmänna konfigurationsalternativ
 
-Alternativ som kan konfigureras i *nxd_bsd. h* gör att programmet kan finjustera netx Duo BSD-socketar för sina specifika program krav.
+Med användarkonfigurerbara *alternativ i nxd_bsd.h* kan programmet finjustera NetX Duo BSD-sockets för sina specifika programkrav.
 
-Följande är en lista över konfigurerbara alternativ som ställs in vid kompilering:
+Följande är en lista över konfigurerbara alternativ som anges vid kompilering:
 
-- **NX_BSD_TCP_WINDOW**: används i uppmaningen att skapa TCP-socketar. 64 KB är en typisk fönster storlek för 100 MB Ethernet. Standardvärdet är 65535.
+- **NX_BSD_TCP_WINDOW: Används** i TCP socket create-anrop. 64 000 är en normal fönsterstorlek för 100 MB Ethernet. Standardvärdet är 65535.
 
-- **NX_BSD_SOCKFD_START**: det här är det logiska indexet för start värde för BSD-Sockelns fil beskrivning. Som standard är det här alternativet 32.
+- **NX_BSD_SOCKFD_START:** Det här är det logiska indexet för startvärdet för BSD-socketfilbeskrivningen. Som standard är det här alternativet 32.
 
-- **NX_BSD_MAX_SOCKETS**: anger det maximala antalet totalt antal tillgängliga socketar i BSD-lagret och måste vara en multipel av 32. Värdet är standard för 32.
+- **NX_BSD_MAX_SOCKETS:** Anger det maximala antalet totalt antal sockets som är tillgängliga i BSD-lagret och måste vara en multipel av 32. Standardvärdet är 32.
 
-- **NX_BSD_SOCKET_QUEUE_MAX**: anger det maximala antalet UDP-paket som lagras i kön för mottagnings socket. Värdet är standard 5.
+- **NX_BSD_SOCKET_QUEUE_MAX:** Anger det maximala antalet UDP-paket som lagras i den mottagna socketkön. Värdet är som standard 5.
 
-- **NX_BSD_MAX_LISTEN_BACKLOG**: Detta anger storleken på lyssnings kön ("efter släpning") för BSD TCP-socketar. Standardvärdet är 5.
+- **NX_BSD_MAX_LISTEN_BACKLOG:** Anger storleken på lyssnarkön (' eftersläpning') för BSD TCP-sockets. Standardvärdet är 5.
 
-- **NX_MICROSECOND_PER_CPU_TICK**: anger antalet mikrosekunder per Schemaläggarens timer-Tick.
+- **NX_MICROSECOND_PER_CPU_TICK:** Anger antalet mikrosekunder per tids tick för schemaläggaren.
 
-- **NX_BSD_TIMEOUT**: anger tids gränsen i timer-Tick på netx Duo-interna anrop som krävs av BSD. Standardvärdet är (20 * NX_IP_PERIODIC_RATE).
+- **NX_BSD_TIMEOUT:** Anger timeout i tids tick för interna NetX Duo-anrop som krävs av BSD. Standardvärdet är (20 * NX_IP_PERIODIC_RATE).
 
-- **NX_BSD_TCP_SOCKET_DISCONNECT_TIMEOUT**: anger tids gränsen i timer-Tick på netx duo från kopplings anrop. Standardvärdet är 1.
+- **NX_BSD_TCP_SOCKET_DISCONNECT_TIMEOUT:** Anger tidsgränsen i timern för NetX Duo-frånkopplingsanrop. Standardvärdet är 1.
 
-- **NX_BSD_PRINT_ERRORS**: om det här alternativet anges returnerar fel status för en BSD-funktion ett rad nummer och en typ av fel, t. ex. NX_SOC_ERROR där felet uppstår. Detta kräver att programutvecklaren definierar fel söknings resultatet. Standardinställningen är inaktive rad och inga fel söknings utdata har angetts i *nxd_bsd. h*.
+- **NX_BSD_PRINT_ERRORS:** Om det här anges returnerar felstatusen för en BSD-funktion ett radnummer och en typ av fel, t.ex. NX_SOC_ERROR där felet inträffar. Detta kräver att programutvecklaren definierar felsökningsutdata. Standardinställningen är inaktiverad och inga felsökningsutdata anges *i nxd_bsd.h*.
 
-- **NX_BSD_TIMER_RATE**: intervall efter vilken BSD periodiska timer-aktivitet körs. Standardvärdet är 1 sekund (1 * NX_IP_PERIODIC_RATE).
+- **NX_BSD_TIMER_RATE:** Intervall efter vilket den periodiska BSD-timeraktiviteten körs. Standardvärdet är 1 sekund (1 * NX_IP_PERIODIC_RATE).
 
-- **NX_BSD_TIMEOUT_PROCESS_IN_TIMER**: om det här alternativet är inställt kan BSD-timeout-processen köras i systemets timer-kontext. Standard beteendet är inaktiverat. Den här funktionen beskrivs i detalj i kapitel 2 "installation och användning av NetX Duo BSD".
+- **NX_BSD_TIMEOUT_PROCESS_IN_TIMER:** Om det här alternativet är inställt kan BSD-timeout-processen köras i systemtimerkontexten. Standardbeteendet är inaktiverat. Den här funktionen beskrivs i detalj i kapitel 2 "Installation och användning av NetX Duo BSD".
 
-- **NX_BSD_RAW_PPPOE_SUPPORT**: Aktivera stöd för PPPoE-rå paket. Det här alternativet är inte aktiverat som standard.
+- **NX_BSD_RAW_PPPOE_SUPPORT:** Aktivera stöd för PPPoE-råpaket. Det här alternativet är inte aktiverat som standard.
 
-- **NX_BSD_ENABLE_DNS**: om det är aktiverat skickar netx Duo BSD en DNS-fråga för värdnamn eller värd-IP-adress. Kräver att en DNS-klient instans skapas och startas tidigare. Som standard är den inte aktive rad.
+- **NX_BSD_ENABLE_DNS:** Om det här alternativet är aktiverat skickar NetX Duo BSD en DNS-fråga för ett värdnamn eller en värd-IP-adress. Kräver att en DNS-klientinstans har skapats och startats tidigare. Som standard är den inte aktiverad.
 
-- **NX_BSD_SOCKET_RAW_PROTOCOL_TABLE_SIZE**: definierar storleken på tabellen RAW socket. Värdet måste vara en potens av två. NetX BSD skapar en matris med Sockets av typen NX_BSD_SOCKETS för att skicka och ta emot rå paket. NX_ENABLE_IP_RAW_PACKET_FILTER måste vara aktiverat. Som standard är den 32.
+- **NX_BSD_SOCKET_RAW_PROTOCOL_TABLE_SIZE:** Definierar storleken på raw socket tabellen. Värdet måste vara en kraft på två. NetX BSD skapar en matris med socketar av NX_BSD_SOCKETS för att skicka och ta emot råa paket. NX_ENABLE_IP_RAW_PACKET_FILTER måste vara aktiverat. Som standard är det 32.
 
-- **NX_BSD_IPV4_ADDR_MAX_NUM**: det maximala antalet IPv4-adresser som returneras av *getaddrinfo*. Detta tillsammans med NX_BSD_IPV6_ADDR_MAX_NUM definierar storleken på NetX BSD block-poolen nx_bsd_addrinfo_block_pool för dynamiskt allokerat minne för att adressera informations lagringen i *getaddrinfo*. Standardvärdet är 5.
+- **NX_BSD_IPV4_ADDR_MAX_NUM:** Maximalt antal IPv4-adresser som returneras *av getaddrinfo*. Detta tillsammans NX_BSD_IPV6_ADDR_MAX_NUM definierar storleken på Blockpool-nx_bsd_addrinfo_block_pool NetX BSD för att dynamiskt allokera minne till adressinformationslagring i *getaddrinfo*. Standardvärdet är 5.
 
-- **NX_BSD_IPV6_ADDR_MAX_NUM**: det maximala antalet IPv6-adresser som returneras av *getaddrinfo*. Detta tillsammans med NX_BSD_IPV4_ADDR_MAX_NUM definierar storleken på NetX BSD block-poolen nx_bsd_addrinfo_block_pool för dynamiskt allokerat minne för att adressera informations lagringen i *getaddrinfo*.
+- **NX_BSD_IPV6_ADDR_MAX_NUM:** Maximalt antal IPv6-adresser som returneras *av getaddrinfo*. Detta tillsammans NX_BSD_IPV4_ADDR_MAX_NUM definierar storleken på NetX BSD-blockpoolen nx_bsd_addrinfo_block_pool för att dynamiskt allokera minne till adressinformationslagring *i getaddrinfo*.
 
-- **NX_BSD_IPV4_ADDR_PER_HOST**: definierar maximalt antal IPv4-adresser som lagras per DNS-fråga. Standardvärdet är 5.
+- **NX_BSD_IPV4_ADDR_PER_HOST: Definierar** maximalt antal IPv4-adresser som lagras per DNS-fråga. Standardvärdet är 5.
 
-- **NX_BSD_IPV6_ADDR_PER_HOST**: definierar maximalt antal IPv6-adresser som lagras per DNS-fråga. Standardvärdet är 2.
+- **NX_BSD_IPV6_ADDR_PER_HOST: Definierar** maximalt antal IPv6-adresser som lagras per DNS-fråga. Standardvärdet är 2.
 
-## <a name="bsd-socket-options"></a>BSD socket-alternativ
+## <a name="bsd-socket-options"></a>Alternativ för BSD Socket
 
-Följande lista med alternativ för NetX Duo BSD-socket kan aktive ras (eller inaktive RAS) vid körning per socket med hjälp av *Setsockopt* -tjänsten:
+Följande lista över NetX Duo BSD-socketalternativ kan aktiveras (eller inaktiveras) vid körning per socket med tjänsten *setsockopt:*
 
 ```c
 INT setsockopt(INT sockID, INT option_level, INT option_name, 
@@ -259,55 +259,55 @@ INT setsockopt(INT sockID, INT option_level, INT option_name,
 
 Det finns två olika inställningar för option_level.
 
-Den första typen av ingångs alternativ för körning är SOL_SOCKET för alternativ för socketnivå. Om du vill aktivera ett alternativ för en socketnivå anropar du *Setsockopt* med option_level inställd på SOL_SOCKET och option_name anger det speciella alternativet t. ex. SO_BROADCAST *.* Om du vill hämta en alternativ inställning anropar du *getsockopt* för option_name med option_level återigen inställt på SOL_SOCKET.
+Den första typen av socketalternativ för körningstid är SOL_SOCKET alternativ för socketnivå. Om du vill aktivera ett alternativ på socketnivå anropar du *setsockopt* med option_level inställt på SOL_SOCKET och option_name angett till det specifika alternativet, t.ex. SO_BROADCAST *.* Om du vill hämta en alternativinställning *anropar du getsockopt* för option_name med option_level återigen inställd på SOL_SOCKET.
 
-Listan över alternativ för körning av socket-nivå visas nedan.
+Listan över alternativ på socketnivå för körningstid visas nedan.
 
-- **SO_BROADCAST**: om den här inställningen är aktive rad kan du skicka och ta emot broadcast-paket från netx Sockets. Detta är standard beteendet för NetX Duo. Alla Sockets har den här funktionen.
+- **SO_BROADCAST:** Om det här är inställt kan du skicka och ta emot broadcast-paket från Netx-sockets. Det här är standardbeteendet för NetX Duo. Alla sockets har den här funktionen.
 
-- **SO_ERROR**: används för att hämta socket-status för den tidigare socket-åtgärden för den angivna socketen med hjälp av *getsockopt* -tjänsten. Alla Sockets har den här funktionen.
+- **SO_ERROR:** Används för att hämta socketstatus för den tidigare socketåtgärden för den angivna socketen med *hjälp av getsockopt-tjänsten.* Alla sockets har den här funktionen.
 
-- **SO_KEEPALIVE**: om det här alternativet har angetts aktiverar detta TCP Keep Alive-funktionen. Detta kräver att NetX Duo-biblioteket skapas med NX_TCP_ENABLE_KEEPALIVE som definieras i *nx_user. h*. Som standard är den här funktionen inaktive rad.
+- **SO_KEEPALIVE:** Om detta anges aktiveras TCP Keep Alive-funktionen. Detta kräver att NetX Duo-biblioteket byggs med NX_TCP_ENABLE_KEEPALIVE definieras *i nx_user.h*. Den här funktionen är inaktiverad som standard.
 
-- **SO_RCVTIMEO**: Detta anger vänte alternativet i sekunder för mottagning av paket på netx Duo BSD-socketar. Standardvärdet är NX_WAIT_FOREVER (0xFFFFFFFF) eller, om icke-blockerande är aktiverat, NX_NO_WAIT (0x0).
+- **SO_RCVTIMEO:** Anger väntealternativet i sekunder för att ta emot paket på NetX Duo BSD-sockets. Standardvärdet är NX_WAIT_FOREVER (0xFFFFFFFF) eller, om icke-blockerande är aktiverat, NX_NO_WAIT (0x0).
 
-- **SO_RCVBUF**: här anges fönster storleken för TCP-socketen. Standardvärdet NX_BSD_TCP_WINDOW har angetts till 64 KB för BSD TCP-socketar. Om du vill ställa in storleken över 65535 kräver att NetX Duo-biblioteket skapas med NX_TCP_ENABLE_WINDOW_SCALING definieras.
+- **SO_RCVBUF:** Anger fönsterstorleken för TCP-socketen. Standardvärdet, som NX_BSD_TCP_WINDOW, är inställt på 64k för BSD TCP-sockets. Om du vill ange storleken över 65535 måste NetX Duo-biblioteket byggas med NX_TCP_ENABLE_WINDOW_SCALING definieras.
 
-- **SO_REUSEADDR**: om den här inställningen är aktive rad kan flera Sockets mappas till en port. Den typiska användningen är för TCP-serverns socket. Detta är standard beteendet för NetX Duo-platser.
+- **SO_REUSEADDR:** Om det här anges gör detta att flera sockets kan mappas till en port. Den vanligaste användningen är för TCP-serversocketen. Det här är standardbeteendet för NetX Duo-sockets.
 
-Den andra typen av alternativ för körning av socket är IP-alternativnivå. Om du vill aktivera ett alternativ för IP-nivå anropar du *Setsockopt* med option_level inställd på IP_PROTO och option_name anger alternativet t. ex. IP_MULTICAST_TTL *.* Om du vill hämta en alternativ inställning anropar du *getsockopt* för option_name med option_level återigen inställt på IP_PROTO.
+Den andra typen av socketalternativ för körningstid är IP-alternativnivån. Om du vill aktivera ett alternativ för IP-nivå anropar du *setsockopt* med option_level till IP_PROTO och option_name in på alternativet t.ex. IP_MULTICAST_TTL *.* Om du vill hämta en alternativinställning *anropar du getsockopt* för option_name med option_level återigen inställd på IP_PROTO.
 
-Listan över alternativ för IP-nivå för körning visas nedan.
+Listan över ip-nivåalternativ för körningstid visas nedan.
 
-- **IP_MULTICAST_TTL**: Detta anger TTL-tiden för UDP-socketar. Standardvärdet är NX_IP_TIME_TO_LIVE (0x80) när socketen skapas. Det här värdet kan åsidosättas genom att anropa *Setsockopt* med alternativet socket.
+- **IP_MULTICAST_TTL:** Detta anger TDD-sockets time to live. Standardvärdet är NX_IP_TIME_TO_LIVE (0x80) när socketen skapas. Det här värdet kan åsidosättas genom att anropa *setsockopt med det* här socketalternativet.
 
-- **IP_RAW_IPV6_HDRINCL**: om det här alternativet är inställt måste det anropande programmet lägga till ett IPv6-huvud och eventuellt program rubriker till data som skickas till RAW IPv6-Sockets som skapats av BSD. Om du vill använda det här alternativet måste rå socket-bearbetning vara aktiverat för IP-aktiviteten.
+- **IP_RAW_IPV6_HDRINCL:** Om det här alternativet har angetts måste det anropande programmet lägga till ett IPv6-huvud och eventuellt programhuvuden till data som skickas på rådata IPv6-sockets som skapats av BSD. Om du vill använda det raw socket måste bearbetningen vara aktiverad på IP-uppgiften.
 
-- **IP_ADD_MEMBERSHIP**: om det här alternativet är aktiverat aktiverar det här alternativet BSD-socketen (gäller endast UDP-socketar) för att ansluta till den angivna IGMP-gruppen.
+- **IP_ADD_MEMBERSHIP:** Om det här alternativet har angetts kan BSD-socketen (gäller endast UDP-socketar) ansluta till den angivna IGMP-gruppen.
 
-- **IP_DROP_MEMBERSHIP**: om det här alternativet är aktiverat aktiverar det här alternativet BSD-socketen (gäller endast UDP-socketar) för att lämna den angivna IGMP-gruppen.
+- **IP_DROP_MEMBERSHIP:** Om det här alternativet har angetts kan BSD-socketen (gäller endast UDP-socketar) lämna den angivna IGMP-gruppen.
 
-- **IP_HDRINCL**: om det här alternativet är inställt måste det anropande programmet lägga till IP-huvudet och eventuellt program huvuden till data som skickas på obehandlade IPv4-socketar som skapats i BSD. Om du vill använda det här alternativet måste rå socket-bearbetning vara aktiverat för IP-aktiviteten.
+- **IP_HDRINCL:** Om det här alternativet har angetts måste det anropande programmet lägga till IP-huvudet och eventuellt programhuvuden till data som överförs på råa IPv4-sockets som skapats i BSD. Om du vill använda det raw socket måste bearbetningen vara aktiverad på IP-uppgiften.
 
-- **IP_RAW_RX_NO_HEADER**: om alternativet är avmarkerat inkluderas IPv6-huvudet med mottagna data för RAW IPv6-Sockets som skapats i BSD. IPv6-huvuden tas bort som standard i BSD RAW IPv6-socketar och paket längden inkluderar inte IPv6-huvudet.
+- **IP_RAW_RX_NO_HEADER:** Om den är rensad inkluderas IPv6-huvudet med mottagna data för IPv6-råsocketar som skapats i BSD. IPv6-huvuden tas bort som standard i BSD-råa IPv6-socketar och paketlängden innehåller inte IPv6-huvudet.
 
-Om det här alternativet anges tas IPv4-sidhuvudet bort från mottagna data på BSD RAW-socketar av typen IPv4. IPv4-huvuden ingår som standard i BSD RAW IPv4-socketar och paket längden inkluderar IPv4-huvudet.
+Om detta anges tas IPv4-huvudet bort från mottagna data på BSD-råsocketar av typen IPv4. IPv4-huvuden ingår som standard i BSD-råa IPv4-sockets och paketlängden innehåller IPv4-huvudet.
 
-Det här alternativet har ingen påverkan på antingen IPv4-eller IPv6-överförings data.
+Det här alternativet har ingen effekt på vare sig IPv4- eller IPv6-överföringsdata.
 
-## <a name="small-ipv4-example"></a>Exempel på små IPv4
+## <a name="small-ipv4-example"></a>Litet IPv4-exempel
 
-Ett exempel på hur du använder NetX Duo BSD-tjänster för IPv4-nätverk beskrivs nedan. I det här exemplet tas include-filen *nxd_bsd. h* in på rad 8. Därefter skapas IP-instansen *bsd_ip* och packet pool *bsd_pool* som globala variabler på rad 20 och 21. Observera att den här demon använder en ram-drivrutin (virtuellt nätverk)*, _nx_ram_network_driver*. Klienten och servern kommer att dela samma IP-adress på en enskild IP-instans i det här exemplet.
+Ett exempel på hur du använder NetX Duo BSD-tjänster för IPv4-nätverk beskrivs nedan. I det här exemplet kommer *indelningsfilen nxd_bsd.h* på rad 8. Därefter skapas *IP-bsd_ip* och *bsd_pool* som globala variabler på rad 20 och 21. Observera att den här demonstrationen använder en RAM-drivrutin (virtuell)*_nx_ram_network_driver*. Klienten och servern delar samma IP-adress på en enskild IP-instans i det här exemplet.
 
-Klient-och Server trådarna skapas på raderna 62 och 68. BSD-adresspoolen för överföring av paket skapas på rad 78 och används i skapa IP-instans på rad 87. Observera att IP-trådens aktivitet får prioritet 1 i *nx_ip_create* -anropet. Den här tråden bör vara den högsta prioritets uppgiften som definierats i programmet för optimal NetX-prestanda.
+Klient- och servertrådarna skapas på raderna 62 och 68. BSD-paketpoolen för överföring av paket skapas på rad 78 och används när IP-instansen skapas på rad 87. Observera att IP-trådaktiviteten får prioritet 1 i *det nx_ip_create anropet.* Den här tråden bör vara den högsta prioritetsuppgiften som definierats i programmet för optimala NetX-prestanda.
 
-IP-instansen är aktive rad för ARP-och TCP-tjänster på raderna 88 och 110. Det senaste kravet innan BSD-tjänster kan användas är att anropa *bsd_initialize* på rad 120 för att konfigurera alla data strukturer och netx-och ThreadX-resurser som krävs av BSD.
+IP-instansen är aktiverad för ARP- och TCP-tjänster på raderna 88 respektive 110. Det sista kravet innan BSD-tjänster kan användas är att *anropa bsd_initialize* på rad 120 för att konfigurera alla datastrukturer och NetX- och ThreadX-resurser som krävs av BSD.
 
-Funktionen Server tråd post definieras härnäst. BSD TCP-socketen skapas på rad 149. Serverns IP-adress och Port har angetts på raderna 160-163. Observera användningen av värden för byte av nätverks byte *htonl* och *htons* som tillämpas på IP-adressen och porten. Detta är i överensstämmelse med BSD socket-specifikationen att data för flera byte skickas till BSD-tjänsterna i nätverkets byte ordning.
+Servertrådens postfunktion definieras härnäst. BSD TCP-socketen skapas på rad 149. Serverns IP-adress och port anges på raderna 160–163. Observera användningen av makron *htonl* och *hton-värden* för nätverksbyteordning som tillämpas på IP-adressen och porten. Detta är i enlighet med BSD-socketspecifikationen att multibyte-data skickas till BSD-tjänsterna i nätverksbyteordning.
 
-Sedan binds huvud serverns socket till porten med hjälp av *BIND* -tjänsten på rad 166. Detta är lyssnings-socketen för TCP-begäranden med hjälp av *lyssnar* tjänsten på rad 180. Härifrån kan du *thread_server_entry*, loopar för att söka efter mottagnings händelser med hjälp av funktionen *Välj* samtal på rad 202. Om en Receive-händelse är en anslutningsbegäran, som bestäms genom att jämföra listan med Läs klara, så anropas *den på rad* 213. En underordnad server-socket tilldelas för att hantera anslutningsbegäran och läggas till i huvud listan över TCP-server-socketar som är anslutna till en klient på rad 223. Om det inte finns några nya anslutnings begär Anden, kontrollerar Server tråden alla anslutna Sockets för att ta emot händelser i for-loopen med början på rad 236. När en Receive-händelse *väntar på anrop* , anropas *Skicka* och ta emot på denna socket tills inga data tas emot (anslutningen stängs på den andra sidan) och socketen stängs med hjälp av *soc_close* tjänsten på rad 277.
+Därefter binds huvudserversocketen till porten med *bindningstjänsten* på rad 166. Det här är lyssningssocketen för TCP-anslutningsbegäranden med *hjälp* av lyssningstjänsten på rad 180. Härifrån loopar servertrådfunktionen, *thread_server_entry*, för att söka efter mottagningshändelser med hjälp av select-anropet på rad 202.  Om en mottagningshändelse är en anslutningsbegäran, som bestäms genom att jämföra den läsklara listan, anropas *acceptera* på rad 213. En underordnad serversocket tilldelas för att hantera anslutningsbegäran och läggs till i huvudlistan över TCP-serversocketar som är anslutna till en klient på rad 223. Om det inte finns några nya anslutningsbegäranden söker servertråden sedan igenom alla anslutna socketar efter mottagningshändelser i for-loopen som börjar på rad 236. När en väntande mottagningshändelse  identifieras anropar den send och *recv* på den socketen tills inga data tas emot (anslutningen stängs på den andra sidan) och socketen stängs med *hjälp av soc_close-tjänsten* på rad 277.
 
-När Server tråden har ställts in skapar funktionen klient tråd post *thread_client_entry* en socket på rad 326 och ansluter med TCP-serverns socket med hjälp av *anslutnings* anropet på rad 337. Sedan loopar de för att skicka och ta emot paket med hjälp *av tjänsterna* *Skicka* och ta emot. När inga fler data tas emot, stängs socketen på rad 398 med hjälp av tjänsten *soc_close* . Efter från kopplingen skapar funktionen klient tråd post en ny TCP-socket och gör en annan anslutningsbegäran i loopen igång på rad 321.
+När servertråden har anslutits skapar funktionen Client thread *entry, thread_client_entry,* en socket på rad 326 och ansluter med TCP-serversocketen med anslutningsanropet på rad 337.  Den loopar sedan för att skicka och ta emot paket med *hjälp av* tjänsterna send *respektive recv.* När inga fler data tas emot stängs socketen på  rad 398 med soc_close tjänsten. Efter frånkopplingen skapar klienttrådens postfunktion en ny TCP-socket och gör en till anslutningsbegäran i while-loopen som startades på rad 321.
 
 ```c
 /* This is a small demo of BSD Wrapper for the high-performance NetX Duo
@@ -747,23 +747,23 @@ struct     sockaddr_in localAddr; /
 }
 ```
 
-## <a name="small-ipv6-example-system"></a>Exempel system för små IPv6-system
+## <a name="small-ipv6-example-system"></a>Litet IPv6-exempelsystem
 
-Ett exempel på hur du använder NetX Duo BSD-tjänster för IPv6-nätverk beskrivs i programmet nedan. Det här exemplet påminner mycket om demonstrations programmet för IPv4 som tidigare beskrivits med några viktiga skillnader.
+Ett exempel på hur du använder NetX Duo BSD-tjänster för IPv6-nätverk beskrivs i programmet nedan. Det här exemplet liknar IPv4-demoprogrammet som beskrevs tidigare med några viktiga skillnader.
 
-Klient-och Server trådarna, BSD-adresspoolen, IP-instansen och BSD-Initieringen sker på samma sätt som för IPv4 BSD-socketar.
+Klient- och servertrådarna, BSD-paketpoolen, IP-instansen och BSD-initieringen sker på samma sätt som för IPv4 BSD-sockets.
 
-I funktionen Server tråd inmatning definierar *thread_server_entry* en par IPv6-variabler som använder *sockaddr_in6* och *NXD_ADDRESS* data typer på raderna 145-148. Data typen NXD_ADDRESS kan faktiskt lagra både IPv4-och IPv6-adress typer.
+I servertrådens postfunktion *definierar thread_server_entry* ett par IPv6-variabler med *hjälp av sockaddr_in6* och *NXD_ADDRESS-datatyper* på raderna 145–148. Datatypen NXD_ADDRESS kan faktiskt lagra både IPv4- och IPv6-adresstyper.
 
-Sedan aktiverar Server tråden IPv6 och ICMPv6 på IP-instansen med hjälp av *nxd_ipv6_enable* och *nxd_icmpv6_enable* tjänst på rad 161 och 169. Sedan registreras lokala länkar och globala IP-adresser med IP-instansen. Detta görs med hjälp av *nxd_ipv6_address_set* -tjänsten på raderna 180 och 195. Därefter är det tillräckligt länge för IP-trådens uppgift att slutföra det duplicerade adress identifierings protokollet och registrera dessa adresser som giltiga adresser på *tx_thread_sleep* -anropet på rad 201.
+Därefter aktiverar servertråden IPv6 och ICMPv6 på IP-instansen med *hjälp av nxd_ipv6_enable* och *nxd_icmpv6_enable* på rad 161 respektive 169. Därefter registreras länkens lokala och globala IP-adresser med IP-instansen. Detta görs med hjälp av *nxd_ipv6_address_set tjänsten* på raderna 180 och 195. Den försparar sig sedan tillräckligt länge för att IP-trådaktiviteten ska slutföra protokollet Dubblettadressidentifiering och registrera dessa adresser som giltiga adresser i tx_thread_sleep-anropet på rad 201. 
 
-Därefter skapas TCP-serverns socket med argumentet AF_INET6 indatamängds typ på rad 204. Socket-IPv6-adressen och porten är inställda på raderna 216-221, om du ombeds att använda *htonl* -och *htons* -makron för att lägga till data i byte ordningen i nätverket för BSD socket Services. Härifrån är funktionen för Server tråd inmatning nästan identisk med IPv4-exemplet.
+Därefter skapas TCP-serversocketen med AF_INET6 argument för sockettyp på rad 204. Socket-IPv6-adressen och porten är inställda på raderna 216–221, vilket återigen visar användningen av *htonl-* och *htons-makron* för att placera data i nätverksbyteordningen för BSD-sockettjänster. Härifrån är servertrådens postfunktion praktiskt taget identisk med IPv4-exemplet.
 
-Funktionen klient tråd post, *thread_client_entry*, definieras härnäst. Observera att eftersom TCP-klienten i det här exemplet delar samma IP-instans och IPv6-adress som TCP-servern, behöver vi inte aktivera IPv6-eller ICMPv6-tjänster på IP-instansen igen. Dessutom har IPv6-adressen redan registrerats med IP-instansen. I stället väntar klient tråd posten bara på rad 368 för att servern ska kunna konfigureras. Server adressen och porten anges, med hjälp av värden till bytes för byte i nätverk på rad 387-392 och klienten kan ansluta till TCP-servern på rad 412. Observera att de lokala IP-adressens data typer på raderna 378-383 bara används för att demonstrera *getsockname* -och *getpeername* -tjänsterna på raderna 425 respektive 434. Eftersom data kommer från nätverket kommer nätverket att vara värd för byte av byte-ordning som används i raderna 378-383.
+Klienttrådens *postfunktion, thread_client_entry*, definieras härnäst. Observera att eftersom TCP-klienten i det här exemplet delar samma IP-instans och IPv6-adress som TCP-servern behöver vi inte aktivera IPv6- eller ICMPv6-tjänster på IP-instansen igen. Dessutom är IPv6-adressen redan registrerad med IP-instansen. I stället väntar klienttrådens postfunktion helt enkelt på rad 368 tills servern har ställts in. Serveradressen och porten anges med hjälp av värden för att nätverksbyteordning makron på raderna 387-392 och sedan klienten kan ansluta till TCP-servern på rad 412. Observera att de lokala IP-adressdatatyperna på raderna 378–383 endast används för att demonstrera *getockname-* och *getpeername-tjänsterna* på raderna 425 respektive 434. Eftersom data kommer från nätverket är nätverket värd för byteordningsma makron som används på raderna 378–383.
 
-Nästa funktion i klient tråds funktionen anger en loop i vilken den skapar en TCP-socket, gör en TCP-anslutning och skickar och tar emot data med TCP-servern tills inga fler data tas emot i stort sett samma som IPv4-exemplet. Den stänger sedan socketen på rad 483, pausar en kort stund och skapar en annan TCP-socket och begär en TCP-server anslutning.
+Därefter anger klienttrådens postfunktion en loop där den skapar en TCP-socket, gör en TCP-anslutning och skickar och tar emot data med TCP-servern tills inga fler data tas emot i princip på samma sätt som IPv4-exemplet. Den stänger sedan socketen på rad 483, pausar kort och skapar en annan TCP-socket och begär en TCP-serveranslutning.
 
-En viktig skillnad med IPv4-exemplet är att *socket* -anropen anger en IPv6-socket med argumentet AF_INET6 indataargumentet. En annan viktig skillnad är att TCP client *Connect* -anropet använder *sockaddr_in6* datatyp och ett längd argument har angetts till storleken på data typen *sockaddr_in6* .
+En viktig skillnad med IPv4-exemplet är *att socketanropen* anger en IPv6-socket med hjälp AF_INET6 indataargumentet. En annan viktig skillnad  är att TCP-klient *connect-anropet tar en* sockaddr_in6-datatyp och ett längdargument som är inställt på storleken på sockaddr_in6-datatypen. 
 
 ```c
 /* This is a small demo of BSD Wrapper for the high-performance NetX Duo

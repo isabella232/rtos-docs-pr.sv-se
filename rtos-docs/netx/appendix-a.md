@@ -1,21 +1,21 @@
 ---
-title: Bilaga A – Azure återställnings tider NetX-tjänster
-description: Utforska Azure återställnings tider NetX-tjänsterna.
+title: Bilaga A – Azure RTOS NetX Services
+description: Utforska Azure RTOS NetX Services.
 author: philmea
 ms.author: philmea
 ms.date: 05/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 632e6ee2b2813421ad37109f77b28d95f01ab972
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: e2ec90a63fba9a3464a5984a005ce83abe410af387787c792b19314bcb6d27c5
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104825647"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116784146"
 ---
-# <a name="appendix-a---azure-rtos-netx-services"></a>Bilaga A – Azure återställnings tider NetX-tjänster
+# <a name="appendix-a---azure-rtos-netx-services"></a>Bilaga A – Azure RTOS NetX Services
 
-## <a name="address-resolution-protocol-arp"></a>ARP (Address Resolution Protocol)  
+## <a name="address-resolution-protocol-arp"></a>Address Resolution Protocol (ARP)  
 
 ```c
 UINT nx_arp_dynamic_entries_invalidate(NX_IP *ip_ptr);
@@ -227,7 +227,7 @@ UINT nx_ip_status_check(
     ULONG wait_option);
 ```
 
-## <a name="packet-management"></a>Paket hantering  
+## <a name="packet-management"></a>Pakethantering  
 
 ```c
 UINT nx_packet_allocate(
@@ -277,7 +277,7 @@ UINT nx_packet_release(NX_PACKET *packet_ptr);
 UINT nx_packet_transmit_release(NX_PACKET *packet_ptr);
 ```
 
-## <a name="reverse-address-resolution-protocol-rarp"></a>RARP (reversed Address Resolution Protocol)  
+## <a name="reverse-address-resolution-protocol-rarp"></a>REVERSE Address Resolution Protocol (RARP)  
 
 ```c
 UINT nx_rarp_disable(NX_IP *ip_ptr);

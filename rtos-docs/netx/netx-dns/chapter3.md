@@ -1,49 +1,49 @@
 ---
-title: Kapitel 3 – Beskrivning av Azure återställnings tider NetX DNS Client Services
-description: Det här kapitlet innehåller en beskrivning av alla Azure återställnings tider NetX DNS-tjänster (visas nedan) i alfabetisk ordning.
+title: Kapitel 3 – Beskrivning Azure RTOS NetX DNS-klienttjänster
+description: Det här kapitlet innehåller en beskrivning av alla Azure RTOS NetX DNS-tjänster (anges nedan) i alfabetisk ordning.
 author: philmea
 ms.author: philmea
 ms.date: 06/04/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 18e059e79f9742eaaafffbf15b55b4b5063363f8
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 922d41dc374ccd782809404776f18f2aed8f5e3c34b7c9e143075c0ee5567220
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104826751"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116782530"
 ---
-# <a name="chapter-3---description-of-azure-rtos-netx-dns-client-services"></a>Kapitel 3 – Beskrivning av Azure återställnings tider NetX DNS Client Services
+# <a name="chapter-3---description-of-azure-rtos-netx-dns-client-services"></a>Kapitel 3 – Beskrivning Azure RTOS NetX DNS-klienttjänster
 
-Det här kapitlet innehåller en beskrivning av alla Azure återställnings tider NetX DNS-tjänster (visas nedan) i alfabetisk ordning.
+Det här kapitlet innehåller en beskrivning av alla Azure RTOS NetX DNS-tjänster (anges nedan) i alfabetisk ordning.
 
-I avsnittet "retur värden" i följande API-beskrivningar påverkas inte värden i **fetstil** av **NX_DISABLE_ERROR_CHECKING** definiera som används för att inaktivera API-felkontroll, medan icke-Fetstilade värden är helt inaktiverade.
+I avsnittet "Returvärden" i följande API-beskrivningar påverkas inte värden i **FETSTIL** av **den NX_DISABLE_ERROR_CHECKING-definition** som används för att inaktivera API-felkontroll, medan värden som inte är fetstilta är helt inaktiverade.
 
-- **nx_dns_authority_zone_start_get**: *Leta upp starten av en zon för auktoritet som är associerad med det angivna värd namnet*
-- **nx_dns_cache_initialize**: *initiera en DNS-cache.*
-- **nx_dns_cache_notify_clear**: *Rensa cachen fullständig aviserings funktion.*
-- **nx_dns_cache_notify_set**: *Ange fullständig meddelande funktion för cachen.*
-- **nx_dns_cname_get**: *Leta upp det kanoniska domän namnet för aliaset för den inmatade domänen*
-- **nx_dns_create**: *skapa en DNS-klient instans*
-- **nx_dns_delete**: *ta bort en DNS-klient instans*
-- **nx_dns_domain_name_server_get**: *Leta upp auktoritativa namnservrar för zonen för inmatade domäner*
-- **nx_dns_domain_mail_exchange_get**: *slå upp e-postmeddelandet som är kopplat till det angivna värd namnet.*
-- **nx_dns_domain_service_get**: *slå upp de tjänster som är associerade med det angivna värd namnet*
-- **nx_dns_get_serverlist_size**: *returnera storleken på listan över DNS-klientinställningar*
-- **nx_dns_info_by_name_get**: *returnera IP-adress, Port fråga på indata-värdnamn*
-- **nx_dns_ipv4_address_by_name_get**: *Leta upp IPv4-adressen från det angivna värd namnet*
-- **nx_dns_host_by_address_get**: *Leta upp ett värdnamn från en angiven IP-adress*
-- **nx_dns_host_by_name_get**: *Leta upp IPv4-adressen från det angivna värd namnet*
-- **nx_dns_host_text_get**: *Leta upp text data för det angivna domän namnet*
-- **nx_dns_packet_pool_set**: *Ange DNS-anslutningspoolen för klienter*
-- **nx_dns_server_add**: *Lägg till en DNS-server på den angivna adressen i klient listan*
-- **nx_dns_server_get**: *returnera DNS-servern i klient listan*
-- **nx_dns_server_remove**: *ta bort en DNS-server från klient listan*
-- **nx_dns_server_remove_all**: *ta bort alla DNS-servrar från klient listan*
+- **nx_dns_authority_zone_start_get:** Leta *upp starten av en auktoritetszon som är associerad med det angivna värdnamnet*
+- **nx_dns_cache_initialize:** Initiera *en DNS-cache.*
+- **nx_dns_cache_notify_clear:** Rensa *cachen med fullständig notify-funktion.*
+- **nx_dns_cache_notify_set:** Ställ *in cachen för fullständig notify-funktion.*
+- **nx_dns_cname_get:** Leta *upp det kanoniska domännamnet för indatadomänens namnalias*
+- **nx_dns_create:** Skapa *en DNS-klientinstans*
+- **nx_dns_delete: Ta** *bort en DNS-klientinstans*
+- **nx_dns_domain_name_server_get:** Leta *upp de auktoritativa namnservrarna för indatadomänzonen*
+- **nx_dns_domain_mail_exchange_get: Leta** *upp det e-postutbyte som är associerat med det angivna värdnamnet.*
+- **nx_dns_domain_service_get:** *Leta upp de tjänster som är associerade med det angivna värdnamnet*
+- **nx_dns_get_serverlist_size:** Returnera *storleken på DNS-klientserverlistan*
+- **nx_dns_info_by_name_get: Returnera** *IP-adress, portfrågor på indatavärdnamn*
+- **nx_dns_ipv4_address_by_name_get:** Leta *upp IPv4-adressen från det angivna värdnamnet*
+- **nx_dns_host_by_address_get:** Leta *upp ett värdnamn från en angiven IP-adress*
+- **nx_dns_host_by_name_get:** Leta *upp IPv4-adressen från det angivna värdnamnet*
+- **nx_dns_host_text_get:** *Leta upp textdata för domännamnet för indata*
+- **nx_dns_packet_pool_set:** Ange *DNS-klientens paketpool*
+- **nx_dns_server_add:** Lägg *till en DNS-server på den angivna adressen i klientlistan*
+- **nx_dns_server_get:** Returnera *DNS-servern i klientlistan*
+- **nx_dns_server_remove:** *Ta bort en DNS-server från klientlistan*
+- **nx_dns_server_remove_all:** *Ta bort alla DNS-servrar från klientlistan*
 
 ## <a name="nx_dns_authority_zone_start_get"></a>nx_dns_authority_zone_start_get
 
-Leta upp starten av auktoritets zonen för den angivna värden
+Leta upp indatavärdens auktoritetszons start
 
 ### <a name="prototype"></a>Prototyp
 
@@ -56,51 +56,51 @@ UINT nx_dns_authority_zone_start_get (NX_DNS *dns_ptr, UCHAR *host_name,
 
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Om NX_DNS_ENABLE_EXTENDED_RR_TYPES har definierats skickar den här tjänsten en fråga av typen SOA med det angivna domän namnet för att hämta start zonen för auktoriteten för det angivna domän namnet. DNS-klienten kopierar de SOA-poster som returneras i DNS-serverns svar till *record_buffer* minnes plats. 
+Om NX_DNS_ENABLE_EXTENDED_RR_TYPES har definierats skickar den här tjänsten en fråga av typen SOA med det angivna domännamnet för att hämta början av auktoritetszonen för domännamnet för indatadomänen. DNS-klienten kopierar de SOA-poster som returneras i DNS-serversvaret till *den record_buffer* minnesplatsen. 
 >[!NOTE]
-> *Record_buffer* måste vara 4 bytes justerad för att ta emot data.
+> Den *record_buffer* måste vara 4 byte justerad för att ta emot data.
 
-I NetX DNS-klient sparas SOA-posttypen NX_DNS_SOA_ENTRY, som 7 4 byte-parametrar, totalt 28 byte:
+I NetX DNS-klienten sparas SOA-posttypen, NX_DNS_SOA_ENTRY, som sju 4 byte-parametrar, vilket blir totalt 28 byte:
 
-- **nx_dns_soa_host_mname_ptr**: pekar mot primär data källa för den här zonen
-- **nx_dns_soa_host_rname_ptr**: pekar mot post lådan som ansvarar för zonen
-- **nx_dns_soa_serial**: zon versions nummer
-- **nx_dns_soa_refresh**: uppdaterings intervall
-- **nx_dns_soa_retry**: intervall mellan SOA-frågekörning försök
-- **nx_dns_soa_expire**: tids period när SOA upphör att gälla
-- **nx_dns_soa_minmum**: minsta TTL-fält i SOA värdnamn DNS-svarsmeddelanden
+- **nx_dns_soa_host_mname_ptr:** Pekare till den primära datakällan för den här zonen
+- **nx_dns_soa_host_rname_ptr: Pekare** till postlådan som ansvarar för den här zonen
+- **nx_dns_soa_serial:** Zonversionsnummer
+- **nx_dns_soa_refresh:** Uppdateringsintervall
+- **nx_dns_soa_retry:** Intervall mellan återförsök för SOA-fråga
+- **nx_dns_soa_expire:** Varaktighet när SOA upphör att gälla
+- **nx_dns_soa_minmum:** Minsta TTL-fält i DNS-svarsmeddelanden för SOA-värdnamn
 
-Lagringen av två SOA-poster visas nedan. De SOA-poster som innehåller fasta längd data anges med början överst i bufferten. Pekarna MNAME och RNAME pekar på variabla längd data (värd namn) som lagras längst ned i bufferten. Ytterligare SOA-poster anges efter den första posten ("ytterligare SOA-poster...") och deras variabla längd data lagras ovanför den sista postens variabla längd data ("ytterligare data för SOA-variabel längd"):
+Lagringen av två SOA-poster visas nedan. SOA-posterna som innehåller data med fast längd anges överst i bufferten. Pekarna MNAME och RNAME pekar på variabellängdsdata (värdnamn) som lagras längst ned i bufferten. Ytterligare SOA-poster anges efter den första posten ("ytterligare SOA-poster...") och deras data om variabellängd lagras ovanför den sista postens data om variabellängd ("ytterligare DATA för variabel längd på SOA"):
 
 ![Diagram som representerar lagringen av två S O A-poster](media/image2.png)
 
-Om indata- *record_buffer* inte rymmer alla SOA-data i Server svaret innehåller *record_buffer* så många poster som får plats och returnerar antalet poster i bufferten.
+Om *indataservern record_buffer* kan innehålla alla SOA-data i serverns svar, innehåller *record_buffer* så många poster som passar och returnerar antalet poster i bufferten.
 
-Med antalet SOA-poster som returneras i **record_count* kan programmet parsa data från *record_buffer* och extrahera start av värd namn strängar för zon utfärdare.
+Med antalet SOA-poster som returneras i **record_count kan* programmet parsa data från *record_buffer* och extrahera början av zonutfärdares värdnamnssträngar.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **dns_ptr**: pekar mot DNS-klient.  
-- **host_name**: pekare till värd namnet för att hämta SOA-data för
-- **record_buffer**: pekare till plats att extrahera SOA-data till
-- **buffer_size**: storleken på bufferten som ska innehålla SOA-data
-- **record_count**: pekar mot antalet SOA-poster som hämtats
-- **wait_option**: vänte alternativ för att ta emot DNS-serverns svar
+- **dns_ptr:** Pekare till DNS-klient.  
+- **host_name: Pekare** till värdnamnet för att hämta SOA-data för
+- **record_buffer:** Pekare till plats för att extrahera SOA-data till
+- **buffer_size:** Storlek på buffert för soa-data
+- **record_count:** Pekare till antalet SOA-poster som hämtats
+- **wait_option: Vänta-alternativet** för att ta emot DNS-serversvar
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) har hämtat SOA-data
-- **NX_DNS_NO_SERVER**: (0XA1) klient server listan är tom
-- **NX_DNS_QUERY_FAILED**: (0XA3) inget giltigt DNS-svar togs emot
-- NX_PTR_ERROR: (0x07) ogiltig IP-eller DNS-pekare
-- NX_CALLER_ERROR: (0x11) ogiltig anropare för den här tjänsten
-- NX_DNS_PARAM_ERROR: (0xA8) ogiltig inmatad icke-pekare
+- **NX_SUCCESS:**(0x00) Soa-data har erhållits
+- **NX_DNS_NO_SERVER**: (0xA1) Klientserverlistan är tom
+- **NX_DNS_QUERY_FAILED**: (0xA3) Inget giltigt DNS-svar togs emot
+- NX_PTR_ERROR: (0x07) Ogiltig IP- eller DNS-pekare
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare för den här tjänsten
+- NX_DNS_PARAM_ERROR: (0xA8) Ogiltig icke-pekarindata
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 ```c
@@ -180,27 +180,27 @@ UINT nx_dns_cache_initialize(NX_DNS *dns_ptr,
                              VOID *cache_ptr, UINT cache_size);
 
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten skapar och initierar en DNS-cache.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **dns_ptr**: pekar mot DNS-kontroll-block.
-- **cache_ptr**: pekar mot DNS-cache.
-- **cache_size**: DNS-cachens storlek, i byte.
+- **dns_ptr:** Pekare till DNS-kontrollblock.
+- **cache_ptr:** Pekare till DNS-cache.
+- **cache_size:** Storleken på DNS-cache i byte.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) DNS-cache har initierats
-- NX_DNS_ERROR: (0xA0) cache är inte 4-byte-justerad.
-- NX_DNS_PARAM_ERROR: (0xA8) ogiltigt DNS-ID.
-- NX_PTR_ERROR: (0x07) ogiltig DNS-pekare.
-- NX_CALLER_ERROR: (0x11) ogiltig anropare för den här tjänsten
+- **NX_SUCCESS**: (0x00) DNS Cache har initierats
+- NX_DNS_ERROR: (0xA0) Cache är inte justerad med 4 byte.
+- NX_DNS_PARAM_ERROR: (0xA8) Ogiltigt DNS-ID.
+- NX_PTR_ERROR: (0x07) Ogiltig DNS-pekare.
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare för den här tjänsten
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 ```c
@@ -213,30 +213,30 @@ status =  nx_dns_cache_initialize(&my_dns, dns_cache, 2048);
 
 ## <a name="nx_dns_cache_notify_clear"></a>nx_dns_cache_notify_clear
 
-Rensa DNS-cachens fullständiga meddelande funktion
+Rensa den fullständiga av meddela-funktionen för DNS Cache
 
 ### <a name="prototype"></a>Prototyp
 
 ```c
 UINT     nx_dns_cache_notify_clear(NX_DNS *dns_ptr);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten rensar cachen fullständig aviserings funktion.
+Den här tjänsten rensar cachens fullständiga av meddela-funktion.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **dns_ptr**: pekar mot DNS-kontroll-block.
+- **dns_ptr:** Pekare till DNS-kontrollblock.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) DNS-cache-avisering har angetts
-- NX_DNS_PARAM_ERROR: (0xA8) ogiltigt DNS-ID.
-- NX_PTR_ERROR: (0x07) ogiltig DNS-pekare.
+- **NX_SUCCESS**: (0x00) DNS cache notify successfully set
+- NX_DNS_PARAM_ERROR: (0xA8) Ogiltigt DNS-ID.
+- NX_PTR_ERROR: (0x07) Ogiltig DNS-pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -249,7 +249,7 @@ status =  nx_dns_cache_notify_clear(&my_dns);
 
 ## <a name="nx_dns_cache_notify_set"></a>nx_dns_cache_notify_set
 
-Ange fullständig meddelande funktion för DNS-cache
+Ställ in funktionen DNS Cache full notify (Fullständigt meddelande för DNS-cache)
 
 ### <a name="prototype"></a>Prototyp
 
@@ -257,24 +257,24 @@ Ange fullständig meddelande funktion för DNS-cache
 UINT nx_dns_cache_notify_set(NX_DNS *dns_ptr, VOID (*cache_full_notify_cb)(NX_DNS *dns_ptr));
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten anger den fullständiga aviserings funktionen cache.
+Den här tjänsten anger cachen fullständig notify-funktion.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **dns_ptr**: pekar mot DNS-kontroll-block.
-- **cache_full_notify_cb**: motringningsfunktionen som anropas när cachen blir full.
+- **dns_ptr:** Pekare till DNS-kontrollblock.
+- **cache_full_notify_cb:** Återanropsfunktionen som ska anropas när cachen blir full.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) DNS-cache-avisering har angetts
-- NX_DNS_PARAM_ERROR: (0xA8) ogiltigt DNS-ID.
-- NX_PTR_ERROR: (0x07) ogiltig DNS-pekare.
+- **NX_SUCCESS**: (0x00) MEDDELA DNS-cache har angetts
+- NX_DNS_PARAM_ERROR: (0xA8) Ogiltigt DNS-ID.
+- NX_PTR_ERROR: (0x07) Ogiltig DNS-pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -288,7 +288,7 @@ status =  nx_dns_cache_notify_set(&my_dns, cache_full_notify_cb);
 
 ## <a name="nx_dns_cname_get"></a>nx_dns_cname_get
 
-Leta upp det kanoniska namnet för det angivna värd namnet
+Leta upp det kanoniska namnet för värdnamnet för indata
 
 ### <a name="prototype"></a>Prototyp
 ```c
@@ -297,30 +297,30 @@ UINT nx_dns_cname_get(NX_DNS *dns_ptr, UCHAR *host_name,
                       ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Om NX_DNS_ENABLE_EXTENDED_RR_TYPES definieras i *nx_dns. h* skickar den här tjänsten en fråga av typen CNAME med det angivna domän namnet för att hämta det kanoniska domän namnet. DNS-klienten kopierar den CNAME-sträng som returnerades i DNS-serverns svar till *record_buffer* minnes plats.
+Om NX_DNS_ENABLE_EXTENDED_RR_TYPES definieras *i nx_dns.h* skickar den här tjänsten en fråga av typen CNAME med det angivna domännamnet för att hämta det kanoniska domännamnet. DNS-klienten kopierar CNAME-strängen som returneras i DNS-serversvaret *till record_buffer* minnesplatsen.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **dns_ptr**: pekar mot DNS-klient.  
-- **host_name**: pekare till värd namn för att hämta CNAME-data för
-- **record_buffer**: pekare till platsen där du vill extrahera CNAME-data till
-- **buffer_size**: buffertstorleken för att lagra CNAME-data
-- **wait_option**: vänte alternativ för att ta emot DNS-serverns svar
+- **dns_ptr:** Pekare till DNS-klient.  
+- **host_name:** Pekare till värdnamn för att hämta CNAME-data för
+- record_buffer : **Pekare** till plats för att extrahera CNAME-data till
+- **buffer_size:** Storleken på bufferten som ska innehålla CNAME-data
+- **wait_option: Väntealternativet** för att ta emot DNS-serversvar
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0x00) hämtade CNAME-data
-- **NX_DNS_NO_SERVER**: (0XA1) klient server listan är tom
-- **NX_DNS_QUERY_FAILED**: (0XA3) inget giltigt DNS-svar togs emot
-- NX_PTR_ERROR: (0x07) ogiltig IP-eller DNS-pekare
-- NX_CALLER_ERROR: (0x11) ogiltig anropare för den här tjänsten
-- NX_DNS_PARAM_ERROR: (0xA8) ogiltig Indatatyp för icke-pekare
+- **NX_SUCCESS:**(0x00) CNAME-data har erhållits
+- **NX_DNS_NO_SERVER**: (0xA1) Klientserverlistan är tom
+- **NX_DNS_QUERY_FAILED**: (0xA3) Inget giltigt DNS-svar togs emot
+- NX_PTR_ERROR: (0x07) Ogiltig IP- eller DNS-pekare
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare för den här tjänsten
+- NX_DNS_PARAM_ERROR: (0xA8) Ogiltiga indata som inte pekare
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -351,7 +351,7 @@ Test CNAME: **my_example**.com
 
 ## <a name="nx_dns_create"></a>nx_dns_create
 
-Skapa en DNS-klient instans
+Skapa en DNS-klientinstans
 
 ### <a name="prototype"></a>Prototyp
 
@@ -359,29 +359,29 @@ Skapa en DNS-klient instans
 UINT nx_dns_create(NX_DNS *dns_ptr, NX_IP *ip_ptr, CHAR *domain_name);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skapar en DNS-klient instans för den tidigare skapade IP-instansen.
+Den här tjänsten skapar en DNS-klientinstans för den tidigare skapade IP-instansen.
 
 >[!NOTE]
->Programmet måste se till att paket nytto lasten för den modempool som används av DNS-klienten är tillräckligt stor för maximalt 512 byte DNS-meddelande, plus UDP-, IP-och Ethernet-rubriker. Om DNS-klienten skapar en egen modempool, definieras detta av NX_DNS_PACKET_POOL_SIZE och NX_DNS_PACKET_PAYLOAD. Om DNS-klientprogrammet föredrar att tillhandahålla en tidigare skapad modempool ska nytto lasten för IPv4 DNS-klienten vara 512 byte för maximalt antal DNS plus 20 byte för IP-huvudet, 8 byte för UDP-huvudet och 14 byte för Ethernet-huvudet.
+>Programmet måste se till att paketnyttolasten för paketpoolen som används av DNS-klienten är tillräckligt stor för det maximala DNS-meddelandet på 512 byte, plus UDP-, IP- och Ethernet-huvuden. Om DNS-klienten skapar en egen paketpool definieras detta av NX_DNS_PACKET_POOL_SIZE och NX_DNS_PACKET_PAYLOAD. Om DNS-klientprogrammet föredrar att ange en tidigare skapad paketpool bör nyttolasten för IPv4 DNS-klienten vara 512 byte för det maximala DNS-värdet plus 20 byte för IP-huvudet, 8 byte för UDP-huvudet och 14 byte för Ethernet-huvudet.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **dns_ptr**: pekar mot DNS-klient.  
-- **ip_ptr**: pekare till den tidigare skapade IP-instansen.  
-- **domain_name**: pekar på domän namn för DNS-instans.
+- **dns_ptr:** Pekare till DNS-klient.  
+- **ip_ptr:** Pekare till ip-instans som skapats tidigare.  
+- **domain_name:** Pekare till domännamn för DNS-instans.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) lyckad DNS-skapande
-- **NX_DNS_ERROR**: (0XA0) DNS-skapande fel
-- NX_PTR_ERROR: (0x07) ogiltig IP-eller DNS-pekare
-- NX_CALLER_ERROR: (0x11) ogiltig anropare för den här tjänsten
+- **NX_SUCCESS**: (0x00) Lyckad DNS-skapa
+- **NX_DNS_ERROR**: (0xA0) DNS-skapa-fel
+- NX_PTR_ERROR: (0x07) Ogiltig IP- eller DNS-pekare
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare för den här tjänsten
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -394,7 +394,7 @@ status =  nx_dns_create(&my_dns, &my_ip, "My DNS");
 ```
 ## <a name="nx_dns_delete"></a>nx_dns_delete
 
-Ta bort en DNS-klient instans
+Ta bort en DNS-klientinstans
 
 ### <a name="prototype"></a>Prototyp
 
@@ -402,25 +402,25 @@ Ta bort en DNS-klient instans
 UINT     nx_dns_delete(NX_DNS *dns_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar bort en tidigare skapad DNS-klient instans och frigör sina resurser. 
+Den här tjänsten tar bort en DNS-klientinstans som skapats tidigare och frigör dess resurser. 
 >[!NOTE]
-> Om **NX_DNS_CLIENT_USER_CREATE_PACKET_POOL** har definierats och DNS-klienten tilldelats en användardefinierad modempool, är det upp till programmet att ta bort DNS-klientcachen om den inte längre behöver den.
+> Om **NX_DNS_CLIENT_USER_CREATE_PACKET_POOL** har definierats och DNS-klienten har tilldelats en användardefinierad paketpool är det upp till programmet att ta bort DNS-klientens paketpool om den inte längre behövs.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **dns_ptr**: pekar mot en tidigare skapad DNS- **klient** instans.
+- **dns_ptr:** Pekare till en DNS-klientinstans **som skapats** tidigare.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) lyckade DNS-klient borttagningar.
-- NX_PTR_ERROR: (0x07) ogiltig IP-eller DNS-klient pekare.
-- NX_CALLER_ERROR: (0x11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS**: (0x00) Borttagning av DNS-klient.
+- NX_PTR_ERROR: (0x07) Ogiltig IP- eller DNS-klient pekare.
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -433,7 +433,7 @@ status =  nx_dns_delete(&my_dns);
 ```
 ## <a name="nx_dns_domain_name_server_get"></a>nx_dns_domain_name_server_get
 
-Leta upp auktoritativa namnservrar för den inmatade domän zonen
+Leta upp auktoritativa namnservrar för indatadomänzonen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -443,47 +443,47 @@ UINT nx_dns_domain_name_server_get(NX_DNS *dns_ptr, UCHAR *host_name,
                                    UINT *record_count, ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Om NX_DNS_ENABLE_EXTENDED_RR_TYPES har definierats skickar den här tjänsten en fråga av typen NS med det angivna domän namnet för att hämta namnservrarna för det inmatade domän namnet. DNS-klienten kopierar den eller de NS-poster som returneras i DNS-serverns svar till *record_buffer* minnes plats. 
+Om NX_DNS_ENABLE_EXTENDED_RR_TYPES har definierats skickar den här tjänsten en fråga av typen NS med det angivna domännamnet för att hämta namnservrarna för indatadomännamnet. DNS-klienten kopierar NS-posterna som returneras i DNS-serversvaret *till record_buffer* minnesplatsen. 
 
 >[!NOTE]
->*Record_buffer* måste vara 4 bytes justerad för att ta emot data.
+>Den *record_buffer* måste vara 4 byte justerad för att ta emot data.
 
-I NetX DNS-klient har data typen NS, NX_DNS_NS_ENTRY, sparats som 2 4 byte-parametrar:
+I NetX DNS-klienten sparas NS-datatypen, NX_DNS_NS_ENTRY, som två 4 byte-parametrar:
 
-- **nx_dns_ns_ipv4_address**: namn serverns IPv4-adress
-- **nx_dns_ns_hostname_ptr**: pekar mot namn serverns värdnamn
+- **nx_dns_ns_ipv4_address:** Namnserverns IPv4-adress
+- **nx_dns_ns_hostname_ptr:** Pekare till namnserverns värdnamn
 
-Den buffert som visas nedan innehåller fyra NX_DNS_NS_ENTRY poster. Pekaren som är värd för namn sträng i varje post pekar mot motsvarande värd namn sträng i den nedre halvan av bufferten:
+Bufferten som visas nedan innehåller fyra NX_DNS_NS_ENTRY poster. Pekaren till värdnamnssträngen i varje startpunkt pekar på motsvarande värdnamnssträng i den nedre halvan av bufferten:
 
-![Diagram över bufferten som innehåller fyra N X D N s post poster.](media/image3.png)
+![Diagram över bufferten som innehåller fyra N X D N S S postposter.](media/image3.png)
 
-Om indata- *record_buffer* inte rymmer alla ns-data i Server svaret innehåller *record_buffer* så många poster som får plats och returnerar antalet poster i bufferten.
+Om *indataservern record_buffer* inte kan lagra alla NS-data i serverns *svar,* innehåller record_buffer så många poster som passar och returnerar antalet poster i bufferten.
 
-Med antalet NS-poster som returneras i **record_count* kan programmet parsa IP-adressen och värd namnet för varje post i *record_buffer*.
+Med antalet NS-poster som returneras i **record_count kan* programmet parsa IP-adressen och värdnamnet för varje post i *record_buffer*.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **dns_ptr**: pekar mot DNS-klient.  
-- **host_name**: pekare till värdnamn för att hämta ns-data för
-- **record_buffer**: pekare till platsen för att extrahera ns-data till
-- **buffer_size**: storleken på bufferten som ska innehålla ns-data
-- **record_count**: pekar mot antalet hämtade NS-poster
-- **wait_option**: vänte alternativ för att ta emot DNS-serverns svar
+- **dns_ptr:** Pekare till DNS-klient.  
+- **host_name:** Pekare till värdnamn för att hämta NS-data för
+- **record_buffer: Pekare** till plats för att extrahera NS-data till
+- **buffer_size:** Storleken på bufferten som ska innehålla NS-data
+- **record_count:** Pekare till antalet NS-poster som hämtats
+- **wait_option: Väntealternativet** för att ta emot DNS-serversvar
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0x00) hämtade ns-data
-- **NX_DNS_NO_SERVER**: (0XA1) klient server listan är tom
-- **NX_DNS_QUERY_FAILED**: (0XA3) inget giltigt DNS-svar togs emot
-- NX_DNS_PARAM_ERROR: (0xA8) ogiltigt DNS-ID.
-- NX_PTR_ERROR: (0x07) ogiltig IP-eller DNS-pekare
-- NX_CALLER_ERROR: (0x11) ogiltig anropare för den här tjänsten
+- **NX_SUCCESS**: (0x00) NS-data har erhållits
+- **NX_DNS_NO_SERVER**: (0xA1) Klientserverlistan är tom
+- **NX_DNS_QUERY_FAILED**: (0xA3) Inget giltigt DNS-svar togs emot
+- NX_DNS_PARAM_ERROR: (0xA8) Ogiltigt DNS-ID.
+- NX_PTR_ERROR: (0x07) Ogiltig IP- eller DNS-pekare
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare för den här tjänsten
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 ```c
@@ -547,7 +547,7 @@ hostname = ns4.www.my_example.com
 
 ## <a name="nx_dns_domain_mail_exchange_get"></a>nx_dns_domain_mail_exchange_get
 
-Slå upp e-post Exchange (s) för det angivna värd namnet
+Leta upp e-postutbytena efter indatavärdnamnet
 
 ### <a name="prototype"></a>Prototyp
 ```c
@@ -559,49 +559,49 @@ UINT     nx_dns_domain_mail_exchange_get(NX_DNS *dns_ptr, UCHAR *host_name,
 
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Om NX_DNS_ENABLE_EXTENDED_RR_TYPES har definierats skickar den här tjänsten en fråga av typen MX med det angivna domän namnet för att hämta e-postadressen för det inmatade domän namnet. DNS-klienten kopierar MX-post (er) som returneras i DNS-serverns svar till *record_buffer* minnes plats.
+Om NX_DNS_ENABLE_EXTENDED_RR_TYPES har definierats skickar den här tjänsten en fråga av typen MX med det angivna domännamnet för att hämta e-postutbytet för indatadomännamnet. DNS-klienten kopierar MX-posterna som returneras i DNS-serversvaret *till den record_buffer* minnesplatsen.
 
 >[!NOTE]
->*Record_buffer* måste vara 4 bytes justerad för att ta emot data.
+>Den *record_buffer* måste vara 4 byte justerad för att ta emot data.
 
-I NetX DNS-klient sparas post typen post Exchange, NX_DNS_MAIL_EXCHANGE_ENTRY, som fyra parametrar, med summering av 12 byte:
+I NetX DNS-klienten sparas posttypen för e-NX_DNS_MAIL_EXCHANGE_ENTRY som fyra parametrar, totalt 12 byte:
 
-- **nx_dns_mx_ipv4_address**: e-post Exchange IPv4-adress 4 byte
-- **nx_dns_mx_preference**: Preference 2 byte
-- **nx_dns_mx_reserved0**: reserverade 2 byte
-- **nx_dns_mx_hostname_ptr**: pekare till e-post Exchange Server-värdnamn 4 byte
+- **nx_dns_mx_ipv4_address:** E-post exchange IPv4-adress 4 byte
+- **nx_dns_mx_preference:** Inställning 2 byte
+- **nx_dns_mx_reserved0:** Reserverade 2 byte
+- **nx_dns_mx_hostname_ptr: Pekare** till e-post exchange-serverns värdnamn 4 byte
 
-En buffert som innehåller fyra MX-poster visas nedan. Varje post innehåller data för fast längd från listan ovan. Pekaren till e-postadressen till Exchange-servern pekar på motsvarande värdnamn längst ned i bufferten.
+En buffert som innehåller fyra MX-poster visas nedan. Varje post innehåller data med fast längd från listan ovan. Pekaren till värdnamnet för e-postutbytesservern pekar på motsvarande värdnamn längst ned i bufferten.
 
 ![Diagram som visar bufferten som innehåller fyra M X-poster.](media/image4.png)
 
-Om indata- *record_buffer* inte rymmer alla MX-data i svaret på servern så innehåller *record_buffer* så många poster som får plats och returnerar antalet poster i bufferten.
+Om *indataservern record_buffer* inte kan lagra alla MX-data i serverns *svar,* innehåller record_buffer så många poster som passar och returnerar antalet poster i bufferten.
 
-Med antalet MX-poster som returneras i **record_count* kan programmet parsa MX-parametrarna, inklusive e-postvärdnamnet för varje post i *record_buffer*.
+Med antalet MX-poster som returneras i **record_count kan* programmet parsa MX-parametrarna, inklusive e-postvärdnamnet för varje post *i record_buffer*.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **dns_ptr**: pekar mot DNS-klient.  
-- **host_name**: pekare till värdnamn för att hämta MX-data för
-- **record_buffer**: pekare till plats att extrahera MX-data till
-- **buffer_size**: storleken på bufferten som ska innehålla MX-data
-- **record_count**: pekar mot antalet MX-poster som hämtats
-- **wait_option**: vänte alternativ för att ta emot DNS-serverns svar
+- **dns_ptr:** Pekare till DNS-klient.  
+- **host_name:** Pekare till värdnamn för att hämta MX-data för
+- **record_buffer: Pekare** till plats för att extrahera MX-data till
+- **buffer_size:** Storleken på bufferten som ska innehålla MX-data
+- **record_count:** Pekare till antalet MX-poster som hämtats
+- **wait_option: Väntealternativet** för att ta emot DNS-serversvar
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) har hämtat MX-data
-- **NX_DNS_NO_SERVER**: (0XA1) klient server listan är tom
-- **NX_DNS_QUERY_FAILED**: (0XA3) inget giltigt DNS-svar togs emot
-- NX_DNS_PARAM_ERROR: (0xA8) ogiltigt DNS-ID.
-- NX_PTR_ERROR: (0x07) ogiltig IP-eller DNS-pekare
-- NX_CALLER_ERROR: (0x11) ogiltig anropare för den här tjänsten
+- **NX_SUCCESS**: (0x00) Mx-data har erhållits
+- **NX_DNS_NO_SERVER**: (0xA1) Klientserverlistan är tom
+- **NX_DNS_QUERY_FAILED**: (0xA3) Inget giltigt DNS-svar togs emot
+- NX_DNS_PARAM_ERROR: (0xA8) Ogiltigt DNS-ID.
+- NX_PTR_ERROR: (0x07) Ogiltig IP- eller DNS-pekare
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare för den här tjänsten
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 ```c
@@ -674,7 +674,7 @@ hostname = alt2.aspmx.l.www.my_example.com
 
 ## <a name="nx_dns_domain_service_get"></a>nx_dns_domain_service_get
 
-Leta upp de tjänster som tillhandahålls av det angivna värd namnet
+Leta upp de tjänster som tillhandahålls av indatavärdnamnet
 
 ### <a name="prototype"></a>Prototyp
 
@@ -684,51 +684,51 @@ UINT nx_dns_domain_service_get (NX_DNS *dns_ptr, UCHAR *host_name,
                                 UINT *record_count, ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Om NX_DNS_ENABLE_EXTENDED_RR_TYPES har definierats skickar den här tjänsten en fråga av typen SRV med det angivna domän namnet för att leta upp de tjänster och deras port nummer som är associerade med den angivna domänen. DNS-klienten kopierar de SRV-poster som returneras i DNS-serverns svar till *record_buffer* minnes plats. 
+Om NX_DNS_ENABLE_EXTENDED_RR_TYPES definieras skickar den här tjänsten en fråga av typen SRV med det angivna domännamnet för att leta upp de tjänster och deras portnummer som är associerade med den angivna domänen. DNS-klienten kopierar de SRV-poster som returneras i DNS-serversvaret *till record_buffer* minnesplatsen. 
 
 >[!NOTE]
->*Record_buffer* måste vara 4 bytes justerad för att ta emot data.
+>Den *record_buffer* måste vara 4 byte justerad för att ta emot data.
 
-I NetX DNS-klient sparas tjänst post typen NX_DNS_SRV_ post som sex parametrar, vilket innebär att 16 byte summeras. Detta gör att SRV-data för variabel längd lagras på ett minnes effektivt sätt:
+I NetX DNS-klienten sparas tjänstposttypen, NX_DNS_SRV_ ENTRY, som sex parametrar, totalt 16 byte. Detta gör att SRV-data med variabel längd kan lagras på ett minneseffektivt sätt:
 
-- **Serverns IPv4-adress**: nx_dns_srv_ipv4_address 4 byte
-- **Server prioritet**: nx_dns_srv_priority 2 byte
-- **Server vikt**: nx_dns_srv_weight 2 byte
-- **Tjänst port nummer**: nx_dns_srv_port_number 2 byte
-- **Reserverad för 4-byte-justering**: nx_dns_srv_reserved0 2 byte
-- **Pekare till serverns värdnamn**: * nx_dns_srv_hostname_ptr 4 byte
+- **Serverns IPv4-adress:** nx_dns_srv_ipv4_address 4 byte
+- **Serverprioritet:** nx_dns_srv_priority 2 byte
+- **Servervikt:** nx_dns_srv_weight 2 byte
+- **Tjänstportnummer:** nx_dns_srv_port_number 2 byte
+- **Reserverad för justering på 4 byte:** nx_dns_srv_reserved0 2 byte
+- **Pekare till serverns värdnamn:***nx_dns_srv_hostname_ptr 4 byte
 
-Fyra SRV-poster lagras i den angivna bufferten. Varje NX_DNS_SRV_ENTRY post innehåller en pekare, *nx_dns_srv_hostname_ptr*, som pekar på motsvarande värd namn sträng längst ned i bufferten för poster:
+Fyra SRV-poster lagras i den angivna bufferten. Varje NX_DNS_SRV_ENTRY innehåller en *pekare, nx_dns_srv_hostname_ptr*, som pekar på motsvarande värdnamnssträng längst ned i postbufferten:
 
 ![Diagram över fyra S R V-poster som lagras i den angivna bufferten.](media/image5.png)
 
-Om indata- *record_buffer* inte rymmer alla SRV-data i Server svaret innehåller *record_buffer* så många poster som får plats och returnerar antalet poster i bufferten.
+Om *indataservern record_buffer* inte kan lagra alla SRV-data i serverns *svar,* innehåller record_buffer så många poster som passar och returnerar antalet poster i bufferten.
 
-Med antalet SRV-poster som returneras i **record_count* kan programmet parsa SRV-parametrarna, inklusive Server värd namnet för varje post i *record_buffer*.
+Med antalet SRV-poster som returneras i **record_count kan* programmet parsa SRV-parametrarna, inklusive servervärdnamnet för varje post i *record_buffer*.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **dns_ptr**: pekar mot DNS-klient.  
-- **host_name**: pekare till värdnamn för att hämta SRV-data för
-- **record_buffer**: pekare till plats för att extrahera SRV-data till
-- **buffer_size**: storleken på bufferten som ska innehålla SRV-data
-- **record_count**: pekar mot antalet SRV-poster som hämtats
-- **wait_option**: vänte alternativ för att ta emot DNS-serverns svar
+- **dns_ptr:** Pekare till DNS-klient.  
+- host_name : **Pekare** till värdnamn för att hämta SRV-data för
+- **record_buffer:** Pekare till plats för att extrahera SRV-data till
+- **buffer_size:** Storleken på bufferten som ska innehålla SRV-data
+- **record_count:** Pekare till antalet SRV-poster som hämtats
+- **wait_option: Väntealternativet** för att ta emot DNS-serversvar
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0x00) hämtade SRV-data
-- **NX_DNS_NO_SERVER**: (0XA1) klient server listan är tom
-- **NX_DNS_QUERY_FAILED**: (0XA3) inget giltigt DNS-svar togs emot
-- NX_DNS_PARAM_ERROR: (0xA8) ogiltigt DNS-ID.
-- NX_PTR_ERROR: (0x07) ogiltig IP-eller DNS-pekare
-- NX_CALLER_ERROR: (0x11) ogiltig anropare för den här tjänsten
+- **NX_SUCCESS:**(0x00) SRV-data har erhållits
+- **NX_DNS_NO_SERVER**: (0xA1) Klientserverlistan är tom
+- **NX_DNS_QUERY_FAILED**: (0xA3) Inget giltigt DNS-svar togs emot
+- NX_DNS_PARAM_ERROR: (0xA8) Ogiltigt DNS-ID.
+- NX_PTR_ERROR: (0x07) Ogiltig IP- eller DNS-pekare
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare för den här tjänsten
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -807,7 +807,7 @@ hostname = alt1.xmpp.l.www.my_example.com
 
 ## <a name="nx_dns_get_serverlist_size"></a>nx_dns_get_serverlist_size
 
-Returnera storleken på DNS-klientens server lista
+Returnera storleken på DNS-klientens serverlista
 
 ### <a name="prototype"></a>Prototyp
 
@@ -815,24 +815,24 @@ Returnera storleken på DNS-klientens server lista
 UINT nx_dns_get_serverlist_size (NX_DNS *dns_ptr, UINT *size);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten returnerar antalet giltiga DNS-servrar i klient listan.
+Den här tjänsten returnerar antalet giltiga DNS-servrar i klientlistan.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **dns_ptr**: pekar mot DNS-kontroll-block  
-- **storlek**: returnerar antalet servrar i listan
+- **dns_ptr:** Pekare till DNS-kontrollblock  
+- **size**: Returnerar antalet servrar i listan
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) DNS-serverns lista storlek har returnerats
-- NX_PTR_ERROR: (0x07) ogiltig IP-eller DNS-pekare.
-- NX_CALLER_ERROR: (0x11) ogiltig anropare för den här tjänsten
+- **NX_SUCCESS**: (0x00) DNS-serverlistans storlek har returnerats
+- NX_PTR_ERROR: (0x07) Ogiltig IP- eller DNS-pekare.
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare för den här tjänsten
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -848,7 +848,7 @@ status =  nx_dns_get_serverlist_size (&my_dns, 5, &my_listsize);
 
 ## <a name="nx_dns_info_by_name_get"></a>nx_dns_info_by_name_get
 
-Returnera IP-adress och port för DNS-servern efter värdnamn
+Returnera IP-adress och port för DNS-server efter värdnamn
 
 ### <a name="prototype"></a>Prototyp
 
@@ -858,28 +858,28 @@ UINT nx_dns_info_by_name_get(NX_DNS *dns_ptr, UCHAR *host_name,
                              USHORT *host_port_ptr, ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten returnerar serverns IP-adress och port (tjänst post) baserat på det angivna värd namnet av DNS-frågan. Om en tjänst post inte hittas returnerar den här rutinen en noll-IP-adress i indata-adress pekaren och en fel status som inte är noll returneras för att signalera ett fel.
+Den här tjänsten returnerar server-IP och port (tjänstpost) baserat på indatavärdnamnet efter DNS-fråga. Om en tjänstpost inte hittas returnerar den här rutinen en noll-IP-adress i pekaren för indataadressen och en felstatus som inte är noll returneras för att signalera ett fel.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **dns_ptr**: pekar mot DNS-kontroll-block  
-- **host_name**: pekare till värd namnets buffert
-- **host_address_ptr**: pekare till adress som ska returneras
-- **host_port_ptr**: pekare till port för att returnera wait_option vänte alternativ för DNS-svaret
+- **dns_ptr:** Pekare till DNS-kontrollblock  
+- **host_name:** Pekare till värdnamnbuffert
+- **host_address_ptr:** Pekare till adress som ska returneras
+- **host_port_ptr:** Pekare till port för att wait_option väntealternativet för DNS-svaret
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) DNS-Server posten har returnerats
-- **NX_DNS_NO_SERVER**: (0XA1) ingen DNS-server har registrerats med klienten för att skicka fråga på hostname
-- **NX_DNS_QUERY_FAILED**: (0XA3) DNS-fråga misslyckades; Inga svar från några DNS-servrar i klient listan eller ingen tjänst post är tillgängliga för det angivna värd namnet.
-- NX_PTR_ERROR: (0x07) ogiltig IP-eller DNS-pekare
-- NX_CALLER_ERROR: (0x11) ogiltig anropare för den här tjänsten
+- **NX_SUCCESS:**(0x00) DNS-serverposten returnerades
+- **NX_DNS_NO_SERVER**: (0xA1) Ingen DNS-server registrerad med Klienten för att skicka fråga på värdnamnet
+- **NX_DNS_QUERY_FAILED:**(0xA3) DNS-fråga misslyckades; inget svar från några DNS-servrar i klientlistan eller ingen tjänstpost är tillgänglig för indatavärdnamnet.
+- NX_PTR_ERROR: (0x07) Ogiltig IP- eller DNS-pekare
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare för den här tjänsten
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 ```c
@@ -895,7 +895,7 @@ status =  nx_dns_info_by_name_get(&my_dns, “www.abc1234.com”, &ip_address, &
 
 ## <a name="nx_dns_ipv4_address_by_name_get"></a>nx_dns_ipv4_address_by_name_get
 
-Leta upp IPv4-adressen för det angivna värd namnet
+Leta upp IPv4-adressen för värdnamnet för indata
 
 ### <a name="prototype"></a>Prototyp
 
@@ -907,40 +907,40 @@ UINT nx_dns_ipv4_address_by_name_get (NX_DNS *dns_ptr,
                                        ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skickar en fråga av typen A med det angivna värd namnet för att hämta IP-adresserna för det angivna värd namnet. DNS-klienten kopierar IPv4-adressen från en eller flera poster som returneras i DNS-serverns svar till *record_buffer* minnes plats. 
+Den här tjänsten skickar en fråga av typen A med det angivna värdnamnet för att hämta IP-adresserna för indatavärdnamnet. DNS-klienten kopierar IPv4-adressen från A-posterna som returneras i DNS-serversvaret till *den* record_buffer minnesplatsen. 
 
 >[!NOTE]
->*Record_buffer* måste vara 4 bytes justerad för att ta emot data.
+>Den *record_buffer* måste vara 4 byte justerad för att ta emot data.
 
-Flera IPv4-adresser lagras i den 4-byte-justerade bufferten som visas nedan:
+Flera IPv4-adresser lagras i den 4 byte-justerade bufferten enligt nedan:
 
-![Diagram över multipla I P v 4-adresser som lagras i den justerade bufferten på 4 byte.](media/image6.png)
+![Diagram över flera I P v 4-adresser som lagras i den 4 byte-justerade bufferten.](media/image6.png)
 
-Om den angivna bufferten inte kan innehålla alla IP-Datadata, lagras inte de återstående posterna i *record_buffer*. Detta gör att programmet kan hämta ett, några eller alla tillgängliga IP-Datadata i svaret från servern.
+Om den angivna bufferten inte kan innehålla alla IP-adressdata lagras inte de återstående A-posterna i *record_buffer*. Detta gör att programmet kan hämta en eller flera av de tillgängliga IP-adressdata i serverns svar.
 
-Med antalet returnerade poster i **record_count* kan programmet parsa IPv4-adress data från *record_buffer*.
+Med antalet A-poster som returneras i **record_count* kan programmet parsa IPv4-adressdata från *record_buffer*.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **dns_ptr**: pekar mot DNS-klient.  
-- **host_name_ptr**: pekar på värd namn för att hämta IPv4-adressens buffert pekare till platsen där du kan extrahera IPv4-data till
-- **buffer_size**: storleken på bufferten för att lagra IPv4-data
-- **wait_option**: vänte alternativ för att ta emot DNS-serverns svar
+- **dns_ptr:** Pekare till DNS-klient.  
+- **host_name_ptr: Pekare** till värdnamn för att hämta IPv4-adressbufferten Pekare till plats för att extrahera IPv4-data till
+- **buffer_size:** Storlek på buffert för att lagra IPv4-data
+- **wait_option: Vänta-alternativet** för att ta emot DNS-serversvar
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0x00) hämtade IPv4-data
-- **NX_DNS_NO_SERVER**: (0XA1) klient server listan är tom
-- **NX_DNS_QUERY_FAILED**: (0XA3) inget giltigt DNS-svar togs emot
-- NX_DNS_PARAM_ERROR: (0xA8) ogiltig indataparameter.
-- NX_PTR_ERROR: (0x07) ogiltig IP-eller DNS-pekare
-- NX_CALLER_ERROR: (0x11) ogiltig anropare för den här tjänsten
+- **NX_SUCCESS**: (0x00) IPv4-data har erhållits
+- **NX_DNS_NO_SERVER**: (0xA1) Klientserverlistan är tom
+- **NX_DNS_QUERY_FAILED**: (0xA3) Inget giltigt DNS-svar togs emot
+- NX_DNS_PARAM_ERROR: (0xA8) Ogiltig indataparameter.
+- NX_PTR_ERROR: (0x07) Ogiltig IP- eller DNS-pekare
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare för den här tjänsten
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -1007,35 +1007,35 @@ UINT nx_dns_host_by_address_get(NX_DNS *dns_ptr, ULONG ip_address,
                                 ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten begär namn matchning av den angivna IP-adressen från en eller flera DNS-servrar som tidigare angavs av programmet. Om det lyckas returneras det NULL-avslutade värd namnet i strängen som anges av *host_name_ptr*.
+Den här tjänsten begär namnmatchning av den angivna IP-adressen från en eller flera DNS-servrar som tidigare angetts av programmet. Om det lyckas returneras det NULL-avslutade värdnamnet i strängen som anges av *host_name_ptr*.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **dns_ptr**: pekare till en tidigare skapad DNS-instans.
-- **ip_address**: IP-adress att matcha i ett namn
-- **host_name_ptr**: pekare till mål arean för värd namnet
-- **max_host_name_size**: storleken på mål arean för värd namnet
-- **wait_option**: definierar hur länge tjänsten väntar på timer-Tick för ett DNS-servernamn efter varje DNS-fråga och frågans försök att göra om vänte alternativen definieras enligt följande:
-    - **timeout-värde**: (0X00000001-0xFFFFFFFE) om du väljer ett numeriskt värde (1-0xFFFFFFFE) anges det maximala antalet timer-Tick som ska pausas i väntan på DNS-matchningen.
-    - **TX_WAIT_FOREVER**: (0Xffffffff) väljer TX_WAIT_FOREVER gör att anrops tråden inaktive ras oändligt tills en DNS-Server svarar på begäran.
+- **dns_ptr:** Pekare till dns-instans som skapats tidigare.
+- **ip_address:** IP-adress som ska matchas mot ett namn
+- **host_name_ptr:** Pekare till målområdet för värdnamnet
+- **max_host_name_size:** Storleken på målområdet för värdnamnet
+- **wait_option:** Definierar hur länge tjänsten ska vänta i timern för ett DNS-serversvar efter varje DNS-fråga och återförsök för frågan Väntealternativen definieras enligt följande:
+    - **timeout-värde:**(0x00000001-0xFFFFFFFE) Om du väljer ett numeriskt värde (1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas i väntan på DNS-upplösningen.
+    - **TX_WAIT_FOREVER**: (0xFFFFFFFF) Om du TX_WAIT_FOREVER här alternativet pausas anropstråden på obestämd tid tills en DNS-server svarar på begäran.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) DNS-matchning har genomförts  
-- **NX_DNS_TIMEOUT**: (0xA2) uppnådde tids gränsen vid hämtning av DNS-mutex
-- **NX_DNS_NO_SERVER**: (0XA1) ingen DNS-serveradress har angetts
-- **NX_DNS_QUERY_FAILED**: (0XA3) fick inget svar på frågan
-- **NX_DNS_BAD_ADDRESS_ERROR**: (0XA4) null-indata adress
-- **NX_DNS_INVALID_ADDRESS_TYPE**: (0XB2) index pekar på ogiltig adress typ (t. ex. IPv6)
-- **NX_DNS_PARAM_ERROR**: (0XA8) ogiltig inmatad icke-pekare
-- NX_PTR_ERROR: (0x07) ogiltigt inmatade pekare
-- NX_CALLER_ERROR: (0x11) ogiltig anropare för den här tjänsten
+- **NX_SUCCESS:**(0x00) Lyckad DNS-upplösning  
+- **NX_DNS_TIMEOUT**: (0xA2) Time out när DNS mutex erhölls
+- **NX_DNS_NO_SERVER**: (0xA1) Ingen DNS-serveradress har angetts
+- **NX_DNS_QUERY_FAILED**: (0xA3) Tog inte emot något svar på frågan
+- **NX_DNS_BAD_ADDRESS_ERROR:**(0xA4) Null-indataadress
+- **NX_DNS_INVALID_ADDRESS_TYPE**: (0xB2) Index pekar på ogiltig adresstyp (t.ex. IPv6)
+- **NX_DNS_PARAM_ERROR**: (0xA8) Ogiltig icke-pekarindata
+- NX_PTR_ERROR: (0x07) Ogiltig pekare
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare för den här tjänsten
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -1055,7 +1055,7 @@ status =  nx_dns_host_by_address_get(&my_dns, IP_ADDRESS(192.2.2.10),
 
 ## <a name="nx_dns_host_by_name_get"></a>nx_dns_host_by_name_get
 
-Leta upp en IP-adress från värd namnet
+Leta upp en IP-adress från värdnamnet
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1064,31 +1064,31 @@ UINT nx_dns_host_by_name_get(NX_DNS *dns_ptr, UCHAR *host_name,
                              ULONG *host_address_ptr, ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten begär namn matchning för det angivna namnet, som pekas efter *host_name*, från en eller flera DNS-servrar som tidigare angavs av programmet. Om det lyckas returneras den associerade IP-adressen i målet som *host_address_ptr*.
+Den här tjänsten begär namnmatchning av det angivna namnet, vilket *host_name*, från en eller flera DNS-servrar som tidigare har angetts av programmet. Om det lyckas returneras den associerade IP-adressen i det mål som *host_address_ptr*.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **dns_ptr**: pekare till en tidigare skapad DNS-instans.
-- **host_name**: pekare till värdnamn
-- **host_address_ptr**: pekar mot DNS-VÄRDEns IP-adress
-- **wait_option**: definierar hur länge tjänsten ska vänta på DNS-matchningen. Vänte alternativen definieras enligt följande:
-    - **timeout-värde**: (0X00000001 till 0xFFFFFFFE) om du väljer ett numeriskt värde (1-0xFFFFFFFE) anger det maximala antalet timer-Tick som ska pausas i väntan på DNS-matchningen.
-    - **TX_WAIT_FOREVER**: (0Xffffffff) väljer TX_WAIT_FOREVER gör att anrops tråden inaktive ras oändligt tills en DNS-Server svarar på begäran.
+- **dns_ptr:** Pekare till dns-instans som skapats tidigare.
+- **host_name:** Pekare till värdnamn
+- **host_address_ptr: Pekare** till DNS-värdens IP-adress
+- **wait_option:** Definierar hur länge tjänsten ska vänta på DNS-upplösningen. Väntealternativen definieras på följande sätt:
+    - **timeout-värde:**(0x00000001 till 0xFFFFFFFE) Om du väljer ett numeriskt värde (1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan du väntar på DNS-upplösningen.
+    - **TX_WAIT_FOREVER**: (0xFFFFFFFF) Om du TX_WAIT_FOREVER här alternativet pausas anropstråden på obestämd tid tills en DNS-server svarar på begäran.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) DNS-matchning har genomförts.
-- **NX_DNS_NO_SERVER**: (0XA1) ingen DNS-serveradress har angetts
-- **NX_DNS_QUERY_FAILED**: (0XA3) fick inget svar på frågan
-- NX_DNS_PARAM_ERROR: (0xA8) ogiltig inmatad icke-pekare
-- NX_PTR_ERROR: (0x07) ogiltigt inmatade pekare
-- NX_CALLER_ERROR: (0x11) ogiltig anropare för den här tjänsten
+- **NX_SUCCESS**: (0x00) Lyckad DNS-upplösning.
+- **NX_DNS_NO_SERVER**: (0xA1) Ingen DNS-serveradress har angetts
+- **NX_DNS_QUERY_FAILED**: (0xA3) Tog inte emot något svar på frågan
+- NX_DNS_PARAM_ERROR: (0xA8) Ogiltig icke-pekarindata
+- NX_PTR_ERROR: (0x07) Ogiltig pekare
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare för den här tjänsten
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 ```c
@@ -1125,7 +1125,7 @@ IP address: 192.2.2.10
 
 ## <a name="nx_dns_host_text_get"></a>nx_dns_host_text_get
 
-Leta upp text strängen för det angivna domän namnet
+Leta upp textsträngen för domännamnet för indata
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1135,35 +1135,35 @@ UINT nx_dns_host_text_get(NX_DNS *dns_ptr, UCHAR *host_name,
                           UINT buffer_size, ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skickar en fråga av typen TXT med det angivna domän namnet och bufferten för att hämta godtyckliga sträng data.
+Den här tjänsten skickar en fråga av typen TXT med det angivna domännamnet och bufferten för att hämta godtyckliga strängdata.
 
-DNS-klienten kopierar text strängen i TXT-posten i DNS-serverns svar till *record_buffer* minnes plats. 
+DNS-klienten kopierar textsträngen i TXT-posten i DNS-serversvaret till *record_buffer* minnesplatsen. 
 
 >[!NOTE]
->*Record_buffer* behöver inte vara 4 byte-justerad för att ta emot data.
+>Den *record_buffer* behöver inte vara 4 byte justerad för att ta emot data.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **dns_ptr**: pekar mot DNS-klient.  
-- **host_name**: pekare till namnet på värden att söka på
-- **record_buffer**: pekare till plats att extrahera txt-data till
-- **buffer_size**: storleken på bufferten som ska innehålla txt-data
-- **wait_option**: vänte alternativ för att ta emot DNS-serverns svar
+- **dns_ptr:** Pekare till DNS-klient.  
+- **host_name:** Pekare till namnet på värden som sökningen ska sökas på
+- **record_buffer:** Pekare till en plats där TXT-data ska extraheras till
+- **buffer_size:** Storlek på buffert för txt-data
+- **wait_option: Vänta-alternativet** för att ta emot DNS-serversvar
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0x00) en returnerad txt-sträng
-- **NX_DNS_NO_SERVER**: (0XA1) klient server listan är tom
-- **NX_DNS_QUERY_FAILED**: (0XA3) inget giltigt DNS-svar togs emot
-- NX_PTR_ERROR: (0x07) ogiltigt inmatade pekare
-- NX_CALLER_ERROR: (0x11) ogiltig anropare för den här tjänsten
-- NX_DNS_PARAM_ERROR: (0xA8) ogiltig inmatad icke-pekare
+- **NX_SUCCESS**: (0x00) TXT-strängen har hämtats
+- **NX_DNS_NO_SERVER**: (0xA1) Klientserverlistan är tom
+- **NX_DNS_QUERY_FAILED**: (0xA3) Inget giltigt DNS-svar togs emot
+- NX_PTR_ERROR: (0x07) Ogiltig pekare
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare för den här tjänsten
+- NX_DNS_PARAM_ERROR: (0xA8) Ogiltiga indata som inte pekare
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -1197,38 +1197,38 @@ v=spf1 include:_www.my_example.com ip4:192.2.2.10/31 ip4:192.2.2.11/31 ~all
 
 ## <a name="nx_dns_packet_pool_set"></a>nx_dns_packet_pool_set
 
-Ange pool för DNS-klient
+Ange DNS-klientens paketpool
 
 ### <a name="prototype"></a>Prototyp
 
 ```c
 UINT nx_dns_packet_pool_set(NX_DNS *dns_ptr, NX_PACKET_POOL *pool_ptr);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten anger en tidigare skapad modempool som DNS- **klientens** adresspool. DNS-klienten kommer att använda den här poolen för att skicka DNS-frågor, så paketets nytto Last bör inte vara mindre än NX_DNS_PACKET_PAYLOAD_UNALIGNED som innehåller Ethernet-fönstret, IP-och UDP-huvuden och definieras i *nx_dns. h*.
+Den här tjänsten anger en tidigare skapad paketpool som **DNS-klientpaketpool.** DNS-klienten använder den här paketpoolen för att skicka DNS-frågor, så paketnyttolasten bör inte vara mindre än NX_DNS_PACKET_PAYLOAD_UNALIGNED som innehåller Ethernet-ram, IP- och UDP-huvuden och definieras *i nx_dns.h*.
  
 >[!NOTE]
->När DNS-klienten tas bort tas inte poolen bort med den och det är programmets ansvar att ta bort modempoolen när den inte längre behöver den.
+>När DNS-klienten tas bort tas paketpoolen inte bort med den och det är programmets ansvar att ta bort paketpoolen när den inte längre behövs.
 
 >[!NOTE]
->Den här tjänsten är bara tillgänglig om konfigurations alternativet NX_DNS_CLIENT_USER_CREATE_PACKET_POOL definierats i *nx_dns. h*
+>Den här tjänsten är endast tillgänglig om konfigurationsalternativet NX_DNS_CLIENT_USER_CREATE_PACKET_POOL har definierats *i nx_dns.h*
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **dns_ptr**: pekar mot en tidigare skapad DNS- **klient** instans.
-- **pool_ptr**: pekare till tidigare skapade paketets pool
+- **dns_ptr:** Pekare till en DNS-klientinstans som **skapats** tidigare.
+- **pool_ptr**: Pekare till paketpool som skapats tidigare
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) slutfördes.
-- **NX_NOT_ENABLED**: (0X14) klienten är inte konfigurerad för det här alternativet
-- NX_PTR_ERROR: (0x07) ogiltig IP-eller DNS- **klient** pekare.
-- NX_CALLER_ERROR: (0x11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS**: (0x00) Slutförande.
+- **NX_NOT_ENABLED**: (0x14) Klienten har inte konfigurerats för det här alternativet
+- NX_PTR_ERROR: (0x07) Ogiltig IP- eller **DNS-klient** pekare.
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 ```c
@@ -1253,7 +1253,7 @@ status =  nx_dns_packet_pool_set(&my_dns, &client_pool);
 
 ## <a name="nx_dns_server_add"></a>nx_dns_server_add
 
-Lägg till DNS-serverns IP-adress
+Lägga till IP-adress för DNS-server
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1261,27 +1261,27 @@ Lägg till DNS-serverns IP-adress
 UINT nx_dns_server_add(NX_DNS *dns_ptr, ULONG server_address);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten lägger till en IPv4 DNS-server i Server listan.
+Den här tjänsten lägger till en IPv4 DNS-server i serverlistan.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **dns_ptr**: pekar mot DNS-kontroll-block.  
-- **server_address**: IP-adress för DNS-Server
+- **dns_ptr:** Pekare till DNS-kontrollblock.  
+- **server_address:** IP-adress för DNS-server
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) servern har lagts till
-- **NX_DNS_DUPLICATE_ENTRY** eller **NX_NO_MORE_ENTRIES**: (0X17) inga fler DNS-servrar tillåts (listan är full)
-- **NX_DNS_PARAM_ERROR**: (0XA8) ogiltig inmatad icke-pekare
-- NX_PTR_ERROR: (0x07) ogiltigt inmatade pekare
-- NX_CALLER_ERROR: (0x11) ogiltig anropare för den här tjänsten
-- NX_DNS_BAD_ADDRESS_ERROR: (0xA4) null-indata för server adress
+- **NX_SUCCESS:**(0x00) Server har lagts till
+- **NX_DNS_DUPLICATE_ENTRY** eller **NX_NO_MORE_ENTRIES**: (0x17) Inga fler DNS-servrar tillåts (listan är full)
+- **NX_DNS_PARAM_ERROR**: (0xA8) Ogiltiga indata som inte pekare
+- NX_PTR_ERROR: (0x07) Ogiltig pekare
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare för den här tjänsten
+- NX_DNS_BAD_ADDRESS_ERROR: (0xA4) Null-serveradressindata
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -1294,7 +1294,7 @@ status =  nx_dns_server_add(&my_dns, IP_ADDRESS(202,2,2,13));
 
 ## <a name="nx_dns_server_get"></a>nx_dns_server_get
 
-Returnera en IPv4 DNS-server från klient listan
+Returnera en IPv4 DNS-server från klientlistan
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1303,28 +1303,28 @@ UINT nx_dns_server_get(NX_DNS *dns_ptr, UINT index,
                        ULONG *dns_server_address);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten returnerar IPv4 DNS-serveradressen från server listan vid det angivna indexet. Observera att indexet är noll baserat. Om inindexet överskrider storleken på listan över DNS-klienter returneras ett fel. Den *nx_dns_get_serverlist_size* tjänsten kan anropas först hämta antalet DNS-servrar i klient listan.
+Den här tjänsten returnerar IPv4 DNS-serveradressen från serverlistan i det angivna indexet. Observera att indexet är nollbaserat. Om indataindexet överskrider storleken på DNS-klientlistan returneras ett fel. Tjänsten *nx_dns_get_serverlist_size* anropas först hämta antalet DNS-servrar i klientlistan.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **dns_ptr**: pekar mot DNS-kontroll-block  
-- **index**: index i DNS-klientens lista över servrar
-- **dns_server_address**: pekare till IP-adressen för DNS-servern
+- **dns_ptr:** Pekare till DNS-kontrollblock  
+- **index:** Indexera till DNS-klientens lista över servrar
+- **dns_server_address:** Pekare till IP-adress för DNS-server
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) lyckad Server returnerades
-- **NX_DNS_SERVER_NOT_FOUND**: (0XA9) index pekar på tom plats
-- **NX_DNS_BAD_ADDRESS_ERROR**: (0XA4) index pekar på null-adress
-- **NX_DNS_PARAM_ERROR**: (0XA8) indexet överskrider storleken på listan
-- NX_PTR_ERROR: (0x07) ogiltig IP-eller DNS-pekare.
-- NX_CALLER_ERROR: (0x11) ogiltig anropare för den här tjänsten
+- **NX_SUCCESS**: (0x00) Servern har returnerats
+- **NX_DNS_SERVER_NOT_FOUND**: (0xA9) Index pekar på tomt fack
+- **NX_DNS_BAD_ADDRESS_ERROR**: (0xA4) Index pekar på null-adress
+- **NX_DNS_PARAM_ERROR**: (0xA8) Indexet överskrider storleken på listan
+- NX_PTR_ERROR: (0x07) Ogiltig IP- eller DNS-pekare.
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare för den här tjänsten
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -1340,7 +1340,7 @@ status =  nx_dns_server_get(&my_dns, 5, &my_server_addres);
 
 ## <a name="nx_dns_server_remove"></a>nx_dns_server_remove
 
-Ta bort en IPv4 DNS-server från klient listan
+Ta bort en IPv4 DNS-server från klientlistan
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1348,26 +1348,26 @@ Ta bort en IPv4 DNS-server från klient listan
 UINT nx_dns_server_remove(NX_DNS *dns_ptr, ULONG server_address);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar bort en IPv4 DNS-server från klient listan.
+Den här tjänsten tar bort en IPv4 DNS-server från klientlistan.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **dns_ptr**: pekar mot DNS-kontroll-block.
-- **server_address**: IP-adressen för DNS-servern.
+- **dns_ptr:** Pekare till DNS-kontrollblock.
+- **server_address:** IP-adressen för DNS-servern.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) DNS-servern har tagits bort
-- **NX_DNS_SERVER_NOT_FOUND**: (0XA9) Server inte i klient listan
-- **NX_DNS_BAD_ADDRESS_ERROR**: (0XA4) null-indata för server adress
-- NX_PTR_ERROR: (0x07) ogiltig IP-eller DNS-pekare.
-- NX_CALLER_ERROR: (0x11) ogiltig anropare för den här tjänsten
+- **NX_SUCCESS**: (0x00) DNS-servern har tagits bort
+- **NX_DNS_SERVER_NOT_FOUND**: (0xA9) Server inte i klientlistan
+- **NX_DNS_BAD_ADDRESS_ERROR**: (0xA4) Null-serveradressindata
+- NX_PTR_ERROR: (0x07) Ogiltig IP- eller DNS-pekare.
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare för den här tjänsten
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -1381,7 +1381,7 @@ status =  nx_dns_server_remove(&my_dns, IP_ADDRESS(202,2,2,13));
 
 ## <a name="nx_dns_server_remove_all"></a>nx_dns_server_remove_all
 
-Ta bort alla DNS-servrar från klient listan
+Ta bort alla DNS-servrar från klientlistan
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1389,24 +1389,24 @@ Ta bort alla DNS-servrar från klient listan
 UINT nx_dns_server_remove_all(NX_DNS *dns_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar bort alla DNS-servrar från klient listan.
+Den här tjänsten tar bort alla DNS-servrar från klientlistan.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **dns_ptr**: pekar mot DNS-kontroll-block.
+- **dns_ptr:** Pekare till DNS-kontrollblock.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) DNS-servrar har tagits bort
-- **NX_DNS_ERROR**: (0XA0) Det gick inte att hämta skydds-mutex
-- NX_PTR_ERROR: (0x07) ogiltig IP-eller DNS-pekare.
-- NX_CALLER_ERROR: (0x11) ogiltig anropare för den här tjänsten
+- **NX_SUCCESS:**(0x00) DNS-servrar har tagits bort
+- **NX_DNS_ERROR**: (0xA0) Det gick inte att hämta skyddet mutex
+- NX_PTR_ERROR: (0x07) Ogiltig IP- eller DNS-pekare.
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare för den här tjänsten
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 

@@ -1,153 +1,153 @@
 ---
-title: Kapitel 4 – Beskrivning av LWM2M klient tjänster
-description: Det här kapitlet innehåller en beskrivning av alla LWM2M klient tjänster i alfabetisk ordning.
+title: Kapitel 4 – Beskrivning av LWM2M CLIENT Services
+description: Det här kapitlet innehåller en beskrivning av alla LWM2M-klienttjänster i alfabetisk ordning.
 author: v-condav
 ms.author: v-condav
 ms.date: 01/22/2021
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 825a215ba756b39b6d76e6cc773c288e8b8aab01
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 0956cb43f4fcd87d5bd4d90b2288ce6f8d5295ee0be8b8a9f4719ad842e00b2a
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104825929"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116783449"
 ---
-# <a name="chapter-4--description-of-lwm2m-client-services"></a>Kapitel 4 Beskrivning av LWM2M-KLIENTtjänster
+# <a name="chapter-4--description-of-lwm2m-client-services"></a>Kapitel 4 Beskrivning av LWM2M CLIENT Services
 
-Det här kapitlet innehåller en beskrivning av alla LWM2M klient tjänster som listas nedan i alfabetisk ordning.
+Det här kapitlet innehåller en beskrivning av alla LWM2M-klienttjänster som anges nedan i alfabetisk ordning.
 
-I avsnittet "retur värden" i följande API-beskrivningar påverkas inte värden i **fetstil** av  **NX_DISABLE_ERROR_CHECKING** definiera som används för att inaktivera API-felkontroll, medan icke-Fetstilade värden är helt inaktiverade.
+I avsnittet "Returvärden" i följande API-beskrivningar påverkas inte värden i **FETSTIL** av  **den NX_DISABLE_ERROR_CHECKING-definition** som används för att inaktivera API-felkontroll, medan värden som inte är fetstilta är helt inaktiverade.
 
-**LWM2M klient hantering:**
+**LWM2M-klienthantering:**
 
-- nx_lwm2m_client_create: *skapa lwm2m-klient*
+- nx_lwm2m_client_create: *Skapa LWM2M-klient*
 
-- nx_lwm2m_client_delete: *ta bort lwm2m-klienten*
+- nx_lwm2m_client_delete: *Ta bort LWM2M-klient*
 
-- nx_lwm2m_client_lock: *Lås lwm2m-klienten*
+- nx_lwm2m_client_lock: Lås *LWM2M-klient*
 
-- nx_lwm2m_client_unlock: *Lås upp lwm2m-klienten*
+- nx_lwm2m_client_unlock: Låsa *upp LWM2M-klient*
 
-**LWM2M för hantering av klient sessioner:**
+**LWM2M-klientsessionshantering:**
 
-- nx_lwm2m_client_session_create: *skapa en lwm2m-klientsession*
+- nx_lwm2m_client_session_create: *Skapa LWM2M-klientsession*
 
-- nx_lwm2m_client_session_delete: *ta bort lwm2m-klientsession*
+- nx_lwm2m_client_session_delete: Ta *bort LWM2M-klientsession*
 
-- nx_lwm2m_client_session_bootstrap: *starta en session med en Start Server*
+- nx_lwm2m_client_session_bootstrap: Starta *en session med en Bootstrap-server*
 
-- nx_lwm2m_client_session_bootstrap_dtls: *starta en säker session med en Start Server*
+- nx_lwm2m_client_session_bootstrap_dtls: Starta *en säker session med en Bootstrap-server*
 
-- nx_lwm2m_client_session_register_info_get: *Hämta Lwm2m Server register information*
+- nx_lwm2m_client_session_register_info_get: Hämta *registerinformation för LWM2M-server*
 
-- nx_lwm2m_client_session_register: *starta en session med en lwm2m-Server*
+- nx_lwm2m_client_session_register: Starta *en session med en LWM2M-server*
 
-- nx_lwm2m_client_session_register_dtls: *starta en säker session med en lwm2m-Server*
+- nx_lwm2m_client_session_register_dtls: Starta *en säker session med en LWM2M-server*
 
-- nx_lwm2m_client_session_update: *Uppdatera en session med en lwm2m-Server*
+- nx_lwm2m_client_session_update: Uppdatera *en session med en LWM2M-server*
 
-- nx_lwm2m_client_session_deregister: *Avsluta en session med en lwm2m-Server*
+- nx_lwm2m_client_session_deregister: Avsluta *en session med en LWM2M-server*
 
-- nx_lwm2m_client_session_error_get: *Hämta senaste fel i en session*
+- nx_lwm2m_client_session_error_get: Hämta *det senaste felet för en session*
 
-**Implementering av enhets objekt:**
+**Implementering av enhetsobjekt:**
 
-- nx_lwm2m_client_device_callbacks_set: *Ange återanrop i enhets objekts program*
+- nx_lwm2m_client_device_callbacks_set: *Ange återanrop för enhetsobjektprogram*
 
-- nx_lwm2m_client_device_error_push: *Lägg till felkod till enhets objekt*
+- nx_lwm2m_client_device_error_push: Lägg *till felkod i enhetsobjektet*
 
-- nx_lwm2m_client_device_error_reset: *återställa felkoder för enhets objekt*
+- nx_lwm2m_client_device_error_reset: Återställa *felkoder för enhetsobjektet*
 
-- nx_lwm2m_client_device_resource_changed: *signal ändring av enhets objekt resurs*
+- nx_lwm2m_client_device_resource_changed: *Signaländring av enhetsobjektresurs*
 
-**Objekt implementering för uppdatering av inbyggd program vara:**
+**Objektimplementering för uppdatering av inbyggd programvara:**
 
-- nx_lwm2m_firmware_create: *skapa uppdaterings objekt för inbyggd program vara*
+- nx_lwm2m_firmware_create: Skapa *objekt för uppdatering av inbyggd programvara*
 
-- nx_lwm2m_firmware_package_info_set: *Ange information om uppdaterings paket för inbyggd program vara*
+- nx_lwm2m_firmware_package_info_set: Ange *information om uppdateringspaket för inbyggd programvara*
 
-- nx_lwm2m_firmware_result_set: *Ange uppdaterings resultat för inbyggd program vara*
+- nx_lwm2m_firmware_result_set: Ange *resultat för uppdatering av inbyggd programvara*
 
-- nx_lwm2m_firmware_state_set: *Ange uppdaterings tillstånd för inbyggd program vara*
+- nx_lwm2m_firmware_state_set: Ange *uppdateringstillstånd för inbyggd programvara*
 
 **Implementering av anpassade objekt:**
 
-- nx_lwm2m_client_object_add: *Lägg till objekt implementering i lwm2m-klienten*
+- nx_lwm2m_client_object_add: Lägg *till objektimplementering till LWM2M-klienten*
 
-- nx_lwm2m_client_object_remove: *ta bort objekt implementering från lwm2m-klienten*
+- nx_lwm2m_client_object_remove: Ta *bort objektimplementering från LWM2M-klienten*
 
-- nx_lwm2m_client_object_instance_add: *Lägg till objekt instans i lwm2m-klienten*
+- nx_lwm2m_client_object_instance_add: Lägg *till objektinstans i LWM2M-klienten*
 
-- nx_lwm2m_client_object_instance_remove: *ta bort objekt instansen från lwm2m-klienten*
+- nx_lwm2m_client_object_instance_remove: Ta *bort objektinstans från LWM2M-klienten*
 
-- nx_lwm2m_object_resource_changed: *signal ändring av ett resurs värde för en objekt instans*
+- nx_lwm2m_object_resource_changed: *Signaländring av ett resursvärde för en objektinstans*
 
-**Hantering av lokala enheter**
+**Lokal Enhetshantering**
 
-- nx_lwm2m_client_object_create: *skapa en ny objekt instans*
+- nx_lwm2m_client_object_create: Skapa *en ny objektinstans*
 
-- nx_lwm2m_client_object_delete: *ta bort en objekt instans*
+- nx_lwm2m_client_object_delete: Ta *bort en objektinstans*
 
-- nx_lwm2m_client_object_discover: *identifiera resurser för en objekt instans*
+- nx_lwm2m_client_object_discover: Identifiera *resurser för en objektinstans*
 
-- nx_lwm2m_client_object_execute: *Kör resurs för en objekt instans*
+- nx_lwm2m_client_object_execute: Köra *resurs för en objektinstans*
 
-- nx_lwm2m_client_object_next_get: *Hämta listan över objekt som implementeras av lwm2m-klienten*
+- nx_lwm2m_client_object_next_get: *Hämta listan över objekt som implementerats av LWM2M-klienten*
 
 - nx_lwm2m_client_object_instance_next_get: *Hämta listan över instanser av ett objekt*
 
-- nx_lwm2m_client_object_read: *läsa resurs värden för en objekt instans*
+- nx_lwm2m_client_object_read: Läsa *resursvärden för en objektinstans*
 
-- nx_lwm2m_client_object_write: *Ändra resurs värden för en objekt instans*
+- nx_lwm2m_client_object_write: Ändra *resursvärden för en objektinstans*
 
-**Inställning av resurs information och värden:**
+**Inställning av resursinformation och -värden:**
 
-- nx_lwm2m_client_resource_info_set: *Ange resurs informationen*
+- nx_lwm2m_client_resource_info_set: Ange *resursinformation*
 
-- nx_lwm2m_client_resource_string_set: *Ange resurs värde som sträng*
+- nx_lwm2m_client_resource_string_set: *Ange resursvärdet som sträng*
 
-- nx_lwm2m_client_resource_integer32_set: *Ange resurs värde som 32-bitars heltal*
+- nx_lwm2m_client_resource_integer32_set: Ange *resursvärdet som 32-bitars heltal*
 
-- nx_lwm2m_client_resource_integer64_set: *Ange resurs värde som 64-bitars heltal*
+- nx_lwm2m_client_resource_integer64_set: Ange *resursvärdet som 64-bitars heltal*
 
-- nx_lwm2m_client_resource_float32_set: *Ange resurs värde som 32-bitars flyttal*
+- nx_lwm2m_client_resource_float32_set: Ange *resursvärdet som 32-bitars flyttal*
 
-- nx_lwm2m_client_resource_float64_set: *Ange resurs värde som 64-bitars flyttal*
+- nx_lwm2m_client_resource_float64_set: *Ange resursvärdet som 64-bitars flyttal*
 
-- nx_lwm2m_client_resource_boolean_set: *Ange resurs värde som booleskt värde*
+- nx_lwm2m_client_resource_boolean_set: *Ange resursvärdet som booleskt*
 
-- nx_lwm2m_client_resource_objlnk_set: *Ange resurs värde som objekt länk*
+- nx_lwm2m_client_resource_objlnk_set: Ange *resursvärdet som objektlänk*
 
-- nx_lwm2m_client_resource_opaque_set: *Ange resurs värde som ogenomskinligt*
+- nx_lwm2m_client_resource_opaque_set: Ange *resursvärdet som täckande*
 
-- nx_lwm2m_client_resource_instance_set: *Ange resurs värde som instansen för flera resurser*
+- nx_lwm2m_client_resource_instance_set: Ange *resursvärdet som instans för flera resurser*
 -
-- nx_lwm2m_client_resource_dim_set: *Ange resurs dimensionen för flera resurser.*
+- nx_lwm2m_client_resource_dim_set: Ange *resursdimensionen för flera resurser.*
 
-**Resurs information och värden får:**
+**Information om resurser och värden som hämtar:**
 
-- nx_lwm2m_client_resource_info_get: *Hämta resursinformation*
+- nx_lwm2m_client_resource_info_get: Hämta *resursinformation*
 
-- nx_lwm2m_client_resource_string_get: *Hämta värdet för en sträng resurs*
+- nx_lwm2m_client_resource_string_get: Hämta *värdet för en strängresurs*
 
-- nx_lwm2m_client_resource_integer32_get: *Hämta värdet för en 32-bitars heltals resurs*
+- nx_lwm2m_client_resource_integer32_get: Hämta *värdet för en 32-bitars heltalsresurs*
 
-- nx_lwm2m_client_resource_integer64_get: *Hämta värdet för en 64-bitars heltals resurs*
+- nx_lwm2m_client_resource_integer64_get: *Hämta värdet för en 64-bitars heltalsresurs*
 
-- nx_lwm2m_client_resource_float32_get: *Hämta värdet för en 32-bitars float-resurs*
+- nx_lwm2m_client_resource_float32_get: Hämta *värdet för en 32-bitars flyttalsresurs*
 
-- nx_lwm2m_client_resource_float64_get: *Hämta värdet för en 64-bitars float-resurs*
+- nx_lwm2m_client_resource_float64_get: *Hämta värdet för en 64-bitars flyttalsresurs*
 
 - nx_lwm2m_client_resource_boolean_get: *Hämta värdet för en boolesk resurs*
 
-- nx_lwm2m_client_resource_objlnk_get: *Hämta värdet för en objekt länk resurs*
+- nx_lwm2m_client_resource_objlnk_get: Hämta *värdet för en objektlänkresurs*
 
-- nx_lwm2m_client_resource_opaque_get: *Hämta värdet för en ogenomskinlig resurs*
+- nx_lwm2m_client_resource_opaque_get: Hämta *värdet för en täckande resurs*
 
-- nx_lwm2m_client_resource_instance_get: *Hämta resurs instansen för flera resurser*
+- nx_lwm2m_client_resource_instance_get: Hämta *resursinstansen för flera resurser*
 
-- nx_lwm2m_client_resource_dim_get: *Hämta resurs dimensionen för flera resurser.*
+- nx_lwm2m_client_resource_dim_get: Hämta *resursdimensionen för flera resurser.*
 
 ## <a name="nx_lwm2m_client_create"></a>nx_lwm2m_client_create
 
@@ -170,36 +170,36 @@ UINT nx_lwm2m_client_create(
     UINT priority);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skapar en LWM2M-klient instans som körs i kontexten för en egen ThreadX-tråd.
+Den här tjänsten skapar en LWM2M-klientinstans som körs i kontexten för en egen ThreadX-tråd.
 
-LWM2M-klienten implementerar följande OMA LWM2M-objekt: Security (0), Server (1), Access Control (2) och enhet (3). Implementeringar av andra objekt måste läggas till av programmet.
+LWM2M-klienten implementerar följande OMA LWM2M-objekt: Säkerhet (0), Server (1), Access Control (2) och Enhet (3). De andra objektimplementeringarna måste läggas till av programmet.
 
 ### <a name="parameters"></a>Parametrar
 
-- **client_ptr** Pekare till LWM2M klient kontroll block.
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
-- **packet_pool_ptr** Visar en pekare till LWM2M-klientens standardpool.
-- **name_ptr** Pekare till LWM2M-klientens slut punkts namn.
-- **name_length** Längden på LWM2M-klientens slut punkts namn.
-- **msisdn_ptr** Pekaren till MSISDN där LWM2M-klienten kan nås för användning med SMS-bindningen, kan vara NULL om SMS-bindning inte stöds.
-- **msisdn_length** Längd på MSISDN-nummer.
-- **binding_modes** Bindningen och lägena som stöds av LWM2M-klienten måste vara en kombination av NX_LWM2M_BINDING_U-, NX_LWM2M_BINDING_UQ-, NX_LWM2M_BINDING_S-och NX_LWM2M_BINDING_SQ flaggor.
-- **stack_ptr** Pekare till LWM2M klient tråds tack.
-- **stack_size** LWM2M klient trådens stack storlek.
+- **client_ptr** Pekare till LWM2M-klientkontrollblocket.
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
+- **packet_pool_ptr** Pekare till standardpaketpoolen för den här LWM2M-klienten.
+- **name_ptr** Pekare till namnet på LWM2M-klientslutpunkten.
+- **name_length** Längden på namnet på LWM2M-klientslutpunkten.
+- **msisdn_ptr** Pekare till MSISDN där LWM2M-klienten kan nås för användning med SMS-bindningen, kan vara NULL om SMS-bindning inte stöds.
+- **msisdn_length** Längden på MSISDN-talet.
+- **binding_modes** Bindningen och lägena som stöds av LWM2M-klienten måste vara en kombination av flaggor NX_LWM2M_BINDING_U, NX_LWM2M_BINDING_UQ, NX_LWM2M_BINDING_S och NX_LWM2M_BINDING_SQ.
+- **stack_ptr** Pekare till LWM2M-klientens trådstackområde.
+- **stack_size** Storleken på LWM2M-klientens trådstack.
 - **prioritet** Prioritet för LWM2M-klienten.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** LWM2M-klienten har skapats.
-- **NX_LWM2M_CLIENT_ERROR** LWM2M-klient skapa fel.
+- **NX_LWM2M_CLIENT_ERROR** Fel när LWM2M-klienten skapas.
 - **NX_LWM2M_CLIENT_PORT_UNAVAILABLE** Porten är inte tillgänglig.
 - **NX_PTR_ERROR** Ogiltig pekare.
-- **NX_SIZE_ERROR** Ogiltig stack storlek.
+- **NX_SIZE_ERROR** Ogiltig stackstorlek.
 - **NX_OPTION_ERROR** Ogiltig prioritet.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -225,22 +225,22 @@ Tar bort en LWM2M-klient.
 UINT nx_lwm2m_client_delete(NX_LWM2M_CLIENT *client_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar bort en tidigare skapad LWM2M-klient instans.
+Den här tjänsten tar bort en tidigare skapad LWM2M-klientinstans.
 
-Alla sessioner som är anslutna till klienten tas också bort av det här anropet.
+Alla sessioner som för närvarande är kopplade till klienten tas också bort av det här anropet.
 
 ### <a name="parameters"></a>Parametrar
 
-- **client_ptr** Pekare till LWM2M klient kontroll block.
+- **client_ptr** Pekare till LWM2M-klientkontrollblocket.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** LWM2M-klienten har tagits bort.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -255,7 +255,7 @@ status = nx_lwm2m_client_create(&lwm2m_client);
 
 ## <a name="nx_lwm2m_client_device_callback_set"></a>nx_lwm2m_client_device_callback_set
 
-Anger ett enhets objekts återanrop för programmet.
+Anger ett enhetsobjekts programanrop.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -265,23 +265,23 @@ UINT **nx_lwm2m_client_device_callback_set**(
     NX_LWM2M_CLIENT_DEVICE_OPERATION_CALLBACK operation_callback);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten installerar program återanrop för att implementera åtgärder på LWM2M enhets objekt resurser som inte hanteras av LWM2M-klienten.
+Den här tjänsten installerar programmets återanrop för att implementera åtgärder på LWM2M-enhetsobjektresurser som inte hanteras av LWM2M-klienten.
 
-LWM2M-klienten implementerar följande resurser: felkod (11), Reset-felkod (12) och bindning och lägen som stöds (16). åtgärder för de andra resurserna omdirigeras till programmet.
+LWM2M-klienten implementerar följande resurser: Felkod (11), Återställ felkod (12) och Bindning och lägen som stöds (16), åtgärder till de andra resurserna omdirigeras till programmet.
 
 ### <a name="parameters"></a>Parametrar
 
-- **client_ptr** Pekare till LWM2M klient kontroll block.
-- **operation_callback** Återanrop för "Read", "Discovery", "Write" och "EXECUTE".
+- **client_ptr** Pekare till LWM2M-klientkontrollblocket.
+- **operation_callback** Åtgärdsanropet för "Read", "Discover", "Write" och "Execute" (Kör).
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** Återanropet för åtgärden har angetts.
+- **NX_SUCCESS** Åtgärdens återanrop har angetts.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -295,7 +295,7 @@ status = nx_lwm2m_client_device_callback_set(&lwm2m_client, device_operation);
 ```
 
 ## <a name="nx_lwm2m_client_device_error_push"></a>nx_lwm2m_client_device_error_push
-Lägger till en felkod till ett enhets objekt.
+Lägger till en felkod i ett enhetsobjekt.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -305,27 +305,27 @@ UINT **nx_lwm2m_client_device_error_push**(
     UCHAR code);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten lägger till en ny instans i fel kods resursen (11) för objekt enheten.
+Den här tjänsten lägger till en ny instans i resursen Felkod (11) för objektenheten.
 
 ### <a name="parameters"></a>Parametrar
 
-- **client_ptr** Pekare till LWM2M klient kontroll block.
+- **client_ptr** Pekare till LWM2M-klientkontrollblocket.
 - **kod** Den nya felkoden.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
 - **NX_LWM2M_CLIENT_BUFFER_TOO_SMALL**
 
 Det maximala antalet lagrade felkoder har
 
-nåtts.
+har nåtts.
 
 NX_PTR_ERROR ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -340,7 +340,7 @@ status = nx_lwm2m_client_device_error_push(&lwm2m_client, 1);
 
 ## <a name="nx_lwm2m_client_device_error_reset"></a>nx_lwm2m_client_device_error_reset
 
-Återställer felkoden för enhets objekt.
+Återställer felkoderna för enhetsobjektet.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -348,20 +348,20 @@ status = nx_lwm2m_client_device_error_push(&lwm2m_client, 1);
 UINT nx_lwm2m_client_device_error_reset(NX_LWM2M_CLIENT *client_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar bort alla fel kods resurs instanser från objektet enhet. Det motsvarar att köra fel koden för resurs återställning (12).
+Den här tjänsten tar bort alla felkodresursinstanser från enhetsobjektet. Detta motsvarar att köra resursåterställningsfelkoden (12).
 
 ### <a name="parameters"></a>Parametrar
 
-- **client_ptr** Pekare till LWM2M klient kontroll block.
+- **client_ptr** Pekare till LWM2M-klientkontrollblocket.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -376,7 +376,7 @@ status = nx_lwm2m_client_device_error_reset(&lwm2m_client);
 
 ## <a name="nx_lwm2m_client_device_resource_changed"></a>nx_lwm2m_client_device_resource_changed
 
-Signalerar en ändring av en enhets objekt resurs.
+Signalerar en ändring av en enhetsobjektresurs.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -387,21 +387,21 @@ UINT nx_lwm2m_client_device_resource_changed(
 
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Tjänsten används av programmet för att signalera till LWM2M-klienten att en resurs av objekt enheten har ändrats. LWM2M-klienten skickar ett meddelande om resursen observeras av en LWM2M-Server.
+Tjänsten används av programmet för att signalera till LWM2M-klienten att en resurs för objektenheten har ändrats. LWM2M-klienten skickar ett meddelande om resursen observeras av en LWM2M-server.
 
 ### <a name="parameters"></a>Parametrar
 
-- **client_ptr** Pekare till LWM2M klient kontroll block.
-- **resurs** Pekar till strukturen som beskriver den resurs som har ändrats.
+- **client_ptr** Pekare till LWM2M-klientkontrollblocket.
+- **resurs** Pekare till den struktur som beskriver den resurs som har ändrats.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -416,7 +416,7 @@ status = nx_lwm2m_client_device_resource_changed(&lwm2m_client, &resource);
 
 ##  <a name="nx_lwm2m_client_firmware_create"></a>nx_lwm2m_client_firmware_create
 
-Skapa ett LWM2M-klient-objekt för inbyggd program vara. 
+Skapa ett LWM2M-klientobjekt för inbyggd programvara. 
 
 ### <a name="prototype"></a>Prototyp
 
@@ -430,25 +430,25 @@ UINT nx_lwm2m_client_firmware_create(
     NX_LWM2M_CLIENT_FIRMWARE_PACKAGE_URI_CALLBACK update_callback);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Tjänsten används av programmet för att skapa en inbyggd program vara.
+Tjänsten används av programmet för att skapa objekt för inbyggd programvara.
 
 ### <a name="parameters"></a>Parametrar
 
-- **firmware_ptr** Pekare till LWM2M-klientens inbyggda objekt.
-- **client_ptr** Pekare till LWM2M klient kontroll block.
+- **firmware_ptr** Pekare till LWM2M-klientens objekt för inbyggd programvara.
+- **client_ptr** Pekare till LWM2M-klientkontrollblocket.
 - **protokoll** Protokoll som stöds.
-- **package_callback** Paket återanropet.
-- **package_uri_callback** Paket-URI-motanrop.
-- **update_callback** Återanropet för uppdateringen.
+- **package_callback** Paketanropet.
+- **package_uri_callback** Paket-URI-återanrop.
+- **update_callback** Uppdateringsanropet.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 **NX_SUCCESS** Åtgärden lyckades.
 **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -466,7 +466,7 @@ status = nx_lwm2m_client_firmware_create(&firmware, &lwm2m_client,
 
 ##  <a name="nx_lwm2m_client_firmware_package_info_set"></a>nx_lwm2m_client_firmware_package_info_set
 
-Anger information om LWM2M-klientens firmware-paket.
+Anger paketinformationen för LWM2M-klientens inbyggda programvara.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -479,24 +479,24 @@ UINT nx_lwm2m_client_firmware_package_info_set(
     UINT version_length);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Tjänsten används av programmet för att ange paket informations resurserna för det inbyggda program varans uppdaterings objekt.
+Tjänsten används av programmet för att ange paketinformationsresurserna för objektet för uppdatering av inbyggd programvara.
 
 ### <a name="parameters"></a>Parametrar
 
-- **firmware_ptr** Pekare till LWM2M-klientens inbyggda objekt.
-- **namn** Namnet på den inbyggda program varans paket.
-- **name_length** Namnets längd.
-- **version** Versionen av den inbyggda program varans paket.
-- **version_length** Versionens längd.
+- **firmware_ptr** Pekare till LWM2M-klientens objekt för inbyggd programvara.
+- **namn** Namnet på paketet för inbyggd programvara.
+- **name_length** Längden på namnet.
+- **version** Versionen av paketet för inbyggd programvara.
+- **version_length** Längden på versionen.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -513,7 +513,7 @@ status = nx_lwm2m_client_firmware_package_info_set(&firmware, 2m_client,
 
 ##  <a name="nx_lwm2m_client_firmware_result_set"></a>nx_lwm2m_client_firmware_result_set
 
-Anger uppdaterings resultat resursen för det inbyggda program varans uppdaterings objekt.
+Anger resursen för uppdateringsresultat för objektet för uppdatering av inbyggd programvara.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -523,21 +523,21 @@ UINT nx_lwm2m_client_firmware_result_set(
     UCHAR result);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Tjänsten används av programmet för att ställa in uppdaterings resultat resursen för objektet för den inbyggda program varan.
+Tjänsten används av programmet för att ange resursen för uppdateringsresultat för objektet för uppdatering av inbyggd programvara.
 
 ### <a name="parameters"></a>Parametrar
 
-- **firmware_ptr** Pekare till LWM2M-klientens inbyggda objekt.
-- **resultat** Uppdaterings resultatet.
+- **firmware_ptr** Pekare till LWM2M-klientens objekt för inbyggd programvara.
+- **resultat** Uppdateringsresultatet.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -553,7 +553,7 @@ status = nx_lwm2m_client_firmware_result_set(&firmware,
 
 ##  <a name="nx_lwm2m_client_firmware_state_set"></a>nx_lwm2m_client_firmware_state_set
 
-Anger uppdaterings resultat resursen för det inbyggda program varans uppdaterings objekt.
+Anger resursen för uppdateringsresultat för objektet för uppdatering av inbyggd programvara.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -563,21 +563,21 @@ UINT nx_lwm2m_client_firmware_state_set(
     UCHAR result);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Tjänsten används av programmet för att ange tillstånd för uppdaterings objekt för den inbyggda program varan.
+Tjänsten används av programmet för att ange tillståndet för objektet för uppdatering av inbyggd programvara.
 
 ### <a name="parameters"></a>Parametrar
 
-- **firmware_ptr** Pekare till LWM2M-klientens inbyggda objekt.
-- **tillstånd** Status för den inbyggda program varans objekt.
+- **firmware_ptr** Pekare till LWM2M-klientens objekt för inbyggd programvara.
+- **tillstånd** Tillståndet för objektet för inbyggd programvara.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -601,24 +601,24 @@ Låser LWM2M-klienten.
 UINT **nx_lwm2m_client_lock**(NX_LWM2M_CLIENT *client_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten låser LWM2M-klienten för att förhindra samtidig åtkomst till LWM2M-objekt från servrar eller en annan program tråd.
+Den här tjänsten låser LWM2M-klienten för att förhindra samtidig åtkomst till LWM2M-objekten från servrarna eller en annan programtråd.
 
-Om LWM2M-klienten är låst av en annan tråd, kommer funktionen att blockeras tills LWM2M-klienten har låsts upp.
+Om LWM2M-klienten för närvarande är låst av en annan tråd blockeras funktionen tills LWM2M-klienten låses upp.
 
-Anrop till ***nx_lwm2m_client_lock** _/_ *_nx_lwm2m_client_unlock_**-par kan kapslas.
+Anrop till ***nx_lwm2m_client_lock** _/_ *_nx_lwm2m_client_unlock_** par kan kapslas.
 
 ### <a name="parameters"></a>Parametrar
 
-- **client_ptr** Pekare till LWM2M klient kontroll block.
+- **client_ptr** Pekare till LWM2M-klientkontrollblocket.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -633,7 +633,7 @@ status = nx_lwm2m_client_lock(&lwm2m_client);
 
 ## <a name="nx_lwm2m_client_object_add"></a>nx_lwm2m_client_object_add
 
-Lägger till en objekt implementering i LWM2M-klienten.
+Lägger till en objektimplementering till LWM2M-klienten.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -645,24 +645,24 @@ UINT **nx_lwm2m_client_object_add**(
     NX_LWM2M_CLIENT_OBJECT_OPERATION_CALLBACK object_operation);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten lägger till en ny objekt implementering i LWM2M-klienten.
+Den här tjänsten lägger till en ny objektimplementering till LWM2M-klienten.
 
 ### <a name="parameters"></a>Parametrar
 
-- **client_ptr** Pekare till LWM2M klient kontroll block.
-- **object_ptr** Pekare till strukturen som definierar objekt implementeringen.
-- **object_id** Objekt-ID.
-- **object_operation** Funktionen motringning för objekt åtgärd.
+- **client_ptr** Pekare till LWM2M-klientkontrollblocket.
+- **object_ptr** Pekare till den struktur som definierar objektimplementering.
+- **object_id** Objekt-ID:t.
+- **object_operation** Funktionen för återanrop av objektåtgärd.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
-- **NX_LWM2M_CLIENT_ALREADY_EXIST** Objekt-ID: t finns redan.
+- **NX_LWM2M_CLIENT_ALREADY_EXIST** Objekt-ID:t finns redan.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -678,7 +678,7 @@ status = nx_lwm2m_client_object_add(&lwm2m_client, &object,
 
 ## <a name="nx_lwm2m_client_object_create"></a>nx_lwm2m_client_object_create
 
-Skapar en ny objekt instans.
+Skapar en ny objektinstans.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -691,28 +691,28 @@ UINT nx_lwm2m_client_object_create(
     const NX_LWM2M_RESOURCE *values_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten utför en "skapa"-åtgärd på ett objekt av LWM2M-klienten för att skapa en ny objekt instans.
+Den här tjänsten utför en "Skapa"-åtgärd på ett objekt i LWM2M-klienten för att skapa en ny objektinstans.
 
 ### <a name="parameters"></a>Parametrar
 
-- **client_ptr** Pekare till LWM2M klient kontroll block.
-- **object_id** Objekt-ID.
-- **instance_id_ptr** Pekaren till ID: t för den nya instansen kan vara **Null** om LWM2M-klienten måste tilldela ett instans-ID. Om ID: t är det reserverade värdet 65535, tilldelar LWM2M-klienten ett instans-ID. Om det tilldelade ID: t inte är NULL returneras det efter anropet.
+- **client_ptr** Pekare till LWM2M-klientkontrollblocket.
+- **object_id** Objekt-ID:t.
+- **instance_id_ptr** Pekare till ID för den nya instansen, kan vara **NULL** om LWM2M-klienten måste tilldela ett instans-ID. Om ID:t är det reserverade värdet 65535 tilldelar LWM2M-klienten ett instans-ID. Om inte NULL returneras det tilldelade ID:t efter anropet.
 - **num_values** Antalet värden som ska anges.
-- **values_ptr** Pekar mot en matris med resurs värden för att initiera den nya objekt instansen.
+- **values_ptr** Pekare till en matris med resursvärden för att initiera den nya objektinstansen.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
-- **NX_LWM2M_CLIENT_ALREADY_EXIST** Objekt instans-ID: t finns redan.
-- **NX_LWM2M_CLIENT_METHOD_NOT_ALLOWED** Objektet har inte stöd för att skapa en instans.
+- **NX_LWM2M_CLIENT_ALREADY_EXIST** Objektinstans-ID:t finns redan.
+- **NX_LWM2M_CLIENT_METHOD_NOT_ALLOWED** Objektet stöder inte skapande av instanser.
 - **NX_LWM2M_CLIENT_NO_MEMORY** Det går inte att allokera minne för att lagra den nya instansen.
-- **NX_LWM2M_CLIENT_NOT_FOUND** Objekt-ID: t finns inte.
+- **NX_LWM2M_CLIENT_NOT_FOUND** Objekt-ID:t finns inte.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -727,7 +727,7 @@ status = nx_lwm2m_client_object_create(&lwm2m_client, 3303, 0, 2, &resource);
 
 ## <a name="nx_lwm2m_client_object_delete"></a>nx_lwm2m_client_object_delete
 
-Tar bort en objekt instans.
+Tar bort en objektinstans.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -738,24 +738,24 @@ UINT nx_lwm2m_client_object_delete(
     NX_LWM2M_ID instance_id);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten utför en borttagnings åtgärd på en objekt instans av LWM2M-klienten.
+Den här tjänsten utför en "Delete"-åtgärd på en objektinstans av LWM2M-klienten.
 
 ### <a name="parameters"></a>Parametrar
 
-- **client_ptr** Pekare till LWM2M klient kontroll block.
-- **object_id** Objekt-ID.
-- **instance_id** Objekt instansens ID.
+- **client_ptr** Pekare till LWM2M-klientkontrollblocket.
+- **object_id** Objekt-ID:t.
+- **instance_id** Objektinstans-ID:t.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
-- **NX_LWM2M_CLIENT_METHOD_NOT_ALLOWED** Objektet har inte stöd för borttagning av instans.
-- **NX_LWM2M_CLIENT_NOT_FOUND** Objekt-ID: t eller objekt instans-ID: t finns inte.
+- **NX_LWM2M_CLIENT_METHOD_NOT_ALLOWED** Objektet stöder inte borttagning av instanser.
+- **NX_LWM2M_CLIENT_NOT_FOUND** Objekt-ID:t eller objektinstans-ID:t finns inte.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -770,7 +770,7 @@ status = nx_lwm2m_client_object_delete(&lwm2m_client, 3303, 0);
 
 ## <a name="nx_lwm2m_client_object_discover"></a>nx_lwm2m_client_object_discover
 
-Identifierar resurser för en objekt instans.
+Identifierar resurser för en objektinstans.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -784,26 +784,26 @@ UINT nx_lwm2m_client_object_discover(
 
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten utför en "Discover"-åtgärd på en objekt instans av LWM2M-klienten, vilket returnerar listan över resurser som implementeras av objektet.
+Den här tjänsten utför en "Identifiera"-åtgärd på en objektinstans av LWM2M-klienten, vilket returnerar listan över resurser som implementeras av objektet.
 
 ### <a name="parameters"></a>Parametrar
 
-- **client_ptr** Pekare till LWM2M klient kontroll block.
-- **object_id** Objekt-ID.
-- **instance_id** Objekt instansens ID.
-- **num_resources** Vid indata anger du storleken på målcachen vid utdata av antalet element som skrivs till bufferten.
-- **resurser** Pekar mot målcachen.
+- **client_ptr** Pekare till LWM2M-klientkontrollblocket.
+- **object_id** Objekt-ID: t.
+- **instance_id** Objektinstans-ID:t.
+- **num_resources** När du matar in storleken på målbufferten på matas antalet element som skrivits till bufferten ut.
+- **resurser** Pekare till målbufferten.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- *NX_SUCCESS** åtgärden lyckades.
-- **NX_LWM2M_CLIENT_BUFFER_TOO_SMALL** Resursens buffert är för liten för att lagra listan över resurser.
-- **NX_LWM2M_CLIENT_NOT_FOUND** Objekt-ID: t eller objekt instans-ID: t finns inte.
+- *NX_SUCCESS** Åtgärden lyckades.
+- **NX_LWM2M_CLIENT_BUFFER_TOO_SMALL** Resursbufferten är för liten för att lagra listan över resurser.
+- **NX_LWM2M_CLIENT_NOT_FOUND** Objekt-ID:t eller objektinstans-ID:t finns inte.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -822,7 +822,7 @@ status = nx_lwm2m_client_object_discover(&lwm2m_client, 3303, 0,
 
 ## <a name="nx_lwm2m_client_object_execute"></a>nx_lwm2m_client_object_execute
 
-Utför en körnings åtgärd på en resurs av en objekt instans.
+Utför en Execute-åtgärd på en resurs i en objektinstans.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -836,27 +836,27 @@ UINT **nx_lwm2m_client_object_execute**(
     UINT arguments_length);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten utför åtgärden kör på en objekt instans resurs för LWM2M-klienten.
+Den här tjänsten utför åtgärden "Kör" på en objektinstansresurs för LWM2M-klienten.
 
 ### <a name="parameters"></a>Parametrar
 
-- **client_ptr** Pekare till LWM2M klient kontroll block.
-- **object_id** Objekt-ID.
-- **instance_id** Objekt instansens ID.
-- **resource_id** Resurs-ID.
-- **arguments_ptr** Pekar till argumenten för körnings åtgärden. Kan vara NULL om arguments_length är noll.
-- **arguments_length** Argumentens längd.
+- **client_ptr** Pekare till LWM2M-klientkontrollblocket.
+- **object_id** Objekt-ID: t.
+- **instance_id** Objektinstans-ID:t.
+- **resource_id** Resurs-ID: t.
+- **arguments_ptr** Pekare till argumenten för körningsåtgärden. Kan vara NULL om arguments_length är noll.
+- **arguments_length** Längden på argumenten.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
-- **NX_LWM2M_CLIENT_BUFFER_TOO_SMALL** Resursens buffert är för liten för att lagra listan över resurser.
-- **NX_LWM2M_CLIENT_NOT_FOUND** Objekt-ID: t eller objekt instans-ID: t finns inte.
+- **NX_LWM2M_CLIENT_BUFFER_TOO_SMALL** Resursbufferten är för liten för att lagra listan över resurser.
+- **NX_LWM2M_CLIENT_NOT_FOUND** Objekt-ID:t eller objektinstans-ID:t finns inte.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -872,7 +872,7 @@ status = nx_lwm2m_client_object_execute (&lwm2m_client, 3303, 0, 0,
 
 ## <a name="nx_lwm2m_client_object_instance_add"></a>nx_lwm2m_client_object_instance_add
 
-Lägger till en objekt instans implementering till ett objekt.
+Lägger till en implementering av en objektinstans till ett objekt.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -883,23 +883,23 @@ UINT nx_lwm2m_client_object_instance_add(
     NX_LWM2M_ID *instance_id_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten lägger till en ny implementering av objekt instansen i LWM2M-klienten. Om värdet för instance_id_ptr är **NX_LWM2M_CLIENT_RESERVED_ID** tilldelar LWM2M-klienten automatiskt ett oanvänt instans-ID, annars kommer LWM2M-klienten att använda värdet program uppsättning. När den nya instansen har lagts till kommer instance_id att fyllas i instance_id_ptr att återgå till programmet.
+Den här tjänsten lägger till en ny implementering av objektinstansen till LWM2M-klienten. Om värdet för instance_id_ptr är **NX_LWM2M_CLIENT_RESERVED_ID** tilldelar LWM2M-klienten automatiskt ett oanvänt instans-ID, annars använder LWM2M-klienten värdeuppsättningen. När den nya instansen har lagts till fylls instance_id i automatiskt instance_id_ptr att återgå till programmet.
 
 ### <a name="parameters"></a>Parametrar
 
-- **object_ptr** Pekare till strukturen som definierar objekt implementeringen.
-- **instance_ptr** Pekare till strukturen som definierar implementeringen av objekt instansen.
-- **instance_id_ptr** Pekare till objekt instansens ID.
+- **object_ptr** Pekare till den struktur som definierar objektimplementering.
+- **instance_ptr** Pekare till den struktur som definierar implementeringen av objektinstansen.
+- **instance_id_ptr** Pekare till objektinstans-ID:t.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
-- **NX_CLIENT_LWM2M_ALREADY_EXIST** Objekt-ID: t finns redan.
+- **NX_CLIENT_LWM2M_ALREADY_EXIST** Objekt-ID:t finns redan.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -926,23 +926,23 @@ UINT nx_lwm2m_client_object_instance_next_get(
     NX_LWM2M_ID *instance_id_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten returnerar ID: t för nästa objekt instans av det aktuella objektet. Om det aktuella instans-ID: t är inställt på NX_LWM2M_RESERVED_ID (65535) returneras ID: t för den första instansen.
+Den här tjänsten returnerar ID:t för nästa objektinstans för det angivna objektet. Om det aktuella instans-ID:t är NX_LWM2M_RESERVED_ID (65535) returneras ID:t för den första instansen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **client_ptr** Pekare till LWM2M klient kontroll block.
-- **object_id** Objekt-ID.
-- **instance_id_ptr** Pekar mot det aktuella objekt instans-ID: t. Vid retur innehåller nästa instans-ID för objektet.
+- **client_ptr** Pekare till LWM2M-klientkontrollblocket.
+- **object_id** Objekt-ID: t.
+- **instance_id_ptr** Pekare till aktuellt objektinstans-ID. Vid retur innehåller nästa instans-ID för objektet.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
-- **NX_CLIENT_LWM2M_NOT_FOUND** Angivet instans-ID är det sista objektet eller objekt-ID: t är inte implementerat.
+- **NX_CLIENT_LWM2M_NOT_FOUND** Det angivna instans-ID:t är det sista av objektet, eller så implementeras inte objekt-ID:t.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -958,7 +958,7 @@ status = nx_lwm2m_client_object_instance_next_get(&lwm2m_client, 3303,
 
 ## <a name="nx_lwm2m_client_object_instance_remove"></a>nx_lwm2m_client_object_instance_remove
 
-Tar bort en objekt instans implementering från ett objekt.
+Tar bort en implementering av en objektinstans från ett objekt.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -968,22 +968,22 @@ UINT nx_lwm2m_client_object_instance_remove(
     NX_LWM2M_CLIENT_OBJECT_INSTANCE *instance_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar bort en objekt instans från ett objekt.
+Den här tjänsten tar bort en objektinstans från ett objekt.
 
 ### <a name="parameters"></a>Parametrar
 
-- ***object_ptr*** Pekare till strukturen som definierar objekt implementeringen.
-- **instance_ptr** Pekare till strukturen som definierar implementeringen av objekt instansen.
+- ***object_ptr*** Pekare till den struktur som definierar objektimplementering.
+- **instance_ptr** Pekare till den struktur som definierar implementeringen av objektinstansen.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
-- **NX_LWM2M_CLIENT_ALREADY_EXIST** Objekt-ID: t finns redan.
+- **NX_LWM2M_CLIENT_ALREADY_EXIST** Objekt-ID:t finns redan.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -1008,22 +1008,22 @@ UINT nx_lwm2m_client_object_next_get(
     NX_LWM2M_ID \*object_id_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten returnerar ID: t för nästa objekt som implementeras av LWM2M-klienten. Om aktuellt objekt-ID är inställt på NX_LWM2M_RESERVED_ID (65535) returneras det första objekt-ID: t.
+Den här tjänsten returnerar ID:t för nästa objekt som implementeras av LWM2M-klienten. Om aktuellt objekt-ID är inställt på NX_LWM2M_RESERVED_ID (65535) returneras det första objekt-ID:t.
 
 ### <a name="parameters"></a>Parametrar
 
-- **client_ptr** Pekare till LWM2M klient kontroll block.
-- **object_id_ptr** Pekar mot aktuellt objekt-ID. Vid retur innehåller nästa objekt-ID som implementeras av LWM2M-klienten.
+- **client_ptr** Pekare till LWM2M-klientkontrollblocket.
+- **object_id_ptr** Pekare till aktuellt objekt-ID. Vid retur innehåller nästa objekt-ID som implementeras av LWM2M-klienten.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
-- **NX_LWM2M_CLIENT_NOT_FOUND** Angivet objekt-ID är det sista i databasen.
+- **NX_LWM2M_CLIENT_NOT_FOUND** Det angivna objekt-ID:t är det sista i databasen.
 **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -1038,7 +1038,7 @@ status = nx_lwm2m_client_object_next_get(&lwm2m_client, &object_id);
 
 ## <a name="nx_lwm2m_client_object_read"></a>nx_lwm2m_client_object_read
 
-Läser en objekt Instanss resource's-värden.
+Läser en objektinstanss resursvärden.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1051,26 +1051,26 @@ UINT nx_lwm2m_client_object_read(
     NX_LWM2M_RESOURCE *values);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten utför en Läs åtgärd på en objekt instans av LWM2M-klienten.
+Den här tjänsten utför en läsåtgärd på en objektinstans av LWM2M-klienten.
 
 ### <a name="parameters"></a>Parametrar
 
-- **client_ptr** Pekare till LWM2M klient kontroll block.
-- **object_id** Objekt-ID.
-- **instance_id** Objekt instansens ID.
+- **client_ptr** Pekare till LWM2M-klientkontrollblocket.
+- **object_id** Objekt-ID: t.
+- **instance_id** Objektinstans-ID:t.
 - **num_values** Antalet resurser som ska läsas.
-- **values_ptr** Pekar till en matris med NX_LWM2M_RESOURCE som innehåller ID: n för de resurser som ska läsas. Vid retur fylls matrisen med motsvarande typer och värden.
+- **values_ptr** Pekare till en matris NX_LWM2M_RESOURCE som innehåller DE RESURSERS-ID:er som ska läsas. När matrisen returneras fylls den med motsvarande typer och värden.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
-- **NX_LWM2M_CLIENT_METHOD_NOT_ALLOWED** En resurs har inte stöd för Läs åtgärden.
-- **NX_LWM2M_CLIENT_NOT_FOUND** Objekt-ID, objekt instans-ID eller resurs-ID finns inte.
+- **NX_LWM2M_CLIENT_METHOD_NOT_ALLOWED** En resurs stöder inte läsåtgärden.
+- **NX_LWM2M_CLIENT_NOT_FOUND** Objekt-ID, objektinstans-ID eller resurs-ID finns inte.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -1085,7 +1085,7 @@ status = nx_lwm2m_client_object_read(&lwm2m_client, 3303, 0, 2, &resource);
 
 ## <a name="nx_lwm2m_client_object_remove"></a>nx_lwm2m_client_object_remove
 
-Tar bort en objekt instans implementering från ett objekt.
+Tar bort en implementering av en objektinstans från ett objekt.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1095,23 +1095,23 @@ UINT nx_lwm2m_client_object_remove(
     NX_LWM2M_CLIENT_OBJECT *object_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten tar bort ett objekt från LWM2M-klienten.
 
 ### <a name="parameters"></a>Parametrar
 
-- **client_ptr** Pekare till LWM2M klient kontroll block.
-- **object_ptr** Pekare till strukturen som definierar objekt implementeringen.
+- **client_ptr** Pekare till LWM2M-klientkontrollblocket.
+- **object_ptr** Pekare till den struktur som definierar objektimplementering.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
-- **NX_LWM2M_CLIENT_ALREADY_EXIST** Objekt-ID: t finns redan.
+- **NX_LWM2M_CLIENT_ALREADY_EXIST** Objekt-ID:t finns redan.
 - **NX_PTR_ERROR** Ogiltig pekare.
-- **NX_LWM2M_CLIENT_FORBIDDEN** Borttagning av internt objekt är förbjudet.
+- **NX_LWM2M_CLIENT_FORBIDDEN** Det är förbjudet att ta bort interna objekt.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -1126,7 +1126,7 @@ status = nx_lwm2m_client_object_remove(&lwm2m_client, &object);
 
 ## <a name="nx_lwm2m_client_object_resource_changed"></a>nx_lwm2m_client_object_resource_changed
 
-Signalerar en ändring av en objekt resurs.
+Signalerar en ändring av en objektresurs.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1137,22 +1137,22 @@ UINT nx_lwm2m_client_object_resource_changed(
     const NX_LWM2M_RESOURCE *resource);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Tjänsten används av programmet för att signalera till LWM2M-klienten om att en resurs objekt har ändrats. LWM2M-klienten skickar ett meddelande om resursen observeras av en LWM2M-Server.
+Tjänsten används av programmet för att signalera till LWM2M-klienten att en resurs i objektet har ändrats. LWM2M-klienten skickar ett meddelande om resursen observeras av en LWM2M-server.
 
 ### <a name="parameters"></a>Parametrar
 
-- **object_ptr** Pekare till strukturen som definierar objekt implementeringen.
-- ***instance_ptr*** Pekare till strukturen som definierar implementeringen av objekt instansen.
-- **resurs** Pekar till strukturen som beskriver den resurs som har ändrats.
+- **object_ptr** Pekare till den struktur som definierar objektimplementering.
+- ***instance_ptr*** Pekare till den struktur som definierar implementeringen av objektinstansen.
+- **resurs** Pekar på strukturen som beskriver den resurs som har ändrats.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -1167,7 +1167,7 @@ status = nx_lwm2m_client_object_resource_changed(&object, &instance, &resource);
 
 ## <a name="nx_lwm2m_client_object_write"></a>nx_lwm2m_client_object_write
 
-Ändrar resursens värden för en objekt instans.
+Ändrar resursens värden för en objektinstans.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1181,41 +1181,41 @@ UINT nx_lwm2m_client_object_write(
     UINT write_op);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten utför en Skriv åtgärd på en objekt instans av LWM2M-klienten.
+Den här tjänsten utför en skrivåtgärd på en objektinstans av LWM2M-klienten.
 
-Följande Skriv åtgärder kan anges för parametern *write_op* .
+Följande skrivåtgärder kan anges för den *write_op* parametern.
 
-| Värde | Skriv &nbsp; åtgärd | Beskrivning |
+| Värde | &nbsp;Skrivåtgärd | Beskrivning |
 | --- | ---| --- |
-| 0 | Partiell uppdatering | Lägger till eller uppdaterar resurser som finns i det nya värdet och lämnar andra befintliga resurser oförändrade. |
-| **NX_LWM2M_CLIENT_OBJECT_WRITE_REPLACE_INSTANCE** | Ersätt instans | Ersätter objekt instansen med de nya angivna resurs värdena. |
-| **NX_LWM2M_CLIENT_OBJECT_WRITE_REPLACE_RESOURCE** | Ersätt resurs | Ersätter resurserna med de nya angivna resurs värdena (används för att ersätta flera resurser). |
-| **NX_LWM2M_CLIENT_OBJECT_WRITE_BOOTSTRAP** | Bootstrap-skrivning | Anger ett anrop från en bootstrap-sekvens. |
+| 0 | Partiell uppdatering | Lägger till eller uppdaterar resurser som anges i det nya värdet och lämnar andra befintliga resurser oförändrade. |
+| **NX_LWM2M_CLIENT_OBJECT_WRITE_REPLACE_INSTANCE** | Ersätt instans | Ersätter objektinstansen med de nya angivna resursvärdena. |
+| **NX_LWM2M_CLIENT_OBJECT_WRITE_REPLACE_RESOURCE** | Ersätt resurs | Ersätter resurserna med de nya angivna resursvärdena (används för att ersätta flera resurser). |
+| **NX_LWM2M_CLIENT_OBJECT_WRITE_BOOTSTRAP** | Bootstrap-skrivning | Anger ett anrop från en Bootstrap-sekvens. |
 
 ### <a name="parameters"></a>Parametrar
 
-- **client_ptr** Pekare till LWM2M klient kontroll block.
-- **object_id** Objekt-ID.
-- **instance_id** Objekt instansens ID.
+- **client_ptr** Pekare till LWM2M-klientkontrollblocket.
+- **object_id** Objekt-ID: t.
+- **instance_id** Objektinstans-ID:t.
 - **num_values** Antalet resurser som ska skrivas.
-- **values_ptr** Pekar till en matris med NX_LWM2M_RESOURCE som innehåller ID: n för resurserna, typerna och värdena som ska skrivas.
-- **write_op** Typ av Skriv åtgärd.
+- **values_ptr** Pekare till en matris NX_LWM2M_RESOURCE som innehåller RESURSERNAs,de typer och värden som ska skrivas.
+- **write_op** Typ av skrivåtgärd.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
-- **NX_LWM2M_CLIENT_BAD_ENCODING** Resurs typen är inte giltig.
+- **NX_LWM2M_CLIENT_BAD_ENCODING** Typen av resurs är inte giltig.
 - **NX_LWM2M_CLIENT_BUFFER_TOO_SMALL** Längden på ett värde är för stor för att lagras i instansen.
-- **NX_LWM2M_CLIENT_METHOD_NOT_ALLOWED** En resurs har inte stöd för Skriv åtgärden.
-- **NX_LWM2M_CLIENT_NO_MEMORY** Det går inte att allokera minne för att lagra ett resurs värde.
+- **NX_LWM2M_CLIENT_METHOD_NOT_ALLOWED** En resurs stöder inte skrivåtgärden.
+- **NX_LWM2M_CLIENT_NO_MEMORY** Det går inte att allokera minne för att lagra ett resursvärde.
 - **NX_LWM2M_CLIENT_NOT_ACCEPTABLE** Värdet för en resurs är inte giltigt.
-- **NX_LWM2M_CLIENT_NOT_FOUND** Objekt-ID, objekt instans-ID eller resurs-ID finns inte.
-- **NX_OPTION_ERROR** Ogiltig typ av Skriv åtgärd. 
+- **NX_LWM2M_CLIENT_NOT_FOUND** Objekt-ID, objektinstans-ID eller resurs-ID finns inte.
+- **NX_OPTION_ERROR** Ogiltig typ av skrivåtgärd. 
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -1241,22 +1241,22 @@ UINT nx_lwm2m_client_resource_boolean_get(
     NX_LWM2M_BOOL *bool_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Tjänsten hämtar värdet för en boolesk resurs.
 
 ### <a name="parameters"></a>Parametrar
 
-- **resurs** Pekare till resurs värde beskrivning.
-- **bool_ptr** Pekar mot målets booleska värde.
+- **resurs** Pekare till Beskrivning av resursvärde.
+- **bool_ptr** Pekare till det booleska målvärdet.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
-- **NX_LWM2M_CLIENT_BAD_ENCODING** Resursens värde är inte ett booleskt värde.
+- **NX_LWM2M_CLIENT_BAD_ENCODING** Resursvärdet är inte ett booleskt värde.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -1281,21 +1281,21 @@ UINT nx_lwm2m_client_resource_boolean_set(
     NX_LWM2M_BOOL bool_data);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Tjänsten anger värdet för en boolesk resurs.
 
 ### <a name="parameters"></a>Parametrar
 
-- **resurs** Pekare till resurs.
+- **resurs** Pekare till Resurs.
 - **bool_data** Booleska data.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -1310,7 +1310,7 @@ status = nx_lwm2m_client_resource_boolean_set(&resource, NX_TRUE);
 
 ## <a name="nx_lwm2m_client_resource_dim_get"></a>nx_lwm2m_client_resource_dim_get
 
-Hämtar resurs dimensionen för flera resurser
+Hämtar resursdimensionen för flera resurser
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1320,22 +1320,22 @@ UINT nx_lwm2m_client_resource_dim_get(
     UCHAR *dim);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Tjänsten hämtar resurs dimensionen för flera resurser.
+Tjänsten hämtar resursdimensionen för flera resurser.
 
 ### <a name="parameters"></a>Parametrar
 
-- **resurs** Pekare till resurs.
-- **dim** pekare till mål dimensionen.
+- **resurs** Pekare till Resurs.
+- **tona** pekaren till måldimensionen.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
-- **NX_LWM2M_CLIENT_BAD_ENCODING** Resursens värde är inte ett booleskt värde.
+- **NX_LWM2M_CLIENT_BAD_ENCODING** Resursvärdet är inte ett booleskt värde.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -1350,7 +1350,7 @@ status = nx_lwm2m_client_resource_dim_get(&resource, &dim);
 
 ## <a name="nx_lwm2m_client_resource_dim_set"></a>nx_lwm2m_client_resource_dim_set
 
-Anger resurs dimensionen för flera resurser.
+Anger resursdimensionen för flera resurser.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1360,21 +1360,21 @@ UINT nx_lwm2m_client_resource_dim_set(
     CHAR dim);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Tjänsten anger resurs dimensionen för flera resurser.
+Tjänsten anger resursdimensionen för flera resurser.
 
 ### <a name="parameters"></a>Parametrar
 
-- **värde** Pekare till resurs värde beskrivning.
-- dimensions värde för **dimension** .
+- **värde** Pekare till Beskrivning av resursvärde.
+-  dim-dimensionsvärde.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -1389,7 +1389,7 @@ status = nx_lwm2m_client_resource_dim_set(&resource, 3);
 
 ## <a name="nx_lwm2m_client_resource_float32_get"></a>nx_lwm2m_client_resource_float32_get
 
-Hämtar värdet för en 32-bitars **float** -resurs
+Hämtar värdet för en 32-bitars **flyttalsresurs**
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1399,22 +1399,22 @@ UINT nx_lwm2m_client_resource_float32_get(
     NX_LWM2M_FLOAT32 *float32_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Tjänsten hämtar värdet för en 32-bitars **float** -resurs.
+Tjänsten hämtar värdet för en 32-bitars **flyttalsresurs.**
 
 ### <a name="parameters"></a>Parametrar
 
-- **resurs** Pekare till resurs.
-- **float32_ptr** Pekar till målet 32-bit **flytt ALS** värde.
+- **resurs** Pekare till Resurs.
+- **float32_ptr** Pekare till målets 32-bitars **flyttal.**
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
-- **NX_LWM2M_CLIENT_BAD_ENCODING** Resursens värde är inte ett booleskt värde.
+- **NX_LWM2M_CLIENT_BAD_ENCODING** Resursvärdet är inte ett booleskt värde.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -1429,7 +1429,7 @@ status = nx_lwm2m_client_resource_float32_get(&resource, &float32);
 
 ## <a name="nx_lwm2m_client_resource_float32_set"></a>nx_lwm2m_client_resource_float32_set
 
-Anger värdet för en 32-bitars **float** -resurs
+Anger värdet för en 32-bitars **flyttalsresurs**
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1439,21 +1439,21 @@ UINT nx_lwm2m_client_resource_float32_set(
     NX_LWM2M_FLOAT32 float32_data);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Tjänsten anger värdet för en 32-bitars **float** -resurs.
+Tjänsten anger värdet för en 32-bitars **flyttalsresurs.**
 
 ### <a name="parameters"></a>Parametrar
 
-- **resurs** Pekare till resurs.
-- **float32_data** 32-bitars **float** -data.
+- **resurs** Pekare till Resurs.
+- **float32_data** 32-bitars **flyttalsdata.**
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -1468,7 +1468,7 @@ status = nx_lwm2m_client_resource_float32_set(&resource, 1.24);
 
 ## <a name="nx_lwm2m_client_resource_float64_get"></a>nx_lwm2m_client_resource_float64_get
 
-Hämtar värdet för en 64-bitars float-resurs.
+Hämtar värdet för en 64-bitars flyttalsresurs.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1478,22 +1478,22 @@ UINT nx_lwm2m_client_resource_float64_get(
     NX_LWM2M_FLOAT64 *float64_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Tjänsten hämtar värdet för en 64-bitars **float** -resurs.
+Tjänsten hämtar värdet för en 64-bitars **flyttalsresurs.**
 
 ### <a name="parameters"></a>Parametrar
 
-- **resurs** Pekare till resurs.
-- **float64_ptr** Pekar till målet 64-bit **flytt ALS** värde.
+- **resurs** Pekare till Resurs.
+- **float64_ptr** Pekare till målets 64-bitars **flyttal.**
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
-- **NX_LWM2M_CLIENT_BAD_ENCODING** Resursens värde är inte ett flytt ALS värde.
+- **NX_LWM2M_CLIENT_BAD_ENCODING** Resursvärdet är inte ett flyttal.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -1508,7 +1508,7 @@ status = nx_lwm2m_client_resource_float64_get(&resource, &float64);
 
 ## <a name="nx_lwm2m_client_resource_float64_set"></a>nx_lwm2m_client_resource_float64_set
 
-Anger värdet för en 64-bitars **float** -resurs.
+Anger värdet för en 64-bitars **flyttalsresurs.**
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1518,21 +1518,21 @@ UINT nx_lwm2m_client_resource_float64_set(
     NX_LWM2M_FLOAT64 float64_data);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Tjänsten anger värdet för en 64-bitars **float** -resurs.
+Tjänsten anger värdet för en 64-bitars **flyttalsresurs.**
 
 ### <a name="parameters"></a>Parametrar
 
-- **resurs** Pekare till resurs.
-- **float64_data** 64-bitars **float** -data.
+- **resurs** Pekare till Resurs.
+- **float64_data** 64-bitars **flyttalsdata.**
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -1547,7 +1547,7 @@ status = nx_lwm2m_client_resource_float64_set(&resource, 1.24);
 
 ## <a name="nx_lwm2m_client_resource_info_get"></a>nx_lwm2m_client_resource_info_get
 
-Hämtar resurs informationen.
+Hämtar resursinformationen.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1558,22 +1558,22 @@ UINT nx_lwm2m_client_resource_info_get(
     ULONG *operation);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Tjänsten hämtar resurs informationen för resursen.
+Tjänsten hämtar resursinformationen för resursen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **resurs** Pekare till resurs.
-- **resource_id** Pekare till mål resurs-ID: t.
-- **åtgärd** Pekare till mål resurs åtgärden.
+- **resurs** Pekare till Resurs.
+- **resource_id** Pekare till målresursens ID.
+- **åtgärd** Pekare till målresursåtgärden.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -1588,7 +1588,7 @@ status = nx_lwm2m_client_resource_info_get(&resource, &resource_id, &operation);
 
 ## <a name="nx_lwm2m_client_resource_info_set"></a>nx_lwm2m_client_resource_info_set
 
-Anger resursinformation.
+Anger resursinformationen.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1598,22 +1598,22 @@ UINT nx_lwm2m_client_resource_info_set(
     NX_LWM2M_FLOAT64 float64_data);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Tjänsten anger resursinformationen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **resurs** Pekare till resurs.
-- **resource_id** Resursens ID.
-- **åtgärd** Driften av resursen.
+- **resurs** Pekare till Resurs.
+- **resource_id** ID för resursen.
+- **åtgärd** Åtgärden för resursen.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -1639,24 +1639,24 @@ UINT nx_lwm2m_client_resource_instances_get(
     UINT *count);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Tjänsten hämtar resurs informationen för resursen.
+Tjänsten hämtar resursinformationen för resursen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **resurs** Pekare till resurs.
-- **resource_instances** Pekare till mål resurs-ID: t.
-- **antal** Pekar mot Count.
+- **resurs** Pekare till Resurs.
+- **resource_instances** Pekare till målresursens ID.
+- **antal** Pekare till antalet.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
-- **NX_LWM2M_CLIENT_BAD_ENCODING** Resursens värde är inte ett booleskt värde.
-- **NX_LWM2M_CLIENT_NO_MEMORY** Det fanns inte tillräckligt med minne för att fylla i instanser.
+- **NX_LWM2M_CLIENT_BAD_ENCODING** Resursvärdet är inte ett booleskt värde.
+- **NX_LWM2M_CLIENT_NO_MEMORY** Inget minne för att fylla i instanser.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -1672,7 +1672,7 @@ status = nx_lwm2m_client_resource_instances_get(&resource, &resource_instances,
 
 ## <a name="nx_lwm2m_client_resource_instances_set"></a>nx_lwm2m_client_resource_instances_set
 
-Anger resurs instanser.
+Anger resursinstanserna.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1682,22 +1682,22 @@ UINT nx_lwm2m_client_resource_instances_set(
     NX_LWM2M_CLIENT_RESOURCE *resource_instances, 
     UINT count);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Tjänsten anger resurs instanserna för flera resurser.
+Tjänsten anger resursinstanser för flera resurser.
 
 ### <a name="parameters"></a>Parametrar
 
-- **resurs** Pekare till resurs.
-- **resource_instance** Pekare till resurs instanser.
-- **antal** Antal resurs instanser.
+- **resurs** Pekare till Resurs.
+- **resource_instance** Pekare till resursinstanser.
+- **antal** Antal resursinstanser.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -1712,7 +1712,7 @@ status = nx_lwm2m_client_resource_instances_set(&resource, &resource_instance, 2
 
 ## <a name="nx_lwm2m_client_resource_integer32_get"></a>nx_lwm2m_client_resource_integer32_get
 
-Hämtar värdet för en 32-bitars heltals resurs.
+Hämtar värdet för en 32-bitars heltalsresurs.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1722,22 +1722,22 @@ UINT nx_lwm2m_client_resource_integer32_get(
     NX_LWM2M_INTEGER32 *integer32_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Tjänsten hämtar värdet för en 32-bitars heltals resurs.
+Tjänsten hämtar värdet för en 32-bitars heltalsresurs.
 
 ### <a name="parameters"></a>Parametrar
 
-- **resurs** Pekare till resurs.
-- **integer32_ptr** Pekar mot 32-bitars heltals värde.
+- **resurs** Pekare till Resurs.
+- **integer32_ptr** Pekare till 32-bitars heltalsvärde.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
-- **NX_LWM2M_CLIENT_BAD_ENCODING** Resursens värde är inte ett heltals värde.
+- **NX_LWM2M_CLIENT_BAD_ENCODING** Resursvärdet är inte ett heltalsvärde.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -1752,7 +1752,7 @@ status = nx_lwm2m_client_resource_integer32_get(&resource, &integer32);
 
 ## <a name="nx_lwm2m_client_resource_integer32_set"></a>nx_lwm2m_client_resource_integer32_set
 
-Anger värdet för en 32-bitars heltals resurs.
+Anger värdet för en 32-bitars heltalsresurs.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1762,21 +1762,21 @@ UINT nx_lwm2m_client_resource_integer32_set(
     NX_LWM2M_INTEGER32 integer32_data);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Tjänsten anger värdet för en 32-bitars heltals resurs.
+Tjänsten anger värdet för en 32-bitars heltalsresurs.
 
 ### <a name="parameters"></a>Parametrar
 
-- **resurs** Pekare till resurs.
-- **integer32_data** 32-bitars heltals data.
+- **resurs** Pekare till Resurs.
+- **integer32_data** 32-bitars heltalsdata.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -1791,7 +1791,7 @@ status = nx_lwm2m_client_resource_integer32_set(&resource, 8);
 
 ## <a name="nx_lwm2m_client_resource_integer64_get"></a>nx_lwm2m_client_resource_integer64_get
 
-Hämtar värdet för en 64-bitars heltals resurs.
+Hämtar värdet för en 64-bitars heltalsresurs.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1801,22 +1801,22 @@ UINT nx_lwm2m_client_resource_integer64_get(
     NX_LWM2M_INTEGER64 *integer64_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Tjänsten hämtar värdet för en 64-bitars heltals resurs.
+Tjänsten hämtar värdet för en 64-bitars heltalsresurs.
 
 ### <a name="parameters"></a>Parametrar
 
-- **resurs** Pekare till resurs.
-- **integer64_ptr** Pekar mot 64-bitars heltals värde.
+- **resurs** Pekare till Resurs.
+- **integer64_ptr** Pekare till 64-bitars heltalsvärdet.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
-- **NX_LWM2M_CLIENT_BAD_ENCODING** Resursens värde är inte 64-bitars heltals värde.
+- **NX_LWM2M_CLIENT_BAD_ENCODING** Resursvärdet är inte 64-bitars heltalsvärde.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -1831,7 +1831,7 @@ status = nx_lwm2m_client_resource_integer64_get(&resource, &integer64);
 
 ## <a name="nx_lwm2m_client_resource_integer64_set"></a>nx_lwm2m_client_resource_integer64_set
 
-## <a name="set-the-value-of-a-64-bit-integer-resource"></a>Ange värdet för en 64-bitars heltals resurs
+## <a name="set-the-value-of-a-64-bit-integer-resource"></a>Ange värdet för en 64-bitars heltalsresurs
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1841,21 +1841,21 @@ UINT nx_lwm2m_client_resource_integer64_set(
     NX_LWM2M_INTEGER64 integer64_data);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Tjänsten anger värdet för en 64-bitars heltals resurs.
+Tjänsten anger värdet för en 64-bitars heltalsresurs.
 
 ### <a name="parameters"></a>Parametrar
 
-- **resurs** Pekare till resurs.
+- **resurs** Pekare till Resurs.
 - **integer64_data** 64-bitars heltal.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -1870,7 +1870,7 @@ status = nx_lwm2m_client_resource_integer64_set(&resource, 32323);
 
 ##  <a name="nx_lwm2m_client_resource_objlnk_get"></a>nx_lwm2m_client_resource_objlnk_get
 
-Hämtar värdet för en objekt länk resurs.
+Hämtar värdet för en objektlänkresurs.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1881,23 +1881,23 @@ UINT nx_lwm2m_client_resource_objlnk_get(
     NX_LWM2M_ID *instance_id);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Tjänsten hämtar värdet för objekt länken.
+Tjänsten hämtar värdet för objektlänken.
 
 ### <a name="parameters"></a>Parametrar
 
-- **resurs** Pekare till resurs.
-- **object_id** Pekar mot objekt-ID.
-- **instance_id** Pekare till objekt instansens ID.
+- **resurs** Pekare till Resurs.
+- **object_id** Pekare till objekt-ID:t.
+- **instance_id** Pekare till objektinstans-ID:t.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
-- **NX_LWM2M_CLIENT_BAD_ENCODING** Resursens värde är inte ett objekt länk värde.
+- **NX_LWM2M_CLIENT_BAD_ENCODING** Resursvärdet är inte ett objektlänkvärde.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -1912,7 +1912,7 @@ status = nx_lwm2m_client_resource_objlnk_get(&resource, &object_id, &instance_id
 
 ## <a name="nx_lwm2m_client_resource_objlnk_set"></a>nx_lwm2m_client_resource_objlnk_set
 
-Anger resurs instanser
+Anger resursinstanserna
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1923,22 +1923,22 @@ UINT nx_lwm2m_client_resource_objlnk_set(
     NX_LWM2M_ID instance_id);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Tjänsten anger värdet för objekt länk resursen.
+Tjänsten anger värdet för objektlänkresursen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **resurs** Pekare till resurs.
+- **resurs** Pekare till Resurs.
 - **object_id** Objekt-ID.
-- **instance_id** Objekt instans-ID.
+- **instance_id** Objektinstans-ID.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -1953,7 +1953,7 @@ status = nx_lwm2m_client_resource_objlnk_set(&resource, 3303, 2);
 
 ## <a name="nx_lwm2m_client_resource_opaque_get"></a>nx_lwm2m_client_resource_opaque_get
 
-Hämtar värdet för en ogenomskinlig resurs.
+Hämtar värdet för en täckande resurs.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1965,23 +1965,23 @@ UINT nx_lwm2m_client_resource_opaque_get(
 ```
 
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Tjänsten hämtar värdet för en ogenomskinlig resurs. Ett ogenomskinligt resurs värde består av en pekare till en buffert och en längd.
+Tjänsten hämtar värdet för en täckande resurs. Ett täckande resursvärde består av en pekare till en buffert och en längd.
 
 ### <a name="parameters"></a>Parametrar
 
-- **resurs** Pekare till resurs.
-- **opaque_ptr** Pekar mot täckande data.
-- **opaque_length** Pekar mot ogenomskinlig data längd.
+- **resurs** Pekare till Resurs.
+- **opaque_ptr** Pekare till täckande data.
+- **opaque_length** Pekare till den täckande datalängden.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
-- **NX_LWM2M_CLIENT_BAD_ENCODING** Resursens värde är inte en ogenomskinlig resurs.
+- **NX_LWM2M_CLIENT_BAD_ENCODING** Resursvärdet är inte en täckande resurs.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -1996,7 +1996,7 @@ status = nx_lwm2m_client_resource_opaque_get(&resource, &opaque_ptr, &opaque_len
 
 ## <a name="nx_lwm2m_client_resource_opaque_set"></a>nx_lwm2m_client_resource_opaque_set
 
-Anger värdet för en ogenomskinlig resurs.
+Anger värdet för en täckande resurs.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2007,22 +2007,22 @@ UINT nx_lwm2m_client_resource_opaque_set(
     UINT opaque_length);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Tjänsten anger värdet för en ogenomskinlig resurs.
+Tjänsten anger värdet för en täckande resurs.
 
 ### <a name="parameters"></a>Parametrar
 
-- **resurs** Pekare till resurs.
-- **opaque_ptr** Pekar mot täckande data.
+- **resurs** Pekare till Resurs.
+- **opaque_ptr** Pekare till täckande data.
 - **opaque_length** Längden på täckande data.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -2037,7 +2037,7 @@ status = nx_lwm2m_client_resource_opaque_set(&resource, “AQIDBAU=”, 8);
 
 ## <a name="nx_lwm2m_client_resource_string_get"></a>nx_lwm2m_client_resource_string_get
 
-Hämtar värdet för en sträng resurs.
+Hämtar värdet för en strängresurs.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2048,23 +2048,23 @@ UINT nx_lwm2m_client_resource_string_get(
     UINT *string_length);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Tjänsten hämtar värdet för en sträng resurs.
+Tjänsten hämtar värdet för en strängresurs.
 
 ### <a name="parameters"></a>Parametrar
 
-- **resurs** Pekare till resurs.
-- **string_ptr** Pekare till mål sträng pekaren.
-- **string_length** Pekar mot mål strängens längd. Kan vara **Null** om strängen är null-terminerad.
+- **resurs** Pekare till Resurs.
+- **string_ptr** Pekare till målsträngens pekare.
+- **string_length** Pekare till målsträngens längd. Kan vara **NULL** om strängen är null-avslutad.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
-- **NX_LWM2M_CLIENT_BAD_ENCODING** Resursens värde är inte ett sträng värde.
+- **NX_LWM2M_CLIENT_BAD_ENCODING** Resursvärdet är inte ett strängvärde.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -2079,7 +2079,7 @@ status = nx_lwm2m_client_resource_string_get(&resource, &string_ptr, &string_len
 
 ## <a name="nx_lwm2m_client_resource_string_set"></a>nx_lwm2m_client_resource_string_set
 
-Anger värdet för en sträng resurs.
+Anger värdet för en strängresurs.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2090,22 +2090,22 @@ UINT nx_lwm2m_client_resource_string_set(
     UINT string_length);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Tjänsten anger värdet för en 64-bitars heltals resurs.
+Tjänsten anger värdet för en 64-bitars heltalsresurs.
 
 ### <a name="parameters"></a>Parametrar
 
-- **resurs** Pekare till resurs.
+- **resurs** Pekare till Resurs.
 - **string_ptr** Pekare till strängen.
 - **string_length** Strängens längd.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -2120,7 +2120,7 @@ status = nx_lwm2m_client_resource_string_set(&resource, “test”, sizeof(“te
 
 ## <a name="nx_lwm2m_client_session_bootstrap"></a>nx_lwm2m_client_session_bootstrap
 
-Startar en-session med en Start Server.
+Startar en session med en Bootstrap-server.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2132,29 +2132,29 @@ UINT nx_lwm2m_client_session_bootstrap(
     UINT port);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten startar en session med en Start Server. Servern måste ha en motsvarande säkerhets instans i objektet Security.
+Den här tjänsten startar en session med en Bootstrap-server. Servern ska ha en motsvarande säkerhetsinstans i säkerhetsobjektet.
 
-Om resursen "vänta bort" skiljer sig från noll i säkerhets instansen som är kopplad till den här servern väntar sessionen på en initierad start av servern, om ingen start initieras av servern efter den här tids perioden som en klient initierade boostrap kommer att utföras.
+Om resursen "Håll av" skiljer sig från noll i den säkerhetsinstans som är associerad med den här servern väntar sessionen på en serverinitierad bootstrap. Om ingen bootstrap initieras av servern efter den här tidsperioden utförs en klientinitierad boostrap.
 
-Alla pågående aktiva sessioner avbryts av det här anropet och ersätts av den nya bootstrap-serversessionen.
+Alla aktiva sessioner avbryts av det här anropet och ersätts av den nya Bootstrap Server-sessionen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till LWM2M för klientens session.
-- **security_id** Start serverns säkerhets instans-ID måste anges till NX_LWM2M_RESERVED_ID (65535) om ingen säkerhets instans har definierats för bootstrap-servern.
-- **ip_address** Serverns IP-adress.
-- **port** Serverns UDP-port.
+- **session_ptr** Pekare till kontrollblocket för LWM2M-klientsession.
+- **security_id** Säkerhetsinstans-ID för Bootstrap-servern måste anges till NX_LWM2M_RESERVED_ID (65535) om Bootstrap-servern inte har någon definierad säkerhetsinstans.
+- **ip_address** IP-adressen för servern.
+- **port** UDP-porten för servern.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
-- **NX_LWM2M_CLIENT_ERROR** Start fel.
+- **NX_LWM2M_CLIENT_ERROR** Bootstrap-fel.
 - **NX_LWM2M_CLIENT_PORT_UNAVAILABLE** Porten är inte tillgänglig.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -2169,7 +2169,7 @@ status = nx_lwm2m_client_session_bootstrap(&lwm2m_client, 0, &ip_address, 5783);
 
 ## <a name="nx_lwm2m_client_session_bootstrap_dtls"></a>nx_lwm2m_client_session_bootstrap_dtls
 
-Startar en säker session med en Start Server
+Startar en säker session med en Bootstrap-server
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2182,33 +2182,33 @@ UINT nx_lwm2m_client_session_bootstrap_dtls(
     NX_SECURE_DTLS_SESSION *dtls_session_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten startar en session med en Start Server med en säker DTLS-anslutning. Servern måste ha en motsvarande säkerhets instans i objektet Security.
+Den här tjänsten startar en session med en Bootstrap-server med hjälp av en säker DTLS-anslutning. Servern ska ha en motsvarande säkerhetsinstans i säkerhetsobjektet.
 
-DTLS-sessionen måste ha kon figurer ATS med lämpliga chiffersviter och nyckel material innan du anropar den här funktionen. **NX_SECURE_ENABLE_DTLS** måste definieras.
+DTLS-sessionen måste ha konfigurerats med rätt chiffersviter och nyckelmaterial innan den här funktionen anropas. **NX_SECURE_ENABLE_DTLS** måste definieras.
 
-Om resursen "vänta bort" skiljer sig från noll i säkerhets instansen som är kopplad till den här servern väntar sessionen på en initierad start av servern, om ingen start initieras av servern efter den här tids perioden som en klient initierade boostrap kommer att utföras. 
+Om resursen "Håll av" skiljer sig från noll i den säkerhetsinstans som är associerad med den här servern väntar sessionen på en serverinitierad bootstrap, om ingen bootstrap initieras av servern efter den här tidsperioden utförs en klientinitierad boostrap. 
 
-Alla pågående aktiva sessioner avbryts av det här anropet och ersätts av den nya bootstrap-serversessionen.
+Alla aktiva sessioner avbryts av det här anropet och ersätts av den nya Bootstrap Server-sessionen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till LWM2M för klientens session.
-- **security_id** Start serverns säkerhets instans-ID måste anges till **NX_LWM2M_RESERVED_ID** (65535) om ingen säkerhets instans har definierats för bootstrap-servern.
-- **ip_address** Serverns IP-adress.
-- **port** Serverns UDP-port.
-- **dtls_session_ptr** DTLS-sessionen som ska användas för bootstrap-sessionen.
+- **session_ptr** Pekare till kontrollblocket för LWM2M-klientsession.
+- **security_id** Säkerhetsinstans-ID för Bootstrap-servern måste anges till **NX_LWM2M_RESERVED_ID** (65535) om Bootstrap-servern inte har någon definierad säkerhetsinstans.
+- **ip_address** IP-adressen för servern.
+- **port** UDP-porten för servern.
+- **dtls_session_ptr** DTLS-sessionen som ska användas för Bootstrap-sessionen.
 - **dtls_local_port** Den lokala UDP-porten som används för DTLS-sessionen.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
-- **NX_LWM2M_CLIENT_ERROR** Start fel.
+- **NX_LWM2M_CLIENT_ERROR** Bootstrap-fel.
 - **NX_LWM2M_CLIENT_PORT_UNAVAILABLE** Porten är inte tillgänglig.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -2234,24 +2234,24 @@ UINT nx_lwm2m_client_session_create(
     NX_LWM2M_CLIENT_SESSION_STATE_CALLBACK state_callback);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skapar en ny LWM2M-klientsession som är ansluten till en befintlig LWM2M-klient. Sessionen används av LWM2M-klienten för att kommunicera med en Start Server eller en LWM2M-Server. 
+Den här tjänsten skapar en ny LWM2M-klientsession som är kopplad till en befintlig LWM2M-klient. Sessionen används av LWM2M-klienten för att kommunicera med en Bootstrap-server eller en LWM2M-server. 
 
-Programmet måste tillhandahålla en callback-funktion som anropas när sessionens tillstånd uppdateras.
+Programmet måste tillhandahålla en återanropsfunktion som anropas när sessionens tillstånd uppdateras.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till LWM2M för klientens session.
-- **client_ptr** Pekare till den tidigare skapade LWM2M-klienten.
-- **state_callback** Återanrop från program som anropas när sessionens tillstånd har ändrats.
+- **session_ptr** Pekare till kontrollblocket för LWM2M-klientsession.
+- **client_ptr** Pekare till LWM2M-klienten som du skapade tidigare.
+- **state_callback** Programanrop som anropas när sessionens tillstånd har ändrats.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -2274,22 +2274,22 @@ Tar bort en LWM2M-klientsession.
 UINT nx_lwm2m_client_session_delete(NX_LWM2M_CLIENT_SESSION *session_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten tar bort en LWM2M-klientsession.
 
-När en LWM2M-klient tas bort genom att anropa nx_lwm2m_client_delete alla sessioner som är anslutna till klienten också bort.
+När en LWM2M-klient tas bort genom nx_lwm2m_client_delete alla sessioner som är kopplade till klienten tas också bort.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till LWM2M för klientens session.
+- **session_ptr** Pekare till kontrollblocket för LWM2M-klientsession.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -2304,7 +2304,7 @@ status = nx_lwm2m_client_session_delete(&session);
 
 ## <a name="nx_lwm2m_client_session_deregister"></a>nx_lwm2m_client_session_deregister
 
-Avslutar en session med en LWM2M-Server.
+Avslutar en session med en LWM2M-server.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2312,21 +2312,21 @@ Avslutar en session med en LWM2M-Server.
 UINT nx_lwm2m_client_session_deregister(NX_LWM2M_CLIENT_SESSION *session_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten utför en "avregistrera"-åtgärd på en LWM2M-Server.
+Den här tjänsten utför en "Avregistrera"-åtgärd till en LWM2M-server.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till LWM2M för klientens session.
+- **session_ptr** Pekare till kontrollblocket för LWM2M-klientsession.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
 - **NX_LWM2M_CLIENT_NOT_REGISTERED** Klienten är inte registrerad på servern.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -2341,7 +2341,7 @@ status = nx_lwm2m_client_session_deregister(&session);
 
 ## <a name="nx_lwm2m_client_session_error_get"></a>nx_lwm2m_client_session_error_get
 
-Hämtar det senaste felet i en session.
+Hämtar det sista felet för en session.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2349,28 +2349,28 @@ Hämtar det senaste felet i en session.
 UINT nx_lwm2m_client_session_error_get(NX_LWM2M_CLIENT_SESSION *session_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten returnerar felkoden för sessionen när sessionen är i ett fel tillstånd.
+Den här tjänsten returnerar felkoden för sessionen när sessionen är i ett feltillstånd.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till LWM2M för klientens session.
+- **session_ptr** Pekare till kontrollblocket för LWM2M-klientsession.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** Sessionen är inte i ett fel tillstånd.
-- **NX_LWM2M_CLIENT_ADDRESS_ERROR** Ogiltig server adress.
-- **NX_LWM2M_ CLIENT_BUFFER_TOO_SMALL** Nytto lasten för begäran får inte plats i nätverksmappen.
-- **NX_LWM2M_ CLIENT_DTLS_ERROR** Det gick inte att upprätta en säker anslutning till servern.
-- **NX_LWM2M_ CLIENT_ERROR** Okänt fel.
+- **NX_SUCCESS** Sessionen är inte i feltillstånd.
+- **NX_LWM2M_CLIENT_ADDRESS_ERROR** Ogiltig serveradress.
+- **NX_LWM2M_ CLIENT_BUFFER_TOO_SMALL** Nyttolasten för begäran får inte plats i nätverksbufferten.
+- **NX_LWM2M_ CLIENT_DTLS_ERROR** Det gick inte att upprätta en säker anslutning med servern.
+- **NX_LWM2M_ CLIENT_ERROR** Ospecificerat fel.
 - **NX_LWM2M_ CLIENT_FORBIDDEN** Registreringen nekades av servern.
-- **NX_LWM2M_ CLIENT_NOT_FOUND** Klienten kunde inte hittas av servern vid uppdatering/avregistrering.
-- **NX_LWM2M_ CLIENT_SERVER_INSTANCE_DELETED** Server objekts instansen som motsvarar sessionen har tagits bort.
+- **NX_LWM2M_ CLIENT_NOT_FOUND** Klienten hittades inte av servern vid uppdatering/avregistrering.
+- **NX_LWM2M_ CLIENT_SERVER_INSTANCE_DELETED** Serverobjektinstansen som motsvarar sessionen har tagits bort.
 - **NX_LWM2M_ CLIENT_TIMED_OUT** Inget svar från servern.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -2382,7 +2382,7 @@ status = nx_lwm2m_client_session_error_get(&session);
 ```
 ## <a name="nx_lwm2m_client_session_register"></a>nx_lwm2m_client_session_register
 
-Startar en session med en LWM2M-Server.
+Startar en session med en LWM2M-server.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2395,29 +2395,29 @@ UINT nx_lwm2m_client_session_register(
 ```
 
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten utför en "Registrera"-åtgärd på en LWM2M-Server. Servern måste ha en motsvarande Server instans i objektet Server.
+Den här tjänsten utför en registeråtgärd till en LWM2M-server. Servern måste ha en motsvarande serverinstans i serverobjektet.
 
-Om registreringen lyckas kommer LWM2M-klienten att bearbeta ytterligare åtgärder från servern och skickar regelbundet meddelanden om uppdatering tills klienten avregistreras.
+Om registreringen lyckas bearbetar LWM2M-klienten ytterligare åtgärder från servern och skickar regelbundet uppdateringsmeddelanden tills klienten avregistreras.
 
-Alla pågående aktiva sessioner avbryts av det här anropet och ersätts av den nya LWM2M.
+Alla aktiva sessioner avbryts av det här anropet och ersätts av den nya LWM2M-serversessionen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till LWM2M för klientens session.
-- **server_id** Det korta Server-ID: t för LWM2M-servern.
-- **ip_address** Serverns IP-adress.
-- **port** Serverns UDP-port.
+- **session_ptr** Pekare till kontrollblocket för LWM2M-klientsession.
+- **server_id** Kort server-ID för LWM2M-servern.
+- **ip_address** IP-adressen för servern.
+- **port** UDP-porten för servern.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
-- **NX_LWM2M_CLIENT_ERROR** Start fel.
+- **NX_LWM2M_CLIENT_ERROR** Bootstrap-fel.
 - **NX_LWM2M_CLIENT_PORT_UNAVAILABLE** Porten är inte tillgänglig.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -2432,7 +2432,7 @@ status = nx_lwm2m_client_session_register (&lwm2m_client, 123, &ip_address, 5683
 
 ## <a name="nx_lwm2m_client_session_register_dtls"></a>nx_lwm2m_client_session_register_dtls
 
-Startar en säker session med en LWM2M-Server.
+Startar en säker session med en LWM2M-server.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2445,32 +2445,32 @@ UINT nx_lwm2m_client_session_register_dtls(
     NX_SECURE_DTLS_SESSION *dtls_session_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten utför en "Registrera"-åtgärd på en LWM2M-server med en säker DTLS-anslutning. Servern måste ha en motsvarande Server instans i objektet Server.
+Den här tjänsten utför en registeråtgärd till en LWM2M-server med hjälp av en säker DTLS-anslutning. Servern måste ha en motsvarande serverinstans i serverobjektet.
 
-DTLS-sessionen måste ha kon figurer ATS med lämpliga chiffersviter och nyckel material innan du anropar den här funktionen. **NX_SECURE_ENABLE_DTLS** måste definieras.
+DTLS-sessionen måste ha konfigurerats med rätt chiffersviter och nyckelmaterial innan den här funktionen anropas. **NX_SECURE_ENABLE_DTLS** måste definieras.
 
-Om registreringen lyckas kommer LWM2M-klienten att bearbeta ytterligare åtgärder från servern och skickar regelbundet meddelanden om uppdatering tills klienten avregistreras.
+Om registreringen lyckas bearbetar LWM2M-klienten ytterligare åtgärder från servern och skickar regelbundet uppdateringsmeddelanden tills klienten avregistreras.
 
-Alla pågående aktiva sessioner avbryts av det här anropet och ersätts av den nya LWM2M.
+Alla aktiva sessioner avbryts av det här anropet och ersätts av den nya LWM2M-serversessionen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till LWM2M för klientens session.
-- **server_id** Det korta Server-ID: t för LWM2M-servern.
-- **ip_address** Serverns IP-adress.
-- **port** Serverns UDP-port.
+- **session_ptr** Pekare till kontrollblocket för LWM2M-klientsession.
+- **server_id** Kort server-ID för LWM2M-servern.
+- **ip_address** IP-adressen för servern.
+- **port** UDP-porten för servern.
 - **dtls_session_ptr** DTLS-sessionen som ska användas för LWM2M-sessionen.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
-- **NX_LWM2M_CLIENT_ERROR** Start fel.
+- **NX_LWM2M_CLIENT_ERROR** Bootstrap-fel.
 - **NX_LWM2M_CLIENT_PORT_UNAVAILABLE** Porten är inte tillgänglig.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -2485,7 +2485,7 @@ status = nx_lwm2m_client_session_register_dtls(&lwm2m_client, 123, &ip_address, 
 
 ## <a name="nx_lwm2m_client_session_register_info_get"></a>nx_lwm2m_client_session_register_info_get
 
-Startar en säker session med en LWM2M-Server.
+Startar en säker session med en LWM2M-server.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2505,32 +2505,32 @@ UINT nx_lwm2m_client_session_register_dtls(
     UINT *secret_key_len);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-När en kommunikations-session med en Start Server upprättats. Programmet kan anropa detta API för att hämta server-och säkerhets information för nästa registrerings steg.
+När en kommunikationssession med en Bootstrap-server hade upprättats. Programmet kan anropa det här API:et för att hämta server- och säkerhetsinformation för nästa registreringssteg.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till LWM2M för klientens session.
-- **security_instance_id** Säkerhets instans-ID.
-- **server_id** Pekare till mål serverns ID.
-- **server_uri** Pekare till mål serverns URI.
-- **server_uri_len** Pekare till mål serverns URI-längd.
-- **security_mode** Pekare till mål säkerhets läge.
-- **pub_key_or_id** Pekare till den offentliga nyckeln eller identiteten.
-- **pub_key_or_id_len** Pekare till målets offentliga nyckel eller identitets längd.
-- **server_pub_key** Pekare till den offentliga nyckeln för mål servern.
-- **server_pub_key_len** Pekare till mål serverns offentliga nyckel längd.
-- **SECRET_KEY** Pekare till målets hemliga nyckel.
-- **secret_key_len** Pekare till målets hemliga nyckel längd.
+- **session_ptr** Pekare till LWM2M-klientsessionskontrollblocket.
+- **security_instance_id** Säkerhetsinstans-ID.
+- **server_id** Pekare till målserverns ID.
+- **server_uri** Pekare till målserverns URI.
+- **server_uri_len** Pekare till målserverns URI-längd.
+- **security_mode** Pekare till målsäkerhetsläge.
+- **pub_key_or_id** Pekare till den offentliga målnyckeln eller identiteten.
+- **pub_key_or_id_len** Pekare till den offentliga målnyckeln eller identitetslängden.
+- **server_pub_key** Pekare till den offentliga målserverns nyckel.
+- **server_pub_key_len** Pekare till målserverns offentliga nyckellängd.
+- **secret_key** Pekare till målhemlighetsnyckel.
+- **secret_key_len** Pekare till målhemlighetens nyckellängd.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
-- **NX_LWM2M_CLIENT_NOT_FOUND** Det finns ingen säkerhets objekts instans.
+- **NX_LWM2M_CLIENT_NOT_FOUND** Det finns ingen säkerhetsobjektinstans.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -2545,7 +2545,7 @@ status = nx_lwm2m_client_session_register_info_get(&session, NX_LWM2M_CLIENT_RES
 
 ## <a name="nx_lwm2m_client_session_update"></a>nx_lwm2m_client_session_update
 
-Uppdaterar en session med en LWM2M-Server.
+Uppdaterar en session med en LWM2M-server.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2553,21 +2553,21 @@ Uppdaterar en session med en LWM2M-Server.
 UINT nx_lwm2m_client_session_update(NX_LWM2M_CLIENT_SESSION *session_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten utför en uppdaterings åtgärd på en LWM2M-Server.
+Den här tjänsten utför en uppdateringsåtgärd till en LWM2M-server.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till LWM2M för klientens session.
+- **session_ptr** Pekare till LWM2M-klientsessionskontrollblocket.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
 - **NX_LWM2M_CLIENT_NOT_REGISTERED** Klienten är inte registrerad på servern.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 
@@ -2590,20 +2590,20 @@ Låser upp en LWM2M-klient.
 UINT nx_lwm2m_client_unlock(NX_LWM2M_CLIENT *client_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten låser upp LWM2M-klienten som tidigare låstes av ett anrop till ***nx_lwm2m_client_unlock***.
+Den här tjänsten låser upp LWM2M-klienten som tidigare låsts av ett anrop ***till nx_lwm2m_client_unlock***.
 
 ### <a name="parameters"></a>Parametrar
 
-- **client_ptr** Pekare till LWM2M klient kontroll block.
+- **client_ptr** Pekare till LWM2M-klientkontrollblocket.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 - **NX_SUCCESS** Åtgärden lyckades.
 - **NX_PTR_ERROR** Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar, initiering
 

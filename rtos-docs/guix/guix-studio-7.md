@@ -1,118 +1,118 @@
 ---
-title: Definiera skärm flöde
-description: GUIX Studio stöder automatisk generering och körning av en skärm över gångs logik.
+title: Definiera Flow
+description: GUIX Studio stöder automatisk generering och körning av logik för skärmövergång.
 author: philmea
 ms.author: philmea
 ms.date: 5/19/2020
 ms.service: rtos
 ms.topic: article
-ms.openlocfilehash: 1c590725281c785181bcb4c5852346bc973c24d1
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 1df90acd86b4446d96a66ab3ee21545afcd9824e28efb40204c2966cb075c501
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104826298"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116785617"
 ---
-# <a name="chapter-7-defining-screen-flow"></a>Kapitel 7: definiera skärm flöde
+# <a name="chapter-7-defining-screen-flow"></a>Kapitel 7: Definiera Flow
 
-GUIX Studio stöder automatisk generering och körning av en skärm över gångs logik. Användaren definierar skärmens över gångs logik genom att skapa och redigera ett grafiskt skärm flödes diagram. När ett skärm flödes diagram läggs till i projektet, aktiverar det två viktiga funktioner: 1) programmet kan köras inifrån Studio-miljön och 2) Studio genererar automatiskt händelse hanterare och skärm över gångs logik för att implementera det angivna skärm flödet i den genererade specifikationerna. c-filen, vilket tar bort den här belastningen från program programmet. 
+GUIX Studio stöder automatisk generering och körning av logik för skärmövergång. Användaren definierar logiken för skärmövergång genom att skapa och redigera ett grafiskt skärmflödesdiagram. När ett skärmflödesdiagram läggs till i projektet möjliggör det två viktiga funktioner: 1) Programmet kan köras inifrån Studio-miljön och 2) Studio genererar automatiskt händelsehanterare och skärmövergångslogik för att implementera det avsedda skärmflödet i den genererade filen specifications.c, vilket tar bort den här belastningen från programmet. 
 
-Att köra programmet på Skriv bordet från Studio-miljön är en praktisk funktion som sparar tid i att du inte behöver gå igenom en kompilera/länka-cykel för att köra programmet. Det finns kurs begränsningar för vad som kan göras utan att kompilera programmet. Anpassade rit funktioner, anpassade händelse hanterare och komplex händelse hantering är inte tillgängliga när du kör programmet inifrån GUIX Studio-miljön. Den här funktionen gör det möjligt för dig att automatiskt skapa en skärm över gångs logik och programanimeringar som ska köras för över gången från en skärm till en annan. Dessa effekter och animeringar kan observeras direkt i GUIX Studio-miljön.
+Att köra programmet på skrivbordet från Studio-miljön är en praktisk funktion som sparar tid eftersom du inte behöver gå igenom en cykel för kompilering/länk för att köra programmet. Det finns naturligtvis begränsningar för vad som kan göras utan att kompilera programmet. Anpassade ritningsfunktioner, anpassade händelsehanterare och komplex händelsehantering är inte tillgängliga när du kör programmet inifrån GUIX Studio-miljön. Med den här funktionen kan du fortfarande automatiskt generera logik för skärmövergång och programanimeringar som ska köras för att övergå från en skärm till en annan. Dessa effekter och animeringar kan observeras direkt från GUIX Studio-miljön.
 
-Observera att när du definierar skärm flöde, utlösare och åtgärder som vi ska beskriva i följande stycken, så aktiverar du inte bara körning av ditt användar gränssnitt från Studio-miljön, men du aktiverar även GUIX Studio för att generera logik i din fil med specifikationer som hanterar händelser och vidtar åtgärder baserat på dessa händelser, till exempel över gång från en skärm till en annan.
+Observera att när du definierar skärmflöde, utlösare och åtgärder som beskrivs i följande stycken aktiverar du inte bara körningen av användargränssnittet inifrån Studio-miljön, utan du aktiverar även GUIX Studio för att generera logik i din specifikationsfil som hanterar händelser och vidta åtgärder baserat på dessa händelser,  som att övergå från en skärm till en annan.
 
-## <a name="configuring-screen-flow"></a>Konfigurera skärm flöde
+## <a name="configuring-screen-flow"></a>Konfigurera Flow
 
-Innan ett program kan köras i Studio-miljön måste några saker definieras. Först måste skärmen eller skärmarna på den översta nivån som ska visas vid program start anges genom att välja egenskapen "synlig vid start" i vyn Studio egenskaper. Den här flaggan anger att den här skärmen först ska visas när programmet startas. Mer än en skärm kan ha den här beteckningen om du vill.
+Innan ett program kan köras inifrån Studio-miljön måste några saker definieras. För det första måste skärmen eller skärmarna på den översta nivån som ska visas vid programstart anges genom att välja egenskapen "Synlig vid start" i studioegenskaperna. Den här flaggan anger att den här skärmen först ska visas när programmet startar. Mer än en skärm kan ha den här benämningen om du vill.
 
-När du har definierat skärm (er) som är synliga vid start kan användaren definiera hur UI-programmet ska flöda från skärmen till skärmen. GUIX Studio innehåller ett grafiskt skärm flödes diagram för att definiera en skärm över gångs logik. Välj bara meny alternativet ***Konfigurera, skärm flöde** _ för att Visa dialog rutan Redigera dialog rutan, se skärm bilden i _ *_bild 30_* *.
+När du har definierat de skärmar som visas vid start kan användaren definiera hur UI-programmet ska flöda från skärm till skärm. GUIX Studio innehåller ett grafiskt skärmflödesdiagram för att definiera logik för skärmövergång. Välj bara menyvalet ***Konfigurera, Skärm Flow** _ för att öppna dialogrutan för redigering av skärmflöde, se skärmbilden i _*_bild 30_**.
 
-![Skärm bild av dialog rutan skärm flöde i GUIX Studio.](./media/guix-studio/config_screen_flow.png)
+![Skärmbild av dialogrutan GUIX Studio Screen Flow.](./media/guix-studio/config_screen_flow.png)
 
 **Bild 30**
 
-Varje bildskärm på den översta nivån som definierats i projektet visas som en ruta som visar skärm namnet. Den här rutan är en plats hållare som representerar varje toppnivå som definierats i projektet. Dessa rutor kan flyttas och storleks änd ras efter behov. När en över gång från en bildskärm på översta nivån till en annan har definierats visas en anslutnings linje med en pil mellan två skärmar som visar över gångar från en skärm till en annan.
+Varje skärm på den översta nivån som definieras i projektet visas som en ruta som visar skärmnamnet. Den här rutan är en platshållare som representerar varje skärm på den översta nivån som definierats i projektet. Dessa rutor kan flyttas och ändras efter behov. När en övergång från en skärm på den översta nivån till en annan har definierats visas en anslutningslinje med ett pilhuvud mellan två skärmar för att indikera övergångar från en skärm till en annan.
 
-Trädvyn i vänster sida av skärmens flödes diagram visar varje toppnivå-skärm och du kan välja vilka skärmar på den översta nivån som ska ritas i skärm flödes diagrammet.
+Trädvyn till vänster i skärmflödesdiagrammet visar varje skärm på den översta nivån och du kan välja vilka skärmar på den översta nivån som ska ritas i skärmflödesdiagrammet.
 
-Skärm Flow-diagrammet är rullnings Bart. Du kan dra ett skärm block nedåt och åt höger utanför det synliga området för att förstora det rullnings bara fönstret. När du har för sto rad rullnings fönstret kan du zooma ut så att det passar det synliga avsnittet genom att rulla mus hjulet nedåt. Om rullnings bara fönstret är utzoomat kan du göra det tillräckligt stort för att rymma alla block genom att rulla mus hjulet uppåt.
+Skärmflödesdiagrammet är rullningsbart. Du kan dra alla skärmblock nedåt och precis utanför det synliga området för att förstora det rullningsbara fönstret. När det rullningsbara fönstret har förstorats kan du zooma ut så att det passar det synliga området genom att rulla ned mushjulet. Om det rullningsbara fönstret zoomas ut kan du göra det tillräckligt stort för att rymma alla block genom att rulla upp mushjulet.
 
-Om du vill definiera över gångar för en skärm högerklickar du på plats hållaren för skärmen för att öppna dialog rutan Redigera utlösare, se ***bild 31***.
+Om du vill definiera övergångar för en skärm högerklickar du på platshållaren för skärmen för att öppna dialogrutan Redigera utlösarlista. Se ***bild 31.***
 
-![Skärm bild av dialog rutan Redigera utlösare i GUIX Studio.](./media/guix-studio/edit_trigger_list.png)
+![Skärmbild av dialogrutan Redigera utlösarlista i GUIX Studio.](./media/guix-studio/edit_trigger_list.png)
 
 **Bild 31**
 
-I dialog rutan för utlösare redigera visas de händelser som användaren har definierat som utlöser en skärm över gång, vilket är orsaken till att vi kallar dessa händelse utlösare. Utlösare signalerar normalt genereras av en eller flera underordnade widgetar för den valda skärmen.
+Dialogrutan för att redigera utlösare visar de händelser som användaren har definierat och som utlöser en skärmövergång, vilket är anledningen till att vi anropar dessa händelseutlösare. Utlösare är vanligtvis signaler som genereras av en eller flera underordnade widgetar på den valda skärmen.
 
-Om du vill definiera en ny utlösare väljer du knappen ***Lägg till ny utlösare** _ i dialog rutan Redigera utlösare för att Visa dialog rutan Lägg till utlösare i _ *_bild 32_* *.
+Om du vill definiera en ny utlösare väljer du **knappen*** Lägg till ny utlösare _ i dialogrutan Redigera utlösarlista för att öppna dialogrutan Lägg till utlösare som visas i _*_bild 32_**.
 
-![Skärm bild av dialog rutan Lägg till utlösare för GUIX Studio.](./media/guix-studio/add_trigger_for.png)
+![Skärmbild av dialogrutan Lägg till utlösare i GUIX Studio.](./media/guix-studio/add_trigger_for.png)
 
-**Figur 32**
+**Bild 32**
 
-Du kan definiera vilken händelse typ som ska utlösa en ny uppsättning åtgärder och definiera de åtgärder som ska utföras när utlösaren tas emot.
+Du kan definiera händelsetypen som utlöser en ny uppsättning åtgärder och definiera de åtgärder som ska köras när utlösarhändelsen tas emot.
 
-När du definierar den händelse typ som du vill använda för att utlösa en ny Animations skärm över gång, sparar du den nya utlösaren så visas den i dialog rutan Redigera utlösare.
+När du har definierat den händelsetyp som du vill använda för att utlösa en ny animeringsskärmövergång sparar du den nya utlösaren så visas den i dialogrutan Redigera utlösarlista.
 
-Du kan ändra den här händelsen (utan att ändra de relaterade åtgärder som ska vidtas) genom att markera händelsen i dialog rutan Redigera utlösare och välja ***händelse knappen Redigera utlösare*** .
+Du kan ändra den här händelsen (utan att ändra de relaterade åtgärder som ska vidtas) genom att välja händelsen i dialogrutan Redigera utlösarlista och välja ***knappen Redigera utlösarhändelse.***
 
-På samma sätt kan du ta bort eventuella Utlös ande händelser från listan genom att markera händelsen och klicka på knappen ***ta bort vald utlösare*** .
+På samma sätt kan du ta bort en utlösarhändelse från listan genom att välja händelsen och klicka på ***knappen Ta bort vald*** utlösare.
 
-Om du vill ange vilken animering eller skärm bilds över gång som ska ske baserat på en viss Utlös ande händelse väljer du den Utlös ande händelsen och klickar på knappen ***Redigera åtgärd (er)*** . Observera att du kan starta mer än en åtgärd baserat på varje definierad utlösare.
+Om du vill ange animeringen eller skärmövergången som ska ske baserat på en viss utlösarhändelse väljer du utlösarhändelsen och klickar på ***knappen Redigera*** åtgärd. Observera att du kan utlösa fler än en åtgärd baserat på varje definierad utlösare.
 
-Med knappen **Redigera åtgärd (n)** kan du se dialog rutan Redigera åtgärder för utlösare, som visas i bild 33: 
+Knappen **Redigera åtgärd(er)** visar dialogrutan Redigera åtgärder för utlösare, som visas i bild 33: 
 
-![Skärm bild av dialog rutan Redigera åtgärder för utlösare i GUIX Studio.](./media/guix-studio/edit_actions_for_trigger.png)
+![Skärmbild av dialogrutan GUIX Studio Redigera åtgärder för utlösare.](./media/guix-studio/edit_actions_for_trigger.png)
 
-**Figur 33**
+**Bild 33**
 
-Med den här dialog rutan kan du definiera hur många åtgärder som ska implementeras baserat på den här utlösnings händelsen. Du kan ge varje åtgärd ett beskrivande namn som hjälper dig att associera varje åtgärds definition med en visuell animering eller över gång. I exemplet ovan definierade vi två åtgärder med namnet "fade_in_text_screen" och "fade_out_button_screen".
+I den här dialogrutan kan du definiera val av åtgärder som ska implementeras baserat på den här utlösarhändelsen. Du kan ge varje åtgärd ett beskrivande namn som hjälper dig att associera varje åtgärdsdefinition med en visuell animering eller övergång. I exemplet ovan definierade vi två åtgärder med namnet "fade_in_text_screen" och "fade_out_button_screen".
 
-Definiera en ny åtgärd att implementera genom att klicka på knappen Lägg till ny åtgärd, som öppnar dialog rutan Välj åtgärd, bild 34:
+Definiera en ny åtgärd att implementera och klicka på knappen Lägg till ny åtgärd, som visar dialogrutan Välj åtgärd, bild 34:
 
-![Skärm bild av dialog rutan Välj åtgärd i GUIX Studio.](./media/guix-studio/select_action.png)
+![Skärmbild av dialogrutan Välj åtgärd i GUIX Studio.](./media/guix-studio/select_action.png)
 
-**Figur 34**
+**Bild 34**
 
-Tillgängliga åtgärds typer är:
+Tillgängliga åtgärdstyper är:
 
-- **Animering**: starta en animering med angiven information.
-- **Bifoga**: koppla mål skärmen till den överordnade skärmen, om den överordnade skärmen inte anges, kopplas mål skärmen till rot fönstret.
-- **Koppla** från: koppla från mål skärmen från dess överordnade plats.
-- **Dölj**: Dölj mål skärmen.
-- **Skärms tack pop**: pop a Screen från den interna stacken.
-- **Push**-överföring av skärm: skicka en skärm pekare till den interna stacken.
-- **Återställ skärms stack**: ta bort alla skärm pekare från den interna stacken.
-- **Visa**: Visa mål skärmen.
-- **Växla**: koppla mål skärmen till den aktuella skärmens överordnade och koppla bort den aktuella skärmen från dess överordnade plats.
-- **Fönster körning**: kör på mål skärmen.
-- **Fönster körnings stopp**: avsluta körning av den aktuella skärmen.
+- **Animering:** Starta en animering med angiven information.
+- **Anslut:** Anslut målskärmen till den överordnade skärmen. Om den överordnade skärmen inte har angetts ansluts målskärmen till rotfönstret.
+- **Koppla från:** Koppla från målskärmen från dess överordnade skärm.
+- **Dölj:** Dölj målskärmen.
+- **Skärmstackspop:** Pop a screen from the internal screen stack (Pop-pop i en skärm från den interna skärmstacken).
+- **Push-push för skärmstack:** Skicka en skärm pekare till den interna skärmstacken.
+- **Återställning av skärmstack:** Ta bort alla skärmpekare från den interna skärmstacken.
+- **Visa:** Visa målskärmen.
+- **Växla:** Koppla målskärmen till den aktuella skärmens överordnade skärm och koppla bort den aktuella skärmen från dess överordnade skärm.
+- **Kör fönster:** Kör målskärmen modally.
+- **Window Execute Stop**:Exit modally execution of the current screen.
 
-När du har definierat en åtgärd som ska utföras baserat på den valda utlösnings händelsen visas åtgärden i dialog rutan Redigera åtgärder för utlösare. Du kan välja den här åtgärden för att ändra parametrarna för åtgärden som visas i bild 35.
+När du har definierat en åtgärd som ska vidtas baserat på den valda utlösarhändelsen visas åtgärden i dialogrutan Redigera åtgärder för utlösare. Du kan välja den här åtgärden om du vill ändra parametrarna för åtgärden enligt bild 35.
 
-![Skärm bild av dialog rutan Redigera åtgärder för utlösare i GUIX Studio.](./media/guix-studio/edit_actions_for_trigger.png)
+![Skärmbild av dialogrutan GUIX Studio Redigera åtgärder för utlösare.](./media/guix-studio/edit_actions_for_trigger.png)
 
-**Figur 35**
+**Bild 35**
 
-Om åtgärds typen är en animering visas en uppsättning animeringssymboler till höger så att du kan definiera en animering av bild och/eller toning som ska köras. När en animeringseffekt har slutförts kan du också avgöra om animeringen ska kopplas från automatiskt från den överordnade och/eller skickas till den interna skärm bilden, vilket ofta är användbart när du definierar meny system på flera lager.
+Om åtgärdstypen är en animering visas en uppsättning animeringsparametrar till höger så att du kan definiera en animering av bild- och/eller toningstyp som ska köras. När en animeringsåtgärd har slutförts kan du också avgöra om animeringen ska tas bort automatiskt från den överordnade och/eller push-skickas till den interna skärmstacken, vilket ofta är användbart när du definierar menysystem med flera lager.
 
-För animeringar av bild och toning kan du också definiera den över gångs funktion som ska användas genom att välja knappen över gångs val. Över gångar är olika kurvor som har utformats för att bättre efterlikna faktiska händelser för livs längds rörelser. Om du markerar den här knappen visas dialog rutan Välj över gångs **funktion** , bild 36:
+För animeringar med dra och toning kan du också definiera den easing-funktion som ska användas genom att välja knappen Easing Func Select (Underlätta func-val). Easing-funktioner är olika kurvor som är utformade för att närmare efterlikna verkliga rörelsehändelser. Om du väljer den här knappen **öppnas dialogrutan Välj easing-funktion,** bild 36:
 
-![Skärm bild av GUIX Studio Välj över gångs funktion dialog ruta.](./media/guix-studio/easing_function_select.png)
+![Skärmbild av dialogrutan Välj easingfunktion i GUIX Studio.](./media/guix-studio/easing_function_select.png)
 
-**Figur 36**
+**Bild 36**
 
-Om du definierar flera åtgärder som ska associeras med en Utlös ande händelse kan det vara praktiskt att tilldela varje åtgärd ett meningsfullt namn. Åtgärds namn måste följa namngivnings regler för C-syntax, eftersom dessa namn används i den genererade Specifikations filen för att definiera händelse-och åtgärds tabeller.
+Om du definierar flera åtgärder som ska associeras med en utlösarhändelse kan det vara praktiskt att tilldela varje åtgärd ett beskrivande namn. Åtgärdsnamn måste följa namngivningsreglerna för C-syntax, eftersom dessa namn kommer att användas i den genererade specifikationsfilen för att definiera händelse- och åtgärdstabeller.
 
-När du definierar Utlös ande händelser och åtgärder i GUIX Studio genereras automatiska händelse hanterare i filen med projekt specifikationer för att hantera dessa händelser och köra de angivna åtgärderna. Det innebär att du inte behöver hantera dessa händelser i program koden, även om utlösarens händelser fortfarande skickas till eventuella anpassade händelse hanterare som du har definierat. Med andra ord ökar Studio-genererade händelse hanterare, i stället för att ersätta, dina egna anpassade händelse hanterare.
+När du definierar utlösarhändelser och åtgärder i GUIX Studio genereras automatiserade händelsehanterare i filen med projektspecifikationer för att hantera dessa händelser och köra de angivna åtgärderna. Det innebär att du INTE behöver hantera dessa händelser i din programkod, även om utlösarhändelserna fortfarande skickas till anpassade händelsehanterare som du har definierat. Med andra ord utökar studiogenererade händelsehanterare dina egna anpassade händelsehanterare i stället för att ersätta dem.
 
 ## <a name="running-the-application"></a>Köra programmet
 
-När Start skärmar och ett skärm flödes diagram har skapats kan du köra programmet i Studio genom att välja alternativet Kör program
+När startskärmarna och ett skärmflödesdiagram har skapats kan du köra programmet i Studio genom att välja "Kör program"
 
-![Skärm bild av knappen Kör program.](./media/guix-studio/image68.jpg)
+![Skärmbild av knappen Kör program.](./media/guix-studio/image68.jpg)
 
--knapp i verktygsfältet och väljer Redigera | Kör programmet från projekt-menyn eller genom att klicka på knappen Kör längst ned i dialog rutan Redigera skärm flöde.
+i verktygsfältet och väljer Redigera | Kör Program från projektmenyn eller genom att välja knappen Kör längst ned i dialogrutan Redigera Flow skärm.
 
-När du kör programmet visas skärmarna som du har angivit som "synlig vid start" i ett nytt fönster. De underordnade widgetarna på dessa skärmar är helt operativa. Du kan klicka på knappar, använda skjutreglagen och rulla hjul osv. Om du har definierat anpassade ritnings funktioner eller kund händelse hantering för någon av dessa widgetar, kommer du naturligtvis inte att se detta när du kör programmet i det här läget. Men om du har definierat ett skärm flödes diagram med Utlös ande händelser och åtgärder, kommer dessa utlösare att fungera och dina skärmar kommer att överföras när du har definierat, inklusive eventuella animeringar som du kan ha definierat.
+När du kör programmet visas de skärmar som du har angett som "Synlig vid start" i ett nytt fönster. De underordnade widgetarna på den här skärmen fungerar fullt ut. Du kan klicka på knappar, använda skjutreglage och rullningshjul osv. Om du har definierat anpassade ritningsfunktioner eller kundhändelsehantering för någon av dessa widgetar ser du förstås INTE detta när du kör programmet i det här läget. Men om du har definierat ett skärmflödesdiagram med utlösarhändelser och åtgärder kommer dessa utlösare att fungera och dina skärmar övergår som du har definierat, inklusive animeringar som du har definierat.

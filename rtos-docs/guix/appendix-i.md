@@ -1,19 +1,19 @@
 ---
-title: Bilaga I – GUIX informations strukturer
-description: Lär dig mer om informations strukturer i GUIX.
+title: Bilaga I – GUIX-informationsstrukturer
+description: Lär dig mer om GUIX-informationsstrukturer.
 author: philmea
 ms.author: philmea
 ms.date: 05/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: dc7775cdde8f1aa89ca650561713f54ac6c069eb
-ms.sourcegitcommit: 60ad844b58639d88830f2660ab0c4ff86b92c10f
+ms.openlocfilehash: 8730dbfc49ed51716f32c118a25ebffc907b19a54d98d83ede4155f87fbecb7b
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 04/07/2021
-ms.locfileid: "106550226"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116784174"
 ---
-# <a name="appendix-i---guix-information-structures"></a>Bilaga I – GUIX informations strukturer 
+# <a name="appendix-i---guix-information-structures"></a>Bilaga I – GUIX-informationsstrukturer 
 
 ## <a name="gx_bidi_text_info"></a>GX_BIDI_TEXT_INFO 
 
@@ -29,9 +29,9 @@ typedef struct GX_BIDI_TEXT_INFO_STRUCT
 ```
 | Medlemmar | Description |
 | ---------------------------------- | ---------------------------------------------------------- |
-| **gx_bidi_text_info_text**               | Text för att ordna om |
-| **gx_bidi_text_info_font**               | Teckensnitt som används för att visa text, ange det som GX_NULL om rad brytning inte behövs |
-| **gx_bidi_text_info_display_width**      | Tillgänglig bredd för visning, Ställ in den på-1 om rad brytning inte behövs |
+| **gx_bidi_text_info_text**               | Text för att ändra ordning |
+| **gx_bidi_text_info_font**               | Teckensnitt som används för att visa text, ange det till GX_NULL radbrytning inte behövs |
+| **gx_bidi_text_info_display_width**      | Tillgänglig bredd för visning, ställ in den på -1 om radbrytning inte behövs |
 
 ## <a name="gx_bidi_resolved_text_info"></a>GX_BIDI_RESOLVED_TEXT_INFO 
 
@@ -48,9 +48,9 @@ typedef struct GX_BIDI_RESOLVED_TEXT_INFO_STRUCT
 
 | Medlemmar | Description |
 | ---------------------------------- | ---------------------------------------------------------- |
-| **gx_bidi_resolved_text_info_text**             | Pekare till matrisen med omordningen dubbelriktad text |
-| **gx_bidi_resolved_text_info_total_lines**      | Totalt antal rader matchad dubbelriktad text för ett stycke |
-| **gx_bidi_resolved_text_info_next**             | Dubbelriktad dubbelriktad text information för nästa stycke |
+| **gx_bidi_resolved_text_info_text**             | Pekare till matrisen med omsorterad bidi-text |
+| **gx_bidi_resolved_text_info_total_lines**      | Totalt antal rader med lösta bidi-text för ett stycke |
+| **gx_bidi_resolved_text_info_next**             | Löst information om offerttext för nästa stycke |
 
 ## <a name="gx_circular_gauge_info"></a>GX_CIRCULAR_GAUGE_INFO
 
@@ -71,17 +71,17 @@ typedef struct GX_CIRCULAR_GAUGE_INFO_STRUCT
 
 | Medlemmar | Description |
 | ------------------------------------------------ | -------------------------------------------- |
-| **gx_circular_gauge_info_animation_steps**       | Totalt antal steg som nål färdas genom att flytta från den aktuella nålventil till en nyligen tilldelad bänk |
-| **gx_circular_gauge_info_animation_delay**       | Antalet GUIX klock Tick som ska förskjutas mellan animeringssekvenser |
-| **gx_circular_gauge_info_needle_xpos**           | Avståndet från vänster om mätar widgeten till rotations punkten för mätarens Barr |
-| **gx_circular_gauge_info_needle_ypos**           | Avståndet från överkanten i mätar widgeten till rotations punkten för mätarens Barr |
-| **gx_circular_gauge_info_needle_xcor**           | Avståndet från den högra delen av nålventil till rotations punkten för mätarens Barr |
-| **gx_circular_gauge_info_needle_ycor**           | Avståndet från den översta delen av nålventil till rotations punkten för mätarens Barr |
-| **gx_circular_gauge_info_needle_pixelmap**       | Resurs-ID för Pixelmap som ska användas för att rita mätar nål. Den här bilden roteras efter behov av mätar widgeten för att Visa mätarens barr i valfri position |
+| **gx_circular_gauge_info_animation_steps**       | Totalt antal steg som nålen färdas genom när den flyttas från den aktuella nålvinkeln till en nyligen tilldelad nålvinkel |
+| **gx_circular_gauge_info_animation_delay**       | Antalet GUIX-klockan tickar för att fördröja mellan animeringsstegen |
+| **gx_circular_gauge_info_needle_xpos**           | Avståndet från vänster om mätarwidgeten till mitten av rotationen på mätarnålen |
+| **gx_circular_gauge_info_needle_ypos**           | Avståndet från överdelen av mätarwidgeten till mitten av rotationen på mätarnålen |
+| **gx_circular_gauge_info_needle_xcor**           | Avståndet från vänster om nålbilden till mitten av rotationen på mätarnålen |
+| **gx_circular_gauge_info_needle_ycor**           | Avståndet från nålens övre del till mitten av rotationen på mätarnålen |
+| **gx_circular_gauge_info_needle_pixelmap**       | Resurs-ID för pixelkartan som ska användas för att rita mätarnålen. Den här bilden roteras efter behov av mätarwidgeten för att visa mätarnålen på valfri plats |
 
-Diagrammet nedan illustrerar Xpos, ypos och XCOR, ycor koordinater:
+Diagrammet nedan visar koordinaterna xpos, ypos och xcor, ycor:
 
-![Diagram över koordinaterna för nål Y och X](./media/guix/image8.png)
+![Diagram över nål Y- och X-koordinaterna](./media/guix/image8.png)
 
 ## <a name="gx_line_chart_info"></a>GX_LINE_CHART_INFO
 
@@ -108,16 +108,16 @@ typedef struct GX_LINE_CHART_INFO_STRUCT
 
 | Medlemmar | Description |
 | ---------------------------------- | ---------------------------------------------------------- |
-| **gx_line_chart_min_val**          | Det minsta data värde som används för att beräkna skalning
-| **gx_line_chart_max_val**          | Maximalt data värde, som används för att beräkna skalning |
-| **gx_line_chart_data**             | Pekar mot en matris med heltals värden. Detta är de heltals värden som ritas av linje diagrammets widget |
-| **gx_line_ <side> _margin**          | Förskjutningen från diagram fönstret som är yttre till det faktiska diagrammets åter givnings område. Diagrammets axel och data linje ritas alltid inom den här inre gränsen, vilket gör att programmet kan rita etiketter och annan information i diagram fönstret, men utanför diagrammets diagram område |
-| **gx_line_chart_max_data_count**   | Antalet data värden som kan finnas. Den här parametern används för att beräkna skalningen på x-axeln eller intervall för att rita data punkter. |
-| **gx_line_active_data_count**      | Antalet data värden som faktiskt finns i data matrisen. Ett linje diagram kan skalas för att rita högst 100 värden (till exempel), men för en viss uppdatering kan det faktiskt finnas ett mindre antal data värden. |
-| **gx_line_axis_line_width**        | Bredd på linjen som används för att rita den vågräta och lodräta axeln |
-| **gx_line_data_line_width**        | Bredd på den ritade data linjen |
-| **gx_line_chart_axis_color**       | Resurs-ID för färgen som används för att rita axel linjerna |
-| **gx_line_chart_line_color**       | Resurs-ID för den färg som används för att rita diagrammets data linje |
+| **gx_line_chart_min_val**          | Det minsta datavärdet som används för att beräkna skalning
+| **gx_line_chart_max_val**          | Det maximala datavärdet, som används för att beräkna skalning |
+| **gx_line_chart_data**             | Pekare till en matris med heltalsvärden. Det här är heltalsvärdena som ritas av linjediagramswidgeten |
+| **gx_line_ <side> _margin**          | Förskjutningen från diagramfönstrets yttre bundna till det faktiska diagramåtergivningsområdet. Diagramaxeln och datalinjen ritas alltid inom den här inre gränsen, vilket gör att programmet kan rita etiketter och annan information i diagramfönstret men utanför teckendiagrammet |
+| **gx_line_chart_max_data_count**   | Antalet datavärden som kan finnas. Den här parametern används för att beräkna x-axelns skalning eller intervallet för att rita datapunkter. |
+| **gx_line_active_data_count**      | Antalet datavärden som faktiskt finns i datamatrisen. Ett linjediagram kan skalas för att rita högst 100 värden (till exempel), men vid en viss uppdatering kan det faktiskt finnas ett mindre antal datavärden. |
+| **gx_line_axis_line_width**        | Bredden på den linje som används för att rita den vågräta och lodräta axeln |
+| **gx_line_data_line_width**        | Bredden på den ritade datalinjen |
+| **gx_line_chart_axis_color**       | Resurs-ID för den färg som används för att rita axellinjerna |
+| **gx_line_chart_line_color**       | Resurs-ID för den färg som används för att rita diagrammets datalinje |
 
 ## <a name="gx_mouse_cursor_info"></a>GX_MOUSE_CURSOR_INFO 
 
@@ -134,9 +134,9 @@ typedef struct GX_MOUSE_CURSOR_INFO_STRUCT
 
 | Medlemmar | Description |
 | ---------------------------------- | ---------------------------------------------------------- |
-| **gx_mouse_cursor_image_id**       | Resurs-ID för mus bilden |
-| **gx_mouse_cursor_hotspot_x**      | Förskjutningen från vänster om musen till klickbar bild punkt |
-| **gx_mouse_cursor_hotspot_y**      | Förskjutningen från bildens överkant till punktens klickbara bild punkt |
+| **gx_mouse_cursor_image_id**       | Resurs-ID för musavbildningen |
+| **gx_mouse_cursor_hotspot_x**      | Förskjutningen från vänster om musbilden till musens bildpunkt |
+| **gx_mouse_cursor_hotspot_y**      | Förskjutningen från överst i musbilden till musbildens hotspot |
 
 ## <a name="gx_pen_configuration"></a>GX_PEN_CONFIGURATION 
 
@@ -152,8 +152,8 @@ typedef struct GX_PEN_CONFIGURATION_STRUCT
 
 | Medlemmar | Description |
 | -------------------------------------------- | ------------------------------------------------ |
-| **gx_pen_configuration_min_drag_dist**       | Minsta drag avstånd per GUIX timer för att utlösa ett SNÄRTNING-händelse. Anropa GX_FIXED_VAL_MAKE för att skapa ett fast punkt värde för data typen |
-| **gx_pen_configuration_max_pen_speed_ticks** | Den maximala dra hastigheten i GUIX timer-Tick för att utlösa en SNÄRTNING-händelse | 
+| **gx_pen_configuration_min_drag_dist**       | Det minsta dra avståndet per GUIX-timer tick för att utlösa en EVENT. Anropa GX_FIXED_VAL_MAKE för att skapa ett datatypvärde för fast punkt |
+| **gx_pen_configuration_max_pen_speed_ticks** | Den maximala dra-hastigheten i GUIX-timern tickar för att utlösa en TRIGGER-händelse | 
 
 ## <a name="gx_pixelmap_slider_info"></a>GX_PIXELMAP_SLIDER_INFO 
 
@@ -170,9 +170,9 @@ typedef struct GX_PIXELMAP_SLIDER_INFO_STRUCT
 
 | Medlemmar | Description |
 | ----------------------------------------------------- | ---------------------------------------- |
-| **gx_pixelmap_slider_info_lower_background_pixelmap** | Resurs-ID för Pixelmap som fyller bakgrunden före nål. Om den övre bakgrunds Pixelmap inte har angetts används den för att fylla bakgrunden både före och efter nål |
-| **gx_pixelmap_slider_info_upper_background_pixelmap** | Resurs-ID för Pixelmap som fyller bakgrunden efter nål |
-| **gx_pixelmap_slider_info_needle_pixelmap**           | Resurs-ID för nålventil Pixelmap |
+| **gx_pixelmap_slider_info_lower_background_pixelmap** | Resurs-ID för pixelkartan för att fylla i bakgrunden före nålen. Om den övre pixelkartan i bakgrunden inte har angetts används den för att fylla i bakgrunden både före och efter nålen |
+| **gx_pixelmap_slider_info_upper_background_pixelmap** | Resurs-ID för pixelkartan för att fylla i bakgrunden efter nålen |
+| **gx_pixelmap_slider_info_needle_pixelmap**           | Resurs-ID för pixelkartan med nål |
 
 ## <a name="gx_progress_bar_info"></a>GX_PROGRESS_BAR_INFO 
 
@@ -194,14 +194,14 @@ typedef struct GX_PROGRESS_BAR_INFO_STRUCT
 
 | Medlemmar | Description |
 | -------------------------------------------- | ------------------------------------------------ |
-| **gx_progress_bar_info_min_val**             | Lägsta rapporterade värde |
+| **gx_progress_bar_info_min_val**             | Minsta rapporterade värde |
 | **gx_progress_bar_info_max_val**             | Maximalt rapporterat värde |
 | **gx_progress_bar_info_current_val**         | Aktuellt värde |
-| **gx_progress_bar_info_font_id**             | Resurs-ID för teckensnittet som används för att rita det valfria text värdet i widgeten förlopps indikator      |
-| **gx_progress_bar_normal_text_color**        | Resurs-ID för text färgen i läget normal som används för att definiera den valfria text ritningen i widgeten förlopps indikator |
-| **gx_progress_bar_selected_text_color**      | Resurs-ID för textfärg när widgeten får fokus, används för att definiera valfri text ritning i förlopps indikatorns widget |
-| **gx_progress_bar_disabled_text_color**      | Resurs-ID för text färgen när GX_STYLE_ENABLED inte är aktiv, används för att definiera den valfria text ritningen i widgeten för förlopps indikatorn |
-| **gx_progress_bar_fill_pixelmap**            | Resurs-ID för Pixelmap för bakgrunds fyllning|
+| **gx_progress_bar_info_font_id**             | Resurs-ID för teckensnittet som används för att rita det valfria textvärdet i förloppsfältets widget      |
+| **gx_progress_bar_normal_text_color**        | Resurs-ID för textfärgen i normalt tillstånd som används för att definiera den valfria textritningen i förloppsfältets widget |
+| **gx_progress_bar_selected_text_color**      | Resurs-ID för textfärgen när widgeten får fokus, används för att definiera den valfria textritningen i förloppsfältets widget |
+| **gx_progress_bar_disabled_text_color**      | Resurs-ID för textfärgen när GX_STYLE_ENABLED inte är aktiv, används för att definiera den valfria textritningen i förloppsfältets widget |
+| **gx_progress_bar_fill_pixelmap**            | Resurs-ID för pixelkartan för bakgrundsfyllning|
 
 ## <a name="gx_radial_progress_bar_info"></a>GX_RADIAL_PROGRESS_BAR_INFO
 
@@ -228,19 +228,19 @@ typedef struct GX_RADIAL_PROGRESS_BAR_INFO_STRUCT
 
 | Medlemmar | Description |
 | ------------------------------------------------- | -------------------------------------------- |
-| **gx_radial_progress_bar_info_xcenter**           | Widgetens position i x-koordinaten |
-| **gx_radial_progress_bar_info_ycenter**           | Widgetens position i y-koordinaten  |
-| **gx_radial_progress_bar_info_radius**            | Radien för förlopps cirkeln |
-| **gx_radial_progress_bar_info_current_val**       | Aktuellt värde, begränsat till intervallet [-360, 360], anger vinkeln delta mellan ankar positionen och slut punkten för den övre bågen. Negativt värde gör att bågen ritas i en medsols riktning som börjar vid ankar positionen. Positivt värde gör att bågen ritas in i riktningen medurs med början vid ankar positionen. Programmet måste skala det verkliga ord svärdet som anges för att tilldela ett vinkel värde till widgeten för förlopps indikatorn |
-| **gx_radial_progress_bar_anchor_val**             | Start vinkeln för den övre förlopps bågen. Värdet definieras som en heltals grad med 0 grader peka på höger och 90 grad som visar en rak position. |
-| **gx_radial_progress_bar_font_id**                | Resurs-ID för det teckensnitt som används för att rita det valfria text värdet i widgeten förlopps indikator |
-| **gx_radial_progress_bar_normal_text_color**      | Resurs-ID för text färgen i läget normal som används för att definiera den valfria text ritningen i widgeten förlopps indikator |
-| **gx_radial_progress_bar_selected_text_color**    |Resurs-ID för text färgen när widgeten får fokus, används för att definiera valfri text ritning i förlopps indikatorns widget |
-| **gx_radial_progress_bar_disabled_text_color**    | Resurs-ID för text färgen när GX_STYLE_ENABLED inte är aktiv, används för att definiera den valfria text ritningen i widgeten för förlopps indikatorn |
-| **gx_radial_progress_bar_normal_brush_width**     | Bredden på den nedre förlopps cirkeln |
-| **gx_radial_progress_bar_selected_brush_width**   | Bredden för den övre förloppet, den övre bågen kan vara smalare, samma som eller bredare än den nedre cirkeln |
-| **gx_radial_progress_bar_normal_brush_color**     | Resurs-ID för färgen som ska fyllas i lägre förlopps cirkel |
-| **gx_radial_progress_bar_selected_brush_color**   | Resurs-ID för färgen som fyller mot den övre förloppet för en båge |
+| **gx_radial_progress_bar_info_xcenter**           | Widgetposition i x koordinat |
+| **gx_radial_progress_bar_info_ycenter**           | Widgetposition i y-koordinat  |
+| **gx_radial_progress_bar_info_radius**            | Radien för förloppskretsen |
+| **gx_radial_progress_bar_info_current_val**       | Det aktuella värdet, begränsat till intervallet [-360, 360], anger angular-delta mellan fästpunkten och slutpunkten för den övre båge. Negativt värde gör att båge ritas i en medurs riktning med början vid fästpunktspositionen. Positivt värde gör att båge ritas i en moturs riktning med början vid fästpunktspositionen. Programmet måste skala det verkliga ordvärdet som anges för att tilldela ett angularvärde till förloppsfältets widget |
+| **gx_radial_progress_bar_anchor_val**             | Start vinkel för den övre förlopps arc. Värdet definieras i termer av heltalsgrad med 0 grader som pekar åt höger och 90 grader som visar en rät upp-position. |
+| **gx_radial_progress_bar_font_id**                | Resurs-ID för teckensnittet som används för att rita det valfria textvärdet i förloppsfältets widget |
+| **gx_radial_progress_bar_normal_text_color**      | Resurs-ID för textfärgen i normalt tillstånd som används för att definiera den valfria textritningen i förloppsfältets widget |
+| **gx_radial_progress_bar_selected_text_color**    |Resurs-ID för textfärgen när widgeten får fokus, används för att definiera den valfria textritningen i förloppsfältets widget |
+| **gx_radial_progress_bar_disabled_text_color**    | Resurs-ID för textfärgen när GX_STYLE_ENABLED inte är aktiv, används för att definiera den valfria textritningen i förloppsfältets widget |
+| **gx_radial_progress_bar_normal_brush_width**     | Bredden på den nedre förloppskretsen |
+| **gx_radial_progress_bar_selected_brush_width**   | Bredden på den övre förloppsbåge, den övre båge kan vara smalare, samma som eller bredare än den nedre cirkeln |
+| **gx_radial_progress_bar_normal_brush_color**     | Resurs-ID för färgen som ska fylla cirkeln med lägre förlopp |
+| **gx_radial_progress_bar_selected_brush_color**   | Resurs-ID för färgen som ska fylla den övre förlopps arc |
 
 ## <a name="gx_radial_slider_info"></a>GX_RADIAL_SLIDER_INFO 
 
@@ -265,17 +265,17 @@ typedef struct GX_RADIAL_SLIDER_INFO_STRUCT
 
 | Medlemmar | Description |
 | --------------------------------------------- | ------------------------------------------------ |
-**gx_radial_slider_info_xcenter**               | Avstånd från vänster om skjutreglagets widget till rotations punkten för skjutreglaget |
-| **gx_radial_slider_info_ycenter**             | Avstånd från skjutreglagets överkant till rotations punkten för skjutreglaget |
-| **gx_radial_slider_info_radius**              | Radien för den radiella skjutreglaget cirkel |
-| **gx_radial_slider_info_track_width**         | Bredd på radiellt Slider-spår |
-| **gx_radial_slider_info_current_angle**       | Aktuell vinkel för skjutreglage |
+**gx_radial_slider_info_xcenter**               | Avstånd från vänster om skjutreglagets widget till mitten av rotationen på skjutreglagets nål |
+| **gx_radial_slider_info_ycenter**             | Avstånd från upptill i skjutreglagets widget till mitten av rotationen på skjutreglagets nål |
+| **gx_radial_slider_info_radius**              | Radie för cirkel med radiellt skjutreglage |
+| **gx_radial_slider_info_track_width**         | Bredden på det radiella skjutreglaget |
+| **gx_radial_slider_info_current_angle**       | Aktuell skjutreglagevinkel |
 | **gx_radial_slider_info_min_angle**           | Minsta skjutreglagets vinkel |
-| **gx_radial_slider_info_max_angle**           | Maximal skjutreglages vinkel |
-| **gx_radial_slider_info_angle_list**          | Vinkel värde lista, definierar fäst vinklar, om det är inställt, kan skjutreglagets vinkel bara vara en av de definierade ankar vinklarna |
-| **gx_radial_slider_info_list_count**          | Antal ankar vinklar |
-| **gx_radial_slider_info_background_pixelmap** | Resurs-ID för bakgrunds Pixelmap |
-| **gx_radial_slider_info_needle_pixelmap**     | Resurs-ID för barr Pixelmap |
+| **gx_radial_slider_info_max_angle**           | Maximal skjutreglagevinkel |
+| **gx_radial_slider_info_angle_list**          | Vinkelvärdelista, definierar fästpunktsvinklar. Om skjutreglagets vinkel är inställd kan den bara vara en av de definierade fästpunktsvinklarna |
+| **gx_radial_slider_info_list_count**          | Antal fästpunktsvinklar |
+| **gx_radial_slider_info_background_pixelmap** | Resurs-ID för pixelkarta i bakgrunden |
+| **gx_radial_slider_info_needle_pixelmap**     | Resurs-ID för pixelkarta med nål |
 
 ## <a name="gx_rectangle"></a>GX_RECTANGLE
 
@@ -294,8 +294,8 @@ typedef struct GX_RECTANGLE_STRUCT
 | Medlemmar | Description |
 | -------------------------------- | ------------------------|
 | **gx_rectangle_left**            | Vänster om rektangeln   |  
-| **gx_rectangle_top**             | Övre delen av rektangeln    | 
-| **gx_rectangle_right**           | Rektangelns högerkant  |
+| **gx_rectangle_top**             | Överst i rektangeln    | 
+| **gx_rectangle_right**           | Höger om rektangeln  |
 | **gx_rectangle_bottom**          | Längst ned i rektangeln |
 
 ## <a name="gx_rich_text_fonts"></a>GX_RICH_TEXT_FONTS 
@@ -314,10 +314,10 @@ typedef struct GX_RICH_TEXT_FONTS_STRUCT
 
 | Medlemmar | Description |
 | ---------------------------------- | ---------------------------------------------------------- |
-| **gx_rich_text_fonts_normal_id**   | Resurs-ID för normalt text teckensnitt |
-| **gx_rich_text_fonts_bold_id**     | Resurs-ID med fet text teckensnitt |
-| **gx_rich_text_fonts_italic_id**   | Resurs-ID för kursivt text teckensnitt |
-| **gx_rich_text_fonts_bold_italic_id** | Resurs-ID med fet kursiv text teckensnitt |
+| **gx_rich_text_fonts_normal_id**   | Resurs-ID för normalt textteckensnitt |
+| **gx_rich_text_fonts_bold_id**     | Resurs-ID för fetstil |
+| **gx_rich_text_fonts_italic_id**   | Resurs-ID för kursiv textteckensnitt |
+| **gx_rich_text_fonts_bold_italic_id** | Resurs-ID för fet kursiv text |
 
 ## <a name="gx_scroll_info"></a>GX_SCROLL_INFO 
 ### <a name="definition"></a>**Definition**
@@ -335,11 +335,11 @@ typedef struct GX_SCROLL_INFO_STRUCT
 
 | Medlemmar | Description |
 | ----------------------- | ----------------------------- |
-| **gx_scroll_value**     | Aktuell rullnings position       |
-| **gx_scroll_minimum**   | Lägsta rapporterade position     |
-| **gx_scroll_maximum**   | Högsta rapporterade position     |
-| **gx_scroll_visible**   | Synligt intervall för överordnad fönster   |
-| **gx_scroll_increment** | Minsta delta värde för rullnings List |
+| **gx_scroll_value**     | Aktuell rullningsposition       |
+| **gx_scroll_minimum**   | Minsta rapporterade position     |
+| **gx_scroll_maximum**   | Maximal rapporterad position     |
+| **gx_scroll_visible**   | Synligt intervall för överordnat fönster   |
+| **gx_scroll_increment** | Minsta deltavärde för rullningslist |
 
 ## <a name="gx_scrollbar_appearance"></a>GX_SCROLLBAR_APPEARANCE 
 
@@ -365,18 +365,18 @@ typedef struct GX_SCROLLBAR_APPEARANCE_STRUCT
 
 | Medlemmar | Description |
 | ---------------------------------------- | ----------------------------------------------------- |
-| **gx_scroll_width**                      | Bredd på widgeten rullnings List, i bild punkter |
-| **gx_scroll_thumb_width**                | Bredden på knapp tummen som bilder på rullnings listen visas i bild punkter. Det här värdet är vanligt vis ett antal pixlar som är mindre än den totala rullnings listens bredd |
-| **gx_scroll_thumb_travel_min**           | Förskjutning från slutet av rullnings listen till den minsta skjutreglaget för knapp resans slut punkt. Den här gränsen kan användas för att förhindra att knappen för tummen reser till en ytterst ände av rullnings listen |
-| **gx_scroll_thumb_travel_max**           | Förskjutning från slutet av rullnings listen till max knappens knapp för skjutreglaget. Den här gränsen kan användas för att förhindra att knappen för tummen reser till en ytterst ände av rullnings listen |
-| **gx_scroll_thumb_border_style**         | Kant linje format för knapp för tumm |
-| **gx_scroll_fill_pixelmap**              | Valfritt Pixelmap-ID. Om detta Pixelmap-ID inte är noll använder rullnings listen den här Pixelmap för att rita rullnings List bakgrunden |
-| **gx_scroll_thumb_pixelmap**             | Valfritt Pixelmap-ID. Om detta Pixelmap-ID inte är noll, använder knapp rullnings knappen den här Pixelmap för att rita sig själv |
-| **gx_scroll_up_pixelmap**                | Valfritt Pixelmap-ID. Om detta Pixelmap-ID inte är noll, använder rullnings listen det här Pixelmap-ID: t för att rita rullnings listen till vänster/uppåt |
-| **gx_scroll_down_pixelmap**              | Valfritt Pixelmap-ID. Om detta Pixelmap-ID inte är noll använder rullnings listen det här Pixelmap-ID: t för att rita rullnings listen för rullnings listen |
-| **gx_scroll_thumb_color**                | Resurs-ID för färg som används för att fylla skjutreglaget |
-| **gx_scroll_thumb_border_color**         | Resurs-ID för den färg som används för att rita knappens kant linje | 
-| **gx_scroll_button_color**               | Resurs-ID för färg som används för att fylla rullnings List slut knappar |
+| **gx_scroll_width**                      | Bredden på widgeten för rullningslisten, i bildpunkter |
+| **gx_scroll_thumb_width**                | Bredden på tumknappen som bilder i rullningslisten, i bildpunkter. Det här värdet är vanligtvis ett visst antal bildpunkter som är mindre än den totala rullningslistens bredd |
+| **gx_scroll_thumb_travel_min**           | Förskjut från slutet av rullningslisten till minsta tumknapps respunkt. Den här gränsen kan användas för att förhindra att tumknappen kommer till slutet av rullningslisten |
+| **gx_scroll_thumb_travel_max**           | Förskjut från slutet av rullningslisten till den maximala respunkten för tumknappen. Den här gränsen kan användas för att förhindra att tumknappen kommer till slutet av rullningslisten |
+| **gx_scroll_thumb_border_style**         | Tumknapp för kantlinjeformat |
+| **gx_scroll_fill_pixelmap**              | Valfritt pixelkarta-ID. Om det här pixelkartans ID inte är noll använder rullningslisten den här pixelkartan för att rita rullningslistsbakgrunden |
+| **gx_scroll_thumb_pixelmap**             | Valfritt pixelkarta-ID. Om det här pixelkartans ID inte är noll använder rullningslisten tumknappen den här pixelkartan för att rita sig själv |
+| **gx_scroll_up_pixelmap**                | Valfritt pixelkarta-ID. Om det här pixelkartans ID inte är noll använder rullningslisten det här pixelkarta-ID:t för att rita rullningslisten till vänster/uppåt-knappen |
+| **gx_scroll_down_pixelmap**              | Valfritt pixelkarta-ID. Om det här pixelkartans ID inte är noll använder rullningslisten det här pixelkarta-ID:t för att rita rullningslisten till höger/ned-knappen |
+| **gx_scroll_thumb_color**                | Resurs-ID för färg som används för att fylla tumknappen |
+| **gx_scroll_thumb_border_color**         | Resurs-ID för färg som används för att rita tumknappens kantlinje | 
+| **gx_scroll_button_color**               | Resurs-ID för färg som används för att fylla rullningslistens slutknappar |
 
 ## <a name="gx_slider_info"></a>GX_SLIDER_INFO
 
@@ -400,15 +400,15 @@ typedef struct GX_SLIDER_INFO_STRUCT
 
 | Medlemmar | Description |
 | --------------------------------------- | ------------------------------------------------------ |
-| **gx_slider_info_min_val**              | Lägsta rapporterade värde |
+| **gx_slider_info_min_val**              | Minsta rapporterade värde |
 | **gx_slider_info_max_val**              | Maximalt rapporterat värde |
 | **gx_slider_info_current_value**        | Aktuellt värde |
-| **gx_slider_info_min_travel**           | Nålans rese gräns |
-| **gx_slider_info_max_travel**           | Nålans rese gräns |
-| **gx_slider_info_needle_width**         | Bredd för barr i bild punkt |
-| **gx_slider_info_needle_height**        | Nål höjden i bild punkter |
-|**gx_slider_info_needle_inset**          | Nålans rit position. Om GX_STYLE_SLIDER_VERTICAL anges används för att ange förskjutningen från start positionen för nålventil till skjutreglaget till vänster. Else, används för att ange förskjutningen från start positionen för nålventil till skjutreglaget överst. |
-| **gx_slider_info_needle_hotspot_offset** | Nål hotpot_offset som används för att ange förskjutningen från start positionen för Barrets start punkt till det aktiva skjutreglaget. |
+| **gx_slider_info_min_travel**           | Nålens resgräns |
+| **gx_slider_info_max_travel**           | Nålens resgräns |
+| **gx_slider_info_needle_width**         | Nålbredd i pixel |
+| **gx_slider_info_needle_height**        | Nålhöjd i pixel |
+|**gx_slider_info_needle_inset**          | Nåldragningsposition. Om GX_STYLE_SLIDER_VERTICAL har angetts används för att ange förskjutningen från nålens startposition till skjutreglaget till vänster. Annars används för att ange förskjutningen från nålens startposition till skjutreglagets övre del. |
+| **gx_slider_info_needle_hotspot_offset** | Nål hotpot_offset används för att ange förskjutningen från nålens startposition till skjutreglagets hotspot. |
 
 ## <a name="gx_sprite_frame"></a>GX_SPRITE_FRAME
 
@@ -428,9 +428,9 @@ typedef struct GX_SPRITE_FRAME_STRUCT
 
 | Medlemmar | Description |
 | ---------------------------------------- | ----------------------------------------------------- |
-| **gx_sprite_frame_pixelmap**             | Resurs-ID för Pixelmap som ska visas för den här ramen. ID: t kan vara 0. |
-| **gx_sprite_frame_x_offset**             | Förskjut från widgeten Sprite till vänster för att Visa Pixelmap |
-| **gx_sprite_frame_y_offset**             | Förskjutning från widgeten Sprite överst för att Visa Pixelmap |
-| **gx_sprite_frame_delay**                | Fördröjnings värde, i GUIX timer-Tick när den här ramen visas innan den går vidare till nästa Sprite-ram |
-| **gx_sprite_frame_background_operation** | Definiera hur bakgrunden ska raderas. Möjliga värden för det här fältet är:<br />GX_SPRITE_BACKGROUND_NO_ACTION: Ingen fyllning mellan ramar<br />GX_SPRITE_BACKGROUND_SOLID_FILL: rita om Sprite-bakgrund<br />GX_SPRITE_BACKGROUND_RESTORE: Återställ tidigare Pixelmap |
-| **gx_sprite_frame_alpha**                | Alfa värde som ska läggas till i den visade Pixelmap. Värdet 255 anger att inget extra alfa värde ska införas. Om Pixelmap innehåller en alfa kanal läggs denna alfa kanal till i ramens alfa värde. |
+| **gx_sprite_frame_pixelmap**             | Resurs-ID för pixelkartan som ska visas för den här ramen. ID:t kan vara 0. |
+| **gx_sprite_frame_x_offset**             | Förskjutning från den grafiska widgeten till vänster för att visa pixelkartan |
+| **gx_sprite_frame_y_offset**             | Förskjut från widgetens övre del för att visa pixelkartan |
+| **gx_sprite_frame_delay**                | Fördröjningsvärdet i GUIX-timern tickar efter att den här bildrutan har visas innan du går vidare till nästa grafiska bildruta |
+| **gx_sprite_frame_background_operation** | Definiera hur bakgrunden ska raderas. Möjliga värden för det här fältet är:<br />GX_SPRITE_BACKGROUND_NO_ACTION: Ingen fyllning mellan bildrutor<br />GX_SPRITE_BACKGROUND_SOLID_FILL: Rita om bakgrund<br />GX_SPRITE_BACKGROUND_RESTORE: Återställa föregående pixelkarta |
+| **gx_sprite_frame_alpha**                | Alfavärde som ska läggas till i den pixelkarta som visas. Värdet 255 anger att inget extra alfavärde ska införas. Om pixelkartan innehåller en alfakanal läggs den här alfakanalen till i bildrutans alfavärde. |

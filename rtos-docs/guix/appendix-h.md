@@ -1,17 +1,17 @@
 ---
 title: Bilaga H – GUIX Build-Time Configuration-flaggor
-description: Läs mer om GUIX-konfigurationsflaggor för byggtid.
+description: Lär dig mer om GUIX-konfigurationsflaggor för byggtid.
 author: philmea
 ms.author: philmea
 ms.date: 05/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 2b48491e3c601aeb68ecef00fd0f25d93cda6e64
-ms.sourcegitcommit: 62cfdf02628530807f4d9c390d6ab623e2973fee
+ms.openlocfilehash: ecd4d86fbc6fb1ebaa002675e66492758edaf14ed90aa03fc9f4cf4abb87e661
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 08/05/2021
-ms.locfileid: "115177770"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116784214"
 ---
 # <a name="appendix-h---guix-build-time-configuration-flags"></a>Bilaga H – GUIX Build-Time Configuration-flaggor
 
@@ -27,7 +27,7 @@ GX_SYSTEM_TIMER_MS
 
 TX_TIMER_TICKS_PER_SECOND
 - Standard: 100
-- Beskrivning: Det här värdet definierar antalet avbrottsfrekvenser i TX-timern. Eftersom standardtimern för ThreadX-intervallet är 10 ms används som standard 100 Hz-frekvens för det här värdet.
+- Beskrivning: Det här värdet definierar antalet avbrottsfrekvenser för TX-timer. Eftersom standardtimern för ThreadX-intervallet är 10 ms används som standard 100 Hz-frekvens för det här värdet.
 
 GX_DISABLE_MULTITHREAD_SUPPORT
 - Standard: Inte definierad
@@ -43,7 +43,7 @@ GX_DISABLE_ARC_DRAWING_SUPPORT
 
 GX_DISABLE_SOFTWARE_DECODER_SUPPORT
 - Standard: Inte definierad.
-- Beskrivning: Detta villkor kan definieras för att ta bort stöd för GUIX-bibliotekskörning för jpeg- och PNG-programavkodare. Om programmet inte kräver körningsavkodning av jpg- eller png-filer, vilket innebär att programmet inte använder pixelkartor i RAW-format som skapas av Studio och inte läser bildfiler från ett externt filsystem, kan du aktivera den här #define för att minska GUIX-bibliotekets fotavtryck.
+- Beskrivning: Detta villkor kan definieras för att ta bort stöd för GUIX-bibliotekskörning för JPEG- och PNG-programavkodare. Om programmet inte kräver körningsavkodning av jpg- eller png-filer, vilket innebär att programmet inte använder pixelkartor i RAW-format som skapas av Studio och inte läser bildfiler från ett externt filsystem, kan du aktivera den här #define för att minska GUIX-bibliotekets fotavtryck.
 
 GX_DISABLE_BINARY_RESOURCE_SUPPORT
 - Standard: Inte definierad
@@ -51,7 +51,7 @@ GX_DISABLE_BINARY_RESOURCE_SUPPORT
 
 GX_DISABLE_BRUSH_ALPHA_SUPPORT
 - Standard: Inte definierad.
-- Beskrivning: Vid körning med 16 bpp och högre färgdjup stöder GUIX valfritt ritning av icke-arc-grafik, pixelkartor och teckensnitt med ett alfavärde som definieras av penseln för ritningskontext. Stöd för det här ritningsläget medför en liten ökning av körningskostnader och biblioteksfotavtryck, som kan elimineras genom att definiera den här flaggan om du inte behöver stöd för alfablandningsritning. Observera att pixelkartor med alfakanal, antialias teckensnitt och andra antialiasritningslägen fortfarande stöds oavsett den här villkorliga inställningen.
+- Beskrivning: Vid körning med 16 bpp och högre färgdjup stöder GUIX valfritt ritning av icke-arc-grafik, pixelkartor och teckensnitt med ett alfavärde som definieras av penseln för ritningskontext. Stöd för det här ritningsläget medför en liten ökning av körningskostnader och biblioteksfotavtryck, som kan elimineras genom att definiera den här flaggan om du inte behöver stöd för alfablandningsritning. Observera att pixelkartor med alfakanal, antialiasade teckensnitt och andra antialiasritningslägen fortfarande stöds oavsett den här villkorliga inställningen.
 
 GX_DISABLE_THREADX_TIMER_SOURCE
 - Standard: Inte definierad.
@@ -71,7 +71,7 @@ GX_MAX_DIRTY_AREAS
 
 GX_MAX_CONTEXT_NESTING
 - Standard: 8.
-- Beskrivning: Definierar den maximala kapsling för ritningskontextstacken. Detta motsvarar den maximala kapsling för widgetar för överordnad/underordnad/underordnad/underordnad i gränssnittsdefinitionen.
+- Beskrivning: Definierar den maximala kapsling för ritningskontextstacken. Detta motsvarar den maximala kapsling av över-/underordnade/underordnade/underordnade widgetar i gränssnittsdefinitionen.
 
 GX_MAX_INPUT_CAPTURE_NESTING
 - Standard: 4.
@@ -95,7 +95,7 @@ GX_MULTI_LINE_INDEX_CACHE_SIZE
 
 GX_MULTI_LINE_TEXT_BUTTON_MAX_LINES
 - Standard: 4.
-- Beskrivning: Kontrollblocket för flerradstextknappen har en pekare till varje rad med text som ska visas av knappen. Det här värdet avgör antalet text pekare som behövs av den sämsta flerradstextknappen.
+- Beskrivning: Kontrollblocket för flerradstextknappen har en pekare till varje rad med text som ska visas av knappen. Det här värdet avgör hur många textpekare som behövs av den sämsta flerradstextknappen.
 
 GX_POLYGON_MAX_EDGE_NUM
 - Standard: 10.
@@ -115,7 +115,7 @@ GX_NUMERIC_PROMPT_BUFFER_SIZE
 
 GX_ANIMATION_POOL_SIZE
 - Standard: 6.
-- Beskrivning: GUIX definierar en animeringspool från vilken animeringsinformationsstrukturer kan allokeras och returneras dynamiskt med hjälp av gx_system_animation_get- gx_system_animation_free() API:er. Den här definitionen definierar storleken på den här blockpoolen för animeringskontroll.
+- Beskrivning: GUIX definierar en animeringspool från vilken strukturer med animeringsinformation kan allokeras och returneras dynamiskt med hjälp av gx_system_animation_get- och gx_system_animation_free()-API:er. Den här definitionen definierar storleken på den här animeringskontrollblockpoolen.
 
 GX_MOUSE_SUPPORT
 - Standard: Inte definierad.
@@ -123,20 +123,20 @@ GX_MOUSE_SUPPORT
 
 GX_HARDWARE_MOUSE_SUPPORT
 - Standard: Inte definierad.
-- Beskrivning: När den här definitionen definieras använder GUIX-visningsdrivrutinen stöd för maskinvarumarkörsritning. Detta minskar det minne som krävs för att avbilda arbetsytans minne under musmarkören och förbättrar systemprestanda för de maskinvarumål som stöder ett grafiklager för musöverlägg.
+- Beskrivning: När den här definitionen definieras använder GUIX-visningsdrivrutinen stöd för maskinvarumarkörsritning. Detta minskar det minne som krävs för att avbilda arbetsytans minne under musmarkören och förbättrar systemprestanda för de maskinvarumål som stöder ett grafiklager med musöverlägg.
 
 GX_FONT_KERNING_SUPPORT
 - Standard: Inte definierad.
-- Beskrivning: Den här definitionen kan definieras för att aktivera stöd för teckensnitts-kerning. Teckensnitts kerning förbättrar glyph-avståndet för vissa glyph-kombinationer. Det här stödet lägger till en liten mängd omkostnader för körningssträngens ritningsfunktioner och lägger också till en liten storlek i teckendatastrukturerna.
+- Beskrivning: Den här definitionen kan definieras för att aktivera stöd för teckensnitts-kerning. Tecken kerning förbättrar glyph avstånd för vissa glyph kombinationer. Det här stödet lägger till en liten mängd omkostnader för ritningsfunktionerna för körningssträngar och lägger också till en liten mängd storlek i teckendatastrukturerna.
 
 GX_WIDGET_USER_DATA
 - Standard: Inte definierad.
-- Beskrivning: Om detta definieras läggs ett användardefinierat datafält till i GX_WIDGET kontrollblocket. Det här datafältet kan tilldelas med hjälp av egenskapsvyn i GUIX Studio. Det här datafältet ignoreras av GUIX internt, men kan användas av programprogramvara för många ändamål.
+- Beskrivning: Om detta definieras läggs ett användardefinierat datafält till i GX_WIDGET kontrollblocket. Det här datafältet kan tilldelas med hjälp av egenskapsvyn i GUIX Studio. Det här datafältet ignoreras av GUIX internt, men kan användas av programprogramvara för många olika syften.
 
 GUIX_5_4_0_COMPATIBILITY
 - Standard: Inte definierad.
-- Beskrivning: Vissa GUI-API:er ändrades efter version 5.4.0 för att lägga till stöd för inaktiverade textfärger och för att förbättra noggrannheten för vissa matematiska funktioner med hjälp av matchningsparametrar med fast punkt. Dessa ändringar gör att GUIX-biblioteksutgåningar efter 5.4.0 inte är kompatibla med tidigare versioner. Men genom att aktivera den här #define kan biblioteket byggas så att API:erna är helt kompatibla med versionerna <= 5.4.0, vilket innebär att inga ändringar behövs i befintliga program för att kompileras med den senaste VERSIONEN AV GUIX-biblioteket.
+- Beskrivning: Vissa GUI-API:er ändrades efter version 5.4.0 för att lägga till stöd för inaktiverade textfärger och för att förbättra noggrannheten för vissa matematiska funktioner med hjälp av matchningsparametrar med fast punkt. Dessa ändringar gör att GUIX-biblioteksutgåningar efter 5.4.0 inte är kompatibla med tidigare versioner. Men genom att aktivera den här #define-versionen kan biblioteket byggas så att API:erna är helt kompatibla med versionerna <= 5.4.0, vilket innebär att inga ändringar behövs i befintliga program för att kompileras med den senaste GUIX-bibliotekslanseringen.
 
 GX_MAX_STRING_LENGTH
 - Standard: 102400
-- Beskrivning: Definierar den maximala längden på en sträng som används för att testa ogiltiga strängar. Om indatasträngen överskrider den maximala stränglängden kommer den att betrakta som ogiltig.
+- Beskrivning: Definierar den maximala längden på en sträng, som används för att testa ogiltiga strängar. Om indatasträngen överskrider den maximala stränglängden kommer den att betrakta den som ogiltig.

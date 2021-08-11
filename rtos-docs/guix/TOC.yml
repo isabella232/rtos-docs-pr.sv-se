@@ -1,77 +1,77 @@
-- name: Dokumentation om Azure återställnings tider GUIX
+- name: Azure RTOS GUIX-dokumentation
   href: index.yml
 - name: Översikt över GUIX
   href: overview-guix.md
 - name: GUIX Studio-Snabbstartsguide
   href: guix-studio-quick-start.md
-- name: Användar handbok för GUIX
+- name: GUIX-användarhandbok
   expanded: true
   items:
     - name: Om den här guiden
       href: about-guix.md
-    - name: V. 1 – Introduktion till GUIX
+    - name: Ch. 1 – Introduktion till GUIX
       href: chapter-1.md
-    - name: V. 2 – installation och användning av GUIX
+    - name: Ch. 2 – Installation och användning av GUIX
       href: chapter-2.md
-    - name: V. 3 – funktionell översikt över GUIX
+    - name: Ch. 3 – Funktionell översikt över GUIX
       href: chapter-3.md
-    - name: V. 4 – Beskrivning av GUIX-tjänster
+    - name: Ch. 4 – Beskrivning av GUIX-tjänster
       href: chapter-4.md
-    - name: V. 5-GUIX visnings driv rutiner
+    - name: Ch. 5 – GUIX-visningsdrivrutiner
       href: chapter-5.md
     - name: GUIX-exempel
       href: guix-example.md
-    - name: Mobilappar. A-GUIX färg definitioner
+    - name: App. A – GUIX-färgdefinitioner
       href: appendix-a.md
-    - name: Mobilappar. Färg format för B-GUIX
+    - name: App. B – GUIX-färgformat
       href: appendix-b.md
-    - name: Mobilappar. Format för GUIX-widget
+    - name: App. C – GUIX-widgetformat
       href: appendix-c.md
-    - name: 'Mobilappar. D-GUIX pensel-, canvas-och gradient-attribut'
+    - name: 'App. D – GUIX-pensel-, arbetsyte- och toningsattribut'
       href: appendix-d.md
-    - name: Mobilappar. Händelse Beskrivning för E-GUIX
+    - name: App. E – Beskrivning av GUIX-händelse
       href: appendix-e.md
-    - name: Mobilappar. F-GUIX återställnings tider-bindnings tjänster
+    - name: App. F – GUIX RTOS-bindningstjänster
       href: appendix-f.md
-    - name: Mobilappar. G-GUIX teckensnitts struktur
+    - name: App. G – GUIX-teckensnittsstruktur
       href: appendix-g.md
-    - name: Mobilappar. Konfigurations flaggor för H-GUIX
+    - name: App. H – GUIX-konfigurationsflaggor för byggtid
       href: appendix-h.md
-    - name: Mobilappar. I-GUIX informations strukturer
+    - name: App. I – GUIX-informationsstrukturer
       href: appendix-i.md
-- name: Användar guide för GUIX Studio
+- name: Användarhandbok för GUIX Studio
   items:
     - name: Om GUIX Studio
       href: about-guix-studio.md
-    - name: V. 1 – Introduktion till GUIX Studio
+    - name: Ch. 1 – Introduktion till GUIX Studio
       href: guix-studio-1.md
-    - name: V. 2 – installation och användning av GUIX Studio
+    - name: Ch. 2 – Installation och användning av GUIX Studio
       href: guix-studio-2.md
-    - name: V. 3 – Beskrivning av GUIX Studio
+    - name: Ch. 3 – Beskrivning av GUIX Studio
       href: guix-studio-3.md
-    - name: V. 4-GUIX Studio-resurser
+    - name: Ch. 4 – GUIX Studio-resurser
       href: guix-studio-4.md
-    - name: V. 5-GUIX Studio-skärm design
+    - name: Ch. 5 – GUIX Studio-skärmdesigner
       href: guix-studio-5.md
-    - name: V. 6-GUIX Studio-genererad kod
+    - name: Ch. 6 – GUIX Studio-genererad kod
       href: guix-studio-6.md
-    - name: V. 7 – definiera skärm flöde
+    - name: Ch. 7 – Definiera Flow
       href: guix-studio-7.md
-    - name: V. 8 – kommentarer om att redigera vissa typer av widget
+    - name: Ch. 8 – Kommentarer om redigering av specifika widgettyper
       href: guix-studio-8.md
-    - name: V. 9-GUIX Studio kommando rad
+    - name: Ch. 9 – GUIX Studio-kommandorad
       href: guix-studio-9.md
-    - name: V. 10 – enkelt exempel projekt
+    - name: Ch. 10 – Enkelt exempel Project
       href: guix-studio-10.md
 - name: GUIX-lagringsplats
   href: 'https://github.com/azure-rtos/guix'
 - name: Relaterade tjänster
   items:
-    - name: Defender för IoT-återställnings tider (för hands version)
+    - name: Defender for IoT – RTOS (förhandsversion)
       href: 'https://docs.microsoft.com/azure/defender-for-iot/iot-security-azure-rtos'
-- name: Microsoft Azure återställnings tider-komponenter
+- name: Microsoft Azure RTOS-komponenter
   items:
-    - name: Microsoft Azure återställnings tider
+    - name: Microsoft Azure RTOS
       href: ../index.yml
     - name: ThreadX
       href: ../threadx/index.yml
@@ -79,7 +79,7 @@
       href: ../threadx-modules/index.yml
     - name: NetX Duo
       href: ../netx-duo/index.yml
-    - name: NetX
+    - name: Netx
       href: ../netx/index.yml
     - name: GUIX
       href: ../guix/index.yml

@@ -1,27 +1,27 @@
 ---
-title: Bilaga A – Azure återställnings tider ThreadX API-tjänster
-description: Utforska Azure återställnings tider ThreadX API-tjänsterna.
+title: Bilaga A – Azure RTOS ThreadX API Services
+description: Utforska Azure RTOS ThreadX API Services.
 author: philmea
 ms.author: philmea
 ms.date: 05/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 30a2dc6284b413fe79ae6214e972b01d1321d031
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 99dd57b474f2f82aea2a7b2317a46c6b5a6150009ab33522ee6fbe4a3de6bf2c
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104825473"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116788532"
 ---
-# <a name="appendix-a---azure-rtos-threadx-api-services"></a>Bilaga A – Azure återställnings tider ThreadX API-tjänster
+# <a name="appendix-a---azure-rtos-threadx-api-services"></a>Bilaga A – Azure RTOS ThreadX API Services
 
-## <a name="entry-function"></a>Post funktion
+## <a name="entry-function"></a>Entry Function
 
 ```c
 VOID      tx_kernel_enter(VOID);
 ```
 
-## <a name="block-memory-services"></a>Blockera minnes tjänster
+## <a name="block-memory-services"></a>Block Memory Services
 
 ```c
 UINT      tx_block_allocate(TX_BLOCK_POOL *pool_ptr,
@@ -66,7 +66,7 @@ UINT      tx_block_pool_prioritize(TX_BLOCK_POOL *pool_ptr);
 UINT      tx_block_release(VOID *block_ptr);
 ```
 
-## <a name="byte-memory-services"></a>Byte minnes tjänster
+## <a name="byte-memory-services"></a>Byte Memory Services
 
 ```c
 UINT      tx_byte_allocate(TX_BYTE_POOL *pool_ptr,
@@ -113,7 +113,7 @@ UINT      tx_byte_pool_prioritize(TX_BYTE_POOL *pool_ptr);
 UINT      tx_byte_release(VOID *memory_ptr);
 ```
 
-## <a name="event-flags-services"></a>Event Flags-tjänster
+## <a name="event-flags-services"></a>Event Flags Services
 
 ```c
 UINT      tx_event_flags_create(TX_EVENT_FLAGS_GROUP *group_ptr,
@@ -160,7 +160,7 @@ UINT      tx_event_flags_set_notify(TX_EVENT_FLAGS_GROUP *group_ptr,
             VOID (*events_set_notify)(TX_EVENT_FLAGS_GROUP *));
 ```
 
-## <a name="interrupt-control"></a>Avbrotts kontroll
+## <a name="interrupt-control"></a>Avbrottskontroll
 
 ```c
 UINT      tx_interrupt_control(UINT new_posture);
@@ -270,7 +270,7 @@ UINT       tx_queue_send_notify(TX_QUEUE *queue_ptr, VOID
               (*queue_send_notify)(TX_QUEUE *));
 ```
 
-## <a name="semaphore-services"></a>Semafor-tjänster
+## <a name="semaphore-services"></a>Semaphore Services
 
 ```c
 UINT       tx_semaphore_ceiling_put(TX_SEMAPHORE *semaphore_ptr,
@@ -323,7 +323,7 @@ UINT       tx_semaphore_put_notify(TX_SEMAPHORE *semaphore_ptr,
               VOID (*semaphore_put_notify)(TX_SEMAPHORE *));
 ```
 
-## <a name="thread-control-services"></a>Tråd kontroll tjänster
+## <a name="thread-control-services"></a>Trådkontrolltjänster
 
 ```c
 UINT       tx_thread_create(TX_THREAD *thread_ptr,
@@ -424,14 +424,14 @@ UINT       tx_thread_time_slice_change(TX_THREAD *thread_ptr,
 UINT       tx_thread_wait_abort(TX_THREAD *thread_ptr);
 ```
 
-## <a name="time-services"></a>Tids tjänster
+## <a name="time-services"></a>Tidstjänster
 
 ```c
 ULONG      tx_time_get(VOID);
 VOID       tx_time_set(ULONG new_time);
 ```
 
-## <a name="timer-services"></a>Timer-tjänster
+## <a name="timer-services"></a>Timer Services
 
 ```c
 UINT       tx_timer_activate(TX_TIMER *timer_ptr);

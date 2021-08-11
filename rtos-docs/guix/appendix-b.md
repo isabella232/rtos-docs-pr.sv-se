@@ -1,19 +1,19 @@
 ---
-title: Bilaga B – GUIX färg format
-description: Lär dig mer om GUIX färg format.
+title: Bilaga B – GUIX-färgformat
+description: Lär dig mer om GUIX-färgformaten.
 author: philmea
 ms.author: philmea
 ms.date: 05/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: e99e40dd334b28e74a0b7570a09d0deb4e0a6436
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 21fa35db7b04f9249da0948bb8b6b5b18f7ab96079c927fa0878c7ab87adeee8
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104827282"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116784673"
 ---
-# <a name="appendix-b---guix-color-formats"></a>Bilaga B – GUIX färg format
+# <a name="appendix-b---guix-color-formats"></a>Bilaga B – GUIX-färgformat
 
 | Färg                               | Värde |
 |------------------------------------ | ----- |

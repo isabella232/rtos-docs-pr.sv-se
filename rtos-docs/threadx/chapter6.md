@@ -1,38 +1,38 @@
 ---
-title: Kapitel 6 – demonstrations system för Azure återställnings tider ThreadX
-description: Det här kapitlet innehåller en beskrivning av demonstrations systemet som levereras med alla Azure återställnings tider ThreadX-processor support paket.
+title: Kapitel 6 – Demonstrationssystem för Azure RTOS ThreadX
+description: Det här kapitlet innehåller en beskrivning av demonstrationssystemet som levereras med alla Azure RTOS ThreadX-processorsupportpaket.
 author: philmea
 ms.author: philmea
 ms.date: 05/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: be85ba77e5c27366f61899c0939be7cad1845bbe
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 67054d67d0a6babc50a489c4ec4b738abf3efccab10060d307106e8344b00d02
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104825452"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116783381"
 ---
-# <a name="chapter-6---demonstration-system-for-azure-rtos-threadx"></a>Kapitel 6 – demonstrations system för Azure återställnings tider ThreadX
+# <a name="chapter-6---demonstration-system-for-azure-rtos-threadx"></a>Kapitel 6 – Demonstrationssystem för Azure RTOS ThreadX
 
-Det här kapitlet innehåller en beskrivning av demonstrations systemet som levereras med alla Azure återställnings tider ThreadX-processor support paket.
+Det här kapitlet innehåller en beskrivning av demonstrationssystemet som levereras med alla Azure RTOS ThreadX-processorsupportpaket.
 
 ## <a name="overview"></a>Översikt
 
-Varje ThreadX produkt distribution innehåller ett demonstrations system som körs på alla mikroprocessorer som stöds.
+Varje ThreadX-produktdistribution innehåller ett demonstrationssystem som körs på alla mikroprocessorer som stöds.
 
-Det här exempel systemet definieras i distributions filen ***demo_threadx. c*** och är utformat för att illustrera hur ThreadX används i en inbäddad flertrådstestning-miljö. Demonstrationen består av initiering, åtta trådar, en byte-pool, en blockerande pool, en kö, en semafor, en mutex och en grupp med händelse flaggor.
+Det här exempelsystemet definieras i distributionsfilen ***demo_threadx.c*** och är utformat för att illustrera hur ThreadX används i en inbäddad flertrådsmiljö. Demonstrationen består av initiering, åtta trådar, en bytepool, en blockpool, en kö, en semafor, en mutex och en händelseflaggor.
 
 > [!NOTE]
-> *Med undantag för trådens stack storlek är demonstrations programmet identiskt på alla ThreadX-processorer som stöds.*
+> *Förutom trådens stackstorlek är demonstrationsprogrammet identiskt på alla ThreadX-processorer som stöds.*
 
-Den fullständiga listan över ***demo_threadx. c***, inklusive rad numren som refereras till i resten av det här kapitlet.
+Den fullständiga listan med ***demo_threadx.c***, inklusive de radnummer som refereras till under resten av det här kapitlet.
 
-## <a name="application-define"></a>Tillämpnings definition
+## <a name="application-define"></a>Program definiera
 
-Funktionen ***tx_application_define*** körs när den grundläggande ThreadX har initierats. Den ansvarar för att konfigurera alla de första system resurserna, inklusive trådar, köer, semaforer, mutexer, händelse flaggor och lagringspooler.
+Funktionen ***tx_application_define*** körs när den grundläggande ThreadX-initieringen är klar. Den ansvarar för att konfigurera alla ursprungliga systemresurser, inklusive trådar, köer, semaforer, mutexes, händelseflaggor och minnespooler.
 
-Demonstrations systemet ***tx_application_define** _ (_line numren 60-164 *) skapar demonstrations objekt i följande ordning:
+Demonstrationssystemets ***tx_application_define** _ (_line nummer 60-164*) skapar demonstrationsobjekten i följande ordning:
 
 - byte_pool_0
 - thread_0
@@ -49,60 +49,60 @@ Demonstrations systemet ***tx_application_define** _ (_line numren 60-164 *) ska
 - mutex_0
 - block_pool_0
 
-Demonstrations systemet skapar inga andra ytterligare ThreadX-objekt. Ett faktiskt program kan dock skapa system objekt under körningen i för att köra trådar.
+Demonstrationssystemet skapar inte några ytterligare ThreadX-objekt. Ett faktiskt program kan dock skapa systemobjekt under körning inuti körning av trådar.
 
-### <a name="initial-execution"></a>Första körning
+### <a name="initial-execution"></a>Inledande körning
 
-Alla trådar skapas med alternativet **TX_AUTO_START** . Detta gör att de ursprungligen kan köras. När ***tx_application_define*** har slutförts överförs kontrollen till thread Scheduler och därifrån till varje enskild tråd.
+Alla trådar skapas med TX_AUTO_START **alternativet.** Detta gör dem initialt redo för körning. När ***tx_application_define*** har slutförts överförs kontrollen till trådschemat och därifrån till varje enskild tråd.
 
-Den ordning som trådarna körs på bestäms av deras prioritet och i vilken ordning de skapades. I demonstrations systemet körs ***thread_0*** först eftersom det har högst prioritet (*det skapades med prioritet 1*). När ***thread_0*** har pausats körs ***thread_5*** följt av körningen av ***thread_3** _, _*_thread_4_*_, _*_thread_6_*_, _* _thread_7_* *, ***thread_1**_ och slutligen _ *_thread_2_* *.
+Ordningen som trådarna körs i bestäms av deras prioritet och den ordning som de skapades. I demonstrationssystemet körs ***thread_0*** eftersom den har högst prioritet (*den skapades med prioriteten 1*). När ***thread_0*** pausas ***körs thread_5*** följt av körningen av ***thread_3** _, _*_thread_4_*_, _*_thread_6_*_, _* _thread_7_**, ***thread_1**_ och slutligen _*_thread_2_**.
 
 > [!NOTE]
-> *Även om **thread_3** och **thread_4** har samma prioritet (båda har skapats med prioritet 8) börjar **thread_3** köras först. Detta beror på att **thread_3** skapats och blivit klart innan **thread_4**. Trådar med samma prioritet körs på en FIFO-miljö.*
+> *Även om **thread_3** **och thread_4** har samma prioritet (båda har skapats med prioriteten 8) körs **thread_3** först. Det beror på **thread_3** skapades och blev redo innan **thread_4**. Trådar med samma prioritet körs på FIFO-sätt.*
 
 ## <a name="thread-0"></a>Tråd 0
 
-Funktionen ***thread_0_entry*** markerar trådens start punkt *(rader 167-190*). ***Thread_0*** är den första tråden i demonstrations systemet som ska köras. Bearbetningen är enkel: den ökar räknaren, väntar på 10 timer-Tick, ställer in en händelse flagga för att väcka ***thread_5*** och upprepar sedan sekvensen.
+Funktionen ***thread_0_entry*** markerar trådens startpunkt *(raderna 167-190*). ***Thread_0*** är den första tråden i demonstrationssystemet som ska köras. Bearbetningen är enkel: den ökar sin räknare, för viloläger för 10 timer tick, ställer in en händelseflagga för att ***väcka*** thread_5 och upprepar sedan sekvensen.
 
-***Thread_0*** är den högsta prioritets tråden i systemet. När den begärda vilo tiden går ut, kommer det att finnas någon annan körnings tråd i demonstrationen.
+***Thread_0*** är den högsta prioritetstråden i systemet. När den begärda strömsparläge upphör att gälla kommer den att avinstallera alla andra körningstrådar i demonstrationen.
 
 ## <a name="thread-1"></a>Tråd 1
 
-Funktionen ***thread_1_entry** _ anger start punkten för tråden _(rader 193-216 *). ***Thread_1*** är den andra-till-sista-tråden i demonstrations systemet som ska köras. Bearbetningen består i att öka räknarens räknare, skicka ett meddelande till ***thread_2*** (* till och med * ***queue_0***) och upprepa sekvensen. Observera att ***thread_1**_ pausas när _*_queue_0_*_ blir full (_line 207 *).
+Funktionen ***thread_1_entry** _ markerar trådens startpunkt _(raderna 193-216 *). ***Thread_1*** är den näst sista tråden i demonstrationssystemet som ska köras. Bearbetningen består av att öka  räknaren,* skicka ett meddelande till thread_2 ( via* ***queue_0***) och upprepa sekvensen. Observera att ***thread_1**_ pausas när _*_queue_0_*_ blir full (_line 207*).
 
 ## <a name="thread-2"></a>Tråd 2
 
-Funktionen ***thread_2_entry*** markerar trådens start punkt *(rader 219-243*). ***Thread_2*** är den sista tråden i demonstrations systemet som ska köras. Bearbetningen består av att öka räknaren, hämta ett meddelande från ***thread_1*** (via ***queue_0***) och upprepa sekvensen. Observera att ***thread_2** _ pausas när _*_queue_0_*_ blir tomt (_line 233 *).
+Funktionen ***thread_2_entry*** markerar trådens startpunkt *(raderna 219-243*). ***Thread_2*** är den sista tråden i demonstrationssystemet som ska köras. Bearbetningen består av att öka räknaren, få ett ***meddelande från thread_1*** ***(via queue_0***) och upprepa sekvensen. Observera att ***thread_2** _ pausas när _*_queue_0_*_ blir tom (_line 233*).
 
-Även om ***thread_1** _ och _ *_thread_2_** delar den lägsta prioriteten i demonstrations systemet (* prioritet 16 *), *trådarna 3 och 4*
+Även ***thread_1** _ och _ *_thread_2_*** delar den lägsta prioriteten i demonstrationssystemet ( prioritet 16*), så har de tråd *3 och 4*
 
-är också de enda trådar som är redo att köras i den här tiden. De är också de enda trådarna som skapas med tids segmentering (*raderna 87 och 93*). Varje tråd kan köras med högst 4 timer-Tick innan den andra tråden körs.
+är också de enda trådar som är redo för körning för det mesta. De är också de enda trådar som skapas med tidsslinga (*raderna 87 och 93*). Varje tråd tillåts köra högst 4 timer tick innan den andra tråden körs.
 
 ## <a name="threads-3-and-4"></a>Trådar 3 och 4
 
-Funktionen ***thread_3_and_4_entry*** markerar start punkten för både ***thread_3** _ och _ *_thread_4_** (rader 246-280). Båda trådarna har prioriteten 8, vilket gör dem till de tredje och fjärde trådarna i demonstrations systemet som ska köras. Bearbetningen för varje tråd är detsamma: att öka räknarens räknare, Hämta ***semaphore_0***, vilande för 2 timer-Tick, släppa ***semaphore_0*** och upprepa sekvensen. Observera att varje tråd pausas när ***semaphore_0*** inte är tillgängligt (rad 264).
+Funktionen ***thread_3_and_4_entry*** markerar startpunkten för både ***thread_3** _ och _ *_thread_4_** (raderna 246–280). Båda trådarna har prioriteten 8, vilket gör dem till den tredje och fjärde tråden i demonstrationssystemet att köra. Bearbetningen för varje tråd är densamma: öka räknaren, få ***semaphore_0***, viloläge för 2 timer tick, ***släppa semaphore_0***, och upprepa sekvensen. Observera att varje tråd pausas när ***semaphore_0*** inte är tillgänglig (rad 264).
 
 Båda trådarna använder också samma funktion för sin huvudsakliga bearbetning.
-Detta ger inga problem eftersom de båda har sin egen unika stack, och C är naturlig reentrant. Varje tråd avgör vilken som är av genom att undersöka trådens indataparametrar (rad 258), som är en inställning när de skapas (rader 102 och 109).
+Detta medför inga problem eftersom båda har sin egen unika stack och C är naturligt reentrant. Varje tråd avgör vilken den är genom att undersöka trådindataparametern (rad 258), som konfigureras när de skapas (raderna 102 och 109).
 
 > [!NOTE]
-> *Det är också rimligt att du får den aktuella tråd punkten under tråd körning och jämför den med kontroll blockets adress för att fastställa tråd identitet.*
+> *Det är också rimligt att hämta den aktuella trådpunkten under trådkörningen och jämföra den med kontrollblockets adress för att fastställa trådidentiteten.*
 
 ## <a name="thread-5"></a>Tråd 5
 
-Funktionen ***thread_5_entry*** markerar trådens start punkt (rader 283-305). ***Thread_5*** är den andra tråden i demonstrations systemet som ska köras. Bearbetningen består av en stegvis ökning av räknaren, hämtar en händelse flagga från ***thread_0*** (via ***event_flags_0***) och upprepar sekvensen. Observera att ***thread_5*** pausas när händelse flaggan i ***event_flags_0*** inte är tillgänglig (rad 298).
+Funktionen ***thread_5_entry*** markerar trådens startpunkt (raderna 283–305). ***Thread_5*** är den andra tråden i demonstrationssystemet som ska köras. Bearbetningen består av att öka räknaren, hämta en händelseflagga ***från thread_0*** ***(via event_flags_0***) och upprepa sekvensen. Observera att ***thread_5*** pausar när händelseflaggan ***i event_flags_0*** inte är tillgänglig (rad 298).
 
 ## <a name="threads-6-and-7"></a>Trådar 6 och 7
 
-Funktionen ***thread_6_and_7_entry*** markerar start punkten för både ***thread_6** _ och _ *_thread_7_** (rader 307-358). Båda trådarna har prioriteten 8, vilket gör dem till de femte och sjätte trådarna i demonstrations systemet som ska köras. Bearbetningen för varje tråd är detsamma: att öka räknaren, få ***mutex_0*** två gånger, i vilo läge för 2 timer-Tick, släppa ***mutex_0*** två gånger och upprepa sekvensen. Observera att varje tråd pausas när ***mutex_0*** inte är tillgängligt (rad 325).
+Funktionen ***thread_6_and_7_entry*** startpunkten för både ***thread_6** _ och _ *_thread_7_** (raderna 307–358). Båda trådarna har prioriteten 8, vilket gör dem till den femte och sjätte tråden i demonstrationssystemet att köra. Bearbetningen för varje tråd är densamma: att öka räknaren, ***få mutex_0*** två gånger, i viloläge i 2 timer tick, ***släppa mutex_0*** två gånger och upprepa sekvensen. Observera att varje tråd pausas när ***mutex_0*** inte är tillgänglig (rad 325).
 
-Båda trådarna använder också samma funktion för sin huvudsakliga bearbetning. Detta ger inga problem eftersom de båda har sin egen unika stack, och C är naturlig reentrant.
-Varje tråd avgör vilken som är av genom att undersöka trådens indataparametrar (rad 319), som är en inställning när de skapas (rader 126 och 133).
+Båda trådarna använder också samma funktion för sin huvudsakliga bearbetning. Detta medför inga problem eftersom båda har sin egen unika stack och C är naturligt reentrant.
+Varje tråd avgör vilken som är den genom att undersöka trådindataparametern (rad 319), som konfigureras när de skapas (raderna 126 och 133).
 
-## <a name="observing-the-demonstration"></a>Att iaktta demonstrationen
+## <a name="observing-the-demonstration"></a>Observera demonstrationen
 
-Varje demonstrations tråd ökar sin egen unika räknare.
-Följande räknare kan undersökas för att kontrol lera demoets åtgärd:
+Var och en av demonstrationstrådarna ökar sin egen unika räknare.
+Följande räknare kan undersökas för att kontrollera demoåtgärden:
 
 - thread_0_counter
 - thread_1_counter
@@ -115,9 +115,9 @@ Följande räknare kan undersökas för att kontrol lera demoets åtgärd:
 
 Var och en av dessa räknare bör fortsätta att öka när demonstrationen körs, med ***thread_1_counter** _ och _ *_thread_2_counter_** ökar med den snabbaste hastigheten.
 
-## <a name="distribution-file-demo_threadxc"></a>Distributions fil: demo_threadx. c
+## <a name="distribution-file-demo_threadxc"></a>Distributionsfil: demo_threadx.c
 
-I det här avsnittet visas en fullständig lista över ***demo_threadx. c***, inklusive de rad nummer som refereras till i det här kapitlet.
+I det här avsnittet visas en fullständig ***lista demo_threadx.c***, inklusive de radnummer som refereras till i det här kapitlet.
 
 ```c
 /* This is a small demo of the high-performance ThreadX kernel. It includes examples of eight

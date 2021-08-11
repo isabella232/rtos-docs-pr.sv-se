@@ -1,24 +1,24 @@
 ---
-title: Kapitel 3 – Beskrivning av Azure återställnings tider NetX Duo DHCP server Services
-description: Det här kapitlet innehåller en beskrivning av alla NetX Duo DHCP Server-tjänster (visas nedan) i alfabetisk ordning.
+title: Kapitel 3 – Beskrivning av Azure RTOS NetX Duo DHCP-servertjänster
+description: Det här kapitlet innehåller en beskrivning av alla NetX Duo DHCP-servertjänster (anges nedan) i alfabetisk ordning.
 author: philmea
 ms.author: philmea
 ms.date: 06/08/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 33eb0b4bd98f808124b9a6a1f01950639243d612
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 8496d9158c06e79ed86cb2f09ed9986a4eae5ed176352ff01c317df9f2399127
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104826106"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116788447"
 ---
-# <a name="chapter-3---description-of-azure-rtos-netx-duo-dhcp-server-services"></a>Kapitel 3 – Beskrivning av Azure återställnings tider NetX Duo DHCP server Services
+# <a name="chapter-3---description-of-azure-rtos-netx-duo-dhcp-server-services"></a>Kapitel 3 – Beskrivning av Azure RTOS NetX Duo DHCP Server Services
 
-Det här kapitlet innehåller en beskrivning av alla NetX Duo DHCP Server-tjänster (visas nedan) i alfabetisk ordning.
+Det här kapitlet innehåller en beskrivning av alla NetX Duo DHCP-servertjänster (anges nedan) i alfabetisk ordning.
 
 > [!NOTE]
-> I avsnittet "retur värden" i följande API-beskrivningar påverkas inte värden i **fetstil** av **NX_DISABLE_ERROR_CHECKING** definiera som används för att inaktivera API-felkontroll, medan icke-Fetstilade värden är helt inaktiverade.
+> I avsnittet "Returvärden" i följande API-beskrivningar påverkas inte värden i **BOLD** av **den NX_DISABLE_ERROR_CHECKING-definition** som används för att inaktivera API-felkontroll, medan värden som inte är i fetstil är helt inaktiverade.
 
 ## <a name="nx_dhcp_server-create"></a>nx_dhcp_server skapa
 
@@ -32,31 +32,31 @@ UINT nx_dhcp_server_create(NX_DHCP_SERVER *dhcp_ptr, NX_IP *ip_ptr,
     CHAR *input_address_list, CHAR *name_ptr, NX_PACKET_POOL *packet_pool_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten skapar en DHCP-serverinstans med en tidigare skapad IP-instans.
 
 > [!IMPORTANT]
-> Programmet måste se till att Packet-poolen som skapas för tjänsten för IP-skapande har en minimal 548 byte-nyttolast, inte inklusive UDP-, IP-och Ethernet-huvudena.
+> Programmet måste se till att paketpoolen som skapades för IP-tjänsten för att skapa har en nyttolast på minst 548 byte, utan UDP-, IP- och Ethernet-huvuden.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **dhcp_ptr** Pekare till DHCP-serverns kontroll block.
+- **dhcp_ptr** Pekare till KONTROLLblock för DHCP-server.
 - **ip_ptr** Pekare till DHCP-serverns IP-instans.
-- **stack_ptr** Pekare för DHCP-serverns stack plats.
-- **Stack_size storleken på DHCP-serverns stack** input_address_list pekare till server lista över IP-adresser
-- **Name_ptr pekare till DHCP-serverns namn** packet_pool_ptr pekare till DHCP-serverns paket-pool
+- **stack_ptr** Pekarplats för DHCP-serverstack.
+- **stack_size storleken på DHCP-serverstacken** input_address_list pekare till serverns lista över IP-adresser
+- **name_ptr pekare till DHCP-servernamn packet_pool_ptr** pekare till DHCP-serverns paketpool
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) DHCP-servern har skapats.
-- **NX_DHCP_INADEQUATE_PACKET_POOL_PAYLOAD** (0XA9) paket nytto last för litet fel
-- **NX_DHCP_NO_SERVER_OPTION_LIST** (0X96) Server alternativ listan är tom
-- NX_DHCP_PARAMETER_ERROR (0x92) ogiltig inmatad icke-pekare
-- NX_CALLER_ERROR (0x11) ogiltig anropar tjänst.
-- NX_PTR_ERROR (0x16) ogiltig pekare inmatade.
+- **NX_SUCCESS** (0x00) Lyckad DHCP-server skapas.
+- **NX_DHCP_INADEQUATE_PACKET_POOL_PAYLOAD** (0xA9) Paketnyttolasten är för liten
+- **NX_DHCP_NO_SERVER_OPTION_LIST** (0x96) Serveralternativlistan är tom
+- NX_DHCP_PARAMETER_ERROR (0x92) Ogiltiga indata som inte pekare
+- NX_CALLER_ERROR (0x11) Ogiltig anropare av tjänsten.
+- NX_PTR_ERROR (0x16) Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Program
 
@@ -83,27 +83,27 @@ UINT nx_dhcp_create_server_ip_address_list(NX_DHCP_SERVER *dhcp_ptr,
     ULONG end_ip_address, UINT *addresses_added);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skapar en specifik pool med tillgängliga IP-adresser för den angivna DHCP-servern som ska tilldelas. Start-och slut-IP-adresserna måste matcha det angivna nätverks gränssnittet. Det faktiska antalet IP-adresser som lagts till kan vara mindre än det totala antalet adresser om IP-adress listan inte är tillräckligt stor (vilket anges i den användar konfigurerbara *NX_DHCP_IP_ADDRESS_MAX_LIST_SIZE* parametern).
+Den här tjänsten skapar en nätverksgränssnittsspecifik pool med tillgängliga IP-adresser för den angivna DHCP-server som ska tilldelas. Start- och slut-IP-adresserna måste matcha det angivna nätverksgränssnittet. Det faktiska antalet IP-adresser som läggs till kan vara mindre än det totala antalet adresser om IP-adresslistan inte är tillräckligt stor (vilket anges i den användarkonfigurerbara *NX_DHCP_IP_ADDRESS_MAX_LIST_SIZE* parameter).
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **dhcp_ptr** Pekare till DHCP-serverns kontroll block.
-- **iface_index** Index som motsvarar nätverks gränssnittet
+- **dhcp_ptr** Pekare till KONTROLLblock för DHCP-server.
+- **iface_index** Index som motsvarar nätverksgränssnittet
 - **start_ip_address** Första tillgängliga IP-adress
-- **end_ip_address** Sista tillgängliga IP-adress
+- **end_ip_address** Den sista tillgängliga IP-adressen
 - **addresses_added** Antal IP-adresser som lagts till i listan
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) DHCP-servern har skapats.
-- **NX_DHCP_SERVER_BAD_INTERFACE_INDEX** (0XA1) indexet matchar inte adresser
-- **NX_DHCP_INVALID_IP_ADDRESS_LIST** (0X99) ogiltig adress indata
-- NX_DHCP_INVALID_IP_ADDRESS (0x9B) Illogical start-/slut adresser
-- NX_PTR_ERROR (0x16) ogiltig pekare inmatade.
+- **NX_SUCCESS** (0x00) Lyckad DHCP-server skapas.
+- **NX_DHCP_SERVER_BAD_INTERFACE_INDEX** (0xA1) Index matchar inte adresser
+- **NX_DHCP_INVALID_IP_ADDRESS_LIST** (0x99) Ogiltig adressinmatning
+- NX_DHCP_INVALID_IP_ADDRESS (0x9B) Ologisk start-/slutadress
+- NX_PTR_ERROR (0x16) Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Program
 
@@ -122,7 +122,7 @@ status = nx_dhcp_create_server_ip_list(&dhcp_server, iface_index,
 
 ## <a name="nx_dhcp_clear_client_record"></a>nx_dhcp_clear_client_record
 
-Ta bort klient posten från Server databasen
+Ta bort klientposten från serverdatabasen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -131,22 +131,22 @@ UINT nx_dhcp_clear_client_record(NX_DHCP_SERVER *dhcp_ptr,
     NX_DHCP_CLIENT *dhcp_client_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten rensar klient posten från Server databasen.
+Den här tjänsten rensar klientposten från serverdatabasen.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **dhcp_ptr** Pekare till DHCP-serverns kontroll block.
+- **dhcp_ptr** Pekare till KONTROLLblock för DHCP-server.
 - **dhcp_client_ptr pekare till DHCP-klienten som ska tas bort**
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) DHCP-servern har skapats.
-- NX_PTR_ERROR (0x16) ogiltig pekare inmatade.
-- NX_CALLER_ERROR (0x11) icke-tråd som anropar tjänsten
+- **NX_SUCCESS** (0x00) Lyckad DHCP-server skapas.
+- NX_PTR_ERROR (0x16) Ogiltig pekare.
+- NX_CALLER_ERROR (0x11) Tjänstanropare som inte är trådanropare
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Program
 
@@ -161,7 +161,7 @@ status = nx_dhcp_clear_client_record(&dhcp_server, &dhcp_client_ptr);
 
 ## <a name="nx_dhcp_set_interface_network_parameters"></a>nx_dhcp_set_interface_network_parameters
 
-Ange Nätverks parametrar för DHCP-alternativ
+Ange nätverksparametrar för DHCP-alternativ
 
 ### <a name="prototype"></a>Prototyp
 
@@ -172,26 +172,26 @@ UINT nx_dhcp_set_interface_network_parameters(NX_DHCP_SERVER *dhcp_ptr,
     ULONG dns_server_address);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten ställer in standardvärden för nätverks kritiska parametrar för det angivna gränssnittet. DHCP-servern kommer att inkludera de här alternativen i erbjudandet och bekräftelse svar på DHCP-klienten. Om värd uppsättningens gränssnitts parametrar som en DHCP-server körs på, kommer parametrarna att försättas enligt följande: routern är inställd på den primära gatewayen för DHCP-servern, DNS-serveradressen till själva DHCP-servern och nät masken till samma som DHCP-serverns gränssnitt har kon figurer ATS med.
+Den här tjänsten anger standardvärden för nätverkskritiska parametrar för det angivna gränssnittet. DHCP-servern inkluderar dessa alternativ i erbjudandet och ACK svarar på DHCP-klienten. Om gränssnittsparametrarna för värduppsättningen som en DHCP-server körs på anges standardparametrarna på följande sätt: routern är inställd på den primära gränssnittsgatewayen för själva DHCP-servern, DNS-serveradressen till själva DHCP-servern och nätmasken till samma som DHCP-servergränssnittet konfigureras med.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **dhcp_ptr** Pekare till DHCP-serverns kontroll block.
-- **iface_index** Index som motsvarar nätverks gränssnittet
-- **subnet_mask** Nätmask för klient nätverk
-- **default_gateway_address** Klientens IP-adress för router
-- **dns_server_address** DNS-server för klient nätverk
+- **dhcp_ptr** Pekare till KONTROLLblock för DHCP-server.
+- **iface_index** Index som motsvarar nätverksgränssnittet
+- **subnet_mask** Nätmask för klientnätverk
+- **default_gateway_address** Klientens router-IP-adress
+- **dns_server_address** DNS-server för klientens nätverk
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) DHCP-servern har skapats.
-- **NX_DHCP_SERVER_BAD_INTERFACE_INDEX** (0XA1) indexet matchar inte adresser
-- **NX_DHCP_INVALID_NETWORK_PARAMETERS** (0XA3) ogiltiga nätverks parametrar
-- NX_PTR_ERROR (0x16) ogiltig pekare inmatade.
+- **NX_SUCCESS** (0x00) Lyckad DHCP-server skapas.
+- **NX_DHCP_SERVER_BAD_INTERFACE_INDEX** (0xA1) Index matchar inte adresser
+- **NX_DHCP_INVALID_NETWORK_PARAMETERS** (0xA3) Ogiltiga nätverksparametrar
+- NX_PTR_ERROR (0x16) Ogiltig pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Program
 
@@ -217,7 +217,7 @@ Ta bort en DHCP-serverinstans
 UINT nx_dhcp_server_delete(NX_DHCP_SERVER *dhcp_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten tar bort en tidigare skapad DHCP-serverinstans.
 
@@ -225,16 +225,16 @@ Den här tjänsten tar bort en tidigare skapad DHCP-serverinstans.
 
 - **dhcp_ptr** Pekare till en DHCP-serverinstans.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) DHCP-servern har tagits bort.
-- NX_PTR_ERROR (0x16) ogiltig pekare inmatade.
-- NX_DHCP_PARAMETER_ERROR (0x92) ogiltig inmatad icke-pekare
-- NX_CALLER_ERROR (0x11) ogiltig anropar tjänst.
+- **NX_SUCCESS** (0x00) Lyckad BORTTAGNING av DHCP-server.
+- NX_PTR_ERROR (0x16) Ogiltig pekare.
+- NX_DHCP_PARAMETER_ERROR (0x92) Ogiltiga indata som inte pekare
+- NX_CALLER_ERROR (0x11) Ogiltig anropare av tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -248,7 +248,7 @@ status = nx_dhcp_server_delete(&dhcp_server);
 
 ## <a name="nx_dhcp_server_start"></a>nx_dhcp_server_start
 
-Starta bearbetning av DHCP-server
+Starta DHCP-serverbearbetning
 
 ### <a name="prototype"></a>Prototyp
 
@@ -256,25 +256,25 @@ Starta bearbetning av DHCP-server
 UINT nx_dhcp_server_start(NX_DHCP_SERVER *dhcp_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten startar DHCP-server bearbetning, vilket innefattar att skapa en server UDP-socket, binda DHCP-porten och vänta på att ta emot klient-DHCP-begäranden.
+Den här tjänsten startar DHCP-serverbearbetning, vilket innefattar att skapa en server-UDP-socket, binda DHCP-porten och vänta på att ta emot klientens DHCP-begäranden.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **dhcp_ptr** Pekare till den tidigare skapade DHCP-instansen.
+- **dhcp_ptr** Pekare till dhcp-instans som skapats tidigare.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) Server start har slutförts.
-- **NX_DHCP_ALREADY_STARTED** (0X93) DHCP har redan startats.
-- NX_PTR_ERROR (0x16) ogiltig pekare inmatade.
-- NX_CALLER_ERROR (0x11) ogiltig anropar tjänst.
-- NX_DHCP_PARAMETER_ERROR (0x92) ogiltig inmatad icke-pekare
+- **NX_SUCCESS** (0x00) Lyckad serverstart.
+- **NX_DHCP_ALREADY_STARTED** (0x93) DHCP har redan startats.
+- NX_PTR_ERROR (0x16) Ogiltig pekare.
+- NX_CALLER_ERROR (0x11) Ogiltig anropare av tjänsten.
+- NX_DHCP_PARAMETER_ERROR (0x92) Ogiltiga icke-pekarindata
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -288,7 +288,7 @@ status = nx_dhcp_server_start(&dhcp_server);
 
 ## <a name="nx_dhcp_server_stop"></a>nx_dhcp_server_stop
 
-Stoppar DHCP-server bearbetning
+Stoppar DHCP-serverbearbetning
 
 ### <a name="prototype"></a>Prototyp
 
@@ -296,25 +296,25 @@ Stoppar DHCP-server bearbetning
 UINT nx_dhcp_server_stop(NX_DHCP_SERVER *dhcp_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten stoppar DHCP-serverns bearbetning, vilket innefattar att ta emot begär Anden om DHCP-klienter.
+Den här tjänsten stoppar DHCP-serverbearbetning, vilket innefattar att ta emot DHCP-klientbegäranden.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **dhcp_ptr** Pekare till DHCP-serverinstansen.
+- **dhcp_ptr** Pekare till DHCP-serverinstans.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) DHCP-stopp.
-- **NX_DHCP_ALREADY_STARTED** (0X93) DHCP har redan startats.
-- NX_PTR_ERROR (0x16) ogiltig pekare inmatade.
-- NX_CALLER_ERROR (0x11) ogiltig anropar tjänst.
-- NX_DHCP_PARAMETER_ERROR (0x92) ogiltig inmatad icke-pekare
+- **NX_SUCCESS** (0x00) Dhcp-stopp.
+- **NX_DHCP_ALREADY_STARTED** (0x93) DHCP har redan startats.
+- NX_PTR_ERROR (0x16) Ogiltig pekare.
+- NX_CALLER_ERROR (0x11) Ogiltig anropare av tjänsten.
+- NX_DHCP_PARAMETER_ERROR (0x92) Ogiltiga icke-pekarindata
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 

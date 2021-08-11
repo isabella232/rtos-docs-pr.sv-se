@@ -1,23 +1,23 @@
 ---
-title: Bilaga B – Azure återställnings tider FileX-konstanter
-description: Lär dig mer om FileX-konstanterna i Azure återställnings tider.
+title: Bilaga B – Azure RTOS FileX-konstanter
+description: Lär dig mer Azure RTOS FileX-konstanter.
 author: philmea
 ms.author: philmea
 ms.date: 05/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: a40eef204f9d524abc1ca02e07785c98ff1aba53
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 5846a47e9de16ad39f946640bcb0d7682630b5fa4dd6fb1b9012b2a83052b67a
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104825569"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116783823"
 ---
-# <a name="appendix-b---azure-rtos-filex-constants"></a>Bilaga B – Azure återställnings tider FileX-konstanter
+# <a name="appendix-b---azure-rtos-filex-constants"></a>Bilaga B – Azure RTOS FileX-konstanter
 
-## <a name="alphabeticlistings"></a>Alfabetiskt | Förteckningar 
+## <a name="alphabeticlistings"></a>Alfabetisk| Listor 
 
-| Konstant (med alfabetiska) | Värde          |
+| Konstant (efter alfabetisk) | Värde          |
 |-----------|-----------|
 |EXFAT_BIT_MAP_FIRST_TABLE|0|
 |EXFAT_BOOT_REGION_SIZE|24|
@@ -150,7 +150,7 @@ ms.locfileid: "104825569"
 |FX_LAST_CLUSTER_2|0xFFFF|
 |FX_LAST_CLUSTER_2_32|0x0FFFFFFF|
 |FX_LAST_CLUSTER_EXFAT|0x0FFFFFFF|
-|FX_LONG_NAME|0xF|
+|FX_LONG_NAME|0xf|
 |FX_LONG_NAME_ENTRY_LEN|13|
 |FX_LOST_CLUSTER_ERROR|0x04|
 |FX_MAX_12BIT_CLUST|0x0FF0|
@@ -334,7 +334,7 @@ EXFAT_NUM_OF_DIR_ENTRIES|2|
 |FX_MAX_SHORT_NAME_LEN|13|
 |FX_NOT_DIRECTORY|0x0E|
 |FX_RESERVED_SECTORS|0x00E|
-|FX_LONG_NAME|0xF|
+|FX_LONG_NAME|0xf|
 |FX_MONTH_MASK|0x0F|
 |FX_NO_MORE_ENTRIES|0x0F|
 |FX_DIR_NOT_EMPTY|0x10|

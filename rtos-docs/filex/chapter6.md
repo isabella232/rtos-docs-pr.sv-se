@@ -1,138 +1,138 @@
 ---
-title: Kapitel 6 – Azure återställnings tider FileX fel tolerans modul
-description: Det här kapitlet innehåller en beskrivning av den feltoleranta modulen i Azure återställnings tider FileX som är utformad för att underhålla fil systemets integritet om mediet förlorar ström eller matas ut i mitten av en fil skrivnings åtgärd.
+title: Kapitel 6 – Azure RTOS FileX-feltolerant modul
+description: Det här kapitlet innehåller en beskrivning av Azure RTOS FileX Fault Tolerant Module som är utformad för att upprätthålla filsystemets integritet om mediet förlorar ström eller matas ut mitt i en filskrivningsåtgärd.
 author: philmea
 ms.author: philmea
 ms.date: 05/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 68a24f0345a2c4d3e824270699b00a2daab32f8e
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 66bffa2dbf52bc458bfaf124aa006a79e810100ac2e926c17444daf090519e66
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104826505"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116783793"
 ---
-# <a name="chapter-6---azure-rtos-filex-fault-tolerant-module"></a>Kapitel 6 – Azure återställnings tider FileX fel tolerans modul
+# <a name="chapter-6---azure-rtos-filex-fault-tolerant-module"></a>Kapitel 6 – Azure RTOS FileX-feltolerant modul
 
-Det här kapitlet innehåller en beskrivning av den feltoleranta modulen i Azure återställnings tider FileX som är utformad för att underhålla fil systemets integritet om mediet förlorar ström eller matas ut i mitten av en fil skrivnings åtgärd.
+Det här kapitlet innehåller en beskrivning av Azure RTOS FileX Fault Tolerant Module som är utformad för att upprätthålla filsystemets integritet om mediet förlorar ström eller matas ut mitt i en filskrivningsåtgärd.
 
-## <a name="filex-fault-tolerant-module-overview"></a>Översikt över FileX feltolerant modul
+## <a name="filex-fault-tolerant-module-overview"></a>Översikt över FileX-feltolerant modul
 
-När ett program skriver data till en fil, uppdaterar FileX både data kluster och system information. Dessa uppdateringar måste utföras som en atomisk åtgärd för att hålla informationen i fil systemet konsekvent. Om du till exempel lägger till data i en fil måste FileX hitta ett tillgängligt kluster i mediet, uppdatera FAT-kedjan, uppdatera längden som har arkiverats i katalog posten och eventuellt uppdatera det första kluster numret i katalog posten. Antingen ett strömavbrott eller en medie utmatning kan avbryta sekvensen av uppdateringar, vilket lämnar fil systemet i ett inkonsekvent tillstånd. Om det inkonsekventa läget inte korrigeras kan data som uppdateras gå förlorade och på grund av skada på system informationen kan efterföljande fil system åtgärder skada andra filer eller kataloger på mediet.
+När ett program skriver data till en fil uppdaterar FileX både datakluster och systeminformation. Dessa uppdateringar måste slutföras som en atomisk åtgärd för att hålla informationen i filsystemet sammanhängande. När du till exempel ska lägga till data i en fil måste FileX hitta ett tillgängligt kluster på mediet, uppdatera FAT-kedjan, uppdatera längden som finns i katalogposten och eventuellt uppdatera startklustret i katalogposten. Antingen kan ett strömavbrott eller mediautmatning avbryta uppdateringssekvensen, vilket gör att filsystemet är i ett inkonsekvent tillstånd. Om det inkonsekventa tillståndet inte korrigeras kan data som uppdateras gå förlorade, och på grund av skador på systeminformationen kan efterföljande filsystemsoperationer skada andra filer eller kataloger på mediet.
 
-Den feltoleranta modulen FileX fungerar med de Journal steg som krävs för att uppdatera en fil *innan* de här stegen tillämpas på fil systemet. Om fil uppdateringen lyckas tas dessa logg poster bort. Men om fil uppdateringen avbryts lagras logg posterna på mediet. Nästa gången mediet monteras identifierar FileX dessa logg poster från den tidigare (oavslutade) Skriv åtgärden. I sådana fall kan FileX återställas efter fel genom att antingen återställa de ändringar som redan har gjorts i fil systemet eller genom att tillämpa de nödvändiga ändringarna för att slutföra den tidigare åtgärden. På så sätt upprätthåller FileX-feltolerant modul fil systemets integritet om mediet förlorar ström under en uppdaterings åtgärd.
-
-> [!IMPORTANT]
-> *FileX feltolerant modul är inte utformad för att förhindra skada av fil system som orsakas av fysiskt medie fel med giltiga data.*
+FileX-feltolerant modul fungerar genom att journalföra de steg som krävs *för att* uppdatera en fil innan de här stegen tillämpas på filsystemet. Om filuppdateringen lyckas tas loggposterna bort. Men om filuppdateringen avbryts lagras loggposterna på mediet. Nästa gång mediet monteras identifierar FileX dessa loggposter från den tidigare (oavslutade) skrivåtgärden. I sådana fall kan FileX återställas från ett fel genom att antingen återställa de ändringar som redan har gjorts i filsystemet eller genom att tillämpa de ändringar som krävs för att slutföra den föregående åtgärden igen. På så sätt upprätthåller FileX-feltolerant modul filsystemets integritet om mediet förlorar ström under en uppdateringsåtgärd.
 
 > [!IMPORTANT]
-> *När FileX-feltolerant modul skyddar ett medium, får inte mediet monteras av något annat än FileX med feltolerant aktiverat. Detta kan orsaka att logg posterna i fil systemet är inkonsekventa med system information på mediet. Om FileX feltolerant module försöker bearbeta logg poster när mediet har uppdaterats av ett annat fil system, kan återställnings proceduren Miss lyckas, vilket lämnar hela fil systemet i ett oförutsägbart tillstånd.*
-
-## <a name="use-of-the-fault-tolerant-module"></a>Användning av fel tolerans modulen
-
-FileX-feltolerant funktion är tillgänglig för alla FAT-filsystem som stöds av FileX, inklusive FAT12, FAT16, FAT32 och exFAT. Om du vill aktivera den feltoleranta funktionen måste FileX skapas med symbolen **FX_ENABLE_FAULT_TOLERANT** definierad. Vid körning startar programmet feltolerant tjänst genom att anropa **_fx_fault_tolerant_enable_*_ omedelbart efter anropet till _*_fx_media_open_**. När fel tolerans har Aktiver ATS skyddas alla fil skrivnings åtgärder till det angivna mediet. Fel tolerans modulen är som standard inte aktive rad.
+> *FileX Fault Tolerant Module är inte utformad för att förhindra att filsystemet skadas på grund av att fysiska media skadas med giltiga data i den.*
 
 > [!IMPORTANT]
-> * Programmet måste se till att fil systemet inte kommer åt före ***fx_fault_tolerant_enable** _ anropas. Om programmet skriver data till fil systemet före den feltoleranta aktiveringen, kan Skriv åtgärden skada mediet om tidigare Skriv åtgärder inte hade slutförts och fil systemet inte återställdes med feltolerant logg entries._
+> *När FileX Fault Tolerant-modulen skyddar ett medium får mediet inte monteras av något annat än FileX med Feltolerant aktiverat. Om du gör det kan loggposterna i filsystemet vara inkonsekventa med systeminformationen på mediet. Om FileX Fault Tolerant-modulen försöker bearbeta loggposter efter att mediet har uppdaterats av ett annat filsystem kan återställningsproceduren misslyckas, vilket gör att hela filsystemet är i ett oförutsägbart tillstånd.*
 
-## <a name="filex-fault-tolerant-module-log"></a>Logg för FileX feltolerant modul
+## <a name="use-of-the-fault-tolerant-module"></a>Användning av feltolerant modul
 
-FileX fel tolerans loggen tar upp ett logiskt kluster i Flash. Indexet till Start kluster numret för klustret registreras i Start sektorn för mediet, med en förskjutning som anges av symbolen **FX_FAULT_TOLERANT_BOOT_INDEX**. Som standard är den här symbolen definierad som 116. Den här platsen väljs eftersom den är markerad som reserverad i FAT12/16/32-och exFAT-specifikationen.
-
-Bild 5, "logg strukturens layout", visar logg strukturens allmänna layout. Logg strukturen innehåller tre avsnitt: logg huvud, FAT-kedja och logg poster.
+Funktionen Feltolerant FileX är tillgänglig för alla FAT-filsystem som stöds av FileX, inklusive FAT12, FAT16, FAT32 och exFAT. För att aktivera den feltoleranta funktionen måste FileX byggas med symbolen **FX_ENABLE_FAULT_TOLERANT** definieras. Vid körning startar programmet en feltolerant tjänst genom **_att anropa fx_fault_tolerant_enable_ _ omedelbart efter *anropet till _*_fx_media_open_**. När feltolerant har aktiverats skyddas alla filskrivningsåtgärder till det avsedda mediet. Som standard är den feltoleranta modulen inte aktiverad.
 
 > [!IMPORTANT]
-> *Alla värden för flera byte som lagras i logg posterna är i litet endian-format.*
+> *Programmet måste se till att filsystemet inte används innan ***** fx_fault_tolerant_enable _ anropas. Om programmet skriver data till filsystemet innan feltolerant aktivera, kan skrivåtgärden skada mediet om tidigare skrivåtgärder inte slutfördes och filsystemet inte återställdes med hjälp av feltolerant logg entries._
 
-![Layout för logg struktur](./media/user-guide/log-structure-layout.png)
+## <a name="filex-fault-tolerant-module-log"></a>FileX-feltolerant modullogg
 
-**Bild 5. Layout för logg struktur**
+Den feltoleranta FileX-loggen tar upp ett logiskt kluster i flash. Indexet för klustrets startkluster registreras i startsektorn för mediet, med en förskjutning som anges av symbolen **FX_FAULT_TOLERANT_BOOT_INDEX**. Som standard definieras den här symbolen som 116. Den här platsen väljs eftersom den är markerad som reserverad i FAT12/ 16/32 och exFAT-specifikation.
 
-Logg huvud området innehåller information som beskriver hela logg strukturen och förklarar varje fält i detalj.
+Bild 5, "Log Structure Layout", visar loggstrukturens allmänna layout. Loggstrukturen innehåller tre avsnitt: Loggrubrik, FAT-kedja och loggposter.
 
-**TABELL 8. Logg huvuds Area**
+> [!IMPORTANT]
+> *Alla värden för flera byte som lagras i loggposterna är i Little Endian-format.*
+
+![Loggstrukturlayout](./media/user-guide/log-structure-layout.png)
+
+**Bild 5. Layout för loggstruktur**
+
+Området Loggrubrik innehåller information som beskriver hela loggstrukturen och förklarar varje fält i detalj.
+
+**TABELL 8. Logghuvudområde**
 
 |Fält|Storlek (i byte)|Description|
 |-----|--------------|-----------|
-|ID|4|Identifierar en feltolerant logg struktur för FileX. Logg strukturen betraktas som ogiltig om ID-värdet inte är 0x46544C52.|
-|Total storlek|2|Anger den totala storleken (i byte) för hela logg strukturen.|
-|Huvud kontroll Summa|2|Kontroll summa som konverterar logg huvuds ytan. Logg strukturen betraktas som ogiltig om huvud fälten inte kan verifiera kontroll summan.|
-|Versionsnummer|2|FileX-feltoleranta huvud-och del versions nummer.|
+|ID|4|Identifierar en FileX-feltolerant loggstruktur. Loggstrukturen anses vara ogiltig om ID-värdet inte 0x46544C52.|
+|Total storlek|2|Anger den totala storleken (i byte) för hela loggstrukturen.|
+|Rubrikkontrollsumma|2|Kontrollsumma som konverterar loggrubrikområdet. Loggstrukturen anses vara ogiltig om huvudfälten misslyckas med verifieringen av kontrollsumman.|
+|Versionsnummer|2|FileX-feltolerant huvudversion och lägre versionsnummer.|
 |Reserverat|2|För framtida expansion.|
 
-Logg huvuds ytan följs av logg ytan FAT-kedja. Bild 9 innehåller information som beskriver hur FAT-kedjan ska ändras. Det här logg området innehåller information om de kluster som allokeras till en fil, de kluster som tas bort från en fil och där infogningen/borttagningen ska vara och beskriver varje fält i logg området FAT-kedja.
+Området Loggrubrik följs av området FAT Chain Log (FAT-kedja). Bild 9 innehåller information som beskriver hur FAT-kedjan ska ändras. Det här loggområdet innehåller information om de kluster som allokeras till en fil, klustren som tas bort från en fil och var infogningen/borttagningen ska vara och beskriver varje fält i området för FAT-kedjans logg.
 
-**TABELL 9. Logg områden för FAT-kedja**
+**TABELL 9. FAT-kedjans loggområde**
 
-|Fält|Storlek (i byte)|Beskrivning|
+|Fält|Storlek (i byte)|Description|
 |-----|--------------|-----------|
-|Logg kontroll summa för FAT-kedja|2|Kontroll summa för hela logg ytan FAT-kedja. Logg arean för FAT-kedjan betraktas som ogiltig om verifieringen av kontroll summan Miss lyckas.|
-|Flagga|1|Giltiga flagg värden är:<br/>0x01 FAT-kedja giltig<br />protokollnumret 0x02-BITMAPP används|
+|FAT-kedja, loggkontrollsumma|2|Kontrollsumma för hela FAT-kedjans loggområde. OMRÅDET FAT Chain Log anses vara ogiltigt om verifieringen av kontrollsumman misslyckas.|
+|Flagga|1|Giltiga flaggvärden är:<br/>0x01 FAT-kedja giltig<br />0x02 SOM ANVÄNDS|
 |Reserverat|1|Reserverad för framtida användning|
-|Insättnings punkt – överst|4|Klustret (som hör till den ursprungliga FAT-kedjan) där den nya kedjan ska kopplas till.|
-|Huvud kluster för ny FAT-kedja|4|Det första klustret i den nyligen skapade FAT-kedjan|
-|Huvud kluster för ursprunglig FAT-kedja|4|Det första klustret i den del av den ursprungliga FAT-kedjan som ska tas bort.|
-|Insättnings punkt – bakåt|4|Det ursprungliga klustret där den nyligen skapade FAT-kedjan kopplas till.|
-|Nästa borttagnings punkt|4|Det här fältet hjälper till med rensnings proceduren för FAT-kedjan.|
+|Infogningspunkt – Front|4|Klustret (som tillhör den ursprungliga FAT-kedjan) där den nyligen skapade kedjan ska kopplas till.|
+|Huvudkluster i ny FAT-kedja|4|Det första klustret i den nyligen skapade FAT-kedjan|
+|Huvudkluster från den ursprungliga FAT-kedjan|4|Det första klustret i den del av den ursprungliga FAT-kedjan som ska tas bort.|
+|Infogningspunkt – bakåt|4|Det ursprungliga klustret där den nyligen skapade FAT-kedjan ansluts.|
+|Nästa borttagningspunkt|4|Det här fältet hjälper rensningsproceduren för FAT-kedjan.|
 
-Fältet logg poster innehåller logg poster som beskriver de ändringar som krävs för att återställa efter ett fel. Det finns tre typer av logg poster som stöds i FileX feltolerant modul: FAT-loggpost; Katalog logg post; och Bitmap-loggpost.
+Området Loggposter innehåller loggposter som beskriver de ändringar som krävs för att återställa efter ett fel. Det finns tre typer av loggpost som stöds i fileX-feltolerant modul: FAT-loggpost; Katalogloggpost; och Bitmapp-loggpost.
 
-Följande tre figurer och tre tabeller beskriver dessa logg poster i detalj.
+Följande tre figurer och tre tabeller beskriver dessa loggposter i detalj.
 
-![Logg post för FAT](./media/user-guide/fat-log-entry.png)
+![FAT-loggpost](./media/user-guide/fat-log-entry.png)
 
-**Bild 6. Logg post för FAT**
+**Bild 6. FAT-loggpost**
 
-**TABELL 10. Logg post för FAT**
+**TABELL 10. FAT-loggpost**
 
 |Fält|Storlek (i byte)|Beskrivning|
 |-----|--------------|-----------|
 Typ|2|Typ av post måste vara FX_FAULT_TOLERANT_FAT_LOG_TYPE|
-|Storlek|2|Storlek på posten|
-|Kluster nummer|4|Kluster nummer|
+|Storlek|2|Storleken på den här posten|
+|Klusternummer|4|Klusternummer|
 |Värde|4|Värde som ska skrivas till FAT-posten|
 
-![Katalog logg post](./media/user-guide/directory-log-entry.png)
+![Katalogloggpost](./media/user-guide/directory-log-entry.png)
 
-**Bild 7. Katalog logg post**
+**Bild 7. Katalogloggpost**
 
-**TABELL 11. Katalog logg post**
+**TABELL 11. Katalogloggpost**
 
 |Fält|Storlek (i byte)|Beskrivning|
 |-----|--------------|-----------|
 |Typ|2|Typ av post måste vara FX_FAULT_TOLERANT_DIRECTORY_LOG_TYPE|
-|Storlek|2|Storlek på posten|
-|Sektor förskjutning|4|Offset (i byte) i den sektor där katalogen finns.|
-|Logg sektor|4|Den sektor där katalog posten finns|
-|Loggdata|Variabel|Katalog postens innehåll|
+|Storlek|2|Storleken på den här posten|
+|Sektorförskjutning|4|Förskjutning (i byte) i den sektor där den här katalogen finns.|
+|Loggsektor|4|Den sektor där katalogposten finns|
+|Loggdata|Variabel|Katalogpostens innehåll|
 
-![Loggpost för Bitmap](./media/user-guide/bitmap-log-entry.png)
+![Loggpost för Bitmapp](./media/user-guide/bitmap-log-entry.png)
 
-**Figur 8. Loggpost för Bitmap**
+**Bild 8. Loggpost för Bitmapp**
 
-**TABELL 12. Loggpost för Bitmap**
+**TABELL 12. Loggpost för Bitmapp**
 
 |Fält|Storlek (i byte)|Beskrivning|
 |-----|--------------|-----------|
 |Typ|2|Typ av post måste vara FX_FAULT_TOLERANT_BITMAP_LOG_TYPE|
-|Storlek|2|Storlek på posten|
-|Kluster nummer|4|Kluster nummer|
+|Storlek|2|Storleken på den här posten|
+|Klusternummer|4|Klusternummer|
 |Värde|4|Värde som ska skrivas till FAT-posten|
 
-## <a name="fault-tolerant-protection"></a>Fel tolerans skydd
+## <a name="fault-tolerant-protection"></a>Feltolerant skydd
 
-När FileX-feltolerant modul startar söker den först efter en befintlig feltolerant loggfil på mediet. Om det inte går att hitta en giltig loggfil anser FileX att mediet inte är skyddat. I det här fallet kommer FileX att skapa en feltolerant logg fil på mediet.
+När FileX-feltolerant modul startar söker den först efter en befintlig feltolerant loggfil på mediet. Om det inte går att hitta en giltig loggfil betraktar FileX mediet som oskyddat. I det här fallet skapar FileX en feltolerant loggfil på mediet.
 
 > [!IMPORTANT]
-> * FileX kan inte skydda ett fil system om det var skadat innan den FileX feltoleranta modulen startar. *
+> *FileX kan inte skydda ett filsystem om det var skadat innan FileX-feltolerant modul startar. *
 
-Om det finns en feltolerant logg fil söker FileX efter befintliga logg poster. En loggfil utan loggpost indikerar att en tidigare fil har genomförts och alla logg poster togs bort. I det här fallet kan programmet börja använda fil systemet med feltolerant skydd.
+Om en feltolerant loggfil finns söker FileX efter befintliga loggposter. En loggfil utan loggpost anger att den tidigare filåtgärden lyckades och att alla loggposter har tagits bort. I det här fallet kan programmet börja använda filsystemet med feltolerant skydd.
 
-Men om det finns logg poster måste FileX antingen slutföra den tidigare fil åtgärden eller återställa ändringarna som redan har tillämpats på fil systemet, ångra ändringarna. I båda fallen återställs fil systemet till ett enhetligt tillstånd efter att logg posterna har tillämpats på fil systemet och programmet kan börja använda fil systemet igen.
+Men om loggposter finns måste FileX antingen slutföra den tidigare filåtgärden eller återställa ändringarna som redan tillämpats på filsystemet, vilket effektivt ångrar ändringarna. I båda fallen, när loggposterna har tillämpats på filsystemet, återställs filsystemet till ett sammanhängande tillstånd och programmet kan börja använda filsystemet igen.
 
-För mediet som skyddas av FileX, under fil uppdaterings åtgärden, skrivs data delen direkt till mediet. När FileX skriver data registreras även alla ändringar som krävs för att tillämpas på katalog poster, FAT-tabell. Den här informationen registreras i de File-toleranta logg posterna. Den här metoden garanterar att uppdateringar av fil systemet sker efter att data har skrivits till mediet. Om mediet matas ut under data skrivnings fasen har viktig fil system information ännu inte ändrats. Därför påverkas inte fil systemet av avbrottet.
+För media som skyddas av FileX skrivs datadelen direkt till mediet under filuppdateringen. När FileX skriver data registrerar den även eventuella ändringar som måste tillämpas på katalogposter, FAT-tabell. Den här informationen registreras i filen toleranta loggposter. Den här metoden garanterar att uppdateringar av filsystemet sker när data har skrivits till mediet. Om mediet matas ut under dataskrivningsfasen har viktig filsysteminformation inte ändrats ännu. Därför påverkas inte filsystemet av avbrottet.
 
-När alla data har skrivits till mediet kan FileX följa informationen i logg posterna för att tillämpa ändringarna i system information, en post i taget. När all system information har allokerats till mediet tas logg posterna bort från fel tolerans loggen. Vid det här tillfället Slutför FileX fil uppdaterings åtgärden.
+När alla data har skrivits till mediet följer FileX sedan information i loggposterna för att applicera ändringarna i systeminformationen, en post i taget. När all systeminformation har utförts på mediet tas loggposterna bort från den feltoleranta loggen. Nu slutför FileX filuppdateringsåtgärden.
 
-Filer uppdateras inte på plats under fil uppdaterings åtgärden. Feltolerant modul allokerar en sektor för data att skriva nya data till och sedan ta bort sektorn som innehåller de data som ska skrivas över, uppdatera tillhör ande fett poster för att länka den nya sektorn till Chian. För situationer där partiella data i ett kluster behöver ändras, tilldelar FileX alltid nya kluster, skriver hela data från de gamla klustren med uppdaterade data till de nya klustren och frigör sedan de gamla klustren. Detta garanterar att den ursprungliga filen är intakt om fil uppdateringen avbryts. Programmet måste vara medveten om att det under FileX feltoleranta skyddet kräver att mediet har tillräckligt med ledigt utrymme för att rymma nya data innan sektorer med gamla data kan släppas. Om mediet inte har tillräckligt med utrymme för att lagra nya data, Miss lyckas uppdaterings åtgärden.
+Under filuppdateringen uppdateras inte filerna på plats. Den feltoleranta modulen allokerar en sektor som data ska skriva nya data till och tar sedan bort den sektor som innehåller de data som ska skrivas över och uppdaterar relaterade FAT-poster för att länka den nya sektorn till chian. I situationer där partiella data i ett kluster måste ändras allokerar FileX alltid nya kluster, skriver hela data från de gamla klustren med uppdaterade data till de nya klustren och frigör sedan de gamla klustren. Detta garanterar att den ursprungliga filen är intakt om filuppdateringen avbryts. Programmet måste vara medveten om att under Feltolerant FileX-skydd kräver uppdatering av data i en fil att mediet har tillräckligt med ledigt utrymme för att lagra nya data innan sektorer med gamla data kan släppas. Om mediet inte har tillräckligt med utrymme för att lagra nya data misslyckas uppdateringsåtgärden.

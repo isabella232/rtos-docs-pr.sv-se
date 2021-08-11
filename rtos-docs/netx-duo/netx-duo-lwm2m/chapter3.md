@@ -1,140 +1,140 @@
 ---
-title: Kapitel 3 – funktions Beskrivning av LWM2M-klienten
-description: Det här kapitlet innehåller en funktions Beskrivning av LWM2M-klienten.
+title: Kapitel 3 – Funktionell beskrivning av LWM2M-klienten
+description: Det här kapitlet innehåller en funktionell beskrivning av LWM2M-klienten.
 author: v-condav
 ms.author: v-condav
 ms.date: 01/22/2021
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 24b7ff66fb4d060075eb6bc81bed45b3479e18dc
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: be6d9d854ce89140ce749fbeb0364678077337bf19ddc1055d286d0f624e8bd5
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104825938"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116783466"
 ---
-# <a name="chapter-3--functional-description-of-lwm2m-client"></a>Kapitel 3 funktions Beskrivning av LWM2M-klienten
+# <a name="chapter-3--functional-description-of-lwm2m-client"></a>Kapitel 3 Funktionell beskrivning av LWM2M-klienten
 
-> Det här kapitlet innehåller en funktions Beskrivning av LWM2M-klienten.
+> Det här kapitlet innehåller en funktionell beskrivning av LWM2M-klienten.
 
-## <a name="lwm2m-client-initialization"></a>LWM2M klient initiering
+## <a name="lwm2m-client-initialization"></a>LWM2M-klient initiering
 
-LWM2M-klienten initieras genom att anropa ***nx_lwm2m_client_creates*** tjänsten. LWM2M-klienten körs i sin egen tråd och kan rapportera vissa händelser till programmet genom att använda återanrop eller genom att anropa metoder för de anpassade objekt som implementeras av programmet.
+LWM2M-klienten initieras genom  att anropa nx_lwm2m_client_create tjänsten. LWM2M-klienten körs i en egen tråd och kan rapportera vissa händelser till programmet med hjälp av återanrop, eller genom att anropa metoder för anpassade objekt som implementeras av programmet.
 
-Dessutom måste LWM2M-klientsessioner skapas genom att anropa ***nx_lwm2m_client_session_create*** för att aktivera kommunikation med en eller flera servrar. En session kan kommunicera med två olika typer av servrar: en Start Server eller en LWM2M-Server (enhets hantering).
+Dessutom måste LWM2M-klientsessioner skapas genom att ***anropa nx_lwm2m_client_session_create*** för att möjliggöra kommunikation med en eller flera servrar. En session kan kommunicera med två olika typer av servrar: en Bootstrap-server eller en LWM2M-server (Enhetshantering).
 
-### <a name="bootstrap-server-session"></a>Bootstrap-Server-session
+### <a name="bootstrap-server-session"></a>Bootstrap-serversession
 
-En kommunikations-session med en Start Server används för att tillhandahålla viktig information till LWM2M-klienten så att LWM2M-klienten kan utföra åtgärden "Registrera" med en eller flera LWM2M-servrar. Den här typen av Server används vid start läge för klienten som initierats och initierats av servern.
+En kommunikationssession med en Bootstrap-server används för att etablera viktig information i LWM2M-klienten så att LWM2M-klienten kan utföra åtgärden "Registrera" med en eller flera LWM2M-servrar. Den här typen av server används i lägena Klientinitierad och Serverinitierad bootstrap.
 
-Programmet kan starta en bootstrap-session genom att anropa ***nx_lwm2m_client_session_bootstrap** _ eller _*_nx_lwm2m_client_session_bootstrap_dtls_*_, den måste ange IP-adressen och port numret för-servern och ett valfritt säkerhets objekts instans-ID. Funktionen _*_nx_lwm2m_client_session_bootstrap_*_ använder osäker kommunikation, medan _ *_nx_lwm2m_client_session_bootstrap_dtls_** upprättar en säker DTLS-anslutning till servern.
+Programmet kan starta en Bootstrap-session genom att anropa ***nx_lwm2m_client_session_bootstrap** _ eller _*_nx_lwm2m_client_session_bootstrap_dtls_*_, den måste ange serverns IP-adress och portnummer samt ett valfritt ID för säkerhetsobjektinstans. Funktionen _*_nx_lwm2m_client_session_bootstrap_*_ använder osäker kommunikation, medan _ nx_lwm2m_client_session_bootstrap_dtls **_upprättar_* en säker DTLS-anslutning med servern.
 
-Om bootstrap-åtgärden lyckas ska start servern ha skapat säkerhets objekts instanser för start-och LWM2M-servrarna och Server objekt instanser för LWM2M-servrarna. Programmet kan anropa ***nx_lwm2m_client_session_register_info_get*** för att hämta information om Lwm2m-servrar och använda den här informationen för att upprätta en session med Lwm2m-servrarna.
+Om bootstrap-åtgärden lyckas bör Bootstrap-servern ha skapat säkerhetsobjektinstanser för Bootstrap- och LWM2M-servrarna och serverobjektinstanserna för LWM2M-servrarna. Programmet kan anropa ***nx_lwm2m_client_session_register_info_get*** hämta information om LWM2M-servrar och använda den här informationen för att upprätta en session med LWM2M-servrarna.
 
-Bootstrap-data ska sparas till beständigt minne av programmet för att konfigurera LWM2M-klienten vid nästa omstart av enheten.
+Bootstrap-data ska sparas i beständigt minne av programmet för att konfigurera LWM2M-klienten vid nästa omstart av enheten.
 
-### <a name="lwm2m-server-session"></a>LWM2M Server-session
+### <a name="lwm2m-server-session"></a>LWM2M-serversession
 
-En kommunikations-session med en LWM2M-Server används för registrering, enhets hantering och tjänst aktivering.
+En kommunikationssession med en LWM2M-server används för registrering, Enhetshantering och tjänstaktivering.
 
-Programmet kan registrera LWM2M-klienten på en server genom att anropa ***nx_lwm2m_client_session_register** _ eller _*_nx_lwm2m_client_session_register_dtls_*_, den måste ange IP-adressen och port numret för-servern och det korta Server-ID som motsvarar en befintlig server objekt instans. Funktionen _*_nx_lwm2m_client_session_register_*_ använder osäker kommunikation, medan _ *_nx_lwm2m_client_session_register_dtls_** upprättar en säker DTLS-anslutning till servern.
+Programmet kan registrera LWM2M-klienten till en server genom att anropa ***nx_lwm2m_client_session_register** _ eller _*_nx_lwm2m_client_session_register_dtls_*_, den måste ange serverns IP-adress och portnummer samt det korta server-ID som motsvarar en befintlig serverobjektinstans. Funktionen _*_nx_lwm2m_client_session_register_*_ använder osäker kommunikation, medan _ *_nx_lwm2m_client_session_register_dtls_** upprättar en säker DTLS-anslutning med servern.
 
-Programmet kan avregistrera LWM2M-klienten genom att anropa ***nx_lwm2m_client_session_deregister** _ och be klienten att skicka ett uppdaterings meddelande genom att anropa _ *_nx_lwm2m_client_session_update_* *.
+Programmet kan avregistrera LWM2M-klienten genom att anropa ***nx_lwm2m_client_session_deregister** _, och be klienten att skicka ett uppdateringsmeddelande genom att anropa _*_nx_lwm2m_client_session_update_**.
 
-### <a name="session-state-callback"></a>Motanrop för sessionstillstånd
+### <a name="session-state-callback"></a>Återanrop av sessionstillstånd
 
-Programmet registrerar ett återanrop vid skapandet av en session som anropas när sessionens status uppdateras. motringningsfunktionen **NX_LWM2M_CLIENT_SESSION_STATE_CALLBACK** har följande prototyp.
+Programmet registrerar ett återanrop när en session skapas som anropas när sessionens tillstånd uppdateras. Återanropsfunktionen har NX_LWM2M_CLIENT_SESSION_STATE_CALLBACK **följande** prototyp.
 
-TypeDef VOID ( \* NX_LWM2M_CLIENT_SESSION_STATE_CALLBACK) (NX_LWM2M_CLIENT_SESSION \* SESSION_PTR, uint-tillstånd);
+typedef VOID ( \* NX_LWM2M_CLIENT_SESSION_STATE_CALLBACK)(NX_LWM2M_CLIENT_SESSION \* session_ptr,UINT state);
 
 Följande tillstånd definieras.
 
-| Sessionstillstånd &nbsp; | Beskrivning |
+| &nbsp;Sessionstillstånd | Description |
 | --- | --- |
-| **NX_LWM2M_CLIENT_SESSION_INIT** | Initialt tillstånd efter att sessionen skapats. |
-| **NX_LWM2M_CLIENT_SESSION_BOOTSTRAP_WAITING** | Klienten väntar på att start av timer eller initierad Server ska startas. |
-| **NX_LWM2M_CLIENT_SESSION_BOOTSTRAP_REQUESTING** | Klienten har skickat ett "Request"-meddelande till bootstrap-servern (klienten initierade start). |
-| **NX_LWM2M_CLIENT_SESSION_BOOTSTRAP_INITIATED** | Klienten tar emot data från start servern. |
-| **NX_LWM2M_CLIENT_SESSION_BOOTSTRAP_FINISHED** | Start servern har skickat ett meddelande om att det har skickats. |
-| **NX_LWM2M_CLIENT_SESSION_BOOTSTRAP_ERROR** | Det gick inte att starta bootstrap-sessionen. |
-| **NX_LWM2M_CLIENT_SESSION_REGISTERING** | Klienten har skickat ett "Registrera"-meddelande till LWM2M-servern. |
+| **NX_LWM2M_CLIENT_SESSION_INIT** | Det initiala tillståndet efter att sessionen har skapats. |
+| **NX_LWM2M_CLIENT_SESSION_BOOTSTRAP_WAITING** | Klienten väntar på att timern "Håll av" eller ServerInitierad bootstrap ska förfalla. |
+| **NX_LWM2M_CLIENT_SESSION_BOOTSTRAP_REQUESTING** | Klienten har skickat ett meddelande om begäran till Bootstrap-servern (klientinitierad bootstrap). |
+| **NX_LWM2M_CLIENT_SESSION_BOOTSTRAP_INITIATED** | Klienten tar emot data från Bootstrap-servern. |
+| **NX_LWM2M_CLIENT_SESSION_BOOTSTRAP_FINISHED** | Bootstrap-servern har skickat meddelandet "Finished". |
+| **NX_LWM2M_CLIENT_SESSION_BOOTSTRAP_ERROR** | Bootstrap-sessionen misslyckades. |
+| **NX_LWM2M_CLIENT_SESSION_REGISTERING** | Klienten har skickat ett registermeddelande till LWM2M-servern. |
 | **NX_LWM2M_CLIENT_SESSION_REGISTERED** | Klienten är registrerad på LWM2M-servern. |
-| **NX_LWM2M_CLIENT_SESSION_UPDATING** | Klienten har skickat ett uppdaterings meddelande till LWM2M-servern. |
-| **NX_LWM2M_CLIENT_SESSION_DEREGISTERING** | Klienten har skickat meddelandet "avregistrera" till LWM2M-servern. |
-| **NX_LWM2M_CLIENT_SESSION_DEREGISTERED** | Klienten är avregistrerad från LWM2M-servern. |
-| **NX_LWM2M_CLIENT_SESSION_DISABLED** | LWM2M-servern är inaktive rad. En "Registrera" skickas när den inaktiverade timern upphör att gälla. |
-| **NX_LWM2M_CLIENT_SESSION_ERROR** | Det gick inte att utföra registreringen eller uppdateringen på LWM2M-servern. |
-| **NX_LWM2M_CLIENT_SESSION_DELETED** | Server objekts instansen som motsvarar LWM2M-servern har tagits bort. |
+| **NX_LWM2M_CLIENT_SESSION_UPDATING** | Klienten har skickat ett uppdateringsmeddelande till LWM2M-servern. |
+| **NX_LWM2M_CLIENT_SESSION_DEREGISTERING** | Klienten har skickat ett avregistrerat meddelande till LWM2M-servern. |
+| **NX_LWM2M_CLIENT_SESSION_DEREGISTERED** | Klienten avregistreras från LWM2M-servern. |
+| **NX_LWM2M_CLIENT_SESSION_DISABLED** | LWM2M-servern är inaktiverad. Ett register skickas efter att inaktiveringstimern har gått ut. |
+| **NX_LWM2M_CLIENT_SESSION_ERROR** | Registreringen eller uppdateringen av LWM2M-servern misslyckades. |
+| **NX_LWM2M_CLIENT_SESSION_DELETED** | Serverobjektinstansen som motsvarar LWM2M-servern har tagits bort. |
 
-Om ett fel uppstår kan programmet Hämta orsaken till felet genom att anropa ***nx_lwm2m_client_session_error_get***.
+Om det uppstår fel kan programmet hämta orsaken till felet genom att anropa ***nx_lwm2m_client_session_error_get***.
 
-## <a name="local-device-management"></a>Hantering av lokala enheter
+## <a name="local-device-management"></a>Lokala Enhetshantering
 
-Programmet kan komma åt objekten i LWM2M-klienten med hjälp av funktionerna för lokal enhets hantering. Följande funktioner finns.
+Programmet kan komma åt objekten för LWM2M-klienten med hjälp av de lokala enhetshanteringsfunktionerna. Följande funktioner tillhandahålls.
 
-| Funktions &nbsp; namn | Beskrivning |
+| &nbsp;Funktionsnamn | Description |
 | --- | --- |
-| ***nx_lwm2m_client_object_read*** | Läsa resurser från en objekt instans. |
-| ***nx_lwm2m_client_object_discover*** | Hämta listan över resurser för en objekt instans.
-| ***nx_lwm2m_client_object_write*** | Skriv resurser till en objekt instans. |
-| ***nx_lwm2m_client_object_execute*** | Utför åtgärden kör på en resurs av en objekt instans. |
-| ***nx_lwm2m_client_object_create*** | Skapa en ny objekt instans. |
-| ***nx_lwm2m_client_object_delete*** | Ta bort en befintlig objekt instans. |
+| ***nx_lwm2m_client_object_read*** | Läsa resurser från en objektinstans. |
+| ***nx_lwm2m_client_object_discover*** | Hämta listan över resurserna för en objektinstans.
+| ***nx_lwm2m_client_object_write*** | Skriva resurser till en objektinstans. |
+| ***nx_lwm2m_client_object_execute*** | Utför åtgärden Kör på en resurs i en objektinstans. |
+| ***nx_lwm2m_client_object_create*** | Skapa en ny objektinstans. |
+| ***nx_lwm2m_client_object_delete*** | Ta bort en befintlig objektinstans. |
 | ***nx_lwm2m_client_object_next_get*** | Hämta nästa objekt-ID av LWM2M-klienten. |
 | ***nx_lwm2m_client_object_instance_next_get*** | Hämta nästa instans av ett objekt. |
 
 ## <a name="resource-information"></a>Resursinformation
 
-Vid läsning från och skrivning till objekt representeras en resurs av NX_LWM2M_CLIENT_RESOURCE-strukturen. Den här strukturen innehåller ID: t för resursen/instansen och dess värde.
+När du läser från och skriver till objekt representeras en resurs av NX_LWM2M_CLIENT_RESOURCE struktur. Den här strukturen innehåller ID:t för resursen/instansen och dess värde.
 
-Följande funktioner finns för att ange resursinformation och-värde.
+Följande funktioner tillhandahålls för att ange resursinformation och värde.
 
-| Funktions &nbsp; namn | Beskrivning |
+| &nbsp;Funktionsnamn | Description |
 | --- | --- |
-| ***nx_lwm2m_client_resource_info_set*** | Ange resursinformation: resurs-ID och åtgärd: läsa, skriva, KÖRBAR fil. |
-| ***nx_lwm2m_client_resource_string_set*** | Ange resurs värde som sträng. |
-| ***nx_lwm2m_client_resource_integer32_set*** | Ange resurs värde som 32-bitars heltal. |
-| ***nx_lwm2m_client_resource_integer64_set*** | Ange resurs värde som 64-bitars heltal. |
-| ***nx_lwm2m_client_resource_float32_set*** | Ange resurs värde som 32-bitars flyttal. |
-| ***nx_lwm2m_client_resource_float64_set*** | Ange resurs värde som 64-bitars flyttal. |
-| ***nx_lwm2m_client_resource_boolean_set*** | Ange resurs värde som Boolean. |
-| ***nx_lwm2m_client_resource_objlnk_set*** | Ange resurs värde som objekt länk. |
-| ***nx_lwm2m_client_resource_opaque_set*** | Ange resurs värde som ogenomskinligt. |
-| ***nx_lwm2m_client_resource_instance_set*** | Ange resurs värde som instansen för flera resurser. |
-| ***nx_lwm2m_client_resource_dim_set*** | Ange resurs dimensionen för flera resurser för identifiering. |
+| ***nx_lwm2m_client_resource_info_set*** | Ange resursinformation: resurs-ID och åtgärd: LÄSA, SKRIVA, KÖRBAR FIL. |
+| ***nx_lwm2m_client_resource_string_set*** | Ange resursvärdet som sträng. |
+| ***nx_lwm2m_client_resource_integer32_set*** | Ange resursvärdet som 32-bitars heltal. |
+| ***nx_lwm2m_client_resource_integer64_set*** | Ange resursvärdet som 64-bitars heltal. |
+| ***nx_lwm2m_client_resource_float32_set*** | Ange resursvärdet som 32-bitars flyttal. |
+| ***nx_lwm2m_client_resource_float64_set*** | Ange resursvärdet som 64-bitars flyttal. |
+| ***nx_lwm2m_client_resource_boolean_set*** | Ange resursvärdet som booleskt. |
+| ***nx_lwm2m_client_resource_objlnk_set*** | Ange resursvärdet som objektlänk. |
+| ***nx_lwm2m_client_resource_opaque_set*** | Ange resursvärdet som täckande. |
+| ***nx_lwm2m_client_resource_instance_set*** | Ange resursvärdet som instans för flera resurser. |
+| ***nx_lwm2m_client_resource_dim_set*** | Ange resursdimensionen för flera resurser för identifiering. |
 
-Följande funktioner är tillgängliga för att hämta resurs information och-värde.
+Följande funktioner tillhandahålls för att hämta resursinformation och värde.
 
-| Funktions &nbsp; namn | Beskrivning |
+| &nbsp;Funktionsnamn | Description |
 | --- | --- |
-| ***nx_lwm2m_client_resource_info_get*** | Hämta resurs information: resurs-ID och åtgärd: läsa, skriva, KÖRBAR fil. |
-| ***nx_lwm2m_client_resource_string_get*** | Hämta värdet för en sträng resurs. |
-| ***nx_lwm2m_client_resource_integer32_get*** | Hämta värdet för en 32-bitars heltals resurs. |
-| ***nx_lwm2m_client_resource_integer64_get*** | Hämta värdet för en B4-bitars heltals resurs. |
-| ***nx_lwm2m_client_resource_float32_get*** | Hämta värdet för en 32-bitars float-resurs. |
-| ***nx_lwm2m_client_resource_float64_get*** | Hämta värdet för en 64-bitars float-resurs. |
+| ***nx_lwm2m_client_resource_info_get*** | Hämta resursinformation: resurs-ID och åtgärd: LÄSA, SKRIVA, KÖRBAR FIL. |
+| ***nx_lwm2m_client_resource_string_get*** | Hämta värdet för en strängresurs. |
+| ***nx_lwm2m_client_resource_integer32_get*** | Hämta värdet för en 32-bitars heltalsresurs. |
+| ***nx_lwm2m_client_resource_integer64_get*** | Hämta värdet för en b4-bitars heltalsresurs. |
+| ***nx_lwm2m_client_resource_float32_get*** | Hämta värdet för en 32-bitars flyttalsresurs. |
+| ***nx_lwm2m_client_resource_float64_get*** | Hämta värdet för en 64-bitars flyttalsresurs. |
 | ***nx_lwm2m_client_resource_boolean_get*** | Hämta värdet för en boolesk resurs. |
-| ***nx_lwm2m_client_resource_objlnk_get*** | Hämta värdet för en objekt länk resurs. |
-| ***nx_lwm2m_client_resource_opaque_get*** | Hämta värdet för en ogenomskinlig resurs. |
-| ***nx_lwm2m_client_resource_instance_get*** | Hämta resurs instansen för flera resurser. |
-| ***nx_lwm2m_client_resource_dim_get*** | Hämta resurs dimensionen för flera resurser. |
+| ***nx_lwm2m_client_resource_objlnk_get*** | Hämta värdet för en objektlänkresurs. |
+| ***nx_lwm2m_client_resource_opaque_get*** | Hämta värdet för en täckande resurs. |
+| ***nx_lwm2m_client_resource_instance_get*** | Hämta resursinstansen för flera resurser. |
+| ***nx_lwm2m_client_resource_dim_get*** | Hämta resursdimensionen för flera resurser. |
 
-## <a name="object-implementation"></a>Objekt implementering
+## <a name="object-implementation"></a>Objektimplementering
 
-LWM2M-klienten implementerar de obligatoriska OMA LWM2M-objekten: säkerhet (0), Server (1), Access Control (2) och enhet (3). Andra enhets specifika objekt måste implementeras av programmet.
+LWM2M-klienten implementerar de obligatoriska OMA LWM2M-objekten: Säkerhet (0), Server (1), Access Control (2) och Enhet (3). Andra enhetsspecifika objekt måste implementeras av programmet.
 
-Två data strukturer används för att definiera ett objekt: NX_LWM2M_CLIENT_OBJECTs strukturen definierar objekt implementeringen, inklusive objekt-ID och objekt metoder, och NX_LWM2M_CLIENT_OBJECT_INSTANCE strukturen innehåller data för en objekt instans.
+Två datastrukturer används för att definiera ett objekt: NX_LWM2M_CLIENT_OBJECT-strukturen definierar objektimplementering, inklusive objekt-ID och objektmetoder, och NX_LWM2M_CLIENT_OBJECT_INSTANCE-strukturen innehåller data för en objektinstans.
 
-Följande funktioner finns.
+Följande funktioner tillhandahålls.
 
-| Funktions &nbsp; namn | Beskrivning |
+| &nbsp;Funktionsnamn | Description |
 | --- | --- |
-| ***nx_lwm2m_client_object_add*** | Lägg till objekt implementering i LwM2M-klienten. |
-| ***nx_lwm2m_client_object_remove*** | Ta bort objekt implementering från LwM2M-klienten. |
-| ***nx_lwm2m_client_object_instance_add*** | Lägg till objekt instans i objektet. |
-| ***nx_lwm2m_client_object_instance_remove*** | Ta bort objekt instansen från objektet. |
+| ***nx_lwm2m_client_object_add*** | Lägg till objektimplementering till LwM2M-klienten. |
+| ***nx_lwm2m_client_object_remove*** | Ta bort objektimplementering från LwM2M-klienten. |
+| ***nx_lwm2m_client_object_instance_add*** | Lägg till objektinstansen i -objektet. |
+| ***nx_lwm2m_client_object_instance_remove*** | Ta bort objektinstansen från -objektet. |
 
-Funktionen callback för objekt metod innehåller en signatur som visas nedan.
+Återanropsfunktionen för objektmetoden har signaturen som visas nedan.
 
 ```c
 typedef UINT (*NX_LWM2M_CLIENT_OBJECT_OPERATION_CALLBACK)(
@@ -147,113 +147,113 @@ typedef UINT (*NX_LWM2M_CLIENT_OBJECT_OPERATION_CALLBACK)(
     UINT args_length);
 ```
 
-### <a name="the-read-method"></a>Metoden Read
+### <a name="the-read-method"></a>Read-metoden
 
-Metoden Read används för att läsa resurs värden från en objekt instans. Parametrarna definieras enligt följande.
+Metoden "Läsa" används för att läsa resursvärden från en objektinstans. Parametrarna definieras på följande sätt.
 
 | Parameter | Beskrivning |
 | --- | --- |
-| **reparation** | **NX_LWM2M_CLIENT_OBJECT_READ** |
-| **object_ptr** | Pekare till objekt implementeringen. |
-| **instance_ptr** | Pekare till objekt instansen. |
-| **klusterresursen** | Pekar till en matris med **NX_LWM2M_CLIENT_RESOURCE** som innehåller ID: n för de resurser som ska läsas. Vid retur fylls matrisen med motsvarande typer och värden. |
-| **resource_count** | Pekar på antalet resurser som ska läsas. |
+| **Drift** | **NX_LWM2M_CLIENT_OBJECT_READ** |
+| **object_ptr** | Pekare till objektimplementering. |
+| **instance_ptr** | Pekare till objektinstansen. |
+| **resource** | Pekare till en **matris NX_LWM2M_CLIENT_RESOURCE** som innehåller DE RESURSER som ska läsas. Vid retur fylls matrisen med motsvarande typer och värden. |
+| **resource_count** | Pekare till antalet resurser som ska läsas. |
 | **args_ptr** | Oanvänd parameter för läsning. |
 | **args_length** | Oanvänd parameter för läsning. |
 
-### <a name="the-discover-method"></a>Identifiera-metoden
+### <a name="the-discover-method"></a>Identifieringsmetoden
 
-Identifiera-metoden används för att hämta en lista över alla resurser som implementerats av ett objekt. Parametrarna definieras enligt följande.
+Metoden "Identifiera" används för att hämta listan över alla resurser som implementeras av ett objekt. Parametrarna definieras på följande sätt.
 
 | Parameter | Beskrivning |
 | --- | --- |
-| **reparation** | **NX_LWM2M_CLIENT_OBJECT_DISCOVER** |
-| **object_ptr** | Pekare till objekt implementeringen. |
-| **instance_ptr** | Pekare till objekt instansen. |
-| **klusterresursen** | Pekare till en matris med NX_LWM2M_CLIENT_RESOURCE. Vid retur fylls matrisen med motsvarande resursinformation. |
-| **resource_count** | Pekar på antalet resurser som ska identifieras. Vid retur måste den här parametern uppdateras som det sanna värdet. |
+| **Drift** | **NX_LWM2M_CLIENT_OBJECT_DISCOVER** |
+| **object_ptr** | Pekare till objektimplementering. |
+| **instance_ptr** | Pekare till objektinstansen. |
+| **resource** | Pekare till en matris med NX_LWM2M_CLIENT_RESOURCE. När matrisen returneras fylls den med motsvarande resursinformation. |
+| **resource_count** | Pekare till antalet resurser som ska upptäckas. Vid retur måste den här parametern uppdateras som det sanna värdet. |
 | **args_ptr** | Oanvänd parameter för identifiering. |
 | **args_length** | Oanvänd parameter för identifiering. |
 
-### <a name="the-write-method"></a>Write-metoden
+### <a name="the-write-method"></a>Metoden "Write"
 
-Metoden Write används för att uppdatera eller ersätta resurser för en objekt instans. Parametrarna definieras enligt följande.
+Metoden "Write" används för att uppdatera eller ersätta resurser för en objektinstans. Parametrarna definieras på följande sätt.
 
 | Parameter  | Beskrivning |
 | --- | --- |
-| **reparation** | **NX_LWM2M_CLIENT_OBJECT_WRITE** |
-| **object_ptr** | Pekare till objekt implementeringen. |
-| **instance_ptr** | Pekare till objekt instansen. |
-| **klusterresursen** | Pekar till en matris med **NX_LWM2M_CLIENT_RESOURCE** som innehåller ID: n för de resurser som ska läsas. Vid retur fylls matrisen med motsvarande typer och värden. |
-| **resource_count** | Pekar på antalet resurser som ska identifieras. |
+| **Drift** | **NX_LWM2M_CLIENT_OBJECT_WRITE** |
+| **object_ptr** | Pekare till objektimplementering. |
+| **instance_ptr** | Pekare till objektinstansen. |
+| **resource** | Pekare till en **matris NX_LWM2M_CLIENT_RESOURCE** som innehåller DE RESURSER som ska läsas. Vid retur fylls matrisen med motsvarande typer och värden. |
+| **resource_count** | Pekare till antalet resurser som ska upptäckas. |
 | **args_ptr** | Skriv flaggor. |
-| **args_length** | Argumentens längd. |
+| **args_length** | Längden på argumenten. |
 
-Följande Skriv åtgärder kan anges för *flagg* parametern.
+Följande skrivåtgärder kan anges för *flaggparametern.*
 
 | Åtgärd | Åtgärd | Beskrivning |
 | --- | ---| --- |
-| 0 | Partiell uppdatering | Lägger till eller uppdaterar resurser som finns i det nya värdet och lämnar andra befintliga resurser oförändrade.
-| **NX_LWM2M_CLIENT_OBJECT_WRITE_REPLACE_INSTANCE** | Ersätt instans | Ersätter objekt instansen med de nya angivna resurs värdena.
-| **NX_LWM2M_CLIENT_OBJECT_WRITE_REPLACE_RESOURCE** |  Ersätt resurs | Ersätter resurserna med de nya angivna resurs värdena (används för att ersätta flera resurser). |
-| **NX_LWM2M_CLIENT_OBJECT_WRITE_CREATE** | Skapa instans | Initierar den nyligen skapade objekt instansen med de tillhandahållna resurs värdena (anropas från metoden **_nx_lwm2m_object_create_** ). |
-| **NX_LWM2M_CLIENT_OBJECT_WRITE_BOOTSTRAP** | Bootstrap-skrivning | Anropas under bootstrap-sekvens. |
+| 0 | Partiell uppdatering | Lägger till eller uppdaterar resurser som anges i det nya värdet och lämnar andra befintliga resurser oförändrade.
+| **NX_LWM2M_CLIENT_OBJECT_WRITE_REPLACE_INSTANCE** | Ersätt instans | Ersätter objektinstansen med de nya angivna resursvärdena.
+| **NX_LWM2M_CLIENT_OBJECT_WRITE_REPLACE_RESOURCE** |  Ersätt resurs | Ersätter resurserna med de nya angivna resursvärdena (används för att ersätta flera resurser). |
+| **NX_LWM2M_CLIENT_OBJECT_WRITE_CREATE** | Skapa instans | Initierar den nyligen skapade objektinstansen med de angivna resursvärdena (anropas **_från nx_lwm2m_object_create-metoden)._** |
+| **NX_LWM2M_CLIENT_OBJECT_WRITE_BOOTSTRAP** | Bootstrap-skrivning | Anropas under Bootstrap-sekvensen. |
 
-### <a name="the-execute-method"></a>Metoden Execute
+### <a name="the-execute-method"></a>Execute-metoden
 
-Metoden Execute implementerar körningen av en objekt resurs.
+Metoden "Execute" implementerar körningen av en objektresurs.
 
-Indataparametrarna definieras enligt följande.
-
-| Parameter  | Beskrivning |
-| --- | --- |
-| **reparation** | NX_LWM2M_CLIENT_OBJECT_EXECUTE |
-| **object_ptr** | Pekare till objekt implementeringen. |
-| **instance_ptr** | Pekare till objekt instansen. |
-| **klusterresursen** | Pekar till en matris med **NX_LWM2M_CLIENT_RESOURCE** som innehåller ID: n för de resurser som ska läsas. Vid retur fylls matrisen med motsvarande typer och värden. |
-| **resource_count** | Pekar på antalet resurser som ska identifieras. |
-| **args_ptr** | Pekar mot argumenten. |
-| **args_length** | Argumentens längd.  |
-
-Funktionen måste returnera **NX_LWM2M_CLIENT_NOT_FOUND** om resurs-ID: t inte finns eller **NX_LWM2M_CLIENT_METHOD_NOT_ALLOWED** om det inte stöder körning.
-
-### <a name="the-create-method"></a>Metoden Create
-
-Metoden Create implementerar skapandet av en ny objekt instans.
-
-Indataparametrarna definieras enligt följande.
+Indataparametrarna definieras på följande sätt.
 
 | Parameter  | Beskrivning |
 | --- | --- |
-| **reparation** | **NX_LWM2M_CLIENT_OBJECT_CREATE** |
-| **object_ptr** | Pekare till objekt implementeringen. |
+| **Drift** | NX_LWM2M_CLIENT_OBJECT_EXECUTE |
+| **object_ptr** | Pekare till objektimplementering. |
+| **instance_ptr** | Pekare till objektinstansen. |
+| **resource** | Pekare till en **matris NX_LWM2M_CLIENT_RESOURCE** som innehåller DE RESURSER som ska läsas. Vid retur fylls matrisen med motsvarande typer och värden. |
+| **resource_count** | Pekare till antalet resurser som ska upptäckas. |
+| **args_ptr** | Pekare till argumenten. |
+| **args_length** | Längden på argumenten.  |
+
+Funktionen måste returnera **NX_LWM2M_CLIENT_NOT_FOUND** resurs-ID:t inte finns, eller **NX_LWM2M_CLIENT_METHOD_NOT_ALLOWED** om det inte stöder körning.
+
+### <a name="the-create-method"></a>Metoden "Skapa"
+
+Metoden "Skapa" implementerar skapandet av en ny objektinstans.
+
+Indataparametrarna definieras på följande sätt.
+
+| Parameter  | Beskrivning |
+| --- | --- |
+| **Drift** | **NX_LWM2M_CLIENT_OBJECT_CREATE** |
+| **object_ptr** | Pekare till objektimplementering. |
 | **instance_ptr** | Oanvänd parameter. |
-| **klusterresursen** | Pekar till en matris med **NX_LWM2M_CLIENT_RESOURCE** som innehåller ID: n för de resurser som ska läsas. Vid retur fylls matrisen med motsvarande typer och värden. |
-| **resource_count** | Pekar på antalet resurser som ska identifieras. |
-| **args_ptr** | Objekt instans-ID. |
-| **args_length** | Argumentens längd. |
+| **resource** | Pekare till en **matris NX_LWM2M_CLIENT_RESOURCE** som innehåller DE RESURSER som ska läsas. Vid retur fylls matrisen med motsvarande typer och värden. |
+| **resource_count** | Pekare till antalet resurser som ska upptäckas. |
+| **args_ptr** | Objektinstans-ID. |
+| **args_length** | Längden på argumenten. |
 
-### <a name="the-delete-method"></a>Metoden Delete
+### <a name="the-delete-method"></a>Delete-metoden
 
-Metoden Delete implementerar borttagningen av en objekt instans, indataparametrarna definieras enligt följande.
+Metoden "Ta bort" implementerar borttagningen av en objektinstans. Indataparametrarna definieras på följande sätt.
 
 | Parameter  | Beskrivning |
 | --- | --- |
-| **reparation** | NX_LWM2M_CLIENT_OBJECT_DELETE |
-| **object_ptr** | Pekare till objekt implementeringen. |
-| **instance_ptr** | Pekare till objekt instansen. |
-| **klusterresursen** | Oanvänd parameter. |
+| **Drift** | NX_LWM2M_CLIENT_OBJECT_DELETE |
+| **object_ptr** | Pekare till objektimplementering. |
+| **instance_ptr** | Pekare till objektinstansen. |
+| **resource** | Oanvänd parameter. |
 | **resource_count** | Oanvänd parameter. |
 | **args_ptr** | Oanvänd parameter. |
 | **args_length** | Oanvänd parameter. |
 
-Vid lyckad måste objektet frisläppa objekt instans data och andra resurser som allokerats av instansen.
+Om det lyckas måste objektet frigöra objektinstansdata och alla andra resurser som allokerats av instansen.
 
 ## <a name="example-of-lwm2m-client-application"></a>Exempel på LWM2M-klientprogram
 
-Följande kod är ett exempel på ett enkelt LWM2M klient program som implementerar en anpassad enhet som består av en temperatur sensor och en ljus växel.
+Följande kod är ett exempel på ett enkelt LWM2M-klientprogram som implementerar en anpassad enhet som består av en temperatursensor och en lampa.
 
-Enheten gör att en server kan läsa värdet för temperatur sensorn och den booleska statusen för ljus växeln och för att ställa in ljus växeln på/av.
+Enheten gör att en server kan läsa värdet för temperatursensorn och det booleska tillståndet för ljusväxeln och ställa in reglaget på på/av.
 
 ```c
 #include "nx_lwm2m_client.h"

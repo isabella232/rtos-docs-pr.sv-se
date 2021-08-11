@@ -1,78 +1,78 @@
 ---
-title: Bilaga D – GUIX pensel, attribut för arbets yta och toning
-description: Lär dig mer om GUIX-penseln, arbetsytans och Toningens attribut.
+title: Bilaga D – GUIX-pensel, arbetsyteattribut och toningar
+description: Lär dig mer om GUIX-pensel-, arbetsyte- och toningsattribut.
 author: philmea
 ms.author: philmea
 ms.date: 05/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 19c0687a54be244ae395124664b4b6da0f4e90b6
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 9fbc98f1094cab6be4bc0826fef7c0feb77b50b066b22342cd52404bd85ff98e
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104827276"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116784639"
 ---
-# <a name="appendix-d---guix-brush-canvas-and-gradient-attributes"></a>Bilaga D – GUIX pensel, attribut för arbets yta och toning
+# <a name="appendix-d---guix-brush-canvas-and-gradient-attributes"></a>Bilaga D – GUIX-pensel, arbetsyteattribut och toningar
 
-__**Pensel format:**__
+__**Penselformat:**__
 
 **GX_BRUSH_OUTLINE**
 - Värde: 0x0000
-- Beskrivning: det här pensel formatet gäller för form ritnings funktioner som gx_canvas_rectangle_draw eller gx_canvas_polygon_draw. Det här formatet visar att figuren ska vara definierad, förutom att du kan fylla. Om GX_BRUSH_OUTLINE-formatet har angetts och GX_BRSUH_SOLID_FILL är avmarkerat visas figuren bara.
+- Beskrivning: Det här penselformatet gäller för formritningsfunktioner som gx_canvas_rectangle_draw eller gx_canvas_polygon_draw. Det här formatet anger att formen ska beskrivas, förutom att den eventuellt kan fyllas i. Om GX_BRUSH_OUTLINE har angetts och GX_BRSUH_SOLID_FILL rensas, så är formen bara konturerad.
 
 **GX_BRUSH_SOLID_FILL**
 - Värde: 0x0001
-- Beskrivning: det här pensel formatet används för form ritnings funktioner och anger att den begärda formen ska fyllas med en solid färg med den aktuella pensel fyllnings färgen.
+- Beskrivning: Det här penselformatet gäller för formritningsfunktioner och anger att den begärda formen ska fyllas med en solid färg med hjälp av den aktuella penselfyllningsfärgen.
 
 **GX_BRUSH_PIXELMAP_FILL**
 - Värde: 0x0002
-- Beskrivning: det här pensel formatet används för form ritnings funktioner och anger att den önskade formen ska vara ett mönster som är ifyllt med den aktuella penseln Pixelmap.
+- Beskrivning: Det här penselformatet gäller för formritningsfunktioner och anger att den begärda formen ska vara ett mönster fyllt med den aktuella penselpunktskartan.
 
 **GX_BRUSH_ALIAS**
 - Värde: 0x0004
-- Beskrivning: det här pensel formatet gäller för alla linje rit-och form konturer. Om den här flaggan är inställd, ritas linjer och kant linjer med mer exakt, men även mer tid på att använda algoritmer för kant utjämning. Den här format flaggan används bara för 16-BPP färgdjup och högre.
+- Beskrivning: Det här penselformatet gäller för alla linjeritningar och formkontur. Om den här flaggan anges ritas linjer och konturer med mer exakta men även mer tidskrävande antialiasbaserade ritningsalgoritmer. Den här stilflaggan används endast för 16 bpp-färgdjup och högre.
 
 **GX_BRUSH_UNDERLINE**
 - Värde: 0x0008
-- Beskrivning: den här flaggan gäller för text ritning och anger att efterföljande text som ritas ska vara understruken.
+- Beskrivning: Den här flaggan gäller för textritning och anger att efterföljande text som ritas ska vara understruken.
 
 **GX_BRUSH_ROUND**
 - Värde: 0x0010
-- Beskrivning: den här flaggan gäller för linje ritning och anger att linje änd punkter ritas med en runda eller cirkulär form, i stället för standardformen.
+- Beskrivning: Den här flaggan gäller för linjeritning och anger att linjens ändar ritas med en runda eller cirkelformad form, i stället för den förvalda kvadratformen.
 
-__**Flaggor för arbets ytor:**__
+__**Flaggor för arbetsyta:**__
 
 **GX_CANVAS_SIMPLE**
 - Värde: 0x01
-- Beskrivning: en minnes arbets yta som används för att rita på skärmen.
+- Beskrivning: En minnesarbetsyta som används för att rita utanför skärmen.
 
 **GX_CANVAS_MANAGED**
-- Värde: protokollnumret 0x02
-- Beskrivning: en arbets yta som automatiskt töms på den aktiva visningen, antingen som en del av den sammansatta skapande processen eller som en del av växlings åtgärden för en enskild arbets yta.
+- Värde: 0x02
+- Beskrivning: En arbetsyta som automatiskt rensas till den aktiva visningen, antingen som en del av den sammansatta byggprocessen eller som en del av buffertreglageåtgärden för en enda arbetsytearkitektur.
 
 **GX_CANVAS_VISIBLE**
 - Värde: 0x04
-- Beskrivning: den här flaggan kan användas för att aktivera och inaktivera en arbets yta utan att förlora ritnings innehållet i arbets ytan.
+- Beskrivning: Den här flaggan kan användas för att aktivera och inaktivera en arbetsyta utan att förlora arbetsytans ritningsinnehåll.
 
 **GX_CANVAS_MODIFIED**
 - Värde: 0x08
-- Beskrivning: reserverad för framtida användning.
+- Beskrivning: Reserverad för framtida användning.
 
 **GX_CANVAS_COMPOSITE**
 - Värde: 0x20
-- Beskrivning: den här flaggan används av programmet när du konfigurerar ett system med flera arbets ytor som sammansätter flera hanterade arbets ytor i den sammansatta arbets ytan och den sammansatta enheten är driven för maskin varu Rams bufferten.
+- Beskrivning: Den här flaggan används av programmet när du konfigurerar ett system med flera arbetsyteenheter som ska sammansatta flera hanterade arbetsyta i den sammansatta arbetsytan och den sammansatta styrs av maskinvarurambufferten.
 
-__**Tonings typer:**__
+__**Toningstyper:**__
 
 **GX_GRADIENT_TYPE_VERTICAL**
 - Värde: 0x01
-- Beskrivning: skapar en lodrät AlphaMap-övertoning.
+- Beskrivning: Skapar en lodrät alfakartetoning.
 
 **GX_GRADIENT_TYPE_ALPHA**
-- Värde: protokollnumret 0x02
-- Beskrivning: utformerar en tonings toning i alpha-mappar. Detta är för närvarande det enda stödda tonings formatet.
+- Värde: 0x02
+- Beskrivning: Creats an alpha-map style gradient. Detta är för närvarande det enda toningsformat som stöds.
 
 **GX_GRADIENT_TYPE_MIRROR**
 - Värde: 0x04
-- Beskrivning: den här flaggan anger att toningen ska vara hög vid mitten av intervallet för bredd/höjd och återgå till startvärdet när den når höger/nedre kant. Utan den här format flaggan är övertoningen en linjär övertoning från översta till nedre eller från vänster till höger, beroende på GX_GRADIENT_TYPE_VERTICAL flagga.
+- Beskrivning: Den här flaggan anger att toningen ska vara som högst i mitten av bredd-/höjdintervallet och återgå till startvärdet när den når den högra/nedre kanten. Utan den här stilflaggan blir toningen en linjär toning från uppifrån och ned eller från vänster till höger, beroende på GX_GRADIENT_TYPE_VERTICAL flagga.

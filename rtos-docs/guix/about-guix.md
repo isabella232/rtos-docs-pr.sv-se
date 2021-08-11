@@ -1,114 +1,114 @@
 ---
 title: Användarhandbok för Azure RTOS GUIX
-description: Den här guiden innehåller omfattande information om Azure återställnings tider GUIX, den högpresterande GUI-produkten från Microsoft.
+description: Den här guiden innehåller omfattande information Azure RTOS GUIX, den högpresterande GUI-produkten från Microsoft.
 author: philmea
 ms.author: philmea
 ms.date: 5/19/2020
 ms.service: rtos
 ms.topic: article
-ms.openlocfilehash: b7af0fba59b599c9c8db3ab80a3271eacfd11992
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: e7cc1f44648111a75cd6b28d6b98480b721af9c8521e8fcb8cdac6f24c5514e7
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104827291"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116784707"
 ---
-# <a name="about-guix-user-guide"></a>Om Användar handbok för GUIX
+# <a name="about-guix-user-guide"></a>Om GUIX-användarhandbok
 
-Den här guiden innehåller omfattande information om Azure återställnings tider GUIX, den högpresterande GUI-produkten från Microsoft. Den är avsedd för inbäddade program varu utvecklare i real tid som är bekanta med grundläggande GUI-koncept, Azure återställnings tider-ThreadX och programmeringsspråket C.
+Den här guiden innehåller omfattande information Azure RTOS GUIX, den högpresterande GUI-produkten från Microsoft. Den är avsedd för inbäddade realtidsutvecklare som är bekanta med grundläggande GUI-begrepp, Azure RTOS ThreadX och programmeringsspråket C.
 
 ## <a name="organization"></a>Organisation
 
-[Kapitel 1 – Introduktion till Azure återställnings tider GUIX](chapter-1.md)
+[Kapitel 1 – Introduktion till Azure RTOS GUIX](chapter-1.md)
 
-[Kapitel 2 – installation och användning av Azure återställnings tider GUIX](chapter-2.md)
+[Kapitel 2 – Installation och användning av Azure RTOS GUIX](chapter-2.md)
 
-[Kapitel 3 – funktionell översikt över Azure återställnings tider GUIX](chapter-3.md)
+[Kapitel 3 – Funktionell översikt över Azure RTOS GUIX](chapter-3.md)
 
-[Kapitel 4 – Beskrivning av Azure återställnings tider GUIX-tjänster](chapter-4.md)
+[Kapitel 4 – Beskrivning av Azure RTOS GUIX-tjänster](chapter-4.md)
 
-[Kapitel 5 – Azure återställnings tider GUIX display Drivers](chapter-5.md)  
+[Kapitel 5 – Azure RTOS GUIX-visningsdrivrutiner](chapter-5.md)  
 
-[Azure återställnings tider GUIX-exempel](guix-example.md)
+[Azure RTOS GUIX-exempel](guix-example.md)
 
-[Bilaga A – GUIX färg definitioner för Azure återställnings tider](appendix-a.md)
+[Bilaga A – Azure RTOS GUIX-färgdefinitioner](appendix-a.md)
 
-[Bilaga B – färg format för Azure återställnings tider-GUIX](appendix-b.md)
+[Bilaga B – Azure RTOS GUIX-färgformat](appendix-b.md)
 
-[Bilaga C – widgets format för Azure återställnings tider-GUIX](appendix-c.md)
+[Bilaga C – Azure RTOS GUIX-widgetformat](appendix-c.md)
 
-[Bilaga D – Azure återställnings tider GUIX pensel, attribut för arbets yta och toning](appendix-d.md)
+[Bilaga D – Azure RTOS GUIX-pensel, arbetsyteattribut och toningar](appendix-d.md)
 
-[Bilaga E – händelse Beskrivning för Azure återställnings tider GUIX](appendix-e.md)
+[Bilaga E – Azure RTOS GUIX-händelsebeskrivning](appendix-e.md)
 
-[Bilaga F – Azure återställnings tider GUIX återställnings tider binding Services](appendix-f.md)
+[Bilaga F – Azure RTOS GUIX RTOS-bindningstjänster](appendix-f.md)
 
-[Bilaga G – Azure återställnings tider GUIX-teckensnitts struktur](appendix-g.md)
+[Bilaga G – Azure RTOS GUIX-teckenstruktur](appendix-g.md)
 
-[Bilaga H – Azure återställnings tider-GUIX Build-Time konfigurations flaggor](appendix-h.md)
+[Bilaga H – Azure RTOS GUIX Build-Time Configuration-flaggor](appendix-h.md)
 
-[Bilaga I – Azure återställnings tider GUIX informations strukturer](appendix-i.md)
+[Bilaga I – Azure RTOS GUIX-informationsstrukturer](appendix-i.md)
 
-## <a name="guide-conventions"></a>Guide konventioner
+## <a name="guide-conventions"></a>Guidekonventioner
 
-*Kursiv stil* – teckensnittet noterar bok titlar, betonar viktiga ord och indikerar variabler.
+*Italics* – Typeface anger boktitlar, betonar viktiga ord och anger variabler.
 
-**Fetstil** – typsnitt anger fil namn, viktiga ord och betonar viktiga ord och variabler.
+**Boldface** – Typeface anger filnamn, nyckelord och betonar viktiga ord och variabler ytterligare.
 
 > [!IMPORTANT]
-> Informations symboler drar uppmärksamheten till viktig eller ytterligare information som kan påverka prestandan eller funktionen.
+> Informationssymboler uppmärksammar viktig eller ytterligare information som kan påverka prestanda eller funktion.
 
-## <a name="azure-rtos-guix-data-types"></a>Data typer för Azure dataåterställnings tiders-GUIX
+## <a name="azure-rtos-guix-data-types"></a>Azure RTOS GUIX-datatyper
 
-Förutom de anpassade data typerna för kontroll strukturen i Azure återställnings tider-GUIX, finns det flera särskilda data typer som används i Azure återställnings tider GUIX service Call-gränssnitt. Dessa särskilda data typer mappar direkt till data typer för den underliggande C-kompilatorn. Detta görs för att säkerställa portabilitet mellan olika C-kompilatorer. Den exakta implementeringen ärvs från ThreadX och kan hittas i filen ***tx_port. h*** som ingår i ThreadX-distributionen.
+Förutom de anpassade GUIX Azure RTOS-kontrollstrukturdatatyperna finns det flera särskilda datatyper som används i anropsgränssnitten Azure RTOS GUIX-tjänsten. Dessa särskilda datatyper mappar direkt till datatyper för den underliggande C-kompilatorn. Detta görs för att säkerställa portabilitet mellan olika C-kompilatorer. Den exakta implementeringen ärvs från ThreadX och finns i ***filen tx_port.h*** som ingår i ThreadX-distributionen.
 
-Följande är en lista över data typer för Azure återställnings tider GUIX service Call och deras associerade betydelser:
+Följande är en lista över de Azure RTOS GUIX-tjänstens anropsdatatyper och deras associerade betydelser:
 
 | <!-- --> | <!-- --> |
 | --------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| **UINT**             | Basic-osignerat heltal. Den här typen är mappad till den mest användbara osignerade data typen.                                |
-| **INT**              | Basic-signerat heltal. Den här typen är mappad till den mest praktiska signerade data typen.                                    |
+| **Uint**             | Grundläggande osignerat heltal. Den här typen mappas till den mest praktiska osignerade datatypen.                                |
+| **INT**              | Grundläggande signerat heltal. Den här typen mappas till den mest praktiska signerade datatypen.                                    |
 | **ULONG**            | Osignerad lång typ. Den här typen måste ha stöd för 32-bitars osignerade data.                                                      |
-| **VOID**             | Nästan alltid ekvivalent med kompilatorns void-typ.                                                                 |
-| **GX_CHAR**         | Oftast TypeDef som den definierade tecken typen compiler.                                                               |
+| **Void**             | Nästan alltid likvärdigt med kompilatorns void-typ.                                                                 |
+| **GX_CHAR**         | Skriv oftastdefed som den kompilatordefinierade teckentypen.                                                               |
 | **GX_BYTE**          | 8-bitars signerad typ.                                                                                                    |
 | **GX_UBYTE**         | 8-bitars osignerad typ.                                                                                                  |
-| **GX_VALUE**        | 16-eller 32-bitars signerad typ. Definieras som nödvändig för bästa prestanda på mål systemet.                                |
-| **GX_FIXED_VAL**   | Numerisk datatyp för fast punkt.                                                                                        |
+| **GX_VALUE**        | 16- eller 32-bitars signerad typ. Definieras efter behov för bästa prestanda i målsystemet.                                |
+| **GX_FIXED_VAL**   | Numerisk datatyp med fast punkt.                                                                                        |
 | **GX_RESOURCE_ID** | Osignerad lång typ.                                                                                                   |
 | **GX_COLOR**        | Osignerad lång typ.                                                                                                   |
-| **GX_STRING**       | Struktur som innehåller GX_CHAR \* gx_string_ptr och UINT gx_string_length.                                          |
+| **GX_STRING**       | Struktur som GX_CHAR \* gx_string_ptr UINT-gx_string_length.                                          |
 | **GX_POINT**        | Struktur som innehåller gx_point_x och gx_point_y.                                                                   |
-| **GX_RECTANGLE**    | Struktur som innehåller gx_rectangle_left, gx_rectangle_top, gx_rectangle_right och gx_rectangle_bottom fält. |
-| **GX_GLYPH**        | Struktur som innehåller Glyph-mått.                                                                                   |
-| **GX_FONT**         | Struktur som innehåller teckensnitts mått.                                                                                    |
-| **GX_BRUSH**        | Struktur som innehåller pensel mått.                                                                               |
-**GX_PIXELMAP**       | Struktur som innehåller Pixelmap-mått.
+| **GX_RECTANGLE**    | Struktur som gx_rectangle_left, gx_rectangle_top, gx_rectangle_right och gx_rectangle_bottom fält. |
+| **GX_GLYPH**        | Struktur som innehåller glyph-mått.                                                                                   |
+| **GX_FONT**         | Struktur som innehåller teckensnittsmått.                                                                                    |
+| **GX_BRUSH**        | Struktur som innehåller penselmått.                                                                               |
+**GX_PIXELMAP**       | Struktur som innehåller pixelkarta-mått.
 
-Ytterligare data typer används i Azure återställnings tider GUIX-källan. De finns antingen i ***tx_port. h** _ eller _ *_gx_port. h_** filer.
+Ytterligare datatyper används i den Azure RTOS GUIX-källan. De finns antingen i filerna ***tx_port.h** _ eller _ *_gx_port.h_** .
 
-## <a name="customer-support-center"></a>Kund Support Center
+## <a name="customer-support-center"></a>Kundsupport
 
-Skicka in ett support ärende via Azure Portal om du har frågor eller hjälp med att följa stegen här. Lämna oss med följande information i ett e-postmeddelande så att vi effektivare kan lösa support förfrågan:
+Skicka en supportbiljett via Azure-portalen för frågor eller hjälp med att följa stegen här. Ange följande information i ett e-postmeddelande så att vi kan lösa din supportbegäran mer effektivt:
 
-1. En detaljerad beskrivning av problemet, inklusive frekvensen av händelser och huruvida det kan återskapas tillförlitligt.
+1. En detaljerad beskrivning av problemet, inklusive förekomstfrekvens och huruvida det kan återskapas på ett tillförlitligt sätt.
 
-2. En detaljerad beskrivning av eventuella ändringar i programmet och/eller Azure återställnings tider-GUIX som föregåde problemet.
+2. En detaljerad beskrivning av eventuella ändringar i programmet och/eller Azure RTOS GUIX som föregick problemet.
 
-3. Innehållet i _tx_version_id-och _gx_version_id-strängar som finns i ***tx_port. h**_ -och _ *_gx_port. h_**-filerna i distributionen. De här strängarna ger oss värdefull information om din kör tids miljö.
+3. Innehållet i _tx_version_id och gx_version_id i _filerna ***tx_port.h**_ och _ *_gx_port.h_** för distributionen. Dessa strängar ger oss värdefull information om din körningsmiljö.
 
 4. Innehållet i RAM-minnet för följande ULONG-variabler:
 
     **_tx_build_options** **_gx_system_build_options**
 
-    Dessa variabler ger oss information om hur dina Azure återställnings tider ThreadX-och Azure återställnings tider GUIX-bibliotek skapades.
+    De här variablerna ger oss information om hur Azure RTOS ThreadX och Azure RTOS GUIX-biblioteken har skapats.
 
 5. Innehållet i RAM-minnet för följande ULONG-variabler:
 
     **_gx_system_last_error** **_gx_system_error_count**
 
-    Dessa variabler håller koll på interna systemfel i Azure återställnings tider GUIX. Om _gx_system_error_count är större än en måste du ange en Bryt punkt för funktionen i funktionen _gx_system_error_process och ange värdet för _gx_system_last_error i det här läget. Detta ger det första interna Azure återställnings tider GUIX-systemfel.
+    Dessa variabler håller reda på interna systemfel i Azure RTOS GUIX. Om _gx_system_error_count är större än en anger du en brytpunkt för funktionen som returneras i _gx_system_error_process-funktionen och anger värdet för _gx_system_last_error nu. Detta ger den första interna Azure RTOS GUIX-systemfel.
 
-6. En spårnings-buffert som samlats in omedelbart efter det att problemet upptäcktes. Detta åstadkommer du genom att skapa Azure återställnings tider-ThreadX och Azure återställnings tider GUIX-biblioteken med TX_ENABLE_EVENT_TRACE och anropa tx_trace_enable med information om spårnings-bufferten.
+6. En spårningsbuffert avbildas omedelbart efter att problemet har identifierats. Detta åstadkoms genom att skapa Azure RTOS ThreadX- och Azure RTOS GUIX-bibliotek med TX_ENABLE_EVENT_TRACE och anropa tx_trace_enable med spårningsbuffertinformationen.
 
-7. Azure återställnings tider GUIX Studio-projektet som du använder, om det är tillämpligt eller minst ett litet projekt tillräckligt litet för att demonstrera den brist som du rapporterar.
+7. Det Azure RTOS GUIX Studio-projekt som du använder, om tillämpligt, eller åtminstone ett litet projekt som är tillräckligt för att demonstrera vilken brist du rapporterar.

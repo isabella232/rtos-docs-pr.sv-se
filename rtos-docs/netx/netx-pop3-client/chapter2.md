@@ -1,46 +1,46 @@
 ---
-title: Kapitel 2 – installation och användning av Azure återställnings tider NetX POP3-klienten
-description: NetX POP3-klienten innehåller en källfil, en rubrik fil och en demonstrations fil. Det finns två ytterligare filer för MD5 Digest-tjänster.
+title: Kapitel 2 – Installation och användning av Azure RTOS NetX POP3-klient
+description: NetX POP3 Client innehåller en källfil, en rubrikfil och en demofil. Det finns ytterligare två filer för MD5-sammanfattande tjänster.
 author: philmea
 ms.author: philmea
 ms.date: 06/04/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 24de396c69d458866f9423fd995bcb8d905f29c8
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: e8fc4f1194e423efdd179c3b7f33c3935bf683fcdd0321d83a7510dc6bdffb81
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104826664"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116783398"
 ---
-# <a name="chapter-2---installation-and-use-of-azure-rtos-netx-pop3-client"></a>Kapitel 2 – installation och användning av Azure återställnings tider NetX POP3-klienten
+# <a name="chapter-2---installation-and-use-of-azure-rtos-netx-pop3-client"></a>Kapitel 2 – Installation och användning av Azure RTOS NetX POP3-klient
 
-NetX POP3-klienten innehåller en källfil, en rubrik fil och en demonstrations fil. Det finns två ytterligare filer för MD5 Digest-tjänster. Det finns också en PDF-fil för användar guiden (det här dokumentet).
+NetX POP3 Client innehåller en källfil, en rubrikfil och en demofil. Det finns ytterligare två filer för MD5-sammanfattande tjänster. Det finns också en PDF-fil med användarhandboken (det här dokumentet).
 
-- **nx_pop3_client. c**: c-källfil för netx POP3-klient-API
-- **nx_pop3_client. h**: C-huvud fil för netx POP3-klient-API
-- **demo_netxduo_pop3_client. c**: demo filen för skapande av POP3-klienten och initiering av session
-- **nx_md5. c**: c-källfil som definierar MD5 Digest-tjänster
-- **nx_md5. h**: C-rubrik fil som definierar MD5 Digest-tjänster
-- **nx_pop3_client.pdf**: netx POP3-klient Användar handbok
+- **nx_pop3_client.c:** C-källfil för NetX POP3-klient-API
+- **nx_pop3_client.h:** C-huvudfil för NetX POP3-klient-API
+- **demo_netxduo_pop3_client.c:** Demofil för skapande av POP3-klient och sessionsinitiering
+- **nx_md5.c:** C-källfil som definierar MD5-sammanfattande tjänster
+- **nx_md5.h:** C-huvudfil som definierar MD5-sammanfattande tjänster
+- **nx_pop3_client.pdf:** Användarhandbok för NetX POP3-klient
 
-Om du vill använda NetX POP3-klienten kan hela distributionen som du tidigare kopiera till samma katalog som NetX är installerad på. Om NetX till exempel är installerat i katalogen "*\threadx\mcf5272\green*", ska *nx_md5. h*, *nx_md5. c,* *nx_pop3_client. h och nx_pop3_client. c* -filer kopieras till den här katalogen.
+Om du vill använda NetX POP3-klienten kan hela distributionen som nämns ovan kopieras till samma katalog där NetX är installerat. Om NetX till exempel är installerat i katalogen "*\threadx\mcf5272\green*" ska filerna *nx_md5.h,* *nx_md5.c,* *nx_pop3_client.h och nx_pop3_client.c* kopieras till den här katalogen.
 
-## <a name="using-netx-pop3-client"></a>Använda NetX POP3-klienten
+## <a name="using-netx-pop3-client"></a>Använda NetX POP3-klient
 
-Om du vill använda NetX POP3-klient tjänsten måste programmet lägga till *nx_pop3_client. c* i sitt build-projekt. Program koden måste innehålla *nx_md5. h, nx_pop3. h och nx_pop3_client. h* efter *tx_api. h* och *nx_api. h* för att kunna använda ThreadX och netx.
+Om du vill använda NetX POP3-klienttjänsten måste programmet *lägga till nx_pop3_client.c i* sitt byggprojekt. Programkoden måste innehålla *nx_md5.h, nx_pop3.h och nx_pop3_client.h* efter *tx_api.h* *och nx_api.h* för att threadX och NetX ska kunna användas.
 
-Filerna måste kompileras på samma sätt som andra programfiler och objekt koden måste vara länkad tillsammans med programmets filer. Detta är allt som krävs för att använda NetX POP3-klienten.
+De här filerna måste kompileras på samma sätt som andra programfiler och objektkoden måste länkas tillsammans med programmets filer. Det här är allt som krävs för att använda NetX POP3-klienten.
 
-## <a name="small-example-of-the-netx-pop3-client"></a>Litet exempel på POP3-klienten för NetX
+## <a name="small-example-of-the-netx-pop3-client"></a>Litet exempel på NetX POP3-klienten
 
-Ett exempel på hur du använder NetX POP3-klient tjänster beskrivs i bild 1 som visas nedan. Den här demon konfigurerar de två återanropen för att skicka meddelanden om hämtning av e-post och slut för ande av sessioner på raderna 37 och 38. POP3-klientens adresspool skapas på rad 76. Aktiviteten IP-tråd skapas på rad 88. Observera att denna adresspool också används för POP3-klientens adresspool. TCP är aktiverat på IP-uppgiften på rad 107.
+Ett exempel på hur du använder NetX POP3-klienttjänster beskrivs i bild 1 som visas nedan. I den här demonstrationen konfigureras de två återanropen för meddelanden om nedladdning av e-post och slutförande av sessioner på raderna 37 och 38. POP3-klientpaketpoolen skapas på rad 76. IP-trådaktiviteten skapas på rad 88. Observera att den här paketpoolen också används för POP3-klientpaketpoolen. TCP är aktiverat för IP-aktiviteten på rad 107.
 
-POP3-klienten skapas på rad 133 i funktionen för tråd inmatning i programmet *demo_thread_entry*. Detta beror på att *nx_pop3_client_creates* tjänsten även försöker upprätta en TCP-anslutning till POP3-servern. Om det lyckas frågar programmet POP3-servern efter antalet objekt i dess maildrop på rad 149 med hjälp av tjänsten *nx_pop3_client_mail_items_get* .
+POP3-klienten skapas på rad 133 i programtrådens postfunktion, *demo_thread_entry*. Det beror på att *nx_pop3_client_create* också försöker upprätta en TCP-anslutning med POP3-servern. Om det lyckas frågar programmet POP3-servern efter antalet objekt i sin maildrop på rad 149 med *hjälp av nx_pop3_client_mail_items_get tjänsten.*
 
-Om det finns ett eller flera objekt itererar programmet igenom slingan för varje e-postobjekt för att hämta e-postmeddelandet. RETR-begäran görs på rad 149 i *nx_pop3_client_mail_item_get* -anropet. Om det lyckas laddar programmet ned paket med hjälp av *nx_pop3_client_mail_item_message_get* tjänsten på rad 177 till den identifierar det sista paketet i meddelandet har tagits emot på rad 196. Slutligen tar programmet bort e-postobjektet, förutsatt att en lyckad nedladdning har skett på rad 199 i *nx_pop3_client_mail_item_delete* -anropet. RFC 1939 rekommenderar att POP3-klienter instruerar servern att ta bort hämtade e-postobjekt för att förhindra att e-post ackumuleras i klientens maildrop. Servern kan ändå göra det automatiskt.
+Om det finns ett eller flera objekt itererar programmet genom while-loopen för varje e-postobjekt för att ladda ned e-postmeddelandet. RETR-begäran görs på rad 149 i *det nx_pop3_client_mail_item_get anropet.* Om det lyckas laddar programmet ned paket med *hjälp av nx_pop3_client_mail_item_message_get-tjänsten* på rad 177 tills det upptäcker att det sista paketet i meddelandet har tagits emot på rad 196. Slutligen tar programmet bort e-postobjektet, förutsatt att en lyckad nedladdning har gjorts på rad 199 *i nx_pop3_client_mail_item_delete anropet.* RFC 1939 rekommenderar att POP3-klienter instruerar servern att ta bort nedladdade e-postobjekt för att förhindra att e-post ackumuleras i klientens maildrop. Servern kan göra det ändå automatiskt.
 
-När alla e-postobjekt har laddats ned, eller om ett anrop till POP3-klienten Miss lyckas, avslutar programmet och tar bort POP3-klienten på rad 217 med hjälp av tjänsten *nx_pop3_client_delete* .
+När alla e-postobjekt har laddats ned, eller om ett POP3-klienttjänstanrop misslyckas, avslutas loopen och POP3-klienten tas bort på rad 217 *med hjälp av nx_pop3_client_delete tjänsten.*
 
 ```c
 /*
@@ -250,24 +250,24 @@ NX_PACKET     *packet_ptr;
 }
 ```
 
-Bild 1. Exempel på ett NetX POP3-klient program
+Bild 1. Exempel på ett NetX POP3-klientprogram
 
-## <a name="pop3-client-configuration-options"></a>Konfigurations alternativ för POP3-klienten
+## <a name="pop3-client-configuration-options"></a>Konfigurationsalternativ för POP3-klient
 
-Det finns flera konfigurations alternativ med NetX POP3-klienten. Nedan visas en lista över alla alternativ som beskrivs i detalj:
+Det finns flera konfigurationsalternativ med NetX POP3-klienten. Här följer en lista över alla alternativ som beskrivs i detalj:
 
-- **NX_POP3_CLIENT_PACKET_TIMEOUT**: Detta definierar vänte alternativet i sekunder för POP3-klienten för att allokera ett paket. Standardvärdet är 1 sekund.
+- **NX_POP3_CLIENT_PACKET_TIMEOUT:** Detta definierar väntealternativet i sekunder för POP3-klienten att allokera ett paket. Standardvärdet är 1 sekund.
 
-- **NX_POP3_CLIENT_CONNECTION_TIMEOUT**: Detta definierar vänte alternativet i sekunder för POP3-klienten att ansluta till POP3-servern. Standardvärdet är 30 sekunder.
+- **NX_POP3_CLIENT_CONNECTION_TIMEOUT:** Detta definierar väntealternativet i sekunder för POP3-klienten att ansluta till POP3-servern. Standardvärdet är 30 sekunder.
 
-- **NX_POP3_CLIENT_DISCONNECT_TIMEOUT**: Detta definierar vänte alternativet i sekunder för att POP3-klienten ska koppla från POP3-servern. Standardvärdet är 2 sekunder.
+- **NX_POP3_CLIENT_DISCONNECT_TIMEOUT:** Detta definierar väntealternativet i sekunder för POP3-klienten att koppla från POP3-servern. Standardvärdet är 2 sekunder.
 
-- **NX_POP3_TCP_SOCKET_SEND_WAIT**: det här alternativet anger vänte alternativet i sekunder i *nx_tcp_socket_send* tjänst anrop. Standardvärdet är 2 sekunder.
+- **NX_POP3_TCP_SOCKET_SEND_WAIT:** Det här alternativet anger väntealternativet i sekunder i *nx_tcp_socket_send tjänstsamtal.* Standardvärdet är 2 sekunder.
 
-- **NX_POP3_SERVER_REPLY_TIMEOUT**: det här alternativet anger vänte alternativet i *nx_tcp_socket_receive* tjänst anrop för att servern ska svara på en klientbegäran. Standardvärdet är 10 sekunder.
+- **NX_POP3_SERVER_REPLY_TIMEOUT:** Det här alternativet anger väntealternativet *i nx_tcp_socket_receive* för serversvar på en klientbegäran. Standardvärdet är 10 sekunder.
 
-- **NX_POP3_CLIENT_TCP_WINDOW_SIZE**: det här alternativet anger storleken på KLIENTens TCP-mottagningsfönstret. Detta ska vara inställt på IP-instansens MTU-storlek minus IP-och TCP-huvud. Standardvärdet är 1460.
+- **NX_POP3_CLIENT_TCP_WINDOW_SIZE:** Det här alternativet anger storleken på klientens TCP-mottagningsfönster. Detta ska anges till MTU-storleken för IP-instansen minus IP- och TCP-huvudet. Standardvärdet är 1460.
 
-- **NX_POP3_MAX_USERNAME**: det här alternativet anger storleken på bufferten för POP3-klientens användar namn. Standardvärdet är 40 byte.
+- **NX_POP3_MAX_USERNAME:** Det här alternativet anger storleken på bufferten för POP3-klientens användarnamn. Standardvärdet är 40 byte.
 
-- **NX_POP3_MAX_PASSWORD**: det här alternativet anger storleken på bufferten för POP3-klientens lösen ord. Standardvärdet är 20 byte.
+- **NX_POP3_MAX_PASSWORD:** Det här alternativet anger storleken på bufferten för POP3-klientlösenordet. Standardvärdet är 20 byte.

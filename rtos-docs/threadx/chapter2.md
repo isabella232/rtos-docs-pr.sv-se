@@ -1,93 +1,93 @@
 ---
-title: Kapitel 2 – installation och användning av Azure återställnings tider ThreadX
-description: Det här kapitlet innehåller en beskrivning av olika problem som rör Installation, konfiguration och användning av Azure återställnings tider ThreadX-kärnan med höga prestanda.
+title: Kapitel 2 – Installation och användning av Azure RTOS ThreadX
+description: Det här kapitlet innehåller en beskrivning av olika problem som rör installation, installation och användning av den högpresterande Azure RTOS ThreadX-kerneln.
 author: philmea
 ms.author: philmea
 ms.date: 05/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: e1bf85d363b07c81f226d494107eae9ba18114a7
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: a88dc75c3b01e8054f72b3e1475791f064eac0ded02b22ccd18dd46da8c7200a
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104825455"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116785047"
 ---
-# <a name="chapter-2---installation-and-use-of-azure-rtos-threadx"></a>Kapitel 2 – installation och användning av Azure återställnings tider ThreadX
+# <a name="chapter-2---installation-and-use-of-azure-rtos-threadx"></a>Kapitel 2 – Installation och användning av Azure RTOS ThreadX
 
-Det här kapitlet innehåller en beskrivning av olika problem som rör Installation, konfiguration och användning av Azure återställnings tider ThreadX-kärnan med höga prestanda.
+Det här kapitlet innehåller en beskrivning av olika problem som rör installation, installation och användning av den högpresterande Azure RTOS ThreadX-kerneln.
 
-## <a name="host-considerations"></a>Värd överväganden
+## <a name="host-considerations"></a>Värdöverväganden
 
-Inbäddad program vara utvecklas vanligt vis på Windows-eller Linux-värddatorer (UNIX). När programmet har kompilerats, länkats och finns på värden laddas den ned till mål maskin varan för körning.
+Inbäddad programvara utvecklas vanligtvis på Windows- eller Linux-värddatorer (Unix). När programmet har kompilerats, länkats och finns på värden laddas det ned till målmaskinvaran för körning.
 
-Normalt görs mål hämtningen från utvecklings verktygets fel sökare. När nedladdningen är klar ansvarar fel söknings programmet för att tillhandahålla mål körnings kontroll (gå till, stoppa, Bryt punkt osv.) samt åtkomst till minne och processor register.
+Vanligtvis görs målnedladdningen inifrån felsökningsprogrammet för utvecklingsverktyget. När nedladdningen är klar ansvarar felsökningsprogrammet för att tillhandahålla målkörningskontroll (go, halt, brytpunkt osv.) samt åtkomst till minne och processorregister.
 
-De flesta utvecklings verktyg för fel sökning kommunicerar med mål maskin varan via OCD-anslutningar (on-chip debug) som JTAG (IEEE 1149,1) och fel söknings läge för bakgrunden (BDM). Fel sökare kommunicerar också med mål maskin vara via ICE-anslutningar (In-Circuit emulation). Både OCD-och ICE-anslutningar ger robusta lösningar med minimalt intrång på den inhemske program varan.
+De flesta felsökningsverktyg kommunicerar med målmaskinvaran via OCD-anslutningar (On-Chip Debug), till exempel JTAG (IEEE 1149.1) och Bakgrundsfelsökningsläge (BDM). Felsökare kommunicerar också med målmaskinvaran via In-Circuit(ICE)-anslutningar. Både OCD- och ICE-anslutningar ger robusta lösningar med minimal intrång på målprogramvaran.
 
-För resurser som används på värden levereras käll koden för ThreadX i ASCII-format och kräver cirka 1 MB utrymme på värddatorns hård disk.
+Precis som för resurser som används på värden levereras källkoden för ThreadX i ASCII-format och kräver cirka 1 MB utrymme på värddatorns hårddisk.
 
-## <a name="target-considerations"></a>Mål överväganden
+## <a name="target-considerations"></a>Målöverväganden
 
-ThreadX kräver mellan 2 KByte och 20 KB skrivskyddat minne (ROM) på målet. Det kräver också ytterligare 1 till 2 KByte av målets RAM-minne (Random Access Memory) för ThreadX system stack och andra globala data strukturer.
+ThreadX kräver mellan 2 KByte och 20 KByte skrivskyddad minne (ROM) på målet. Det krävs även ytterligare 1 till 2 KByte av målets RAM-minne (Random Access Memory) för ThreadX-systemstacken och andra globala datastrukturer.
 
-För timer-relaterade funktioner som tids gränser för tjänst anrop, tids segmentering och programtimers för att fungera, måste den underliggande mål maskin varan tillhandahålla en regelbunden avbrotts källa. Om processorn har den här funktionen används den av ThreadX. Annars, om mål processorn inte har möjlighet att generera ett periodiskt avbrott måste användarens maskin vara tillhandahålla den. Installationen och konfigurationen av det tidsinställda avbrottet finns vanligt vis i ***tx_initialize_low_level*** sammansättnings filen i ThreadX-distributionen.
+För timerrelaterade funktioner som time out-time-out för tjänstanrop, tidsslikning och programtimer för att fungera måste den underliggande målmaskinvaran tillhandahålla en periodisk avbrottskälla. Om processorn har den här funktionen används den av ThreadX. Om målprocessorn inte har möjlighet att generera ett regelbundet avbrott måste användarens maskinvara ange det. Installation och konfiguration av timeravbrottet finns vanligtvis i tx_initialize_low_level ***i*** ThreadX-distributionen.
 
 > [!NOTE]
-> *ThreadX fungerar fortfarande även om ingen återkommande timer-källa för avbrott är tillgänglig. Men ingen av de timer-relaterade tjänsterna fungerar.*
+> *ThreadX fungerar fortfarande även om det inte finns någon källa för periodiskt timeravbrott. Ingen av de timerrelaterade tjänsterna fungerar dock.*
 
-## <a name="product-distribution"></a>Produkt distribution
+## <a name="product-distribution"></a>Produktdistribution
 
-Azure återställnings tider-ThreadX kan hämtas från vår offentliga käll kods lagrings plats på <https://github.com/azure-rtos/threadx/> .
+Azure RTOS ThreadX kan hämtas från vår offentliga källkodsdatabas på <https://github.com/azure-rtos/threadx/> .
 
-Följande är en lista över flera viktiga filer i lagrings platsen.
+Följande är en lista över flera viktiga filer på lagringsplatsen.
 
-| Sökväg | Beskrivning |
+| Filnamn | Description |
 |------------------- | ----------- |
-| **tx_api. h**                      | C-huvudfilen som innehåller alla system likställda, data strukturer och tjänst prototyper.                                                             |
-| **tx_port. h**                     | C-huvudfil som innehåller alla utvecklings verktyg och targetspecific data definitioner och strukturer.                                                 |
-| **demo_threadx. c**                | C-fil som innehåller ett litet demo program.                                                                                                       |
-| **TX. a (eller TX. lib)**              | Binär version av ThreadX C-biblioteket som distribueras med *standard* paketet.                                                          |
+| **tx_api.h**                      | C-rubrikfilen som innehåller alla system är lika med, datastrukturer och tjänstprototyper.                                                             |
+| **tx_port.h**                     | C-rubrikfil som innehåller alla utvecklingsverktyget och målspecifika datadefinitioner och strukturer.                                                 |
+| **demo_threadx.c**                | C-fil som innehåller ett litet demoprogram.                                                                                                       |
+| **tx.a (eller tx.lib)**              | Binär version av ThreadX C-biblioteket som distribueras med *standardpaketet.*                                                          |
 |                                   |                                                                                                                                                   |
 
 >[!NOTE]
->*Alla fil namn är i gemener. Med den här namngivnings konventionen blir det enklare att konvertera kommandon till plattformar med Linux (UNIX).*
+>*Alla filnamn har gemener. Den här namngivningskonventionen gör det enklare att konvertera kommandona till Linux-utvecklingsplattformar (Unix).*
 
 ## <a name="threadx-installation"></a>ThreadX-installation
 
-ThreadX installeras genom att klona GitHub-lagringsplatsen till den lokala datorn. Följande är en typisk syntax för att skapa en klon av ThreadX-lagringsplatsen på din dator.
+ThreadX installeras genom att klona GitHub på den lokala datorn. Följande är en vanlig syntax för att skapa en klon av ThreadX-lagringsplatsen på datorn.
 
 ```c
     git clone https://github.com/azure-rtos/threadx
 ```
 
-Alternativt kan du ladda ned en kopia av lagrings platsen med hjälp av knappen Ladda ned på GitHub-huvud sidan.
+Du kan också ladda ned en kopia av lagringsplatsen med hjälp av nedladdningsknappen GitHub på huvudsidan.
 
-Du hittar också instruktioner för att skapa ThreadX-biblioteket på den första sidan i online-lagringsplatsen.
+Du hittar också anvisningar för att skapa ThreadX-biblioteket på startsidan för onlinedatabasen.
 
 > [!NOTE]
-> * Program varan behöver åtkomst till biblioteks filen ThreadX (vanligt vis **TX. a** eller **TX. lib**) och C include-filerna **_tx_api. h_* _ och _*_tx_port. h_*_. Detta åstadkommer du genom att ange lämplig sökväg för utvecklingsverktyg eller genom att kopiera filerna till program utvecklingen area._
+> *Programprogramvaran behöver åtkomst till ThreadX-biblioteksfilen (vanligtvis **tx.a** eller **tx.lib**) och C innehåller filerna **_tx_api.h_* _ _*_och tx_port.h_*_. Detta åstadkoms antingen genom att ange lämplig sökväg för utvecklingsverktygen eller genom att kopiera dessa filer till area._
 
 ## <a name="using-threadx"></a>Använda ThreadX
 
-Om du vill använda ThreadX måste program koden innehålla ***tx_api. h** _ under kompileringen och länka med ThreadX för kör tids biblioteket _*_TX. a_*_ (eller _ *_TX. lib_* *).
+Om du vill använda ThreadX måste programkoden innehålla ***tx_api.h** _ under kompileringen och länka till ThreadX-körningsbiblioteket _*_tx.a_*_ (eller _*_tx.lib_**).
 
-Det krävs fyra steg för att bygga ett ThreadX-program.
+Det krävs fyra steg för att skapa ett ThreadX-program.
 
-1. Inkludera filen ***tx_api. h*** i alla filer som använder ThreadX Services eller data strukturer.
+1. Inkludera filen ***tx_api.h*** i alla programfiler som använder ThreadX-tjänster eller datastrukturer.
 
-1. Skapa standard C *-funktionen **main** _. Den här funktionen måste slutligen anropa _ *_tx_kernel_enter_** för att starta ThreadX. Programspecifik initiering som inte omfattar ThreadX kan läggas till innan du anger kärnan.
+1. Skapa standardfunktionen C ***main** _ . Den här funktionen måste så småningom anropa _ *_tx_kernel_enter_** för att starta ThreadX. Programspecifik initiering som inte omfattar ThreadX kan läggas till innan du anger kerneln.
 
       > [!IMPORTANT]
-      > * ThreadX-inmatnings funktionen ***tx_kernel_enter** _ returnerar inte. Se därför till att inte placera några bearbetnings-eller funktions anrop efter it._
+      > *ThreadX-postfunktionen ***tx_kernel_enter** _ returnerar inte. Se därför till att inte placera några bearbetnings- eller funktionsanrop efter it._
 
-1. Skapa funktionen ***tx_application_define*** . Det är här som de ursprungliga system resurserna skapas. Exempel på system resurser är trådar, köer, minnesmoduler, händelse flaggor grupper, mutexer och semaforer.
+1. Skapa ***tx_application_define*** funktion. Det är här som de första systemresurserna skapas. Exempel på systemresurser är trådar, köer, minnespooler, händelseflaggor, mutexes och semaforer.
 
-1. Kompilera program källan och länka med ThreadX körnings bibliotekets ***TX. lib***. Den resulterande bilden kan laddas ned till målet och köras!
+1. Kompilera programkällan och länka till ThreadX-körningsbiblioteket ***tx.lib***. Den resulterande avbildningen kan laddas ned till målet och köras!
 
-## <a name="small-example-system"></a>Litet exempel system
+## <a name="small-example-system"></a>Litet exempelsystem
 
-I det lilla exempel systemet i bild 1 visas skapandet av en enskild tråd med prioritet 3. Tråden körs, ökar en räknare och sedan vilo läge för ett klock streck.
+Det lilla exempelsystemet i bild 1 visar skapandet av en enda tråd med prioritet 3. Tråden körs, ökar en räknare och för viloläger sedan för en klock tick.
 Den här processen fortsätter för alltid.
 
 ```c
@@ -119,33 +119,33 @@ void my_thread_entry(ULONG thread_input)
 }
 ```
 
-**BILD 1. Mall för program utveckling**
+**BILD 1. Mall för programutveckling**
 
-Även om det här är ett enkelt exempel ger det en lämplig mall för verklig program utveckling.
+Även om det här är ett enkelt exempel är det en bra mall för verklig programutveckling.
 
 ## <a name="troubleshooting"></a>Felsökning
 
-Varje ThreadX-port levereras med ett demonstrations program. Det är alltid en bra idé att först se till att demonstrations systemet körs, antingen på faktiskt mål maskin vara eller simulerad miljö.
+Varje ThreadX-port levereras med ett demonstrationsprogram. Det är alltid en bra idé att först få igång demonstrationssystemet – antingen på faktisk målmaskinvara eller simulerad miljö.
 
-Om demonstrations systemet inte körs korrekt är följande fel söknings tips.
+Om demonstrationssystemet inte körs korrekt är följande några felsökningstips.
 
-1. Ta reda på hur mycket av demonstrationen som körs.
-1. Öka stack storlekarna (detta är mer viktigt i den faktiska program koden än för demonstrationen).
-1. Återskapa ThreadX-biblioteket med TX_ENABLE_STACK_CHECKING definierat. Detta aktiverar den inbyggda ThreadX stack-kontrollen.
-1. Kringgå tillfälligt eventuella nyligen gjorda ändringar för att se om problemet försvinner eller ändras. Sådan information bör vara användbar för support tekniker.
+1. Fastställ hur mycket av demonstrationen som körs.
+1. Öka stackstorlekarna (detta är viktigare i den faktiska programkoden än i demonstrationen).
+1. Återskapa ThreadX-biblioteket med TX_ENABLE_STACK_CHECKING definierat. Detta aktiverar den inbyggda ThreadX-stackkontrollen.
+1. Kringgå tillfälligt de senaste ändringarna för att se om problemet försvinner eller ändras. Sådan information bör vara användbar för supporttekniker.
 
-Följ de procedurer som beskrivs i "[kund Support Center](about-this-guide.md#customer-support-center)" för att skicka den information som samlas in från fel söknings stegen.
+Följ de procedurer som beskrivs i[Kundsupportcenter för att](about-this-guide.md#customer-support-center)skicka den information som samlats in från felsökningsstegen.
 
-## <a name="configuration-options"></a>Konfigurations alternativ
+## <a name="configuration-options"></a>Konfigurationsalternativ
 
-Det finns flera konfigurations alternativ när du skapar ThreadX-biblioteket och programmet med ThreadX. Alternativen nedan kan definieras i program källan, på kommando raden eller i filen ***tx_user. h*** include.
+Det finns flera konfigurationsalternativ när du skapar ThreadX-biblioteket och programmet med ThreadX. Alternativen nedan kan definieras i programkällan, på kommandoraden eller i filen ***tx_user.h*** include.
 
 > [!IMPORTANT]
-> * Alternativ som definieras i ***tx_user. h** _ används endast om program-och ThreadX-biblioteket har skapats med _ *TX_INCLUDE_USER_DEFINE_FILE** definierat.*
+> *Alternativ som ***definieras i tx_user.h** _ tillämpas endast om programmet och ThreadX-biblioteket har skapats med _ *TX_INCLUDE_USER_DEFINE_FILE** definierat.*
 
 ### <a name="smallest-configuration"></a>Minsta konfiguration
 
-För den minsta tecken storleken bör följande konfigurations alternativ för ThreadX anses vara (i avsaknad av alla andra alternativ).
+För den minsta kodstorleken bör följande ThreadX-konfigurationsalternativ övervägas (utan alla andra alternativ).
 
 ```c
 TX_DISABLE_ERROR_CHECKING
@@ -157,132 +157,132 @@ TX_NOT_INTERRUPTABLE
 TX_TIMER_PROCESS_IN_ISR
 ```
 
-### <a name="fastest-configuration"></a>Snabbast konfiguration
+### <a name="fastest-configuration"></a>Snabbaste konfiguration
 
-För den snabbaste körningen har samma konfigurations alternativ som används för den minsta konfigurationen, men med dessa alternativ beaktas även.
+För den snabbaste körningen, samma konfigurationsalternativ som användes för den minsta konfigurationen tidigare, men med dessa alternativ också övervägas.
 
 ```c
 TX_REACTIVATE_INLINE
 TX_INLINE_THREAD_RESUME_SUSPEND
 ```
 
-[Detaljerade konfigurations alternativ](#detailed-configuration-options) beskrivs.
+[Detaljerade konfigurationsalternativ](#detailed-configuration-options) beskrivs.
 
-### <a name="global-time-source"></a>Global tids källa
+### <a name="global-time-source"></a>Global tidskälla
 
-För andra Microsoft Azure återställnings tider-produkter (FileX, NetX, GUIX, USBX osv.) definierar ThreadX antalet ThreadX timer-Tick som motsvarar en sekund. Andra uppfyller sina tids krav baserat på denna konstant. Som standard är värdet 100, vilket förutsätter ett periodiskt avbrott i 10ms. Användaren kan åsidosätta det här värdet genom att definiera TX_TIMER_TICKS_PER_SECOND med det önskade värdet i ***tx_port. h*** eller i IDE-eller kommando raden.
+För andra Microsoft Azure RTOS-produkter (FileX, NetX, GUIX, USBX osv.) definierar ThreadX antalet ThreadX-timer tick som representerar en sekund. Andra härleder sina tidskrav baserat på den här konstanten. Som standard är värdet 100, förutsatt ett periodiskt avbrott på 10 ms. Användaren kan åsidosätta det här värdet genom TX_TIMER_TICKS_PER_SECOND definiera med önskat ***värde i tx_port.h*** eller i IDE eller kommandoraden.
 
-### <a name="detailed-configuration-options"></a>Detaljerade konfigurations alternativ
-
-**TX_BYTE_POOL_ENABLE_PERFORMANCE_INFO**
-
-När det här alternativet är definierat aktiverar det här alternativet insamling av prestanda information i byte-pooler. Som standard är det här alternativet inte definierat.
+### <a name="detailed-configuration-options"></a>Detaljerade konfigurationsalternativ
 
 **TX_BYTE_POOL_ENABLE_PERFORMANCE_INFO**
 
-När det här alternativet är definierat aktiverar det här alternativet insamling av prestanda information i byte-pooler. Som standard är det här alternativet inte definierat.
+När det här alternativet definieras kan du samla in prestandainformation om bytepooler. Det här alternativet är inte definierat som standard.
+
+**TX_BYTE_POOL_ENABLE_PERFORMANCE_INFO**
+
+När det här alternativet definieras kan du samla in prestandainformation om bytepooler. Det här alternativet är inte definierat som standard.
 
 **TX_DISABLE_ERROR_CHECKING**
 
-Hoppar över grundläggande fel kontroll av tjänst anrop. När den är definierad i program källan är all grundläggande parameter fel kontroll inaktive rad. Detta kan förbättra prestandan med så mycket som 30% och kan också minska bild storleken.
+Kringgår grundläggande felkontroll av tjänstsamtal. När den definieras i programkällan inaktiveras all grundläggande parameterfelkontroll. Detta kan förbättra prestandan med upp till 30 % och kan också minska bildstorleken.
 
 > [!NOTE]
-> *Det är bara säkert att inaktivera fel kontrollen om programmet kan vara absolut garantera att alla indataparametrar alltid är giltiga under alla omständigheter, inklusive indataparametrar härledda från externa ingångar. Om ogiltiga indata har angetts i API: et med fel kontrollen inaktive rad, är det resulterande beteendet odefinierat och kan leda till minnes skada eller system krasch.*
+> *Det är bara säkert att inaktivera felkontroll om programmet absolut kan garantera att alla indataparametrar alltid är giltiga under alla omständigheter, inklusive indataparametrar som härletts från externa indata. Om ogiltiga indata har angetts till API:et med felkontroll inaktiverat, är det resulterande beteendet odefinierat och kan resultera i minnesfel eller systemkrasch.*
 
 > [!NOTE]
-> *ThreadX API-retur värden påverkas inte genom inaktive ring av fel kontroll visas i fetstil i avsnittet "retur värden" i varje API-beskrivning i kapitel 4. Retur värden i fet stil är ogiltiga om fel kontrollen har inaktiverats med alternativet TX_DISABLE_ERROR_CHECKING.*
+> *ThreadX API-returvärden som inte påverkas av inaktivering av felkontroll visas i fetstil i avsnittet "Returvärden" i varje API-beskrivning i kapitel 4. Returvärdena för icke-boliska värden annulleras om felkontrollen inaktiveras med hjälp TX_DISABLE_ERROR_CHECKING alternativet.*
 
 **TX_DISABLE_NOTIFY_CALLBACKS**
 
-När det här alternativet är definierat inaktive ras aviserings återanrop för olika ThreadX-objekt. Genom att använda det här alternativet minskar du kodens storlek och förbättrar prestandan. Som standard är det här alternativet inte definierat.
+När detta definieras inaktiveras återanrop av avanrop för olika ThreadX-objekt. Om du använder det här alternativet minskar kodstorleken något och prestandan förbättras. Det här alternativet är inte definierat som standard.
 
 **TX_DISABLE_PREEMPTION_THRESHOLD**
 
-När det här alternativet är definierat inaktive ras avstängningen-tröskelvärdet, vilket minskar kod storleken och ökar prestandan. Naturligtvis är avstängningen-tröskeln inte längre tillgängliga. Som standard är det här alternativet inte definierat.
+När funktionen preemption-threshold definieras minskar den kodstorleken något och förbättrar prestandan. Naturligtvis är funktionerna för tröskelvärden för avspärrning inte längre tillgängliga. Det här alternativet är inte definierat som standard.
 
 **TX_DISABLE_REDUNDANT_CLEARING**
 
-När den är definierad tas logiken bort för att initiera ThreadX globala C-datastrukturer till noll. Detta bör endast användas om kompilatorns initierings kod anger alla oinitierade C globala data till noll. Genom att använda det här alternativet minskar du kodens storlek och förbättrar prestandan under initieringen. Som standard är det här alternativet inte definierat.
+När du definierar tar bort logiken för att initiera ThreadX globala C-datastrukturer till noll. Detta bör endast användas om kompilatorns initieringskod anger alla o initialiserade globala C-data till noll. Om du använder det här alternativet minskar kodstorleken något och prestandan förbättras under initieringen. Det här alternativet är inte definierat som standard.
 
 **TX_DISABLE_STACK_FILLING**
 
-När det här alternativet är definierat inaktive ras 0xEF-värdet i varje byte av varje tråds stack när de skapas. Som standard är det här alternativet inte definierat.
+När det här definieras inaktiverar 0xEF värdet i varje byte i varje trådstack när den skapas. Det här alternativet är inte definierat som standard.
 
 **TX_ENABLE_EVENT_TRACE**
 
-När det är definierat aktiverar ThreadX händelse insamlings koden för att skapa en TraceX-spårningssession.
+När Det här definieras aktiverar ThreadX händelseinsamlingskoden för att skapa en TraceX-spårningsbuffert.
 
 **TX_ENABLE_STACK_CHECKING**
 
-När det är definierat aktiverar ThreadX körning av stack-kontroll, vilket innefattar analys av hur mycket stack som har använts och granskning av data mönster "avgränsningar" före och efter stackområdet. Om ett stack fel upptäcks, anropas den registrerade program stackens fel hanterare. Det här alternativet resulterar i en något ökad omkostnader och kod storlek. Läs ***tx_thread_stack_error_notify*** API-funktionen för mer information. Som standard är det här alternativet inte definierat.
+När det här definieras aktiverar threadx-körningsstackkontroll, vilket innefattar analys av hur mycket stack som har använts och undersökning av datamönstret "stängsel" före och efter stackområdet. Om ett stackfel identifieras anropas felhanteraren för den registrerade programstacken. Det här alternativet resulterar i något högre omkostnader och kodstorlek. Mer ***information finns i tx_thread_stack_error_notify*** API-funktionen. Det här alternativet är inte definierat som standard.
 
 **TX_EVENT_FLAGS_ENABLE_PERFORMANCE_INFO**
 
-När det är definierat aktiverar insamling av prestanda information på händelse flaggor grupper. Som standard är det här alternativet inte definierat.
+När detta definieras möjliggör insamling av prestandainformation om händelseflaggor grupper. Det här alternativet är inte definierat som standard.
 
 **TX_INLINE_THREAD_RESUME_SUSPEND**
 
-När det här alternativet har definierats förbättrar ThreadX ***tx_thread_resume** _ och _ *_tx_thread_suspend_** API-anrop via kod i rad. Detta ökar kod storleken men förbättrar prestandan för dessa två API-anrop.
+När Det här definieras förbättrar ThreadX ***tx_thread_resume** _ och _ *_tx_thread_suspend_** API-anrop via in-line-kod. Detta ökar kodstorleken men förbättrar prestandan för dessa två API-anrop.
 
 **TX_MAX_PRIORITIES**
 
-Definierar prioritets nivåer för ThreadX. Giltiga värden är mellan 32 och 1024 (inklusive) och *måste* vara jämnt delbar med 32. Om antalet tillåtna nivåer ökar ökar RAM-användningen med 128 byte för varje grupp med 32 prioriteter. Det finns dock bara en försumbar effekt på prestanda. Som standard är det här värdet inställt på 32 prioritets nivåer.
+Definierar prioritetsnivåer för ThreadX. Juridiska värden sträcker sig från 32 till 1024 (inklusive) och måste vara jämnt delbara med 32.  Genom att öka antalet prioritetsnivåer som stöds ökar RAM-användningen med 128 byte för varje grupp med 32 prioriteringar. Det finns dock bara en försumbar effekt på prestanda. Som standard är det här värdet inställt på 32 prioritetsnivåer.
 
 **TX_MINIMUM_STACK**
 
-Definierar den minsta stack storleken (i byte). Den används för fel kontroll när trådar skapas. Standardvärdet är port-Specific och finns i ***tx_port. h***.
+Definierar den minsta stackstorleken (i byte). Den används för felkontroll när trådar skapas. Standardvärdet är portspecifikt och finns i ***tx_port.h***.
 
 **TX_MISRA_ENABLE**
 
-När det är definierat använder ThreadX MISRA C-kompatibla konventioner. Mer information finns i  ***ThreadX_MISRA_Compliance.pdf*** .
+När threadX definieras använder de konventioner som följer MISRA C. Se  ***ThreadX_MISRA_Compliance.pdf*** för mer information.
 
 **TX_MUTEX_ENABLE_PERFORMANCE_INFO**
 
-När det är definierat aktiverar insamling av prestanda information på mutexer. Som standard är det här alternativet inte definierat.
+När detta definieras möjliggör insamling av prestandainformation om mutexer. Det här alternativet är inte definierat som standard.
 
 **TX_NO_TIMER**
 
-När det är definierat är ThreadX timer-logiken helt inaktive rad. Detta är användbart i de fall där ThreadX timer-funktioner (tråd ström spar läge, API-tidsgräns, tids segmentering och program timers) inte används. Om **TX_NO_TIMER** anges måste alternativet **TX_TIMER_PROCESS_IN_ISR** också definieras.
+När det här definieras är ThreadX-timerlogiken helt inaktiverad. Detta är användbart i fall där ThreadX-timerfunktionerna (trådströmsparläge, API-timeouter, tidsslicering och programtimer) inte används. Om **TX_NO_TIMER** har angetts måste **TX_TIMER_PROCESS_IN_ISR** också definieras.
 
 **TX_NOT_INTERRUPTABLE**
 
-När det här är definierat försöker ThreadX inte minimera avbrotts utelåsnings tiden. Detta resulterar i snabbare körning men ökar snabbt avbrotts utelåsnings tiden.
+När det här definieras försöker ThreadX inte minimera avbrottsutlåsningstiden. Detta resulterar i snabbare körning men ökar något avbrottslåsningstiden.
 
 **TX_QUEUE_ENABLE_PERFORMANCE_INFO**
 
-När det är definierat aktiverar insamling av prestanda information i köer. Som standard är det här alternativet inte definierat.
+När detta definieras möjliggör insamling av prestandainformation i köer. Det här alternativet är inte definierat som standard.
 
 **TX_REACTIVATE_INLINE**
 
-När det här definieras utförs återaktivering av ThreadX timers infogade timers i stället för att använda ett funktions anrop. Detta förbättrar prestandan, men ökar kod storleken något. Som standard är det här alternativet inte definierat.
+När detta definieras utför återaktivering av ThreadX-timers infogade i stället för att använda ett funktionsanrop. Detta förbättrar prestandan men ökar kodstorleken något. Det här alternativet är inte definierat som standard.
 
 **TX_SEMAPHORE_ENABLE_PERFORMANCE_INFO**
 
-När det är definierat aktiverar insamling av prestanda information för semaforer. Som standard är det här alternativet inte definierat.
+När detta definieras möjliggör insamling av prestandainformation på semaforer. Det här alternativet är inte definierat som standard.
 
 **TX_THREAD_ENABLE_PERFORMANCE_INFO**
 
-När det är definierat aktiverar insamling av prestanda information på trådar. Som standard är det här alternativet inte definierat.
+När detta definieras möjliggör insamling av prestandainformation om trådar. Det här alternativet är inte definierat som standard.
 
 **TX_TIMER_ENABLE_PERFORMANCE_INFO**
 
-När det är definierat aktiverar insamling av prestanda information för timers. Som standard är det här alternativet inte definierat.
+När detta definieras möjliggör insamling av prestandainformation på timers. Det här alternativet är inte definierat som standard.
 
 **TX_TIMER_PROCESS_IN_ISR**
 
-När det här alternativet är definierat elimineras den interna systemets timer-tråd för ThreadX. Detta resulterar i bättre prestanda vid timer-händelser och mindre RAM-krav eftersom timer-stacken och kontroll blocket inte längre behövs. Om du använder det här alternativet flyttas all timer för förfallo tid till ISR-nivå. Som standard är det här alternativet inte definierat.
+När detta definieras eliminerar den interna systemtimertråden för ThreadX. Detta resulterar i bättre prestanda för timerhändelser och mindre RAM-krav eftersom timerstacken och kontrollblocket inte längre behövs. Om du använder det här alternativet flyttas dock all förfallotidsbearbetning till timer-ISR-nivån. Det här alternativet är inte definierat som standard.
 
 > [!NOTE]
-> *Tjänster som tillåts från timers är kanske inte tillåtna från ISR: er och kan därför inte användas när du använder det här alternativet.*
+> *Tjänster som tillåts från timers kanske inte tillåts från ISR:er och därför kanske inte tillåts när du använder det här alternativet.*
 
 **TX_TIMER_THREAD_PRIORITY**
 
-Definierar prioriteten för den interna ThreadX system timer-tråden. Standardvärdet är Priority 0, högst prioritet i ThreadX. Standardvärdet är definierat i ***tx_port. h***.
+Definierar prioriteten för den interna ThreadX-systemtimertråden. Standardvärdet är prioritet 0 – den högsta prioriteten i ThreadX. Standardvärdet definieras i ***tx_port.h***.
 
 **TX_TIMER_THREAD_STACK_SIZE**
 
-Definierar stack storleken (i byte) för den interna ThreadX system timer-tråden. Den här tråden bearbetar alla tråd Ströms begär Anden och alla tids gränser för tjänst anrop. Dessutom anropas alla rutiner för återanrop från program timer från den här kontexten. Standardvärdet är port-Specific och finns i ***tx_port. h***.
+Definierar stackstorleken (i byte) för den interna ThreadX-systemtimertråden. Den här tråden bearbetar alla trådströmsparbegäranden samt alla tidsgränser för tjänstanrop. Dessutom anropas alla rutiner för återanrop av programtimer från den här kontexten. Standardvärdet är portspecifikt och finns i ***tx_port.h***.
 
-## <a name="threadx-version-id"></a>ThreadX versions-ID
+## <a name="threadx-version-id"></a>Version-ID för ThreadX
 
-Programmerare kan hämta ThreadX-versionen från undersökningen av filen ***tx_port. h** _. Dessutom innehåller den här filen även en versions historik för motsvarande port. Program varan kan hämta ThreadX-versionen genom att undersöka den globala strängen _ * _tx_version_id * *.
+Programmeraren kan hämta ThreadX-versionen från undersökningen av filen ***tx_port.h** _. Dessutom innehåller den här filen även en versionshistorik för motsvarande port. Programprogramvara kan hämta ThreadX-versionen genom att undersöka den globala strängen _*_tx_version_id**.

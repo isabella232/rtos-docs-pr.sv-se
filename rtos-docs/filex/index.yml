@@ -1,31 +1,31 @@
 ### YamlMime:Landing
-title: Dokumentation om Azure återställnings tider FileX
-summary: Azure återställnings tider FileX är ett FAT-kompatibelt (File Allocation Table)-kompatibelt fil system som är fullständigt integrerat med Azure återställnings tider-ThreadX och är tillgängligt för alla processorer som stöds. Precis som med Azure återställnings tider-ThreadX är Azure återställnings tider FileX utformad för att ha ett litet utrymme och höga prestanda, vilket gör det perfekt för dagens djupt inbäddade program som kräver fil hanterings åtgärder. FileX stöder de flesta fysiska media, inklusive RAM-, Azure återställnings tider-USBX, SD-kort och NAND/eller Flash-minnen via Azure återställnings tider LevelX.
+title: Azure RTOS FileX-dokumentation
+summary: Azure RTOS FileX är ett FAT-kompatibelt filsystem (File Allocation Table) med höga prestanda som är helt integrerat med Azure RTOS ThreadX och tillgängligt för alla processorer som stöds. Precis som Azure RTOS ThreadX är Azure RTOS FileX utformat för att ha ett litet fotavtryck och höga prestanda, vilket gör det idealiskt för dagens djupt inbäddade program som kräver filhanteringsåtgärder. FileX stöder de flesta fysiska media, inklusive RAM, Azure RTOS USBX, SD-KORT och NÄTVERKSKORT/NOR flashminnen via Azure RTOS LevelX.
 metadata:
-  title: Vad är Azure återställnings tider FileX?
-  description: Azure återställnings tider FileX är ett FAT-kompatibelt (File Allocation Table)-kompatibelt fil system som är fullständigt integrerat med Azure återställnings tider-ThreadX och är tillgängligt för alla processorer som stöds. Precis som med Azure återställnings tider-ThreadX är Azure återställnings tider FileX utformad för att ha ett litet utrymme och höga prestanda, vilket gör det perfekt för dagens djupt inbäddade program som kräver fil hanterings åtgärder. FileX stöder de flesta fysiska media, inklusive RAM-, Azure återställnings tider-USBX, SD-kort och NAND/eller Flash-minnen via Azure återställnings tider LevelX.
+  title: Vad är Azure RTOS FileX?
+  description: Azure RTOS FileX är ett FAT-kompatibelt filsystem (File Allocation Table) med höga prestanda som är helt integrerat med Azure RTOS ThreadX och tillgängligt för alla processorer som stöds. Precis som Azure RTOS ThreadX är Azure RTOS FileX utformat för att ha ett litet fotavtryck och höga prestanda, vilket gör det idealiskt för dagens djupt inbäddade program som kräver filhanteringsåtgärder. FileX stöder de flesta fysiska media, inklusive RAM, Azure RTOS USBX, SD-KORT och NÄTVERKSKORT/NOR flashminnen via Azure RTOS LevelX.
   services: rtos
   ms.service: rtos
   ms.topic: landing-page
   author: philmea
   ms.author: philmea
   ms.date: 05/19/2020
-  ms.openlocfilehash: bf7fd9f842c363b753f8acd52f54b9f8e462616c
-  ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+  ms.openlocfilehash: 932479742f8aae7204bce3ca80afe13e7db0ec6a5a73cd3d1011dba1dd9a008c
+  ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
   ms.translationtype: MT
   ms.contentlocale: sv-SE
-  ms.lasthandoff: 03/22/2021
-  ms.locfileid: "104798026"
+  ms.lasthandoff: 08/07/2021
+  ms.locfileid: "116782905"
 landingContent:
-- title: Introduktion till Azure återställnings tider FileX
+- title: Introduktion till Azure RTOS FileX
   linkLists:
   - linkListType: overview
     links:
-    - text: Vad är Azure återställnings tider FileX?
+    - text: Vad är Azure RTOS FileX?
       url: overview-filex.md
-- title: Kom igång med Azure återställnings tider FileX
+- title: Kom igång med Azure RTOS FileX
   linkLists:
   - linkListType: get-started
     links:
-    - text: Användar handbok för Azure återställnings tider FileX
+    - text: Azure RTOS FileX-användarhandbok
       url: about-this-guide.md

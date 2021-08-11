@@ -1,6 +1,6 @@
 - name: Microsoft Azure RTOS-dokumentation
   href: index.yml
-- name: Översikt över Microsoft Azure RTOScd
+- name: Översikt över Microsoft Azure RTOS
   href: overview-rtos.md
 - name: Kom igång-guider
   href: getting-started.md

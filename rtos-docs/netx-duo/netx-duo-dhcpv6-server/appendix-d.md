@@ -1,31 +1,31 @@
 ---
-title: Bilaga D – exempel på Azure återställnings tider NetX Duo Advanced DHCPv6 server
-description: Det här kapitlet innehåller ett exempel på en avancerad DHCPv6-server med NetX Duo
+title: Bilaga D – Azure RTOS Exempel på NetX Duo Advanced DHCPv6-server
+description: Det här kapitlet innehåller ett NetX Duo Advanced DHCPv6-serverexempel
 author: philmea
 ms.author: philmea
 ms.date: 06/08/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 4472804dd223815a80438f283efd4e327ce51898
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 3ebb9683bd3183d5c6a72eab5730175b8e1713b75d285ac3417307c7cf5bde04
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104826049"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116783687"
 ---
-# <a name="appendix-d----azure-rtos-netx-duo-advanced-dhcpv6-server-example"></a>Bilaga D – exempel på Azure återställnings tider NetX Duo Advanced DHCPv6 server
+# <a name="appendix-d----azure-rtos-netx-duo-advanced-dhcpv6-server-example"></a>Bilaga D – Azure RTOS Exempel på NetX Duo Advanced DHCPv6-server
 
-Det här är en avancerad DHCPv6-server som visar hur du sparar och hämtar serverns IP-adresslån tabell och klient post tabeller från icke-flyktigt minne, enligt vad som krävs i RFC 3315.
+Det här är en avancerad DHCPv6-server som visar hur du sparar och hämtar serverns IP-adresslåntabell och klientposttabeller från beständigt minne, vilket krävs av RFC 3315.
 
-I det här exemplet tas include-filen *nxd_dhcpv6_server. h* in på rad 7. Därefter skapas NetX Duo DHCPv6 Server Application Thread på rad 81 i exempel koden nedan. Observera att DHCPv6 Control Block "*dhcp_server_0*" definierades som en global variabel på rad 19 tidigare.
+I det här exemplet kommer *indelningsfilen nxd_dhcpv6_server.h* på rad 7. Därefter skapas NetX Duo DHCPv6 Server-programtråden på rad 81 i exempelkoden nedan. Observera att DHCPv6-kontrollblocket "*dhcp_server_0*" definierades som en global variabel på rad 19 tidigare.
 
-Innan du skapar NetX Duo DHCPv6 Server-instansen skapar demon en modempool för att skicka DHCPv6-meddelanden på rad 84, skapar ett IP-tråds gränssnitt på rad 102 och aktiverar UDP i NetX Duo på rad 116.
+Innan du skapar NetX Duo DHCPv6-serverinstansen skapar demon paketpool för att skicka DHCPv6-meddelanden på rad 84, skapar ett IP-trådgränssnitt på rad 102 och aktiverar UDP i NetX Duo på rad 116.
 
-När du har skapat NetX Duo DHCPv6-servern på rad 136 ingår de två valfria funktionerna för motringning som beskrivs i kapitel 1.It, vilket gör att IPv6 och ICMPv6 krävs för att NetX Duo ska kunna bearbeta IPv6-och DHCPv6-åtgärder på rad 162-163. Innan DHCPv6-server tråden kan köras måste DHCPv6-servern verifiera sin IPv6-adress (167-180) och definiera dess DHCPv6-gränssnitt på raderna 208-209. *Nx_dhcpv6_set_server_duids* tjänsten anropas för att skapa servern om inget DUID för Server har skapats tidigare på rad 266. Servern konfigurerar ett IP-adressintervall för att skapa en lista över tilldelnings bara adresser. Om data sparas från en tidigare session, hämtas klient poster och IPv6-låne data från minnet i raderna 283-318. Det skapar också ett DUID för servern, eller om ett tidigare har skapats hämtar DUID-data från den användardefinierade lagringen. Detta är nödvändigt för att återskapa ett konsekvent Server-DUID i omstarter. Om du väljer värd programmet definieras en DNS-server för klienter som begär DNS-serverkonfigurationen.
+Det lyckade skapandet av NetX Duo DHCPv6 Server på rad 136 innehåller de två valfria återanropsfunktionen som beskrivs i kapitel 1.It gör att IPv6 och ICMPv6 är nödvändiga för att NetX Duo ska kunna bearbeta IPv6- och DHCPv6-åtgärder på rad 162–163. Innan DHCPv6-servertråden är redo att köras måste DHCPv6-servern verifiera sin IPv6-adress(167-180) och definiera sitt DHCPv6-gränssnitt på raderna 208-209. Tjänsten *nx_dhcpv6_set_server_duid* anropas för att skapa servern om ingen Server DUID har skapats tidigare på rad 266. Servern uppsättningar ett IP-adressintervall för att skapa en lista över adresser som kan tilldelas. Om data sparas från en tidigare session hämtas klientposter och IPv6-lånedata från minnet på raderna 283–318. Den skapar också dess Server DUID, eller om en tidigare skapades, hämtar DUID-data från användarangivet lagringsutrymme. Detta är nödvändigt för att återskapa en konsekvent Server DUID vid omstarter. Värdprogrammet kan också definiera en DNS-server för klienter som begär DNS-serverkonfiguration.
 
-Därefter startar värden DHCPv6Server på rad 329. Detta skapar DHCPv6-serverns UPD-socket och aktiverar NetX Duo DHCPv6-server timers. Servern väntar sedan på att ta emot klient begär Anden. Även om det kan betjäna många klienter kan den bara bearbeta en enda klientbegäran i taget.
+Därefter startar värden DHCPv6Server på rad 329. Detta skapar DHCPv6-serverns UPD-socket och aktiverar NetX Duo DHCPv6-servertimer. Servern väntar sedan på att ta emot klientbegäranden. Även om tjänsten kan användas för många klienter kan den bara bearbeta en enskild klientbegäran i taget.
 
-Resten av exemplet innehåller värd implementeringar för att spara och hämta Server tabeller över den tilldelnings bara IPv6-adresspoolen och klient poster till och från icke-flyktigt minne. Den innehåller också en alternativ hanterare för alternativ som begärs av DHCPv6-klienter som inte stöds direkt av NetX Duo DHCPv6-servern (endast alternativet DNS-Server stöds för närvarande). Slutligen finns det en kod för att demonstrera hur du sparar och hämtar "icke-flyktig tid" genom vilken servern håller reda på tilldelad IP-låne förfallo datum.
+Resten av exemplet innehåller värdimplementeringar för att spara och hämta servertabeller för dess tilldelningsbara IPv6-adresspool och klientposter till respektive från icke-beständigt minne. Den innehåller också en alternativhanterare för alternativ som begärs av DHCPv6-klienter som inte stöds direkt av NetX Duo DHCPv6-servern (endast DNS-serveralternativet stöds för närvarande). Slutligen finns det en kod för att demonstrera hur man sparar och hämtar "ej beständig tid" när servern håller reda på när tilldelade IP-lån upphör att gälla.
 
 ```
 1 /* This is a small demo of the NetX Duo DHCPv6 Server for the high-performance
@@ -702,4 +702,4 @@ before rebooting or for making a backup).*/
 657 }
 ```
 
-**Bild 6. Advanced NetX Duo DHCPv6 server-program**
+**Bild 6. Avancerat NetX Duo DHCPv6-serverprogram**

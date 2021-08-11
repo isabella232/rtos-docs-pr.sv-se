@@ -1,45 +1,45 @@
 ---
-title: Kapitel 3 – Beskrivning av Azure återställnings tider NetX PPPoE Server Services
-description: Det här kapitlet innehåller en beskrivning av alla Azure återställnings tider NetX PPPoE Server-tjänster (visas nedan) i alfabetisk ordning.
+title: Kapitel 3 – Beskrivning Azure RTOS NetX PPPoE Server Services
+description: Det här kapitlet innehåller en beskrivning av alla Azure RTOS NetX PPPoE-servertjänster (listas nedan) i alfabetisk ordning.
 author: philmea
 ms.author: philmea
 ms.date: 06/04/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: d1137fae4dfea428d50e2defed94de6a838b01c6
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: d184fc3c5e6ed74ef25045561b1613e280672f77385fbb13b8e84bccf051b301
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104826601"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116782820"
 ---
-# <a name="chapter-3---description-of-azure-rtos-netx-pppoe-server-services"></a>Kapitel 3 – Beskrivning av Azure återställnings tider NetX PPPoE Server Services
+# <a name="chapter-3---description-of-azure-rtos-netx-pppoe-server-services"></a>Kapitel 3 – Beskrivning Azure RTOS NetX PPPoE Server Services
 
-Det här kapitlet innehåller en beskrivning av alla Azure återställnings tider NetX PPPoE Server-tjänster (visas nedan) i alfabetisk ordning.
+Det här kapitlet innehåller en beskrivning av alla Azure RTOS NetX PPPoE-servertjänster (listas nedan) i alfabetisk ordning.
 
-I avsnittet "retur värden" i följande API-beskrivningar påverkas inte värden i **fetstil** av **NX_DISABLE_ERROR_CHECKING** definiera som används för att inaktivera API-felkontroll, medan icke-Fetstilade värden är helt inaktiverade.
+I avsnittet "Returvärden" i följande API-beskrivningar påverkas inte värden i **FETSTIL** av **den NX_DISABLE_ERROR_CHECKING-definition** som används för att inaktivera API-felkontroll, medan värden som inte är fetstilta är helt inaktiverade.
 
-- **nx_pppoe_server_create**: *skapa en PPPoE-serverinstans*
+- **nx_pppoe_server_create:** Skapa *en PPPoE-serverinstans*
 
-- **nx_pppoe_server_ac_name_set**: *Ange namn på åtkomst kon centra Tor*
+- **nx_pppoe_server_ac_name_set:** Ange *namnet på Access Concentrator*
 
-- **nx_pppoe_server_delete**: *ta bort en PPPoE-serverinstans*
+- **nx_pppoe_server_delete:** Ta *bort en PPPoE-serverinstans*
 
-- **nx_pppoe_server_enable**: *aktivera PPPoE Server-tjänster*
+- **nx_pppoe_server_enable:** Aktivera *PPPoE-servertjänster*
 
-- **nx_pppoe_server_disable**: *inaktivera PPPoE Server-tjänster*
+- **nx_pppoe_server_disable:** *Inaktivera PPPoE-servertjänster*
 
-- **nx_pppoe_server_callback_notify_set**: *Ange återanrop för PPPoE-serverns aviserings funktioner*
+- **nx_pppoe_server_callback_notify_set: Ange** *meddela funktioner för PPPoE-serveranrop*
 
-- **nx_pppoe_server_service_name_set**: *Ange ett tjänst namn för PPPoE-servern*
+- **nx_pppoe_server_service_name_set:** Ange *PPPoE-servertjänstnamn*
 
-- **nx_pppoe_server_session_send**: *Skicka PPPoE-serverns data till en angiven session*
+- **nx_pppoe_server_session_send:** Skicka *PPPoE-serverdata till den angivna sessionen*
 
-- **nx_pppoe_server_session_packet_send**: *Skicka PPPoE-serverns paket till en angiven session*
+- **nx_pppoe_server_session_packet_send:** Skicka *PPPoE-serverpaket till angiven session*
 
-- **nx_pppoe_server_session_terminate**: *avsluta den angivna PPPoE-sessionen*
+- **nx_pppoe_server_session_terminate:** Avsluta *den angivna PPPoE-sessionen*
 
-- **nx_pppoe_server_session_get**: *Hämta information om den angivna sessionen*
+- **nx_pppoe_server_session_get:** Hämta *den angivna sessionsinformationen*
 
 ## <a name="nx_pppoe_server_create"></a>nx_pppoe_server_create
 
@@ -58,36 +58,36 @@ UINT nx_pppoe_server_create(NX_PPPOE_SERVER *pppoe_server_ptr,
                             UINT priority);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skapar en PPPoE-serverinstans med den angivna länk driv rutinen för den angivna NetX IP-instansen. Om länk driv rutinen inte har initierats och är aktive rad, är den ansvarig för PPPoE Sever-programvara som initierar länk driv rutinen.
+Den här tjänsten skapar en PPPoE-serverinstans med den användarangivna länkdrivrutinen för den angivna NetX IP-instansen. Om länkdrivrutinen inte har initierats och aktiverats ansvarar PPPoE-programvaran för att initiera länkdrivrutinen.
 
-Dessutom måste programmet ange en tidigare skapad modempool för att PPPoE-serverinstansen ska användas för intern paket tilldelning.
+Dessutom måste programmet ange en paketpool som skapats tidigare för att PPPoE-serverinstansen ska kunna använda för intern paketallokering.
 
-Observera att det vanligt vis är en bra idé att skapa NetX IP-tråd med högre prioritet än tråd prioriteten för PPPoE-servern. Mer information om hur du anger prioritet för IP-tråd finns i *nx_ip_create* -tjänsten.
+Observera att det vanligtvis är en bra idé att skapa NetX IP-tråden med högre prioritet än PPPoE-serverns trådprioritet. Mer information om *hur du anger IP-trådprioritet* finns i nx_ip_create-tjänsten.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **pppoe_server_ptr**: pekar på kontroll block för PPPoE-Server.
-- **namn**: namnet på den här PPPoE-serverinstansen.
-- **ip_ptr**: pekare till Control-Block för IP-instans.
-- **interface_index**: gränssnitts index.
-- **pppoe_link_driver**: användarens angivna länk driv rutin.
-- **pool_ptr**: pekar mot Packet bassäng.
-- **stack_ptr**: pekare för att starta PPPoE-Server trådens stack Area.
-- **stack_size**: storlek i byte i trådens stack.
-- **prioritet**: prioritet för interna PPPoE-Server trådar (1-31).
+- **pppoe_server_ptr:** Pekare till PPPoE-serverkontrollblocket.
+- **name**: Namnet på den här PPPoE-serverinstansen.
+- **ip_ptr: Pekare** till kontrollblock för IP-instans.
+- **interface_index:** Gränssnittsindex.
+- **pppoe_link_driver:** Länkdrivrutin som användaren har angett.
+- **pool_ptr:** Pekare till paketpool.
+- **stack_ptr:** Pekare för att starta PPPoE-servertrådens stackområde.
+- **stack_size:** Storlek i byte i trådens stack.
+- **prioritet:** Prioritet för interna PPPoE-servertrådar (1–31).
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_PPPOE_SERVER_SUCCESS**: (0X00) lyckad PPPoE-Server skapa.
-- NX_PPPOE_SERVER_PTR_ERROR: (0xC1) ogiltig PPPoE-Server, IP, Packet bassäng eller stack pekare.
-- NX_PPPOE_SERVER_INVALID_INTERFACE: (0xC2) ogiltigt gränssnitt.
-- NX_PPPOE_SERVER_PACKET_PAYLOAD_ERROR: (0xC3) ogiltig nytto Last storlek för Packet bassäng.
-- NX_PPPOE_SERVER_MEMORY_SIZE_ERROR: (0xC4) ogiltig minnes storlek.
-- NX_PPPOE_SERVER_PRIORITY_ERROR: (0xC5) ogiltig prioritet för PPPoE-serverns tråd.
+- **NX_PPPOE_SERVER_SUCCESS**: (0x00) Lyckades PPPoE-server skapa.
+- NX_PPPOE_SERVER_PTR_ERROR: (0xC1) Ogiltig PPPoE-server, IP- eller paketpool eller stackpekare.
+- NX_PPPOE_SERVER_INVALID_INTERFACE: (0xC2) Ogiltigt gränssnitt.
+- NX_PPPOE_SERVER_PACKET_PAYLOAD_ERROR: (0xC3) Ogiltig nyttolaststorlek för paketpoolen.
+- NX_PPPOE_SERVER_MEMORY_SIZE_ERROR: (0xC4) Ogiltig minnesstorlek.
+- NX_PPPOE_SERVER_PRIORITY_ERROR: (0xC5) Ogiltig prioritet för PPPoE-servertråden.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
@@ -111,22 +111,22 @@ Ta bort en PPPoE-serverinstans
 UINT nx_pppoe_server_delete(NX_PPPOE_SERVER *pppoe_server_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten tar bort den tidigare skapade PPPoE-serverinstansen.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **pppoe_server_ptr**: pekar på kontroll block för PPPoE-Server.
+- **pppoe_server_ptr:** Pekare till PPPoE-serverkontrollblocket.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_PPPOE_SERVER_SUCCESS**: (0X00) lyckad borttagning av PPPoE-Server.
-- NX_PPPOE_SERVER_PTR_ERROR: (0xC1) ogiltig PPPoE-Server pekare.
+- **NX_PPPOE_SERVER_SUCCESS**: (0x00) Lyckad PPPoE-server-borttagning.
+- NX_PPPOE_SERVER_PTR_ERROR: (0xC1) Ogiltig PPPoE-serverpekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -147,23 +147,23 @@ Aktivera PPPoE-servertjänsten
 UINT nx_pppoe_server_enable(NX_PPPOE_SERVER *pppoe_server_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Med den här tjänsten kan du använda PPPoE-Server tjänsterna.
+Den här tjänsten aktiverar PPPoE-servertjänsterna.
 
 > [!NOTE]
-> Den här funktionen måste anropas efter *nx_pppoe_server_create* och *nx_pppoe_server_callback_notify_set*.
+> Den här funktionen måste anropas *efter nx_pppoe_server_create* och *nx_pppoe_server_callback_notify_set*.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **pppoe_server_ptr**: pekar på kontroll block för PPPoE-Server.
+- **pppoe_server_ptr:** Pekare till PPPoE-serverkontrollblocket.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_PPPOE_SERVER_SUCCESS**: (0X00) lyckad borttagning av PPPoE-Server.
-- NX_PPPOE_SERVER_PTR_ERROR: (0xC1) ogiltig PPPoE-Server pekare.
+- **NX_PPPOE_SERVER_SUCCESS**: (0x00) Lyckad PPPoE-server-borttagning.
+- NX_PPPOE_SERVER_PTR_ERROR: (0xC1) Ogiltig PPPoE-serverpekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
@@ -186,20 +186,20 @@ Inaktivera PPPoE-servertjänsten
 UINT nx_pppoe_server_disable(NX_PPPOE_SERVER *pppoe_server_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten inaktiverar PPPoE-Server tjänsterna.
+Den här tjänsten inaktiverar PPPoE-servertjänsterna.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **pppoe_server_ptr**: pekar på kontroll block för PPPoE-Server.
+- **pppoe_server_ptr:** Pekare till PPPoE-serverkontrollblocket.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_PPPOE_SERVER_SUCCESS**: (0X00) lyckad borttagning av PPPoE-Server.
-- NX_PPPOE_SERVER_PTR_ERROR: (0xC1) ogiltig PPPoE-Server pekare.
+- **NX_PPPOE_SERVER_SUCCESS**: (0x00) Lyckad PPPoE-server-borttagning.
+- NX_PPPOE_SERVER_PTR_ERROR: (0xC1) Ogiltig PPPoE-serverpekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
@@ -214,7 +214,7 @@ status = nx_pppoe_server_disable(&my_pppoe_server);
 
 ## <a name="nx_pppoe_server_callback_notify_set"></a>nx_pppoe_server_callback_notify_set
 
-Ange aviserings funktioner för motringning från PPPoE-Server 
+Ange meddela funktioner för PPPoE-serveranrop 
 
 ### <a name="prototype"></a>Prototyp
 
@@ -231,29 +231,29 @@ UINT nx_pppoe_server_callback_notify_set(
         VOID (* pppoe_discover_notify)(UINT session_index, UCHAR *data))
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten anger att återanrop i PPPoE-servern ska meddela funktioner.
+Den här tjänsten ställer in PPPoE Server-återanrop av meddela funktioner.
 
 > [!NOTE]
-> Den här funktionen måste anropas före *nx_pppoe_server_enabl och* pppoe_data_receive_notify-funktions pekare måste anges, om inte, *nx_pppoe_server_enable* kommer att Miss lyckas.
+> Den här funktionen måste *anropas innan nx_pppoe_server_enabl och* pppoe_data_receive_notify-funktionspekaren måste anges, om *inte, nx_pppoe_server_enable* kommer att misslyckas.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **pppoe_server_ptr**: pekar på kontroll block för PPPoE-Server.
-- **pppoe_discover_initiation_notify**: program funktion som anropas när ett meddelande om att initiering av PPPoE-identifiering tas emot. Om det här värdet är NULL inaktive ras funktionen motringning.
-- **pppoe_discover_request_notify**: program funktion som anropas när ett meddelande om PPPoE-Discover tas emot. Om det här värdet är NULL är funktionen motringning för begäran inaktive rad.
-- **pppoe_discover_terminate_notify**: program funktion som anropas när ett meddelande om att avsluta PPPoE-identifiering tas emot. Om det här värdet är NULL är funktionen avsluta motringning inaktive rad.
-- **pppoe_discover_terminate_confirm**: program funktion som anropas när ett meddelande om att avsluta PPPoE-identifiering skickas. Om det här värdet är NULL är funktionen avsluta motringning inaktive rad.
-- **pppoe_data_receive_notify**: program funktion som anropas när ett data meddelande för PPPoE tas emot. Värdet får inte vara noll.
-- **pppoe_data_send_notify**: program funktion som anropas när ett data meddelande för PPPoE skickas. Om det här värdet är NULL är funktionen för att skicka motringning inaktive rad.
+- **pppoe_server_ptr:** Pekare till PPPoE-serverkontrollblocket.
+- **pppoe_discover_initiation_notify:** Programfunktion som anropas när PPPoE identifierar initieringsmeddelandet tas emot. Om det här värdet är NULL identifierar du att funktionen för initiering av motringning är inaktiverad.
+- **pppoe_discover_request_notify:** Programfunktion som anropas när ett meddelande om pppoe-identifieringsbegäran tas emot. Om det här värdet är NULL är funktionen för återanrop av begäran inaktiverad.
+- **pppoe_discover_terminate_notify:** Programfunktion som anropas när ett meddelande om att PPPoE-identifieringen har tagits emot tas emot. Om det här värdet är NULL är funktionen avsluta motringning inaktiverad.
+- **pppoe_discover_terminate_confirm:** Programfunktion som anropas när ett meddelande om att PPPoE-identifieringen avslutas skickas. Om det här värdet är NULL identifierar du att funktionen för att avbryta motringning är inaktiverad.
+- **pppoe_data_receive_notify:** Programfunktion som anropas när PPPoE-datameddelande tas emot. Det här värdet får inte vara noll.
+- **pppoe_data_send_notify:** Programfunktion som anropas när PPPoE-datameddelandet skickas. Om det här värdet är NULL inaktiveras funktionen för återanrop vid datasänding.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_PPPOE_SERVER_SUCCESS**: (0X00) lyckad borttagning av PPPoE-Server.
-- NX_PPPOE_SERVER_PTR_ERROR: (0xC1) ogiltig PPPoE-Server pekare eller funktions pekare.
+- **NX_PPPOE_SERVER_SUCCESS**: (0x00) Lyckades PPPoE-server ta bort.
+- NX_PPPOE_SERVER_PTR_ERROR: (0xC1) Ogiltig PPPoE-server pekare eller funktionspekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
@@ -275,7 +275,7 @@ status = nx_pppoe_server_disable(&my_pppoe_server,
 
 ## <a name="nx_pppoe_server_ac_name_set"></a>nx_pppoe_server_ac_name_set
 
-Ange namn på åtkomst kon centra Tor
+Ange Access Concentrator-namn
 
 ### <a name="prototype"></a>Prototyp
 
@@ -286,26 +286,26 @@ UINT nx_pppoe_server_ac_name_set(
 );
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen ställer in åtkomst till koncentrator Name funktion anrop.
+Den här funktionen anger funktionsanropet Access Concentrator name.
 
 > [!NOTE]
-> Strängen för ac_name måste vara NULL-terminerad och längden på ac_name matchar den längd som anges i argument listan.
+> Strängen för ac_name måste vara NULL-avslutad och längden på ac_name matchar längden som anges i argumentlistan.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **pppoe_server_ptr**: pekar på kontroll block för PPPoE-Server.
-- **ac_name**: åtkomst till koncentrator namn.
-- **ac_name_length**: längden på ac_ame.
+- **pppoe_server_ptr:** Pekare till PPPoE-serverkontrollblock.
+- **ac_name:** Access Concentrator-namn.
+- **ac_name_length:** Längden på ac_ame.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_PPPOE_SERVER_SUCCESS**: (0X00) lyckad PPPoE-Server uppsättning.
-- **NX_PPPOE_SERVER_PTR_ERROR**: (0XC1) ogiltig PPPoE-Server, IP, Packet bassäng eller stack pekare.
-- **NX_SIZE_ERROR**: (0X09) kontrol lera name_length inte.
+- **NX_PPPOE_SERVER_SUCCESS**: (0x00) Lyckad PPPoE-serveruppsättning.
+- **NX_PPPOE_SERVER_PTR_ERROR**: (0xC1) Ogiltig PPPoE-server, IP-adress, paketpool eller stackpekare.
+- **NX_SIZE_ERROR**: (0x09) Kontrollera name_length misslyckas.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
@@ -320,7 +320,7 @@ status = nx_pppoe_server_ac_name_set(&my_pppoe_server, "my PPPoE ac name",16);
 
 ## <a name="nx_pppoe_server_service_name_set"></a>nx_pppoe_server_service_name_set
 
-Ange namn på tjänsten PPPoE-Server
+Ange PPPoE-servertjänstnamn
 
 ### <a name="prototype"></a>Prototyp
 
@@ -330,20 +330,20 @@ UINT nx_pppoe_server_service_name_set(
         UCHAR **service_name, UINT service_name_count);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten anger tjänst namnet för en PPPoE-Server.
+Den här tjänsten anger PPPoE Server-tjänstens namn.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **pppoe_server_ptr**: pekar på kontroll block för PPPoE-Server.
+- **pppoe_server_ptr:** Pekare till PPPoE-serverkontrollblock.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_PPPOE_SERVER_SUCCESS**: (0X00) lyckad borttagning av PPPoE-Server.
-- NX_PPPOE_SERVER_PTR_ERROR: (0xC1) ogiltig PPPoE-Server pekare.
+- **NX_PPPOE_SERVER_SUCCESS**: (0x00) Lyckades PPPoE-server ta bort.
+- NX_PPPOE_SERVER_PTR_ERROR: (0xC1) Ogiltig PPPoE-serverpekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
@@ -366,7 +366,7 @@ status = nx_pppoe_server_service_namet_set(&my_pppoe_server,
 
 ## <a name="nx_pppoe_server_session_send"></a>nx_pppoe_server_session_send
 
-Skicka PPPoE-serverns data till en angiven session
+Skicka PPPoE-serverdata till angiven session
 
 ### <a name="prototype"></a>Prototyp
 
@@ -375,26 +375,26 @@ UINT nx_pppoe_server_session_send (NX_PPPOE_SERVER *pppoe_server_ptr,
                 UINT session_index, UCHAR *data_ptr, UINT data_length);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skickar PPPoE-ramen med angivet sessions-ID.
+Den här tjänsten skickar PPPoE-ram med angivet sessions-ID.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **pppoe_server_ptr**: pekar på kontroll block för PPPoE-Server.
-- **session_index**: sessionens index.
-- **data_ptr**: pekare för att starta data rutan för PPPoE-servern.
-- **data_length**: längden på data fältet för PPPoE-servern.
+- **pppoe_server_ptr:** Pekare till PPPoE-serverkontrollblock.
+- **session_index:** Indexet för sessionen.
+- **data_ptr:** Pekare till början av PPPoE Server-dataramen.
+- **data_length:** Längden på PPPoE Server-dataramen.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_PPPOE_SERVER_SUCCESS**: (0X00) lyckad borttagning av PPPoE-Server.
-- NX_PPPOE_SERVER_PTR_ERROR: (0xC1) ogiltig PPPoE-Server pekare.
-- NX_PPPOE_SERVER_NOT_ENABLED: (0xC6) PPPoE-servertjänsten är inte aktive rad.
-- NX_PPPOE_SERVER_INVALID_SESSION: (0xC7) ogiltigt PPPoE-sessions index.
-- NX_PPPOE_SERVER_SESSION_NOT_ESTABLISHED: (0xC8) PPPoE-sessionen har inte upprättats.
+- **NX_PPPOE_SERVER_SUCCESS**: (0x00) Lyckades PPPoE-server ta bort.
+- NX_PPPOE_SERVER_PTR_ERROR: (0xC1) Ogiltig PPPoE-serverpekare.
+- NX_PPPOE_SERVER_NOT_ENABLED: (0xC6) PPPoE-servertjänsten är inte aktiverad.
+- NX_PPPOE_SERVER_INVALID_SESSION: (0xC7) Ogiltigt PPPoE-sessionsindex.
+- NX_PPPOE_SERVER_SESSION_NOT_ESTABLISHED: (0xC8) PPPoE-session har inte upprättats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
@@ -409,7 +409,7 @@ status = nx_pppoe_server_session_send(&my_pppoe_server, 0, my_data_ptr, 1400);
 
 ## <a name="nx_pppoe_server_session_packet_send"></a>nx_pppoe_server_session_packet_send
 
-Skicka PPPoE-serverns paket till en angiven session
+Skicka PPPoE-serverpaket till angiven session
 
 ### <a name="prototype"></a>Prototyp
 
@@ -419,26 +419,26 @@ UINT nx_pppoe_server_session_packet_send (
         UINT session_index, NX_PACKET *packet_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten skickar PPPoE-paket med angivet sessions-ID.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **pppoe_server_ptr**: pekar på kontroll block för PPPoE-Server.
-- **session_index**: sessionens index.
-- **packet_ptr**: pekare till PPPoE-paket.
+- **pppoe_server_ptr:** Pekare till PPPoE-serverkontrollblock.
+- **session_index:** Indexet för sessionen.
+- **packet_ptr:** Pekare till PPPoE-paket.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_PPPOE_SERVER_SUCCESS**: (0X00) lyckad borttagning av PPPoE-Server.
-- NX_PPPOE_SERVER_PTR_ERROR: (0xC1) ogiltig PPPoE-Server pekare.
-- NX_PPPOE_SERVER_PACKET_PAYLOAD_ERROR: (0xC3) ogiltigt PPPoE-Server paket.
-- NX_PPPOE_SERVER_NOT_ENABLED: (0xC6) PPPoE-servertjänsten är inte aktive rad.
-- NX_PPPOE_SERVER_INVALID_SESSION: (0xC7) ogiltigt PPPoE-sessions index.
-- NX_PPPOE_SERVER_SESSION_NOT_ESTABLISHED: (0xC8) PPPoE-sessionen har inte upprättats.
+- **NX_PPPOE_SERVER_SUCCESS**: (0x00) Lyckades PPPoE-server ta bort.
+- NX_PPPOE_SERVER_PTR_ERROR: (0xC1) Ogiltig PPPoE-serverpekare.
+- NX_PPPOE_SERVER_PACKET_PAYLOAD_ERROR: (0xC3) Ogiltigt PPPoE-serverpaket.
+- NX_PPPOE_SERVER_NOT_ENABLED: (0xC6) PPPoE-servertjänsten är inte aktiverad.
+- NX_PPPOE_SERVER_INVALID_SESSION: (0xC7) Ogiltigt PPPoE-sessionsindex.
+- NX_PPPOE_SERVER_SESSION_NOT_ESTABLISHED: (0xC8) PPPoE-session har inte upprättats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
@@ -463,24 +463,24 @@ UINT nx_pppoe_server_session_terminate(
         UINT session_index);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten avslutar den angivna PPPoE-sessionen.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **pppoe_server_ptr**: pekar på kontroll block för PPPoE-Server.
-- **session_index**: sessionens index.
+- **pppoe_server_ptr:** Pekare till PPPoE-serverkontrollblock.
+- **session_index:** Indexet för sessionen.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_PPPOE_SERVER_SUCCESS**: (0X00) lyckad borttagning av PPPoE-Server.
-- NX_PPPOE_SERVER_PTR_ERROR: (0xC1) ogiltig PPPoE-Server pekare.
-- NX_PPPOE_SERVER_NOT_ENABLED: (0xC6) PPPoE-servertjänsten är inte aktive rad.
-- NX_PPPOE_SERVER_INVALID_SESSION: (0xC7) ogiltigt PPPoE-sessions index.
-- NX_PPPOE_SERVER_SESSION_NOT_ESTABLISHED: (0xC8) PPPoE-sessionen har inte upprättats.
+- **NX_PPPOE_SERVER_SUCCESS**: (0x00) Lyckades PPPoE-server ta bort.
+- NX_PPPOE_SERVER_PTR_ERROR: (0xC1) Ogiltig PPPoE-serverpekare.
+- NX_PPPOE_SERVER_NOT_ENABLED: (0xC6) PPPoE-servertjänsten är inte aktiverad.
+- NX_PPPOE_SERVER_INVALID_SESSION: (0xC7) Ogiltigt PPPoE-sessionsindex.
+- NX_PPPOE_SERVER_SESSION_NOT_ESTABLISHED: (0xC8) PPPoE-session har inte upprättats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
@@ -495,7 +495,7 @@ status = nx_pppoe_server_session_send(&my_pppoe_server, 0);
 
 ## <a name="nx_pppoe_server_session_get"></a>nx_pppoe_server_session_get
 
-Hämta den angivna informationen om PPPoE-sessionen
+Hämta den angivna PPPoE-sessionsinformationen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -507,26 +507,26 @@ UINT nx_pppoe_server_session_get(NX_PPPOE_SERVER *pppoe_server_ptr,
                                 ULONG *session_id);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar den angivna PPPoE-sessionsinformation, klientens fysiska adress och sessions-ID.
+Den här tjänsten hämtar den angivna PPPoE-sessionsinformationen, klientens fysiska adress och sessions-ID.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **pppoe_server_ptr**: pekar på kontroll block för PPPoE-Server.
-- **session_index**: sessionens index.
-- **client_mac_msw**: MSW-pekare för klientens fysiska adress.
-- **client_mac_lsw**: MSW-pekare för klientens fysiska adress.
-- **session_id**: sessions-ID-pekare.
+- **pppoe_server_ptr:** Pekare till PPPoE-serverkontrollblock.
+- **session_index:** Indexet för sessionen.
+- **client_mac_msw:** MSW-pekare för klientens fysiska adress.
+- **client_mac_lsw:** MSW-pekare för klientens fysiska adress.
+- **session_id:** Pekare för sessions-ID.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_PPPOE_SERVER_SUCCESS**: (0X00) lyckad borttagning av PPPoE-Server.
-- NX_PPPOE_SERVER_PTR_ERROR: (0xC1) ogiltig PPPoE-Server pekare.
-- NX_PPPOE_SERVER_INVALID_SESSION: (0xC7) ogiltigt PPPoE-sessions index.
-- NX_PPPOE_SERVER_SESSION_NOT_ESTABLISHED: (0xC8) PPPoE-sessionen har inte upprättats.
+- **NX_PPPOE_SERVER_SUCCESS**: (0x00) Lyckades PPPoE-server ta bort.
+- NX_PPPOE_SERVER_PTR_ERROR: (0xC1) Ogiltig PPPoE-serverpekare.
+- NX_PPPOE_SERVER_INVALID_SESSION: (0xC7) Ogiltigt PPPoE-sessionsindex.
+- NX_PPPOE_SERVER_SESSION_NOT_ESTABLISHED: (0xC8) PPPoE-session har inte upprättats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
@@ -541,7 +541,7 @@ status = nx_pppoe_server_session_get (&my_pppoe_server, 0, &client_mac_msw, &cli
 
 ## <a name="pppinitind"></a>PppInitInd
 
-Konfigurera standard tjänst namnet
+Konfigurera standardnamnet för tjänsten
 
 ### <a name="prototype"></a>Prototyp
 
@@ -549,20 +549,20 @@ Konfigurera standard tjänst namnet
 VOID PppInitnd(UINT length, UCHAR *aData);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-PPPoE-programmet kommer att visa den här funktionen för att tillåta att TTP-programvaran konfigurerar standard tjänst namnet som PPPoE ska använda för att filtrera inkommande PADI-begäranden. PPPoE-programvaran bör komma ihåg den här informationen och om ett PADI-paket tas emot som innehåller ett tjänst namn som matchar, ska det anropa PppDiscoverReq.
+PPPoE-programvaran exponerar den här funktionen så att TTP:s programvara kan konfigurera det "standardtjänstnamn" som PPPoE ska använda för att filtrera inkommande PADI-begäranden. PPPoE-programvaran bör komma ihåg den här informationen, och om ett PADI-paket tas emot som innehåller ett tjänstnamn som matchar ska det anropa PppDiscoverReq.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **längd**: längden på standard tjänst namnet.
-- **aData**: standard tjänst namn.
+- **length**: Längden på standardtjänstnamnet.
+- **aData:** Standardtjänstnamn.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 **Ingen**
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
@@ -575,7 +575,7 @@ PppInitInd (3, "XBB");
 
 ## <a name="pppdiscovercnf"></a>PppDiscoverCnf
 
-Definiera tjänst namns fältet för PADO-paketet
+Definiera fältet Tjänstnamn för PADO-paketet
 
 ### <a name="prototype"></a>Prototyp
 
@@ -583,27 +583,27 @@ Definiera tjänst namns fältet för PADO-paketet
 VOID PppDiscoverCnf (UINT length, UCHAR *aData, UINT interfaceHandle);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-PPPoE-programmet kommer att visa den här funktionen för att tillåta att TTP-programvaran definierar fältet för tjänst namn i PADO-paketet. PPPoE-programvaran bör inte skicka PADO förrän PppDiscoverCnf anropas.
+PPPoE-programvaran exponerar den här funktionen så att TTP:s programvara kan definiera fältet Tjänstnamn för PADO-paketet. PPPoE-programvaran bör inte skicka PADO förrän PppDiscoverCnf anropas.
 
-PADO-paketet måste innehålla ett namn för åtkomst koncentrator (med taggen ID 0x0102 som definieras i RFC2516), definierat i initieringen av PPPoE-programvaran.
+PADO-paketet ska innehålla ett åtkomstkoncentratornamn (med tagg-ID:t 0x0102 enligt definitionen i RFC2516) som definieras vid initieringen av PPPoE-programvaran.
 
-Flera tjänst namn kan skickas i aData, där varje namn ska vara null.
+Flera tjänstnamn kan skickas i aData, där varje namn ska avslutas med null.
 
-NULL-tecken används som avgränsare för att ge maximal flexibilitet om andra kommandon måste skickas in som en del av tjänstens namn.
+Null-tecknet används som avgränsare för att ge maximal flexibilitet om andra kommandon måste skickas som en del av tjänstnamnet.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **längd**: längden på standard tjänst namnet.
-- **aData**: standard tjänst namn.
-- **interfaceHandle**: gränssnitts referens.
+- **length**: Längden på standardtjänstnamnet.
+- **aData:** Standardtjänstnamn.
+- **interfaceHandle:** Gränssnittshandtag.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 **Ingen**
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
@@ -624,20 +624,20 @@ Acceptera eller avvisa PPPoE-sessionen
 VOID PppOpenCnf (UCHAR accept, UINT interfaceHandle);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-PPPoE-programmet kommer att exponera den här funktionen så att TTP-programvaran kan godkänna eller avvisa PPPoE-sessionen.  Som svar på det här är PPPoE-stacken att godkänna anslutningen och tilldela ett unikt PPPoE-Session_ID kopplat till interfaceHandle.
+PPPoE-programvaran exponerar den här funktionen så att TTP:s programvara kan godkänna eller avvisa PPPoE-sessionen.  Som svar på detta bör PPPoE-stacken acceptera anslutningen och tilldela ett unikt PPPoE Session_ID-nummer som är associerat med interfaceHandle.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **acceptera**: NX_TRUE om anslutningen ska godkännas.
-- **interfaceHandle**: gränssnitts referens.
+- **accept**: NX_TRUE om anslutningen ska godkännas.
+- **interfaceHandle:** Gränssnittshandtag.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 **Ingen**
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
@@ -658,22 +658,22 @@ Stänga en PPPoE-session
 VOID PppCloseInd (UINT interfaceHandle, UCHAR *causeCode);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-PPPoE-programvaran kommer att exponera den här funktionen för att låta TTP-programvaran stänga en PPPoE-session.
+PPPoE-programvaran exponerar den här funktionen så att TTP:s programvara kan stänga en PPPoE-session.
 
-PPPoE-programvaran anger orsaks kod strängen i Generic-Error-taggen (0x0203) i PADT-meddelandet
+PPPoE-programvaran anger orsakskodsträngen i den Generic-Error taggen (0x0203) i PADT-meddelandet
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **interfaceHandle**: gränssnitts referens.
-- **causeCode**: null-avslutad sträng för sändning av information om orsaken till att anslutningen stängdes från PPPoE-servern.
+- **interfaceHandle:** Gränssnittshandtag.
+- **causeCode:** Null-avslutad sträng för att skicka information om orsaken till att anslutningen stängs från PPPoE-servern.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 **Ingen**
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
@@ -686,7 +686,7 @@ PppCloseInd(0, NX_NULL);
 
 ## <a name="pppclosecnf"></a>PppCloseCnf
 
-Bekräfta att referensen har frigjorts
+Bekräfta att referensen har frisats
 
 ### <a name="prototype"></a>Prototyp
 
@@ -694,19 +694,19 @@ Bekräfta att referensen har frigjorts
 VOID PppCloseCnf (UINT interfaceHandle);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-PPPoE-programmet kommer att exponera den här funktionen för att tillåta att TTP-programvaran bekräftar att referensen har frigjorts.
+PPPoE-programvaran exponerar den här funktionen så att TTP:s programvara kan bekräfta att referensen har frispolerats.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **interfaceHandle**: gränssnitts referens.
+- **interfaceHandle:** Gränssnittshandtag.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 **Ingen**
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
@@ -719,7 +719,7 @@ PppCloseCnf(0);
 
 ## <a name="ppptransmitdatacnf"></a>PppTransmitDataCnf
 
-Tillåt att en tidigare PPP-data bekräftas
+Tillåt att tidigare PPP-data bekräftas
 
 ### <a name="prototype"></a>Prototyp
 
@@ -728,21 +728,21 @@ VOID PppTransmitDataCnf (UINT interfaceHandle, UCHAR *aData,
                         UINT packet_id);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-PPPoE-programmet kommer att exponera den här funktionen så att en föregående PppTransmitDataReq kan bekräftas.  Det innebär att TTP-programvaran är redo för en ny PPP-ram från PPPoE.
+PPPoE-programvaran exponerar den här funktionen för att tillåta att en tidigare PppTransmitDataReq bekräftas.  Det innebär att TTP:s programvara är redo för en ny PPP-ram från PPPoE.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **interfaceHandle**: gränssnitts referens.
-- **aData**: pekar på den PPP-databuffert som har godkänts.
-- **Packet_id**: paket-ID.
+- **interfaceHandle:** Gränssnittshandtag.
+- **aData:** Pekar den PPP-databuffert som har godkänts.
+- **Packet_id:** Paketidentifierare.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 **Ingen**
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
@@ -757,7 +757,7 @@ PppTransmitDataCnf(0, NX_NULL, packet_id);
 
 ## <a name="pppreceivedataind"></a>PppReceiveDataInd
 
-Ta emot data från överföring över Ethernet
+Ta emot data från överföring via Ethernet
 
 ### <a name="prototype"></a>Prototyp
 
@@ -765,21 +765,21 @@ Ta emot data från överföring över Ethernet
 VOID PppReceiveDataInd(UINT interfaceHandle, UINT length, UCHAR *aData);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-PPPoE-programmet kommer att exponera den här funktionen för att ta emot data för överföring via Ethernet
+PPPoE-programvaran exponerar den här funktionen för att ta emot data för överföring via Ethernet
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **interfaceHandle**: gränssnitts referens.
-- **längd**: antalet byte i aData.
-- **aData**: databuffert som innehåller en ram med PPP-data.
+- **interfaceHandle:** Gränssnittshandtag.
+- **length**: Antalet byte i aData.
+- **aData:** Databuffert som innehåller ramen för PPP-data.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 **Ingen**
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 

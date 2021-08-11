@@ -1,72 +1,72 @@
 ---
-title: Kapitel 2 – installation och användning av HTTP och HTTPS
-description: Det här kapitlet innehåller en beskrivning av olika problem som rör Installation, konfiguration och användning av NetX-webb-HTTP-komponenten.
+title: Kapitel 2 – Installation och användning av HTTP och HTTPS
+description: Det här kapitlet innehåller en beskrivning av olika problem som rör installation, installation och användning av NetX Web HTTP-komponenten.
 author: philmea
 ms.author: philmea
 ms.date: 07/24/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 99e649781588b56e72b509c2aa077c38423379d1
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: fd8ab093d15c5413b0d5dac6d35b080674c3a332ec7a028fc462237135880d34
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104825704"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116783432"
 ---
-# <a name="chapter-2---installation-and-use-of-http-and-https"></a>Kapitel 2 – installation och användning av HTTP och HTTPS
+# <a name="chapter-2---installation-and-use-of-http-and-https"></a>Kapitel 2 – Installation och användning av HTTP och HTTPS
 
-Det här kapitlet innehåller en beskrivning av olika problem som rör Installation, konfiguration och användning av NetX-webb-HTTP-komponenten.
+Det här kapitlet innehåller en beskrivning av olika problem som rör installation, installation och användning av NetX Web HTTP-komponenten.
 
-## <a name="product-distribution"></a>Produkt distribution
+## <a name="product-distribution"></a>Produktdistribution
 
-HTTP för NetX finns på [https://github.com/azure-rtos/netxduo](https://github.com/azure-rtos/netxduo) . Paketet innehåller tre källfiler, två inkludera filer och en fil som innehåller det här dokumentet, enligt följande:
+HTTP för NetX finns på [https://github.com/azure-rtos/netxduo](https://github.com/azure-rtos/netxduo) . Paketet innehåller tre källfiler, två inkluderar filer och en fil som innehåller det här dokumentet, enligt följande:
 
-- **nx_web_http_common. h** Gemensam huvud fil för NetX-webb-HTTP
-- **nx_web_http_client. h** Rubrik fil för HTTP-klient för NetX-webben
-- **nx_web_http_server. h** Rubrik fil för HTTP-server för NetX-webben
-- **nx_web_http_client. c** C-källfil för HTTP-klient för NetX-webben
-- **nx_web_http_server. c** C-källfil för HTTP-server för NetX-webben
-- **nx_tcpserver. c** C-källfil för flera TCP-Sockets
-- **nx_tcpserver. h** Rubrik fil för definition av HTTPS-server symboler
-- **nx_md5. c** MD5 Digest-algoritmer
-- **filex_stub. h** Stub-fil om FileX inte finns
-- **nx_web_http.pdf** Beskrivning av HTTP för NetX-webben
-- **demo_netx_web_http. c** NetX webb-HTTP-demonstration
+- **nx_web_http_common.h** Gemensam rubrikfil för NetX Web HTTP
+- **nx_web_http_client.h** Huvudfil för HTTP-klient för NetX Web
+- **nx_web_http_server.h** Huvudfil för HTTP Server för NetX Web
+- **nx_web_http_client.c** C-källfil för HTTP-klient för NetX Web
+- **nx_web_http_server.c** C-källfil för HTTP Server för NetX Web
+- **nx_tcpserver.c** C-källfil för flera TCP-sockets
+- **nx_tcpserver.h** Rubrikfil för att definiera HTTPS-serversymboler
+- **nx_md5.c** MD5-sammanfattande algoritmer
+- **filex_stub.h** Stub-fil om FileX inte finns
+- **nx_web_http.pdf** Beskrivning av HTTP för NetX Web
+- **demo_netx_web_http.c** Demonstration av NetX Web HTTP
 
 ## <a name="http-installation"></a>HTTP-installation
 
-För att du ska kunna använda NetX Web HTTP, ska hela distributionen som nämnts tidigare kopieras till samma katalog där NetX Duo är installerat. Om t. ex. NetX Duo är installerat i katalogen "*\threadx\arm7\green*", så *nx_web_http_client. h* och *Nx_web_http_client. c för netx webb-http-klientprogram och nx_web_http_server. h*, *nx_web_http_server. c, nx_tcpserver. c och nx_tcpserver. h för netx webb-http-serverprogram. För både klient-och serverprogram måste nx_web_http_common. h vara i den här katalogen också. nx_md5. c* bör också kopieras till den här katalogen om Digest-autentisering används. För demonstrationen av "ram-drivrutinen" program HTTP-klient och server filer bör kopieras till samma katalog.
+För att kunna använda NetX Web HTTP bör hela distributionen som nämns ovan kopieras till samma katalog där NetX Duo är installerat. Om NetX Duo till exempel är installerat i katalogen "*\threadx\arm7\green*" så är *nx_web_http_client.h* och *nx_web_http_client.c för NetX Web HTTP-klientprogram och nx_web_http_server.h*, *nx_web_http_server.c, nx_tcpserver.c och nx_tcpserver.h för NetX-webb-HTTP Server-program. För både klient- och serverprogram måste nx_web_http_common.h också finnas i den här katalogen. nx_md5.c* bör också kopieras till den här katalogen om sammanfattad autentisering används. För demonstrationen ska HTTP-klient- och serverfilerna för RAM-drivrutinsprogrammet kopieras till samma katalog.
 
-Om du använder TLS bör du ha en separat NetX-säker katalog som innehåller TLS-källfilerna.
+Om du använder TLS bör du ha en separat NetX Secure-katalog som innehåller TLS-källfilerna.
 
 ## <a name="using-http"></a>Använda HTTP
 
-Det är enkelt att använda NetX Web HTTP. I princip måste program koden innehålla *nx_web_http_client. h* och/eller *nx_web_http_server. h* när den innehåller *tx_api. h, fx_api. h* och *nx_api. h* (*nx_web_http_common. h* ingår automatiskt). Dessa huvuden gör att programmet kan använda ThreadX, FileX och NetX Duo. För HTTPS-stöd måste huvudena ingå efter att filen *nx_secure_tls. h* ingår i TLS-stöd.
+Det är enkelt att använda NetX Web HTTP. I princip måste programkoden innehålla *nx_web_http_client.h* och/eller *nx_web_http_server.h* när den *innehåller tx_api.h, fx_api.h* och *nx_api.h* (*nx_web_http_common.h* ingår automatiskt). Dessa huvuden gör det möjligt för programmet att använda ThreadX, FileX respektive NetX Duo. För HTTPS-stöd måste huvudena inkluderas när *filen nx_secure_tls.h* har inkluderats för att få TLS-stöd.
 
-När HTTP-huvudfilerna har inkluderats kan program koden göra HTTP-funktions anropen senare i den här hand boken. Programmet måste också länka till *nx_web_http_client. c för http (s)-klienter*, *nx_web_http_server. c och nx_tcpserver. c för HTTP-servrar* och *nx_md5. c (för sammanfattad autentisering)* i build-processen. De här filerna måste kompileras på samma sätt som andra programfiler och dess objekt formulär måste vara länkade tillsammans med programmets filer. Detta är allt som krävs för att använda NetX webb-HTTP.
+När HTTP-huvudfilerna har inkluderats kan programkoden sedan göra HTTP-funktionsanrop som anges senare i den här guiden. Programmet måste också länka till *nx_web_http_client.c för HTTP(S)-klienter*, *nx_web_http_server.c och nx_tcpserver.c för HTTP(S)-servrar* och *nx_md5.c (för* sammanfattad autentisering) i byggprocessen. Dessa filer måste kompileras på samma sätt som andra programfiler och dess objektformulär måste länkas tillsammans med programmets filer. Det här är allt som krävs för att använda NetX Web HTTP.
 
 > [!NOTE]
-> Om NX_WEB_HTTP_DIGEST_ENABLE inte anges i build-processen behöver inte *MD5. c* -filen läggas till i programmet. Om ingen HTTP-klient krävs, kan *nx_web_http_client. c* -filen utelämnas och om ingen http-server krävs, kan *nx_web_http_server. c* utelämnas.
+> Om NX_WEB_HTTP_DIGEST_ENABLE inte har angetts i byggprocessen behöver *filen md5.c* inte läggas till i programmet. Om inga HTTP-klientfunktioner krävs kan filen *nx_web_http_client.c* utelämnas och om inga HTTP-serverfunktioner krävs *kan nx_web_http_server.c* utelämnas.
 >
-> Om inte NX_WEB_HTTPS_ENABLE har definierats för att aktivera HTTPS (i stället för att bara använda klartext HTTP) behöver NetX Secure TLS inte finnas i versionen.
+> Om NX_WEB_HTTPS_ENABLE inte definieras för att aktivera HTTPS (i stället för att endast använda HTTP i klartext) behöver NetX Secure TLS inte finnas i bygget.
 >
-> Eftersom HTTP använder sig av NetX TCP-tjänster måste TCP aktive ras med *nx_tcp_enable ()* -anropet innan http.
+> Eftersom HTTP använder NetX TCP-tjänster måste TCP aktiveras med *nx_tcp_enable()-anropet* innan HTTP används.
 >
-> När du använder HTTPS med NetX Secure TLS måste TLS initieras med *nx_secure_tls_initialize ()* innan du anropar https-rutiner.
+> När du använder HTTPS med NetX Secure TLS måste TLS initieras *med nx_secure_tls_initialize()* innan HTTPS-rutiner anropas.
 
-## <a name="small-example-system"></a>Litet exempel system
+## <a name="small-example-system"></a>Litet exempelsystem
 
-Ett exempel på hur du använder NetX webb-HTTP beskrivs i bild 1,1 nedan.
+Ett exempel på hur du använder NetX Web HTTP beskrivs i bild 1.1 nedan.
 
 > [!CAUTION]
-> Detta tillhandahålls endast i demonstrations syfte och är inte garanterat att kompilera och köra i befintligt skick.
+> Detta tillhandahålls endast i demonstrationssyfte och är inte garanterat att kompileras och köras som det är.
 >
-> Se NetX Duo HTTPS release Code-distributionen för demo-källfiler som kommer att bygga i den inbyggda Express Logic-miljön.  Tänk också på att dessa demonstrationer avsiktligt hålls enkla eftersom de är avsedda att introducera HTTPS och/eller NetX Duo HTTPS-program för nya användare.
+> Se NetX Duo HTTPS-versionens koddistribution för demokällkodfiler som kommer att byggas korrekt i den inbyggda Express Logic-miljön.  Tänk också på att dessa demonstrationer avsiktligt hålls mycket enkla eftersom de är avsedda att introducera HTTPS och/eller NetX Duo HTTPS-program för nya användare.
 
-I det här exemplet tas HTTP include-filen *nx_web_http_client. h och nx_web_http_server. h* in (*netx_web_http_common. h* ingår automatiskt). Därefter skapas HTTP-servern i "*tx_application_define*". Observera att HTTP Server Control Block "*Server*" har definierats som en global variabel tidigare. HTTPS-servern startas när den har skapats. HTTPS-klienten skapas sedan. Filen skrivs och filen läses tillbaka.
+I det här exemplet hämtas *HTTP-indelningsfilen nx_web_http_client.h och nx_web_http_server.h* (*netx_web_http_common.h* inkluderas automatiskt). Därefter skapas HTTP-servern i "*tx_application_define*". Observera att HTTP-serverkontrollblocket "*Server*" definierades som en global variabel tidigare. NÄR HTTPS-servern har skapats startas den. HTTPS-klienten skapas sedan. Den skriver filen och läser tillbaka filen.
 
 > [!NOTE]
-> NX_WEB_HTTPS_ENABLE har definierats i det här systemet.
+> NX_WEB_HTTPS_ENABLE definieras i det här systemet.
 
 ```c
 /* This is a small demo of HTTPS on the high-performance NetX Duo TCP/IP stack.
@@ -376,38 +376,38 @@ void    thread_0_entry(ULONG thread_input)
 }
 ```
 
-**Figur 1,1 exempel på HTTPS-användning med NetX och NetX Secure TLS**
+**Bild 1.1 Exempel på HTTPS-användning med NetX och NetX Secure TLS**
 
-## <a name="configuration-options"></a>Konfigurations alternativ
+## <a name="configuration-options"></a>Konfigurationsalternativ
 
-Det finns flera konfigurations alternativ för att skapa HTTP för NetX. Följande är en lista över alla alternativ, där var och en beskrivs i detalj. Standardvärdena visas men kan omdefinieras innan du kan inkludera *nx_web_http_client. h och nx_web_http_server. h*:
+Det finns flera konfigurationsalternativ för att skapa HTTP för NetX. Nedan följer en lista över alla alternativ, där vart och ett beskrivs i detalj. Standardvärdena visas men kan definieras om innan du tar med *nx_web_http_client.h och nx_web_http_server.h:*
 
-- **NX_DISABLE_ERROR_CHECKING** Definierad tar det här alternativet bort grundläggande HTTP-felkontroll. Den används vanligt vis när programmet har felsökts.
-- **NX_WEB_HTTP_DIGEST_ENABLE** Om det här alternativet definieras används autentisering med MD5 Digest på HTTPS-servern. Som standard är den inte definierad.
-- **NX_WEB_HTTP_SERVER_PRIORITY** Prioriteten för HTTPS-serverns tråd. Som standard definieras värdet som 16 för att ange prioritet 16.
-- **NX_WEB_HTTP_NO_FILEX** Definierad är det här alternativet en stub för FileX-beroenden. HTTPS-klienten fungerar utan några ändringar om det här alternativet har definierats. HTTPS-servern måste antingen ändras eller så måste användaren skapa en fåtal av FileX-tjänsterna för att fungera korrekt.
-- **NX_WEB_HTTP_TYPE_OF_SERVICE** Typ av tjänst som krävs för HTTPS TCP-begäranden. Som standard definieras det här värdet som NX_IP_NORMAL för att indikera den normala IP-paketfiltrering.
-- **NX_WEB_HTTP_SERVER_THREAD_TIME_SLICE** Antalet timer-Tick som server tråden får köra innan den tilldelas trådar av samma prioritet. Standardvärdet är 2. Observera att det här alternativet är föråldrat.
-- **NX_WEB_HTTP_FRAGMENT_OPTION** Fragment aktivera för HTTP TCP-begäranden. Som standard är det här värdet NX_DONT_FRAGMENT för att inaktivera HTTP TCP-fragmentering.
-- **NX_WEB_HTTP_SERVER_WINDOW_SIZE** Serverns socket Window-storlek. Som standard är det här värdet 2048 byte.
-- **NX_WEB_HTTP_TIME_TO_LIVE** Anger antalet routrar som det här paketet kan passera innan det tas bort. Standardvärdet är inställt på 0x80.
-- **NX_WEB_HTTP_SERVER_TIMEOUT** Anger antalet ThreadX-Tick som interna tjänster ska pausas för. Standardvärdet är inställt på 10 sekunder (10 \* *NX_IP_PERIODIC_RATE*).
-- **NX_WEB_HTTP_SERVER_TIMEOUT_ACCEPT** Anger antalet ThreadX-Tick som interna tjänster ska pausas för i interna *nx_tcp_server_socket_accept ()-* anrop. Standardvärdet är inställt på (10 \* *NX_IP_PERIODIC_RATE*).
-- **NX_WEB_HTTP_SERVER_TIMEOUT_DISCONNECT** Anger antalet ThreadX-Tick som interna tjänster ska pausas för i interna *nx_tcp_socket_disconnect ()-* anrop. Standardvärdet är inställt på 10 sekunder (10 \* *NX_IP_PERIODIC_RATE*).
-- **NX_WEB_HTTP_SERVER_TIMEOUT_RECEIVE** Anger antalet ThreadX-Tick som interna tjänster ska pausas för i interna *nx_tcp_socket_receive ()-* anrop. Standardvärdet är inställt på 10 sekunder (10 \* *NX_IP_PERIODIC_RATE*).
-- **NX_WEB_HTTP_SERVER_TIMEOUT_SEND** Anger antalet ThreadX-Tick som interna tjänster ska pausas för i interna *nx_tcp_socket_send ()-* anrop. Standardvärdet är inställt på 10 sekunder (10 \* *NX_IP_PERIODIC_RATE*).
-- **NX_WEB_HTTP_MAX_HEADER_FIELD** **anger den maximala storleken för fältet http-huvud. Standardvärdet är 256.**
-- * * NX_WEB_HTTP_MULTIPART_ENABLE * * * * om det är definierat aktiverar HTTPS-servern stöd för multipart HTTP-begäranden. **
-- **NX_WEB_HTTP_SERVER_MAX_PENDING** Anger antalet anslutningar som kan köas för HTTPS-servern. Standardvärdet har angetts till två gånger det maximala antalet serversessioner.
-- **NX_WEB_HTTP_MAX_RESOURCE** Anger antalet byte som tillåts i ett klient *resurs namn* som anges. Standardvärdet är inställt på 40.
-- **NX_WEB_HTTP_MAX_NAME** Anger antalet byte som tillåts i en klient som har angett *användar namn*. Standardvärdet är inställt på 20.
-- **NX_WEB_HTTP_MAX_PASSWORD** Anger antalet byte som tillåts i ett *lösen ord* som anges av klienten. Standardvärdet är inställt på 20.
-- **NX_WEB_HTTP_SERVER_SESSION_MAX** Anger antalet samtidiga sessioner för en HTTP-eller HTTPS-server. En TCP-socket och en TLS-session (om HTTPS har Aktiver ATS) allokeras för varje session. Standardvärdet är inställt på 2.
-- **NX_WEB_HTTPS_ENABLE** Det här makrot aktiverar TLS och HTTPS om det har definierats. Lämna undefined för att frigöra resurser om bara HTTP i klartext önskas. Som standard är det här makrot inte definierat.
-- **NX_WEB_HTTPS_KEEPALIVE_DISABLE** Om det här makrot är definierat inaktive ras HTTP Keep-Alive-funktionen. Som standard är det här makrot inte definierat.
-- **NX_WEB_HTTP_SERVER_MIN_PACKET_SIZE** Anger minimi storleken på paketen i poolen som anges när servern skapas. Minimi storleken krävs för att säkerställa att det fullständiga HTTP-huvudet kan finnas i ett paket. Standardvärdet är inställt på 600.
-- **NX_WEB_HTTP_CLIENT_MIN_PACKET_SIZE** Anger minimi storleken på paketen i poolen som anges när klienten skapades. Minimi storleken krävs för att säkerställa att det fullständiga HTTP-huvudet kan finnas i ett paket. Standardvärdet är inställt på 600.
-- **NX_WEB_HTTP_SERVER_RETRY_SECONDS** Ange tids gränsen för återöverföring av Server-socket i sekunder. Standardvärdet är inställt på 2.
-- **NX_WEB_HTTP_ SERVER_RETRY_MAX** Detta anger det maximala antalet återöverföringar på Server-socketen. Standardvärdet är inställt på 10.
-- **NX_WEB_HTTP_ SERVER_RETRY_SHIFT** Det här värdet används för att ange nästa timeout för återöverföring. Den aktuella tids gränsen multipliceras med antalet återöverföringar, vilket innebär att värdet för timeout-värdet för socketen flyttas. Standardvärdet är inställt på 1 för dubblerad tids gräns.
-- **NX_WEB_HTTP_SERVER_RETRY_TRANSMIT_QUEUE_DEPTH** Detta anger det maximala antalet paket som kan köas på återställnings kön för Server-socket. Om antalet paket som har placerats i kö når det här antalet kan inga fler paket skickas förrän ett eller flera köade paket släpps. Standardvärdet är inställt på 20.
+- **NX_DISABLE_ERROR_CHECKING** Det här alternativet tar bort den grundläggande HTTP-felkontrollen. Det används vanligtvis när programmet har felsökts.
+- **NX_WEB_HTTP_DIGEST_ENABLE** Om autentisering med MD5-sammanfattningen har definierats är det aktiverat på HTTPS-servern. Som standard definieras den inte.
+- **NX_WEB_HTTP_SERVER_PRIORITY** Https-servertrådens prioritet. Som standard definieras det här värdet som 16 för att ange prioritet 16.
+- **NX_WEB_HTTP_NO_FILEX** Det här alternativet har definierats och tillhandahåller en stub för FileX-beroenden. HTTPS-klienten fungerar utan ändringar om det här alternativet har definierats. HTTPS-servern måste antingen ändras eller så måste användaren skapa ett fåtal FileX-tjänster för att fungera korrekt.
+- **NX_WEB_HTTP_TYPE_OF_SERVICE** Typ av tjänst som krävs för HTTPS TCP-begäranden. Som standard definieras det här värdet som NX_IP_NORMAL för att indikera normal IP-pakettjänst.
+- **NX_WEB_HTTP_SERVER_THREAD_TIME_SLICE** Antalet timer tick som Server-tråden tillåts köra innan den ger till trådar med samma prioritet. Standardvärdet är 2. Observera att det här alternativet är inaktuellt.
+- **NX_WEB_HTTP_FRAGMENT_OPTION** Aktivera fragment för HTTP TCP-begäranden. Som standard är det här värdet NX_DONT_FRAGMENT inaktivera HTTP TCP-fragmentering.
+- **NX_WEB_HTTP_SERVER_WINDOW_SIZE** Fönsterstorlek för serversocket. Som standard är det här värdet 2 048 byte.
+- **NX_WEB_HTTP_TIME_TO_LIVE** Anger antalet routrar som det här paketet kan skicka innan det tas bort. Standardvärdet är inställt på 0x80.
+- **NX_WEB_HTTP_SERVER_TIMEOUT** Anger antalet ThreadX-tick som interna tjänster ska pausas för. Standardvärdet är inställt på 10 sekunder (10 \* *NX_IP_PERIODIC_RATE*).
+- **NX_WEB_HTTP_SERVER_TIMEOUT_ACCEPT** Anger antalet ThreadX-tick som interna tjänster pausar för i interna *nx_tcp_server_socket_accept()-anrop.* Standardvärdet är inställt på (10 \* *NX_IP_PERIODIC_RATE*).
+- **NX_WEB_HTTP_SERVER_TIMEOUT_DISCONNECT** Anger antalet ThreadX-tick som interna tjänster pausar för i interna *nx_tcp_socket_disconnect()-anrop.* Standardvärdet är inställt på 10 sekunder (10 \* *NX_IP_PERIODIC_RATE*).
+- **NX_WEB_HTTP_SERVER_TIMEOUT_RECEIVE** Anger antalet ThreadX-tick som interna tjänster pausar för i interna *nx_tcp_socket_receive()-anrop.* Standardvärdet är inställt på 10 sekunder (10 \* *NX_IP_PERIODIC_RATE*).
+- **NX_WEB_HTTP_SERVER_TIMEOUT_SEND** Anger antalet ThreadX-tick som interna tjänster ska pausa för i interna *nx_tcp_socket_send()-anrop.* Standardvärdet är inställt på 10 sekunder (10 \* *NX_IP_PERIODIC_RATE*).
+- **NX_WEB_HTTP_MAX_HEADER_FIELD** **Anger den maximala storleken för HTTP-rubrikfältet. Standardvärdet är 256.**
+- **NX_WEB_HTTP_MULTIPART_ENABLE ** **Om https-servern har definierats kan den ge stöd för HTTP-begäranden med flera delar. **
+- **NX_WEB_HTTP_SERVER_MAX_PENDING** Anger antalet anslutningar som kan köas för HTTPS-servern. Standardvärdet är inställt på två gånger det maximala antalet serversessioner.
+- **NX_WEB_HTTP_MAX_RESOURCE** Anger antalet byte som tillåts i ett resursnamn som tillhandahålls *av en klient.* Standardvärdet är inställt på 40.
+- **NX_WEB_HTTP_MAX_NAME** Anger antalet byte som tillåts i ett användarnamn som tillhandahålls av *en klient.* Standardvärdet är inställt på 20.
+- **NX_WEB_HTTP_MAX_PASSWORD** Anger antalet byte som tillåts i ett lösenord som anges av *klienten.* Standardvärdet är inställt på 20.
+- **NX_WEB_HTTP_SERVER_SESSION_MAX** Anger antalet samtidiga sessioner för en HTTP- eller HTTPS-server. En TCP-socket och en TLS-session (om HTTPS är aktiverat) allokeras för varje session. Standardvärdet är inställt på 2.
+- **NX_WEB_HTTPS_ENABLE** Om det här makrot definieras aktiveras TLS och HTTPS. Lämna odefinierat för att frigöra resurser om du bara vill använda HTTP i klartext. Som standard definieras inte det här makrot.
+- **NX_WEB_HTTPS_KEEPALIVE_DISABLE** Om det här makrot har definierats inaktiveras HTTP keep-alive-funktionen. Som standard definieras inte det här makrot.
+- **NX_WEB_HTTP_SERVER_MIN_PACKET_SIZE** Anger den minsta storleken på paketen i poolen som angavs när servern skapades. Den minsta storleken krävs för att säkerställa att det fullständiga HTTP-huvudet kan finnas i ett paket. Standardvärdet är inställt på 600.
+- **NX_WEB_HTTP_CLIENT_MIN_PACKET_SIZE** Anger den minsta storleken på paketen i poolen som angavs när klienten skapades. Den minsta storleken krävs för att säkerställa att det fullständiga HTTP-huvudet kan finnas i ett paket. Standardvärdet är inställt på 600.
+- **NX_WEB_HTTP_SERVER_RETRY_SECONDS** Ange tidsgränsen för återöverföring av serversocket i sekunder. Standardvärdet är inställt på 2.
+- **NX_WEB_HTTP_ SERVER_RETRY_MAX** Detta anger det maximala antalet återöverföringar på serversocketen. Standardvärdet är inställt på 10.
+- **NX_WEB_HTTP_ SERVER_RETRY_SHIFT** Det här värdet används för att ange nästa tidsgräns för återöverföring. Den aktuella tidsgränsen multipliceras med antalet återöverföringar hittills, skiftat med värdet för socket-timeout-skiftet. Standardvärdet är inställt på 1 för att dubblera tidsgränsen.
+- **NX_WEB_HTTP_SERVER_RETRY_TRANSMIT_QUEUE_DEPTH** Detta anger det maximala antalet paket som kan finnas i kö för återöverföring av serversocket. Om antalet paket som tas iqueued når det här antalet kan inga fler paket skickas förrän ett eller flera paket i rad släpps. Standardvärdet är inställt på 20.

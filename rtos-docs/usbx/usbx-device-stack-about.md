@@ -1,43 +1,43 @@
 ---
-title: Användar handbok för Azure återställnings tider USBX Device stack
-description: Den här guiden innehåller omfattande information om Azure återställnings tider-USBX, högpresterande USB Foundation-programvara från Microsoft
+title: Azure RTOS användarhandbok för USBX-enhetsstack
+description: Den här guiden innehåller omfattande information Azure RTOS USBX, högpresterande USB Foundation-programvara från Microsoft
 author: philmea
 ms.author: philmea
 ms.date: 5/19/2020
 ms.service: rtos
 ms.topic: article
-ms.openlocfilehash: c8e9360c8b72adbc41f840a48e333668c489399e
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 042398377766a3e73f72d4dbba0478ba707d378a379fd33de7808675eb96f257
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104825428"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116788770"
 ---
-# <a name="azure-rtos-usbx-device-stack-user-guide"></a>Användar handbok för Azure återställnings tider USBX Device stack
+# <a name="azure-rtos-usbx-device-stack-user-guide"></a>Azure RTOS användarhandbok för USBX-enhetsstack
 
-Den här guiden innehåller omfattande information om Azure återställnings tider-USBX, högpresterande USB Foundation-programvara från Microsoft.
+Den här guiden innehåller omfattande information Azure RTOS USBX, den högpresterande USB-grundprogramvaran från Microsoft.
 
-Den är avsedd för den inbäddade programutvecklaren i real tid. Utvecklaren bör vara bekant med standard operativ system funktioner i real tid, USB-specifikationen och programmeringsspråket C.
+Den är avsedd för den inbäddade realtidsutvecklaren. Utvecklaren bör vara bekant med standardfunktioner för realtidsoperativsystemet, USB-specifikationen och programmeringsspråket C.
 
-Teknisk information som rör USB finns i specifikationer för USB-specifikation och USB-klass som kan hämtas på https://www.USB.org/developers
+Teknisk information om USB finns i USB-specifikationen och USB-klassspecifikationerna som kan laddas ned på https://www.USB.org/developers
 
 ## <a name="organization"></a>Organisation
 
-- [**Kapitel 1**](usbx-device-stack-1.md) – innehåller en introduktion till Azure återställnings tider USBX
+- [**Kapitel 1**](usbx-device-stack-1.md) – innehåller en introduktion Azure RTOS USBX
 
-- [**Kapitel 2**](usbx-device-stack-2.md) – innehåller grundläggande steg för att installera och använda Azure återställnings tider-USBX med ditt ThreadX-program
+- [**Kapitel 2**](usbx-device-stack-2.md) – innehåller de grundläggande stegen för att installera och använda Azure RTOS USBX med ditt ThreadX-program
 
-- [**Kapitel 3**](usbx-device-stack-3.md) – beskriver funktionella komponenter i enhets stacken för Azure återställnings tider USBX
+- [**Kapitel 3**](usbx-device-stack-3.md) – beskriver de funktionella komponenterna i den Azure RTOS USBX-enhetsstacken
 
-- [**Kapitel 4**](usbx-device-stack-4.md) – beskriver Azure återställnings tider USBX Device stack-tjänster
+- [**Kapitel 4 –**](usbx-device-stack-4.md) beskriver Azure RTOS USBX-enhetsstacktjänster
 
-- [**Kapitel 5**](usbx-device-stack-5.md) – beskriver varje Azure återställnings tider USBX-enhets klass inklusive API: er
+- [**Kapitel 5 –**](usbx-device-stack-5.md) beskriver varje Azure RTOS USBX-enhetsklass, inklusive deras API:er
 
-## <a name="customer-support-center"></a>Kund Support Center
+## <a name="customer-support-center"></a>Customer Support Center
 
-Skicka in ett support ärende via Azure Portal om du har frågor eller hjälp med att följa stegen här. Lämna oss med följande information i ett e-postmeddelande så att vi effektivare kan lösa support förfrågan:
+Skicka en supportbiljett via Azure-portalen för frågor eller hjälp med att följa stegen här. Ange följande information i ett e-postmeddelande så att vi kan lösa din supportbegäran mer effektivt:
 
-1. En detaljerad beskrivning av problemet, inklusive frekvensen av händelser och huruvida det kan återskapas tillförlitligt.
-2. En detaljerad beskrivning av eventuella ändringar i programmet och/eller Azure återställnings tider-ThreadX som föregåde problemet.
-3. Innehållet i den **_tx_version_id** strängen som finns i filen **_tx_port. h_** i distributionen. Den här strängen ger oss värdefull information om din kör tids miljö.
-4. Innehållet i RAM-minnet för *_tx_build_options* **ulong** -variabeln. Den här variabeln ger oss information om hur ditt Azure återställnings tider ThreadX-bibliotek har skapats.
+1. En detaljerad beskrivning av problemet, inklusive förekomstfrekvens och huruvida det kan återskapas på ett tillförlitligt sätt.
+2. En detaljerad beskrivning av eventuella ändringar i programmet och/eller Azure RTOS ThreadX som föregick problemet.
+3. Innehållet i den **_tx_version_id** strängen som finns **_i tx_port.h-filen_** för distributionen. Den här strängen ger oss värdefull information om din körningsmiljö.
+4. Innehållet i RAM-minnet för *_tx_build_options* **ULONG-variabeln.** Den här variabeln ger oss information om hur Azure RTOS ThreadX-biblioteket har skapats.

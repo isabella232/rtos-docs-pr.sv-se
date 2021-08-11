@@ -1,133 +1,133 @@
 ---
-title: Kapitel 5-I/O-drivrutiner för Azure återställnings tider FileX
-description: Det här kapitlet innehåller en beskrivning av I/O-drivrutiner för Azure återställnings tider FileX och är utformat för att hjälpa utvecklare att skriva programspecifika driv rutiner.
+title: Kapitel 5 – I/O-drivrutiner för Azure RTOS FileX
+description: Det här kapitlet innehåller en beskrivning av I/O-drivrutiner för Azure RTOS FileX och är utformat för att hjälpa utvecklare att skriva programspecifika drivrutiner.
 author: philmea
 ms.author: philmea
 ms.date: 05/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 8f2ef697f68a269b24a34147a4bc076b8a2b1660
-ms.sourcegitcommit: 60ad844b58639d88830f2660ab0c4ff86b92c10f
+ms.openlocfilehash: 163893119837a46479b3f346c2bd47d200de2af75232f91a23bbc3f64e20ea50
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 04/07/2021
-ms.locfileid: "106550090"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116782922"
 ---
-# <a name="chapter-5---io-drivers-for-azure-rtos-filex"></a>Kapitel 5-I/O-drivrutiner för Azure återställnings tider FileX
+# <a name="chapter-5---io-drivers-for-azure-rtos-filex"></a>Kapitel 5 – I/O-drivrutiner för Azure RTOS FileX
 
-Det här kapitlet innehåller en beskrivning av I/O-drivrutiner för Azure återställnings tider FileX och är utformat för att hjälpa utvecklare att skriva programspecifika driv rutiner.
+Det här kapitlet innehåller en beskrivning av I/O-drivrutiner för Azure RTOS FileX och är utformat för att hjälpa utvecklare att skriva programspecifika drivrutiner.
 
 ## <a name="io-driver-introduction"></a>Introduktion till I/O-drivrutin
 
-FileX stöder flera medie enheter. FX_MEDIAs strukturen definierar allt som krävs för att hantera en Media enhet. Den här strukturen innehåller all medie information, inklusive den leverantörsspecifika I/O-drivrutinen och tillhör ande parametrar för att skicka information och status mellan driv rutins-och FileX. I de flesta system finns det en unik I/O-drivrutin för varje FileX medie instans.
+FileX stöder flera medieenheter. Strukturen FX_MEDIA definierar allt som krävs för att hantera en medieenhet. Den här strukturen innehåller all medieinformation, inklusive mediespecifik I/O-drivrutin och associerade parametrar för att skicka information och status mellan drivrutinen och FileX. I de flesta system finns det en unik I/O-drivrutin för varje FileX-medieinstans.
 
-## <a name="io-driver-entry"></a>Post för I/O-drivrutin
+## <a name="io-driver-entry"></a>I/O-drivrutinspost
 
-Varje FileX I/O-drivrutin har en enda post-funktion som definieras av ***fx_media_open*** tjänst anropet. Funktionen driv rutins post har följande format:
+Varje FileX I/O-drivrutin har en enda postfunktion som definieras av fx_media_open tjänstanropet.  Drivrutinspostfunktionen har följande format:
 
 ```c
 void my_driver_entry(FX_MEDIA *media_ptr);
 ```
 
-FileX anropar funktionen I/O-drivrutin för att begära all fysisk medie åtkomst, inklusive initiering och start sektor läsning. Begär Anden som görs till driv rutinen görs i tur och ordning. t. ex. FileX väntar på att den aktuella begäran ska slutföras innan en annan begäran skickas.
+FileX anropar I/O-drivrutinspostfunktionen för att begära all fysisk mediaåtkomst, inklusive initiering och läsning av startsektor. Begäranden som görs till drivrutinen görs sekventiellt. FileX väntar alltså på att den aktuella begäran ska slutföras innan en annan begäran skickas.
 
-## <a name="io-driver-requests"></a>I/O-drivrutin begär Anden
+## <a name="io-driver-requests"></a>I/O-drivrutinsbegäranden
 
-Eftersom varje I/O-drivrutin har en enda post-funktion, gör FileX vissa förfrågningar via medie kontroll blocket. Mer specifikt används  **fx_media_driver_request** medlem i **FX_MEDIA** för att ange den exakta driv rutins förfrågan. I/O-drivrutinen meddelar att begäran lyckades eller misslyckades via **fx_media_driver_status** medlem i **FX_MEDIA**. Om begäran om driv rutin har lyckats placeras **FX_SUCCESS** i det här fältet innan driv rutinen returneras. Annars placeras FX_IO_ERROR i det här fältet om ett fel upptäcks.
+Eftersom varje I/O-drivrutin har en enda postfunktion gör FileX specifika begäranden via mediakontrollblocket. Mer specifikt  **fx_media_driver_request** medlem **i FX_MEDIA** för att ange den exakta drivrutinsbegäran. I/O-drivrutinen kommunicerar om begäran lyckades eller misslyckades via **fx_media_driver_status** medlem **i FX_MEDIA**. Om drivrutinsbegäran lyckades placeras **FX_SUCCESS** i det här fältet innan drivrutinen returneras. Annars, om ett fel upptäcks, FX_IO_ERROR placeras i det här fältet.
 
-### <a name="driver-initialization"></a>Driv rutins initiering
+### <a name="driver-initialization"></a>Drivrutinsinitiering
 
-Även om den faktiska initieringen av driv rutinen är programspecifik, består det vanligt vis av data struktur initiering och eventuellt preliminär maskin varu initiering. Den här begäran är den första som görs av FileX och görs inifrån den fx_media_open tjänsten.
+Även om den faktiska initieringsbearbetningen av drivrutiner är programspecifik består den vanligtvis av initiering av datastrukturer och eventuellt viss preliminär maskinvaru initiering. Den här begäran är den första som görs av FileX och görs inifrån fx_media_open tjänsten.
 
-Om medie Skriv skyddet identifieras ska driv rutinen fx_media_driver_write_protect medlem i FX_MEDIA anges till FX_TRUE.
+Om medieskrivningsskydd identifieras ska drivrutinsmedlemmen fx_media_driver_write_protect i FX_MEDIA vara inställd på FX_TRUE.
 
-Följande FX_MEDIA-medlemmar används för begäran om att initiera I/O-drivrutinen:
+Följande medlemmar FX_MEDIA för I/O-drivrutinsinitieringsbegäran:
 
 |FX_MEDIA medlem|Innebörd|
 |-----------|-----------|
 |fx_media_driver_request|FX_DRIVER_INIT|
 
-FileX tillhandahåller en mekanism för att informera program driv rutinen när sektorer inte längre används. Detta är särskilt användbart för minnes hanterare i FLASH som måste hantera alla inaktuella logiska sektorer som är kopplade till FLASH.
+FileX tillhandahåller en mekanism för att informera programdrivrutinen när sektorer inte längre används. Detta är särskilt användbart för FLASH-minneshanterare som måste hantera alla logiska sektorer som används och som är mappade till FLASH.
 
-Om det krävs ett sådant meddelande om kostnads fria sektorer, ställer program driv rutinen bara in *fx_media_driver_free_sector_update* fältet i den associerade **FX_MEDIAs** strukturen för att **FX_TRUE**. Efter den här inställningen gör FileX ett **_FX_DRIVER_RELEASE_SECTORS_** I/O-drivrutin som anger när en eller flera efterföljande sektorer blir kostnads fria.
+Om sådana meddelanden om kostnadsfria sektorer krävs anger programdrivrutinen bara *fx_media_driver_free_sector_update* i den associerade **FX_MEDIA** strukturen till **FX_TRUE**. Efter uppsättningen gör FileX ett **_FX_DRIVER_RELEASE_SECTORS_** I/O-drivrutinsanrop som anger när en eller flera efterföljande sektorer blir lediga.
 
-### <a name="boot-sector-read"></a>Läsning av start sektor
+### <a name="boot-sector-read"></a>Läsa startsektor
 
-I stället för att använda en vanlig Read-begäran, gör FileX en särskild begäran om att läsa mediets start sektor. Följande **FX_MEDIA** -medlemmar används för i/O-drivrutinens start sektor Read-begäran:
+I stället för att använda en standardläsningsbegäran, gör FileX en specifik begäran om att läsa mediets startsektor. Följande **FX_MEDIA** används för läsbegäran för I/O-drivrutinsstartsektor:
 
 |FX_MEDIA medlem|Innebörd|
 |-----------|-----------|
 |fx_media_driver_request| FX_DRIVER_BOOT_READ|
-|fx_media_driver_buffer| Mål adress för start sektor.|
+|fx_media_driver_buffer| Måladress för startsektor.|
 
-### <a name="boot-sector-write"></a>Skriv start sektor
+### <a name="boot-sector-write"></a>Skrivning av startsektor
 
-I stället för att använda en vanlig skrivbegäran, gör FileX en särskild begäran om att skriva mediets start sektor. Följande **FX_MEDIA** -medlemmar används för i/O-drivrutinens start sektor Skriv förfrågan:
+I stället för att använda en standardskrivningsbegäran, gör FileX en specifik begäran om att skriva mediets startsektor. Följande **FX_MEDIA** används för skrivbegäran för I/O-drivrutinsstartsektor:
 
 |FX_MEDIA medlem|Innebörd|
 |-----------|-----------|
 |fx_media_driver_request| FX_DRIVER_BOOT_WRITE|
-|fx_media_driver_buffer| Källans adress för start sektorn.|
+|fx_media_driver_buffer| Källadress för startsektor.|
 
-### <a name="sector-read"></a>Läs sektor
+### <a name="sector-read"></a>Sektorläsning
 
-FileX läser en eller flera sektorer i minnet genom att utfärda en Read-begäran till I/O-drivrutinen. Följande **FX_MEDIA** -medlemmar används för i/O-drivrutinen Read-begäran:
+FileX läser en eller flera sektorer i minnet genom att utfärda en läsbegäran till I/O-drivrutinen. Följande **FX_MEDIA** används för läsbegäran för I/O-drivrutinen:
 
 |FX_MEDIA medlem|Innebörd|
 |-----------|-----------|
 |fx_media_driver_request| FX_DRIVER_READ|
 |fx_media_driver_logical_sector|Logisk sektor att läsa|
-|fx_media_driver_sectors|Antal sektorer att läsa|
-|fx_media_driver_buffer|Destinations-buffert för sektor (er) Läs|
-|fx_media_driver_data_sector_read|Ange till FX_TRUE om en fil data sektor begärs. I annat fall FX_FALSE om en system sektor (FAT eller katalog sektor) begärs.|
-|fx_media_driver_sector_type|Definierar den explicita typ av sektor som begärs enligt följande:<br />FX_FAT_SECTOR (2)<br />FX_DIRECTORY_SECTOR (3)<br />FX_DATA_SECTOR (4)|
+|fx_media_driver_sectors|Antal sektorer som ska läsas|
+|fx_media_driver_buffer|Målbuffert för sektorläsning|
+|fx_media_driver_data_sector_read|Ange till FX_TRUE om en fildatasektor begärs. Annars FX_FALSE om en systemsektor (FAT eller katalogsektor) begärs.|
+|fx_media_driver_sector_type|Definierar den explicita typen av sektor som begärs enligt följande:<br />FX_FAT_SECTOR (2)<br />FX_DIRECTORY_SECTOR (3)<br />FX_DATA_SECTOR (4)|
 
-### <a name="sector-write"></a>Sektor skrivning
+### <a name="sector-write"></a>Sektorskrivning
 
-FileX skriver en eller flera sektorer till de fysiska medierna genom att utfärda en skrivbegäran till I/O-drivrutinen. Följande FX_MEDIA-medlemmar används för i/O-drivrutinen Skriv förfrågan:
+FileX skriver en eller flera sektorer till det fysiska mediet genom att utfärda en skrivbegäran till I/O-drivrutinen. Följande FX_MEDIA används för skrivbegäran för I/O-drivrutinen:
 
 |FX_MEDIA medlem| Innebörd|
 |-----------|-----------|
 |fx_media_driver_request|FX_DRIVER_WRITE|
 |fx_media_driver_logical_sector|Logisk sektor att skriva|
-|fx_media_driver_sectors|Antal sektorer att skriva|
-|fx_media_driver_buffer|Source buffer för sektor (er) att skriva|
-|fx_media_driver_system_write| Ange till FX_TRUE om en system sektor begärs (FAT eller katalog sektor). Annars FX_FALSE om en fil data sektor begärs.|
-|fx_media_driver_sector_type|Definierar den explicita typ av sektor som begärs enligt följande:<br> <br>FX_FAT_SECTOR (2) <br> FX_DIRECTORY_SECTOR (3) <br>FX_DATA_SECTOR (4).|
+|fx_media_driver_sectors|Antal sektorer som ska skrivas|
+|fx_media_driver_buffer|Källbuffert för sektorer som ska skrivas|
+|fx_media_driver_system_write| Ange till FX_TRUE om en systemsektor begärs (FAT eller katalogsektor). Annars FX_FALSE om en fildatasektor begärs.|
+|fx_media_driver_sector_type|Definierar den explicita typen av sektor som begärs enligt följande:<br> <br>FX_FAT_SECTOR (2) <br> FX_DIRECTORY_SECTOR (3) <br>FX_DATA_SECTOR (4).|
 
-### <a name="driver-flush"></a>Driv rutins tömning
+### <a name="driver-flush"></a>Drivrutins flush
 
-FileX tömmer alla sektorer som för närvarande finns i driv Rutinens sektor-cache till det fysiska mediet genom att skicka en begäran om tömning till I/O-drivrutinen. Om driv rutinen inte cachelagrar sektorer behöver denna begäran naturligtvis ingen driv rutins bearbetning. Följande FX_MEDIA-medlemmar används för i/O-drivrutinen tömnings förfrågan:
+FileX rensar alla sektorer som för närvarande finns i drivrutinens sektorcache till det fysiska mediet genom att skicka en flush-begäran till I/O-drivrutinen. Om drivrutinen inte cachelagrar sektorer kräver den här begäran naturligtvis ingen drivrutinsbearbetning. Följande FX_MEDIA används för I/O-drivrutins flush-begäran:
 
 |FX_MEDIA medlem| Innebörd|
 |-----------|-----------|
 |fx_media_driver_request|FX_DRIVER_FLUSH|
 
-### <a name="driver-abort"></a>Avbryt driv rutin
+### <a name="driver-abort"></a>Drivrutinsförsening
 
-FileX informerar driv rutinen för att avbryta all ytterligare fysisk I/O-aktivitet med det fysiska mediet genom att utfärda en abort-begäran till I/O-drivrutinen. Driv rutinen ska inte utföra några I/O igen förrän den har startats om. Följande FX_MEDIA-medlemmar används för i/O-drivrutinens abort-begäran:
+FileX informerar drivrutinen om att avbryta all ytterligare fysisk I/O-aktivitet med det fysiska mediet genom att skicka en begäran om avbrott till I/O-drivrutinen. Drivrutinen bör inte utföra några I/O igen förrän den har initierats på nytt. Följande FX_MEDIA för I/O-drivrutinens avbrottsbegäran:
 
 |FX_MEDIA medlem| Innebörd|
 |-----------|-----------|
 |fx_media_driver_request| FX_DRIVER_ABORT|
 
-### <a name="release-sectors"></a>Versions sektorer
+### <a name="release-sectors"></a>Lanseringssektorer
 
-Om den tidigare valdes av driv rutinen under initieringen informerar FileX driv rutinen när en eller flera sektorer i följd blir kostnads fria. Om driv rutinen faktiskt är en FLASH Manager kan du använda den här informationen för att berätta för FLASH Manager att dessa sektorer inte längre behövs. Följande **FX_MEDIAs** medlemmar används för begäran om i/O-release-release-sektorn:
+Om fileX tidigare valdes av drivrutinen under initieringen informerar det drivrutinen när en eller flera efterföljande sektorer blir lediga. Om drivrutinen faktiskt är en FLASH-hanterare kan den här informationen användas för att meddela FLASH-hanteraren att dessa sektorer inte längre behövs. Följande **FX_MEDIA** används för begäran om I/O-publiceringssektorer:
 
 |FX_MEDIA medlem| Innebörd|
 |-----------|-----------|
 |fx_media_driver_request|FX_DRIVER_RELEASE_SECTORS|
-|fx_media_driver_logical_sector|Början av den kostnads fria sektorn|
-|fx_media_driver_sectors|Antal kostnads fria sektorer|
+|fx_media_driver_logical_sector|Start av den kostnadsfria sektorn|
+|fx_media_driver_sectors|Antal lediga sektorer|
 
-### <a name="driver-suspension"></a>Driv rutins SUS Pension
+### <a name="driver-suspension"></a>Drivrutinsavstängning
 
-Eftersom I/O med fysiska media kan ta en stund, är det ofta önskvärt att pausa anrops tråden. Detta förutsätter att slut för ande av den underliggande i/O-åtgärden avbryts. I så fall, är det enkelt att göra en tråd upphängning med en ThreadX-semafor. När du har startat indata-eller utdata-åtgärden inaktive ras i/O-drivrutinen på den egna interna I/O-semaforen (skapas med det inledande antalet noll under driv rutins initieringen). Som en del av avbrotts processen i/O-slut för ande av driv rutinen anges samma I/O-semafor, vilket i sin tur aktiverar den pausade tråden.
+Eftersom I/O med fysiska medier kan ta lite tid är det ofta önskvärt att pausa anropstråden. Naturligtvis förutsätter detta att slutförandet av den underliggande I/O-åtgärden är avbrottsdriven. I så fall kan trådavstängning enkelt implementeras med en ThreadX-semaphore. När du har initierat indata- eller utdataåtgärden pausar I/O-drivrutinen sin egen interna I/O-semaphore (skapas med det första antalet noll under drivrutinsinitieringen). Som en del av bearbetningen av I/O-slutförande av drivrutinen anges samma I/O-semaphore, som i sin tur aktiverar den pausade tråden.
 
-### <a name="sector-translation"></a>Sektor Översättning
+### <a name="sector-translation"></a>Sektoröversättning
 
-Eftersom FileX visar mediet som linjära logiska sektorer görs I/O-begäranden som görs till i/O-drivrutinen med logiska sektorer. Det är driv Rutinens ansvar att översätta mellan logiska sektorer och mediets fysiska geometri, som kan innehålla huvuden, spår och fysiska sektorer. För FLASH-och RAM-skivor mappar de logiska sektorerna vanligt vis katalog till fysiska sektorer. I så fall är det typiska formler för att utföra mappning av logiska till fysiska sektorer i i/O-drivrutinen:
+Eftersom FileX ser mediet som linjära logiska sektorer görs I/O-begäranden som görs till I/O-drivrutinen med logiska sektorer. Det är drivrutinens ansvar att översätta mellan logiska sektorer och den fysiska geometrin för mediet, som kan innehålla krona, spår och fysiska sektorer. För FLASH- och RAM-diskmedier mappar de logiska sektorerna vanligtvis katalogen till fysiska sektorer. I vilket fall som helst är här de vanliga formlerna för att utföra mappningen mellan logiska och fysiska sektorer i I/O-drivrutinen:
 
 ```c
 media_ptr -> fx_media_driver_physical_sector =
@@ -142,19 +142,19 @@ media_ptr -> fx_media_driver_physical_track =(media_ptr ->
     media_ptr -> fx_media_heads)));
 ```
 
-Observera att fysiska sektorer börjar med en, medan logiska sektorer börjar på noll.
+Observera att fysiska sektorer börjar på en, medan logiska sektorer börjar på noll.
 
 ### <a name="hidden-sectors"></a>Dolda sektorer
 
-Dolda sektorer fanns före start posten på mediet. Eftersom de verkligen ligger utanför omfånget för FAT-filsystemet måste de redovisas i varje logisk sektor åtgärd som driv rutinen gör.
+Dolda sektorer finns före startposten på mediet. Eftersom de verkligen ligger utanför FAT-filsystemets layout måste de redovisas i varje logisk sektoråtgärd som drivrutinen gör.
 
-### <a name="media-write-protect"></a>Skriv skydd för media
+### <a name="media-write-protect"></a>Media Write Protect
 
-FileX-drivrutinen kan aktivera skriv skydd genom att ange fältet fx_media_driver_write_protect i medie kontroll blocket. Detta leder till att ett fel returneras om eventuella FileX-anrop görs i ett försök att skriva till mediet.
+FileX-drivrutinen kan aktivera skrivskydd genom att ange fx_media_driver_write_protect i mediakontrollblocket. Detta leder till att ett fel returneras om några FileX-anrop görs i ett försök att skriva till mediet.
 
 ## <a name="sample-ram-driver"></a>Exempel på RAM-drivrutin
 
-FileX demonstrations systemet levereras med en liten RAM-drivrutin, som definieras i filen fx_ram_driver. c. Driv rutinen förutsätter ett minnes utrymme på 32K och skapar en start post för 256 128 byte-sektorer. Den här filen ger ett användbart exempel på hur du implementerar programspecifika FileX I/O-drivrutiner.
+FileX-demonstrationssystemet levereras med en liten RAM-diskdrivrutin, som definieras i filen fx_ram_driver.c. Drivrutinen förutsätter ett 32 000 minnesutrymme och skapar en startpost för 256 128 byte-sektorer. Den här filen är ett bra exempel på hur du implementerar programspecifika FileX I/O-drivrutiner.
 
 ```c
 /*FUNCTION: _fx_ram_driver

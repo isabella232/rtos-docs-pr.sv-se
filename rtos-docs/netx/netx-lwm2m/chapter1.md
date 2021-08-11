@@ -1,32 +1,32 @@
 ---
-title: Kapitel 1 – Introduktion till Azure återställnings tider NetX-LWM2M
-description: Azure återställnings tider NetX LWM2M-protokollet implementerar klient delen av den lätta datorn till Machine Protocol standard.
+title: Kapitel 1 – Introduktion till Azure RTOS NetX LWM2M
+description: Den Azure RTOS NetX LWM2M Protocol implementerar klientdelen av protokollstandarden Lightweight Machine to Machine.
 author: philmea
 ms.author: philmea
 ms.date: 06/04/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: c29af430975266eed684bd1de38d9e5d7e2586a6
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: fe9c90ec10b241c72c71882b28b5fe0e3e60e3913435ec27f797eade4ca4eca5
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104826709"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116784928"
 ---
-# <a name="chapter-1---introduction-to-azure-rtos-netx-lwm2m"></a>Kapitel 1 – Introduktion till Azure återställnings tider NetX-LWM2M
+# <a name="chapter-1---introduction-to-azure-rtos-netx-lwm2m"></a>Kapitel 1 – Introduktion till Azure RTOS NetX LWM2M
 
-Azure återställnings tider NetX LWM2M-protokollet implementerar klient delen av den lätta datorn till Machine Protocol standard.
+Den Azure RTOS NetX LWM2M Protocol implementerar klientdelen av protokollstandarden Lightweight Machine to Machine.
 
-## <a name="netx-lwm2m-requirements"></a>NetX LWM2M-krav
+## <a name="netx-lwm2m-requirements"></a>Krav för NetX LWM2M
 
-För att fungera korrekt, kräver NetX-LWM2M kör tids bibliotek att en NetX-IP-instans redan har skapats. NetX LWM2M-paketet har inga ytterligare krav.
+För att netX LWM2M-körningsbiblioteket ska fungera korrekt måste en NetX IP-instans redan ha skapats. NetX LWM2M-paketet har inga ytterligare krav.
 
-## <a name="netx-lwm2m-rfcs"></a>NetX LWM2M-rapporter
+## <a name="netx-lwm2m-rfcs"></a>NetX LWM2M RFC
 
-NetX LWM2M är kompatibel med OMA-TS-LightweightM2M-V1_0 -20170208-A och följande RFC: er relaterade till det begränsade applikations protokollet (CoAP):
+NetX LWM2M är kompatibel med OMA-TS-LightweightM2M-V1_0-20170208-A och följande RFC:er relaterade till CoAP (Constrained Application Protocol):
 
-- **RFC 7252**: det begränsade applikations protokollet (CoAP)
+- **RFC 7252:** Det begränsade programprotokollet (CoAP)
 
-- **RFC 7641**: att observera resurser i det begränsade program protokollet (CoAP)
+- **RFC 7641:** Observera resurser i det begränsade programprotokollet (CoAP)
 
-- **RFC 6690**: begränsat RESTful miljöer (Core) länk format
+- **RFC 6690:** Begränsad RESTful-miljölänkformat (CoRE)

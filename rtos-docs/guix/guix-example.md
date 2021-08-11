@@ -1,21 +1,21 @@
 ---
 title: GUIX-exempel
-description: GUIX demonstrations systemet levereras med ett litet exempel, definierat i exemplen/HelloWorld/HelloWorld. c.
+description: GUIX-demonstrationssystemet levereras med ett litet exempel som definieras i examples/helloworld/helloworld.c.
 author: philmea
 ms.author: philmea
 ms.date: 05/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 79d342fc8697fcb40e1f402f9b040621ed43e3fb
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 8af9ee437902467ba40c74266f59d358f3919fe0146d0a5bca3d6e6e5722359e
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104826340"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116786407"
 ---
 # <a name="guix-example"></a>GUIX-exempel
 
-GUIX demonstrations systemet levereras med ett litet exempel, definierat i exemplen/HelloWorld/HelloWorld. c. Det här exemplet illustrerar de steg som krävs för att initiera GUIX-systemet för att konfigurera bildskärms driv rutiner. Käll koden visas på följande sidor.
+GUIX-demonstrationssystemet levereras med ett litet exempel som definieras i examples/helloworld/helloworld.c. Det här exemplet illustrerar de steg som krävs för att initiera GUIX-systemet för att konfigurera visningsdrivrutiner. Källkoden visas på följande sidor.
 
 ```c
 /* This is a small demonstration of the high-performance GUIX embedded UI run-time environment. This demonstration consists of a simple "Hello World" prompt on top of the root window. */

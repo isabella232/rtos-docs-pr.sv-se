@@ -1,41 +1,41 @@
-- name: Dokumentation om Azure återställnings tider FileX
+- name: Azure RTOS FileX-dokumentation
   href: index.yml
 - name: Översikt över FileX
   href: overview-filex.md
-- name: Användar handbok för FileX
+- name: FileX-användarhandbok
   expanded: true
   items:
     - name: Om den här guiden
       href: about-this-guide.md
-    - name: V. 1 – Introduktion till FileX
+    - name: Ch. 1 – Introduktion till FileX
       href: chapter1.md
-    - name: V. 2 – installation och användning av FileX
+    - name: Ch. 2 – Installation och användning av FileX
       href: chapter2.md
-    - name: V. 3-funktionella komponenter i FileX
+    - name: Ch. 3 – Funktionella komponenter i FileX
       href: chapter3.md
-    - name: V. 4 – Beskrivning av FileX-tjänster
+    - name: Ch. 4 – Beskrivning av FileX-tjänster
       href: chapter4.md
-    - name: V. 5-I/O-drivrutiner för FileX
+    - name: Ch. 5 – I/O-drivrutiner för FileX
       href: chapter5.md
-    - name: V. 6 – FileX fel tolerans modul
+    - name: Ch. 6 – FileX-feltolerant modul
       href: chapter6.md
-    - name: Mobilappar. A-FileX tjänster
+    - name: App. A – FileX-tjänster
       href: appendix-a.md
-    - name: Mobilappar. B-FileX konstanter
+    - name: App. B – FileX-konstanter
       href: appendix-b.md
-    - name: Mobilappar. C-FileX data typer
+    - name: App. C – FileX-datatyper
       href: appendix-c.md
-    - name: Mobilappar. D-ASCII-tecken koder
+    - name: App. D – ASCII-teckenkoder
       href: appendix-d.md
 - name: FileX-lagringsplats
   href: 'https://github.com/azure-rtos/filex'
 - name: Relaterade tjänster
   items:
-    - name: Defender för IoT-återställnings tider (för hands version)
+    - name: Defender for IoT – RTOS (förhandsversion)
       href: 'https://docs.microsoft.com/azure/defender-for-iot/iot-security-azure-rtos'
-- name: Microsoft Azure återställnings tider-komponenter
+- name: Microsoft Azure RTOS-komponenter
   items:
-    - name: Microsoft Azure återställnings tider
+    - name: Microsoft Azure RTOS
       href: ../index.yml
     - name: ThreadX
       href: ../threadx/index.yml
@@ -43,7 +43,7 @@
       href: ../threadx-modules/index.yml
     - name: NetX Duo
       href: ../netx-duo/index.yml
-    - name: NetX
+    - name: Netx
       href: ../netx/index.yml
     - name: GUIX
       href: ../guix/index.yml
