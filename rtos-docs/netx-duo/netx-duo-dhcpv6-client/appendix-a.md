@@ -1,31 +1,31 @@
 ---
-title: Bilaga A – Beskrivning av funktionen återställnings tillstånd för Azure återställnings tider NetX Duo DHCPv6-klienten
-description: Konfigurations alternativet för Azure återställnings tider NetX Duo DHDPv6-klienten NX_DHCPV6_CLIENT_RESTORE_STATE, gör det möjligt för ett system att återställa en tidigare skapad DHCP-klient i ett begränsat tillstånd mellan omstarter av systemet.
+title: Bilaga A – Beskrivning av funktionen för återställningstillstånd för Azure RTOS NetX Duo DHCPv6-klient
+description: Med Azure RTOS netX Duo DHDPv6-klientkonfigurationsalternativet, NX_DHCPV6_CLIENT_RESTORE_STATE, kan ett system återställa en tidigare skapad DHCP-klient i ett bundet tillstånd mellan omstarter av systemet.
 author: philmea
 ms.author: philmea
 ms.date: 06/04/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 3e642af158202bb3b2a4e2a37397b47d707b566e
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 6840f89e66d713b1839ac84427b73273b3f9601d4b6d9d39cd94908ac77a77ca
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104826100"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116791337"
 ---
-# <a name="appendix-a---description-of-the-restore-state-feature-for-azure-rtos-netx-duo-dhcpv6-client"></a>Bilaga A – Beskrivning av funktionen återställnings tillstånd för Azure återställnings tider NetX Duo DHCPv6-klienten
+# <a name="appendix-a---description-of-the-restore-state-feature-for-azure-rtos-netx-duo-dhcpv6-client"></a>Bilaga A – Beskrivning av funktionen för återställningstillstånd för Azure RTOS NetX Duo DHCPv6-klient
 
-Konfigurations alternativet för Azure återställnings tider NetX Duo DHDPv6-klienten NX_DHCPV6_CLIENT_RESTORE_STATE, gör det möjligt för ett system att återställa en tidigare skapad DHCP-klient i ett begränsat tillstånd mellan omstarter av systemet.
+Med Azure RTOS netX Duo DHDPv6-klientkonfigurationsalternativet, NX_DHCPV6_CLIENT_RESTORE_STATE, kan ett system återställa en tidigare skapad DHCP-klient i ett bundet tillstånd mellan omstarter av systemet.
 
-Det här alternativet gör det också möjligt för ett program att pausa DHCPv6-klient tråden och återuppta den, uppdaterat med den tid som förflutit mellan att pausa och återuppta tråden utan att behöva stänga av den.
+Det här alternativet gör också att ett program kan pausa DHCPv6-klienttråden och återuppta den, uppdaterad med tiden mellan att pausa och återuppta tråden utan att stänga av.
 
 ## <a name="restoring-the-dhcpv6-client-between-reboots"></a>Återställa DHCPv6-klienten mellan omstarter
 
-För att återställa en DHCPv6-klient mellan omstarter skapar DHCPv6-programmet en instans av DHCPv6-klienten och erhåller sedan ett IP-adresslån med det normala DHCPv6-protokollet och anropar *nx_dhcpv6_start*. DHCPv6-programmet väntar sedan på att protokollet ska slutföras. Om alla går bra, uppnår enheten BINDNINGs tillstånd med en tilldelad giltig IP-adress från DHCPv6-servern. Innan den stängs av sparar DHCPv6-klient programmet den aktuella DHCPv6-klient instansen till en DHCPv6-klient post som sedan lagras i beständigt minne. En oberoende "tidsbehållare" i systemet håller reda på den tid som förflutit under det här tillstånd som är avstängd. Vid inaktive rad skapar programmet en ny DHCPv6-klient instans och uppdaterar den sedan med den tidigare skapade DHCPv6-klient posten. Tiden som förflutit hämtas från "tids hållaren" och tillämpas sedan på den tid som återstår av DHCP-Clientv6 lån. I det här läget kan programmet återuppta DHCPv6-klienten.
+För att återställa en DHCPv6-klient mellan omstarter skapar DHCPv6-programmet en instans av DHCPv6-klienten och hämtar sedan ett IP-adresslån med hjälp av det normala DHCPv6-protokollet och anropar *nx_dhcpv6_start*. DHCPv6-programmet väntar sedan på att protokollet ska slutföras. Om allt går bra uppnår enheten BOUND-tillståndet med en tilldelad giltig IP-adress från sin DHCPv6-server. Innan den inaktiveras sparar DHCPv6-klientprogrammet den aktuella DHCPv6-klientinstansen till en DHCPv6-klientpost som sedan lagras i beständigt minne. En oberoende "tids keeper" någon annanstans i systemet håller reda på den tid som förflutit under detta nedstängda tillstånd. Vid strömförsörjningen skapar programmet en ny DHCPv6-klientinstans och uppdaterar den sedan med den tidigare skapade DHCPv6-klientposten. Den förflutna tiden hämtas från "time keeper" och tillämpas sedan på den tid som återstår på DHCP Clientv6-lånet. Nu kan programmet återuppta DHCPv6-klienten.
 
-Om den tid som förflutit under avstängning ger DHCPv6-klientens tillstånd i antingen förnyelse eller OMBINDNING, initierar DHCPv6-klienten automatiskt DHCPv6-meddelanden som begär att förnya eller ombinda IP-adresslån. Om IP-adressen har upphört att gälla rensar DHCPv6-klienten automatiskt IP-adressen på IP-instansen och påbörjar DHCPv6-processen från INIT-tillståndet och begär en ny IP-adress.
+Om tiden som förflutit under strömavbrottet försätter DHCPv6-klientens tillstånd i antingen RENEW- eller REBIND-tillstånd, initierar DHCPv6-klienten automatiskt DHCPv6-meddelanden som begär att förnya eller binda OM IP-adresslånet. Om IP-adressen har upphört att gälla rensar DHCPv6-klienten automatiskt IP-adressen på IP-instansen och påbörjar DHCPv6-processen från INIT-tillståndet och begär en ny IP-adress.
 
-På så sätt kan DHCPv6-klienten köras mellan omstarter som om de är avbrutna.
+På det här sättet kan DHCPv6-klienten fungera mellan omstarter som om de avbryts.
 
 Nedan visas en illustration av den här funktionen.
 
@@ -97,7 +97,7 @@ NX_DHCPV6_CLIENT_RECORD client_my_record;
 
 ## <a name="nx_dhcpv6_client_get_record"></a>nx_dhcpv6_client_get_record
 
-Skapa en post för aktuellt DHCPv6-klient tillstånd
+Skapa en post för det aktuella DHCPv6-klienttillståndet
 
 ### <a name="prototype"></a>Prototyp
 
@@ -106,27 +106,27 @@ ULONG nx_dhcpv6_client_get_record(NX_DHCPV6 *dhcpv6_ptr,
                                   NX_DHCPV6_CLIENT_RECORD *record_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten sparar DHCPv6-klienten till posten som pekas av record_ptr. Detta gör att DHCPv6-klientens program kan återställa sitt DHCPv6-klient tillstånd efter, till exempel en avstängning och omstart.
+Den här tjänsten sparar DHCPv6-klienten till den post som record_ptr. Detta gör att DHCPv6-klientprogrammet kan återställa sitt DHCPv6-klienttillstånd efter exempelvis ett strömavbrott och en omstart.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **dhcpv6_ptr** Pekare till DHCPv6-klienten
+- **dhcpv6_ptr** Pekare till DHCPv6-klient
 
-- **record_ptr** Pekare till DHCPv6-klient post
+- **record_ptr** Pekare till DHCPv6-klientpost
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS (0x0)** En giltig klient post har skapats
+- **NX_SUCCESS (0x0)** Giltig klientpost har skapats
 
-- **NX_DHCPV6_NOT_BOUND** -klienten (0xE94) är inte i ett begränsat tillstånd och har därför inte tilldelats någon giltig IP-adress
+- **NX_DHCPV6_NOT_BOUND** (0xE94) Klienten är inte i bundet tillstånd, därför inte tilldelad giltig IP-adress
 
-- **NX_PTR_ERROR** (0X16) ogiltigt inmatade pekare
+- **NX_PTR_ERROR** (0x16) Ogiltig pekare
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -148,7 +148,7 @@ status=  nx_dhcpv6_client_get_record(&dhcpv6_ptr, &dhcpv6_record);
 
 ## <a name="nx_dhcpv6_client_restore_record"></a>nx_dhcpv6_client_restore_record
 
-Återställa DHCPv6-klient tillstånd från sparad post
+Återställa DHCPv6-klienttillståndet från sparad post
 
 ### <a name="prototype"></a>Prototyp
 
@@ -158,27 +158,27 @@ ULONG nx_dhcpv6_client_restore_record(NX_DHCPV6 *dhcpv6_ptr,
                                       *record_ptr, ULONG time_elapsed);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten gör det möjligt för ett DHCPv6-program att återskapa sitt DHCPv6-klient tillstånd från en tidigare session genom att uppdatera DHCPv6-klienten med DHCPv6-klient posten som record_ptr, och uppdaterar den tid som återstår på DHCPv6-klient lånet med time_elapsed indata. Detta gör att DHCPv6-klient programmet återskapar sin DHCPv6-klient, till exempel efter en avstängning. Detta kräver att DHCPv6-klient programmet har skapat en post för DHCPv6-klienten innan den stängs av och sparar posten till icke-flyktigt minne.
+Med den här tjänsten kan ett DHCPv6-program återskapa sitt DHCPv6-klienttillstånd från en tidigare session genom att uppdatera DHCPv6-klienten med DHCPv6-klientposten som record_ptr pekar på och uppdaterar den återstående tiden på DHCPv6-klientlånet med time_elapsed-indata. Detta gör att DHCPv6-klientprogrammet kan återskapa sin DHCPv6-klient, till exempel efter att den har varit i drift. Detta kräver att DHCPv6-klientprogrammet skapade en post för DHCPv6-klienten innan den stängas av och sparade posten i icke-beständigt minne.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **dhcpv6_ptr** Pekare till DHCPv6-klienten
+- **dhcpv6_ptr** Pekare till DHCPv6-klient
 
-- **record_ptr** Pekare till DHCPv6-klient post
+- **record_ptr** Pekare till DHCPv6-klientpost
 
-- **time_elapsed** Tid för att ta bort från den återstående låne tiden i posten för indata-klienten
+- **time_elapsed** Tid att subtrahera från den återstående lånetiden i indataklientposten
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS (0x0)** Klient post återställd
+- **NX_SUCCESS (0x0)** Klientposten har återställts
 
-- NX_PTR_ERROR (0x16) ogiltigt inmatade pekare
+- NX_PTR_ERROR (0x16) Ogiltig pekare
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 

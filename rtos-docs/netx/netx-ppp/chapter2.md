@@ -1,50 +1,50 @@
 ---
-title: Kapitel 2 – installation och användning av Azure återställnings tider NetX Point-to-Point Protocol (PPP)
-description: Det här kapitlet innehåller en beskrivning av olika problem som rör Installation, konfiguration och användning av Azure återställnings tider NetX Point-to-Point Protocol (PPP)-komponenten.
+title: Kapitel 2 – Installation och användning av Azure RTOS NetX Point-to-Point Protocol (PPP)
+description: Det här kapitlet innehåller en beskrivning av olika problem som rör installation, installation och användning av Azure RTOS PPP-komponenten (NetX Point-to-Point Protocol).
 author: philmea
 ms.author: philmea
 ms.date: 06/04/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 40f09da31f5541208c3b2cc0eeb54850b3d71f7c
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: b62ca837cadd5f7bee2686ab566ff133f1088ff7ba8b572e372e5051b7bbaab9
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104826655"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116791099"
 ---
-# <a name="chapter-2---installation-and-use-of-azure-rtos-netx-point-to-point-protocol-ppp"></a>Kapitel 2 – installation och användning av Azure återställnings tider NetX Point-to-Point Protocol (PPP)
+# <a name="chapter-2---installation-and-use-of-azure-rtos-netx-point-to-point-protocol-ppp"></a>Kapitel 2 – Installation och användning av Azure RTOS NetX Point-to-Point Protocol (PPP)
 
-Det här kapitlet innehåller en beskrivning av olika problem som rör Installation, konfiguration och användning av Azure återställnings tider NetX Point-to-Point Protocol (PPP)-komponenten.
+Det här kapitlet innehåller en beskrivning av olika problem som rör installation, installation och användning av Azure RTOS PPP-komponenten (NetX Point-to-Point Protocol).
 
-## <a name="product-distribution"></a>Produkt distribution
+## <a name="product-distribution"></a>Produktdistribution
 
-Azure återställnings tider NetX Point-to-Point Protocol-paketet (PPP) finns på <https://github.com/azure-rtos/netx> . Paketet innehåller följande filer:
+Paketet Azure RTOS NetX Point-to-Point Protocol (PPP) finns på <https://github.com/azure-rtos/netx> . Paketet innehåller följande filer:
 
-- **nx_ppp. h**: rubrik fil för PPP för netx
-- **nx_ppp. c**: c-KÄLLFIL för PPP för netx
-- **nx_ppp.pdf**: PDF-Beskrivning av PPP för netx
-- **demo_netx_ppp. c**: netx PPP-demonstration
+- **nx_ppp.h:** Rubrikfil för PPP för NetX
+- **nx_ppp.c:** C-källfil för PPP för NetX
+- **nx_ppp.pdf:** PDF-beskrivning av PPP för NetX
+- **demo_netx_ppp.c:** Demonstration av NetX PPP
 
 ## <a name="ppp-installation"></a>PPP-installation
 
-För att du ska kunna använda PPP för NetX, ska hela distributionen som nämnts tidigare kopieras till samma katalog där NetX är installerat. Om NetX till exempel är installerat i katalogen "*\threadx\arm7\green*", ska *nx_ppp. h* -och *nx_ppp. c* -filerna kopieras till den här katalogen.
+För att kunna använda PPP för NetX, bör hela distributionen som nämns ovan kopieras till samma katalog där NetX är installerat. Om NetX till exempel är installerat i katalogen "*\threadx\arm7\green*" ska *filerna nx_ppp.h* *och nx_ppp.c* kopieras till den här katalogen.
 
 ## <a name="using-ppp"></a>Använda PPP
 
-Det är enkelt att använda PPP för NetX. I princip måste program koden innehålla *nx_ppp. h* när den innehåller *tx_api. h* och *nx_api. h* för att kunna använda ThreadX respektive netx. När *nx_ppp. h* ingår kan program koden sedan göra de PPP-funktions anrop som anges längre fram i den här hand boken. Programmet måste även innehålla *nx_ppp. c* i build-processen. Den här filen måste kompileras på samma sätt som andra programfiler och dess objekt formulär måste vara länkade tillsammans med programmets filer. Detta är allt som krävs för att använda NetX PPP.
+Det är enkelt att använda PPP för NetX. I princip måste programkoden innehålla *nx_ppp.h* efter att den *innehåller tx_api.h* och *nx_api.h* för att kunna använda ThreadX respektive NetX. När *nx_ppp.h* ingår kan programkoden göra de PPP-funktionsanrop som anges senare i den här guiden. Programmet måste även innehålla *nx_ppp.c* i byggprocessen. Den här filen måste kompileras på samma sätt som andra programfiler och dess objektformulär måste länkas tillsammans med programmets filer. Det här är allt som krävs för att använda NetX PPP.
 
 ## <a name="using-modems"></a>Använda modem
 
-Om ett modem krävs för anslutning till Internet krävs vissa särskilda överväganden för att kunna använda NetX-PPP-produkten. Med hjälp av ett modem införs i princip den ytterligare initierings logiken och logiken för att förlora kommunikationen. Dessutom utförs de flesta ytterligare modem logiken utanför kontexten för NetX PPP. Det grundläggande flödet för att använda NetX PPP med ett modem ser ut ungefär så här:
+Om ett modem krävs för anslutning till Internet, krävs vissa särskilda överväganden för att kunna använda NetX PPP-produkten. I princip introducerar användning av ett modem ytterligare initieringslogik och logik för förlust av kommunikation. Dessutom görs merparten av den ytterligare modemlogiken utanför kontexten för NetX PPP. Det grundläggande flödet för att använda NetX PPP med ett modem ser ut ungefär så här:
 
 1. Initiera modem
 
-1. Ring Internet Service Provider (ISP)
+1. Internetleverantör för uppringning
 
 1. Vänta på anslutning
 
-1. Vänta på UserID-prompt
+1. Vänta på UserID-fråga
 
 1. Starta NetX PPP [PPP i drift]
 
@@ -54,42 +54,42 @@ Om ett modem krävs för anslutning till Internet krävs vissa särskilda överv
 
 ### <a name="initialize-modem"></a>Initiera modem
 
-Med hjälp av programmets lågnivå seriella utmatnings rutin initieras modemet via en serie ASCII-tecken kommandon (se modem dokumentationen för mer information).
+Med programmets rutin för serieutdata på låg nivå initieras modemet via en serie ASCII-teckenkommandon (mer information finns i modemets dokumentation).
 
-### <a name="dial-internet-service-provider"></a>Ring Internet tjänst leverantör
+### <a name="dial-internet-service-provider"></a>Internetleverantör för uppringning
 
-Med hjälp av programmets lågnivå serie för seriella utdata uppmanas modemet att ringa upp Internet leverantören. Till exempel är följande typiska för en ASCII-sträng som används för att ringa upp en ISP på siffran 123-4567:
+Med programmets rutin för seriella utdata på låg nivå uppmanas modemet att ringa Internetleverantören. Följande är till exempel typiskt för en ASCII-sträng som används för att ringa upp en Internetleverantör med numret 123–4567:
 
 "ATDT123456\r"
 
 ### <a name="wait-for-connection"></a>Vänta på anslutning
 
-I det här skedet väntar programmet på att ta emot indikationer från modemet som en anslutning har upprättats till. Detta åstadkommer du genom att söka efter tecken från programmets lågnivå seriella Indatatyp. Vanligt vis returnerar modem en ASCII-sträng "CONNECT" när en anslutning har upprättats.
+Nu väntar programmet på att få en indikation från modemet om att en anslutning har upprättats. Detta åstadkoms genom att söka efter tecken från programmets rutin för serieindata på låg nivå. Vanligtvis returnerar modem en ASCII-sträng som "CONNECT" när en anslutning har upprättats.
 
-### <a name="wait-for-user-id-prompt"></a>Vänta på användar-ID-prompt
+### <a name="wait-for-user-id-prompt"></a>Vänta tills användarens ID efterfrågas
 
-När anslutningen har upprättats måste programmet nu vänta på en första inloggningsbegäran från Internet leverantören. Detta är vanligt vis formen av en ASCII-sträng som "inloggning?"
+När anslutningen har upprättats måste programmet nu vänta på en första inloggningsbegäran från Internetleverantören. Detta sker vanligtvis i form av en ASCII-sträng som "Logga in?".
 
 ### <a name="start-netx-ppp"></a>Starta NetX PPP
 
-I det här läget kan NetX-PPP startas. Detta åstadkommer du genom att anropa *nx_ppp_creates* tjänsten följt av *nx_ip_creates* tjänsten. Ytterligare tjänster för att aktivera PAP och för att konfigurera PPP-IP-adresser kan också krävas. Mer information finns i följande avsnitt i den här hand boken.
+Nu kan NetX PPP startas. Detta åstadkoms genom att *anropa nx_ppp_create* tjänsten följt av *nx_ip_create tjänsten.* Ytterligare tjänster för att aktivera PAP och konfigurera PPP-IP-adresserna kan också krävas. Mer information finns i följande avsnitt i den här guiden.
 
 ### <a name="loss-of-communication"></a>Förlust av kommunikation
 
-När PPP har startats skickas all icke-PPP-information till den "Ogiltig paket hantering"-rutinen som angetts till tjänsten *nx_ppp_create* . Vanligt vis skickar modem en ASCII-sträng, till exempel "ingen BÄRVÅG" när kommunikationen går förlorad hos Internet leverantören. När programmet tar emot ett icke-PPP-paket med sådan information, bör det fortsätta att antingen stoppa NetX-PPP-instansen eller starta om datorn med PPP-tillstånd via *nx_ppp_restart* -API: et.
+När PPP har startats skickas eventuell icke-PPP-information till den "ogiltiga pakethanteringsrutin" som programmet har *angett till nx_ppp_create tjänsten.* Vanligtvis skickar modem en ASCII-sträng, till exempel "INGEN OPERATÖR" när kommunikationen med Internetleverantören går förlorad. När programmet tar emot ett icke-PPP-paket med sådan information bör det antingen stoppa NetX PPP-instansen eller starta om PPP-tillståndsdatorn via nx_ppp_restart-API:et. 
 
 ### <a name="stop-netx-ppp"></a>Stoppa NetX PPP
 
-Det är ganska enkelt att stoppa NetX-PPP. I princip måste alla skapade Sockets vara obundna och ta bort. Ta sedan bort IP-instansen via tjänsten *nx_ip_delete* . När IP-instansen har tagits bort ska *nx_ppp_delete* -tjänsten anropas för att avsluta processen att stoppa PPP. Nu kan programmet nu försöka återupprätta kommunikationen med Internet leverantören.
+Det är ganska enkelt att stoppa NetX PPP. I princip måste alla skapade socketar vara obundna och borttagna. Ta sedan bort IP-instansen via *nx_ip_delete tjänsten.* När IP-instansen har tagits *bort nx_ppp_delete* tjänsten anropas för att slutföra processen med att stoppa PPP. Nu kan programmet försöka återupprätta kommunikationen med Internetleverantören.
 
-## <a name="small-example-system"></a>Litet exempel system
+## <a name="small-example-system"></a>Litet exempelsystem
 
-Ett exempel som illustrerar hur enkelt det är att använda NetX PPP beskrivs i bild 1,1 som visas nedan. I det här exemplet tas PPP-filen *nx_ppp. h* in på rad 3. Därefter skapas PPP i *"tx_application_define*" på rad 56. PPP-kontroll blocket "*my_ppp*" definierades som en global variabel på rad 9 tidigare. 
+Ett exempel som illustrerar hur enkelt det är att använda NetX PPP beskrivs i bild 1.1 som visas nedan. I det här exemplet tas *PPP-indelningsfilen nx_ppp.h* in på rad 3. Därefter skapas PPP i *"tx_application_define"* på rad 56. PPP-kontrollblocket "*my_ppp*" definierades som en global variabel på rad 9 tidigare. 
 
 >[!NOTE]
->PPP bör skapas innan du skapar IP-instansen. När du har skapat PPP och IP väntar tråden "*my_thread*" på att PPP-länken ska komma i rad 98. På rad 104 är både PPP och NetX fullt operativa.
+>PPP bör skapas innan du skapar IP-instansen. När PPP och IP har skapats väntar tråden "*my_thread*" på att PPP-länken ska bli levande på rad 98. På rad 104 fungerar både PPP och NetX fullt ut.
 
-Det element som inte visas i det här exemplet är programmets serie byte erhåller ISR. Det måste anropa *nx_ppp_byte_receive* med "*my_ppp*" och mottagna byte som indataparametrar.
+Det objekt som inte visas i det här exemplet är programmets isr-in mottagning av seriebyte. Den måste anropa nx_ppp_byte_receive *"* my_ppp "*och* bytet tas emot som indataparametrar.
 
 ```c
 #include   "tx_api.h"
@@ -197,34 +197,34 @@ NX_PACKET   *my_packet;
 
 }
 ```
-## <a name="configuration-options"></a>Konfigurations alternativ
+## <a name="configuration-options"></a>Konfigurationsalternativ
 
-Det finns flera konfigurations alternativ för att skapa PPP för NetX. I följande lista beskrivs var och en i detalj:
+Det finns flera konfigurationsalternativ för att skapa PPP för NetX. I följande lista beskrivs var och en i detalj:
 
-- **NX_DISABLE_ERROR_CHECKING**: det här alternativet tar bort grundläggande fel sökning av PPP. Den används vanligt vis när programmet har felsökts.
-- **NX_PPP_PPPOE_ENABLE**: om det är DEFINIERAT kan PPP överföra paket över Ethernet
-- **NX_PPP_BASE_TIMEOUT**: Detta definierar period frekvensen (i timer-Tick) som PPP-trådens aktivitet är aktive för att söka efter PPP-händelser. Standardvärdet är 1 * NX_IP_PERIODIC_RATE (100 Tick).
-- **NX_PPP_DISABLE_INFO**: om det här är definierat inaktive ras intern insamling av PPP-information.
-- **NX_PPP_DEBUG_LOG_ENABLE**: om den har definierats är intern PPP-felsökning aktive rad.
-- **NX_PPP_DEBUG_LOG_PRINT_ENABLE**: om det är definierat är den interna PPP-felsöknings loggen *printf* till *Stdio* aktive rad. Detta är endast giltigt om fel söknings loggen också är aktive rad.
-- **NX_PPP_DEBUG_LOG_SIZE**: storleken på fel söknings loggen (antalet poster i fel söknings loggen). När den senaste posten hamnade, radbryts fel söknings avbildningen till den första posten och skriver över alla data som tidigare har registrerats. Standardvärdet är 50.
-- **NX_PPP_DEBUG_FRAME_SIZE**: maximal mängd data som samlas in från en mottagen paket nytto last och sparas i fel söknings utdata. Standardvärdet är 50.
-- **NX_PPP_DISABLE_CHAP**: om det är definierat tas intern PPP CHAP-logik bort, inklusive MD5 Digest-logiken.
-- **NX_PPP_DISABLE_PAP**: om det är definierat tas intern PPP PAP-logik bort.
-- **NX_PPP_DNS_OPTION_DISABLE**: om alternativet är definierat är DNS-alternativet inaktiverat i IPCP-svaret.  Som standard är det här alternativet inte definierat (DNS-alternativet är inställt).
-- **NX_PPP_DNS_ADDRESS_MAX_RETRIES**: Detta anger hur många gånger PPP-värden ska begära en DNS-serveradress från peer-datorn i IPCP-tillstånd. Detta har ingen påverkan om NX_PPP_DNS_OPTION_DISABLE har definierats. Standardvärdet är 2.
-- **NX_PPP_HASHED_VALUE_SIZE**: anger storleken på "hashed Value"-strängar som används i CHAP-autentisering. Standardvärdet är inställt på 16 byte, men kan omdefinieras innan *nx_ppp. h.*
-- **NX_PPP_MAX_LCP_PROTOCOL_RETRIES**: Detta definierar Max antalet återförsök om PPP-tiden överskrids innan en annan LCP-konfiguration begär ett meddelande skickas. När det här talet nås avbryts PPP-handskakningen och länkens status är nere. Standardvärdet är 20.
-- **NX_PPP_MAX_PAP_PROTOCOL_RETRIES**: Detta definierar Max antalet återförsök om PPP-tiden överskrids innan ett annat meddelande om PAP-autentiseringsbegäran skickas. När det här talet nås avbryts PPP-handskakningen och länkens status är nere. Standardvärdet är 20.
-- **NX_PPP_MAX_CHAP_PROTOCOL_RETRIES**: Detta definierar Max antalet återförsök om PPP-tiden överskrids innan ett annat CHAP-utmanings meddelande skickas. När det här talet nås avbryts PPP-handskakningen och länkens status är nere. Standardvärdet är 20.
-- **NX_PPP_MAX_IPCP_PROTOCOL_RETRIES**: Detta definierar Max antalet återförsök om PPP-tiden överskrids innan en annan IPCP-konfiguration skickas. När det här talet nås avbryts PPP-handskakningen och länkens status är nere. Standardvärdet är 20.
-- **NX_PPP_MRU**: anger den maximala mottagnings enheten (MRU) för PPP. Som standard är det här värdet 1 500 byte (minimivärdet). Den här inställningen kan anges av programmet innan *nx_ppp. h*.
-- **NX_PPP_MINIMUM_MRU**: anger det lägsta MRU som tas emot i ett LCP-meddelande om att konfigurera begär Anden. Som standard är det här värdet 1 500 byte (minimivärdet). Den här inställningen kan anges av programmet innan *nx_ppp. h*.
-- **NX_PPP_NAME_SIZE**: anger storleken på "namn"-strängar som används vid autentisering. Standardvärdet är inställt på 32bytes, men kan definieras om innan inkludering av * nx_ppp. h.
-- **NX_PPP_PASSWORD_SIZE**: anger storleken på "Password"-strängar som används i autentisering. Standardvärdet är inställt på 32bytes, men kan omdefinieras innan du tar med *nx_ppp. h.*
-- **NX_PPP_PROTOCOL_TIMEOUT**: Detta definierar vänte alternativet (i sekunder) för att PPP-aktiviteten ska ta emot ett svar på ett meddelande om PPP-protokoll begär Ande. Standardvärdet är 4 sekunder.
-- **NX_PPP_RECEIVE_TIMEOUTS**: Detta definierar antalet gånger som en tids gräns i PPP-tråden väntar på att ta emot nästa-tecknen i en PPP-meddelande ström. Därefter släpper PPP paketet och börjar vänta på att ta emot nästa PPP-meddelande. Standardvärdet är 4.
-- **NX_PPP_SERIAL_BUFFER_SIZE**: anger storleken på den seriella bufferten för mottagnings tecknen. Som standard är det här värdet 3 000 byte. Den här inställningen kan anges av programmet innan *nx_ppp. h*.
-- **NX_PPP_TIMEOUT**: Detta definierar vänte alternativet (i timer-Tick) för att allokera paket för att överföra data och buffra PPP-Datadata till paket som ska skickas till IP-lagret. Standardvärdet är 4 * NX_IP_PERIODIC_RATE (400 Tick).
-- **NX_PPP_THREAD_TIME_SLICE**: Time-slice-alternativ för PPP-trådar. Som standard är det här värdet TX_NO_TIME_SLICE. Den här inställningen kan anges av programmet innan *nx_ppp. h*.
-- **NX_PPP_VALUE_SIZE**: anger storleken på "värde"-strängar som används i CHAP-autentisering. Standardvärdet är inställt på 32bytes, men kan omdefinieras innan du tar med nx_ppp. h.
+- **NX_DISABLE_ERROR_CHECKING:** Det här alternativet tar bort den grundläggande PPP-felkontrollen. Det används vanligtvis när programmet har felsökts.
+- **NX_PPP_PPPOE_ENABLE:** Om PPP definieras kan det överföra paket via Ethernet
+- **NX_PPP_BASE_TIMEOUT:** Detta definierar den periodfrekvens (i tids tick) som PPP-tråduppgiften är incheckad för att söka efter PPP-händelser. Standardvärdet är 1 *NX_IP_PERIODIC_RATE (100 tick).
+- **NX_PPP_DISABLE_INFO:** Om det här definieras inaktiveras intern PPP-informationsinsamling.
+- **NX_PPP_DEBUG_LOG_ENABLE:** Om den definieras aktiveras den interna PPP-felsökningsloggen.
+- **NX_PPP_DEBUG_LOG_PRINT_ENABLE:Om** den har definierats aktiveras internt PPP-felsökningsloggutskrift till *stdio.*  Detta är endast giltigt om felsökningsloggen också är aktiverad.
+- **NX_PPP_DEBUG_LOG_SIZE:** Storleken på felsökningsloggen (antalet poster i felsökningsloggen). När den senaste posten har nåtts omsluter felsökningsfångst till den första posten och skriver över alla data som tidigare har avbildats. Standardvärdet är 50.
+- **NX_PPP_DEBUG_FRAME_SIZE:** Maximal mängd data som samlas in från en mottagen paketnyttolast och som sparats i felsökningsutdata. Standardvärdet är 50.
+- **NX_PPP_DISABLE_CHAP:** Om den definieras tas intern PPP CHAP-logik bort, inklusive sammanfattad MD5-logik.
+- **NX_PPP_DISABLE_PAP**: Om den definieras tas intern PPP PAP-logik bort.
+- **NX_PPP_DNS_OPTION_DISABLE:** Om DNS-alternativet har definierats är det inaktiverat i IPCP-svaret.  Som standard definieras inte det här alternativet (DNS-alternativet har angetts).
+- **NX_PPP_DNS_ADDRESS_MAX_RETRIES:** Anger hur många gånger PPP-värden begär en DNS-serveradress från peer-datorn i IPCP-tillståndet. Detta har ingen effekt om NX_PPP_DNS_OPTION_DISABLE har definierats. Standardvärdet är 2.
+- **NX_PPP_HASHED_VALUE_SIZE:** Anger storleken på "hashade värde"-strängar som används vid CHAP-autentisering. Standardvärdet är inställt på 16 byte, men kan definieras om innan du tar *med nx_ppp.h.*
+- **NX_PPP_MAX_LCP_PROTOCOL_RETRIES:** Detta definierar det maximala antalet återförsök om PPP-tiden går ut innan ett annat meddelande om LCP-konfigurationsbegäran skickas. När det här numret nås avbryts PPP-handskakningen och länkstatusen är nere. Standardvärdet är 20.
+- **NX_PPP_MAX_PAP_PROTOCOL_RETRIES:** Detta definierar det maximala antalet återförsök om PPP-tiden går ut innan ett annat PAP-meddelande om autentiseringsbegäran skickas. När det här numret nås avbryts PPP-handskakningen och länkstatusen är nere. Standardvärdet är 20.
+- **NX_PPP_MAX_CHAP_PROTOCOL_RETRIES:** Detta definierar det maximala antalet återförsök om PPP-tiden går ut innan ett annat CHAP-utmaningsmeddelande skickas. När det här numret nås avbryts PPP-handskakningen och länkstatusen är nere. Standardvärdet är 20.
+- **NX_PPP_MAX_IPCP_PROTOCOL_RETRIES:** Detta definierar det maximala antalet återförsök om PPP-tiden går ut innan ett annat meddelande om IPCP-konfigurationsbegäran skickas. När det här numret nås avbryts PPP-handskakningen och länkstatusen är nere. Standardvärdet är 20.
+- **NX_PPP_MRU:** Anger högsta mottagningsenhet (MRU) för PPP. Som standard är det här värdet 1 500 byte (minimivärdet). Den här definierar kan anges av programmet innan du tar med *nx_ppp.h*.
+- **NX_PPP_MINIMUM_MRU:** Anger den minsta mru som tas emot i ett meddelande om LCP-konfigurationsbegäran. Som standard är det här värdet 1 500 byte (minimivärdet). Den här definierar kan anges av programmet innan du tar med *nx_ppp.h*.
+- **NX_PPP_NAME_SIZE**: Anger storleken på "namn"-strängar som används vid autentisering. Standardvärdet är inställt på 32byte, men kan definieras om innan *nx_ppp.h tas med.
+- **NX_PPP_PASSWORD_SIZE:** Anger storleken på "lösenordssträngar" som används vid autentisering. Standardvärdet är inställt på 32byte, men kan definieras om innan du tar *nx_ppp.h.*
+- **NX_PPP_PROTOCOL_TIMEOUT:** Detta definierar väntealternativet (i sekunder) för PPP-uppgiften att ta emot ett svar på ett begärandemeddelande om PPP-protokoll. Standardvärdet är 4 sekunder.
+- **NX_PPP_RECEIVE_TIMEOUTS:** Detta definierar hur många gånger PPP-trådaktiviteten får sin tid ut i väntan på att ta emot nästa tecken i en PPP-meddelandeström. Därefter släpper PPP paketet och börjar vänta på att få nästa PPP-meddelande. Standardvärdet är 4.
+- **NX_PPP_SERIAL_BUFFER_SIZE:** Anger storleken på seriebufferten för mottagningstecken. Som standard är det här värdet 3 000 byte. Den här definierar kan anges av programmet innan du tar med *nx_ppp.h*.
+- **NX_PPP_TIMEOUT:** Detta definierar väntealternativet (i timer tick) för att allokera paket för att överföra data samt buffra PPP-seriella data till paket som ska skickas till IP-lagret. Standardvärdet är 4*NX_IP_PERIODIC_RATE (400 tick).
+- **NX_PPP_THREAD_TIME_SLICE:** Alternativet För tidssegment för PPP-trådar. Som standard är det här värdet TX_NO_TIME_SLICE. Den här definierar kan anges av programmet innan du tar med *nx_ppp.h*.
+- **NX_PPP_VALUE_SIZE:** Anger storleken på "value"-strängar som används vid CHAP-autentisering. Standardvärdet är inställt på 32byte, men kan definieras om innan du tar nx_ppp.h.

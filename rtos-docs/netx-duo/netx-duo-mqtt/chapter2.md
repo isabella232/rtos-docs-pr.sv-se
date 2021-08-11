@@ -1,61 +1,62 @@
 ---
-title: Kapitel 2 – installation och användning av Azure återställnings tider NetX Duo MQTT-klienten
-description: Det här kapitlet innehåller en beskrivning av olika problem som rör Installation, konfiguration och användning av NetX Duo MQTT-klient komponenten.
+title: Kapitel 2 – Installation och användning av Azure RTOS NetX Duo MQTT-klient
+description: Det här kapitlet innehåller en beskrivning av olika problem som rör installation, installation och användning av NetX Duo MQTT-klientkomponenten.
 author: philmea
 ms.author: philmea
 ms.date: 05/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: cde19a0e84f369f1199ea4027fa09e6bd038e837
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: faf9d84b8b2bce12a99a72198a396b121055a8eef975349f53833a180092e0a3
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104825908"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116797542"
 ---
-# <a name="chapter-2---installation-and-use-of-azure-rtos-netx-duo-mqtt-client"></a>Kapitel 2 – installation och användning av Azure återställnings tider NetX Duo MQTT-klienten
+# <a name="chapter-2---installation-and-use-of-azure-rtos-netx-duo-mqtt-client"></a>Kapitel 2 – Installation och användning av Azure RTOS NetX Duo MQTT-klient
 
-Det här kapitlet innehåller en beskrivning av olika problem som rör Installation, konfiguration och användning av klient komponenten Azure återställnings tider NetX Duo MQTT.
+Det här kapitlet innehåller en beskrivning av olika problem som rör installation, installation och användning av Azure RTOS NetX Duo MQTT-klientkomponenten.
 
-## <a name="product-distribution"></a>Produkt distribution
+## <a name="product-distribution"></a>Produktdistribution
 
-MQTT-klienten för NetX Duo finns på [https://github.com/azure-rtos/netxduo](https://github.com/azure-rtos/netxduo) . Paketet innehåller två källfiler, en include-fil och en fil som innehåller det här dokumentet, enligt följande:
+MQTT-klienten för NetX Duo finns på [https://github.com/azure-rtos/netxduo](https://github.com/azure-rtos/netxduo) . Paketet innehåller två källfiler, en inkluderad fil och en fil som innehåller det här dokumentet, enligt följande:
 
-- **nxd_mqtt_client. h** Rubrik fil för MQTT-klienten för NetX Duo
-- **nxd_mqtt_client. c** C-källfil för MQTT-klient för NetX Duo
+- **nxd_mqtt_client.h** Rubrikfil för MQTT-klienten för NetX Duo
+- **nxd_mqtt_client.c** C-källfil för MQTT-klienten för NetX Duo
 - **nxd_mqtt_client.pdf** Beskrivning av MQTT-klienten för NetX Duo
-- **demo_mqtt_client. c** NetX Duo MQTT-demonstration
+- **demo_mqtt_client.c** NetX Duo MQTT-demonstration
 
-## <a name="mqtt-client-installation"></a>MQTT-klient installation
+## <a name="mqtt-client-installation"></a>MQTT-klientinstallation
 
-För att kunna använda MQTT-klienten för NetX Duo, bör hela den distribution som nämnts tidigare kopieras till samma katalog där NetX Duo är installerat. Om t. ex. NetX Duo är installerat i katalogen "*\threadx\arm7\green*" måste *nxd_mqtt_client. h* och *Nxd_mqtt_client. c* för netx Duo MQTT-klienten kopieras till den här katalogen.
+För att kunna använda MQTT-klienten för NetX Duo ska hela distributionen som nämns ovan kopieras till samma katalog där NetX Duo är installerat. Om NetX Duo till exempel är installerat i katalogen "*\threadx\arm7\green*" måste *nxd_mqtt_client.h* och *nxd_mqtt_client.c för* NetX Duo MQTT-klienten kopieras till den här katalogen.
 
 ## <a name="using-mqtt-client"></a>Använda MQTT-klient
 
-Det är enkelt att använda MQTT-klienten för NetX Duo. I princip måste program koden innehålla *nxd_mqtt_client. h* när den innehåller *tx_api. h* och *nx_api. h* för att kunna använda ThreadX respektive netx Duo. När MQTT-klientens huvud filer ingår kan program koden använda de MQTT-tjänster som beskrivs längre fram i den här hand boken. Programmet måste även innehålla *nxd_mqtt_client. c* i build-processen. De här filerna måste kompileras på samma sätt som andra programfiler och dess objekt formulär måste vara länkade tillsammans med programmets filer. Detta är allt som krävs för att använda NetX Duo MQTT-klienten.
+Det är enkelt att använda MQTT Client för NetX Duo. I princip måste programkoden innehålla *nxd_mqtt_client.h* efter att den innehåller *tx_api.h* och *nx_api.h*, för att kunna använda ThreadX respektive NetX Duo. När MQTT-klienthuvudfilerna har inkluderats kan programkoden sedan använda de MQTT-tjänster som beskrivs senare i den här guiden. Programmet måste också inkludera *nxd_mqtt_client.c* i byggprocessen. Dessa filer måste kompileras på samma sätt som andra programfiler och dess objektformulär måste länkas tillsammans med programmets filer. Det här är allt som krävs för att använda NetX Duo MQTT-klienten.
 
 ## <a name="using-mqtt-client-with-netx-secure-tls"></a>Använda MQTT-klienten med NetX Secure TLS
 
-Om du vill använda MQTT-klienten med NetX Secure TLS-modul måste programmet ha NetX Secure TLS-modulen installerad och inkludera *nx_secure_tls_api. h* och *nx_crypto. h*. MQTT-biblioteket måste ha skapats med symbolen ***NX_SECURE_ENABLE*** definierad.
+Om du vill använda MQTT-klienten med NetX Secure TLS-modulen måste programmet ha NetX Secure TLS-modulen installerad och inkludera *nx_secure_tls_api.h* *och nx_crypto.h*. MQTT-biblioteket måste byggas med symbolen ***NX_SECURE_ENABLE*** definierad.
 
-## <a name="configuration-options"></a>Konfigurations alternativ
+## <a name="configuration-options"></a>Konfigurationsalternativ
 
-Det finns flera konfigurations alternativ för att skapa MQTT-klienten för NetX Duo. Följande är en lista över alla alternativ, där var och en beskrivs i detalj. Standardvärdena visas, men kan omdefinieras innan du kan inkludera *nxd_mqtt_client. h.*
+Det finns flera konfigurationsalternativ för att skapa MQTT-klienten för NetX Duo. Nedan visas en lista över alla alternativ, där vart och ett beskrivs i detalj. Standardvärdena visas, men kan definieras om innan du tar med *nxd_mqtt_client.h.*
 
-- **NX_DISABLE_ERROR_CHECKING**: det här alternativet tar bort den grundläggande MQTT-klientens fel kontroll. Den används vanligt vis när programmet har felsökts.
-- **NX_SECURE_ENABLE**: en definierad MQTT-klient har skapats med TLS-stöd.
-Att definiera den här symbolen kräver att NetX Secure TLS-modul installeras.
-*NX_SECURE_ENABLE* är inte aktiverat som standard. * *
-- **NXD_MQTT_REQUIRE_TLS**: definierad, programmet måste använda TLS för att ansluta till MQTT-Broker. Den här funktionen kräver *NX_SECURE_ENABLE* definieras. Den här symbolen är inte definierad som standard.
-- **NXD_MQTT_MAX_TOPIC_NAME_LENGTH**: inaktuell.
-- **NXD_MQTT_MAX_MESSAGE_LENGTH**: inaktuell.
-- **NXD_MQTT_KEEPALIVE_TIMER_RATE**: definierar tidsintervallet MQTT i ThreadX timer-Tick. Den här timern används för att hålla reda på tiden sedan det senaste MQTT skickades och skickar ett MQTT PINGREQ-meddelande innan Keep-Alive-tiden går ut. Den här timern aktive ras om klienten ansluter till Broker med ett värde för Keep-Alive-timer. Standardvärdet är TX_TIMER_TICKS_PER_SECOND, som är en eng-Second-timer.
-- **NXD_MQTT_PING_TIMEOUT_DELAY**: anger den tid som MQTT-klienten väntar på PINGRESP från Service Broker när den skickar ut MQTT PINGREQ. Om ingen PINGRESP tas emot efter den här tids fördröjningen, behandlar klienten Service Broker som ej svarar och kopplar bort sig själv från Broker. Standard fördröjningen för PING är TX_TIMER_TICKS_PER_SECOND, vilket är en sekund.
-- **NXD_MQTT_SOCKET_TIMEOUT**: definierar tids gränsen för anropet från TCP-socket från koppling vid från koppling från MQTT-servern i timer-Tick. Standardvärdet är NX_WAIT_FOREVER.
+- **NX_DISABLE_ERROR_CHECKING**: Det här alternativet tar bort den grundläggande MQTT-klientfelkontrollen. Det används vanligtvis när programmet har felsökts.
+- **NX_SECURE_ENABLE:** MQTT-klienten har definierats med TLS-stöd.
+För att definiera den här symbolen måste NetX Secure TLS-modulen vara installerad.
+*NX_SECURE_ENABLE* är inte aktiverat som standard.**
+- **NXD_MQTT_REQUIRE_TLS:** Definierad måste programmet använda TLS för att ansluta till MQTT-meddelandekö. Den här funktionen *kräver NX_SECURE_ENABLE* definieras. Som standard definieras inte den här symbolen.
+- **NXD_MQTT_MAXIMUM_TRANSMIT_QUEUE_DEPTH:** Definierad är MQTT-överföringsködjup aktiverat. Det måste vara ett positivt heltal.
+- **NXD_MQTT_MAX_TOPIC_NAME_LENGTH:** Inaktuell.
+- **NXD_MQTT_MAX_MESSAGE_LENGTH:** Inaktuell.
+- **NXD_MQTT_KEEPALIVE_TIMER_RATE:** Definierar MQTT-timerhastigheten i ThreadX-timern tick. Den här timern används för att hålla reda på tiden sedan det senaste MQTT-kontrollmeddelandet skickades och skickar ett MQTT PINGREQ-meddelande innan keep-alive-tiden upphör att gälla. Den här timern aktiveras om klienten ansluter till koordinatorn med ett anställt keep-alive-timervärde. Standardvärdet är TX_TIMER_TICKS_PER_SECOND, vilket är en en sekunds timer.
+- **NXD_MQTT_PING_TIMEOUT_DELAY:** Definierar den tid som MQTT-klienten väntar på PINGRESP från den a broker som skickas ut till MQTT PINGREQ. Om ingen PINGRESP tas emot efter den här timeout-fördröjningen behandlar klienten den a broker som icke-responsiv och kopplar bort sig själv från den a broker. Standardfördröjningen för PING TX_TIMER_TICKS_PER_SECOND, vilket är en sekund.
+- **NXD_MQTT_SOCKET_TIMEOUT:** Definierar time out i TCP socket disconnect-anropet när du kopplar från MQTT-servern i timern tick. Standardvärdet är NX_WAIT_FOREVER.
 
 ## <a name="sample-mqtt-program"></a>Exempel på MQTT-program
 
-Följande program illustrerar ett enkelt MQTT-program. För enkelhetens skull antas retur koderna lyckas, vilket innebär att ingen ytterligare fel kontroll utförs.
+Följande program illustrerar ett enkelt MQTT-program. För enkelhetens skull antas returkoderna lyckas, och därför utförs ingen ytterligare felkontroll.
 
 ```c
 #define LOCAL_SERVER_ADDRESS (IP_ADDRESS(192, 168, 1, 81))

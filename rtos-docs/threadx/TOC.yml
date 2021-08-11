@@ -1,73 +1,73 @@
-- name: Dokumentation om Azure återställnings tider ThreadX
+- name: Azure RTOS ThreadX-dokumentation
   href: index.yml
 - name: Översikt över ThreadX
   href: overview-threadx.md
-- name: Användar handbok för ThreadX
+- name: Användarhandbok för ThreadX
   expanded: true
   items:
     - name: Om den här guiden
       href: about-this-guide.md
-    - name: V. 1 – Introduktion till ThreadX
+    - name: Ch. 1 – Introduktion till ThreadX
       href: chapter1.md
-    - name: V. 2 – installation och användning av ThreadX
+    - name: Ch. 2 – Installation och användning av ThreadX
       href: chapter2.md
-    - name: V. 3-funktionella komponenter i ThreadX
+    - name: Ch. 3 – Funktionella komponenter i ThreadX
       href: chapter3.md
-    - name: V. 4 – Beskrivning av ThreadX-tjänster
+    - name: Ch. 4 – Beskrivning av ThreadX-tjänster
       href: chapter4.md
-    - name: V. 5-enhets driv rutiner för ThreadX
+    - name: Ch. 5 – Enhetsdrivrutiner för ThreadX
       href: chapter5.md
-    - name: V. 6 – demonstrations system för ThreadX
+    - name: Ch. 6 – Demonstrationssystem för ThreadX
       href: chapter6.md
-    - name: Mobilappar. A – ThreadX API-tjänster
+    - name: App. A – ThreadX API-tjänster
       href: appendix-a.md
-    - name: Mobilappar. B-ThreadX konstanter
+    - name: App. B – ThreadX-konstanter
       href: appendix-b.md
-    - name: Mobilappar. C-ThreadX data typer
+    - name: App. C – ThreadX-datatyper
       href: appendix-c.md
-    - name: Mobilappar. D-ASCII-tecken koder
+    - name: App. D – ASCII-teckenkoder
       href: appendix-d.md
-- name: ThreadX user guide-tillägg för ARMv8-M
+- name: ThreadX-användarhandboks addendum för ARMv8-M
   items:
-    - name: V. 1 – Introduktion till Azure återställnings tider ThreadX for ARMv8-M
+    - name: Ch. 1 – Introduktion till Azure RTOS ThreadX för ARMv8-M
       href: ./user-guide-armv8m/chapter1.md
-    - name: V. 2 – Installera ThreadX-stöd för ARMv8-M
+    - name: Ch. 2 – Installera ThreadX-stöd för ARMv8-M
       href: ./user-guide-armv8m/chapter2.md
-    - name: 'V. 3-ThreadX-API: er för ARMv8-M'
+    - name: 'Ch. 3 – ThreadX-API:er för ARMv8-M'
       href: ./user-guide-armv8m/chapter3.md
-- name: Användar handbok för ThreadX SMP
+- name: Användarhandbok för ThreadX SMP
   items:
     - name: Om den här guiden
       href: ./threadx-smp/about-this-guide.md
-    - name: V. 1 – Introduktion till ThreadX SMP
+    - name: Ch. 1 – Introduktion till ThreadX SMP
       href: ./threadx-smp/chapter1.md
-    - name: V. 2-installations & användning av ThreadX SMP
+    - name: Ch. 2 – Installation & av ThreadX SMP
       href: ./threadx-smp/chapter2.md
-    - name: V. 3-funktionella komponenter i ThreadX SMP
+    - name: Ch. 3 – Funktionella komponenter i ThreadX SMP
       href: ./threadx-smp/chapter3.md
-    - name: V. 4 – Beskrivning av ThreadX SMP-tjänster
+    - name: Ch. 4 – Beskrivning av ThreadX SMP Services
       href: ./threadx-smp/chapter4.md
-    - name: V. 5-enhets driv rutiner för ThreadX SMP
+    - name: Ch. 5 – Enhetsdrivrutiner för ThreadX SMP
       href: ./threadx-smp/chapter5.md
-    - name: V. 6 – demonstrations system för ThreadX SMP
+    - name: Ch. 6 – Demonstrationssystem för ThreadX SMP
       href: ./threadx-smp/chapter6.md
-    - name: Mobilappar. A-ThreadX SMP API-tjänster
+    - name: App. A – ThreadX SMP API Services
       href: ./threadx-smp/appendix-a.md
-    - name: Mobilappar. B-ThreadX SMP-konstanter
+    - name: App. B – ThreadX SMP-konstanter
       href: ./threadx-smp/appendix-b.md
-    - name: Mobilappar. Data typer för C-ThreadX SMP
+    - name: App. C – ThreadX SMP-datatyper
       href: ./threadx-smp/appendix-c.md
-    - name: Mobilappar. D-ASCII-tecken koder
+    - name: App. D – ASCII-teckenkoder
       href: ./threadx-smp/appendix-d.md
 - name: ThreadX-lagringsplats
   href: 'https://github.com/azure-rtos/threadx'
 - name: Relaterade tjänster
   items:
-    - name: Defender för IoT-återställnings tider (för hands version)
+    - name: Defender for IoT – RTOS (förhandsversion)
       href: 'https://docs.microsoft.com/azure/defender-for-iot/iot-security-azure-rtos'
-- name: Microsoft Azure återställnings tider-komponenter
+- name: Microsoft Azure RTOS-komponenter
   items:
-    - name: Microsoft Azure återställnings tider
+    - name: Microsoft Azure RTOS
       href: ../index.yml
     - name: ThreadX
       href: ../threadx/index.yml
@@ -75,7 +75,7 @@
       href: ../threadx-modules/index.yml
     - name: NetX Duo
       href: ../netx-duo/index.yml
-    - name: NetX
+    - name: Netx
       href: ../netx/index.yml
     - name: GUIX
       href: ../guix/index.yml

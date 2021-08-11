@@ -1,21 +1,21 @@
 ---
-title: Kapitel 3 – Azure återställnings tider NetX Duo BSD-tjänster
-description: Det här kapitlet innehåller en beskrivning av alla Azure återställnings tider NetX Duo BSD Basic-tjänster (visas nedan) i alfabetisk ordning.
+title: Kapitel 3 – Azure RTOS NetX Duo BSD Services
+description: Det här kapitlet innehåller en beskrivning av alla Azure RTOS NetX Duo BSD grundläggande tjänster (listas nedan) i alfabetisk ordning.
 author: philmea
 ms.author: philmea
 ms.date: 06/04/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: c0aea725fc088c3b563b6fa54338e202b8f58b12
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 7a3f9bb39779f3fe3561d2db9a789d3ae86d9741a8256a53a8e78508593eabc9
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104826151"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116791184"
 ---
-# <a name="chapter-3---azure-rtos-netx-duo-bsd-services"></a>Kapitel 3 – Azure återställnings tider NetX Duo BSD-tjänster
+# <a name="chapter-3---azure-rtos-netx-duo-bsd-services"></a>Kapitel 3 – Azure RTOS NetX Duo BSD Services
 
-Det här kapitlet innehåller en beskrivning av alla Azure återställnings tider NetX Duo BSD Basic-tjänster (visas nedan) i alfabetisk ordning.
+Det här kapitlet innehåller en beskrivning av alla Azure RTOS NetX Duo BSD grundläggande tjänster (listas nedan) i alfabetisk ordning.
 
 ```c
 INT accept(INT sockID, struct sockaddr *ClientAddress, INT *addressLength);

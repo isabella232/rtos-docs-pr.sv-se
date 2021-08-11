@@ -1,34 +1,34 @@
 ---
-title: Bilaga D – Azure återställnings tider NetX BSD-Compatible socket API
-description: 'Lär dig mer om API: et för BSD-Compatible socket för IPv4.'
+title: Bilaga D – Azure RTOS NetX BSD-Compatible Socket API
+description: Läs mer om BSD-Compatible Socket API för IPv4.
 author: philmea
 ms.author: philmea
 ms.date: 05/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 9062e27d8f447ac8d36e7a09afee5ac14f86f8c3
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: bd4a35c19cd794a5135f01abe5595456d39b5306ba25ce2966c3bb1aea14ea17
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104826898"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116790096"
 ---
-# <a name="appendix-d---azure-rtos-netx-bsd-compatible-socket-api"></a>Bilaga D – Azure återställnings tider NetX BSD-Compatible socket API
+# <a name="appendix-d---azure-rtos-netx-bsd-compatible-socket-api"></a>Bilaga D – Azure RTOS NetX BSD-Compatible Socket API
 
-## <a name="bsd-compatible-socket-api"></a>API för BSD-Compatible socket
+## <a name="bsd-compatible-socket-api"></a>API för BSD-Compatible Socket
 
-API-anrop för BSD-Compatible socket har stöd för en delmängd av BSD-API-anrop (med vissa begränsningar) genom att använda Azure återställnings tider NetX-primitiver under. IPv4-protokoll och nätverks adresser stöds. Detta API-skikt i BSD-Compatible Sockets ska fungera lika snabb eller något snabbare än vanliga BSD-implementeringar eftersom detta API använder interna NetX-primitiver och kringgår onödig fel kontroll av NetX.
+Socket-API:et för BSD-Compatible stöder en delmängd av API-anropen för BSD Sockets (med vissa begränsningar) genom att använda Azure RTOS NetX-primitiver under. IPv4-protokoll och nätverksadressering stöds. Det BSD-Compatible Sockets API-lagret bör fungera lika snabbt eller något snabbare än typiska BSD-implementeringar eftersom det här API:et använder interna NetX-primitiver och kringgår onödig NetX-felkontroll.
 
-Med konfigurerbara alternativ kan värd programmet definiera maximalt antal Sockets, maximal storlek för TCP-fönster och djup i lyssnings kön.
+Konfigurerbara alternativ gör att värdprogrammet kan definiera det maximala antalet sockets, tcp maximal fönsterstorlek och djup för lyssnande kö.
 
-På grund av prestanda-och arkitektur begränsningar stöder detta BSD-Compatible Sockets-API: t inte alla BSD-anrop i BSD. Dessutom är inte alla BSD-alternativ tillgängliga för BSD-tjänsterna, särskilt följande:
+På grund av prestanda- och arkitekturbegränsningar stöder BSD-Compatible Sockets API inte alla BSD Sockets-anrop. Dessutom är inte alla BSD-alternativ tillgängliga för BSD-tjänsterna, särskilt följande:
 
-- Funktionen ***Select** _ fungerar med endast _fd_set \* readfds *, andra argument i det här anropet, t. ex. *writefds*, *exceptfds* stöds inte.
-- Argumentet *för int-flaggor* stöds inte för funktionerna ***send** _, _*_Recv_*_, _*_SendTo_*_ och _ *_recvfrom_**. API: et för BSD-Compatible socket stöder endast en begränsad uppsättning BSD Sockets-anrop.
+- Funktionen ***select** _ fungerar endast med _fd_set readfds*, andra argument i det här anropet, \* t.ex. *writefds*, *exceptfds* stöds inte.
+- Argumentet *int flags* stöds inte för funktionerna ***send** _, _*_recv_*_, _*_sendto och_*_ _ *_recvfrom_** . Det BSD-Compatible Socket-API:et stöder endast en begränsad uppsättning BSD Sockets-anrop.
 
-Käll koden är utformad för enkelhet och består endast av två filer, ***nx_bsd. c** _ och _*_nx_bsd. h_*_. Installationen kräver att du lägger till de här två filerna i build-projektet (inte NetX-biblioteket) och skapar värd programmet som ska använda BSD socket service-anrop. Filen _ *_nx_bsd. h_** måste också ingå i program källan. Exempel på demonstrations filer ingår i distributionen som är gratis tillgänglig med NetX. Mer information finns i hjälpen BSD-Compatible socket API **417** och readme filer som är sammankopplade med API-paketet BSD-Compatible socket.
+Källkoden är utformad för enkelhetens skull och består endast av två filer,***nx_bsd.c** _ _*_och nx_bsd.h_*_. Installationen kräver att dessa två filer läggs till i byggprojektet (inte NetX-biblioteket) och att värdprogrammet skapas som använder BSD Socket-tjänstanrop. Filen _ *_nx_bsd.h_** måste också ingå i programkällan. Exempeldemofiler ingår i distributionen som är fritt tillgänglig med NetX. Mer information finns i hjälpen för BSD-Compatible Socket API **417** och Readme-filer som paketeras med BSD-Compatible Socket API-paketet.
 
-API: erna för BSD-Compatible Sockets stöder följande API-anrop i BSD:
+Det BSD-Compatible Sockets-API:et stöder följande API-anrop för BSD Sockets:
 
 ```C
 *INT bsd_initialize (NX_IP *default_ip, NX_PACKET_POOL *default_pool,

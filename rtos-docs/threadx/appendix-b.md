@@ -1,26 +1,26 @@
 ---
-title: Bilaga B – Azure återställnings tider ThreadX-konstanter
-description: Utforska ThreadX-konstanterna i Azure återställnings tider.
+title: Bilaga B – Azure RTOS ThreadX-konstanter
+description: Utforska de Azure RTOS ThreadX-konstanterna.
 author: philmea
 ms.author: philmea
 ms.date: 05/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: c17af40df7a45a0cdb9961f12e1dcd775b081975
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: c749dc2656894e817f8dcce430e7552763f0fa319cd91d4390983f3cd6a95221
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104826589"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116801859"
 ---
-# <a name="appendix-b---azure-rtos-threadx-constants"></a>Bilaga B – Azure återställnings tider ThreadX-konstanter
+# <a name="appendix-b---azure-rtos-threadx-constants"></a>Bilaga B – Azure RTOS ThreadX-konstanter
 
 - [**Alfabetiska listor**](#alphabetic-listings) 
 - [**Lista efter värde**](#listing-by-value)
 
 ## <a name="alphabetic-listings"></a>Alfabetiska listor
 
-| Konstant (med alfabetiska) | Värde |
+| Konstant (efter alfabetisk) | Värde |
 | --------- | - |
 | TX_1_ULONG | 1 |
 | TX_2_ULONG | 2 |

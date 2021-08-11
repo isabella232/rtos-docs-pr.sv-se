@@ -1,35 +1,35 @@
 ---
-title: 'Kapitel 6 – Azure återställnings tider-LevelX eller API: er'
-description: 'Azure återställnings tider-LevelX eller API: er som är tillgängliga för programmet.'
+title: Kapitel 6 – Azure RTOS LevelX NOR API:er
+description: Den Azure RTOS LevelX NOR API:er som är tillgängliga för programmet.
 author: philmea
 ms.author: philmea
 ms.date: 05/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 3ab7d3a7e431d7c8f49ef4f5cab9216dc77c8d33
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 2e109f5916a9e903aa3341f2855ade085e9d9a22b80ec7cb2e0c310e43ff3eac
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104827051"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116790249"
 ---
-# <a name="chapter-6---azure-rtos-levelx-nor-apis"></a>Kapitel 6 – Azure återställnings tider-LevelX eller API: er
+# <a name="chapter-6---azure-rtos-levelx-nor-apis"></a>Kapitel 6 – Azure RTOS LevelX NOR API:er
 
-Azure återställnings tider-LevelX eller API-funktionerna som är tillgängliga för programmet är följande.
+De Azure RTOS LevelX NOR API som är tillgängliga för programmet är följande.
 
-- ***lx_nor_flash_close** _: _Close eller Flash-instans *
-- ***lx_nor_flash_defragment** _: _Defragment eller Flash-instans *
-- ***lx_nor_flash_extended_cache_enable** _: _Enable/Disable utökad eller cache *
-- ***lx_nor_flash_initialize** _: _INITIALIZE-eller Flash-Support *
-- ***lx_nor_flash_open** _: _Open eller Flash-instans *
-- ***lx_nor_flash_partial_defragment** _: _Partial defragmentera eller Flash-instansen *
-- ***lx_nor_flash_sector_read** _: _Read eller Flash-sektor *
-- ***lx_nor_flash_sector_release** _: _Release eller Flash-sektor *
-- ***lx_nor_flash_sector_write** _: _Write eller Flash-sektor *
+- ***lx_nor_flash_close** _: _Close ELLER flash-instans*
+- ***lx_nor_flash_defragment** _: _Defragment NOR flash instance*
+- ***lx_nor_flash_extended_cache_enable** _: _Enable/inaktivera utökad NOR-cache*
+- ***lx_nor_flash_initialize** _: _Initialize NOR flash support*
+- ***lx_nor_flash_open** _: _Open NOR flash instance*
+- ***lx_nor_flash_partial_defragment** _: _Partial defragmentering av NOR Flash-instansen*
+- ***lx_nor_flash_sector_read** _: _Read NOR flash sector*
+- ***lx_nor_flash_sector_release** _: _Release NOR flash sector*
+- ***lx_nor_flash_sector_write** _: _Write ELLER flash-sektor*
 
 ## <a name="lx_nor_flash_close"></a>lx_nor_flash_close
 
-Stäng eller Flash-instans
+Stäng NOR Flash-instansen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -37,22 +37,22 @@ Stäng eller Flash-instans
 UINT lx_nor_flash_close(LX_NOR_FLASH *nor_flash);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten stänger den tidigare öppnade eller Flash-instansen.
+Den här tjänsten stänger den tidigare öppnade NOR Flash-instansen.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- *nor_flash*: eller Flash instance-pekare.
+- *nor_flash:* NOR flash instance pointer.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **LX_SUCCESS**: (0X00) lyckad begäran.
-- **LX_ERROR**: (0x01) Det gick inte att stänga Flash-instansen.
+- **LX_SUCCESS**: (0x00) Lyckad begäran.
+- **LX_ERROR**: (0x01) Fel vid stängning av flash-instans.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -76,7 +76,7 @@ status = lx_nor_flash_close(&my_nor_flash);
 
 ## <a name="lx_nor_flash_defragment"></a>lx_nor_flash_defragment
 
-Defragmentera eller Flash-instans
+Flash-instans för defragmentering ELLER
 
 ### <a name="prototype"></a>Prototyp
 
@@ -84,22 +84,22 @@ Defragmentera eller Flash-instans
 UINT lx_nor_flash_defragment(LX_NOR_FLASH *nor_flash);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten defragmenterar den tidigare öppnade eller Flash-instansen. Defragmenteringen maximerar antalet kostnads fria sektorer och block.
+Den här tjänsten defragmentar den tidigare öppnade NOR Flash-instansen. Defragmenteringsprocessen maximerar antalet lediga sektorer och block.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- *nor_flash*: eller Flash instance-pekare.
+- *nor_flash:* NOR flash instance pointer.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **LX_SUCCESS**: (0X00) lyckad begäran.
-- **LX_ERROR**: (0x01) Det gick inte att defragmentera Flash-instansen.
+- **LX_SUCCESS**: (0x00) Lyckad begäran.
+- **LX_ERROR**: (0x01) Fel vid defragmentering av flash-instans.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -123,7 +123,7 @@ status = lx_nor_flash_defragment(&my_nor_flash);
 
 ## <a name="lx_nor_flash_extended_cache_enable"></a>lx_nor_flash_extended_cache_enable
 
-Aktivera/inaktivera utökad eller cachelagring
+Aktivera/inaktivera utökad NOR-cache
 
 ### <a name="prototype"></a>Prototyp
 
@@ -134,25 +134,25 @@ UINT lx_nor_flash_extended_cache_enable(
     ULONG size);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten implementerar ett-eller sektor cache-skikt i RAM-minnet med det minne som tillhandahålls av programmet. Varje 512 byte minne som tillhandahålls översätts till en eller sektor som kan cachelagras. De cachelagrade sektorerna är de som innehåller block kontroll information, t. ex., antal rader, kostnads fri sektor karta och information om sektor mappning. Data sektorer lagras inte i det här cacheminnet.
+Den här tjänsten implementerar ett NOR-sektorcachelager i RAM med hjälp av det minne som tillhandahålls av programmet. Varje mängd minne på 512 byte översätts till en NOR-sektor som kan cachelagras. De sektorer som cachelagras är de som innehåller blockkontrollinformation, t.ex. radering av antal, kostnadsfri sektorkarta och sektormappningsinformation. Datasektorer lagras inte i den här cachen.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **nor_flash**: eller Flash instance-pekare.  
-- **minne**: Start adress för cache-minne, justerat för ulong-åtkomst. Värdet LX_NULL inaktiverar cacheminnet.  
-- **storlek**: storleken i byte för det angivna minnet (bör vara flera av 512 byte).
+- **nor_flash:** NOR flash instance pointer.  
+- **memory**: Startadress för cacheminne, justerat för ULONG-åtkomst. Värdet för LX_NULL inaktiverar cachen.  
+- **storlek:** Storleken i byte för det angivna minnet (ska vara flera av 512 byte).
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **LX_SUCCESS**: (0X00) lyckad begäran.
-- **LX_ERROR**: (0x01) det finns inte tillräckligt med minne för en eller sektor.
-- **LX_DISABLED**: (0X09) eller utökad cache inaktiverat av konfigurations alternativ.
+- **LX_SUCCESS**: (0x00) Lyckad begäran.
+- **LX_ERROR**: (0x01) Det finns inte tillräckligt med minne för en NOR-sektor.
+- **LX_DISABLED:**(0x09) ELLER utökad cache inaktiverad av konfigurationsalternativet.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -177,7 +177,7 @@ status = lx_nor_flash_extended_cache_enable(&my_nor_flash,
 
 ## <a name="lx_nor_flash_initialize"></a>lx_nor_flash_initialize
 
-Initiera eller stöd för Flash
+Initiera NOR Flash-stöd
 
 ### <a name="prototype"></a>Prototyp
 
@@ -185,22 +185,22 @@ Initiera eller stöd för Flash
 UINT lx_nor_flash_initialize(void);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten initierar LevelX eller Flash-stöd. Den måste anropas före andra LevelX eller API: er.
+Den här tjänsten initierar Flash-stöd för LevelX NOR. Den måste anropas före andra LevelX NOR-API:er.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **Ingen**
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **LX_SUCCESS**: (0X00) lyckad begäran.
-- **LX_ERROR**: (0x01) Det gick inte att initiera eller Flash-stöd.
+- **LX_SUCCESS**: (0x00) Lyckad begäran.
+- **LX_ERROR:**(0x01) Fel vid initiering av NOR Flash-stöd.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar
+Initiering, Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -224,7 +224,7 @@ status = lx_nor_flash_initialize();
 
 ## <a name="lx_nor_flash_open"></a>lx_nor_flash_open
 
-Öppna eller Flash-instans
+Öppna NOR Flash-instansen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -235,25 +235,25 @@ UINT lx_nor_flash_open(
     UINT (*nor_driver_initialize) (LX_NOR_FLASH *));
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten öppnar en eller Flash-instans med angivet eller Flash-kontroll block och driv rutins initierings funktionen. Observera att driv Rutinens initierings funktion ansvarar för att installera olika funktions pekare för att läsa, skriva och radera block av den eller maskin vara som är associerad med den här eller Flash-instansen.
+Den här tjänsten öppnar en NOR-flash-instans med angiven INITIERINGsfunktion för NOR-flash-kontrollblock och drivrutin. Observera att initieringsfunktionen för drivrutiner ansvarar för att installera olika funktionspekare för läsning, skrivning och radering av block i NOR-maskinvaran som är associerad med den här NOR Flash-instansen.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- *nor_flash*: eller Flash instance-pekare.
-- *namn*: namnet på eller Flash-instansen.
-- *nor_driver_initialize*: funktions pekare till eller Flash driver initierings funktion. Se kapitel 5 i den här hand boken om du vill ha mer information om eller driv rutins ansvar för Flash.
+- *nor_flash:* NOR flash instance pointer.
+- *name*: Namnet på NOR flash-instansen.
+- *nor_driver_initialize: Funktionspekaren* till FUNKTIONEN INITIERING AV FLASH-drivrutin. Mer information om ansvaret för FLASH-drivrutiner finns i kapitel 5 i den här guiden.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **LX_SUCCESS**: (0X00) lyckad begäran.
-- **LX_ERROR**: (0x01) Det gick inte att öppna eller Flash-instansen.
-- **LX_NO_MEMORY**: (0X08) driv rutinen tillhandahöll ingen buffert för att läsa någon sektor i RAM-minnet.
+- **LX_SUCCESS**: (0x00) Lyckad begäran.
+- **LX_ERROR:**(0x01) Det gick inte att öppna NOR Flash-instansen.
+- **LX_NO_MEMORY**: (0x08) Drivrutin tillhandahåller inte buffert för läsning av ingen sektor till RAM-minne.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -278,7 +278,7 @@ status = lx_nor_flash_open(&my_nor_flash,"my NOR flash",
 
 ## <a name="lx_nor_flash_partial_defragment"></a>lx_nor_flash_partial_defragment
 
-Partiell defragmentering av eller Flash-instans
+Partiell defragmentering av NOR-flashinstans
 
 ### <a name="prototype"></a>Prototyp
 
@@ -288,23 +288,23 @@ UINT lx_nor_flash_partial_defragment(
     UINT max_blocks);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten defragmenterar den tidigare öppnade eller Flash-instansen upp till det maximala antalet block som anges. Defragmenteringen maximerar antalet kostnads fria sektorer och block.
+Den här tjänsten defragmenterade den tidigare öppnade NOR Flash-instansen upp till det maximala antalet block som angetts. Defragmenteringsprocessen maximerar antalet lediga sektorer och block.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- *nor_flash*: eller Flash instance-pekare.
-- *max_blocks*: maximalt antal block.
+- *nor_flash:* NOR flash instance pointer.
+- *max_blocks:* Maximalt antal block.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **LX_SUCCESS**: (0X00) lyckad begäran.
-- **LX_ERROR**: (0x01) Det gick inte att defragmentera Flash-instansen.
+- **LX_SUCCESS**: (0x00) Lyckad begäran.
+- **LX_ERROR**: (0x01) Fel vid defragmentering av flash-instans.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -328,7 +328,7 @@ status = lx_nor_flash_partial_defragment(&my_nor_flash, 1);
 
 ## <a name="lx_nor_flash_sector_read"></a>lx_nor_flash_sector_read
 
-Läs eller Flash-sektor
+Läs ELLER flash-sektor
 
 ### <a name="prototype"></a>Prototyp
 
@@ -339,24 +339,24 @@ UINT lx_nor_flash_sector_read(
     VOID *buffer);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten läser den logiska sektorn från eller Flash-instansen och returnerar innehållet i den angivna bufferten om det lyckas. Observera att eller sektor storlek alltid är 512 byte.
+Den här tjänsten läser den logiska sektorn från NOR Flash-instansen och returnerar om det lyckas innehållet i den angivna bufferten. Observera att NOR-sektorstorleken alltid är 512 byte.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- *nor_flash* ELLER Flash instance-pekare.
-- *logical_sector*: logisk sektor som ska läsas.
-- *buffert*: pekare till målet för innehållet i den logiska sektorn. Observera att bufferten antas vara 512 byte och justerad för ULONG-åtkomst.
+- *nor_flash* PEKARe för FLASH-instans.
+- *logical_sector:* Logisk sektor att läsa.
+- *buffer*: Pekare till mål för innehållet i den logiska sektorn. Observera att bufferten antas vara 512 byte och justerad för ULONG-åtkomst.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **LX_SUCCESS**: (0X00) lyckad begäran.
-- **LX_ERROR**: (0x01) Det gick inte att läsa eller Flash-sektorn.
+- **LX_SUCCESS**: (0x00) Lyckad begäran.
+- **LX_ERROR**: (0x01) Det gick inte att läsa NOR Flash-sektorn.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -380,7 +380,7 @@ status = lx_nor_flash_sector_read(&my_nor_flash, 20, buffer);
 
 ## <a name="lx_nor_flash_sector_release"></a>lx_nor_flash_sector_release
 
-Utgåva eller Flash-sektor
+Släpp ELLER flash-sektor
 
 ### <a name="prototype"></a>Prototyp
 
@@ -390,23 +390,23 @@ UINT lx_nor_flash_sector_release(
     ULONG logical_sector);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten släpper den logiska sektor mappningen i eller Flash-instansen. Att släppa en logisk sektor när den inte används gör att LevelX slitaget är mer effektivt.
+Den här tjänsten släpper mappningen av den logiska sektorn i FLASH-instansen NOR. Om du frigör en logisk sektor när den inte används blir nivå X-förslitningen effektivare.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- *nor_flash*: eller Flash instance-pekare.
-- *logical_sector*: logisk sektor som ska frisläppas.
+- *nor_flash:* NOR flash instance pointer.
+- *logical_sector:* Logisk sektor som ska släppas.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **LX_SUCCESS**: (0X00) lyckad begäran.
-- **LX_ERROR**: (0X01) fel eller Flash-sektor skrivning.
+- **LX_SUCCESS**: (0x00) Lyckad begäran.
+- **LX_ERROR:**(0x01) Fel VID skrivning av FLASH-sektor.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -430,7 +430,7 @@ status = lx_nor_flash_sector_release(&my_nor_flash, 20);
 
 ## <a name="lx_nor_flash_sector_write"></a>lx_nor_flash_sector_write
 
-Skriv-eller Flash-sektor
+Skriv NOR Flash-sektor
 
 ### <a name="prototype"></a>Prototyp
 
@@ -441,25 +441,25 @@ UINT lx_nor_flash_sector_write(
     VOID *buffer);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skriver den angivna logiska sektorn i eller Flash-instansen.
+Den här tjänsten skriver den angivna logiska sektorn i NOR Flash-instansen.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- *nor_flash*: eller Flash instance-pekare.
-- *logical_sector*: logisk sektor som ska skrivas.
-- *Buffer*: pekar mot innehållet i den logiska sektorn. Observera att bufferten antas vara 512 byte justerad för ULONG-åtkomst.
+- *nor_flash:* NOR flash instance pointer.
+- *logical_sector:* Logisk sektor att skriva.
+- *buffer*: Pekare till innehållet i den logiska sektorn. Observera att bufferten antas vara 512 byte justerad för ULONG-åtkomst.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **LX_SUCCESS**: (0X00) lyckad begäran.
-- **LX_NO_SECTORS**: (protokollnumret 0x02) det finns inga fler kostnads fria sektorer att utföra skrivningen.
-- **LX_ERROR**: (0X01) fel vid fri släppning eller Flash-sektor.
+- **LX_SUCCESS**: (0x00) Lyckad begäran.
+- **LX_NO_SECTORS**: (0x02) Inga fler lediga sektorer är tillgängliga för att utföra skrivning.
+- **LX_ERROR**: (0x01) Fel vid lanserar NOR Flash-sektor.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 

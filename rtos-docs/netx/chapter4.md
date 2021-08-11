@@ -1,30 +1,30 @@
 ---
-title: Kapitel 4 – Beskrivning av Azure återställnings tider NetX-tjänster
-description: Det här kapitlet innehåller en beskrivning av alla Azure återställnings tider NetX-tjänster i alfabetisk ordning.
+title: Kapitel 4 – Beskrivning Azure RTOS NetX Services
+description: Det här kapitlet innehåller en beskrivning av alla Azure RTOS NetX-tjänster i alfabetisk ordning.
 author: philmea
 ms.author: philmea
 ms.date: 05/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 720e573b53070a754618830134f63a8421b9fd29
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: f1ebbd4d78f96a257fc6cf62474917a1d618524ff6f27f99c108f904589f84fe
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104825641"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116801945"
 ---
-# <a name="chapter-4---description-of-azure-rtos-netx-services"></a>Kapitel 4 – Beskrivning av Azure återställnings tider NetX-tjänster
+# <a name="chapter-4---description-of-azure-rtos-netx-services"></a>Kapitel 4 – Beskrivning Azure RTOS NetX Services
 
-Det här kapitlet innehåller en beskrivning av alla Azure återställnings tider NetX-tjänster i alfabetisk ordning. Tjänst namn är utformade så att alla liknande tjänster grupperas tillsammans. Till exempel finns alla ARP-tjänster i början av det här kapitlet.
+Det här kapitlet innehåller en beskrivning av alla Azure RTOS NetX-tjänster i alfabetisk ordning. Tjänstnamn är utformade så att alla liknande tjänster grupperas tillsammans. Till exempel finns alla ARP-tjänster i början av det här kapitlet.
 
 > [!NOTE]
-> *Observera att det finns en BSD-Compatible socket-API för äldre program kod som inte kan dra full nytta av NetX-API: et med höga prestanda. Se bilaga D för mer information om API: et för BSD-Compatible socket.*
+> *Observera att ett BSD-Compatible Socket API är tillgängligt för äldre programkod som inte kan dra full nytta av NetX-API:et med höga prestanda. Se bilaga D för mer information om BSD-Compatible Socket API.*
 
-I avsnittet "returnera värden" i varje beskrivning påverkas inte värden i **fetstil** av NX_DISABLE_ERROR_CHECKING alternativ som används för att inaktivera API-felkontrollen, medan värden i icke-fetstil är helt inaktiverade. I avsnitten "tillåten från" anges från vilka varje NetX-tjänst kan anropas.
+I avsnittet "Returvärden" i varje beskrivning påverkas inte värden i **BOLD** av det NX_DISABLE_ERROR_CHECKING-alternativ som används för att inaktivera API-felkontrollen, medan värden i icke-fetstil är helt inaktiverade. Avsnitten "Tillåten från" anger från vilka varje NetX-tjänst kan anropas.
 
 ## <a name="nx_arp_dynamic_entries_invalidate"></a>nx_arp_dynamic_entries_invalidate
 
-Ogiltig förklara alla dynamiska poster i ARP-cachen
+Ogiltigförklara alla dynamiska poster i ARP-cachen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -32,28 +32,28 @@ Ogiltig förklara alla dynamiska poster i ARP-cachen
 UINT nx_arp_dynamic_entries_invalidate(NX_IP *ip_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-I den här tjänsten inaktive ras alla dynamiska ARP-poster i ARP-cachen.
+Den här tjänsten ogiltigförklarar alla dynamiska ARP-poster som för närvarande finns i ARP-cachen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) slutförde ARP-cachen.
-- **NX_NOT_ENABLED** (0X14) ARP har inte Aktiver ATS.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-adress.
-- **NX_CALLER_ERROR** (0X11) anroparen är inte en tråd.
+- **NX_SUCCESS** (0x00) Lyckad ARP-cache ogiltigförklaras.
+- **NX_NOT_ENABLED** (0x14) ARP är inte aktiverat.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-adress.
+- **NX_CALLER_ERROR** (0x11) anroparen är inte en tråd.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -66,9 +66,9 @@ status = nx_arp_dynamic_entries_invalidate(&ip_0);
 ### <a name="see-also"></a>Se även
 
 - nx_arp_dynamic_entry_set, nx_arp_enable, nx_arp_gratuitous_send,
-- nx_arp_hardware_address_find nx_arp_info_get,
-- nx_arp_ip_address_find nx_arp_static_entries_delete,
-- nx_arp_static_entry_create nx_arp_static_entry_delete
+- nx_arp_hardware_address_find, nx_arp_info_get,
+- nx_arp_ip_address_find, nx_arp_static_entries_delete,
+- nx_arp_static_entry_create, nx_arp_static_entry_delete
 
 ## <a name="nx_arp_dynamic_entry_set"></a>nx_arp_dynamic_entry_set
 
@@ -84,33 +84,33 @@ UINT nx_arp_dynamic_entry_set(
     ULONG physical_lsw);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten allokerar en dynamisk post från ARP-cachen och ställer in den angivna IP-adressen till fysisk adress mappning. Om en fysisk adress på noll anges skickas en faktisk ARP-begäran till nätverket för att den fysiska adressen ska kunna matchas. Observera också att den här posten tas bort om ARP-åldrande är aktiv eller om ARP-cachen är slut och det här är den minst nyligen använda ARP-posten.
+Den här tjänsten allokerar en dynamisk post från ARP-cachen och uppsättningar upp den angivna IP-adressen till fysisk adressmappning. Om en fysisk adress är noll skickas en faktisk ARP-begäran till nätverket för att den fysiska adressen ska kunna matchas. Observera också att den här posten tas bort om ARP-åldersfördelningen är aktiv eller om ARP-cachen är uttömd och detta är den minst nyligen använda ARP-posten.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
 - **ip_address** IP-adress att mappa.
-- **physical_msw** De 16 främsta bitarna (47-32) av den fysiska adressen.
-- **physical_lsw** Lägre 32 bitar (31-0) av den fysiska adressen.
+- **physical_msw** Översta 16 bitar (47–32) av den fysiska adressen.
+- **physical_lsw** Lägre 32 bitar (31–0) av den fysiska adressen.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) en dynamisk ARP-post uppsättning.
-- **NX_NO_MORE_ENTRIES** (0X17) inga fler ARP-poster är tillgängliga i ARP-cachen.
-- **NX_IP_ADDRESS_ERROR** (0X21) ogiltig IP-adress.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-instans pekare.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS** (0x00) Lyckad dynamisk ARP-postuppsättning.
+- **NX_NO_MORE_ENTRIES** (0x17) Inga fler ARP-poster är tillgängliga i ARP-cachen.
+- **NX_IP_ADDRESS_ERROR** (0x21) Ogiltig IP-adress.
+- **NX_PTR_ERROR** (0x07) Pekare för ogiltig IP-instans.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -125,14 +125,14 @@ status = nx_arp_dynamic_entry_set(&ip_0, IP_ADDRESS(1,2,3,4),
 
 ### <a name="see-also"></a>Se även
 
-- nx_arp_dynamic_entries_invalidate nx_arp_enable,
-- nx_arp_gratuitous_send nx_arp_hardware_address_find,
+- nx_arp_dynamic_entries_invalidate, nx_arp_enable,
+- nx_arp_gratuitous_send, nx_arp_hardware_address_find,
 - nx_arp_info_get, nx_arp_ip_address_find, nx_arp_static_entries_delete,
-- nx_arp_static_entry_create nx_arp_static_entry_delete
+- nx_arp_static_entry_create, nx_arp_static_entry_delete
 
 ## <a name="nx_arp_enable"></a>nx_arp_enable
 
-Aktiverar adress matchnings protokoll (ARP).
+Aktiverar ARP (Address Resolution Protocol).
 
 ### <a name="prototype"></a>Prototyp
 
@@ -143,31 +143,31 @@ UINT nx_arp_enable(
     ULONG arp_cache_size);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten initierar ARP-komponenten i NetX för den angivna IP-instansen. ARP-initieringen innefattar konfiguration av ARP-cachen och olika ARP-bearbetnings rutiner som krävs för att skicka och ta emot ARP-meddelanden.
+Den här tjänsten initierar ARP-komponenten i NetX för den specifika IP-instansen. ARP-initiering omfattar att konfigurera ARP-cachen och olika ARP-bearbetningsrutiner som krävs för att skicka och ta emot ARP-meddelanden.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
-- **arp_cache_memory** Pekare till minnes området för att placera ARP-cache.
-- **arp_cache_size** Varje ARP-post är 52 byte, det totala antalet ARP-poster är därför att storleken dividerat med 52.
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
+- **arp_cache_memory** Pekare till minnesområdet för att placera ARP-cachen.
+- **arp_cache_size** Varje ARP-post är 52 byte, det totala antalet ARP-poster är därför storleken dividerat med 52.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) slutförde ARP-aktivering.
-- **NX_PTR_ERROR** (0X07) ogiltig IP eller minnes pekare för cache.
-- **NX_SIZE_ERROR** (0x09) den TILLHANDAHÅLLna ARP-cache-minnet är för litet.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_ALREADY_ENABLED** (0X15) den här komponenten har redan Aktiver ATS.
+- **NX_SUCCESS** (0x00) Lyckad ARP-aktivera.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP- eller cacheminnespekare.
+- **NX_SIZE_ERROR** (0x09) Användaren angav att ARP-cacheminnet är för litet.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_ALREADY_ENABLED** (0x15) Den här komponenten har redan aktiverats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -180,14 +180,14 @@ status = nx_arp_enable(&ip_0, (void *) pointer, 1024);
 
 ### <a name="see-also"></a>Se även
 
-- nx_arp_dynamic_entries_invalidate nx_arp_dynamic_entry_set,
-- nx_arp_gratuitous_send nx_arp_hardware_address_find,
+- nx_arp_dynamic_entries_invalidate, nx_arp_dynamic_entry_set,
+- nx_arp_gratuitous_send, nx_arp_hardware_address_find,
 - nx_arp_info_get, nx_arp_ip_address_find, nx_arp_static_entries_delete,
-- nx_arp_static_entry_create nx_arp_static_entry_delete
+- nx_arp_static_entry_create, nx_arp_static_entry_delete
 
 ## <a name="nx_arp_gratuitous_send"></a>nx_arp_gratuitous_send
 
-Skicka en kostnads fria ARP-begäran
+Skicka en gratuitous ARP-begäran
 
 ### <a name="prototype"></a>Prototyp
 
@@ -197,31 +197,31 @@ UINT nx_arp_gratuitous_send(
     VOID (*response_handler) (NX_IP *ip_ptr, NX_PACKET *packet_ptr));
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten går igenom alla fysiska gränssnitt för att överföra AntiArp-begäranden så länge som gränssnittets IP-adress är giltig. Om ett ARP-svar sedan tas emot, anropas den tillhandahållna svars hanteraren för att bearbeta svaret till den kostnads fria ARP-filen.
+Den här tjänsten går igenom alla fysiska gränssnitt för att överföra gratuitous ARP-begäranden så länge gränssnittets IP-adress är giltig. Om ett ARP-svar senare tas emot anropas den angivna svarshanteraren för att bearbeta svaret till den ej intuitiska ARP:n.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
-- **response_handler** Pekare till funktionen för svars hantering. Om NX_NULL anges ignoreras svaren.
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
+- **response_handler** Pekare till svarshanteringsfunktionen. Om NX_NULL anges ignoreras svar.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckad överföring av kostnads fria ARP.
-- **NX_NO_PACKET** (0X01) inget paket tillgängligt.
-- **NX_NOT_ENABLED** (0X14) ARP har inte Aktiver ATS.
-- Den aktuella IP-adressen för **NX_IP_ADDRESS_ERROR** (0x21) är ogiltig.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-pekare.
-- **NX_CALLER_ERROR** (0X11) anroparen är inte en tråd.
+- **NX_SUCCESS** (0x00) Lyckad, olöslig ARP-skicka.
+- **NX_NO_PACKET** (0x01) Inget paket tillgängligt.
+- **NX_NOT_ENABLED** (0x14) ARP är inte aktiverat.
+- **NX_IP_ADDRESS_ERROR** (0x21) Den aktuella IP-adressen är ogiltig.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-pekare.
+- **NX_CALLER_ERROR** (0x11) anroparen är inte en tråd.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -234,14 +234,14 @@ status = nx_arp_gratuitous_send(&ip_0, NX_NULL);
 
 ### <a name="see-also"></a>Se även
 
-- nx_arp_dynamic_entries_invalidate nx_arp_dynamic_entry_set,
+- nx_arp_dynamic_entries_invalidate, nx_arp_dynamic_entry_set,
 - nx_arp_enable, nx_arp_hardware_address_find, nx_arp_info_get,
-- nx_arp_ip_address_find nx_arp_static_entries_delete,
-- nx_arp_static_entry_create nx_arp_static_entry_delete
+- nx_arp_ip_address_find, nx_arp_static_entries_delete,
+- nx_arp_static_entry_create, nx_arp_static_entry_delete
 
 ## <a name="nx_arp_hardware_address_find"></a>nx_arp_hardware_address_find
 
-Hitta en fysisk maskin varu adress med en IP-adress
+Hitta den fysiska maskinvaruadressen med en IP-adress
 
 ### <a name="prototype"></a>Prototyp
 
@@ -253,33 +253,33 @@ UINT nx_arp_hardware_address_find(
     ULONG *physical_lsw);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten försöker hitta en fysisk maskin varu adress i ARP-cachen som är associerad med den angivna IP-adressen.
+Den här tjänsten försöker hitta en fysisk maskinvaruadress i ARP-cachen som är associerad med den angivna IP-adressen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
 - **ip_address** IP-adress att söka efter.
-- **physical_msw** Pekare till variabeln för att returnera de översta 16 bitarna (47-32) av den fysiska adressen.
-- **physical_lsw** Pekare till variabeln för att returnera de lägre 32 bitarna (31-0) för den fysiska adressen.
+- **physical_msw** Pekare till variabeln för att returnera de 16 översta bitarna (47–32) för den fysiska adressen.
+- **physical_lsw** Pekare till variabeln för att returnera de lägre 32 bitarna (31–0) för den fysiska adressen.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckad ARP-maskinvara Sök.
-- Det gick inte att hitta **NX_ENTRY_NOT_FOUND** -mappningen (0x16) i ARP-cachen.
-- **NX_IP_ADDRESS_ERROR** (0X21) ogiltig IP-adress.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-eller minnes pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
+- **NX_SUCCESS** (0x00) Hitta lyckad ARP-maskinvaruadress.
+- **NX_ENTRY_NOT_FOUND** (0x16) Mappning hittades inte i ARP-cachen.
+- **NX_IP_ADDRESS_ERROR** (0x21) Ogiltig IP-adress.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP- eller minnespekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -299,10 +299,10 @@ status = nx_arp_hardware_address_find(
 
 ### <a name="see-also"></a>Se även
 
-- nx_arp_dynamic_entries_invalidate nx_arp_dynamic_entry_set,
+- nx_arp_dynamic_entries_invalidate, nx_arp_dynamic_entry_set,
 - nx_arp_enable, nx_arp_gratuitous_send, nx_arp_info_get,
-- nx_arp_ip_address_find nx_arp_static_entries_delete,
-- nx_arp_static_entry_create nx_arp_static_entry_delete
+- nx_arp_ip_address_find, nx_arp_static_entries_delete,
+- nx_arp_static_entry_create, nx_arp_static_entry_delete
 
 ## <a name="nx_arp_info_get"></a>nx_arp_info_get
 
@@ -323,38 +323,38 @@ UINT nx_arp_info_get(
     ULONG *arp_invalid_messages);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten hämtar information om ARP-aktiviteter för den associerade IP-instansen.
 
-*Om en mål pekare är NX_NULL returneras inte den informationen till anroparen.*
+*Om en mål pekare NX_NULL returneras inte den informationen till anroparen.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
-- **arp_requests_sent** Pekare till målet för de totala ARP-begäranden som skickats från den här IP-instansen.
-- **arp_requests_received** Pekare till målet för de totala ARP-begäranden som tagits emot från nätverket.
-- **arp_responses_sent** Pekare till målet för det totala antalet ARP-svar som skickas från den här IP-instansen.
-- **arp_responses_received** Pekar till målet för det totala antalet ARP-svar som tagits emot från nätverket.
-- **arp_dynamic_entries** Pekar mot målet för det aktuella antalet dynamiska ARP-poster.
-- **arp_static_entries** Pekar mot målet för det aktuella antalet statiska ARP-poster.
-- **arp_aged_entries** Pekar till målet för det totala antalet ARP-poster som har föråldrats och blivit ogiltiga.
-- **arp_invalid_messages** Pekar till målet för de totala ogiltiga ARP-meddelanden som tagits emot.
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
+- **arp_requests_sent** Pekare till mål för det totala antalet ARP-begäranden som skickats från den här IP-instansen.
+- **arp_requests_received** Pekare till mål för totalt antal ARP-begäranden som tagits emot från nätverket.
+- **arp_responses_sent** Pekare till mål för det totala ARP-svar som skickats från den här IP-instansen.
+- **arp_responses_received** Pekare till målet för det totala antalet ARP-svar som tagits emot från nätverket.
+- **arp_dynamic_entries** Pekare till målet för det aktuella antalet dynamiska ARP-poster.
+- **arp_static_entries** Pekare till målet för det aktuella antalet statiska ARP-poster.
+- **arp_aged_entries** Pekare till målet för det totala antalet ARP-poster som har blivit ogiltiga och har blivit ogiltiga.
+- **arp_invalid_messages** Pekare till målet för de totala ogiltiga ARP-meddelanden som tagits emot.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckades Hämta ARP-information.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
+- **NX_SUCCESS** (0x00) Lyckad ARP-informationshämtning.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -376,15 +376,15 @@ status = nx_arp_info_get(
 
 ### <a name="see-also"></a>Se även
 
-- nx_arp_dynamic_entries_invalidate nx_arp_dynamic_entry_set,
-- nx_arp_enable nx_arp_gratuitous_send,
-- nx_arp_hardware_address_find nx_arp_ip_address_find,
-- nx_arp_static_entries_delete nx_arp_static_entry_create,
+- nx_arp_dynamic_entries_invalidate, nx_arp_dynamic_entry_set,
+- nx_arp_enable, nx_arp_gratuitous_send,
+- nx_arp_hardware_address_find, nx_arp_ip_address_find,
+- nx_arp_static_entries_delete, nx_arp_static_entry_create,
 - nx_arp_static_entry_delete
 
 ## <a name="nx_arp_ip_address_find"></a>nx_arp_ip_address_find
 
-Hitta IP-adress till en fysisk adress
+Hitta IP-adress givet en fysisk adress
 
 ### <a name="prototype"></a>Prototyp
 
@@ -396,33 +396,33 @@ UINT nx_arp_ip_address_find(
     ULONG physical_lsw);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten försöker hitta en IP-adress i ARP-cachen som är associerad med den angivna fysiska adressen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
-- **ip_address** Pekare för att returnera IP-adress, om en sådan finns, som har mappats.
-- **physical_msw** De 16 främsta bitarna (47-32) i den fysiska adressen som du vill söka efter.
-- **physical_lsw** Lägre 32 bitar (31-0) för den fysiska adressen att söka efter.
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
+- **ip_address** Pekare för att returnera IP-adress om en sådan har mappats.
+- **physical_msw** Översta 16 bitar (47–32) av den fysiska adressen att söka efter.
+- **physical_lsw** Lägre 32 bitar (31–0) av den fysiska adressen att söka efter.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckade ARP IP-adress Sök
-- Det gick inte att hitta **NX_ENTRY_NOT_FOUND** -mappningen (0x16) i ARP-cachen.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-eller minnes pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
-- **NX_INVALID_PARAMETERS** (0x4D) Physical_msw och physical_lsw är båda 0.
+- **NX_SUCCESS** (0x00) Lyckad IP-adress för ARP
+- **NX_ENTRY_NOT_FOUND** (0x16) Mappning hittades inte i ARP-cachen.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP- eller minnespekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
+- **NX_INVALID_PARAMETERS** (0x4D) Physical_msw och physical_lsw båda 0.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -438,10 +438,10 @@ status = nx_arp_ip_address_find(&ip_0, &ip_address, 0x0, 0x1234);
 
 ### <a name="see-also"></a>Se även
 
-- nx_arp_dynamic_entries_invalidate nx_arp_dynamic_entry_set,
-- nx_arp_enable nx_arp_gratuitous_send,
-- nx_arp_hardware_address_find nx_arp_info_get,
-- nx_arp_static_entries_delete nx_arp_static_entry_create,
+- nx_arp_dynamic_entries_invalidate, nx_arp_dynamic_entry_set,
+- nx_arp_enable, nx_arp_gratuitous_send,
+- nx_arp_hardware_address_find, nx_arp_info_get,
+- nx_arp_static_entries_delete,nx_arp_static_entry_create,
 - nx_arp_static_entry_delete
 
 ## <a name="nx_arp_static_entries_delete"></a>nx_arp_static_entries_delete
@@ -454,28 +454,28 @@ Ta bort alla statiska ARP-poster
 UINT nx_arp_static_entries_delete(NX_IP *ip_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten tar bort alla statiska poster i ARP-cachen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) statiska poster tas bort.
-- **NX_PTR_ERROR** (0X07) ogiltig ip_ptr pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
+- **NX_SUCCESS** (0x00) Statiska poster tas bort.
+- **NX_PTR_ERROR** (0x07) Ogiltig ip_ptr pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -491,15 +491,15 @@ have been deleted. */
 
 ### <a name="see-also"></a>Se även
 
-- nx_arp_dynamic_entries_invalidate nx_arp_dynamic_entry_set,
-- nx_arp_enable nx_arp_gratuitous_send,
-- nx_arp_hardware_address_find nx_arp_info_get,
-- nx_arp_ip_address_find nx_arp_static_entry_create,
+- nx_arp_dynamic_entries_invalidate, nx_arp_dynamic_entry_set,
+- nx_arp_enable, nx_arp_gratuitous_send,
+- nx_arp_hardware_address_find, nx_arp_info_get,
+- nx_arp_ip_address_find, nx_arp_static_entry_create,
 - nx_arp_static_entry_delete
 
 ## <a name="nx_arp_static_entry_create"></a>nx_arp_static_entry_create
 
-Skapa statisk IP-adress för maskin varu mappning i ARP-cache
+Skapa statisk IP till maskinvarumappning i ARP-cache
 
 ### <a name="prototype"></a>Prototyp
 
@@ -511,34 +511,34 @@ UINT nx_arp_static_entry_create(
     ULONG physical_lsw);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skapar en statisk IP-till-fysisk-adress mappning i ARP-cachen för den angivna IP-instansen. Statiska ARP-poster omfattas inte av regelbundna ARP-uppdateringar.
+Den här tjänsten skapar en statisk IP-till-fysisk adressmappning i ARP-cachen för den angivna IP-instansen. Statiska ARP-poster omfattas inte av periodiska ARP-uppdateringar.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
-- **ip_address** IP-adress att mappa.
-- **physical_msw** De 16 främsta bitarna (47-32) av den fysiska adressen som ska mappas.
-- **physical_lsw** Nedre 32 bitar (31-0) av den fysiska adressen som ska mappas.
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
+- **ip_address** IP-adress som ska mappa.
+- **physical_msw** De 16 översta bitarna (47–32) av den fysiska adressen som ska mappa.
+- **physical_lsw** Lägre 32 bitar (31–0) av den fysiska adressen som ska mappa.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00)-statisk post har skapats.
-- **NX_NO_MORE_ENTRIES** (0X17) inga fler ARP-poster är tillgängliga i ARP-cachen.
-- **NX_IP_ADDRESS_ERROR** (0X21) ogiltig IP-adress.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
-- **NX_INVALID_PARAMETERS** (0x4D) Physical_msw och physical_lsw är båda 0.
+- **NX_SUCCESS** (0x00) Skapa en statisk ARP-post.
+- **NX_NO_MORE_ENTRIES** (0x17) Inga fler ARP-poster är tillgängliga i ARP-cachen.
+- **NX_IP_ADDRESS_ERROR** (0x21) Ogiltig IP-adress.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
+- **NX_INVALID_PARAMETERS** (0x4D) Physical_msw och physical_lsw båda 0.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -556,15 +556,15 @@ status = nx_arp_static_entry_create(&ip_0, IP_ADDRESS(1,2,3,4),
 
 ### <a name="see-also"></a>Se även
 
-- nx_arp_dynamic_entries_invalidate nx_arp_dynamic_entry_set,
-- nx_arp_enable nx_arp_gratuitous_send,
-- nx_arp_hardware_address_find nx_arp_info_get,
-- nx_arp_ip_address_find nx_arp_static_entries_delete,
+- nx_arp_dynamic_entries_invalidate, nx_arp_dynamic_entry_set,
+- nx_arp_enable, nx_arp_gratuitous_send,
+- nx_arp_hardware_address_find, nx_arp_info_get,
+- nx_arp_ip_address_find, nx_arp_static_entries_delete,
 - nx_arp_static_entry_delete
 
 ## <a name="nx_arp_static_entry_delete"></a>nx_arp_static_entry_delete
 
-Ta bort statisk IP-adress till maskin varu mappning i ARP-cache
+Ta bort statisk IP till maskinvarumappning i ARP-cache
 
 
 ### <a name="prototype"></a>Prototyp
@@ -577,34 +577,34 @@ UINT nx_arp_static_entry_delete(
     ULONG physical_lsw);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hittar och tar bort en tidigare skapad statisk IP-till-fysisk-adress mappning i ARP-cachen för den angivna IP-instansen.
+Den här tjänsten hittar och tar bort en tidigare skapad statisk IP-till-fysisk adressmappning i ARP-cachen för den angivna IP-instansen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
-- **ip_address** IP-adress som har mappats statiskt.
-- **physical_msw** De 16 16 bitarna (47-32) för den fysiska adress som har mappats statiskt.
-- **physical_lsw** Lägre 32 bitar (31-0) för den fysiska adress som har mappats statiskt.
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
+- **ip_address** IP-adress som mappades statiskt.
+- **physical_msw** De 16 översta bitarna (47–32) av den fysiska adressen som mappades statiskt.
+- **physical_lsw** Lägre 32 bitar (31–0) av den fysiska adressen som mappades statiskt.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckade ARP-post borttagning.
-- Det gick inte att hitta den statiska ARP-posten **NX_ENTRY_NOT_FOUND** (0x16) i ARP-cachen.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
-- **NX_IP_ADDRESS_ERROR** (0X21) ogiltig IP-adress.
-- **NX_INVALID_PARAMETERS** (0x4D) Physical_msw och physical_lsw är båda 0.
+- **NX_SUCCESS** (0x00) Borttagning av statisk ARP-post.
+- **NX_ENTRY_NOT_FOUND** (0x16) Statisk ARP-post hittades inte i ARP-cachen.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
+- **NX_IP_ADDRESS_ERROR** (0x21) Ogiltig IP-adress.
+- **NX_INVALID_PARAMETERS** (0x4D) Physical_msw och physical_lsw båda 0.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -619,10 +619,10 @@ status = nx_arp_static_entry_delete(&ip_0, IP_ADDRESS(1,2,3,4),
 
 ### <a name="see-also"></a>Se även
 
-- nx_arp_dynamic_entries_invalidate nx_arp_dynamic_entry_set,
-- nx_arp_enable nx_arp_gratuitous_send,
-- nx_arp_hardware_address_find nx_arp_info_get,
-- nx_arp_ip_address_find nx_arp_static_entries_delete,
+- nx_arp_dynamic_entries_invalidate, nx_arp_dynamic_entry_set,
+- nx_arp_enable, nx_arp_gratuitous_send,
+- nx_arp_hardware_address_find, nx_arp_info_get,
+- nx_arp_ip_address_find, nx_arp_static_entries_delete,
 - nx_arp_static_entry_create
 
 ## <a name="nx_icmp_enable"></a>nx_icmp_enable
@@ -635,29 +635,29 @@ Aktivera Internet Control Message Protocol (ICMP)
 UINT nx_icmp_enable(NX_IP *ip_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten aktiverar ICMP-komponenten för den angivna IP-instansen.
-ICMP-komponenten ansvarar för hantering av Internet fel meddelanden och ping-förfrågningar och svar.
+ICMP-komponenten ansvarar för att hantera Internet-felmeddelanden och pinga begäranden och svar.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) slutförde ICMP-aktivering.
-- **NX_ALREADY_ENABLED** (0X15) ICMP har redan Aktiver ATS.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS** (0x00) Lyckad ICMP-aktivera.
+- **NX_ALREADY_ENABLED** (0x15) ICMP är redan aktiverat.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -670,7 +670,7 @@ status = nx_icmp_enable(&ip_0);
 
 ### <a name="see-also"></a>Se även
 
-- nx_icmp_info_get nx_icmp_ping
+- nx_icmp_info_get, nx_icmp_ping
 
 ## <a name="nx_icmp_info_get"></a>nx_icmp_info_get
 
@@ -689,36 +689,36 @@ UINT nx_icmp_info_get(
     ULONG *icmp_unhandled_messages);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten hämtar information om ICMP-aktiviteter för den angivna IP-instansen.
 
-*Om en mål pekare är NX_NULL returneras inte den informationen till anroparen.*
+*Om en mål pekare NX_NULL returneras inte den informationen till anroparen.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
-- **pings_sent** Pekare till målet för det totala antalet pingar som skickats.
-- **ping_timeouts** Pekare till målet för det totala antalet ping-tidsgräns.
-- **ping_threads_suspended** Pekare till målet för det totala antalet trådar som har inaktiverats för ping-begäranden.
-- **ping_responses_received** Pekare till åltabell av det totala antalet ping-svar som tagits emot.
-- **icmp_checksum_errors** Pekare till målet för det totala antalet fel i ICMP-kontrollsumma.
-- **icmp_unhandled_messages** Pekare till åltabell av det totala antalet ohanterade ICMP-meddelanden.
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
+- **pings_sent** Pekare till mål för det totala antalet pingar som skickats.
+- **ping_timeouts** Pekare till mål för det totala antalet tidsgränser för ping.
+- **ping_threads_suspended** Pekare till målet för det totala antalet trådar som pausas vid ping-begäranden.
+- **ping_responses_received** Pekare till estination av det totala antalet ping-svar som tagits emot.
+- **icmp_checksum_errors** Pekare till målet för det totala antalet ICMP-kontrollsummor.
+- **icmp_unhandled_messages** Pekare till estination av det totala antalet ej hanterade ICMP-meddelanden.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckades Hämta ICMP-information.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-pekare.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
+- **NX_SUCCESS** (0x00) Lyckad ICMP-informationshämtning.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-pekare.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -739,11 +739,11 @@ status = nx_icmp_info_get(
 
 ### <a name="see-also"></a>Se även
 
-- nx_icmp_enable nx_icmp_ping
+- nx_icmp_enable, nx_icmp_ping
 
 ## <a name="nx_icmp_ping"></a>nx_icmp_ping
 
-Skicka ping-begäran till angiven IP-adress
+Skicka pingbegäran till angiven IP-adress
 
 ### <a name="prototype"></a>Prototyp
 
@@ -756,43 +756,43 @@ UINT nx_icmp_ping(
     ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skickar en ping-begäran till den angivna IP-adressen och väntar på den angivna tiden för ett ping-svarsmeddelande. Om inget svar tas emot returneras ett fel. Annars returneras hela svarsmeddelandet i variabeln som pekas av response_ptr.
+Den här tjänsten skickar en ping-begäran till den angivna IP-adressen och väntar på den angivna tiden för ett pingsvarsmeddelande. Om inget svar tas emot returneras ett fel. Annars returneras hela svarsmeddelandet i variabeln som response_ptr.
 
 *Om NX_SUCCESS returneras ansvarar programmet för att släppa det mottagna paketet när det inte längre behövs.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
-- **ip_address** IP-adress i byte ordning för värden till ping. data pekare till data arean för ping-meddelande.
-- **data_size** Antal byte i ping-data
-- **response_ptr** Pekare till paket pekare för att returnera meddelandet ping-svar i.
-- **wait_option** Anger hur lång tid det tar att vänta på ping-svar. vänte alternativen definieras enligt följande:
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
+- **ip_address** IP-adress, i värdbyteordning, för att pinga. data Pekare till dataområde för pingmeddelande.
+- **data_size** Antal byte i pingdata
+- **response_ptr** Pekare till paket pekare för att returnera pingsvarsmeddelandet i.
+- **wait_option** Definierar hur lång tid det tar att vänta på ett pingsvar. väntealternativ definieras på följande sätt:
 
   - NX_NO_WAIT (0x00000000)
   - NX_WAIT_FOREVER (0xFFFFFFFF)
-  - timeout-värde i Tick (0x00000001 till 0xFFFFFFFE)
+  - timeout-värde i tick (0x00000001 via 0xFFFFFFFE)
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckades ping. Svars meddelandets pekare placerades i variabeln som pekades på av response_ptr.
-- **NX_NO_PACKET** (0X01) Det gick inte att allokera ett ping Request-paket.
-- **NX_OVERFLOW** (0x03) det angivna data utrymmet överskrider standard paket storleken för den här IP-instansen.
-- **NX_NO_RESPONSE** (0X29) begärda IP-adressen svarade inte.
-- **NX_WAIT_ABORTED** (0x1a) den begärda Avstängningen avbröts av ett anrop till tx_thread_wait_abort.
-- **NX_IP_ADDRESS_ERROR** (0X21) ogiltig IP-adress.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-eller svars pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
+- **NX_SUCCESS** (0x00) Lyckad ping. Pekaren för svarsmeddelanden placerades i variabeln som response_ptr.
+- **NX_NO_PACKET** (0x01) Det går inte att allokera ett pingbegärandepaket.
+- **NX_OVERFLOW** (0x03) Det angivna dataområdet överskrider standardpaketstorleken för den här IP-instansen.
+- **NX_NO_RESPONSE** (0x29) Begärd IP-adress svarade inte.
+- **NX_WAIT_ABORTED** (0x1A) Den begärda instängningen avbröts av ett anrop till tx_thread_wait_abort.
+- **NX_IP_ADDRESS_ERROR** (0x21) Ogiltig IP-adress.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP- eller svarspekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -810,11 +810,11 @@ status = nx_icmp_ping(&ip_0, IP_ADDRESS(1,2,3,5), "abcd", 4,
 
 ### <a name="see-also"></a>Se även
 
-- nx_icmp_enable nx_icmp_info_get
+- nx_icmp_enable, nx_icmp_info_get
 
 ## <a name="nx_igmp_enable"></a>nx_igmp_enable
 
-Aktivera IGMP (Internet Group Management Protocol)
+Aktivera Internet Group Management Protocol (IGMP)
 
 ### <a name="prototype"></a>Prototyp
 
@@ -822,29 +822,29 @@ Aktivera IGMP (Internet Group Management Protocol)
 UINT nx_igmp_enable(NX_IP *ip_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten aktiverar IGMP-komponenten på den angivna IP-instansen.
-IGMP-komponenten ansvarar för att ge stöd för hanterings åtgärder för IP-multicast-grupper.
+IGMP-komponenten ansvarar för att tillhandahålla stöd för IP multicast-grupphanteringsåtgärder.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckad IGMP-aktivering.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_ALREADY_ENABLED** (0X15) den här komponenten har redan Aktiver ATS.
+- **NX_SUCCESS** (0x00) Lyckad IGMP-aktivera.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_ALREADY_ENABLED** (0x15) Den här komponenten har redan aktiverats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -857,9 +857,9 @@ status = nx_igmp_enable(&ip_0);
 
 ### <a name="see-also"></a>Se även
 
-- nx_igmp_info_get nx_igmp_loopback_disable,
-- nx_igmp_loopback_enable nx_igmp_multicast_interface_join,
-- nx_igmp_multicast_join nx_igmp_multicast_leave
+- nx_igmp_info_get,nx_igmp_loopback_disable,
+- nx_igmp_loopback_enable, nx_igmp_multicast_interface_join,
+- nx_igmp_multicast_join, nx_igmp_multicast_leave
 
 ## <a name="nx_igmp_info_get"></a>nx_igmp_info_get
 
@@ -876,34 +876,34 @@ UINT nx_igmp_info_get(
     ULONG *current_groups_joined);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten hämtar information om IGMP-aktiviteter för den angivna IP-instansen.
 
-*Om en mål pekare är NX_NULL returneras inte den informationen till anroparen.*
+*Om en mål pekare NX_NULL returneras inte den informationen till anroparen.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
-- **igmp_reports_sent** Pekare till målet för det totala antalet ICMP-rapporter som skickats.
-- **igmp_queries_received** Pekare till målet för det totala antalet frågor som tagits emot av multicast-router.
-- **igmp_checksum_errors** Pekare till målet för det totala antalet fel i IGMP-kontrollsumma för mottagna paket.
-- **current_groups_joined** Pekare till målet för det aktuella antalet grupper som anslöts via den här IP-instansen.
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
+- **igmp_reports_sent** Pekare till mål för det totala antalet skickade ICMP-rapporter.
+- **igmp_queries_received** Pekare till mål för det totala antalet frågor som tas emot av multicast-routern.
+- **igmp_checksum_errors** Pekare till målet för det totala antalet IGMP-kontrollsummafel på mottagningspaket.
+- **current_groups_joined** Pekare till målet för det aktuella antalet grupper som är sammanfogade via den här IP-instansen.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckad IGMP-informations hämtning.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
+- **NX_SUCCESS** (0x00) Lyckad IGMP-informationshämtning.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -921,13 +921,13 @@ status = nx_igmp_info_get(
 
 ### <a name="see-also"></a>Se även
 
-- nx_igmp_enable nx_igmp_loopback_disable,
-- nx_igmp_loopback_enable nx_igmp_multicast_interface_join,
-- nx_igmp_multicast_join nx_igmp_multicast_leave
+- nx_igmp_enable, nx_igmp_loopback_disable,
+- nx_igmp_loopback_enable, nx_igmp_multicast_interface_join,
+- nx_igmp_multicast_join, nx_igmp_multicast_leave
 
 ## <a name="nx_igmp_loopback_disable"></a>nx_igmp_loopback_disable
 
-Inaktivera IGMP loopback
+Inaktivera IGMP-loopback
 
 ### <a name="prototype"></a>Prototyp
 
@@ -935,27 +935,27 @@ Inaktivera IGMP loopback
 UINT nx_igmp_loopback_disable(NX_IP *ip_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten inaktiverar IGMP loopback för alla efterföljande multicast-grupper som anslutits.
+Den här tjänsten inaktiverar IGMP-loopback för alla efterföljande multicast-grupper som är sammanfogade.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
 
-### <a name="return-values"></a>Retur värden
-- **NX_SUCCESS** (0X00) lyckades IGMP loopback-inaktive ring.
-- **NX_NOT_ENABLED** (0X14) IGMP är inte aktiverat.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-pekare.
-- **NX_CALLER_ERROR** (0X11) anroparen är inte en tråd eller initiering.
+### <a name="return-values"></a>Returvärden
+- **NX_SUCCESS** (0x00) Lyckad IGMP-loopback inaktiveras.
+- **NX_NOT_ENABLED** (0x14) IGMP är inte aktiverat.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-pekare.
+- **NX_CALLER_ERROR** (0x11) Anroparen är inte en tråd eller initiering.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -969,12 +969,12 @@ status = nx_igmp_loopback_disable(&ip_0);
 ### <a name="see-also"></a>Se även
 
 - nx_igmp_enable, nx_igmp_info_get, nx_igmp_loopback_enable,
-- nx_igmp_multicast_interface_join nx_igmp_multicast_join,
+- nx_igmp_multicast_interface_join, nx_igmp_multicast_join,
 - nx_igmp_multicast_leave
 
 ## <a name="nx_igmp_loopback_enable"></a>nx_igmp_loopback_enable
 
-Aktivera IGMP loopback
+Aktivera IGMP-loopback
 
 ### <a name="prototype"></a>Prototyp
 
@@ -982,27 +982,27 @@ Aktivera IGMP loopback
 UINT nx_igmp_loopback_enable(NX_IP *ip_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten aktiverar IGMP loopback för alla efterföljande multicast-grupper som är anslutna.
+Den här tjänsten aktiverar IGMP-loopback för alla efterföljande multicast-grupper som är sammanslagna.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
 
-### <a name="return-values"></a>Retur värden
-- **NX_SUCCESS** (0X00) lyckades IGMP loopback-inaktive ring.
-- **NX_NOT_ENABLED** (0X14) IGMP är inte aktiverat.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-pekare.
-- **NX_CALLER_ERROR** (0X11) anroparen är inte en tråd eller initiering.
+### <a name="return-values"></a>Returvärden
+- **NX_SUCCESS** (0x00) Lyckad IGMP-loopback inaktiveras.
+- **NX_NOT_ENABLED** (0x14) IGMP är inte aktiverat.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-pekare.
+- **NX_CALLER_ERROR** (0x11) Anroparen är inte en tråd eller initiering.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -1016,12 +1016,12 @@ status = nx_igmp_loopback_enable(&ip_0);
 ### <a name="see-also"></a>Se även
 
 - nx_igmp_enable, nx_igmp_info_get, nx_igmp_loopback_disable,
-- nx_igmp_multicast_interface_join nx_igmp_multicast_join,
+- nx_igmp_multicast_interface_join, nx_igmp_multicast_join,
 - nx_igmp_multicast_leave
 
 ## <a name="nx_igmp_multicast_interface_join"></a>nx_igmp_multicast_interface_join
 
-Ansluta IP-instans till angiven multicast-grupp via ett gränssnitt
+Ansluta IP-instansen till en angiven multicast-grupp via ett gränssnitt
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1032,33 +1032,33 @@ UINT nx_igmp_multicast_interface_join(
     UINT interface_index);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten ansluter en IP-instans till den angivna multicast-gruppen via ett angivet nätverks gränssnitt. En intern räknare upprätthålls för att hålla reda på hur många gånger samma grupp har anslutits. När du har anslutit till multicast-gruppen tillåter IGMP-komponenten mottagning av IP-paket med den här grupp adressen via det angivna nätverks gränssnittet och rapporterar till routrar som den här IP-adressen är medlem i den här multicast-gruppen. IGMP-medlemskapet Anslut, rapportera och lämna meddelanden skickas också via det angivna nätverks gränssnittet.
+Den här tjänsten ansluter en IP-instans till den angivna multicast-gruppen via ett angivet nätverksgränssnitt. En intern räknare underhålls för att hålla reda på antalet gånger som samma grupp har anslutits. När du har sammanfogat multicast-gruppen tillåter IGMP-komponenten mottagning av IP-paket med den här gruppadressen via det angivna nätverksgränssnittet och rapporterar även till routrar att denna IP-adress är medlem i den här multicast-gruppen. Meddelanden om IGMP-medlemskapskoppling, rapport och skrivning skickas också via det angivna nätverksgränssnittet.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
-- **group_address** Klass D IP multicast-gruppadress att ansluta till i värdens byte ordning.
-- **interface_index** Index för det gränssnitt som är kopplat till NetX-instansen.
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
+- **group_address** Multicast-gruppadress för klass D som ska anslutas i värdbyteordning.
+- **interface_index** Index för gränssnittet som är kopplat till NetX-instansen.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) multicast-gruppanslutningen är klar.
-- **NX_NO_MORE_ENTRIES** (0x17) Det går inte att ansluta fler multicast-grupper, maximalt antal har överskridits.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-pekare.
-- **NX_INVALID_INTERFACE** (0X4C) enhets index pekar på ett ogiltigt nätverks gränssnitt.
-- Den tillhandahållna **NX_IP_ADDRESS_ERROR** (0X21) multicast-gruppadressen är inte en giltig klass D-adress.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0x14) stöd för IP-multicast är inte aktiverat.
+- **NX_SUCCESS** (0x00) Lyckad multicast-gruppkoppling.
+- **NX_NO_MORE_ENTRIES** (0x17) Inga fler multicast-grupper kan vara sammanfogade, maxvärdet överskrids.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-pekare.
+- **NX_INVALID_INTERFACE** (0x4C) Enhetsindex pekar på ett ogiltigt nätverksgränssnitt.
+- **NX_IP_ADDRESS_ERROR** (0x21) Multicast-gruppadress som anges är inte en giltig klass D-adress.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) IP-multicast-stöd är inte aktiverat.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -1077,12 +1077,12 @@ status = nx_igmp_multicast_interface_join
 ### <a name="see-also"></a>Se även
 
 - nx_igmp_enable, nx_igmp_info_get, nx_igmp_loopback_disable,
-- nx_igmp_loopback_enable nx_igmp_multicast_join,
+- nx_igmp_loopback_enable, nx_igmp_multicast_join,
 - nx_igmp_multicast_leave
 
 ## <a name="nx_igmp_multicast_join"></a>nx_igmp_multicast_join
 
-Anslut IP-instans till angiven multicast-grupp
+Ansluta IP-instans till angiven multicast-grupp
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1092,35 +1092,35 @@ UINT nx_igmp_multicast_join(
     ULONG group_address);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten ansluter en IP-instans till den angivna multicast-gruppen. En intern räknare upprätthålls för att hålla reda på hur många gånger samma grupp har anslutits. Driv rutinen anropas för att skicka en IGMP-rapport om detta är den första anslutnings förfrågan som finns i nätverket och som anger värden för att ansluta till gruppen. När du har anslutit till IGMP-komponenten kan IGMP-komponenten ta emot IP-paket med den här grupp adressen och rapportera till routrar som den här IP-adressen är medlem i den här multicast-gruppen.
+Den här tjänsten ansluter en IP-instans till den angivna multicast-gruppen. En intern räknare underhålls för att hålla reda på antalet gånger som samma grupp har anslutits. Drivrutinen uppmanas att skicka en IGMP-rapport om det här är den första kopplingsbegäran i nätverket som anger värdens avsikt att ansluta till gruppen. Efter anslutningen tillåter IGMP-komponenten mottagning av IP-paket med den här gruppadressen och rapporterar till routrar att denna IP-adress är medlem i den här multicast-gruppen.
 
 > [!NOTE]
-> *Använd tjänsten nx_igmp_multicast_interface_join om du vill ansluta en multicast-grupp på en icke-primär enhet **.***
+> *Om du vill ansluta till en multicast-grupp på en icke-primär enhet använder du **nx_igmp_multicast_interface_join.***
 
 - **Parametrar**
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
-- **group_address** Klass D IP multicast-grupp adress att ansluta till.
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
+- **group_address** Multicast-gruppadress för klass D som ska anslutas.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) multicast-gruppanslutningen är klar.
-- **NX_NO_MORE_ENTRIES** (0x17) Det går inte att ansluta fler multicast-grupper, maximalt antal har överskridits.
-- **NX_INVALID_INTERFACE** (0X4C) enhets index pekar på ett ogiltigt nätverks gränssnitt.
-- **NX_IP_ADDRESS_ERROR** (0X21) ogiltig IP-gruppadress.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
+- **NX_SUCCESS** (0x00) Lyckad multicast-gruppkoppling.
+- **NX_NO_MORE_ENTRIES** (0x17) Inga fler multicast-grupper kan vara sammanfogade, maxvärdet överskrids.
+- **NX_INVALID_INTERFACE** (0x4C) Enhetsindex pekar på ett ogiltigt nätverksgränssnitt.
+- **NX_IP_ADDRESS_ERROR** (0x21) Ogiltig IP-gruppadress.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -1136,12 +1136,12 @@ status = nx_igmp_multicast_join(&ip_0, IP_ADDRESS(224,0,0,200));
 ### <a name="see-also"></a>Se även
 
 - nx_igmp_enable, nx_igmp_info_get, nx_igmp_loopback_disable,
-- nx_igmp_loopback_enable nx_igmp_multicast_interface_join,
+- nx_igmp_loopback_enable, nx_igmp_multicast_interface_join,
 - nx_igmp_multicast_leave
 
 ## <a name="nx_igmp_multicast_leave"></a>nx_igmp_multicast_leave
 
-Orsak till att IP-instansen lämnar angiven multicast-grupp
+Orsaka att IP-instansen lämnar angiven multicast-grupp
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1151,32 +1151,32 @@ UINT nx_igmp_multicast_leave(
     ULONG group_address);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten gör att en IP-instans lämnar den angivna multicast-gruppen, om antalet tjänstledighets begär Anden matchar antalet anslutnings begär Anden. Annars minskas antalet interna anslutningar helt enkelt.
+Den här tjänsten gör att en IP-instans lämnar den angivna multicast-gruppen om antalet ledighetsbegäranden matchar antalet kopplingsbegäranden. Annars minskar det interna antalet kopplingar helt enkelt.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
-- **group_address** Multicast-grupp att lämna.
+- **ip_ptr** Pekare till IP-instans som skapats tidigare.
+- **group_address** Multicast-grupp som ska gå.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) multicast-gruppanslutningen är klar.
-- Det gick inte att hitta den tidigare kopplings förfrågan för **NX_ENTRY_NOT_FOUND** (0x16).
-- **NX_INVALID_INTERFACE** (0X4C) enhets index pekar på ett ogiltigt nätverks gränssnitt.
-- **NX_IP_ADDRESS_ERROR** (0X21) ogiltig IP-gruppadress.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
+- **NX_SUCCESS** (0x00) Lyckad multicast-gruppkoppling.
+- **NX_ENTRY_NOT_FOUND** (0x16) Föregående kopplingsbegäran hittades inte.
+- **NX_INVALID_INTERFACE** (0x4C) Enhetsindex pekar på ett ogiltigt nätverksgränssnitt.
+- **NX_IP_ADDRESS_ERROR** (0x21) Ogiltig IP-gruppadress.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -1190,12 +1190,12 @@ status = nx_igmp_multicast_leave(&ip_0, IP_ADDRESS(224,0,0,200);
 ### <a name="see-also"></a>Se även
 
 - nx_igmp_enable, nx_igmp_info_get, nx_igmp_loopback_disable,
-- nx_igmp_loopback_enable nx_igmp_multicast_interface_join,
+- nx_igmp_loopback_enable, nx_igmp_multicast_interface_join,
 - nx_igmp_multicast_join
 
 ## <a name="nx_ip_address_change_notifiy"></a>nx_ip_address_change_notifiy
 
-Meddela program om IP-adressen ändras
+Meddela programmet om IP-adressen ändras
 
 
 ### <a name="prototype"></a>Prototyp
@@ -1207,29 +1207,29 @@ UINT nx_ip_address_change_notify(
     VOID *additional_info);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten registrerar en program meddelande funktion som anropas när IP-adressen ändras.
+Den här tjänsten registrerar en programmeddelandefunktion som anropas när IP-adressen ändras.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
-- **change_notify** Pekare till funktionen IP-ändrings meddelande. Om den här parametern är NX_NULL inaktive ras meddelandet om ändring av IP-adress.
-- **additional_info** Pekare till valfri ytterligare information som också tillhandahålls till meddelande funktionen när IP-adressen ändras.
+- **ip_ptr** Pekare till IP-instans som skapats tidigare.
+- **change_notify** Pekare till ip-ändringsmeddelandefunktionen. Om den här parametern NX_NULL inaktiveras meddelandet om IP-adressändring.
+- **additional_info** Pekar på valfri ytterligare information som också skickas till meddelandefunktionen när IP-adressen ändras.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) avisering om ändring av IP-adress har slutförts.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS** (0x00) Meddelande om lyckad ändring av IP-adress.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -1245,14 +1245,14 @@ status = nx_ip_address_change_notify(&ip_0, my_ip_changed, NX_NULL);
 ### <a name="see-also"></a>Se även
 
 - nx_ip_address_get, nx_ip_address_set, nx_ip_create, nx_ip_delete,
-- nx_ip_driver_direct_command nx_ip_driver_interface_direct_command,
-- nx_ip_forwarding_disable nx_ip_forwarding_enable,
+- nx_ip_driver_direct_command, nx_ip_driver_interface_direct_command,
+- nx_ip_forwarding_disable, nx_ip_forwarding_enable,
 - nx_ip_fragment_disable, nx_ip_fragment_enable, nx_ip_info_get,
-- nx_ip_status_check nx_system_initialize
+- nx_ip_status_check, nx_system_initialize
 
 ## <a name="nx_ip_address_get"></a>nx_ip_address_get
 
-Hämta IP-adress och nätverks mask
+Hämta IP-adress och nätverksmask
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1263,32 +1263,32 @@ UINT nx_ip_address_get(
     ULONG *network_mask);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar IP-adressen och dess nätmask för det primära nätverks gränssnittet.
+Den här tjänsten hämtar IP-adressen och dess nätmask för det primära nätverksgränssnittet.
 
-* Om du vill hämta information om den sekundära enheten använder du tjänsten
-- **nx_ip_interface_address_get**. *
+*Om du vill hämta information om den sekundära enheten använder du tjänsten
+- **nx_ip_interface_address_get**.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
+- **ip_ptr** Pekare till IP-instans som skapats tidigare.
 - **ip_address** Pekare till mål för IP-adress.
-- **network_mask** Pekare till målet för nätverks masken.
+- **network_mask** Pekare till mål för nätverksmask.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) IP-adress hämtades.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-eller RETUR variabel pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS** (0x00) Lyckad IP-adress hämta.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-adress eller returvariabel pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -1305,15 +1305,15 @@ status = nx_ip_address_get(&ip_0,
 ### <a name="see-also"></a>Se även
 
 - nx_ip_address_change_notify, nx_ip_address_set, nx_ip_create,
-- nx_ip_delete nx_ip_driver_direct_command,
-- nx_ip_driver_interface_direct_command nx_ip_forwarding_disable,
-- nx_ip_forwarding_enable nx_ip_fragment_disable,
+- nx_ip_delete, nx_ip_driver_direct_command,
+- nx_ip_driver_interface_direct_command, nx_ip_forwarding_disable,
+- nx_ip_forwarding_enable, nx_ip_fragment_disable,
 - nx_ip_fragment_enable, nx_ip_info_get, nx_ip_status_check,
 - nx_system_initialize
 
 ## <a name="nx_ip_address_set"></a>nx_ip_address_set
 
-Ange IP-adress och nätverks mask
+Ange IP-adress och nätverksmask
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1324,32 +1324,32 @@ UINT nx_ip_address_set(
     ULONG network_mask);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten anger IP-adress och nätverks mask för det primära nätverks gränssnittet.
+Den här tjänsten anger IP-adress och nätverksmask för det primära nätverksgränssnittet.
 
-*Om du vill ange IP-adress och nätverks mask för den sekundära enheten använder du tjänsten **nx_ip_interface_address_set**.*
+*Om du vill ange IP-adress och nätverksmask för den sekundära enheten använder du **nx_ip_interface_address_set**.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
+- **ip_ptr** Pekare till IP-instans som skapats tidigare.
 - **ip_address** Ny IP-adress.
-- **network_mask** Ny nätverks mask.
+- **network_mask** Ny nätverksmask.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- Den angivna IP-adressen för **NX_SUCCESS** (0x00).
-- **NX_IP_ADDRESS_ERROR** (0X21) ogiltig IP-adress.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS** (0x00) Lyckad IP-adressuppsättning.
+- **NX_IP_ADDRESS_ERROR** (0x21) Ogiltig IP-adress.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -1365,9 +1365,9 @@ status = nx_ip_address_set(&ip_0, IP_ADDRESS(1,2,3,4), 0xFFFFFF00UL);
 ### <a name="see-also"></a>Se även
 
 - nx_ip_address_change_notify, nx_ip_address_get, nx_ip_create,
-- nx_ip_delete nx_ip_driver_direct_command,
-- nx_ip_driver_interface_direct_command nx_ip_forwarding_disable,
-- nx_ip_forwarding_enable nx_ip_fragment_disable,
+- nx_ip_delete, nx_ip_driver_direct_command,
+- nx_ip_driver_interface_direct_command, nx_ip_forwarding_disable,
+- nx_ip_forwarding_enable, nx_ip_fragment_disable,
 - nx_ip_fragment_enable, nx_ip_info_get, nx_ip_status_check,
 - nx_system_initialize
 
@@ -1390,38 +1390,38 @@ UINT nx_ip_create(
     UINT priority);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skapar en IP-instans med användaren angiven IP-adress och nätverks driv rutin. Dessutom måste programmet ange en tidigare skapad modempool för IP-instansen som ska användas för intern paket tilldelning. Observera att den angivna program nätverks driv rutinen inte anropas förrän den här IP-tråden körts.
+Den här tjänsten skapar en IP-instans med användarens angivna IP-adress och nätverksdrivrutin. Dessutom måste programmet tillhandahålla en tidigare skapad paketpool som IP-instansen kan använda för intern paketallokering. Observera att den tillhandahållna programnätverksdrivrutinen inte anropas förrän ip-adressens tråd körs.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare för att kontrol lera block för att skapa en ny IP-instans.
+- **ip_ptr** Pekare till kontrollblock för att skapa en ny IP-instans.
 - **namn** Namnet på den nya IP-instansen.
 - **ip_address** IP-adress för den här nya IP-instansen.
-- **network_mask** Mask för att avgränsa nätverks delen av IP-adressen för under näts tycken och Super-nett användning.
-- **default_pool** Pekare för att kontrol lera blockeringen av tidigare skapade NetX-paket.
-- **ip_network_driver** Nätverks driv rutin som anges av användaren som används för att skicka och ta emot IP-paket.
-- **memory_ptr** Pekare till minnes området för IP Helper-trådens stack Area.
-- **memory_size** Antal byte i minnes området för IP Helper-trådens stack.
-- **prioritet** Prioritet för IP Helper-tråd.
+- **network_mask** Maskera för att beskriva nätverksdelen av IP-adressen för användning av undernät och supernät.
+- **default_pool** Pekare till kontrollblocket för netx-paketpoolen som skapats tidigare.
+- **ip_network_driver** Nätverksdrivrutin som tillhandahålls av användaren används för att skicka och ta emot IP-paket.
+- **memory_ptr** Pekare till minnesområdet för IP-hjälptrådens stackområde.
+- **memory_size** Antal byte i minnesområdet för IP-hjälptrådens stack.
+- **prioritet** Prioritet för IP-hjälptråd.
 
-### <a name="return-values"></a>Retur värden
-- **NX_SUCCESS** (0x00) en lyckad IP-instans skapas.
-- **NX_NOT_IMPLEMENTED** (0X4A) netx-biblioteket är felaktigt konfigurerat.
-- **NX_PTR_ERROR** (0X07) ogiltig IP, nätverks driv rutin funktion pekare, adresspool eller minnes pekare.
-- **NX_SIZE_ERROR** (0X09) den angivna stack storleken är för liten.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_IP_ADDRESS_ERROR** (0X21) den angivna IP-adressen är ogiltig.
-- **NX_OPTION_ERROR** (0X21) den angivna prioriteten för IP-tråd är ogiltig.
+### <a name="return-values"></a>Returvärden
+- **NX_SUCCESS** (0x00) Lyckad skapande av IP-instans.
+- **NX_NOT_IMPLEMENTED** (0x4A) NetX-biblioteket är felaktigt konfigurerat.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP, funktionspekare för nätverksdrivrutiner, paketpool eller minnespekare.
+- **NX_SIZE_ERROR** (0x09) Den angivna stackstorleken är för liten.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_IP_ADDRESS_ERROR** (0x21) Den angivna IP-adressen är ogiltig.
+- **NX_OPTION_ERROR** (0x21) Den angivna IP-trådprioritet är ogiltig.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -1447,15 +1447,15 @@ status = nx_ip_create(
 ### <a name="see-also"></a>Se även
 
 - nx_ip_address_change_notify, nx_ip_address_get, nx_ip_address_set,
-- nx_ip_delete nx_ip_driver_direct_command,
-- nx_ip_driver_interface_direct_command nx_ip_forwarding_disable,
-- nx_ip_forwarding_enable nx_ip_fragment_disable,
+- nx_ip_delete, nx_ip_driver_direct_command,
+- nx_ip_driver_interface_direct_command, nx_ip_forwarding_disable,
+- nx_ip_forwarding_enable, nx_ip_fragment_disable,
 - nx_ip_fragment_enable, nx_ip_info_get, nx_ip_status_check,
 - nx_system_initialize
 
 ## <a name="nx_ip_delete"></a>nx_ip_delete
 
-Ta bort den tidigare skapade IP-instansen
+Ta bort IP-instans som skapats tidigare
 
 
 ### <a name="prototype"></a>Prototyp
@@ -1464,27 +1464,27 @@ Ta bort den tidigare skapade IP-instansen
 UINT nx_ip_delete(NX_IP *ip_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar bort en tidigare skapad IP-instans och släpper alla system resurser som ägs av IP-instansen.
+Den här tjänsten tar bort en tidigare skapad IP-instans och släpper alla systemresurser som ägs av IP-instansen.
 
 ### <a name="parameters"></a>Parametrar
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
+- **ip_ptr** Pekare till IP-instans som skapats tidigare.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) IP-borttagning har slutförts.
-- **NX_SOCKETS_BOUND** (0X28) den här IP-instansen har fortfarande UDP-eller TCP-Sockets kopplade till sig. Alla Sockets måste vara obundna och tas bort innan IP-instansen tas bort.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS** (0x00) Lyckad IP-borttagning.
+- **NX_SOCKETS_BOUND** (0x28) Den här IP-instansen har fortfarande UDP- eller TCP-sockets bundna till sig. Alla socketar måste vara obundna och borttagna innan DU tar bort IP-instansen.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Ja
+Yes
 
 ### <a name="example"></a>Exempel
 
@@ -1498,15 +1498,15 @@ status = nx_ip_delete(&ip_0);
 ### <a name="see-also"></a>Se även
 
 - nx_ip_address_change_notify, nx_ip_address_get, nx_ip_address_set,
-- nx_ip_create nx_ip_driver_direct_command,
-- nx_ip_driver_interface_direct_command nx_ip_forwarding_disable,
-- nx_ip_forwarding_enable nx_ip_fragment_disable,
+- nx_ip_create, nx_ip_driver_direct_command,
+- nx_ip_driver_interface_direct_command, nx_ip_forwarding_disable,
+- nx_ip_forwarding_enable, nx_ip_fragment_disable,
 - nx_ip_fragment_enable, nx_ip_info_get, nx_ip_status_check,
 - nx_system_initialize
 
 ## <a name="nx_ip_driver_direct_command"></a>nx_ip_driver_direct_command
 
-Issue-kommando för nätverks driv rutin
+Utfärda kommando till nätverksdrivrutin
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1517,18 +1517,18 @@ UINT nx_ip_driver_direct_command(
     ULONG *return_value_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tillhandahåller ett direkt gränssnitt till programmets primära nätverks gränssnitts driv rutin som anges under ***nx_ip_create*** -anropet.
+Den här tjänsten tillhandahåller ett direkt gränssnitt till programmets primära nätverksgränssnittsdrivrutin som anges under ***nx_ip_create anropet.***
 
-Programspecifika kommandon kan användas för att tillhandahålla ett numeriskt värde som är större än eller lika med NX_LINK_USER_COMMAND.
+Programspecifika kommandon kan användas om deras numeriska värde är större än eller lika med NX_LINK_USER_COMMAND.
 
-*Om du vill utfärda kommando för den sekundära enheten använder du tjänsten **nx_ip_driver_interface_direct_command** .*
+*Om du vill utfärda kommandot  för den sekundära enheten använder du nx_ip_driver_interface_direct_command tjänsten.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
-- **kommando** Numerisk kommando kod. Standard kommandon definieras enligt följande:
+- **ip_ptr** Pekare till IP-instans som skapats tidigare.
+- **kommando** Numerisk kommandokod. Standardkommandon definieras på följande sätt:
 
 - NX_LINK_GET_STATUS (10)
 - NX_LINK_GET_SPEED (11)
@@ -1539,23 +1539,23 @@ Programspecifika kommandon kan användas för att tillhandahålla ett numeriskt 
 - NX_LINK_GET_ALLOC_ERRORS (16)
 - NX_LINK_USER_COMMAND (50)
 
-- **return_value_ptr** Pekare som returnerar variabeln i anroparen.
+- **return_value_ptr** Pekare för att returnera variabeln i anroparen.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) enhets direkt kommando för nätverks driv rutin.
-- **NX_UNHANDLED_COMMAND** (0x44) ohanterad eller ej implementerad nätverks driv rutin kommando.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-eller RETUR värdes pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_INVALID_INTERFACE** (0X4C) ogiltigt gränssnitts index.
+- **NX_SUCCESS** (0x00) Ett lyckat direktkommando för nätverksdrivrutiner.
+- **NX_UNHANDLED_COMMAND** (0x44) kommandot Ohanterad eller ohanterad nätverksdrivrutin.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-adress eller returvärdes pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_INVALID_INTERFACE** (0x4C) Ogiltigt gränssnittsindex.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-- **Avstängningen möjlig**
+- **Avtagande möjlig**
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -1576,13 +1576,13 @@ status = nx_ip_driver_direct_command(
 
 - nx_ip_address_change_notify, nx_ip_address_get, nx_ip_address_set,
 - nx_ip_create, nx_ip_delete, nx_ip_driver_interface_direct_command,
-- nx_ip_forwarding_disable nx_ip_forwarding_enable,
+- nx_ip_forwarding_disable, nx_ip_forwarding_enable,
 - nx_ip_fragment_disable, nx_ip_fragment_enable, nx_ip_info_get,
-- nx_ip_status_check nx_system_initialize
+- nx_ip_status_check, nx_system_initialize
 
 ## <a name="nx_ip_driver_interface_direct_command"></a>nx_ip_driver_interface_direct_command
 
-Issue-kommando för nätverks driv rutin
+Utfärda kommando till nätverksdrivrutin
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1594,14 +1594,14 @@ UINT nx_ip_driver_interface_direct_command(
     ULONG *return_value_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tillhandahåller ett direkt kommando för programmets nätverks enhets driv rutin i IP-instansen. Programspecifika kommandon kan användas för att tillhandahålla ett numeriskt värde som är större än eller lika med *NX_LINK_USER_COMMAND*.
+Den här tjänsten tillhandahåller ett direktkommando till programmets drivrutin för nätverksenhet i IP-instansen. Programspecifika kommandon kan användas om deras numeriska värde är större än eller lika med *NX_LINK_USER_COMMAND*.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
-- **kommando** Numerisk kommando kod. Standard kommandon definieras enligt följande:
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
+- **kommando** Numerisk kommandokod. Standardkommandon definieras på följande sätt:
 - NX_LINK_GET_STATUS (10)
 - NX_LINK_GET_SPEED (11)
 - NX_LINK_GET_DUPLEX_TYPE (12)
@@ -1610,23 +1610,23 @@ Den här tjänsten tillhandahåller ett direkt kommando för programmets nätver
 - NX_LINK_GET_TX_COUNT (15)
 - NX_LINK_GET_ALLOC_ERRORS (16)
 - NX_LINK_USER_COMMAND (50)
-- **interface_index** Index för det nätverks gränssnitt som kommandot ska skickas till.
-- **return_value_ptr** Pekare som returnerar variabeln i anroparen.
+- **interface_index** Index för nätverksgränssnittet som kommandot ska skickas till.
+- **return_value_ptr** Pekare för att returnera variabeln i anroparen.
 
-### <a name="return-values"></a>Retur värden
-- **NX_SUCCESS** (0x00) enhets direkt kommando för nätverks driv rutin.
-- **NX_UNHANDLED_COMMAND** (0x44) ohanterad eller ej implementerad nätverks driv rutin kommando.
-- **NX_INVALID_INTERFACE** (0X4C) ogiltigt gränssnitts index
-- **NX_PTR_ERROR** (0X07) ogiltig IP-eller RETUR värdes pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
+### <a name="return-values"></a>Returvärden
+- **NX_SUCCESS** (0x00) Ett lyckat direktkommando för nätverksdrivrutiner.
+- **NX_UNHANDLED_COMMAND** (0x44) kommandot Ohanterad eller ohanterad nätverksdrivrutin.
+- **NX_INVALID_INTERFACE** (0x4C) Ogiltigt gränssnittsindex
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-adress eller returvärdes pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -1650,9 +1650,9 @@ UINT interface_index = 0;
 
 - nx_ip_address_change_notify, nx_ip_address_get, nx_ip_address_set,
 - nx_ip_create, nx_ip_delete, nx_ip_driver_direct_command,
-- nx_ip_forwarding_disable nx_ip_forwarding_enable,
+- nx_ip_forwarding_disable, nx_ip_forwarding_enable,
 - nx_ip_fragment_disable, nx_ip_fragment_enable, nx_ip_info_get,
-- nx_ip_status_check nx_system_initialize
+- nx_ip_status_check, nx_system_initialize
 
 ## <a name="nx_ip_forwarding_disable"></a>nx_ip_forwarding_disable
 
@@ -1664,27 +1664,27 @@ Inaktivera vidarebefordran av IP-paket
 UINT nx_ip_forwarding_disable(NX_IP *ip_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten inaktiverar vidarebefordring av IP-paket i IP-komponenten NetX. Den här tjänsten inaktive ras automatiskt när du skapar IP-uppgiften.
+Den här tjänsten inaktiverar vidarebefordran av IP-paket i NetX IP-komponenten. När IP-uppgiften skapas inaktiveras den här tjänsten automatiskt.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00)-slutförd IP-vidarebefordring inaktivera.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS** (0x00) Lyckad IP-vidarebefordran inaktiveras.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar, timers
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -1700,9 +1700,9 @@ status = nx_ip_forwarding_disable(&ip_0);
 
 - nx_ip_address_change_notify, nx_ip_address_get, nx_ip_address_set,
 - nx_ip_create, nx_ip_delete, nx_ip_driver_direct_command,
-- nx_ip_driver_interface_direct_command nx_ip_forwarding_enable,
+- nx_ip_driver_interface_direct_command, nx_ip_forwarding_enable,
 - nx_ip_fragment_disable, nx_ip_fragment_enable, nx_ip_info_get,
-- nx_ip_status_check nx_system_initialize
+- nx_ip_status_check, nx_system_initialize
 
 ## <a name="nx_ip_forwarding_enable"></a>nx_ip_forwarding_enable
 
@@ -1714,26 +1714,26 @@ Aktivera vidarebefordran av IP-paket
 UINT nx_ip_forwarding_enable(NX_IP *ip_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten aktiverar vidarebefordring av IP-paket i NetX-IP-komponenten. Den här tjänsten inaktive ras automatiskt när du skapar IP-uppgiften.
+Den här tjänsten möjliggör vidarebefordran av IP-paket i NetX IP-komponenten. När IP-uppgiften skapas inaktiveras den här tjänsten automatiskt.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
 
-### <a name="return-values"></a>Retur värden
-- **NX_SUCCESS** (0X00) lyckad IP-vidarebefordring aktivera.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
+### <a name="return-values"></a>Returvärden
+- **NX_SUCCESS** (0x00) Lyckad IP-vidarebefordran aktivera.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar, timers
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -1749,9 +1749,9 @@ status = nx_ip_forwarding_enable(&ip_0);
 
 - nx_ip_address_change_notify, nx_ip_address_get, nx_ip_address_set,
 - nx_ip_create, nx_ip_delete, nx_ip_driver_direct_command,
-- nx_ip_driver_interface_direct_command nx_ip_forwarding_disable,
+- nx_ip_driver_interface_direct_command, nx_ip_forwarding_disable,
 - nx_ip_fragment_disable, nx_ip_fragment_enable, nx_ip_info_get,
-- nx_ip_status_check nx_system_initialize
+- nx_ip_status_check, nx_system_initialize
 
 ## <a name="nx_ip_fragment_disable"></a>nx_ip_fragment_disable
 
@@ -1763,27 +1763,27 @@ Inaktivera fragmentering av IP-paket
 UINT nx_ip_fragment_disable(NX_IP *ip_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten inaktiverar funktionen för fragmentering och sammansättning av IP-paket. För paket som väntar på att ommonteras, frigör tjänsten dessa paket. Den här tjänsten inaktive ras automatiskt när du skapar IP-uppgiften.
+Den här tjänsten inaktiverar funktionen för fragmentering och återmontering av IP-paket. För paket som väntar på att återmonteras släpper den här tjänsten dessa paket. När IP-uppgiften skapas inaktiveras den här tjänsten automatiskt.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
+- **ip_ptr** Pekare till IP-instans som skapats tidigare.
 
-### <a name="return-values"></a>Retur värden
-- **NX_SUCCESS** (0x00) IP-fragment har inaktiverats.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0x14) IP-fragmentering är inte aktive rad på IP-instansen.
+### <a name="return-values"></a>Returvärden
+- **NX_SUCCESS** (0x00) Lyckades IP-fragment inaktiveras.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) IP-fragmentering är inte aktiverat på IP-instansen.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -1799,9 +1799,9 @@ status = nx_ip_fragment_disable(&ip_0);
 
 - nx_ip_address_change_notify, nx_ip_address_get, nx_ip_address_set,
 - nx_ip_create, nx_ip_delete, nx_ip_driver_direct_command,
-- nx_ip_driver_interface_direct_command nx_ip_forwarding_disable,
+- nx_ip_driver_interface_direct_command, nx_ip_forwarding_disable,
 - nx_ip_forwarding_enable, nx_ip_fragment_enable, nx_ip_info_get,
-- nx_ip_status_check nx_system_initialize
+- nx_ip_status_check, nx_system_initialize
 
 ## <a name="nx_ip_fragment_enable"></a>nx_ip_fragment_enable
 
@@ -1813,28 +1813,28 @@ Aktivera fragmentering av IP-paket
 UINT nx_ip_fragment_enable(NX_IP *ip_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten aktiverar funktioner för att fragmentera och ommontera IP-paket. Den här tjänsten inaktive ras automatiskt när du skapar IP-uppgiften.
+Den här tjänsten möjliggör fragmentering och återmontering av IP-paket. När IP-uppgiften skapas inaktiveras den här tjänsten automatiskt.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
+- **ip_ptr** Pekare till IP-instans som skapats tidigare.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckades aktivera IP-fragment.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0x14) funktioner för IP-fragmentering har inte kompilerats i netx.
+- **NX_SUCCESS** (0x00) Lyckad IP-fragmentet aktivera.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) funktioner för IP-fragmentering kompileras inte till NetX.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -1850,9 +1850,9 @@ status = nx_ip_fragment_enable(&ip_0);
 
 - nx_ip_address_change_notify, nx_ip_address_get, nx_ip_address_set,
 - nx_ip_create, nx_ip_delete, nx_ip_driver_direct_command,
-- nx_ip_driver_interface_direct_command nx_ip_forwarding_disable,
+- nx_ip_driver_interface_direct_command, nx_ip_forwarding_disable,
 - nx_ip_forwarding_enable, nx_ip_fragment_disable, nx_ip_info_get,
-- nx_ip_status_check nx_system_initialize
+- nx_ip_status_check, nx_system_initialize
 
 ## <a name="nx_ip_gateway_address_set"></a>nx_ip_gateway_address_set
 
@@ -1866,29 +1866,29 @@ UINT nx_ip_gateway_address_set(
     ULONG ip_address);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten anger IP-gatewayens IP-adress. All trafik utanför nätverket dirigeras till den här gatewayen för överföring. Gatewayen måste vara direkt tillgänglig via ett av nätverks gränssnitten.
+Den här tjänsten anger IP-gatewayens IP-adress. All trafik utanför nätverket dirigeras till den här gatewayen för överföring. Gatewayen måste vara direkt åtkomlig via ett av nätverksgränssnitten.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
+- **ip_ptr** Pekare till IP-instans som skapats tidigare.
 - **ip_address** IP-adressen för gatewayen.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) GATEWAYens IP-adress har angetts.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-instans pekare.
-- **NX_IP_ADDRESS_ERROR** (0X21) ogiltig IP-adress.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS** (0x00) Ip-adressuppsättning för lyckad gateway.
+- **NX_PTR_ERROR** (0x07) Pekare för ogiltig IP-instans.
+- **NX_IP_ADDRESS_ERROR** (0x21) Ogiltig IP-adress.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, tråd
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -1902,7 +1902,7 @@ status = nx_ip_gateway_address_set(&ip_0, IP_ADDRESS(1,2,3,99));
 ```
 ### <a name="see-also"></a>Se även
 
-- nx_ip_info_get nx_ip_static_route_add nx_ip_static_route_delete
+- nx_ip_info_get, nx_ip_static_route_add, nx_ip_static_route_delete
 
 ## <a name="nx_ip_info_get"></a>nx_ip_info_get
 
@@ -1925,39 +1925,39 @@ UINT nx_ip_info_get(
     ULONG *ip_total_fragments_received);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten hämtar information om IP-aktiviteter för den angivna IP-instansen.
 
-*Om en mål pekare är NX_NULL returneras inte den informationen till anroparen.*
+*Om en mål pekare NX_NULL returneras inte den informationen till anroparen.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
-- **ip_total_packets_sent** Pekare till målet för det totala antalet skickade IP-paket.
-- **ip_total_bytes_sent** Pekare till målet för det totala antalet byte som har skickats.
-- **ip_total_packets_received** Pekare till målet för det totala antalet IP-mottagna paket.
+- **ip_ptr** Pekare till IP-instans som skapats tidigare.
+- **ip_total_packets_sent** Pekare till mål för det totala antalet skickade IP-paket.
+- **ip_total_bytes_sent** Pekare till mål för det totala antalet skickade byte.
+- **ip_total_packets_received** Pekare till målet för det totala antalet IP-mottagningspaket.
 - **ip_total_bytes_received** Pekare till målet för det totala antalet mottagna IP-byte.
 - **ip_invalid_packets** Pekare till målet för det totala antalet ogiltiga IP-paket.
-- **ip_receive_packets_dropped** Pekare till målet för det totala antalet mottagna paket som har tagits bort.
-- **ip_receive_checksum_errors** Pekare till målet för det totala antalet fel i kontroll summor i mottagna paket.
-- **ip_send_packets_dropped** Pekare till målet för det totala antalet skickade paket som släppts.
+- **ip_receive_packets_dropped** Pekare till målet för det totala antalet bort ignorerade inkommande paket.
+- **ip_receive_checksum_errors** Pekare till målet för det totala antalet fel med kontrollsumma i inkommande paket.
+- **ip_send_packets_dropped** Pekare till målet för det totala antalet bort ignorerade skickade paket.
 - **ip_total_fragments_sent** Pekare till målet för det totala antalet fragment som skickats.
-- **ip_total_fragments_received** Pekare till målet för det totala antalet fragment som tagits emot.
+- **ip_total_fragments_received** Pekare till målet för det totala antalet mottagna fragment.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) hämtning av IP-information.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-pekare.
+- **NX_SUCCESS** (0x00) Lyckad IP-informationshämtning.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -1983,13 +1983,13 @@ status = nx_ip_info_get(&ip_0,
 
 - nx_ip_address_change_notify, nx_ip_address_get, nx_ip_address_set,
 - nx_ip_create, nx_ip_delete, nx_ip_driver_direct_command,
-- nx_ip_driver_interface_direct_command nx_ip_forwarding_disable,
-- nx_ip_forwarding_enable nx_ip_fragment_disable,
-- nx_ip_fragment_enable nx_ip_status_check nx_system_initialize
+- nx_ip_driver_interface_direct_command, nx_ip_forwarding_disable,
+- nx_ip_forwarding_enable, nx_ip_fragment_disable,
+- nx_ip_fragment_enable, nx_ip_status_check, nx_system_initialize
 
 ## <a name="nx_ip_interface_address_get"></a>nx_ip_interface_address_get
 
-Hämta gränssnittets IP-adress
+Hämta IP-adress för gränssnitt
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2001,33 +2001,33 @@ UINT nx_ip_interface_address_get (
     ULONG *network_mask);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar IP-adressen för ett angivet nätverks gränssnitt.
+Den här tjänsten hämtar IP-adressen för ett angivet nätverksgränssnitt.
 
-*Den angivna enheten måste, om den inte är den primära enheten, vara tidigare ansluten till IP-instansen.*
+*Den angivna enheten, om den inte är den primära enheten, måste tidigare vara ansluten till IP-instansen.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
-- **interface_index** Gränssnitts index, samma värde som indexet till nätverks gränssnittet som är kopplat till IP-instansen.
-- **ip_address** Pekare till målet för enhets gränssnittets IP-adress.
-- **network_mask** Pekare till målet för enhets gränssnittets nätverks mask.
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
+- **interface_index** Gränssnittsindex, samma värde som indexet till nätverksgränssnittet som är kopplat till IP-instansen.
+- **ip_address** Pekare till mål för enhetens gränssnitts-IP-adress.
+- **network_mask** Pekare till mål för enhetens gränssnittsnätverksmask.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) IP-adress hämtades.
-- **NX_INVALID_INTERFACE** (0x4C) det angivna nätverks gränssnittet är ogiltigt.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-pekare.
+- **NX_SUCCESS** (0x00) Lyckad IP-adress hämta.
+- **NX_INVALID_INTERFACE** (0x4C) Angivet nätverksgränssnitt är ogiltigt.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -2044,13 +2044,13 @@ status = nx_ip_interface_address_get(ip_ptr,INTERFACE_INDEX,
 
 ### <a name="see-also"></a>Se även
 
-- nx_ip_interface_address_set nx_ip_interface_attach,
-- nx_ip_interface_info_get nx_ip_interface_status_check,
+- nx_ip_interface_address_set, nx_ip_interface_attach,
+- nx_ip_interface_info_get, nx_ip_interface_status_check,
 - nx_ip_link_status_change_notify_set
 
 ## <a name="nx_ip_interface_address_set"></a>nx_ip_interface_address_set
 
-Ange gränssnittets IP-adress och nätverks mask
+Ange IP-adress för gränssnitt och nätverksmask
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2062,34 +2062,34 @@ UINT nx_ip_interface_address_set(
     ULONG network_mask);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten anger IP-adressen och nätverks masken för det angivna IP-gränssnittet.
+Den här tjänsten anger IP-adressen och nätverksmasken för det angivna IP-gränssnittet.
 
-*Det angivna gränssnittet måste vara kopplat till IP-instansen tidigare.*
+*Det angivna gränssnittet måste tidigare vara kopplat till IP-instansen.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
-- **interface_index** Index för det gränssnitt som är kopplat till NetX-instansen.
-- **ip_address** Nytt IP-adress för nätverks gränssnitt.
-- **network_mask** Nätverks mask för nytt gränssnitt.
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
+- **interface_index** Index för gränssnittet som är kopplat till NetX-instansen.
+- **ip_address** Ny IP-adress för nätverksgränssnittet.
+- **network_mask** Nätverksmask för nytt gränssnitt.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- Den angivna IP-adressen för **NX_SUCCESS** (0x00).
-- **NX_INVALID_INTERFACE** (0x4C) det angivna nätverks gränssnittet är ogiltigt.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_PTR_ERROR** (0X07) ogiltiga pekare.
-- **NX_IP_ADDRESS_ERROR** (0X21) ogiltig IP-adress
+- **NX_SUCCESS** (0x00) Lyckad IP-adressuppsättning.
+- **NX_INVALID_INTERFACE** (0x4C) Angivet nätverksgränssnitt är ogiltigt.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_PTR_ERROR** (0x07) Ogiltiga pekare.
+- **NX_IP_ADDRESS_ERROR** (0x21) Ogiltig IP-adress
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -2106,13 +2106,13 @@ successfully set. */
 
 ### <a name="see-also"></a>Se även
 
-- nx_ip_interface_address_get nx_ip_interface_attach,
-- nx_ip_interface_info_get nx_ip_interface_status_check,
+- nx_ip_interface_address_get, nx_ip_interface_attach,
+- nx_ip_interface_info_get, nx_ip_interface_status_check,
 - nx_ip_link_status_change_notify_set
 
 ## <a name="nx_ip_interface_attach"></a>nx_ip_interface_attach
 
-Koppla nätverks gränssnitt till IP-instans
+Koppla nätverksgränssnitt till IP-instans
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2126,43 +2126,43 @@ UINT nx_ip_interface_attach(
     (struct NX_IP_DRIVER_STRUCT *));
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten lägger till ett fysiskt nätverks gränssnitt i IP-gränssnittet. Observera att IP-instansen skapas med det primära gränssnittet så att varje ytterligare gränssnitt är sekundärt till det primära gränssnittet. Det totala antalet nätverks gränssnitt som är kopplade till IP-instansen (inklusive det primära gränssnittet) får inte överskrida **NX_MAX_PHYSICAL_INTERFACES**.
+Den här tjänsten lägger till ett fysiskt nätverksgränssnitt i IP-gränssnittet. Observera att IP-instansen skapas med det primära gränssnittet så att varje ytterligare gränssnitt är sekundärt till det primära gränssnittet. Det totala antalet nätverksgränssnitt som är kopplade till IP-instansen (inklusive det primära gränssnittet) får inte **överskrida NX_MAX_PHYSICAL_INTERFACES**.
 
-Om IP-tråden inte har körts än kommer de sekundära gränssnitten att initieras som en del av start processen för IP-tråd som initierar alla fysiska gränssnitt.
+Om IP-tråden inte har körts än initieras de sekundära gränssnitten som en del av IP-trådstartsprocessen som initierar alla fysiska gränssnitt.
 
-Om IP-tråden inte körs ännu initieras det sekundära gränssnittet som en del av ***nx_ip_interface_attachs*** tjänsten.
+Om IP-tråden inte körs ännu initieras det sekundära  gränssnittet som en del av nx_ip_interface_attach tjänsten.
 
-*ip_ptr måste peka på en giltig IP-struktur för NetX.*
+*ip_ptr måste peka på en giltig NetX IP-struktur.*
 
-- ***NX_MAX_PHYSICAL_INTERFACES** måste konfigureras för antalet nätverks gränssnitt för IP-instansen. Standardvärdet är ett.*
+- ***NX_MAX_PHYSICAL_INTERFACES** måste konfigureras för antalet nätverksgränssnitt för IP-instansen. Standardvärdet är ett.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
-- **INTERFACE_NAME** Pekare till gränssnittets namn sträng.
-- **ip_address** Enhetens IP-adress i byte ordningen för värden.
-- **network_mask** Enhetens nätverks mask i byte ordningen för värden.
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
+- **interface_name** Pekare till gränssnittets namnsträng.
+- **ip_address** Enhetens IP-adress i värdbyteordning.
+- **network_mask** Enhetens nätverksmask i värdbyteordning.
 - **ip_link_driver** Ethernet-drivrutin för gränssnittet.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** -posten (0x00) läggs till i den statiska routningstabellen.
-- **NX_NO_MORE_ENTRIES** (0X17) Max antal gränssnitt.
-- **NX_MAX_PHYSICAL_INTERFACES** har överskridits.
-- **NX_DUPLICATED_ENTRY** (0X52) den angivna IP-adressen används redan på den här IP-instansen.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_PTR_ERROR** (0X07) ogiltig pekare inmatade.
-- **NX_IP_ADDRESS_ERROR** (0X21) ogiltig IP-adress för indata.
+- **NX_SUCCESS** (0x00) post läggs till i statisk routningstabell.
+- **NX_NO_MORE_ENTRIES** (0x17) Maximalt antal gränssnitt.
+- **NX_MAX_PHYSICAL_INTERFACES** överskrids.
+- **NX_DUPLICATED_ENTRY** (0x52) Den angivna IP-adressen används redan på den här IP-instansen.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_PTR_ERROR** (0x07) Ogiltig pekare.
+- **NX_IP_ADDRESS_ERROR** (0x21) Ogiltig IP-adressinmatning.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -2179,13 +2179,13 @@ status = nx_ip_interface_attach(ip_ptr, “secondary_port”,
 
 ### <a name="see-also"></a>Se även
 
-- nx_ip_interface_address_get nx_ip_interface_address_set,
-- nx_ip_interface_info_get nx_ip_interface_status_check,
+- nx_ip_interface_address_get, nx_ip_interface_address_set,
+- nx_ip_interface_info_get, nx_ip_interface_status_check,
 - nx_ip_link_status_change_notify_set
 
 ## <a name="nx_ip_interface_info_get"></a>nx_ip_interface_info_get
 
-Hämta nätverks gränssnitts parametrar
+Hämta nätverksgränssnittsparametrar
 
 
 ### <a name="prototype"></a>Prototyp
@@ -2202,37 +2202,37 @@ UINT nx_ip_interface_info_get(
     ULONG *physical_address_lsw);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar information om nätverks parametrar för det angivna nätverks gränssnittet. Alla data hämtas i byte ordning för värden.
+Den här tjänsten hämtar information om nätverksparametrar för det angivna nätverksgränssnittet. Alla data hämtas i värdbyteordningen.
 
-*ip_ptr måste peka på en giltig IP-struktur för NetX. Det angivna gränssnittet, om inte det primära gränssnittet, måste vara tidigare kopplat till IP-instansen.*
+*ip_ptr måste peka på en giltig NetX IP-struktur. Det angivna gränssnittet, om det inte är det primära gränssnittet, måste tidigare vara kopplat till IP-instansen.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
-- **interface_index** Index som anger nätverks gränssnitt.
-- **INTERFACE_NAME** Pekar på den buffert som innehåller namnet på nätverks gränssnittet.
-- **ip_address** Pekar till målet för gränssnittets IP-adress.
-- **network_mask** Pekare till målet för nätverks masken.
-- **mtu_size** Pekare till målet för den maximala överförings enheten för det här gränssnittet.
-- **physical_address_msw** Pekare till målet för de 16 främsta bitarna i enhetens MAC-adress.
-- **physical_address_lsw** Pekare till målet för nedre 32 bitar av enhetens MAC-adress.
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
+- **interface_index** Index som anger nätverksgränssnitt.
+- **interface_name** Pekare till den buffert som innehåller namnet på nätverksgränssnittet.
+- **ip_address** Pekare till målet för IP-adressen för gränssnittet.
+- **network_mask** Pekare till mål för nätverksmask.
+- **mtu_size** Pekare till mål för maximal överföringsenhet för det här gränssnittet.
+- **physical_address_msw** Pekare till mål för de 16 översta bitarna på enhetens MAC-adress.
+- **physical_address_lsw** Pekare till mål för lägre 32 bitar av enhetens MAC-adress.
 
 
-### <a name="return-values"></a>Retur värden
-- **NX_SUCCESS** (0X00) gränssnitts information har hämtats.
-- **NX_PTR_ERROR** (0X07) ogiltig pekare inmatade.
-- **NX_INVALID_INTERFACE** (0X4C) ogiltig IP-pekare.
-- Tjänsten **NX_CALLER_ERROR** (0x11) anropas inte från system initiering eller tråd kontext.
+### <a name="return-values"></a>Returvärden
+- **NX_SUCCESS** (0x00) Gränssnittsinformation har erhållits.
+- **NX_PTR_ERROR** (0x07) Ogiltig pekare.
+- **NX_INVALID_INTERFACE** (0x4C) Ogiltig IP-pekare.
+- **NX_CALLER_ERROR** tjänst (0x11) anropas inte från system initiering eller trådkontext.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -2254,13 +2254,13 @@ status = nx_ip_interface_info_get(ip_ptr, INTERFACE_INDEX,
 
 ### <a name="see-also"></a>Se även
 
-- nx_ip_interface_address_get nx_ip_interface_address_set,
-- nx_ip_interface_attach nx_ip_interface_status_check,
+- nx_ip_interface_address_get, nx_ip_interface_address_set,
+- nx_ip_interface_attach, nx_ip_interface_status_check,
 - nx_ip_link_status_change_notify_set
 
 ## <a name="nx_ip_interface_status_check"></a>nx_ip_interface_status_check
 
-Kontrol lera status för en IP-instans
+Kontrollera status för en IP-instans
 
 
 ### <a name="prototype"></a>Prototyp
@@ -2274,15 +2274,15 @@ UINT nx_ip_interface_status_check(
     ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten kontrollerar och väntar på den angivna statusen för nätverks gränssnittet för en tidigare skapad IP-instans.
+Den här tjänsten kontrollerar och väntar eventuellt på den angivna statusen för nätverksgränssnittet för en tidigare skapad IP-instans.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
-- **interface_index** Gränssnitts index nummer
-- **needed_status** IP-status begärd, definierad i bit-Map-formulär enligt följande:
+- **ip_ptr** Pekare till IP-instans som skapats tidigare.
+- **interface_index** Gränssnittsindexnummer
+- **needed_status** IP-status begärd, definierad i bitkartform enligt följande:
     - NX_IP_INITIALIZE_DONE (0x0001)
     - NX_IP_ADDRESS_RESOLVED (0x0002)
     - NX_IP_LINK_ENABLED (0x0004)
@@ -2292,28 +2292,28 @@ Den här tjänsten kontrollerar och väntar på den angivna statusen för nätve
     - NX_IP_IGMP_ENABLED (0x0040)
     - NX_IP_RARP_COMPLETE (0x0080)
     - NX_IP_INTERFACE_LINK_ENABLED (0x0100)
-- **actual_status** Pekare till målet för faktisk BITS-uppsättning.
-- **wait_option** Definierar hur tjänsten fungerar om de begärda status bitarna inte är tillgängliga. Vänte alternativen definieras enligt följande:
+- **actual_status** Pekare till mål för faktiska bitar som angetts.
+- **wait_option** Definierar hur tjänsten beter sig om de begärda statusbitarna inte är tillgängliga. Väntealternativen definieras på följande sätt:
     - NX_NO_WAIT (0x00000000)
     - NX_WAIT_FOREVER (0xFFFFFFFF)
-    - timeout-värde i Tick (0x00000001 till 0xFFFFFFFE)
+    - timeout-värde i tick (0x00000001 via 0xFFFFFFFE)
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) kontroll av IP-status har slutförts.
-- **NX_NOT_SUCCESSFUL** (0X43) status förfrågan uppfylldes inte inom den angivna tids gränsen.
-- **NX_PTR_ERROR** (0x07) IP-pekaren är eller har blivit ogiltig eller så är den faktiska status pekaren ogiltig.
-- **NX_OPTION_ERROR** (0X0a) ogiltigt status alternativ.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_INVALID_INTERFACE** (0x4C) Interface_index är utanför intervallet. eller så är gränssnittet ogiltigt.
+- **NX_SUCCESS** (0x00) Lyckad IP-statuskontroll.
+- **NX_NOT_SUCCESSFUL** (0x43) Statusbegäran nöjdes inte inom den angivna tidsgränsen.
+- **NX_PTR_ERROR** (0x07) IP-pekare är eller har blivit ogiltig, eller så är den faktiska status pekaren ogiltig.
+- **NX_OPTION_ERROR** (0x0a) Statusalternativet Ogiltigt krävs.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_INVALID_INTERFACE** (0x4C) Interface_index ligger utanför intervallet. eller så är gränssnittet inte giltigt.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -2329,13 +2329,13 @@ status = nx_ip_interface_status_check(&ip_0, 1, NX_IP_LINK_ENABLED,
 
 ### <a name="see-also"></a>Se även
 
-- nx_ip_interface_address_get nx_ip_interface_address_set,
-- nx_ip_interface_attach nx_ip_interface_info_get,
+- nx_ip_interface_address_get, nx_ip_interface_address_set,
+- nx_ip_interface_attach, nx_ip_interface_info_get,
 - nx_ip_link_status_change_notify_set
 
 ## <a name="nx_ip_link_status_change_notify_set"></a>nx_ip_link_status_change_notify_set
 
-Ange funktionen länk status ändring meddela motringning
+Ställ in länkstatusändringen för att meddela återanropsfunktionen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2345,30 +2345,30 @@ UINT nx_ip_link_status_change_notify_set(
     VOID (*link_status_change_notify)(NX_IP *ip_ptr, UINT interface_index, UINT link_up));
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten konfigurerar funktionen länk status ändring meddela motringning. Den användardefinierade *link_status_change_notify* rutinen anropas när antingen den primära eller sekundära gränssnitts statusen ändras (till exempel om IP-adressen har ändrats). Om *link_status_change_notify* är null, är länk status ändring meddela motringning funktion inaktive rad.
+Den här tjänsten konfigurerar funktionen för att meddela återanrop om länkstatusändring. Den användarindelade *link_status_change_notify* anropas när antingen den primära eller sekundära gränssnittsstatusen ändras (till exempel IP-adress ändras.) Om *link_status_change_notify* är NULL inaktiveras funktionen meddela återanrop om länkstatusändring.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare för IP Control Block
-- **link_status_change_notify** Återanrops funktion som användaren har angett för att anropas vid en ändring i det fysiska gränssnittet.
+- **ip_ptr** Pekare för IP-kontrollblock
+- **link_status_change_notify** Återanropsfunktionen som anges av användaren anropas vid en ändring av det fysiska gränssnittet.
 
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) har angetts
-- **NX_PTR_ERROR** (0X07) ogiltig kontroll block pekare eller ny fysisk adress pekare
-- Tjänsten **NX_CALLER_ERROR** (0x11) anropas inte från system initiering eller tråd kontext.
+- **NX_SUCCESS** (0x00) Lyckad uppsättning
+- **NX_PTR_ERROR** (0x07) Ogiltig PEKARe för IP-kontrollblock eller ny fysisk adress pekare
+- **NX_CALLER_ERROR** tjänst (0x11) anropas inte från system initiering eller trådkontext.
 
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -2383,13 +2383,13 @@ status = nx_ip_link_status_change_notify_set(&ip_0, my_change_cb);
 
 ### <a name="see-also"></a>Se även
 
-- nx_ip_interface_address_get nx_ip_interface_address_set,
-- nx_ip_interface_attach nx_ip_interface_info_get,
+- nx_ip_interface_address_get, nx_ip_interface_address_set,
+- nx_ip_interface_attach, nx_ip_interface_info_get,
 - nx_ip_interface_status_check
 
 ## <a name="nx_ip_raw_packet_disable"></a>nx_ip_raw_packet_disable
 
-Inaktivera sändning/mottagning av RAW-paket
+Inaktivera sändning/mottagning av råa paket
 
 
 ### <a name="prototype"></a>Prototyp
@@ -2398,27 +2398,27 @@ Inaktivera sändning/mottagning av RAW-paket
 UINT nx_ip_raw_packet_disable(NX_IP *ip_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten inaktiverar överföring och mottagning av obehandlade IP-paket för den här IP-instansen. Om RAW Packet service tidigare har Aktiver ATS och det finns RAW-paket i Receive-kön, kommer den här tjänsten att släppa eventuella mottagna rå paket.
+Den här tjänsten inaktiverar överföring och mottagning av råa IP-paket för den här IP-instansen. Om den råa pakettjänsten tidigare har aktiverats och det finns råa paket i mottagningskön, släpper den här tjänsten alla mottagna raw-paket.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
+- **ip_ptr** Pekare till IP-instans som skapats tidigare.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) genomförde IP RAW-paket inaktivera.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS** (0x00) Lyckade IP-rådatapaket inaktiveras.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -2432,12 +2432,12 @@ status = nx_ip_raw_packet_disable(&ip_0);
 
 ### <a name="see-also"></a>Se även
 
-- nx_ip_raw_packet_enable nx_ip_raw_packet_receive,
-- nx_ip_raw_packet_send nx_ip_raw_packet_interface_send
+- nx_ip_raw_packet_enable, nx_ip_raw_packet_receive,
+- nx_ip_raw_packet_send, nx_ip_raw_packet_interface_send
 
 ## <a name="nx_ip_raw_packet_enable"></a>nx_ip_raw_packet_enable
 
-Aktivera rå paket bearbetning
+Aktivera bearbetning av rådatapaket
 
 
 ### <a name="prototype"></a>Prototyp
@@ -2446,27 +2446,27 @@ Aktivera rå paket bearbetning
 UINT nx_ip_raw_packet_enable(NX_IP *ip_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten möjliggör överföring och mottagning av RAW IP-paket för den här IP-instansen. Inkommande TCP-, UDP-, ICMP-och IGMP-paket bearbetas fortfarande av NetX. Paket med okända protokoll typer för övre skikt bearbetas av rutinen för mottagning av rå paket.
+Den här tjänsten möjliggör överföring och mottagning av råa IP-paket för den här IP-instansen. Inkommande TCP-, UDP-, ICMP- och IGMP-paket bearbetas fortfarande av NetX. Paket med okända protokolltyper på den övre nivån bearbetas av råa rutiner för paketmottagande.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckade IP RAW-paket aktivera.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS** (0x00) Lyckades aktivera IP-rådatapaket.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -2480,12 +2480,12 @@ status = nx_ip_raw_packet_enable(&ip_0);
 
 ### <a name="see-also"></a>Se även
 
-- nx_ip_raw_packet_disable nx_ip_raw_packet_receive,
-- nx_ip_raw_packet_send nx_ip_raw_packet_interface_send
+- nx_ip_raw_packet_disable, nx_ip_raw_packet_receive,
+- nx_ip_raw_packet_send, nx_ip_raw_packet_interface_send
 
 ## <a name="nx_ip_raw_packet_interface_send"></a>nx_ip_raw_packet_interface_send
 
-Skicka RAW IP-paket via angivet nätverks gränssnitt
+Skicka råa IP-paket via angivet nätverksgränssnitt
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2498,41 +2498,41 @@ UINT nx_ip_raw_packet_interface_send(
     ULONG type_of_service);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skickar ett RAW IP-paket till målets IP-adress med den angivna lokala IP-adressen som käll adress och via det associerade nätverks gränssnittet. Observera att den här rutinen returnerar omedelbart och är därför inte känd om IP-paketet faktiskt har skickats. Nätverks driv rutinen kommer att ansvara för att släppa paketet när överföringen är klar. Den här tjänsten skiljer sig från andra tjänster eftersom det inte finns något sätt att veta om paketet faktiskt har skickats. Det kan gå förlorat på Internet.
+Den här tjänsten skickar ett obearbetat IP-paket till målets IP-adress med den angivna lokala IP-adressen som källadress och via det associerade nätverksgränssnittet. Observera att den här rutinen returneras omedelbart och därför inte är känd om IP-paketet faktiskt har skickats. Nätverksdrivrutinen ansvarar för att frigöra paketet när överföringen är klar. Den här tjänsten skiljer sig från andra tjänster på så sätt att det inte finns något sätt att veta om paketet faktiskt skickades. Det kan gå förlorat på Internet.
 
-*Observera att RAW IP-bearbetning måste vara aktiverat.*
+*Observera att rå IP-bearbetning måste vara aktiverat.*
 
-*Den här tjänsten liknar **nx_ip_raw_packet_send**, förutom att den här tjänsten tillåter att ett program skickar RAW IP-paket från ett angivet fysiskt gränssnitt.*
+*Den här tjänsten liknar **den nx_ip_raw_packet_send**, förutom att den här tjänsten gör att ett program kan skicka råa IP-paket från ett angivet fysiskt gränssnitt.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till en tidigare skapad IP-aktivitet.
-- **packet_ptr** Pekare till paket att överföra.
+- **ip_ptr** Pekare till IP-uppgift som skapats tidigare.
+- **packet_ptr** Pekare till paket som ska överföras.
 - **destination_ip** IP-adress för att skicka paket.
-- **address_index** Index för den gränssnitts adress som paketet ska skickas till.
+- **address_index** Index för adressen för det gränssnitt som paketet ska skickas på.
 - **type_of_service** Typ av tjänst för paket.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) paket har skickats.
-- **NX_IP_ADDRESS_ERROR** (0X21) inget lämpligt utgående gränssnitt är tillgängligt.
-- **NX_NOT_ENABLED** (0X14) RAW IP-paketfiltrering är inte aktiverat.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_PTR_ERROR** (0X07) ogiltig pekare inmatade.
-- **NX_OPTION_ERROR** (0X0a) ogiltig tjänst typ har angetts.
-- **NX_OVERFLOW** (0X03) ogiltig lägga pekare för paket.
-- **NX_UNDERFLOW** (protokollnumret 0x02) ogiltig lägga pekare för paket.
-- **NX_INVALID_INTERFACE** (0X4C) ogiltigt gränssnitts index angavs.
+- **NX_SUCCESS** paket (0x00) har överförts.
+- **NX_IP_ADDRESS_ERROR** (0x21) Inget lämpligt utgående gränssnitt är tillgängligt.
+- **NX_NOT_ENABLED** (0x14) Rå IP-paketbearbetning är inte aktiverat.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_PTR_ERROR** (0x07) Ogiltig pekare.
+- **NX_OPTION_ERROR** (0x0A) Ogiltig typ av tjänst har angetts.
+- **NX_OVERFLOW** (0x03) Pekare för ogiltig paketförberedelser.
+- **NX_UNDERFLOW** (0x02) Ogiltig pekare för paketförberedelser.
+- **NX_INVALID_INTERFACE** (0x4C) Ogiltigt gränssnittsindex har angetts.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -2548,12 +2548,12 @@ status = nx_ip_raw_packet_interface_send(ip_ptr, packet_ptr,
 
 ### <a name="see-also"></a>Se även
 
-- nx_ip_raw_packet_disable nx_ip_raw_packet_enable,
-- nx_ip_raw_packet_receive nx_ip_raw_packet_send
+- nx_ip_raw_packet_disable, nx_ip_raw_packet_enable,
+- nx_ip_raw_packet_receive, nx_ip_raw_packet_send
 
 ## <a name="nx_ip_raw_packet_receive"></a>nx_ip_raw_packet_receive
 
-Ta emot RAW IP-paket
+Ta emot råa IP-paket
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2564,37 +2564,37 @@ UINT nx_ip_raw_packet_receive(
     ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar emot ett RAW IP-paket från den angivna IP-instansen. Om det finns IP-paket i kön för mottagna obearbetade paket returneras det första (äldsta) paketet till anroparen. Annars, om inga paket är tillgängliga, kan anroparen pausa så som anges av alternativet vänta.
+Den här tjänsten tar emot ett rå IP-paket från den angivna IP-instansen. Om det finns IP-paket i kön för rå paket tar emot returneras det första (äldsta) paketet till anroparen. Annars kan anroparen pausa som anges av väntealternativet om det inte finns några tillgängliga paket.
 
-*Om NX_SUCCESS returneras, ansvarar programmet för att släppa det mottagna paketet när det inte längre behövs.*
+*Om NX_SUCCESS returneras ansvarar programmet för att frigöra det mottagna paketet när det inte längre behövs.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
-- **packet_ptr** Pekare till pekaren för att placera det mottagna RAW IP-paketet i.
-- **wait_option** Definierar hur tjänsten fungerar om det inte finns några tillgängliga obehandlade IP-paket. Vänte alternativen definieras enligt följande:
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
+- **packet_ptr** Pekare till pekare för att placera det mottagna rådata-IP-paketet i.
+- **wait_option** Definierar hur tjänsten beter sig om det inte finns några råa IP-paket tillgängliga. Väntealternativen definieras på följande sätt:
 - NX_NO_WAIT (0x00000000)
 - NX_WAIT_FOREVER (0xFFFFFFFF)
-- timeout-värde i Tick (0x00000001 till 0xFFFFFFFE)
+- timeout-värde i tick (0x00000001 via 0xFFFFFFFE)
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) Det gick inte att ta emot IP RAW-paket.
-- **NX_NO_PACKET** (0X01) inget paket var tillgängligt.
-- **NX_WAIT_ABORTED** (0x1a) den begärda Avstängningen avbröts av ett anrop till tx_thread_wait_abort.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
-- **NX_PTR_ERROR** (0X07) ogiltig IP eller RETUR paket pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten
+- **NX_SUCCESS** (0x00) Ip-rådatapaket tas emot.
+- **NX_NO_PACKET** (0x01) Inget paket var tillgängligt.
+- **NX_WAIT_ABORTED** (0x1A) Den begärda instängningen avbröts av ett anrop till tx_thread_wait_abort.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-adress eller returpaket pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -2609,12 +2609,12 @@ status = nx_ip_raw_packet_receive(&ip_0, &packet_ptr, 4);
 
 ### <a name="see-also"></a>Se även
 
-- nx_ip_raw_packet_disable nx_ip_raw_packet_enable,
-- nx_ip_raw_packet_send nx_ip_raw_packet_interface_send
+- nx_ip_raw_packet_disable, nx_ip_raw_packet_enable,
+- nx_ip_raw_packet_send, nx_ip_raw_packet_interface_send
 
 ## <a name="nx_ip_raw_packet_send"></a>nx_ip_raw_packet_send
 
-Skicka RAW IP-paket
+Skicka RÅ-IP-paket
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2626,20 +2626,20 @@ UINT nx_ip_raw_packet_send(
     ULONG type_of_service);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skickar ett RAW IP-paket till målets IP-adress. Observera att den här rutinen returnerar omedelbart och är därför inte känd om IP-paketet faktiskt har skickats. Nätverks driv rutinen kommer att ansvara för att släppa paketet när överföringen är klar.
+Den här tjänsten skickar ett obearbetat IP-paket till målets IP-adress. Observera att den här rutinen returneras omedelbart och det är därför inte känt om IP-paketet faktiskt har skickats. Nätverksdrivrutinen ansvarar för att frigöra paketet när överföringen är klar.
 
-För ett multihome-system använder NetX målets IP-adress för att hitta ett lämpligt nätverks gränssnitt och använder gränssnittets IP-adress som käll adress. Om mål-IP-adressen är broadcast eller multicast används det första giltiga gränssnittet. Programmen använder ***nx_ip_raw_packet_interface_send*** i det här fallet.
+För ett multihome-system använder NetX mål-IP-adressen för att hitta ett lämpligt nätverksgränssnitt och använder IP-adressen för gränssnittet som källadress. Om mål-IP-adressen sänds eller multicast används det första giltiga gränssnittet. Program använder ***nx_ip_raw_packet_interface_send*** i det här fallet.
 
-*Om ett fel returneras ska programmet inte släppa paketet efter det här anropet. På så sätt kan oväntade resultat uppstå, eftersom nätverks driv rutinen kommer att släppa paketet efter överföringen.*
+*Om inget fel returneras ska programmet inte släppa paketet efter det här anropet. Detta leder till oförutsägbara resultat eftersom nätverksdrivrutinen släpper paketet efter överföringen.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
-- **packet_ptr** Pekare till det RAW IP-paket som ska skickas.
-- **destination_ip** Målets IP-adress, som kan vara en speciell värd-IP-adress, en nätverks sändning, en intern loop eller en multicast-adress.
-- **type_of_service** Definierar typ av tjänst för överföringen, de juridiska värdena är följande:
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
+- **packet_ptr** Pekare till det råa IP-paket som ska skickas.
+- **destination_ip** Mål-IP-adress, som kan vara en specifik värd-IP-adress, en nätverkssändning, en intern loop-back eller en multicast-adress.
+- **type_of_service** Definierar typen av tjänst för överföringen. De juridiska värdena är följande:
 - NX_IP_NORMAL (0x00000000)
 - NX_IP_MIN_DELAY (0x00100000)
 - NX_IP_MAX_DATA (0x00080000)
@@ -2647,24 +2647,24 @@ För ett multihome-system använder NetX målets IP-adress för att hitta ett l�
 - NX_IP_MIN_COST (0x00020000)
 
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckade IP RAW-paket sändning initierad.
-- **NX_IP_ADDRESS_ERROR** (0X21) ogiltig IP-adress.
-- **NX_NOT_ENABLED** (0X14) RAW IP-funktionen är inte aktive rad.
-- **NX_OPTION_ERROR** (0X0a) ogiltig typ av tjänst.
-- **NX_UNDERFLOW** (protokollnumret 0x02) inte tillräckligt med utrymme för att lägga ett IP-huvud i paketet.
-- **NX_OVERFLOW** (0X03) paket tilläggs pekare är ogiltig.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-eller paket pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS** (0x00) Lyckad IP-råpaketssändning initierad.
+- **NX_IP_ADDRESS_ERROR** (0x21) Ogiltig IP-adress.
+- **IP-NX_NOT_ENABLED** (0x14) Raw är inte aktiverad.
+- **NX_OPTION_ERROR** (0x0A) Ogiltig typ av tjänst.
+- **NX_UNDERFLOW** (0x02) Det finns inte tillräckligt med utrymme för att lägga till ett IP-huvud i paketet.
+- **NX_OVERFLOW** -paket (0x03) är ogiltig.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-adress eller paket pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -2680,13 +2680,13 @@ status = nx_ip_raw_packet_send(&ip_0, packet_ptr,
 
 ### <a name="see-also"></a>Se även
 
-- nx_ip_raw_packet_disable nx_ip_raw_packet_enable,
-- nx_ip_raw_packet_receive nx_ip_raw_packet_send,
+- nx_ip_raw_packet_disable, nx_ip_raw_packet_enable,
+- nx_ip_raw_packet_receive, nx_ip_raw_packet_send,
 - nx_ip_raw_packet_interface_send
 
 ## <a name="nx_ip_static_route_add"></a>nx_ip_static_route_add
 
-Lägg till statisk väg i routningstabellen
+Lägga till statisk väg i routningstabellen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2698,35 +2698,35 @@ UINT nx_ip_static_route_add(
     ULONG next_hop);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten lägger till en post i tabellen för statisk routning. Observera att den *next_hop* adressen måste vara direkt åtkomlig från en av de lokala nätverks enheterna.
+Den här tjänsten lägger till en post i den statiska routningstabellen. Observera att *next_hop* måste vara direkt åtkomlig från någon av de lokala nätverksenheterna.
 
-*Observera att ip_ptr måste peka på en giltig IP-struktur för NetX och NetX-biblioteket måste skapas med NX_ENABLE_IP_STATIC_ROUTING som har definierats för att använda den här tjänsten. Som standard skapas NetX utan att NX_ENABLE_IP_STATIC_ROUTING definieras.*
+*Observera att ip_ptr måste peka på en giltig NetX IP-struktur, och NetX-biblioteket måste byggas med en NX_ENABLE_IP_STATIC_ROUTING definieras för att använda den här tjänsten. Som standard byggs NetX utan att NX_ENABLE_IP_STATIC_ROUTING definieras.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
-- **network_address** Mål nätverks adress, i byte ordning för värden
-- **net_mask** Mål nätverks mask, i byte ordning för värden
-- **next_hop** Nästa hopp adress för mål nätverket, i byte ordning för värden
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
+- **network_address** Målnätverksadress i värdbyteordning
+- **net_mask** Målnätverksmask i värdbyteordning
+- **next_hop** Nästa hoppadress för målnätverket, i värdbyteordning
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESSs** posten (0x00) läggs till i tabellen med statiska vägar.
-- **NX_OVERFLOW** (0X03) statisk routningstabell är full.
-- **NX_NOT_SUPPORTED** (0X4B) den här funktionen är inte kompilerad i.
-- **NX_IP_ADDRESS_ERROR** (0X21) nästa hopp är inte direkt tillgängligt via lokala gränssnitt.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_PTR_ERROR** (0X07) ogiltig ip_ptr pekare.
+- **NX_SUCCESS** (0x00) post läggs till i den statiska routningstabellen.
+- **NX_OVERFLOW** (0x03) Statisk routningstabell är full.
+- **NX_NOT_SUPPORTED** (0x4B) Den här funktionen kompileras inte i.
+- **NX_IP_ADDRESS_ERROR** (0x21) Nästa hopp kan inte nås direkt via lokala gränssnitt.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_PTR_ERROR** (0x07) Ogiltig ip_ptr pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -2743,11 +2743,11 @@ status = nx_ip_static_route_add(ip_ptr, IP_ADDRESS(192,168,10,0),
 
 ### <a name="see-also"></a>Se även
 
-- nx_ip_gateway_address_set nx_ip_info_get nx_ip_static_route_delete
+- nx_ip_gateway_address_set, nx_ip_info_get, nx_ip_static_route_delete
 
 ## <a name="nx_ip_static_route_delete"></a>nx_ip_static_route_delete
 
-Ta bort statisk väg från routningstabell
+Ta bort statisk väg från routningstabellen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2758,25 +2758,25 @@ UINT nx_ip_static_route_delete(
     ULONG net_mask);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar bort en post från tabellen för statisk routning.
+Den här tjänsten tar bort en post från den statiska routningstabellen.
 
-*Observera att ip_ptr måste peka på en giltig IP-struktur för NetX och NetX-biblioteket måste skapas med NX_ENABLE_IP_STATIC_ROUTING som har definierats för att använda den här tjänsten. Som standard skapas NetX utan att NX_ENABLE_IP_STATIC_ROUTING definieras.*
+*Observera att ip_ptr måste peka på en giltig NetX IP-struktur, och NetX-biblioteket måste byggas med en NX_ENABLE_IP_STATIC_ROUTING definieras för att använda den här tjänsten. Som standard byggs NetX utan att NX_ENABLE_IP_STATIC_ROUTING definieras.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
-- **network_address** Mål nätverks adress i byte ordning för värden.
-- **net_mask** Mål nätverks mask i byte ordning för värden.
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
+- **network_address** Målnätverksadress i värdbyteordning.
+- **net_mask** Målnätverksmask i värdbyteordning.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -2791,11 +2791,11 @@ status = nx_ip_static_route_delete(ip_ptr,
 
 ### <a name="see-also"></a>Se även
 
-- nx_ip_gateway_address_set nx_ip_info_get nx_ip_static_route_add
+- nx_ip_gateway_address_set, nx_ip_info_get, nx_ip_static_route_add
 
 ## <a name="nx_ip_status_check"></a>nx_ip_status_check
 
-Kontrol lera status för en IP-instans
+Kontrollera status för en IP-instans
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2807,14 +2807,14 @@ UINT nx_ip_status_check(
     ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten kontrollerar och väntar på den angivna statusen för det primära nätverks gränssnittet för en tidigare skapad IP-instans. För att få status för sekundära gränssnitt, ska program använda tjänsten ***nx_ip_interface_status_check.***
+Den här tjänsten kontrollerar och kan eventuellt vänta på den angivna statusen för det primära nätverksgränssnittet för en tidigare skapad IP-instans. För att få status på sekundära gränssnitt ska programmen använda tjänsten ***nx_ip_interface_status_check.***
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
-- **needed_status** IP-status begärd, definierad i bit-Map-formulär enligt följande:
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
+- **needed_status** IP-status begärd, definierad i bitkartform enligt följande:
 - NX_IP_INITIALIZE_DONE (0x0001)
 - NX_IP_ADDRESS_RESOLVED (0x0002)
 - NX_IP_LINK_ENABLED (0x0004)
@@ -2824,27 +2824,27 @@ Den här tjänsten kontrollerar och väntar på den angivna statusen för det pr
 - NX_IP_IGMP_ENABLED (0x0040)
 - NX_IP_RARP_COMPLETE (0x0080)
 - NX_IP_INTERFACE_LINK_ENABLED (0x0100)
-- **actual_status** Pekare till målet för faktisk BITS-uppsättning.
-- **wait_option** Definierar hur tjänsten fungerar om de begärda status bitarna inte är tillgängliga. Vänte alternativen definieras enligt följande:
+- **actual_status** Pekare till mål för faktiska bitar som angetts.
+- **wait_option** Definierar hur tjänsten beter sig om de begärda statusbitarna inte är tillgängliga. Väntealternativen definieras på följande sätt:
 - NX_NO_WAIT (0x00000000)
 - NX_WAIT_FOREVER (0xFFFFFFFF)
-- timeout-värde i Tick (0x00000001 till 0xFFFFFFFE)
+- timeout-värde i tick (0x00000001 via 0xFFFFFFFE)
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) kontroll av IP-status har slutförts.
-- **NX_NOT_SUCCESSFUL** (0X43) status förfrågan uppfylldes inte inom den angivna tids gränsen.
-- **NX_PTR_ERROR** (0x07) IP-pekaren är eller har blivit ogiltig eller så är den faktiska status pekaren ogiltig.
-- **NX_OPTION_ERROR** (0X0a) ogiltigt status alternativ.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS** (0x00) Lyckad IP-statuskontroll.
+- **NX_NOT_SUCCESSFUL** (0x43) Statusbegäran nöjdes inte inom den angivna tidsgränsen.
+- **NX_PTR_ERROR** (0x07) IP-pekare är eller har blivit ogiltig, eller så är den faktiska status pekaren ogiltig.
+- **NX_OPTION_ERROR** (0x0a) Statusalternativet Ogiltigt krävs.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -2862,9 +2862,9 @@ status = nx_ip_status_check(&ip_0, NX_IP_LINK_ENABLED,
 
 - nx_ip_address_change_notify, nx_ip_address_get, nx_ip_address_set,
 - nx_ip_create, nx_ip_delete, nx_ip_driver_direct_command,
-- nx_ip_driver_interface_direct_command nx_ip_forwarding_disable,
-- nx_ip_forwarding_enable nx_ip_fragment_disable,
-- nx_ip_fragment_enable nx_ip_info_get nx_system_initialize
+- nx_ip_driver_interface_direct_command, nx_ip_forwarding_disable,
+- nx_ip_forwarding_enable, nx_ip_fragment_disable,
+- nx_ip_fragment_enable, nx_ip_info_get, nx_system_initialize
 
 ## <a name="nx_packet_allocate"></a>nx_packet_allocate
 
@@ -2880,37 +2880,37 @@ UINT nx_packet_allocate(
     ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten allokerar ett paket från den angivna poolen och justerar lägga-pekaren i paketet enligt den typ av paket som angetts. Om inget paket är tillgängligt pausas tjänsten enligt det angivna vänte alternativet.
+Den här tjänsten allokerar ett paket från den angivna poolen och justerar förberedelse pekaren i paketet enligt den typ av paket som angetts. Om inget paket är tillgängligt pausar tjänsten enligt det angivna väntealternativet.
 
 ### <a name="parameters"></a>Parametrar
 
-- **pool_ptr** Pekare till den tidigare skapade lagringspoolen.
-- **packet_ptr** Pekare till pekaren över den allokerade paket pekaren.
-- **packet_type** Definierar den typ av paket som begärs. Se "paket pooler" på sidan 49 i kapitel 3 för en lista över paket typer som stöds.
-- **wait_option** Definierar vänte tiden i Tick om det inte finns några tillgängliga paket i modempoolen. Vänte alternativen definieras enligt följande:
+- **pool_ptr** Pekare till paketpool som skapats tidigare.
+- **packet_ptr** Pekare till pekaren för den allokerade paket pekaren.
+- **packet_type** Definierar vilken typ av paket som begärs. Se "Paketpooler" på sidan 49 i kapitel 3 för en lista över pakettyper som stöds.
+- **wait_option** Definierar väntetiden i tick om det inte finns några paket tillgängliga i paketpoolen. Väntealternativen definieras på följande sätt:
 - NX_NO_WAIT (0x00000000)
 - NX_WAIT_FOREVER (0xFFFFFFFF)
-- timeout-värde i Tick (0x00000001 till 0xFFFFFFFE)
+- timeout-värde i tick (0x00000001 via 0xFFFFFFFE)
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) paket tilldelningen lyckades.
-- **NX_NO_PACKET** (0X01) inget paket tillgängligt.
-- **NX_WAIT_ABORTED** (0x1a) den begärda Avstängningen avbröts av ett anrop till tx_thread_wait_abort.
-- **NX_INVALID_PARAMETERSs** paket storlek (0X4D) stöder inte protokollet.
-- **NX_OPTION_ERROR** (0X0a) ogiltig pakettyp.
-- **NX_PTR_ERROR** (0X07) ogiltig pool eller paket retur pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltigt wait-alternativ från icke-tråd.
+- **NX_SUCCESS** (0x00) Allokera ett lyckat paket.
+- **NX_NO_PACKET** (0x01) Inget paket tillgängligt.
+- **NX_WAIT_ABORTED** (0x1A) Den begärda instängningen avbröts av ett anrop till tx_thread_wait_abort.
+- **NX_INVALID_PARAMETERS** (0x4D) Paketstorleken stöder inte protokoll.
+- **NX_OPTION_ERROR** (0x0A) Ogiltig pakettyp.
+- **NX_PTR_ERROR** (0x07) Ogiltig pool eller paketretur pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltigt väntealternativ från icke-läst.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er (program nätverks driv rutiner). Alternativet wait måste vara NX_NO_WAIT när det används i ISR eller i timer-kontext.
+Initiering, trådar, timers och ISR (programnätverksdrivrutiner). Väntealternativet måste vara NX_NO_WAIT när det används i ISR eller i timerkontext.
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -2926,10 +2926,10 @@ status = nx_packet_allocate(&pool_0, &packet_ptr, NX_UDP_PACKET, 5);
 
 ### <a name="see-also"></a>Se även
 
-- nx_packet_copy nx_packet_data_append,
-- nx_packet_data_extract_offset nx_packet_data_retrieve,
+- nx_packet_copy, nx_packet_data_append,
+- nx_packet_data_extract_offset, nx_packet_data_retrieve,
 - nx_packet_length_get, nx_packet_pool_create, nx_packet_pool_delete,
-- nx_packet_pool_info_get nx_packet_release,
+- nx_packet_pool_info_get, nx_packet_release,
 - nx_packet_transmit_release
 
 ## <a name="nx_packet_copy"></a>nx_packet_copy
@@ -2946,38 +2946,38 @@ UINT nx_packet_copy(
     ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten kopierar informationen i det angivna paketet till ett eller flera nya paket som tilldelas från den angivna poolen. Om det lyckas returneras pekaren till det nya paketet i destinationen som **new_packet_ptr**.
+Den här tjänsten kopierar informationen i det angivna paketet till ett eller flera nya paket som allokeras från den angivna paketpoolen. Om det lyckas returneras pekaren till det nya paketet i målet som visas av **new_packet_ptr**.
 
 ### <a name="parameters"></a>Parametrar
 
-- **packet_ptr** Pekare till käll paketet.
-- **new_packet_ptr** Pekar till målet där pekaren återgår till den nya kopian av paketet.
-- **pool_ptr** Visar en pekare till den tidigare skapade Packet-poolen som används för att allokera ett eller flera paket för kopian.
-- **wait_option** Definierar hur tjänsten väntar om det inte finns några tillgängliga paket. Vänte alternativen definieras enligt följande:
+- **packet_ptr** Pekare till källpaketet.
+- **new_packet_ptr** Pekare till målet för var pekaren ska returneras till den nya kopian av paketet.
+- **pool_ptr** Pekare till den tidigare skapade paketpoolen som används för att allokera ett eller flera paket för kopian.
+- **wait_option** Definierar hur tjänsten väntar om det inte finns några tillgängliga paket. Väntealternativen definieras på följande sätt:
 - NX_NO_WAIT (0x00000000)
 - NX_WAIT_FOREVER (0xFFFFFFFF)
-- timeout-värde i Tick (0x00000001 till 0xFFFFFFFE)
+- timeout-värde i tick (0x00000001 via 0xFFFFFFFE)
 
-### <a name="return-values"></a>Retur värden
-- **NX_SUCCESS** (0x00) paket kopiering har slutförts.
-- **NX_NO_PACKET** -paket (0x01) är inte tillgängligt för kopiering.
-- **NX_INVALID_PACKET** (0X12) tomt käll paket eller kopia misslyckades.
-- **NX_WAIT_ABORTED** (0x1a) den begärda Avstängningen avbröts av ett anrop till tx_thread_wait_abort.
-- **NX_INVALID_PARAMETERSs** paket storlek (0X4D) stöder inte protokollet.
-- **NX_PTR_ERROR** (0X07) ogiltig pool, paket eller destinations pekare.
-- **NX_UNDERFLOW** (protokollnumret 0x02) ogiltig lägga pekare för paket.
-- **NX_OVERFLOW** (0X03) ogiltig paket tilläggs pekare.
-- **NX_CALLER_ERROR** (0X11) ett wait-alternativ angavs i initiering eller i en ISR.
+### <a name="return-values"></a>Returvärden
+- **NX_SUCCESS** (0x00) Lyckad paketkopiering.
+- **NX_NO_PACKET** (0x01) Paket som inte är tillgängligt för kopiering.
+- **NX_INVALID_PACKET** (0x12) Tomt källpaket eller kopiering misslyckades.
+- **NX_WAIT_ABORTED** (0x1A) Den begärda instängningen avbröts av ett anrop till tx_thread_wait_abort.
+- **NX_INVALID_PARAMETERS** (0x4D) Paketstorleken stöder inte protokoll.
+- **NX_PTR_ERROR** (0x07) Ogiltig pool, paket eller mål pekare.
+- **NX_UNDERFLOW** (0x02) Ogiltig pekare för paketförberedelser.
+- **NX_OVERFLOW** (0x03) Pekare för ogiltigt paketfördr dess tillägg.
+- **NX_CALLER_ERROR** (0x11) Ett väntealternativ angavs vid initieringen eller i en ISR.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -2993,15 +2993,15 @@ status = nx_packet_copy(old_packet, &new_copy_ptr, &pool_0, 20);
 
 ### <a name="see-also"></a>Se även
 
-- nx_packet_allocate nx_packet_data_append,
-- nx_packet_data_extract_offset nx_packet_data_retrieve,
+- nx_packet_allocate, nx_packet_data_append,
+- nx_packet_data_extract_offset, nx_packet_data_retrieve,
 - nx_packet_length_get, nx_packet_pool_create, nx_packet_pool_delete,
-- nx_packet_pool_info_get nx_packet_release,
+- nx_packet_pool_info_get, nx_packet_release,
 - nx_packet_transmit_release
 
 ## <a name="nx_packet_data_append"></a>nx_packet_data_append
 
-Lägg till data i slutet av paketet
+Lägga till data i slutet av paketet
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3014,40 +3014,40 @@ UINT nx_packet_data_append(
     ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten lägger till data i slutet av det angivna paketet. Det angivna data utrymmet kopieras till paketet. Om det inte finns tillräckligt med minne tillgängligt och funktionen länkat paket är aktive rad allokeras ett eller flera paket för att uppfylla begäran. Om funktionen för länkat paket inte är aktive rad returneras *NX_SIZE_ERROR* .
+Den här tjänsten lägger till data i slutet av det angivna paketet. Det angivna dataområdet kopieras till paketet. Om det inte finns tillräckligt med minne tillgängligt och funktionen för kedjade paket är aktiverad, allokeras ett eller flera paket för att uppfylla begäran. Om funktionen för kedjade paket inte är *aktiverad NX_SIZE_ERROR* returneras.
 
 ### <a name="parameters"></a>Parametrar
 
 - **packet_ptr** Paket pekare.
-- **data_start** Pekar till början av användarens data områden som ska läggas till i paketet.
-- **data_size** Storlek på användarens data områden.
-- **pool_ptr** Pekare till Packet bassäng från vilken du vill allokera ett annat paket om det inte finns tillräckligt med utrymme i det aktuella paketet.
-- **wait_option** Definierar hur tjänsten fungerar om det inte finns några tillgängliga paket. Vänte alternativen definieras enligt följande:
+- **data_start** Pekare till början av användarens dataområde som ska läggas till i paketet.
+- **data_size** Storleken på användarens dataområde.
+- **pool_ptr** Pekare till paketpoolen som ett annat paket ska allokeras från om det inte finns tillräckligt med utrymme i det aktuella paketet.
+- **wait_option** Definierar hur tjänsten beter sig om det inte finns några tillgängliga paket. Väntealternativen definieras på följande sätt:
 - NX_NO_WAIT (0x00000000)
 - NX_WAIT_FOREVER (0xFFFFFFFF)
-- timeout-värde i Tick (0x00000001 till 0xFFFFFFFE)
+- timeout-värde i tick (0x00000001 via 0xFFFFFFFE)
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) slutfört paket tillägg.
-- **NX_NO_PACKET** (0X01) inget paket tillgängligt.
-- **NX_WAIT_ABORTED** (0x1a) den begärda Avstängningen avbröts av ett anrop till *tx_thread_wait_abort*.
-- **NX_INVALID_PARAMETERSs** paket storlek (0X4D) stöder inte protokollet.
-- **NX_UNDERFLOW** (protokollnumret 0x02) lägga-pekaren är mindre än start av nytto Last.
-- **NX_OVERFLOW** (0X03) Lägg till-pekare är större än nytto Last slutet.
-- **NX_PTR_ERROR** (0X07) ogiltig pool, paket eller data pekare.
-- **NX_SIZE_ERROR** (0X09) ogiltig data storlek.
-- **NX_CALLER_ERROR** (0X11) ogiltigt wait-alternativ från icke-tråd.
+- **NX_SUCCESS** (0x00) Lyckat paket.
+- **NX_NO_PACKET** (0x01) Inget paket tillgängligt.
+- **NX_WAIT_ABORTED** (0x1A) Den begärda instängningen avbröts av ett anrop *till tx_thread_wait_abort*.
+- **NX_INVALID_PARAMETERS** paketstorlek (0x4D) stöder inte protokoll.
+- **NX_UNDERFLOW** (0x02) pekare är mindre än nyttolastens start.
+- **NX_OVERFLOW** (0x03) Pekaren är större än nyttolastens slut.
+- **NX_PTR_ERROR** (0x07) Ogiltig pool, paket eller datapekare.
+- **NX_SIZE_ERROR** (0x09) Ogiltig datastorlek.
+- **NX_CALLER_ERROR** (0x11) Ogiltigt väntealternativ från oläst.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er (program nätverks driv rutiner)
+Initiering, trådar, timers och ISR (programnätverksdrivrutiner)
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -3082,31 +3082,31 @@ UINT nx_packet_data_extract_offset(
     ULONG *bytes_copied);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten kopierar data från ett NetX-paket (eller paket kedja) som börjar vid den angivna förskjutningen från paketets lägga-pekare i byte till den angivna bufferten. Antalet byte som faktiskt kopieras returneras i *bytes_copied.* Den här tjänsten tar inte bort data från paketet eller justerar inte lägga-pekaren eller annan information om internt tillstånd.
+Den här tjänsten kopierar data från ett NetX-paket (eller paketkedja) med början vid den angivna förskjutningen från paketförberedaren för den angivna storleken i byte till den angivna bufferten. Antalet byte som kopieras returneras i *bytes_copied.* Den här tjänsten tar inte bort data från paketet och justerar inte heller den förberedande pekaren eller annan intern tillståndsinformation.
 
 ### <a name="parameters"></a>Parametrar
 
-- **packet_ptr** Pekare till paket att extrahera
-- **förskjutning** Offset från den aktuella lägga-pekaren.
-- **buffer_start** Pekare till början av Spara buffert
+- **packet_ptr** Pekare till paket som ska extraheras
+- **offset** Offset from the current prepend pointer.Offset from the current prepend pointer.Offset from the current prepend pointer.
+- **buffer_start** Pekare till start av spara buffert
 - **buffer_length** Antal byte som ska kopieras
-- **bytes_copied** Antal byte som faktiskt har kopierats
+- **bytes_copied** Antal byte som faktiskt kopierats
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) paket kopiering har slutförts
-- **NX_PACKET_OFFSET_ERROR** (0X53) ogiltigt offset-värde angavs
-- **NX_PTR_ERROR** (0X07) ogiltig paket pekare eller buffert pekare
+- **NX_SUCCESS** (0x00) Lyckad paketkopiering
+- **NX_PACKET_OFFSET_ERROR** (0x53) Ogiltigt förskjutningsvärde har angetts
+- **NX_PTR_ERROR** (0x07) Ogiltig paket pekare eller buffert pekare
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -3140,33 +3140,33 @@ UINT nx_packet_data_retrieve(
     ULONG *bytes_copied);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten kopierar data från det angivna paketet till den angivna bufferten. Det faktiska antalet kopierade byte returneras i målet som pekas av **bytes_copied**.
+Den här tjänsten kopierar data från det angivna paketet till den angivna bufferten. Det faktiska antalet kopierade byte returneras i det mål som bytes_copied **.**
 
 Observera att den här tjänsten inte ändrar paketets interna tillstånd. De data som hämtas är fortfarande tillgängliga i paketet.
 
-*Måldomänkontrollanten måste vara tillräckligt stor för att rymma paketets innehåll. Om inte, kommer minnet att skadas orsaka oförutsägbara resultat.*
+*Målbufferten måste vara tillräckligt stor för paketets innehåll. Annars skadas minnet, vilket orsakar oförutsägbara resultat.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **packet_ptr** Pekare till käll paketet.
-- **buffer_start** Pekar till början av mellanlagringsområdet.
-- **bytes_copied** Pekar mot målet för antalet kopierade byte.
+- **packet_ptr** Pekare till källpaketet.
+- **buffer_start** Pekare till början av buffertområdet.
+- **bytes_copied** Pekare till målet för antalet kopierade byte.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) paket data hämtades.
-- **NX_INVALID_PACKET** (0X12) ogiltigt paket.
-- **NX_PTR_ERROR** (0X07) ogiltig paket, StartStart eller kopierade byte-pekare.
+- **NX_SUCCESS** (0x00) Lyckade paketdata hämtas.
+- **NX_INVALID_PACKET** (0x12) Ogiltigt paket.
+- **NX_PTR_ERROR** (0x07) Ogiltigt paket, buffertstart eller kopierad pekare för byte.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -3184,14 +3184,14 @@ status = nx_packet_data_retrieve(packet_ptr, buffer, &bytes_copied);
 ### <a name="see-also"></a>Se även
 
 - nx_packet_allocate, nx_packet_copy, nx_packet_data_append,
-- nx_packet_data_extract_offset nx_packet_length_get,
-- nx_packet_pool_create nx_packet_pool_delete,
-- nx_packet_pool_info_get nx_packet_release,
+- nx_packet_data_extract_offset, nx_packet_length_get,
+- nx_packet_pool_create, nx_packet_pool_delete,
+- nx_packet_pool_info_get, nx_packet_release,
 - nx_packet_transmit_release
 
 ## <a name="nx_packet_length_get"></a>nx_packet_length_get
 
-Hämta längd på paket data
+Hämta längden på paketdata
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3201,22 +3201,22 @@ UINT nx_packet_length_get(
     ULONG *length);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten hämtar längden på data i det angivna paketet.
 
 ### <a name="parameters"></a>Parametrar
 
 - **packet_ptr** Pekare till paketet.
-- **längd** Mål för paketets längd.
+- **längd** Mål för paketlängden.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -3230,14 +3230,14 @@ status = nx_packet_length_get(my_packet, &my_length);
 ### <a name="see-also"></a>Se även
 
 - nx_packet_allocate, nx_packet_copy, nx_packet_data_append,
-- nx_packet_data_extract_offset nx_packet_data_retrieve,
-- nx_packet_pool_create nx_packet_pool_delete,
-- nx_packet_pool_info_get nx_packet_release,
+- nx_packet_data_extract_offset, nx_packet_data_retrieve,
+- nx_packet_pool_create, nx_packet_pool_delete,
+- nx_packet_pool_info_get, nx_packet_release,
 - nx_packet_transmit_release
 
 ## <a name="nx_packet_pool_create"></a>nx_packet_pool_create
 
-Skapa en modempool i angivet minnes området
+Skapa paketpool i angivet minnesområde
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3250,32 +3250,32 @@ UINT nx_packet_pool_create(
     ULONG memory_size);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skapar en adresspool av den angivna paket storleken i det minnes utrymme som anges av användaren.
+Den här tjänsten skapar en paketpool med den angivna paketstorleken i det minnesområde som anges av användaren.
 
 ### <a name="parameters"></a>Parametrar
 
-- **pool_ptr** Pekare till kontroll block för Packet-pool.
-- **namn** Pekar till programmets namn för poolen.
-- **payload_size** Antal byte i varje paket i poolen. Värdet måste vara minst 40 byte och måste också vara jämnt delbar med 4.
-- **memory_ptr** Pekar på minnes området för att placera mediepoolen i. Pekaren ska vara justerad mot en ULONG-gränser.
-- **memory_size** Storlek på poolens minnes området.
+- **pool_ptr** Pekare till paketpoolens kontrollblock.
+- **namn** Pekare till programmets namn för paketpoolen.
+- **payload_size** Antal byte i varje paket i poolen. Det här värdet måste vara minst 40 byte och måste också vara jämnt delbart med 4.
+- **memory_ptr** Pekare till det minnesområde som paketpoolen ska placeras i. Pekaren bör justeras mot en ULONG-gräns.
+- **memory_size** Storleken på poolens minnesområde.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) en paket bassäng har skapats.
-- **NX_PTR_ERROR** (0X07) ogiltig pool eller minnes pekare.
-- **NX_SIZE_ERROR** (0X09) ogiltigt block eller minnes storlek.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS** (0x00) Lyckad paketpool som skapas.
+- **NX_PTR_ERROR** (0x07) Ogiltig pool eller minnespekare.
+- **NX_SIZE_ERROR** (0x09) Ogiltig block- eller minnesstorlek.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -3292,13 +3292,13 @@ status = nx_packet_pool_create(&pool_0, "Default Pool", 128,
 ### <a name="see-also"></a>Se även
 
 - nx_packet_allocate, nx_packet_copy, nx_packet_data_append,
-- nx_packet_data_extract_offset nx_packet_data_retrieve,
+- nx_packet_data_extract_offset, nx_packet_data_retrieve,
 - nx_packet_length_get, nx_packet_pool_delete, nx_packet_pool_info_get,
-- nx_packet_release nx_packet_transmit_release
+- nx_packet_release, nx_packet_transmit_release
 
 ## <a name="nx_packet_pool_delete"></a>nx_packet_pool_delete
 
-Ta bort tidigare skapade paket pool
+Ta bort paketpool som skapats tidigare
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3306,27 +3306,27 @@ Ta bort tidigare skapade paket pool
 UINT nx_packet_pool_delete(NX_PACKET_POOL *pool_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar bort en tidigare skapad paket pool. NetX söker efter trådar som för närvarande är inaktiverade på paket i modempoolen och rensar uppskjutningen.
+Den här tjänsten tar bort en paketpool som skapats tidigare. NetX söker efter trådar som för närvarande är inaktiverade på paket i paketpoolen och tar bort instängningen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **pool_ptr** Pekare för kontroll block för Packet-pool.
+- **pool_ptr** Block pekare för paketpoolskontroll.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckades ta bort paketets pool.
-- **NX_PTR_ERROR** (0X07) ogiltig pool pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS** (0x00) Borttagna paketpooler.
+- **NX_PTR_ERROR** (0x07) Ogiltig poolpekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Ja
+Yes
 
 ### <a name="example"></a>Exempel
 
@@ -3341,14 +3341,14 @@ status = nx_packet_pool_delete(&pool_0);
 ### <a name="see-also"></a>Se även
 
 - nx_packet_allocate, nx_packet_copy, nx_packet_data_append,
-- nx_packet_data_extract_offset nx_packet_data_retrieve,
-- nx_packet_length_get nx_packet_pool_create,
-- nx_packet_pool_info_get nx_packet_release,
+- nx_packet_data_extract_offset, nx_packet_data_retrieve,
+- nx_packet_length_get, nx_packet_pool_create,
+- nx_packet_pool_info_get, nx_packet_release,
 - nx_packet_transmit_release
 
 ## <a name="nx_packet_pool_info_get"></a>nx_packet_pool_info_get
 
-Hämta information om en modempool
+Hämta information om en paketpool
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3362,34 +3362,34 @@ UINT nx_packet_pool_info_get(
     ULONG *invalid_packet_releases);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar information om den angivna poolen.
+Den här tjänsten hämtar information om den angivna paketpoolen.
 
-*Om en mål pekare är NX_NULL returneras inte den informationen till anroparen.*
+*Om en mål pekare NX_NULL returneras inte den informationen till anroparen.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **pool_ptr** Pekare till den tidigare skapade lagringspoolen.
-- **total_packets** Pekare till målet för det totala antalet paket i poolen.
-- **free_packets** Pekare till målet för det totala antalet paket som för närvarande är kostnads fria.
-- **empty_pool_requests** Pekare till målet för det totala antalet tilldelnings begär anden när poolen var tom.
-- **empty_pool_suspensions** Pekare till målet för det totala antalet avstängningar av tomma pooler.
-- **invalid_packet_releases** Pekare till målet för det totala antalet ogiltiga paket utgåvor.
+- **pool_ptr** Pekare till paketpool som skapats tidigare.
+- **total_packets** Pekare till mål för det totala antalet paket i poolen.
+- **free_packets** Pekare till mål för det totala antalet för närvarande kostnadsfria paket.
+- **empty_pool_requests** Pekare till målet för det totala antalet allokeringsbegäranden när poolen var tom.
+- **empty_pool_suspensions** Pekare till mål för det totala antalet tomma pooluppstängningar.
+- **invalid_packet_releases** Pekare till målet för det totala antalet ogiltiga paketutgåningar.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) information om hämtning av paket bassäng lyckades.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS** (0x00) Information om lyckad paketpool.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar och timers
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -3409,13 +3409,13 @@ status = nx_packet_pool_info_get(&pool_0,
 ### <a name="see-also"></a>Se även
 
 - nx_packet_allocate, nx_packet_copy, nx_packet_data_append,
-- nx_packet_data_extract_offset nx_packet_data_retrieve,
-- nx_packet_length_get nx_packet_pool_create nx_packet_pool_delete
-- nx_packet_release nx_packet_transmit_release
+- nx_packet_data_extract_offset, nx_packet_data_retrieve,
+- nx_packet_length_get, nx_packet_pool_create, nx_packet_pool_delete
+- nx_packet_release, nx_packet_transmit_release
 
 ## <a name="nx_packet_release"></a>nx_packet_release
 
-Frigör tidigare allokerat paket
+Frisläpp tidigare allokerat paket
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3423,30 +3423,30 @@ Frigör tidigare allokerat paket
 UINT nx_packet_release(NX_PACKET *packet_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten frigör ett paket, inklusive eventuella ytterligare paket som är länkade till det angivna paketet. Om en annan tråd blockeras vid paket tilldelningen får den paketet och återupptas.
+Den här tjänsten släpper ett paket, inklusive eventuella ytterligare paket som är kedjade till det angivna paketet. Om en annan tråd blockeras vid paketallokering får den paketet och återupptas.
 
-*Programmet måste förhindra att ett paket släpps mer än en gång, eftersom detta kan orsaka oförutsägbara resultat.*
+*Programmet måste förhindra att ett paket frigörs mer än en gång, eftersom det kan orsaka oförutsägbara resultat.*
 
 ### <a name="parameters"></a>Parametrar
 
 - **packet_ptr** Paket pekare.
 
 
-### <a name="return-values"></a>Retur värden
-- **NX_SUCCESS** (0x00) paket versionen har slutförts.
-- **NX_PTR_ERROR** (0X07) ogiltig paket pekare.
-- **NX_UNDERFLOW** (protokollnumret 0x02) lägga-pekaren är mindre än start av nytto Last.
-- **NX_OVERFLOW** (0X03) Lägg till-pekare är större än nytto Last slutet.
+### <a name="return-values"></a>Returvärden
+- **NX_SUCCESS** (0x00) Lyckad paketsläppning.
+- **NX_PTR_ERROR** (0x07) Ogiltig paket pekare.
+- **NX_UNDERFLOW** (0x02) Förberedelsepekaren är mindre än nyttolastens start.
+- **NX_OVERFLOW** (0x03)-pekare är större än nyttolastens slut.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er (program nätverks driv rutiner)
+Initiering, trådar, timers och ISR (programnätverksdrivrutiner)
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Ja
+Yes
 
 ### <a name="example"></a>Exempel
 
@@ -3461,13 +3461,13 @@ status = nx_packet_release(packet_ptr);
 ### <a name="see-also"></a>Se även
 
 - nx_packet_allocate, nx_packet_copy, nx_packet_data_append,
-- nx_packet_data_extract_offset nx_packet_data_retrieve,
+- nx_packet_data_extract_offset, nx_packet_data_retrieve,
 - nx_packet_length_get, nx_packet_pool_create, nx_packet_pool_delete,
-- nx_packet_pool_info_get nx_packet_transmit_release
+- nx_packet_pool_info_get, nx_packet_transmit_release
 
 ## <a name="nx_packet_transmit_release"></a>nx_packet_transmit_release
 
-Frisläpp ett överfört paket
+Släppa ett överfört paket
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3475,30 +3475,30 @@ Frisläpp ett överfört paket
 UINT nx_packet_transmit_release(NX_PACKET *packet_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-För icke-TCP-paket släpper den här tjänsten ett överfört paket, inklusive eventuella ytterligare paket som är länkade till det angivna paketet. Om en annan tråd blockeras vid paket tilldelningen får den paketet och återupptas. För ett överfört TCP-paket markeras paketet som överfört, men släpps inte till paketet. Den här tjänsten kallas vanligt vis för programmets nätverks driv rutin när ett paket har överförts.
+För icke-TCP-paket släpper den här tjänsten ett överfört paket, inklusive eventuella ytterligare paket som är kedjade till det angivna paketet. Om en annan tråd blockeras vid paketallokering får den paketet och återupptas. För ett överfört TCP-paket markeras paketet som överfört men släpps inte förrän paketet har bekräftats. Den här tjänsten anropas vanligtvis från programmets nätverksdrivrutin när ett paket har överförts.
 
-*Nätverks driv rutinen bör ta bort det fysiska medie huvudet och justera Paketets längd innan du anropar den här tjänsten.*
+*Nätverksdrivrutinen bör ta bort det fysiska mediehuvudet och justera paketets längd innan den här tjänsten anropas.*
 
 ### <a name="parameters"></a>Parametrar
 
 - **packet_ptr** Paket pekare.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) utgåva av överförings paket lyckades.
-- **NX_PTR_ERROR** (0X07) ogiltig paket pekare.
-- **NX_UNDERFLOW** (protokollnumret 0x02) lägga-pekaren är mindre än start av nytto Last.
-- **NX_OVERFLOW** (0X03) Lägg till-pekare är större än nytto Last slutet.
+- **NX_SUCCESS** (0x00) Lyckad sändning av paket.
+- **NX_PTR_ERROR** (0x07) Felaktig paketpekare.
+- **NX_UNDERFLOW** (0x02) pekare är mindre än nyttolastens start.
+- **NX_OVERFLOW** (0x03) Pekaren är större än nyttolastens slut.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers, program nätverks driv rutiner (inklusive ISR: er)
+Initiering, trådar, timers, programnätverksdrivrutiner (inklusive ISR:er)
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Ja
+Yes
 
 ### <a name="example"></a>Exempel
 
@@ -3514,13 +3514,13 @@ status = nx_packet_transmit_release(packet_ptr);
 ### <a name="see-also"></a>Se även
 
 - nx_packet_allocate, nx_packet_copy, nx_packet_data_append,
-- nx_packet_data_extract_offset nx_packet_data_retrieve,
+- nx_packet_data_extract_offset, nx_packet_data_retrieve,
 - nx_packet_length_get, nx_packet_pool_create, nx_packet_pool_delete,
-- nx_packet_pool_info_get nx_packet_release
+- nx_packet_pool_info_get, nx_packet_release
 
 ## <a name="nx_rarp_disable"></a>nx_rarp_disable
 
-Inaktivera RARP (reverse Address Resolution Protocol)
+Inaktivera RARP (Reverse Address Resolution Protocol)
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3528,28 +3528,28 @@ Inaktivera RARP (reverse Address Resolution Protocol)
 UINT nx_rarp_disable(NX_IP *ip_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten inaktiverar RARP-komponenten för NetX för den angivna IP-instansen. För ett multihome-system inaktiverar den här tjänsten RARP på alla gränssnitt.
+Den här tjänsten inaktiverar RARP-komponenten för NetX för den specifika IP-instansen. För ett multihome-system inaktiverar den här tjänsten RARP i alla gränssnitt.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) RARP-inaktive ras.
-- **NX_NOT_ENABLED** (0X14) RARP har inte Aktiver ATS.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS** (0x00) Lyckad RARP-inaktivering.
+- **NX_NOT_ENABLED** (0x14) RARP har inte aktiverats.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -3562,11 +3562,11 @@ status = nx_rarp_disable(&ip_0);
 
 ### <a name="see-also"></a>Se även
 
-- nx_rarp_enable nx_rarp_info_get
+- nx_rarp_enable, nx_rarp_info_get
 
 ## <a name="nx_rarp_enable"></a>nx_rarp_enable
 
-Aktivera omvänt adress matchnings protokoll (RARP)
+Aktivera RARP (Reverse Address Resolution Protocol)
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3574,29 +3574,29 @@ Aktivera omvänt adress matchnings protokoll (RARP)
 UINT nx_rarp_enable(NX_IP *ip_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten aktiverar RARP-komponenten för NetX för den angivna IP-instansen. RARP-komponenterna söker igenom alla anslutna nätverks gränssnitt för noll IP-adress. En noll-IP-adress anger att gränssnittet inte har IP-adresstilldelning ännu. RARP försöker matcha IP-adressen genom att aktivera RARP-processen på det gränssnittet.
+Den här tjänsten aktiverar RARP-komponenten för NetX för den specifika IP-instansen. RARP-komponenterna söker igenom alla anslutna nätverksgränssnitt efter noll IP-adress. En noll IP-adress anger att gränssnittet inte har IP-adresstilldelning ännu. RARP försöker matcha IP-adressen genom att aktivera RARP-processen i det gränssnittet.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) RARP aktivera har slutförts.
-- **NX_IP_ADDRESS_ERROR** (0x21) IP-adressen är redan giltig.
-- **NX_ALREADY_ENABLED** (0X15) RARP har redan Aktiver ATS.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS** (0x00) Lyckad RARP-aktivera.
+- **IP-NX_IP_ADDRESS_ERROR** (0x21) är redan giltig.
+- **NX_ALREADY_ENABLED** (0x15) RARP har redan aktiverats.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar, timers
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -3610,7 +3610,7 @@ status = nx_rarp_enable(&ip_0);
 
 ### <a name="see-also"></a>Se även
 
-- nx_rarp_disable nx_rarp_info_get
+- nx_rarp_disable, nx_rarp_info_get
 
 ## <a name="nx_rarp_info_get"></a>nx_rarp_info_get
 
@@ -3626,33 +3626,33 @@ UINT nx_rarp_info_get(
     ULONG *rarp_invalid_messages);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten hämtar information om RARP-aktiviteter för den angivna IP-instansen.
 
-*Om en mål pekare är NX_NULL returneras inte den informationen till anroparen.*
+*Om en mål pekare NX_NULL returneras inte den informationen till anroparen.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
-- **rarp_requests_sent** Pekare till målet för det totala antalet RARP-begäranden som skickats.
-- **rarp_responses_received** Pekare till målet för det totala antalet RARP-svar som tagits emot.
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
+- **rarp_requests_sent** Pekare till mål för det totala antalet RARP-begäranden som skickats.
+- **rarp_responses_received** Pekare till mål för det totala antalet RARP-svar som tagits emot.
 - **rarp_invalid_messages** Pekare till målet för det totala antalet ogiltiga meddelanden.
 
 
-### <a name="return-values"></a>Retur värden
-- **NX_SUCCESS** (0X00) lyckad RARP information hämtning.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-pekare.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
+### <a name="return-values"></a>Returvärden
+- **NX_SUCCESS** (0x00) Lyckad hämtning av RARP-information.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-pekare.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -3669,7 +3669,7 @@ status = nx_rarp_info_get(&ip_0,
 
 ### <a name="see-also"></a>Se även
 
-- nx_rarp_disable nx_rarp_enable
+- nx_rarp_disable, nx_rarp_enable
 
 ## <a name="nx_system_initialize"></a>nx_system_initialize
 
@@ -3681,25 +3681,25 @@ Initiera NetX-system
 VOID nx_system_initialize(VOID);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten initierar de grundläggande NetX system resurserna som förberedelse för användning. Den ska anropas av programmet under initieringen och innan något annat NetX-anrop görs.
+Den här tjänsten initierar de grundläggande NetX-systemresurserna som förberedelse för användning. Det bör anropas av programmet under initieringen och innan något annat NetX-anrop görs.
 
 ### <a name="parameters"></a>Parametrar
 
 Ingen
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-Inget
+Ingen
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers, ISR: er
+Initiering, trådar, timers, ISR
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -3715,13 +3715,13 @@ nx_system_initialize();
 
 - nx_ip_address_change_notify, nx_ip_address_get, nx_ip_address_set,
 - nx_ip_create, nx_ip_delete, nx_ip_driver_direct_command,
-- nx_ip_driver_interface_direct_command nx_ip_forwarding_disable,
-- nx_ip_forwarding_enable nx_ip_fragment_disable,
-- nx_ip_fragment_enable nx_ip_info_get nx_ip_status_check
+- nx_ip_driver_interface_direct_command, nx_ip_forwarding_disable,
+- nx_ip_forwarding_enable, nx_ip_fragment_disable,
+- nx_ip_fragment_enable, nx_ip_info_get, nx_ip_status_check
 
 ## <a name="nx_tcp_client_socket_bind"></a>nx_tcp_client_socket_bind
 
-Bind klient TCP-socket till TCP-port
+Binda klientens TCP-socket till TCP-port
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3731,38 +3731,38 @@ UINT nx_tcp_client_socket_bind(
     UINT port, ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten binder den tidigare skapade TCP-klientcachen till den angivna TCP-porten. Giltiga TCP-Sockets sträcker sig från 0 till 0xFFFF. Om den angivna TCP-porten inte är tillgänglig pausas tjänsten enligt det angivna vänte alternativet.
+Den här tjänsten binder den tidigare skapade TCP-klientsocketen till den angivna TCP-porten. Giltiga TCP-sockets sträcker sig från 0 till 0xFFFF. Om den angivna TCP-porten inte är tillgänglig pausar tjänsten enligt det angivna väntealternativet.
 
 ### <a name="parameters"></a>Parametrar
 
-- **socket_ptr** Pekare till den tidigare skapade TCP-socket-instansen.
-- **port** Port nummer att binda (1 till 0xFFFF). Om Port numret är NX_ANY_PORT (0x0000) kommer IP-instansen att söka efter nästa lediga port och använda den för bindningen.
-- **wait_option** Definierar hur tjänsten beter sig om porten redan är kopplad till en annan socket. Vänte alternativen definieras enligt följande:
+- **socket_ptr** Pekare till tcp socketinstans som skapats tidigare.
+- **port** Portnummer som ska bindas (1 till 0xFFFF). Om portnumret är NX_ANY_PORT (0x0000) söker IP-instansen efter nästa kostnadsfria port och använder den för bindningen.
+- **wait_option** Definierar hur tjänsten beter sig om porten redan är bunden till en annan socket. Väntealternativen definieras på följande sätt:
 - NX_NO_WAIT (0x00000000)
 - NX_WAIT_FOREVER (0xFFFFFFFF)
-- timeout-värde i Tick (0x00000001 till 0xFFFFFFFE)
+- timeout-värde i tick (0x00000001 via 0xFFFFFFFE)
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) socket-bindning.
-- **NX_ALREADY_BOUND** (0X22) den här socketen är redan kopplad till en annan TCP-port.
-- **NX_PORT_UNAVAILABLE** -porten (0x23) är redan kopplad till en annan socket.
-- **NX_NO_FREE_PORTS** (0X45) ingen kostnads fri port.
-- **NX_WAIT_ABORTED** (0x1a) den begärda Avstängningen avbröts av ett anrop till *tx_thread_wait_abort*.
-- **NX_INVALID_PORT** (0X46) ogiltig port.
-- **NX_PTR_ERROR** (0X07) ogiltig socket-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
+- **NX_SUCCESS** (0x00) Lyckad socketbindning.
+- **NX_ALREADY_BOUND** (0x22) Den här socketen är redan bunden till en annan TCP-port.
+- **NX_PORT_UNAVAILABLE** (0x23) Porten är redan bunden till en annan socket.
+- **NX_NO_FREE_PORTS** (0x45) Ingen kostnadsfri port.
+- **NX_WAIT_ABORTED** (0x1A) Den begärda instängningen avbröts av ett anrop *till tx_thread_wait_abort*.
+- **NX_INVALID_PORT** (0x46) Ogiltig port.
+- **NX_PTR_ERROR** (0x07) Ogiltig socket-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -3777,20 +3777,20 @@ status = nx_tcp_client_socket_bind(&client_socket, 12, 7);
 
 ### <a name="see-also"></a>Se även
 
-- nx_tcp_client_socket_connect nx_tcp_client_socket_port_get,
+- nx_tcp_client_socket_connect, nx_tcp_client_socket_port_get,
 - nx_tcp_client_socket_unbind, nx_tcp_enable, nx_tcp_free_port_find,
-- nx_tcp_info_get nx_tcp_server_socket_accept,
-- nx_tcp_server_socket_listen nx_tcp_server_socket_relisten,
-- nx_tcp_server_socket_unaccept nx_tcp_server_socket_unlisten,
-- nx_tcp_socket_bytes_available nx_tcp_socket_create,
-- nx_tcp_socket_delete nx_tcp_socket_disconnect,
-- nx_tcp_socket_info_get nx_tcp_socket_receive,
-- nx_tcp_socket_receive_queue_max_set nx_tcp_socket_send,
+- nx_tcp_info_get, nx_tcp_server_socket_accept,
+- nx_tcp_server_socket_listen, nx_tcp_server_socket_relisten,
+- nx_tcp_server_socket_unaccept, nx_tcp_server_socket_unlisten,
+- nx_tcp_socket_bytes_available, nx_tcp_socket_create,
+- nx_tcp_socket_delete, nx_tcp_socket_disconnect,
+- nx_tcp_socket_info_get, nx_tcp_socket_receive,
+- nx_tcp_socket_receive_queue_max_set, nx_tcp_socket_send,
 - nx_tcp_socket_state_wait
 
 ## <a name="nx_tcp_client_socket_connect"></a>nx_tcp_client_socket_connect
 
-Anslut klientens TCP-socket
+Anslut TCP-socket för klient
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3802,41 +3802,41 @@ UINT nx_tcp_client_socket_connect(
     ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten ansluter den tidigare skapade och kopplade TCP-klientens socket till den angivna serverns port. Giltiga TCP server-portar är mellan 0 och 0xFFFF. Om anslutningen inte slutförs omedelbart pausas tjänsten enligt det angivna vänte alternativet.
+Den här tjänsten ansluter den tidigare skapade och bundna TCP-klientsocketen till den angivna serverns port. Giltiga TCP-serverportar sträcker sig från 0 till 0xFFFF. Om anslutningen inte slutförs omedelbart pausas tjänsten enligt det angivna väntealternativet.
 
 ### <a name="parameters"></a>Parametrar
 
-- **socket_ptr** Pekare till den tidigare skapade TCP-socket-instansen.
+- **socket_ptr** Pekare till tcp socketinstans som skapats tidigare.
 - **server_ip** Serverns IP-adress.
-- **SERVER_PORT** Server port nummer att ansluta till (1 till 0xFFFF).
-- **wait_option** Definierar hur tjänsten fungerar när anslutningen upprättas. Vänte alternativen definieras enligt följande:
+- **server_port** Serverportnummer att ansluta till (1 till 0xFFFF).
+- **wait_option** Definierar hur tjänsten beter sig när anslutningen upprättas. Väntealternativen definieras på följande sätt:
 - NX_NO_WAIT (0x00000000)
 - NX_WAIT_FOREVER (0xFFFFFFFF)
-- timeout-värde i Tick (0x00000001 till 0xFFFFFFFE)
+- timeout-värde i tick (0x00000001 via 0xFFFFFFFE)
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) anslutningen lyckades.
-- **NX_NOT_BOUND** -socketen (0x24) är inte kopplad.
-- **NX_NOT_CLOSED** -socketen (0x35) är inte i ett stängt tillstånd.
-- **NX_IN_PROGRESS** (0X37) ingen väntan angavs, anslutnings försöket pågår.
-- **NX_INVALID_INTERFACE** (0X4C) ogiltigt gränssnitt har angetts.
-- **NX_WAIT_ABORTED** (0x1a) den begärda Avstängningen avbröts av ett anrop till tx_thread_wait_abort.
-- **NX_IP_ADDRESS_ERROR** (0X21) ogiltig Server-IP-adress.
-- **NX_INVALID_PORT** (0X46) ogiltig port.
-- **NX_PTR_ERROR** (0X07) ogiltig socket-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
+- **NX_SUCCESS** (0x00) Lyckad socketanslutning.
+- **NX_NOT_BOUND** (0x24) Socket är inte bunden.
+- **NX_NOT_CLOSED** (0x35) Socket är inte i stängt tillstånd.
+- **NX_IN_PROGRESS** (0x37) Ingen väntetid har angetts, anslutningsförsöket pågår.
+- **NX_INVALID_INTERFACE** (0x4C) Ogiltigt gränssnitt har angetts.
+- **NX_WAIT_ABORTED** (0x1A) Den begärda instängningen avbröts av ett anrop till tx_thread_wait_abort.
+- **NX_IP_ADDRESS_ERROR** (0x21) Ogiltig server-IP-adress.
+- **NX_INVALID_PORT** (0x46) Ogiltig port.
+- **NX_PTR_ERROR** (0x07) Ogiltig socket-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -3855,20 +3855,20 @@ status = nx_tcp_client_socket_connect(&client_socket,
 
 ### <a name="see-also"></a>Se även
 
-- nx_tcp_client_socket_bind nx_tcp_client_socket_port_get,
+- nx_tcp_client_socket_bind, nx_tcp_client_socket_port_get,
 - nx_tcp_client_socket_unbind, nx_tcp_enable, nx_tcp_free_port_find,
-- nx_tcp_info_get nx_tcp_server_socket_accept,
-- nx_tcp_server_socket_listen nx_tcp_server_socket_relisten,
-- nx_tcp_server_socket_unaccept nx_tcp_server_socket_unlisten,
-- nx_tcp_socket_bytes_available nx_tcp_socket_create,
-- nx_tcp_socket_delete nx_tcp_socket_disconnect,
-- nx_tcp_socket_info_get nx_tcp_socket_receive
-- nx_tcp_socket_receive_queue_max_set nx_tcp_socket_send,
+- nx_tcp_info_get, nx_tcp_server_socket_accept,
+- nx_tcp_server_socket_listen, nx_tcp_server_socket_relisten,
+- nx_tcp_server_socket_unaccept, nx_tcp_server_socket_unlisten,
+- nx_tcp_socket_bytes_available, nx_tcp_socket_create,
+- nx_tcp_socket_delete, nx_tcp_socket_disconnect,
+- nx_tcp_socket_info_get, nx_tcp_socket_receive
+- nx_tcp_socket_receive_queue_max_set, nx_tcp_socket_send,
 - nx_tcp_socket_state_wait
 
 ## <a name="nx_tcp_client_socket_port_get"></a>nx_tcp_client_socket_port_get
 
-Hämta port nummer kopplat till klienten TCP-socket
+Hämta portnummer som är bundet till klientens TCP-socket
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3878,30 +3878,30 @@ UINT nx_tcp_client_socket_port_get(
     UINT *port_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar det port nummer som är associerat med socketen, vilket är användbart för att hitta den port som allokerats av NetX i situationer där NX_ANY_PORT angavs vid den tidpunkt då socketen var kopplad.
+Den här tjänsten hämtar det portnummer som är associerat med socketen, vilket är användbart för att hitta porten som allokerades av NetX i situationer där NX_ANY_PORT angavs när socketen bindas.
 
 ### <a name="parameters"></a>Parametrar
 
-- **socket_ptr** Pekare till den tidigare skapade TCP-socket-instansen.
-- **port_ptr** Pekare till målet för retur port numret. Giltiga port nummer är (1 till 0xFFFF).
+- **socket_ptr** Pekare till tcp socketinstans som skapats tidigare.
+- **port_ptr** Pekare till mål för returportnumret. Giltiga portnummer är (1 till 0xFFFF).
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) socket-bindning.
-- **NX_NOT_BOUND** (0X24) den här socketen är inte kopplad till någon port.
-- **NX_PTR_ERROR** (0X07) ogiltig socket pekare eller port retur pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
+- **NX_SUCCESS** (0x00) Lyckad socketbindning.
+- **NX_NOT_BOUND** (0x24) Den här socketen är inte bunden till en port.
+- **NX_PTR_ERROR** (0x07) Ogiltig socket-pekare eller portretur pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -3916,20 +3916,20 @@ status = nx_tcp_client_socket_port_get(&client_socket, &port);
 
 ### <a name="see-also"></a>Se även
 
-- nx_tcp_client_socket_bind nx_tcp_client_socket_connect,
+- nx_tcp_client_socket_bind, nx_tcp_client_socket_connect,
 - nx_tcp_client_socket_unbind, nx_tcp_enable, nx_tcp_free_port_find,
-- nx_tcp_info_get nx_tcp_server_socket_accept,
-- nx_tcp_server_socket_listen nx_tcp_server_socket_relisten,
-- nx_tcp_server_socket_unaccept nx_tcp_server_socket_unlisten,
-- nx_tcp_socket_bytes_available nx_tcp_socket_create,
-- nx_tcp_socket_delete nx_tcp_socket_disconnect,
-- nx_tcp_socket_info_get nx_tcp_socket_receive,
-- nx_tcp_socket_receive_queue_max_set nx_tcp_socket_send,
+- nx_tcp_info_get, nx_tcp_server_socket_accept,
+- nx_tcp_server_socket_listen, nx_tcp_server_socket_relisten,
+- nx_tcp_server_socket_unaccept, nx_tcp_server_socket_unlisten,
+- nx_tcp_socket_bytes_available, nx_tcp_socket_create,
+- nx_tcp_socket_delete, nx_tcp_socket_disconnect,
+- nx_tcp_socket_info_get, nx_tcp_socket_receive,
+- nx_tcp_socket_receive_queue_max_set, nx_tcp_socket_send,
 - nx_tcp_socket_state_wait
 
 ## <a name="nx_tcp_client_socket_unbind"></a>nx_tcp_client_socket_unbind
 
-Bind TCP-klientens socket från TCP-port
+Ta bort TCP-klientsocket från TCP-port
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3937,30 +3937,30 @@ Bind TCP-klientens socket från TCP-port
 UINT nx_tcp_client_socket_unbind(NX_TCP_SOCKET *socket_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten frigör bindningen mellan TCP-klientens socket och en TCP-port. Om det finns andra trådar som väntar på att binda en annan socket till samma port nummer, binds den första pausade tråden till den här porten.
+Den här tjänsten släpper bindningen mellan TCP-klientsocketen och en TCP-port. Om det finns andra trådar som väntar på att binda en annan socket till samma portnummer, binds den första pausade tråden till den här porten.
 
 ### <a name="parameters"></a>Parametrar
 
-- **socket_ptr** Pekare till den tidigare skapade TCP-socket-instansen.
+- **socket_ptr** Pekare till tcp socketinstans som skapats tidigare.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) uppkopplad socket-bindning.
-- **NX_NOT_BOUND** -socketen var inte kopplad till någon port.
-- **NX_NOT_CLOSED** -socketen (0x35) har inte kopplats från.
-- **NX_PTR_ERROR** (0X07) ogiltig socket-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
+- **NX_SUCCESS** (0x00) Lyckad socket-unbind.
+- **NX_NOT_BOUND** (0x24) Socket var inte bunden till någon port.
+- **NX_NOT_CLOSED** (0x35) Socket har inte frånkopplats.
+- **NX_PTR_ERROR** (0x07) Felaktig socket-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Ja
+Yes
 
 ### <a name="example"></a>Exempel
 
@@ -3974,20 +3974,20 @@ status = nx_tcp_client_socket_unbind(&client_socket);
 
 ### <a name="see-also"></a>Se även
 
-- nx_tcp_client_socket_bind nx_tcp_client_socket_connect,
+- nx_tcp_client_socket_bind, nx_tcp_client_socket_connect,
 - nx_tcp_client_socket_port_get, nx_tcp_enable, nx_tcp_free_port_find,
-- nx_tcp_info_get nx_tcp_server_socket_accept,
-- nx_tcp_server_socket_listen nx_tcp_server_socket_relisten,
-- nx_tcp_server_socket_unaccept nx_tcp_server_socket_unlisten,
-- nx_tcp_socket_bytes_available nx_tcp_socket_create,
-- nx_tcp_socket_delete nx_tcp_socket_disconnect,
-- nx_tcp_socket_info_get nx_tcp_socket_receive,
-- nx_tcp_socket_receive_queue_max_set nx_tcp_socket_send,
+- nx_tcp_info_get, nx_tcp_server_socket_accept,
+- nx_tcp_server_socket_listen, nx_tcp_server_socket_relisten,
+- nx_tcp_server_socket_unaccept, nx_tcp_server_socket_unlisten,
+- nx_tcp_socket_bytes_available, nx_tcp_socket_create,
+- nx_tcp_socket_delete, nx_tcp_socket_disconnect,
+- nx_tcp_socket_info_get, nx_tcp_socket_receive,
+- nx_tcp_socket_receive_queue_max_set, nx_tcp_socket_send,
 - nx_tcp_socket_state_wait
 
 ## <a name="nx_tcp_enable"></a>nx_tcp_enable
 
-Aktivera TCP-komponenten NetX
+Aktivera TCP-komponenten för NetX
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3995,28 +3995,28 @@ Aktivera TCP-komponenten NetX
 UINT nx_tcp_enable(NX_IP *ip_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten aktiverar Transmission Control Protocol-komponenten (TCP) i NetX. När den har Aktiver ATS kan TCP-anslutningar upprättas av programmet.
+Med den här tjänsten Transmission Control Protocol (TCP)-komponenten i NetX. När det är aktiverat kan TCP-anslutningar upprättas av programmet.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) TCP-aktivering har slutförts.
-- **NX_ALREADY_ENABLED** (0X15) TCP har redan Aktiver ATS.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS** (0x00) Tcp-aktivera.
+- **TCP NX_ALREADY_ENABLED** (0x15) har redan aktiverats.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar, timers
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -4029,15 +4029,15 @@ status = nx_tcp_enable(&ip_0);
 
 ### <a name="see-also"></a>Se även
 
-- nx_tcp_client_socket_bind nx_tcp_client_socket_connect,
-- nx_tcp_client_socket_port_get nx_tcp_client_socket_unbind,
+- nx_tcp_client_socket_bind, nx_tcp_client_socket_connect,
+- nx_tcp_client_socket_port_get, nx_tcp_client_socket_unbind,
 - nx_tcp_free_port_find, nx_tcp_info_get, nx_tcp_server_socket_accept,
-- nx_tcp_server_socket_listen nx_tcp_server_socket_relisten,
-- nx_tcp_server_socket_unaccept nx_tcp_server_socket_unlisten,
-- nx_tcp_socket_bytes_available nx_tcp_socket_create,
-- nx_tcp_socket_delete nx_tcp_socket_disconnect,
-- nx_tcp_socket_info_get nx_tcp_socket_receive,
-- nx_tcp_socket_receive_queue_max_set nx_tcp_socket_send,
+- nx_tcp_server_socket_listen, nx_tcp_server_socket_relisten,
+- nx_tcp_server_socket_unaccept, nx_tcp_server_socket_unlisten,
+- nx_tcp_socket_bytes_available, nx_tcp_socket_create,
+- nx_tcp_socket_delete, nx_tcp_socket_disconnect,
+- nx_tcp_socket_info_get, nx_tcp_socket_receive,
+- nx_tcp_socket_receive_queue_max_set, nx_tcp_socket_send,
 - nx_tcp_socket_state_wait
 
 ## <a name="nx_tcp_free_port_find"></a>nx_tcp_free_port_find
@@ -4052,34 +4052,34 @@ UINT nx_tcp_free_port_find(
     UINT port, UINT *free_port_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten försöker hitta en kostnads fri TCP-port (obunden) med början från appens angivna port. Sök logiken kommer att figursättas runt om sökningen sker för att uppnå det högsta port svärdet för 0xFFFF. Om sökningen lyckas returneras den kostnads fria porten i variabeln som pekar på *free_port_ptr*.
+Den här tjänsten försöker hitta en kostnadsfri TCP-port (obunden) från den port som programmet har angett. Söklogiken omsluts om sökningen når det maximala portvärdet för 0xFFFF. Om sökningen lyckas returneras den kostnadsfria porten i variabeln som free_port_ptr *.*
 
-*Den här tjänsten kan anropas från en annan tråd och har samma port returnerad. För att förhindra det här konkurrens tillståndet kanske programmet vill placera den här tjänsten och det faktiska klient-socket-bindningen under skyddet av en mutex.*
+*Den här tjänsten kan anropas från en annan tråd och returnera samma port. För att förhindra det här rastillståndet kanske programmet vill placera den här tjänsten och den faktiska klientsocketen bindas under skyddet av en mutex.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
-- **port** Port nummer för att starta sökningen vid (1 till 0xFFFF).
-- **free_port_ptr** Pekar till målets lediga port retur värde.
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
+- **port** Portnummer för att börja söka på (1 till 0xFFFF).
+- **free_port_ptr** Pekare till returvärdet för den kostnadsfria målporten.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) den kostnads fria porten hittades.
-- **NX_NO_FREE_PORTS** (0X45) inga lediga portar hittades.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
-- **NX_INVALID_PORT** (0X46) det angivna port numret är ogiltigt.
+- **NX_SUCCESS** (0x00) Hitta den kostnadsfria porten.
+- **NX_NO_FREE_PORTS** (0x45) Inga lediga portar hittades.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
+- **NX_INVALID_PORT** (0x46) Det angivna portnumret är ogiltigt.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -4094,15 +4094,15 @@ status = nx_tcp_free_port_find(&ip_0, 12, &free_port);
 
 ### <a name="see-also"></a>Se även
 
-- nx_tcp_client_socket_bind nx_tcp_client_socket_connect,
-- nx_tcp_client_socket_port_get nx_tcp_client_socket_unbind,
+- nx_tcp_client_socket_bind, nx_tcp_client_socket_connect,
+- nx_tcp_client_socket_port_get, nx_tcp_client_socket_unbind,
 - nx_tcp_enable, nx_tcp_info_get, nx_tcp_server_socket_accept,
-- nx_tcp_server_socket_listen nx_tcp_server_socket_relisten,
-- nx_tcp_server_socket_unaccept nx_tcp_server_socket_unlisten,
-- nx_tcp_socket_bytes_available nx_tcp_socket_create,
-- nx_tcp_socket_delete nx_tcp_socket_disconnect,
-- nx_tcp_socket_info_get nx_tcp_socket_receive,
-- nx_tcp_socket_receive_queue_max_set nx_tcp_socket_send,
+- nx_tcp_server_socket_listen, nx_tcp_server_socket_relisten,
+- nx_tcp_server_socket_unaccept, nx_tcp_server_socket_unlisten,
+- nx_tcp_socket_bytes_available, nx_tcp_socket_create,
+- nx_tcp_socket_delete, nx_tcp_socket_disconnect,
+- nx_tcp_socket_info_get, nx_tcp_socket_receive,
+- nx_tcp_socket_receive_queue_max_set, nx_tcp_socket_send,
 - nx_tcp_socket_state_wait
 
 ## <a name="nx_tcp_info_get"></a>nx_tcp_info_get
@@ -4127,41 +4127,41 @@ UINT nx_tcp_info_get(
     ULONG *tcp_retransmit_packets);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten hämtar information om TCP-aktiviteter för den angivna IP-instansen.
 
-*Om en mål pekare är NX_NULL returneras inte den informationen till anroparen.*
+*Om en mål pekare NX_NULL returneras inte den informationen till anroparen.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
-- **tcp_packets_sent** Pekare till målet för det totala antalet skickade TCP-paket.
-- **tcp_bytes_sent** Pekare till målet för det totala antalet TCP-byte som har skickats.
-- **tcp_packets_received** Pekare till målet för det totala antalet mottagna TCP-paket.
-- **tcp_bytes_received** Pekare till målet för det totala antalet mottagna TCP-byte.
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
+- **tcp_packets_sent** Pekare till mål för det totala antalet TCP-paket som skickats.
+- **tcp_bytes_sent** Pekare till mål för det totala antalet TCP-byte som skickats.
+- **tcp_packets_received** Pekare till målet för det totala antalet MOTTAGNA TCP-paket.
+- **tcp_bytes_received** Pekare till mål för det totala antalet mottagna TCP-byte.
 - **tcp_invalid_packets** Pekare till målet för det totala antalet ogiltiga TCP-paket.
-- **tcp_receive_packets_dropped** Pekare till målet för det totala antalet TCP-mottagna paket som har tagits bort.
-- **tcp_checksum_errors** Pekare till målet för det totala antalet TCP-paket med fel kontroll summor.
+- **tcp_receive_packets_dropped** Pekare till mål för det totala antalet TCP-mottagningspaket som tagits bort.
+- **tcp_checksum_errors** Pekare till målet för det totala antalet TCP-paket med kontrollsummafel.
 - **tcp_connections** Pekare till målet för det totala antalet TCP-anslutningar.
-- **tcp_disconnections** Pekare till målet för det totala antalet TCP-anslutningar.
-- **tcp_connections_dropped** Pekare till målet för det totala antalet avbrutna TCP-anslutningar.
-- **tcp_retransmit_packets** Pekare till målet för det totala antalet återsända TCP-paket.
+- **tcp_disconnections** Pekare till målet för det totala antalet TCP-frånkopplingar.
+- **tcp_connections_dropped** Pekare till mål för det totala antalet TCP-anslutningar som har tagits bort.
+- **tcp_retransmit_packets** Pekare till målet för det totala antalet TCP-paket som har återöversatts.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckad hämtning av TCP-information.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
+- **NX_SUCCESS** (0x00) Lyckad TCP-informationshämtning.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -4185,15 +4185,15 @@ status = nx_tcp_info_get(&ip_0,
 
 ### <a name="see-also"></a>Se även
 
-- nx_tcp_client_socket_bind nx_tcp_client_socket_connect,
-- nx_tcp_client_socket_port_get nx_tcp_client_socket_unbind,
+- nx_tcp_client_socket_bind, nx_tcp_client_socket_connect,
+- nx_tcp_client_socket_port_get, nx_tcp_client_socket_unbind,
 - nx_tcp_enable, nx_tcp_free_port_find, nx_tcp_server_socket_accept,
-- nx_tcp_server_socket_listen nx_tcp_server_socket_relisten,
-- nx_tcp_server_socket_unaccept nx_tcp_server_socket_unlisten,
-- nx_tcp_socket_bytes_available nx_tcp_socket_create,
-- nx_tcp_socket_delete nx_tcp_socket_disconnect,
-- nx_tcp_socket_info_get nx_tcp_socket_receive,
-- nx_tcp_socket_receive_queue_max_set nx_tcp_socket_send,
+- nx_tcp_server_socket_listen, nx_tcp_server_socket_relisten,
+- nx_tcp_server_socket_unaccept, nx_tcp_server_socket_unlisten,
+- nx_tcp_socket_bytes_available, nx_tcp_socket_create,
+- nx_tcp_socket_delete, nx_tcp_socket_disconnect,
+- nx_tcp_socket_info_get, nx_tcp_socket_receive,
+- nx_tcp_socket_receive_queue_max_set, nx_tcp_socket_send,
 - nx_tcp_socket_state_wait
 
 ## <a name="nx_tcp_server_socket_accept"></a>nx_tcp_server_socket_accept
@@ -4208,39 +4208,39 @@ UINT nx_tcp_server_socket_accept(
     ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten accepterar (eller förbereder att godkänna) en begäran om TCP-anslutning till Socket för en port som tidigare har kon figurer ATS för lyssning. Den här tjänsten kan anropas omedelbart när programmet anropar lyssnings-eller återlyssnar-tjänsten, eller efter att lyssnings rutinen för lyssning anropas när klient anslutningen faktiskt finns. Om en anslutning inte kan upprättas direkt, pausas tjänsten enligt det angivna vänte alternativet.
+Den här tjänsten accepterar (eller förbereder för att acceptera) en TCP-klientsocketanslutningsbegäran för en port som tidigare har ställts in för lyssning. Den här tjänsten kan anropas omedelbart efter att programmet anropar lyssna- eller lyssnartjänsten, eller efter att återanropsrutinen för lyssnande anropas när klientanslutningen faktiskt finns. Om det inte går att upprätta en anslutning direkt pausas tjänsten enligt det angivna väntealternativet.
 
-*Programmet måste anropa **nx_tcp_server_socket_unaccept** när anslutningen inte längre behövs för att ta bort Server socketens bindning till Server porten.*
+*Programmet måste anropa **nx_tcp_server_socket_unaccept** när anslutningen inte längre behövs för att ta bort serversocketens bindning till serverporten.*
 
-*Rutinen för återanrop av program anropas inifrån IP: s hjälp tråd.*
+*Rutiner för programanrop anropas inifrån IP-adressens hjälptråd.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **socket_ptr** Pekar mot TCP-serverns socket Control-Block.
-- **wait_option** Definierar hur tjänsten fungerar när anslutningen upprättas. Vänte alternativen definieras enligt följande:
+- **socket_ptr** Pekare till TCP-serverns socketkontrollblock.
+- **wait_option** Definierar hur tjänsten beter sig när anslutningen upprättas. Väntealternativen definieras på följande sätt:
 - NX_NO_WAIT (0x00000000)
 - NX_WAIT_FOREVER (0xFFFFFFFF)
-- timeout-värde i Tick (0x00000001 till 0xFFFFFFFE)
+- timeout-värde i tick (0x00000001 via 0xFFFFFFFE)
 
 
-### <a name="return-values"></a>Retur värden
-- **NX_SUCCESS** (0X00) lyckad TCP-server-socket acceptera (passiv anslutning).
-- **NX_NOT_LISTEN_STATE** (0X36) den angivna Server-socketen är inte i ett lyssnings tillstånd.
-- **NX_IN_PROGRESS** (0X37) ingen väntan angavs, anslutnings försöket pågår.
-- **NX_WAIT_ABORTED** (0x1a) den begärda Avstängningen avbröts av ett anrop till *tx_thread_wait_abort*.
-- **NX_PTR_ERROR** (0X07) socket Point-fel.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
+### <a name="return-values"></a>Returvärden
+- **NX_SUCCESS** (0x00) Lyckad TCP-serversocket accept (passiv anslutning).
+- **NX_NOT_LISTEN_STATE** (0x36) Den angivna serversocketen är inte i ett lyssnande tillstånd.
+- **NX_IN_PROGRESS** (0x37) Ingen väntetid har angetts, anslutningsförsöket pågår.
+- **NX_WAIT_ABORTED** (0x1A) Den begärda instängningen avbröts av ett anrop *till tx_thread_wait_abort*.
+- **NX_PTR_ERROR** (0x07) Socket-pekarfel.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -4339,20 +4339,20 @@ void port_12_server_thread_entry(ULONG id)
 
 ### <a name="see-also"></a>Se även
 
-- nx_tcp_client_socket_bind nx_tcp_client_socket_connect,
-- nx_tcp_client_socket_port_get nx_tcp_client_socket_unbind,
+- nx_tcp_client_socket_bind, nx_tcp_client_socket_connect,
+- nx_tcp_client_socket_port_get, nx_tcp_client_socket_unbind,
 - nx_tcp_enable, nx_tcp_free_port_find, nx_tcp_info_get,
-- nx_tcp_server_socket_listen nx_tcp_server_socket_relisten,
-- nx_tcp_server_socket_unaccept nx_tcp_server_socket_unlisten,
-- nx_tcp_socket_bytes_available nx_tcp_socket_create,
-- nx_tcp_socket_delete nx_tcp_socket_disconnect,
-- nx_tcp_socket_info_get nx_tcp_socket_receive,
-- nx_tcp_socket_receive_queue_max_set nx_tcp_socket_send,
+- nx_tcp_server_socket_listen, nx_tcp_server_socket_relisten,
+- nx_tcp_server_socket_unaccept, nx_tcp_server_socket_unlisten,
+- nx_tcp_socket_bytes_available, nx_tcp_socket_create,
+- nx_tcp_socket_delete, nx_tcp_socket_disconnect,
+- nx_tcp_socket_info_get, nx_tcp_socket_receive,
+- nx_tcp_socket_receive_queue_max_set, nx_tcp_socket_send,
 - nx_tcp_socket_state_wait
 
 ## <a name="nx_tcp_server_socket_listen"></a>nx_tcp_server_socket_listen
 
-Aktivera lyssning för klient anslutning på TCP-port
+Aktivera lyssnande efter klientanslutning på TCP-port
 
 ### <a name="prototype"></a>Prototyp
 
@@ -4365,43 +4365,43 @@ UINT nx_tcp_server_socket_listen(
     VOID (*listen_callback)(NX_TCP_SOCKET *socket_ptr, UINT port));
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Med den här tjänsten kan du lyssna efter en klient anslutnings förfrågan på den angivna TCP-porten. När en begäran om klient anslutning tas emot binds den angivna Server sockeln till den angivna porten och den angivna funktionen för lyssnings motringning anropas.
+Med den här tjänsten kan du lyssna efter en klientanslutningsbegäran på den angivna TCP-porten. När en klientanslutningsbegäran tas emot binds den angivna serversocketen till den angivna porten och den angivna funktionen för lyssnande återanrop anropas.
 
-Bearbetningen av lyssnings rutinen för lyssning är helt upp i programmet. Den kan innehålla logik för att väcka en program tråd som sedan utför en acceptera-åtgärd. Om programmet redan har en tråd inaktive rad för accepterad bearbetning för den här socketen kanske inte rutinen för lyssnings anrop behövs.
+Bearbetningen av lyssnaranropsrutinen är helt upp till programmet. Den kan innehålla logik för att väcka en programtråd som därefter utför en accept-åtgärd. Om programmet redan har en tråd som pausas vid bearbetning av accept för den här socketen kanske inte återanropsrutinen för lyssnande behövs.
 
-Om programmet vill hantera ytterligare klient anslutningar på samma port måste ***nx_tcp_server_socket_relisten*** anropas med en tillgänglig socket (en socket i stängt tillstånd) för nästa anslutning. Ytterligare klient anslutningar köas tills tjänsten relistener anropas. När det maximala ködjup överskrids, släpps den äldsta anslutningsbegäran i stället för att köa den nya anslutningsbegäran. Det maximala ködjup anges av den här tjänsten.
+Om programmet vill hantera ytterligare klientanslutningar på samma port ***måste nx_tcp_server_socket_relisten*** anropas med en tillgänglig socket (en socket med tillståndet STÄNGD) för nästa anslutning. Tills tjänsten för återlyssning anropas köas ytterligare klientanslutningar. När det maximala ködjupet överskrids tas den äldsta anslutningsbegäran bort och den nya anslutningsbegäran köas. Maximalt ködjup anges av den här tjänsten.
 
-*Rutinen för återanrop av program anropas från den interna IP-hjälpen.*
+*Rutiner för programanrop anropas från den interna IP-hjälptråden.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
-- **port** Port nummer att lyssna på (1 till 0xFFFF).
-- **socket_ptr** Pekare till Socket som ska användas för anslutningen.
-- **listen_queue_size** Antal klient anslutnings begär Anden som kan köas.
-- **listen_callback** Program funktion som anropas när anslutningen tas emot. Om du anger ett NULL-värde är funktionen lyssnande motringning inaktive rad.
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
+- **port** Portnummer att lyssna på (1 till 0xFFFF).
+- **socket_ptr** Pekare till socket som ska användas för anslutningen.
+- **listen_queue_size** Antal klientanslutningsbegäranden som kan köas.
+- **listen_callback** Programfunktion som anropas när anslutningen tas emot. Om ett NULL-värde anges inaktiveras funktionen för att lyssna motringning.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckade TCP-ports lyssning.
-- **NX_MAX_LISTEN** (0X33) inga fler lyssnar begär ande strukturer är tillgängliga. Konstanten NX_MAX_LISTEN_REQUESTS i nx_api. h definierar hur många aktiva lyssnings begär Anden som är möjliga.
-- **NX_NOT_CLOSED** (0X35) den angivna Server socketen är inte i ett stängt tillstånd.
-- **NX_ALREADY_BOUND** (0X22) den angivna Server socketen är redan kopplad till en port.
-- **NX_DUPLICATE_LISTEN** (0X34) det finns redan en aktiv avlyssnings förfrågan för den här porten.
-- **NX_INVALID_PORT** (0X46) ogiltig Port har angetts.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-eller socket-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
+- **NX_SUCCESS** (0x00) Lyckad TCP-portlyssning aktivera.
+- **NX_MAX_LISTEN** (0x33) Inga fler strukturer för lyssna-begäran är tillgängliga. Konstanten NX_MAX_LISTEN_REQUESTS i nx_api.h definierar hur många aktiva lyssnarbegäranden som är möjliga.
+- **NX_NOT_CLOSED** (0x35) Den angivna serversocketen är inte i stängt tillstånd.
+- **NX_ALREADY_BOUND** (0x22) Den angivna serversocketen är redan bunden till en port.
+- **NX_DUPLICATE_LISTEN** (0x34) Det finns redan en aktiv lyssnarbegäran för den här porten.
+- **NX_INVALID_PORT** (0x46) Ogiltig port har angetts.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP- eller socket-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -4503,20 +4503,20 @@ nx_tcp_socket_delete(&server_socket);
 
 ### <a name="see-also"></a>Se även
 
-- nx_tcp_client_socket_bind nx_tcp_client_socket_connect,
-- nx_tcp_client_socket_port_get nx_tcp_client_socket_unbind,
+- nx_tcp_client_socket_bind, nx_tcp_client_socket_connect,
+- nx_tcp_client_socket_port_get, nx_tcp_client_socket_unbind,
 - nx_tcp_enable, nx_tcp_free_port_find, nx_tcp_info_get,
-- nx_tcp_server_socket_accept nx_tcp_server_socket_relisten,
-- nx_tcp_server_socket_unaccept nx_tcp_server_socket_unlisten,
-- nx_tcp_socket_bytes_available nx_tcp_socket_create,
-- nx_tcp_socket_delete nx_tcp_socket_disconnect,
-- nx_tcp_socket_info_get nx_tcp_socket_receive,
-- nx_tcp_socket_receive_queue_max_set nx_tcp_socket_send,
+- nx_tcp_server_socket_accept, nx_tcp_server_socket_relisten,
+- nx_tcp_server_socket_unaccept, nx_tcp_server_socket_unlisten,
+- nx_tcp_socket_bytes_available, nx_tcp_socket_create,
+- nx_tcp_socket_delete, nx_tcp_socket_disconnect,
+- nx_tcp_socket_info_get, nx_tcp_socket_receive,
+- nx_tcp_socket_receive_queue_max_set, nx_tcp_socket_send,
 - nx_tcp_socket_state_wait
 
 ## <a name="nx_tcp_server_socket_relisten"></a>nx_tcp_server_socket_relisten
 
-Lyssna efter klient anslutning på TCP-port
+Lyssna efter klientanslutning på TCP-port igen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -4527,36 +4527,36 @@ UINT nx_tcp_server_socket_relisten(
     NX_TCP_SOCKET *socket_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten anropas efter att en anslutning har tagits emot på en port som tidigare har kon figurer ATS för lyssning. Huvud syftet med den här tjänsten är att tillhandahålla en ny server-socket för nästa klient anslutning. Om en anslutningsbegäran är i kö kommer anslutningen att bearbetas omedelbart under det här tjänst anropet.
+Den här tjänsten anropas när en anslutning har tagits emot på en port som tidigare har ställts in för lyssning. Huvudsyftet med den här tjänsten är att tillhandahålla en ny serversocket för nästa klientanslutning. Om en anslutningsbegäran köas bearbetas anslutningen omedelbart under det här tjänstsamtalet.
 
-*Samma återanrops rutin som anges av den ursprungliga lyssnar förfrågan kallas även när det finns en anslutning för denna nya server-socket.*
+*Samma återanropsrutin som anges av den ursprungliga lyssna-begäran anropas också när det finns en anslutning för den nya serversocketen.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
-- **port** Port nummer att lyssna på igen (1 till 0xFFFF).
-- **socket_ptr** Socket som ska användas för nästa klient anslutning.
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
+- **port** Portnummer att lyssna på igen (1 till 0xFFFF).
+- **socket_ptr** Socket som ska användas för nästa klientanslutning.
 
-### <a name="return-values"></a>Retur värden
-- **NX_SUCCESS** (0X00) lyckade TCP-port-lyssna igen.
-- **NX_NOT_CLOSED** (0X35) den angivna Server socketen är inte i ett stängt tillstånd.
-- **NX_ALREADY_BOUND** (0X22) den angivna Server socketen är redan kopplad till en port.
-- **NX_INVALID_RELISTEN** (0X47) det finns redan en giltig socket-pekare för den här porten, eller så har den angivna porten ingen avlyssnings förfrågan aktiv.
-- **NX_CONNECTION_PENDING** (0X48) samma som NX_SUCCESS, förutom att det fanns en köade anslutningsbegäran och bearbetades under det här anropet.
-- **NX_INVALID_PORT** (0X46) ogiltig Port har angetts.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-eller lyssnande återanrops pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
+### <a name="return-values"></a>Returvärden
+- **NX_SUCCESS** (0x00) Lyckad TCP-port lyssnar om.
+- **NX_NOT_CLOSED** (0x35) Den angivna serversocketen är inte i stängt tillstånd.
+- **NX_ALREADY_BOUND** (0x22) Den angivna serversocketen är redan bunden till en port.
+- **NX_INVALID_RELISTEN** (0x47) Det finns redan en giltig socket-pekare för den här porten eller så har den angivna porten ingen aktiv lyssnarbegäran.
+- **NX_CONNECTION_PENDING** (0x48) Samma som NX_SUCCESS, förutom att det fanns en anslutningsbegäran i kö och den bearbetades under anropet.
+- **NX_INVALID_PORT** (0x46) Ogiltig port har angetts.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-adress eller lyssnar pekare för återanrop.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -4656,20 +4656,20 @@ void port_12_server_thread_entry(ULONG id)
 
 ### <a name="see-also"></a>Se även
 
-- nx_tcp_client_socket_bind nx_tcp_client_socket_connect,
-- nx_tcp_client_socket_port_get nx_tcp_client_socket_unbind,
+- nx_tcp_client_socket_bind, nx_tcp_client_socket_connect,
+- nx_tcp_client_socket_port_get, nx_tcp_client_socket_unbind,
 - nx_tcp_enable, nx_tcp_free_port_find, nx_tcp_info_get,
-- nx_tcp_server_socket_accept nx_tcp_server_socket_listen,
-- nx_tcp_server_socket_unaccept nx_tcp_server_socket_unlisten,
-- nx_tcp_socket_bytes_available nx_tcp_socket_create,
-- nx_tcp_socket_delete nx_tcp_socket_disconnect,
-- nx_tcp_socket_info_get nx_tcp_socket_receive,
-- nx_tcp_socket_receive_queue_max_set nx_tcp_socket_send,
+- nx_tcp_server_socket_accept, nx_tcp_server_socket_listen,
+- nx_tcp_server_socket_unaccept, nx_tcp_server_socket_unlisten,
+- nx_tcp_socket_bytes_available, nx_tcp_socket_create,
+- nx_tcp_socket_delete, nx_tcp_socket_disconnect,
+- nx_tcp_socket_info_get, nx_tcp_socket_receive,
+- nx_tcp_socket_receive_queue_max_set, nx_tcp_socket_send,
 - nx_tcp_socket_state_wait
 
 ## <a name="nx_tcp_server_socket_unaccept"></a>nx_tcp_server_socket_unaccept
 
-Ta bort socket-associationen med lyssnings porten
+Ta bort socketassociatiering med lyssningsport
 
 ### <a name="prototype"></a>Prototyp
 
@@ -4677,29 +4677,29 @@ Ta bort socket-associationen med lyssnings porten
 UINT nx_tcp_server_socket_unaccept(NX_TCP_SOCKET *socket_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar bort associationen mellan denna server-socket och den angivna Server porten. Programmet måste anropa tjänsten efter en från koppling eller efter ett misslyckat accept-anrop.
+Den här tjänsten tar bort associationen mellan den här serversocketen och den angivna serverporten. Programmet måste anropa den här tjänsten efter en frånkoppling eller efter ett misslyckat accept-anrop.
 
 ### <a name="parameters"></a>Parametrar
 
-- **socket_ptr** Pekare till tidigare konfigurerad server-socket-instans.
+- **socket_ptr** Pekare till tidigare konfigurera server socket-instans.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckad Server-socket accepterades inte.
-- **NX_NOT_LISTEN_STATE** (0x36)-serverns socket är i ett felaktigt tillstånd och är förmodligen inte frånkopplad.
-- **NX_PTR_ERROR** (0X07) ogiltig socket-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
+- **NX_SUCCESS** (0x00) Unaccept för lyckad serversocket.
+- **NX_NOT_LISTEN_STATE** (0x36) Server socket är i felaktigt tillstånd och är förmodligen inte frånkopplad.
+- **NX_PTR_ERROR** (0x07) Felaktig socket-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -4796,19 +4796,19 @@ void port_12_server_thread_entry(ULONG id)
 
 ### <a name="see-also"></a>Se även
 
-- nx_tcp_client_socket_bind nx_tcp_client_socket_connect,
+- nx_tcp_client_socket_bind, nx_tcp_client_socket_connect,
 - nx_tcp_client_socket_port_get, nx_tcp_client_socket_unbind, nx_tcp_enable,
 - nx_tcp_free_port_find, nx_tcp_info_get, nx_tcp_server_socket_accept,
-- nx_tcp_server_socket_listen nx_tcp_server_socket_relisten,
-- nx_tcp_server_socket_unlisten nx_tcp_socket_bytes_available,
+- nx_tcp_server_socket_listen, nx_tcp_server_socket_relisten,
+- nx_tcp_server_socket_unlisten, nx_tcp_socket_bytes_available,
 - nx_tcp_socket_create, nx_tcp_socket_delete, nx_tcp_socket_disconnect,
-- nx_tcp_socket_info_get nx_tcp_socket_receive,
-- nx_tcp_socket_receive_queue_max_set nx_tcp_socket_send,
+- nx_tcp_socket_info_get, nx_tcp_socket_receive,
+- nx_tcp_socket_receive_queue_max_set, nx_tcp_socket_send,
 - nx_tcp_socket_state_wait
 
 ## <a name="nx_tcp_server_socket_unlisten"></a>nx_tcp_server_socket_unlisten
 
-Inaktivera lyssning för klient anslutning på TCP-port
+Inaktivera lyssnande efter klientanslutning på TCP-port
 
 ### <a name="prototype"></a>Prototyp
 
@@ -4816,31 +4816,31 @@ Inaktivera lyssning för klient anslutning på TCP-port
 UINT nx_tcp_server_socket_unlisten(NX_IP *ip_ptr, UINT port);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten inaktiverar avlyssningen av en klient anslutnings förfrågan på den angivna TCP-porten.
+Den här tjänsten inaktiverar lyssnandet efter en klientanslutningsbegäran på den angivna TCP-porten.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
-- **port** Antal portar för att inaktivera lyssning (0 till 0xFFFF).
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
+- **port** Antalet portar som lyssnar (0 till och med 0xFFFF).
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) TCP-lyssning har inaktiverats.
-- Lyssning för **NX_ENTRY_NOT_FOUND** (0x16) har inte Aktiver ATS för den angivna porten.
-- **NX_INVALID_PORT** (0X46) ogiltig Port har angetts.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
+- **NX_SUCCESS** (0x00) Lyckad TCP-lyssnar inaktivera.
+- **NX_ENTRY_NOT_FOUND** (0x16) Lyssnar har inte aktiverats för den angivna porten.
+- **NX_INVALID_PORT** (0x46) Ogiltig port har angetts.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -4934,20 +4934,20 @@ void port_12_server_thread_entry(ULONG id)
 
 ### <a name="see-also"></a>Se även
 
-- nx_tcp_client_socket_bind nx_tcp_client_socket_connect,
-- nx_tcp_client_socket_port_get nx_tcp_client_socket_unbind,
+- nx_tcp_client_socket_bind, nx_tcp_client_socket_connect,
+- nx_tcp_client_socket_port_get, nx_tcp_client_socket_unbind,
 - nx_tcp_enable, nx_tcp_free_port_find, nx_tcp_info_get,
-- nx_tcp_server_socket_accept nx_tcp_server_socket_listen,
-- nx_tcp_server_socket_relisten nx_tcp_server_socket_unaccept,
-- nx_tcp_socket_bytes_available nx_tcp_socket_create,
-- nx_tcp_socket_delete nx_tcp_socket_disconnect,
-- nx_tcp_socket_info_get nx_tcp_socket_receive,
-- nx_tcp_socket_receive_queue_max_set nx_tcp_socket_send,
+- nx_tcp_server_socket_accept, nx_tcp_server_socket_listen,
+- nx_tcp_server_socket_relisten, nx_tcp_server_socket_unaccept,
+- nx_tcp_socket_bytes_available, nx_tcp_socket_create,
+- nx_tcp_socket_delete, nx_tcp_socket_disconnect,
+- nx_tcp_socket_info_get, nx_tcp_socket_receive,
+- nx_tcp_socket_receive_queue_max_set, nx_tcp_socket_send,
 - nx_tcp_socket_state_wait
 
 ## <a name="nx_tcp_socket_bytes_available"></a>nx_tcp_socket_bytes_available
 
-Hämtar antalet byte som är tillgängliga för hämtning
+Hämtar antalet tillgängliga byte för hämtning
 
 ### <a name="prototype"></a>Prototyp
 
@@ -4957,30 +4957,30 @@ UINT nx_tcp_socket_bytes_available(
     ULONG *bytes_available);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar antalet byte som är tillgängliga för hämtning i den angivna TCP-socketen. Observera att TCP-socketen måste vara ansluten.
+Den här tjänsten hämtar antalet byte som är tillgängliga för hämtning i den angivna TCP-socketen. Observera att TCP-socketen redan måste vara ansluten.
 
 ### <a name="parameters"></a>Parametrar
 
-- **socket_ptr** Pekare till tidigare skapad och ansluten TCP-socket.
-- **bytes_available** Pekare till målet för tillgängliga byte.
+- **socket_ptr** Pekare till tidigare skapade och anslutna TCP-socketar.
+- **bytes_available** Pekare till mål för tillgängliga byte.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- Tjänsten **NX_SUCCESS** (0x00) har körts. Antalet byte som är tillgängliga för läsning returneras till anroparen.
-- **NX_NOT_CONNECTED** -socketen (0x38) är inte i ett anslutet tillstånd.
-- **NX_PTR_ERROR** (0X07) ogiltiga pekare.
-- **NX_NOT_ENABLED** (0X14) TCP är inte aktiverat.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS** (0x00) tjänsten körs. Antalet byte som är tillgängliga för läsning returneras till anroparen.
+- **NX_NOT_CONNECTED** (0x38) Socket är inte i ett anslutet tillstånd.
+- **NX_PTR_ERROR** (0x07) Ogiltiga pekare.
+- **TCP NX_NOT_ENABLED** (0x14) är inte aktiverat.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -4995,20 +4995,20 @@ status = nx_tcp_socket_bytes_available(&my_socket,
 
 ### <a name="see-also"></a>Se även
 
-- nx_tcp_client_socket_bind nx_tcp_client_socket_connect,
-- nx_tcp_client_socket_port_get nx_tcp_client_socket_unbind,
+- nx_tcp_client_socket_bind, nx_tcp_client_socket_connect,
+- nx_tcp_client_socket_port_get, nx_tcp_client_socket_unbind,
 - nx_tcp_enable, nx_tcp_free_port_find, nx_tcp_info_get,
-- nx_tcp_server_socket_accept nx_tcp_server_socket_listen,
-- nx_tcp_server_socket_relisten nx_tcp_server_socket_unaccept,
-- nx_tcp_server_socket_unlisten nx_tcp_socket_create,
-- nx_tcp_socket_delete nx_tcp_socket_disconnect,
-- nx_tcp_socket_info_get nx_tcp_socket_receive,
-- nx_tcp_socket_receive_queue_max_set nx_tcp_socket_send,
+- nx_tcp_server_socket_accept, nx_tcp_server_socket_listen,
+- nx_tcp_server_socket_relisten, nx_tcp_server_socket_unaccept,
+- nx_tcp_server_socket_unlisten, nx_tcp_socket_create,
+- nx_tcp_socket_delete, nx_tcp_socket_disconnect,
+- nx_tcp_socket_info_get, nx_tcp_socket_receive,
+- nx_tcp_socket_receive_queue_max_set, nx_tcp_socket_send,
 - nx_tcp_socket_state_wait
 
 ## <a name="nx_tcp_socket_create"></a>nx_tcp_socket_create
 
-Skapa TCP-klient eller Server-socket
+Skapa TCP-klient eller serversocket
 
 ### <a name="prototype"></a>Prototyp
 
@@ -5024,18 +5024,18 @@ UINT nx_tcp_socket_create(
     VOID (*disconnect_callback)(NX_TCP_SOCKET *socket_ptr));
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skapar en TCP-klient eller Server-socket för den angivna IP-instansen.
+Den här tjänsten skapar en TCP-klient eller serversocket för den angivna IP-instansen.
 
-*Rutinen för återanrop av program anropas från tråden som är kopplad till den här IP-instansen.*
+*Rutiner för programanrop anropas från tråden som är associerad med den här IP-instansen.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
-- **socket_ptr** Pekare till nytt TCP socket Control-Block.
-- **namn** Programmets namn för denna TCP-socket.
-- **type_of_service** Definierar typ av tjänst för överföringen, de juridiska värdena är följande:
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
+- **socket_ptr** Pekare till det nya TCP-socketkontrollblocket.
+- **namn** Programnamn för den här TCP-socketen.
+- **type_of_service** Definierar typen av tjänst för överföringen. De juridiska värdena är följande:
 
 - NX_IP_NORMAL (0x00000000)
 - NX_IP_MIN_DELAY (0x00100000)
@@ -5043,26 +5043,26 @@ Den här tjänsten skapar en TCP-klient eller Server-socket för den angivna IP-
 - NX_IP_MAX_RELIABLE (0x00040000)
 - NX_IP_MIN_COST (0x00020000)
 
-- **fragment**  Anger om IP-fragmentering tillåts eller inte. Om NX_FRAGMENT_OKAY (0x0) anges tillåts IP-fragmentering. Om NX_DONT_FRAGMENT (0x4000) anges inaktive ras IP-fragmentering.
-- **time_to_live** Anger det 8-bitars värde som definierar hur många routrar det här paketet kan passera innan det utlöses. Standardvärdet anges av NX_IP_TIME_TO_LIVE.
-- **window_size** Definierar det maximala antalet byte som tillåts i mottagnings kön för denna socket
-- **urgent_data_callback** Programfunktion som anropas när brådskande data identifieras i Receive-dataströmmen. Om det här värdet är NX_NULL ignoreras brådskande data.
-- **disconnect_callback** Program funktion som anropas när en från koppling utfärdas av socketen i den andra änden av anslutningen. Om det här värdet är NX_NULL inaktive ras funktionen för motringning.
+- **fragment**  Anger om IP-fragmentering tillåts eller inte. Om NX_FRAGMENT_OKAY (0x0) anges tillåts IP-fragmentering. Om NX_DONT_FRAGMENT (0x4000) anges inaktiveras IP-fragmentering.
+- **time_to_live** Anger det 8-bitars värde som definierar hur många routrar det här paketet kan passera innan det slängs. Standardvärdet anges av NX_IP_TIME_TO_LIVE.
+- **window_size** Definierar det maximala antalet byte som tillåts i mottagningskön för den här socketen
+- **urgent_data_callback** Programfunktion som anropas när brådskande data identifieras i mottagningsströmmen. Om det här NX_NULL ignoreras brådskande data.
+- **disconnect_callback** Programfunktion som anropas när en frånkoppling utfärdas av socketen i den andra änden av anslutningen. Om det här NX_NULL inaktiveras återanropsfunktionen för frånkoppling.
 
-### <a name="return-values"></a>Retur värden
-- **NX_SUCCESS** (0X00) TCP-klient-socket har skapats.
-- **NX_OPTION_ERROR** (0X0a) ogiltigt alternativ för typ av tjänst, fragment, ogiltig fönster storlek eller tid tolive.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-eller socket-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
+### <a name="return-values"></a>Returvärden
+- **NX_SUCCESS** (0x00) Lyckad TCP-klientsocket för att skapa.
+- **NX_OPTION_ERROR** (0x0A) Ogiltig tjänsttyp, fragment, ogiltig fönsterstorlek eller time tolive-alternativ.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP- eller socket-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering och trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -5084,15 +5084,15 @@ status = nx_tcp_socket_create(&ip_0, &client_socket,
 
 ### <a name="see-also"></a>Se även
 
-- nx_tcp_client_socket_bind nx_tcp_client_socket_connect,
-- nx_tcp_client_socket_port_get nx_tcp_client_socket_unbind,
+- nx_tcp_client_socket_bind, nx_tcp_client_socket_connect,
+- nx_tcp_client_socket_port_get, nx_tcp_client_socket_unbind,
 - nx_tcp_enable, nx_tcp_free_port_find, nx_tcp_info_get,
-- nx_tcp_server_socket_accept nx_tcp_server_socket_listen,
-- nx_tcp_server_socket_relisten nx_tcp_server_socket_unaccept,
-- nx_tcp_server_socket_unlisten nx_tcp_socket_bytes_available,
-- nx_tcp_socket_delete nx_tcp_socket_disconnect,
-- nx_tcp_socket_info_get nx_tcp_socket_receive,
-- nx_tcp_socket_receive_queue_max_set nx_tcp_socket_send,
+- nx_tcp_server_socket_accept, nx_tcp_server_socket_listen,
+- nx_tcp_server_socket_relisten, nx_tcp_server_socket_unaccept,
+- nx_tcp_server_socket_unlisten, nx_tcp_socket_bytes_available,
+- nx_tcp_socket_delete, nx_tcp_socket_disconnect,
+- nx_tcp_socket_info_get, nx_tcp_socket_receive,
+- nx_tcp_socket_receive_queue_max_set, nx_tcp_socket_send,
 - nx_tcp_socket_state_wait
 
 ## <a name="nx_tcp_socket_delete"></a>nx_tcp_socket_delete
@@ -5105,30 +5105,30 @@ Ta bort TCP-socket
 UINT nx_tcp_socket_delete(NX_TCP_SOCKET *socket_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar bort en tidigare skapad TCP-socket. Om socketen fortfarande är bunden eller ansluten, returnerar tjänsten en felkod.
+Den här tjänsten tar bort en TCP-socket som skapats tidigare. Om socketen fortfarande är bunden eller ansluten returnerar tjänsten en felkod.
 
 ### <a name="parameters"></a>Parametrar
 
 - **socket_ptr** TCP-socket har skapats tidigare
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) ta bort socket.
-- Det gick inte att skapa **NX_NOT_CREATED** (0X27) socket.
-- **NX_STILL_BOUND** (0X42) socket är fortfarande kopplad.
-- **NX_PTR_ERROR** (0X07) ogiltig socket-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
+- **NX_SUCCESS** (0x00) Lyckad socket-borttagning.
+- **NX_NOT_CREATED** (0x27) Socket skapades inte.
+- **NX_STILL_BOUND** (0x42) Socket är fortfarande bunden.
+- **NX_PTR_ERROR** (0x07) Felaktig socket-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -5141,20 +5141,20 @@ status = nx_tcp_socket_delete(&client_socket);
 
 ### <a name="see-also"></a>Se även
 
-- nx_tcp_client_socket_bind nx_tcp_client_socket_connect,
-- nx_tcp_client_socket_port_get nx_tcp_client_socket_unbind,
+- nx_tcp_client_socket_bind, nx_tcp_client_socket_connect,
+- nx_tcp_client_socket_port_get, nx_tcp_client_socket_unbind,
 - nx_tcp_enable, nx_tcp_free_port_find, nx_tcp_info_get,
-- nx_tcp_server_socket_accept nx_tcp_server_socket_listen,
-- nx_tcp_server_socket_relisten nx_tcp_server_socket_unaccept,
-- nx_tcp_server_socket_unlisten nx_tcp_socket_bytes_available,
-- nx_tcp_socket_create nx_tcp_socket_disconnect,
-- nx_tcp_socket_info_get nx_tcp_socket_receive,
-- nx_tcp_socket_receive_queue_max_set nx_tcp_socket_send,
+- nx_tcp_server_socket_accept, nx_tcp_server_socket_listen,
+- nx_tcp_server_socket_relisten, nx_tcp_server_socket_unaccept,
+- nx_tcp_server_socket_unlisten, nx_tcp_socket_bytes_available,
+- nx_tcp_socket_create, nx_tcp_socket_disconnect,
+- nx_tcp_socket_info_get, nx_tcp_socket_receive,
+- nx_tcp_socket_receive_queue_max_set, nx_tcp_socket_send,
 - nx_tcp_socket_state_wait
 
 ## <a name="nx_tcp_socket_disconnect"></a>nx_tcp_socket_disconnect
 
-Koppla från klient-och Server anslutningar
+Koppla från klient- och serversocketanslutningar
 
 ### <a name="prototype"></a>Prototyp
 
@@ -5164,35 +5164,35 @@ UINT nx_tcp_socket_disconnect(
     ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten kopplar från en upprättad klient eller Server-socket-anslutning. En från koppling av en server-socket bör följas av en begäran om att ta emot begäran, medan en klient-socket som är frånkopplad är kvar i ett tillstånd som är redo för en annan anslutningsbegäran. Om från kopplings processen inte kan slutföras omedelbart pausas tjänsten enligt det angivna vänte alternativet.
+Den här tjänsten kopplar från en upprättad klient- eller serversocketanslutning. En frånkoppling av en serversocket ska följas av en icke-acceptsbegäran, medan en klientsocket som är frånkopplad lämnas i ett tillstånd som är redo för en annan anslutningsbegäran. Om frånkopplingsprocessen inte kan slutföras omedelbart pausas tjänsten enligt det angivna väntealternativet.
 
 ### <a name="parameters"></a>Parametrar
 
-- **socket_ptr** Pekare till den tidigare anslutna klienten eller Server-socket-instansen.
-- **wait_option** Definierar hur tjänsten fungerar när från koppling pågår. Vänte alternativen definieras enligt följande:
+- **socket_ptr** Pekare till en tidigare ansluten klient- eller serversocketinstans.
+- **wait_option** Definierar hur tjänsten beter sig medan frånkopplingen pågår. Väntealternativen definieras på följande sätt:
 - NX_NO_WAIT (0x00000000)
 - NX_WAIT_FOREVER (0xFFFFFFFF)
-- timeout-värde i Tick (0x00000001 till 0xFFFFFFFE)
+- timeout-värde i tick (0x00000001 via 0xFFFFFFFE)
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckades socket från kopplingen.
-- **NX_NOT_CONNECTED** (0x38) den angivna socketen är inte ansluten.
-- **NX_IN_PROGRESS** (0x37) från koppling pågår, ingen väntan har angetts.
-- **NX_WAIT_ABORTED** (0x1a) den begärda Avstängningen avbröts av ett anrop till tx_thread_wait_abort.
-- **NX_PTR_ERROR** (0X07) ogiltig socket-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
+- **NX_SUCCESS** (0x00) Lyckad socketkoppling.
+- **NX_NOT_CONNECTED** (0x38) Angiven socket är inte ansluten.
+- **NX_IN_PROGRESS** (0x37) Frånkoppling pågår har ingen väntetid angetts.
+- **NX_WAIT_ABORTED** (0x1A) Den begärda instängningen avbröts av ett anrop till tx_thread_wait_abort.
+- **NX_PTR_ERROR** (0x07) Felaktig socket-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Ja
+Yes
 
 ### <a name="example"></a>Exempel
 
@@ -5208,19 +5208,19 @@ status = nx_tcp_socket_disconnect(&client_socket, 400);
 
 ### <a name="see-also"></a>Se även
 
-- nx_tcp_client_socket_bind nx_tcp_client_socket_connect,
-- nx_tcp_client_socket_port_get nx_tcp_client_socket_unbind,
+- nx_tcp_client_socket_bind, nx_tcp_client_socket_connect,
+- nx_tcp_client_socket_port_get, nx_tcp_client_socket_unbind,
 - nx_tcp_enable, nx_tcp_free_port_find, nx_tcp_info_get,
-- nx_tcp_server_socket_accept nx_tcp_server_socket_listen,
-- nx_tcp_server_socket_relisten nx_tcp_server_socket_unaccept,
-- nx_tcp_server_socket_unlisten nx_tcp_socket_bytes_available,
+- nx_tcp_server_socket_accept, nx_tcp_server_socket_listen,
+- nx_tcp_server_socket_relisten, nx_tcp_server_socket_unaccept,
+- nx_tcp_server_socket_unlisten, nx_tcp_socket_bytes_available,
 - nx_tcp_socket_create, nx_tcp_socket_delete, nx_tcp_socket_info_get,
-- nx_tcp_socket_receive nx_tcp_socket_receive_queue_max_set,
-- nx_tcp_socket_send nx_tcp_socket_state_wait
+- nx_tcp_socket_receive, nx_tcp_socket_receive_queue_max_set,
+- nx_tcp_socket_send, nx_tcp_socket_state_wait
 
 ## <a name="nx_tcp_socket_disconnect_complete_notify"></a>nx_tcp_socket_disconnect_complete_notify
 
-Installera TCP från koppling Slutför meddela motringning
+Installera tcp disconnect complete notify callback function (Installera TCP-frånkoppling av fullständig avanropsfunktion)
 
 ### <a name="prototype"></a>Prototyp
 
@@ -5231,31 +5231,31 @@ UINT nx_tcp_socket_disconnect_complete_notify(
     (NX_TCP_SOCKET *socket_ptr));
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten registrerar en callback-funktion som anropas när en socket-från koppling har slutförts. Callback-funktionen för att koppla från TCP socket är tillgänglig om NetX har skapats med alternativet
+Den här tjänsten registrerar en återanropsfunktion som anropas när en socket-frånkoppling har slutförts. Funktionen för att koppla från TCP-socketen är tillgänglig om NetX har skapats med alternativet
 
-- ***NX_ENABLE_EXTENDED_NOTIFY_SUPPORT*** definierats.
+- ***NX_ENABLE_EXTENDED_NOTIFY_SUPPORT*** definieras.
 
 ### <a name="parameters"></a>Parametrar
 
-- **socket_ptr** Pekare till den tidigare anslutna klienten eller Server-socket-instansen.
-- **tcp_disconnect_complete_notify** Motringningsfunktionen som ska installeras.
+- **socket_ptr** Pekare till en tidigare ansluten klient- eller serversocketinstans.
+- **tcp_disconnect_complete_notify** Återanropsfunktionen som ska installeras.
 
-### <a name="return-values"></a>Retur värden
-- **NX_SUCCESS** (0x00) registrerade återanrops funktionen.
-- **NX_NOT_SUPPORTED** (0x4B) funktionen för utökad avisering är inte inbyggd i netx-biblioteket
-- **NX_PTR_ERROR** (0X07) ogiltig socket-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) TCP-funktionen är inte aktive rad.
+### <a name="return-values"></a>Returvärden
+- **NX_SUCCESS** (0x00) Har registrerat återanropsfunktionen.
+- **NX_NOT_SUPPORTED** (0x4B) Den utökade av meddela-funktionen är inte inbyggd i NetX-biblioteket
+- **NX_PTR_ERROR** (0x07) Ogiltig socket-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) TCP-funktionen är inte aktiverad.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -5268,15 +5268,15 @@ status = nx_tcp_socket_disconnect_complete_notify(&client_socket,
 ### <a name="see-also"></a>Se även
 
 - nx_tcp_enable, nx_tcp_socket_create, nx_tcp_socket_establish_notify,
-- nx_tcp_socket_mss_get nx_tcp_socket_mss_peer_get,
-- nx_tcp_socket_mss_set nx_tcp_socket_peer_info_get,
-- nx_tcp_socket_receive_notify nx_tcp_socket_timed_wait_callback,
+- nx_tcp_socket_mss_get, nx_tcp_socket_mss_peer_get,
+- nx_tcp_socket_mss_set, nx_tcp_socket_peer_info_get,
+- nx_tcp_socket_receive_notify, nx_tcp_socket_timed_wait_callback,
 - nx_tcp_socket_transmit_configure,
 - nx_tcp_socket_window_update_notify_set
 
 ## <a name="nx_tcp_socket_establish_notify"></a>nx_tcp_socket_establish_notify
 
-Ange TCP-upprättning av funktionen meddela motringning
+Ställ in TCP-upprätta funktionen för att meddela motringning
 
 ### <a name="prototype"></a>Prototyp
 
@@ -5286,30 +5286,30 @@ UINT nx_tcp_socket_establish_notify(
     VOID (*tcp_establish_notify)(NX_TCP_SOCKET *socket_ptr));
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten registrerar en callback-funktion som anropas när en TCP-socket upprättar en anslutning. TCP-socketen för att skapa en motringning är tillgänglig om NetX har skapats med alternativet ***NX_ENABLE_EXTENDED_NOTIFY_SUPPORT*** definierat.
+Den här tjänsten registrerar en återanropsfunktion som anropas när en TCP-socket upprättar en anslutning. Funktionen för att etablera återanrop för TCP-socket är tillgänglig om NetX har skapats med ***alternativet NX_ENABLE_EXTENDED_NOTIFY_SUPPORT*** definieras.
 
 ### <a name="parameters"></a>Parametrar
 
-- **socket_ptr** Pekare till den tidigare anslutna klienten eller Server-socket-instansen.
-- **tcp_establish_notify** Callback-funktionen anropas efter att en TCP-anslutning har upprättats.
+- **socket_ptr** Pekare till en tidigare ansluten klient- eller serversocketinstans.
+- **tcp_establish_notify** Återanropsfunktionen anropas när en TCP-anslutning har upprättats.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) har angett funktionen notify.
-- **NX_NOT_SUPPORTED** (0x4B) funktionen för utökad avisering är inte inbyggd i netx-biblioteket
-- **NX_PTR_ERROR** (0X07) ogiltig socket-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) TCP har inte Aktiver ATS av programmet.
+- **NX_SUCCESS** (0x00) Anger funktionen notify.
+- **NX_NOT_SUPPORTED** (0x4B) Den utökade av meddela-funktionen är inte inbyggd i NetX-biblioteket
+- **NX_PTR_ERROR** (0x07) Ogiltig socket-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) TCP har inte aktiverats av programmet.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -5321,16 +5321,16 @@ status = nx_tcp_socket_establish_notify(&client_socket, callback);
 
 ### <a name="see-also"></a>Se även
 
-- nx_tcp_enable nx_tcp_socket_create,
-- nx_tcp_socket_disconnect_complete_notify nx_tcp_socket_mss_get,
-- nx_tcp_socket_mss_peer_get nx_tcp_socket_mss_set,
-- nx_tcp_socket_peer_info_get nx_tcp_socket_receive_notify,
-- nx_tcp_socket_timed_wait_callback nx_tcp_socket_transmit_configure,
+- nx_tcp_enable, nx_tcp_socket_create,
+- nx_tcp_socket_disconnect_complete_notify, nx_tcp_socket_mss_get,
+- nx_tcp_socket_mss_peer_get, nx_tcp_socket_mss_set,
+- nx_tcp_socket_peer_info_get, nx_tcp_socket_receive_notify,
+- nx_tcp_socket_timed_wait_callback, nx_tcp_socket_transmit_configure,
 - nx_tcp_socket_window_update_notify_set
 
 ## <a name="nx_tcp_socket_info_get"></a>nx_tcp_socket_info_get
 
-Hämta information om TCP-socket-aktiviteter
+Hämta information om TCP-socketaktiviteter
 
 ### <a name="prototype"></a>Prototyp
 
@@ -5350,35 +5350,35 @@ UINT nx_tcp_socket_info_get(
     ULONG *tcp_receive_window);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar information om TCP-socket-aktiviteter för den angivna TCP socket-instansen.
+Den här tjänsten hämtar information om TCP-socketaktiviteter för den angivna TCP socket-instansen.
 
-*Om en mål pekare är NX_NULL returneras inte den informationen till anroparen.*
+*Om en mål pekare NX_NULL returneras inte den informationen till anroparen.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **socket_ptr** Pekare till den tidigare skapade TCP-socket-instansen.
-- **tcp_packets_sent** Pekare till målet för det totala antalet TCP-paket som skickats på socket.
-- **tcp_bytes_sent** Pekare till målet för det totala antalet TCP-byte som skickats på socket.
-- **tcp_packets_received** Pekare till målet för det totala antalet TCP-paket som tagits emot på socket.
-- **tcp_bytes_received** Pekare till målet för det totala antalet TCP-byte som tagits emot vid socket.
-- **tcp_retransmit_packets** Pekare till målet för det totala antalet återöverföringar av TCP-paket.
-- **tcp_packets_queued** Pekare till målet för det totala antalet köade TCP-paket på socket.
-- **tcp_checksum_errors** Pekare till målet för det totala antalet TCP-paket med fel kontroll summor på socket.
+- **socket_ptr** Pekare till tcp socketinstans som skapats tidigare.
+- **tcp_packets_sent** Pekare till mål för det totala antalet TCP-paket som skickats på socket.
+- **tcp_bytes_sent** Pekare till mål för det totala antalet TCP-byte som skickats på socket.
+- **tcp_packets_received** Pekare till målet för det totala antalet TCP-paket som tagits emot på socketen.
+- **tcp_bytes_received** Pekare till mål för det totala antalet TCP-byte som tagits emot på socket.
+- **tcp_retransmit_packets** Pekare till målet för det totala antalet TCP-paketöverföringar.
+- **tcp_packets_queued** Pekare till mål för det totala antalet köade TCP-paket på socket.
+- **tcp_checksum_errors** Pekare till målet för det totala antalet TCP-paket med kontrollsummafel på socket.
 - **tcp_socket_state** Pekare till målet för socketens aktuella tillstånd.
-- **tcp_transmit_queue_depth** Pekare till målet för det totala antalet överförings paket som fortfarande står i kö i väntan på bekräftelse.
-- **tcp_transmit_window** Pekare till målet för den aktuella överförings fönster storleken.
-- **tcp_receive_window** Pekare till målet för den aktuella storleken för mottagnings fönster.
+- **tcp_transmit_queue_depth** Pekare till målet för det totala antalet överföringspaket som fortfarande står i kö och väntar på ACK.
+- **tcp_transmit_window** Pekare till mål för den aktuella överföringsfönstrets storlek.
+- **tcp_receive_window** Pekare till målet för den aktuella mottagningsfönstrets storlek.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckades Hämta TCP-socket-information.
-- **NX_PTR_ERROR** (0X07) ogiltig socket-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
+- **NX_SUCCESS** (0x00) Lyckad hämtning av TCP-socketinformation.
+- **NX_PTR_ERROR** (0x07) Ogiltig socket-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
 ```C
 /* Retrieve TCP socket information from previously created socket_0.*/
@@ -5398,13 +5398,13 @@ status = nx_tcp_socket_info_get(&socket_0,
 /* If status is NX_SUCCESS, TCP socket information was retrieved. */
 ```
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -5428,15 +5428,15 @@ status = nx_tcp_socket_info_get(&socket_0,
 
 ### <a name="see-also"></a>Se även
 
-- nx_tcp_client_socket_bind nx_tcp_client_socket_connect,
-- nx_tcp_client_socket_port_get nx_tcp_client_socket_unbind,
+- nx_tcp_client_socket_bind, nx_tcp_client_socket_connect,
+- nx_tcp_client_socket_port_get, nx_tcp_client_socket_unbind,
 - nx_tcp_enable, nx_tcp_free_port_find, nx_tcp_info_get,
-- nx_tcp_server_socket_accept nx_tcp_server_socket_listen,
-- nx_tcp_server_socket_relisten nx_tcp_server_socket_unaccept,
-- nx_tcp_server_socket_unlisten nx_tcp_socket_bytes_available,
+- nx_tcp_server_socket_accept, nx_tcp_server_socket_listen,
+- nx_tcp_server_socket_relisten, nx_tcp_server_socket_unaccept,
+- nx_tcp_server_socket_unlisten, nx_tcp_socket_bytes_available,
 - nx_tcp_socket_create, nx_tcp_socket_delete, nx_tcp_socket_disconnect,
-- nx_tcp_socket_receive nx_tcp_socket_receive_queue_max_set,
-- nx_tcp_socket_send nx_tcp_socket_state_wait
+- nx_tcp_socket_receive, nx_tcp_socket_receive_queue_max_set,
+- nx_tcp_socket_send, nx_tcp_socket_state_wait
 
 ## <a name="nx_tcp_socket_mss_get"></a>nx_tcp_socket_mss_get
 
@@ -5450,29 +5450,29 @@ UINT nx_tcp_socket_mss_get(
     ULONG *mss);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar den angivna socketens lokala maximala segment storlek (MSS).
+Den här tjänsten hämtar den angivna socketens lokala maximal segmentstorlek (MSS).
 
 ### <a name="parameters"></a>Parametrar
 
-- **socket_ptr** Pekare till den tidigare skapade socketen.
-- **MSS** Mål för returnerad MSS.
+- **socket_ptr** Pekare till socket som skapats tidigare.
+- **mss** Mål för att returnera MSS.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) godkänd MSS Hämta.
-- **NX_PTR_ERROR** (0X07) ogiltig mål pekare för socket eller MSS.
-- **NX_NOT_ENABLED** (0X14) TCP är inte aktiverat.
-- **NX_CALLER_ERROR** (0X11) anroparen är inte en tråd eller initiering.
+- **NX_SUCCESS** (0x00) Lyckad MSS-get.
+- **NX_PTR_ERROR** (0x07) Ogiltig socket eller MSS-mål pekare.
+- **NX_NOT_ENABLED** (0x14) TCP är inte aktiverat.
+- **NX_CALLER_ERROR** (0x11) Anroparen är inte en tråd eller initiering.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering och trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -5486,17 +5486,17 @@ status = nx_tcp_socket_mss_get(&my_socket, &mss_value);
 
 ### <a name="see-also"></a>Se även
 
-- nx_tcp_enable nx_tcp_socket_create,
+- nx_tcp_enable, nx_tcp_socket_create,
 - nx_tcp_socket_disconnect_complete_notify,
-- nx_tcp_socket_establish_notify nx_tcp_socket_mss_peer_get,
-- nx_tcp_socket_mss_set nx_tcp_socket_peer_info_get,
-- nx_tcp_socket_receive_notify nx_tcp_socket_timed_wait_callback,
+- nx_tcp_socket_establish_notify, nx_tcp_socket_mss_peer_get,
+- nx_tcp_socket_mss_set, nx_tcp_socket_peer_info_get,
+- nx_tcp_socket_receive_notify, nx_tcp_socket_timed_wait_callback,
 - nx_tcp_socket_transmit_configure,
 - nx_tcp_socket_window_update_notify_set
 
 ## <a name="nx_tcp_socket_mss_peer_get"></a>nx_tcp_socket_mss_peer_get
 
-Hämta MSS för peer TCP-socketen
+Hämta MSS för peer-TCP-socketen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -5506,30 +5506,30 @@ UINT nx_tcp_socket_mss_peer_get(
     ULONG *mss);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar den maximala segment storleken (MSS) som annonseras av peer-socketen.
+Den här tjänsten hämtar maximal segmentstorlek (MSS) som annonseras av peer-socketen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **socket_ptr** Pekare till tidigare skapad och ansluten socket.
-- **MSS** Mål för att returnera MSS.
+- **socket_ptr** Pekare till tidigare skapade och anslutna socketar.
+- **mss** Mål för att returnera MSS.
 
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckad peer-MSS Hämta.
-- **NX_PTR_ERROR** (0X07) ogiltig mål pekare för socket eller MSS.
-- **NX_NOT_ENABLED** (0X14) TCP är inte aktiverat.
-- **NX_CALLER_ERROR** (0X11) anroparen är inte en tråd eller initiering.
+- **NX_SUCCESS** (0x00) Lyckad peer-MSS hämta.
+- **NX_PTR_ERROR** (0x07) Ogiltig socket eller MSS-mål pekare.
+- **NX_NOT_ENABLED** (0x14) TCP är inte aktiverat.
+- **NX_CALLER_ERROR** (0x11) Anroparen är inte en tråd eller initiering.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -5543,11 +5543,11 @@ status = nx_tcp_socket_mss_peer_get(&my_socket, &mss_value);
 
 ### <a name="see-also"></a>Se även
 
-- nx_tcp_enable nx_tcp_socket_create,
+- nx_tcp_enable, nx_tcp_socket_create,
 - nx_tcp_socket_disconnect_complete_notify,
-- nx_tcp_socket_establish_notify nx_tcp_socket_mss_get,
-- nx_tcp_socket_mss_set nx_tcp_socket_peer_info_get,
-- nx_tcp_socket_receive_notify nx_tcp_socket_timed_wait_callback,
+- nx_tcp_socket_establish_notify, nx_tcp_socket_mss_get,
+- nx_tcp_socket_mss_set, nx_tcp_socket_peer_info_get,
+- nx_tcp_socket_receive_notify, nx_tcp_socket_timed_wait_callback,
 - nx_tcp_socket_transmit_configure,
 - nx_tcp_socket_window_update_notify_set
 
@@ -5563,33 +5563,33 @@ UINT nx_tcp_socket_mss_set(
     ULONG mss);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten anger den angivna socketens största segment storlek (MSS). Observera att MSS-värdet måste ligga inom nätverks gränssnittets IP-MTU, vilket ger utrymme för IP-och TCP-huvuden.
+Den här tjänsten anger den angivna socketens maximal segmentstorlek (MSS). Observera att MSS-värdet måste finnas i nätverksgränssnittets IP MTU, vilket ger utrymme för IP- och TCP-huvuden.
 
-Den här tjänsten ska användas innan en TCP-socket startar anslutnings processen. Om tjänsten används när en TCP-anslutning har upprättats har det nya värdet ingen påverkan på anslutningen.
+Den här tjänsten ska användas innan en TCP-socket startar anslutningsprocessen. Om tjänsten används när en TCP-anslutning har upprättats har det nya värdet ingen effekt på anslutningen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **socket_ptr** Pekare till den tidigare skapade socketen.
-- **MSS** Värdet för MSS som ska anges.
+- **socket_ptr** Pekare till socket som skapats tidigare.
+- **mss** Värdet för MSS som ska anges.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) godkänd MSS-uppsättning.
-- Det angivna MSS-värdet för **NX_SIZE_ERROR** (0x09) är för stort.
-- **NX_NOT_CONNECTED** (0X38) TCP-anslutning har inte upprättats
-- **NX_PTR_ERROR** (0X07) ogiltig socket-pekare.
-- **NX_NOT_ENABLED** (0X14) TCP är inte aktiverat.
-- **NX_CALLER_ERROR** (0X11) anroparen är inte en tråd eller initiering.
+- **NX_SUCCESS** (0x00) Lyckad MSS-uppsättning.
+- **NX_SIZE_ERROR** (0x09) Det angivna MSS-värdet är för stort.
+- **NX_NOT_CONNECTED** (0x38) TCP-anslutningen har inte upprättats
+- **NX_PTR_ERROR** (0x07) Ogiltig socket-pekare.
+- **NX_NOT_ENABLED** (0x14) TCP är inte aktiverat.
+- **NX_CALLER_ERROR** (0x11) Anroparen är inte en tråd eller initiering.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering och trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -5602,17 +5602,17 @@ status = nx_tcp_socket_mss_set(&my_socket, 1000);
 
 ### <a name="see-also"></a>Se även
 
-- nx_tcp_enable nx_tcp_socket_create,
+- nx_tcp_enable, nx_tcp_socket_create,
 - nx_tcp_socket_disconnect_complete_notify,
-- nx_tcp_socket_establish_notify nx_tcp_socket_mss_get,
-- nx_tcp_socket_mss_peer_get nx_tcp_socket_peer_info_get,
-- nx_tcp_socket_receive_notify nx_tcp_socket_timed_wait_callback,
+- nx_tcp_socket_establish_notify, nx_tcp_socket_mss_get,
+- nx_tcp_socket_mss_peer_get, nx_tcp_socket_peer_info_get,
+- nx_tcp_socket_receive_notify, nx_tcp_socket_timed_wait_callback,
 - nx_tcp_socket_transmit_configure,
 - nx_tcp_socket_window_update_notify_set
 
 ## <a name="nx_tcp_socket_peer_info_get"></a>nx_tcp_socket_peer_info_get
 
-Hämta information om peer TCP-socket
+Hämta information om peer-TCP-socket
 
 ### <a name="prototype"></a>Prototyp
 
@@ -5623,31 +5623,31 @@ UINT nx_tcp_socket_peer_info_get(
     ULONG *peer_port);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar information om peer-IP-adress och port för den anslutna TCP-socketen över IP-nätverket.
+Den här tjänsten hämtar peer-IP-adress och portinformation för den anslutna TCP-socketen via IP-nätverk.
 
 ### <a name="parameters"></a>Parametrar
 
-- **socket_ptr** Pekare till den tidigare skapade TCP-socketen.
-- **peer_ip_address** Pekare till mål för peer-IP-adress i byte ordning för värden.
-- **peer_port** Pekar till mål för peer-portnummer i byte ordning för värden.
+- **socket_ptr** Pekare till TCP-socket som skapats tidigare.
+- **peer_ip_address** Pekare till mål för peer-IP-adress, i värdbyteordning.
+- **peer_port** Pekare till mål för peer-portnummer, i värdbyteordning.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- Tjänsten **NX_SUCCESS** (0x00) har körts. Peer-IP-adress och port nummer returneras till anroparen.
-- **NX_NOT_CONNECTED** -socketen (0x38) är inte i ett anslutet tillstånd.
-- **NX_PTR_ERROR** (0X07) ogiltiga pekare.
-- **NX_NOT_ENABLED** (0X14) TCP är inte aktiverat.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS** (0x00) tjänsten körs. Peer-IP-adress och portnummer returneras till anroparen.
+- **NX_NOT_CONNECTED** (0x38) Socket är inte i ett anslutet tillstånd.
+- **NX_PTR_ERROR** (0x07) Ogiltiga pekare.
+- **NX_NOT_ENABLED** (0x14) TCP är inte aktiverat.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -5661,11 +5661,11 @@ status = nx_tcp_socket_peer_info_get(&my_socket, &peer_ip_address,
 
 ### <a name="see-also"></a>Se även
 
-- nx_tcp_enable nx_tcp_socket_create,
+- nx_tcp_enable, nx_tcp_socket_create,
 - nx_tcp_socket_disconnect_complete_notify,
-- nx_tcp_socket_establish_notify nx_tcp_socket_mss_get,
-- nx_tcp_socket_mss_peer_get nx_tcp_socket_mss_set,
-- nx_tcp_socket_receive_notify nx_tcp_socket_timed_wait_callback,
+- nx_tcp_socket_establish_notify, nx_tcp_socket_mss_get,
+- nx_tcp_socket_mss_peer_get, nx_tcp_socket_mss_set,
+- nx_tcp_socket_receive_notify, nx_tcp_socket_timed_wait_callback,
 - nx_tcp_socket_transmit_configure,
 - nx_tcp_socket_window_update_notify_set
 
@@ -5682,60 +5682,60 @@ UINT nx_tcp_socket_receive(
     ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar emot TCP-data från den angivna socketen. Om inga data har placerats i kö på den angivna socketen, pausas anroparen utifrån det angivna wait-alternativet.
+Den här tjänsten tar emot TCP-data från den angivna socketen. Om inga data köas på den angivna socketen pausar anroparen baserat på det angivna väntealternativet.
 
 *Om NX_SUCCESS returneras ansvarar programmet för att släppa det mottagna paketet när det inte längre behövs.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **socket_ptr** Pekare till den tidigare skapade TCP-socket-instansen.
-- **packet_ptr** Pekare till TCP-paketfiltrering.
-- **wait_option** Definierar hur tjänsten beter sig om inga data är köade på denna socket. Vänte alternativen definieras enligt följande:
+- **socket_ptr** Pekare till tcp socketinstans som skapats tidigare.
+- **packet_ptr** Pekare till TCP-paket pekare.
+- **wait_option** Definierar hur tjänsten beter sig om inga data för närvarande köas på den här socketen. Väntealternativen definieras på följande sätt:
 - NX_NO_WAIT (0x00000000)
 - NX_WAIT_FOREVER (0xFFFFFFFF)
-- timeout-värde i Tick (0x00000001 till 0xFFFFFFFE)
+- timeout-värde i tick (0x00000001 via 0xFFFFFFFE)
 
-### <a name="return-values"></a>Retur värden
-- **NX_SUCCESS** (0X00) lyckades ta emot socket-data.
-- **NX_NOT_BOUND** (0x24)-socketen är inte kopplad än.
-- **NX_NO_PACKET** (0X01) inga data togs emot.
-- **NX_WAIT_ABORTED** (0x1a) den begärda Avstängningen avbröts av ett anrop till tx_thread_wait_abort.
-- **NX_NOT_CONNECTED** (0x38) socketen är inte längre ansluten.
-- **NX_PTR_ERROR** (0X07) ogiltig socket eller RETUR paket pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
+### <a name="return-values"></a>Returvärden
+- **NX_SUCCESS** (0x00) Lyckad socketdatain mottagning.
+- **NX_NOT_BOUND** (0x24) Socket är inte bunden ännu.
+- **NX_NO_PACKET** (0x01) Inga data tas emot.
+- **NX_WAIT_ABORTED** (0x1A) Den begärda instängningen avbröts av ett anrop till tx_thread_wait_abort.
+- **NX_NOT_CONNECTED** (0x38) Socketen är inte längre ansluten.
+- **NX_PTR_ERROR** (0x07) Ogiltig socket eller returnera paket pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
-/* Ta emot ett paket från den tidigare skapade och anslutna TCP-klientens socket. Om det inte finns något paket tillgängligt väntar du tills 200 timer-Tick innan du får upp. */status = nx_tcp_socket_receive (&client_socket &packet_ptr 200);
+/* Ta emot ett paket från den tidigare skapade och anslutna TCP-klientsocketen. Om inget paket är tillgängligt väntar du på 200 timer tick innan du ger upp. */ status = nx_tcp_socket_receive(&client_socket, &packet_ptr, 200);
 
-/* Om status är NX_SUCCESS kommer det mottagna paketet att pekas av "packet_ptr". */
+/* Om statusen NX_SUCCESS visas det mottagna paketet med "packet_ptr". */
 
 ### <a name="see-also"></a>Se även
 
-- nx_tcp_client_socket_bind nx_tcp_client_socket_connect,
-- nx_tcp_client_socket_port_get nx_tcp_client_socket_unbind,
+- nx_tcp_client_socket_bind, nx_tcp_client_socket_connect,
+- nx_tcp_client_socket_port_get, nx_tcp_client_socket_unbind,
 - nx_tcp_enable, nx_tcp_free_port_find, nx_tcp_info_get,
-- nx_tcp_server_socket_accept nx_tcp_server_socket_listen,
-- nx_tcp_server_socket_relisten nx_tcp_server_socket_unaccept,
-- nx_tcp_server_socket_unlisten nx_tcp_socket_bytes_available,
+- nx_tcp_server_socket_accept, nx_tcp_server_socket_listen,
+- nx_tcp_server_socket_relisten, nx_tcp_server_socket_unaccept,
+- nx_tcp_server_socket_unlisten, nx_tcp_socket_bytes_available,
 - nx_tcp_socket_create, nx_tcp_socket_delete, nx_tcp_socket_disconnect,
-- nx_tcp_socket_info_get nx_tcp_socket_receive_queue_max_set,
-- nx_tcp_socket_send nx_tcp_socket_state_wait
+- nx_tcp_socket_info_get, nx_tcp_socket_receive_queue_max_set,
+- nx_tcp_socket_send, nx_tcp_socket_state_wait
 
 ## <a name="nx_tcp_socket_receive_notify"></a>nx_tcp_socket_receive_notify
 
-Meddela program om mottagna paket
+Meddela tillämpningen av mottagna paket
 
 
 ### <a name="prototype"></a>Prototyp
@@ -5746,29 +5746,29 @@ UINT nx_tcp_socket_receive_notify(
     VOID (*tcp_receive_notify) (NX_TCP_SOCKET *socket_ptr));
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten konfigurerar funktionen ta emot aviserings funktion med återanrops funktionen som anges av programmet. Den här återanrops funktionen anropas sedan när ett eller flera paket tas emot på socketen. Om en NX_NULL-pekare har angetts inaktive ras funktionen notify.
+Den här tjänsten konfigurerar pekaren för receive notify-funktionen med återanropsfunktionen som anges av programmet. Den här återanropsfunktionen anropas sedan när ett eller flera paket tas emot på socketen. Om en NX_NULL pekare anges inaktiveras notify-funktionen.
 
 ### <a name="parameters"></a>Parametrar
 
 - **socket_ptr** Pekare till TCP-socketen.
-- **tcp_receive_notify** Funktionen motringning till program som anropas när ett eller flera paket tas emot på socketen.
+- **tcp_receive_notify** Funktionspekare för programanrop som anropas när ett eller flera paket tas emot på socketen.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckad socket Receive-avisering.
-- **NX_PTR_ERROR** (0X07) ogiltig socket-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) TCP-funktionen är inte aktive rad.
+- **NX_SUCCESS** (0x00) Ett meddelande om att socketen har lyckats.
+- **NX_PTR_ERROR** (0x07) Ogiltig socket-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) TCP-funktionen är inte aktiverad.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -5785,11 +5785,11 @@ status = nx_tcp_socket_receive_notify(&client_socket,
 
 ### <a name="see-also"></a>Se även
 
-- nx_tcp_enable nx_tcp_socket_create,
+- nx_tcp_enable, nx_tcp_socket_create,
 - nx_tcp_socket_disconnect_complete_notify,
-- nx_tcp_socket_establish_notify nx_tcp_socket_mss_get,
-- nx_tcp_socket_mss_peer_get nx_tcp_socket_mss_set,
-- nx_tcp_socket_peer_info_get nx_tcp_socket_timed_wait_callback,
+- nx_tcp_socket_establish_notify, nx_tcp_socket_mss_get,
+- nx_tcp_socket_mss_peer_get, nx_tcp_socket_mss_set,
+- nx_tcp_socket_peer_info_get, nx_tcp_socket_timed_wait_callback,
 - nx_tcp_socket_transmit_configure,
 - nx_tcp_socket_window_update_notify_set
 
@@ -5806,44 +5806,44 @@ UINT nx_tcp_socket_send(
     ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skickar TCP-data via en tidigare ansluten TCP-socket. Om mottagarens senaste annonserade fönster storlek är mindre än den här begäran, så pausas tjänsten om den inte har angetts. Den här tjänsten garanterar att inga paket data som är större än MSS skickas till IP-skiktet.
+Den här tjänsten skickar TCP-data via en tidigare ansluten TCP-socket. Om mottagarens senast annonserade fönsterstorlek är mindre än den här begäran, pausar tjänsten eventuellt baserat på det angivna väntealternativet. Den här tjänsten garanterar att inga paketdata som är större än MSS skickas till IP-lagret.
 
-*Om ett fel returneras ska programmet inte släppa paketet efter det här anropet. Om du gör det kan det orsaka oförutsägbara resultat, eftersom nätverks driv rutinen även försöker frigöra paketet efter överföringen.*
+*Om inget fel returneras ska programmet inte släppa paketet efter det här anropet. Detta leder till oförutsägbara resultat eftersom nätverksdrivrutinen även försöker släppa paketet efter överföringen.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **socket_ptr** Pekare till den tidigare anslutna TCP-socket-instansen.
-- **packet_ptr** TCP data paket pekare.
-- **wait_option** Definierar hur tjänsten fungerar om begäran är större än mottagarens fönster storlek. Vänte alternativen definieras enligt följande:
+- **socket_ptr** Pekare till en tidigare ansluten TCP socket-instans.
+- **packet_ptr** Pekare för TCP-datapaket.
+- **wait_option** Definierar hur tjänsten beter sig om begäran är större än mottagarens fönsterstorlek. Väntealternativen definieras på följande sätt:
 - NX_NO_WAIT (0x00000000)
 - NX_WAIT_FOREVER (0xFFFFFFFF)
-- timeout-värde i Tick (0x00000001 till 0xFFFFFFFE)
+- timeout-värde i tick (0x00000001 via 0xFFFFFFFE)
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) skickade socket-sändning.
-- **NX_NOT_BOUND** -socketen var inte kopplad till någon port.
-- **NX_NO_INTERFACE_ADDRESS** (0X50) inget lämpligt utgående gränssnitt hittades.
-- **NX_NOT_CONNECTED** -socketen (0x38) är inte längre ansluten.
-- **NX_WINDOW_OVERFLOW** -begäran (0x39) är större än mottagarens annonserade fönster storlek i byte.
-- **NX_WAIT_ABORTED** (0x1a) den begärda Avstängningen avbröts av ett anrop till tx_thread_wait_abort.
-- **NX_INVALID_PACKET** -paketet (0x12) har inte allokerats.
-- **NX_TX_QUEUE_DEPTH** (0X49) högsta tillåtna djup för överförings kön har uppnåtts.
-- **NX_OVERFLOW** (0X03) paket tilläggs pekare är ogiltig.
-- **NX_PTR_ERROR** (0X07) ogiltig socket-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
-- **NX_UNDERFLOW** (protokollnumret 0x02) paket lägga pekare är ogiltig.
+- **NX_SUCCESS** (0x00) Lyckad socket-send.
+- **NX_NOT_BOUND** (0x24) Socket var inte bunden till någon port.
+- **NX_NO_INTERFACE_ADDRESS** (0x50) Inget lämpligt utgående gränssnitt hittades.
+- **NX_NOT_CONNECTED** (0x38) Socket är inte längre ansluten.
+- **NX_WINDOW_OVERFLOW** (0x39) Begäran är större än mottagarens annonserade fönsterstorlek i byte.
+- **NX_WAIT_ABORTED** (0x1A) Den begärda instängningen avbröts av ett anrop till tx_thread_wait_abort.
+- **NX_INVALID_PACKET** (0x12) Paket allokeras inte.
+- **NX_TX_QUEUE_DEPTH** (0x49) Maximalt överföringsködjup har nåtts.
+- **NX_OVERFLOW** -paket (0x03) är ogiltig.
+- **NX_PTR_ERROR** (0x07) Felaktig socket-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
+- **NX_UNDERFLOW** (0x02) Pekaren för paketförberedelser är ogiltig.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -5858,19 +5858,19 @@ status = nx_tcp_socket_send(&client_socket, packet_ptr, 200);
 
 ### <a name="see-also"></a>Se även
 
-- nx_tcp_client_socket_bind nx_tcp_client_socket_connect,
-- nx_tcp_client_socket_port_get nx_tcp_client_socket_unbind,
+- nx_tcp_client_socket_bind, nx_tcp_client_socket_connect,
+- nx_tcp_client_socket_port_get, nx_tcp_client_socket_unbind,
 - nx_tcp_enable, nx_tcp_free_port_find, nx_tcp_info_get,
-- nx_tcp_server_socket_accept nx_tcp_server_socket_listen,
-- nx_tcp_server_socket_relisten nx_tcp_server_socket_unaccept,
-- nx_tcp_server_socket_unlisten nx_tcp_socket_bytes_available,
+- nx_tcp_server_socket_accept, nx_tcp_server_socket_listen,
+- nx_tcp_server_socket_relisten, nx_tcp_server_socket_unaccept,
+- nx_tcp_server_socket_unlisten, nx_tcp_socket_bytes_available,
 - nx_tcp_socket_create, nx_tcp_socket_delete, nx_tcp_socket_disconnect,
-- nx_tcp_socket_info_get nx_tcp_socket_receive,
-- nx_tcp_socket_receive_queue_max_set nx_tcp_socket_state_wait
+- nx_tcp_socket_info_get, nx_tcp_socket_receive,
+- nx_tcp_socket_receive_queue_max_set, nx_tcp_socket_state_wait
 
 ### <a name="nx_tcp_socket_state_wait"></a>nx_tcp_socket_state_wait
 
-Vänta tills TCP-socketen har angett ett angivet tillstånd
+Vänta tills TCP-socketen förs in i ett visst tillstånd
 
 ### <a name="prototype"></a>Prototyp
 
@@ -5880,16 +5880,16 @@ UINT nx_tcp_socket_state_wait(
     UINT desired_state, 
     ULONG wait_option);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten väntar på att socketen ska ange önskat tillstånd. Om socketen inte har önskat tillstånd pausas tjänsten enligt det angivna wait-alternativet.
+Den här tjänsten väntar på att socketen ska ange önskat tillstånd. Om socketen inte är i önskat tillstånd pausar tjänsten enligt det angivna väntealternativet.
 
 ### <a name="parameters"></a>Parametrar
 
-- **socket_ptr** Pekare till den tidigare anslutna TCP-socket-instansen.
-- **desired_state** Önskat TCP-tillstånd. Giltiga TCP-socket-tillstånd definieras enligt följande:
+- **socket_ptr** Pekare till en tidigare ansluten TCP socket-instans.
+- **desired_state** Önskat TCP-tillstånd. Giltiga TCP-socket-tillstånd definieras på följande sätt:
 - NX_TCP_CLOSED (0x01)
-- NX_TCP_LISTEN_STATE (protokollnumret 0x02)
+- NX_TCP_LISTEN_STATE (0x02)
 - NX_TCP_SYN_SENT (0x03)
 - NX_TCP_SYN_RECEIVED (0x04)
 - NX_TCP_ESTABLISHED (0x05)
@@ -5899,27 +5899,27 @@ Den här tjänsten väntar på att socketen ska ange önskat tillstånd. Om sock
 - NX_TCP_CLOSING (0x09)
 - NX_TCP_TIMED_WAIT (0x0A)
 - NX_TCP_LAST_ACK (0x0B)
-- **wait_option** Definierar hur tjänsten fungerar om det begärda läget inte finns. Vänte alternativen definieras enligt följande:
+- **wait_option** Definierar hur tjänsten beter sig om det begärda tillståndet inte finns. Väntealternativen definieras på följande sätt:
 - NX_NO_WAIT (0x00000000)
 - NX_WAIT_FOREVER (0xFFFFFFFF)
-- timeout-värde i Tick (0x00000001 till 0xFFFFFFFE)
+- timeout-värde i tick (0x00000001 via 0xFFFFFFFE)
 
-### <a name="return-values"></a>Retur värden
-- **NX_SUCCESS** (0x00) tillstånd väntar.
-- **NX_PTR_ERROR** (0X07) ogiltig socket-pekare.
-- **NX_NOT_SUCCESSFUL** (0X43) status finns inte inom angiven vänte tid.
-- **NX_WAIT_ABORTED** (0x1a) den begärda Avstängningen avbröts av ett anrop till tx_thread_wait_abort.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
-- **NX_OPTION_ERROR** (0X0a) det önskade socket-läget är ogiltigt.
+### <a name="return-values"></a>Returvärden
+- **NX_SUCCESS** (0x00) Lyckad tillståndsvänte.
+- **NX_PTR_ERROR** (0x07) Felaktig socket-pekare.
+- **NX_NOT_SUCCESSFUL** (0x43) tillstånd som inte finns inom den angivna väntetiden.
+- **NX_WAIT_ABORTED** (0x1A) Den begärda instängningen avbröts av ett anrop till tx_thread_wait_abort.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
+- **NX_OPTION_ERROR** (0x0A) Det önskade sockettillståndet är ogiltigt.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -5935,19 +5935,19 @@ status = nx_tcp_socket_state_wait(&client_socket,
 
 ### <a name="see-also"></a>Se även
 
-- nx_tcp_client_socket_bind nx_tcp_client_socket_connect,
-- nx_tcp_client_socket_port_get nx_tcp_client_socket_unbind,
+- nx_tcp_client_socket_bind, nx_tcp_client_socket_connect,
+- nx_tcp_client_socket_port_get, nx_tcp_client_socket_unbind,
 - nx_tcp_enable, nx_tcp_free_port_find, nx_tcp_info_get,
-- nx_tcp_server_socket_accept nx_tcp_server_socket_listen,
-- nx_tcp_server_socket_relisten nx_tcp_server_socket_unaccept,
-- nx_tcp_server_socket_unlisten nx_tcp_socket_bytes_available,
+- nx_tcp_server_socket_accept, nx_tcp_server_socket_listen,
+- nx_tcp_server_socket_relisten, nx_tcp_server_socket_unaccept,
+- nx_tcp_server_socket_unlisten, nx_tcp_socket_bytes_available,
 - nx_tcp_socket_create, nx_tcp_socket_delete, nx_tcp_socket_disconnect,
-- nx_tcp_socket_info_get nx_tcp_socket_receive,
-- nx_tcp_socket_receive_queue_max_set nx_tcp_socket_send
+- nx_tcp_socket_info_get, nx_tcp_socket_receive,
+- nx_tcp_socket_receive_queue_max_set, nx_tcp_socket_send
 
 ## <a name="nx_tcp_socket_timed_wait_callback"></a>nx_tcp_socket_timed_wait_callback
 
-Installera motringning för vänte läge med vänte tid
+Installera återanrop för väntetillståndet för tidsend
 
 ### <a name="prototype"></a>Prototyp
 
@@ -5957,30 +5957,30 @@ UINT nx_tcp_socket_timed_wait_callback(
     VOID (*tcp_timed_wait_callback) (NX_TCP_SOCKET *socket_ptr));
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten registrerar en callback-funktion som anropas när TCP-socketen är i vänte läge. Om du vill använda den här tjänsten måste NetX-biblioteket skapas med alternativet ***NX_ENABLE_EXTENDED_NOTIFY*** definierat.
+Den här tjänsten registrerar en återanropsfunktion som anropas när TCP-socketen är i väntetidstillstånd. Om du vill använda den här tjänsten måste NetX-biblioteket byggas med alternativet ***NX_ENABLE_EXTENDED_NOTIFY*** definierat.
 
 ### <a name="parameters"></a>Parametrar
 
-- **socket_ptr** Pekare till den tidigare anslutna klienten eller Server-socket-instansen.
-- **tcp_timed_wait_callback** Funktionen vänte tid för motringning
+- **socket_ptr** Pekare till en tidigare ansluten klient- eller serversocketinstans.
+- **tcp_timed_wait_callback** Funktionen för återanrop i tidsväntetid
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) registrerar återanrops funktionens socket
-- **NX_NOT_SUPPORTED** (0X4B) netx-biblioteket har skapats utan den utökade meddelande funktionen aktive rad.
-- **NX_PTR_ERROR** (0X07) ogiltig socket-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) TCP-funktionen är inte aktive rad.
+- **NX_SUCCESS** (0x00) Registrerar motringningsfunktionens socket
+- **NX_NOT_SUPPORTED** (0x4B) NetX-biblioteket har skapats utan att den utökade av meddela-funktionen är aktiverad.
+- **NX_PTR_ERROR** (0x07) Felaktig socket-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **TCP 0x14 funktionen** (NX_NOT_ENABLED) är inte aktiverad.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -5991,17 +5991,17 @@ nx_tcp_socket_timed_wait_callback(&client_socket, callback);
 
 ### <a name="see-also"></a>Se även
 
-- nx_tcp_enable nx_tcp_socket_create,
+- nx_tcp_enable, nx_tcp_socket_create,
 - nx_tcp_socket_disconnect_complete_notify,
-- nx_tcp_socket_establish_notify nx_tcp_socket_mss_get,
-- nx_tcp_socket_mss_peer_get nx_tcp_socket_mss_set,
-- nx_tcp_socket_peer_info_get nx_tcp_socket_receive_notify,
+- nx_tcp_socket_establish_notify, nx_tcp_socket_mss_get,
+- nx_tcp_socket_mss_peer_get, nx_tcp_socket_mss_set,
+- nx_tcp_socket_peer_info_get, nx_tcp_socket_receive_notify,
 - nx_tcp_socket_transmit_configure,
 - nx_tcp_socket_window_update_notify_set
 
 ## <a name="nx_tcp_socket_transmit_configure"></a>nx_tcp_socket_transmit_configure
 
-Konfigurera överförings parametrar för socket
+Konfigurera socketens överföringsparametrar
 
 ### <a name="prototype"></a>Prototyp
 
@@ -6014,32 +6014,32 @@ UINT nx_tcp_socket_transmit_configure(
     ULONG timeout_shift);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten konfigurerar olika överförings parametrar för den angivna TCP-socketen.
+Den här tjänsten konfigurerar olika överföringsparametrar för den angivna TCP-socketen.
 
 ### <a name="parameters"></a>Parametrar
 
 - **socket_ptr** Pekare till TCP-socketen.
-- **max_queue_depth** Högsta antal paket som får placeras i kö för överföring.
-- **tids gräns** Antal ThreadX timer-Tick som en ACK väntar innan paketet skickas igen.
-- **max_retries** Maximalt antal tillåtna försök.
-- **timeout_shift** Värde för att skifta tids gränsen för varje efterföljande försök. Värdet 0, resulterar i samma tids gräns mellan efterföljande försök. Värdet 1, dubblar tids gränsen mellan återförsök.
+- **max_queue_depth** Maximalt antal paket som får köas för överföring.
+- **tidsgräns** Antalet ThreadX-timer tick som en ACK väntar på innan paketet skickas igen.
+- **max_retries** Maximalt antal återförsök som tillåts.
+- **timeout_shift** Värde för att flytta tidsgränsen för varje efterföljande återförsök. Värdet 0 resulterar i samma tidsgräns mellan efterföljande återförsök. Värdet 1 fördubblar tidsgränsen mellan återförsöken.
 
-### <a name="return-values"></a>Retur värden
-- **NX_SUCCESS** (0x00) konfiguration av överförings-socket har slutförts.
-- **NX_PTR_ERROR** (0X07) ogiltig socket-pekare.
-- **NX_OPTION_ERROR** (0X0a) ogiltigt ködjup-alternativ.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) TCP-funktionen är inte aktive rad.
+### <a name="return-values"></a>Returvärden
+- **NX_SUCCESS** (0x00) Konfigurera lyckad överföringssocket.
+- **NX_PTR_ERROR** (0x07) Felaktig socket-pekare.
+- **NX_OPTION_ERROR** (0x0a) Alternativet Ogiltig ködjup.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **TCP 0x14 funktionen** (NX_NOT_ENABLED) är inte aktiverad.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -6056,17 +6056,17 @@ status = nx_tcp_socket_transmit_configure(&client_socket,
 
 ### <a name="see-also"></a>Se även
 
-- nx_tcp_enable nx_tcp_socket_create,
+- nx_tcp_enable, nx_tcp_socket_create,
 - nx_tcp_socket_disconnect_complete_notify,
-- nx_tcp_socket_establish_notify nx_tcp_socket_mss_get,
-- nx_tcp_socket_mss_peer_get nx_tcp_socket_mss_set,
-- nx_tcp_socket_peer_info_get nx_tcp_socket_receive_notify,
+- nx_tcp_socket_establish_notify, nx_tcp_socket_mss_get,
+- nx_tcp_socket_mss_peer_get, nx_tcp_socket_mss_set,
+- nx_tcp_socket_peer_info_get, nx_tcp_socket_receive_notify,
 - nx_tcp_socket_timed_wait_callback,
 - nx_tcp_socket_window_update_notify_set
 
 ## <a name="nx_tcp_socket_window_update_notify_set"></a>nx_tcp_socket_window_update_notify_set
 
-Meddela programmet om uppdateringar av fönster storlek
+Meddela programmet om uppdateringar av fönsterstorlek
 
 ### <a name="prototype"></a>Prototyp
 
@@ -6078,29 +6078,29 @@ UINT nx_tcp_socket_window_update_notify_set(
     (NX_TCP_SOCKET *socket_ptr));
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten installerar ett socket-fönster uppdatera motringning. Den här rutinen anropas automatiskt när den angivna socketen tar emot ett paket som anger en ökning av fönster storleken för fjärrvärden.
+Den här tjänsten installerar en uppdateringsrutin för socketfönsteruppdatering. Den här rutinen anropas automatiskt när den angivna socketen tar emot ett paket som anger en ökning av fönsterstorleken för fjärrvärden.
 
 ### <a name="parameters"></a>Parametrar
 
-- **socket_ptr** Pekare till den tidigare skapade TCP-socketen.
-- **tcp_window_update_notify** Callback-rutin som anropas när fönstrets storlek ändras. Värdet NULL inaktiverar uppdatering av fönster ändringar.
+- **socket_ptr** Pekare till TCP-socket som skapats tidigare.
+- **tcp_window_update_notify** Återanropsrutin anropas när fönsterstorleken ändras. Värdet NULL inaktiverar uppdateringen av fönsterändringen.
 
-### <a name="return-values"></a>Retur värden
-- **NX_SUCCESS** (0x00) återanrops rutinen är installerad på socketen.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_PTR_ERROR** (0X07) ogiltiga pekare.
-- **NX_NOT_ENABLED** (0X14) TCP-funktionen är inte aktive rad.
+### <a name="return-values"></a>Returvärden
+- **NX_SUCCESS** (0x00) motringning är installerad på socketen.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_PTR_ERROR** (0x07) Ogiltiga pekare.
+- **TCP 0x14 funktionen** (NX_NOT_ENABLED) är inte aktiverad.
 
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -6120,16 +6120,16 @@ void my_windows_update_callback(NX_TCP_SCOCKET *data_socket)
 
 ### <a name="see-also"></a>Se även
 
-- nx_tcp_enable nx_tcp_socket_create,
+- nx_tcp_enable, nx_tcp_socket_create,
 - nx_tcp_socket_disconnect_complete_notify,
-- nx_tcp_socket_establish_notify nx_tcp_socket_mss_get,
-- nx_tcp_socket_mss_peer_get nx_tcp_socket_mss_set,
-- nx_tcp_socket_peer_info_get nx_tcp_socket_receive_notify,
-- nx_tcp_socket_timed_wait_callback nx_tcp_socket_transmit_configure
+- nx_tcp_socket_establish_notify, nx_tcp_socket_mss_get,
+- nx_tcp_socket_mss_peer_get, nx_tcp_socket_mss_set,
+- nx_tcp_socket_peer_info_get, nx_tcp_socket_receive_notify,
+- nx_tcp_socket_timed_wait_callback, nx_tcp_socket_transmit_configure
 
 ## <a name="nx_udp_enable"></a>nx_udp_enable
 
-Aktivera UDP-komponenten för NetX
+Aktivera UDP-komponenten i NetX
 
 ### <a name="prototype"></a>Prototyp
 
@@ -6137,28 +6137,28 @@ Aktivera UDP-komponenten för NetX
 UINT nx_udp_enable(NX_IP *ip_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten aktiverar UDP-komponenten (User Datagram Protocol) i NetX. När den har Aktiver ATS kan UDP-datagram skickas och tas emot av programmet.
+Den här tjänsten aktiverar UDP-komponenten (User Datagram Protocol) i NetX. När det är aktiverat kan UDP-datagram skickas och tas emot av programmet.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckad UDP-aktivering.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_ALREADY_ENABLED** (0X15) den här komponenten har redan Aktiver ATS.
+- **NX_SUCCESS** (0x00) Lyckad UDP-aktivera.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_ALREADY_ENABLED** (0x15) Den här komponenten har redan aktiverats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar, timers
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -6173,12 +6173,12 @@ status = nx_udp_enable(&ip_0);
 ### <a name="see-also"></a>Se även
 
 - nx_udp_free_port_find, nx_udp_info_get, nx_udp_packet_info_extract,
-- nx_udp_socket_bind nx_udp_socket_bytes_available,
-- nx_udp_socket_checksum_disable nx_udp_socket_checksum_enable,
+- nx_udp_socket_bind, nx_udp_socket_bytes_available,
+- nx_udp_socket_checksum_disable, nx_udp_socket_checksum_enable,
 - nx_udp_socket_create, nx_udp_socket_delete, nx_udp_socket_info_get,
-- nx_udp_socket_port_get nx_udp_socket_receive,
-- nx_udp_socket_receive_notify nx_udp_socket_send,
-- nx_udp_socket_interface_send nx_udp_socket_unbind,
+- nx_udp_socket_port_get, nx_udp_socket_receive,
+- nx_udp_socket_receive_notify, nx_udp_socket_send,
+- nx_udp_socket_interface_send, nx_udp_socket_unbind,
 - nx_udp_source_extract
 
 ## <a name="nx_udp_free_port_find"></a>nx_udp_free_port_find
@@ -6194,35 +6194,35 @@ UINT nx_udp_free_port_find(
     UINT *free_port_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten söker efter en kostnads fri UDP-port (obunden) med början från det angivna port numret för programmet. Sök logiken kommer att figursättas runt om sökningen når det högsta port svärdet för 0xFFFF. Om sökningen lyckas returneras den kostnads fria porten i variabeln som pekar på *free_port_ptr*.
+Den här tjänsten söker efter en kostnadsfri UDP-port (obunden) från programmets angivna portnummer. Söklogiken omsluts om sökningen når det maximala portvärdet för 0xFFFF. Om sökningen lyckas returneras den kostnadsfria porten i variabeln som free_port_ptr *.*
 
-*Den här tjänsten kan anropas från en annan tråd och kan ha samma port som returneras. För att förhindra det här konkurrens tillståndet kanske programmet vill placera den här tjänsten och faktiskt socket-bindning under skyddet av en mutex.*
+*Den här tjänsten kan anropas från en annan tråd och kan returnera samma port. För att förhindra det här rastillståndet kanske programmet vill placera den här tjänsten och den faktiska socketbindningen under skyddet av en mutex.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
-- **port** Port nummer för att starta sökning (1 till 0xFFFF).
-- **free_port_ptr** Pekar på den lediga portens retur variabel.
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
+- **port** Portnummer för att starta sökningen (1 till 0xFFFF).
+- **free_port_ptr** Pekare till returvariabeln för den kostnadsfria målporten.
 
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) den kostnads fria porten hittades.
-- **NX_NO_FREE_PORTS** (0X45) inga lediga portar hittades.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
-- **NX_INVALID_PORT** (0x46) det angivna port numret är ogiltigt.
+- **NX_SUCCESS** (0x00) Lyckad hitta kostnadsfri port.
+- **NX_NO_FREE_PORTS** (0x45) Inga lediga portar hittades.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
+- **NX_INVALID_PORT** (0x46) Det angivna portnumret är ogiltigt.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -6238,12 +6238,12 @@ status = nx_udp_free_port_find(&ip_0, 12, &free_port);
 ### <a name="see-also"></a>Se även
 
 - nx_udp_enable, nx_udp_info_get, nx_udp_packet_info_extract,
-- nx_udp_socket_bind nx_udp_socket_bytes_available,
-- nx_udp_socket_checksum_disable nx_udp_socket_checksum_enable,
+- nx_udp_socket_bind, nx_udp_socket_bytes_available,
+- nx_udp_socket_checksum_disable, nx_udp_socket_checksum_enable,
 - nx_udp_socket_create, nx_udp_socket_delete, nx_udp_socket_info_get,
-- nx_udp_socket_port_get nx_udp_socket_receive,
-- nx_udp_socket_receive_notify nx_udp_socket_send,
-- nx_udp_socket_interface_send nx_udp_socket_unbind,
+- nx_udp_socket_port_get, nx_udp_socket_receive,
+- nx_udp_socket_receive_notify, nx_udp_socket_send,
+- nx_udp_socket_interface_send, nx_udp_socket_unbind,
 - nx_udp_source_extract
 
 ## <a name="nx_udp_info_get"></a>nx_udp_info_get
@@ -6264,38 +6264,38 @@ UINT nx_udp_info_get(
     ULONG *udp_checksum_errors);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten hämtar information om UDP-aktiviteter för den angivna IP-instansen.
 
-*Om en mål pekare är NX_NULL returneras inte den informationen till anroparen.*
+*Om en mål pekare NX_NULL returneras inte den informationen till anroparen.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
-- **udp_packets_sent** Pekare till målet för det totala antalet skickade UDP-paket.
-- **udp_bytes_sent** Pekare till målet för det totala antalet UDP-byte som har skickats.
-- **udp_packets_received** Pekare till målet för det totala antalet mottagna UDP-paket.
-- **udp_bytes_received** Pekare till målet för det totala antalet mottagna UDP-byte.
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
+- **udp_packets_sent** Pekare till mål för det totala antalet UDP-paket som skickats.
+- **udp_bytes_sent** Pekare till mål för det totala antalet UDP-byte som skickats.
+- **udp_packets_received** Pekare till målet för det totala antalet UDP-paket som tagits emot.
+- **udp_bytes_received** Pekare till mål för det totala antalet UDP-byte som tagits emot.
 - **udp_invalid_packets** Pekare till målet för det totala antalet ogiltiga UDP-paket.
-- **udp_receive_packets_dropped** Pekare till målet för det totala antalet mottagna UDP-paket.
-- **udp_checksum_errors** Pekare till målet för det totala antalet UDP-paket med fel kontroll summor.
+- **udp_receive_packets_dropped** Pekare till mål för det totala antalet UDP-mottagningspaket som tagits bort.
+- **udp_checksum_errors** Pekare till målet för det totala antalet UDP-paket med kontrollsummafel.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckades hämtning av UDP-information.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
+- **NX_SUCCESS** (0x00) Lyckad UDP-informationshämtning.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
 
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar och timers
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -6315,17 +6315,17 @@ status = nx_udp_info_get(&ip_0, &udp_packets_sent,
 ### <a name="see-also"></a>Se även
 
 - nx_udp_enable, nx_udp_free_port_find, nx_udp_packet_info_extract,
-- nx_udp_socket_bind nx_udp_socket_bytes_available,
-- nx_udp_socket_checksum_disable nx_udp_socket_checksum_enable,
+- nx_udp_socket_bind, nx_udp_socket_bytes_available,
+- nx_udp_socket_checksum_disable, nx_udp_socket_checksum_enable,
 - nx_udp_socket_create, nx_udp_socket_delete, nx_udp_socket_info_get,
-- nx_udp_socket_port_get nx_udp_socket_receive,
-- nx_udp_socket_receive_notify nx_udp_socket_send,
-- nx_udp_socket_interface_send nx_udp_socket_unbind,
+- nx_udp_socket_port_get, nx_udp_socket_receive,
+- nx_udp_socket_receive_notify, nx_udp_socket_send,
+- nx_udp_socket_interface_send, nx_udp_socket_unbind,
 - nx_udp_source_extract
 
 ## <a name="nx_udp_packet_info_extract"></a>nx_udp_packet_info_extract
 
-Extrahera nätverks parametrar från UDP-paket
+Extrahera nätverksparametrar från UDP-paket
 
 ### <a name="prototype"></a>Prototyp
 
@@ -6338,32 +6338,32 @@ UINT nx_udp_packet_info_extract(
     UINT *interface_index);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten extraherar nätverks parametrar, till exempel IP-adress, peer-portnummer, protokoll typ (den här tjänsten returnerar alltid UDP-typ) från ett paket som tas emot i ett inkommande gränssnitt.
+Den här tjänsten extraherar nätverksparametrar, till exempel IP-adress, peer-portnummer, protokolltyp (den här tjänsten returnerar alltid UDP-typ) från ett paket som tas emot i ett inkommande gränssnitt.
 
 ### <a name="parameters"></a>Parametrar
 
-- **packet_ptr** Pekar mot paket.
-- **ip_address** Pekare till avsändar-IP-adress.
+- **packet_ptr** Pekare till paket.
+- **ip_address** Pekare till avsändarens IP-adress.
 - **protokoll** Pekare till protokoll (UDP).
-- **port** Pekare till avsändarens port nummer.
-- **interface_index** Pekare för att ta emot gränssnitts index.
+- **port** Pekare till avsändarens portnummer.
+- **interface_index** Pekare till det mottagande gränssnittsindexet.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) paket gränssnitts data har extraherats.
-- **NX_INVALID_PACKET** -paketet (0x12) innehåller inte någon IP-ram.
-- **NX_PTR_ERROR** (0X07) ogiltigt inmatade pekare
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS** (0x00) Paketgränssnittsdata har extraherats.
+- **NX_INVALID_PACKET** -paket (0x12) innehåller inte NÅGON IP-ram.
+- **NX_PTR_ERROR** (0x07) Ogiltig pekare
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -6379,17 +6379,17 @@ status = nx_udp_packet_info_extract( packet_ptr, &ip_address,
 ### <a name="see-also"></a>Se även
 
 - nx_udp_enable, nx_udp_free_port_find, nx_udp_info_get,
-- nx_udp_socket_bind nx_udp_socket_bytes_available,
-- nx_udp_socket_checksum_disable nx_udp_socket_checksum_enable,
+- nx_udp_socket_bind, nx_udp_socket_bytes_available,
+- nx_udp_socket_checksum_disable, nx_udp_socket_checksum_enable,
 - nx_udp_socket_create, nx_udp_socket_delete, nx_udp_socket_info_get,
-- nx_udp_socket_port_get nx_udp_socket_receive,
-- nx_udp_socket_receive_notify nx_udp_socket_send,
-- nx_udp_socket_interface_send nx_udp_socket_unbind,
+- nx_udp_socket_port_get, nx_udp_socket_receive,
+- nx_udp_socket_receive_notify, nx_udp_socket_send,
+- nx_udp_socket_interface_send, nx_udp_socket_unbind,
 - nx_udp_source_extract
 
 ## <a name="nx_udp_socket_bind"></a>nx_udp_socket_bind
 
-Bind UDP-socket till UDP-port
+Binda UDP-socket till UDP-port
 
 ### <a name="prototype"></a>Prototyp
 
@@ -6400,38 +6400,38 @@ UINT nx_udp_socket_bind(
     ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten binder den tidigare skapade UDP-socketen till den angivna UDP-porten. Giltiga UDP-socketar sträcker sig från 0 till 0xFFFF. Om det begärda port numret är kopplat till en annan socket, väntar den här tjänsten på den angivna tids perioden för att socketen ska kunna bindas från Port numret.
+Den här tjänsten binder den tidigare skapade UDP-socketen till den angivna UDP-porten. Giltiga UDP-sockets sträcker sig från 0 till 0xFFFF. Om det begärda portnumret är bundet till en annan socket väntar den här tjänsten under angiven tidsperiod på att socketen ska ta bort bindningen från portnumret.
 
 ### <a name="parameters"></a>Parametrar
 
-- **socket_ptr** Pekare till den tidigare skapade UDP-instansen.
-- **port** Port nummer att binda till (1 till 0xFFFF). Om Port numret är NX_ANY_PORT (0x0000) kommer IP-instansen att söka efter nästa lediga port och använda den för bindningen.
-- **wait_option** Definierar hur tjänsten beter sig om porten redan är kopplad till en annan socket. Vänte alternativen definieras enligt följande:
+- **socket_ptr** Pekare till en UDP-socketinstans som skapats tidigare.
+- **port** Portnummer som ska bindas till (1 till 0xFFFF). Om portnumret är NX_ANY_PORT (0x0000) söker IP-instansen efter nästa kostnadsfria port och använder den för bindningen.
+- **wait_option** Definierar hur tjänsten beter sig om porten redan är bunden till en annan socket. Väntealternativen definieras på följande sätt:
 - NX_NO_WAIT (0x00000000)
 - NX_WAIT_FOREVER (0xFFFFFFFF)
-- timeout-värde i Tick (0x00000001 till 0xFFFFFFFE)
+- timeout-värde i tick (0x00000001 via 0xFFFFFFFE)
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) socket-bindning.
-- **NX_ALREADY_BOUND** (0X22) den här socketen är redan kopplad till en annan port.
-- **NX_PORT_UNAVAILABLE** -porten (0x23) är redan kopplad till en annan socket.
-- **NX_NO_FREE_PORTS** (0X45) ingen kostnads fri port.
-- **NX_WAIT_ABORTED** (0x1a) den begärda Avstängningen avbröts av ett anrop till tx_thread_wait_abort.
-- **NX_INVALID_PORT** (0X46) ogiltig Port har angetts.
-- **NX_PTR_ERROR** (0X07) ogiltig socket-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
+- **NX_SUCCESS** (0x00) Lyckad socketbindning.
+- **NX_ALREADY_BOUND** (0x22) Den här socketen är redan bunden till en annan port.
+- **NX_PORT_UNAVAILABLE** (0x23) Porten är redan bunden till en annan socket.
+- **NX_NO_FREE_PORTS** (0x45) Ingen kostnadsfri port.
+- **NX_WAIT_ABORTED** (0x1A) Den begärda instängningen avbröts av ett anrop till tx_thread_wait_abort.
+- **NX_INVALID_PORT** (0x46) Ogiltig port har angetts.
+- **NX_PTR_ERROR** (0x07) Ogiltig socket-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -6448,12 +6448,12 @@ status = nx_udp_socket_bind(&udp_socket, 12, 300);
 ### <a name="see-also"></a>Se även
 
 - nx_udp_enable, nx_udp_free_port_find, nx_udp_info_get,
-- nx_udp_packet_info_extract nx_udp_socket_bytes_available,
-- nx_udp_socket_checksum_disable nx_udp_socket_checksum_enable,
+- nx_udp_packet_info_extract, nx_udp_socket_bytes_available,
+- nx_udp_socket_checksum_disable, nx_udp_socket_checksum_enable,
 - nx_udp_socket_create, nx_udp_socket_delete, nx_udp_socket_info_get,
-- nx_udp_socket_port_get nx_udp_socket_receive,
-- nx_udp_socket_receive_notify nx_udp_socket_send,
-- nx_udp_socket_interface_send nx_udp_socket_unbind,
+- nx_udp_socket_port_get, nx_udp_socket_receive,
+- nx_udp_socket_receive_notify, nx_udp_socket_send,
+- nx_udp_socket_interface_send, nx_udp_socket_unbind,
 - nx_udp_source_extract
 
 ## <a name="nx_udp_socket_bytes_available"></a>nx_udp_socket_bytes_available
@@ -6468,30 +6468,30 @@ UINT nx_udp_socket_bytes_available(
     ULONG *bytes_available);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten hämtar antalet byte som är tillgängliga för mottagning i den angivna UDP-socketen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **socket_ptr** Pekare till den tidigare skapade UDP-socketen.
-- **bytes_available** Pekare till målet för tillgängliga byte.
+- **socket_ptr** Pekare till UDP-socket som skapats tidigare.
+- **bytes_available** Pekare till mål för tillgängliga byte.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) hämtade bytes tillgängliga byte.
-- **NX_NOT_SUCCESSFUL** -socketen (0x43) är inte kopplad till en port.
-- **NX_PTR_ERROR** (0X07) ogiltiga pekare.
-- **NX_NOT_ENABLED** (0X14) UDP-funktionen är inte aktive rad.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS** (0x00) Lyckade byte tillgänglig hämtning.
+- **NX_NOT_SUCCESSFUL** (0x43) Socket är inte bunden till en port.
+- **NX_PTR_ERROR** (0x07) Ogiltiga pekare.
+- **UDP-funktionen** NX_NOT_ENABLED (0x14) är inte aktiverad.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -6506,17 +6506,17 @@ status = nx_udp_socket_bytes_available(&my_socket, &bytes_available);
 ### <a name="see-also"></a>Se även
 
 - nx_udp_enable, nx_udp_free_port_find, nx_udp_info_get,
-- nx_udp_packet_info_extract nx_udp_socket_bind,
-- nx_udp_socket_checksum_disable nx_udp_socket_checksum_enable,
+- nx_udp_packet_info_extract, nx_udp_socket_bind,
+- nx_udp_socket_checksum_disable, nx_udp_socket_checksum_enable,
 - nx_udp_socket_create, nx_udp_socket_delete, nx_udp_socket_info_get,
-- nx_udp_socket_port_get nx_udp_socket_receive,
-- nx_udp_socket_receive_notify nx_udp_socket_send,
-- nx_udp_socket_interface_send nx_udp_socket_unbind,
+- nx_udp_socket_port_get, nx_udp_socket_receive,
+- nx_udp_socket_receive_notify, nx_udp_socket_send,
+- nx_udp_socket_interface_send, nx_udp_socket_unbind,
 - nx_udp_source_extract
 
 ## <a name="nx_udp_socket_checksum_disable"></a>nx_udp_socket_checksum_disable
 
-Inaktivera kontroll summa för UDP-socket
+Inaktivera kontrollsumma för UDP-socket
 
 ### <a name="prototype"></a>Prototyp
 
@@ -6524,31 +6524,31 @@ Inaktivera kontroll summa för UDP-socket
 UINT nx_udp_socket_checksum_disable(NX_UDP_SOCKET *socket_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten inaktiverar kontroll summan för att skicka och ta emot paket på den angivna UDP-socketen. När logiken för kontroll summa är inaktive rad läses värdet noll in i UDP-huvudets fält för kontroll summa för alla paket som skickas via denna socket. Ett värde för en kontroll summa med noll värde i UDP-huvudet signalerar mottagaren om att kontroll summan inte har beräknats för det här paketet.
+Den här tjänsten inaktiverar logiken för kontrollsumma för att skicka och ta emot paket på den angivna UDP-socketen. När logiken för kontrollsumma är inaktiverad läses värdet noll in i UDP-huvudets kontrollsummafält för alla paket som skickas via den här socketen. Ett nollvärdesvärde för kontrollsumma i UDP-huvudet signalerar till mottagaren att kontrollsumman inte har beräknats för det här paketet.
 
-Observera också att detta inte har någon inverkan om ***NX_DISABLE_UDP_RX_CHECKSUM** _ och _ *_NX_DISABLE_UDP_TX_CHECKSUM_** definieras när du tar emot och skickar UDP-paket.
+Observera också att detta inte har någon effekt om ***NX_DISABLE_UDP_RX_CHECKSUM** _ och _ *_NX_DISABLE_UDP_TX_CHECKSUM_** definieras när du tar emot och skickar UDP-paket.
 
 ### <a name="parameters"></a>Parametrar
 
-- **socket_ptr** Pekare till den tidigare skapade UDP-instansen.
+- **socket_ptr** Pekare till en UDP-socketinstans som skapats tidigare.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) inaktive ring av kontroll summa.
-- **NX_NOT_BOUND** -socketen (0x24) är inte kopplad.
-- **NX_PTR_ERROR** (0X07) ogiltig socket-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
+- **NX_SUCCESS** (0x00) Lyckad socketkontrollsumma inaktiveras.
+- **NX_NOT_BOUND** (0x24) Socket är inte bunden.
+- **NX_PTR_ERROR** (0x07) Ogiltig socket-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar, timer
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -6563,17 +6563,17 @@ status = nx_udp_socket_checksum_disable(&udp_socket);
 ### <a name="see-also"></a>Se även
 
 - nx_udp_enable, nx_udp_free_port_find, nx_udp_info_get,
-- nx_udp_packet_info_extract nx_udp_socket_bind,
-- nx_udp_socket_bytes_available nx_udp_socket_checksum_disable,
+- nx_udp_packet_info_extract, nx_udp_socket_bind,
+- nx_udp_socket_bytes_available, nx_udp_socket_checksum_disable,
 - nx_udp_socket_create, nx_udp_socket_delete, nx_udp_socket_info_get,
-- nx_udp_socket_port_get nx_udp_socket_receive,
-- nx_udp_socket_receive_notify nx_udp_socket_send,
-- nx_udp_socket_interface_send nx_udp_socket_unbind,
+- nx_udp_socket_port_get, nx_udp_socket_receive,
+- nx_udp_socket_receive_notify, nx_udp_socket_send,
+- nx_udp_socket_interface_send, nx_udp_socket_unbind,
 - nx_udp_source_extract
 
 ## <a name="nx_udp_socket_checksum_enable"></a>nx_udp_socket_checksum_enable
 
-Aktivera kontroll summa för UDP-socket
+Aktivera kontrollsumma för UDP-socket
 
 ### <a name="prototype"></a>Prototyp
 
@@ -6581,31 +6581,31 @@ Aktivera kontroll summa för UDP-socket
 UINT nx_udp_socket_checksum_enable(NX_UDP_SOCKET *socket_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten aktiverar den logiska kontroll summan för att skicka och ta emot paket på den angivna UDP-socketen. Kontroll summan täcker hela UDP-dataområdet samt ett IP-huvud för pseudo.
+Den här tjänsten aktiverar logiken för kontrollsumma för att skicka och ta emot paket på den angivna UDP-socketen. Kontrollsumman omfattar hela UDP-dataområdet samt en pseudo-IP-rubrik.
 
-Observera också att detta inte har någon påverkan om **NX_DISABLE_UDP_RX_CHECKSUM** och **NX_DISABLE_UDP_TX_CHECKSUM** definieras när UDP-paket tas emot och skickas.
+Observera också att detta inte har någon effekt **om NX_DISABLE_UDP_RX_CHECKSUM** **och NX_DISABLE_UDP_TX_CHECKSUM** definieras när du tar emot respektive skickar UDP-paket.
 
 ### <a name="parameters"></a>Parametrar
 
-- **socket_ptr** Pekare till den tidigare skapade UDP-instansen.
+- **socket_ptr** Pekare till en UDP-socketinstans som skapats tidigare.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) Enabled-kontroll Summa aktivera.
-- **NX_NOT_BOUND** -socketen (0x24) är inte kopplad.
-- **NX_PTR_ERROR** (0X07) ogiltig socket-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
+- **NX_SUCCESS** (0x00) Lyckad socketkontrollsumma aktiveras.
+- **NX_NOT_BOUND** (0x24) Socket är inte bunden.
+- **NX_PTR_ERROR** (0x07) Ogiltig socket-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar, timer
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -6620,12 +6620,12 @@ status = nx_udp_socket_checksum_enable(&udp_socket);
 ### <a name="see-also"></a>Se även
 
 - nx_udp_enable, nx_udp_free_port_find, nx_udp_info_get,
-- nx_udp_packet_info_extract nx_udp_socket_bind,
-- nx_udp_socket_bytes_available nx_udp_socket_checksum_disable,
+- nx_udp_packet_info_extract, nx_udp_socket_bind,
+- nx_udp_socket_bytes_available, nx_udp_socket_checksum_disable,
 - nx_udp_socket_create, nx_udp_socket_delete, nx_udp_socket_info_get,
-- nx_udp_socket_port_get nx_udp_socket_receive,
-- nx_udp_socket_receive_notify nx_udp_socket_send,
-- nx_udp_socket_interface_send nx_udp_socket_unbind,
+- nx_udp_socket_port_get, nx_udp_socket_receive,
+- nx_udp_socket_receive_notify, nx_udp_socket_send,
+- nx_udp_socket_interface_send, nx_udp_socket_unbind,
 - nx_udp_source_extract
 
 ## <a name="nx_udp_socket_create"></a>nx_udp_socket_create
@@ -6642,40 +6642,40 @@ UINT nx_udp_socket_create(
     UINT time_to_live, ULONG queue_maximum);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten skapar en UDP-socket för den angivna IP-instansen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ip_ptr** Pekare till den tidigare skapade IP-instansen.
-- **socket_ptr** Pekar på ny Bloc för UDP-socket.
-- **namn** Program namn för denna UDP-socket.
-- **type_of_service** Definierar typ av tjänst för överföringen, de juridiska värdena är följande:
+- **ip_ptr** Pekare till ip-instans som skapats tidigare.
+- **socket_ptr** Pekare till ny UDP socket control bloc.
+- **namn** Programnamn för den här UDP-socketen.
+- **type_of_service** Definierar typen av tjänst för överföringen. De juridiska värdena är följande:
     - NX_IP_NORMAL (0x00000000)
     - NX_IP_MIN_DELAY (0x00100000)
     - NX_IP_MAX_DATA (0x00080000)
     - NX_IP_MAX_RELIABLE (0x00040000)
     - NX_IP_MIN_COST (0x00020000)
-- **fragment** Anger om IP-fragmentering tillåts eller inte. Om NX_FRAGMENT_OKAY (0x0) anges tillåts IP-fragmentering. Om NX_DONT_FRAGMENT (0x4000) anges inaktive ras IP-fragmentering.
-- **time_to_live** Anger det 8-bitars värde som definierar hur många routrar det här paketet kan passera innan det utlöses. Standardvärdet anges av NX_IP_TIME_TO_LIVE.
-- **queue_maximum** Definierar det maximala antalet UDP-datagram som kan köas för denna socket. När gränsen för kön har uppnåtts frigörs det äldsta UDP-paketet för varje nytt paket som togs emot.
+- **fragment** Anger om IP-fragmentering tillåts eller inte. Om NX_FRAGMENT_OKAY (0x0) anges tillåts IP-fragmentering. Om NX_DONT_FRAGMENT (0x4000) har angetts inaktiveras IP-fragmentering.
+- **time_to_live** Anger det 8-bitarsvärde som definierar hur många routrar det här paketet kan passera innan det slängs. Standardvärdet anges av NX_IP_TIME_TO_LIVE.
+- **queue_maximum** Definierar det maximala antalet UDP-datagram som kan köas för den här socketen. När kögränsen har nåtts släpps det äldsta UDP-paketet för varje nytt paket som tas emot.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) Det gick inte att skapa UDP-socket.
-- **NX_OPTION_ERROR** (0X0a) ogiltigt alternativ typ-of-service, fragment eller Time-to-Live.
-- **NX_PTR_ERROR** (0X07) ogiltig IP-eller socket-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
+- **NX_SUCCESS** (0x00) Lyckad UDP-socket skapas.
+- **NX_OPTION_ERROR** (0x0A) Ogiltigt tjänst-, fragment- eller time-to-live-alternativ.
+- **NX_PTR_ERROR** (0x07) Ogiltig IP- eller socket-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering och trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -6691,13 +6691,13 @@ status = nx_udp_socket_create(&ip_0, &udp_socket, "Sample UDP Socket",
 ### <a name="see-also"></a>Se även
 
 - nx_udp_enable, nx_udp_free_port_find, nx_udp_info_get,
-- nx_udp_packet_info_extract nx_udp_socket_bind,
-- nx_udp_socket_bytes_available nx_udp_socket_checksum_disable,
-- nx_udp_socket_checksum_enable nx_udp_socket_delete,
-- nx_udp_socket_info_get nx_udp_socket_port_get,
-- nx_udp_socket_receive nx_udp_socket_receive_notify,
-- nx_udp_socket_send nx_udp_socket_interface_send,
-- nx_udp_socket_unbind nx_udp_source_extract
+- nx_udp_packet_info_extract, nx_udp_socket_bind,
+- nx_udp_socket_bytes_available, nx_udp_socket_checksum_disable,
+- nx_udp_socket_checksum_enable, nx_udp_socket_delete,
+- nx_udp_socket_info_get, nx_udp_socket_port_get,
+- nx_udp_socket_receive, nx_udp_socket_receive_notify,
+- nx_udp_socket_send, nx_udp_socket_interface_send,
+- nx_udp_socket_unbind, nx_udp_source_extract
 
 ## <a name="nx_udp_socket_delete"></a>nx_udp_socket_delete
 
@@ -6709,29 +6709,29 @@ Ta bort UDP-socket
 UINT nx_udp_socket_delete(NX_UDP_SOCKET *socket_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar bort en UDP-socket som skapats tidigare. Om socketen var kopplad till en port måste socketen vara obunden först.
+Den här tjänsten tar bort en UDP-socket som skapats tidigare. Om socketen var bunden till en port måste socketen vara obunden först.
 
 ### <a name="parameters"></a>Parametrar
 
-- **socket_ptr** Pekare till den tidigare skapade UDP-instansen.
+- **socket_ptr** Pekare till en UDP-socketinstans som skapats tidigare.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) ta bort socket.
-- **NX_STILL_BOUND** (0X42) socket är fortfarande kopplad.
-- **NX_PTR_ERROR** (0X07) ogiltig socket-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
+- **NX_SUCCESS** (0x00) Lyckad socket-borttagning.
+- **NX_STILL_BOUND** (0x42) Socket är fortfarande bunden.
+- **NX_PTR_ERROR** (0x07) Ogiltig socket-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -6746,17 +6746,17 @@ status = nx_udp_socket_delete(&udp_socket);
 ### <a name="see-also"></a>Se även
 
 - nx_udp_enable, nx_udp_free_port_find, nx_udp_info_get,
-- nx_udp_packet_info_extract nx_udp_socket_bind,
-- nx_udp_socket_bytes_available nx_udp_socket_checksum_disable,
-- nx_udp_socket_checksum_enable nx_udp_socket_create,
-- nx_udp_socket_info_get nx_udp_socket_port_get,
-- nx_udp_socket_receive nx_udp_socket_receive_notify,
-- nx_udp_socket_send nx_udp_socket_interface_send,
-- nx_udp_socket_unbind nx_udp_source_extract
+- nx_udp_packet_info_extract, nx_udp_socket_bind,
+- nx_udp_socket_bytes_available, nx_udp_socket_checksum_disable,
+- nx_udp_socket_checksum_enable, nx_udp_socket_create,
+- nx_udp_socket_info_get, nx_udp_socket_port_get,
+- nx_udp_socket_receive, nx_udp_socket_receive_notify,
+- nx_udp_socket_send, nx_udp_socket_interface_send,
+- nx_udp_socket_unbind, nx_udp_source_extract
 
 ## <a name="nx_udp_socket_info_get"></a>nx_udp_socket_info_get
 
-Hämta information om UDP-socket-aktiviteter
+Hämta information om UDP-socketaktiviteter
 
 ### <a name="prototype"></a>Prototyp
 
@@ -6772,37 +6772,37 @@ UINT nx_udp_socket_info_get(
     ULONG *udp_checksum_errors);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar information om UDP-socket-aktiviteter för den angivna UDP-socket-instansen.
+Den här tjänsten hämtar information om UDP-socketaktiviteter för den angivna UDP-socketinstansen.
 
-*Om en mål pekare är NX_NULL returneras inte den informationen till anroparen.*
+*Om en mål pekare NX_NULL returneras inte den informationen till anroparen.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **socket_ptr** Pekare till den tidigare skapade UDP socket-instansen.
-- **udp_packets_sent** Pekare till målet för det totala antalet UDP-paket som skickats på socket.
-- **udp_bytes_sent** Pekare till målet för det totala antalet UDP-byte som skickats på socket.
+- **socket_ptr** Pekare till en UDP-socketinstans som skapats tidigare.
+- **udp_packets_sent** Pekare till mål för det totala antalet UDP-paket som skickats på socket.
+- **udp_bytes_sent** Pekare till mål för det totala antalet UDP-byte som skickats på socket.
 - **udp_packets_received** Pekare till målet för det totala antalet UDP-paket som tagits emot på socket.
-- **udp_bytes_received** Pekare till målet för det totala antalet UDP-byte som tagits emot vid socket.
-- **udp_packets_queued** Pekare till målet för det totala antalet köade UDP-paket på socket.
-- **udp_receive_packets_dropped** Pekare till målet för det totala antalet UDP-mottagna paket som har tagits bort för socket på grund av att köns storlek överskrids.
-- **udp_checksum_errors** Pekare till målet för det totala antalet UDP-paket med fel kontroll summor på socket.
+- **udp_bytes_received** Pekare till målet för det totala antalet UDP-byte som tagits emot på socketen.
+- **udp_packets_queued** Pekare till mål för det totala antalet köade UDP-paket på socket.
+- **udp_receive_packets_dropped** Pekare till mål för det totala antalet UDP-mottagningspaket som tagits bort för socket på grund av att köstorleken har överskridits.
+- **udp_checksum_errors** Pekare till målet för det totala antalet UDP-paket med kontrollsummafel på socket.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckades hämtning av UDP-socket-information.
-- **NX_PTR_ERROR** (0X07) ogiltig socket-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
+- **NX_SUCCESS** (0x00) Lyckad informationshämtning av UDP-socket.
+- **NX_PTR_ERROR** (0x07) Ogiltig socket-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar och timers
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -6823,17 +6823,17 @@ status = nx_udp_socket_info_get(&socket_0,
 ### <a name="see-also"></a>Se även
 
 - nx_udp_enable, nx_udp_free_port_find, nx_udp_info_get,
-- nx_udp_packet_info_extract nx_udp_socket_bind,
-- nx_udp_socket_bytes_available nx_udp_socket_checksum_disable,
-- nx_udp_socket_checksum_enable nx_udp_socket_create,
-- nx_udp_socket_delete nx_udp_socket_port_get,
-- nx_udp_socket_receive nx_udp_socket_receive_notify,
-- nx_udp_socket_send nx_udp_socket_interface_send,
-- nx_udp_socket_unbind nx_udp_source_extract
+- nx_udp_packet_info_extract, nx_udp_socket_bind,
+- nx_udp_socket_bytes_available, nx_udp_socket_checksum_disable,
+- nx_udp_socket_checksum_enable, nx_udp_socket_create,
+- nx_udp_socket_delete, nx_udp_socket_port_get,
+- nx_udp_socket_receive, nx_udp_socket_receive_notify,
+- nx_udp_socket_send, nx_udp_socket_interface_send,
+- nx_udp_socket_unbind, nx_udp_source_extract
 
 ## <a name="nx_udp_socket_port_get"></a>nx_udp_socket_port_get
 
-Hämta port nummer som är kopplat till UDP-socket
+Upphämtning av portnummer som är bundet till UDP-socket
 
 ### <a name="prototype"></a>Prototyp
 
@@ -6841,30 +6841,30 @@ Hämta port nummer som är kopplat till UDP-socket
 UINT nx_udp_socket_port_get(NX_UDP_SOCKET *socket_ptr, UINT *port_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar det port nummer som är associerat med socketen, vilket är användbart för att hitta den port som allokerats av NetX i situationer där NX_ANY_PORT angavs vid den tidpunkt då socketen var kopplad.
+Den här tjänsten hämtar det portnummer som är associerat med socketen, vilket är användbart för att hitta porten som allokerades av NetX i situationer där NX_ANY_PORT angavs när socketen bindas.
 
 ### <a name="parameters"></a>Parametrar
 
-- **socket_ptr** Pekare till den tidigare skapade UDP-instansen.
-- **port_ptr** Pekare till målet för retur port numret. Giltiga port nummer är (1 – 0xFFFF).
+- **socket_ptr** Pekare till en UDP-socketinstans som skapats tidigare.
+- **port_ptr** Pekare till mål för returportnumret. Giltiga portnummer är (1-0xFFFF).
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) socket-bindning.
-- **NX_NOT_BOUND** (0X24) den här socketen är inte kopplad till någon port.
-- **NX_PTR_ERROR** (0X07) ogiltig socket pekare eller port retur pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
+- **NX_SUCCESS** (0x00) Lyckad socketbindning.
+- **NX_NOT_BOUND** (0x24) Den här socketen är inte bunden till en port.
+- **NX_PTR_ERROR** (0x07) Ogiltig socket-pekare eller portretur pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -6879,13 +6879,13 @@ status = nx_udp_socket_port_get(&udp_socket, &port);
 ### <a name="see-also"></a>Se även
 
 - nx_udp_enable, nx_udp_free_port_find, nx_udp_info_get,
-- nx_udp_packet_info_extract nx_udp_socket_bind,
-- nx_udp_socket_bytes_available nx_udp_socket_checksum_disable,
-- nx_udp_socket_checksum_enable nx_udp_socket_create,
-- nx_udp_socket_delete nx_udp_socket_info_get,
-- nx_udp_socket_receive nx_udp_socket_receive_notify,
-- nx_udp_socket_send nx_udp_socket_interface_send,
-- nx_udp_socket_unbind nx_udp_source_extract
+- nx_udp_packet_info_extract, nx_udp_socket_bind,
+- nx_udp_socket_bytes_available, nx_udp_socket_checksum_disable,
+- nx_udp_socket_checksum_enable, nx_udp_socket_create,
+- nx_udp_socket_delete, nx_udp_socket_info_get,
+- nx_udp_socket_receive, nx_udp_socket_receive_notify,
+- nx_udp_socket_send, nx_udp_socket_interface_send,
+- nx_udp_socket_unbind, nx_udp_source_extract
 
 ## <a name="nx_udp_socket_receive"></a>nx_udp_socket_receive
 
@@ -6900,28 +6900,28 @@ UINT nx_udp_socket_receive(
     ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar emot ett UDP-datagram från den angivna socketen. Om inget datagram har placerats i kö på den angivna socketen, pausas anroparen utifrån det angivna wait-alternativet.
+Den här tjänsten tar emot ett UDP-datagram från den angivna socketen. Om inget datagram finns i kö på den angivna socketen pausar anroparen baserat på det angivna väntealternativet.
 
 *Om NX_SUCCESS returneras ansvarar programmet för att släppa det mottagna paketet när det inte längre behövs.*
 
 ### <a name="parameters"></a>Parametrar
 
-- **socket_ptr** Pekare till den tidigare skapade UDP-instansen.
-- **packet_ptr** Pekare till paket pekare för UDP-datagram.
-- **wait_option** Definierar hur tjänsten fungerar om ett datagram inte är i kö för närvarande i kö. Vänte alternativen definieras enligt följande:
+- **socket_ptr** Pekare till en UDP-socketinstans som skapats tidigare.
+- **packet_ptr** Pekare till UDP-paket pekare för datagram.
+- **wait_option** Definierar hur tjänsten beter sig om ett datagram för närvarande inte finns i kö på den här socketen. Väntealternativen definieras på följande sätt:
 - NX_NO_WAIT (0x00000000)
 - NX_WAIT_FOREVER (0xFFFFFFFF)
-- timeout-värde i Tick (0x00000001 till 0xFFFFFFFE)
+- timeout-värde i tick (0x00000001 via 0xFFFFFFFE)
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -6938,17 +6938,17 @@ status = nx_udp_socket_receive(&udp_socket, &packet_ptr, 500);
 ### <a name="see-also"></a>Se även
 
 - nx_udp_enable, nx_udp_free_port_find, nx_udp_info_get,
-- nx_udp_packet_info_extract nx_udp_socket_bind,
-- nx_udp_socket_bytes_available nx_udp_socket_checksum_disable,
-- nx_udp_socket_checksum_enable nx_udp_socket_create,
-- nx_udp_socket_delete nx_udp_socket_info_get,
-- nx_udp_socket_port_get nx_udp_socket_receive_notify,
-- nx_udp_socket_send nx_udp_socket_interface_send,
-- nx_udp_socket_unbind nx_udp_source_extract
+- nx_udp_packet_info_extract, nx_udp_socket_bind,
+- nx_udp_socket_bytes_available, nx_udp_socket_checksum_disable,
+- nx_udp_socket_checksum_enable, nx_udp_socket_create,
+- nx_udp_socket_delete, nx_udp_socket_info_get,
+- nx_udp_socket_port_get, nx_udp_socket_receive_notify,
+- nx_udp_socket_send, nx_udp_socket_interface_send,
+- nx_udp_socket_unbind, nx_udp_source_extract
 
 ## <a name="nx_udp_socket_receive_notify"></a>nx_udp_socket_receive_notify
 
-Meddela program om varje mottaget paket
+Meddela tillämpningen av varje mottaget paket
 
 ### <a name="prototype"></a>Prototyp
 
@@ -6959,22 +6959,22 @@ UINT nx_udp_socket_receive_notify(
     (NX_UDP_SOCKET *socket_ptr));
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten ställer in en aviserings funktions pekare för funktionen motringning till funktionen motringning som anges av programmet. Den här återanrops funktionen anropas sedan när ett paket tas emot på socketen. Om det finns en NX_NULL-pekare är funktionen Receive notify inaktive rad.
+Den här tjänsten anger pekaren för receive notify-funktionen till återanropsfunktionen som anges av programmet. Den här återanropsfunktionen anropas sedan när ett paket tas emot på socketen. Om en NX_NULL-pekare anges inaktiveras receive notify-funktionen.
 
 ### <a name="parameters"></a>Parametrar
 
 - **socket_ptr** Pekare till UDP-socketen.
-- **udp_receive_notify** Funktionen motringning till program som anropas när ett paket tas emot på socketen.
+- **udp_receive_notify** Funktions pekare för återanrop av program som anropas när ett paket tas emot på socketen.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -6992,12 +6992,12 @@ status = nx_udp_socket_receive_notify(&udp_socket,
 ### <a name="see-also"></a>Se även
 
 - nx_udp_enable, nx_udp_free_port_find, nx_udp_info_get,
-- nx_udp_packet_info_extract nx_udp_socket_bind,
-- nx_udp_socket_bytes_available nx_udp_socket_checksum_disable,
-- nx_udp_socket_checksum_enable nx_udp_socket_create,
-- nx_udp_socket_delete nx_udp_socket_info_get,
+- nx_udp_packet_info_extract, nx_udp_socket_bind,
+- nx_udp_socket_bytes_available, nx_udp_socket_checksum_disable,
+- nx_udp_socket_checksum_enable, nx_udp_socket_create,
+- nx_udp_socket_delete, nx_udp_socket_info_get,
 - nx_udp_socket_port_get, nx_udp_socket_receive, nx_udp_socket_send,
-- nx_udp_socket_interface_send nx_udp_socket_unbind,
+- nx_udp_socket_interface_send, nx_udp_socket_unbind,
 - nx_udp_source_extract
 
 ## <a name="nx_udp_socket_send"></a>nx_udp_socket_send
@@ -7014,41 +7014,41 @@ UINT nx_udp_socket_send(
     UINT port);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skickar ett UDP-datagram via en tidigare skapad och kopplad UDP-socket. NetX hittar en lämplig lokal IP-adress som käll adress baserat på mål-IP-adressen. Om du vill ange ett särskilt gränssnitt och en käll-IP-adress ska programmet använda tjänsten **nx_udp_socket_interface_send** .
+Den här tjänsten skickar ett UDP-datagram via en tidigare skapad och bunden UDP-socket. NetX hittar en lämplig lokal IP-adress som källadress baserat på målets IP-adress. Om du vill ange ett specifikt gränssnitt och  en käll-IP-adress ska programmet använda nx_udp_socket_interface_send tjänsten.
 
-Observera att den här tjänsten returnerar omedelbart oavsett om UDP-datagramet har skickats.
+Observera att den här tjänsten returnerar omedelbart oavsett om UDP-datagrammet har skickats.
 
-Socketen måste vara kopplad till en lokal port.
+Socketen måste vara bunden till en lokal port.
 
 ### <a name="parameters"></a>Parametrar
 
-- **socket_ptr** Pekare till den tidigare skapade UDP-instansen
-- **packet_ptr** Paket pekare för UDP-datagram
+- **socket_ptr** Pekare till en UDP-socketinstans som skapats tidigare
+- **packet_ptr** Pekare för UDP-datagrampaket
 - **ip_address** Mål-IP-adress
-- **port** Giltigt mål port nummer mellan 1 och 0Xffffffff) i värdens byte ordning
+- **port** Giltigt målportnummer mellan 1 och 0xFFFF) i värdbyteordning
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckades UDP socket Send
-- **NX_NOT_BOUND** -sockel (0x24) är inte kopplad till någon port
+- **NX_SUCCESS** (0x00) Lyckad UDP-socketssändning
+- **NX_NOT_BOUND** (0x24) Socket som inte är bunden till någon port
 - **NX_NO_INTERFACE_ADDRESS** (0x50) Det går inte att hitta något lämpligt utgående gränssnitt.
-- **NX_IP_ADDRESS_ERROR** (0X21) ogiltig Server-IP-adress
-- **NX_UNDERFLOW** (protokollnumret 0x02) inte tillräckligt med utrymme för UDP-huvudet i paketet
-- **NX_OVERFLOW** (0X03) paket tilläggs pekare är ogiltig
-- **NX_PTR_ERROR** (0X07) ogiltig socket-pekare
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten
-- **NX_NOT_ENABLED** (0X14) UDP har inte Aktiver ATS
-- **NX_INVALID_PORT** (0X46) port numret är inte inom ett giltigt intervall
+- **NX_IP_ADDRESS_ERROR** (0x21) Ogiltig server-IP-adress
+- **NX_UNDERFLOW** (0x02) Det finns inte tillräckligt med utrymme för UDP-huvudet i paketet
+- **NX_OVERFLOW** (0x03) Pekaren för tilläggspaket är ogiltig
+- **NX_PTR_ERROR** (0x07) Ogiltig socket-pekare
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten
+- **NX_NOT_ENABLED** (0x14) UDP har inte aktiverats
+- **NX_INVALID_PORT** (0x46) Portnumret ligger inte inom ett giltigt intervall
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -7069,13 +7069,13 @@ status = nx_udp_socket_send(&client_socket, packet_ptr,
 ### <a name="see-also"></a>Se även
 
 - nx_udp_enable, nx_udp_free_port_find, nx_udp_info_get,
-- nx_udp_packet_info_extract nx_udp_socket_bind,
-- nx_udp_socket_bytes_available nx_udp_socket_checksum_disable,
-- nx_udp_socket_checksum_enable nx_udp_socket_create,
-- nx_udp_socket_delete nx_udp_socket_info_get,
-- nx_udp_socket_port_get nx_udp_socket_receive,
-- nx_udp_socket_receive_notify nx_udp_socket_interface_send,
-- nx_udp_socket_unbind nx_udp_source_extract
+- nx_udp_packet_info_extract, nx_udp_socket_bind,
+- nx_udp_socket_bytes_available, nx_udp_socket_checksum_disable,
+- nx_udp_socket_checksum_enable, nx_udp_socket_create,
+- nx_udp_socket_delete, nx_udp_socket_info_get,
+- nx_udp_socket_port_get, nx_udp_socket_receive,
+- nx_udp_socket_receive_notify, nx_udp_socket_interface_send,
+- nx_udp_socket_unbind, nx_udp_source_extract
 
 ## <a name="nx_udp_socket_interface_send"></a>nx_udp_socket_interface_send
 
@@ -7092,38 +7092,38 @@ UINT nx_udp_socket_interface_send(
     UINT address_index);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skickar ett UDP-datagram via en tidigare skapad och kopplad UDP-socket via nätverks gränssnittet med den angivna IP-adressen som käll adress. Observera att tjänsten returnerar omedelbart, oavsett om UDP-datagramet har skickats eller inte.
+Den här tjänsten skickar ett UDP-datagram via en tidigare skapad och bunden UDP-socket via nätverksgränssnittet med den angivna IP-adressen som källadress. Observera att tjänsten returnerar omedelbart, oavsett om UDP-datagrammet har skickats eller inte.
 
 ### <a name="parameters"></a>Parametrar
 
-- **socket_ptr** Socket för att överföra paketet.
-- **packet_ptr** Pekare till paket att överföra.
-- **ip_address** Mål-IP-adress att skicka paket.
+- **socket_ptr** Socket för att överföra paketet ut på.
+- **packet_ptr** Pekare till paket som ska överföras.
+- **ip_address** Mål-IP-adress för att skicka paket.
 - **port** Målport.
-- **address_index** Index för den adress som är associerad med det gränssnitt som ska användas för att skicka paket.
+- **address_index** Index för den adress som är associerad med gränssnittet för att skicka paket.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESSs** paket (0x00) har skickats.
-- **NX_NOT_BOUND** -socketen (0x24) är inte kopplad till en port.
-- **NX_IP_ADDRESS_ERROR** (0X21) ogiltig IP-adress.
-- **NX_NOT_ENABLED** (0X14) UDP-bearbetning är inte aktiverat.
-- **NX_PTR_ERROR** (0X07) ogiltig pekare.
-- **NX_OVERFLOW** (0X03) ogiltig paket tilläggs pekare.
-- **NX_UNDERFLOW** (protokollnumret 0x02) ogiltig lägga pekare för paket.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_INVALID_INTERFACE** (0X4C) ogiltigt adress index.
-- **NX_INVALID_PORT** (0X46) port numret överskrider det högsta port numret.
+- **NX_SUCCESS** paket (0x00) har skickats.
+- **NX_NOT_BOUND** (0x24) Socket som inte är bunden till en port.
+- **NX_IP_ADDRESS_ERROR** (0x21) Ogiltig IP-adress.
+- **NX_NOT_ENABLED** (0x14) UDP-bearbetning har inte aktiverats.
+- **NX_PTR_ERROR** (0x07) Ogiltig pekare.
+- **NX_OVERFLOW** (0x03) Pekare för ogiltigt paketfördr dess tillägg.
+- **NX_UNDERFLOW** (0x02) Ogiltig pekare för paketförberedelser.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_INVALID_INTERFACE** (0x4C) Ogiltigt adressindex.
+- **NX_INVALID_PORT** (0x46) Portnumret överskrider det maximala portnumret.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -7142,17 +7142,17 @@ status = nx_udp_packet_interface_send(socket_ptr, packet_ptr,
 ### <a name="see-also"></a>Se även
 
 - nx_udp_enable, nx_udp_free_port_find, nx_udp_info_get,
-- nx_udp_packet_info_extract nx_udp_socket_bind,
-- nx_udp_socket_bytes_available nx_udp_socket_checksum_disable,
-- nx_udp_socket_checksum_enable nx_udp_socket_create,
-- nx_udp_socket_delete nx_udp_socket_info_get,
-- nx_udp_socket_port_get nx_udp_socket_receive,
-- nx_udp_socket_receive_notify nx_udp_socket_send,
+- nx_udp_packet_info_extract, nx_udp_socket_bind,
+- nx_udp_socket_bytes_available, nx_udp_socket_checksum_disable,
+- nx_udp_socket_checksum_enable, nx_udp_socket_create,
+- nx_udp_socket_delete, nx_udp_socket_info_get,
+- nx_udp_socket_port_get, nx_udp_socket_receive,
+- nx_udp_socket_receive_notify, nx_udp_socket_send,
 - nx_udp_socket_unbind
 
 ## <a name="nx_udp_socket_unbind"></a>nx_udp_socket_unbind
 
-Bind UDP-socketen från UDP-porten.
+Ta bort bindning för UDP-socket från UDP-porten.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -7160,31 +7160,31 @@ Bind UDP-socketen från UDP-porten.
 UINT nx_udp_socket_unbind(NX_UDP_SOCKET *socket_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten frigör bindningen mellan UDP-socketen och en UDP-port. Alla mottagna paket som lagras i mottagnings kön frigörs som en del av Unbind-åtgärden.
+Den här tjänsten släpper bindningen mellan UDP-socketen och en UDP-port. Mottagna paket som lagras i mottagningskön släpps som en del av unbind-åtgärden.
 
 Om det finns andra trådar som väntar på att binda en annan socket till den obundna porten, binds den första pausade tråden till den nyligen obundna porten.
 
 ### <a name="parameters"></a>Parametrar
 
-- **socket_ptr** Pekare till den tidigare skapade UDP-instansen.
+- **socket_ptr** Pekare till en UDP-socketinstans som skapats tidigare.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) uppkopplad socket-bindning.
-- **NX_NOT_BOUND** -socketen var inte kopplad till någon port.
-- **NX_PTR_ERROR** (0X07) ogiltig socket-pekare.
-- **NX_CALLER_ERROR** (0X11) ogiltig anropare för den här tjänsten.
-- **NX_NOT_ENABLED** (0X14) den här komponenten har inte Aktiver ATS.
+- **NX_SUCCESS** (0x00) Lyckad socket-unbind.
+- **NX_NOT_BOUND** (0x24) Socket var inte bunden till någon port.
+- **NX_PTR_ERROR** (0x07) Ogiltig socket-pekare.
+- **NX_CALLER_ERROR** (0x11) Ogiltig anropare för den här tjänsten.
+- **NX_NOT_ENABLED** (0x14) Den här komponenten har inte aktiverats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Ja
+Yes
 
 ### <a name="example"></a>Exempel
 
@@ -7199,13 +7199,13 @@ status = nx_udp_socket_unbind(&udp_socket);
 ### <a name="see-also"></a>Se även
 
 - nx_udp_enable, nx_udp_free_port_find, nx_udp_info_get,
-- nx_udp_packet_info_extract nx_udp_socket_bind,
-- nx_udp_socket_bytes_available nx_udp_socket_checksum_disable,
-- nx_udp_socket_checksum_enable nx_udp_socket_create,
-- nx_udp_socket_delete nx_udp_socket_info_get,
-- nx_udp_socket_port_get nx_udp_socket_receive,
-- nx_udp_socket_receive_notify nx_udp_socket_send,
-- nx_udp_socket_interface_send nx_udp_source_extract
+- nx_udp_packet_info_extract, nx_udp_socket_bind,
+- nx_udp_socket_bytes_available, nx_udp_socket_checksum_disable,
+- nx_udp_socket_checksum_enable, nx_udp_socket_create,
+- nx_udp_socket_delete, nx_udp_socket_info_get,
+- nx_udp_socket_port_get, nx_udp_socket_receive,
+- nx_udp_socket_receive_notify, nx_udp_socket_send,
+- nx_udp_socket_interface_send, nx_udp_source_extract
 
 ## <a name="nx_udp_source_extract"></a>nx_udp_source_extract
 
@@ -7219,29 +7219,29 @@ UINT nx_udp_source_extract(
     ULONG *ip_address, UINT *port);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten extraherar avsändarens IP-adress och port nummer från IP-och UDP-huvudena för det angivna UDP-datagrammet.
+Den här tjänsten extraherar avsändarens IP-adress och portnummer från IP- och UDP-huvudena för det angivna UDP-datagrammet.
 
 ### <a name="parameters"></a>Parametrar
 
-- **packet_ptr** Paket pekare för UDP-datagram.
-- **ip_address** Giltig pekare till variabeln returnera IP-adress.
-- **port** Giltig pekare till retur port-variabeln.
+- **packet_ptr** UDP-datagrampaket pekare.
+- **ip_address** Giltig pekare till den returnerade IP-adressvariabeln.
+- **port** Giltig pekare till returportvariabeln.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckad käll-IP/port-extrahering.
-- **NX_INVALID_PACKET** (0X12) det angivna paketet är ogiltigt.
-- **NX_PTR_ERROR** (0X07) ogiltigt paket eller IP-eller port mål.
+- **NX_SUCCESS** (0x00) Lyckad extrahering av käll-IP/port.
+- **NX_INVALID_PACKET** (0x12) Det angivna paketet är ogiltigt.
+- **NX_PTR_ERROR** (0x07) Ogiltigt paket eller IP- eller portmål.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar, timers, ISR
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -7258,10 +7258,10 @@ status = nx_udp_source_extract(packet_ptr, &sender_ip_address,
 ### <a name="see-also"></a>Se även
 
 - nx_udp_enable, nx_udp_free_port_find, nx_udp_info_get,
-- nx_udp_packet_info_extract nx_udp_socket_bind,
-- nx_udp_socket_bytes_available nx_udp_socket_checksum_disable,
-- nx_udp_socket_checksum_enable nx_udp_socket_create,
-- nx_udp_socket_delete nx_udp_socket_info_get,
-- nx_udp_socket_port_get nx_udp_socket_receive,
-- nx_udp_socket_receive_notify nx_udp_socket_send,
-- nx_udp_socket_interface_send nx_udp_socket_unbind
+- nx_udp_packet_info_extract, nx_udp_socket_bind,
+- nx_udp_socket_bytes_available, nx_udp_socket_checksum_disable,
+- nx_udp_socket_checksum_enable, nx_udp_socket_create,
+- nx_udp_socket_delete, nx_udp_socket_info_get,
+- nx_udp_socket_port_get, nx_udp_socket_receive,
+- nx_udp_socket_receive_notify, nx_udp_socket_send,
+- nx_udp_socket_interface_send, nx_udp_socket_unbind

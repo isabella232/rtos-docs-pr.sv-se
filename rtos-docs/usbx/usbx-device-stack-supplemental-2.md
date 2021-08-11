@@ -1,25 +1,25 @@
 ---
-title: Kapitel 2 – överväganden för enhets klass i USBX
-description: USB-enhetens RNDIS-klass tillåter att ett USB-värdnamn kommunicerar med enheten som en Ethernet-enhet. Den här klassen baseras på Microsofts patentskyddade implementering och är specifika för Windows-plattformar.
+title: Kapitel 2 – Överväganden för USBX-enhetsklass
+description: Usb-enhetens RNDIS-klass gör att ett USB-värdsystem kan kommunicera med enheten som en Ethernet-enhet. Den här klassen baseras på Microsofts egenutvecklade implementering och är specifik för Windows plattformar.
 author: philmea
 ms.author: philmea
 ms.date: 5/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 035492644a911eba3b1c62a79572bc7d4c55f6dd
-ms.sourcegitcommit: 1aeca2f91960856d8cc24fef65f909639e527599
+ms.openlocfilehash: 2a28196c8f0e29ad94ef9f2d65b143459bf0214f48c345e6bb0d4ea71d520dfd
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/31/2021
-ms.locfileid: "106082225"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116802639"
 ---
-# <a name="chapter-2---usbx-device-class-considerations"></a>Kapitel 2 – överväganden för enhets klass i USBX
+# <a name="chapter-2---usbx-device-class-considerations"></a>Kapitel 2 – Överväganden för USBX-enhetsklass
 
-## <a name="usb-device-rndis-class"></a>RNDIS-klass för USB-enhet
+## <a name="usb-device-rndis-class"></a>USB-enhetens RNDIS-klass
 
-USB-enhetens RNDIS-klass tillåter att ett USB-värdnamn kommunicerar med enheten som en Ethernet-enhet. Den här klassen baseras på Microsofts patentskyddade implementering och är specifika för Windows-plattformar.
+Usb-enhetens RNDIS-klass gör att ett USB-värdsystem kan kommunicera med enheten som en Ethernet-enhet. Den här klassen baseras på Microsofts egenutvecklade implementering och är specifik för Windows plattformar.
 
-Ett RNDIS-kompatibelt enhets ramverk måste deklareras av enhets stacken. Ett exempel finns nedan.
+Ett RNDIS-kompatibelt enhetsramverk måste deklareras av enhetsstacken. Ett exempel finns nedan.
 
 ```C
 unsigned char device_framework_full_speed[] = {
@@ -111,7 +111,7 @@ unsigned char device_framework_full_speed[] = {
 };
 ```
 
-RNDIS-klassen använder en mycket liknande enhets beskrivnings metod för CDC-ACM och CDC-ECM och kräver också en IAD-beskrivning. Se CDC-ACM-klassen för definition och krav för enhets beskrivningen.
+RNDIS-klassen använder en liknande enhetsbeskrivningsmetod som CDC-ACM och CDC-ECM och kräver även en IAD-beskrivning. Se CDC-ACM-klassen för definition och krav för enhetsbeskrivningen.
 
 Aktiveringen av RNDIS-klassen är följande.
 
@@ -151,13 +151,13 @@ status = ux_device_stack_class_register(_ux_system_slave_class_rndis_name,
     ux_device_class_rndis_entry, 1,0, &parameter);
 ```
 
-För CDC-ECM kräver RNDIS-klassen 2 noder, en lokal och en fjärr anslutning, men det finns inget krav på att ha en sträng beskrivning som beskriver fjärrnoden.
+För CDC-ECM kräver RNDIS-klassen 2 noder, en lokal och en fjärrnod, men det finns inget krav på att ha en strängbeskrivning som beskriver fjärrnoden.
 
-Men på grund av Microsoft patentskyddad meddelande funktion krävs vissa extra parametrar. Först måste leverantörs-ID: t skickas. På samma sätt är driv rutins versionen av RNDIS. En leverantörs sträng måste också anges.
+På grund av Microsofts egna meddelandemekanism krävs dock vissa extra parametrar. Först måste leverantörs-ID:t skickas. På samma sätt gäller drivrutinsversionen för RNDIS. En leverantörssträng måste också anges.
 
-RNDIS-klassen har inbyggda API: er för överföring av data på båda sätt, men de är dolda för programmet när användar programmet kommer att kommunicera med USB-Ethernet-enheten via NetX.
+RNDIS-klassen har inbyggda API:er för överföring av data på båda sätten, men de är dolda för programmet eftersom användarprogrammet kommer att kommunicera med USB Ethernet-enheten via NetX.
 
-USBX RNDIS-klassen är nära kopplad till Azure återställnings tider NetX-nätverks stacken. Ett program som använder både NetX-och USBX RNDIS-klassen kommer att aktivera NetX-nätverks stacken på vanligt sätt, men du måste också aktivera USB-protokollstacken på följande sätt.
+USBX RNDIS-klassen är nära knuten Azure RTOS NetX-nätverksstacken. Ett program som använder både NetX- och USBX RNDIS-klassen aktiverar NetX-nätverksstacken på vanligt sätt, men måste dessutom aktivera USB-nätverksstacken på följande sätt.
 
 ```C
 /* Initialize the NetX system. */
@@ -168,9 +168,9 @@ nx_system_initialize();
 ux_network_driver_init();
 ```
 
-USB-protokollstacken behöver bara aktive ras en gång och är inte särskilt för RNDIS, men krävs av alla USB-klasser som kräver NetX-tjänster.
+USB-nätverksstacken måste bara aktiveras en gång och är inte specifik för RNDIS, men krävs av alla USB-klasser som kräver NetX-tjänster.
 
-RNDIS-klassen känns inte igen av MAC OS-och Linux-värdar eftersom den är speciell för Microsofts operativ system. På Windows-plattformar måste en INF-fil finnas på den värd som matchar enhets beskrivningen. Microsoft tillhandahåller en mall för klassen RNDIS och finns i usbx_windows_host_files-katalogen. För senare versioner av Windows ska filen RNDIS_Template. inf användas. Den här filen måste ändras för att återspegla det PID/VID som används av enheten. PID/VID är specifika för den slutgiltiga kunden när företaget och produkten registreras med USB-IF. I INF-filen finns fälten som ska ändras här.
+RNDIS-klassen identifieras inte av MAC OS- och Linux-värdar eftersom den är specifik för Microsofts operativsystem. På Windows-plattformar måste en .inf-fil finnas på den värd som matchar enhetsbeskrivningen. Microsoft tillhandahåller en mall för RNDIS-klassen och den finns i usbx_windows_host_files katalogen. För den senaste versionen Windows filen RNDIS_Template.inf användas. Den här filen måste ändras så att den återspeglar den PID/VID som används av enheten. PID/VID är specifik för den slutliga kunden när företaget och produkten registreras med USB-IF. I inf-filen finns de fält som ska ändras här.
 
 ```Inf
 [DeviceList]
@@ -180,19 +180,19 @@ RNDIS-klassen känns inte igen av MAC OS-och Linux-värdar eftersom den är spec
 %DeviceName%=DriverInstall, USB\\VID_xxxx&PID_yyyy&MI_00
 ```
 
-I enhets ramverket för RNDIS-enheten lagras PID/VID i enhets beskrivningen (se den enhets beskrivning som anges ovan)
+I enhetsramverket för RNDIS-enheten lagras PID/VID i enhetsbeskrivningen (se enhetsbeskrivningen som deklareras ovan)
 
-När ett USB-värdnamn identifierar USB-RNDIS enhet monteras ett nätverks gränssnitt och enheten kan användas med nätverks protokolls Tacken. Se värd operativ systemet för referens.
+När ett USB-värdsystem identifierar USB RNDIS-enheten monterar det ett nätverksgränssnitt och enheten kan användas med nätverksprotokollstacken. Se värdens operativsystem som referens.
 
-## <a name="usb-device-dfu-class"></a>DFU-klass för USB-enhet
+## <a name="usb-device-dfu-class"></a>USB-enhetens DFU-klass
 
-USB-enhetens DFU-klass tillåter att ett USB-värdnamn uppdaterar enhetens inbyggda program vara baserat på ett värd program. Klassen DFU är en USB-IF-standardklass.
+Usb-enhetens DFU-klass gör att ett USB-värdsystem kan uppdatera enhetens inbyggda programvara baserat på ett värdprogram. DFU-klassen är en USB-IF-standardklass.
 
-USBX DFU-klassen är relativt enkel. IT-enhetens Beskrivning kräver inte något annat än en kontroll slut punkt. I de flesta fall kommer den här klassen att bäddas in i en USB-sammansatt enhet. Enheten kan vara något som en lagrings enhet eller en kommunikations enhet och det tillagda DFU-gränssnittet kan informera värden om att enheten kan uppdatera sin inbyggda program vara i farten.
+USBX DFU-klassen är relativt enkel. Enhetsbeskrivningen kräver inte något annat än en kontrollslutpunkt. I de flesta fall bäddas den här klassen in i en USB-sammansatt enhet. Enheten kan vara vad som helst, till exempel en lagringsenhet eller en kommunikationsenhet, och det tillagda DFU-gränssnittet kan informera värden om att enhetens inbyggda programvara kan uppdateras direkt.
 
-DFU-klassen fungerar i tre steg. Första enheten monteras som normal med den exporterade klassen. Ett program på värden (Windows eller Linux) kommer att utnyttja klassen DFU och skicka en begäran om att återställa enheten till DFU-läge. Enheten kommer att försvinna från bussen under en kort tid (tillräckligt för värden och enheten för att identifiera en återställnings ordning) och vid omstart är enheten exklusivt i DFU-läge, väntar på att värd programmet ska skicka en uppgradering av inbyggd program vara. När uppgraderingen av den inbyggda program varan har slutförts återställer värd programmet enheten och när den omräknas igen återgår enheten till sin normala drift med den nya inbyggda program varan.
+DFU-klassen fungerar i 3 steg. Först monterar enheten som vanligt med hjälp av den exporterade klassen. Ett program på värden (Windows eller Linux) använder DFU-klassen och skickar en begäran om att återställa enheten till DFU-läge. Enheten försvinner från buss under en kort tid (tillräckligt för att värden och enheten ska kunna identifiera en RESET-sekvens) och vid omstart är enheten uteslutande i DFU-läge och väntar på att värdprogrammet ska skicka en uppgradering av den inbyggda programvaran. När uppgraderingen av den inbyggda programvaran har slutförts återställer värdprogrammet enheten och vid omräkning återgår enheten till normal drift med den nya inbyggda programvaran.
 
-En DFU Device Framework ser ut så här.
+Ett DFU-enhetsramverk kommer att se ut så här.
 
 ```C
 UCHAR device_framework_full_speed[] = {
@@ -216,17 +216,17 @@ UCHAR device_framework_full_speed[] = {
 };
 ```
 
-I det här exemplet är DFU-beskrivningen inte associerad med några andra klasser. Den har en enkel gränssnitts beskrivning och inga andra slut punkter är kopplade till den. Det finns en funktions beskrivning som beskriver de olika DFU-funktionerna på enheten.
+I det här exemplet är DFU-beskrivningen inte associerad med några andra klasser. Den har en enkel gränssnittsbeskrivning och inga andra slutpunkter kopplade till den. Det finns en funktionell beskrivning som beskriver enhetens DFU-funktioner.
 
 Beskrivningen av DFU-funktionerna är följande.
 
-| Name             | Offset  | Storlek | typ      | Beskrivning |
+| Name             | Offset  | Storlek | typ      | Description |
 |------------------|----------|------|-----------|------------|
-| bmAttributes  | 2     | 1   | Bitars fält | Bit 3: enheten utför en buss-koppla bort sekvens när den får en DFU_DETACH begäran. Värden får inte utfärda en USB-återställning. (bitWillDetach) 0 = ingen 1 = Yes bit 2: enheten kan kommunicera via USB efter manifest fasen. (bitManifestationTolerant) 0 = Nej, måste se buss återställning 1 = Ja bit 1: uppladdnings funktion (bitCanUpload) 0 = ingen 1 = Yes bit 0: nedladdnings bar funktion (bitCanDnload) 0 = ingen 1 = Ja  |
-| wDetachTimeOut  | 3      | 2  | antal    | Tid i millisekunder som enheten väntar efter att DFU_DETACH-begäran har mottagits. Om den här tiden går ut utan en USB-återställning avslutar enheten omkonfigurations fasen och återgår till normal drift. Detta motsvarar den längsta tid som enheten kan vänta (beroende på dess timers, osv.). USBX anger det här värdet till 1000 MS.  |
-| wTransferSize  | 5      | 2  | antal    | Maximalt antal byte som enheten kan godkänna vid \- Skriv åtgärd per kontroll. USBX anger det här värdet till 64 byte. |
+| bmAttributes  | 2     | 1   | Bitfält | Bit 3: Enheten utför en från koppla från-koppla-busssekvens när den tar emot en DFU_DETACH begäran. Värden får inte utfärda en USB-återställning. (bitWillDetach) 0 = nej 1 = ja Bit 2: enheten kan kommunicera via USB efter Fasen Fördr. (bitManifestationTolerant) 0 = nej, måste se bussåterställning 1 = ja Bit 1: uppladdnings kompatibel (bitCanUpload) 0 = nej 1 = ja Bit 0: hämtnings kompatibel (bitCanDnload) 0 = nej 1 = ja  |
+| wDetachTimeOut  | 3      | 2  | antal    | Tid, i millisekunder, som enheten väntar efter att ha fått DFU_DETACH begäran. Om den här tiden går utan EN USB-återställning avslutar enheten omkonfigurationsfasen och återgår till normal drift. Detta representerar den maximala tid som enheten kan vänta (beroende på timers osv.). USBX anger det här värdet till 1 000 ms.  |
+| wTransferSize  | 5      | 2  | antal    | Maximalt antal byte som enheten kan acceptera per kontroll för \- skrivåtgärd. USBX anger det här värdet till 64 byte. |
 
-DFU-klassens deklaration är följande:
+Deklarationen för DFU-klassen är följande:
 
 ```C
 /* Store the DFU parameters. */
@@ -264,29 +264,29 @@ status = ux_device_stack_class_register(_ux_system_slave_class_dfu_name,
 if (status!=UX_SUCCESS) return;
 ```
 
-DFU-klassen måste fungera med en enhets program vara som är specifik för målet. Därför definierar den flera anrop tillbaka till Läs-och skriv block med inbyggd program vara och hämta status från uppdaterings programmet för den inbyggda program varan. Klassen DFU har också en funktion för att uppmana dig att meddela programmet när den inbyggda program varans start och slut har överförts.
+DFU-klassen måste fungera med ett program för enhetens inbyggda programvara som är specifik för målet. Därför definierar den flera åter anrop till läs- och skrivblock för inbyggd programvara och för att hämta status från programmet för uppdatering av inbyggd programvara. DFU-klassen har också en återanropsfunktion för att meddela programmet när en överföring av den inbyggda programvaran påbörjas och avslutas.
 
 Nedan visas en beskrivning av ett typiskt DFU-programflöde.
 
-![DFU program flöde](./media/usbx-device-stack-supplemental/dfu-application-flow.png)
+![DFU-programflöde](./media/usbx-device-stack-supplemental/dfu-application-flow.png)
 
-Den största utmaningen i DFU-klassen får rätt program på värden för att utföra hämtningen av den inbyggda program varan. Det finns inget program från Microsoft eller USB-IF. Vissa shareware finns och de fungerar bra på Linux och i mindre utsträckning i Windows.
+Den största utmaningen med DFU-klassen är att få rätt program på värden för att utföra nedladdningen av den inbyggda programvaran. Det finns inget program som tillhandahålls av Microsoft eller USB-IF. Det finns vissa shareware-program som fungerar någorlunda bra i Linux och i mindre utsträckning Windows.
 
-I Linux finns en DFU-utils som du kan hitta här: [https://wiki.openmoko.org/wiki/Dfu-util](https://wiki.openmoko.org/wiki/Dfu-util) mycket information om DFU-utils finns också på den här länken: [https://www.libusb.org/wiki/windows_backend](https://www.libusb.org/wiki/windows_backend)
+På Linux kan du använda dfu-utils för att hitta här: Mycket information om [https://wiki.openmoko.org/wiki/Dfu-util](https://wiki.openmoko.org/wiki/Dfu-util) dfu utils finns också på den här länken: [https://www.libusb.org/wiki/windows_backend](https://www.libusb.org/wiki/windows_backend)
 
-Linux-implementeringen av DFU utför korrekt återställnings ordningen mellan värden och enheten och därför behöver enheten inte göra det. Linux kan godkänna bmAttributes- *bitWillDetach* till 0. Windows på den andra sidan kräver att enheten utför återställningen.
+Linux-implementeringen av DFU utför korrekt återställningssekvensen mellan värden och enheten och därför behöver enheten inte göra det. Linux kan acceptera att bmAttributes *bitWillDetach* är 0. Windows på den andra sidan kräver att enheten utför återställningen.
 
-I Windows måste USB-registret kunna associera USB-enheten med sitt PID/VID och USB-biblioteket som i sin tur används av DFU-programmet. Detta kan vara enkelt att göra med den kostnads fria Zadig som du hittar här: [https://sourceforge.net/projects/libwdi/files/zadig/](https://sourceforge.net/projects/libwdi/files/zadig/) .
+På Windows måste USB-registret kunna associera USB-enheten med dess PID/VID och USB-biblioteket som i sin tur kommer att användas av DFU-programmet. Detta kan enkelt göras med det kostnadsfria verktyget Zadig som finns här: [https://sourceforge.net/projects/libwdi/files/zadig/](https://sourceforge.net/projects/libwdi/files/zadig/) .
 
-När du kör Zadig för första gången visas den här skärmen:
+Om du kör Zadig för första gången visas den här skärmen:
 
-![Kör Zadig för första gången](./media/usbx-device-stack-supplemental/zadig.png)
+![Köra Zadig för första gången](./media/usbx-device-stack-supplemental/zadig.png)
 
-I enhets listan letar du reda på din enhet och associerar den med libusb Windows-drivrutinen. Detta binder enhets numret/VID enheten med Windows USB-biblioteket som används av DFU-verktygen.
+I enhetslistan hittar du enheten och associerar den med biblioteksdrivrutinen för Windows. Detta binder ENHETENs PID/VID till den Windows USB-biblioteket som används av DFU-verktygen.
 
-Om du vill använda kommandot DFU packar du upp de zippade DFU-verktygen i en katalog och kontrollerar att libusb-DLL-filen också finns i samma katalog. DFU-verktygen måste köras från en DOS-ruta på kommando raden.
+Om du vill köra DFU-kommandot packar du bara upp de komprimerade dfu-verktygen i en katalog och kontrollerar att libusb dll också finns i samma katalog. DFU-verktygen måste köras från en DOS-ruta på kommandoraden.
 
-Börja med att skriva kommandot **DFU-util – l** för att avgöra om enheten visas i listan. Om inte kör du Zadig för att kontrol lera att enheten är listad och kopplad till USB-biblioteket. Du bör se en skärm på följande sätt:
+Skriv först kommandot **dfu-util –l för** att avgöra om enheten visas. Om inte kör du Zadig för att kontrollera att enheten visas och är associerad med USB-biblioteket. Du bör se en skärm på följande sätt:
 
 ```Command-line
 C:\usb specs\DFU\dfu-util-0.6&gt;dfu-util -l dfu-util 0.6
@@ -297,79 +297,79 @@ This program is Free Software and has ABSOLUTELY NO WARRANTY
 Found Runtime: [0a5c:21bc] devnum=0, cfg=1, intf=3, alt=0, name="UNDEFINED"
 ```
 
-Nästa steg är att förbereda filen som ska laddas ned. USBX DFU-klassen utför ingen verifiering på den här filen och är oberoende av dess interna format. Den här inbyggda program varan är särskilt speciell för målet men inte att DFU eller USBX.
+Nästa steg är att förbereda filen som ska laddas ned. USBX DFU-klassen utför ingen verifiering av den här filen och är oberoende av dess interna format. Den här filen för inbyggd programvara är mycket specifik för målet, men inte för DFU eller USBX.
 
-Sedan kan DFU-util instrueras att skicka filen genom att skriva följande kommando:
+Sedan kan dfu-util instrueras att skicka filen genom att skriva följande kommando:
 
 ```Command-line
 dfu-util –R –t 64 -D file_to_download.hex
 ```
 
-DFU-util bör Visa fil hämtnings processen tills den inbyggda program varan har laddats ned helt.
+Dfu-util bör visa filnedladdningsprocessen tills den inbyggda programvaran har laddats ned helt.
 
-## <a name="usb-device-pima-class-ptp-responder"></a>PIMA-klass (PTP-svarare) för USB-enhet
+## <a name="usb-device-pima-class-ptp-responder"></a>PIMA-klass för USB-enhet (PTP-svarare)
 
-USB-enhetens PIMA-klass tillåter att ett USB-värdnamn (Initiator) ansluter till en
+USB-enhetens PIMA-klass gör att ett USB-värdsystem (initierare) kan ansluta till en
 
-PIMA-enhet (Resonder) för överföring av mediafiler. USBX Pima-klassen överensstämmer med USB-IF PIMA 15740-klassen kallas även PTP-klass (för Picture Transfer Protocol).
+PIMA-enhet (Resonder) för att överföra mediefiler. USBX Pima-klassen överensstämmer med USB-IF PIMA 15740-klassen, som även kallas PTP-klass (för Picture Transfer Protocol).
 
-USBX PIMA-klassen stöder följande åtgärder.
+PIMA-klassen på USBX-enhetssidan stöder följande åtgärder.
 
-| Åtgärds kod                                    | Värde | Beskrivning                       |
+| Åtgärdskod                                    | Värde | Beskrivning                       |
 |---------------------------------------------------|---------|-----------------------------------------------------|
-| UX_DEVICE_CLASS_PIMA_OC_GET_DEVICE_INFO    | 0x1001  | Hämta de åtgärder och händelser som stöds av enheten                                                         |
+| UX_DEVICE_CLASS_PIMA_OC_GET_DEVICE_INFO    | 0x1001  | Hämta åtgärder och händelser som stöds av enheten                                                         |
 | UX_DEVICE_CLASS_PIMA_OC_OPEN_SESSION        | 0x1002  | Öppna en session mellan värden och enheten                                                            |
 | UX_DEVICE_CLASS_PIMA_OC_CLOSE_SESSION       | 0x1003  | Stäng en session mellan värden och enheten                                                           |
-| UX_DEVICE_CLASS_PIMA_OC_GET_STORAGE_IDS    | 0x1004  | Returnerar enhetens lagrings-ID. USBX PIMA använder bara ett lagrings-ID |
-| UX_DEVICE_CLASS_PIMA_OC_GET_STORAGE_INFO   | 0x1005  | Returnera information om lagrings objekt såsom maximal kapacitet och ledigt utrymme                           |
-| UX_DEVICE_CLASS_PIMA_OC_GET_NUM_OBJECTS    | 0x1006  | Returnera antalet objekt som finns i lagrings enheten                                              |
-| UX_DEVICE_CLASS_PIMA_OC_GET_OBJECT_HANDLES | 0x1007  | Returnera en matris med referenser för objekten på lagrings enheten                                           |
-| UX_DEVICE_CLASS_PIMA_OC_GET_OBJECT_INFO    | 0x1008  | Returnera information om ett objekt, till exempel namnet på objektet, dess skapelse datum, ändrings datum |
-| UX_DEVICE_CLASS_PIMA_OC_GET_OBJECT          | 0x1009  | Returnera data som hör till ett angivet objekt                                                         |
-| UX_DEVICE_CLASS_PIMA_OC_GET_THUMB           | 0x100A  | Skicka miniatyren om den är tillgänglig för ett objekt                                                           |
+| UX_DEVICE_CLASS_PIMA_OC_GET_STORAGE_IDS    | 0x1004  | Returnerar enhetens lagrings-ID. USBX PIMA använder endast ett lagrings-ID |
+| UX_DEVICE_CLASS_PIMA_OC_GET_STORAGE_INFO   | 0x1005  | Returnera information om lagringsobjektet, till exempel maximal kapacitet och ledigt utrymme                           |
+| UX_DEVICE_CLASS_PIMA_OC_GET_NUM_OBJECTS    | 0x1006  | Returnera antalet objekt som finns på lagringsenheten                                              |
+| UX_DEVICE_CLASS_PIMA_OC_GET_OBJECT_HANDLES | 0x1007  | Returnera en matris med referenser till objekten på lagringsenheten                                           |
+| UX_DEVICE_CLASS_PIMA_OC_GET_OBJECT_INFO    | 0x1008  | Returnera information om ett objekt, till exempel namnet på objektet, dess skapandedatum, ändringsdatum |
+| UX_DEVICE_CLASS_PIMA_OC_GET_OBJECT          | 0x1009  | Returnera data som hör till ett specifikt objekt                                                         |
+| UX_DEVICE_CLASS_PIMA_OC_GET_THUMB           | 0x100A  | Skicka miniatyrbilden om den är tillgänglig för ett objekt                                                           |
 | UX_DEVICE_CLASS_PIMA_OC_DELETE_OBJECT       | 0x100B  | Ta bort ett objekt på mediet                                                                             |
-| UX_DEVICE_CLASS_PIMA_OC_SEND_OBJECT_INFO   | 0x100C  | Skicka till enhets informationen om ett objekt för att skapa det på mediet                              |
+| UX_DEVICE_CLASS_PIMA_OC_SEND_OBJECT_INFO   | 0x100C  | Skicka information om ett objekt till enheten för att det ska kunna skapas på mediet                              |
 | UX_DEVICE_CLASS_PIMA_OC_SEND_OBJECT         | 0x100D  | Skicka data för ett objekt till enheten                                                                     |
-| UX_DEVICE_CLASS_PIMA_OC_FORMAT_STORE        | 0x100F  | Rengör enhets mediet                                                                                    |
-| UX_DEVICE_CLASS_PIMA_OC_RESET_DEVICE        | 0x0110  | Återställa mål enheten                                                                                   |
+| UX_DEVICE_CLASS_PIMA_OC_FORMAT_STORE        | 0x100F  | Rensa enhetens media                                                                                    |
+| UX_DEVICE_CLASS_PIMA_OC_RESET_DEVICE        | 0x0110  | Återställa målenheten                                                                                   |
 
-| Åtgärds kod                                         | Värde | Beskrivning |
+| Åtgärdskod                                         | Värde | Beskrivning |
 |--------------------------------------------------------|-------|-----------------------------------------|
 | UX_DEVICE_CLASS_PIMA_EC_CANCEL_TRANSACTION       | 0x4001  | Avbryter den aktuella transaktionen                                                 |
-| UX_DEVICE_CLASS_PIMA_EC_OBJECT_ADDED             | 0x4002  | Ett objekt har lagts till i enhets mediet och kan hämtas av host\. |
-| UX_DEVICE_CLASS_PIMA_EC_OBJECT_REMOVED           | 0x4003  | Ett objekt har tagits bort från enhets mediet                                |
-| UX_DEVICE_CLASS_PIMA_EC_STORE_ADDED              | 0x4004  | Ett medium har lagts till i enheten                                            |
+| UX_DEVICE_CLASS_PIMA_EC_OBJECT_ADDED             | 0x4002  | Ett objekt har lagts till i enhetsmediet och kan hämtas av värden\. |
+| UX_DEVICE_CLASS_PIMA_EC_OBJECT_REMOVED           | 0x4003  | Ett objekt har tagits bort från enhetens media                                |
+| UX_DEVICE_CLASS_PIMA_EC_STORE_ADDED              | 0x4004  | Ett medium har lagts till på enheten                                            |
 | UX_DEVICE_CLASS_PIMA_EC_STORE_REMOVED            | 0x4005  | Ett medium har tagits bort från enheten                                        |
-| UX_DEVICE_CLASS_PIMA_EC_DEVICE_PROP_CHANGED     | 0x4006  | Enhets egenskaperna har ändrats                                                  |
-| UX_DEVICE_CLASS_PIMA_EC_OBJECT_INFO_CHANGED     | 0x4007  | En objekt information har ändrats                                               |
+| UX_DEVICE_CLASS_PIMA_EC_DEVICE_PROP_CHANGED     | 0x4006  | Enhetsegenskaperna har ändrats                                                  |
+| UX_DEVICE_CLASS_PIMA_EC_OBJECT_INFO_CHANGED     | 0x4007  | Objektinformationen har ändrats                                               |
 | UX_DEVICE_CLASS_PIMA_EC_DEVICE_INFO_CHANGE      | 0x4008  | En enhet har ändrats                                                            |
 | UX_DEVICE_CLASS_PIMA_EC_REQUEST_OBJECT_TRANSFER | 0x4009  | Enheten begär överföring av ett objekt från värden                     |
 | UX_DEVICE_CLASS_PIMA_EC_STORE_FULL               | 0x400A  | Enheten rapporterar att mediet är fullt                                                |
-| UX_DEVICE_CLASS_PIMA_EC_DEVICE_RESET             | 0x400B  | Enhets rapporter som den återställdes                                                     |
-| UX_DEVICE_CLASS_PIMA_EC_STORAGE_INFO_CHANGED    | 0x400C  | Lagrings information har ändrats på enheten                                   |
-| UX_DEVICE_CLASS_PIMA_EC_CAPTURE_COMPLETE         | 0x400D  | Avbildningen har slutförts                                                            |
+| UX_DEVICE_CLASS_PIMA_EC_DEVICE_RESET             | 0x400B  | Enhetsrapporter som återställdes                                                     |
+| UX_DEVICE_CLASS_PIMA_EC_STORAGE_INFO_CHANGED    | 0x400C  | Storage information har ändrats på enheten                                   |
+| UX_DEVICE_CLASS_PIMA_EC_CAPTURE_COMPLETE         | 0x400D  | Avskiljning har slutförts                                                            |
 
-Enhets klassen USBX PIMA använder en TX-tråd för att lyssna på PIMA-kommandon från värden.
+USBX PIMA-enhetsklassen använder en TX-tråd för att lyssna på PIMA-kommandon från värden.
 
-Ett PIMA-kommando består av ett kommando block, ett data block och en status fas.
+Ett PIMA-kommando består av ett kommandoblock, ett datablock och en statusfas.
 
-Funktionen ux_device_class_pima_thread publicerar en begäran till stacken för att ta emot ett PIMA-kommando från värd sidan. PIMA-kommandot avkodas och verifieras för innehåll. Om kommando blocket är giltigt är det grenat till lämplig kommando hanterare.
+Funktionen ux_device_class_pima_thread en begäran till stacken om att ta emot ett PIMA-kommando från värdsidan. PIMA-kommandot avkodas och verifieras för innehåll. Om kommandoblocket är giltigt förgrenar det till lämplig kommandohanterare.
 
-De flesta PIMA-kommandon kan bara utföras när en session har öppnats av värden. Det enda undantaget är kommandot **UX_DEVICE_CLASS_PIMA_OC_GET_DEVICE_INFO**. Med USBX PIMA-implementeringen kan endast en session öppnas mellan en initierare och en svarare när som helst. Alla transaktioner i den enskilda sessionen blockeras och ingen ny transaktion kan börja innan den tidigare slutförts.
+De flesta PIMA-kommandon kan bara köras när en session har öppnats av värden. Det enda undantaget är kommandot **UX_DEVICE_CLASS_PIMA_OC_GET_DEVICE_INFO**. Med USBX PIMA-implementering kan endast en session öppnas mellan en initierare och svarare när som helst. Alla transaktioner i den enda sessionen blockeras och ingen ny transaktion kan påbörjas innan den föregående slutfördes.
 
-PIMA-transaktioner består av tre faser, en kommando fas, en valfri data fas och en svars fas. Om det finns en data fas kan den bara vara i en riktning.
+PIMA-transaktioner består av tre faser, en kommandofas, en valfri datafas och en svarsfas. Om det finns en datafas kan den bara vara i en riktning.
 
-Initieraren fastställer alltid flödet för PIMA-åtgärder, men den som svarar kan initiera händelser tillbaka till initieraren för att informera om status ändringar som har skett under en session.
+Initieraren bestämmer alltid flödet för PIMA-åtgärderna, men svararen kan initiera händelser tillbaka till initieraren för att informera om statusändringar som inträffade under en session.
 
-Följande diagram visar överföringen av ett data objekt mellan värden och enhets klassen PIMA.
+Följande diagram visar överföringen av ett dataobjekt mellan värden och PIMA-enhetsklassen.
 
-![PIMA transaktioner](./media/usbx-device-stack-supplemental/pima-transactions.png)
+![PIMA-transaktioner](./media/usbx-device-stack-supplemental/pima-transactions.png)
 
-## <a name="initialization-of-the-pima-device-class"></a>Initiering av enhets klassen PIMA
+## <a name="initialization-of-the-pima-device-class"></a>Initiering av PIMA-enhetsklassen
 
-PIMA enhets klass behöver vissa parametrar som tillhandahålls av programmet under initieringen.
+PIMA-enhetsklassen behöver vissa parametrar som tillhandahålls av programmet under initieringen.
 
-Följande parametrar beskriver enhets-och lagrings information.
+Följande parametrar beskriver enheten och lagringsinformationen.
 
 - `ux_device_class_pima_manufacturer`
 - `ux_device_class_pima_model`
@@ -387,7 +387,7 @@ Följande parametrar beskriver enhets-och lagrings information.
 - `ux_device_class_pima_storage_description`
 - `ux_device_class_pima_storage_volume_label`
 
-PIMA-klassen kräver också registrering av motringning till programmet för att informera om tillämpningen av vissa händelser eller hämta/lagra data från/till det lokala mediet. Återanropen är följande.
+PIMA-klassen kräver också registrering av återanrop i programmet för att informera tillämpningen av vissa händelser eller hämta/lagra data från/till det lokala mediet. Återanropen är följande.
 
 - `ux_device_class_pima_object_number_get`
 - `ux_device_class_pima_object_handles_get`
@@ -397,7 +397,7 @@ PIMA-klassen kräver också registrering av motringning till programmet för att
 - `ux_device_class_pima_object_data_send`
 - `ux_device_class_pima_object_delete`
 
-I följande exempel visas hur du initierar klient sidan av PIMA. I det här exemplet används PictBridge som en klient för PIMA.
+I följande exempel visas hur du initierar klientsidan av PIMA. I det här exemplet används Pictbridge som klient för PIMA.
 
 ```C
 /* Initialize the first XML object valid in the pictbridge instance.
@@ -504,7 +504,7 @@ if (status != UX_SUCCESS)
 
 ## <a name="ux_device_class_pima_object_add"></a>ux_device_class_pima_object_add
 
-Lägga till ett objekt och skicka händelsen till värden
+Lägga till ett -objekt och skicka händelsen till värden
 
 ### <a name="prototype"></a>Prototyp
 
@@ -514,14 +514,14 @@ UINT ux_device_class_pima_object_add(
     ULONG object_handle);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen anropas när PIMA-klassen behöver lägga till ett objekt och informera värden.
+Den här funktionen anropas när PIMA-klassen behöver lägga till ett -objekt och informera värden.
 
 ### <a name="parameters"></a>Parametrar
 
-- **Pima**: pekar mot Pima-klass instansen
-- **object_handle**: objektets handtag.
+- **pima:** Pekare till pima-klassinstansen
+- **object_handle**: Referens för objektet.
 
 ### <a name="example"></a>Exempel
 
@@ -533,7 +533,7 @@ status = ux_device_class_pima_object_add(pima, UX_PICTBRIDGE_OBJECT_HANDLE_CLIEN
 
 ## <a name="ux_device_class_pima_object_number_get"></a>ux_device_class_pima_object_number_get
 
-Hämtar objekt numret från programmet
+Hämta objektnumret från programmet
 
 ### <a name="prototype"></a>Prototyp
 
@@ -543,14 +543,14 @@ UINT ux_device_class_pima_object_number_get(
     ULONG *object_number);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen anropas när PIMA-klassen behöver hämta antalet objekt i det lokala systemet och skicka tillbaka den till värden.
+Den här funktionen anropas när PIMA-klassen behöver hämta antalet objekt i det lokala systemet och skicka tillbaka det till värden.
 
 ### <a name="parameters"></a>Parametrar
 
-- **Pima**: pekar mot Pima-klass instansen
-- **object_number**: adressen för det antal objekt som ska returneras
+- **pima:** Pekare till pima-klassinstansen
+- **object_number:** Adress för antalet objekt som ska returneras
 
 ### <a name="example"></a>Exempel
 
@@ -565,7 +565,7 @@ UINT ux_pictbridge_dpsclient_object_number_get(UX_SLAVE_CLASS_PIMA *pima, ULONG 
 
 ## <a name="ux_device_class_pima_object_handles_get"></a>ux_device_class_pima_object_handles_get
 
-Returnera objektets referens mat ris
+Returnera objekthandtagsmatrisen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -578,17 +578,17 @@ UINT **ux_device_class_pima_object_handles_get**(
     ULONG object_handles_max_number);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här funktionen anropas när PIMA-klassen behöver hämta objektet hanterar matrisen i det lokala systemet och skicka tillbaka den till värden.
 
 ### <a name="parameters"></a>Parametrar
 
-- **Pima**: pekar mot instans av Pima-klassen.
-- **object_handles_format_code**: format kod för handtagen
-- **object_handles_association**: objekt kopplings kod
-- **object_handle_array**: adress dit du vill lagra handtagen
-- **object_handles_max_number**: högsta antal referenser i matrisen
+- **pima:** Pekare till pima-klassinstansen.
+- **object_handles_format_code:** Formatera kod för handtagen
+- **object_handles_association:** Objektassociationskod
+- **object_handle_array:** Adress där handtagen ska lagras
+- **object_handles_max_number:** Maximalt antal referenser i matrisen
 
 ### <a name="example"></a>Exempel
 
@@ -638,7 +638,7 @@ UINT ux_pictbridge_dpsclient_object_handles_get(UX_SLAVE_CLASS_PIMA *pima,
 
 ## <a name="ux_device_class_pima_object_info_get"></a>ux_device_class_pima_object_info_get
 
-Returnera objekt informationen
+Returnera objektinformationen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -649,15 +649,15 @@ UINT ux_device_class_pima_object_info_get(
     UX_SLAVE_CLASS_PIMA_OBJECT **object);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här funktionen anropas när PIMA-klassen behöver hämta objektet hanterar matrisen i det lokala systemet och skicka tillbaka den till värden.
 
 ### <a name="parameters"></a>Parametrar
 
-- **Pima**: pekar mot instans av Pima-klassen.
-- **object_handles**: referens för objektet
-- **objekt**: objektets pekare adress
+- **pima:** Pekare till pima-klassinstansen.
+- **object_handles**: Referens för objektet
+- **objekt:** Objekt pekaradress
 
 ### <a name="example"></a>Exempel
 
@@ -695,7 +695,7 @@ UINT ux_pictbridge_dpsclient_object_info_get(UX_SLAVE_CLASS_PIMA *pima,
 
 ## <a name="ux_device_class_pima_object_data_get"></a>ux_device_class_pima_object_data_get
 
-Returnera objekt data
+Returnera objektdata
 
 ### <a name="prototype"></a>Prototyp
 
@@ -709,17 +709,17 @@ UINT ux_device_class_pima_object_info_get(
     ULONG *object_actual_length);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen anropas när PIMA-klassen behöver hämta objekt data i det lokala systemet och skicka tillbaka den till värden.
+Den här funktionen anropas när PIMA-klassen behöver hämta objektdata i det lokala systemet och skicka tillbaka dem till värden.
 
 ### <a name="parameters"></a>Parametrar
 
-- **Pima**: pekar mot instans av Pima-klassen.
-- **object_handle**: referens för objektet
-- **object_buffer**: objektets bufferts adress
-- **object_length_requested**: den objekt data längd som klienten har begärt till programmet
-- **object_actual_length**: objekt data längden som returnerades av programmet
+- **pima:** Pekare till pima-klassinstansen.
+- **object_handle**: Referens för objektet
+- **object_buffer:** Objektbuffertadress
+- **object_length_requested:** Objektdatalängd som begärs av klienten till programmet
+- **object_actual_length:** Objektdatalängd som returneras av programmet
 
 ### <a name="example"></a>Exempel
 
@@ -816,7 +816,7 @@ UINT ux_pictbridge_dpsclient_object_data_get(UX_SLAVE_CLASS_PIMA *pima,
 
 ## <a name="ux_device_class_pima_object_info_send"></a>ux_device_class_pima_object_info_send
 
-Värd skickar objekt informationen
+Värden skickar objektinformationen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -827,15 +827,15 @@ UINT ux_device_class_pima_object_info_send(
     ULONG *object_handle);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen anropas när PIMA-klassen behöver ta emot objekt informationen i det lokala systemet för framtida lagring.
+Den här funktionen anropas när PIMA-klassen behöver ta emot objektinformationen i det lokala systemet för framtida lagring.
 
 ### <a name="parameters"></a>Parametrar
 
-- **Pima**: pekar mot Pima-klass instansen
-- **objekt**: pekar mot objektet
-- **object_handle**: referens för objektet
+- **pima:** Pekare till pima-klassinstansen
+- **object**: Pekare till objektet
+- **object_handle**: Referens för objektet
 
 ### <a name="example"></a>Exempel
 
@@ -919,7 +919,7 @@ UINT ux_pictbridge_dpsclient_object_info_send(UX_SLAVE_CLASS_PIMA *pima,
 
 ## <a name="ux_device_class_pima_object_data_send"></a>ux_device_class_pima_object_data_send
 
-Värden skickar objekt data
+Värden skickar objektdata
 
 ### <a name="prototype"></a>Prototyp
 
@@ -933,18 +933,18 @@ UINT ux_device_class_pima_object_data_send(
     ULONG object_length);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen anropas när PIMA-klassen behöver ta emot objekt data i det lokala systemet för lagring.
+Den här funktionen anropas när PIMA-klassen behöver ta emot objektdata i det lokala systemet för lagring.
 
 ### <a name="parameters"></a>Parametrar
 
-- **Pima**: pekar mot Pima-klass instansen
-- **object_handle**: referens för objektet
-- **fas**: överförings fasen (aktiv eller fullständig)
-- **object_buffer**: objektets bufferts adress
-- **object_offset**: data adress
-- **object_length**: objekt data längden har skickats av programmet
+- **pima:** Pekare till pima-klassinstansen
+- **object_handle**: Referens för objektet
+- **fas**: överföringsfasen (aktiv eller klar)
+- **object_buffer:** Objektbuffertadress
+- **object_offset:** Dataadress
+- **object_length:** Objektdatalängd som skickas av programmet
 
 ### <a name="example"></a>Exempel
 
@@ -1010,14 +1010,14 @@ UINT ux_device_class_pima_object_delete(
     ULONG object_handle);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen anropas när PIMA-klassen behöver ta bort ett objekt i den lokala lagringen.
+Den här funktionen anropas när PIMA-klassen behöver ta bort ett objekt på den lokala lagringen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **Pima**: pekar mot Pima-klass instansen
-- **object_handle**: referens för objektet
+- **pima:** Pekare till pima-klassinstansen
+- **object_handle**: Referens för objektet
 
 ### <a name="example"></a>Exempel
 
@@ -1030,11 +1030,11 @@ UINT ux_pictbridge_dpsclient_object_delete(UX_SLAVE_CLASS_PIMA *pima,
 }
 ```
 
-## <a name="usb-device-audio-class"></a>Ljud klass för USB-enhet
+## <a name="usb-device-audio-class"></a>Ljudklass för USB-enhet
 
-Ljud klassen USB-enhet gör att ett USB-värdnamn kan kommunicera med enheten som en ljuden het. Den här klassen baseras på USB-standarden och USB Audio-klassen 1,0 eller 2,0 standard.
+Usb-enhetens ljudklass gör att ett USB-värdsystem kan kommunicera med enheten som en ljudenhet. Den här klassen baseras på USB-standarden och USB-ljudklass 1.0 eller 2.0-standarden.
 
-En USB-kompatibel enhets ramverk måste deklareras av enhets stacken. Ett exempel på en ljud 2,0-talare följer:
+Ett USB-ljud kompatibelt enhetsramverk måste deklareras av enhetsstacken. Ett exempel på en Audio 2.0-talare följer:
 
 ```C
 unsigned char device_framework_high_speed[] = {
@@ -1165,13 +1165,13 @@ unsigned char device_framework_high_speed[] = {
 };
 ```
 
-Klassen Audio använder ett sammansatt enhets ramverk för att gruppera gränssnitt (kontroll och strömning). Därför bör du vidta åtgärder när du definierar enhets beskrivningen. USBX förlitar sig på IAD-beskrivningen för att veta internt hur man binder gränssnitt. IAD-beskrivningen måste deklareras före gränssnitten (ett AudioControl-gränssnitt följt av ett eller flera AudioStreaming-gränssnitt) och innehålla det första gränssnittet i klassen Audio (AudioControl-gränssnittet) och hur många gränssnitt som är kopplade.
+Klassen Audio använder ett sammansatt enhetsramverk för att gruppera gränssnitt (kontroll och strömning). Därför bör du vara försiktig när du definierar enhetsbeskrivningen. USBX förlitar sig på IAD-beskrivningen för att veta internt hur gränssnitt ska bindas. IAD-beskrivningen ska deklareras före gränssnitten (ett AudioControl-gränssnitt följt av ett eller flera AudioStreaming-gränssnitt) och innehålla det första gränssnittet i klassen Audio (AudioControl-gränssnittet) och hur många gränssnitt som är anslutna.
 
-Hur klassen Audio fungerar beror på om enheten skickar eller tar emot ljud, men båda fallen använder en FIFO för att lagra ljud Rams buffertar: om enheten skickar ljud till värden, lägger programmet till ljud Rams buffertar till FIFO som senare skickas till värden av USBX; Om enheten tar emot ljud från värden lägger USBX till de ljud Rams buffertar som tas emot från värden till FIFO-enheten som senare läses av programmet. Varje ljud ström har en egen FIFO, och varje buffert för ljud ramar består av flera exempel.
+Hur ljudklassen fungerar beror på om enheten skickar eller tar emot ljud, men båda fallen använder en FIFO för att lagra ljudrambuffertar: om enheten skickar ljud till värden lägger programmet till ljudrambuffertar till FIFO:n som senare skickas till värden via USBX. Om enheten tar emot ljud från värden lägger USBX till de ljudrambuffertar som tas emot från värden till FIFO:n som läses senare av programmet. Varje ljudström har sin egen FIFO, och varje ljudrambuffert består av flera exempel.
 
 Initieringen av klassen Audio förväntar sig följande delar.
 
-1. Klassen Audio förväntar sig följande strömnings parametrar:
+1. Ljudklassen förväntar sig följande strömningsparametrar:
 
    ```C
    /* Set the parameters for Audio streams. */
@@ -1197,7 +1197,7 @@ Initieringen av klassen Audio förväntar sig följande delar.
    audio_stream_parameter[0].ux_device_class_audio_stream_parameter_thread_entry = ux_device_class_audio_read_thread_entry;
    ```
 
-2. Klassen Audio förväntar sig följande funktions parametrar.
+2. Ljudklassen förväntar sig följande funktionsparametrar.
 
    ```C
    /* Set the parameters for Audio device. */
@@ -1234,21 +1234,21 @@ Initieringen av klassen Audio förväntar sig följande delar.
        return;
    ```
 
-   Den programdefinierade kontrollen begär motringning (***ux_device_class_audio_control_process***; som anges i föregående exempel) anropas när stacken tar emot en kontrollbegäran från värden. Om begäran godkänns och hanteras (bekräftas eller stoppas) måste återanropet returnera ett fel, annars ska felet returneras.
+   Det programdefinierade återanropet av kontrollbegäran (***ux_device_class_audio_control_process***; som anges i föregående exempel) anropas när stacken tar emot en kontrollbegäran från värden. Om begäran godkänns och hanteras (bekräftad eller avstannad) måste återanropet returnera lyckat, annars ska felet returneras.
 
-   Den klassbaserade kontrollen begär processen definieras som en programdefinierad motringning eftersom kontroll förfrågningarna är mycket olika mellan USB-ljudversioner och en stor del av processen för begäran relaterar till enhets ramverket. Programmet ska hantera begär Anden korrekt för att enheten ska fungera.
+   Den klassspecifika processen för kontrollbegäran definieras som ett programdefinierat återanrop eftersom kontrollbegäranden skiljer sig mycket åt mellan USB-ljudversioner och en stor del av begärandeprocessen relaterar till enhetsramverket. Programmet ska hantera begäranden korrekt för att enheten ska fungera.
 
-   Eftersom en ljuden het, volym, ljud av och samplings frekvens är vanliga kontroll begär Anden, är det enkelt att använda internt definierade återanrop för olika versioner av USB-ljud i senare avsnitt för program som ska användas. Se ***ux_device_class_audio10_control_process** _ och _ *_ux_device_class_audio_control_request_** för mer information.
+   Eftersom volym, mute och samplingsfrekvens för en ljudenhet är vanliga kontrollbegäranden introduceras enkla, internt definierade återanrop för olika USB-ljudversioner i senare avsnitt så att program kan använda dem. Mer information **finns i * ux_device_class_audio10_control_process** _ och _ *_ux_device_class_audio_control_request_** .
 
-I enhets ramverket för ljud enheten lagras PID/VID i enhets beskrivningen (se den enhets beskrivning som anges ovan).
+I enhetsramverket för ljudenheten lagras PID/VID i enhetsbeskrivningen (se enhetsbeskrivningen som deklarerades ovan).
 
-När ett USB-värdnamn identifierar USB-ljudenheten och monterar klassen Audio, kan enheten användas med valfri ljuds pelare eller inspelning (beroende på ramverket). Se värd operativ systemet för referens.
+När ett USB-värdsystem identifierar USB-ljudenheten och monterar ljudklassen kan enheten användas med valfri ljudspelare eller inspelare (beroende på ramverk). Se värdoperativsystemet som referens.
 
-Ljud klassens API: er definieras nedan.
+Ljudklass-API:erna definieras nedan.
 
 ## <a name="ux_device_class_audio_read_thread_entry"></a>ux_device_class_audio_read_thread_entry
 
-Tråd inmatning för läsning av data för ljud funktionen.
+Trådpost för läsning av data för funktionen Audio.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1256,13 +1256,13 @@ Tråd inmatning för läsning av data för ljud funktionen.
 VOID ux_device_class_audio_read_thread_entry(ULONG audio_stream);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen skickas till initierings parametern för ljud strömmen om du vill läsa ljud från värden. Internt skapas en tråd med den här funktionen som dess post funktion. själva tråden läser ljud data genom den isokrona slut punkten i ljud funktionen.
+Den här funktionen skickas till initieringsparametern för ljudströmmar om du vill läsa ljud från värden. Internt skapas en tråd med den här funktionen som postfunktion. tråden läser ljuddata via den isokrona OUT-slutpunkten i funktionen Audio.
 
 ### <a name="parameters"></a>Parametrar
 
-- **audio_stream**: pekar mot ljud Ströms instansen.
+- **audio_stream:** Pekare till ljudströminstansen.
 
 ### <a name="example"></a>Exempel
 
@@ -1274,7 +1274,7 @@ audio_stream_parameter[0].ux_device_class_audio_stream_parameter_thread_entry
 
 ## <a name="ux_device_class_audio_write_thread_entry"></a>ux_device_class_audio_write_thread_entry
 
-Tråd inmatning för att skriva data för ljud funktionen
+Trådpost för att skriva data för ljudfunktionen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1282,13 +1282,13 @@ Tråd inmatning för att skriva data för ljud funktionen
 VOID ux_device_class_audio_write_thread_entry(ULONG audio_stream);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen skickas till initierings parametern för ljud strömmen om du vill skriva ljud till värden. Internt skapas en tråd med den här funktionen som dess post funktion. själva tråden skriver ljud data via den isokrona slut punkten i ljud funktionen.
+Den här funktionen skickas till initieringsparametern för ljudströmmar om du vill skriva ljud till värden. Internt skapas en tråd med den här funktionen som postfunktion. själva tråden skriver ljuddata via den isokrona IN-slutpunkten i funktionen Audio.
 
 ### <a name="parameters"></a>Parametrar
 
-- **audio_stream**: pekar mot ljud Ströms instansen.
+- **audio_stream:** Pekare till ljudströminstansen.
 
 ### <a name="example"></a>Exempel
 
@@ -1300,7 +1300,7 @@ audio_stream_parameter[0].ux_device_class_audio_stream_parameter_thread_en
 
 ## <a name="ux_device_class_audio_stream_get"></a>ux_device_class_audio_stream_get
 
-Hämta en speciell Stream-instans för ljud funktionen
+Hämta en specifik ströminstans för ljudfunktionen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1311,20 +1311,20 @@ UINT ux_device_class_audio_stream_get(
     UX_DEVICE_CLASS_AUDIO_STREAM **stream);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen används för att hämta en strömmande instans av klassen Audio.
+Den här funktionen används för att hämta en ströminstans av ljudklassen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ljud**: pekar mot ljud instansen
-- **stream_index**: Stream instance index baserat på 0
-- **Stream**: pekare till buffer för att lagra pekaren för ljud strömmens instans
+- **audio**: Pekare till ljudinstansen
+- **stream_index:** Stream-instansindex baserat på 0
+- **stream**: Pekare till buffert för att lagra pekaren för ljudströminstansen
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0X00) den här åtgärden lyckades
-- **UX_ERROR** (0Xff) fel från funktion
+- **UX_SUCCESS** (0x00) Den här åtgärden lyckades
+- **UX_ERROR** (0xFF) Fel från funktion
 
 ### <a name="example"></a>Exempel
 
@@ -1338,7 +1338,7 @@ if(status != UX_SUCCESS)
 
 ## <a name="ux_device_class_audio_reception_start"></a>ux_device_class_audio_reception_start
 
-Starta mottagning av ljud data för ljud strömmen
+Starta mottagning av ljuddata för ljudströmmen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1346,20 +1346,20 @@ Starta mottagning av ljud data för ljud strömmen
 UINT ux_device_class_audio_reception_start(UX_DEVICE_CLASS_AUDIO_STREAM *stream);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen används för att starta läsning av ljud data i ljud strömmar.
+Den här funktionen används för att starta ljuddataläsning i ljudströmmar.
 
 ### <a name="parameters"></a>Parametrar
 
-- **Stream**: pekar mot ljud Ströms instansen.
+- **stream**: Pekare till ljudströminstansen.
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0X00) den här åtgärden lyckades.
-- **UX_CONFIGURATION_HANDLE_UNKNOWN** (0x51) gränssnittet är nere.
-- **UX_BUFFER_OVERFLOW** (0X5D) FIFO-bufferten är full.
-- **UX_ERROR** (0Xff) fel från funktion
+- **UX_SUCCESS** (0x00) Den här åtgärden lyckades.
+- **UX_CONFIGURATION_HANDLE_UNKNOWN** (0x51) Gränssnittet är nere.
+- **UX_BUFFER_OVERFLOW** (0x5d) FIFO-bufferten är full.
+- **UX_ERROR** (0xFF) Fel från funktion
 
 ### <a name="example"></a>Exempel
 
@@ -1373,7 +1373,7 @@ if(status != UX_SUCCESS)
 
 ## <a name="ux_device_class_audio_sample_read8"></a>ux_device_class_audio_sample_read8
 
-Läs 8-bitars exempel från ljud strömmen
+Läsa 8-bitarsexempel från ljudströmmen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1383,23 +1383,23 @@ UINT ux_device_class_audio_sample_read8(
     UCHAR *buffer);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen läser 8-bitars ljud exempel data från den angivna data strömmen.
+Den här funktionen läser 8-bitars ljudexempeldata från den angivna strömmen.
 
-Mer specifikt läser det exempel data från den aktuella bufferten för bild ramar i FIFO-enheten. När du läser det sista exemplet i en ljud ram frigörs ramen automatiskt så att den kan användas för att acceptera mer data från värden.
+Mer specifikt läser den exempeldata från den aktuella ljudrambufferten i FIFO:n. När du läser det sista exemplet i en ljudram frigörs ramen automatiskt så att den kan användas för att ta emot mer data från värden.
 
 ### <a name="parameters"></a>Parametrar
 
-- **Stream**: pekar mot ljud Ströms instansen.
-- **Buffer**: pekar mot bufferten för att spara exempel-byte.
+- **stream**: Pekare till ljudströminstansen.
+- **buffer**: Pekare till bufferten för att spara exempelbyte.
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0X00) den här åtgärden lyckades.
-- **UX_CONFIGURATION_HANDLE_UNKNOWN** (0x51) gränssnittet är nere.
-- **UX_BUFFER_OVERFLOW** (0X5D) FIFO-bufferten är null.
-- **UX_ERROR** (0Xff) fel från funktion
+- **UX_SUCCESS** (0x00) Den här åtgärden lyckades.
+- **UX_CONFIGURATION_HANDLE_UNKNOWN** (0x51) Gränssnittet är nere.
+- **UX_BUFFER_OVERFLOW** (0x5d) FIFO-bufferten är null.
+- **UX_ERROR** (0xFF) Fel från funktion
 
 ### <a name="example"></a>Exempel
 
@@ -1414,7 +1414,7 @@ if(status != UX_SUCCESS)
 
 ## <a name="ux_device_class_audio_sample_read16"></a>ux_device_class_audio_sample_read16
 
-Läsa 16-bitars exempel från ljud strömmen
+Läsa 16-bitarsexempel från ljudströmmen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1424,23 +1424,23 @@ UINT ux_device_class_audio_sample_read16(
     USHORT *buffer);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen läser 16-bitars ljud exempel data från den angivna data strömmen.
+Den här funktionen läser 16-bitars ljudexempeldata från den angivna strömmen.
 
-Mer specifikt läser det exempel data från den aktuella bufferten för bild ramar i FIFO-enheten. När du läser det sista exemplet i en ljud ram frigörs ramen automatiskt så att den kan användas för att acceptera mer data från värden.
+Mer specifikt läser den exempeldata från den aktuella ljudrambufferten i FIFO:n. När du läser det sista exemplet i en ljudram frigörs ramen automatiskt så att den kan användas för att ta emot mer data från värden.
 
 ### <a name="parameters"></a>Parametrar
 
-- **Stream**: pekar mot ljud Ströms instansen.
-- **Buffer**: pekare till bufferten för att spara 16-bitars exemplet.
+- **stream**: Pekare till ljudströminstansen.
+- **buffer**: Pekare till bufferten för att spara 16-bitarsprovet.
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0X00) den här åtgärden lyckades.
-- **UX_CONFIGURATION_HANDLE_UNKNOWN** (0x51) gränssnittet är nere.
-- **UX_BUFFER_OVERFLOW** (0X5D) FIFO-bufferten är null.
-- **UX_ERROR** (0Xff) fel från funktion
+- **UX_SUCCESS** (0x00) Den här åtgärden lyckades.
+- **UX_CONFIGURATION_HANDLE_UNKNOWN** (0x51) Gränssnittet är nere.
+- **UX_BUFFER_OVERFLOW** (0x5d) FIFO-bufferten är null.
+- **UX_ERROR** (0xFF) Fel från funktion
 
 ### <a name="example"></a>Exempel
 
@@ -1455,7 +1455,7 @@ if(status != UX_SUCCESS)
 
 ## <a name="ux_device_class_audio_sample_read24"></a>ux_device_class_audio_sample_read24
 
-Läs 24-bitars exempel från ljud strömmen
+Läsa 24-bitarsexempel från ljudströmmen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1465,23 +1465,23 @@ UINT ux_device_class_audio_sample_read24(
     ULONG *buffer);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen läser 24-bitars ljud exempel data från den angivna data strömmen.
+Den här funktionen läser 24-bitars ljudexempeldata från den angivna strömmen.
 
-Mer specifikt läser det exempel data från den aktuella bufferten för bild ramar i FIFO-enheten. När du läser det sista exemplet i en ljud ram frigörs ramen automatiskt så att den kan användas för att acceptera mer data från värden.
+Mer specifikt läser den exempeldata från den aktuella ljudrambufferten i FIFO. När du läser det sista exemplet i en ljudram frigörs ramen automatiskt så att den kan användas för att ta emot mer data från värden.
 
 ### <a name="parameters"></a>Parametrar
 
-- **Stream**: pekar mot ljud Ströms instansen.
-- **Buffer**: pekare till bufferten för att spara exemplet med tre byte.
+- **stream**: Pekare till ljudströminstansen.
+- **buffer**: Pekare till bufferten för att spara 3 byte-exemplet.
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0X00) den här åtgärden lyckades.
-- **UX_CONFIGURATION_HANDLE_UNKNOWN** (0x51) gränssnittet är nere.
-- **UX_BUFFER_OVERFLOW** (0X5D) FIFO-bufferten är null.
-- **UX_ERROR** (0Xff) fel från funktion
+- **UX_SUCCESS** (0x00) Den här åtgärden lyckades.
+- **UX_CONFIGURATION_HANDLE_UNKNOWN** (0x51) Gränssnittet är nere.
+- **UX_BUFFER_OVERFLOW** (0x5d) FIFO-bufferten är null.
+- **UX_ERROR** (0xFF) Fel från funktion
 
 ### <a name="example"></a>Exempel
 
@@ -1496,7 +1496,7 @@ if(status != UX_SUCCESS)
 
 ## <a name="ux_device_class_audio_sample_read32"></a>ux_device_class_audio_sample_read32
 
-Läs 32-bitars exempel från ljud strömmen
+Läsa 32-bitarsexempel från ljudströmmen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1506,23 +1506,23 @@ UINT ux_device_class_audio_sample_read32(
     ULONG *buffer);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen läser 32-bitars ljud exempel data från den angivna data strömmen.
+Den här funktionen läser 32-bitars ljudexempeldata från den angivna dataströmmen.
 
-Mer specifikt läser det exempel data från den aktuella bufferten för bild ramar i FIFO-enheten. När du läser det sista exemplet i en ljud ram frigörs ramen automatiskt så att den kan användas för att acceptera mer data från värden.
+Mer specifikt läser den exempeldata från den aktuella ljudrambufferten i FIFO. När du läser det sista exemplet i en ljudram frigörs ramen automatiskt så att den kan användas för att ta emot mer data från värden.
 
 ### <a name="parameters"></a>Parametrar
 
-- **Stream**: pekar mot ljud Ströms instansen.
-- **Buffer**: pekar mot bufferten för att spara data för 4 byte.
+- **stream**: Pekare till ljudströminstansen.
+- **buffer**: Pekare till bufferten för att spara 4 byte-data.
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0X00) den här åtgärden lyckades.
-- **UX_CONFIGURATION_HANDLE_UNKNOWN** (0x51) gränssnittet är nere.
-- **UX_BUFFER_OVERFLOW** (0X5D) FIFO-bufferten är null.
-- **UX_ERROR** (0Xff) fel från funktion
+- **UX_SUCCESS** (0x00) Den här åtgärden lyckades.
+- **UX_CONFIGURATION_HANDLE_UNKNOWN** (0x51) Gränssnittet är nere.
+- **UX_BUFFER_OVERFLOW** (0x5d) FIFO-bufferten är null.
+- **UX_ERROR** (0xFF) Fel från funktion
 
 ### <a name="example"></a>Exempel
 
@@ -1537,7 +1537,7 @@ if(status != UX_SUCCESS)
 
 ## <a name="ux_device_class_audio_read_frame_get"></a>ux_device_class_audio_read_frame_get
 
-Få åtkomst till ljud ramen i ljud strömmen
+Få åtkomst till ljudramen i ljudströmmen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1548,22 +1548,22 @@ UINT ux_device_class_audio_read_frame_get(
     ULONG *frame_length);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen returnerar den första ljud Rams bufferten och dess längd i den angivna data strömens FIFO. När programmet har behandlat data måste ux_device_class_audio_read_frame_free användas för att frigöra bildruteproportioner i FIFO.
+Den här funktionen returnerar den första ljudrambufferten och dess längd i den angivna strömmens FIFO. När programmet har bearbetat data måste ux_device_class_audio_read_frame_free användas för att frigöra rambufferten i FIFO:n.
 
 ### <a name="parameters"></a>Parametrar
 
-- **Stream**: pekar mot ljud Ströms instansen.
-- **frame_data**: pekar på data pekare för att returnera data pekaren i.
-- **frame_length**: pekare till buffer för att spara ram längden i antal byte.
+- **stream**: Pekare till ljudströminstansen.
+- **frame_data:** Pekare till data pekare för att returnera data pekaren i.
+- **frame_length:** Pekare till buffert för att spara ramlängden i antal byte.
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0X00) den här åtgärden lyckades.
-- **UX_CONFIGURATION_HANDLE_UNKNOWN** (0x51) gränssnittet är nere.
-- **UX_BUFFER_OVERFLOW** (0X5D) FIFO-bufferten är null.
-- **UX_ERROR** (0Xff) fel från funktion
+- **UX_SUCCESS** (0x00) Den här åtgärden lyckades.
+- **UX_CONFIGURATION_HANDLE_UNKNOWN** (0x51) Gränssnittet är nere.
+- **UX_BUFFER_OVERFLOW** (0x5d) FIFO-bufferten är null.
+- **UX_ERROR** (0xFF) Fel från funktion
 
 ### <a name="example"></a>Exempel
 
@@ -1578,7 +1578,7 @@ if(status != UX_SUCCESS)
 
 ## <a name="ux_device_class_audio_read_frame_free"></a>ux_device_class_audio_read_frame_free
 
-Frigör en buffert i ljud fönstret i ljud strömmen
+Frigör en ljudramsbuffert i ljudströmmen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1586,20 +1586,20 @@ Frigör en buffert i ljud fönstret i ljud strömmen
 UINT ux_device_class_audio_read_frame_free(UX_DEVICE_CLASS_AUDIO_STREAM *stream);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Med den här funktionen frigörs ljud bildens buffert längst fram i den angivna data strömmens FIFO så att den kan ta emot data från värden.
+Den här funktionen frigör ljudrambufferten framför den angivna strömmens FIFO så att den kan ta emot data från värden.
 
 ### <a name="parameters"></a>Parametrar
 
-- **Stream**: pekar mot ljud Ströms instansen.
+- **stream**: Pekare till ljudströminstansen.
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0X00) den här åtgärden lyckades.
-- **UX_CONFIGURATION_HANDLE_UNKNOWN** (0x51) gränssnittet är nere.
-- **UX_BUFFER_OVERFLOW** (0X5D) FIFO-bufferten är null.
-- **UX_ERROR** (0Xff) fel från funktion
+- **UX_SUCCESS** (0x00) Den här åtgärden lyckades.
+- **UX_CONFIGURATION_HANDLE_UNKNOWN** (0x51) Gränssnittet är nere.
+- **UX_BUFFER_OVERFLOW** (0x5d) FIFO-bufferten är null.
+- **UX_ERROR** (0xFF) Fel från funktion
 
 ### <a name="example"></a>Exempel
 
@@ -1614,7 +1614,7 @@ if(status != UX_SUCCESS)
 
 ## <a name="ux_device_class_audio_transmission_start"></a>ux_device_class_audio_transmission_start
 
-Starta ljud data överföring för ljud strömmen
+Starta överföring av ljuddata för ljudströmmen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1622,20 +1622,20 @@ Starta ljud data överföring för ljud strömmen
 UINT ux_device_class_audio_transmission_start(UX_DEVICE_CLASS_AUDIO_STREAM *stream);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen används för att börja skicka ljud data som skrivits till FIFO i klassen Audio.
+Den här funktionen används för att börja skicka ljuddata som skrivits till FIFO i ljudklassen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **Stream**: pekar mot ljud Ströms instansen.
+- **stream**: Pekare till ljudströminstansen.
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0X00) den här åtgärden lyckades.
-- **UX_CONFIGURATION_HANDLE_UNKNOWN** (0x51) gränssnittet är nere.
-- **UX_BUFFER_OVERFLOW** (0X5D) FIFO-bufferten är null.
-- **UX_ERROR** (0Xff) fel från funktion
+- **UX_SUCCESS** (0x00) Den här åtgärden lyckades.
+- **UX_CONFIGURATION_HANDLE_UNKNOWN** (0x51) Gränssnittet är nere.
+- **UX_BUFFER_OVERFLOW** (0x5d) FIFO-bufferten är null.
+- **UX_ERROR** (0xFF) Fel från funktion
 
 ### <a name="example"></a>Exempel
 
@@ -1650,7 +1650,7 @@ if(status != UX_SUCCESS)
 
 ## <a name="ux_device_class_audio_frame_write"></a>ux_device_class_audio_frame_write
 
-Skriv en ljud bild ruta i ljud strömmen
+Skriva en ljudram till ljudströmmen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1661,22 +1661,22 @@ UINT ux_device_class_audio_frame_write(
     ULONG frame_length);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen skriver en ram till ljud strömmens FIFO. Ramdata kopieras till den tillgängliga bufferten i FIFO så att den kan skickas till värden.
+Den här funktionen skriver en bildruta till ljudströmmens FIFO. Ramdata kopieras till den tillgängliga bufferten i FIFO:n så att de kan skickas till värden.
 
 ### <a name="parameters"></a>Parametrar
 
-- **Stream**: pekar mot ljud Ströms instansen.
-- **ram**: pekar mot ramdata.
-- **frame_length** Ram längd i antal byte.
+- **stream**: Pekare till ljudströminstansen.
+- **frame**: Pekare för att rama in data.
+- **frame_length** Ramlängd i antal byte.
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0X00) den här åtgärden lyckades.
-- **UX_CONFIGURATION_HANDLE_UNKNOWN** (0x51) gränssnittet är nere.
-- **UX_BUFFER_OVERFLOW** (0X5D) FIFO-bufferten är full.
-- **UX_ERROR** (0Xff) fel från funktion
+- **UX_SUCCESS** (0x00) Den här åtgärden lyckades.
+- **UX_CONFIGURATION_HANDLE_UNKNOWN** (0x51) Gränssnittet är nere.
+- **UX_BUFFER_OVERFLOW** (0x5d) FIFO-bufferten är full.
+- **UX_ERROR** (0xFF) Fel från funktion
 
 ### <a name="example"></a>Exempel
 
@@ -1691,7 +1691,7 @@ if(status != UX_SUCCESS)
 
 ## <a name="ux_device_class_audio_write_frame_get"></a>ux_device_class_audio_write_frame_get
 
-Få åtkomst till ljud ramen i ljud strömmen
+Få åtkomst till ljudramen i ljudströmmen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1702,22 +1702,22 @@ UINT ux_device_class_audio_write_frame_get(
     ULONG *frame_length);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen hämtar adressen till den senaste ljud bildens buffert i FIFOn. den hämtar också längden på ljud Rams bufferten. När programmet har fyllt i ljud fönstrets buffert med önskade data, måste ***ux_device_class_audio_write_frame_commit*** användas för att lägga till/bekräfta RAMSIDAN till FIFO.
+Den här funktionen hämtar adressen till den sista ljudrambufferten för FIFO: Den hämtar även längden på ljudrambufferten. När programmet har fyllt ljudrambufferten med önskade data ***ux_device_class_audio_write_frame_commit*** användas för att lägga till/spara bildrutebufferten till FIFO:n.
 
 ### <a name="parameters"></a>Parametrar
 
-- **Stream**: pekar mot ljud Ströms instansen.
-- **frame_data**: pekar mot bildruta-datapekare för att returnera ramens data pekare i.
-- **frame_length** Pekar på bufferten för att spara ram längden i antal byte.
+- **stream**: Pekare till ljudströminstansen.
+- **frame_data: Pekare** för att rama in datapekaren för att returnera pekaren för ramdata.
+- **frame_length** Pekare till bufferten för att spara ramlängden i antal byte.
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0X00) den här åtgärden lyckades.
-- **UX_CONFIGURATION_HANDLE_UNKNOWN** (0x51) gränssnittet är nere.
-- **UX_BUFFER_OVERFLOW** (0X5D) FIFO-bufferten är full.
-- **UX_ERROR** (0Xff) fel från funktion
+- **UX_SUCCESS** (0x00) Den här åtgärden lyckades.
+- **UX_CONFIGURATION_HANDLE_UNKNOWN** (0x51) Gränssnittet är nere.
+- **UX_BUFFER_OVERFLOW** (0x5d) FIFO-bufferten är full.
+- **UX_ERROR** (0xFF) Fel från funktion
 
 ### <a name="example"></a>Exempel
 
@@ -1732,7 +1732,7 @@ if(status != UX_SUCCESS)
 
 ## <a name="ux_device_class_audio_write_frame_commit"></a>ux_device_class_audio_write_frame_commit
 
-Bekräfta en buffert för ljud ramar i ljud strömmen.
+Spara en ljudramsbuffert i ljudströmmen.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1742,21 +1742,21 @@ UINT ux_device_class_audio_write_frame_commit(
     ULONG length);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen lägger till/aktiverar den senaste ljud bildens buffert till FIFO så att bufferten kan överföras till värden. Observera att den sista bufferten för ljud ramar borde ha fyllts i via ux_device_class_write_frame_get.
+Den här funktionen lägger till/genomför den sista ljudrambufferten till FIFO:n så att bufferten är redo att överföras till värden. Observera att den senaste ljudrambufferten bör ha fyllts i via ux_device_class_write_frame_get.
 
 ### <a name="parameters"></a>Parametrar
 
-- **Stream**: pekar mot ljud Ströms instansen.
-- **längd**: antal byte som är klara i bufferten.
+- **stream**: Pekare till ljudströminstansen.
+- **length**: Antal byte som är redo i bufferten.
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0X00) den här åtgärden lyckades.
-- **UX_CONFIGURATION_HANDLE_UNKNOWN** (0x51) gränssnittet är nere.
-- **UX_BUFFER_OVERFLOW** (0X5D) FIFO-bufferten är fssull.
-- **UX_ERROR** (0Xff) fel från funktion
+- **UX_SUCCESS** (0x00) Den här åtgärden lyckades.
+- **UX_CONFIGURATION_HANDLE_UNKNOWN** (0x51) Gränssnittet är nere.
+- **UX_BUFFER_OVERFLOW** (0x5d) FIFO-bufferten är fssull.
+- **UX_ERROR** (0xFF) Fel från funktion
 
 ### <a name="example"></a>Exempel
 
@@ -1771,7 +1771,7 @@ if(status != UX_SUCCESS)
 
 ## <a name="ux_device_class_audio10_control_process"></a>ux_device_class_audio10_control_process
 
-Bearbeta USB-ljud 1,0-kontroll begär Anden
+Bearbeta USB Audio 1.0-kontrollbegäranden
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1782,22 +1782,22 @@ UINT ux_device_class_audio10_control_process(
     UX_DEVICE_CLASS_AUDIO10_CONTROL_GROUP *group);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen hanterar grundläggande förfrågningar som skickas av värden på kontrollens slut punkt med en USB-ljud1,0-typ.
+Den här funktionen hanterar grundläggande begäranden som skickas av värden på kontrollslutpunkten med en USB Audio 1.0-specifik typ.
 
-Ljud 1,0 funktioner för volym-och ljud uppspelnings förfrågningar bearbetas i funktionen. När begär Anden bearbetas används fördefinierade data som skickas av den senaste parametern (grupp) för att besvara begär Anden och spara kontroll ändringar.
+Audio 1.0-funktioner för volym- och mute-begäranden bearbetas i funktionen. Vid bearbetning av begäranden används fördefinierade data som skickas av den sista parametern (grupp) för att besvara begäranden och lagra kontrolländringar.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ljud**: pekar mot ljud instansen.
-- **överföring**: pekar mot överförings begär ande instansen.
-- **grupp**: data grupp för process för begäran.
+- **audio**: Pekare till ljudinstansen.
+- **transfer**: Pekare till instansen för överföringsbegäran.
+- **group**: Datagrupp för begärandeprocess.
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0X00) den här åtgärden lyckades.
-- **UX_ERROR** (0Xff) fel från funktion
+- **UX_SUCCESS** (0x00) Den här åtgärden lyckades.
+- **UX_ERROR** (0xFF) Fel från funktion
 
 ### <a name="example"></a>Exempel
 
@@ -1830,7 +1830,7 @@ if (status == UX_SUCCESS)
 
 ## <a name="ux_device_class_audio20_control_process"></a>ux_device_class_audio20_control_process
 
-Bearbeta USB-ljud 1,0-kontroll begär Anden
+Bearbeta USB Audio 1.0-kontrollbegäranden
 
 ### <a name="prototype"></a>Prototyp
 ```C
@@ -1840,22 +1840,22 @@ UINT ux_device_class_audio20_control_process(
     UX_DEVICE_CLASS_AUDIO20_CONTROL_GROUP *group);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen hanterar grundläggande förfrågningar som skickas av värden på kontrollens slut punkt med en USB-ljud2,0-typ.
+Den här funktionen hanterar grundläggande begäranden som skickas av värden på kontrollslutpunkten med en USB Audio 2.0-specifik typ.
 
-Ljud 2,0 samplings frekvens (förmodad enkel fast frekvens), funktioner för volym och ljud av förfrågningar bearbetas i funktionen. När begär Anden bearbetas används fördefinierade data som skickas av den senaste parametern (grupp) för att besvara begär Anden och spara kontroll ändringar.
+Samplingsfrekvensen för Audio 2.0 (antas vara en fast frekvens), funktioner för volym- och mute-begäranden bearbetas i funktionen. Vid bearbetning av begäranden används fördefinierade data som skickas av den sista parametern (grupp) för att besvara begäranden och lagra kontrolländringar.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ljud**: pekar mot ljud instansen.
-- **överföring**: pekar mot överförings begär ande instansen.
-- **grupp**: data grupp för process för begäran.
+- **audio**: Pekare till ljudinstansen.
+- **transfer**: Pekare till instansen för överföringsbegäran.
+- **group**: Datagrupp för begärandeprocess.
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0X00) den här åtgärden lyckades.
-- **UX_ERROR** (0Xff) fel från funktion
+- **UX_SUCCESS** (0x00) Den här åtgärden lyckades.
+- **UX_ERROR** (0xFF) Fel från funktion
 
 ### <a name="example"></a>Exempel
 

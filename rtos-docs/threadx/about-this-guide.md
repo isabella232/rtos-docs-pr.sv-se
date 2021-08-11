@@ -1,81 +1,81 @@
 ---
-title: Om Azure återställnings tider ThreadX-guiden
-description: Den här guiden innehåller omfattande information om Azure återställnings tider ThreadX, Microsoft Real-Performance-kärnan i real tid.
+title: Om guiden Azure RTOS ThreadX
+description: Den här guiden innehåller omfattande information om Azure RTOS ThreadX, Microsofts högpresterande kernel i realtid.
 author: philmea
 ms.author: philmea
 ms.date: 05/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: ad9f782942bcdbb2dc49a9c841d865d97bcb1d4e
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 28f088409fdd5e2c075cbf90b21d3d260c811806066e74bffc395207cde0239c
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104826592"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116802132"
 ---
-# <a name="about-the-azure-rtos-threadx-guide"></a>Om Azure återställnings tider ThreadX-guiden
+# <a name="about-the-azure-rtos-threadx-guide"></a>Om guiden Azure RTOS ThreadX
 
-Den här guiden innehåller omfattande information om Azure återställnings tider ThreadX, Microsoft Real-Performance-kärnan i real tid. 
+Den här guiden innehåller omfattande information Azure RTOS ThreadX, Microsofts högpresterande kernel i realtid. 
 
-Den är avsedd för den inbäddade programutvecklaren i real tid. Utvecklaren bör vara bekant med vanliga operativ system funktioner i real tid och programmeringsspråket C.
+Den är avsedd för den inbäddade realtidsutvecklaren. Utvecklaren bör vara bekant med standardfunktioner för realtidsoperativsystemet och programmeringsspråket C.
 
 ## <a name="organization"></a>Organisation
 
-[Kapitel 1](chapter1.md) – innehåller en grundläggande översikt över Azure återställnings tider-ThreadX och dess relation till inbäddad real tids utveckling
+[Kapitel 1](chapter1.md) – Ger en grundläggande översikt över Azure RTOS ThreadX och dess relation till inbäddad utveckling i realtid
 
-[Kapitel 2](chapter2.md) – innehåller grundläggande steg för att installera och använda Azure återställnings tider-ThreadX i ditt program direkt från *lådan*
+[Kapitel 2](chapter2.md) – Ger de grundläggande stegen för att installera Azure RTOS använda ThreadX i ditt program *direkt*
 
-[Kapitel 3](chapter3.md) – beskrivs i detalj den funktionella driften av Azure återställnings tider ThreadX, real tids kärnan i real tid
+[Kapitel 3](chapter3.md) – Beskriver i detalj den funktionella driften Azure RTOS ThreadX, kerneln med höga prestanda i realtid
 
-[Kapitel 4](chapter4.md) – information om programmets gränssnitt till Azure återställnings tider ThreadX
+[Kapitel 4](chapter4.md) – Beskriver programmets gränssnitt för att Azure RTOS ThreadX
 
-[Kapitel 5](chapter5.md) – beskriver hur du skriver I/O-drivrutiner för Azure återställnings tider ThreadX-program
+[Kapitel 5 –](chapter5.md) Beskriver hur du skriver I/O-drivrutiner Azure RTOS ThreadX-program
 
-[Kapitel 6](chapter6.md) – beskriver demonstrations programmet som medföljer varje Azure återställnings tider ThreadX processor support paket
+[Kapitel 6](chapter6.md) – Beskriver demonstrationsprogrammet som levereras med varje Azure RTOS ThreadX-processorsupportpaket
 
-[Bilaga A](appendix-a.md) – Azure återställnings tider THREADX-API
+[Bilaga A](appendix-a.md) – Azure RTOS ThreadX API
 
-[Bilaga B](appendix-b.md) – Azure återställnings tider ThreadX-konstanter
+[Bilaga B](appendix-b.md) – Azure RTOS ThreadX-konstanter
 
-[Bilaga C](appendix-c.md) – data typer för Azure återställnings tider-ThreadX
+[Bilaga C](appendix-c.md) – Azure RTOS ThreadX-datatyper
 
 [Bilaga D](appendix-d.md) – ASCII-diagram
 
-## <a name="guide-conventions"></a>Guide konventioner
+## <a name="guide-conventions"></a>Guidekonventioner
 
-*Kursiv stil* -teckensnitt anger bok titlar, betonar viktiga ord och indikerar parametrar.
+*Italics* – typeface anger boktitlar, betonar viktiga ord och anger parametrar.
 
-**Fetstil** – typsnitt anger nyckelord, konstanter, typ namn, gränssnitts element, variabel namn och betonar viktiga ord.
+**Fetstil** – typansiktet anger nyckelord, konstanter, typnamn, användargränssnittselement, variabelnamn och betonar viktiga ord ytterligare.
 
-***Kursiv stil och fetstil*** – typsnitt anger fil namn och funktions namn.
+***Italics och Boldface*** – typeface anger filnamn och funktionsnamn.
 
 > [!IMPORTANT]
-> Informations symboler drar uppmärksamheten till viktig eller ytterligare information som kan påverka prestandan eller funktionen.
+> Informationssymboler uppmärksammar viktig eller ytterligare information som kan påverka prestanda eller funktion.
 
 > [!WARNING]
-> Varnings symboler drar uppmärksamhet till situationer där utvecklare bör ta hand om att undvika att de kan orsaka allvarliga fel.
+> Varningssymboler uppmärksammar situationer där utvecklare bör vara noga med att undvika eftersom de kan orsaka allvarliga fel.
 
-## <a name="azure-rtos-threadx-data-types"></a>Data typer för Azure dataåterställnings tiders-ThreadX
+## <a name="azure-rtos-threadx-data-types"></a>Azure RTOS ThreadX-datatyper
 
-Förutom de anpassade data typerna för kontroll strukturen i Azure återställnings tider-ThreadX finns det en serie särskilda data typer som används i Azure återställnings tider ThreadX service Call-gränssnitt. Dessa särskilda data typer mappar direkt till data typer för den underliggande C-kompilatorn. Detta görs för att säkerställa portabilitet mellan olika C-kompilatorer. Du hittar den exakta implementeringen i filen ***tx_port. h*** som ingår i källan.
+Förutom de anpassade datatyperna Azure RTOS ThreadX-kontrollstruktur finns det en serie särskilda datatyper som används i Azure RTOS ThreadX-tjänstens anropsgränssnitt. Dessa särskilda datatyper mappar direkt till datatyperna i den underliggande C-kompilatorn. Detta görs för att säkerställa portabilitet mellan olika C-kompilatorer. Den exakta implementeringen finns i filen ***tx_port.h*** som ingår i källan.
 
-Följande är en lista över data typer för Azure återställnings tider ThreadX service Call och deras associerade betydelser:
+Följande är en lista över datatyper Azure RTOS ThreadX-tjänsten och deras associerade betydelser:
 
 | Datatyp  | Beskrivning |
 | -------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| **UINT** | Basic-osignerat heltal. Den här typen måste ha stöd för 8-bitars osignerade data. den är dock mappad till den mest användbara osignerade data typen. |
+| **Uint** | Grundläggande heltal utansignering. Den här typen måste ha stöd för 8-bitars osignerade data. Den mappas dock till den mest praktiska osignerade datatypen. |
 | **ULONG** | Osignerad lång typ. Den här typen måste ha stöd för 32-bitars osignerade data. |
-| **VOID** | Nästan alltid ekvivalent med kompilatorns void-typ. |
-| **HÄNGANDE** | Oftast en vanlig 8-bitars tecken typ. |
+| **Void** | Nästan alltid likvärdigt med kompilatorns void-typ. |
+| **Char** | Oftast en standardtyp med 8 bitar. |
 |  |  |
 
-Ytterligare data typer används i Azure återställnings tider ThreadX-källan. De finns också i filen ***tx_port. h*** .
+Ytterligare datatyper används i Azure RTOS ThreadX-källan. De finns också i filen ***tx_port.h.***
 
-## <a name="customer-support-center"></a>Kund Support Center
+## <a name="customer-support-center"></a>Customer Support Center
 
-Skicka in ett support ärende via Azure Portal om du har frågor eller hjälp med att följa stegen här. Lämna oss med följande information i ett e-postmeddelande så att vi effektivare kan lösa support förfrågan:
+Skicka en supportbiljett via Azure-portalen för frågor eller hjälp med att följa stegen här. Ange följande information i ett e-postmeddelande så att vi kan lösa din supportbegäran mer effektivt:
 
-1. En detaljerad beskrivning av problemet, inklusive frekvensen av händelser och huruvida det kan återskapas tillförlitligt.
-2. En detaljerad beskrivning av eventuella ändringar i programmet och/eller Azure återställnings tider-ThreadX som föregåde problemet.
-3. Innehållet i den *_tx_version_id* strängen som finns i filen *tx_port. h* i distributionen. Den här strängen ger oss värdefull information om din kör tids miljö.
-4. Innehållet i RAM-minnet för **_tx_build_options** **ulong** -variabeln. Den här variabeln ger oss information om hur ditt Azure återställnings tider ThreadX-bibliotek har skapats.
+1. En detaljerad beskrivning av problemet, inklusive förekomstfrekvens och om det kan återskapas på ett tillförlitligt sätt.
+2. En detaljerad beskrivning av eventuella ändringar i programmet och/eller Azure RTOS ThreadX som föregick problemet.
+3. Innehållet i den *_tx_version_id strängen* som finns *i tx_port.h-filen* för distributionen. Den här strängen ger oss värdefull information om din körningsmiljö.
+4. Innehållet i RAM-minnet för **den _tx_build_options** **ULONG-variabeln.** Den här variabeln ger oss information om hur Azure RTOS ThreadX-biblioteket har skapats.

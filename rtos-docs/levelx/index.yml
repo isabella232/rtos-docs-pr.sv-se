@@ -1,31 +1,31 @@
 ### YamlMime:Landing
-title: Dokumentation om Azure återställnings tider LevelX
-summary: Azure återställnings tider-LevelX innehåller NAND och eller Flash slitage-funktioner till inbäddade program.
+title: Azure RTOS LevelX-dokumentation
+summary: Azure RTOS LevelX tillhandahåller FÖRslitnings- och UTSlitning av FLASH-skydd till inbäddade program.
 metadata:
-  title: Vad är Azure återställnings tider LevelX?
-  description: Azure återställnings tider-LevelX innehåller NAND och eller Flash slitage-funktioner till inbäddade program.
+  title: Vad är Azure RTOS LevelX?
+  description: Azure RTOS LevelX tillhandahåller FÖRslitnings- och UTSlitning av FLASH-skydd till inbäddade program.
   services: rtos
   ms.service: rtos
   ms.topic: landing-page
   author: philmea
   ms.author: philmea
   ms.date: 07/10/2020
-  ms.openlocfilehash: 27ce4d34d53b2a6daec651dd83c648024aad0291
-  ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+  ms.openlocfilehash: ea822259a774e57cb9e018a90a1985f291a4cbbd157b086753680f577e8cbc94
+  ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
   ms.translationtype: MT
   ms.contentlocale: sv-SE
-  ms.lasthandoff: 03/22/2021
-  ms.locfileid: "104798008"
+  ms.lasthandoff: 08/07/2021
+  ms.locfileid: "116790555"
 landingContent:
-- title: Introduktion till Azure återställnings tider LevelX
+- title: Introduktion till Azure RTOS LevelX
   linkLists:
   - linkListType: overview
     links:
-    - text: Vad är Azure återställnings tider LevelX?
+    - text: Vad är Azure RTOS LevelX?
       url: chapter1.md
-- title: Installera och använda Azure återställnings tider-LevelX
+- title: Installera och använda Azure RTOS LevelX
   linkLists:
   - linkListType: get-started
     links:
-    - text: Användar handbok för Azure återställnings tider LevelX
+    - text: Azure RTOS användarhandbok för LevelX
       url: chapter2.md

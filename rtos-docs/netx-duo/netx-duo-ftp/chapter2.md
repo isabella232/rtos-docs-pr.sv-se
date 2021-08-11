@@ -1,59 +1,59 @@
 ---
-title: Kapitel 2 – installation och användning av FTP
-description: Det här kapitlet innehåller en beskrivning av olika problem som rör Installation, konfiguration och användning av NetX Duo FTP-tjänster.
+title: Kapitel 2 – Installation och användning av FTP
+description: Det här kapitlet innehåller en beskrivning av olika problem som rör installation, installation och användning av NetX Duo FTP-tjänsterna.
 author: philmea
 ms.author: philmea
 ms.date: 07/14/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: ac58658af93f59556d99d340ae38570908d63fc1
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: bef7dcce9354e6653dd92c5a47a29d120268faeb4a30b4d146c9e10d2d69084e
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104825977"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116790232"
 ---
-# <a name="chapter-2---installation-and-use-of-ftp"></a>Kapitel 2 – installation och användning av FTP
+# <a name="chapter-2---installation-and-use-of-ftp"></a>Kapitel 2 – Installation och användning av FTP
 
-Det här kapitlet innehåller en beskrivning av olika problem som rör Installation, konfiguration och användning av NetX Duo FTP-tjänster.
+Det här kapitlet innehåller en beskrivning av olika problem som rör installation, installation och användning av NetX Duo FTP-tjänsterna.
 
-## <a name="product-distribution"></a>Produkt distribution
+## <a name="product-distribution"></a>Produktdistribution
 
 NetX Duo FTP finns på [https://github.com/azure-rtos/netxduo](https://github.com/azure-rtos/netxduo) . Paketet innehåller två källfiler och en PDF-fil som innehåller det här dokumentet, enligt följande:
 
-- **nxd_ftp_client. h** Rubrik fil för NetX Duo FTP-klient
-- **nxd_ftp_client. c** C-källfil för NetX Duo FTP client
-- **nxd_ftp_server. h** Rubrik fil för NetX Duo FTP-Server
-- **nxd_ftp_server. c** C-källfil för NetX Duo FTP-Server
-- **filex_stub. h** Stub-fil om FileX inte finns
-- **nxd_ftp.pdf** PDF-Beskrivning av FTP för NetX Duo
-- **demo_netxduo_ftp. c** Demonstrations system för FTP
+- **nxd_ftp_client.h** Rubrikfil för NetX Duo FTP-klient
+- **nxd_ftp_client.c** C-källfil för NetX Duo FTP-klient
+- **nxd_ftp_server.h** Rubrikfil för NetX Duo FTP-server
+- **nxd_ftp_server.c** C-källfil för NetX Duo FTP-server
+- **filex_stub.h** Stub-fil om FileX inte finns
+- **nxd_ftp.pdf** PDF-beskrivning av FTP för NetX Duo
+- **demo_netxduo_ftp.c** FTP-demonstrationssystem
 
 ## <a name="netx-duo-ftp-installation"></a>NetX Duo FTP-installation
 
-För att kunna använda NetX Duo FTP API, ska hela distributionen som nämnts tidigare kopieras till samma katalog där NetX Duo är installerat. Om t. ex. NetX Duo installeras i katalogen "*\threadx\arm7\green*" måste *nxd_ftp_client. h* och *nxd_ftp_client. c* kopieras till den här katalogen för FTP-klientprogram och *nxd_ftp_server. h* -och *nxd_ftp_server. c* -filer ska kopieras till den här katalogen för FTP-serverprogram.
+För att kunna använda NETX Duo FTP-API:et ska hela distributionen som nämns ovan kopieras till samma katalog där NetX Duo är installerat. Om NetX Duo till exempel är installerat i katalogen "*\threadx\arm7\green*" ska *filerna nxd_ftp_client.h* och nxd_ftp_client.c kopieras till den här katalogen för FTP-klientprogram, och filerna *nxd_ftp_server.h* och *nxd_ftp_server.c* ska kopieras till den här katalogen för FTP-serverprogram. 
 
 ## <a name="using-netx-duo-ftp"></a>Använda NetX Duo FTP
 
-Det är enkelt att använda NetX Duo FTP API. Program koden måste i princip innehålla antingen *nxd_ftp_client. h* för FTP-klientprogram eller *nxd_ftp_server* för FTP-serverprogram när den innehåller *tx_api. h, fx_api. h* och *nx_api. h*, för att kunna använda ThreadX, FileX och netx Duo. Build-projektet måste innehålla FTP-källkoden och värd program filen, och naturligtvis ThreadX-och NetX-biblioteksfilerna. Detta är allt som krävs för att använda NetX Duo FTP.
+Det är enkelt att använda FTP-API:et för NetX Duo. I princip måste programkoden innehålla *antingen nxd_ftp_client.h* för FTP-klientprogram eller *nxd_ftp_server* för FTP-serverprogram, när den innehåller *tx_api.h, fx_api.h* och *nx_api.h*, för att kunna använda ThreadX, FileX respektive NetX Duo. Byggprojektet måste innehålla FTP-källkoden och värdprogramfilen, och naturligtvis biblioteksfilerna ThreadX och NetX. Det här är allt som krävs för att använda NetX Duo FTP.
 
-Observera att eftersom FTP använder NetX Duo TCP-tjänster måste TCP aktive ras med det *nx_tcp_enable* samtalet innan FTP används.
+Observera att eftersom FTP använder NetX Duo TCP-tjänster måste TCP aktiveras med nx_tcp_enable *innan* du använder FTP.
 
-Observera att NetX Duo-biblioteket kan aktive ras för IPv6 och fortfarande ha stöd för IPv4-nätverk. NetX Duo stöder dock inte IPv6 om den inte är aktive rad. För att inaktivera IPv6-bearbetning i NetX Duo måste **NX_DISABLE_IPV6** definieras i *nx_user. h* -filen och filen måste ingå i netx Duo Library-versionen genom att definiera **NX_INCLUDE_USER_DEFINE_FILE** i *nx_port. h* -filen. Som standard är **NX_DISABLE_IPV6** inte definierat (IPv6 är aktiverat). Detta skiljer sig från *nxd_ipv6_enable* -tjänsten som konfigurerar IPv6-protokoll och-tjänster för IP-aktiviteten och kräver att **NX_DISABLE_IPV6** inte har definierats.
+Observera att NetX Duo-biblioteket kan aktiveras för IPv6 och fortfarande har stöd för IPv4-nätverk. NetX Duo stöder dock inte IPv6 om det inte är aktiverat. Om du vill inaktivera IPv6-bearbetning i NetX Duo **måste NX_DISABLE_IPV6** definieras i *nx_user.h-filen* och filen måste inkluderas i NetX Duo-biblioteksbygget genom att **definiera NX_INCLUDE_USER_DEFINE_FILE** i *nx_port.h-filen.* Som standard är **NX_DISABLE_IPV6** inte definierad (IPv6 är aktiverat). Detta skiljer sig från *den nxd_ipv6_enable* tjänst som uppsättningar IPv6-protokoll och -tjänster för IP-uppgiften och kräver **att NX_DISABLE_IPV6** inte definieras.
 
-## <a name="small-example-system-of-netx-duo-ftp"></a>Litet exempel system av NetX Duo FTP
+## <a name="small-example-system-of-netx-duo-ftp"></a>Litet exempelsystem för NetX Duo FTP
 
-Ett exempel på hur enkelt det är att använda NetX Duo FTP beskrivs i bild 1,1 som visas nedan. I det här exemplet skapas både en FTP-server och en FTP-klient. Både FTP inkluderar filerna *nxd_ftp_client. h och nxd_ftp_server. h* tas i rad 10 och 11. Därefter skapas FTP-servern i "*tx_application_define*" på rad 99. Observera att FTP-servern och klient kontroll block definieras som globala variabler på rad 26 tidigare.
+Ett exempel på hur enkelt det är att använda NetX Duo FTP beskrivs i bild 1.1 som visas nedan. I det här exemplet skapas både en FTP-server och en FTP-klient. Därför tas både *FTP-nxd_ftp_client.h och nxd_ftp_server.h* in på rad 10 och 11. Därefter skapas FTP-servern i "*tx_application_define*" på rad 99. Observera att kontrollblocken FTP-server och klient definieras som globala variabler på rad 26 tidigare.
 
-Den här demon visar hur du använder de Duo-funktioner som är tillgängliga i NetX Duo FTP samt de äldre IPv4-begränsade FTP-tjänsterna. För att använda IPv6-funktionerna definierar demonstrationen USE_IPV6 på rad 16
+Den här demonstrationen visar hur du använder duo-funktionerna som är tillgängliga i NetX Duo FTP samt äldre IPv4-begränsade FTP-tjänster. För att använda IPv6-funktionerna definierar demon USE_IPV6 på rad 16
 
-På rad 162 skapas FTP-servern med ***nxd_ftp_server_create** _ om värd programmet definierar USE_IPV6 som stöder både IPv4 och IPv6. Om så inte är fallet skapas FTP-servern med _ *_nx_ftp_server_create_** på rad 166 med begränsad IPv4-tjänst. Observera att funktionen Duo använder olika inloggnings-och utloggnings funktions argument än IPv4-tjänsten, som båda definieras längst ned i filen på raderna 534-568.
+På rad 162 skapas FTP-servern med ***nxd_ftp_server_create** _ om värdprogrammet definierar USE_IPV6 som stöder både IPv4 och IPv6. Om den inte är det skapas FTP-servern med _ *_nx_ftp_server_create_** på rad 166 med den begränsade IPv4-tjänsten. Observera att funktionen "duo" använder andra argument för inloggnings- och utloggningsfunktionen än IPv4-tjänsten, som definieras längst ned i filen på raderna 534–568.
 
-FTP-servern måste sedan upprätta sin IPv6-adress (global och länk lokal) med NetX Duo, med början på rad 466 i kopplings funktionen för FTP-server. FTP-servern startas sedan på rad 518 och är klar för FTP-begäranden.
+FTP-servern måste sedan upprätta sin IPv6-adress (global och länka lokal) med NetX Duo, från och med rad 466 i ftp-serverns trådinmatningsfunktion. FTP-servern startas sedan på rad 518 och är redo för FTP-klientbegäranden.
 
-FTP-klienten skapas på rad 316 och går igenom samma process som FTP-servern för att få IP-uppgiften IPv6 aktive rad för FTP-klienter, och dess IPv6-adresser verifieras från och med rader 263-313.
+FTP-klienten skapas på rad 316 och går igenom samma process som FTP-servern för att aktivera FTP-klientens IP-uppgift IPv6, och dess IPv6-adresser verifieras med början på raderna 263-313.
 
-Klienten ansluter sedan till FTP-servern med ***nxd_ftp_client_connect** _ på rad 334 om den har definierat USE_IPV6 eller rad 340 om den använder den begränsade IPv4-tjänsten _ *_nx_ftp_client_connect_* *. Under den tid som FTP-klienten trådas skriver den en fil till FTP-servern och läser den igen innan den kopplas från.
+Klienten ansluter sedan till FTP-servern med ***nxd_ftp_client_connect** _ på rad 334 om den har definierat USE_IPV6 eller rad 340 om den använder den begränsade IPv4-tjänsten _*_nx_ftp_client_connect_**. Under ftp-klientens trådfunktion skriver den en fil till FTP-servern och läser tillbaka den innan den kopplas från.
 
 ```C
 /* This is a small demo of NetX FTP on the high-performance NetX TCP/IP stack.  This demo
@@ -639,30 +639,30 @@ UINT  server_logout(struct NX_FTP_SERVER_STRUCT *ftp_server_ptr, ULONG client_ip
 #endif  /* USE_IPV6 */
 ```
 
-**Figur 1,1 exempel på NetX Duo FTP**
+**Bild 1.1 Exempel på NetX Duo FTP**
 
-## <a name="configuration-options"></a>Konfigurations alternativ
+## <a name="configuration-options"></a>Konfigurationsalternativ
 
-Det finns flera konfigurations alternativ för att skapa NetX FTP och NetX Duo FTP. Standardvärdena visas, men varje definierar kan anges av
+Det finns flera konfigurationsalternativ för att skapa NetX FTP och NetX Duo FTP. Standardvärdena visas, men varje definition kan anges av
 
-program innan den angivna NetX Duo FTP-huvudfilen tas med. Om ingen rubrik fil anges är alternativet tillgängligt i både *nxd_ftp_client. h och nxd_ftp_server. h*. I följande lista beskrivs var och en i detalj:
+innan den angivna FTP-huvudfilen för NetX Duo tas med. Om ingen rubrikfil anges är alternativet tillgängligt i både *nxd_ftp_client.h och nxd_ftp_server.h*. I följande lista beskrivs var och en i detalj:
 
-- **NX_FTP_SERVER_PRIORITY** Prioriteten för FTP-serverns tråd. Som standard definieras värdet som 16 för att ange prioritet 16.
-- **NX_FTP_MAX_CLIENTS** Det maximala antalet klienter som servern kan hantera på en och samma tidpunkt. Som standard är det här värdet 4 för att stödja 4 klienter på en gång.
-- **NX_FTP_SERVER_MIN_PACKET_PAYLOAD** Den minimala storleken på nytto lasten i byte för Server paketets pool, inklusive TCP-, IP-och nätverks ram-rubriker plus HTTP-data. Standardvärdet är 256 (den maximala längden på filename i FileX) + 12 byte för fil information och NX_PHYSICAL_TRAILER.
-- **NX_FTP_SERVER_TIMEOUT** Anger antalet ThreadX-Tick som interna tjänster ska pausas för. Standardvärdet är inställt på 1 sekund (1 * NX_IP_PERIODIC_RATE).
-- **NX_FTP_ACTIVITY_TIMEOUT** Anger antalet sekunder som en klient anslutning upprätthålls om det inte finns någon aktivitet. Standardvärdet är inställt på 240.
-- **NX_FTP_TIMEOUT_PERIOD** Anger de intervall i sekunder som servern söker efter klient aktivitet. Standardvärdet är inställt på 60.
-- **NX_FTP_SERVER_RETRY_SECONDS** Anger den inledande tids gränsen i sekunder innan Server svaret skickas igen. Standardvärdet är 2.
-- **NX_FTP_SERVER_TRANSMIT_QUEUE_DEPTH** Anger det maximala djupet för överförings paket i kö på Server-socket. Standardvärdet är 20.
-- **NX_FTP_SERVER_RETRY_MAX** Anger högsta antal återförsök per paket. Standardvärdet är 10.
-- **NX_FTP_SERVER_RETRY_SHIFT** Anger antalet bitar som ska skiftas i inställningen Timeout för återförsök. Standardvärdet är 2, t. ex. varje timeout för återförsök är två gånger så länge det föregående försöket.
-- **NX_FTP_NO_FILEX** Definierad är det här alternativet en stub för FileX-beroenden. FTP-klienten fungerar utan några ändringar om det här alternativet har definierats. FTP-servern måste antingen ändras eller så måste användaren skapa en fåtal av FileX-tjänster för att fungera korrekt.
-- **NX_FTP_CONTROL_TOS** Typ av tjänst som krävs för förfrågningar om FTP-kontroll. Som standard definieras det här värdet som NX_IP_NORMAL för att indikera den normala IP-paketfiltrering.
-- **NX_FTP_DATA_TOS** Typ av tjänst som krävs för förfrågningar om FTP-data. Som standard definieras det här värdet som NX_IP_NORMAL för att indikera den normala IP-paketfiltrering.
-- **NX_FTP_FRAGMENT_OPTION** Fragment aktivera för FTP-begäranden. Som standard är det här värdet NX_DONT_FRAGMENT för att inaktivera FTP TCP-fragmentering.
-- **NX_FTP_CONTROL_WINDOW_SIZE** Storlek på TCP-kontrollens socket-fönster. Som standard är det här värdet 400 byte.
-- **NX_FTP_DATA_WINDOW_SIZE** Fönster storlek för TCP-datasocket. Som standard är det här värdet 2048 byte.
+- **NX_FTP_SERVER_PRIORITY** Prioriteten för FTP-servertråden. Som standard definieras det här värdet som 16 för att ange prioritet 16.
+- **NX_FTP_MAX_CLIENTS** Det maximala antalet klienter som servern kan hantera samtidigt. Som standard är det här värdet 4 för att stödja 4 klienter samtidigt.
+- **NX_FTP_SERVER_MIN_PACKET_PAYLOAD** Den minsta storleken på nyttolasten för serverpaketpoolen i byte, inklusive TCP, IP- och nätverksramrubriker plus HTTP-data. Standardvärdet är 256 (maximal längd på filnamn i FileX) + 12 byte för filinformation och NX_PHYSICAL_TRAILER.
+- **NX_FTP_SERVER_TIMEOUT** Anger antalet ThreadX-tick som interna tjänster ska pausas för. Standardvärdet är inställt på 1 sekund (1 * NX_IP_PERIODIC_RATE).
+- **NX_FTP_ACTIVITY_TIMEOUT** Anger antalet sekunder som en klientanslutning upprätthålls om det inte finns någon aktivitet. Standardvärdet är inställt på 240.
+- **NX_FTP_TIMEOUT_PERIOD** Anger intervallen i sekunder när servern söker efter klientaktivitet. Standardvärdet är inställt på 60.
+- **NX_FTP_SERVER_RETRY_SECONDS** Anger den inledande tidsgränsen i sekunder innan serversvaret skickas igen. Standardvärdet är 2.
+- **NX_FTP_SERVER_TRANSMIT_QUEUE_DEPTH** Anger det maximala djupet för köade överföringspaket på serversocketen. Standardvärdet är 20.
+- **NX_FTP_SERVER_RETRY_MAX** Anger det maximala antalet återförsök per paket. Standardvärdet är 10.
+- **NX_FTP_SERVER_RETRY_SHIFT** Anger antalet bitar som ska flyttas när tidsgränsen för återförsök ska anges. Standardvärdet är 2, t.ex. varje tidsgräns för återförsök är dubbelt så lång som föregående återförsök.
+- **NX_FTP_NO_FILEX** Det här alternativet tillhandahåller en stub för FileX-beroenden. FTP-klienten fungerar utan ändringar om det här alternativet har definierats. FTP-servern måste antingen ändras eller så måste användaren skapa ett fåtal FileX-tjänster för att fungera korrekt.
+- **NX_FTP_CONTROL_TOS** Typ av tjänst som krävs för FTP-kontrollbegäranden. Som standard definieras det här värdet som NX_IP_NORMAL för att indikera normal IP-pakettjänst.
+- **NX_FTP_DATA_TOS** Typ av tjänst som krävs för FTP-databegäranden. Som standard definieras det här värdet som NX_IP_NORMAL för att indikera normal IP-pakettjänst.
+- **NX_FTP_FRAGMENT_OPTION** Aktivera fragment för FTP-begäranden. Som standard är det här värdet NX_DONT_FRAGMENT inaktivera FTP TCP-fragmentering.
+- **NX_FTP_CONTROL_WINDOW_SIZE** Fönsterstorlek för TCP-kontrollsocket. Som standard är det här värdet 400 byte.
+- **NX_FTP_DATA_WINDOW_SIZE** Fönsterstorlek för TCP-datasocket. Som standard är det här värdet 2 048 byte.
 - **NX_FTP_TIME_TO_LIVE** Anger antalet routrar som det här paketet kan passera innan det tas bort. Standardvärdet är inställt på 0x80.
-- **NX_FTP_USERNAME_SIZE** Anger antalet byte som tillåts i en klient som har angett *användar namn*. Standardvärdet är inställt på 20 *.*
-- **NX_FTP_PASSWORD_SIZE** Anger antalet byte som tillåts i ett *lösen ord* som anges av klienten. Standardvärdet är inställt på 20.
+- **NX_FTP_USERNAME_SIZE** Anger antalet byte som tillåts i ett användarnamn som anges av *klienten.* Standardvärdet är inställt på 20 *.*
+- **NX_FTP_PASSWORD_SIZE** Anger antalet byte som tillåts i ett lösenord som anges av *klienten.* Standardvärdet är inställt på 20.

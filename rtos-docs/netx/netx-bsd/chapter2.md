@@ -1,45 +1,45 @@
 ---
-title: Kapitel 2 – installation och användning av Azure återställnings tider NetX BSD
-description: Det här kapitlet innehåller en beskrivning av olika problem som rör Installation, konfiguration och användning av Azure återställnings tider NetX BSD-komponenten.
+title: Kapitel 2 – Installation och användning av Azure RTOS NetX BSD
+description: Det här kapitlet innehåller en beskrivning av olika problem som rör installation, installation och användning av Azure RTOS NetX BSD-komponenten.
 author: philmea
 ms.author: philmea
 ms.date: 06/04/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 7539565ccd4956c5354be45000efab8318dc606c
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: c04175ec18dff160faf853d675c9c85c9a0c6fbc5e834c410a7cb97a739c69f8
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104826844"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116796709"
 ---
-# <a name="chapter-2---installation-and-use-of-azure-rtos-netx-bsd"></a>Kapitel 2 – installation och användning av Azure återställnings tider NetX BSD
+# <a name="chapter-2---installation-and-use-of-azure-rtos-netx-bsd"></a>Kapitel 2 – Installation och användning av Azure RTOS NetX BSD
 
-Det här kapitlet innehåller en beskrivning av olika problem som rör Installation, konfiguration och användning av Azure återställnings tider NetX BSD-komponenten.
+Det här kapitlet innehåller en beskrivning av olika problem som rör installation, installation och användning av Azure RTOS NetX BSD-komponenten.
 
-## <a name="product-distribution"></a>Produkt distribution
+## <a name="product-distribution"></a>Produktdistribution
 
-Azure återställnings tider NetX BSD kan hämtas från vår offentliga käll kods lagrings plats på [https://github.com/azure-rtos/netx/](https://github.com/azure-rtos/netx/) . Paketet innehåller två källfiler och en PDF-fil som innehåller det här dokumentet, enligt följande:
+Azure RTOS NetX BSD kan hämtas från vår offentliga källkodsdatabas på [https://github.com/azure-rtos/netx/](https://github.com/azure-rtos/netx/) . Paketet innehåller två källfiler och en PDF-fil som innehåller det här dokumentet, enligt följande:
 
-- **nx_bsd. h**: rubrik fil för netx BSD
-- **nx_bsd. c**: c-källfil för netx BSD
-- **nx_bsd.pdf**: Användar handbok för netx BSD
+- **nx_bsd.h:** Rubrikfil för NetX BSD
+- **nx_bsd.c:** C-källfil för NetX BSD
+- **nx_bsd.pdf:** Användarhandbok för NetX BSD
 
-Demonstrations filer:
-- **bsd_demo_tcp. c**
-- **bsd_demo_udp. c**
+Demofiler:
+- **bsd_demo_tcp.c**
+- **bsd_demo_udp.c**
 
 ## <a name="netx-bsd-installation"></a>NetX BSD-installation
 
-För att kunna använda NetX BSD bör hela distributionen som nämnts tidigare kopieras till samma katalog där NetX har installerats. Om NetX till exempel är installerat i katalogen "*\threadx\arm7\green*", ska *nx_bsd. h* -och *nx_bsd. c* -filerna kopieras till den här katalogen.
+För att kunna använda NetX BSD ska hela distributionen som nämns ovan kopieras till samma katalog där NetX är installerat. Om NetX till exempel är installerat i katalogen "*\threadx\arm7\green*" ska *filerna nx_bsd.h* *och nx_bsd.c* kopieras till den här katalogen.
 
-## <a name="building-the-threadx-and-netx-components-of-a-bsd-application"></a>Skapa ThreadX-och NetX-komponenterna i ett BSD-program
+## <a name="building-the-threadx-and-netx-components-of-a-bsd-application"></a>Skapa ThreadX- och NetX-komponenterna i ett BSD-program
 
 ### <a name="threadx"></a>ThreadX
 
-ThreadX-biblioteket måste definiera *bsd_errno* i den lokala tråd lagringen. Vi rekommenderar följande procedur:
+ThreadX-biblioteket måste definiera *bsd_errno* i den lokala trådlagringen. Vi rekommenderar följande procedur:
 
-1. I *tx_port. h* anger du ett av TX_THREAD_EXTENSION-makron enligt följande:
+1. I *tx_port.h* anger du ett av TX_THREAD_EXTENSION makron enligt följande:
 
   ```c
   #define TX_THREAD_EXTENSION_3     int bsd_errno
@@ -48,17 +48,17 @@ ThreadX-biblioteket måste definiera *bsd_errno* i den lokala tråd lagringen. V
 2. Återskapa ThreadX-biblioteket.
 
 > [!NOTE]
-> Om TX_THREAD_EXTENSION_3 redan används, är användaren kostnads fri att använda något av de andra TX_THREAD_EXTENSION-makron.
+> Om TX_THREAD_EXTENSION_3 redan används kan användaren använda något av de andra TX_THREAD_EXTENSION makron.
 
-### <a name="netx"></a>NetX
+### <a name="netx"></a>Netx
 
-Innan du använder NetX BSD-tjänster måste NetX-biblioteket skapas med NX_ENABLE_EXTENDED_NOTIFY_SUPPORT definierat (t. ex. i *nx_user. h*). Som standard är den inte definierad.
+Innan du använder NetX BSD Services måste NetX-biblioteket byggas med NX_ENABLE_EXTENDED_NOTIFY_SUPPORT (t.ex. *i nx_user.h*). Som standard definieras den inte.
 
 ## <a name="using-netx-bsd"></a>Använda NetX BSD
 
-Det är enkelt att använda BSD för NetX. I princip måste program koden innehålla *nx_bsd. h* när den innehåller *tx_api. h* och *nx_api. h* för att kunna använda ThreadX respektive netx. När *nx_bsd. h* ingår kan program koden sedan använda BSD-tjänsterna som anges senare i den här hand boken. Programmet måste även innehålla *nx_bsd. c* i build-processen. Den här filen måste kompileras på samma sätt som andra programfiler och dess objekt formulär måste vara länkade tillsammans med programmets filer. Detta är allt som krävs för att använda NetX BSD.
+Det är enkelt att använda BSD för NetX. I princip måste programkoden innehålla *nx_bsd.h* efter att den *innehåller tx_api.h* och *nx_api.h* för att kunna använda ThreadX respektive NetX. När *nx_bsd.h* ingår kan programkoden använda de BSD-tjänster som anges senare i den här guiden. Programmet måste även innehålla *nx_bsd.c* i byggprocessen. Den här filen måste kompileras på samma sätt som andra programfiler och dess objektformulär måste länkas tillsammans med programmets filer. Det här är allt som krävs för att använda NetX BSD.
 
-Om du vill använda NetX BSD-tjänster måste programmet skapa en IP-instans, en modempool och initiera BSD-tjänster genom att anropa *bsd_initialize.* Detta visas i avsnittet "litet exempel" senare i den här hand boken. Prototypen visas nedan:
+Om du vill använda NetX BSD-tjänster måste programmet skapa en IP-instans, en paketpool och initiera BSD-tjänster genom att *anropa bsd_initialize.* Detta visas i avsnittet "Litet exempel" senare i den här guiden. Prototypen visas nedan:
 
 ```c
 INT bsd_initialize(NX_IP *default_ip, NX_PACKET_POOL *default_pool,
@@ -66,22 +66,22 @@ INT bsd_initialize(NX_IP *default_ip, NX_PACKET_POOL *default_pool,
                   UINT bsd_thread_priority);
 ```
 
-De sista tre parametrarna används för att skapa en tråd för att utföra periodiska uppgifter, till exempel söka efter TCP-händelser och definiera trådens stack utrymme.
+De sista tre parametrarna används för att skapa en tråd för att utföra periodiska uppgifter, till exempel söka efter TCP-händelser och definiera trådstackutrymmet.
 
 > [!NOTE]
-> Till skillnad från BSD-Sockets, som fungerar i nätverk bye-ordning, fungerar NetX i värd processorns värddators ordning. För språkkompatibilitetsproblem har makron htons (), ntohs (), htonl (), ntohl () definierats, men ändrar inte argumentet som skickas.
+> Till skillnad från BSD-sockets, som fungerar i network bye-ordning, fungerar NetX i värdbyteordningen för värdprocessorn. Av källkompatibilitetsskäl har makrona htons(), nt maskinvaru(), htonl(), ntohl() definierats, men ändrar inte det argument som skickas.
 
 ## <a name="netx-bsd-limitations"></a>NetX BSD-begränsningar
 
-På grund av problem med prestanda och arkitektur stöder NetX BSD inte alla BSD 4,3-socket-funktioner:
+På grund av prestanda- och arkitekturproblem stöder NetX BSD inte alla BSD 4.3 socket-funktioner:
 
-Det finns inte stöd för INT *-flaggor för sändnings-, Recv-, SendTo-* och *recvfrom* -anrop.
+INT-flaggor stöds inte för *anropen send, recv, sendto* *och recvfrom.*
 
 ## <a name="netx-bsd-with-dns-support"></a>NetX BSD med DNS-stöd
 
-Om NX_BSD_ENABLE_DNS har definierats kan NetX BSD skicka DNS-frågor för att hämta värdnamn eller värd-IP-information. Den här funktionen kräver att en NetX DNS-klient skapas tidigare med hjälp av tjänsten *nx_dns_create* . En eller flera kända DNS-Server-IP-adresser måste registreras med DNS-instansen med hjälp av *nx_dns_server_add* för att lägga till Server adresser.
+Om NX_BSD_ENABLE_DNS har definierats kan NetX BSD skicka DNS-frågor för att hämta värdnamn eller värd-IP-information. Den här funktionen kräver att en NetX DNS-klient har skapats tidigare med *hjälp nx_dns_create tjänsten.* En eller flera kända IP-adresser för DNS-servern måste registreras med *DNS-instansen* med hjälp av nx_dns_server_add för att lägga till serveradresser.
 
-DNS-tjänster och minnesallokering används av *getaddrinfo* -och *getnameinfo* -tjänster:
+DNS-tjänster och minnesallokering används av *getaddrinfo-* och *getnameinfo-tjänster:*
 
 ```c
 INT getaddrinfo(const CHAR *node, const CHAR *service,
@@ -91,44 +91,44 @@ INT getnameinfo(const struct sockaddr *sa, socklen_t salen,
               char *host, size_t hostlen, char *serv, size_t servlen, int flags)
 ```
 
-När BSD-programmet anropar *getaddrinfo* med ett värdnamn anropar netx BSD vilken som helst av tjänsterna nedan för att hämta IP-adressen:
+När BSD-programmet anropar *getaddrinfo* med ett värdnamn anropar NetX BSD någon av nedanstående tjänster för att hämta IP-adressen:
 
 - nx_dns_ipv4_address_by_name_get
 - nx_dns_cname_get
 
-För *nx_dns_ipv4_address_by_name_get* använder NetX BSD ipv4_addr_buffer minnes områden. Storleken på de här buffertarna definieras av ( `NX_BSD_IPV4_ADDR_PER_HOST * 4` ).
+För *nx_dns_ipv4_address_by_name_get* använder NetX BSD de ipv4_addr_buffer minnesområdena. Storleken på dessa buffertar definieras av ( `NX_BSD_IPV4_ADDR_PER_HOST * 4` ).
 
-För att returnera adress information från *getaddrinfo* använder netx BSD ThreadX block minnes tabell *nx_bsd_addrinfo_pool_memory*, vars minnes yta definieras av en annan uppsättning konfigurerbara alternativ *NX_BSD_IPV4_ADDR_MAX_NUM*.
+För att returnera adressinformation från *getaddrinfo* använder NetX BSD ThreadX-blockminnestabellen *nx_bsd_addrinfo_pool_memory*, vars minnesområde definieras av en annan uppsättning konfigurerbara *alternativ, NX_BSD_IPV4_ADDR_MAX_NUM*.
 
-Se **konfigurations alternativ** för mer information om konfigurations alternativen ovan.
+Se **Konfigurationsalternativ** för mer information om konfigurationsalternativen ovan.
 
-Om NX_DNS_ENABLE_EXTENDED_RR_TYPES har definierats och värd indatatypen är ett kanoniskt namn, allokerar NetX BSD dynamiskt minne från en tidigare skapad block pool *_nx_bsd_cname_block_pool*
+Om en NX_DNS_ENABLE_EXTENDED_RR_TYPES har definierats och värdindata är ett kanoniskt namn, allokerar NetX BSD minne dynamiskt från en blockpool som skapats *tidigare _nx_bsd_cname_block_pool*
 
 > [!NOTE]
-> Efter att ha anropat *getaddrinfo* är BSD-programmet ansvarigt för att släppa det minne som pekas på av res argumentet tillbaka till block tabellen med hjälp av *freeaddrinfo* -tjänsten.
+> När *du har anropat getaddrinfo* ansvarar BSD-programmet för att frigöra minnet som res-argumentet pekar på tillbaka till blocktabellen med hjälp av *freeaddrinfo-tjänsten.*
 
-## <a name="configuration-options"></a>Konfigurations alternativ
+## <a name="configuration-options"></a>Konfigurationsalternativ
 
-Alternativ som kan konfigureras i *nx_bsd. h* gör det möjligt för programmet att finjustera netx BSD-socketar för sina specifika krav. Följande är en lista över dessa parametrar:
+Med användarkonfigurerbara alternativ *i nx_bsd.h* kan programmet finjustera NetX BSD-sockets för sina specifika krav. Följande är en lista över dessa parametrar:
 
-- **NX_BSD_TCP_WINDOW**: används i uppmaningen att skapa TCP-socketar. 65535 är en typisk fönster storlek för 100 MB Ethernet. Standardvärdet är 65535.
-- **NX_BSD_SOCKFD_START** Det här är det logiska indexet för start värde för BSD-socketens fil beskrivning. Som standard är det här alternativet 32.
-- **NX_BSD_MAX_SOCKETS** Anger det maximala antalet totalt antal tillgängliga socketar i BSD-skiktet och måste vara en multipel av 32. värdet är standard 32.
-- **NX_BSD_SOCKET_QUEUE_MAX** Anger det maximala antalet UDP-paket som lagras i kön för mottagnings socket. Värdet är standard 5.
-- **NX_BSD_MAX_LISTEN_BACKLOG** Detta anger storleken på lyssnings kön ("efter släpning") för BSD TCP-Sockets. Standardvärdet är 5.
-- **NX_MICROSECOND_PER_CPU_TICK** Anger antalet mikrosekunder per timer-avbrott
-- **NX_BSD_TIMEOUT** Anger tids gränsen i timer-Tick på NetX interna anrop som krävs av BSD. Standardvärdet är 20 * NX_IP_PERIODIC_RATE.
-- **NX_BSD_TCP_SOCKET_DISCONNECT_TIMEOUT**: anger tids gränsen i timer-Tick på netx från kopplings anrop. Standardvärdet är 1.
-- **NX_BSD_PRINT_ERRORS** Om detta anges returnerar fel status för en BSD-funktion ett rad nummer och en typ av fel, t. ex. NX_SOC_ERROR där felet uppstår. Detta kräver att programutvecklaren definierar fel söknings resultatet. Standardinställningen är inaktive rad och inga fel söknings utdata har angetts i *nx_bsd. h*
-- **NX_BSD_TIMER_RATE** Intervall efter vilken BSD-återkommande timer-aktivitet körs. Standardvärdet är 1 sekund (1 * NX_IP_PERIODIC_RATE).
-- **NX_BSD_TIMEOUT_PROCESS_IN_TIMER** Om det här alternativet är inställt kan BSD-timeoutvärdet köras i systemets timer-kontext. Standard beteendet är inaktiverat. Den här funktionen beskrivs i detalj i kapitel 2 "installation och användning av NetX BSD".
-- **NX_BSD_ENABLE_DNS** Om aktive rad skickar NetX BSD en DNS-fråga för ett värdnamn eller en värd-IP-adress. Kräver att en DNS-klient instans skapas och startas tidigare. Som standard är den inte aktive rad.
-- **NX_BSD_IPV4_ADDR_MAX_NUM** Maximalt antal IPv4-adresser som returneras av *getaddrinfo*. Detta tillsammans med NX_BSD_IPV4_ADDR_MAX_NUM definierar storleken på NetX BSD block-poolen nx_bsd_addrinfo_block_pool för dynamiskt allokerat minne för att adressera informations lagringen i *getaddrinfo*. Standardvärdet är 5.
-- **NX_BSD_IPV4_ADDR_PER_HOST**: definierar maximalt antal IPv4-adresser som lagras per DNS-fråga. Standardvärdet är 5.
+- **NX_BSD_TCP_WINDOW: Används** i TCP socket create-anrop. 65535 är en typisk fönsterstorlek för 100 MB Ethernet. Standardvärdet är 65535.
+- **NX_BSD_SOCKFD_START** Det här är det logiska indexet för startvärdet för BSD-socketfilen. Som standard är det här alternativet 32.
+- **NX_BSD_MAX_SOCKETS** Anger det maximala antalet totalt antal sockets som är tillgängliga i BSD-lagret och måste vara en multipel av 32. Värdet är standardvärdet 32.
+- **NX_BSD_SOCKET_QUEUE_MAX** Anger det maximala antalet UDP-paket som lagras i kön för ta emot socket. Värdet är som standard 5.
+- **NX_BSD_MAX_LISTEN_BACKLOG** Detta anger storleken på lyssnarkön (' eftersläpning') för BSD TCP-sockets. Standardvärdet är 5.
+- **NX_MICROSECOND_PER_CPU_TICK** Anger antalet mikrosekunder per timeravbrott
+- **NX_BSD_TIMEOUT** Anger timeout i timer tick för interna NetX-anrop som krävs av BSD. Standardvärdet är 20*NX_IP_PERIODIC_RATE.
+- **NX_BSD_TCP_SOCKET_DISCONNECT_TIMEOUT:** Anger timeout-värdet i timern för NetX-frånkopplingsanrop. Standardvärdet är 1.
+- **NX_BSD_PRINT_ERRORS** Om det är inställt returneras felstatus för en BSD-funktion som returnerar ett radnummer och en typ av fel, till exempel NX_SOC_ERROR där felet inträffar. Detta kräver att programutvecklaren definierar felsökningsutdata. Standardinställningen är inaktiverad och inga felsökningsutdata anges i *nx_bsd.h*
+- **NX_BSD_TIMER_RATE** Intervall efter vilket den periodiska BSD-timeraktiviteten körs. Standardvärdet är 1 sekund (1 * NX_IP_PERIODIC_RATE).
+- **NX_BSD_TIMEOUT_PROCESS_IN_TIMER** Om detta anges tillåter det här alternativet att BSD-timeout-processen körs i systemtimerkontexten. Standardbeteendet är inaktiverat. Den här funktionen beskrivs i detalj i kapitel 2 "Installation och användning av NetX BSD".
+- **NX_BSD_ENABLE_DNS** Om aktiverad skickar NetX BSD en DNS-fråga för ett värdnamn eller en värd-IP-adress. Kräver att en DNS-klientinstans skapas och startas tidigare. Som standard är den inte aktiverad.
+- **NX_BSD_IPV4_ADDR_MAX_NUM** Maximalt antal IPv4-adresser som returneras *av getaddrinfo*. Detta tillsammans med NX_BSD_IPV4_ADDR_MAX_NUM definierar storleken på NetX BSD-blockpoolen nx_bsd_addrinfo_block_pool för att dynamiskt allokera minne till adressinformationslagring i *getaddrinfo*. Standardvärdet är 5.
+- **NX_BSD_IPV4_ADDR_PER_HOST: Definierar** maximalt antal IPv4-adresser som lagras per DNS-fråga. Standardvärdet är 5.
 
-## <a name="bsd-socket-options"></a>BSD socket-alternativ
+## <a name="bsd-socket-options"></a>Alternativ för BSD Socket
 
-Följande lista över NetX BSD socket-alternativ kan aktive ras (eller inaktive RAS) vid körning per socket med hjälp av *Setsockopt* -tjänsten:
+Följande lista över NetX BSD-socketalternativ kan aktiveras (eller inaktiveras) vid körning per socket med *tjänsten setsockopt:*
 
 ```c
 INT setsockopt(INT sockID, INT option_level, INT option_name, const
@@ -137,38 +137,38 @@ INT setsockopt(INT sockID, INT option_level, INT option_name, const
 
 Det finns två olika inställningar för *option_level*.
 
-Den första typen av ingångs alternativ för körning är SOL_SOCKET för alternativ för socketnivå. Om du vill aktivera ett alternativ för en socketnivå anropar du *Setsockopt* med option_level inställd på SOL_SOCKET och option_name anger det speciella alternativet t. ex. SO_BROADCAST. Om du vill hämta en alternativ inställning anropar du *getsockopt* för option_name med option_level återigen inställt på SOL_SOCKET.
+Den första typen av socketalternativ för körningstid är SOL_SOCKET alternativ för socketnivå. Om du vill aktivera ett alternativ på socketnivå anropar du *setsockopt* med option_level inställt på SOL_SOCKET och option_name angett till det specifika alternativet, t.ex. SO_BROADCAST. Om du vill hämta en alternativinställning *anropar du getsockopt* för option_name med option_level återigen inställd på SOL_SOCKET.
 
-Listan över alternativ för körning av socket-nivå visas nedan.
+Listan över alternativ på socketnivå för körningstid visas nedan.
 
-- **SO_BROADCAST**: om den här inställningen är aktive rad kan du skicka och ta emot broadcast-paket från netx Sockets. Detta är standard beteendet för NetX. Alla Sockets har den här funktionen.
-- **SO_ERROR**: används för att hämta socket-status för den tidigare socket-åtgärden för den angivna socketen med hjälp av *getsockopt* -tjänsten. Alla Sockets har den här funktionen.
-- **SO_KEEPALIVE**: om det här alternativet har angetts aktiverar detta TCP Keep Alive-funktionen. Detta kräver att NetX-biblioteket skapas med NX_TCP_ENABLE_KEEPALIVE som definieras i *nx_user. h*. Som standard är den här funktionen inaktive rad.
-- **SO_RCVTIMEO**: den här inställningen anger vänte tiden i sekunder för mottagning av paket på netx BSD-platser. Standardvärdet är NX_WAIT_FOREVER (0xFFFFFFFF) eller, om icke-blockerande är aktiverat, NX_NO_WAIT (0x0).
-- **SO_RCVBUF**: här anges fönster storleken för TCP-socketen. Standardvärdet NX_BSD_TCP_WINDOW har angetts till 64 KB för BSD TCP-socketar. Om du vill ange storleken över 65535 kräver att NetX-biblioteket skapas med NX_TCP_ENABLE_WINDOW_SCALING definieras.
-- **SO_REUSEADDR**: om den här inställningen är aktive rad kan flera Sockets mappas till en port. Den typiska användningen är för TCP-serverns socket. Detta är standard beteendet för NetX-Sockets.
+- **SO_BROADCAST:** Om det här är inställt kan du skicka och ta emot broadcast-paket från Netx-sockets. Det här är standardbeteendet för NetX. Alla sockets har den här funktionen.
+- **SO_ERROR:** Används för att hämta socketstatus för den tidigare socketåtgärden för den angivna socketen med *hjälp av getsockopt-tjänsten.* Alla sockets har den här funktionen.
+- **SO_KEEPALIVE:** Om detta anges aktiveras TCP Keep Alive-funktionen. Detta kräver att NetX-biblioteket byggs med NX_TCP_ENABLE_KEEPALIVE definieras *i nx_user.h*. Den här funktionen är inaktiverad som standard.
+- **SO_RCVTIMEO:** Anger väntealternativet i sekunder för att ta emot paket på NetX BSD-sockets. Standardvärdet är NX_WAIT_FOREVER (0xFFFFFFFF) eller, om icke-blockerande är aktiverat, NX_NO_WAIT (0x0).
+- **SO_RCVBUF:** Anger fönsterstorleken för TCP-socketen. Standardvärdet, som NX_BSD_TCP_WINDOW, är inställt på 64k för BSD TCP-sockets. Om du vill ange storleken över 65535 måste NetX-biblioteket byggas med NX_TCP_ENABLE_WINDOW_SCALING definieras.
+- **SO_REUSEADDR:** Om det här anges gör detta att flera sockets kan mappas till en port. Den vanligaste användningen är för TCP-serversocketen. Det här är standardbeteendet för NetX-sockets.
 
-Den andra typen av alternativ för körning av socket är IP-alternativnivå. Om du vill aktivera ett alternativ för IP-nivå anropar du *Setsockopt* med option_level inställd på IP_PROTO och option_name anger alternativet t. ex. IP_MULTICAST_TTL. Om du vill hämta en alternativ inställning anropar du *getsockopt* för option_name med option_level återigen inställt på IP_PROTO.
+Den andra typen av socketalternativ för körningstid är IP-alternativnivån. Om du vill aktivera ett alternativ för IP-nivå anropar du *setsockopt* med option_level inställt på IP_PROTO och option_name till alternativet t.ex. IP_MULTICAST_TTL. Om du vill hämta en alternativinställning *anropar du getsockopt* för option_name med option_level återigen inställd på IP_PROTO.
 
-Listan över alternativ för IP-nivå för körning visas nedan.
+Listan över ip-nivåalternativ för körningstid visas nedan.
 
-- **IP_MULTICAST_TTL**: Detta anger TTL-tiden för UDP-socketar. Standardvärdet är NX_IP_TIME_TO_LIVE (0x80) när socketen skapas. Det här värdet kan åsidosättas genom att anropa *Setsockopt* med alternativet socket.
-- **IP_ADD_MEMBERSHIP**: om det här alternativet är aktiverat aktiverar det här alternativet BSD-socketen (gäller endast UDP-socketar) för att ansluta till den angivna IGMP-gruppen.
-- **IP_DROP_MEMBERSHIP**: om det här alternativet är aktiverat aktiverar det här alternativet BSD-socketen (gäller endast UDP-socketar) för att lämna den angivna IGMP-gruppen.
+- **IP_MULTICAST_TTL:** Detta anger hur lång tid UDP-sockets ska vara. Standardvärdet är NX_IP_TIME_TO_LIVE (0x80) när socketen skapas. Det här värdet kan åsidosättas genom att anropa *setsockopt med det* här socketalternativet.
+- **IP_ADD_MEMBERSHIP:** Om det här alternativet har angetts kan BSD-socketen (gäller endast UDP-socketar) ansluta till den angivna IGMP-gruppen.
+- **IP_DROP_MEMBERSHIP:** Om det här alternativet har angetts kan BSD-socketen (gäller endast UDP-socketar) lämna den angivna IGMP-gruppen.
 
-## <a name="small-example-system"></a>Litet exempel system
+## <a name="small-example-system"></a>Litet exempelsystem
 
-Ett exempel på hur du använder NetX BSD visas i bild 1,0 nedan. I det här exemplet tas include-filen *nx_bsd. h* in på rad 7. Därefter skapas IP-instansen *bsd_ip* och packet pool *bsd_pool* som globala variabler på rad 20 och 21. Observera att den här demon använder en ram (virtuell) nätverks driv rutin (rad 41). Klienten och servern kommer att dela samma IP-adress på en enskild IP-instans i det här exemplet.
+Ett exempel på hur du använder NetX BSD visas i bild 1.0 nedan. I det här exemplet kommer *indelningsfilen nx_bsd.h* på rad 7. Därefter skapas *IP-bsd_ip* och *bsd_pool* som globala variabler på rad 20 och 21. Observera att den här demonstrationen använder en RAM-drivrutin (virtuell) (rad 41). Klienten och servern delar samma IP-adress på en enskild IP-instans i det här exemplet.
 
-Klient-och Server trådarna skapas på rad 303 och 309 i *tx_application_define* som konfigurerar programmet och definieras på rader 293-361. När IP-instansen har skapats på rad 327 aktive ras IP-instansen för TCP-tjänster på rad 350. Det senaste kravet innan BSD-tjänster kan användas är att anropa *bsd_initialize* på rad 360 för att konfigurera alla data strukturer och netx och ThreadX resurser som krävs av BSD.
+Klient- och servertrådarna skapas på rad 303 och 309 *i tx_application_define* som uppsättningar programmet och definieras på raderna 293-361. När IP-instansen har skapats på rad 327 aktiveras IP-instansen för TCP-tjänster på rad 350. Det sista kravet innan BSD-tjänster kan användas är att *anropa bsd_initialize* på rad 360 för att konfigurera alla datastrukturer och NetX- och ThreadX-resurser som krävs av BSD.
 
-I funktionen Server tråd inmatning *thread_1_entry,* som definieras på raderna 381-397, väntar programmet på att driv rutinen ska initiera netx med nätverks parametrar. När detta görs anropas *tcpServer,* som definieras på raderna 146-253, för att hantera den information som krävs för att konfigurera TCP-serverns socket.
+I servertrådens postfunktion *thread_1_entry,* som definieras på raderna 381–397, väntar programmet på att drivrutinen ska initiera NetX med nätverksparametrar. När det är klart anropar den *tcpServer,* som definieras på raderna 146–253, för att hantera information om hur du konfigurerar TCP-serversocketen.
 
-*tcpServer* skapar huvudsocketen genom att anropa *socket* service på rad 159 och binder den till lyssnings-socketen med hjälp av *bindnings* anropet på rad 176. Den konfigureras sedan för att lyssna efter anslutnings begär Anden på rad 191. Observera att huvud-socketen inte accepterar en anslutningsbegäran. Den körs i en kontinuerlig slinga som anropar *Välj* varje tidpunkt för att identifiera anslutnings begär Anden. En sekundär BSD-socket som valts från en matris med BSD-socketar tilldelas anslutningsbegäran när tjänsten *Accept* har anropats på rad 218.
+*tcpServer* skapar huvudsocketen genom att anropa *sockettjänsten* på rad 159 och binda den till lyssningssocketen med hjälp av bindningsanropet på rad 176.  Den konfigureras sedan för att lyssna efter anslutningsbegäranden på rad 191. Observera att huvudsocketen inte accepterar en anslutningsbegäran. Den körs i en kontinuerlig loop som anropar *select* varje gång för att identifiera anslutningsbegäranden. En sekundär BSD-socket som väljs från en matris med BSD-sockets tilldelas anslutningsbegäran efter anrop till *accepttjänsten* på rad 218.
 
-På klient sidan ska klient tråds funktionen post, *thread_0_entry*, definieras på raderna 366-377, även vänta tills netx initieras av driv rutinen. Här väntar vi bara på att Server sidan ska göra det. Sedan anropas *tcpClient* som definierats på rad 54-142 för att hantera information om hur du konfigurerar TCP-klientens socket och begär en TCP-anslutning.
+På klientsidan bör klienttrådens *postfunktion, thread_0_entry*, som definierats på raderna 366-377, också vänta tills NetX initieras av drivrutinen. Här väntar vi bara på att serversidan ska göra det. Den anropar *sedan tcpClient* som definierats på rad 54-142 för att hantera informationen om att konfigurera TCP-klientsocketen och begära en TCP-anslutning.
 
-TCP-klientens socket skapas på rad 68. Socketen är kopplad till den angivna IP-adressen och försöker ansluta till TCP-servern genom att anropa *Connect* på rad 84. Nu är det dags att börja skicka och ta emot paket.
+TCP-klientsocketen skapas på rad 68. Socketen är bunden till den angivna IP-adressen och försöker ansluta till TCP-servern genom att *anropa connect* på rad 84. Den är nu redo att börja skicka och ta emot paket.
 
 ```c
 1 /*  This is a small demo of BSD Wrapper for the high-performance NetX TCP/IP stack.

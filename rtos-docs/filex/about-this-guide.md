@@ -1,80 +1,80 @@
 ---
-title: Användar handbok för Azure återställnings tider FileX
-description: Den här guiden innehåller omfattande information om Azure återställnings tider FileX, real tids fil systemet med höga prestanda från Microsoft.
+title: Azure RTOS FileX-användarhandbok
+description: Den här guiden innehåller omfattande information Azure RTOS filex, det högpresterande filsystemet i realtid från Microsoft.
 author: philmea
 ms.author: philmea
 ms.date: 05/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 640d9ed4c8037d3af6c5f45158c9496ad1258a3c
-ms.sourcegitcommit: 60ad844b58639d88830f2660ab0c4ff86b92c10f
+ms.openlocfilehash: 48fe70fc3cff6e656328d38b2583116e58a6c98510d5f0554f81a7b728f95457
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 04/07/2021
-ms.locfileid: "106550107"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116782412"
 ---
-# <a name="about-this-filex-user-guide"></a>Om den här användar handboken för FileX
+# <a name="about-this-filex-user-guide"></a>Om den här användarhandboken för FileX
 
-Den här guiden innehåller omfattande information om Azure återställnings tider FileX, det högpresterande inbäddade fil systemet i real tid från Microsoft. För att få ut mesta möjliga av den här guiden bör du vara bekant med standard operativ system funktioner i real tid, FAT-filsystemtjänster och programmeringsspråket C.
+Den här guiden innehåller omfattande information Azure RTOS FileX, det högpresterande inbäddade filsystemet i realtid från Microsoft. För att få ut mesta av den här guiden bör du vara bekant med standardfunktioner för operativsystemet i realtid, FAT-filsystemtjänster och programmeringsspråket C.
 
 ## <a name="organization"></a>Organisation
 
-[Kapitel 1](chapter1.md) – introducerar Azure återställnings tider FileX
+[Kapitel 1](chapter1.md) – Introducerar Azure RTOS FileX
 
-[Kapitel 2](chapter2.md) – innehåller grundläggande steg för att installera och använda Azure återställnings tider-FileX med ditt Azure återställnings tider ThreadX-program
+[Kapitel 2](chapter2.md) – Ger grundläggande steg för att installera och använda Azure RTOS FileX med ditt Azure RTOS ThreadX-program
 
-[Kapitel 3](chapter3.md) – innehåller en funktionell översikt över Azure återställnings tider FileX-systemet och grundläggande information om fat-format för fil system
+[Kapitel 3](chapter3.md) – Ger en funktionell översikt över Azure RTOS FileX-systemet och grundläggande information om FAT-filformat
 
-[Kapitel 4](chapter4.md) – information om programmets gränssnitt till Azure återställnings tider FileX
+[Kapitel 4](chapter4.md) – Beskriver programmets gränssnitt för att Azure RTOS FileX
 
-[Kapitel 5](chapter5.md) – beskriver den tillhandahållna Azure återställnings tider FileX ram-drivrutinen och hur du skriver egna anpassade Azure återställnings tider FileX-drivrutiner
+[Kapitel 5 –](chapter5.md) Beskriver den angivna Azure RTOS FileX RAM-drivrutinen och hur du skriver egna anpassade Azure RTOS FileX-drivrutiner
 
-[Kapitel 6](chapter6.md) – beskriver den feltoleranta modulen för Azure återställnings tider FileX
+[Kapitel 6](chapter6.md) – Beskriver Azure RTOS FileX-feltolerant modul
 
-[Bilaga A](appendix-a.md) – Azure återställnings tider FileX-tjänster
+[Bilaga A](appendix-a.md) – Azure RTOS FileX Services
 
-[Bilaga B](appendix-b.md) – Azure återställnings tider FileX-konstanter
+[Bilaga B](appendix-b.md) – Azure RTOS FileX-konstanter
 
-[Bilaga C](appendix-c.md) – data typer för Azure återställnings tider-FileX
+[Bilaga C](appendix-c.md) – Azure RTOS FileX-datatyper
 
 [Bilaga D](appendix-d.md) – ASCII-diagram
 
-## <a name="guide-conventions"></a>Guide konventioner
+## <a name="guide-conventions"></a>Guidekonventioner
 
-*Kursiv stil* – teckensnittet noterar bok titlar, betonar viktiga ord och indikerar variabler.
+*Italics* – Typeface anger boktitlar, betonar viktiga ord och anger variabler.
 
-**Fetstil** – typsnitt anger fil namn, viktiga ord och betonar viktiga ord och variabler.
+**Boldface** – Typeface anger filnamn, nyckelord och betonar viktiga ord och variabler ytterligare.
 
 > [!NOTE]
-> Informations symboler drar uppmärksamheten till viktig eller ytterligare information som kan påverka prestandan eller funktionen.
+> Informationssymboler uppmärksammar viktig eller ytterligare information som kan påverka prestanda eller funktion.
 
 > [!IMPORTANT]
-> Varnings symboler drar uppmärksamhet till situationer som utvecklare bör undvika eftersom de kan orsaka allvarliga fel.
+> Varningssymboler uppmärksammar situationer som utvecklare bör undvika eftersom de kan orsaka allvarliga fel.
 
-## <a name="filex-data-types"></a>FileX data typer
+## <a name="filex-data-types"></a>FileX-datatyper
 
-Förutom de anpassade data typerna för kontroll strukturen i Azure återställnings tider-FileX, finns det en serie särskilda data typer som används i Azure återställnings tider FileX service Call-gränssnitt. Dessa särskilda data typer mappar direkt till data typer för den underliggande C-kompilatorn. Detta görs för att säkerställa portabilitet mellan olika C-kompilatorer. Den exakta implementeringen ärvs från Azure återställnings tider ThreadX och finns i filen tx_port. h som ingår i Azure återställnings tider ThreadX-distributionen.
+Förutom de anpassade datatyperna Azure RTOS FileX-kontrollstruktur finns det en serie särskilda datatyper som används i Azure RTOS anropsgränssnitt för FileX-tjänsten. Dessa särskilda datatyper mappar direkt till datatyper för den underliggande C-kompilatorn. Detta görs för att säkerställa portabilitet mellan olika C-kompilatorer. Den exakta implementeringen ärvs från Azure RTOS ThreadX och finns i filen tx_port.h som ingår i Azure RTOS ThreadX-distributionen.
 
-Följande är en lista över data typer för Azure återställnings tider FileX service Call och deras associerade betydelser.
+Följande är en lista över datatyper Azure RTOS FileX-tjänstens anrop och deras associerade betydelser.
 
 | Typ  | Description  |
 |---|---|
-| **UINT** | Basic-osignerat heltal. Den här typen måste ha stöd för 8-bitars osignerade data. den är dock mappad till den mest användbara osignerade data typen. |
+| **Uint** | Grundläggande osignerat heltal. Den här typen måste ha stöd för 8-bitars osignerade data. Den mappas dock till den mest praktiska osignerade datatypen. |
 | **ULONG** | Osignerad lång typ. Den här typen måste ha stöd för 32-bitars osignerade data. |
-| **VOID** | Nästan alltid ekvivalent med kompilatorns void-typ. |
-| **HÄNGANDE** | Oftast en vanlig 8-bitars tecken typ. |
-| **ULONG64** | 64-bit data typ med osignerat heltal. |
+| **Void** | Nästan alltid likvärdigt med kompilatorns void-typ. |
+| **Char** | Oftast en standardtyp med 8 bitar. |
+| **ULONG64** | 64-bitars heltalsdatatypen osignerad. |
 
-Ytterligare data typer används i FileX-källan. De finns antingen i ***tx_port. h** _ eller _ *_fx_port. h_** filer.
+Ytterligare datatyper används i FileX-källan. De finns antingen i filerna ***tx_port.h** _ eller _ *_fx_port.h_** .
 
-## <a name="customer-support-center"></a>Kund Support Center
+## <a name="customer-support-center"></a>Kundsupport
 
-Skicka in ett support ärende via Azure Portal om du har frågor eller hjälp med att följa stegen här. Lämna oss med följande information i ett e-postmeddelande så att vi kan lösa ditt support ärende mer effektivt.
+Skicka en supportbiljett via Azure-portalen för frågor eller hjälp med att följa stegen här. Ange följande information i ett e-postmeddelande så att vi kan lösa din supportbegäran mer effektivt.
 
-1. En detaljerad beskrivning av problemet, inklusive frekvensen av händelser och huruvida det kan återskapas tillförlitligt.
-2. En detaljerad beskrivning av eventuella ändringar i programmet och/eller FileX som föregåde problemet.
-3. Innehållet i _tx_version_id-och _fx_version_id-strängar som finns i ***tx_port. h**_ -och _ *_fx_port. h_**-filerna i distributionen. De här strängarna ger oss värdefull information om din kör tids miljö.
-4. Innehållet i RAM-minnet för följande **ulong** -variabler. Dessa variabler ger oss information om hur dina ThreadX-och FileX-bibliotek skapades:
+1. En detaljerad beskrivning av problemet, inklusive förekomstfrekvens och huruvida det kan återskapas på ett tillförlitligt sätt.
+2. En detaljerad beskrivning av eventuella ändringar i programmet och/eller FileX som föregick problemet.
+3. Innehållet i _tx_version_id och fx_version_id i _filerna ***tx_port.h**_ och _ *_fx_port.h_** för distributionen. Dessa strängar ger oss värdefull information om din körningsmiljö.
+4. Innehållet i RAM-minnet för följande **ULONG-variabler.** Dessa variabler ger oss information om hur dina ThreadX- och FileX-bibliotek har skapats:
 
     **_tx_build_options**
 

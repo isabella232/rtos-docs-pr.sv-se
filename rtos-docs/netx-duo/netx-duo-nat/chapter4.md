@@ -1,24 +1,24 @@
 ---
 title: Kapitel 4 – Beskrivning av NAT-tjänster
-description: Det här kapitlet innehåller en beskrivning av alla NetX Duo NAT API-tjänster i alfabetisk ordning.
+description: Det här kapitlet innehåller en beskrivning av alla NETX Duo NAT API-tjänster i alfabetisk ordning.
 author: philmea
 ms.author: philmea
 ms.date: 07/14/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 8bdbdfcb2da6425fb99cadc7b2f6815dedc12953
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: dbe2cb25607162b62b048251927bdc7671c5884d2a3b45b6b24bae539e08d24a
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104825851"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116797303"
 ---
 # <a name="chapter-4---description-of-nat-services"></a>Kapitel 4 – Beskrivning av NAT-tjänster
 
-Det här kapitlet innehåller en beskrivning av alla NetX Duo NAT API-tjänster (visas nedan) i alfabetisk ordning.
+Det här kapitlet innehåller en beskrivning av alla NETX Duo NAT API-tjänster (anges nedan) i alfabetisk ordning.
 
 > [!NOTE]
-> I avsnittet "retur värden" i följande API-beskrivningar påverkas inte värden i **fetstil** av **NX_DISABLE_ERROR_CHECKING** definiera som används för att inaktivera API-felkontroll, medan icke-Fetstilade värden är helt inaktiverade.
+> I avsnittet "Returvärden" i följande API-beskrivningar påverkas inte värden i **FETSTIL** av **den NX_DISABLE_ERROR_CHECKING-definition** som används för att inaktivera API-felkontroll, medan värden som inte är fetstilta är helt inaktiverade.
 
 ## <a name="nx_nat_create"></a>nx_nat_create
 
@@ -33,28 +33,28 @@ UINT nx_nat_create(NX_NAT_DEVICE *nat_ptr, NX_IP *ip_ptr,
     UINT dynamic_cache_size);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten skapar en instans av NAT-servern.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **nat_ptr** Pekare till NAT-instans som ska skapas
-- **Ip_ptr pekare** till IP-instans
-- **global_interface_index** Index till det globala nätverks gränssnittet
-- **dynamic_cache_memory** Pekarens minnes yta i NAT-tabellen
-- **dynamic_cache_size** Storlek på minnes området för NAT-tabell
+- **nat_ptr** Pekare till NAT-instans att skapa
+- **ip_ptr pekare till** IP-instans
+- **global_interface_index** Indexera till det globala nätverksgränssnittet
+- **dynamic_cache_memory** Pekar minnesområde till NAT-tabell
+- **dynamic_cache_size** Storlek på minnesområdet för NAT-tabell
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) NAT-servern har skapats
-- NX_PTR_ERROR (0x07) ogiltig parameter för inmatad pekare
-- NX_NAT_PARAM_ERROR (0xD01) ogiltig inmatad icke-pekare
-- NX_NAT_CACHE_ERROR (0xD02) ogiltig Indatatyp för cache pekare
+- **NAT-servern** NX_SUCCESS (0x00) har skapats
+- NX_PTR_ERROR (0x07) Ogiltig indatapekarparameter
+- NX_NAT_PARAM_ERROR (0xD01) Ogiltiga icke-pekarindata
+- NX_NAT_CACHE_ERROR (0xD02) Ogiltig cache-pekare
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Program kod
+Programkod
 
 ### <a name="example"></a>Exempel
 
@@ -82,22 +82,22 @@ Ta bort en NAT-server
 UINT nx_nat_delete(NX_NAT_DEVICE *nat_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar bort en tidigare skapad NAT-server.
+Den här tjänsten tar bort en NAT-server som skapats tidigare.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **nat_ptr** Pekare till NAT-instans som ska tas bort
+- **nat_ptr** Pekare till NAT-instans att ta bort
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) NAT har tagits bort
-- NX_PTR_ERROR (0x07) ogiltig parameter för inmatad pekare
+- **nat NX_SUCCESS** (0x00) har tagits bort
+- NX_PTR_ERROR (0x07) Ogiltig indatapekarparameter
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Program kod
+Programkod
 
 ### <a name="example"></a>Exempel
 
@@ -118,22 +118,22 @@ Aktivera IP-instansen för NAT
 UINT nx_nat_enable(NX_NAT_DEVICE *nat_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten aktiverar IP-instansen för NAT (t. ex. vidarebefordrade paket till NAT-servern).
+Den här tjänsten aktiverar IP-instansen för NAT (t.ex. vidarebefordra mottagna paket till NAT-servern).
 
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **nat_ptr** Pekare till NAT-instans
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) NAT har Aktiver ATS
-- NX_PTR_ERROR (0x07) ogiltig parameter för inmatad pekare
+- **NAT NX_SUCCESS** (0x00) har aktiverats
+- NX_PTR_ERROR (0x07) Ogiltig indatapekarparameter
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Program kod
+Programkod
 
 ### <a name="example"></a>Exempel
 
@@ -154,7 +154,7 @@ Inaktivera IP-instansen för NAT
 UINT nx_nat_disable(NX_NAT_DEVICE *nat_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten inaktiverar NAT på IP-instansen.
 
@@ -162,14 +162,14 @@ Den här tjänsten inaktiverar NAT på IP-instansen.
 
 - **nat_ptr** Pekare till NAT-instans
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) NAT har inaktiverats
-- NX_PTR_ERROR (0x07) ogiltig parameter för inmatad pekare
+- **NAT NX_SUCCESS** (0x00) har inaktiverats
+- NX_PTR_ERROR (0x07) Ogiltig indatapekarparameter
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Program kod
+Programkod
 
 ### <a name="example"></a>Exempel
 
@@ -182,7 +182,7 @@ status = nx_nat_disable (nat_ptr);
 
 ## <a name="nx_nat_cache_notify_set"></a>nx_nat_cache_notify_set
 
-Ange en cache fullständig notify motringnings funktion
+Ange en fullständig återanropsfunktion för att meddela cachen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -192,24 +192,24 @@ UINT nx_nat_cache_notify_set(NX_NAT_DEVICE *nat_ptr,
     (NX_NAT_DEVICE *nat_ptr)));
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten registrerar cachen med fullständig motringning med indata-funktionen pekare cache_full_notify_cb som pekar på en användardefinierad cache fullständig meddelande funktion.
+Den här tjänsten registrerar cachens fullständiga återanrop med indatafunktionens pekare cache_full_notify_cb pekar på en användardefinierad full notify-funktion för cachen.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **nat_ptr** Pekare till NAT-instans
-- **cache_full_notify_cb** Pekare för att cachelagra fullständig Avisera-funktion
+- **cache_full_notify_cb** Pekare till cachelagra fullständig avvisningsfunktion
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) cache fullständig aviserings funktion har angetts
-- NX_PTR_ERROR (0x07) ogiltig parameter för inmatad pekare
-- NX_NAT_PARAM_ERROR (0xD01) ogiltig inmatad icke-pekare
+- **NX_SUCCESS** (0x00) Funktionen Cache full notify har angetts
+- NX_PTR_ERROR (0x07) Ogiltig indatapekarparameter
+- NX_NAT_PARAM_ERROR (0xD01) Ogiltiga icke-pekarindata
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Program kod
+Programkod
 
 ### <a name="example"></a>Exempel
 
@@ -222,7 +222,7 @@ status = nx_nat_cache_notify_set(nat_ptr, cache_full_notify_cb);
 
 ## <a name="nx_nat_inbound_entry_create"></a>nx_nat_inbound_entry_create
 
-Skapa en inkommande post i översättnings tabellen för NAT
+Skapa en inkommande post i NAT-översättningstabellen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -234,29 +234,29 @@ UINT nx_nat_inbound_entry_create(NX_NAT_DEVICE *nat_ptr,
     USHORT local_port, UCHAR protocol);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skapar en inkommande post som statisk (permanent post, upphör aldrig att gälla) och lägger till den i översättnings tabellen NAT. Dessa poster skapas vanligt vis för lokala värd servrar där en anslutning initieras från en värd i nätverket utanför nätverket. NAT-servern kontrollerar att den externa porten inte redan används i översättnings tabellen eller bundits av en tidigare befintlig NetX Duo-socket av samma protokoll.
+Den här tjänsten skapar en inkommande post som statisk (permanent post, upphör aldrig att gälla) och lägger till den i NAT-översättningstabellen. De här posterna skapas vanligtvis för lokala värdservrar där en anslutning initieras från en värd i det externa nätverket. NAT-servern kontrollerar att den externa porten inte redan används i översättningstabellen eller är bunden av en tidigare NetX Duo-socket för samma protokoll.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **nat_ptr** Pekare till NAT-instans
-- **entry_ptr** Pekare till översättnings post
-- **local_ip_address** IP-adress för lokal värd
-- **external_port** Mål port på det externa nätverket
-- **local_port** Käll port (lokal värd)
-- **protokoll** Paket protokoll (t. ex. TCP)
+- **entry_ptr** Pekare till översättningspost
+- **local_ip_address** Lokal värd-IP-adress
+- **external_port** Målport i det externa nätverket
+- **local_port** Källport (lokal värd)
+- **protokoll** Paketprotokoll (t.ex. TCP)
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) har skapats
-- **NX_NAT_PORT_UNAVAILABLE** (0XD0D) ogiltig extern port
-- NX_PTR_ERROR (0x07) ogiltig parameter för inmatad pekare
-- NX_NAT_PARAM_ERROR (0xD01) ogiltig inmatad icke-pekare
+- **NX_SUCCESS** -post (0x00) har skapats
+- **NX_NAT_PORT_UNAVAILABLE** (0xD0D) Ogiltig extern port
+- NX_PTR_ERROR (0x07) Ogiltig indatapekarparameter
+- NX_NAT_PARAM_ERROR (0xD01) Ogiltiga icke-pekarindata
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Program kod
+Programkod
 
 ### <a name="example"></a>Exempel
 
@@ -271,7 +271,7 @@ status = nx_nat_inbound_entry_create(nat_ptr, entry_ptr,
 
 ## <a name="nx_nat_inbound_entry_delete"></a>nx_nat_inbound_entry_delete
 
-Ta bort en inkommande post i översättnings tabellen för NAT
+Ta bort en inkommande post i NAT-översättningstabellen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -280,25 +280,25 @@ UINT nx_nat_inbound_entry_delete(NX_NAT_DEVICE *nat_ptr,
     NX_NAT_TRANSLATION_ENTRY *delete_entry_ptr)
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar bort den angivna inkommande posten från översättnings tabellen.
+Den här tjänsten tar bort den angivna inkommande posten från översättningstabellen.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **nat_ptr** Pekare till NAT-instans
-- **delete_entry_ptr** Pekare till översättnings posten NAT
+- **delete_entry_ptr** Pekare till NAT-översättningsposten
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) har tagits bort
-- Det gick inte att hitta **NX_NAT_ENTRY_NOT_FOUND** (0xD04)-posten
-- NX_PTR_ERROR (0x07) ogiltig parameter för inmatad pekare
-- NX_NAT_ENTRY_TYPE_ERROR (0xD0C) ogiltig översättnings typ
+- **NX_SUCCESS** -post (0x00) har tagits bort
+- **NX_NAT_ENTRY_NOT_FOUND** (0xD04) Hittades inte
+- NX_PTR_ERROR (0x07) Ogiltig indatapekarparameter
+- NX_NAT_ENTRY_TYPE_ERROR (0xD0C) Ogiltig översättningstyp
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Program kod
+Programkod
 
 ### <a name="example"></a>Exempel
 

@@ -1,73 +1,73 @@
 ---
-title: Kapitel 2 – installation och användning av mDNS
-description: Det här kapitlet innehåller en beskrivning av olika problem som rör Installation, konfiguration och användning av NetX Duo mDNS-modulen.
+title: Kapitel 2 – Installation och användning av mDNS
+description: Det här kapitlet innehåller en beskrivning av olika problem som rör installation, installation och användning av NetX Duo mDNS-modulen.
 author: philmea
 ms.author: philmea
 ms.date: 07/09/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 6f9e3d023f1bdbde4546a94da1bc1ccb48578d0e
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: b27671f82c100db4e6a70a568e8a68f14b3ab45e3a33f46dd1f2e1852010f500
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104825920"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116796437"
 ---
-# <a name="chapter-2---installation-and-use-of-mdns"></a>Kapitel 2 – installation och användning av mDNS
+# <a name="chapter-2---installation-and-use-of-mdns"></a>Kapitel 2 – Installation och användning av mDNS
 
-Det här kapitlet innehåller en beskrivning av olika problem som rör Installation, konfiguration och användning av NetX Duo mDNS-modulen.
+Det här kapitlet innehåller en beskrivning av olika problem som rör installation, installation och användning av NetX Duo mDNS-modulen.
 
-## <a name="product-distribution"></a>Produkt distribution
+## <a name="product-distribution"></a>Produktdistribution
 
 NetX Duo mDNS finns på [https://github.com/azure-rtos/netxduo](https://github.com/azure-rtos/netxduo) . Paketet innehåller två källfiler och en PDF-fil som innehåller det här dokumentet, enligt följande:
 
-- **nxd_mdns. h** Rubrik fil för NetX Duo mDNS-modulen
-- **nxd_mdns. c** C-källfil för NetX Duo mDNS-modulen
-- **nxd_mdns.pdf** PDF-Beskrivning av mDNS för NetX Duo
-- **demo_netxduo_mdns. c** Ett enkelt demonstrations program som illustrerar de tjänster som tillhandahålls av mDNS.
+- **nxd_mdns.h** Huvudfil för NetX Duo mDNS-modul
+- **nxd_mdns.c** C-källfil för NetX Duo mDNS-modul
+- **nxd_mdns.pdf** PDF-beskrivning av mDNS för NetX Duo
+- **demo_netxduo_mdns.c** Ett enkelt demonstrationsprogram som illustrerar de tjänster som tillhandahålls av mDNS.
 
-## <a name="netx-duo-mdns-installation"></a>NetX Duo mDNS-installation
+## <a name="netx-duo-mdns-installation"></a>NetX Duo mDNS Installation
 
-För att kunna använda NetX Duo-mDNS-API: erna, ska hela distributionen som nämnts tidigare kopieras till samma katalog där NetX Duo är installerat. Om t. ex. NetX Duo installeras i katalogen "*c:\netxduo*" måste *nxd_mdns. h* och *nxd_mdns. c* kopieras till den här katalogen.
+För att kunna använda NetX Duo mDNS API:er bör hela distributionen som nämns ovan kopieras till samma katalog där NetX Duo är installerat. Om NetX Duo till exempel är installerat i katalogen *" c:\netxduo*" ska *nxd_mdns.h* *och nxd_mdns.c* kopieras till den här katalogen.
 
-## <a name="using-netx-duo-mdns"></a>Använda NetX Duo-mDNS
+## <a name="using-netx-duo-mdns"></a>Använda NetX Duo mDNS
 
-Det är enkelt att använda NetX Duo mDNS-modulen. I princip måste program koden innehålla *nxd_mdns. h* när den innehåller *tx_api. h och* *nx_api. h* för att kunna använda ThreadX respektive netx Duo. Build-projektet måste innehålla mDNS-källkoden och program filen, och naturligtvis ThreadX-och NetX-biblioteksfilerna. Detta är allt som krävs för att använda NetX Duo-mDNS.
+Det är enkelt att använda NetX Duo mDNS-modulen. I princip måste programkoden innehålla *nxd_mdns.h* efter att den *innehåller tx_api.h* och *nx_api.h* för att kunna använda ThreadX respektive NetX Duo. Byggprojektet måste innehålla mDNS-källkoden och programfilen, och naturligtvis biblioteksfilerna ThreadX och NetX. Det här är allt som krävs för att använda NetX Duo mDNS.
 
-## <a name="configuration-options"></a>Konfigurations alternativ
+## <a name="configuration-options"></a>Konfigurationsalternativ
 
-Det finns flera konfigurations alternativ för att skapa NetX Duo mDNS-modulen. Standardvärdena visas i listan, men varje definition kan anges av programmet innan den angivna NetX Duo-mDNS huvud filen tas med. I följande lista beskrivs var och en i detalj:
+Det finns flera konfigurationsalternativ för att skapa NetX Duo mDNS-modulen. Standardvärdena visas, men varje definition kan anges av programmet innan den angivna NetX Duo mDNS-huvudfilen tas med. I följande lista beskrivs var och en i detalj:
 
-- **NX_MDNS_DISABLE_SERVER** Inaktiverar Server funktionen mDNS/DNS-SD. Utan server funktionen kan mDNS/DNS-SD-modulen inte meddela tjänster som tillhandahålls av den lokala värden eller som inte svarar på mDNS förfrågningar. Den här symbolen är inte definierad som standard.
-- **NX_MDNS_DISABLE_CLIENT** Inaktiverar klient funktionen mDNS/DNS-SD. Utan-klient funktionen skickar mDNS/DNS-SD inte frågor eller så upprätthåller den inte mDNS fråge svar som tas emot över nätverket.
-- **NX_MDNS_ENABLE_ADDRESS_CHECK** Definierad utför mDNS-modulen verifierar adresser (käll adress, mål adress och port nummer) från de mottagna mDNS-meddelandena. Den här symbolen definieras som standard.
-- **NX_MDNS_ENABLE_CLIENT_POOF** Definierad, mDNS-modulen utför passiv observation av felen, mDNS/DNS_SD-klienten (frågare) kontrollerar multicast-frågorna som utfärdats av de andra värdarna i nätverket. Den här symbolen definieras som standard.
-- **NX_MDNS_ENABLE_SERVER_NEGATIVE_RESPONSES** Definierad, mDNS/DNS-SD-servern (Responder) genererar negativa svar på frågor som den har legitim ägande rätt till. Den här symbolen definieras som standard.
-- **NX_MDNS_ENABLE_IPV6** Definierad, mDNS/DNS-SD Send/process mDNS-meddelandet över IPv6-adress. Den här symbolen är inte definierad som standard.
-- **NX_MDNS_IPV6_ADDRESS_COUNT** Högsta antal IPv6-adresser för värden. Standardvärdet är 2.
-- **NX_MDNS_HOST_NAME_MAX** Maximal sträng storlek för värd namn. Standardvärdet är 64. Inkluderar inte NULL-begränsaren.
-- **NX_MDNS_SERVICE_NAME_MAX** Maximal sträng storlek för tjänst namn. Standardvärdet är 64. Inkluderar inte NULL-begränsaren.
-- **NX_MDNS_DOMAIN_NAME_MAX** Maximal sträng storlek för domän namn. Standardvärdet är 16. Inkluderar inte NULL-begränsaren.
-- **NX_MDNS_CONFLICT_COUNT** Maximalt antal konflikter för värdnamn eller tjänst namn. Standardvärdet är 8.
-- **NX_MDNS_RR_TTL_HOST** TTL-värde för resurs poster med värdnamn, i sekund. Standardvärdet är 120 för 120S.
-- **NX_MDNS_RR_TTL_OTHER** TTL-värde för andra resurs poster, i andra. Standardvärdet är 4500 i 75 minuter.
-- **NX_MDNS_PROBING_TIMER_COUNT** Tidsintervallet, i Tick, mellan mDNS avsöknings meddelanden. Standardvärdet är 25 Tick för 250ms.
-- **NX_MDNS_ANNOUNCING_TIMER_COUNT** Tidsintervallet, i Tick, mellan mDNS meddelande meddelanden. Standardvärdet är 25 Tick för 250ms.
-- **NX_MDNS_GOODBYE_TIMER_COUNT** Tidsintervallet, i Tick, mellan upprepade meddelanden. Standardvärdet är 25 Tick för 250ms.
-- **NX_MDNS_QUERY_MIN_TIMER_COUNT** Det minsta tidsintervallet, i Tick, mellan två frågor. Standardvärdet är 100-Tick i 1 sekund.
-- **NX_MDNS_QUERY_MAX_TIMER_COUNT** Det maximala tidsintervallet, i Tick, mellan två frågor. Standardvärdet är 360000 i 60 sekunder.
-- **NX_MDNS_QUERY_DELAY_MIN** Den minsta fördröjningen för att skicka första frågan i Tick. Standardvärdet är 2 Tick för 20ms.
-- **NX_MDNS_QUERY_DELAY_RANGE** Fördröjnings intervallet för att skicka den första frågan i Tick. Standardvärdet är 10 Tick för 100 MS.
-- **NX_MDNS_RESPONSE_INTERVAL** Tidsintervallet, i Ticket, i svar på en fråga för att se till att intervallet är minst 1 sedan den senaste gången posten var multicast. Standardvärdet är 100-Tick.
-- **NX_MDNS_RESPONSE_PROBING_TIMER_OUT** Tidsintervallet, i Ticket, i svar på en avsöknings fråga för att se till att intervallet minst 250ms sedan posten var multicast. Standardvärdet är 25 Tick.
-- **NX_MDNS_RESPONSE_UNIQUE_DELAY** Fördröjningen, i Tick, i svar på en fråga till en tjänst som är unik för det lokala nätverket. Standardvärdet är 1 Ticket för 10ms.
-- **NX_MDNS_RESPONSE_SHARED_DELAY_MIN** Den minsta fördröjningen i Tick i som svarar på en fråga till en delad resurs. Standardvärdet är 2 Tick för 20ms.
-- **NX_MDNS_RESPONSE_SHARED_DELAY_RANGE** Fördröjnings intervallet, i Tick, i svar på en fråga till en delad resurs. Standardvärdet är 10 Tick för 100 MS.
-- **NX_MDNS_RESPONSE_TC_DELAY_MIN** Den minsta fördröjningen i Tick i som svarar på en fråga med TC-bit. Standardvärdet är 40-Tick för 400ms.
-- **NX_MDNS_RESPONSE_TC_DELAY_RANGE** Fördröjnings intervallet, i Tick, i svar på en fråga med TC-bit. Standardvärdet är 10 Tick för 100 MS.
-- **NX_MDNS_TIMER_COUNT_RANGE** När du skickar ut mDNS svar innehåller paketet svar som annars skulle skickas inom detta intervall för timer. Antalet timer-intervall uttrycks i Tick. Standardvärdet är 12 för 120ms. Med det här värdet kan ett svar innehålla meddelanden som skickas inom nästa 120ms-intervall om varje Tick är 10ms.
-- **NX_MDNS_PROBING_RETRANSMIT_COUNT** Antalet överförda meddelanden. Standardvärdet är 3.
-- **NX_MDNS_GOODBYE_RETRANSMIT_COUNT** Antalet meddelanden som skickas igen. Standardvärdet är 1.
-- **NX_MDNS_POOF_MIN_COUNT** Antalet frågor som inget multicast-svar har, kan värden ta detta som en indikation på att posten inte längre är giltig. Standardvärdet är 2.
-- **NX_MDNS_POOF_TIME_COUNT** Tidsintervallet, i Tick, i borttagning av posten från cachen efter att ha sett två eller flera av dessa frågor, och som inte ser något multicast-svar som innehåller det förväntade svaret. Standardvärdet är 1000-Tick i 10 sekunder.
-- **NX_MDNS_RR_DELETE_DELAY_TIMER_COUNT** Fördröjningen för borttagning av en resurs post när TTL för den här posten är noll, i Tick, är standardvärdet 100 Tick för 1 sekund.
+- **NX_MDNS_DISABLE_SERVER** Inaktiverar funktionen för mDNS/DNS-SD-servern. Utan serverfunktionen meddelar inte mDNS/DNS-SD-modulen tjänster som tillhandahålls av den lokala värden, och svarar inte heller på mDNS-härdning. Den här symbolen definieras inte som standard.
+- **NX_MDNS_DISABLE_CLIENT** Inaktiverar mDNS/DNS-SD-klientfunktionen. Utan klientfunktionen skickar mDNS/DNS-SD inte några frågor, och den underhåller inte heller mDNS-frågesvar som tas emot via nätverket.
+- **NX_MDNS_ENABLE_ADDRESS_CHECK** MDNS-modulen har definierats och verifierar adresser (källadress, måladress och portnummer) från de mottagna mDNS-meddelandena. Den här symbolen definieras som standard.
+- **NX_MDNS_ENABLE_CLIENT_POOF** MDNS-modulen har definierats för att utföra passiv observation av fel, mDNS /DNS_SD-klienten (querier) observerar de multicast-frågor som utfärdas av de andra värdarna i nätverket. Den här symbolen definieras som standard.
+- **NX_MDNS_ENABLE_SERVER_NEGATIVE_RESPONSES** Definierad genererar mDNS /DNS-SD-servern (svarare) negativa svar på frågor som den har legitimt ägarskap för. Den här symbolen definieras som standard.
+- **NX_MDNS_ENABLE_IPV6** MDNS-/DNS-SD-meddelandet för att skicka/bearbeta mDNS över IPv6-adress har definierats. Den här symbolen definieras inte som standard.
+- **NX_MDNS_IPV6_ADDRESS_COUNT** Maximalt antal IPv6-adresser för värden. Standardvärdet är 2.
+- **NX_MDNS_HOST_NAME_MAX** Maximal strängstorlek för värdnamn. Standardvärdet är 64. Innehåller inte NULL-terminatorn.
+- **NX_MDNS_SERVICE_NAME_MAX** Maximal strängstorlek för tjänstens namn. Standardvärdet är 64. Innehåller inte NULL-terminatorn.
+- **NX_MDNS_DOMAIN_NAME_MAX** Maximal strängstorlek för domännamn. Standardvärdet är 16. Innehåller inte NULL-terminatorn.
+- **NX_MDNS_CONFLICT_COUNT** Maximalt antal konflikter för värdnamn eller tjänstnamn. Standardvärdet är 8.
+- **NX_MDNS_RR_TTL_HOST** TTL-värde för resursposter med värdnamn, i sekunden. Standardvärdet är 120 för 120-tal.
+- **NX_MDNS_RR_TTL_OTHER** TTL-värde för andra resursposter, i sekunden. Standardvärdet är 4 500 i 75 minuter.
+- **NX_MDNS_PROBING_TIMER_COUNT** Tidsintervallet i tick mellan mDNS-avsökningsmeddelanden. Standardvärdet är 25 tick för 250 ms.
+- **NX_MDNS_ANNOUNCING_TIMER_COUNT** Tidsintervallet, i tick, mellan mDNS-meddelanden. Standardvärdet är 25 tick för 250 ms.
+- **NX_MDNS_GOODBYE_TIMER_COUNT** Tidsintervallet, i tick, mellan upprepade "goodbye"-meddelanden. Standardvärdet är 25 tick för 250 ms.
+- **NX_MDNS_QUERY_MIN_TIMER_COUNT** Det minsta tidsintervallet, i tick, mellan två frågor. Standardvärdet är 100 tick i 1 sekund.
+- **NX_MDNS_QUERY_MAX_TIMER_COUNT** Det maximala tidsintervallet i tick mellan två frågor. Standardvärdet är 360000 i 60 sekunder.
+- **NX_MDNS_QUERY_DELAY_MIN** Den minsta fördröjningen för att skicka den första frågan i tick. Standardvärdet är 2 tick för 20 ms.
+- **NX_MDNS_QUERY_DELAY_RANGE** Fördröjningsintervallet för att skicka den första frågan i tick. Standardvärdet är 10 tick för 100 ms.
+- **NX_MDNS_RESPONSE_INTERVAL** Tidsintervallet, i tick, i svarar på en fråga för att säkerställa ett intervall på minst 1:e sedan den senaste gången posten multicast. Standardvärdet är 100 tick.
+- **NX_MDNS_RESPONSE_PROBING_TIMER_OUT** Tidsintervallet i tick i svarar på en avsökningsfråga för att säkerställa ett intervall på minst 250 ms sedan den senaste gången posten multicast.. Standardvärdet är 25 tick.
+- **NX_MDNS_RESPONSE_UNIQUE_DELAY** Fördröjningen, i tick, i svarar på en fråga till en tjänst som är unik för det lokala nätverket. Standardvärdet är 1 tick för 10 ms.
+- **NX_MDNS_RESPONSE_SHARED_DELAY_MIN** Den minsta fördröjningen i tick i svarar på en fråga till en delad resurs. Standardvärdet är 2 tick för 20 ms.
+- **NX_MDNS_RESPONSE_SHARED_DELAY_RANGE** Fördröjningsintervallet, i tick, i svarar på en fråga till en delad resurs. Standardvärdet är 10 tick för 100 ms.
+- **NX_MDNS_RESPONSE_TC_DELAY_MIN** Den minsta fördröjningen, i tick, i att svara på en fråga med TC-bit. Standardvärdet är 40 tick för 400 ms.
+- **NX_MDNS_RESPONSE_TC_DELAY_RANGE** Fördröjningsintervallet, i tick, i svarar på en fråga med TC-bit. Standardvärdet är 10 tick för 100 ms.
+- **NX_MDNS_TIMER_COUNT_RANGE** När du skickar ut mDNS-svar innehåller paketet svar som annars skulle skickas inom det här timerräknarintervallet. Timerantalsintervallet uttrycks i tick. Standardvärdet är 12 för 120 ms. Med det här värdet kan ett svar inkludera meddelanden som skickas inom nästa 120 ms-intervall om varje tick är 10 ms.
+- **NX_MDNS_PROBING_RETRANSMIT_COUNT** Antalet återskickade avsökningsmeddelanden. Standardvärdet är 3.
+- **NX_MDNS_GOODBYE_RETRANSMIT_COUNT** Antalet återskickade "goodbye"-meddelanden. Standardvärdet är 1.
+- **NX_MDNS_POOF_MIN_COUNT** Antalet frågor som inte ger multicast-svar kan vara en indikation på att posten kanske inte längre är giltig. Standardvärdet är 2.
+- **NX_MDNS_POOF_TIME_COUNT** Tidsintervallet, i tick, för att ta bort posten från cacheminnet efter att ha sett två eller flera av dessa frågor, och ser inget multicast-svar som innehåller det förväntade svaret. Standardvärdet är 1 000 tick i 10 sekunder.
+- **NX_MDNS_RR_DELETE_DELAY_TIMER_COUNT** Fördröjningen för att ta bort en resurspost när TTL för den här posten är noll, i tick, är standardvärdet 100 tick i 1 sekund.

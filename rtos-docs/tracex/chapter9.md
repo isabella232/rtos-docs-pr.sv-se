@@ -1,21 +1,21 @@
 ---
-title: Kapitel 9 – Azure återställnings tider USBX trace Events
-description: Det här kapitlet innehåller en beskrivning av de Azure återställnings tider USBX-händelser som visas av TraceX.
+title: Kapitel 9 – Azure RTOS USBX-spårningshändelser
+description: Det här kapitlet innehåller en beskrivning av Azure RTOS USBX-händelser som visas av TraceX.
 author: philmea
 ms.service: rtos
 ms.topic: article
 ms.date: 5/19/2020
 ms.author: philmea
-ms.openlocfilehash: 98561fe1d131e1d1b0893b7d89eb720881a82ac8
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 015e5feedd1d5e90c6491e156c2d0d57a9abaa47518868d375a34e618770d4aa
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104828350"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116795407"
 ---
-# <a name="chapter-9---azure-rtos-usbx-trace-events"></a>Kapitel 9 – Azure återställnings tider USBX trace Events
+# <a name="chapter-9---azure-rtos-usbx-trace-events"></a>Kapitel 9 – Azure RTOS USBX-spårningshändelser
 
-Det här kapitlet innehåller en beskrivning av de Azure återställnings tider USBX-händelser som visas av TraceX. 
+Det här kapitlet innehåller en beskrivning av Azure RTOS USBX-händelser som visas av TraceX. 
 
 ## <a name="list-of-events-and-icons"></a>Lista över händelser och ikoner
 
@@ -23,3915 +23,3915 @@ Följande är en lista över USBX-händelser som visas av TraceX.
 
 | Ikon                             | Innebörd                               |
 | -------------------------------- | ------------------------------------- |
-| ![Enhets klass C D C Aktivera ikon](./media/user-guide/usbx-events/image1.png)    | **Enhets klass CDC-aktivering** *(ux_device_class_cdc_activate)* |
-| ![Enhets klass C D C inaktivera ikon](./media/user-guide/usbx-events/image2.png)    | **CDC-inaktive ring av enhets klass** *(ux_device_class_cdc_deactivate)* |
-| ![Enhets klass C D C Läs ikon](./media/user-guide/usbx-events/image3.png)    | **Läsning av enhets klass CDC** *(ux_device_class_cdc_read)* |
-| ![Enhets klass C D s Skriv ikon](./media/user-guide/usbx-events/image4.png)    | **Enhets klass CDC-skrivning** *(ux_device_class_cdc_write)* |
-| ![Dpump Aktivera ikon för enhets klass](./media/user-guide/usbx-events/image5.png)    | **Aktivering av enhets klass Dpump** *(ux_device_class_dpump_activate)* |
-| ![Ikon för Dpump för enhets klass](./media/user-guide/usbx-events/image6.png)    | **Dpump för enhets klass** *(ux_device_class_dpump_deactivate)* |
-| ![Läs ikon för enhets klassens Dpump](./media/user-guide/usbx-events/image7.png)    | **Läsning av enhets klassens Dpump** *(ux_device_class_dpump_read)* |
-| ![Dpump Skriv ikon för enhets klass](./media/user-guide/usbx-events/image8.png)    | **Skrivning av enhets klass Dpump** *(ux_device_class_dpump_write)* |
-| ![Ikon för HID-aktivering i enhets klass](./media/user-guide/usbx-events/image9.png)    | **HID-aktivering för enhets klass** *(ux_device_class_hid_activate)* |
-| ![Ikon för HID-inaktivera enhets klass](./media/user-guide/usbx-events/image10.png)    | **HID-inaktive ring av enhets klass** *(ux_device_class_hid_deactivate)* |
-| ![Ikon för att skicka HID-beskrivning för enhets klass](./media/user-guide/usbx-events/image11.png)    | **Skicka HID-beskrivning för enhets klass** *(ux_device_class_hid_descriptor_send)* |
-| ![Ikonen Hämta ikon för enhets klassens HID-händelse](./media/user-guide/usbx-events/image12.png)    | **Hämta HID-händelse för enhets klass** *(ux_device_class_hid_event_get)* |
-| ![Ikon uppsättnings ikon för HID-händelseloggen i enhets klass](./media/user-guide/usbx-events/image13.png)    | **HID-händelse uppsättning för enhets klass** *(ux_device_class_hid_event_set)* |
-| ![Ikonen Hämta ikon för enhets klassens HID-rapport](./media/user-guide/usbx-events/image14.png)    | **Hämta HID-rapport för enhets klass** *(ux_device_class_hid_report_get)* |
-| ![Ikon för HID-rapport för enhets klass](./media/user-guide/usbx-events/image15.png)    | **HID-rapport uppsättning i enhets klass** *(ux_device_class_hid_report_set)* |
-| ![Pima Aktivera ikon för enhets klass](./media/user-guide/usbx-events/image16.png)    | **Aktivering av enhets klass Pima** *(ux_device_class_pima_activate)* |
-| ![Ikon för Pima för enhets klass](./media/user-guide/usbx-events/image17.png)    | **Pima för enhets klass** *(ux_device_class_pima_deactivate)* |
-| ![Enhets klass Pima enhets information skicka ikon](./media/user-guide/usbx-events/image18.png)    | **Skicka enhets information i enhets klass Pima** *(ux_device_class_pima_device_info_send)* |
-| ![Enhets klass Pima händelse Hämta ikon](./media/user-guide/usbx-events/image19.png)    | **Enhets klass Pima Event get** *(ux_device_class_pima_event_get)* |
-| ![Enhets klass Pima händelse uppsättnings ikon](./media/user-guide/usbx-events/image20.png)    | **Pima händelse uppsättning** *(Ux_device_class_pima_event_set)* för enhets klass |
-| ![Enhets klass Pima objekt Lägg till ikon](./media/user-guide/usbx-events/image21.png)    | **Enhets klass Pima objekt Lägg till** *(ux_device_class_pima_object_add)* |
-| ![Enhets klass Pima objekt data hämta ikon](./media/user-guide/usbx-events/image22.png)    | **Enhets klass Pima objekt data hämta** *(ux_device_class_pima_object_data_get)* |
-| ![Ikon för att skicka Pima objekt data i enhets klass](./media/user-guide/usbx-events/image23.png)    | **Skicka objekt data från enhets klass Pima** *(ux_device_class_pima_object_data_send)* |
-| ![Pima objekt borttagnings ikon för enhets klass](./media/user-guide/usbx-events/image24.png)    | **Enhets klass Pima objekt borttagning** *(ux_device_class_pima_object_delete)* |
-| ![Skicka ikon för Pima objekt i enhets klass](./media/user-guide/usbx-events/image25.png)    | **Pima objekt i enhets klass hanterar skicka** *(ux_device_class_pima_object_handles_send)* |
-| ![Enhets klass Pima objekt information Hämta ikon](./media/user-guide/usbx-events/image26.png)    | **Enhets klass Pima objekt information get** *(ux_device_class_pima_object_info_get)* |
-| ![Skicka ikon för Pima objekt information i enhets klass](./media/user-guide/usbx-events/image27.png)    | **Skicka Pima objekt information** *(Ux_device_class_pima_object_info_send)* i enhets klass |
-| ![Enhets klass Pima objekt nummer skicka ikon](./media/user-guide/usbx-events/image28.png)    | Skicka *(ux_device_class_pima_objects_number_send)* **Pima objekt nummer i enhets klass** |
-| ![Enhets klass Pima del objekt data hämta ikon](./media/user-guide/usbx-events/image29.png)    | **Enhets klass Pima del objekt data hämta** *(ux_device_class_pima_partial_object_data_get)* |
-| ![Ikon för Pima svars sändning i enhets klass](./media/user-guide/usbx-events/image30.png)    | **Pima för enhets klassens svar** *(ux_device_class_pima_response_send)*|
-| ![Enhets klass Pima Storage I D-skicka ikon](./media/user-guide/usbx-events/image31.png)    | **Enhets klass Pima lagrings-ID skicka** *(ux_device_class_pima_storage_id_send)* |
-| ![Enhets klass Pima Storage information skicka ikon](./media/user-guide/usbx-events/image32.png)    | **Sändning av Pima Storage-information i enhets klass** *(ux_device_class_pima_storage_info_send)* |
-| ![Enhets klass R N D I S Aktivera ikon](./media/user-guide/usbx-events/image33.png)    | **Aktivering av enhets klass RNDIS** *(ux_device_class_rndis_activate)* |
-| ![Ikonen enhets klass R N D I S inaktivera](./media/user-guide/usbx-events/image34.png)    | **RNDIS för enhets klass** *(ux_device_class_rndis_deactivate)* |
-| ![Enhets klass R N D I S meddelande Behåll Aliveicon](./media/user-guide/usbx-events/image35.png)    | **Enhets klass RNDIS meddelande Keep Alive** *(ux_device_class_rndis_msg_keep_alive)* |
-| ![Ikon för enhets klass R N D N D I S](./media/user-guide/usbx-events/image36.png)    | **RNDIS meddelande fråga för enhets klass** *(ux_device_class_rndis_msg_query)* |
-| ![Enhets klass R N D I S ikon för meddelande återställning](./media/user-guide/usbx-events/image37.png)    | **RNDIS meddelande återställning för enhets klass** *(ux_device_class_rndis_msg_reset)* |
-| ![Ikon för enhets klass R N D N D I S](./media/user-guide/usbx-events/image38.png)    | **RNDIS meddelande uppsättning för enhets klass** *(ux_device_class_rndis_msg_set)* |
-| ![Enhets klass R N D N D I S paket mottagnings ikon](./media/user-guide/usbx-events/image39.png)    | **Mottagning av enhets klassens RNDIS-paket** *(ux_device_class_rndis_packet_receive)* |
-| ![Enhets klass R N D I S paket sändnings ikon](./media/user-guide/usbx-events/image40.png)    | **RNDIS Packet överföring i enhets klass** *(ux_device_class_rndis_packet_transmit)* |
-| ![Aktiverings ikon för enhets klass lagring](./media/user-guide/usbx-events/image41.png)    | **Aktivering av enhets klass lagring** *(ux_device_class_storage_activate)* |
-| ![Ikon för enhets klassens lagrings inaktive rad](./media/user-guide/usbx-events/image42.png)    | **Inaktive ring av enhets klass lagring** *(ux_device_class_storage_deactivate)* |
-| ![Ikon för lagrings format för enhets klass](./media/user-guide/usbx-events/image43.png)    | **Lagrings format för enhets klass** *(ux_device_class_storage_format)* |
-| ![Ikon för enhets klass lagrings förfrågan](./media/user-guide/usbx-events/image44.png)    | **Förfrågan om enhets klass lagring** *(ux_device_class_storage_inquiry)* |
-| ![Enhets klassens lagrings läge Välj ikon](./media/user-guide/usbx-events/image45.png)    | **Val av enhets klassens lagrings läge** *(ux_device_class_storage_mode_select)* |
-| ![Ikon för lagrings läge i enhets klass](./media/user-guide/usbx-events/image46.png)    | **Enhets klassens lagrings läge Sense** *(ux_device_class_storage_mode_sense)* |
-| ![Enhets klass lagring förhindra att ikonen borttagning av media](./media/user-guide/usbx-events/image47.png)    | **Enhets klass lagring förhindra borttagning av media** *(ux_device_class_storage_prevent_allow_media_removal)* |
-| ![Läs ikon för enhets klass lagring](./media/user-guide/usbx-events/image48.png)    | **Läsning av enhets klass lagring** *(ux_device_class_storage_read)* |
-| ![Enhets klass lagring Läs kapacitets ikon](./media/user-guide/usbx-events/image49.png)    | **Läs kapacitet för enhets klass lagring** *(ux_device_class_storage_read_capacity)* |
-| ![Kapacitets ikon för Läs format för enhets klass lagring](./media/user-guide/usbx-events/image50.png)    | **Kapacitet för läsning av enhets klass lagring** *(ux_device_class_storage_read_format_capacity)* |
-| ![Enhets klass lagring läsa innehålls förtecknings ikon](./media/user-guide/usbx-events/image51.png)    | **Läsa innehålls förteckning för enhets klass lagring** *(ux_device_class_storage_read_toc)* |
-| ![Ikon för enhets klass lagrings förfrågan Sense](./media/user-guide/usbx-events/image52.png)    | **Enhets klass Storage-begäran Sense** *(ux_device_class_storage_request_sense)* |
-| ![Start stopps ikon för enhets klass lagring](./media/user-guide/usbx-events/image53.png)    | **Start stopp för enhets klass lagring** *(ux_device_class_storage_start_stop)* |
-| ![Ikon för lagrings test för enhets klass](./media/user-guide/usbx-events/image54.png)    | **Test av enhets klass lagring är klar** *(ux_device_class_storage_test_ready)* |
-| ![Enhets klass lagring verifiera ikon](./media/user-guide/usbx-events/image55.png)    | **Verifiera lagring av enhets klass** *(ux_device_class_storage_verify)* |
-| ![Skriv ikon för enhets klass lagring](./media/user-guide/usbx-events/image56.png)    | **Lagrings skrivning av enhets klass** *(ux_device_class_storage_write)* |
-| ![Alternativ inställnings ikon för enhets stack](./media/user-guide/usbx-events/image57.png)    | **Alternativ inställning för enhets stack Hämta** *(ux_device_stack_alternate_setting_get)* |
-| ![Ikon för alternativ inställnings uppsättning för enhets stack](./media/user-guide/usbx-events/image58.png)    | **Alternativ inställnings uppsättning för enhets stack** *(ux_device_stack_alternate_setting_set)* |
-| ![Enhets Stack klass register ikon](./media/user-guide/usbx-events/image59.png)    | **Enhets Stack klass register** *(ux_device_stack_class_register)* |
-| ![Enhets stack rensa funktions ikon](./media/user-guide/usbx-events/image60.png)    | **Rensnings funktion för enhets stack** *(ux_device_stack_clear_feature)* |
-| ![Hämta ikon för enhets stack konfiguration](./media/user-guide/usbx-events/image61.png)    | **Hämta enhets stack konfiguration** *(ux_device_stack_configuration_get)* |
-| ![Ikon för enhets stack konfigurations uppsättning](./media/user-guide/usbx-events/image62.png)    | **Konfigurations uppsättning för enhets stack** *(ux_device_stack_configuration_set)* |
-| ![Enhets stackens anslutnings ikon](./media/user-guide/usbx-events/image63.png)    | **Enhets stack anslutning** *(ux_device_stack_connect)* |
-| ![Ikon för att skicka enhets stack Beskrivning](./media/user-guide/usbx-events/image64.png)    | **Skicka enhets Stacks Beskrivning** *(ux_device_stack_descriptor_send)* |
-| ![Ikon för enhets stack från koppling](./media/user-guide/usbx-events/image65.png)    | **Enhets stack från koppling** *(ux_device_stack_disconnect)* |
-| ![Ikon för enhets stackens slut punkts bås](./media/user-guide/usbx-events/image66.png)    | **Enhets stackens slut punkts ficka** *(ux_device_stack_endpoint_stall)* |
-| ![Enhets stack Hämta status ikon](./media/user-guide/usbx-events/image67.png)    | **Enhets stack Hämta status** *(ux_device_stack_get_status)* |
-| ![Aktiverings ikon för värd för enhets stack](./media/user-guide/usbx-events/image68.png)    | **Aktivering av enhets stack värd** *(ux_device_stack_host_wakeup)* |
-| ![Ikon för enhets stack initierare](./media/user-guide/usbx-events/image69.png)    | **Initiera enhets stack** *(ux_device_stack_initialize)* |
-| ![Borttagnings ikon för enhets stackens gränssnitt](./media/user-guide/usbx-events/image70.png)    | **Borttagning av enhets Stacks gränssnitt** *(ux_device_stack_interface_delete)* |
-| ![Hämta ikon för enhets stackens gränssnitt](./media/user-guide/usbx-events/image71.png)    | **Hämta enhets stack gränssnitt** *(ux_device_stack_interface_get)* |
-| ![Ikon för enhets stackens gränssnitts uppsättning](./media/user-guide/usbx-events/image72.png)    | **Enhets stack gränssnitts uppsättning** *(ux_device_stack_interface_set)* |
-| ![Funktions ikon för enhets stack uppsättning](./media/user-guide/usbx-events/image73.png)    | **Enhets stack uppsättnings funktion** *(ux_device_stack_set_feature)* |
-| ![Avbrotts ikon för enhets stack överföring](./media/user-guide/usbx-events/image74.png)    | **Avbrotts överföring av enhets stack** *(ux_device_stack_transfer_abort)* |
-| ![* Ikon för enhets stacken överför alla begär Anden Avbryt](./media/user-guide/usbx-events/image75.png)    | **Enhets stack överför alla begäran om att avbryta begäran** *(ux_device_stack_transfer_all_request_abort)* |
-| ![Ikon för begäran om enhets stack-överföring](./media/user-guide/usbx-events/image76.png)    | **Begäran om enhets stack överföring** *(ux_device_stack_transfer_request)* |
-| ![Asix Aktivera ikon för värd klass](./media/user-guide/usbx-events/image77.png)    | **Aktivering av värd klass Asix** *(ux_host_class_asix_activate)* |
-| ![Asix-ikon för värd klass](./media/user-guide/usbx-events/image78.png)    | **Asix inaktive ring av värd klass** *(ux_host_class_asix_deactivate)* |
-| ![Asix för värd klassens avbrotts meddelande](./media/user-guide/usbx-events/image79.png)    | **Avbrotts meddelande för värd klass Asix** *(ux_host_class_asix_interrupt_notification)* |
-| ![Läs ikon för värd klassen Asix](./media/user-guide/usbx-events/image80.png)    | **Läsning av värd klass Asix** *(ux_host_class_asix_read)* |
-| ![Asix Skriv ikon för värd klass](./media/user-guide/usbx-events/image81.png)    | **Skrivning av värd klass Asix** *(ux_host_class_asix_write)* |
-| ![Ikon för ljud aktivering i värd klass](./media/user-guide/usbx-events/image82.png)    | **Ljud aktivering av värd klass** *(ux_host_class_audio_activate)* |
-| ![Ikonen Hämta ljud kontroll värde i värd klass](./media/user-guide/usbx-events/image83.png)    | **Hämta ljud kontroll värde i värd klass** *(ux_host_class_audio_control_value_get)* |
-| ![Ikon för ljud kontroll värde för värd klass](./media/user-guide/usbx-events/image84.png)    | **Ljud kontroll värdes uppsättning i värd klass** *(ux_host_class_audio_control_value_set)* |
-| ![Ikon för ljud inaktive ring av värd klass](./media/user-guide/usbx-events/image85.png)    | **Ljud inaktive ring av värd klass** *(ux_host_class_audio_deactivate)* |
-| ![Ljud läsnings ikon för värd klass](./media/user-guide/usbx-events/image86.png)    | **Ljud läsning av värd klass** *(ux_host_class_audio_read)* |
-| ![Exempel på hämtnings ikon för värd klassens ljud strömning](./media/user-guide/usbx-events/image87.png)    | **Exempel på ljud uppspelning av värd klass för hämtning** *(ux_host_class_audio_streaming_sampling_get)* |
-| ![Ikon för samplings uppsättning för värd klassens ljud strömning](./media/user-guide/usbx-events/image88.png)    | **Provtagnings uppsättning för ljud strömning i värd klass** *(ux_host_class_audio_streaming_sampling_set)* |
-| ![Ljud Skriv ikon för värd klass](./media/user-guide/usbx-events/image89.png)    | **Ljud skrivning av värd klass** *(ux_host_class_audio_write)* |
-| ![Värd klass C D C A C M Aktivera ikon](./media/user-guide/usbx-events/image90.png)    | **Värd klass CDC ACM Activate** *(ux_host_class_cdc_acm_activate)* |
-| ![Värd klass C D C A C M inaktivera ikon](./media/user-guide/usbx-events/image91.png)    | **Värd klass CDC ACM-inaktive rad** *(ux_host_class_cdc_acm_deactivate)* |
-| ![Värd klass C D A C M I O C T L i pipe-ikon](./media/user-guide/usbx-events/image92.png)    | **Värd klass CDC ACM IOCTL abort i pipe** *(ux_host_class_cdc_acm_ioctl_abort_in_pipe)* |
-| ![Värd klass C D C A C M I O C T L ta bort pipe-ikon](./media/user-guide/usbx-events/image93.png)    | **Värd klass CDC ACM IOCTL avbryter pipe** *(ux_host_class_cdc_acm_ioctl_abort_out_pipe)* |
-| ![Värd klass C D C A C M I O C T L, Hämta enhets status ikon](./media/user-guide/usbx-events/image94.png)    | **Värd klass CDC ACM IOCTL get enhets status** *(ux_host_class_cdc_acm_ioctl_get_device_status)* |
-| ![Värd klass C D C A C M I O C T L, Hämta rad kodnings ikon](./media/user-guide/usbx-events/image95.png)    | **Värd klass CDC ACM IOCTL get line** *-kodning (ux_host_class_cdc_acm_ioctl_get_line_coding)* |
-| ![Värd klass C D C A C M I O C T L ikon för återanrop i meddelande](./media/user-guide/usbx-events/image96.png)    | **Värd klass CDC ACM IOCTL Notification motringning** *(ux_host_class_cdc_acm_ioctl_notification_callback)* |
-| ![Värd klass C D C A C M I O C T L-ikonen skicka rast](./media/user-guide/usbx-events/image97.png)    | **Värd klass CDC ACM IOCTL Send Break** *(ux_host_class_cdc_acm_ioctl_send_break)* |
-| ![Värd klass C D C A C M I O C T L ange rad kodnings ikon](./media/user-guide/usbx-events/image98.png)    | **Värd klass CDC ACM IOCTL set line** *-kodning (ux_host_class_cdc_acm_ioctl_set_line_coding)* |
-| ![Värd klass C D C A C M I O C T L ikon för ange linje tillstånd](./media/user-guide/usbx-events/image99.png)    | **Värd klass CDC ACM IOCTL set line State** *(ux_host_class_cdc_acm_ioctl_set_line_state)* |
-| ![Värd klass C D A C M Läs ikon](./media/user-guide/usbx-events/image100.png)    | **Värd klass CDC ACM Read** *(ux_host_class_cdc_acm_read)* |
-| ![Start ikon för värd klass C D A C M](./media/user-guide/usbx-events/image101.png)    | **Start av värd klass CDC-ACM** *(ux_host_class_cdc_acm_reception_start)* |
-| ![Svars ikon för värd klass C D A C M](./media/user-guide/usbx-events/image102.png)    | **ACM för värd klass CDC-mottagning** *(ux_host_class_cdc_acm_reception_stop)* |
-| ![Värd klass C D A C M Skriv ikon](./media/user-guide/usbx-events/image103.png)    | **Värd klass CDC ACM Write** *(ux_host_class_cdc_acm_write)* |
-| ![Dpump Aktivera ikon för värd klass](./media/user-guide/usbx-events/image104.png)    | **Aktivering av värd klass Dpump** *(ux_host_class_dpump_activate)* |
-| ![Dpump-ikon för värd klass](./media/user-guide/usbx-events/image105.png)    | **Dpump inaktive ring av värd klass** *(ux_host_class_dpump_deactivate)* |
-| ![Läs ikon för värd klassen Dpump](./media/user-guide/usbx-events/image106.png)    | **Läsning av värd klass Dpump** *(ux_host_class_dpump_read)* |
-| ![Dpump Skriv ikon för värd klass](./media/user-guide/usbx-events/image107.png)    | **Skrivning av värd klass Dpump** *(ux_host_class_dpump_write)* |
-| ![Ikon för HID-aktivering i värd klass](./media/user-guide/usbx-events/image108.png)    | **HID-aktivering för värd klass** *(ux_host_class_hid_activate)* |
-| ![Register ikon för HID-klient för värd klass](./media/user-guide/usbx-events/image109.png)    | **HID-klient register för värd klass** *(ux_host_class_hid_client_register)* |
-| ![Ikon för HID-inaktivera värd klass](./media/user-guide/usbx-events/image110.png)    | **HID-inaktive ring av värd klass** *(ux_host_class_hid_deactivate)* |
-| ![Ikon för HID-inaktivitet i värd klass](./media/user-guide/usbx-events/image111.png)    | **HID Idle-inaktivitet i värd klass** *(ux_host_class_hid_idle_get)* |
-| ![Ikon för HID inaktive rad värd klass](./media/user-guide/usbx-events/image112.png)    | **HID Idle-uppsättning** *(Ux_host_class_hid_idle_set)* för värd klass |
-| ![Ikon för HID-tangentbordet för värd klass](./media/user-guide/usbx-events/image113.png)    | **Aktivera HID-tangentbordet för värd klass** *(ux_host_class_hid_keyboard_activate)* |
-| ![Ikonen värd klass HID tangent bords inaktive ring](./media/user-guide/usbx-events/image114.png)    | **HID-tangentbordsmus för värd klass** *(ux_host_class_hid_keyboard_deactivate)* |
-| ![Aktivera ikon för HID-mus i värd klass](./media/user-guide/usbx-events/image115.png)    | **Aktivera HID-mus för värd klass** *(ux_host_class_hid_mouse_activate)* |
-| ![Värd klass HID-mus inaktivera ikon](./media/user-guide/usbx-events/image116.png)    | **Värd klass HID-mus inaktive rad** *(ux_host_class_hid_mouse_deactivate)* |
-| ![Ikonen aktivera HID-fjärrstyrning i värd klass](./media/user-guide/usbx-events/image117.png)    | **Aktivera HID-fjärrstyrning av värd klass** *(ux_host_class_hid_remote_control_activate)* |
-| ![Ikon för HID-fjärrstyrning av värd klass](./media/user-guide/usbx-events/image118.png)    | **HID-fjärrstyrning av värd klass** *(ux_host_class_hid_remote_control_deactivate)* |
-| ![Ikon för Hämta värd klass HID-rapport](./media/user-guide/usbx-events/image119.png)    | **Hämta HID-rapport för värd klass** *(ux_host_class_hid_report_get)* |
-| ![Ikon för HID-rapport för värd klass](./media/user-guide/usbx-events/image120.png)    | **HID-rapport uppsättning för värd klass** *(ux_host_class_hid_report_set)* |
-| ![Aktivera ikon för värd klassens hubb](./media/user-guide/usbx-events/image121.png)    | **Aktivera värd klass hubb** *(ux_host_class_hub_activate)* |
-| ![Identifiera ikon för värd klassens hubb ändring](./media/user-guide/usbx-events/image122.png)    | **Identifiera ändring av värd klassens hubb** *(ux_host_class_hub_change_detect)* |
-| ![* Ikon för att inaktivera värd Klasss hubb](./media/user-guide/usbx-events/image123.png)    | **Inaktive ring av värd klassens hubb** *(ux_host_class_hub_deactivate)* |
-| ![Ikon för att ändra anslutnings process för värd klassens hubb port](./media/user-guide/usbx-events/image124.png)    | **Anslutnings process för port ändring i värd klass** *(ux_host_class_hub_port_change_connection_process)* |
-| ![Aktivera process ikon för värd klassens hubb port ändring](./media/user-guide/usbx-events/image125.png)    | **Aktiverings process för port ändring i värd klass** *(ux_host_class_hub_port_change_enable_process)* |
-| ![Port ändring över ikon för värd Klasss hubb över den aktuella process ikonen](./media/user-guide/usbx-events/image126.png)    | **Port ändring i värd klassens hubb över den aktuella processen** *(ux_host_class_hub_port_change_over_current_process)* |
-| ![Ikon för ändrings process för värd klassens Hubbs port](./media/user-guide/usbx-events/image127.png)    | **Återställnings process för port ändring av värd klass** *(ux_host_class_hub_port_change_reset_process)* |
-| ![Ikon för att inaktivera process klassens hubb port ändring](./media/user-guide/usbx-events/image128.png)    | Inaktive ring av **värd klassens nav port ändrings process** *(ux_host_class_hub_port_change_suspend_process)* |
-| ![Pima Aktivera ikon för värd klass](./media/user-guide/usbx-events/image129.png)    | **Aktivering av värd klass Pima** *(ux_host_class_prima_activate)* |
-| ![Pima-ikon för värd klass](./media/user-guide/usbx-events/image130.png)    | **Pima inaktive ring av värd klass** *(ux_host_class_pima_deactivate)* |
-| ![Hämta ikon för värd klassens Pima enhets information](./media/user-guide/usbx-events/image131.png)    | **Hämta Pima enhets information för värd klass** *(ux_host_class_pima_device_info_get)* |
-| ![Enhets återställnings ikon för värd klass Pima](./media/user-guide/usbx-events/image132.png)    | **Enhets återställning för Pima av värd klass** *(ux_host_class_pima_device_reset)* |
-| ![Meddelande ikon för värd klass Pima](./media/user-guide/usbx-events/image133.png)    | **Pima-meddelande för värd klass** *(ux_host_class_pima_notification)* |
-| ![Ikon för Pima för värd klassens antal objekt](./media/user-guide/usbx-events/image134.png)    | **Pima antal objekt för värd klass hämtning** *(ux_host_class_pima_num_objects_get)* |
-| ![Ikonen Stäng Pima objekt i värd klass](./media/user-guide/usbx-events/image135.png)    | **Pima objekt stängning för värd klass** *(ux_host_class_pima_object_close)* |
-| ![Objekt kopierings ikon för värd klass Pima](./media/user-guide/usbx-events/image136.png)    | **Objekts kopia av värd klassens Pima** *(ux_host_class_pima_object_copy)* |
-| ![Pima objekt borttagnings ikon för värd klass](./media/user-guide/usbx-events/image137.png)    | **Ta bort värd klass Pima objekt** *(ux_host_class_pima_object_delete)* |
-| ![Pima objekt Hämta ikon för värd klass](./media/user-guide/usbx-events/image138.png)    | **Hämta värd klass Pima objekt** *(ux_host_class_pima_object_get)* |
-| ![Hämta ikon för värd klassens Pima objekt information](./media/user-guide/usbx-events/image139.png)    | **Hämta Pima för värd klassens objekt information** *(ux_host_class_pima_object_info_get)* |
-| ![Skicka ikon för Pima objekt information i värd klass](./media/user-guide/usbx-events/image140.png)    | **Sändning av Pima objekt information i värd klass** *(ux_host_class_pima_object_info_send)* |
-| ![Ikon för flytt av Pima objekt i värd klass](./media/user-guide/usbx-events/image141.png)    | **Flytt av Pima objekt i värd klass** *(ux_host_class_pima_object_move)* |
-| ![Ikon för att skicka Pima objekt i värd klass](./media/user-guide/usbx-events/image142.png)    | **Skicka Pima objekt i värd klass** *(ux_host_class_pima_object_send)* |
-| ![Avbrotts ikon för Pima objekt överföring i värd klass](./media/user-guide/usbx-events/image143.png)    | **Avbryt Pima objekt överföring i värd klass** *(ux_host_class_object_transfer_abort)* |
-| ![Läs ikon för värd klassen Pima](./media/user-guide/usbx-events/image144.png)    | **Läsning av värd klass Pima** *(ux_host_class_pima_read)* |
-| ![Ikon för Pima-begäran i värd klass](./media/user-guide/usbx-events/image145.png)    | **Pima-begäran för värd klass Avbryt** *(ux_host_class_pima_request_cancel)* |
-| ![Pima för värd klassens stängnings ikon](./media/user-guide/usbx-events/image146.png)    | **Pima-session för värd klass stängs** *(ux_host_class_pima_session_close)* |
-| ![Öppna Pima-ikonen för värd klassens session](./media/user-guide/usbx-events/image147.png)    | **Pima-session för värd klass öppen** *(ux_host_class_pima_session_open)* |
-| ![Pima lagrings-ID Hämta ikon för värd klass](./media/user-guide/usbx-events/image148.png)    | **Pima lagrings-ID: n** *(Ux_host_class_pima_storage_ids_get)* för värd klass |
-| ![Pima Storage information get-ikon i värd klass](./media/user-guide/usbx-events/image149.png)    | **Pima Storage information get** *(Ux_host_class_pima_storage_info_get)* i värd klass |
-| ![Ikon för Pima för värd klass](./media/user-guide/usbx-events/image150.png)    | **Pima-skjutreglage för värd klass** *(ux_host_class_pima_thumb_get)* |
-| ![Pima Skriv ikon för värd klass](./media/user-guide/usbx-events/image151.png)    | **Skrivning av värd klass Pima** *(ux_host_class_pima_write)* |
-| ![Aktivera ikon för värd klass skrivare](./media/user-guide/usbx-events/image152.png)    | **Aktivera värd klass skrivare** *(ux_host_class_printer_activate)* |
-| ![Ikon för att inaktivera värd klass skrivare](./media/user-guide/usbx-events/image153.png)    | **Inaktive ring av värd klass skrivare** *(ux_host_class_printer_deactivate)* |
-| ![Hämta ikon för värd klassens skrivar namn](./media/user-guide/usbx-events/image154.png)    | **Skrivar namn för värd klass Hämta** *(ux_host_class_printer_name_get)* |
-| ![Läs ikon för värd klass skrivare](./media/user-guide/usbx-events/image155.png)    |  **Läsning av värd klass skrivare** *(ux_host_class_printer_read)* |
-| ![Ikon för mjuk återställning av värd klass skrivare](./media/user-guide/usbx-events/image156.png)    | **Mjuk återställning av värd klass skrivare** *(ux_host_class_printer_soft_reset)* |
-| ![Ikon för Hämta värd klass skrivar status](./media/user-guide/usbx-events/image157.png)    | **Hämta status för värd klass skrivare** *(ux_host_class_printer_status_get)* |
-| ![Skriv ikon för värd klass skrivare](./media/user-guide/usbx-events/image158.png)    | **Skrivning av värd klass skrivare** *(ux_host_class_printer_write)* |
-| ![Prolific Aktivera ikon för värd klass](./media/user-guide/usbx-events/image159.png)    | **Aktivering av värd klass Prolific** *(ux_host_class_prolific_activate)* |
-| ![Prolific-ikon för värd klass](./media/user-guide/usbx-events/image160.png)    | **Prolific inaktive ring av värd klass** *(ux_host_class_prolific_deactivate)* |
-| ![Prolific för värd klass I O C T L Avbryt i pipe-ikon](./media/user-guide/usbx-events/image161.png)    | **Värd klass Prolific IOCTL Avbryt i pipe** *(ux_host_class_prolific_ioctl_abort_in_pipe)* |
-| ![Prolific för värd klass I O C T L ta bort pipe-ikon](./media/user-guide/usbx-events/image162.png)    | **Prolific för värd klass IOCTL avbryter pipe** *(ux_host_class_prolific_ioctl_abort_out_pipe)* |
-| ![Prolific för värd klass I O C T L, Hämta enhets status ikon](./media/user-guide/usbx-events/image163.png)    | **Värd klass Prolific IOCTL get enhets status** *(ux_host_class_prolific_ioctl_get_device_status)* |
-| ![Prolific för värd klass I O C T L, Hämta rad kodnings ikon](./media/user-guide/usbx-events/image164.png)    | **Prolific för värd klass IOCTL get line-kodning** *(ux_host_class_prolific_ioctl_get_line_coding)* |
-| ![Prolific för värd klass I O C T L ta bort ikon](./media/user-guide/usbx-events/image165.png)    | **Prolific IOCTL-rensning i värd klass** *(ux_host_class_prolific_ioctl_purge)* |
-| ![Enhets status ändrings ikon för värd klass Prolific I O d T L](./media/user-guide/usbx-events/image166.png)    | **Status ändring för Prolific IOCTL-rapport enhets status i värd klass** *(ux_host_class_prolific_ioctl_report_device_status_change)* |
-| ![Prolific för värd klass I O C T L](./media/user-guide/usbx-events/image167.png)    | **Sändning av värd klass Prolific IOCTL skicka rast** *(ux_host_class_prolific_ioctl_send_break)* |
-| ![Prolific för värd klass I O C T L ange rad kodnings ikon](./media/user-guide/usbx-events/image168.png)    | **Prolific för värd klassens IOCTL-uppsättning** *(ux_host_class_prolific_ioctl_set_line_coding)* |
-| ![Ikon för värd klass Prolific I O C T L](./media/user-guide/usbx-events/image169.png)    | **Prolific IOCTL ange linje tillstånd** *(Ux_host_class_prolific_ioctl_set_line_state)* i värd klass |
-| ![Läs ikon för värd klassen Prolific](./media/user-guide/usbx-events/image170.png)    | **Läsning av värd klass Prolific** *(ux_host_class_prolific_read)* |
-| ![Start ikon för Prolific mottagning i värd klass](./media/user-guide/usbx-events/image171.png)    | **Start av värd klass Prolific mottagning** *(ux_host_class_prolific_reception_start)* |
-| ![Stopp ikon för Prolific för värd klass](./media/user-guide/usbx-events/image172.png)    | **Prolific för värd klassens mottagnings stopp** *(ux_host_class_prolific_reception_stop)* |
-| ![Prolific Skriv ikon för värd klass](./media/user-guide/usbx-events/image173.png)    | **Skrivning av värd klass Prolific** *(ux_host_class_prolific_write)* |
-| ![Aktivera ikon för värd klass lagring](./media/user-guide/usbx-events/image174.png)    | **Aktivering av värd klass lagring** *(ux_host_class_storage_activate)* |
-| ![Ikon för värd klass lagrings inaktive ring](./media/user-guide/usbx-events/image175.png)    | **Inaktive ring av värd klass lagring** (*ux_host_class_storage_deactivate)* |
-| ![Ikon för Hämta värd klass lagrings medie kapacitet](./media/user-guide/usbx-events/image176.png)    | **Hämtning av värd klass lagrings medie kapacitet** *(ux_host_class_storage_media_capacity_get)* |
-| ![Ikon för Hämta kapacitet för värd klass lagrings medie format](./media/user-guide/usbx-events/image177.png)    | **Hämtnings kapacitet för värd klass lagrings medie format** *(ux_host_class_storage_media_format_capacity_get)* |
-| ![Monterings ikon för värd klass lagrings medium](./media/user-guide/usbx-events/image178.png)    | **Värd klass lagrings medie montering** (ux_host_class_storage_media_mount) * |
-| ![Öppnings ikon för värd klassens lagrings medium](./media/user-guide/usbx-events/image179.png)    | **Värd klass lagrings medium öppet** *(ux_host_class_storage_media_open)* |
-| ![Läs ikon för värd klassens lagrings medium](./media/user-guide/usbx-events/image180.png)    | **Läsning av värd klassens lagrings medium** *(ux_host_class_storage_media_read)* |
-| ![Skriv ikon för värd klassens lagrings medium](./media/user-guide/usbx-events/image181.png)    | **Skrivning av värd klass lagrings medium** *(ux_host_class_storage_media_write)* |
-| ![Ikon för värd klass lagrings förfrågan Sense](./media/user-guide/usbx-events/image182.png)    | **Sense-begäran för värd klass lagring** *(ux_host_class_storage_request_sense)* |
-| ![Start stopp ikon för värd klass lagring](./media/user-guide/usbx-events/image183.png)    | **Start stopp för värd klass lagring** *(ux_host_class_storage_start_stop)* |
-| ![Test ikon för värd klassens lagrings enhet](./media/user-guide/usbx-events/image184.png)    | **Redo test för värd klass lagrings enhet** *(ux_host_class_storage_activate)* |
-| ![Ikon för att skapa värd Stack klass instans](./media/user-guide/usbx-events/image185.png)    | **Värd Stack klass instans skapa** *(ux_host_stack_class_instance_create)* |
-| ![Ikon för att förstöra värd Stack klass instans](./media/user-guide/usbx-events/image186.png)    | **Förstöring av värd Stack klass instans** *(ux_host_stack_class_instance_destroy)* |
-| ![Borttagnings ikon för värd stack konfiguration](./media/user-guide/usbx-events/image187.png)    | **Ta bort värd stack konfiguration** *(ux_host_stack_configuration_delete)* |
-| ![Uppräknings ikon för värd stack konfiguration](./media/user-guide/usbx-events/image188.png)    | **Uppräkning av värd stack konfiguration** *(ux_host_stack_configuration_enumerate)* |
-| ![Ikon för att skapa värd stack konfigurations instans](./media/user-guide/usbx-events/image189.png)    | **Skapa värd stack konfigurations instans** *(ux_host_stack_configuration_instance_create)* |
-| ![Borttagnings ikon för värd Stacks konfigurations instans](./media/user-guide/usbx-events/image190.png)    | **Borttagning av värd Stacks konfigurations instans** *(ux_host_stack_configuration_instance_delete)* |
-| ![Ikon för konfigurations uppsättning för värd stack](./media/user-guide/usbx-events/image191.png)    | **Konfigurations uppsättning för värd stack** *(ux_host_stack_configuration_set)* |
-| ![Ikon för värd stack enhetens adress uppsättning](./media/user-guide/usbx-events/image192.png)    | **Adress uppsättning för värd stack enhet** *(ux_host_stack_device_set)* |
-| ![Hämta ikon för värd stack enhets konfiguration](./media/user-guide/usbx-events/image193.png)    | **Hämtning av värd stack enhets konfiguration** *(ux_host_stack_device_configuration_get)* |
-| ![Konfiguration av värd stack enhets konfiguration Välj ikon](./media/user-guide/usbx-events/image194.png)    | **Konfiguration av värd stack enhets konfiguration Välj** *(ux_host_stack_device_configuration_select)* |
-| ![Läs ikon för värd stack enhets Beskrivning](./media/user-guide/usbx-events/image195.png)    | **Läsning av värd stack enhets Beskrivning** *(ux_host_stack_device_descriptor_read)* |
-| ![Hämta ikon för värd stack enhet](./media/user-guide/usbx-events/image196.png)    | **Värd stack enhet Hämta** (ux_host_stack_device_get) |
-| ![Ikon för att ta bort värd stack enhet](./media/user-guide/usbx-events/image197.png)    | **Ta bort värd stack enhet** (ux_host_stack_device_get) |
-| ![Ikon för värd stack för enhets resurs](./media/user-guide/usbx-events/image198.png)    | **Värd stack enhets resurs kostnads fritt** (ux_host_stack_device_resource_free) |
-| ![Ikon för att skapa värd stack slut punkts instans](./media/user-guide/usbx-events/image199.png)    | **Skapa värd stack slut punkts instans** (ux_host_stack_endpoint_instance_create) |
-| ![Borttagnings ikon för värd stack slut punkts instans](./media/user-guide/usbx-events/image200.png)    | **Borttagning av värd stack slut punkts instans** (ux_host_stack_endpoint_instance_delete) |
-| ![Ikon för återställning av värd stack slut punkt](./media/user-guide/usbx-events/image201.png)    | **Återställning av värd stack slut punkt** (ux_host_stack_endpoint_reset) |
-| ![Avbryt ikon för värd stack slut punkts överföring](./media/user-guide/usbx-events/image202.png)    | **Avbryt överföring av värd stack slut punkt** (ux_host_stack_endpoint_transfer_abort) |
-| ![Registrerings ikon för värd stack värd styrenhet](./media/user-guide/usbx-events/image203.png)    | Värd **styrenhets register värd styrenhet** *(ux_host_stack_hcd_register)* |
-| ![Ikon för att initiera värd stack](./media/user-guide/usbx-events/image204.png)    | **Värd stack initiering** *(ux_host_stack_initialize)* |
-| ![Hämta ikon för värd stackens gränssnitts slut punkt](./media/user-guide/usbx-events/image205.png)    | **Hämtnings punkt för värd stack gränssnitt** *(ux_host_stack_interface_endpoint_get)* |
-| ![Ikon för att skapa värd stack gränssnitts instans](./media/user-guide/usbx-events/image206.png)    | **Värd stack gränssnitts instans skapa** *(ux_host_stack_interface_instance_create)* |
-| ![Borttagnings ikon för värd stackens gränssnitts instans](./media/user-guide/usbx-events/image207.png)    | **Borttagning av värd Stacks gränssnitts instans** *(ux_host_stack_interface_instance_delete)* |
-| ![Ikon för värd stack gränssnitts uppsättning](./media/user-guide/usbx-events/image208.png)    | **Värd stack gränssnitts uppsättning** *(ux_host_stack_interface_set)* |
-| ![Inställnings ikon för värd Stacks gränssnitt](./media/user-guide/usbx-events/image209.png)    | **Välj värd stack gränssnitts inställning** *(ux_host_stack_interface_setting_select)* |
-| ![Värd stack ny ikon för att skapa konfiguration](./media/user-guide/usbx-events/image210.png)    | **Värd stack ny konfiguration skapa** *(ux_host_stack_new_configuration_create)* |
-| ![Ikon för att skapa en ny enhet för värd stack](./media/user-guide/usbx-events/image211.png)    | **Värd stack ny enhet skapa** *(ux_host_stack_new_device_create)* |
-| ![Skapa ikon för värd stack för ny slut punkt](./media/user-guide/usbx-events/image212.png)    | **Skapa en ny slut punkt för värd stacken** *(ux_host_stack_new_endpoint_create)* |
-| ![Ikon för ändrings process för värd stackens rot nav](./media/user-guide/usbx-events/image213.png)    | **Ändrings process för stacken i värd stacken** *(ux_host_stack_rh_change_process)* |
-| ![Ikon för extrahering av värd stack för rot nav](./media/user-guide/usbx-events/image214.png)    | **Värd stack för rot nav för enhet** *(ux_host_stack_rh_device_extraction)* |
-| ![Ikon för värd stack för rot nav enhet](./media/user-guide/usbx-events/image215.png)    | **Värd stack rot nav för enhets infogning** *(ux_host_stack_rh_device_insertion)* |
-| ![Ikon för värd stack överförings förfrågan](./media/user-guide/usbx-events/image216.png)    | **Begäran om värd-stack-överföring** *(ux_host_stack_transfer_request)* |
-| ![Avbryt ikon för begäran om värd stack överföring](./media/user-guide/usbx-events/image217.png)    | **Avbrott i värd stack överförings förfrågan** *(ux_host_stack_transfer_request_abort)* |
-| ![Fel ikon för U S B X](./media/user-guide/usbx-events/image218.png)    | **USBX-fel** *(ux_error)* |
+| ![Aktiveringsikon för enhetsklass C D C](./media/user-guide/usbx-events/image1.png)    | **Cdc-aktivering för enhetsklass** *(ux_device_class_cdc_activate)* |
+| ![Ikon för inaktiverad enhet klass C D C](./media/user-guide/usbx-events/image2.png)    | **Cdc-inaktivera för enhetsklass** *(ux_device_class_cdc_deactivate)* |
+| ![Read-ikonen för Device Class C D C](./media/user-guide/usbx-events/image3.png)    | **Cdc-läsning för enhetsklass** *(ux_device_class_cdc_read)* |
+| ![Skrivningsikon för enhetsklass C D C](./media/user-guide/usbx-events/image4.png)    | **Cdc-skrivning för** *enhetsklass (ux_device_class_cdc_write)* |
+| ![Aktiveringsikon för enhetsklass-Dpump](./media/user-guide/usbx-events/image5.png)    | **Device Class Dpump Activate** *(ux_device_class_dpump_activate)* |
+| ![Ikon för inaktiverad enhetklass-Dpump](./media/user-guide/usbx-events/image6.png)    | **Inaktivera enhetsklass -Dpump** *(ux_device_class_dpump_deactivate)* |
+| ![Ikonen Läsa för enhetsklass-Dpump](./media/user-guide/usbx-events/image7.png)    | **Device Class Dpump Read** *(ux_device_class_dpump_read)* |
+| ![Skrivningsikon för enhetsklass-Dpump](./media/user-guide/usbx-events/image8.png)    | **Device Class Dpump Write** *(ux_device_class_dpump_write)* |
+| ![Ikonen Hid-aktivering för enhetsklass](./media/user-guide/usbx-events/image9.png)    | **Hid Activate för enhetsklass** *(ux_device_class_hid_activate)* |
+| ![Ikon för inaktiverad enhetsklass](./media/user-guide/usbx-events/image10.png)    | **Inaktivera enhetsklass** *(ux_device_class_hid_deactivate)* |
+| ![Ikonen Skicka med enhetsklass-Hid Descriptor](./media/user-guide/usbx-events/image11.png)    | **Device Class Hid Descriptor Send** *(ux_device_class_hid_descriptor_send)* |
+| ![Ikonen Hämta händelse för enhetsklass](./media/user-guide/usbx-events/image12.png)    | **Device Class Hid Event Get** *(ux_device_class_hid_event_get)* |
+| ![Ikon för hid-händelseuppsättning för enhetsklass](./media/user-guide/usbx-events/image13.png)    | **Händelseuppsättning för enhetsklass** *(ux_device_class_hid_event_set)* |
+| ![Ikonen Hämta rapport för enhetsklass](./media/user-guide/usbx-events/image14.png)    | **Device Class Hid Report Get** *(ux_device_class_hid_report_get)* |
+| ![Ikon för Hid Report Set för enhetsklass](./media/user-guide/usbx-events/image15.png)    | **Rapportuppsättning för enhetsklass** *(ux_device_class_hid_report_set)* |
+| ![Pima-aktiveringsikon för enhetsklass](./media/user-guide/usbx-events/image16.png)    | **Pima-aktivering för enhetsklass** *(ux_device_class_pima_activate)* |
+| ![Ikon för Pima-inaktivera för enhetsklass](./media/user-guide/usbx-events/image17.png)    | **Pima-inaktivera för enhetsklass** *(ux_device_class_pima_deactivate)* |
+| ![Ikonen Skicka enhetsinformation för enhetsklass Pima](./media/user-guide/usbx-events/image18.png)    | **Device Class Pima Device Info Send** *(ux_device_class_pima_device_info_send)* |
+| ![Ikonen Hämta händelse för enhetsklass](./media/user-guide/usbx-events/image19.png)    | **Device Class Pima Event Get** *(ux_device_class_pima_event_get)* |
+| ![Händelseuppsättningsikon för Device Class Pima](./media/user-guide/usbx-events/image20.png)    | **Händelseuppsättning för enhetsklass pima** *(ux_device_class_pima_event_set)* |
+| ![Pima Object Add-ikon för enhetsklass](./media/user-guide/usbx-events/image21.png)    | **Pima Object Add för enhetsklass** *(ux_device_class_pima_object_add)* |
+| ![Ikonen Hämta objektdata för enhetsklass](./media/user-guide/usbx-events/image22.png)    | **Device Class Pima Object Data Get** *(ux_device_class_pima_object_data_get)* |
+| ![Ikonen Skicka objektdata för Enhetsklass Pima-objekt](./media/user-guide/usbx-events/image23.png)    | **Device Class Pima Object Data Send** *(ux_device_class_pima_object_data_send)* |
+| ![Ikonen Ta bort objekt för enhetsklass Pima](./media/user-guide/usbx-events/image24.png)    | **Borttagning av enhetsklassobjekt** *(ux_device_class_pima_object_delete)* |
+| ![Ikonen Device Class Pima Object Handles Send (Pima-objekt hanterar skicka)](./media/user-guide/usbx-events/image25.png)    | **Device Class Pima Object hanterar Send** *(ux_device_class_pima_object_handles_send)* |
+| ![Hämta ikon för Pima-objektinformation för enhetsklass](./media/user-guide/usbx-events/image26.png)    | **Device Class Pima Object Info Get** *(ux_device_class_pima_object_info_get)* |
+| ![Ikonen Skicka information om Objektinformation för enhetsklass](./media/user-guide/usbx-events/image27.png)    | **Device Class Pima Object Info Send** *(ux_device_class_pima_object_info_send)* |
+| ![Ikonen Skicka nummer för Enhetsklass-Pima-objekt](./media/user-guide/usbx-events/image28.png)    | **Antal skickade Pima-objekt för enhetsklass** *(ux_device_class_pima_objects_number_send)* |
+| ![Ikonen Hämta partiella objektdata för Enhetsklass Pima](./media/user-guide/usbx-events/image29.png)    | **Device Class Pima Partial Object Data Get** *(ux_device_class_pima_partial_object_data_get)* |
+| ![Ikonen Skicka svar för Enhetsklass Pima](./media/user-guide/usbx-events/image30.png)    | **Pima Response Send för enhetsklass** *(ux_device_class_pima_response_send)*|
+| ![Ikonen Skicka i ID Storage Pima för enhetsklass](./media/user-guide/usbx-events/image31.png)    | **Device Class Pima Storage ID Send** *(ux_device_class_pima_storage_id_send)* |
+| ![Ikonen Skicka information Storage Pima för enhetsklass](./media/user-guide/usbx-events/image32.png)    | **Device Class Pima Storage Info Send** *(ux_device_class_pima_storage_info_send)* |
+| ![Aktiveringsikon för Device Class R ND I S](./media/user-guide/usbx-events/image33.png)    | **Device Class Rndis Activate** *(ux_device_class_rndis_activate)* |
+| ![Ikon för inaktiverad enhet klass R ND I S](./media/user-guide/usbx-events/image34.png)    | **Inaktivera enhetsklass** *(ux_device_class_rndis_deactivate)* |
+| ![Device Class R N D I S Message Keep Aliveicon](./media/user-guide/usbx-events/image35.png)    | **Device Class Rndis Message Keep Alive** *(ux_device_class_rndis_msg_keep_alive)* |
+| ![Meddelandefrågeikon för Enhetsklass R ND I S](./media/user-guide/usbx-events/image36.png)    | **Device Class Rndis Message Query** *(ux_device_class_rndis_msg_query)* |
+| ![Ikon för R ND I S-meddelandeåterställning för enhetsklass](./media/user-guide/usbx-events/image37.png)    | **Rndis-meddelandeåterställning för enhetsklass** *(ux_device_class_rndis_msg_reset)* |
+| ![Ikon för R ND I S-meddelandeuppsättning för enhetsklass](./media/user-guide/usbx-events/image38.png)    | **Device Class Rndis Message Set** *(ux_device_class_rndis_msg_set)* |
+| ![Ikon för R ND I S-paket för enhetsklass](./media/user-guide/usbx-events/image39.png)    | **Device Class Rndis Packet Receive** *(ux_device_class_rndis_packet_receive)* |
+| ![Ikonen Device Class R N D I S Packet Transmit](./media/user-guide/usbx-events/image40.png)    | **Device Class Rndis Packet Transmit** *(ux_device_class_rndis_packet_transmit)* |
+| ![Ikonen Enhetsklass Storage Aktivera](./media/user-guide/usbx-events/image41.png)    | **Device Class Storage Activate** *(ux_device_class_storage_activate)* |
+| ![Ikon för Storage enhetsklass](./media/user-guide/usbx-events/image42.png)    | **Inaktivera Storage** *(ux_device_class_storage_deactivate)* |
+| ![Ikonen Device Class Storage Format](./media/user-guide/usbx-events/image43.png)    | **Device Class Storage Format** *(ux_device_class_storage_format)* |
+| ![Ikon för Storage enhetsklassförfrågan](./media/user-guide/usbx-events/image44.png)    | **Förfrågan om Storage enhetsklass** *(ux_device_class_storage_inquiry)* |
+| ![Ikonen Välj Storage enhetklassläge](./media/user-guide/usbx-events/image45.png)    | **Välj Storage (ux_device_class_storage_mode_select)** för *enhetsklass* |
+| ![Ikon för Storage sense i enhetsläge](./media/user-guide/usbx-events/image46.png)    | **Device Class Storage Mode Sense** *(ux_device_class_storage_mode_sense)* |
+| ![Ikon för Storage förhindra borttagning av media](./media/user-guide/usbx-events/image47.png)    | **Device Class Storage Prevent Allow Media Removal** *(ux_device_class_storage_prevent_allow_media_removal)* |
+| ![Ikonen Device Class Storage Read (Läsa)](./media/user-guide/usbx-events/image48.png)    | **Device Class Storage Read** *(ux_device_class_storage_read)* |
+| ![Ikon för Storage läsa kapacitet för enhetsklass](./media/user-guide/usbx-events/image49.png)    | **Enhet klass Storage läskapacitet** *(ux_device_class_storage_read_capacity)* |
+| ![Kapacitetsikonen Storage Device Class Storage Read Format](./media/user-guide/usbx-events/image50.png)    | **Device Class Storage Read Format Capacity** *(ux_device_class_storage_read_format_capacity)* |
+| ![Ikon för Storage för enhetsklassläsning](./media/user-guide/usbx-events/image51.png)    | **Device Class Storage Read TOC** *(ux_device_class_storage_read_toc)* |
+| ![Ikonen Device Class Storage Request Sense](./media/user-guide/usbx-events/image52.png)    | **Device Class Storage Request Sense** *(ux_device_class_storage_request_sense)* |
+| ![Ikon för Storage start/stopp för enhetsklass](./media/user-guide/usbx-events/image53.png)    | **Device Class Storage Start Stop** *(ux_device_class_storage_start_stop)* |
+| ![Ikon för Storage test för enhetsklass](./media/user-guide/usbx-events/image54.png)    | **Device Class Storage Test Ready** *(ux_device_class_storage_test_ready)* |
+| ![Ikonen Device Class Storage Verify (Verifiera)](./media/user-guide/usbx-events/image55.png)    | **Device Class Storage Verify** *(ux_device_class_storage_verify)* |
+| ![Ikonen Device Class Storage Write](./media/user-guide/usbx-events/image56.png)    | **Device Class Storage Write** *(ux_device_class_storage_write)* |
+| ![Ikonen Hämta alternativ inställning för enhetsstack](./media/user-guide/usbx-events/image57.png)    | **Alternativ inställning för enhetsstack hämta** *(ux_device_stack_alternate_setting_get)* |
+| ![Ikon för alternativ inställningsuppsättning för enhetsstack](./media/user-guide/usbx-events/image58.png)    | **Alternativ inställningsuppsättning för enhetsstack** *(ux_device_stack_alternate_setting_set)* |
+| ![Ikon för enhetsstacksklassregister](./media/user-guide/usbx-events/image59.png)    | **Device Stack-klassregister** *(ux_device_stack_class_register)* |
+| ![Ikonen Rensa funktion i enhetsstack](./media/user-guide/usbx-events/image60.png)    | **Rensa funktion för enhetsstack** *(ux_device_stack_clear_feature)* |
+| ![Ikonen Hämta för konfiguration av enhetsstack](./media/user-guide/usbx-events/image61.png)    | **Hämta (hämta) konfiguration** *av enhetsstack (ux_device_stack_configuration_get)* |
+| ![Ikon för konfigurationsuppsättning för enhetsstack](./media/user-guide/usbx-events/image62.png)    | **Konfigurationsuppsättning för enhetsstack** *(ux_device_stack_configuration_set)* |
+| ![Ikon för Anslut enhetsstack](./media/user-guide/usbx-events/image63.png)    | **Device Stack Anslut** *(ux_device_stack_connect)* |
+| ![Ikonen Skicka enhetsstacksbeskrivning](./media/user-guide/usbx-events/image64.png)    | **Device Stack Descriptor Send** *(ux_device_stack_descriptor_send)* |
+| ![Ikon för frånkoppling av enhetsstack](./media/user-guide/usbx-events/image65.png)    | **Koppla från enhetsstack** *(ux_device_stack_disconnect)* |
+| ![Ikon för slutpunktstopp för enhetsstack](./media/user-guide/usbx-events/image66.png)    | **Slutpunktstopp för enhetsstack** *(ux_device_stack_endpoint_stall)* |
+| ![Ikonen Hämta status för enhetsstack](./media/user-guide/usbx-events/image67.png)    | **Hämta status för enhetsstack** *(ux_device_stack_get_status)* |
+| ![Aktiveringsikon för värd för enhetsstack](./media/user-guide/usbx-events/image68.png)    | **Aktivering av värd för enhetsstack** *(ux_device_stack_host_wakeup)* |
+| ![Ikonen Initiera i enhetsstack](./media/user-guide/usbx-events/image69.png)    | **Device Stack Initialize** *(ux_device_stack_initialize)* |
+| ![Ikonen Ta bort gränssnitt för enhetsstack](./media/user-guide/usbx-events/image70.png)    | **Ta bort gränssnitt för enhetsstack** *(ux_device_stack_interface_delete)* |
+| ![Ikonen Hämta för Device Stack-gränssnitt](./media/user-guide/usbx-events/image71.png)    | **Device Stack Interface Get** *(ux_device_stack_interface_get)* |
+| ![Ikon för Enhetsstack-gränssnittsuppsättning](./media/user-guide/usbx-events/image72.png)    | **Device Stack-gränssnittsuppsättning** *(ux_device_stack_interface_set)* |
+| ![Ikon för enhetsstackuppsättningsfunktion](./media/user-guide/usbx-events/image73.png)    | **Set-funktion för enhetsstack** *(ux_device_stack_set_feature)* |
+| ![Ikonen Avbryt överföring av enhetsstack](./media/user-guide/usbx-events/image74.png)    | **Avbryt överföring av enhetsstack** *(ux_device_stack_transfer_abort)* |
+| ![*Ikonen Överför alla förfrågningar om överföring av enhetsstack](./media/user-guide/usbx-events/image75.png)    | **Device Stack Transfer All Request Abort** *(ux_device_stack_transfer_all_request_abort)* |
+| ![Ikonen Överföringsbegäran för enhetsstack](./media/user-guide/usbx-events/image76.png)    | **Begäran om överföring av enhetsstack** *(ux_device_stack_transfer_request)* |
+| ![Aktiveringsikon för värdklass somix](./media/user-guide/usbx-events/image77.png)    | **Aktivera Host Class Asix** *(ux_host_class_asix_activate)* |
+| ![Ikon för inaktivera värdklass som asix](./media/user-guide/usbx-events/image78.png)    | **Inaktivera värdklass somix** *(ux_host_class_asix_deactivate)* |
+| ![Meddelandeikon för avbrottsmeddelande för värdklass asix](./media/user-guide/usbx-events/image79.png)    | **Avbrottsmeddelande för värdklass Asix** *(ux_host_class_asix_interrupt_notification)* |
+| ![Ikon för att läsa värdklass somix](./media/user-guide/usbx-events/image80.png)    | **Host Class Asix Read** *(ux_host_class_asix_read)* |
+| ![Skrivikon för värdklass somix](./media/user-guide/usbx-events/image81.png)    | **Host Class Asix Write** *(ux_host_class_asix_write)* |
+| ![Aktiveringsikon för värdklassljud](./media/user-guide/usbx-events/image82.png)    | **Aktivera aktivering av värdklassljud** *(ux_host_class_audio_activate)* |
+| ![Ikonen Hämta värde för värdklassljudkontroll](./media/user-guide/usbx-events/image83.png)    | **Host Class Audio Control Value Get** *(ux_host_class_audio_control_value_get)* |
+| ![Ikon för värdeuppsättning för värdklassljudkontroll](./media/user-guide/usbx-events/image84.png)    | **Värdeuppsättning för värdklassljudkontroll** *(ux_host_class_audio_control_value_set)* |
+| ![Inaktivera ikon för värdklassljud](./media/user-guide/usbx-events/image85.png)    | **Inaktivera värdklassljud** *(ux_host_class_audio_deactivate)* |
+| ![Ikon för ljudläsning för värdklass](./media/user-guide/usbx-events/image86.png)    | **Ljudläsning för värdklass** *(ux_host_class_audio_read)* |
+| ![Hämta-ikonen För sampling av ljudströmning för värdklass](./media/user-guide/usbx-events/image87.png)    | **Host Class Audio Streaming Sampling Get** *(ux_host_class_audio_streaming_sampling_get)* |
+| ![Ikon för uppsättning för insamling av ljudströmning för värdklass](./media/user-guide/usbx-events/image88.png)    | **Samplingsuppsättning för ljudströmning för värdklass** *(ux_host_class_audio_streaming_sampling_set)* |
+| ![Ikon för ljudskrivning för värdklass](./media/user-guide/usbx-events/image89.png)    | **Ljudskrivning för värdklass** *(ux_host_class_audio_write)* |
+| ![Aktiveringsikon för värdklass C D C A C M](./media/user-guide/usbx-events/image90.png)    | **Aktivering av Host Class Cdc Acm** *(ux_host_class_cdc_acm_activate)* |
+| ![Ikon för inaktiverad värdklass C D C A C M](./media/user-guide/usbx-events/image91.png)    | **Inaktivera Värdklass Cdc Acm** *(ux_host_class_cdc_acm_deactivate)* |
+| ![Ikon för värdklass C D C A C M I O C T L i pipe](./media/user-guide/usbx-events/image92.png)    | **Host Class Cdc Acm Ioctl Abort In Pipe** *(ux_host_class_cdc_acm_ioctl_abort_in_pipe)* |
+| ![Ikonen Avbryt pipe för värdklass C D C A C M I O C T L Avbryt ut pipe](./media/user-guide/usbx-events/image93.png)    | **Host Class Cdc Acm Ioctl Abort Out Pipe** *(ux_host_class_cdc_acm_ioctl_abort_out_pipe)* |
+| ![Ikon för att hämta enhetsstatus för värdklass C D C A C M I O C T L](./media/user-guide/usbx-events/image94.png)    | **Host Class Cdc Acm Ioctl Get Device Status** *(ux_host_class_cdc_acm_ioctl_get_device_status)* |
+| ![Ikon för att hämta linjekodning för värdklass C D C A C M M I O C T L Get Line Coding](./media/user-guide/usbx-events/image95.png)    | **Host Class Cdc Acm Ioctl Get Line Coding** *(ux_host_class_cdc_acm_ioctl_get_line_coding)* |
+| ![Ikon för återanrop av meddelanden från värdklass C D C A C M M I O C T L](./media/user-guide/usbx-events/image96.png)    | **Host Class Cdc Acm Ioctl Notification Callback** *(ux_host_class_cdc_acm_ioctl_notification_callback)* |
+| ![Skicka brytikon för värdklass C D C A C M I O C T L](./media/user-guide/usbx-events/image97.png)    | **Host Class Cdc Acm Ioctl Send Break** *(ux_host_class_cdc_acm_ioctl_send_break)* |
+| ![Kodningsikon för raduppsättningskodning för värdklass C D C A C M M I O C T L](./media/user-guide/usbx-events/image98.png)    | **Kodning av värdklass cdc Acm Ioctl set line** *(ux_host_class_cdc_acm_ioctl_set_line_coding)* |
+| ![Ikon för ange radtillstånd för värdklass C D C A C M M I O C T L](./media/user-guide/usbx-events/image99.png)    | **Värdklass Cdc Acm Ioctl Ange radtillstånd** *(ux_host_class_cdc_acm_ioctl_set_line_state)* |
+| ![Ikon för att läsa värdklass C D C A C M](./media/user-guide/usbx-events/image100.png)    | **Host Class Cdc Acm Read** *(ux_host_class_cdc_acm_read)* |
+| ![Startikon för värdklass C D C A C M-mottagning](./media/user-guide/usbx-events/image101.png)    | **Värdklass Cdc Acm Mottagningsstart** *(ux_host_class_cdc_acm_reception_start)* |
+| ![Ikon för värdklass C D C A C M mottagningsstopp](./media/user-guide/usbx-events/image102.png)    | **Host Class Cdc Acm Mottagningsstopp** *(ux_host_class_cdc_acm_reception_stop)* |
+| ![Skrivikon för Värdklass C D C A C M](./media/user-guide/usbx-events/image103.png)    | **Host Class Cdc Acm Write** *(ux_host_class_cdc_acm_write)* |
+| ![Aktiveringsikon för värdklass-Dpump](./media/user-guide/usbx-events/image104.png)    | **Aktivera värdklass-Dpump** *(ux_host_class_dpump_activate)* |
+| ![Ikon för inaktivera värdklass-Dpump](./media/user-guide/usbx-events/image105.png)    | **Inaktivera värdklass Dpump** *(ux_host_class_dpump_deactivate)* |
+| ![Ikon för värdklass-Dpump- läsning](./media/user-guide/usbx-events/image106.png)    | **Host Class Dpump Read** *(ux_host_class_dpump_read)* |
+| ![Skrivikon för värdklass-Dpump](./media/user-guide/usbx-events/image107.png)    | **Host Class Dpump Write** *(ux_host_class_dpump_write)* |
+| ![Ikonen Hid-aktivering för värdklass](./media/user-guide/usbx-events/image108.png)    | **Hid-aktivering för värdklass** *(ux_host_class_hid_activate)* |
+| ![Ikon för hid-klientregister för värdklass](./media/user-guide/usbx-events/image109.png)    | **Hid-klientregister för värdklass** *(ux_host_class_hid_client_register)* |
+| ![Ikon för inaktivera värdklassinaktivering](./media/user-guide/usbx-events/image110.png)    | **Inaktivera värdklass hid** *(ux_host_class_hid_deactivate)* |
+| ![Ikonen Hid Idle Get för värdklass](./media/user-guide/usbx-events/image111.png)    | **Hid Idle Get** *(ux_host_class_hid_idle_get) för värdklass* |
+| ![Ikon för Hid Idle Set för värdklass](./media/user-guide/usbx-events/image112.png)    | **Hid Idle Set för värdklass** *(ux_host_class_hid_idle_set)* |
+| ![Aktiveringsikon för värdklass-hid-tangentbord](./media/user-guide/usbx-events/image113.png)    | **Aktivering av hid-tangentbord för** *värdklass (ux_host_class_hid_keyboard_activate)* |
+| ![Ikon för inaktivera tangentbord för värdklass hid](./media/user-guide/usbx-events/image114.png)    | **Inaktivera tangentbord för värdklass** *(ux_host_class_hid_keyboard_deactivate)* |
+| ![Aktiveringsikon för värdklass för hid-mus](./media/user-guide/usbx-events/image115.png)    | **Aktivering av mus för värdklass hid** *(ux_host_class_hid_mouse_activate)* |
+| ![Ikon för inaktiverad mus för värdklass](./media/user-guide/usbx-events/image116.png)    | **Inaktivera mus för värdklass** *(ux_host_class_hid_mouse_deactivate)* |
+| ![Aktiveringsikon för värdklass hid-fjärrstyrning](./media/user-guide/usbx-events/image117.png)    | **Aktivering av fjärrstyrning för värdklass** *(ux_host_class_hid_remote_control_activate)* |
+| ![Ikon för inaktivera fjärrstyrning för värdklass hid](./media/user-guide/usbx-events/image118.png)    | **Inaktivera fjärrstyrning av värdklass** *(ux_host_class_hid_remote_control_deactivate)* |
+| ![Ikonen Hämta rapport för värdklass](./media/user-guide/usbx-events/image119.png)    | **Host Class Hid Report Get** *(ux_host_class_hid_report_get)* |
+| ![Ikon för hid-rapportuppsättning för värdklass](./media/user-guide/usbx-events/image120.png)    | **Hid-rapportuppsättning för värdklass** *(ux_host_class_hid_report_set)* |
+| ![Aktiveringsikon för värdklasshubb](./media/user-guide/usbx-events/image121.png)    | **Aktivera värdklasshubb** *(ux_host_class_hub_activate)* |
+| ![Ikon för ändrings detect för värdklasshubb](./media/user-guide/usbx-events/image122.png)    | **Ändrings detect för värdklasshubb** *(ux_host_class_hub_change_detect)* |
+| ![*Inaktivera ikon för värdklasshubb](./media/user-guide/usbx-events/image123.png)    | **Inaktivera värdklasshubb** *(ux_host_class_hub_deactivate)* |
+| ![Ikonen Ändra anslutningsprocess för värdklasshubbport](./media/user-guide/usbx-events/image124.png)    | **Process för portändringsanslutning för värdklasshubb** *(ux_host_class_hub_port_change_connection_process)* |
+| ![Ikonen Aktivera process för värdklasshubbport](./media/user-guide/usbx-events/image125.png)    | **Aktivera process för portändring för värdklasshubb** *(ux_host_class_hub_port_change_enable_process)* |
+| ![Portändring för värdklasshubb över aktuell process-ikon](./media/user-guide/usbx-events/image126.png)    | **Portändring för värdklasshubb över aktuell process** *(ux_host_class_hub_port_change_over_current_process)* |
+| ![Ikon för ändringsåterställningsprocess för värdklasshubbport](./media/user-guide/usbx-events/image127.png)    | **Process för ändringsåterställning av värdklasshubbport** *(ux_host_class_hub_port_change_reset_process)* |
+| ![Ikon för ändring av pausprocess för värdklasshubbport](./media/user-guide/usbx-events/image128.png)    | **Pausprocess för portändring för värdklasshubb** *(ux_host_class_hub_port_change_suspend_process)* |
+| ![Aktiveringsikon för värdklass-Pima](./media/user-guide/usbx-events/image129.png)    | **Aktivering av värdklass -Pima** *(ux_host_class_prima_activate)* |
+| ![Ikon för att inaktivera Pima för värdklass](./media/user-guide/usbx-events/image130.png)    | **Inaktivera Värdklass Pima** *(ux_host_class_pima_deactivate)* |
+| ![Ikonen Hämta information om värdklassenhetsinformation för värdklass](./media/user-guide/usbx-events/image131.png)    | **Host Class Pima Device Info Get** *(ux_host_class_pima_device_info_get)* |
+| ![Ikon för återställning av värdklassenhet](./media/user-guide/usbx-events/image132.png)    | **Återställning av värdklass för Pima-enhet** *(ux_host_class_pima_device_reset)* |
+| ![Meddelandeikon för värdklass-Pima](./media/user-guide/usbx-events/image133.png)    | **Pima-meddelande för värdklass** *(ux_host_class_pima_notification)* |
+| ![Pima Number Objects Get-ikon för värdklass](./media/user-guide/usbx-events/image134.png)    | **Host Class Pima Number Objects Get** *(ux_host_class_pima_num_objects_get)* |
+| ![Stängningsikon för värdklass-Pima-objekt](./media/user-guide/usbx-events/image135.png)    | **Pima Object Close för värdklass** *(ux_host_class_pima_object_close)* |
+| ![Pima Object Copy-ikon för värdklass](./media/user-guide/usbx-events/image136.png)    | **Pima Object Copy för värdklass** *(ux_host_class_pima_object_copy)* |
+| ![Ikonen Ta bort objekt för värdklass Pima](./media/user-guide/usbx-events/image137.png)    | **Borttagning av objekt för värdklass** *(ux_host_class_pima_object_delete)* |
+| ![Pima Object Get-ikon för värdklass](./media/user-guide/usbx-events/image138.png)    | **Host Class Pima Object Get** *(ux_host_class_pima_object_get)* |
+| ![Pima Object Info Hämta-ikon för värdklass](./media/user-guide/usbx-events/image139.png)    | **Information om Pima-objekt för värdklass** *hämta (ux_host_class_pima_object_info_get)* |
+| ![Skicka ikon för Pima-objektinformation för värdklass](./media/user-guide/usbx-events/image140.png)    | **Skicka information om Pima-objekt för värdklass** *(ux_host_class_pima_object_info_send)* |
+| ![Flytta objektikon för värdklass Pima](./media/user-guide/usbx-events/image141.png)    | **Flytta objekt för värdklass** *(ux_host_class_pima_object_move)* |
+| ![Ikonen Skicka Pima-objekt för värdklass](./media/user-guide/usbx-events/image142.png)    | **Skicka Pima-objekt för värdklass** *(ux_host_class_pima_object_send)* |
+| ![Ikonen För att avbryta överföring av värdklassobjekt i Pima-klass](./media/user-guide/usbx-events/image143.png)    | **Abort av objektöverföring för värdklass** *(ux_host_class_object_transfer_abort)* |
+| ![Pima Read-ikon för värdklass](./media/user-guide/usbx-events/image144.png)    | **Host Class Pima Read** *(ux_host_class_pima_read)* |
+| ![Ikonen För att avbryta begäran för värdklass Pima](./media/user-guide/usbx-events/image145.png)    | **Begäran om att avbryta värdklassens Pima** *(ux_host_class_pima_request_cancel)* |
+| ![Ikon för Pima-sessionsslut för värdklass](./media/user-guide/usbx-events/image146.png)    | **Sessionsslut för värdklass Pima** *(ux_host_class_pima_session_close)* |
+| ![Ikonen Öppna för värdklasssession för Pima](./media/user-guide/usbx-events/image147.png)    | **Pima-session för värdklass öppen** *(ux_host_class_pima_session_open)* |
+| ![Ikon för att hämta Storage-ID:n för värdklass](./media/user-guide/usbx-events/image148.png)    | **Host Class Pima Storage Ids Get** *(ux_host_class_pima_storage_ids_get)* |
+| ![Pima-ikonen Storage hämta information för värdklass](./media/user-guide/usbx-events/image149.png)    | **Host Class Pima Storage Info Get** *(ux_host_class_pima_storage_info_get)* |
+| ![Pima Thumb Get-ikon för värdklass](./media/user-guide/usbx-events/image150.png)    | **Pima Thumb Get för värdklass** *(ux_host_class_pima_thumb_get)* |
+| ![Pima Write-ikon för värdklass](./media/user-guide/usbx-events/image151.png)    | **Host Class Pima Write** *(ux_host_class_pima_write)* |
+| ![Aktiveringsikon för värdklassskrivare](./media/user-guide/usbx-events/image152.png)    | **Aktivera värdklassskrivare** *(ux_host_class_printer_activate)* |
+| ![Ikon för att inaktivera värdklassskrivare](./media/user-guide/usbx-events/image153.png)    | **Inaktivera värdklassskrivare** *(ux_host_class_printer_deactivate)* |
+| ![Ikonen Hämta namn på värdklassskrivare](./media/user-guide/usbx-events/image154.png)    | **Hämta (ux_host_class_printer_name_get)** *för värdklassskrivare* |
+| ![Ikon för skrivarläsning för värdklass](./media/user-guide/usbx-events/image155.png)    |  **Skrivarläsning för värdklass** *(ux_host_class_printer_read)* |
+| ![Ikon för mjuk återställning av värdklassskrivare](./media/user-guide/usbx-events/image156.png)    | **Mjuk återställning av värdklassskrivare** *(ux_host_class_printer_soft_reset)* |
+| ![Ikonen Hämta status för värdklassskrivare](./media/user-guide/usbx-events/image157.png)    | **Hämta status för värdklassskrivare** *(ux_host_class_printer_status_get)* |
+| ![Skrivikon för värdklassskrivare](./media/user-guide/usbx-events/image158.png)    | **Skriva värdklassskrivare** *(ux_host_class_printer_write)* |
+| ![Aktiveringsikon för värdklass](./media/user-guide/usbx-events/image159.png)    | **Aktivering av värdklass** *(ux_host_class_prolific_activate)* |
+| ![Ikon för inaktivera värdklass](./media/user-guide/usbx-events/image160.png)    | **Inaktivera värdklass prolific** *(ux_host_class_prolific_deactivate)* |
+| ![Host Class Prolific I O C T L Abort In Pipe-ikon](./media/user-guide/usbx-events/image161.png)    | **Prolific Ioctl Abort In Pipe** (ux_host_class_prolific_ioctl_abort_in_pipe) (Host Class Prolific Ioctl Abort In Pipe *(ux_host_class_prolific_ioctl_abort_in_pipe)* |
+| ![Ikon för värdklassprolific I O C T L Abort Out Pipe](./media/user-guide/usbx-events/image162.png)    | **Host Class Prolific Ioctl Abort Out Pipe** *(ux_host_class_prolific_ioctl_abort_out_pipe)* |
+| ![Ikon för att hämta enhetsstatus för värdklassprolific I O C T L](./media/user-guide/usbx-events/image163.png)    | **Hämta enhetsstatus för värdklass prolific Ioctl** *(ux_host_class_prolific_ioctl_get_device_status)* |
+| ![Ikon för att hämta radkodning för värdklassprolific I O C T L](./media/user-guide/usbx-events/image164.png)    | **Host Class Prolific Ioctl Get Line Coding** *(ux_host_class_prolific_ioctl_get_line_coding)* |
+| ![Ikon för rensning av värdklassprolific I O C T L](./media/user-guide/usbx-events/image165.png)    | **Host Class Prolific Ioctl Purge** *(ux_host_class_prolific_ioctl_purge)* |
+| ![Ikon för ändring av enhetsstatus för värdklass prolific I O C T L Report](./media/user-guide/usbx-events/image166.png)    | **Ändring av enhetsstatus för värdklass prolific Ioctl -rapport** *(ux_host_class_prolific_ioctl_report_device_status_change)* |
+| ![Ikonen Skicka paus för värdklassprolific I O C T L](./media/user-guide/usbx-events/image167.png)    | **Skicka paus för värdklass prolific Ioctl** *(ux_host_class_prolific_ioctl_send_break)* |
+| ![Ikon för radkodning för värdklassprolific I O C T L Set Line](./media/user-guide/usbx-events/image168.png)    | **Kodning av rad för värdklassprolific Ioctl Set** *(ux_host_class_prolific_ioctl_set_line_coding)* |
+| ![Ikon för ange radtillstånd för värdklassprolific I O C T L Set Line State](./media/user-guide/usbx-events/image169.png)    | **Radtillstånd för värdklassproocific Ioctl Set** *(ux_host_class_prolific_ioctl_set_line_state)* |
+| ![Ikon för värdklassläsning](./media/user-guide/usbx-events/image170.png)    | **Prolific Read för värdklass** *(ux_host_class_prolific_read)* |
+| ![Startikon för värdklassmottagande](./media/user-guide/usbx-events/image171.png)    | **Host Class Prolific Mottagningsstart** *(ux_host_class_prolific_reception_start)* |
+| ![Stoppikon för värdklassmottagande](./media/user-guide/usbx-events/image172.png)    | **Host Class Prolific Mottagningsstopp** *(ux_host_class_prolific_reception_stop)* |
+| ![Ikon för skrivskydd för värdklass](./media/user-guide/usbx-events/image173.png)    | **Prolific Write för värdklass** *(ux_host_class_prolific_write)* |
+| ![Ikonen Aktivera Storage värdklass](./media/user-guide/usbx-events/image174.png)    | **Aktivera värdklass Storage** *(ux_host_class_storage_activate)* |
+| ![Ikon för Storage inaktivera för värdklass](./media/user-guide/usbx-events/image175.png)    | **Inaktivera Storage värdklass** *(ux_host_class_storage_deactivate)* |
+| ![Hämta ikon Storage värdklass för mediekapacitet](./media/user-guide/usbx-events/image176.png)    | **Host Class Storage Media Capacity Get** *(ux_host_class_storage_media_capacity_get)* |
+| ![Hämta-Storage för värdklass i Media Format-kapacitet](./media/user-guide/usbx-events/image177.png)    | **Host Class Storage Media Format Capacity Get** *(ux_host_class_storage_media_format_capacity_get)* |
+| ![Ikon för Storage mediamontering för värdklass](./media/user-guide/usbx-events/image178.png)    | **Värdklass för Storage Media Mount** (ux_host_class_storage_media_mount)* |
+| ![Ikonen Storage Media Open för värdklass](./media/user-guide/usbx-events/image179.png)    | **Host Class Storage Media Open** *(ux_host_class_storage_media_open)* |
+| ![Ikon för Storage medieläsning för värdklass](./media/user-guide/usbx-events/image180.png)    | **Värdklass för Storage medieläsning** *(ux_host_class_storage_media_read)* |
+| ![Ikon för Storage medieskrivning för värdklass](./media/user-guide/usbx-events/image181.png)    | **Host Class Storage Media Write** *(ux_host_class_storage_media_write)* |
+| ![Ikon för Storage Begär sense för värdklass](./media/user-guide/usbx-events/image182.png)    | **Host Class Storage Request Sense** *(ux_host_class_storage_request_sense)* |
+| ![Ikon för Storage starta/stoppa för värdklass](./media/user-guide/usbx-events/image183.png)    | **Startstopp Storage värdklass** *(ux_host_class_storage_start_stop)* |
+| ![Ikon för Storage för redo Storage för värdklass](./media/user-guide/usbx-events/image184.png)    | **Test av Storage för värdklass** *(ux_host_class_storage_activate)* |
+| ![Skapa ikon för värdstackklassinstans](./media/user-guide/usbx-events/image185.png)    | **Skapa värdstacksklassinstans** *(ux_host_stack_class_instance_create)* |
+| ![Ta bort ikon för värdstackklassinstans](./media/user-guide/usbx-events/image186.png)    | **Destroy för värdstackklassinstans** *(ux_host_stack_class_instance_destroy)* |
+| ![Ikonen Ta bort konfiguration av värdstack](./media/user-guide/usbx-events/image187.png)    | **Ta bort konfiguration av värdstack** *(ux_host_stack_configuration_delete)* |
+| ![Ikon för konfiguration av värdstackskonfiguration](./media/user-guide/usbx-events/image188.png)    | **Konfigurationsuppräkning för värdstack** *(ux_host_stack_configuration_enumerate)* |
+| ![Ikonen Skapa instans för konfigurationsinstans för värdstack](./media/user-guide/usbx-events/image189.png)    | **Skapa en konfigurationsinstans för värdstack** *(ux_host_stack_configuration_instance_create)* |
+| ![Ikon för borttagning av konfigurationsinstans för värdstack](./media/user-guide/usbx-events/image190.png)    | **Ta bort konfigurationsinstans för värdstack** *(ux_host_stack_configuration_instance_delete)* |
+| ![Ikon för konfigurationsuppsättning för värdstack](./media/user-guide/usbx-events/image191.png)    | **Konfigurationsuppsättning för värdstack** *(ux_host_stack_configuration_set)* |
+| ![Ikon för enhetsadressuppsättning för värdstack](./media/user-guide/usbx-events/image192.png)    | **Enhetsadressuppsättning för värdstack** *(ux_host_stack_device_set)* |
+| ![Ikonen Hämta för enhetskonfiguration för värdstack](./media/user-guide/usbx-events/image193.png)    | **Hämta enhetskonfiguration för värdstack** *(ux_host_stack_device_configuration_get)* |
+| ![Ikon för enhetskonfiguration för värdstack välj](./media/user-guide/usbx-events/image194.png)    | **Välj enhetskonfiguration för värdstack** *(ux_host_stack_device_configuration_select)* |
+| ![Ikonen Läsa för enhetsbeskrivning i värdstack](./media/user-guide/usbx-events/image195.png)    | **Enhetsbeskrivning för värdstack** *(ux_host_stack_device_descriptor_read)* |
+| ![Ikonen Hämta för värdstacksenhet](./media/user-guide/usbx-events/image196.png)    | **Hämta värdstackenhet** (ux_host_stack_device_get) |
+| ![Ikonen Ta bort värdstacksenhet](./media/user-guide/usbx-events/image197.png)    | **Ta bort värdstackenhet** (ux_host_stack_device_get) |
+| ![Ikon för kostnadsfri resurs för värdstackenhet](./media/user-guide/usbx-events/image198.png)    | **Resurs kostnadsfri för värdstackenhet** (ux_host_stack_device_resource_free) |
+| ![Ikonen Skapa slutpunktsinstans för värdstack](./media/user-guide/usbx-events/image199.png)    | **Skapa slutpunktsinstans för värdstack** (ux_host_stack_endpoint_instance_create) |
+| ![Ikonen Ta bort slutpunktsinstans för värdstack](./media/user-guide/usbx-events/image200.png)    | **Ta bort slutpunktsinstans för värdstack** (ux_host_stack_endpoint_instance_delete) |
+| ![Ikon för slutpunktsåterställning för värdstack](./media/user-guide/usbx-events/image201.png)    | **Slutpunktsåterställning för värdstack** (ux_host_stack_endpoint_reset) |
+| ![Ikonen Avbryt avslutsöverföring av värdstack](./media/user-guide/usbx-events/image202.png)    | **Migrering av slutpunktsöverföring av värdstack** (ux_host_stack_endpoint_transfer_abort) |
+| ![Registerikon för värdstackvärdstyrenhet](./media/user-guide/usbx-events/image203.png)    | **Host Stack Host Controller Register** *(ux_host_stack_hcd_register)* |
+| ![Initieringsikon för värdstack](./media/user-guide/usbx-events/image204.png)    | **Initiera värdstack** *(ux_host_stack_initialize)* |
+| ![Ikonen Hämta för gränssnittsslutpunkt för värdstack](./media/user-guide/usbx-events/image205.png)    | **Hämta (ux_host_stack_interface_endpoint_get)** *för gränssnittsslutpunkt för värdstack* |
+| ![Ikonen Skapa gränssnittsinstans för värdstack](./media/user-guide/usbx-events/image206.png)    | **Skapa gränssnittsinstans för värdstack** *(ux_host_stack_interface_instance_create)* |
+| ![Ikonen Ta bort gränssnittsinstans för värdstack](./media/user-guide/usbx-events/image207.png)    | **Ta bort gränssnittsinstans för värdstack** *(ux_host_stack_interface_instance_delete)* |
+| ![Ikon för gränssnittsuppsättning för värdstack](./media/user-guide/usbx-events/image208.png)    | **Gränssnittsuppsättning för värdstack** *(ux_host_stack_interface_set)* |
+| ![Gränssnittsinställning för värdstack välj ikon](./media/user-guide/usbx-events/image209.png)    | **Gränssnittsinställning för värdstack** *(ux_host_stack_interface_setting_select)* |
+| ![Ikonen Skapa ny konfiguration för värdstack](./media/user-guide/usbx-events/image210.png)    | **Skapa ny konfiguration för värdstack** *(ux_host_stack_new_configuration_create)* |
+| ![Ikonen Skapa ny enhet för värdstack](./media/user-guide/usbx-events/image211.png)    | **Skapa ny enhet med värdstack** *(ux_host_stack_new_device_create)* |
+| ![Ikonen Skapa ny slutpunkt för värdstack](./media/user-guide/usbx-events/image212.png)    | **Skapa ny slutpunkt för värdstack** *(ux_host_stack_new_endpoint_create)* |
+| ![Ikon för ändringsprocess för värdstackens rothubb](./media/user-guide/usbx-events/image213.png)    | **Ändringsprocess för värdstackens rothubb** *(ux_host_stack_rh_change_process)* |
+| ![Ikon för extrahering av värdstackens rothubbenhet](./media/user-guide/usbx-events/image214.png)    | **Extrahering av rothubben för värdstack** *(ux_host_stack_rh_device_extraction)* |
+| ![Ikon för infogning av rothubbenhet för värdstack](./media/user-guide/usbx-events/image215.png)    | **Infogning av rothubbenhet för värdstack** *(ux_host_stack_rh_device_insertion)* |
+| ![Ikon för begäran om överföring av värdstack](./media/user-guide/usbx-events/image216.png)    | **Begäran om överföring av värdstack** *(ux_host_stack_transfer_request)* |
+| ![Ikonen Avbryt begäran om överföring av värdstack](./media/user-guide/usbx-events/image217.png)    | **Begäran om att avbryta överföring av värdstack** *(ux_host_stack_transfer_request_abort)* |
+| ![Ikon för U S B X-fel](./media/user-guide/usbx-events/image218.png)    | **USBX-fel** *(ux_error)* |
 
-## <a name="event-descriptions"></a>Händelse beskrivningar
+## <a name="event-descriptions"></a>Händelsebeskrivningar
 
-Följande sidor beskriver USBX spårnings händelser.
+Följande sidor beskriver USBX-spårningshändelser.
 
-### <a name="device-class-cdc-activate"></a>Enhets klass CDC-aktivering 
+### <a name="device-class-cdc-activate"></a>Cdc-aktivering för enhetsklass 
 
 #### <a name="ux_device_class_cdc_activate"></a>ux_device_class_cdc_activate
 
-**Ikonen** ![ Enhets klass C D C Aktivera ikon](./media/user-guide/usbx-events/image1.png)
+**Ikon** ![ Aktiveringsikon för enhetsklass C D C](./media/user-guide/usbx-events/image1.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass CDC-aktiverings händelse.
+Den här händelsen representerar en CDC-aktiveringshändelse för USBX-enhetsklass.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-cdc-deactivate"></a>CDC-inaktive ring av enhets klass 
+### <a name="device-class-cdc-deactivate"></a>Cdc-inaktivera för enhetsklass 
 
 #### <a name="ux_device_class_cdc_deactivate"></a>ux_device_class_cdc_deactivate
 
-**Ikonen** ![ Enhets klass C D C inaktivera ikon](./media/user-guide/usbx-events/image2.png)
+**Ikon** ![ Ikon för inaktiverad enhet klass C D C](./media/user-guide/usbx-events/image2.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass CDC-inaktive rad.
+Den här händelsen representerar en USBX-enhetsklass cdc inaktivera.
 
-Informations fält 
+Informationsfält 
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-cdc-read"></a>Läsning av enhets klass CDC 
+### <a name="device-class-cdc-read"></a>Cdc Read för enhetsklass 
 
 #### <a name="ux_device_class_cdc_read"></a>ux_device_class_cdc_read
 
-**Ikonen** ![ Enhets klass C D C Läs ikon](./media/user-guide/usbx-events/image3.png)
+**Ikon** ![ Read-ikonen för Device Class C D C](./media/user-guide/usbx-events/image3.png)
 
 **Beskrivning**
 
-Den här händelsen representerar läsnings händelsen för en USBX-enhets klass CDC.
+Den här händelsen representerar en CDC-läshändelse för USBX-enhetsklass.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: data pekare.
-- Informations fält 3: begärd längd.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Data pekare.
+- Informationsfält 3: Begärd längd.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-cdc-write"></a>Enhets klass CDC-skrivning 
+### <a name="device-class-cdc-write"></a>Cdc-skrivning för enhetsklass 
 
 #### <a name="ux_device_class_cdc_write"></a>ux_device_class_cdc_write
 
-**Ikonen** ![ Enhets klass C D s Skriv ikon](./media/user-guide/usbx-events/image4.png)
+**Ikon** ![ Skrivningsikon för enhetsklass C D C](./media/user-guide/usbx-events/image4.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en skrivnings händelse för USBX-enhetens klass CDC.
+Den här händelsen representerar en CDC-skrivhändelse för USBX-enhetsklass.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: data pekare.
-- Informations fält 3: begärd längd.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Data pekare.
+- Informationsfält 3: Begärd längd.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-dpump-activate"></a>Aktivering av enhets klass Dpump 
+### <a name="device-class-dpump-activate"></a>Aktivering av enhetsklass-Dpump 
 
 #### <a name="ux_device_class_dpump_activate"></a>ux_device_class_dpump_activate
 
-**Ikonen** ![ Dpump Aktivera ikon för enhets klass](./media/user-guide/usbx-events/image5.png)
+**Ikon** ![ Aktiveringsikon för enhetsklass-Dpump](./media/user-guide/usbx-events/image5.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass Dpump aktivera händelse.
+Den här händelsen representerar en aktiveringshändelse för USBX-enhetsklass Dpump.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-dpump-deactivate"></a>Inaktive ring av enhets klass Dpump 
+### <a name="device-class-dpump-deactivate"></a>Inaktivera enhetsklass-Dpump 
 
 #### <a name="ux_device_class_dpump_deactivate"></a>ux_device_class_dpump_deactivate
 
-**Ikonen** ![ Ikon för Dpump för enhets klass](./media/user-guide/usbx-events/image6.png)
+**Ikon** ![ Ikon för inaktiverad enhetklass-Dpump](./media/user-guide/usbx-events/image6.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass Dpump-händelse.
+Den här händelsen representerar en USBX-enhetsklass Dpump Inaktivera händelse.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-dpump-read"></a>Läsning av enhets klassens Dpump 
+### <a name="device-class-dpump-read"></a>Device Class Dpump Read 
 
 #### <a name="ux_device_class_dpump_read"></a>ux_device_class_dpump_read
 
-**Ikonen** ![ Läs ikon för enhets klassens Dpump](./media/user-guide/usbx-events/image7.png)
+**Ikon** ![ Ikonen Läsa för enhetsklass-Dpump](./media/user-guide/usbx-events/image7.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass Dpump Read event.
+Den här händelsen representerar en USBX-enhetsklass Dpump Read-händelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: buffert.
-- Informations fält 3: begärd längd.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Buffert.
+- Informationsfält 3: Begärd längd.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-dpump-write"></a>Skrivning av enhets klass Dpump 
+### <a name="device-class-dpump-write"></a>Device Class Dpump Write 
 
 #### <a name="ux_device_class_dpump_write"></a>ux_device_class_dpump_write
 
-**Ikonen** ![ Dpump Skriv ikon för enhets klass](./media/user-guide/usbx-events/image8.png)
+**Ikon** ![ Skrivningsikon för enhetsklass-Dpump](./media/user-guide/usbx-events/image8.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass Dpump Skriv händelse.
+Den här händelsen representerar en skrivningshändelse för USBX-enhetsklass Dpump.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: data pekare.
-- Informations fält 3: begärd längd.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Datapekare.
+- Informationsfält 3: Begärd längd.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-hid-activate"></a>HID-aktivering för enhets klass 
+### <a name="device-class-hid-activate"></a>Hid-aktivering för enhetsklass 
 
 #### <a name="ux_device_class_hid_activate"></a>ux_device_class_hid_activate
 
-**Ikonen** ![ Ikon för HID-aktivering i enhets klass](./media/user-guide/usbx-events/image9.png)
+**Ikon** ![ Ikonen Hid-aktivering för enhetsklass](./media/user-guide/usbx-events/image9.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass HID Activate-händelse.
+Den här händelsen representerar en USBX-enhetsklass hid activate-händelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-hid-deactivate"></a>HID-inaktive ring av enhets klass 
+### <a name="device-class-hid-deactivate"></a>Inaktivera enhetsklass 
 
 #### <a name="ux_device_class_hid_deactivate"></a>ux_device_class_hid_deactivate
 
-**Ikonen** ![ Ikon för HID-inaktivera enhets klass](./media/user-guide/usbx-events/image10.png)
+**Ikon** ![ Ikonen Hid-inaktivera för enhetsklass](./media/user-guide/usbx-events/image10.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en händelse för HID-inaktive ring av USBX enhets klass.
+Den här händelsen representerar en USBX-enhetsklass som hid-inaktiverar händelse.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-hid-descriptor-send"></a>Skicka HID-beskrivning för enhets klass 
+### <a name="device-class-hid-descriptor-send"></a>Device Class Hid Descriptor Send 
 
 #### <a name="ux_device_class_hid_descritpor_send"></a>ux_device_class_hid_descritpor_send
 
-**Ikonen** ![ Ikon för att skicka HID-beskrivning för enhets klass](./media/user-guide/usbx-events/image11.png)
+**Ikon** ![ Ikonen Skicka med Enhetsklass Hid Descriptor](./media/user-guide/usbx-events/image11.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass som en händelse för att skicka HID-beskrivning.
+Den här händelsen representerar en USBX Device Class Hid Descriptor Send Event.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Informations fält 2: beskrivnings typ.
-- Informations fält 3: begär index.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Beskrivningstyp.
+- Informationsfält 3: Begärandeindex.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-hid-event-get"></a>Hämta HID-händelse för enhets klass 
+### <a name="device-class-hid-event-get"></a>Hämta hid-händelse för enhetsklass 
 
 #### <a name="ux_device_class_hid_event_get"></a>ux_device_class_hid_event_get
 
-**Ikonen** ![ Ikonen Hämta ikon för enhets klassens HID-händelse](./media/user-guide/usbx-events/image12.png)
+**Ikon** ![ Ikonen Hämta händelse för enhetsklass](./media/user-guide/usbx-events/image12.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass HID Event get event.
+Den här händelsen representerar en USBX-enhetsklass, Hid Event Get Event.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-hid-event-set"></a>HID-händelse uppsättning för enhets klass 
+### <a name="device-class-hid-event-set"></a>Händelseuppsättning för enhetsklass hid 
 
 #### <a name="ux_device_class_hid_event_set"></a>ux_device_class_hid_event_set
 
-**Ikonen** ![ Ikon uppsättnings ikon för HID-händelseloggen i enhets klass](./media/user-guide/usbx-events/image13.png)
+**Ikon** ![ Ikon för hid-händelseuppsättning för enhetsklass](./media/user-guide/usbx-events/image13.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en HID-USBX för enhets klass.
+Den här händelsen representerar en USBX-enhetsklass hid-händelseuppsättning.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-hid-report-get"></a>Hämta HID-rapport för enhets klass 
+### <a name="device-class-hid-report-get"></a>Hämta hid-rapport för enhetsklass 
 
 #### <a name="ux_device_class_hid_report_get"></a>ux_device_class_hid_report_get
 
-**Ikonen** ![ Ikonen Hämta ikon för enhets klassens HID-rapport](./media/user-guide/usbx-events/image14.png)
+**Ikon** ![ Ikonen Hämta rapport för enhetsklass](./media/user-guide/usbx-events/image14.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass HID Report get event.
+Den här händelsen representerar en USBX-enhetsklass, Hid Report Get Event.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Informations fält 2: beskrivnings typ.
-- Informations fält 3: begär index.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Beskrivningstyp.
+- Informationsfält 3: Begärandeindex.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-hid-report-set"></a>HID-rapport uppsättning för enhets klass 
+### <a name="device-class-hid-report-set"></a>Rapportuppsättning för enhetsklass hid 
 
 #### <a name="ux_device_class_hid_report_set"></a>ux_device_class_hid_report_set
 
-**Ikonen** ![ Ikon för HID-rapport för enhets klass](./media/user-guide/usbx-events/image15.png)
+**Ikon** ![ Ikon för hid-rapportuppsättning för enhetsklass](./media/user-guide/usbx-events/image15.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en händelse för en HID-rapport för USBX-enhets klass.
+Den här händelsen representerar en USBX-enhetsklass för hid report set-händelse.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Informations fält 2: beskrivnings typ.
-- Informations fält 3: begär index.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Beskrivningstyp.
+- Informationsfält 3: Begärandeindex.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-pima-activate"></a>Aktivering av enhets klass Pima
+### <a name="device-class-pima-activate"></a>Pima-aktivering för enhetsklass
 
 #### <a name="ux_device_class_pima_activate"></a>ux_device_class_pima_activate
 
-**Ikonen** ![ Pima Aktivera ikon för enhets klass](./media/user-guide/usbx-events/image16.png)
+**Ikon** ![ Ikon för Pima-aktivering för enhetsklass](./media/user-guide/usbx-events/image16.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass Pima aktivera händelse.
+Den här händelsen representerar en USBX-enhetsklasshändelse för aktivering av Pima.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-pima-deactivate"></a>Inaktive ring av enhets klass Pima 
+### <a name="device-class-pima-deactivate"></a>Pima för enhetsklass – inaktivera 
 
 #### <a name="ux_device_class_pima_deactivate"></a>ux_device_class_pima_deactivate
 
-**Ikonen** ![ Ikon för Pima för enhets klass](./media/user-guide/usbx-events/image17.png)
+**Ikon** ![ Pima-ikonen Inaktivera för enhetsklass](./media/user-guide/usbx-events/image17.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass Pima-händelse.
+Den här händelsen representerar en Pima-inaktiverad händelse för USBX-enhetsklass.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-pima-device-info-send"></a>Skicka enhets information i enhets klass Pima 
+### <a name="device-class-pima-device-info-send"></a>Skicka enhetsinformation för enhetsklass 
 
 #### <a name="ux_device_class_pima_device_info_send"></a>ux_device_class_pima_device_info_send
 
-**Ikonen** ![ Enhets klass Pima enhets information skicka ikon](./media/user-guide/usbx-events/image18.png)
+**Ikon** ![ Ikonen Skicka enhetsinformation för Enhetsklass Pima](./media/user-guide/usbx-events/image18.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass Pima skicka händelse för enhets information.
+Den här händelsen representerar en Pima Device Info Send-händelse för USBX-enhetsklass.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
 
-### <a name="device-class-pima-event-get"></a>Hämta Pima-händelse i enhets klass 
+### <a name="device-class-pima-event-get"></a>Hämta händelse för enhetsklass 
 
 #### <a name="ux_device_class_pima_event_get"></a>ux_device_class_pima_event_get
 
-**Ikonen** ![ Enhets klass Pima händelse Hämta ikon](./media/user-guide/usbx-events/image19.png)
+**Ikon** ![ Ikonen Hämta händelse för enhetsklass](./media/user-guide/usbx-events/image19.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass Pima Event get event.
+Den här händelsen representerar en USBX-enhetsklass-Pima Event Get Event.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: Pima-händelse.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Pima-händelse.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-pima-event-set"></a>Pima händelse uppsättning för enhets klass 
+### <a name="device-class-pima-event-set"></a>Händelseuppsättning för enhetsklass 
 
 #### <a name="ux_device_class_pima_event_set"></a>ux_device_class_pima_event_set
 
-**Ikonen** ![ Enhets klass Pima händelse uppsättnings ikon](./media/user-guide/usbx-events/image20.png)
+**Ikon** ![ Händelseuppsättningsikon för Device Class Pima](./media/user-guide/usbx-events/image20.png)
 
 **Beskrivning**
 
-Den här händelsen representerar händelse uppsättnings händelsen för en USBX enhets klass Pima.
+Den här händelsen representerar en HÄNDELSEuppsättningshändelse för USBX-enhetsklass.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: Pima-händelse.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Pima-händelse.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-pima-object-add"></a>Enhets klass Pima objekt Lägg till 
+### <a name="device-class-pima-object-add"></a>Pima-objekt för enhetsklass – Lägg till 
 
 #### <a name="ux_device_class_pima_object_add"></a>ux_device_class_pima_object_add
 
-**Ikonen** ![ Enhets klass Pima objekt Lägg till ikon](./media/user-guide/usbx-events/image21.png)
+**Ikon** ![ Pima Object-ikonen Lägg till för enhetsklass](./media/user-guide/usbx-events/image21.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass Pima objekt Lägg till händelse.
+Den här händelsen representerar en Pima Object Add-händelse för USBX-enhetsklass.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Info-fält 2: objekt referens.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Objekthandtag.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-pima-object-data-get"></a>Hämta Pima objekt data för enhets klass 
+### <a name="device-class-pima-object-data-get"></a>Hämta Pima-objektdata för enhetsklass 
 
 #### <a name="ux_device_class_pima_object_data_get"></a>ux_device_class_pima_object_data_get
 
-**Ikonen** ![ Enhets klass Pima objekt data hämta ikon](./media/user-guide/usbx-events/image22.png)
+**Ikon** ![ Pima Object Data Hämta-ikon för enhetsklass](./media/user-guide/usbx-events/image22.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass Pima objekt data hämta händelse.
+Den här händelsen representerar en Pima Object Data Get-händelse för USBX-enhetsklass.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Info-fält 2: objekt referens.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Objekthandtag.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-pima-object-data-send"></a>Skicka objekt data från enhets klass Pima 
+### <a name="device-class-pima-object-data-send"></a>Skicka Pima-objektdata för enhetsklass 
 
 #### <a name="ux_device_class_pima_object_data_send"></a>ux_device_class_pima_object_data_send
 
-**Ikonen** ![ Ikon för att skicka Pima objekt data i enhets klass](./media/user-guide/usbx-events/image23.png)
+**Ikon** ![ Ikonen Skicka Pima-objektdata för enhetsklass](./media/user-guide/usbx-events/image23.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass Pima objekt data sändnings händelse.
+Den här händelsen representerar en Pima Object Data Send-händelse för USBX-enhetsklass.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Info-fält 2: objekt referens.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Objekthandtag.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-pima-object-delete"></a>Ta bort Pima objekt i enhets klass 
+### <a name="device-class-pima-object-delete"></a>Ta bort Pima-objekt för enhetsklass 
 
 #### <a name="ux_device_class_pima_object_delete"></a>ux_device_class_pima_object_delete
 
-**Ikonen** ![ Pima objekt borttagnings ikon för enhets klass](./media/user-guide/usbx-events/image24.png)
+**Ikon** ![ Ikonen Ta bort objekt för enhetsklass](./media/user-guide/usbx-events/image24.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass Pima objekt Delete event.
+Den här händelsen representerar en BORTTAGNINGshändelse för ETT USBX-enhetsklassobjekt.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Info-fält 2: objekt referens.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Objekthandtag.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-pima-object-handles-send"></a>Skicka i enhets klassens Pima-objekt 
+### <a name="device-class-pima-object-handles-send"></a>Device Class Pima Object Handles Send 
 
 #### <a name="ux_device_class_pima_object_handles_send"></a>ux_device_class_pima_object_handles_send
 
-**Ikonen** ![ Skicka ikon för Pima objekt i enhets klass](./media/user-guide/usbx-events/image25.png)
+**Ikon** ![ Ikonen Skicka med Pima-objekt i enhetsklass](./media/user-guide/usbx-events/image25.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass Pima objekt som skickar händelse.
+Den här händelsen representerar ett Pima-objekt i USBX-enhetsklassen som hanterar skicka händelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Informations fält 2: lagrings-ID.
-- Info-fält 3: kod för objekt format.
-- Info-fält 4: objekt Association.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Storage ID.
+- Informationsfält 3: Objektformatkod.
+- Informationsfält 4: Objektassociation.
 
-### <a name="device-class-pima-object-info-get"></a>Hämta Pima objekt information för enhets klass 
+### <a name="device-class-pima-object-info-get"></a>Information om Pima-objekt för enhetsklass hämta 
 
 #### <a name="ux_device_class_pima_object_info_send"></a>ux_device_class_pima_object_info_send
 
-**Ikonen** ![ Enhets klass Pima objekt information Hämta ikon](./media/user-guide/usbx-events/image26.png)
+**Ikon** ![ Pima Object Info Hämta-ikon för enhetsklass](./media/user-guide/usbx-events/image26.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass Pima objekt information get-händelse.
+Den här händelsen representerar en Pima Object Info Get-händelse för USBX-enhetsklass.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info-fält 2: objekt referens.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Objekthandtag.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-pima-object-info-send"></a>Skicka Pima objekt information i enhets klass 
+### <a name="device-class-pima-object-info-send"></a>Skicka information om Pima-objekt för enhetsklass 
 
 #### <a name="ux_device_class_pima_object_info_send"></a>ux_device_class_pima_object_info_send
 
-**Ikonen** ![ Skicka ikon för Pima objekt information i enhets klass](./media/user-guide/usbx-events/image27.png)
+**Ikon** ![ Ikonen Skicka information om Objektinformation för enhetsklass](./media/user-guide/usbx-events/image27.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass Pima objekt information skicka händelse.
+Den här händelsen representerar en Pima Object Info Send-händelse för USBX-enhetsklassen.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-pima-objects-number-send"></a>Skicka Pima objekt nummer i enhets klass 
+### <a name="device-class-pima-objects-number-send"></a>Antal skickade Pima-objekt för enhetsklass 
 
 #### <a name="ux_device_class_pima_object_number_send"></a>ux_device_class_pima_object_number_send
 
-**Ikonen** ![ Enhets klass Pima objekt nummer skicka ikon](./media/user-guide/usbx-events/image28.png)
+**Ikon** ![ Ikonen Skicka nummer för Enhetsklass-Pima-objekt](./media/user-guide/usbx-events/image28.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass Pima objekt nummer skicka händelse.
+Den här händelsen representerar en Pima Object Number Send-händelse för USBX-enhetsklassen.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Informations fält 2: lagrings-ID.
-- Info-fält 3: kod för objekt format.
-- Info-fält 4: objekt associeras.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Storage-ID.
+- Informationsfält 3: Objektformatkod.
+- Informationsfält 4: Objekt associeras.
 
-### <a name="device-class-pima-partial-object-data-get"></a>Hämtning av partiella objekt data för enhets klass Pima
+### <a name="device-class-pima-partial-object-data-get"></a>Hämta partiella objektdata för Enhetsklass
 
 #### <a name="ux_device_class_pima_partial_object_data_get"></a>ux_device_class_pima_partial_object_data_get
 
-**Ikonen** ![ Enhets klass Pima del objekt data hämta ikon](./media/user-guide/usbx-events/image29.png)
+**Ikon** ![ Ikonen Hämta partiella objektdata för Enhetsklass Pima](./media/user-guide/usbx-events/image29.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass Pima del objekt data hämta händelse.
+Den här händelsen representerar en USBX-enhetsklass Pima Partial Object Data Get Event.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info-fält 2: objekt referens.
-- Informations fält 3: offset begärd.
-- Info fält 4: den begärda längden.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Objekthandtag.
+- Informationsfält 3: Offset begärd.
+- Informationsfält 4: Begärd längd.
 
-### <a name="device-class-pima-response-send"></a>Skicka svar för enhets klass Pima 
+### <a name="device-class-pima-response-send"></a>Skicka Pima-svar för enhetsklass 
 
 #### <a name="ux_device_class_pima_response_send"></a>ux_device_class_pima_response_send
 
-**Ikonen** ![ Ikon för Pima svars sändning i enhets klass](./media/user-guide/usbx-events/image30.png)
+**Ikon** ![ Ikonen Skicka svar från Device Class Pima](./media/user-guide/usbx-events/image30.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass Pima sändnings händelse.
+Den här händelsen representerar en Pima Response Send-händelse för USBX-enhetsklassen.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: svars kod.
-- Info-fält 3: nummer parameter.
-- Info-fält 4: Pima-parameter 1.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Svarskod.
+- Informationsfält 3: Nummerparameter.
+- Informationsfält 4: Pima-parameter 1.
 
-### <a name="device-class-pima-storage-id-send"></a>Enhets klass Pima lagrings-ID skicka 
+### <a name="device-class-pima-storage-id-send"></a>Device Class Pima Storage ID Send 
 
 #### <a name="ux_device_class_pima_storage_id_send"></a>ux_device_class_pima_storage_id_send
 
-**Ikonen** ![ Enhets klass Pima lagrings-ID skicka ikon](./media/user-guide/usbx-events/image31.png)
+**Ikon** ![ Ikonen Skicka enhetsklass-Pima Storage-ID](./media/user-guide/usbx-events/image31.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass Pima Storage ID Send event.
+Den här händelsen representerar en USBX-enhetsklass Pima Storage Id Send Event.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-pima-storage-info-send"></a>Skicka Pima Storage-information i enhets klass 
+### <a name="device-class-pima-storage-info-send"></a>Device Class Pima Storage Info Send 
 
 #### <a name="ux_device_class_pima_storage_info_send"></a>ux_device_class_pima_storage_info_send
 
-**Ikonen** ![ Enhets klass Pima Storage information skicka ikon](./media/user-guide/usbx-events/image32.png)
+**Ikon** ![ Ikonen Skicka information Storage Pima för enhetsklass](./media/user-guide/usbx-events/image32.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass Pima Storage information send event.
+Den här händelsen representerar en USBX-enhetsklass-Pima Storage Skicka händelse med information.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-rndis-activate"></a>Aktivering av enhets klass RNDIS 
+### <a name="device-class-rndis-activate"></a>Device Class Rndis Activate 
 
 #### <a name="ux_device_class_rndis_activate"></a>ux_device_class_rndis_activate
 
-**Ikonen** ![ RNDIS Aktivera ikon för enhets klass](./media/user-guide/usbx-events/image33.png)
+**Ikon** ![ Aktiveringsikon för Device Class Rndis](./media/user-guide/usbx-events/image33.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass RNDIS aktivera händelse.
+Den här händelsen representerar en AKTIVERINGShändelse för USBX-enhetsklass.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-rndis-deactivate"></a>Inaktive ring av enhets klass RNDIS 
+### <a name="device-class-rndis-deactivate"></a>Inaktivera enhetsklass 
 
 #### <a name="ux_device_class_rndis_deactivate"></a>ux_device_class_rndis_deactivate
 
-**Ikonen** ![ Ikon för RNDIS för enhets klass](./media/user-guide/usbx-events/image34.png)
+**Ikon** ![ Ikon för inaktivera enhetsklass](./media/user-guide/usbx-events/image34.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass RNDIS-händelse.
+Den här händelsen representerar en inaktiverad händelse för USBX-enhetsklass.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-rndis-message-keep-alive"></a>Enhets klass RNDIS meddelande Keep Alive 
+### <a name="device-class-rndis-message-keep-alive"></a>Device Class Rndis Message Keep Alive 
 
 #### <a name="ux_device_class_rndis_msg_keep_alive"></a>ux_device_class_rndis_msg_keep_alive
 
-**Ikonen** ![ Enhets klass RNDIS meddelande ikonen Behåll Alive](./media/user-guide/usbx-events/image35.png)
+**Ikon** ![ Ikonen Device Class Rndis Message Keep Alive](./media/user-guide/usbx-events/image35.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass RNDIS meddelande om att händelsen "Keep Alive".
+Den här händelsen representerar en USBX Device Class Rndis Message Keep Alive-händelse.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-rndis-message-query"></a>RNDIS meddelande fråga för enhets klass 
+### <a name="device-class-rndis-message-query"></a>Meddelandefråga för enhetsklass -Rndis 
 
 #### <a name="ux_device_class_rndis_msg_keep_query"></a>ux_device_class_rndis_msg_keep_query
 
-**Ikonen** ![ RNDIS meddelande fråga i enhets klass](./media/user-guide/usbx-events/image36.png)
+**Ikon** ![ Ikon för meddelandefråga för enhetsklass -Rndis](./media/user-guide/usbx-events/image36.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass RNDIS meddelande händelse.
+Den här händelsen representerar en USBX-enhetsklass med Rndis-meddelandefrågehändelsen.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Info fält 2: RNDIS OID.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Rndis OID.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-rndis-message-reset"></a>RNDIS meddelande återställning för enhets klass 
+### <a name="device-class-rndis-message-reset"></a>Meddelandeåterställning för enhetsklass 
 
 #### <a name="ux_device_class_rndis_msg_reset"></a>ux_device_class_rndis_msg_reset
 
-**Ikonen** ![ Ikon för enhets klass RNDIS meddelande återställning](./media/user-guide/usbx-events/image37.png)
+**Ikon** ![ Ikon för meddelandeåterställning för enhetsklass -Rndis](./media/user-guide/usbx-events/image37.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass RNDIS Message rereset-händelse.
+Den här händelsen representerar en Rndis-meddelandeåterställningshändelse för USBX-enhetsklass.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
 
-### <a name="device-class-rndis-message-set"></a>RNDIS meddelande uppsättning för enhets klass 
+### <a name="device-class-rndis-message-set"></a>Meddelandeuppsättning för enhetsklass 
 
 #### <a name="ux_device_class_rndis_msg_set"></a>ux_device_class_rndis_msg_set
 
-**Ikonen** ![ Enhets klass RNDIS meddelande uppsättnings ikon](./media/user-guide/usbx-events/image38.png)
+**Ikon** ![ Ikon för enhetsklass-Rndis-meddelandeuppsättning](./media/user-guide/usbx-events/image38.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass RNDIS meddelande uppsättnings händelse.
+Den här händelsen representerar en USBX-enhetsklass med Rndis-meddelandeuppsättningshändelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: RNDIS OID.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Rndis OID.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-rndis-packet-receive"></a>Mottagning av enhets klassens RNDIS-paket 
+### <a name="device-class-rndis-packet-receive"></a>Inkommande device class Rndis-paket 
 
 #### <a name="ux_device_class_rndis_packet_receive"></a>ux_device_class_rndis_packet_receive
 
-**Ikonen** ![ Ikon för enhets klassens RNDIS-paket](./media/user-guide/usbx-events/image39.png)
+**Ikon** ![ Ikonen Device Class Rndis Packet Receive](./media/user-guide/usbx-events/image39.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass RNDIS Packet Receive-händelse.
+Den här händelsen representerar en usbx-enhet klass Rndis paket tar emot händelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-rndis-packet-transmit"></a>Överföring av RNDIS-paket i enhets klass 
+### <a name="device-class-rndis-packet-transmit"></a>Device Class Rndis-paket överföring 
 
 #### <a name="ux_device_class_rndis_packet_transmit"></a>ux_device_class_rndis_packet_transmit
 
-**Ikonen** ![ Enhets klass RNDIS Packet sändnings ikon](./media/user-guide/usbx-events/image40.png)
+**Ikon** ![ Ikon för enhetsklass-Rndis-paket överföring](./media/user-guide/usbx-events/image40.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass RNDIS Packet sändnings händelse.
+Den här händelsen representerar en USBX-enhetsklass med Rndis-paket överföringshändelse.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-storage-activate"></a>Aktivera enhets klass lagring 
+### <a name="device-class-storage-activate"></a>Aktivera Storage enhetsklass 
 
 #### <a name="ux_device_class_storage_activate"></a>ux_device_class_storage_activate
 
-**Ikonen** ![ Aktiverings ikon för enhets klass lagring](./media/user-guide/usbx-events/image41.png)
+**Ikon** ![ Ikonen Enhetsklass Storage Aktivera](./media/user-guide/usbx-events/image41.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en händelse för aktivering av USBX enhets klass lagring.
+Den här händelsen representerar en USBX-enhetsklass Storage aktivera händelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-storage-deactivate"></a>Inaktive ring av enhets klass lagring 
+### <a name="device-class-storage-deactivate"></a>Inaktivera Storage enhetsklass 
 
 #### <a name="ux_device_class_storage_deactivate"></a>ux_device_class_storage_deactivate
 
-**Ikonen** ![ Ikon för enhets klassens lagrings inaktive rad](./media/user-guide/usbx-events/image42.png)
+**Ikon** ![ Ikon för Storage enhetsklass](./media/user-guide/usbx-events/image42.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass lagrings händelse.
+Den här händelsen representerar en USBX-enhetsklass Storage inaktivera händelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-storage-format"></a>Lagrings format för enhets klass 
+### <a name="device-class-storage-format"></a>Device Class Storage Format 
 
 #### <a name="ux_device_class_storage_format"></a>ux_device_class_storage_format
 
-**Ikonen** ![ Ikon för lagrings format för enhets klass](./media/user-guide/usbx-events/image43.png)
+**Ikon** ![ Ikonen Device Class Storage Format](./media/user-guide/usbx-events/image43.png)
 
 **Beskrivning**
 
-Den här händelsen representerar ett USBX för enhets klassens lagrings format.
+Den här händelsen representerar en USBX-enhetsklass Storage-formathändelse.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Info fält 2: LUN.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Lun.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-storage-inquiry"></a>Förfrågan om enhets klass lagring 
+### <a name="device-class-storage-inquiry"></a>Förfrågan om Storage enhetsklass 
 
 #### <a name="ux_device_class_storage_inquiry"></a>ux_device_class_storage_inquiry
 
-**Ikonen** ![ Ikon för enhets klass lagrings förfrågan](./media/user-guide/usbx-events/image44.png)
+**Ikon** ![ Ikon för Storage enhetsklassförfrågan](./media/user-guide/usbx-events/image44.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass lagrings händelse.
+Den här händelsen representerar en USBX-enhetsklass Storage en förfråganshändelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: LUN.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Lun.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-storage-mode-select"></a>Val av enhets klassens lagrings läge
+### <a name="device-class-storage-mode-select"></a>Välj Storage enhetklassläge
 
 #### <a name="ux_device_class_storage_mode_select"></a>ux_device_class_storage_mode_select
 
-**Ikonen** ![ Enhets klassens lagrings läge Välj ikon](./media/user-guide/usbx-events/image45.png)
+**Ikon** ![ Ikonen Välj Storage enhetklassläge](./media/user-guide/usbx-events/image45.png)
 
 **Beskrivning**
 
-Den här händelsen representerar ett USBX enhets klass lagrings läge Välj händelse.
+Den här händelsen representerar en USBX-enhetsklass Storage välj händelse i läge.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Info fält 2: LUN.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Lun.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-storage-mode-sense"></a>Sense i enhets klassens lagrings läge 
+### <a name="device-class-storage-mode-sense"></a>Device Class Storage Mode Sense 
 
 #### <a name="ux_device_class_storage_mode_sense"></a>ux_device_class_storage_mode_sense
 
-**Ikonen** ![ Ikon för lagrings läge i enhets klass](./media/user-guide/usbx-events/image46.png)
+**Ikon** ![ Ikon för Storage sense i enhetsläge](./media/user-guide/usbx-events/image46.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass lagrings läges händelse.
+Den här händelsen representerar en USBX-enhetsklass Storage sense-händelse i läge.
 
-Informations fält 
+Informationsfält 
 
-- NFO-fält 1: klass instans.
-- Info fält 2: LUN.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- nfo Fält 1: Klassinstans.
+- Informationsfält 2: Lun.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-storage-prevent-allow-media-removal"></a>Enhets klass lagring förhindra borttagning av media 
+### <a name="device-class-storage-prevent-allow-media-removal"></a>Device Class Storage Förhindra borttagning av media 
 
 #### <a name="ux_device_class_storage_prevent_allow_media_removal"></a>ux_device_class_storage_prevent_allow_media_removal
 
-**Ikonen** ![ Enhets klass lagring förhindra att ikonen borttagning av media](./media/user-guide/usbx-events/image47.png)
+**Ikon** ![ Ikon för Storage förhindra borttagning av media](./media/user-guide/usbx-events/image47.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass lagring förhindra händelsen borttagning av media.
+Den här händelsen representerar en USBX-enhetsklass Storage förhindra att media tas bort.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: LUN.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Lun.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-storage-read"></a>Läsning av enhets klass lagring 
+### <a name="device-class-storage-read"></a>Läsa Storage enhetsklass 
 
 #### <a name="ux_device_class_storage_read"></a>ux_device_class_storage_read
 
-**Ikonen** ![ Läs ikon för enhets klass lagring](./media/user-guide/usbx-events/image48.png)
+**Ikon** ![ Ikonen Device Class Storage Read (Läsa)](./media/user-guide/usbx-events/image48.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass lagrings händelse.
+Den här händelsen representerar en USBX-enhetsklass Storage Read-händelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: LUN.
-- Informations fält 3: sektor.
-- Info fält 4: numrerade sektorer.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Lun.
+- Informationsfält 3: Sektor.
+- Informationsfält 4: Talsektorer.
 
-### <a name="device-class-storage-read-capacity"></a>Läs kapacitet för enhets klass lagring 
+### <a name="device-class-storage-read-capacity"></a>Kapacitet för Storage läsning 
 
 #### <a name="ux_device_class_storage_read_capacity"></a>ux_device_class_storage_read_capacity
 
-**Ikonen** ![ Enhets klass lagring Läs kapacitets ikon](./media/user-guide/usbx-events/image49.png)
+**Ikon** ![ Ikon för Storage läsa kapacitet för enhetsklass](./media/user-guide/usbx-events/image49.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass lagrings händelse.
+Den här händelsen representerar en USBX-enhetsklass Storage Read Capacity Event.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Info fält 2: LUN.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Lun.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-storage-read-format-capacity"></a>Kapacitet för Läs format för enhets klass lagring 
+### <a name="device-class-storage-read-format-capacity"></a>Kapacitet för Storage för enhetsklassläsningsformat 
 
 #### <a name="ux_device_class_storage_read_format_capacity"></a>ux_device_class_storage_read_format_capacity
 
-**Ikonen** ![ Kapacitets ikon för Läs format för enhets klass lagring](./media/user-guide/usbx-events/image50.png)
+**Ikon** ![ Kapacitetsikonen Storage För enhetsklass och läsformat](./media/user-guide/usbx-events/image50.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX för enhets klass lagrings kapacitet.
+Den här händelsen representerar en USBX-enhetsklass Storage Read Format Capacity Event.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Info fält 2: LUN.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Lun.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-storage-read-toc"></a>Läs innehålls förteckning för enhets klass lagring 
+### <a name="device-class-storage-read-toc"></a>Device Class Storage Read TOC 
 
 #### <a name="ux_device_class_storage_read_toc"></a>ux_device_class_storage_read_toc
 
-**Ikonen** ![ Enhets klass lagring läsa innehålls förtecknings ikon](./media/user-guide/usbx-events/image51.png)
+**Ikon** ![ Ikon för Storage för enhetsklassläsning](./media/user-guide/usbx-events/image51.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass lagring läsa TOC-händelse.
+Den här händelsen representerar en USBX-enhetsklass Storage Läsa TOC-händelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: LUN.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Lun.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-storage-request-sense"></a>Sense-begäran för enhets klass 
+### <a name="device-class-storage-request-sense"></a>Device Class Storage Request Sense 
 
 #### <a name="ux_device_class_storage_request_sense"></a>ux_device_class_storage_request_sense
 
-**Ikonen** ![ Ikon för enhets klass lagrings förfrågan Sense](./media/user-guide/usbx-events/image52.png)
+**Ikon** ![ Ikonen Device Class Storage Request Sense](./media/user-guide/usbx-events/image52.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en händelse för en USBX enhets klass lagrings förfrågan.
+Den här händelsen representerar en USBX-enhetsklass Storage Request Sense Event.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Info fält 2: LUN.
-- Info-fält 3: Sense-nyckel.
-- Info fält 4: kod.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Lun.
+- Informationsfält 3: Avkänningsnyckel.
+- Informationsfält 4: Kod.
 
-### <a name="device-class-storage-start-stop"></a>Start stopp för enhets klass lagring 
+### <a name="device-class-storage-start-stop"></a>Startstopp Storage enhetsklass 
 
 #### <a name="ux_device_class_storage_start_stop"></a>ux_device_class_storage_start_stop
 
-**Ikonen** ![ Start stopps ikon för enhets klass lagring](./media/user-guide/usbx-events/image53.png)
+**Ikon** ![ Ikon för Storage start/stopp för enhetsklass](./media/user-guide/usbx-events/image53.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass lagrings händelse.
+Den här händelsen representerar en USBX-enhetsklass Storage starta/stoppa-händelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: LUN.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Lun.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-storage-test-ready"></a>Lagrings test för enhets klass klar 
+### <a name="device-class-storage-test-ready"></a>Device Class Storage Test Ready 
 
 #### <a name="ux_device_class_storage_test_ready"></a>ux_device_class_storage_test_ready
 
-**Ikonen** ![ Ikon för lagrings test för enhets klass](./media/user-guide/usbx-events/image54.png)
+**Ikon** ![ Ikon för Storage Test klar för enhetsklass](./media/user-guide/usbx-events/image54.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX för enhets klass lagrings test.
+Den här händelsen representerar en USBX-enhetsklass Storage testklar händelse.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Info fält 2: LUN.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Lun.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-storage-verify"></a>Verifiera lagring av enhets klass 
+### <a name="device-class-storage-verify"></a>Device Class Storage Verify 
 
 #### <a name="ux_device_class_storage_verify"></a>ux_device_class_storage_verify
 
-**Ikonen** ![ Enhets klass lagring verifiera ikon](./media/user-guide/usbx-events/image55.png)
+**Ikon** ![ Ikonen Device Class Storage Verify (Verifiera)](./media/user-guide/usbx-events/image55.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets klass lagring verifiera händelse.
+Den här händelsen representerar en USBX-enhetsklass Storage Verifiera händelse.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Info fält 2: LUN.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Lun.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-class-storage-write"></a>Skrivning av enhets klass lagring 
+### <a name="device-class-storage-write"></a>Device Class Storage Write 
 
 #### <a name="ux_device_class_storage_write"></a>ux_device_class_storage_write
 
-**Ikonen** ![ Skriv ikon för enhets klass lagring](./media/user-guide/usbx-events/image56.png)
+**Ikon** ![ Skrivningsikon Storage Device Class](./media/user-guide/usbx-events/image56.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en Skriv händelse för lagring av USBX enhets klass.
+Den här händelsen representerar en USBX-enhetsklass Storage skrivhändelse.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Info fält 2: LUN.
-- Informations fält 3: sektor.
-- Info fält 4: numrerade sektorer.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Lun.
+- Informationsfält 3: Sektor.
+- Informationsfält 4: Talsektorer.
 
-### <a name="device-stack-alternate-setting-get"></a>Alternativ inställning för enhets stack Hämta 
+### <a name="device-stack-alternate-setting-get"></a>Alternativ inställning för enhetsstack hämta 
 
 #### <a name="ux_device_class_alternate_setting_get"></a>ux_device_class_alternate_setting_get
 
-**Ikonen** ![ Alternativ inställnings ikon för enhets stack](./media/user-guide/usbx-events/image57.png)
+**Ikon** ![ Ikonen Hämta alternativ inställning för enhetsstack](./media/user-guide/usbx-events/image57.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en alternativ inställnings händelse för USBX Device stack.
+Den här händelsen representerar en alternativ USBX-enhetsstack med inställningen Hämta händelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Info-fält 1: gränssnitts värde.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Gränssnittsvärde.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-stack-alternate-setting-set"></a>Alternativ inställnings uppsättning för enhets stack 
+### <a name="device-stack-alternate-setting-set"></a>Alternativ inställningsuppsättning för enhetsstack 
 
 #### <a name="ux_device_class_alternate_setting_set"></a>ux_device_class_alternate_setting_set
 
-**Ikonen** ![ Ikon för alternativ inställnings uppsättning för enhets stack](./media/user-guide/usbx-events/image58.png)
+**Ikon** ![ Ikon för alternativ inställningsuppsättning för enhetsstack](./media/user-guide/usbx-events/image58.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en händelse för alternativ inställnings uppsättning för USBX-enhets stack.
+Den här händelsen representerar en alternativ inställningsuppsättningshändelse för USBX-enhetsstack.
 
-**Informations fält**
-- Info-fält 1: gränssnitts värde.
-- Info-fält 2: värde för alternativ inställning.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+**Informationsfält**
+- Informationsfält 1: Gränssnittsvärde.
+- Informationsfält 2: Alternativt inställningsvärde.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-stack-class-register"></a>Enhets Stack klass register 
+### <a name="device-stack-class-register"></a>Enhetsstackklassregister 
 
 #### <a name="ux_device_stack_class_register"></a>ux_device_stack_class_register
 
-**Ikonen** ![ Enhets Stack klass register ikon](./media/user-guide/usbx-events/image59.png)
+**Ikon** ![ Ikon för enhetsstackklassregister](./media/user-guide/usbx-events/image59.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets Stack klass register händelse.
+Den här händelsen representerar en USBX-enhetsstackklassregisterhändelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass namn.
-- Informations fält 2: gränssnitts nummer.
-- Info-fält 3: parameter.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassnamn.
+- Informationsfält 2: Gränssnittsnummer.
+- Informationsfält 3: Parameter.
+- Informationsfält 4: Används inte.
 
-### <a name="device-stack-clear-feature"></a>Rensnings funktion för enhets stack 
+### <a name="device-stack-clear-feature"></a>Rensa funktion för enhetsstack 
 
 #### <a name="ux_device_stack_clear_feature"></a>ux_device_stack_clear_feature
 
-**Ikonen** ![ Enhets stack rensa funktions ikon](./media/user-guide/usbx-events/image60.png)
+**Ikon** ![ Ikonen Rensa funktion för enhetsstack](./media/user-guide/usbx-events/image60.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets stack rensa funktions händelse.
+Den här händelsen representerar en USBX-enhetsstack clear feature-händelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: typ av begäran.
-- Info-fält 2: värde för begäran. Informations fält 3: begär index.
-- Info fält 4: används inte.
+- Informationsfält 1: Typ av begäran.
+- Informationsfält 2: Begärandevärde. Informationsfält 3: Begärandeindex.
+- Informationsfält 4: Används inte.
 
-### <a name="device-stack-configuration-get"></a>Hämta enhets stack konfiguration 
+### <a name="device-stack-configuration-get"></a>Hämta konfiguration av enhetsstack 
 
 #### <a name="ux_device_stack_configuration_get-t"></a>ux_device_stack_configuration_get t
 
-**Ikonen** ![ Hämta ikon för enhets stack konfiguration](./media/user-guide/usbx-events/image61.png)
+**Ikon** ![ Ikonen Hämta för konfiguration av enhetsstack](./media/user-guide/usbx-events/image61.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets stack konfiguration Hämta händelse.
+Den här händelsen representerar en HÄMTA-händelse för en USBX-enhetsstackkonfiguration.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: konfigurations värde.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Konfigurationsvärde.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-stack-configuration-set"></a>Konfigurations uppsättning för enhets stack 
+### <a name="device-stack-configuration-set"></a>Konfigurationsuppsättning för enhetsstack 
 
 #### <a name="ux_device_stack_configuration_set"></a>ux_device_stack_configuration_set
 
-**Ikonen** ![ Ikon för enhets stack konfigurations uppsättning](./media/user-guide/usbx-events/image62.png)
+**Ikon** ![ Ikon för konfigurationsuppsättning för enhetsstack](./media/user-guide/usbx-events/image62.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en händelse för konfigurations uppsättning för USBX Device stack-konfiguration.
+Den här händelsen representerar en USBX-enhetsstackskonfigurationsuppsättningshändelse.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: konfigurations värde.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Konfigurationsvärde.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-stack-connect"></a>Enhets stack anslutning 
+### <a name="device-stack-connect"></a>Enhetsstacks-Anslut 
 
 #### <a name="ux_device_stack_connect"></a>ux_device_stack_connect
 
-**Ikonen** ![ Enhets stackens anslutnings ikon](./media/user-guide/usbx-events/image63.png)
+**Ikon** ![ Ikon för Anslut enhetsstack](./media/user-guide/usbx-events/image63.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX för enhets stack beskrivning.
+Den här händelsen representerar en USBX-enhetsstackbeskrivning för att skicka händelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: används inte.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Används inte.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-stack-descriptor-send"></a>Skicka enhets Stacks Beskrivning 
+### <a name="device-stack-descriptor-send"></a>Skicka enhetsstacksbeskrivning 
 
 #### <a name="ux_device_stack_descriptor_send"></a>ux_device_stack_descriptor_send
 
-**Ikonen** ![ Ikon för att skicka enhets stack Beskrivning](./media/user-guide/usbx-events/image64.png)
+**Ikon** ![ Ikonen Skicka i Enhetsstack](./media/user-guide/usbx-events/image64.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX för enhets stack beskrivning.
+Den här händelsen representerar en USBX-enhetsstackbeskrivning för att skicka händelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: beskrivnings typ.
-- Informations fält 2: begär index.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Beskrivningstyp.
+- Informationsfält 2: Begärandeindex.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-stack-disconnect"></a>Enhets stack från koppling 
+### <a name="device-stack-disconnect"></a>Koppla från enhetsstack 
 
 #### <a name="ux_device_stack_disconnect"></a>ux_device_stack_disconnect
 
-**Ikonen** ![ Ikon för enhets stack från koppling](./media/user-guide/usbx-events/image65.png)
+**Ikon** ![ Ikon för frånkoppling av enhetsstack](./media/user-guide/usbx-events/image65.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en händelse för USBX enhets stack från koppling.
+Den här händelsen representerar en USBX-enhetsstackens frånkopplingshändelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: enhet.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Enhet.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-stack-endpoint-stall"></a>Enhets stackens slut punkt bås 
+### <a name="device-stack-endpoint-stall"></a>Slutpunkten för enhetsstacken har stannat upp 
 
 #### <a name="ux_device_stack_endpoint_stall"></a>ux_device_stack_endpoint_stall
 
-**Ikonen** ![ Ikon för enhets stackens slut punkts bås](./media/user-guide/usbx-events/image66.png)
+**Ikon** ![ Ikon för slutpunktsstopp för enhetsstack](./media/user-guide/usbx-events/image66.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en händelse för USBX Device stack Endpoint bås.
+Den här händelsen representerar en USBX-enhetsstackslutpunkt som stoppas.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: slut punkt.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Slutpunkt.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-stack-get-status"></a>Hämta status för enhets stack 
+### <a name="device-stack-get-status"></a>Hämta status för enhetsstack 
 
 #### <a name="ux_device_stack_get_status"></a>ux_device_stack_get_status
 
-**Ikonen** ![ Enhets stack Hämta status ikon](./media/user-guide/usbx-events/image67.png)
+**Ikon** ![ Ikonen Hämta status för enhetsstack](./media/user-guide/usbx-events/image67.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX enhets stack Hämta status händelse.
+Den här händelsen representerar en USBX-enhetsstack hämta statushändelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: används inte.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Används inte.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-stack-host-wakeup"></a>Aktivering av enhets stack värd 
+### <a name="device-stack-host-wakeup"></a>Aktivering av värd för enhetsstack 
 
 #### <a name="ux_device_stack_host_wakeup"></a>ux_device_stack_host_wakeup
 
-**Ikonen** ![ Aktiverings ikon för värd för enhets stack](./media/user-guide/usbx-events/image68.png)
+**Ikon** ![ Aktiveringsikon för värd för enhetsstack](./media/user-guide/usbx-events/image68.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en aktiverings händelse för USBX Device stack-värden.
+Den här händelsen representerar en aktiveringshändelse för en USBX-enhetsstackvärd.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: används inte.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Används inte.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-stack-initialize"></a>Initiera enhets stack 
+### <a name="device-stack-initialize"></a>Initiera enhetsstacken 
 
 #### <a name="ux_device_stack_initialize"></a>ux_device_stack_initialize
 
-**Ikonen** ![ Ikon för enhets stack initierare](./media/user-guide/usbx-events/image69.png)
+**Ikon** ![ Ikonen Initiera i enhetsstack](./media/user-guide/usbx-events/image69.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en händelse för initiering av USBX enhets stack.
+Den här händelsen representerar en USBX-enhetsstack som initierar händelsen.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: används inte.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Används inte.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-stack-interface-delete"></a>Ta bort enhets Stacks gränssnitt 
+### <a name="device-stack-interface-delete"></a>Ta bort gränssnitt för enhetsstack 
 
 #### <a name="ux_device_stack_interface_delete"></a>ux_device_stack_interface_delete
 
-**Ikonen** ![ Borttagnings ikon för enhets stackens gränssnitt](./media/user-guide/usbx-events/image70.png)
+**Ikon** ![ Ikonen Ta bort gränssnitt för enhetsstack](./media/user-guide/usbx-events/image70.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en händelse för borttagning av USBX Device stack-gränssnitt.
+Den här händelsen representerar en usbx-enhetsstackens gränssnitts-borttagningshändelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: gränssnitt.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Gränssnitt.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-stack-interface-get"></a>Hämta enhets stack gränssnitt 
+### <a name="device-stack-interface-get"></a>Device Stack Interface Get 
 
 #### <a name="ux_device_stack_interface_get"></a>ux_device_stack_interface_get
 
-**Ikonen** ![ Hämta ikon för enhets stackens gränssnitt](./media/user-guide/usbx-events/image71.png)
+**Ikon** ![ Ikonen Hämta i Gränssnittet för enhetsstack](./media/user-guide/usbx-events/image71.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en händelse för hämtning av USBX Device stack-gränssnitt.
+Den här händelsen representerar en USBX Device Stack Interface Get-händelse.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Info-fält 1: gränssnitts värde.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Gränssnittsvärde.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-stack-interface-set"></a>Enhets stack gränssnitts uppsättning 
+### <a name="device-stack-interface-set"></a>Gränssnittsuppsättning för enhetsstack 
 
 #### <a name="ux_device_stack_interface_set"></a>ux_device_stack_interface_set
 
-**Ikonen** ![ Ikon för enhets stackens gränssnitts uppsättning](./media/user-guide/usbx-events/image72.png)
+**Ikon** ![ Ikon för Enhetsstack-gränssnittsuppsättning](./media/user-guide/usbx-events/image72.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en händelse för en USBX enhets stack gränssnitts uppsättning.
+Den här händelsen representerar en USBX Device Stack-gränssnittsuppsättningshändelse.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: värde för begäran. Informations fält 2: begär index.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Begärandevärde. Informationsfält 2: Begärandeindex.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-stack-set-feature"></a>Enhets stack uppsättnings funktion 
+### <a name="device-stack-set-feature"></a>Set-funktion för enhetsstack 
 
 #### <a name="ux_device_stack_set_feature"></a>ux_device_stack_set_feature
 
-**Ikonen** ![ Funktions ikon för enhets stack uppsättning](./media/user-guide/usbx-events/image73.png)
+**Ikon** ![ Ikon för enhetsstackuppsättningsfunktion](./media/user-guide/usbx-events/image73.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en funktions händelse för en USBX enhets stack uppsättning.
+Den här händelsen representerar en USBX-enhetsstackuppsättningsfunktionshändelse.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: värde för begäran. Informations fält 2: begär index.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Begärandevärde. Informationsfält 2: Begärandeindex.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-stack-transfer-abort"></a>Avbryt enhets stack överföring 
+### <a name="device-stack-transfer-abort"></a>Avbryt överföring av enhetsstack 
 
 #### <a name="ux_device_stack_transfer_abort"></a>ux_device_stack_transfer_abort
 
-**Ikonen** ![ Avbrotts ikon för enhets stack överföring](./media/user-guide/usbx-events/image74.png)
+**Ikon** ![ Ikonen Avbryt överföring av enhetsstack](./media/user-guide/usbx-events/image74.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en avbrotts händelse för USBX Device stack-överföring.
+Den här händelsen representerar en USBX-enhetsstacköverföringshändelse som avbryts.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: överförings förfrågan.
-- Info fält 2: slut för ande kod.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Överföringsbegäran.
+- Informationsfält 2: Slutförandekod.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-stack-transfer-all-request-abort"></a>Enhets stack överför alla begäran om att avbryta begäran 
+### <a name="device-stack-transfer-all-request-abort"></a>Överföring av enhetsstack – alla förfrågningar avbryts 
 
 #### <a name="ux_device_stack_transfer_all_request_abort"></a>ux_device_stack_transfer_all_request_abort
 
-**Ikonen** ![ Ikon för enhets stacken överför alla begär Anden](./media/user-guide/usbx-events/image75.png)
+**Ikon** ![ Ikonen Överför alla förfrågningar om överföring av enhetsstack](./media/user-guide/usbx-events/image75.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX Device stack-överföring alla begär Anden om att avbryta begäran.
+Den här händelsen representerar en USBX-enhetsstack som överför alla avbrottshändelse för begäran.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: slut punkt.
-- Info fält 2: slut för ande kod.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Slutpunkt.
+- Informationsfält 2: Slutförandekod.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="device-stack-transfer-request"></a>Begäran om enhets stack överföring 
+### <a name="device-stack-transfer-request"></a>Begäran om överföring av enhetsstack 
 
 #### <a name="ux_device_stack_transfer_request"></a>ux_device_stack_transfer_request
 
-**Ikonen** ![ Ikon för begäran om enhets stack-överföring](./media/user-guide/usbx-events/image76.png)
+**Ikon** ![ Ikonen Överföringsbegäran för enhetsstack](./media/user-guide/usbx-events/image76.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en begäran om USBX enhets stack-överföring.
+Den här händelsen representerar en överföringsbegärandehändelse för USBX-enhetsstack.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: överförings förfrågan.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Överföringsbegäran.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-asix-activate"></a>Aktivering av värd klass Asix 
+### <a name="host-class-asix-activate"></a>Aktivera värdklass somix 
 
 #### <a name="ux_host_class_asix_activate"></a>ux_host_class_asix_activate
 
-**Ikonen** ![ Asix Aktivera ikon för värd klass](./media/user-guide/usbx-events/image77.png)
+**Ikon** ![ Aktiveringsikon för värdklass somix](./media/user-guide/usbx-events/image77.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX-Asix för värd klass.
+Den här händelsen representerar en USBX-värdklass för aktivering av Asix.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-asix-deactivate"></a>Asix inaktive ring av värd klass 
+### <a name="host-class-asix-deactivate"></a>Inaktivera värdklass somix 
 
 #### <a name="ux_host_class_asix_deactivate"></a>ux_host_class_asix_deactivate
 
-**Ikonen** ![ Asix-ikon för värd klass](./media/user-guide/usbx-events/image78.png)
+**Ikon** ![ Ikon för inaktivera värdklass som asix](./media/user-guide/usbx-events/image78.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX värd klass Asix-händelse.
+Den här händelsen representerar en USBX-värdklass– asix-inaktiveringshändelse.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-asix-interrupt-notification"></a>Avbrotts meddelande för värd klass Asix 
+### <a name="host-class-asix-interrupt-notification"></a>Meddelande om avbrott i värdklassen Asix 
 
 #### <a name="ux_host_class_asix_interrupt_notification"></a>ux_host_class_asix_interrupt_notification
 
-**Ikonen** ![ Asix för värd klassens avbrotts meddelande](./media/user-guide/usbx-events/image79.png)
+**Ikon** ![ Meddelandeikon för avbrottsmeddelande för värdklass asix](./media/user-guide/usbx-events/image79.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX Asix-avbrotts meddelande händelse.
+Den här händelsen representerar en USBX-värdklass Asix Interrupt Notification Event.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-asix-read"></a>Läsning av värd klass Asix 
+### <a name="host-class-asix-read"></a>Läsa värdklass som asix 
 
 #### <a name="ux_host_class_asix_read"></a>ux_host_class_asix_read
 
-**Ikonen** ![ Läs ikon för värd klassen Asix](./media/user-guide/usbx-events/image80.png)
+**Ikon** ![ Ikon för att läsa värdklass somix](./media/user-guide/usbx-events/image80.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX värd klass Asix Read event.
+Den här händelsen representerar en USBX-värdklass– asixläsningshändelse.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Info fält 2: data pekare.
-- Informations fält 3: begärd längd.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Datapekare.
+- Informationsfält 3: Begärd längd.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-asix-write"></a>Skrivning av värd klass Asix 
+### <a name="host-class-asix-write"></a>Host Class Asix Write 
 
 #### <a name="ux_host_class_asix_write"></a>ux_host_class_asix_write
 
-**Ikonen** ![ Asix Skriv ikon för värd klass](./media/user-guide/usbx-events/image81.png)
+**Ikon** ![ Skrivikon för värdklass somix](./media/user-guide/usbx-events/image81.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX Asix Skriv händelse.
+Den här händelsen representerar en USBX-värdklass – asix-skrivningshändelse.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Info fält 2: data pekare.
-- Informations fält 3: begärd längd.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Datapekare.
+- Informationsfält 3: Begärd längd.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-audio-activate"></a>Aktivera ljud för värd klass 
+### <a name="host-class-audio-activate"></a>Aktivera värdklassljud 
 
 #### <a name="ux_host_class_audio_activate"></a>ux_host_class_audio_activate
 
-**Ikonen** ![ Ikon för ljud aktivering i värd klass](./media/user-guide/usbx-events/image82.png)
+**Ikon** ![ Aktiveringsikon för värdklassljud](./media/user-guide/usbx-events/image82.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX-händelse för värd klass ljud.
+Den här händelsen representerar en LJUDaktivera händelse för USBX-värdklass.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-audio-control-value-get"></a>Hämta ljud kontroll värde för värd klass 
+### <a name="host-class-audio-control-value-get"></a>Host Class Audio Control Value Get 
 
 #### <a name="ux_host_class_audio_control_value_get"></a>ux_host_class_audio_control_value_get
 
-**Ikonen** ![ Ikonen Hämta ljud kontroll värde i värd klass](./media/user-guide/usbx-events/image83.png)
+**Ikon** ![ Ikonen Hämta värde för värdklassljudkontroll](./media/user-guide/usbx-events/image83.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en händelse för ett ljud kontroll värde i USBX Host-klass.
+Den här händelsen representerar ett LJUDKONTROLLvärde för USBX-värdklass Hämta händelse.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-audio-control-value-set"></a>Värde uppsättning för ljud kontroll i värd klass 
+### <a name="host-class-audio-control-value-set"></a>Värdeuppsättning för ljudkontroll för värdklass 
 
 #### <a name="ux_host_class_audio_control_value_set"></a>ux_host_class_audio_control_value_set
 
-**Ikonen** ![ Ikon för ljud kontroll värde för värd klass](./media/user-guide/usbx-events/image84.png)
+**Ikon** ![ Ikon för värdeuppsättning för värdklassljudkontroll](./media/user-guide/usbx-events/image84.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en intern NetX I/O-drivrutin som Uppskjut bearbetnings händelsen.
+Den här händelsen representerar en intern uppskjuten bearbetningshändelse för NetX I/O-drivrutinen.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Info-fält 2: ljud kontroll.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Infofält 2: Ljudkontroll.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-audio-deactivate"></a>Ljud inaktive ring av värd klass 
+### <a name="host-class-audio-deactivate"></a>Inaktivera värdklassljud 
 
 #### <a name="ux_host_class_audio_deactivate"></a>ux_host_class_audio_deactivate
 
-**Ikonen** ![ Ikon för ljud inaktive ring av värd klass](./media/user-guide/usbx-events/image85.png)
+**Ikon** ![ Inaktivera ikon för värdklassljud](./media/user-guide/usbx-events/image85.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en ljud inaktive rings händelse för USBX värd klass.
+Den här händelsen representerar en USBX-värdklass – Inaktivera ljudhändelse.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-audio-read"></a>Ljud läsning av värd klass 
+### <a name="host-class-audio-read"></a>Ljudläsning för värdklass 
 
 #### <a name="ux_host_class_audio_read"></a>ux_host_class_audio_read
 
-**Ikonen** ![ Ljud läsnings ikon för värd klass](./media/user-guide/usbx-events/image86.png)
+**Ikon** ![ Ikon för ljudläsning för värdklass](./media/user-guide/usbx-events/image86.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX för ljud läsnings händelse för värd klass.
+Den här händelsen representerar en USBX-värdklass för ljudläsningshändelse.
 
-- Informations fält 
-- Informations fält 1: klass instans.
-- Info fält 2: data pekare.
-- Informations fält 3: begärd längd.
-- Info fält 4: används inte.
+- Informationsfält 
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Data pekare.
+- Informationsfält 3: Begärd längd.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-audio-streaming-sampling-get"></a>Ljud uppspelning av värd klass, samplings hämtning 
+### <a name="host-class-audio-streaming-sampling-get"></a>Hämta sampling av ljudströmning för värdklass 
 
 #### <a name="ux_host_class_audio_streaming_sampling_get"></a>ux_host_class_audio_streaming_sampling_get
 
-**Ikonen** ![ Exempel på hämtnings ikon för värd klassens ljud strömning](./media/user-guide/usbx-events/image87.png)
+**Ikon** ![ Hämta ikon för sampling av ljudströmning för värdklass](./media/user-guide/usbx-events/image87.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX för värd klass för ljud uppspelning.
+Den här händelsen representerar en USBX-värdklass – Hämta händelse för ljudströmningssampling.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-audio-streaming-sampling-set"></a>Samplings uppsättning för värd klassens ljud strömning 
+### <a name="host-class-audio-streaming-sampling-set"></a>Samplingsuppsättning för ljudströmning för värdklass 
 
 #### <a name="ux_host_class_audio_streaming_sampling_set"></a>ux_host_class_audio_streaming_sampling_set
 
-**Ikonen** ![ Ikon för samplings uppsättning för värd klassens ljud strömning](./media/user-guide/usbx-events/image88.png)
+**Ikon** ![ Ikon för insamlingsuppsättning för ljudströmning för värdklass](./media/user-guide/usbx-events/image88.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en insamlings händelse för ljud strömning i USBX Host Class.
+Den här händelsen representerar en USBX-värdklass för samplingsuppsättningshändelse för ljudströmning.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Info fält 2: ljud sampling.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Ljudsampling.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-audio-write"></a>Ljud skrivning för värd klass 
+### <a name="host-class-audio-write"></a>Ljudskrivning för värdklass 
 
 #### <a name="ux_host_class_audio_write"></a>ux_host_class_audio_write
 
-**Ikonen** ![ Ljud Skriv ikon för värd klass](./media/user-guide/usbx-events/image89.png)
+**Ikon** ![ Ikon för ljudskrivning för värdklass](./media/user-guide/usbx-events/image89.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en ljud skrivnings händelse för en USBX värd klass.
+Den här händelsen representerar en ljudskrivningshändelse för USBX-värdklass.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Info fält 2: data pekare.
-- Informations fält 3: begärd längd.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Data pekare.
+- Informationsfält 3: Begärd längd.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-cdc-acm-activate"></a>Värd klass CDC-ACM aktivera 
+### <a name="host-class-cdc-acm-activate"></a>Aktivera Cdc Acm för värdklass 
 
 #### <a name="ux_host_class_cdc_acm_activate"></a>ux_host_class_cdc_acm_activate
 
-**Ikonen** ![ Värd klass C D C A C M Aktivera ikon](./media/user-guide/usbx-events/image90.png)
+**Ikon** ![ Aktiveringsikon för värdklass C D C A C M](./media/user-guide/usbx-events/image90.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX-värd klass CDC ACM aktivera händelse.
+Den här händelsen representerar en AKTIVERINGShändelse för USBX-värdklassen Cdc Acm.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-cdc-acm-deactivate"></a>Värd klass CDC ACM-inaktive ring 
+### <a name="host-class-cdc-acm-deactivate"></a>Inaktivera Cdc Acm för värdklass 
 
 #### <a name="ux_host_class_cdc_acm_deactivate"></a>ux_host_class_cdc_acm_deactivate
 
-**Ikonen** ![ Värd klass C D C A C M inaktivera ikon](./media/user-guide/usbx-events/image91.png)
+**Ikon** ![ Ikon för inaktiverad värdklass C D C A C M](./media/user-guide/usbx-events/image91.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX-värd klass CDC ACM-händelsen.
+Den här händelsen representerar en USBX-värdklass cdc Acm inaktivera händelse.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-cdc-acm-ioctl-abort-in-pipe"></a>Värd klass CDC ACM IOCTL abort i pipe 
+### <a name="host-class-cdc-acm-ioctl-abort-in-pipe"></a>Host Class Cdc Acm Ioctl Abort In Pipe 
 
 #### <a name="ux_host_class_cdc_acm_ioctl_abort_in_pipe"></a>ux_host_class_cdc_acm_ioctl_abort_in_pipe
 
-**Ikonen** ![ Värd klass C D C A C M I O C T L avbryter i pipe-ikonen](./media/user-guide/usbx-events/image92.png)
+**Ikon** ![ Ikonen Avbryt i pipe för värdklass C D C A C M I O C T L Avbryt i pipe](./media/user-guide/usbx-events/image92.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX-värd klass CDC ACM IOCTL abort i pipe-händelse.
+Den här händelsen representerar en USBX-värdklass Cdc Acm Ioctl Abort In Pipe Event.
 
-Informations fält 
+Informationsfält 
 
-- Informations fält 1: klass instans.
-- Info fält 2: slut punkt.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Slutpunkt.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-cdc-acm-ioctl-abort-out-pipe"></a>Värd klass CDC ACM IOCTL avbryter pipe 
+### <a name="host-class-cdc-acm-ioctl-abort-out-pipe"></a>Host Class Cdc Acm Ioctl Abort Out Pipe 
 
 #### <a name="ux_host_class_cdc_acm_ioct_abort_out_pipe"></a>ux_host_class_cdc_acm_ioct_abort_out_pipe
 
-**Ikon** ! [[Värd klass C D c A c M I O c T L ta bort pipe-ikon](./media/user-guide/usbx-events/image93.png)
+**Ikon** ! [[Ikon för att avbryta pipe för värdklass C D C A C](./media/user-guide/usbx-events/image93.png) M I O C T L
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX-värd klass CDC ACM IOCTL avbryter pipe-händelse.
+Den här händelsen representerar en USBX-värdklass Cdc Acm Ioctl Abort Out Pipe Event.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Info fält 2: slut punkt.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Slutpunkt.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-cdc-acm-ioctl-get-device-status"></a>Värd klass CDC ACM IOCTL Hämta enhets status 
+### <a name="host-class-cdc-acm-ioctl-get-device-status"></a>Host Class Cdc Acm Ioctl Get Device Status 
 
 #### <a name="ux_host_class_cdc_acm_ioctl_get_device_status"></a>ux_host_class_cdc_acm_ioctl_get_device_status
 
-**Ikonen** ![ Värd klass C D C A C M I O C T L, Hämta enhets status ikon](./media/user-guide/usbx-events/image94.png)
+**Ikon** ![ Ikon för att hämta enhetsstatus för värdklass C D C A C M I O C T L](./media/user-guide/usbx-events/image94.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX-värd klass CDC ACM IOCTL get enhets status händelse.
+Den här händelsen representerar en USBX-värdklass Cdc Acm Ioctl Hämta enhetsstatushändelse.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Info fält 2: enhets status.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Enhetsstatus.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-cdc-acm-ioctl-get-line-coding"></a>Värd klass CDC ACM IOCTL get line-kodning 
+### <a name="host-class-cdc-acm-ioctl-get-line-coding"></a>Host Class Cdc Acm Ioctl Get Line Coding 
 
 #### <a name="ux_host_class_cdc_acm_ioctl_get_line_coding"></a>ux_host_class_cdc_acm_ioctl_get_line_coding
 
-**Ikonen** ![ Värd klass C D C A C M I O C T L, Hämta rad kodnings ikon](./media/user-guide/usbx-events/image95.png)
+**Ikon** ![ Ikon för att hämta linjekodning för värdklass C D C A C M I O C T L](./media/user-guide/usbx-events/image95.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX-värd klass CDC ACM IOCTL get line kodnings händelse.
+Den här händelsen representerar en USBX-värdklass Cdc Acm Ioctl Get Line Coding Event.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Info fält 2: parameter.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Parameter.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-cdc-acm-ioctl-notification-callback"></a>Återanrop för värd klass CDC ACM IOCTL-meddelande
+### <a name="host-class-cdc-acm-ioctl-notification-callback"></a>Återanrop av meddelanden för Host Class Cdc Acm Ioctl
 
 #### <a name="ux_host_class_cdc_acm_ioctl_notification_callback"></a>ux_host_class_cdc_acm_ioctl_notification_callback
 
-**Ikonen** ![ Värd klass C D C A C M I O C T L ikon för återanrop i meddelande](./media/user-guide/usbx-events/image96.png)
+**Ikon** ![ Ikon för återanrop av meddelanden från värdklass C D C A C M I O C T L](./media/user-guide/usbx-events/image96.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX för värd klass CDC ACM IOCTL-meddelande.
+Den här händelsen representerar en USBX-värdklass Cdc Acm Ioctl Notification Callback Event.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: parameter.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Parameter.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-cdc-acm-ioctl-send-break"></a>Värd klass CDC ACM IOCTL skicka rast 
+### <a name="host-class-cdc-acm-ioctl-send-break"></a>Skicka break för Cdc Acm Ioctl för värdklass 
 
 #### <a name="ux_host_class_cdc_acm_ioctl_send_break"></a>ux_host_class_cdc_acm_ioctl_send_break
 
-**Ikonen** ![ Värd klass C D C A C M I O C T L-ikonen skicka rast](./media/user-guide/usbx-events/image97.png)
+**Ikon** ![ Skicka brytikon för Värdklass C D C A C M I O C T L](./media/user-guide/usbx-events/image97.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX-värd klass CDC ACM IOCTL Send Break event.
+Den här händelsen representerar en USBX-värdklass Cdc Acm Ioctl Send Break Event.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Info fält 2: parameter.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Parameter.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-cdc-acm-ioctl-set-line-coding"></a>Värd klass CDC ACM IOCTL set line-kodning 
+### <a name="host-class-cdc-acm-ioctl-set-line-coding"></a>Kodning av radkodning för Cdc Acm Ioctl för värdklass 
 
 #### <a name="ux_host_class_cdc_acm_ioctl_set_line_coding"></a>ux_host_class_cdc_acm_ioctl_set_line_coding
 
-**Ikonen** ![ Värd klass C D C A C M I O C T L v Ange ikon ikon för linje kodning ](./media/user-guide/usbx-events/image97.png) ] (./media/user-guide/usbx-events/image98.png)
+**Ikon** ![ Ikon för ange radkodningsikon för värdklass C D C A C M I O C T L ange ](./media/user-guide/usbx-events/image97.png) radkodning](./media/user-guide/usbx-events/image98.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX för värd klass CDC ACM IOCTL som anger linje kodning.
+Den här händelsen representerar en USBX-värdklass Cdc Acm Ioctl Set Line Coding Event.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: parameter.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Parameter.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-cdc-acm-ioctl-set-line-state"></a>Värd klass CDC ACM IOCTL ange linje status 
+### <a name="host-class-cdc-acm-ioctl-set-line-state"></a>Värdklass Cdc Acm Ioctl Ange radtillstånd 
 
 #### <a name="ux_host_class_cdc_acm_ioctl_set_line_state"></a>ux_host_class_cdc_acm_ioctl_set_line_state
 
-**Ikonen** ![ Värd klass C D C A C M I O C T L ikon för ange linje tillstånd](./media/user-guide/usbx-events/image99.png)
+**Ikon** ![ Ikon för ange radtillstånd för värdklass C D C A C M I O C T L](./media/user-guide/usbx-events/image99.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX värd klass CDC ACM IOCTL set line State event.
+Den här händelsen representerar en USBX-värdklass Cdc Acm Ioctl Set Line State Event.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Info fält 2: parameter.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Parameter.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-cdc-acm-read"></a>Värd klass CDC ACM Read 
+### <a name="host-class-cdc-acm-read"></a>Läsa Cdc Acm för värdklass 
 
 #### <a name="ux_host_class_cdc_acm_read"></a>ux_host_class_cdc_acm_read
 
-**Ikonen** ![ Värd klass C D A C M Läs ikon](./media/user-guide/usbx-events/image100.png)
+**Ikon** ![ Läsikon för Värdklass C D C A C M](./media/user-guide/usbx-events/image100.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX-värd klass CDC ACM Read event.
+Den här händelsen representerar en USBX-värdklass cdc Acm läshändelse.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Info fält 2: data pekare.
-- Informations fält 3: begärd längd.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Data pekare.
+- Informationsfält 3: Begärd längd.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-cdc-acm-reception-start"></a>Start av värd klassens CDC-ACM 
+### <a name="host-class-cdc-acm-reception-start"></a>Host Class Cdc Acm Mottagningsstart 
 
 #### <a name="ux_host_class_cdc_acm_reception_start"></a>ux_host_class_cdc_acm_reception_start
 
-**Ikonen** ![ Start ikon för värd klass C D A C M](./media/user-guide/usbx-events/image101.png)
+**Ikon** ![ Startikon för värdklass C D C A C M-mottagning](./media/user-guide/usbx-events/image101.png)
 
 **Beskrivning**
 
-Den här händelsen representerar start händelsen för en USBX-värd klass CDC-ACM.
+Den här händelsen representerar en USBX-värdklass cdc Acm mottagning starthändelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-cdc-acm-reception-stop"></a>Stopp för värd klass CDC-ACM 
+### <a name="host-class-cdc-acm-reception-stop"></a>Host Class Cdc Acm– mottagningsstopp 
 
 #### <a name="ux_host_class_cdc_acm_reception_stop"></a>ux_host_class_cdc_acm_reception_stop
 
-**Ikonen** ![ Svars ikon för värd klass C D A C M](./media/user-guide/usbx-events/image102.png)
+**Ikon** ![ Ikon för stopp av mottagning i värdklass C D C A C M](./media/user-guide/usbx-events/image102.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX för värd klass CDC ACM.
+Den här händelsen representerar en USBX-värdklass cdc Acm mottagningsstopp händelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-cdc-acm-write"></a>Värd klass CDC ACM-skrivning 
+### <a name="host-class-cdc-acm-write"></a>Host Class Cdc Acm Write 
 
 #### <a name="ux_host_class_acm_write"></a>ux_host_class_acm_write
 
-**Ikonen** ![ Värd klass C D A C M Skriv ikon](./media/user-guide/usbx-events/image103.png)
+**Ikon** ![ Skrivikon för Värdklass C D C A C M](./media/user-guide/usbx-events/image103.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX värd klass CDC ACM Write event.
+Den här händelsen representerar en USBX-värdklass cdc Acm skrivhändelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: data pekare.
-- Informations fält 3: begärd längd.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Data pekare.
+- Informationsfält 3: Begärd längd.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-dpump-activate"></a>Aktivering av värd klass Dpump 
+### <a name="host-class-dpump-activate"></a>Aktivera värdklass-Dpump 
 
 #### <a name="ux_host_class_dpump_activate"></a>ux_host_class_dpump_activate
 
-**Ikonen** ![ Dpump Aktivera ikon för värd klass](./media/user-guide/usbx-events/image104.png)
+**Ikon** ![ Aktiveringsikon för värdklass-Dpump](./media/user-guide/usbx-events/image104.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX-Dpump aktiverings händelse.
+Den här händelsen representerar en aktiveringshändelse för USBX-värdklass Dpump.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-dpump-deactivate"></a>Dpump inaktive ring av värd klass 
+### <a name="host-class-dpump-deactivate"></a>Inaktivera värdklass-Dpump 
 
 #### <a name="ux_host_class_dpump_deactivate"></a>ux_host_class_dpump_deactivate
 
-**Ikonen** ![ Dpump-ikon för värd klass](./media/user-guide/usbx-events/image105.png)
+**Ikon** ![ Ikon för inaktiverad värdklass-Dpump](./media/user-guide/usbx-events/image105.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX värd klass Dpump-händelse.
+Den här händelsen representerar en USBX-värdklass Dpump Inaktivera händelse.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-dpump-read"></a>Läsning av värd klass Dpump 
+### <a name="host-class-dpump-read"></a>Läsa värdklass-Dpump 
 
 #### <a name="ux_host_class_dpump_read"></a>ux_host_class_dpump_read
 
-**Ikonen** ![ Läs ikon för värd klassen Dpump](./media/user-guide/usbx-events/image106.png)
+**Ikon** ![ Ikonen Läsa för värdklass-Dpump](./media/user-guide/usbx-events/image106.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX värd klass Dpump Read event.
+Den här händelsen representerar en LÄShändelse för USBX-värdklass Dpump.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: data pekare.
-- Informations fält 3: begärd längd.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Data pekare.
+- Informationsfält 3: Begärd längd.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-dpump-write"></a>Skrivning av värd klass Dpump 
+### <a name="host-class-dpump-write"></a>Skriv för värdklass-Dpump 
 
 #### <a name="ux_host_class_dpump_write"></a>ux_host_class_dpump_write
 
-**Ikonen** ![ Dpump Skriv ikon för värd klass](./media/user-guide/usbx-events/image107.png)
+**Ikon** ![ Skrivikon för värdklass-Dpump](./media/user-guide/usbx-events/image107.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX Dpump Skriv händelse.
+Den här händelsen representerar en skrivningshändelse för USBX-värdklass Dpump.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Info fält 2: data pekare.
-- Informations fält 3: begärd längd.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Data pekare.
+- Informationsfält 3: Begärd längd.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-hid-activate"></a>HID-aktivering för värd klass 
+### <a name="host-class-hid-activate"></a>Hid-aktivering för värdklass 
 
 #### <a name="ux_host_class_hid_activate"></a>ux_host_class_hid_activate
 
-**Ikonen** ![ Ikon för HID-aktivering i värd klass](./media/user-guide/usbx-events/image108.png)
+**Ikon** ![ Ikon för hid-aktivering för värdklass](./media/user-guide/usbx-events/image108.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en HID-USBX för värd klass.
+Den här händelsen representerar en USBX-värdklass för hid-aktiveringshändelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-hid-client-register"></a>HID-klient register för värd klass 
+### <a name="host-class-hid-client-register"></a>Hid-klientregister för värdklass 
 
 #### <a name="ux_host_class_hid_client_register"></a>ux_host_class_hid_client_register
 
-**Ikonen** ![ Register ikon för HID-klient för värd klass](./media/user-guide/usbx-events/image109.png)
+**Ikon** ![ Ikon för hid-klientregister för värdklass](./media/user-guide/usbx-events/image109.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX-händelse för HID-klient för värd klass.
+Den här händelsen representerar en USBX-värdklass, Hid Client Register Event.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: HID-klientcertifikat.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Hid-klientnamn.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-hid-deactivate"></a>HID-inaktive ring av värd klass 
+### <a name="host-class-hid-deactivate"></a>Inaktivera värdklass 
 
 #### <a name="ux_host_class_hid_deactivate"></a>ux_host_class_hid_deactivate
 
-**Ikonen** ![ Ikon för HID-inaktivera värd klass](./media/user-guide/usbx-events/image110.png)
+**Ikon** ![ Ikon för inaktiverad värdklass](./media/user-guide/usbx-events/image110.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en händelse för HID-inaktive ring av USBX värd klasser.
+Den här händelsen representerar en USBX-värdklass för inaktiverad händelse.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-hid-idle-get"></a>HID-inaktivitet i värd klass 
+### <a name="host-class-hid-idle-get"></a>Hid Idle Get för värdklass 
 
 #### <a name="ux_host_class_hid_idle_get"></a>ux_host_class_hid_idle_get
 
-**Ikonen** ![ Ikon för HID-inaktivitet i värd klass](./media/user-guide/usbx-events/image111.png)
+**Ikon** ![ Ikonen Hid Idle Get (Hämta) för värdklass hid inaktiv](./media/user-guide/usbx-events/image111.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX-värd klass HID inaktiv get-händelse.
+Den här händelsen representerar en USBX-värdklass, Hid Idle Get Event.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-hid-idle-set"></a>HID inaktive rad värd klass 
+### <a name="host-class-hid-idle-set"></a>Hid Idle Set för värdklass 
 
 #### <a name="ux_host_class_hid_idle_set"></a>ux_host_class_hid_idle_set
 
-**Ikonen** ![ Ikon för HID inaktive rad värd klass](./media/user-guide/usbx-events/image112.png)
+**Ikon** ![ Ikon för Hid Idle Set för värdklass](./media/user-guide/usbx-events/image112.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en händelse för HID inaktive rad USBX-värd klass.
+Den här händelsen representerar en USBX-värdklass, Hid Idle Set Event.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-hid-keyboard-activate"></a>Aktivera HID-tangentbord för värd klass 
+### <a name="host-class-hid-keyboard-activate"></a>Aktivera hid-tangentbord för värdklass 
 
 #### <a name="ux_host_class_hid_keyboard_activate"></a>ux_host_class_hid_keyboard_activate
 
-**Ikonen** ![ Ikon för HID-tangentbordet för värd klass](./media/user-guide/usbx-events/image113.png)
+**Ikon** ![ Aktiveringsikon för värdklassens hid-tangentbord](./media/user-guide/usbx-events/image113.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX-värd klass HID tangent bord aktivera händelse.
+Den här händelsen representerar en USBX-värdklass Aktiveringshändelse för hid-tangentbord.
 
-**Informations fält**
-<p>Informations fält 1: klass instans.
-<p>Info-fält 2: HID-klient instans.
-<p>Informations fält 3: används inte.
-<p>Info fält 4: används inte.
+**Informationsfält**
+<p>Informationsfält 1: Klassinstans.
+<p>Informationsfält 2: Hid-klientinstans.
+<p>Informationsfält 3: Används inte.
+<p>Informationsfält 4: Används inte.
 
-### <a name="host-class-hid-keyboard-deactivate"></a>HID-tangent bords inaktive ring för värd klass 
+### <a name="host-class-hid-keyboard-deactivate"></a>Inaktivera hid-tangentbord för värdklass 
 
 #### <a name="ux_host_class_hid_keyboard_deactivate"></a>ux_host_class_hid_keyboard_deactivate
 
-**Ikonen** ![ Ikonen värd klass HID tangent bords inaktive ring](./media/user-guide/usbx-events/image114.png)
+**Ikon** ![ Inaktivera tangentbordsikon för värdklass hid](./media/user-guide/usbx-events/image114.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en händelse för HID-tangentbordet för USBX-värd klass.
+Den här händelsen representerar en USBX-värdklass Inaktivera tangentbord med hid-tangentbord.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info-fält 2: HID-klient instans.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Hid-klientinstans.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-hid-mouse-activate"></a>Aktivera HID-mus för värd klass 
+### <a name="host-class-hid-mouse-activate"></a>Aktivera hid mus för värdklass 
 
 #### <a name="ux_host_class_hid_mouse_activate"></a>ux_host_class_hid_mouse_activate
 
-**Ikonen** ![ Aktivera ikon för HID-mus i värd klass](./media/user-guide/usbx-events/image115.png)
+**Ikon** ![ Aktiveringsikon för värdklass hid mus](./media/user-guide/usbx-events/image115.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX-värd klass HID-mus aktivera händelse.
+Den här händelsen representerar en USBX-värdklass För musaktiverad händelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info-fält 2: HID-klient instans.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Hid-klientinstans.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-hid-mouse-deactivate"></a>Inaktive ring av värd klass HID-mus 
+### <a name="host-class-hid-mouse-deactivate"></a>Inaktivera mus för värdklass 
 
 #### <a name="ux_host_class_hid_mouse_deactivate"></a>ux_host_class_hid_mouse_deactivate
 
-**Ikonen** ![ Värd klass HID-mus inaktivera ikon](./media/user-guide/usbx-events/image116.png)
+**Ikon** ![ Ikon för inaktiverad mus för värdklass](./media/user-guide/usbx-events/image116.png)
 
 **Beskrivning**
 
-- Den här händelsen representerar en USBX-värd klass HID-mus.
+- Den här händelsen representerar en USBX-värdklass inaktiverad mushändelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info-fält 2: HID-klient instans.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Hid-klientinstans.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-hid-remote-control-activate"></a>Aktivera HID-fjärrstyrning av värd klass 
+### <a name="host-class-hid-remote-control-activate"></a>Aktivera fjärrstyrning av värdklass hid 
 
 #### <a name="ux_host_class_hid_remote_control_activate"></a>ux_host_class_hid_remote_control_activate
 
-**Ikonen** ![ Ikonen aktivera HID-fjärrstyrning i värd klass](./media/user-guide/usbx-events/image117.png)
+**Ikon** ![ Aktiveringsikon för värdklass hid-fjärrstyrning](./media/user-guide/usbx-events/image117.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX-värd klass HID-fjärrstyrning.
+Den här händelsen representerar en USBX-värdklass, Hid Remote Control Activate Event.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Info-fält 2: HID-klient instans.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Hid-klientinstans.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-hid-remote-control-deactivate"></a>HID-fjärrstyrning inaktive ras för värd klass 
+### <a name="host-class-hid-remote-control-deactivate"></a>Inaktivera fjärrstyrning av värdklass 
 
 #### <a name="ux_host_class_hid_remote_control_deactivate"></a>ux_host_class_hid_remote_control_deactivate
 
-**Ikonen** ![ Ikon för HID-fjärrstyrning av värd klass](./media/user-guide/usbx-events/image118.png)
+**Ikon** ![ Ikon för inaktiverad fjärrstyrning i värdklass](./media/user-guide/usbx-events/image118.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX-värd klass HID-fjärrstyrning.
+Den här händelsen representerar en USBX-värdklass inaktiverad fjärrstyrningshändelse.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Info-fält 2: HID-klient instans.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Hid-klientinstans.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-hid-report-get"></a>Hämta HID-rapport för värd klass 
+### <a name="host-class-hid-report-get"></a>Hämta hid-rapport för värdklass 
 
 #### <a name="ux_host_class_hid_report_get"></a>ux_host_class_hid_report_get
 
-**Ikonen** ![ Ikon för Hämta värd klass HID-rapport](./media/user-guide/usbx-events/image119.png)
+**Ikon** ![ Ikonen Hämta för värdklass hid-rapport](./media/user-guide/usbx-events/image119.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en HID-rapport för USBX-värd klass.
+Den här händelsen representerar en USBX-värdklass, Hid Report Get.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info-fält 2: klient rapport.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Klientrapport.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-hid-report-set"></a>HID-rapport uppsättning för värd klass 
+### <a name="host-class-hid-report-set"></a>Hid-rapportuppsättning för värdklass 
 
 #### <a name="ux_host_class_hid_report_set"></a>ux_host_class_hid_report_set
 
-**Ikonen** ![ Ikon för HID-rapport för värd klass](./media/user-guide/usbx-events/image120.png)
+**Ikon** ![ Ikon för Hid Report Set för värdklass](./media/user-guide/usbx-events/image120.png)
 
-**Beskrivning** Den här händelsen representerar en HID-rapport uppsättning för USBX-värd klass.
+**Beskrivning** Den här händelsen representerar en USBX-värdklass hid-rapportuppsättning.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info-fält 2: klient rapport.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Klientrapport.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-hub-activate"></a>Aktivera värd klass hubb 
+### <a name="host-class-hub-activate"></a>Aktivera värdklasshubb 
 
 #### <a name="ux_host_class_hub_activate"></a>ux_host_class_hub_activate
 
-**Ikonen** ![ Aktivera ikon för värd klassens hubb](./media/user-guide/usbx-events/image121.png)
+**Ikon** ![ Aktiveringsikon för värdklasshubb](./media/user-guide/usbx-events/image121.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en aktiverings händelse för USBX Host Class Hub.
+Den här händelsen representerar en aktiveringshändelse för en USBX-värdklasshubb.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-hub-change-detect"></a>Identifiera ändring av värd klassens hubb 
+### <a name="host-class-hub-change-detect"></a>Identifiering av ändring av värdklasshubb 
 
 #### <a name="ux_host_class_hub_change_detect"></a>ux_host_class_hub_change_detect
 
-**Ikonen** ![ Identifiera ikon för värd klassens hubb ändring](./media/user-guide/usbx-events/image122.png)
+**Ikon** ![ Ikon för ändring av identifiering av värdklasshubb](./media/user-guide/usbx-events/image122.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en händelse för att identifiera en USBX för värd klass ändringar.
+Den här händelsen representerar en ÄNDRINGshändelse för EN USBX-värdklasshubb.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-hub-deactivate"></a>Inaktive ring av värd Klasss hubb 
+### <a name="host-class-hub-deactivate"></a>Inaktivera värdklasshubb 
 
 #### <a name="ux_host_class_hub_deactivate"></a>ux_host_class_hub_deactivate
 
-**Ikonen** ![ Ikonen inaktivera ikon för värd klassens hubb](./media/user-guide/usbx-events/image123.png)
+**Ikon** ![ Inaktivera ikon för värdklasshubb](./media/user-guide/usbx-events/image123.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX-händelse för värd klassens hubb.
+Den här händelsen representerar en USBX-värdklasshubb för inaktiveringshändelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-hub-port-change-connection-process"></a>Anslutnings processen för värd klassens hubb port ändring 
+### <a name="host-class-hub-port-change-connection-process"></a>Ändringsanslutningsprocess för värdklasshubbport 
 
 #### <a name="ux_host_class_hub_change_connection_process"></a>ux_host_class_hub_change_connection_process
 
-**Ikonen** ![ Ikon för att ändra anslutnings process för värd klassens hubb port](./media/user-guide/usbx-events/image124.png)
+**Ikon** ![ Ikonen Ändra anslutningsprocess för värdklasshubbport](./media/user-guide/usbx-events/image124.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX anslutnings process händelse för värd klassens hubb.
+Den här händelsen representerar en ändringsprocess för portanslutningen för en USBX-värdklasshubb.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: port.
-- Info-fält 3: port status.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Port.
+- Informationsfält 3: Portstatus.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-hub-port-change-enable-process"></a>Aktiverings processen för värd klassens Hubbs port ändring 
+### <a name="host-class-hub-port-change-enable-process"></a>Aktivera process för portändring för värdklasshubb 
 
 #### <a name="ux_host_class_hub_port_change_enable_process"></a>ux_host_class_hub_port_change_enable_process
 
-**Ikonen** ![ Aktivera process ikon för värd klassens hubb port ändring](./media/user-guide/usbx-events/image125.png)
+**Ikon** ![ Ikonen Aktivera process för portändring för värdklasshubb](./media/user-guide/usbx-events/image125.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX för värd Klasss Hub-port ändra Aktivera process händelse.
+Den här händelsen representerar en portändringsprocess för USBX-värdklasshubb för att aktivera processhändelsen.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: port.
-- Info-fält 3: port status.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Port.
+- Informationsfält 3: Portstatus.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-hub-port-change-over-current-process"></a>Port ändring i värd klassens hubb över den aktuella processen 
+### <a name="host-class-hub-port-change-over-current-process"></a>Portändring för värdklasshubb över aktuell process 
 
 #### <a name="ux_host_class_hub_port_change_over_current_process"></a>ux_host_class_hub_port_change_over_current_process
 
-**Ikonen** ![ Port ändring över ikon för värd Klasss hubb över den aktuella process ikonen](./media/user-guide/usbx-events/image126.png)
+**Ikon** ![ Ikon för portändring för värdklasshubb över aktuell process](./media/user-guide/usbx-events/image126.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att allokera ett paket via nx_packet_allocate.
+Den här händelsen representerar allokering av ett paket via nx_packet_allocate.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: port.
-- Info-fält 3: port status.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Port.
+- Informationsfält 3: Portstatus.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-hub-port-change-reset-process"></a>Återställnings process för port ändring av värd klass 
+### <a name="host-class-hub-port-change-reset-process"></a>Process för ändringsåterställning av värdklasshubbport 
 
 #### <a name="ux_host_class_hub_port_change_reset_process"></a>ux_host_class_hub_port_change_reset_process
 
-**Ikonen** ![ Ikon för ändrings process för värd klassens Hubbs port](./media/user-guide/usbx-events/image127.png)
+**Ikon** ![ Ikon för ändring av återställningsprocess för värdklasshubbport](./media/user-guide/usbx-events/image127.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX för värd klass för värde ändrings återställning.
+Den här händelsen representerar en HÄNDELSE för ändringsåterställning av port för USBX-värdklasshubb.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: hubb. Info fält 2: port.
-- Info-fält 3: port status.
-- Info fält 4: används inte.
+- Informationsfält 1: Hubb. Informationsfält 2: Port.
+- Informationsfält 3: Portstatus.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-hub-port-change-suspend-process"></a>Inaktive ring av värd klassens hubb port ändring 
+### <a name="host-class-hub-port-change-suspend-process"></a>Pausprocess för portändring för värdklasshubb 
 
 #### <a name="ux_host_class_hub_port_change_suspend_process"></a>ux_host_class_hub_port_change_suspend_process
 
-**Ikonen** ![ Ikon för att inaktivera process klassens hubb port ändring](./media/user-guide/usbx-events/image128.png)
+**Ikon** ![ Ikon för ändring av pausprocess för värdklasshubbport](./media/user-guide/usbx-events/image128.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en inaktive ring av en USBX för värd Klasss port ändring.
+Den här händelsen representerar en usbx-värdklasshubb, portändring, pausprocesshändelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: port.
-- Info-fält 3: port status.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Port.
+- Informationsfält 3: Portstatus.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-pima-activate"></a>Aktivering av värd klass Pima 
+### <a name="host-class-pima-activate"></a>Aktivera Pima för värdklass 
 
 #### <a name="ux_host_class_pima_activate"></a>ux_host_class_pima_activate
 
-**Ikonen** ![ Pima Aktivera ikon för värd klass](./media/user-guide/usbx-events/image129.png)
+**Ikon** ![ Aktiveringsikon för värdklass-Pima](./media/user-guide/usbx-events/image129.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX-Pima aktiverings händelse.
+Den här händelsen representerar en USBX-värdklass för aktiveringshändelsen i Pima.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-pima-deactivate"></a>Pima inaktive ring av värd klass 
+### <a name="host-class-pima-deactivate"></a>Inaktivera Pima för värdklass 
 
 #### <a name="ux_host_class_pima_deactivate"></a>ux_host_class_pima_deactivate
 
-**Ikonen** ![ Pima-ikon för värd klass](./media/user-guide/usbx-events/image130.png)
+**Ikon** ![ Ikon för att inaktivera värdklass-Pima](./media/user-guide/usbx-events/image130.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX värd klass Pima-händelse.
+Den här händelsen representerar en Pima-inaktiveringshändelse i USBX-värdklassen.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-pima-device-info-get"></a>Hämta Pima enhets information för värd klass 
+### <a name="host-class-pima-device-info-get"></a>Information om värdklass för Pima-enhet hämta 
 
 #### <a name="ux_host_class_pima_device_info_get"></a>ux_host_class_pima_device_info_get
 
-**Ikonen** ![ Hämta ikon för värd klassens Pima enhets information](./media/user-guide/usbx-events/image131.png)
+**Ikon** ![ Ikonen Hämta information om värdklassenhetsinformation för värdklass](./media/user-guide/usbx-events/image131.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX Pima Device information get-händelse.
+Den här händelsen representerar en USBX-värdklass Pima Device Info Get Event.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: Pima-enhet.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Pima-enhet.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-pima-device-reset"></a>Återställning av värd klass Pima enhet 
+### <a name="host-class-pima-device-reset"></a>Återställning av värdklass för Pima-enhet 
 
 #### <a name="ux_host_class_pima_device_reset"></a>ux_host_class_pima_device_reset
 
-**Ikonen** ![ Enhets återställnings ikon för värd klass Pima](./media/user-guide/usbx-events/image132.png)
+**Ikon** ![ Ikon för återställning av värdklassenhet](./media/user-guide/usbx-events/image132.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX Pima Device rereset-händelse.
+Den här händelsen representerar en USBX-värdklasshändelse för återställning av enhet.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-pima-notification"></a>Pima-meddelande för värd klass 
+### <a name="host-class-pima-notification"></a>Pima-meddelande för värdklass 
 
 #### <a name="ux_host_class_pima_notification"></a>ux_host_class_pima_notification
 
-**Ikonen** ![ Meddelande ikon för värd klass Pima](./media/user-guide/usbx-events/image133.png)
+**Ikon** ![ Meddelandeikon för värdklass-Pima](./media/user-guide/usbx-events/image133.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX-meddelande händelse för värd klass Pima.
+Den här händelsen representerar en Pima-meddelandehändelse för EN USBX-värdklass.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans. Info fält 2: händelse kod.
-- Info-fält 3: transaktions-ID.
-- Info fält 4: Parameter1.
+- Informationsfält 1: Klassinstans. Informationsfält 2: Händelsekod.
+- Informationsfält 3: Transaktions-ID.
+- Informationsfält 4: Parameter1.
 
-### <a name="host-class-pima-number-objects-get"></a>Hämta Pima nummer objekt för värd klass 
+### <a name="host-class-pima-number-objects-get"></a>Host Class Pima Number Objects Get 
 
 #### <a name="ux_host_class_pima_number_objects_get"></a>ux_host_class_pima_number_objects_get
 
-**Ikonen** ![ Ikon för Pima för värd klassens antal objekt](./media/user-guide/usbx-events/image134.png)
+**Ikon** ![ Pima Number Objects Get-ikon för värdklass](./media/user-guide/usbx-events/image134.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en händelse för en USBX-värd klass Pima Number Objects.
+Den här händelsen representerar en USBX-värdklass Pima Number Objects Get Event.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-pima-object-close"></a>Pima objekt stängning i värd klass 
+### <a name="host-class-pima-object-close"></a>Stäng Pima-objekt för värdklass 
 
 #### <a name="ux_host_class_pima_object_close"></a>ux_host_class_pima_object_close
 
-**Ikonen** ![ Ikonen Stäng Pima objekt i värd klass](./media/user-guide/usbx-events/image135.png)
+**Ikon** ![ Stängningsikon för värdklass-Pima-objekt](./media/user-guide/usbx-events/image135.png)
 
 **Beskrivning**
 
-Den här händelsen representerar händelsen stängning av USBX Pima objekt.
+Den här händelsen representerar en Pima Object Close-händelse i USBX-värdklassen.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info-fält 2: objekt.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Objekt.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-pima-object-copy"></a>Pima objekt kopia av värd klass 
+### <a name="host-class-pima-object-copy"></a>Pima-objektkopiering för värdklass 
 
 #### <a name="ux_host_class_pima_object_copy"></a>ux_host_class_pima_object_copy
 
-**Ikonen** ![ Objekt kopierings ikon för värd klass Pima](./media/user-guide/usbx-events/image136.png)
+**Ikon** ![ Pima Object Copy-ikon för värdklass](./media/user-guide/usbx-events/image136.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX Pima objekt kopierings händelse.
+Den här händelsen representerar en Pima-objektkopieringshändelse för USBX-värdklass.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info-fält 2: objekt referens.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Objekthandtag.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-pima-object-delete"></a>Ta bort värd klass Pima objekt 
+### <a name="host-class-pima-object-delete"></a>Ta bort Pima-objekt för värdklass 
 
 #### <a name="ux_host_class_pima_object_delete"></a>ux_host_class_pima_object_delete
 
-**Ikonen** ![ Pima objekt borttagnings ikon för värd klass](./media/user-guide/usbx-events/image137.png)
+**Ikon** ![ Ikonen Ta bort objekt för värdklass Pima](./media/user-guide/usbx-events/image137.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX Pima objekt borttagnings händelse.
+Den här händelsen representerar en USBX-värdklass för borttagning av objekt i Pima-klassen.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info-fält 2: objekt referens.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Objekthandtag.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-pima-object-get"></a>Hämta Pima-objekt för värd klass 
+### <a name="host-class-pima-object-get"></a>Host Class Pima Object Get 
 
 #### <a name="ux_host_class_pima_object_get"></a>ux_host_class_pima_object_get
 
-**Ikonen** ![ Pima objekt Hämta ikon för värd klass](./media/user-guide/usbx-events/image138.png)
+**Ikon** ![ Pima Object Get-ikon för värdklass](./media/user-guide/usbx-events/image138.png)
 
 **Beskrivning**
 
 Den här händelsen representerar att hämta RARP-information via nx_rarp_info_get.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info-fält 2: objekt referens.
-- Info-fält 3: objekt.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Objekthandtag.
+- Informationsfält 3: Objekt.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-pima-object-info-get"></a>Hämta Pima objekt information för värd klass 
+### <a name="host-class-pima-object-info-get"></a>Information om Pima-objekt för värdklass get 
 
 #### <a name="ux_host_class_pima_object_info_get"></a>ux_host_class_pima_object_info_get
 
-**Ikonen** ![ Hämta ikon för värd klassens Pima objekt information](./media/user-guide/usbx-events/image139.png)
+**Ikon** ![ Pima Object Info Hämta-ikon för värdklass](./media/user-guide/usbx-events/image139.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX-händelse för värd klass Pima objekt information.
+Den här händelsen representerar en USBX-värdklass för Pima Object Info Get Event.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info-fält 2: objekt referens.
-- Info-fält 3: objekt.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Objekthandtag.
+- Informationsfält 3: Objekt.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-pima-object-info-send"></a>Skicka Pima objekt information i värd klass 
+### <a name="host-class-pima-object-info-send"></a>Skicka information om Pima-objekt för värdklass 
 
 #### <a name="ux_host_class_pima_object_info_send"></a>ux_host_class_pima_object_info_send
 
-**Ikonen** ![ Skicka ikon för Pima objekt information i värd klass](./media/user-guide/usbx-events/image140.png)
+**Ikon** ![ Skicka ikon för Pima-objektinformation för värdklass](./media/user-guide/usbx-events/image140.png)
 
 **Beskrivning**
 
-Den här händelsen representerar sändnings händelsen för en USBX-Pima objekt information.
+Den här händelsen representerar en USBX-värdklass för Pima Object Info Send Event.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info-fält 2: objekt.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Objekt.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-pima-object-move"></a>Flytt av Pima objekt i värd klass 
+### <a name="host-class-pima-object-move"></a>Flytta Pima-objekt för värdklass 
 
 #### <a name="ux_host_class_pima_object_move"></a>ux_host_class_pima_object_move
 
-**Ikonen** ![ Ikon för flytt av Pima objekt i värd klass](./media/user-guide/usbx-events/image141.png)
+**Ikon** ![ Flytta objektikon för värdklass Pima](./media/user-guide/usbx-events/image141.png)
 
 **Beskrivning**
 
-Den här Event reprThis-händelsen representerar en USBX för värd klass Pima objekt.
+Den här händelsen representerar en USBX-värdklass för Pima Object Move Event.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info-fält 2: objekt referens.
-- Info-fält 3: objekt.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Objekthandtag.
+- Informationsfält 3: Objekt.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-pima-object-send"></a>Skicka Pima objekt i värd klass 
+### <a name="host-class-pima-object-send"></a>Skicka Pima-objekt för värdklass 
 
 #### <a name="ux_host_class_pima_object_move"></a>ux_host_class_pima_object_move
 
-**Ikonen** ![ Ikon för att skicka Pima objekt i värd klass](./media/user-guide/usbx-events/image142.png)
+**Ikon** ![ Ikonen Skicka Pima-objekt för värdklass](./media/user-guide/usbx-events/image142.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX-Pima objekt sändnings händelse.
+Den här händelsen representerar en Pima Object Send-händelse för EN USBX-värdklass.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info-fält 2: objekt.
-- Info-fält 3: objektets buffert.
-- Info-fält 4: objekt längd.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Objekt.
+- Informationsfält 3: Objektbuffert.
+- Informationsfält 4: Objektlängd.
 
-### <a name="host-class-pima-object-transfer-abort"></a>Avbrytning av Pima objekt överföring i värd klass 
+### <a name="host-class-pima-object-transfer-abort"></a>Avbryt överföring av objekt i värdklassens Pima-objekt 
 
 #### <a name="ux_host_class_pima_object_transfer_abort"></a>ux_host_class_pima_object_transfer_abort
 
-**Ikonen** ![ Avbrotts ikon för Pima objekt överföring i värd klass](./media/user-guide/usbx-events/image143.png)
+**Ikon** ![ Ikonen För att avbryta överföring av värdklassobjekt i Pima-klass](./media/user-guide/usbx-events/image143.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en avbrotts händelse för USBX av värd klass Pima objekt överföring.
+Den här händelsen representerar en Pima Object Transfer Abort-händelse i USBX-värdklassen.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info-fält 2: objekt referens.
-- Info-fält 3: objekt.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Objekthandtag.
+- Informationsfält 3: Objekt.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-pima-read"></a>Läsning av värd klass Pima 
+### <a name="host-class-pima-read"></a>Pima Read för värdklass 
 
 #### <a name="ux_host_class_pima_read"></a>ux_host_class_pima_read
 
-**Ikonen** ![ Läs ikon för värd klassen Pima](./media/user-guide/usbx-events/image144.png)
+**Ikon** ![ Pima Read-ikon för värdklass](./media/user-guide/usbx-events/image144.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX värd klass Pima Read event.
+Den här händelsen representerar en USBX-värdklass för Pima Read-händelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: data pekare.
-- Informations fält 3: data längd.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Datapekare.
+- Infofält 3: Datalängd.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-pima-request-cancel"></a>Avbrotts förfrågan för värd klass Pima 
+### <a name="host-class-pima-request-cancel"></a>Avbryt begäran om Pima för värdklass 
 
 #### <a name="ux_host_class_pima_request_cancel"></a>ux_host_class_pima_request_cancel
 
-**Ikonen** ![ Ikon för Pima-begäran i värd klass](./media/user-guide/usbx-events/image145.png)
+**Ikon** ![ Ikonen För att avbryta begäran för värdklass Pima](./media/user-guide/usbx-events/image145.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX värd klass Pima.
+Den här händelsen representerar en Pima Request Cancel-händelse för USBX-värdklass.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-pima-session-close"></a>Pima-session för värd klass Stäng 
+### <a name="host-class-pima-session-close"></a>Pima-session för värdklass stäng 
 
 #### <a name="ux_host_class_pima_session_close"></a>ux_host_class_pima_session_close
 
-**Ikonen** ![ Pima för värd klassens stängnings ikon](./media/user-guide/usbx-events/image146.png)
+**Ikon** ![ Ikon för Pima-sessionsslut för värdklass](./media/user-guide/usbx-events/image146.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en händelse för stängning av USBX Pima.
+Den här händelsen representerar en Pima Session Close-händelse för EN USBX-värdklass.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info-fält 2: Pima-sessionen.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Pima-session.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-pima-session-open"></a>Pima-session för värd klass öppen 
+### <a name="host-class-pima-session-open"></a>Värdklassens Pima-session är öppen 
 
 #### <a name="ux_host_class_pima_session_open"></a>ux_host_class_pima_session_open
 
-**Ikonen** ![ Öppna Pima-ikonen för värd klassens session](./media/user-guide/usbx-events/image147.png)
+**Ikon** ![ Ikon för att öppna värdklass-Pima-session](./media/user-guide/usbx-events/image147.png)
 
-**Beskrivning** Den här händelsen representerar en USBX Pima session Open event.
+**Beskrivning** Den här händelsen representerar en Pima Session Open-händelse för USBX-värdklassen.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info-fält 2: Pima-sessionen.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Pima-session.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-pima-storage-ids-get"></a>Pima lagrings-ID: n för värd klass 
+### <a name="host-class-pima-storage-ids-get"></a>Hämta Pima-Storage-ID:n för värdklass 
 
 #### <a name="ux_host_class_pima_session_ids_get"></a>ux_host_class_pima_session_ids_get
 
-**Ikonen** ![ Pima lagrings-ID Hämta ikon för värd klass](./media/user-guide/usbx-events/image148.png)
+**Ikon** ![ Ikonen Hämta för värdklass-Pima Storage-ID:n](./media/user-guide/usbx-events/image148.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en händelse för USBX-Pima för värd klass lagrings-ID.
+Den här händelsen representerar en USBX-värdklass Pima Storage Ids Get Event.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- NFO-fält 2: matris för lagrings-ID.
-- Informations fält 3: lagrings-ID-längd.
-Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- nfo Fält 2: Storage ID-matris.
+- Informationsfält 3: Storage ID-längd.
+Informationsfält 4: Används inte.
 
-### <a name="host-class-pima-storage-info-get"></a>Hämta lagrings information för värd klass Pima 
+### <a name="host-class-pima-storage-info-get"></a>Host Class Pima Storage Info Get 
 
 #### <a name="ux_host_class_pima_storage_info_get"></a>ux_host_class_pima_storage_info_get
 
-**Ikonen** ![ Pima Storage information get-ikon i värd klass](./media/user-guide/usbx-events/image149.png)
+**Ikon** ![ Ikon för att hämta Storage Pima för värdklass](./media/user-guide/usbx-events/image149.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX värd klass Pima Storage information get event.
+Den här händelsen representerar en USBX-värdklass Pima Storage Info Get Event.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Informations fält 2: lagrings-ID.
-- Informations fält 3: lagring.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Storage-ID.
+- Informationsfält 3: Storage.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-pima-thumb-get"></a>Pima-skjutreglage för värd klass 
+### <a name="host-class-pima-thumb-get"></a>Pima Thumb Get för värdklass 
 
 #### <a name="ux_host_class_pima_thumb_get"></a>ux_host_class_pima_thumb_get
 
-**Ikonen** ![ Ikon för Pima för värd klass](./media/user-guide/usbx-events/image150.png)
+**Ikon** ![ Pima Thumb Get-ikon för värdklass](./media/user-guide/usbx-events/image150.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att ta emot en TCP-server-anslutning via nx_tcp_server_socket_unaccept.
+Den här händelsen representerar att en TCP-serveranslutning inte kan nås via nx_tcp_server_socket_unaccept.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Info-fält 2: objekt referens.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Objekthandtag.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-pima-write"></a>Skrivning av värd klass Pima 
+### <a name="host-class-pima-write"></a>Host Class Pima Write 
 
 #### <a name="ux_host_class_pima_thumb_get"></a>ux_host_class_pima_thumb_get
 
-**Ikonen** ![ Pima Skriv ikon för värd klass](./media/user-guide/usbx-events/image151.png)
+**Ikon** ![ Ikon för Pima-skrivning för värdklass](./media/user-guide/usbx-events/image151.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX Pima skrivning av värd klass.
+Den här händelsen representerar en USBX-värdklass Pima Write.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: data pekare.
-- Informations fält 3: data längd.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Data pekare.
+- Informationsfält 3: Datalängd.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-printer-activate"></a>Aktivera värd klass skrivare 
+### <a name="host-class-printer-activate"></a>Aktivera värdklassskrivare 
 
 #### <a name="ux_host_class_printer_activate"></a>ux_host_class_printer_activate
 
-**Ikonen** ![ Aktivera ikon för värd klass skrivare](./media/user-guide/usbx-events/image152.png)
+**Ikon** ![ Aktiveringsikon för värdklassskrivare](./media/user-guide/usbx-events/image152.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX-händelse för värd klass skrivare.
+Den här händelsen representerar en aktiveringshändelse för USBX-värdklassskrivare.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans.
-- Info fält 2: pekare till Socket.
-- Informations fält 3: typ av tjänst.
-- Info fält 4: mottagnings fönster storlek.
+- Informationsfält 1: Pekare till IP-instans.
+- Informationsfält 2: Pekare till socket.
+- Informationsfält 3: Typ av tjänst.
+- Informationsfält 4: Ta emot fönsterstorlek.
 
-### <a name="host-class-printer-deactivate"></a>Inaktivera värd klass skrivare 
+### <a name="host-class-printer-deactivate"></a>Inaktivera värdklassskrivare 
 
 #### <a name="ux_host_class_printer_deactivate"></a>ux_host_class_printer_deactivate
 
-**Ikonen** ![ Ikon för att inaktivera värd klass skrivare](./media/user-guide/usbx-events/image153.png)
+**Ikon** ![ Inaktivera ikon för värdklassskrivare](./media/user-guide/usbx-events/image153.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX-händelse för värd klass skrivare.
+Den här händelsen representerar en inaktiverad USBX-värdklassskrivare.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-printer-name-get"></a>Hämta namn på värd klass skrivare 
+### <a name="host-class-printer-name-get"></a>Host Class Printer Name Get 
 
 #### <a name="ux_host_class_printer_name_get"></a>ux_host_class_printer_name_get
 
-**Ikonen** ![ Hämta ikon för värd klassens skrivar namn](./media/user-guide/usbx-events/image154.png)
+**Ikon** ![ Ikonen Hämta namn på värdklassskrivare](./media/user-guide/usbx-events/image154.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX-händelse för värd klass skrivare namn.
+Den här händelsen representerar en USBX-värdklass för skrivarnamn get-händelse.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-printer-read"></a>Läsning av värd klass skrivare 
+### <a name="host-class-printer-read"></a>Läsa värdklassskrivare 
 
 #### <a name="ux_host_class_printer_read"></a>ux_host_class_printer_read
 
-**Ikonen** ![ Läs ikon för värd klass skrivare](./media/user-guide/usbx-events/image155.png)
+**Ikon** ![ Ikon för skrivarläsning för värdklass](./media/user-guide/usbx-events/image155.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX-händelse för värd klass skrivare.
+Den här händelsen representerar en LÄShändelse för USBX-värdklassskrivare.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: data pekare.
-- Informations fält 3: begärd längd.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Data pekare.
+- Informationsfält 3: Begärd längd.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-printer-soft-reset"></a>Mjuk återställning av värd klass skrivare 
+### <a name="host-class-printer-soft-reset"></a>Mjuk återställning av värdklassskrivare 
 
 #### <a name="ux_host_class_printer_soft_reset"></a>ux_host_class_printer_soft_reset
 
-**Ikonen** ![ Ikon för mjuk återställning av värd klass skrivare](./media/user-guide/usbx-events/image156.png)
+**Ikon** ![ Ikon för mjuk återställning av värdklassskrivare](./media/user-guide/usbx-events/image156.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX-händelse för mjuk återställning av värd klass skrivare.
+Den här händelsen representerar en USBX-värdklassskrivare för mjuk återställning.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-printer-status-get"></a>Hämta status för värd klass skrivare 
+### <a name="host-class-printer-status-get"></a>Hämta status för värdklassskrivare 
 
 #### <a name="ux_host_class_printer_status_get"></a>ux_host_class_printer_status_get
 
-**Ikonen** ![ Ikon för Hämta värd klass skrivar status](./media/user-guide/usbx-events/image157.png)
+**Ikon** ![ Ikonen Hämta status för värdklassskrivare](./media/user-guide/usbx-events/image157.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX-händelse för värd klass skrivare status.
+Den här händelsen representerar en USBX-värdklass Skrivarstatus Hämta händelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: skrivar status.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Skrivarstatus.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-printer-write"></a>Skrivning av värd klass skrivare 
+### <a name="host-class-printer-write"></a>Skriva värdklassskrivare 
 
 #### <a name="ux_host_class_printer_write"></a>ux_host_class_printer_write
 
-**Ikonen** ![ Skriv ikon för värd klass skrivare](./media/user-guide/usbx-events/image158.png)
+**Ikon** ![ Skrivikon för värdklassskrivare](./media/user-guide/usbx-events/image158.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX skrivning av värd klass.
+Den här händelsen representerar skrivning av en USBX-värdklassskrivare.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Info fält 2: data pekare.
-- Informations fält 3: begärd längd.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Datapekare.
+- Informationsfält 3: Begärd längd.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-prolific-activate"></a>Aktivering av värd klass Prolific 
+### <a name="host-class-prolific-activate"></a>Aktivering av värdklass prolific 
 
 #### <a name="ux_host_class_prolific_activate"></a>ux_host_class_prolific_activate 
 
-**Ikonen** ![ Prolific Aktivera ikon för värd klass](./media/user-guide/usbx-events/image159.png)
+**Ikon** ![ Aktiveringsikon för värdklass](./media/user-guide/usbx-events/image159.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX-Prolific aktiverings händelse.
+Den här händelsen representerar en USBX-värdklasshändelse för aktivering av program.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-prolific-deactivate"></a>Prolific inaktive ring av värd klass 
+### <a name="host-class-prolific-deactivate"></a>Inaktivera värdklass prolific 
 
 #### <a name="ux_host_class_prolific_deactivate"></a>ux_host_class_prolific_deactivate 
 
-**Ikonen** ![ Prolific-ikon för värd klass](./media/user-guide/usbx-events/image160.png)
+**Ikon** ![ Ikon för inaktivera värdklass](./media/user-guide/usbx-events/image160.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX värd klass Prolific-händelse.
+Den här händelsen representerar en USBX-värdklassinaktiveringshändelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-prolific-ioctl-abort-in-pipe"></a>Värd klass Prolific IOCTL Avbryt i pipe 
+### <a name="host-class-prolific-ioctl-abort-in-pipe"></a>Avbryt prolific Ioctl för värdklass i pipe 
 
 #### <a name="ux_host_class_prolific_ioctl_abort_in_pipe"></a>ux_host_class_prolific_ioctl_abort_in_pipe
 
-**Ikonen** ![ Prolific för värd klass I O C T L Avbryt i pipe-ikon](./media/user-guide/usbx-events/image161.png)
+**Ikon** ![ Host Class Prolific I O C T L Abort In Pipe-ikon](./media/user-guide/usbx-events/image161.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX för värd klass Prolific IOCTL abort i pipe-händelse.
+Den här händelsen representerar en USBX-värdklass prolific Ioctl Abort In Pipe Event.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: slut punkt.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Slutpunkt.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-prolific-ioctl-abort-out-pipe"></a>Prolific för värd klass IOCTL avbryter pipe 
+### <a name="host-class-prolific-ioctl-abort-out-pipe"></a>Värdklass prolific Ioctl Abort Out Pipe 
 
 #### <a name="ux_host_class_prolific_ioctl_abort_out_pipe"></a>ux_host_class_prolific_ioctl_abort_out_pipe
 
-**Ikonen** ![ Prolific för värd klass I O C T L ta bort pipe-ikon](./media/user-guide/usbx-events/image162.png)
+**Ikon** ![ Ikon för värdklassprolific I O C T L Abort Out Pipe](./media/user-guide/usbx-events/image162.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX för värd klass Prolific IOCTL-avbrott.
+Den här händelsen representerar en USBX-värdklass prolific Ioctl Abort Out Pipe Event.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: slut punkt.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Slutpunkt.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-prolific-ioctl-get-device-status"></a>Värd klass Prolific IOCTL Hämta enhets status 
+### <a name="host-class-prolific-ioctl-get-device-status"></a>Hämta enhetsstatus för värdklass prolific Ioctl 
 
 #### <a name="ux_host_class_prolific_ioctl_get_device_status"></a>ux_host_class_prolific_ioctl_get_device_status
 
-**Ikonen** ![ Prolific för värd klass I O C T L, Hämta enhets status ikon](./media/user-guide/usbx-events/image163.png)
+**Ikon** ![ Ikon för att hämta enhetsstatus för värdklassprolific I O C T L](./media/user-guide/usbx-events/image163.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX värd klass Prolific IOCTL get enhets status händelse.
+Den här händelsen representerar en USBX-värdklass prolific Ioctl Hämta enhetsstatushändelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: enhets status.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Enhetsstatus.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-prolific-ioctl-get-line-coding"></a>Prolific IOCTL get line-kodning i värd klass 
+### <a name="host-class-prolific-ioctl-get-line-coding"></a>Host Class Prolific Ioctl Get Line Coding 
 
 #### <a name="ux_host_class_prolific_ioctl_get_line_coding"></a>ux_host_class_prolific_ioctl_get_line_coding
 
-**Ikonen** ![ Prolific för värd klass I O C T L, Hämta rad kodnings ikon](./media/user-guide/usbx-events/image164.png)
+**Ikon** ![ Ikon för att hämta linjekodning för värdklassprolific I O C T L Get Line](./media/user-guide/usbx-events/image164.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX för värd klass Prolific IOCTL get line.
+Den här händelsen representerar en USBX-värdklass prolific Ioctl Get Line Coding Event.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: parameter.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Parameter.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-prolific-ioctl-purge"></a>Prolific IOCTL-rensning för värd klass 
+### <a name="host-class-prolific-ioctl-purge"></a>Rensning av värdklass prolific Ioctl 
 
 #### <a name="ux_host_class_prolific_ioctl_purge"></a>ux_host_class_prolific_ioctl_purge
 
-**Ikonen** ![ Rensnings ikon för värd klassens Prolific IOCTL](./media/user-guide/usbx-events/image165.png)
+**Ikon** ![ Ikon för rensning av värdklass prolific Ioctl](./media/user-guide/usbx-events/image165.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX för värd klass Prolific IOCTL.
+Den här händelsen representerar en USBX-värdklass prolific Ioctl Purge Event.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: parameter.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Parameter.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-prolific-ioctl-report-device"></a>Prolific IOCTL-rapport enhet för värd klass 
+### <a name="host-class-prolific-ioctl-report-device"></a>Rapportenhet för värdklass prolific Ioctl 
 
 #### <a name="ux_host_class_prolific_ioctl_report_device"></a>ux_host_class_prolific_ioctl_report_device
 
-**Ikonen** ![ Enhets ikon för värd klass Prolific I O d T L](./media/user-guide/usbx-events/image166.png)
+**Ikon** ![ Ikon för rapportenhet för värdklassprolific I O C T L Report](./media/user-guide/usbx-events/image166.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en status ändrings händelse för en USBX Prolific IOCTL-rapport enhet.
+Den här händelsen representerar en USBX-värdklass Prolific Ioctl Report Device Status Change Event.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: parameter.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Parameter.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-prolific-ioctl-send-break"></a>Prolific IOCTL för värd klass skicka rast 
+### <a name="host-class-prolific-ioctl-send-break"></a>Skicka bryt om värdklass prolific Ioctl 
 
 #### <a name="ux_host_class_prolific_ioctl_send_break"></a>ux_host_class_prolific_ioctl_send_break
 
-**Ikonen** ![ Prolific för värd klass I O C T L](./media/user-guide/usbx-events/image167.png)
+**Ikon** ![ Skicka brytikon för värdklassprolific I O C T L](./media/user-guide/usbx-events/image167.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX för värd klass Prolific IOCTL Send Break.
+Den här händelsen representerar en USBX-värdklass prolific Ioctl Send Break Event.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-prolific-ioctl-set-line-coding"></a>Rad kodning för Prolific IOCTL för värd klass 
+### <a name="host-class-prolific-ioctl-set-line-coding"></a>Kodning av radkodning för värdklassprolific Ioctl Set 
 
 #### <a name="ux_host_class_prolific_ioctl_set_line_coding"></a>ux_host_class_prolific_ioctl_set_line_coding
 
-**Ikonen** ![ Prolific för värd klass I O C T L ange rad kodnings ikon](./media/user-guide/usbx-events/image168.png)
+**Ikon** ![ Kodningsikon för värdklassprolific I O C T L Set Line Coding](./media/user-guide/usbx-events/image168.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX för värd klass Prolific IOCTL-uppsättning.
+Den här händelsen representerar en USBX-värdklass för kodningshändelsen Prolific Ioctl Set Line Coding.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: parameter.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Parameter.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-prolific-ioctl-set-line-state"></a>Prolific IOCTL ange linje status i värd klass 
+### <a name="host-class-prolific-ioctl-set-line-state"></a>Radtillstånd för värdklassprolific Ioctl Set 
 
 #### <a name="ux_host_class_prolific_ioctl_set_line_state"></a>ux_host_class_prolific_ioctl_set_line_state
 
-**Ikonen** ![ Ikon för värd klass Prolific I O C T L](./media/user-guide/usbx-events/image169.png)
+**Ikon** ![ Ikon för ange radtillstånd för värdklassprolific I O C T L](./media/user-guide/usbx-events/image169.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX värd klass Prolific IOCTL set line State event.
+Den här händelsen representerar en USBX-värdklasss prolific Ioctl Set Line State-händelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: parameter.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Parameter.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-prolific-read"></a>Läsning av värd klass Prolific 
+### <a name="host-class-prolific-read"></a>Läsa värdklass 
 
 #### <a name="ux_host_class_prolific_read"></a>ux_host_class_prolific_read
 
-**Ikonen** ![ Läs ikon för värd klassen Prolific](./media/user-guide/usbx-events/image170.png)
+**Ikon** ![ Ikon för värdklassläsning](./media/user-guide/usbx-events/image170.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX värd klass Prolific Read event.
+Den här händelsen representerar en USBX-värdklass prolific read-händelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: data pekare.
-- Informations fält 3: begärd längd.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Data pekare.
+- Informationsfält 3: Begärd längd.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-prolific-reception-start"></a>Start av värd klass Prolific mottagning 
+### <a name="host-class-prolific-reception-start"></a>Start av mottagning av värdklass 
 
 #### <a name="ux_host_class_prolific_reception_start"></a>ux_host_class_prolific_reception_start
 
-**Ikonen** ![ Start ikon för Prolific mottagning i värd klass](./media/user-guide/usbx-events/image171.png)
+**Ikon** ![ Startikon för värdklassmottagande](./media/user-guide/usbx-events/image171.png)
 
 **Beskrivning**
 
-Den här händelsen representerar start händelsen för en USBX värd klass Prolific.
+Den här händelsen representerar en START-händelse för USBX-värdklass för mottagningsstart.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-prolific-reception-stop"></a>Sluta ta emot värd klass Prolific 
+### <a name="host-class-prolific-reception-stop"></a>Mottagningsstopp för värdklass 
 
 #### <a name="ux_host_class_prolific_reception_stop"></a>ux_host_class_prolific_reception_stop
 
-**Ikonen** ![ Stopp ikon för Prolific för värd klass](./media/user-guide/usbx-events/image172.png)
+**Ikon** ![ Stoppikon för värdklassmottagande](./media/user-guide/usbx-events/image172.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX för värd klass Prolific mottagning.
+Den här händelsen representerar en USBX-värdklass för mottagningsstopp.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-prolific-write"></a>Skrivning av värd klass Prolific 
+### <a name="host-class-prolific-write"></a>Skrivning av värdklass 
 
 #### <a name="ux_host_class_prolific_write"></a>ux_host_class_prolific_write
 
-**Ikonen** ![ Prolific Skriv ikon för värd klass](./media/user-guide/usbx-events/image173.png)
+**Ikon** ![ Ikon för skrivning av värdklass](./media/user-guide/usbx-events/image173.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX Prolific Skriv händelse.
+Den här händelsen representerar en USBX-värdklass skrivhändelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: data pekare.
-- Informations fält 3: begärd längd.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Data pekare.
+- Informationsfält 3: Begärd längd.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-storage-activate"></a>Aktivera värd klass lagring 
+### <a name="host-class-storage-activate"></a>Aktivera Storage värdklass 
 
 #### <a name="ux_host_class_storage_activate"></a>ux_host_class_storage_activate
 
-**Ikonen** ![ Aktivera ikon för värd klass lagring](./media/user-guide/usbx-events/image174.png)
+**Ikon** ![ Ikonen Aktivera Storage värdklass](./media/user-guide/usbx-events/image174.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en händelse för aktivering av USBX värd klass lagring.
+Den här händelsen representerar en USBX-värdklass Storage aktivera händelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-storage-deactivate"></a>Inaktive ring av värd klass lagring 
+### <a name="host-class-storage-deactivate"></a>Inaktivera Storage värdklass 
 
 #### <a name="ux_host_class_storage_deactivate"></a>ux_host_class_storage_deactivate
 
-**Ikonen** ![ Ikon för värd klass lagrings inaktive ring](./media/user-guide/usbx-events/image175.png)
+**Ikon** ![ Ikon för Storage inaktivera värdklass](./media/user-guide/usbx-events/image175.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX-händelse för värd klass lagring.
+Den här händelsen representerar en USBX-värdklass Storage inaktivera händelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-storage-media-capacity-get"></a>Hämtning av värd klassens lagrings medium kapacitet 
+### <a name="host-class-storage-media-capacity-get"></a>Hämta kapacitet Storage värdklass 
 
 #### <a name="ux_host_class_storage_media_capacity_get"></a>ux_host_class_storage_media_capacity_get
 
-**Ikonen** ![ Ikon för Hämta värd klass lagrings medie kapacitet](./media/user-guide/usbx-events/image176.png)
+**Ikon** ![ Ikonen Hämta Storage värdklassmediakapacitet](./media/user-guide/usbx-events/image176.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en händelse för USBX värd klass lagrings medie kapacitet.
+Den här händelsen representerar en USBX-värdklass Storage Media Capacity Get Event.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-storage-media-format-capacity-get"></a>Hämtnings kapacitet för värd klass lagrings medie format
+### <a name="host-class-storage-media-format-capacity-get"></a>Host Class Storage Media Format Capacity Get
 
 #### <a name="ux_host_class_storage_media_format_capacity_get"></a>ux_host_class_storage_media_format_capacity_get
 
-**Ikonen** ![ Ikon för Hämta kapacitet för värd klass lagrings medie format](./media/user-guide/usbx-events/image177.png)
+**Ikon** ![ Hämta-Storage för värdklass i Media Format-kapacitet](./media/user-guide/usbx-events/image177.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX-händelse för värd klass lagring med medie format.
+Den här händelsen representerar en USBX-värdklass Storage Media Format Capacity Get Event.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-#### <a name="host-class-storage-media-mount"></a>Montering av värd klass lagrings medium 
+#### <a name="host-class-storage-media-mount"></a>Värdklass för Storage Media Mount 
 
 #### <a name="ux_host_class_storage_media_mount"></a>ux_host_class_storage_media_mount
 
-**Ikonen** ![ Monterings ikon för värd klass lagrings medium](./media/user-guide/usbx-events/image178.png)
+**Ikon** ![ Ikon för Storage mediamontering för värdklass](./media/user-guide/usbx-events/image178.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX för värd klass lagrings medier.
+Den här händelsen representerar en USBX-värdklass Storage Media Mount-händelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: sektor.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Sektor.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-storage-media-open"></a>Lagrings medier för värd klass öppen 
+### <a name="host-class-storage-media-open"></a>Värdklass Storage Media Open 
 
 #### <a name="ux_host_class_storage_media_open"></a>ux_host_class_storage_media_open
 
-**Ikonen** ![ Öppnings ikon för värd klassens lagrings medium](./media/user-guide/usbx-events/image179.png)
+**Ikon** ![ Ikonen Storage Media Open för värdklass](./media/user-guide/usbx-events/image179.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX-händelse för värd klass lagrings medier.
+Den här händelsen representerar en USBX-värdklass Storage Media Open Event.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: medium.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Media.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-storage-media-read"></a>Läsning av värd klassens lagrings medium 
+### <a name="host-class-storage-media-read"></a>Läsa värdklass Storage media 
 
 #### <a name="ux_host_class_storage_media_read"></a>ux_host_class_storage_media_read
 
-**Ikonen** ![ Läs ikon för värd klassens lagrings medium](./media/user-guide/usbx-events/image180.png)
+**Ikon** ![ Ikon för Storage medieläsning för värdklass](./media/user-guide/usbx-events/image180.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX för värd klass lagrings medier.
+Den här händelsen representerar en USBX-värdklass Storage medialäsningshändelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: sektor start.
-- Informations fält 3: antal sektorer.
-- Info-fält 4: data pekare.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Sektorstart.
+- Informationsfält 3: Sektorantal.
+- Informationsfält 4: Datapekare.
 
-### <a name="host-class-storage-media-write"></a>Skrivning av värd klass lagrings medium 
+### <a name="host-class-storage-media-write"></a>Host Class Storage Media Write 
 
 #### <a name="ux_host_class_storage_media_write"></a>ux_host_class_storage_media_write
 
-**Ikonen** ![ Skriv ikon för värd klassens lagrings medium](./media/user-guide/usbx-events/image181.png)
+**Ikon** ![ Ikon för Storage medieskrivning för värdklass](./media/user-guide/usbx-events/image181.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en Skriv händelse för USBX Host Class Storage media.
+Den här händelsen representerar en USBX-värdklass Storage mediaskrivningshändelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Info fält 2: sektor start.
-- Informations fält 3: antal sektorer.
-- Info-fält 4: data pekare.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Sektorstart.
+- Informationsfält 3: Sektorantal.
+- Informationsfält 4: Datapekare.
 
-### <a name="host-class-storage-request-sense"></a>Sense-begäran om värd klass lagring 
+### <a name="host-class-storage-request-sense"></a>Host Class Storage Request Sense 
 
 #### <a name="ux_host_class_storage_request_sense"></a>ux_host_class_storage_request_sense
 
-**Ikonen** ![ Ikon för värd klass lagrings förfrågan Sense](./media/user-guide/usbx-events/image182.png)
+**Ikon** ![ Ikon för Storage Begär sense för värdklass](./media/user-guide/usbx-events/image182.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX-händelse för värd klass lagrings begär Anden.
+Den här händelsen representerar en USBX-värdklass Storage Request Sense Event.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-storage-start-stop"></a>Start stopp för värd klass lagring 
+### <a name="host-class-storage-start-stop"></a>Start/stopp Storage värdklass 
 
 #### <a name="ux_host_class_storage_start_stop"></a>ux_host_class_storage_start_stop
 
-**Ikonen** ![ Start stopp ikon för värd klass lagring](./media/user-guide/usbx-events/image183.png)
+**Ikon** ![ Ikon för Storage starta/stoppa för värdklass](./media/user-guide/usbx-events/image183.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX för värd klass lagrings start.
+Den här händelsen representerar en USBX-värdklass Storage start/stopp-händelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Informations fält 2: starta stopp signal.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Starta stoppsignal.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-class-storage-unit-ready-test"></a>Redo test för värd klass lagrings enhet 
+### <a name="host-class-storage-unit-ready-test"></a>Test av Storage värdklassenhet 
 
 #### <a name="ux_host_class_storage_unit_ready_test"></a>ux_host_class_storage_unit_ready_test
 
-**Ikonen** ![ Test ikon för värd klassens lagrings enhet](./media/user-guide/usbx-events/image184.png)
+**Ikon** ![ Ikon för Storage för redo Storage för värdklass](./media/user-guide/usbx-events/image184.png)
 
 **Beskrivning**
 
-Den här händelsen representerar test händelsen för USBX värd klass lagrings enhet.
+Den här händelsen representerar en USBX-värdklass Storage enhetsklar testhändelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass instans.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klassinstans.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-stack-class-instance-create"></a>Värd Stack klass instans skapa 
+### <a name="host-stack-class-instance-create"></a>Skapa värdstacksklassinstans 
 
 #### <a name="ux_host_class_instance_create"></a>ux_host_class_instance_create
 
-**Ikonen** ![ Ikon för att skapa värd Stack klass instans](./media/user-guide/usbx-events/image185.png)
+**Ikon** ![ Skapa ikon för värdstackklassinstans](./media/user-guide/usbx-events/image185.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en händelse för att skapa en USBX Host stack-instans.
+Den här händelsen representerar en USBX-värdstackklassinstans för att skapa händelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass.
-- Informations fält 2: klass instans.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klass.
+- Informationsfält 2: Klassinstans.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-stack-class-instance-destroy"></a>Förstöra värd Stack klass instans 
+### <a name="host-stack-class-instance-destroy"></a>Förstöra värdstackklassinstans 
 
 #### <a name="ux_host_class_instance_create"></a>ux_host_class_instance_create
 
-**Ikonen** ![ Ikon för att förstöra värd Stack klass instans](./media/user-guide/usbx-events/image186.png)
+**Ikon** ![ Ta bort ikon för värdstackklassinstans](./media/user-guide/usbx-events/image186.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en händelse för förstöring av USBX Host stack-instanser.
+Den här händelsen representerar en USBX-värdstackklassinstans för destroy-händelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: klass.
-- Informations fält 2: klass instans.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Klass.
+- Informationsfält 2: Klassinstans.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-stack-configuration-delete"></a>Ta bort värd stack konfiguration 
+### <a name="host-stack-configuration-delete"></a>Ta bort konfiguration av värdstack 
 
 #### <a name="ux_host_class_configuration_delete"></a>ux_host_class_configuration_delete
 
-**Ikonen** ![ Borttagnings ikon för värd stack konfiguration](./media/user-guide/usbx-events/image187.png)
+**Ikon** ![ Ikonen Ta bort värdstackkonfiguration](./media/user-guide/usbx-events/image187.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en händelse för borttagning av en USBX Host stack-konfiguration.
+Den här händelsen representerar en borttagningshändelse för USBX-värdstackens konfiguration.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: konfiguration.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Konfiguration.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-stack-configuration-enumerate"></a>Uppräkning av värd stack konfiguration 
+### <a name="host-stack-configuration-enumerate"></a>Konfigurationsuppräkning för värdstack 
 
 #### <a name="ux_host_stack_configuration_enumerate"></a>ux_host_stack_configuration_enumerate
 
-**Ikonen** ![ Uppräknings ikon för värd stack konfiguration](./media/user-guide/usbx-events/image188.png)
+**Ikon** ![ Ikon för konfigurationsuppräkning av värdstack](./media/user-guide/usbx-events/image188.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en uppräknings händelse för USBX Host stack-konfiguration.
+Den här händelsen representerar en USBX-värdstackkonfigurationsuppräkningshändelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: enhet.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Enhet.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="stack-configuration-instance-create"></a>Skapa stack konfigurations instans 
+### <a name="stack-configuration-instance-create"></a>Skapa stackkonfigurationsinstans 
 
 #### <a name="ux_host_stack_configuration_instance_create"></a>ux_host_stack_configuration_instance_create
 
-**Ikonen** ![ Skapa ikon för stack konfigurations instans](./media/user-guide/usbx-events/image189.png)
+**Ikon** ![ Ikonen Skapa för Stack-konfigurationsinstans](./media/user-guide/usbx-events/image189.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX för att skapa en händelse i värd stacken.
+Den här händelsen representerar en SKAPA-händelse för en USBX-värdstackkonfigurationsinstans.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: konfiguration.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Konfiguration.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-stack-configuration-instance-delete"></a>Borttagning av värd Stacks konfigurations instans 
+### <a name="host-stack-configuration-instance-delete"></a>Ta bort konfigurationsinstans för värdstack 
 
 #### <a name="ux_host_stack_configuration_instance_delete"></a>ux_host_stack_configuration_instance_delete
 
-**Ikonen** ![ Borttagnings ikon för värd Stacks konfigurations instans](./media/user-guide/usbx-events/image190.png)
+**Ikon** ![ Ikonen Ta bort konfigurationsinstans för värdstack](./media/user-guide/usbx-events/image190.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX-händelse som tar bort värd Stacks konfigurations instans.
+Den här händelsen representerar en borttagningshändelse för en USBX-värdstackkonfigurationsinstans.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: konfiguration.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Konfiguration.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-stack-configuration-set"></a>Konfigurations uppsättning för värd stack 
+### <a name="host-stack-configuration-set"></a>Konfigurationsuppsättning för värdstack 
 
 #### <a name="ux_host_stack_configuration_set"></a>ux_host_stack_configuration_set
 
-**Ikonen** ![ Ikon för konfigurations uppsättning för värd stack](./media/user-guide/usbx-events/image191.png)
+**Ikon** ![ Ikon för konfigurationsuppsättning för värdstack](./media/user-guide/usbx-events/image191.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en händelse för konfigurations uppsättning för USBX värd stack.
+Den här händelsen representerar en USBX-värdstacks konfigurationsuppsättningshändelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: konfiguration.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Konfiguration.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-stack-device-address-set"></a>Adress uppsättning för värd stack enhet 
+### <a name="host-stack-device-address-set"></a>Enhetsadressuppsättning för värdstack 
 
 #### <a name="ux_host_stack_device_address_set"></a>ux_host_stack_device_address_set
 
-**Ikonen** ![ Ikon för värd stack enhetens adress uppsättning](./media/user-guide/usbx-events/image192.png)
+**Ikon** ![ Ikon för enhetsadressuppsättning för värdstack](./media/user-guide/usbx-events/image192.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en händelse för en USBX-värd för stack enhet.
+Den här händelsen representerar en USBX-värdstackens enhetsadressuppsättningshändelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: enhet.
-- Info fält 2: enhets adress.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Enhet.
+- Informationsfält 2: Enhetsadress.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-stack-device-configuration-get"></a>Hämta konfiguration av värd stack enhet 
+### <a name="host-stack-device-configuration-get"></a>Hämta enhetskonfiguration för värdstack 
 
 #### <a name="ux_host_stack_device_configuration_get"></a>ux_host_stack_device_configuration_get
 
-**Ikonen** ![ Hämta ikon för värd stack enhets konfiguration](./media/user-guide/usbx-events/image193.png)
+**Ikon** ![ Ikonen Hämta för enhetskonfiguration för värdstack](./media/user-guide/usbx-events/image193.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX värd stack enhets konfiguration Hämta händelse.
+Den här händelsen representerar en HÄMTA-händelse för en USBX-värdstackenhetskonfiguration.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: enhet.
-- NFO-fält 2: konfiguration.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Enhet.
+- nfo Fält 2: Konfiguration.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-stack-device-configuration-select"></a>Välj konfiguration av värd stack enhet 
+### <a name="host-stack-device-configuration-select"></a>Välj enhetskonfiguration för värdstack 
 
 #### <a name="ux_host_stack_device_configuration_select"></a>ux_host_stack_device_configuration_select
 
-**Ikonen** ![ Konfiguration av värd stack enhets konfiguration Välj ikon](./media/user-guide/usbx-events/image194.png)
+**Ikon** ![ Ikonen Välj enhetskonfiguration för värdstack](./media/user-guide/usbx-events/image194.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX för värd stack enhets konfiguration Välj händelse.
+Den här händelsen representerar en ENHETSkonfigurationshändelse för USBX-värdstack.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: enhet.
-- Info fält 2: konfiguration.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Enhet.
+- Informationsfält 2: Konfiguration.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-stack-device-descriptor-read"></a>Läsning av värd stack enhets Beskrivning 
+### <a name="host-stack-device-descriptor-read"></a>Läsa enhetsbeskrivning för värdstack 
 
 #### <a name="ux_host_stack_device_descriptor_read"></a>ux_host_stack_device_descriptor_read
 
-**Ikonen** ![ Läs ikon för värd stack enhets Beskrivning](./media/user-guide/usbx-events/image195.png)
+**Ikon** ![ Ikon för Enhetsbeskrivning för värdstack](./media/user-guide/usbx-events/image195.png)
 
 **Beskrivning**
 
-Den här händelsen representerar läsnings händelsen för en USBX värd Stacks enhets beskrivning.
+Den här händelsen representerar en USBX-värdstackenhetsbeskrivningsläsningshändelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: enhet.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Enhet.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-stack-device-get"></a>Hämta värd stack enhet 
+### <a name="host-stack-device-get"></a>Hämta värdstackenhet 
 
 #### <a name="ux_host_stack_device_get"></a>ux_host_stack_device_get
 
-**Ikonen** ![ Hämta ikon för värd stack enhet](./media/user-guide/usbx-events/image196.png)
+**Ikon** ![ Ikonen Hämta för värdstacksenhet](./media/user-guide/usbx-events/image196.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en händelse för att hämta en USBX värd stack enhet.
+Den här händelsen representerar en USBX-värdstackenhets get-händelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: enhets index.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Enhetsindex.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-stack-device-remove"></a>Ta bort värd stack enhet 
+### <a name="host-stack-device-remove"></a>Ta bort värdstacksenhet 
 
 #### <a name="ux_host_stack_device_remove"></a>ux_host_stack_device_remove
 
-**Ikonen** ![ Ikon för att ta bort värd stack enhet](./media/user-guide/usbx-events/image197.png)
+**Ikon** ![ Ikonen Ta bort värdstacksenhet](./media/user-guide/usbx-events/image197.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en händelse för att ta bort en USBX Host stack-enhet.
+Den här händelsen representerar en USBX-värdstack för borttagning av enhet.
 
-**Informations fält**
+**Informationsfält**
 
-- Info-fält 1: HCD.
-- Info-fält 2: överordnad.
-- Info-fält 3: port index.
-- Info fält 4: enhet.
+- Informationsfält 1: Hcd.
+- Informationsfält 2: Överordnad.
+- Informationsfält 3: Portindex.
+- Informationsfält 4: Enhet.
 
-### <a name="host-stack-device-resource-free"></a>Värd stack för enhets resurs kostnads fritt 
+### <a name="host-stack-device-resource-free"></a>Resurs kostnadsfri för värdstackenhet 
 
 #### <a name="ux_host_stack_device_resource_free"></a>ux_host_stack_device_resource_free
 
-**Ikonen** ![ Ikon för värd stack för enhets resurs](./media/user-guide/usbx-events/image198.png)
+**Ikon** ![ Ikon för kostnadsfri resurs för värdstackenhet](./media/user-guide/usbx-events/image198.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en ledig händelse för en USBX värd stack för enhets resurser.
+Den här händelsen representerar en kostnadsfri USBX-värdstackenhetsresurs.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: enhet.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Enhet.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-stack-endpoint-instance-create"></a>Skapa värd stack slut punkts instans skapa 
+### <a name="host-stack-endpoint-instance-create"></a>Skapa slutpunktsinstans för värdstack 
 
 #### <a name="ux_host_stack_endpoint_instance_create"></a>ux_host_stack_endpoint_instance_create
 
-**Ikonen** ![ Ikon för att skapa värd stack slut punkts instans](./media/user-guide/usbx-events/image199.png)
+**Ikon** ![ Ikonen Skapa slutpunktsinstans för värdstack](./media/user-guide/usbx-events/image199.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en händelse för att skapa en USBX Host stack-slutpunkt.
+Den här händelsen representerar en SKAPA-händelse för en USBX-värdstackslutpunktsinstans.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: enhet.
-- Info fält 2: slut punkt.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Enhet.
+- Informationsfält 2: Slutpunkt.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-stack-endpoint-instance-delete"></a>Ta bort värd stack slut punkts instans 
+### <a name="host-stack-endpoint-instance-delete"></a>Ta bort slutpunktsinstans för värdstack 
 
 #### <a name="ux_host_stack_endpoint_instance_delete"></a>ux_host_stack_endpoint_instance_delete
 
-**Ikonen** ![ Borttagnings ikon för värd stack slut punkts instans](./media/user-guide/usbx-events/image200.png)
+**Ikon** ![ Ikonen Ta bort slutpunktsinstans för värdstack](./media/user-guide/usbx-events/image200.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en händelse för borttagning av en USBX Host stack-slutpunkt.
+Den här händelsen representerar en borttagningshändelse för en USBX-värdstackslutpunktsinstans.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 2: slut punkt.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 2: Slutpunkt.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-stack-endpoint-reset"></a>Återställning av värd stack slut punkt 
+### <a name="host-stack-endpoint-reset"></a>Slutpunktsåterställning för värdstack 
 
 #### <a name="ux_host_stack_endpoint_reset"></a>ux_host_stack_endpoint_reset
 
-**Ikonen** ![ Ikon för återställning av värd stack slut punkt](./media/user-guide/usbx-events/image201.png)
+**Ikon** ![ Ikon för slutpunktsåterställning för värdstack](./media/user-guide/usbx-events/image201.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en händelse för återställning av USBX värd stack slut punkt.
+Den här händelsen representerar en USBX-värdstackens slutpunktsåterställningshändelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: enhet.
-- Info fält 2: slut punkt.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Enhet.
+- Informationsfält 2: Slutpunkt.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-stack-endpoint-transfer-abort"></a>Avbrytning av värd stack slut punkts överföring 
+### <a name="host-stack-endpoint-transfer-abort"></a>Migrering av slutpunktsöverföring för värdstack 
 
 #### <a name="ux_host_stack_endpoint_transfer_abort"></a>ux_host_stack_endpoint_transfer_abort
 
-**Ikonen** ![ Avbryt ikon för värd stack slut punkts överföring](./media/user-guide/usbx-events/image202.png)
+**Ikon** ![ Ikonen Avbryt avslutsöverföring av värdstack](./media/user-guide/usbx-events/image202.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en avbrotts händelse för USBX värd stack slut punkts överföring.
+Den här händelsen representerar en avbrottshändelse för en USBX-värdstacks slutpunktsöverföring.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: slut punkt.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Slutpunkt.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-stack-host-controller-register"></a>Värd styrenhet registrera värd styrenhet 
+### <a name="host-stack-host-controller-register"></a>Värdstack värdstyrenhetsregister 
 
 #### <a name="ux_host_stack_hcd_register"></a>ux_host_stack_hcd_register
 
-**Ikonen** ![ Registrerings ikon för värd stack värd styrenhet](./media/user-guide/usbx-events/image203.png)
+**Ikon** ![ Registerikon för värdstackvärdstyrenhet](./media/user-guide/usbx-events/image203.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en register värd styrenhet för USBX värd.
+Den här händelsen representerar ett USBX-värdstackvärdstyrenhetsregister.
 
-**Informations fält**
+**Informationsfält**
 
-- Info-fält 1: HCD-namn.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Hcd-namn.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-stack-initialize"></a>Värd stack initieras 
+### <a name="host-stack-initialize"></a>Initiera värdstack 
 
 #### <a name="ux_host_stack_initialize"></a>ux_host_stack_initialize
 
-**Ikonen** ![ Ikon för att initiera värd stack](./media/user-guide/usbx-events/image204.png)
+**Ikon** ![ Initieringsikon för värdstack](./media/user-guide/usbx-events/image204.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en händelse för att initiera en USBX-värd.
+Den här händelsen representerar en USBX-värdstack som initierar händelsen.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: används inte.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Används inte.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-stack-interface-endpoint-get"></a>Hämtning av värd stack gränssnitt slut punkt 
+### <a name="host-stack-interface-endpoint-get"></a>Hämta gränssnittsslutpunkt för värdstack 
 
-#### <a name="interface_-tcp-retry-entry"></a>Interface_ TCP-återförsöksintervallet
+#### <a name="interface_-tcp-retry-entry"></a>Interface_ TCP-återförsökspost
 
-**Ikonen** ![ Hämta ikon för värd stackens gränssnitts slut punkt](./media/user-guide/usbx-events/image205.png)
+**Ikon** ![ Ikonen Hämta för gränssnittsslutpunkt för värdstack](./media/user-guide/usbx-events/image205.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en intern NetX-händelse för TCP-försök.
+Den här händelsen representerar en intern NetX TCP-återförsökshändelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: gränssnitt.
-- Info-fält 2: slut punkts index.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Gränssnitt.
+- Informationsfält 2: Slutpunktsindex.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-stack-interface-instance-create"></a>Skapa värd stack gränssnitts instans 
+### <a name="host-stack-interface-instance-create"></a>Skapa gränssnittsinstans för värdstack 
 
 #### <a name="ux_host_stack_interface_instance_create"></a>ux_host_stack_interface_instance_create
 
-**Ikonen** ![ Ikon för att skapa värd stack gränssnitts instans](./media/user-guide/usbx-events/image206.png)
+**Ikon** ![ Ikonen Skapa gränssnittsinstans för värdstack](./media/user-guide/usbx-events/image206.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX-händelse för en värd stack instans.
+Den här händelsen representerar en USBX-värdstack-gränssnittsinstans för att skapa händelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: gränssnitt.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Gränssnitt.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-stack-interface-instance-delete"></a>Borttagning av värd Stacks gränssnitts instans 
+### <a name="host-stack-interface-instance-delete"></a>Ta bort gränssnittsinstans för värdstack 
 
 #### <a name="ux_host_stack_interface_instance_delete"></a>ux_host_stack_interface_instance_delete
 
-**Ikonen** ![ Borttagnings ikon för värd stackens gränssnitts instans](./media/user-guide/usbx-events/image207.png)
+**Ikon** ![ Ta bort ikon för gränssnittsinstans för värdstack](./media/user-guide/usbx-events/image207.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en händelse för borttagning av en USBX Host stack Interface-instans.
+Den här händelsen representerar en borttagningshändelse för en USBX-värdstack-gränssnittsinstans.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: gränssnitt.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Gränssnitt.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-stack-interface-set"></a>Värd stack gränssnitts uppsättning 
+### <a name="host-stack-interface-set"></a>Gränssnittsuppsättning för värdstack 
 
 #### <a name="ux_host_stack_interface_set"></a>ux_host_stack_interface_set
 
-**Ikonen** ![ Ikon för värd stack gränssnitts uppsättning](./media/user-guide/usbx-events/image208.png)
+**Ikon** ![ Ikon för gränssnittsuppsättning för värdstack](./media/user-guide/usbx-events/image208.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en händelse för en gränssnitts uppsättning för USBX värd stack.
+Den här händelsen representerar en USBX-värdstack-gränssnittsuppsättningshändelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: gränssnitt.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Gränssnitt.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-stack-interface-setting-select"></a>Inställning av värd stack gränssnitt Välj 
+### <a name="host-stack-interface-setting-select"></a>Gränssnittsinställning för värdstack väljer du 
 
 #### <a name="ux_host_stack_interface_setting_select"></a>ux_host_stack_interface_setting_select
 
-**Ikonen** ![ Inställnings ikon för värd Stacks gränssnitt](./media/user-guide/usbx-events/image209.png)
+**Ikon** ![ Gränssnittsinställning för värdstack välj ikon](./media/user-guide/usbx-events/image209.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en gränssnitts inställning för en USBX. Välj händelse.
+Den här händelsen representerar en USBX-värdstacks gränssnittsinställning Välj händelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: gränssnitt.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Gränssnitt.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-stack-new-configuration-create"></a>Värd stack ny konfiguration skapa 
+### <a name="host-stack-new-configuration-create"></a>Skapa ny konfiguration för värdstack 
 
 #### <a name="ux_host_stack_new_configuration_create"></a>ux_host_stack_new_configuration_create
 
-**Ikonen** ![ Värd stack ny ikon för att skapa konfiguration](./media/user-guide/usbx-events/image210.png)
+**Ikon** ![ Ikonen Skapa ny konfiguration för värdstack](./media/user-guide/usbx-events/image210.png)
 
 **Beskrivning**
  
-Den här händelsen representerar en ny konfiguration för att skapa en USBX-värd.
+Den här händelsen representerar en USBX-värdstack ny händelse för att skapa konfiguration.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: enhet.
-- Info fält 2: konfiguration.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Enhet.
+- Informationsfält 2: Konfiguration.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-stack-new-device-create"></a>Skapa värd stack ny enhet skapa 
+### <a name="host-stack-new-device-create"></a>Skapa ny enhet för värdstack 
 
 #### <a name="ux_host_stack_new_device_create"></a>ux_host_stack_new_device_create
 
-**Ikonen** ![ Ikon för att skapa en ny enhet för värd stack](./media/user-guide/usbx-events/image211.png)
+**Ikon** ![ Ikonen Skapa ny enhet för värdstack](./media/user-guide/usbx-events/image211.png)
 
 **Beskrivning**
  
- Den här händelsen representerar en USBX-värd stack ny enhet skapa händelse.
+ Den här händelsen representerar en USBX-värdstack ny enhets create-händelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Info-fält 1: HCD.
-- Informations fält 2: enhets ägare.
-- Info-fält 3: port index.
-- Info fält 4: enhet.
+- Informationsfält 1: Hcd.
+- Informationsfält 2: Enhetsägare.
+- Informationsfält 3: Portindex.
+- Informationsfält 4: Enhet.
 
-### <a name="host-stack-new-endpoint-create"></a>Skapa en ny slut punkt för värd stack 
+### <a name="host-stack-new-endpoint-create"></a>Skapa ny slutpunkt för värdstack 
 
 #### <a name="ux_host_stack_new_endpoint_create"></a>ux_host_stack_new_endpoint_create
 
-**Ikonen** ![ Skapa ikon för värd stack för ny slut punkt](./media/user-guide/usbx-events/image212.png)
+**Ikon** ![ Ikonen Skapa ny slutpunkt för värdstack](./media/user-guide/usbx-events/image212.png)
 
 **Beskrivning**
  
-Den här händelsen representerar en ny slut punkt för att skapa en USBX-värd.
+Den här händelsen representerar en USBX-värdstack för att skapa en ny slutpunkt.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: gränssnitt.
-- Info fält 2: slut punkt.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Gränssnitt.
+- Informationsfält 2: Slutpunkt.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-stack-root-hub-change-process"></a>Ändrings process för stacken för värd stackens rot nav 
+### <a name="host-stack-root-hub-change-process"></a>Ändringsprocess för värdstackens rothubb 
 
 #### <a name="ux_host_stack_rh_change_process"></a>ux_host_stack_rh_change_process
 
-**Ikonen** ![ Ikon för ändrings process för värd stackens rot nav](./media/user-guide/usbx-events/image213.png)
+**Ikon** ![ Ikon för ändringsprocess för värdstackens rothubb](./media/user-guide/usbx-events/image213.png)
 
 **Beskrivning**
  
-Den här händelsen representerar en ändrings process för USBX värd stackens rot nav.
+Den här händelsen representerar en USBX-värdstacks rothubbändringsprocess.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: port index.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Portindex.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-stack-root-hub-device-extraction"></a>Värd stack för rot nav enhets extrahering 
+### <a name="host-stack-root-hub-device-extraction"></a>Extrahering av rothubbenhet för värdstack 
 
 #### <a name="ux_host_stack_rh_device_extraction"></a>ux_host_stack_rh_device_extraction
 
-**Ikonen** ![ Ikon för extrahering av värd stack för rot nav](./media/user-guide/usbx-events/image214.png)
+**Ikon** ![ Ikon för extrahering av rothubbenhet för värdstack](./media/user-guide/usbx-events/image214.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX värd stack för enhets stacken.
+Den här händelsen representerar en USBX-värdstack för extrahering av rothubbenhet.
 
-**Informations fält**
+**Informationsfält**
 
-- Info-fält 1: HCD.
-- Info fält 2: port index.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Hcd.
+- Informationsfält 2: Portindex.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-stack-root-hub-device-insertion"></a>Värd stack för rot Hubbs enhets infogning 
+### <a name="host-stack-root-hub-device-insertion"></a>Infogning av rothubbenhet för värdstack 
 
 #### <a name="ux_host_stack_rh_device_insertion"></a>ux_host_stack_rh_device_insertion
 
-**Ikonen** ![ Ikon för värd stack för rot nav enhet](./media/user-guide/usbx-events/image215.png)
+**Ikon** ![ Ikon för infogning av rothubbenhet för värdstack](./media/user-guide/usbx-events/image215.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en USBX som anger att enheten ska infogas i värd stacken.
+Den här händelsen representerar en USBX-värdstack rothubbenhetsinmatning.
 
-**Informations fält**
+**Informationsfält**
 
-- Info-fält 1: HCD.
-- Info fält 2: port index.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Hcd.
+- Informationsfält 2: Portindex.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="host-stack-transfer-request"></a>Begäran om värd stack överföring 
+### <a name="host-stack-transfer-request"></a>Överföringsbegäran för värdstack 
 
 #### <a name="ux_host_stack_transfer_request"></a>ux_host_stack_transfer_request
 
-**Ikonen** ![ Ikon för värd stack överförings förfrågan](./media/user-guide/usbx-events/image216.png)
+**Ikon** ![ Ikonen Överföringsbegäran för värdstack](./media/user-guide/usbx-events/image216.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en begäran om USBX värd stack överföring.
+Den här händelsen representerar en överföringsbegäran för EN USBX-värdstack.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: enhet.
-- Info fält 2: slut punkt.
-- Info fält 3: överförings förfrågan.
-- Info fält 4: används inte.
+- Informationsfält 1: Enhet.
+- Informationsfält 2: Slutpunkt.
+- Informationsfält 3: Överföringsbegäran.
+- Informationsfält 4: Används inte.
 
-### <a name="host-stack-transfer-request-abort"></a>Avbryt begäran om värd stack överföring 
+### <a name="host-stack-transfer-request-abort"></a>Begäran om att avbryta överföring av värdstack 
 
-#### <a name="internal-io-driver-get-status"></a>Status för intern I/O-drivrutin för hämtning
+#### <a name="internal-io-driver-get-status"></a>Hämta status för intern I/O-drivrutin
 
-**Ikonen** ![ Avbryt ikon för begäran om värd stack överföring](./media/user-guide/usbx-events/image217.png)
+**Ikon** ![ Ikonen Avbryt överföringsbegäran i värdstack](./media/user-guide/usbx-events/image217.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en begäran om att USBX värd stack överföring avbryts.
+Den här händelsen representerar ett avbrott i överföringsbegäran för USBX-värdstack.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: enhet.
-- Info fält 2: slut punkt.
-- Info fält 3: överförings förfrågan.
-- Info fält 4: används inte.
+- Informationsfält 1: Enhet.
+- Informationsfält 2: Slutpunkt.
+- Informationsfält 3: Överföringsbegäran.
+- Informationsfält 4: Används inte.
 
 ### <a name="usbx-error"></a>USBX-fel 
 
 #### <a name="ux_error"></a>ux_error
 
-**Ikonen** ![ Fel ikon för U S B X](./media/user-guide/usbx-events/image218.png)
+**Ikon** ![ Ikon för U S B X-fel](./media/user-guide/usbx-events/image218.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en fel händelse för USBX.
+Den här händelsen representerar en USBX-felhändelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: USBX-fel.
-- Informations fält 2: fel namn.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: USBX-fel.
+- Informationsfält 2: Felnamn.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.

@@ -1,23 +1,23 @@
 ---
-title: Kapitel 4 – Beskrivning av Azure återställnings tider NetX Secure DTLS Services
-description: Det här kapitlet innehåller en beskrivning av alla Azure återställnings tider NetX-säkra DTLS-tjänster som anges i alfabetisk ordning.
+title: Kapitel 4 – Beskrivning av Azure RTOS NetX Secure DTLS-tjänster
+description: Det här kapitlet innehåller en beskrivning av alla Azure RTOS NetX Secure DTLS-tjänster som anges i alfabetisk ordning.
 author: philmea
 ms.author: philmea
 ms.date: 06/04/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: e795a5fa35a4590e508c7fe2eec53f5494809657
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 45966e7c8ea9be18bf294e8a7540e7226e803f29ae4f3ad3faaa29e4939c2ed8
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104825689"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116801858"
 ---
-# <a name="chapter-4-description-of-azure-rtos-netx-secure-dtls-services"></a>Kapitel 4: Beskrivning av Azure återställnings tider NetX Secure DTLS Services
+# <a name="chapter-4-description-of-azure-rtos-netx-secure-dtls-services"></a>Kapitel 4: Beskrivning av Azure RTOS NetX Secure DTLS-tjänster
 
-Det här kapitlet innehåller en beskrivning av alla Azure återställnings tider NetX-säkra DTLS-tjänster (visas nedan) i alfabetisk ordning.
+Det här kapitlet innehåller en beskrivning av alla Azure RTOS NetX Secure DTLS-tjänster (listas nedan) i alfabetisk ordning.
 
-I avsnittet "returnera värden" i följande API-beskrivningar påverkas inte värden i **fetstil** av **NX_SECURE_DISABLE_ERROR_CHECKING** makro som används för att inaktivera API-felkontroll, medan icke-Fetstilade värden är helt inaktiverade.
+I avsnittet "Returvärden" i följande API-beskrivningar påverkas värden i **BOLD** inte av **NX_SECURE_DISABLE_ERROR_CHECKING-makrot** som används för att inaktivera API-felkontroll, medan värden som inte är fetstilta är helt inaktiverade.
 
 - [nx_secure_dtls_client_session_start](#nx_secure_dtls_client_session_start)
 - [nx_secure_dtls_packet_allocate](#nx_secure_dtls_packet_allocate)
@@ -51,7 +51,7 @@ I avsnittet "returnera värden" i följande API-beskrivningar påverkas inte vä
 
 ## <a name="nx_secure_dtls_client_session_start"></a>nx_secure_dtls_client_session_start
 
-Starta en NetX säker DTLS-klientsession
+Starta en NetX Secure DTLS-klientsession
 
 ### <a name="prototype"></a>Prototyp
 
@@ -64,45 +64,45 @@ UINT nx_secure_dtls_client_session_start(
 
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten startar en DTLS-klientsession som ansluter till servern med den angivna IP-adressen och UDP-porten, med den tillhandahållna UDP-socketen för nätverkskommunikation.
+Den här tjänsten startar en DTLS-klientsession och ansluter till servern på den angivna IP-adressen och UDP-porten med den angivna UDP-socketen för nätverkskommunikation.
 
-DTLS måste initieras innan den här tjänsten anropas med hjälp av nx_secure_dtls_session_create. Dessutom kräver DTLS-klienten att minst ett certifikat för betrodd certifikat utfärdare har lagts till i sessionen med nx_secure_dtls_session_trusted_certificate_add eller i förväg delade nycklar har Aktiver ATS och kon figurer ATS.
+DTLS-sessionskontrollblocket måste initieras innan den här tjänsten anropas med hjälp av nx_secure_dtls_session_create. Dessutom kräver DTLS-klienten att minst ett betrott CA-certifikat har lagts till i sessionen med hjälp nx_secure_dtls_session_trusted_certificate_add eller i förväg delade nycklar har aktiverats och konfigurerats.
 
 ### <a name="parameters"></a>Parametrar
 
-- **dtls_session** Pekare till en DTLS som initierades tidigare.
-- **udp_socket** Initierad UDP-socket som ska användas för att upprätta nätverkskommunikation med den fjärranslutna DTLS-servern.
-- **ip_address** Pekare till IP-adress strukturen som innehåller adressen till DTLS-servern.
-- **port** Initierad UDP-socket som ska användas för att upprätta nätverkskommunikation med den fjärranslutna DTLS-servern.
-- **wait_option** Uppehålls alternativ för anslutnings försök.
+- **dtls_session** Pekare till en DTLS-sessionsstruktur som initierades tidigare.
+- **udp_socket** Initierad UDP-socket som ska användas för att upprätta nätverkskommunikation med fjärr-DTLS-servern.
+- **ip_address** Pekare till IP-adressstrukturen som innehåller DTLS-fjärrserverns adress.
+- **port** Initierad UDP-socket som används för att upprätta nätverkskommunikation med fjärr-DTLS-servern.
+- **wait_option** Alternativ för stängning för anslutningsförsök.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) har slutfört tilldelningen av certifikat till sessionen.
-- **NX_NOT_CONNECTED** (0x38) servern kan inte nås på den adress och port som anges.
-- **NX_SECURE_TLS_UNRECOGNIZED_MESSAGE_TYPE** (0X102) en mottagen TLS/DTLS meddelande typ är felaktig.
-- **NX_SECURE_TLS_UNSUPPORTED_CIPHER** (0X106) ett chiffer som tillhandahålls av fjärrvärden stöds inte.
-- **NX_SECURE_TLS_HANDSHAKE_FAILURE** (0x107) Det gick inte att bearbeta meddelande bearbetningen under TLS-handskakningen.
-- **NX_SECURE_TLS_HASH_MAC_VERIFY_FAILURE** (0X108) ett inkommande meddelande misslyckades med en hash Mac-kontroll.
-- **NX_SECURE_TLS_TCP_SEND_FAILED** (0x109) Det gick inte att skicka en underliggande TCP-socket.
-- **NX_SECURE_TLS_INCORRECT_MESSAGE_LENGTH** (0X10A) ett inkommande meddelande hade ett ogiltigt längd fält.
-- **NX_SECURE_TLS_BAD_CIPHERSPEC** (0X10B) ett inkommande ChangeCipherSpec-meddelande var felaktigt.
-- **NX_SECURE_TLS_INVALID_SERVER_CERT** (0X10C) ett inkommande TLS-certifikat kan inte användas för att identifiera fjärran SLUTen DTLS-servern.
-- **NX_SECURE_TLS_UNSUPPORTED_PUBLIC_CIPHER** (0X10D) den offentliga nyckel chiffer som tillhandahålls av fjärrvärden stöds inte.
-- **NX_SECURE_TLS_NO_SUPPORTED_CIPHERS** (0x10E) fjärrvärden har indikerat Inga krypteringssviter som stöds av stacken netx Secure DTLS.
-- **NX_SECURE_TLS_UNKNOWN_TLS_VERSION** (0X10F) ett MOTTAGet DTLS-meddelande hade en okänd DTLS-version i huvudet.
-- **NX_SECURE_TLS_UNSUPPORTED_TLS_VERSION** (0X110) ett MOTTAGet DTLS-meddelande hade en känd men DTLS-version som inte stöds i rubriken.
-- **NX_SECURE_TLS_ALLOCATE_PACKET_FAILED** (0x111) Det gick inte att tilldela en intern TLS-paket.
-- **NX_SECURE_TLS_INVALID_CERTIFICATE** (0x112) fjärrvärden tillhandahöll ett ogiltigt certifikat.
-- **NX_SECURE_TLS_ALERT_RECEIVED** (0X114) den fjärranslutna värden skickade en avisering som indikerar ett fel och att TLS-sessionen avslutas.
-- **NX_SECURE_TLS_MISSING_CRYPTO_ROUTINE** (0X13B) en post i ciphersuite-tabellen hade en funktion pekare till null.
-- **NX_PTR_ERROR** (0X07) ogiltig session, socket eller adress pekare.
+- **NX_SUCCESS** (0x00) Lyckad tilldelning av certifikat till session.
+- **NX_NOT_CONNECTED** (0x38) Det går inte att nå servern på den angivna adressen och porten.
+- **NX_SECURE_TLS_UNRECOGNIZED_MESSAGE_TYPE** (0x102) En mottagen TLS/DTLS-meddelandetyp är felaktig.
+- **NX_SECURE_TLS_UNSUPPORTED_CIPHER** (0x106) Chiffer som tillhandahålls av fjärrvärden stöds inte.
+- **NX_SECURE_TLS_HANDSHAKE_FAILURE** (0x107) Meddelandebearbetningen under TLS-handskakningen misslyckades.
+- **NX_SECURE_TLS_HASH_MAC_VERIFY_FAILURE** (0x108) Ett inkommande meddelande misslyckades med en hash-MAC-kontroll.
+- **NX_SECURE_TLS_TCP_SEND_FAILED** (0x109) Det gick inte att skicka underliggande TCP-socket.
+- **NX_SECURE_TLS_INCORRECT_MESSAGE_LENGTH** (0x10A) Ett inkommande meddelande hade ett fält med ogiltig längd.
+- **NX_SECURE_TLS_BAD_CIPHERSPEC** (0x10B) Ett inkommande ChangeCipherSpec-meddelande var felaktigt.
+- **NX_SECURE_TLS_INVALID_SERVER_CERT** (0x10C) Ett inkommande TLS-certifikat kan inte användas för att identifiera DTLS-fjärrservern.
+- **NX_SECURE_TLS_UNSUPPORTED_PUBLIC_CIPHER** (0x10D) Chiffer med offentlig nyckel som tillhandahålls av fjärrvärden stöds inte.
+- **NX_SECURE_TLS_NO_SUPPORTED_CIPHERS** (0x10E) Fjärrvärden har inte angett några chiffer som stöds av NetX Secure DTLS-stacken.
+- **NX_SECURE_TLS_UNKNOWN_TLS_VERSION** (0x10F) Ett mottaget DTLS-meddelande hade en okänd DTLS-version i huvudet.
+- **NX_SECURE_TLS_UNSUPPORTED_TLS_VERSION** (0x110) Ett mottaget DTLS-meddelande hade en känd DTLS-version som inte stöds i rubriken.
+- **NX_SECURE_TLS_ALLOCATE_PACKET_FAILED** (0x111) En intern TLS-paketallokering misslyckades.
+- **NX_SECURE_TLS_INVALID_CERTIFICATE** (0x112) Fjärrvärden angav ett ogiltigt certifikat.
+- **NX_SECURE_TLS_ALERT_RECEIVED** (0x114) Fjärrvärden skickade en avisering som anger ett fel och avslutar TLS-sessionen.
+- **NX_SECURE_TLS_MISSING_CRYPTO_ROUTINE** (0x13B) En post i chiffertabellen hade en NULL-funktionspekare.
+- **NX_PTR_ERROR** (0x07) Ogiltig session, socket eller adress pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -202,7 +202,7 @@ NXD_ADDRESS server_ip;
 
 ### <a name="see-also"></a>Se även
 
-- nx_secure_dtls_session_receive nx_secure_dtls_session_send,
+- nx_secure_dtls_session_receive, nx_secure_dtls_session_send,
 - nx_secure_dtls_session_create
 
 ## <a name="nx_secure_dtls_packet_allocate"></a>nx_secure_dtls_packet_allocate
@@ -220,29 +220,29 @@ UINT  nx_secure_dtls_packet_allocate(
 
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten allokerar en NX_PACKET för den angivna aktiva DTLS-sessionen från den angivna NX_PACKET_POOL. Den här tjänsten ska anropas av programmet för att allokera data paket som ska skickas via en DTLS-anslutning. DTLS-sessionen måste initieras innan den här tjänsten anropas.
+Den här tjänsten allokerar NX_PACKET för den angivna aktiva DTLS-sessionen från den angivna NX_PACKET_POOL. Den här tjänsten ska anropas av programmet för att allokera datapaket som ska skickas via en DTLS-anslutning. DTLS-sessionen måste initieras innan den här tjänsten anropas.
 
-Det allokerade paketet initieras korrekt så att DTLS huvud-och sid fots data kan läggas till efter att paket data har fyllts i. Beteendet är annars identiskt med *nx_packet_allocate*.
+Det allokerade paketet initieras korrekt så att DTLS-sidhuvud- och sidfotsdata kan läggas till när paketdata har fyllts i. Beteendet är annars identiskt med *nx_packet_allocate*.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till en DTLS.
-- **pool_ptr** Pekar till en NX_PACKET_POOL som paketet ska allokeras från.
-- **packet_ptr** Utmatnings pekare till det nyligen allokerade paketet.
-- **wait_option** Uppehålls alternativ för paket tilldelning.
+- **session_ptr** Pekare till en DTLS-sessionsinstans.
+- **pool_ptr** Pekare till NX_PACKET_POOL som paketet ska allokeras från.
+- **packet_ptr** Utdata pekare till det nyligen allokerade paketet.
+- **wait_option** Indragningsalternativ för paketallokering.
 
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) paket tilldelningen lyckades.
-- **NX_SECURE_TLS_ALLOCATE_PACKET_FAILED** (0x111) den underliggande paket tilldelningen misslyckades.
-- **NX_SECURE_TLS_SESSION_UNINITIALIZED** (0X101) den angivna DTLS-sessionen initierades inte.
+- **NX_SUCCESS** (0x00) Lyckat paket allokeras.
+- **NX_SECURE_TLS_ALLOCATE_PACKET_FAILED** (0x111) Underliggande paketallokering misslyckades.
+- **NX_SECURE_TLS_SESSION_UNINITIALIZED** (0x101) Den angivna DTLS-sessionen initierades inte.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -260,14 +260,14 @@ the variable packet_ptr.  */
 
 ### <a name="see-also"></a>Se även
 
-- nx_secure_x509_certificate_initialize nx_secure_dtls_session_create,
+- nx_secure_x509_certificate_initialize, nx_secure_dtls_session_create,
 - nx_secure_dtls_session_trusted_certificate_add,
-- nx_secure_dtls_session_send nx_secure_dtls_session_receive,
-- nx_secure_dtls_session_end nx_secure_dtls_session_delete
+- nx_secure_dtls_session_send, nx_secure_dtls_session_receive,
+- nx_secure_dtls_session_end, nx_secure_dtls_session_delete
 
 ## <a name="nx_secure_dtls_psk_add"></a>nx_secure_dtls_psk_add
 
-Lägga till en i förväg delad nyckel till en NetX Secure DTLS-session
+Lägga till en i förväg delad nyckel i en NetX Secure DTLS-session
 
 ### <a name="prototype"></a>Prototyp
 
@@ -279,29 +279,29 @@ UINT  nx_secure_dtls_psk_add(NX_SECURE_DTLS_SESSION *session_ptr,
                             hint_length);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten lägger till en i förväg delad nyckel (PSK), dess identitets sträng och ett identitets tips till ett DTLS. PSK används i stället för ett digitalt certifikat när PSK-krypteringssviter är aktiverade och används.
+Den här tjänsten lägger till en I förväg delad nyckel (PSK), dess identitetssträng och ett identitetstips i ett DTLS-sessionskontrollblock. PSK används i stället för ett digitalt certifikat när PSK-chiffer har aktiverats och används.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekar till en tidigare skapad DTLS-session.
+- **session_ptr** Pekare till en tidigare skapad DTLS-sessionsinstans.
 - **pre_shared_key** Det faktiska PSK-värdet.
-- **psk_length** PSK-värdets längd.
+- **psk_length** Längden på PSK-värdet.
 - **psk_identity** En sträng som används för att identifiera det här PSK-värdet.
-- **identity_length** PSK-identitetens längd.
-- **tips** En sträng som används för att ange vilken grupp av PSKs som ska väljas på en TLS-server.
-- **hint_length** Längden på tips strängen.
+- **identity_length** Längden på PSK-identiteten.
+- **tips** En sträng som används för att ange vilken grupp av PSK:er som ska väljas på en TLS-server.
+- **hint_length** Längden på tipssträngen.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) tillägget av PSK lyckades.
-- **NX_PTR_ERROR** (0X07) ogiltig DTLS.
-- **NX_SECURE_TLS_NO_MORE_PSK_SPACE** (0X125) kan inte lägga till en annan PSK.
+- **NX_SUCCESS** (0x00) Lyckad tillägg av PSK.
+- **NX_PTR_ERROR** (0x07) Ogiltig DTLS-sessionspekare.
+- **NX_SECURE_TLS_NO_MORE_PSK_SPACE** (0x125) Det går inte att lägga till en annan PSK.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -322,11 +322,11 @@ status =  nx_secure_dtls_psk_add(&dtls_session, psk,
 
 ### <a name="see-also"></a>Se även
 
-- nx_secure_dtls_server_psk_add nx_secure_dtls_client_session_create
+- nx_secure_dtls_server_psk_add, nx_secure_dtls_client_session_create
 
 ## <a name="nx_secure_dtls_server_create"></a>nx_secure_dtls_server_create
 
-Skapa en säker DTLS-Server för NetX
+Skapa en Säker NetX DTLS-server
 
 ### <a name="prototype"></a>Prototyp
 
@@ -347,47 +347,47 @@ UINT  nx_secure_dtls_server_create(
 
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skapar en instans av en DTLS-Server för att hantera inkommande DTLS-begäranden på en viss UDP-port. På grund av det faktum att UDP är tillstånds löst kan DTLS-begäranden från flera klienter komma in på en enda port medan andra DTLS-sessioner är aktiva. Därför behövs servern för att underhålla aktiva sessioner och dirigera inkommande meddelanden korrekt till rätt hanterare.
+Den här tjänsten skapar en instans av en DTLS-server för att hantera inkommande DTLS-begäranden på en viss UDP-port. Eftersom UDP är tillståndslöst kan DTLS-begäranden från flera klienter komma in på en enda port medan andra DTLS-sessioner är aktiva. Servern behövs därför för att underhålla aktiva sessioner och korrekt dirigera inkommande meddelanden till rätt hanterare.
 
-Ip_ptr-parametern pekar på en NX_IP-instans som ska användas för den interna UDP-socket som är associerad med DTLS-servern (och lagras i NX_SECURE_DTLS_SERVER kontroll block). IP-instansen och porten används för att definiera UDP-gränssnittet då servern instansieras med nx_secure_dtls_server_start tjänsten.
+Parametern ip_ptr pekar på en NX_IP-instans som ska användas för den interna UDP-socket som är associerad med DTLS-servern (och lagras i NX_SECURE_DTLS_SERVER kontrollblocket). IP-instansen och porten används för att definiera UDP-gränssnittet där servern instansieras med nx_secure_dtls_server_start tjänsten.
 
-Parametern session buffer används för att hålla kontroll blocken för alla möjliga samtidiga DTLS-sessioner för DTLS-servern. Den bör tilldelas en storlek som är jämnt delbar med storleken på den NX_SECURE_DTLS_SESSION kontroll block strukturen.
+Sessionsbuffertparametern används för att hålla kontrollblocken för alla möjliga samtidiga DTLS-sessioner för DTLS-servern. Den bör allokeras med en storlek som är en till och med multipel av storleken på NX_SECURE_DTLS_SESSION för kontrollblockstrukturen.
 
-Om du vill beräkna nödvändig metadata-storlek kan API-nx_secure_tls_metadata_size_calculate användas.
+För att beräkna den nödvändiga metadatastorleken kan API-nx_secure_tls_metadata_size_calculate användas.
 
-Parametern packet_reassembly_buffer används av DTLS för att ommontera UDP-datagram till en fullständig DTLS-post för dekryptering och bör vara tillräckligt stor för att rymma den största förväntade DTLS-posten (16 KB är den DTLS maximala post storleken, men många program skickar inte samma data i samma post).
+Parametern packet_reassembly_buffer används av DTLS för att sätta ihop UDP-datagram i en fullständig DTLS-post för dekryptering och bör vara tillräckligt stor för att hantera den största förväntade DTLS-posten (16 kB är den maximala DTLS-poststorleken, men många program skickar inte så mycket data i en enda post).
 
-Rutinen för connect_notify motringning anropas när en ny DTLS-klient ansluter till servern. Det är upp till programmet att starta DTLS-sessionen med hjälp av tjänsten *nx_secure_dtls_server_session_start*. Även om sessionen kan startas i själva återanropet rekommenderar vi att återanropet endast används för att meddela program tråden (eller dedikerade DTLS-tråden som skapats av programmet) för anslutningen när motringningen anropas av IP-tråden som används för att bearbeta all nätverks bearbetning på lägre nivå (t. ex. UDP). Detta kan vara lika enkelt som att spara DTLS (anges som en parameter till återanropet) och anropa nx_secure_dtls_server_session_start i den andra tråden. Connect_notify motringning bör normalt returnera NX_SUCCESS.
+Den connect_notify motringning anropas när en ny DTLS-klient ansluter till servern. Det är upp till programmet att sedan starta DTLS-sessionen med hjälp av tjänsten *nx_secure_dtls_server_session_start*. Sessionen kan startas i själva återanropet, men vi rekommenderar att återanropet endast används för att meddela programtråden (eller dedikerad DTLS-tråd som skapats av programmet) om anslutningen eftersom återanropet anropas av IP-tråden som används för att bearbeta all nätverksbearbetning på lägre nivå (t.ex. UDP). Det kan vara så enkelt som att spara DTLS-sessionsparametern (tillhandahålls som en parameter till motringningen) och anropa nx_secure_dtls_server_session_start i den andra tråden. Motringning connect_notify bör normalt returnera NX_SUCCESS.
 
-Rutinen för receive_notify motringning anropas när en DTLS-post tas emot som matchar en befintlig upprättad DTLS-session (IP-adress och port för fjärrvärden används för att identifiera en befintlig session). Detta representerar de "program data" som krypteras och skickas via DTLS. Programmet måste anropa tjänsten *nx_secure_dtls_session_receive* på den angivna DTLS-sessionen för att hämta mottagna data. Precis som med connect_receive motringning rekommenderar vi att sessionen skickas till en annan tråd för att hantera meddelande bearbetningen när återanropet anropas från IP-tråden. Receive_notify motringning bör normalt returnera NX_SUCCESS.
+Den receive_notify motringningsrutinen anropas när en DTLS-post tas emot som matchar en befintlig etablerad DTLS-session (fjärrvärdens IP-adress och port används för att identifiera en befintlig session). Detta representerar de "programdata" som krypteras och skickas via DTLS. Programmet måste anropa tjänst-nx_secure_dtls_session_receive *den angivna* DTLS-sessionen för att hämta mottagna data. Precis som connect_receive motringning rekommenderar vi att sessionen skickas till en annan tråd för att hantera meddelandebearbetningen eftersom motringningen anropas från IP-tråden. Motringning receive_notify bör normalt returnera NX_SUCCESS.
 
 ### <a name="parameters"></a>Parametrar
 
 - **server_ptr** Pekare till en tidigare skapad DTLS-serverinstans.
-- **ip_ptr** Pekar mot ett initierat NX_IP kontroll block som ska användas som nätverks gränssnitt för DTLS-servern.
-- **port** Den lokala UDP-porten som DTLS-serverns UDP-socket är kopplad till.
-- **tids gräns** Tids gräns värde som ska användas för nätverks åtgärder.
-- **session_buffer** Buffertutrymme som innehåller kontroll block för alla instanser av NX_SECURE_DTLS_SESSION som tilldelats den här DTLS-serverinstansen.
-- **session_buffer_size** Storlek på bufferten för session. Detta avgör antalet DTLS-sessioner som tilldelats DTLS-servern.
-- **crypto_table** Pekare till en TLS/DTLS krypterings tabell struktur som används för alla kryptografiska åtgärder.
-- **crypto_metadata_buffer** Buffertutrymme för kryptografiska åtgärds beräkningar och statusinformation.
-- **crypto_metadata_size** Storlek på buffert för metadata.
-- **packet_reassembly_buffer** Buffert som används av DTLS för att ommontera UDP-data i DTLS-poster för dekryptering.
-- **packet_reassembly_buffer_size** Storlek på omassembly buffer. Bör normalt vara större än 16 KB, men kan vara mindre beroende på program.
-- **connect_notify** Callback-rutin som anropas när en fjärran sluten DTLS-klient försöker ansluta till den här DTLS-servern.
-- **receive_notify** Motringning anropades när program data tas emot över en befintlig DTLS-session.
+- **ip_ptr** Pekare till en initierad NX_IP som ska användas som nätverksgränssnitt för DTLS-servern.
+- **port** Den lokala UDP-porten som DTLS-serverns UDP-socket är bunden till.
+- **tidsgräns** Tidsgränsvärde som ska användas för nätverksåtgärder.
+- **session_buffer** Buffertutrymme som ska innehålla kontrollblock för alla instanser av NX_SECURE_DTLS_SESSION tilldelas till den här DTLS-serverinstansen.
+- **session_buffer_size** Sessionsbuffertens storlek. Detta avgör antalet DTLS-sessioner som tilldelats till DTLS-servern.
+- **crypto_table** Pekare till en TLS/DTLS-krypteringstabellstruktur som används för alla kryptografiska åtgärder.
+- **crypto_metadata_buffer** Buffertutrymme för beräkningar av kryptografiska uppgifter och tillståndsinformation.
+- **crypto_metadata_size** Storlek på metadatabuffert.
+- **packet_reassembly_buffer** Buffert som används av DTLS för att sätta ihop UDP-data i DTLS-poster för dekryptering.
+- **packet_reassembly_buffer_size** Storlek på återmonterad buffert. Bör vanligtvis vara större än 16 kB, men kan vara mindre beroende på program.
+- **connect_notify** Motringningsrutin anropas när en DTLS-fjärrklient försöker ansluta till den här DTLS-servern.
+- **receive_notify** Återanrop anropas när programdata tas emot via en befintlig DTLS-session.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) skapandet av DTLS-servern.
-- **NX_PTR_ERROR** (0X07) ogiltig pekare skickades.
-- **NX_INVALID_PARAMETERS** (0X4D) det finns inte tillräckligt med buffertutrymme för sessioner, paket omsammansättning eller kryptografi.
+- **NX_SUCCESS** (0x00) DTLS-servern har skapats.
+- **NX_PTR_ERROR** (0x07) Ogiltig pekare skickades.
+- **NX_INVALID_PARAMETERS** (0x4D) Det finns inte tillräckligt med buffertutrymme för sessioner, paket som återmonteras eller kryptografi.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -530,15 +530,15 @@ void dtls_server_thread(void)
 
 ### <a name="see-also"></a>Se även
 
-- nx_secure_dtls_server_start nx_secure_dtls_server_delete,
-- nx_secure_dtls_session_receive nx_secure_dtls_server_session_send,
+- nx_secure_dtls_server_start, nx_secure_dtls_server_delete,
+- nx_secure_dtls_session_receive, nx_secure_dtls_server_session_send,
 - nx_secure_dtls_server_session_start,
 - nx_secure_dtls_server_session_stop,
 - nx_secure_dtls_server_local_certificate_add
 
 ## <a name="nx_secure_dtls_server_delete"></a>nx_secure_dtls_server_delete
 
-Frigör resurser som används av en säker DTLS-server med NetX
+Frigöra resurser som används av en NetX Secure DTLS-server
 
 ### <a name="prototype"></a>Prototyp
 
@@ -546,23 +546,23 @@ Frigör resurser som används av en säker DTLS-server med NetX
 UINT  nx_secure_dtls_server_delete(NX_SECURE_DTLS_SERVER *server_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten frigör de resurser som har allokerats till en DTLS-serverinstans, inklusive den interna UDP-socket som används av servern.
+Den här tjänsten frigör de resurser som allokerats till en DTLS-serverinstans, inklusive den interna UDP-socketen som används av servern.
 
 ### <a name="parameters"></a>Parametrar
 
 - **server_ptr** Pekare till en tidigare skapad DTLS-serverinstans.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) borttagning av server lyckades.
-- **NX_PTR_ERROR** (0X07) ogiltig pekare skickades.
-- **NX_STILL_BOUND** (0X42) UDP-socket är fortfarande kopplad.
+- **NX_SUCCESS** (0x00) Lyckad borttagning av servern.
+- **NX_PTR_ERROR** (0x07) Ogiltig pekare skickades.
+- **NX_STILL_BOUND** (0x42) UDP-socketen är fortfarande bunden.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -706,13 +706,13 @@ void dtls_server_thread(void)
 
 ### <a name="see-also"></a>Se även
 
-- nx_secure_dtls_server_start nx_secure_dtls_server_create,
-- nx_secure_dtls_session_receive nx_secure_dtls_server_session_send,
+- nx_secure_dtls_server_start, nx_secure_dtls_server_create,
+- nx_secure_dtls_session_receive, nx_secure_dtls_server_session_send,
 - nx_secure_dtls_server_session_start
 
 ## <a name="nx_secure_dtls_server_local_certificate_add"></a>nx_secure_dtls_server_local_certificate_add
 
-Lägga till ett lokalt Server identitets certifikat till en säker DTLS-server med NetX
+Lägga till ett lokalt serveridentitetscertifikat till en NetX Secure DTLS-server
 
 ### <a name="prototype"></a>Prototyp
 
@@ -724,31 +724,31 @@ UINT  nx_secure_dtls_server_local_certificate_add(
 
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten lägger till ett lokalt Server identitets certifikat till en DTLS-Server instans. Minst ett identitets certifikat krävs för att klienter ska kunna ansluta till en DTLS-Server, om inte en annan autentiseringsmekanism (t. ex. i förväg delade nycklar) används.
+Den här tjänsten lägger till ett lokalt serveridentitetscertifikat till en DTLS-serverinstans. Minst ett identitetscertifikat krävs för att klienter ska kunna ansluta till en DTLS-server om inte en alternativ autentiseringsmekanism (t.ex. i förväg delade nycklar) används.
 
-Parametern cert_id är en numerisk identifierare som inte är noll för certifikatet. Detta gör att certifikatet enkelt kan tas bort eller hittas i händelse av att det finns flera identitets certifikat med samma X. 509-namn som finns i DTLS-serverns arkiv. Mer information om X. 509-servercertifikat finns i användar handboken för NetX Secure TLS.
+Parametern cert_id är en numerisk identifierare som inte är noll för certifikatet. Detta gör att certifikatet enkelt kan tas bort eller hittas om det finns flera identitetscertifikat med samma X.509-eget namn i DTLS-serverarkivet. Mer information om X.509-servercertifikat finns i användarhandboken för NetX Secure TLS.
 
 ### <a name="parameters"></a>Parametrar
 
 - **server_ptr** Pekare till en tidigare skapad DTLS-serverinstans.
-- **certifikat** Pekar till en tidigare initierad X. 509-certifikat struktur.
+- **certifikat** Pekare till en tidigare initierad X.509-certifikatstruktur.
 - **cert_id** Numerisk unik identifierare som inte är noll för det här certifikatet på den här DTLS-servern.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) tillägget av certifikat till DTLS-servern har slutförts.
-- **NX_PTR_ERROR** (0X07) ogiltig pekare skickades.
-- **NX_INVALID_PARAMETERS** (0X4D) ett certifikat-ID på 0 skickades.
+- **NX_SUCCESS** (0x00) Ett lyckat tillägg av certifikat till DTLS-servern.
+- **NX_PTR_ERROR** (0x07) Ogiltig pekare skickades.
+- **NX_INVALID_PARAMETERS** (0x4D) Ett certifikat-ID på 0 skickades.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
-* Se referens för *nx_secure_dtls_server_create* ett mer komplett exempel.
+*Se referens för *nx_secure_dtls_server_create* för ett mer komplett exempel.
 
 ```C
 /* Our DTLS Server instance. */
@@ -808,15 +808,15 @@ UINT status;
 
 ### <a name="see-also"></a>Se även
 
-- nx_secure_dtls_server_start nx_secure_dtls_server_create,
-- nx_secure_dtls_session_receive nx_secure_dtls_server_session_send,
+- nx_secure_dtls_server_start, nx_secure_dtls_server_create,
+- nx_secure_dtls_session_receive, nx_secure_dtls_server_session_send,
 - nx_secure_dtls_server_session_start,
 - nx_secure_dtls_server_local_certificate_remove,
 - nx_secure_x509_certificate_initialize
 
 ## <a name="nx_secure_dtls_server_local_certificate_remove"></a>nx_secure_dtls_server_local_certificate_remove
 
-Ta bort ett lokalt Server identitets certifikat från en NetX säker DTLS-Server
+Ta bort ett lokalt serveridentitetscertifikat från en NetX Secure DTLS-server
 
 ### <a name="prototype"></a>Prototyp
 
@@ -829,31 +829,31 @@ UINT  nx_secure_dtls_server_local_certificate_remove(
 
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar bort ett lokalt Server identitets certifikat från en DTLS-Server instans. Minst ett identitets certifikat krävs för att klienter ska kunna ansluta till en DTLS-Server, om inte en annan autentiseringsmekanism (t. ex. i förväg delade nycklar) används.
+Den här tjänsten tar bort ett lokalt serveridentitetscertifikat från en DTLS-serverinstans. Minst ett identitetscertifikat krävs för att klienter ska kunna ansluta till en DTLS-server, såvida inte en alternativ autentiseringsmetod (t.ex. i förväg delade nycklar) används.
 
-Det certifikat som ska tas bort kan identifieras antingen av sitt unika X. 509-namn eller av det numeriska cert_id som tilldelades i anropet till *nx_secure_dtls_server_local_certificate_add*. Cert_id används bara för att identifiera certifikatet och underhålls av programmet. Om det egna namnet används i stället för det numeriska certifikat-ID: n ska parametern cert_id anges till 0.
+Certifikatet som ska tas bort kan antingen identifieras med dess X.509-eget namn eller av det numeriska cert_id som tilldelades i anropet *till nx_secure_dtls_server_local_certificate_add*. Den cert_id används bara för att identifiera certifikatet och underhålls av programmet. Om eget namn används i stället för den numeriska certifikatidentifieraren ska cert_id parametern anges till 0.
 
 > [!NOTE]
-> Att ta bort ett certifikat medan en DTLS-handskakning bearbetas resulterar i ett oväntat beteende. Tjänst *nx_secure_dtls_server_stop* ska anropas innan certifikat tas bort.
+> Att ta bort ett certifikat medan en DTLS-handskakning bearbetas resulterar i oväntat beteende. Tjänstens *nx_secure_dtls_server_stop* anropas innan certifikat tas bort.
 
 ### <a name="parameters"></a>Parametrar
 
 - **server_ptr** Pekare till en tidigare skapad DTLS-serverinstans.
-- **common_name** X. 509-CommonName för det certifikat som ska tas bort. Om det används skickar cert_id som noll.
-- **common_name_length** Längden på common_name sträng i byte.
-- **cert_id** Numerisk unik identifierare som inte är noll för det här certifikatet på den här DTLS-servern. Om detta används kan du skicka NX_NULL för common_name-parametern.
+- **common_name** X.509 CommonName för det certifikat som ska tas bort. Om detta används skickar du cert_id som noll.
+- **common_name_length** Längden på common_name i byte.
+- **cert_id** Numerisk unik identifierare som inte är noll för det här certifikatet på den här DTLS-servern. Om detta används skickar du NX_NULL för den common_name parametern.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) borttagning av certifikat från DTLS-servern har slutförts.
-- **NX_PTR_ERROR** (0X07) ogiltig pekare skickades.
-- **NX_SECURE_TLS_CERTIFICATE_NOT_FOUND** (0x119) Det gick inte att hitta något certifikat som matchar cert_id eller common_name på den aktuella DTLS-servern.
+- **NX_SUCCESS** (0x00) Lyckad borttagning av certifikat från DTLS-servern.
+- **NX_PTR_ERROR** (0x07) Ogiltig pekare skickades.
+- **NX_SECURE_TLS_CERTIFICATE_NOT_FOUND** (0x119) Inget certifikat som matchar cert_id eller common_name hittades på den angivna DTLS-servern.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -916,7 +916,7 @@ void dtls_server_thread(void)
 
 ### <a name="see-also"></a>Se även
 
-- nx_secure_dtls_server_start nx_secure_dtls_server_create,
+- nx_secure_dtls_server_start, nx_secure_dtls_server_create,
 - nx_secure_dtls_server_session_start,
 - nx_secure_dtls_server_session_stop,
 - nx_secure_dtls_server_local_certificate_add,
@@ -924,7 +924,7 @@ void dtls_server_thread(void)
 
 ## <a name="nx_secure_dtls_server_notify_set"></a>nx_secure_dtls_server_notify_set
 
-Tilldela en säker NetX DTLS-Server för valfria meddelanden
+Tilldela valfria rutiner för återanrop av meddelanden till en NetX Secure DTLS-server
 
 ### <a name="prototype"></a>Prototyp
 
@@ -939,30 +939,30 @@ UINT  nx_secure_dtls_server_notify_set(
 
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten kan användas för att lägga till valfria rutiner för återuppringning av meddelanden på en DTLS-Server. Antingen kan callback-parametern skickas som NX_NULL om bara ett återanrop önskas.
+Den här tjänsten kan användas för att lägga till valfria rutiner för återanrop av meddelanden till en DTLS-server. Någon av återanropsparametern kan skickas som NX_NULL om bara ett återanrop önskas.
 
-Disconnect_notify motringning anropas när en fjärrklient avslutar en DTLS-session. Parametern dtls_session är den instans som stängdes. Återanropet bör normalt returnera NX_SUCCESS.
+Återanropet disconnect_notify anropas när en fjärrklient avslutar en DTLS-session. Parametern dtls_session är den sessionsinstans som stängdes. Motringning bör vanligtvis returnera NX_SUCCESS.
 
-Error_notify motringning anropas när ett DTLS-fel eller en timeout inträffar. Parametern dtls_session är den session som felet inträffat för och error_code är den numeriska status koden för det fel som orsakade problemet (se bilaga A)
+Motringningen error_notify anropas när ett DTLS-fel eller en timeout inträffar. Parametern dtls_session är sessionsinstansen där felet inträffade och error_code är den numeriska statuskoden för det fel som orsakade problemet (se bilaga A)
 
-NetX Secure Return/Error Codes för en lista över felkoder som kan returneras). Återanropet bör normalt returnera NX_SUCCESS.
+NetX Secure Return/Error Codes för en lista över felkoder som kan returneras). Motringning bör vanligtvis returnera NX_SUCCESS.
 
 ### <a name="parameters"></a>Parametrar
 
 - **server_ptr** Pekare till en tidigare skapad DTLS-serverinstans.
-- **disconnect_notify** Callback-rutin som anropas när en fjärran sluten klient värd stänger en DTLS-session.
-- **error_notify** Callback-rutin anropas när DTLS påträffar ett fel eller en timeout.
+- **disconnect_notify** Återanropsrutinen anropas när en fjärrklientvärd stänger en DTLS-session.
+- **error_notify** Återanropsrutinen anropas när DTLS påträffar ett fel eller en tidsgräns.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) har slutfört tilldelning av återkallnings rutiner.
-- **NX_PTR_ERROR** (0X07) ogiltig pekare skickades.
+- **NX_SUCCESS** (0x00) Lyckad tilldelning av återanropsrutiner.
+- **NX_PTR_ERROR** (0x07) Ogiltig pekare skickades.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -1037,13 +1037,13 @@ void dtls_server_thread(void)
 
 ### <a name="see-also"></a>Se även
 
-- nx_secure_dtls_server_start nx_secure_dtls_server_create,
+- nx_secure_dtls_server_start, nx_secure_dtls_server_create,
 - nx_secure_dtls_server_session_start,
 - nx_secure_dtls_server_session_stop
 
 ## <a name="nx_secure_dtls_server_psk_add"></a>nx_secure_dtls_server_psk_add
 
-Lägga till en i förväg delad nyckel till en NetX säker DTLS-Server
+Lägga till en i förväg delad nyckel till en NetX Secure DTLS-server
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1057,31 +1057,31 @@ UINT  nx_secure_dtls_server_psk_add(
 
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten lägger till en i förväg delad nyckel (PSK), dess identitets sträng och ett identitets tips till ett DTLS Server Control Block. PSK används i stället för ett digitalt certifikat när PSK-krypteringssviter är aktiverade och används.
+Den här tjänsten lägger till en I förväg delad nyckel (PSK), dess identitetssträng och en identitetstips till ett DTLS-serverkontrollblock. PSK används i stället för ett digitalt certifikat när PSK-chiffer har aktiverats och används.
 
-PSK som läggs till replikeras över alla DTLS-sessioner som tilldelats DTLS-servern (via den session-buffert som anges i anropet till nx_secure_dtls_server_create).
+Den PSK som läggs till replikeras över alla DTLS-sessioner som tilldelats till DTLS-servern (via sessionsbufferten som anges i anropet till nx_secure_dtls_server_create).
 
 ### <a name="parameters"></a>Parametrar
 
 - **server_ptr** Pekare till en tidigare skapad DTLS-serverinstans.
 - **pre_shared_key** Det faktiska PSK-värdet.
-- **psk_length** PSK-värdets längd.
+- **psk_length** Längden på PSK-värdet.
 - **psk_identity** En sträng som används för att identifiera det här PSK-värdet.
-- **identity_length** PSK-identitetens längd.
-- **tips** En sträng som används för att ange vilken grupp av PSKs som ska väljas på en TLS-server.
-- **hint_length** Längden på tips strängen.
+- **identity_length** Längden på PSK-identiteten.
+- **tips** En sträng som används för att ange vilken grupp av PSK:er som ska väljas på en TLS-server.
+- **hint_length** Längden på tipssträngen.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) tillägget av PSK lyckades.
-- **NX_PTR_ERROR** (0X07) ogiltig DTLS-Server pekare.
-- **NX_SECURE_TLS_NO_MORE_PSK_SPACE** (0X125) kan inte lägga till en annan PSK.
+- **NX_SUCCESS** (0x00) Lyckad addition av PSK.
+- **NX_PTR_ERROR** (0x07) Ogiltig DTLS-serverpekare.
+- **NX_SECURE_TLS_NO_MORE_PSK_SPACE** (0x125) Det går inte att lägga till ytterligare en PSK.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -1100,11 +1100,11 @@ status =  nx_secure_dtls_server_psk_add(&dtls_server, psk, sizeof(psk), “psk_1
 
 ### <a name="see-also"></a>Se även
 
-- nx_secure_dtls_psk_add nx_secure_dtls_server_create
+- nx_secure_dtls_psk_add, nx_secure_dtls_server_create
 
 ## <a name="nx_secure_dtls_server_session_send"></a>nx_secure_dtls_server_session_send
 
-Skicka data via en DTLS-session som upprättats med en NetX-säker DTLS-Server
+Skicka data via en DTLS-session som upprättats med en NetX Secure DTLS-server
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1115,26 +1115,26 @@ UINT  nx_secure_dtls_server_session_send(
 
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skickar ett data paket över en etablerad DTLS-server till en fjärran sluten DTLS-klient värd. Den använda sessionen hämtas i receive_notify callback-rutinen som nx_secure_dtls_session_create.
+Den här tjänsten skickar ett datapaket via en etablerad DTLS-serversession till en fjärr-DTLS-klientvärd. Den session som används hämtas i den receive_notify motringning som tillhandahålls för nx_secure_dtls_session_create.
 
-Data som anges i paketet, som måste allokeras med hjälp av *nx_secure_dtls_packet_allocate*, krypteras med hjälp av DTLS-sessionens kryptografiska parametrar och rutiner och skickas sedan till fjärrvärden via DTLS-serverns interna UDP-port till den anslutna klientens IP-adress och port (lagras i DTLS-sessionen).
+Data som anges i paketet, som måste allokeras med *hjälp av nx_secure_dtls_packet_allocate*, krypteras med kryptografiska parametrar och rutiner för DTLS-sessionen och skickas sedan till fjärrvärden via DTLS-serverns interna UDP-port till den anslutna klientens IP-adress och port (lagras i DTLS-sessionen).
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till en DTLS-instans som hämtats från den receive_notify återanrops rutinen som tillhandahålls av programmet.
-- **packet_ptr** Pekare till en NX_PACKET instans som har allokerats tidigare och fyllts med program data.
+- **session_ptr** Pekare till en DTLS-sessionsinstans som hämtas från receive_notify motringning som tillhandahålls av programmet.
+- **packet_ptr** Pekare till en NX_PACKET-instans som allokerats tidigare och fyllts med programdata.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) skapandet av DTLS-servern.
-- **NX_PTR_ERROR** (0X07) ogiltig pekare skickades.
-- **NX_SECURE_TLS_TCP_SEND_FAILED** (0X109) ett fel uppstod i den underliggande UDP-åtgärden för att skicka.
+- **NX_SUCCESS** (0x00) DTLS-servern har skapats.
+- **NX_PTR_ERROR** (0x07) Ogiltig pekare skickades.
+- **NX_SECURE_TLS_TCP_SEND_FAILED** (0x109) Ett fel inträffade i den underliggande UDP-skicka-åtgärden.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -1264,14 +1264,14 @@ if(!connect_flag && !receive_flag)
 
 ### <a name="see-also"></a>Se även
 
-- nx_secure_dtls_server_start nx_secure_dtls_server_delete,
-- nx_secure_dtls_session_receive nx_secure_dtls_server_session_create,
-- nx_secure_dtls_server_session_start nx_secure_dtls_server_session_stop,
+- nx_secure_dtls_server_start, nx_secure_dtls_server_delete,
+- nx_secure_dtls_session_receive, nx_secure_dtls_server_session_create,
+- nx_secure_dtls_server_session_start, nx_secure_dtls_server_session_stop,
 - nx_secure_dtls_server_local_certificate_add
 
 ## <a name="nx_secure_dtls_server_session_start"></a>nx_secure_dtls_server_session_start
 
-Starta en DTLS-session från en NetX-säker DTLS-Server
+Starta en DTLS-session från en NetX Secure DTLS-server
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1281,40 +1281,40 @@ UINT  nx_secure_dtls_server_session_start(
 
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten startar en DTLS-Server genom att utföra DTLS-handskakningen på Server sidan när en fjärran sluten DTLS-klient har anslutit till servern och begärt en DTLS-anslutning.
+Den här tjänsten startar en DTLS-serversession genom att utföra DTLS-handskakningen på serversidan när en DTLS-fjärrklient har anslutit till servern och begärt en DTLS-anslutning.
 
-DTLS-sessionen hämtas i connect_notify callback-rutinen som nx_secure_dtls_server_create.
+DTLS-sessionen hämtas i den connect_notify motringning som tillhandahålls för nx_secure_dtls_server_create.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekare till en DTLS-instans som hämtats från en DTLS-Server connect_notify motringning.
-- **wait_option** ThreadX vänte värde som ska användas för nätverks åtgärder.
+- **session_ptr** Pekare till en DTLS-sessionsinstans som hämtas från en DTLS-server connect_notify återanrop.
+- **wait_option** ThreadX-väntevärde som ska användas för nätverksåtgärder.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) skapandet av DTLS-servern.
-- **NX_PTR_ERROR** (0X07) ogiltig pekare skickades.
-- **NX_SECURE_TLS_ALLOCATE_PACKET_FAILED** (0X111) Det gick inte att ALLOKERA ett DTLS-handskaknings paket (Packet bassäng Empty).
-- **NX_SECURE_TLS_INVALID_PACKET** (0X104) emot data som inte var giltiga DTLS-poster.
-- **NX_SECURE_TLS_HASH_MAC_VERIFY_FAILURE** (0X108) en DTLS-post kunde inte hashas korrekt (krypterings fel).
-- **NX_SECURE_TLS_PADDING_CHECK_FAILED** (0x12A) kontroll av krypterings utfyllnad har misslyckats.
-- **NX_SECURE_TLS_ALERT_RECEIVED** (0X114) emot en avisering från fjärrvärden under DTLS-handskakningen.
-- **NX_SECURE_TLS_UNRECOGNIZED_MESSAGE_TYPE** (0X102) fick ett okänt meddelande under DTLS-handskakningen.
-- **NX_SECURE_TLS_INCORRECT_MESSAGE_LENGTH** (0X10A) emot en DTLS-post med ogiltig längd.
-- **NX_SECURE_TLS_NO_SUPPORTED_CIPHERS** (0X10E) tog emot en sitt hälsnings som inte har stöd för DTLS krypteringssviter.
-- **NX_SECURE_TLS_BAD_COMPRESSION_METHOD** (0X118) emot en sitt hälsnings med en okänd komprimerings metod.
-- **NX_SECURE_TLS_HANDSHAKE_FAILURE** (0X107) allmänt (ospecificerad) hand skaknings fel, vanligt vis på grund av problem med förlängnings bearbetning.
-- **NX_SECURE_TLS_UNSUPPORTED_FEATURE** (0X130) en funktion som ännu inte stöds anropades under DTLS-handskakningen.
-- **NX_SECURE_TLS_UNKNOWN_CIPHERSUITE** (0X105) en okänd CIPHERSUITE påträffades (angivet internt kryptografi fel).
-- **NX_SECURE_TLS_PROTOCOL_VERSION_CHANGED** (0X12E) emot en DTLS post med en felmatchad DTLS-version.
-- **NX_SECURE_TLS_FINISHED_HASH_FAILURE** (0X115) Det gick inte att verifiera DTLS-hand skaknings-hashen, sessionen är ogiltig.
-- **NX_SECURE_TLS_TCP_SEND_FAILED** (0X109) intern UDP-sändning misslyckades.
+- **NX_SUCCESS** (0x00) DTLS-servern har skapats.
+- **NX_PTR_ERROR** (0x07) Ogiltig pekare skickades.
+- **NX_SECURE_TLS_ALLOCATE_PACKET_FAILED** (0x111) Det gick inte att allokera ett DTLS-handskakningspaket (paketpool tom).
+- **NX_SECURE_TLS_INVALID_PACKET** (0x104) Avlägsa data som inte var en giltig DTLS-post.
+- **NX_SECURE_TLS_HASH_MAC_VERIFY_FAILURE** (0x108) En DTLS-post kunde inte hashas korrekt (krypteringsfel).
+- **NX_SECURE_TLS_PADDING_CHECK_FAILED** (0x12A) Det gick inte att utfyllnadskontrollen för kryptering.
+- **NX_SECURE_TLS_ALERT_RECEIVED** (0x114) Tog bort en avisering från fjärrvärden under DTLS-handskakningen.
+- **NX_SECURE_TLS_UNRECOGNIZED_MESSAGE_TYPE** (0x102) Tog emot ett okänt meddelande under DTLS-handskakningen.
+- **NX_SECURE_TLS_INCORRECT_MESSAGE_LENGTH** (0x10A) tog bort en DTLS-post med en ogiltig längd.
+- **NX_SECURE_TLS_NO_SUPPORTED_CIPHERS** (0x10E) tog emot en ClientHello utan DTLS-chiffer som stöds.
+- **NX_SECURE_TLS_BAD_COMPRESSION_METHOD** (0x118) avlägset en ClientHello med en okänd komprimeringsmetod.
+- **NX_SECURE_TLS_HANDSHAKE_FAILURE** (0x107) Allmänt (ospecificerat) handskakningsfel, vanligtvis på grund av problem med tilläggsbearbetning.
+- **NX_SECURE_TLS_UNSUPPORTED_FEATURE** (0x130) En funktion som ännu inte stöds anropades under DTLS-handskakningen.
+- **NX_SECURE_TLS_UNKNOWN_CIPHERSUITE** (0x105) Ett okänt chiffer påträffades (indikerade ett internt kryptografifel).
+- **NX_SECURE_TLS_PROTOCOL_VERSION_CHANGED** (0x12E) tog bort en DTLS-post med en felmatchad DTLS-version.
+- **NX_SECURE_TLS_FINISHED_HASH_FAILURE** (0x115) Det gick inte att verifiera DTLS-handskakningshashar, sessionen är ogiltig.
+- **NX_SECURE_TLS_TCP_SEND_FAILED** (0x109) Det gick inte att skicka intern UDP.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -1457,14 +1457,14 @@ void dtls_server_thread(void)
 
 ### <a name="see-also"></a>Se även
 
-- nx_secure_dtls_server_start nx_secure_dtls_server_delete,
-- nx_secure_dtls_session_receive nx_secure_dtls_server_session_send,
-- nx_secure_dtls_server_session_create nx_secure_dtls_server_session_stop,
+- nx_secure_dtls_server_start, nx_secure_dtls_server_delete,
+- nx_secure_dtls_session_receive, nx_secure_dtls_server_session_send,
+- nx_secure_dtls_server_session_create, nx_secure_dtls_server_session_stop,
 - nx_secure_dtls_server_local_certificate_add
 
 ## <a name="nx_secure_dtls_server_start"></a>nx_secure_dtls_server_start
 
-Starta en NetX säker DTLS-serverinstans som lyssnar på den konfigurerade UDP-porten
+Starta en NetX Secure DTLS-serverinstans som lyssnar på den konfigurerade UDP-porten
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1474,30 +1474,30 @@ UINT  nx_secure_dtls_server_start(
 
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten startar en DTLS-Server. När anropet har returnerats är servern aktiv och kommer att börja bearbeta inkommande begär Anden från DTLS-klienter. Server instansen måste ha kon figurer ATS med tjänsten *nx_secure_dtls_server_create*.
+Den här tjänsten startar en DTLS-server. När anropet returneras är servern aktiv och börjar bearbeta inkommande begäranden från DTLS-klienter. Serverinstansen måste ha konfigurerats med tjänsten *nx_secure_dtls_server_create*.
 
 > [!NOTE]
-> Den här tjänsten binder den interna DTLS-serverns UDP-port till den konfigurerade lokala porten så att de flesta problem som påträffas kan utföras med UDP-kommunikation och nätverks konfiguration.
+> Den här tjänsten binder den interna DTLS-serverns UDP-port till den konfigurerade lokala porten, så de flesta problem som uppstår har att göra med UDP-kommunikation och nätverkskonfiguration.
 
 ### <a name="parameters"></a>Parametrar
 
 - **server_ptr** Pekare till en tidigare skapad DTLS-serverinstans.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) starten av servern har slutförts.
-- **NX_PTR_ERROR** (0X07) ogiltig pekare skickades.
-- **NX_NOT_ENABLED** (0X14) UDP är inte aktiverat.
-- **NX_NO_FREE_PORTS** (0X45) inga tillgängliga UDP-portar.
-- **NX_INVALID_PORT** (0X46) ogiltig UDP-port.
-- **NX_ALREADY_BOUND** (0X22) UDP-porten är redan kopplad.
-- **NX_PORT_UNAVAILABLE** (0X23) UDP-porten är inte tillgänglig för användning.
+- **NX_SUCCESS** (0x00) Lyckad start av servern.
+- **NX_PTR_ERROR** (0x07) Ogiltig pekare skickades.
+- **UDP NX_NOT_ENABLED** (0x14) inte aktiverat.
+- **NX_NO_FREE_PORTS** (0x45) Inga tillgängliga UDP-portar.
+- **NX_INVALID_PORT** (0x46) Ogiltig UDP-port.
+- **NX_ALREADY_BOUND** (0x22) UDP-port som redan är bunden.
+- **UDP NX_PORT_UNAVAILABLE porten** (0x23) är inte tillgänglig för användning.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -1640,14 +1640,14 @@ void dtls_server_thread(void)
 
 ### <a name="see-also"></a>Se även
 
-- nx_secure_dtls_server_stop nx_secure_dtls_server_create,
-- nx_secure_dtls_server_delete nx_secure_dtls_session_receive,
+- nx_secure_dtls_server_stop, nx_secure_dtls_server_create,
+- nx_secure_dtls_server_delete, nx_secure_dtls_session_receive,
 - nx_secure_dtls_server_session_send,
 - nx_secure_dtls_server_session_start
 
 ## <a name="nx_secure_dtls_server_stop"></a>nx_secure_dtls_server_stop
 
-Stoppa en aktiv NetX säker DTLS-serverinstans
+Stoppa en aktiv NetX Secure DTLS-serverinstans
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1655,22 +1655,22 @@ Stoppa en aktiv NetX säker DTLS-serverinstans
 UINT  nx_secure_dtls_server_stop(NX_SECURE_DTLS_SERVER *server_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten stoppar en DTLS-Server från att lyssna på konfigurationen av UDP-porten och återställer alla tillhör ande DTLS-sessioner, vilket stoppar all pågående DTLS kommunikation.
+Den här tjänsten stoppar en DTLS-server från att lyssna på den konfigurerade UDP-porten och återställer alla associerade DTLS-sessioner, vilket stoppar pågående DTLS-kommunikation.
 
 ### <a name="parameters"></a>Parametrar
 
-- **server_ptr** Pekar mot en aktiv DTLS-serverinstans.
+- **server_ptr** Pekare till en aktiv DTLS-serverinstans.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) har stoppats på servern.
-- **NX_PTR_ERROR** (0X07) ogiltig pekare skickades.
+- **NX_SUCCESS** (0x00) Lyckat stopp av servern.
+- **NX_PTR_ERROR** (0x07) Ogiltig pekare skickades.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -1822,14 +1822,14 @@ void dtls_server_thread(void)
 
 ### <a name="see-also"></a>Se även
 
-- nx_secure_dtls_server_start nx_secure_dtls_server_create,
-- nx_secure_dtls_server_delete nx_secure_dtls_session_receive,
+- nx_secure_dtls_server_start, nx_secure_dtls_server_create,
+- nx_secure_dtls_server_delete, nx_secure_dtls_session_receive,
 - nx_secure_dtls_server_session_send,
 - nx_secure_dtls_server_session_start
 
 ## <a name="nx_secure_dtls_server_trusted_certificate_add"></a>nx_secure_dtls_server_trusted_certificate_add
 
-Lägga till ett certifikat för betrodd certifikat utfärdare på en NetX säker DTLS-Server
+Lägga till ett betrott certifikatutfärdarcertifikat till en NetX Secure DTLS-server
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1841,31 +1841,31 @@ UINT  nx_secure_dtls_server_trusted_certificate_add(
 
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten lägger till en betrodd certifikat utfärdare eller ett mellanliggande CA-certifikat till en DTLS-serverinstans och tilldelas till alla interna DTLS-serversessioner. Detta krävs endast om X. 509-autentisering med klient certifikat är aktiverat med *nx_secure_dtls_server_x509_client_verify_configure*. Det tillagda certifikatet kommer att användas för att verifiera inkommande klient X. 509-certifikat.
+Den här tjänsten lägger till ett betrott ca- eller mellanliggande CA-certifikat till en DTLS-serverinstans och tilldelas till alla interna DTLS-serversessioner. Detta är endast nödvändigt om autentisering med X.509-klientcertifikat har aktiverats med *hjälp av nx_secure_dtls_server_x509_client_verify_configure*. Det tillagda certifikatet används för att verifiera inkommande X.509-klientcertifikat.
 
-Parametern cert_id är en numerisk identifierare som inte är noll för certifikatet. Detta gör att certifikatet enkelt kan tas bort eller hittas i händelse av att det finns flera identitets certifikat med samma X. 509-namn som finns i DTLS-serverns arkiv. Mer information om X. 509-servercertifikat finns i användar handboken för NetX Secure TLS.
+Parametern cert_id är en numerisk identifierare som inte är noll för certifikatet. Detta gör att certifikatet enkelt kan tas bort eller hittas om det finns flera identitetscertifikat med samma X.509-eget namn i DTLS-serverarkivet. Mer information om X.509-servercertifikat finns i användarhandboken för NetX Secure TLS.
 
 ### <a name="parameters"></a>Parametrar
 
 - **server_ptr** Pekare till en tidigare skapad DTLS-serverinstans.
-- **certifikat** Pekar till en tidigare initierad X. 509-certifikat struktur.
+- **certifikat** Pekare till en tidigare initierad X.509-certifikatstruktur.
 - **cert_id** Numerisk unik identifierare som inte är noll för det här certifikatet på den här DTLS-servern.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) tillägget av certifikat till DTLS-servern har slutförts.
-- **NX_PTR_ERROR** (0X07) ogiltig pekare skickades.
-- **NX_INVALID_PARAMETERS** (0X4D) ett certifikat-ID på 0 skickades.
+- **NX_SUCCESS** (0x00) Lyckad tillägg av certifikat till DTLS-servern.
+- **NX_PTR_ERROR** (0x07) Ogiltig pekare skickades.
+- **NX_INVALID_PARAMETERS** (0x4D) Ett certifikat-ID på 0 skickades.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
-* Se referens för *nx_secure_dtls_server_create* ett mer komplett exempel.
+*Se referens för *nx_secure_dtls_server_create* för ett mer komplett exempel.
 
 ```C
 /* Our DTLS Server instance. */
@@ -1922,8 +1922,8 @@ UINT status;
 
 ### <a name="see-also"></a>Se även
 
-- nx_secure_dtls_server_start nx_secure_dtls_server_create,
-- nx_secure_dtls_session_receive nx_secure_dtls_server_session_send,
+- nx_secure_dtls_server_start, nx_secure_dtls_server_create,
+- nx_secure_dtls_session_receive, nx_secure_dtls_server_session_send,
 - nx_secure_dtls_server_session_start,
 - nx_secure_dtls_server_local_certificate_add,
 - nx_secure_dtls_server_trusted_certificate_remove,
@@ -1931,7 +1931,7 @@ UINT status;
 
 ## <a name="nx_secure_dtls_server_trusted_certificate_remove"></a>nx_secure_dtls_server_trusted_certificate_remove
 
-Ta bort ett certifikat för betrodd certifikat utfärdare från en NetX säker DTLS-Server
+Ta bort ett certifikat för betrodd certifikatutfärdare från en NetX Secure DTLS-server
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1944,32 +1944,32 @@ UINT  nx_secure_dtls_server_trusted_certificate_remove(
 
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar bort ett certifikat för betrodd certifikat utfärdare från en DTLS-Server instans. Certifikat från betrodda certifikat utfärdare krävs bara för en DTLS-server där X. 509-klient certifikat verifiering har Aktiver ATS genom att anropa *nx_secure_dtls_server_x509_client_verify_configure*.
+Den här tjänsten tar bort ett certifikat från en DTLS-serverinstans. Betrodda CA-certifikat krävs endast för en DTLS-server där X.509-klientcertifikatverifiering har aktiverats genom att *anropa nx_secure_dtls_server_x509_client_verify_configure*.
 
-Det certifikat som ska tas bort kan identifieras antingen av sitt unika X. 509-namn eller av det numeriska cert_id som tilldelades i anropet till *nx_secure_dtls_server_trusted_certificate_add*. Cert_id används bara för att identifiera certifikatet och underhålls av programmet. Om det egna namnet används i stället för det numeriska certifikat-ID: n ska parametern cert_id anges till 0.
+Certifikatet som ska tas bort kan antingen identifieras med dess X.509-eget namn eller med det numeriska cert_id som tilldelades i anropet *till nx_secure_dtls_server_trusted_certificate_add*. Den cert_id används bara för att identifiera certifikatet och underhålls av programmet. Om eget namn används i stället för den numeriska certifikatidentifieraren ska cert_id vara inställd på 0.
 
 > [!NOTE]
-> Att ta bort ett certifikat medan en DTLS-handskakning bearbetas kan resultera i oväntat beteende. Tjänst *nx_secure_dtls_server_stop* ska anropas innan certifikat tas bort.
+> Att ta bort ett certifikat medan en DTLS-handskakning bearbetas kan resultera i oväntat beteende. Tjänstens *nx_secure_dtls_server_stop anropas* innan certifikat tas bort.
 
 ### <a name="parameters"></a>Parametrar
 
 - **server_ptr** Pekare till en tidigare skapad DTLS-serverinstans.
-- **common_name** X. 509-CommonName för det certifikat som ska tas bort. Om det används skickar cert_id som noll.
+- **common_name** X.509 CommonName för det certifikat som ska tas bort. Om detta används skickar du cert_id noll.
 - **common_name_length** Längden på common_name sträng i byte.
-- **cert_id** Numerisk unik identifierare som inte är noll för det här certifikatet på den här DTLS-servern. Om detta används kan du skicka NX_NULL för common_name-parametern.
+- **cert_id** Numerisk unik identifierare som inte är noll för det här certifikatet på den här DTLS-servern. Om detta används skickar du NX_NULL för common_name parametern.
 
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) borttagning av certifikat från DTLS-servern har slutförts.
-- **NX_PTR_ERROR** (0X07) ogiltig pekare skickades.
-- **NX_SECURE_TLS_CERTIFICATE_NOT_FOUND** (0x119) Det gick inte att hitta något certifikat som matchar cert_id eller common_name på den aktuella DTLS-servern.
+- **NX_SUCCESS** (0x00) Lyckad borttagning av certifikat från DTLS-servern.
+- **NX_PTR_ERROR** (0x07) Ogiltig pekare skickades.
+- **NX_SECURE_TLS_CERTIFICATE_NOT_FOUND** (0x119) Inget certifikat som matchar cert_id eller common_name hittades på den angivna DTLS-servern.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -2034,7 +2034,7 @@ UINT status;
 
 ### <a name="see-also"></a>Se även
 
-- nx_secure_dtls_server_start nx_secure_dtls_server_create,
+- nx_secure_dtls_server_start, nx_secure_dtls_server_create,
 - nx_secure_dtls_server_session_start,
 - nx_secure_dtls_server_session_stop,
 - nx_secure_dtls_server_trusted_certificate_add,
@@ -2042,7 +2042,7 @@ UINT status;
 
 ## <a name="nx_secure_dtls_server_x509_client_verify_configure"></a>nx_secure_dtls_server_x509_client_verify_configure
 
-Konfigurera en NetX-säker DTLS-Server för att begära och verifiera klient certifikat
+Konfigurera en NetX Secure DTLS-server för att begära och verifiera klientcertifikat
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2054,18 +2054,18 @@ UINT nx_secure_dtls_server_x509_client_verify_configure(
 
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten konfigurerar en DTLS-Server för att begära och verifiera DTLS klient certifikat. Den här valfria funktionen används när X. 509-certifikat önskas för klientautentisering i stället för andra mekanismer (t. ex. en i förväg delad nyckel).
+Den här tjänsten konfigurerar en DTLS-server för att begära och verifiera DTLS-klientcertifikat. Den här valfria funktionen används när X.509-certifikat önskas för klientautentisering i stället för andra mekanismer (t.ex. en i förväg delad nyckel).
 
 > [!IMPORTANT]
-> *När en DTLS-Server har kon figurer ATS för att verifiera klient certifikat med hjälp av den här tjänsten måste minst ett certifikat för betrodd certifikat utfärdare läggas till på servern med hjälp av nx_secure_dtls_server_trusted_certificate_add eller servern avvisar alla inkommande klient anslutningar eftersom den inte kan verifiera klient certifikat mot det betrodda arkivet.*
+> *När en DTLS-server har konfigurerats för att verifiera klientcertifikat med den här tjänsten måste minst ett betrott CA-certifikat läggas till på servern med hjälp av nx_secure_dtls_server_trusted_certificate_add. Annars avvisar servern alla inkommande klientanslutningar eftersom den inte kan verifiera klientcertifikat mot det betrodda arkivet.*
 
-Vid anrop av den här tjänsten kommer DTLS Server-instansen (när den har startats) begära klient certifikat som en del av DTLS-handskakningen. Förutsatt att klienten är korrekt konfigurerad med ett identitets certifikat (och tillhör ande certifikat kedja vid behov), kräver DTLS-servern att minnet allokeras för att bearbeta klient certifikat data. Det här minnet skickas in som *certs_buffer* parameter.
+När den här tjänsten anropas begär DTLS-serverinstansen (när den startats) klientcertifikat som en del av DTLS-handskakningen. Förutsatt att klienten är korrekt konfigurerad med ett identitetscertifikat (och associerad certifikatkedja i förekommande fall), kräver DTLS-servern att minne allokeras för att bearbeta klientcertifikatdata. Det här minnet skickas som *certs_buffer* parametern.
 
-Certs_buffer måste anpassas till den största förväntade certifikat kedjan från en DTLS-klient, *gånger antalet DTLS-serversessioner*. Bufferten delas upp bland de tillgängliga sessionerna med hjälp av parametern *certs_per_session* som representerar det maximala förväntade antalet certifikat i en klient certifikat kedja. Bufferten måste också tillhandahålla utrymme för NX_SECURE_X509_CERT data strukturen som används för att parsa certifikat data.
+Den certs_buffer måste anpassas efter den största förväntade certifikatkedjan från en DTLS-klient, gånger antalet *DTLS-serversessioner.* Bufferten delas mellan de tillgängliga sessionerna med *hjälp certs_per_session* parametern som representerar det maximala förväntade antalet certifikat i en klientcertifikatkedja. Bufferten måste också ge utrymme för NX_SECURE_X509_CERT datastruktur som används för att parsa certifikatdata.
 
-Beräkningen av rätt buffertstorlek kan göras med följande formel:
+Du kan beräkna rätt buffertstorlek med följande formel:
 
 ```C
 buffer_size = (# of DTLS sessions in server) *
@@ -2075,26 +2075,26 @@ buffer_size = (# of DTLS sessions in server) *
 
 ```
 
-- Antalet DTLS-sessioner bestäms av storleken på den session-buffert som skickades till nx_secure_dtls_server_create.
-- certs_per_session ska anges till det maximala förväntade antalet certifikat i en klient certifikat kedja.
-- Den maximala förväntade certifikat storleken är beroende av programmet, nyckel storlekarna och andra faktorer, men 2KB är vanligt vis tillräckligt.
+- Antalet DTLS-sessioner bestäms av storleken på sessionsbufferten som skickas till nx_secure_dtls_server_create.
+- certs_per_session ska ställas in på det maximala förväntade antalet certifikat i en klientcertifikatkedja.
+- Den maximala förväntade certifikatstorleken beror på programmet, nyckelstorlekarna och andra faktorer, men 2 kB är vanligtvis tillräckligt.
 
 ### <a name="parameters"></a>Parametrar
 
 - **server_ptr** Pekare till en tidigare skapad DTLS-serverinstans.
-- **certs_per_session** Antal certifikat som ska allokeras till varje DTLS Server-session.
-- **certs_buffer** Buffertutrymme för inkommande certifikat data.
-- **buffer_size** Storlek på certifikatets buffert.
+- **certs_per_session** Antal certifikat som ska allokeras till varje DTLS-serversession.
+- **certs_buffer** Buffertutrymme för inkommande certifikatdata.
+- **buffer_size** Certifikatbuffertens storlek.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) konfigurationen av klient verifieringen X. 509.
-- **NX_PTR_ERROR** (0X07) ogiltig pekare skickades.
-- **NX_INVALID_PARAMETERS** (0X4D) ogiltigt certifikat arkiv (DTLSserver-instans inte initalized?).
+- **NX_SUCCESS** (0x00) Lyckad konfiguration av X.509-klientverifiering.
+- **NX_PTR_ERROR** (0x07) Ogiltig pekare skickades.
+- **NX_INVALID_PARAMETERS** (0x4D) Ogiltigt certifikatarkiv (DTLSserverinstansen är inte initaliserad?).
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -2167,7 +2167,7 @@ UINT status;
 ### <a name="see-also"></a>Se även
 
 - nx_secure_dtls_server_x509_client_verify_disable,
-- nx_secure_dtls_server_start nx_secure_dtls_server_create,
+- nx_secure_dtls_server_start, nx_secure_dtls_server_create,
 - nx_secure_dtls_server_session_start,
 - nx_secure_dtls_server_session_stop,
 - nx_secure_dtls_server_trusted_certificate_add,
@@ -2175,7 +2175,7 @@ UINT status;
 
 ## <a name="nx_secure_dtls_server_x509_client_verify_disable"></a>nx_secure_dtls_server_x509_client_verify_disable
 
-Inaktiverar verifiering av klient-X. 509 för en NetX säker DTLS-Server
+Inaktiverar X.509-klientcertifikatverifiering för en NetX Secure DTLS-server
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2184,25 +2184,25 @@ UINT nx_secure_dtls_server_x509_client_verify_disable(
                            NX_SECURE_DTLS_SERVER *server_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten inaktiverar X. 509 klient certifikat verifiering på en DTLS-Server. Tjänsten har ingen funktion om verifieringen av klient certifikatet för X. 509 inte är aktive rad.
+Den här tjänsten inaktiverar verifiering av X.509-klientcertifikat på en DTLS-server. Tjänsten har ingen effekt om verifiering av X.509-klientcertifikat inte har aktiverats.
 
 > [!NOTE]
-> Inaktive ring av klientautentisering på en aktiv DTLS-serverinstans kan leda till oförutsägbara beteenden. Tjänsten nx_secure_dtls_server_stop ska anropas innan Server tillstånd ändras.
+> Om du inaktiverar klientautentisering på en aktiv DTLS-serverinstans kan det leda till oförutsägbart beteende. Tjänsten nx_secure_dtls_server_stop anropas innan du ändrar servertillståndet.
 
 ### <a name="parameters"></a>Parametrar
 
 - **server_ptr** Pekare till en tidigare skapad DTLS-serverinstans.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) har inaktiverat autentisering av X. 509-klient.
-- **NX_PTR_ERROR** (0X07) ogiltig pekare skickades.
+- **NX_SUCCESS** (0x00) Lyckad inaktivering av X.509-klientautentisering.
+- **NX_PTR_ERROR** (0x07) Ogiltig pekare skickades.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -2281,7 +2281,7 @@ UINT status;
 ### <a name="see-also"></a>Se även
 
 - nx_secure_dtls_server_x509_client_verify_configure,
-- nx_secure_dtls_server_start nx_secure_dtls_server_create,
+- nx_secure_dtls_server_start, nx_secure_dtls_server_create,
 - nx_secure_dtls_server_session_start,
 - nx_secure_dtls_server_session_stop,
 - nx_secure_dtls_server_trusted_certificate_add,
@@ -2289,7 +2289,7 @@ UINT status;
 
 ## <a name="nx_secure_dtls_session_client_info_get"></a>nx_secure_dtls_session_client_info_get
 
-Hämta information om fjärran sluten klient från en DTLS-Server
+Hämta fjärrklientinformation från en DTLS-serversession
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2301,26 +2301,26 @@ UINT  nx_secure_dtls_session_client_info_get(
 
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten returnerar nätverksinformation om en DTLS-klient som är ansluten till en viss DTLS Server-session. Den information som returneras består av fjärrklientens IP-adress och UDP-port, samt den lokala server port som klienten är ansluten till.
+Den här tjänsten returnerar nätverksinformation om en DTLS-klient som är ansluten till en viss DTLS-serversession. Informationen som returneras består av fjärrklientens IP-adress och UDP-port, samt den lokala serverporten som klienten är ansluten till.
 
-I allmänhet är DTLS session-instansen som erhålls i anropet från en av DTLS för aviseringar om aviseringar (t. ex. connect_notify eller receive_notify återanrop som skickas till nx_secure_dtls_server_create).
+I allmänhet är DTLS-sessionsinstansen den som erhålls vid anropet av en av rutinerna för återanrop av DTLS-meddelanden (t.ex. de connect_notify- eller receive_notify-återanrop som skickas till nx_secure_dtls_server_create).
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekar mot en aktiv DTLS.
+- **session_ptr** Pekare till en aktiv DTLS-serversessionsinstans.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) borttagning av server lyckades.
-- **NX_PTR_ERROR** (0X07) ogiltig pekare skickades.
-- **NX_INVALID_SOCKET** (0X13) den associerade UDP-socketen är inte giltig (sessionen initierades inte?).
-- **NX_NOT_CONNECTED** (0X38) UDP-socketen är inte ansluten – klient anslutningen har släppts eller ännu inte upprättats.
+- **NX_SUCCESS** (0x00) Lyckad borttagning av servern.
+- **NX_PTR_ERROR** (0x07) Ogiltig pekare skickades.
+- **NX_INVALID_SOCKET** (0x13) Den associerade UDP-socketen är inte giltig (sessionen initieras inte?).
+- **NX_NOT_CONNECTED** (0x38) UDP-socketen är inte ansluten – klientanslutningen har tagits bort eller har ännu inte upprättats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -2478,9 +2478,9 @@ void dtls_server_thread(void)
 
 ### <a name="see-also"></a>Se även
 
-- nx_secure_dtls_server_start nx_secure_dtls_server_stop,
-- nx_secure_dtls_server_create nx_secure_dtls_server_delete,
-- nx_secure_dtls_session_receive nx_secure_dtls_server_session_send,
+- nx_secure_dtls_server_start, nx_secure_dtls_server_stop,
+- nx_secure_dtls_server_create, nx_secure_dtls_server_delete,
+- nx_secure_dtls_session_receive, nx_secure_dtls_server_session_send,
 - nx_secure_dtls_server_session_start
 
 ## <a name="nx_secure_dtls_session_create"></a>nx_secure_dtls_session_create
@@ -2502,46 +2502,46 @@ UINT nx_secure_dtls_session_create(
 
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skapar och konfigurerar en DTLS-session. Detta används vanligt vis för att skapa DTLS-klientsessioner som DTLS-serversessioner hanteras med DTLS-serverns mekanism (se *nx_secure_dtls_server_create*), men det kan finnas instanser där ett program behöver skapa en enda fristående DTLS för Server session, vilket innebär att tjänsten kan användas <sup>7</sup>.
+Den här tjänsten skapar och konfigurerar en DTLS-session. I allmänhet används detta för att skapa DTLS-klientsessioner eftersom DTLS-serversessioner hanteras med DTLS-servermekanismen (se *nx_secure_dtls_server_create*), men det kan finnas instanser där ett program behöver skapa en enda fristående DTLS-serversessionsinstans, i vilket fall den här tjänsten kan användas <sup>7.</sup>
 
-Parametrarna konfigurerar den information och minnes tilldelning som krävs för att instansiera en DTLS-session. Parametern crypto_table är en TLS-tabell som innehåller alla de kryptografiska rutiner som krävs för TLS/DTLS-kryptering och autentisering. Metadata_buffer används för kryptering caclulations (se nx_secure_tls_metadata_size_calculate i användar handboken för NetX Secure TLS) och packet_reassembly_buffer används för att sätta samman UDP-datagram till en fullständig DTLS-post för dekryptering.
+Parametrarna konfigurerar den information och minnesallokering som behövs för att instansiera en DTLS-session. Parametern crypto_table TLS-tabell som innehåller alla kryptografiska rutiner som behövs för TLS/DTLS-kryptering och autentisering. Den metadata_buffer används för krypterings-caclulationer (se nx_secure_tls_metadata_size_calculate i användarhandboken för NetX Secure TLS) och packet_reassembly_buffer används för att sätta ihop UDP-datagram till en fullständig DTLS-post för dekryptering.
 
-Certs_number och remote_certificate_buffer krävs för DTLS-klienter som behöver utrymme för att lagra och bearbeta den inkommande DTLS Server certifikat kedjan. Bufferten måste kunna hantera den maximala förväntade storleken på certifikat kedjan för en server som den ska ansluta till. Bufferten delas upp av antalet förväntade certifikat (certs_number parameter) och måste också vara tillräckligt stor för att rymma en NX_SECURE_X509_CERT struktur per certifikat. Buffertstorleken kan fastställas med hjälp av följande formel:
+Den certs_number och remote_certificate_buffer krävs för DTLS-klienter som behöver utrymme för att lagra och bearbeta den inkommande DTLS-servercertifikatkedjan. Bufferten måste kunna hantera den maximala förväntade storleken på certifikatkedjan för alla servrar som den ska ansluta till. Bufferten delas upp med antalet förväntade certifikat (certs_number parameter) och måste också vara tillräckligt stor för att innehålla en NX_SECURE_X509_CERT struktur per certifikat. Buffertstorleken kan fastställas med hjälp av följande formel:
 
 ```C
 remote_certificate_buffer_size = (certs_number) *
                  (maximum cert size + sizeof(NX_SECURE_X509_CERT))
 ```
 
-- certs_number är det förväntade maximala antalet certifikat i serverns certifikat kedja
-- Maximal certifikat storlek beror på storleken på de nycklar som används och informationen i certifikatet, men 2KB är allmänt tillräckligt.
+- certs_number är det förväntade maximala antalet certifikat i serverns certifikatkedja
+- Den maximala certifikatstorleken beror på storleken på nycklarna som används och informationen i certifikatet, men 2 kB är vanligtvis tillräckligt.
 
-**7** det är inte rekommenderat att skapa DTLS-serversessioner med den här rutinen och den innehåller vissa begränsningar. Det primära problemet är att sessionen inte hanterar ytterligare klient anslutningar på ett smidigt sätt eftersom UDP är anslutnings lös en andra klient kan lagligen skicka data till serverns UDP-port när en tidigare DTLS-session fortfarande är aktiv, vilket skulle orsaka att serversessionen avslutas med ett fel.
+**7** Att skapa DTLS-serversessioner med den här rutinen rekommenderas inte och levereras med vissa begränsningar. Det primära problemet är att sessionen inte hanterar ytterligare klientanslutningar på ett smidigt sätt – eftersom UDP är anslutningslös kan en andra klient juridiskt skicka data till serverns UDP-port när en tidigare DTLS-session fortfarande är aktiv, vilket skulle leda till att serversessionen avslutas med ett fel.
 
 ### <a name="parameters"></a>Parametrar
 
-- **dtls_session** Pekar till en oinitierad DTLS-session.
-- **crypto_table** Pekare till en TLS/DTLS krypterings tabell struktur som används för alla kryptografiska åtgärder.
-- **crypto_metadata_buffer** Buffertutrymme för kryptografiska åtgärds beräkningar och statusinformation.
-- **crypto_metadata_size** Storlek på buffert för metadata.
-- **packet_reassembly_buffer** Buffert som används av DTLS för att ommontera UDP-data i DTLS-poster för dekryptering.
-- **packet_reassembly_buffer_size** Storlek på omassembly buffer. Bör normalt vara större än 16 KB, men kan vara mindre beroende på program.
-- **certs_number** Maximalt Förväntat antal certifikat i fjärrserverns certifikat kedja.
-- **remote_certificate_buffer** Buffertutrymme för inkommande certifikat data.
-- **remote_certificate_buffer_size** Storlek på certifikatets buffert.
+- **dtls_session** Pekare till en oiniterad DTLS-sessionsstruktur.
+- **crypto_table** Pekare till en TLS/DTLS-krypteringstabellstruktur som används för alla kryptografiska åtgärder.
+- **crypto_metadata_buffer** Buffertutrymme för beräkningar av kryptografiska uppgifter och tillståndsinformation.
+- **crypto_metadata_size** Storlek på metadatabuffert.
+- **packet_reassembly_buffer** Buffert som används av DTLS för att sätta ihop UDP-data i DTLS-poster för dekryptering.
+- **packet_reassembly_buffer_size** Storlek på återmonterad buffert. Bör vanligtvis vara större än 16 kB, men kan vara mindre beroende på program.
+- **certs_number** Maximalt förväntat antal certifikat i fjärrserverns certifikatkedja.
+- **remote_certificate_buffer** Buffertutrymme för inkommande certifikatdata.
+- **remote_certificate_buffer_size** Certifikatbuffertens storlek.
 
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) skapandet av session.
-- **NX_PTR_ERROR** (0X07) ogiltig sessions-eller buffert pekare.
-- **NX_INVALID_PARAMETERS** (0X4D) det finns inte tillräckligt med buffertutrymme för paket omsammansättning, certifikat eller kryptografi.
+- **NX_SUCCESS** (0x00) Session har skapats.
+- **NX_PTR_ERROR** (0x07) Ogiltig session eller buffertpekare.
+- **NX_INVALID_PARAMETERS** (0x4D) Det finns inte tillräckligt med buffertutrymme för paket som återmonteras, certifikat eller kryptografi.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -2644,12 +2644,12 @@ NXD_ADDRESS server_ip;
 
 ### <a name="see-also"></a>Se även
 
-- nx_secure_dtls_client_session_start nx_secure_dtls_session_receive,
+- nx_secure_dtls_client_session_start,nx_secure_dtls_session_receive,
 - nx_secure_dtls_session_send
 
 ## <a name="nx_secure_dtls_session_delete"></a>nx_secure_dtls_session_delete
 
-Frigör resurser som används av en NetX Secure DTLS-session
+Frigöra resurser som används av en NetX Secure DTLS-session
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2659,22 +2659,22 @@ UINT nx_secure_dtls_session_delete(
 
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar bort en DTLS-session, vilket frigör alla resurser som har allokerats när den skapades.
+Den här tjänsten tar bort en DTLS-session och frigör alla resurser som allokerades när den skapades.
 
 ### <a name="parameters"></a>Parametrar
 
-- **dtls_session** Pekare till en DTLS som initierades tidigare.
+- **dtls_session** Pekare till en DTLS-sessionsstruktur som initierades tidigare.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) en borttagning av sessionen har slutförts.
-- **NX_PTR_ERROR** (0X07) ogiltig sessions-eller buffert pekare.
+- **NX_SUCCESS** (0x00) Lyckad borttagning av sessionen.
+- **NX_PTR_ERROR** (0x07) Ogiltig session eller buffertpekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -2776,12 +2776,12 @@ void application_thread()
 
 ### <a name="see-also"></a>Se även
 
-- nx_secure_dtls_client_session_start nx_secure_dtls_session_receive,
-- nx_secure_dtls_session_send nx_secure_dtls_session_delete
+- nx_secure_dtls_client_session_start, nx_secure_dtls_session_receive,
+- nx_secure_dtls_session_send, nx_secure_dtls_session_delete
 
 ## <a name="nx_secure_dtls_session_end"></a>nx_secure_dtls_session_end
 
-Stänga en aktiv NetX säker DTLS-session
+Stänga av en aktiv NetX Secure DTLS-session
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2791,30 +2791,30 @@ UINT nx_secure_dtls_session_end(NX_SECURE_DTLS_SESSION *dtls_session,
 
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten avslutar en aktiv DTLS-session genom att skicka en TLS/DTLS CloseNotify-avisering till fjärrvärden. Den IP-adress och port som används är de som användes i föregående anrop till nx_secure_dtls_session_send.
+Den här tjänsten avslutar en aktiv DTLS-session genom att skicka en TLS/DTLS CloseNotify-avisering till fjärrvärden. IP-adressen och porten som används är de som användes i föregående anrop till nx_secure_dtls_session_send.
 
 ### <a name="parameters"></a>Parametrar
 
-- **dtls_session** Pekare till en DTLS som initierades tidigare.
-- **wait_option** ThreadX vänte värde som ska användas för nätverks åtgärder.
+- **dtls_session** Pekare till en DTLS-sessionsstruktur som initierades tidigare.
+- **wait_option** ThreadX-väntevärde som ska användas för nätverksåtgärder.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) en borttagning av sessionen har slutförts.
-- **NX_PTR_ERROR** (0X07) ogiltig sessions-eller buffert pekare.
-- **NX_SECURE_TLS_ALLOCATE_PACKET_FAILED** (0X111) Det gick inte att allokera paket för CloseNotify-avisering.
-- **NX_SECURE_TLS_UNKNOWN_CIPHERSUITE** (0X105) troligen internt fel – kryptografisk rutin känns inte igen.
-- **NX_SECURE_TLS_TCP_SEND_FAILED** (0x109) den underliggande UDP-sändningen misslyckades.
-- **NX_IP_ADDRESS_ERROR** -fel (0x21) med en fjärran sluten värd-IP-adress.
-- **NX_NOT_BOUND** (0x24) den underliggande UDP-socketen är inte kopplad till porten.
-- **NX_INVALID_PORT** (0X46) ogiltig UDP-port.
-- **NX_PORT_UNAVAILABLE** (0X23) UDP-porten är inte tillgänglig för användning.
+- **NX_SUCCESS** (0x00) Lyckad borttagning av sessionen.
+- **NX_PTR_ERROR** (0x07) Ogiltig session eller buffertpekare.
+- **NX_SECURE_TLS_ALLOCATE_PACKET_FAILED** (0x111) Det gick inte att allokera paket för CloseNotify-aviseringen.
+- **NX_SECURE_TLS_UNKNOWN_CIPHERSUITE** (0x105) Sannolikt internt fel – kryptografirutin känns inte igen.
+- **NX_SECURE_TLS_TCP_SEND_FAILED** (0x109) Det gick inte att skicka underliggande UDP.
+- **NX_IP_ADDRESS_ERROR** (0x21) Fel med fjärrvärds-IP-adress.
+- **NX_NOT_BOUND** (0x24) Underliggande UDP-socket som inte är bunden till porten.
+- **NX_INVALID_PORT** (0x46) Ogiltig UDP-port.
+- **UDP NX_PORT_UNAVAILABLE porten** (0x23) är inte tillgänglig för användning.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -2916,12 +2916,12 @@ void application_thread()
 
 ### <a name="see-also"></a>Se även
 
-- nx_secure_dtls_client_session_start nx_secure_dtls_session_receive,
-- nx_secure_dtls_session_send nx_secure_dtls_session_delete
+- nx_secure_dtls_client_session_start, nx_secure_dtls_session_receive,
+- nx_secure_dtls_session_send, nx_secure_dtls_session_delete
 
 ## <a name="nx_secure_dtls_session_local_certificate_add"></a>nx_secure_dtls_session_local_certificate_add
 
-Lägga till ett lokalt identitets certifikat till en NetX Secure DTLS-session
+Lägga till ett lokalt identitetscertifikat i en NetX Secure DTLS-session
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2933,31 +2933,31 @@ UINT  nx_secure_dtls_session_local_certificate_add(
 
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten lägger till ett lokalt identitets certifikat till en DTLS. I allmänhet används den här tjänsten när en DTLS-klientsession måste tillhandahålla ett identitets certifikat till en fjärrserver-värd. Detta är en valfri konfiguration för DTLS, så ett certifikat är inte allmänt nödvändigt för DTLS-klienter. Ett identitets certifikat kräver en associerad privat nyckel.
+Den här tjänsten lägger till ett lokalt identitetscertifikat till en DTLS-sessionsinstans. I allmänhet används den här tjänsten när en DTLS-klientsession måste tillhandahålla ett identitetscertifikat till en fjärrservervärd. Detta är en valfri konfiguration för DTLS, så ett certifikat krävs vanligtvis inte för DTLS-klienter. Ett identitetscertifikat kräver en associerad privat nyckel.
 
-Parametern cert_id är en numerisk identifierare som inte är noll för certifikatet. Detta gör att certifikatet enkelt kan tas bort eller hittas i händelse av att det finns flera identitets certifikat med samma X. 509-namn som finns i certifikat arkivet DTLS. Mer information om X. 509-certifikat finns i användar handboken för NetX Secure TLS.
+Parametern cert_id är en numerisk identifierare som inte är noll för certifikatet. Detta gör att certifikatet enkelt kan tas bort eller hittas om det finns flera identitetscertifikat med samma X.509-eget namn i DTLS-certifikatarkivet. Mer information om X.509-certifikat finns i användarhandboken för NetX Secure TLS.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekar till en tidigare skapad DTLS-session.
-- **certifikat** Pekar till en tidigare initierad X. 509-certifikat struktur.
+- **session_ptr** Pekare till en tidigare skapad DTLS-sessionsinstans.
+- **certifikat** Pekare till en tidigare initierad X.509-certifikatstruktur.
 - **cert_id** Numerisk unik identifierare som inte är noll för det här certifikatet på den här DTLS-servern.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) det framgångs rika tillägget av certifikat till DTLS-sessionen.
-- **NX_PTR_ERROR** (0X07) ogiltig pekare skickades.
-- **NX_INVALID_PARAMETERS** (0X4D) ett certifikat-ID på 0 skickades.
+- **NX_SUCCESS** (0x00) Lyckad tillägg av certifikat till DTLS-session.
+- **NX_PTR_ERROR** (0x07) Ogiltig pekare skickades.
+- **NX_INVALID_PARAMETERS** (0x4D) Ett certifikat-ID på 0 skickades.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
-* Se referens för *nx_secure_dtls_session_create* ett mer komplett exempel.
+*Se referens för *nx_secure_dtls_session_create* för ett mer komplett exempel.
 
 ```C
 /* Our DTLS Server instance. */
@@ -3038,14 +3038,14 @@ status =  nx_secure_dtls_client_session_start(&client_dtls_session,
 
 ### <a name="see-also"></a>Se även
 
-- nx_secure_dtls_session_create nx_secure_dtls_session_receive,
-- nx_secure_dtls_session_send nx_secure_dtls_session_start,
+- nx_secure_dtls_session_create, nx_secure_dtls_session_receive,
+- nx_secure_dtls_session_send, nx_secure_dtls_session_start,
 - nx_secure_dtls_session_local_certificate_remove,
 - nx_secure_x509_certificate_initialize
 
 ## <a name="nx_secure_dtls_session_local_certificate_remove"></a>nx_secure_dtls_session_local_certificate_remove
 
-Ta bort ett lokalt identitets certifikat från en NetX Secure DTLS-session
+Ta bort ett lokalt identitetscertifikat från en NetX Secure DTLS-session
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3057,34 +3057,34 @@ UINT  nx_secure_dtls_session_local_certificate_remove(
 
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar bort ett lokalt identitets certifikat från en DTLS med antingen ett certifikat-ID-nummer (tilldelat när certifikatet lades till med nx_secure_dtls_session_local_certificate_add) eller fältet X. 509 CommonName.
+Den här tjänsten tar bort ett lokalt identitetscertifikat från en DTLS-sessionsinstans med hjälp av antingen ett certifikat-ID-nummer (tilldelades när certifikatet lades till med nx_secure_dtls_session_local_certificate_add) eller fältet X.509 CommonName.
 
-Om common_name används för att matcha certifikatet, ska cert_id-parametern anges till 0. Om cert_id används ska common_name skickas värdet NX_NULL.
+Om common_name används för att matcha certifikatet ska cert_id parametern anges till 0. Om cert_id används ska common_name skickas ett värde på NX_NULL.
 
-Parametern cert_id är en numerisk identifierare som inte är noll för certifikatet. Detta gör att certifikatet enkelt kan tas bort eller hittas i händelse av att det finns flera identitets certifikat med samma X. 509-namn som finns i certifikat arkivet DTLS. Mer information om X. 509-certifikat finns i användar handboken för NetX Secure TLS.
+Parametern cert_id är en numerisk identifierare som inte är noll för certifikatet. Detta gör att certifikatet enkelt kan tas bort eller hittas om det finns flera identitetscertifikat med samma X.509-eget namn i DTLS-certifikatarkivet. Mer information om X.509-certifikat finns i användarhandboken för NetX Secure TLS.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekar till en tidigare skapad DTLS-session.
+- **session_ptr** Pekare till en tidigare skapad DTLS-sessionsinstans.
 - **common_name** Pekar på den CommonName-sträng som ska matchas.
 - **common_name_length** Längden på common_name strängen.
 - **cert_id** Numerisk unik identifierare som inte är noll för det här certifikatet på den här DTLS-servern.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) borttagning av certifikat från DTLS-sessionen lyckades.
-- **NX_PTR_ERROR** (0X07) ogiltig pekare skickades.
-- **NX_SECURE_TLS_CERTIFICATE_NOT_FOUND** (0x119) Det gick inte att hitta något certifikat som matchar cert_id eller common_name i den aktuella DTLS-sessionen.
+- **NX_SUCCESS** (0x00) Lyckad borttagning av certifikat från DTLS-sessionen.
+- **NX_PTR_ERROR** (0x07) Ogiltig pekare skickades.
+- **NX_SECURE_TLS_CERTIFICATE_NOT_FOUND** (0x119) Inget certifikat som matchar cert_id eller common_name hittades i den angivna DTLS-sessionen.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
-* Se referens för *nx_secure_dtls_session_create* ett mer komplett exempel.
+*Se referens för *nx_secure_dtls_session_create* för ett mer komplett exempel.
 
 ```C
 
@@ -3171,14 +3171,14 @@ void application_thread()
 
 ### <a name="see-also"></a>Se även
 
-- nx_secure_dtls_session_create nx_secure_dtls_session_receive,
-- nx_secure_dtls_session_send nx_secure_dtls_session_start,
+- nx_secure_dtls_session_create, nx_secure_dtls_session_receive,
+- nx_secure_dtls_session_send, nx_secure_dtls_session_start,
 - nx_secure_dtls_session_local_certificate_add,
 - nx_secure_x509_certificate_initialize
 
 ## <a name="nx_secure_dtls_session_receive"></a>nx_secure_dtls_session_receive
 
-Ta emot program data över en etablerad NetX Secure DTLS-session
+Ta emot programdata via en etablerad NetX Secure DTLS-session
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3190,34 +3190,34 @@ UINT nx_secure_dtls_session_receive(
 
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten returnerar program data som tagits emot av en aktiv DTLS-session. DTLS-sessionen kan vara antingen en DTLS-klientsession (hanteras av en DTLS-serverinstans) eller en DTLS-klientsession. Det returnerade paketet kan bearbetas med hjälp av någon av NX_PACKET API-tjänsterna (se NetX-dokumentationen för mer information).
+Den här tjänsten returnerar programdata som tas emot av en aktiv DTLS-session. DTLS-sessionen kan vara antingen en DTLS-serversession (som hanteras av en DTLS-serverinstans) eller en DTLS-klientsession. Det returnerade paketet kan bearbetas med någon av NX_PACKET API-tjänsterna (mer information finns i NetX-dokumentationen).
 
 ### <a name="parameters"></a>Parametrar
 
-- **dtls_session** Pekare till en DTLS som initierades tidigare.
-- **packet_ptr_ptr** Pekar till en NX_PACKET-pekare för det returnerade paketet.
-- **wait_option** ThreadX vänte värde som ska användas för nätverks åtgärder.
+- **dtls_session** Pekare till en DTLS-sessionsstruktur som initierades tidigare.
+- **packet_ptr_ptr** Pekare till NX_PACKET pekare för returpaketet.
+- **wait_option** ThreadX-väntevärde som ska användas för nätverksåtgärder.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) mottagning av program data paket.
-- **NX_PTR_ERROR** (0X07) ogiltig session eller paket pekare.
-- **NX_NOT_ENABLED** (0X14) UDP är inte aktiverat.
-- **NX_NOT_BOUND** (0X24) UDP-socketen är inte kopplad till porten.
-- **NX_SECURE_TLS_INVALID_PACKET** (0X104) emot data som inte var giltiga DTLS-poster.
-- **NX_SECURE_TLS_HASH_MAC_VERIFY_FAILURE** (0X108) en DTLS-post kunde inte hashas korrekt (krypterings fel).
-- **NX_SECURE_TLS_PADDING_CHECK_FAILED** (0x12A) kontroll av krypterings utfyllnad har misslyckats.
-- **NX_SECURE_TLS_ALERT_RECEIVED** (0X114) emot en avisering från fjärrvärden.
-- **NX_SECURE_TLS_UNRECOGNIZED_MESSAGE_TYPE**    (0X102) tog emot ett okänt meddelande.
-- **NX_SECURE_TLS_INCORRECT_MESSAGE_LENGTH** (0X10A) emot en DTLS-post med ogiltig längd.
-- **NX_SECURE_TLS_UNKNOWN_CIPHERSUITE** (0X105) en okänd CIPHERSUITE påträffades (tyder på ett internt kryptografi fel).
-- **NX_SECURE_TLS_PROTOCOL_VERSION_CHANGED** (0X12E) emot en DTLS post med en felmatchad DTLS-version.
+- **NX_SUCCESS** (0x00) Lyckad mottagning av programdatapaket.
+- **NX_PTR_ERROR** (0x07) Ogiltig session eller paket pekare.
+- **UDP NX_NOT_ENABLED** (0x14) är inte aktiverat.
+- **NX_NOT_BOUND** (0x24) UDP-socket som inte är bunden till porten.
+- **NX_SECURE_TLS_INVALID_PACKET** (0x104) Avlägsa data som inte var en giltig DTLS-post.
+- **NX_SECURE_TLS_HASH_MAC_VERIFY_FAILURE** (0x108) En DTLS-post kunde inte hashas korrekt (krypteringsfel).
+- **NX_SECURE_TLS_PADDING_CHECK_FAILED** (0x12A) Det gick inte att utfyllnadskontrollen för kryptering.
+- **NX_SECURE_TLS_ALERT_RECEIVED** (0x114) Avlägsa en avisering från fjärrvärden.
+- **NX_SECURE_TLS_UNRECOGNIZED_MESSAGE_TYPE**    (0x102) Tog emot ett okänt meddelande.
+- **NX_SECURE_TLS_INCORRECT_MESSAGE_LENGTH** (0x10A) tog bort en DTLS-post med en ogiltig längd.
+- **NX_SECURE_TLS_UNKNOWN_CIPHERSUITE** (0x105) Ett okänt chiffer påträffades (anger internt kryptografifel).
+- **NX_SECURE_TLS_PROTOCOL_VERSION_CHANGED** (0x12E) avlägset en DTLS-post med en felmatchad DTLS-version.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -3316,12 +3316,12 @@ void application_thread()
 
 ### <a name="see-also"></a>Se även
 
-- nx_secure_dtls_client_session_start nx_secure_dtls_session_end,
-- nx_secure_dtls_session_send nx_secure_dtls_session_delete
+- nx_secure_dtls_client_session_start, nx_secure_dtls_session_end,
+- nx_secure_dtls_session_send, nx_secure_dtls_session_delete
 
 ## <a name="nx_secure_dtls_session_reset"></a>nx_secure_dtls_session_reset
 
-Rensa data i en NetX Secure DTLS-session-instans
+Rensa data i en NetX Secure DTLS-sessionsinstans
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3329,22 +3329,22 @@ Rensa data i en NetX Secure DTLS-session-instans
 UINT nx_secure_dtls_session_reset(NX_SECURE_DTLS_SESSION *dtls_session);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten återställer en DTLS-session och rensar alla tillfälliga kryptografiska data och gör det möjligt att använda strukturen igen för en ny session. Beständiga data (t. ex. certifikat Arkiv) bevaras så att nx_secure_dtls_session_create inte behöver anropas flera gånger.
+Den här tjänsten återställer en DTLS-session, rensar alla tillfälliga kryptografiska data och tillåter att strukturen används på nytt för en ny session. Beständiga data (t.ex. certifikatarkiv) bevaras så att nx_secure_dtls_session_create inte anropas upprepade gånger.
 
 ### <a name="parameters"></a>Parametrar
 
-- **dtls_session** Pekare till en DTLS som initierades tidigare.
+- **dtls_session** Pekare till en DTLS-sessionsstruktur som initierades tidigare.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) lyckades att återställa sessionen.
-- **NX_PTR_ERROR** (0X07) ogiltig sessions-eller buffert pekare.
+- **NX_SUCCESS** (0x00) Lyckad återställning av sessionen.
+- **NX_PTR_ERROR** (0x07) Ogiltig session eller buffert pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -3449,12 +3449,12 @@ void application_thread()
 
 ### <a name="see-also"></a>Se även
 
-- nx_secure_dtls_client_session_start nx_secure_dtls_session_receive,
-- nx_secure_dtls_session_send nx_secure_dtls_session_delete
+- nx_secure_dtls_client_session_start, nx_secure_dtls_session_receive,
+- nx_secure_dtls_session_send, nx_secure_dtls_session_delete
 
 ## <a name="nx_secure_dtls_-session_send"></a>nx_secure_dtls_ session_send
 
-Skicka data över en DTLS-session
+Skicka data via en DTLS-session
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3465,28 +3465,28 @@ UINT  nx_secure_dtls_session_send(NX_SECURE_DTLS_SESSION *session_ptr,
 
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skickar ett data paket över en etablerad DTLS-session till en fjärran sluten DTLS-värd på den angivna IP-adressen och porten. Sessionen som används är en aktiv DTLS-klientsession. Observera att IP-adressen och porten tillhandahålls på grund av tillstånds lös typ av UDP, men bör vanligt vis matcha adressen och porten som används för att starta sessionen i nx_secure_dtls_session_start.
+Den här tjänsten skickar ett datapaket via en etablerad DTLS-session till en fjärransluten DTLS-värd på den angivna IP-adressen och porten. Den session som används är en aktiv DTLS-klientsession. Observera att IP-adressen och porten anges på grund av UDP:s tillståndslösa natur, men bör vanligtvis matcha den adress och port som användes för att starta sessionen i nx_secure_dtls_session_start.
 
-De data som anges i paketet, som måste allokeras med hjälp av *nx_secure_dtls_packet_allocate*, krypteras med hjälp av DTLS-sessionens kryptografiska parametrar och rutiner och sedan skickas till fjärrvärden över DTLS-SESSIONens UDP-socket.
+De data som anges i paketet, som måste allokeras med *hjälp av nx_secure_dtls_packet_allocate*, krypteras med hjälp av DTLS-sessionens kryptografiska parametrar och rutiner och skickas sedan till fjärrvärden via DTLS-sessionens UDP-socket.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekar mot en aktiv DTLS-klientsession.
-- **packet_ptr** Pekare till en NX_PACKET instans som har allokerats tidigare och fyllts med program data.
-- **ip_address** Pekar till en NXD_ADDRESS-struktur som innehåller IP-adressen för fjärrvärden.
+- **session_ptr** Pekare till en aktiv DTLS-klientsessionsinstans.
+- **packet_ptr** Pekare till en NX_PACKET-instans som allokerats tidigare och fyllts med programdata.
+- **ip_address** Pekare till NXD_ADDRESS struktur som innehåller fjärrvärdens IP-adress.
 - **port** UDP-port på fjärrvärden.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) paket sändningen har skickats.
-- **NX_PTR_ERROR** (0X07) ogiltig pekare skickades.
-- **NX_SECURE_TLS_TCP_SEND_FAILED** (0X109) ett fel uppstod i den underliggande UDP-åtgärden för att skicka.
+- **NX_SUCCESS** (0x00) Lyckad paketsändning.
+- **NX_PTR_ERROR** (0x07) Ogiltig pekare skickades.
+- **NX_SECURE_TLS_TCP_SEND_FAILED** (0x109) Ett fel inträffade i den underliggande UDP-skicka-åtgärden.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -3587,12 +3587,12 @@ void application_thread()
 
 ### <a name="see-also"></a>Se även
 
-- nx_secure_dtls_client_session_start nx_secure_dtls_session_receive,
+- nx_secure_dtls_client_session_start, nx_secure_dtls_session_receive,
 - nx_secure_dtls_session_create
 
 ## <a name="nx_secure_dtls_session_trusted_certificate_add"></a>nx_secure_dtls_session_trusted_certificate_add
 
-Lägga till ett certifikat för betrodd certifikat utfärdare i en NetX Secure DTLS-session
+Lägga till ett betrott CA-certifikat i en NetX Secure DTLS-session
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3604,31 +3604,31 @@ UINT  nx_secure_dtls_session_trusted_certificate_add(
 
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten lägger till en betrodd certifikat utfärdare eller ett mellanliggande CA X. 509-certifikat till en DTLS-session. En DTLS-klient kräver minst ett betrott certifikat för att verifiera fjärrservernamn om inte en alternativ autentiseringsmekanism används (t. ex. i förväg delade nycklar). Ett betrott certifikat har vanligt vis ingen privat nyckel.
+Den här tjänsten lägger till en betrodd certifikatutfärdare eller mellanliggande CA X.509-certifikat till en DTLS-sessionsinstans. En DTLS-klient kräver minst ett betrott certifikat för att verifiera fjärrservercertifikat om inte en alternativ autentiseringsmekanism används (t.ex. i förväg delade nycklar). Ett betrott certifikat har vanligtvis ingen privat nyckel.
 
-Parametern cert_id är en numerisk identifierare som inte är noll för certifikatet. Detta gör att certifikatet enkelt kan tas bort eller hittas i händelse av att det finns flera identitets certifikat med samma X. 509-namn som finns i certifikat arkivet DTLS. Mer information om X. 509-certifikat finns i användar handboken för NetX Secure TLS.
+Parametern cert_id är en numerisk identifierare som inte är noll för certifikatet. Detta gör att certifikatet enkelt kan tas bort eller hittas om det finns flera identitetscertifikat med samma X.509-eget namn i DTLS-certifikatarkivet. Mer information om X.509-certifikat finns i Användarhandbok för NetX Secure TLS.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekar till en tidigare skapad DTLS-session.
-- **certifikat** Pekar till en tidigare initierad X. 509-certifikat struktur.
+- **session_ptr** Pekare till en tidigare skapad DTLS-sessionsinstans.
+- **certifikat** Pekare till en tidigare initierad X.509-certifikatstruktur.
 - **cert_id** Numerisk unik identifierare som inte är noll för det här certifikatet på den här DTLS-servern.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) det framgångs rika tillägget av certifikat till DTLS-sessionen.
-- **NX_PTR_ERROR** (0X07) ogiltig pekare skickades.
-- **NX_INVALID_PARAMETERS** (0X4D) ett certifikat-ID på 0 skickades.
+- **NX_SUCCESS** (0x00) Lyckad tillägg av certifikat till DTLS-session.
+- **NX_PTR_ERROR** (0x07) Ogiltig pekare skickades.
+- **NX_INVALID_PARAMETERS** (0x4D) Ett certifikat-ID på 0 skickades.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
-* Se referens för *nx_secure_dtls_session_create* ett mer komplett exempel.
+*Se referens för *nx_secure_dtls_session_create* för ett mer komplett exempel.
 
 ```C
 /* Our DTLS Server instance. */
@@ -3707,14 +3707,14 @@ NXD_ADDRESS server_ip;
 
 ### <a name="see-also"></a>Se även
 
-- nx_secure_dtls_session_create nx_secure_dtls_session_receive,
-- nx_secure_dtls_session_send nx_secure_dtls_session_start,
+- nx_secure_dtls_session_create, nx_secure_dtls_session_receive,
+- nx_secure_dtls_session_send, nx_secure_dtls_session_start,
 - nx_secure_dtls_session_trusted_certificate_remove,
 - nx_secure_x509_certificate_initialize
 
 ## <a name="nx_secure_dtls_session_trusted_certificate_remove"></a>nx_secure_dtls_session_trusted_certificate_remove
 
-Ta bort ett certifikat för betrodd certifikat utfärdare från en NetX Secure DTLS-session
+Ta bort ett betrott CA-certifikat från en NetX Secure DTLS-session
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3726,35 +3726,35 @@ UINT  nx_secure_dtls_session_trusted_certificate_remove(
 
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar bort ett certifikat för betrodd certifikat utfärdare från en DTLS med antingen ett certifikat-ID-nummer (tilldelat när certifikatet lades till nx_secure_dtls_session_trusted_certificate_add) eller fältet X. 509 CommonName.
+Den här tjänsten tar bort ett betrott CA-certifikat från en DTLS-sessionsinstans med hjälp av antingen ett certifikat-ID-nummer (tilldelades när certifikatet lades till med nx_secure_dtls_session_trusted_certificate_add) eller fältet X.509 CommonName.
 
-Om common_name används för att matcha certifikatet, ska cert_id-parametern anges till 0. Om cert_id används ska common_name skickas värdet NX_NULL.
+Om common_name används för att matcha certifikatet ska cert_id parametern anges till 0. Om cert_id används ska common_name skickas ett värde på NX_NULL.
 
-Parametern cert_id är en numerisk identifierare som inte är noll för certifikatet. Detta gör att certifikatet enkelt kan tas bort eller hittas i händelse av att det finns flera identitets certifikat med samma X. 509-namn som finns i certifikat arkivet DTLS. Mer information om X. 509-certifikat finns i användar handboken för NetX Secure TLS.
+Parametern cert_id är en numerisk identifierare som inte är noll för certifikatet. Detta gör att certifikatet enkelt kan tas bort eller hittas om det finns flera identitetscertifikat med samma X.509-eget namn i DTLS-certifikatarkivet. Mer information om X.509-certifikat finns i Användarhandbok för NetX Secure TLS.
 
 ### <a name="parameters"></a>Parametrar
 
-- **session_ptr** Pekar till en tidigare skapad DTLS-session.
-- **common_name** Pekar på den CommonName-sträng som ska matchas.
+- **session_ptr** Pekare till en tidigare skapad DTLS-sessionsinstans.
+- **common_name** Pekare till Den CommonName-sträng som ska matchas.
 - **common_name_length** Längden på common_name strängen.
 - **cert_id** Numerisk unik identifierare som inte är noll för det här certifikatet på den här DTLS-servern.
 
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) borttagning av certifikat från DTLS-sessionen lyckades.
-- **NX_PTR_ERROR** (0X07) ogiltig pekare skickades.
-- **NX_SECURE_TLS_CERTIFICATE_NOT_FOUND** (0x119) Det gick inte att hitta något certifikat som matchar cert_id eller common_name i den aktuella DTLS-sessionen.
+- **NX_SUCCESS** (0x00) Lyckad borttagning av certifikat från DTLS-sessionen.
+- **NX_PTR_ERROR** (0x07) Ogiltig pekare skickades.
+- **NX_SECURE_TLS_CERTIFICATE_NOT_FOUND** (0x119) Inget certifikat som matchar cert_id eller common_name hittades i den angivna DTLS-sessionen.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
-* Se referens för *nx_secure_dtls_session_create* ett mer komplett exempel.
+*Se referens för *nx_secure_dtls_session_create* för ett mer komplett exempel.
 
 ```C
 /* Our DTLS Server instance. */
@@ -3838,7 +3838,7 @@ void application_thread()
 
 ### <a name="see-also"></a>Se även
 
-- nx_secure_dtls_session_create nx_secure_dtls_session_receive,
-- nx_secure_dtls_session_send nx_secure_dtls_session_start,
+- nx_secure_dtls_session_create, nx_secure_dtls_session_receive,
+- nx_secure_dtls_session_send, nx_secure_dtls_session_start,
 - nx_secure_dtls_session_trusted_certificate_add,
 - nx_secure_x509_certificate_initialize

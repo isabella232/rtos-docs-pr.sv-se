@@ -1,58 +1,58 @@
 ---
-title: Kapitel 1 – Introduktion till Azure återställnings tider USBX Device stack
-description: USBX är en USB-stack med full funktionalitet för djupt inbäddade program. I det här kapitlet introduceras USBX som beskriver fördelarna och programmet.
+title: Kapitel 1 – Introduktion till Azure RTOS USBX-enhetsstack
+description: USBX är en fullständig USB-stack för djupt inbäddade program. Det här kapitlet introducerar USBX, som beskriver dess fördelar och program.
 author: philmea
 ms.author: philmea
 ms.date: 5/19/2020
 ms.service: rtos
 ms.topic: article
-ms.openlocfilehash: 8b1e08130d4531fd82629378761cd5b1752f0a07
-ms.sourcegitcommit: 60ad844b58639d88830f2660ab0c4ff86b92c10f
+ms.openlocfilehash: 0ec49e88c8dcb8ca200bc376da2f33eb5ddac340bf3693368dc3508f68220765
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 04/07/2021
-ms.locfileid: "106550294"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116791473"
 ---
-# <a name="chapter-1---introduction-to-azure-rtos-usbx-device-stack"></a>Kapitel 1 – Introduktion till Azure återställnings tider USBX Device stack
+# <a name="chapter-1---introduction-to-azure-rtos-usbx-device-stack"></a>Kapitel 1 – Introduktion till Azure RTOS USBX-enhetsstack
 
-USBX är en USB-stack med full funktionalitet för djupt inbäddade program. I det här kapitlet introduceras USBX, som beskriver program och förmåner 
+USBX är en fullständig USB-stack för djupt inbäddade program. Det här kapitlet introducerar USBX, som beskriver dess program och fördelar 
 
 ## <a name="usbx-features"></a>USBX-funktioner
 
-USBX stöder de tre befintliga USB-specifikationerna: 1,1, 2,0 och OTG. Den är utformad för att vara skalbar och kommer att kunna hantera enkla USB-topologier med bara en ansluten enhet samt komplexa topologier med flera enheter och sammanhängande nav. USBX stöder alla data överförings typer för USB-protokollen: kontroll, Mass, avbrott och isokrona.
+USBX stöder de tre befintliga USB-specifikationerna: 1.1, 2.0 och OTG. Den är utformad för att vara skalbar och kommer att hantera enkla USB-topologier med endast en ansluten enhet samt komplexa topologier med flera enheter och sammanhängande hubbar. USBX stöder alla dataöverföringstyper för USB-protokoll: kontroll, bulk, avbrott och isokron.
 
-USBX stöder både värd sidan och enhets sidan. Varje sida består av tre lager.
+USBX stöder både värdsidan och enhetssidan. Varje sida består av tre lager.
 
-- Styrenhets skikt
-- Stack skikt
-- Klass skikt
+- Kontrollantskikt
+- Stackskikt
+- Klassskikt
 
-Relationen mellan USB-skikten är följande:
+Relationen mellan USB-lagren är följande:
 
-![USB-skikt](media/usbx-device-stack/usb-layers.png)
+![USB-lager](media/usbx-device-stack/usb-layers.png)
 
-## <a name="product-highlights"></a>Produkt höjd punkter
+## <a name="product-highlights"></a>Produkthöjdpunkter
 
-- Slutför support för ThreadX-processor
-- Ingen royalties
-- Fullständig ANSI C-källkod
-- Real tids prestanda
-- Teknisk support som svarar
+- Fullständigt stöd för ThreadX-processor
+- Inga problem
+- Slutför ANSI C-källkoden
+- Prestanda i realtid
+- Dynamisk teknisk support
 - Stöd för flera klasser
-- Flera klass instanser
+- Flera klassinstanser
 - Integrering av klasser med ThreadX, FileX och NetX
 - Stöd för USB-enheter med flera konfigurationer
 - Stöd för USB-sammansatta enheter
-- Stöd för USB-energihantering
-- Stöd för USB-OTG
-- Exportera spårnings händelser för TraceX
+- Stöd för USB-energisparhantering
+- Stöd för USB OTG
+- Exportera spårningshändelser för TraceX
 
-## <a name="powerful-services-of-usbx"></a>Kraftfulla tjänster av USBX
+## <a name="powerful-services-of-usbx"></a>Kraftfulla USBX-tjänster
 
-### <a name="complete-usb-device-framework-support"></a>Fullständigt stöd för USB-enhets ramverk
+### <a name="complete-usb-device-framework-support"></a>Fullständigt stöd för RAMVERK FÖR USB-enheter
 
-USBX kan stödja de mest krävande USB-enheterna, inklusive flera konfigurationer, flera gränssnitt och flera alternativa inställningar.
+USBX har stöd för de mest krävande USB-enheterna, inklusive flera konfigurationer, flera gränssnitt och flera alternativa inställningar.
 
-### <a name="easy-to-use-apis"></a>Lättanvända API: er
+### <a name="easy-to-use-apis"></a>Lättanvända API:er
 
-USBX tillhandahåller den bästa inbäddade USB-stacken på ett sätt som är lätt att förstå och använda. USBX-API: n gör tjänsterna intuitiva och konsekventa. Genom att använda de tillhandahållna USBX klass-API: erna behöver inte användar programmet förstå USB-protokollens komplexitet.
+USBX ger den bästa djupt inbäddade USB-stacken på ett sätt som är lätt att förstå och använda. USBX-API:et gör tjänsterna intuitiva och konsekventa. Genom att använda de tillhandahållna USBX-klass-API:erna behöver inte användarprogrammet förstå komplexiteten i USB-protokollen.

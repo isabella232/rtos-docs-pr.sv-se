@@ -1,35 +1,35 @@
 ---
-title: Kapitel 5 – generera spårnings-buffertar
-description: Det här kapitlet innehåller en beskrivning av hur du skapar en Azure återställnings tider TraceX-händelsehubben och beskriver även det underliggande formatet för bufferten.
+title: Kapitel 5 – Generera spårningsbuffertar
+description: Det här kapitlet innehåller en beskrivning av hur du skapar en Azure RTOS TraceX-händelsebuffert och beskriver även buffertens underliggande format.
 author: philmea
 ms.service: rtos
 ms.topic: article
 ms.date: 5/19/2020
 ms.author: philmea
-ms.openlocfilehash: f296137d23b9f3c1c4fd115947bb50a32b768123
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 7d5c90675728fc7e374d625f5a9ae27340268ca8398200c68fb7113a84aa2983
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104827522"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116801792"
 ---
-# <a name="chapter-5---generating-trace-buffers"></a>Kapitel 5 – generera spårnings-buffertar
+# <a name="chapter-5---generating-trace-buffers"></a>Kapitel 5 – Generera spårningsbuffertar
 
-Det här kapitlet innehåller en beskrivning av hur du skapar en Azure återställnings tider TraceX-händelsehubben och beskriver även det underliggande formatet för bufferten.
+Det här kapitlet innehåller en beskrivning av hur du skapar en Azure RTOS TraceX-händelsebuffert och beskriver även buffertens underliggande format.
 
-## <a name="threadx-event-trace-support"></a>Stöd för ThreadX Event trace
+## <a name="threadx-event-trace-support"></a>Stöd för Händelsespårning i ThreadX
 
-ThreadX tillhandahåller inbyggt stöd för spårning av händelser för alla ThreadX-tjänster, ändringar i tråd tillstånd och användardefinierade händelser. ThreadX Event – trace-funktionen har främst utformats som ett efter slakt verktyg för att analysera de senaste "n"-aktiviteterna i programmet. Med hjälp av den här informationen kan utvecklaren upptäcka problem och/eller potentiella optimerings mål.
+ThreadX har inbyggt stöd för händelsespårning för alla ThreadX-tjänster, ändringar av trådtillstånd och användardefinierade händelser. Händelsespårningsfunktionerna i ThreadX är främst utformade som ett verktyg för efteranalys för att analysera de senaste "n"-aktiviteterna i programmet. Med den här informationen kan utvecklaren upptäcka problem och/eller potentiella optimeringsmål.
 
-TraceX visar den buffert för händelse spårning som skapats av ThreadX. Följande beskriver hur du skapar bufferten och beskriver buffertens underliggande format.
+TraceX visar grafiskt händelsespårningsbufferten som skapats av ThreadX. Följande beskriver hur du skapar bufferten och beskriver buffertens underliggande format.
 
-## <a name="enabling-event-trace"></a>Aktivera händelse spårning
+## <a name="enabling-event-trace"></a>Aktivera händelsespårning
 
-Om du vill aktivera händelse spårning definierar du tids stämplings konstanterna, skapar ThreadX-biblioteket med **TX_ENABLE_EVENT_TRACE** definierat och aktiverar spårning genom att anropa funktionen **tx_trace_enable** .
+Om du vill aktivera händelsespårning definierar du tidsstämpelkonstanterna, skapar ThreadX-biblioteket **med TX_ENABLE_EVENT_TRACE** definierat och aktiverar spårning genom att **anropa tx_trace_enable-funktionen.**
 
 ## <a name="defining-time-stamp-constants"></a>Definiera Time-Stamp konstanter
 
-Konstanterna för tidsstämpel är utformade för att ge utvecklare kontrollen över den tids stämpling som används i händelse spårnings posterna. De två konstanterna för tidsstämpel och deras standardvärden är följande:
+Tidsstämpelkonstanterna är utformade för att ge utvecklaren kontroll över den tidsstämpel som används i händelsespårningsposterna. De två tidsstämpelkonstanterna och deras standardvärden är följande:
 
 ```c
 #ifndef TX_TRACE_TIME_SOURCE
@@ -40,7 +40,7 @@ Konstanterna för tidsstämpel är utformade för att ge utvecklare kontrollen �
 #endif
 ```
 
-Ovanstående konstanter definieras i **tx_port. h** och skapar en "falsk" tidstämpel som bara ökar med en för varje händelse. Följande är ett exempel på en faktisk tidsstämpel-definition:
+Ovanstående konstanter definieras i **tx_port.h** och skapar en "falsk" tidsstämpel som bara ökar med en för varje händelse. Följande är ett exempel på en faktisk tidsstämpeldefinition:
 
 ```c
 #ifndef TX_TRACE_TIME_SOURCE
@@ -53,32 +53,32 @@ Ovanstående konstanter definieras i **tx_port. h** och skapar en "falsk" tidst�
 
 Ovanstående konstanter anger en 32-bitars timer som hämtas genom att läsa adressen 0x13000004. De flesta programspecifika tidsstämplar bör konfigureras på liknande sätt.
 
-## <a name="exporting-the-trace-buffer"></a>Exportera den sökta kommandobufferten
+## <a name="exporting-the-trace-buffer"></a>Exportera spårningsbufferten
 
-TraceX kräver en spårningssession i ett binärt, Intel HEX eller Motorola S-Record-filformat på värden. Det enklaste sättet att göra detta är att stoppa målet och instruera fel söknings programmet att dumpa det minnes utrymme som du angav för att ***tx_trace_enable*** funktionen i en fil på värden.
+TraceX behöver spårningsbufferten i ett binärt format, Intel HEX eller Samsung S-Record-filformat på värden. Det enklaste sättet att åstadkomma detta är att stoppa målet och instruera felsökningsprogrammet att dumpa det minnesområde som du angav ***för att tx_trace_enable*** till en fil på värden.
 
 > [!WARNING]
->***Var noga med att inte stoppa målet i själva spårnings insamlings koden. Om du gör det kan det orsaka ogiltig spårnings information. Om programmet har stoppats i ThreadX, är det bäst att stega över alla spårnings infognings makron innan du påsöker en spårnings-buffert.***
+>***Var noga med att inte stoppa målet i själva spårningssamlingskoden. Detta kan orsaka ogiltig spårningsinformation. Om programmet stoppas i ThreadX är det bäst att gå igenom ett makro för att infoga spårning innan spårningsbufferten dumpas.***
 
 > [!IMPORTANT]
-> *Bilaga D visar hur du dumpar spårningssessionen från en rad olika utvecklingsverktyg.*
+> *Bilaga D visar hur du dumpar spårningsbufferten från en mängd olika utvecklingsverktyg.*
 
-## <a name="extended-event-trace-api"></a>API för utökad händelse spårning
+## <a name="extended-event-trace-api"></a>Extended Event Trace API
 
-När ThreadX har skapats med **TX_ENABLE_EVENT_TRACE** definierat, är följande nya API: er för Event trace tillgängliga för programmet:
+När ThreadX har skapats med **TX_ENABLE_EVENT_TRACE** definieras är följande nya händelsespårnings-API:er tillgängliga för programmet:
 
-- tx_trace_enable: *Aktivera händelse spårning*
-- tx_trace_event_filter: *filtrera angivna händelse (er)*
-- tx_trace_event_unfilter: *avfiltrera angivna händelse (er)*
-- tx_trace_disable: *inaktivera händelse spårning*
-- tx_trace_isr_enter_insert: *Infoga ISR ange spårnings händelse*
-- tx_trace_isr_exit_insert: *Infoga ISR-avsluta spårnings händelse*
-- tx_trace_buffer_full_notify: *Registrera fullständig program återanrop i spårnings buffert*
-- tx_trace_user_event_insert: *Infoga användar händelse*
+- tx_trace_enable: Aktivera *händelsespårning*
+- tx_trace_event_filter: *Filtrera angivna händelser*
+- tx_trace_event_unfilter: *Ofiltrera angivna händelser*
+- tx_trace_disable: Inaktivera *händelsespårning*
+- tx_trace_isr_enter_insert: Infoga *ISR ange spårningshändelse*
+- tx_trace_isr_exit_insert: Infoga *isr-avslutsspårningshändelse*
+- tx_trace_buffer_full_notify: Registrera *spårningsbuffert med fullständigt programanrop*
+- tx_trace_user_event_insert: Infoga *användarhändelse*
 
 ### <a name="tx_trace_enable"></a>tx_trace_enable
 
-Aktivera händelse spårning
+Aktivera händelsespårning
 
 #### <a name="prototype"></a>Prototyp
 
@@ -87,26 +87,26 @@ UINT tx_trace_enable (VOID *trace_buffer_start,
      ULONG trace_buffer_size, ULONG registry_entries);
 ```
 
-#### <a name="description"></a>Beskrivning
-Den här tjänsten aktiverar händelse spårning i ThreadX. Den sökta bufferten och det maximala antalet ThreadX-objekt tillhandahålls av programmet.
+#### <a name="description"></a>Description
+Den här tjänsten aktiverar händelsespårning i ThreadX. Spårningsbufferten och det maximala antalet ThreadX-objekt tillhandahålls av programmet.
 
 > [!IMPORTANT]
-> ThreadX-biblioteket och programmet måste ha skapats med **TX_ENABLE_EVENT_TRACE** definierat för att spårning av händelser ska kunna användas.
+> ThreadX-biblioteket och programmet måste byggas med **TX_ENABLE_EVENT_TRACE** definieras för att kunna använda händelsespårning.
 
 #### <a name="input-parameters"></a>Indataparametrar
 
-- **trace_buffer_start**: pekar mot början av den användarspecifika spårningssessionen.
-- **trace_buffer_size**: det totala antalet byte i minnet för den sökta kommandobufferten. Ju större kommandobufferten, desto fler poster kan de lagra.
-- **registry_entries**: antalet program ThreadX objekt som ska behållas i spårnings registret. Registret används för att korrelera objekt adresser med objekt namn. Detta är mycket användbart för verktyg för spårnings analys av GUI.
+- **trace_buffer_start:** Pekare till början av den spårningsbuffert som användaren angav.
+- **trace_buffer_size:** Totalt antal byte i minnet för spårningsbufferten. Ju större spårningsbuffert, desto fler poster kan den lagra.
+- **registry_entries:** Antal ThreadX-programobjekt som ska behållas i spårningsregistret. Registret används för att korrelera objektadresser med objektnamn. Detta är mycket användbart för GUI-spårningsanalysverktyg.
 
-#### <a name="return-values"></a>Retur värden
+#### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS** (0x00) aktive ras spårning av händelse spårning.
-- Den angivna storleken för 0x05 () är för liten. **TX_SIZE_ERROR** Det måste vara tillräckligt stort för spårnings huvudet, objekt registret och minst en spårnings post.
-- **TX_NOT_DONE** (0X20) händelse spårning har redan Aktiver ATS.
-- **TX_FEATURE_NOT_ENABLED** (0xFF)-systemet kompilerades inte med spårning aktiverat.
+- **TX_SUCCESS** (0x00) Aktivera lyckad händelsespårning.
+- **TX_SIZE_ERROR** (0x05) Den angivna spårningsbuffertstorleken är för liten. Det måste vara tillräckligt stort för spårningsrubriken, objektregistret och minst en spårningspost.
+- **TX_NOT_DONE** (0x20) Händelsespårning har redan aktiverats.
+- **TX_FEATURE_NOT_ENABLED** (0xFF) System kompilerades inte med spårning aktiverat.
 
-#### <a name="allowed-from"></a>Tillåten från
+#### <a name="allowed-from"></a>Tillåts från
 
 Initiering och trådar
 
@@ -135,16 +135,16 @@ Filtrera angivna händelser
 UINT tx_trace_event_filter (ULONG  vent_filter_bits);
 ```
 
-#### <a name="description"></a>Beskrivning
+#### <a name="description"></a>Description
 
-Den här tjänsten filtrerar den eller de angivna händelserna från att infogas i den aktiva spårningssessionen. Observera att standardinställningen inga händelser filtreras efter att *tx_trace_enable* anropas.
+Den här tjänsten filtrerar angivna händelser från att infogas i den aktiva spårningsbufferten. Observera att inga händelser filtreras som standard när *tx_trace_enable* anropas.
 
 > [!IMPORTANT]
-> ThreadX-biblioteket och programmet måste ha skapats med **TX_ENABLE_EVENT_TRACE** definierat för att spårning av händelser ska kunna användas.
+> ThreadX-biblioteket och programmet måste byggas med **TX_ENABLE_EVENT_TRACE** definieras för att kunna använda händelsespårning.
 
 #### <a name="input-parameters"></a>Indataparametrar
 
-- **event_filter_bits**: bitar som motsvarar händelser att filtrera. Flera händelser kan filtreras genom att helt enkelt Oring lämpliga konstanter. Giltiga konstanter för den här variabeln definieras enligt följande:
+- **event_filter_bits:** Bitar som motsvarar händelser som ska filtreras. Flera händelser kan filtreras genom att helt enkelt eller tillsammans koppla ihop lämpliga konstanter. Giltiga konstanter för den här variabeln definieras på följande sätt:
 
 ```c
 TX_TRACE_ALL_EVENTS                   0x000007FF
@@ -184,12 +184,12 @@ UX_TRACE_HOST_CLASS_EVENTS            0x20000000
 UX_TRACE_DEVICE_CLASS_EVENTS          0x40000000
 ```
 
-#### <a name="return-values"></a>Retur värden
+#### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS** (0x00) händelse filter har slutförts.
-- **TX_FEATURE_NOT_ENABLED** (0xFF)-systemet kompilerades inte med spårning aktiverat.
+- **TX_SUCCESS** (0x00) Filtret Lyckades.
+- **TX_FEATURE_NOT_ENABLED** (0xFF) System kompilerades inte med spårning aktiverat.
 
-#### <a name="allowed-from"></a>Tillåten från
+#### <a name="allowed-from"></a>Tillåts från
 
 Initiering och trådar
 
@@ -209,7 +209,7 @@ tx_trace_enable, tx_trace_event_unfilter, tx_trace_disable, tx_trace_isr_enter_i
 
 ### <a name="tx_trace_event_unfilter"></a>tx_trace_event_unfilter
 
-Filtrera angivna händelser
+Ofiltrera angivna händelser
 
 #### <a name="prototype"></a>Prototyp
 
@@ -217,16 +217,16 @@ Filtrera angivna händelser
 UINT tx_trace_event_unfilter (ULONG event_unfilter_bits);
 ```
 
-#### <a name="description"></a>Beskrivning
+#### <a name="description"></a>Description
 
-Den här tjänsten avfiltrerar den eller de angivna händelse (er) som de ska infogas i den aktiva spårningssessionen.
+Den här tjänsten avfiltrerar de angivna händelse(erna) så att de infogas i den aktiva spårningsbufferten.
 
 > [!IMPORTANT]
-> ThreadX-biblioteket och programmet måste ha skapats med **TX_ENABLE_EVENT_TRACE** definierat för att spårning av händelser ska kunna användas.
+> ThreadX-biblioteket och programmet måste byggas med **TX_ENABLE_EVENT_TRACE** definieras för att kunna använda händelsespårning.
 
 #### <a name="input-parameters"></a>Indataparametrar
 
-- **event_unfilter_bits**: bitar som motsvarar händelser som ska avfiltreras. Flera händelser kan avfiltreras genom att enkelt eller genom att kombinera lämpliga konstanter. Giltiga konstanter för den här variabeln definieras enligt följande:
+- **event_unfilter_bits:** Bitar som motsvarar händelser som ofiltrerar. Flera händelser kan vara ofiltrerade genom att helt enkelt eller tillsammans koppla ihop lämpliga konstanter. Giltiga konstanter för den här variabeln definieras på följande sätt:
 
 ```c
 TX_TRACE_ALL_EVENTS                  0x000007FF
@@ -266,12 +266,12 @@ UX_TRACE_HOST_CLASS_EVENTS           0x20000000
 UX_TRACE_DEVICE_CLASS_EVENTS         0x40000000
 ```
 
-#### <a name="return-values"></a>Retur värden
+#### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS** (0x00) händelse Avfiltrering slutfördes.
-- **TX_FEATURE_NOT_ENABLED** (0xFF)-systemet kompilerades inte med spårning aktiverat.
+- **TX_SUCCESS** (0x00) Lyckad händelse ofiltrera.
+- **TX_FEATURE_NOT_ENABLED** (0xFF) System kompilerades inte med spårning aktiverat.
 
-#### <a name="allowed-from"></a>Tillåten från
+#### <a name="allowed-from"></a>Tillåts från
 
 Initiering och trådar
 
@@ -291,7 +291,7 @@ tx_trace_enable, tx_trace_event_filter, tx_trace_disable, tx_trace_isr_enter_ins
 
 ### <a name="tx_trace_disable"></a>tx_trace_disable
 
-#### <a name="disable-event-tracing"></a>Inaktivera händelse spårning
+#### <a name="disable-event-tracing"></a>Inaktivera händelsespårning
 
 #### <a name="prototype"></a>Prototyp
 
@@ -299,24 +299,24 @@ tx_trace_enable, tx_trace_event_filter, tx_trace_disable, tx_trace_isr_enter_ins
 UINT tx_trace_disable (VOID);
 ```
 
-#### <a name="description"></a>Beskrivning
+#### <a name="description"></a>Description
 
-Den här tjänsten inaktiverar händelse spårning i ThreadX. Detta kan vara användbart om programmet vill låsa den aktuella bufferten för händelse spårning och eventuellt transportera den externt under körnings tillfället. När den är inaktive rad kan **tx_trace_enable** anropas för att börja spåra igen.
+Den här tjänsten inaktiverar händelsespårning i ThreadX. Detta kan vara användbart om programmet vill låsa den aktuella händelsespårningsbufferten och eventuellt transportera den externt under körning. När den har **inaktiverats kan tx_trace_enable** anropas för att börja spåra igen.
 
 > [!IMPORTANT]
-> ThreadX-biblioteket och programmet måste ha skapats med **TX_ENABLE_EVENT_TRACE** definierat för att spårning av händelser ska kunna användas.
+> ThreadX-biblioteket och programmet måste byggas **TX_ENABLE_EVENT_TRACE** definieras för att du ska kunna använda händelsespårning.
 
 #### <a name="input-parameters"></a>Indataparametrar
 
 Inga.
 
-#### <a name="return-values"></a>Retur värden
+#### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS** (0x00) inaktive ring av händelse spårning.
-- Händelse spårning för **TX_NOT_DONE** (0x20) har inte Aktiver ATS.
-- **TX_FEATURE_NOT_ENABLED** (0xFF)-systemet kompilerades inte med spårning aktiverat.
+- **TX_SUCCESS** (0x00) Lyckad händelsespårning inaktiveras.
+- **TX_NOT_DONE** (0x20) Händelsespårning har inte aktiverats.
+- **TX_FEATURE_NOT_ENABLED** (0xFF) System kompilerades inte med spårning aktiverat.
 
-#### <a name="allowed-from"></a>Tillåten från
+#### <a name="allowed-from"></a>Tillåts från
 
 Initiering och trådar
 
@@ -335,7 +335,7 @@ tx_trace_enable, tx_trace_event_filter, tx_trace_event_unfilter, tx_trace_isr_en
 
 ### <a name="tx_trace_isr_enter_insert"></a>tx_trace_isr_enter_insert
 
-#### <a name="insert-isr-enter-event"></a>Infoga händelse för ISR-retur
+#### <a name="insert-isr-enter-event"></a>Infoga ISR Enter-händelse
 
 #### <a name="prototype"></a>Prototyp
 
@@ -343,23 +343,23 @@ tx_trace_enable, tx_trace_event_filter, tx_trace_event_unfilter, tx_trace_isr_en
 VOID tx_trace_isr_enter_insert (ULONG isr_id);
 ```
 
-#### <a name="description"></a>Beskrivning
+#### <a name="description"></a>Description
 
-Den här tjänsten infogar ISR-händelsen retur i bufferten för händelse spårning. Den bör anropas av programmet i början av ISR-bearbetning. Den angivna parametern ska identifiera den specifika ISR för programmet.
+Den här tjänsten infogar ISR Enter-händelsen i händelsespårningsbufferten. Det bör anropas av programmet i början av ISR-bearbetningen. Den angivna parametern ska identifiera programmets specifika ISR.
 
 > [!IMPORTANT]
-> ThreadX-biblioteket och programmet måste ha skapats med **TX_ENABLE_EVENT_TRACE** definierat för att spårning av händelser ska kunna användas.
+> ThreadX-biblioteket och programmet måste byggas **TX_ENABLE_EVENT_TRACE** definieras för att du ska kunna använda händelsespårning.
 
 #### <a name="input-parameters"></a>Indataparametrar 
-- **isr_id**: Programspecifikt värde för att identifiera ISR.
+- **isr_id:** Programspecifikt värde för att identifiera ISR.
 
-#### <a name="return-values"></a>Retur värden
+#### <a name="return-values"></a>Returvärden
 
 **Ingen**
 
-#### <a name="allowed-from"></a>Tillåten från 
+#### <a name="allowed-from"></a>Tillåts från 
 
-ISR: er
+Isrs
 
 #### <a name="example"></a>Exempel
 
@@ -377,7 +377,7 @@ tx_trace_enable, tx_trace_event_filter, tx_trace_event_unfilter, tx_trace_disabl
 
 ### <a name="tx_trace_isr_exit_insert"></a>tx_trace_isr_exit_insert
 
-#### <a name="insert-isr-exit-event"></a>Infoga ISR-avsluts händelse
+#### <a name="insert-isr-exit-event"></a>Infoga ISR-avslutshändelse
 
 #### <a name="prototype"></a>Prototyp
 
@@ -385,24 +385,24 @@ tx_trace_enable, tx_trace_event_filter, tx_trace_event_unfilter, tx_trace_disabl
 VOID tx_trace_isr_exit_insert (ULONG isr_id);
 ```
 
-#### <a name="description"></a>Beskrivning
+#### <a name="description"></a>Description
 
-Den här tjänsten infogar händelsen ISR-post i kommandobufferten. Den bör anropas av programmet i början av ISR-bearbetning. Den angivna parametern ska identifiera ISR till programmet.
+Den här tjänsten infogar ISR-posthändelsen i händelsespårningsbufferten. Det bör anropas av programmet i början av ISR-bearbetningen. Den angivna parametern ska identifiera ISR för programmet.
 
 > [!IMPORTANT]
-> ThreadX-biblioteket och programmet måste ha skapats med **TX_ENABLE_EVENT_TRACE** definierat för att spårning av händelser ska kunna användas.
+> ThreadX-biblioteket och programmet måste byggas **TX_ENABLE_EVENT_TRACE** definieras för att du ska kunna använda händelsespårning.
 
 #### <a name="input-parameters"></a>Indataparametrar 
 
-- **isr_id**: Programspecifikt värde för att identifiera ISR.
+- **isr_id:** Programspecifikt värde för att identifiera ISR.
 
-#### <a name="return-values"></a>Retur värden
+#### <a name="return-values"></a>Returvärden
 
 **Ingen**
 
-#### <a name="allowed-from"></a>Tillåten från
+#### <a name="allowed-from"></a>Tillåts från
 
-ISR: er
+Isrs
 
 #### <a name="example"></a>Exempel
 
@@ -420,7 +420,7 @@ tx_trace_enable, tx_trace_event_filter, tx_trace_event_unfilter, tx_trace_disabl
 
 ### <a name="tx_trace_buffer_full_notify"></a>tx_trace_buffer_full_notify
 
-#### <a name="register-trace-buffer-full-application-callback"></a>Registrera fullständig motringning för spårnings buffert
+#### <a name="register-trace-buffer-full-application-callback"></a>Registrera spårningsbuffert för fullständigt programanrop
 
 #### <a name="prototype"></a>Prototyp
 
@@ -428,24 +428,24 @@ tx_trace_enable, tx_trace_event_filter, tx_trace_event_unfilter, tx_trace_disabl
 VOID tx_trace_buffer_full_notify (VOID (*full_buffer_callback)(VOID *));
 ```
 
-#### <a name="description"></a>Beskrivning
+#### <a name="description"></a>Description
 
-Den här tjänsten registrerar en återanrops funktion för program som anropas av ThreadX när spårnings-bufferten blir full. Programmet kan sedan välja att inaktivera spårning och/eller eventuellt konfigurera en ny spårnings-buffert.
+Den här tjänsten registrerar en återanropsfunktion för program som anropas av ThreadX när spårningsbufferten blir full. Programmet kan sedan välja att inaktivera spårning och/eller eventuellt konfigurera en ny spårningsbuffert.
 
 > [!IMPORTANT]
-> ThreadX-biblioteket och programmet måste ha skapats med **TX_ENABLE_EVENT_TRACE** definierat för att spårning av händelser ska kunna användas.
+> ThreadX-biblioteket och programmet måste byggas **TX_ENABLE_EVENT_TRACE** definieras för att du ska kunna använda händelsespårning.
 
 #### <a name="input-parameters"></a>Indataparametrar
 
-- **full_buffer_callback**: program funktion som anropas när kommandobufferten är full. Värdet NULL inaktiverar återanropet av meddelandet.
+- **full_buffer_callback:** Programfunktionen anropar när spårningsbufferten är full. Värdet NULL inaktiverar återanropet av meddelanden.
 
-#### <a name="return-values"></a>Retur värden
+#### <a name="return-values"></a>Returvärden
 
 **Ingen**
 
-#### <a name="allowed-from"></a>Tillåten från
+#### <a name="allowed-from"></a>Tillåts från
 
-ISR: er
+Isrs
 
 #### <a name="example"></a>Exempel
 
@@ -471,7 +471,7 @@ tx_trace_enable, tx_trace_event_filter, tx_trace_event_unfilter, tx_trace_disabl
 
 ### <a name="tx_trace_user_event_insert"></a>tx_trace_user_event_insert
 
-#### <a name="insert-user-event"></a>Infoga användar händelse
+#### <a name="insert-user-event"></a>Infoga användarhändelse
 
 #### <a name="prototype"></a>Prototyp
 
@@ -481,27 +481,27 @@ UINT tx_trace_user_event_insert (ULONG event_id,
    ULONG info_field_3, ULONG info_field_4);
 ```
 
-#### <a name="description"></a>Beskrivning
+#### <a name="description"></a>Description
 
-Den här tjänsten infogar användar händelsen i den sökta bufferten. Användar händelse-ID: n måste vara större än konstanten **TX_TRACE_USER_EVENT_START**, som definieras som 4096. Den maximala användar händelsen definieras av konstant **TX_TRACE_USER_EVENT_END**, som definieras som 65535. Alla händelser inom det här intervallet är tillgängliga för programmet. Informations fälten är programspecifika.
+Den här tjänsten infogar användarhändelsen i spårningsbufferten. Användarhändelse-ID måste vara större än **konstanten TX_TRACE_USER_EVENT_START**, som har definierats till 4096. Den maximala användarhändelsen definieras av **konstanten TX_TRACE_USER_EVENT_END**, som har definierats till 65535. Alla händelser inom det här intervallet är tillgängliga för programmet. Informationsfälten är programspecifika.
 
 > [!IMPORTANT]
-> ThreadX-biblioteket och programmet måste ha skapats med **TX_ENABLE_EVENT_TRACE** definierat för att spårning av händelser ska kunna användas.
+> ThreadX-biblioteket och programmet måste byggas **TX_ENABLE_EVENT_TRACE** definieras för att du ska kunna använda händelsespårning.
 
 #### <a name="input-parameters"></a>Indataparametrar
 
-- **event_id**: identifiering av programspecifik händelse och måste börja vara större än **TX_TRACE_USER_EVENT_START** och mindre än eller lika med **TX_TRACE_USER_EVENT_END**.
-- **info_field_1**: programspecifikt informations fält.
-- **info_field_2**: programspecifikt informations fält.
-- **info_field_3**: programspecifikt informations fält.
-- **info_field_4**: programspecifikt informations fält.
+- **event_id:** Programspecifik händelseidentifiering och måste börja vara **större än TX_TRACE_USER_EVENT_START** och mindre än eller lika med **TX_TRACE_USER_EVENT_END**.
+- **info_field_1:** Programspecifikt informationsfält.
+- **info_field_2:** Programspecifikt informationsfält.
+- **info_field_3:** Programspecifikt informationsfält.
+- **info_field_4:** Programspecifikt informationsfält.
 
-#### <a name="return-values"></a>Retur värden
-- **TX_SUCCESS** (0x00) användar händelsen infogades.
-- Händelse spårning för **TX_NOT_DONE** (0x20) har inte Aktiver ATS.
-- **TX_FEATURE_NOT_ENABLED** (0xFF) systemet kompilerades inte med spårning aktiverat.
+#### <a name="return-values"></a>Returvärden
+- **TX_SUCCESS** (0x00) Infogning av användarhändelse.
+- **TX_NOT_DONE** (0x20) Händelsespårning är inte aktiverat.
+- **TX_FEATURE_NOT_ENABLED** (0xFF) Systemet kompilerades inte med spårning aktiverat.
 
-#### <a name="allowed-from"></a>Tillåten från
+#### <a name="allowed-from"></a>Tillåts från
 
 Initiering och trådar
 

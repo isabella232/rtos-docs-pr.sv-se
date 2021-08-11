@@ -1,32 +1,32 @@
 ---
-title: Bilaga A – Azure återställnings tider NetX Duo DHCPv6-alternativ koder
-description: Det här kapitlet innehåller en beskrivning av alla NetX Duo DHCPv6-alternativ koder
+title: Bilaga A – Azure RTOS NetX Duo DHCPv6-alternativkoder
+description: Det här kapitlet innehåller en beskrivning av alla NetX Duo DHCPv6-alternativkoder
 author: philmea
 ms.author: philmea
 ms.date: 06/08/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 36d673c34479ec2d476eeaa094c0dc02714ee010
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 58b6e36fab4de02a9fb973894500a48f2656809ec2baa3dfc65fcd80ae33b832
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104826064"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116791847"
 ---
-# <a name="appendix-a--azure-rtos-netx-duo-dhcpv6-option-codes"></a>Bilaga A – Azure återställnings tider NetX Duo DHCPv6-alternativ koder
+# <a name="appendix-a--azure-rtos-netx-duo-dhcpv6-option-codes"></a>Bilaga A – Azure RTOS NetX Duo DHCPv6-alternativkoder
 
-| Alternativ              | Kod            | Beskrivning |
+| Alternativ              | Kod            | Description |
 | ------------------- | ------------------- | --------------- |
-| DUID för klient identifierare | 1 | Identifierar unikt en klient värd i nätverket |
-| Server identifierare (DUID) | 2 | Identifierar unikt DHCPv6Server-värden i nätverket |
-| Identitets koppling för icke-temporära adresser (IANA) | 3 | Parametrar för en icke-tillfällig IP-adresstilldelning |
-| Identitets koppling för temporära adresser (IATA) | 4 | Parametrar för en tillfällig IP-adresstilldelning |
-| IA-adress | 5 | Faktiska IPv6-adress och livstider för IPv6-adress som ska tilldelas till klienten |
-| Option-begäran | 6 | En lista med informations begär Anden för att hämta nätverks information, till exempel DNS-server och andra parametrar för nätverks konfiguration. |
-| Personanpassa | 7 | Ingår i Server annonsera meddelande till klienten för att påverka klientens val av servrar. Klienten måste välja en server med högre prioritets värde för andra servrar. 255 är det maximala värdet, medan noll anger att klienten kan välja vilken server som helst som svarar igen |
-| Förfluten tid | 8 | Innehåller tiden (i 0,01 sekunder) när klienten initierar DHCPv6 Exchange med servern. Används av sekundära servrar för att avgöra om den primära servern svarar i tid på klient begär Anden. |
-| Relä meddelande | 9 | Innehåller det ursprungliga meddelandet i relä meddelandet | 
+| DUID för klientidentifierare | 1 | Identifierar unikt en klientvärd i nätverket |
+| Serveridentifierare (DUID) | 2 | Identifierar unikt DHCPv6Server-värden i nätverket |
+| Identity Association for Non Temporary Addresses (IANA) | 3 | Parametrar för en icke-tillfällig IP-adresstilldelning |
+| Identity Association for Temporary Addresses (IATA) | 4 | Parametrar för en tillfällig IP-adresstilldelning |
+| IA-adress | 5 | Faktisk IPv6-adress och IPv6-adresslivstid som ska tilldelas till klienten |
+| Alternativbegäran | 6 | En lista med informationsförfrågningar om att hämta nätverksinformation, till exempel DNS-server och andra nätverkskonfigurationsparametrar. |
+| Preferens | 7 | Ingår i servern Annonsera meddelande till klienten för att påverka klientens val av servrar. Klienten måste välja en server med högre inställningsvärde framför andra servrar. 255 är det högsta värdet, medan noll anger att klienten kan välja vilken server som helst som svarar tillbaka till dem |
+| Förfluten tid | 8 | Innehåller tiden (i 0,01 sekunder) när klienten initierar DHCPv6-utbyte med servern. Används av sekundära servrar för att avgöra om den primära servern svarar i tid på klientbegäran. |
+| Vidarebefordrande meddelande | 9 | Innehåller det ursprungliga meddelandet i Relay-meddelandet | 
 | Autentisering | 11 | Innehåller information för att autentisera identiteten och innehållet i DHCPv6-meddelanden |
-| Server-unicast | 12 | Servern skickar det här alternativet för att låta klienten veta att servern accepterar unicast-meddelanden direkt från klienten i stället för multicast. |
+| Server Unicast | 12 | Servern skickar det här alternativet för att meddela klienten att servern accepterar unicast-meddelanden direkt från klienten i stället för multicast. |
 
-IATA, relä meddelande, autentisering och Server-unicast-alternativ stöds inte i den här versionen av NetX Duo DHCPv6 server. Den aktuella alternativ koden 10 för DHCPv6-protokollet lämnas odefinierad i RFC 3315.
+IATA-, Relay Message-, Authentication- och Server Unicast-alternativ stöds inte i den här versionen av NetX Duo DHCPv6 Server. Den aktuella alternativkoden för DHCPv6-protokollet 10 är odefinierad i RFC 3315.

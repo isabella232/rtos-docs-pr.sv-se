@@ -1,112 +1,112 @@
 ---
-title: Kapitel 4 – Beskrivning av Azure återställnings tider ThreadX SMP-tjänster
-description: Det här kapitlet innehåller en beskrivning av alla Azure återställnings tider ThreadX SMP-tjänster i alfabetisk ordning.
+title: Kapitel 4 – Beskrivning Azure RTOS ThreadX SMP Services
+description: Det här kapitlet innehåller en beskrivning av alla Azure RTOS ThreadX SMP-tjänster i alfabetisk ordning.
 author: philmea
 ms.author: philmea
 ms.date: 06/04/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 4432001b773b4ef4f99b1b34193e90863966aad4
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 71b964963968b0ec6fa3c8cc70cc46576e8ff33e2cfad0315182afe1f1afcc5b
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104828023"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116802166"
 ---
-# <a name="chapter-4---description-of-azure-rtos-threadx-smp-services"></a>Kapitel 4 – Beskrivning av Azure återställnings tider ThreadX SMP-tjänster
+# <a name="chapter-4---description-of-azure-rtos-threadx-smp-services"></a>Kapitel 4 – Beskrivning Azure RTOS ThreadX SMP Services
 
-Det här kapitlet innehåller en beskrivning av alla Azure återställnings tider ThreadX SMP-tjänster i alfabetisk ordning. Deras namn är utformade så att alla liknande tjänster grupperas tillsammans. I avsnittet "retur värden" i följande beskrivningar påverkas inte värden i **fetstil** av **TX_DISABLE_ERROR_CHECKING** definiera som används för att inaktivera API-kontrollen. värden som visas i fet stil är helt inaktiverade. Dessutom visar rubriken "**Ja**" som visas under rubriken "**avstängningen möjlig**" att anrop till tjänsten kan återuppta en tråd med högre prioritet, vilket innebär att den anropande tråden.
+Det här kapitlet innehåller en beskrivning av alla Azure RTOS ThreadX SMP-tjänster i alfabetisk ordning. Deras namn är utformade så att alla liknande tjänster grupperas tillsammans. I avsnittet "Returvärden" i följande beskrivningar påverkas inte värden  i **BOLD** av den TX_DISABLE_ERROR_CHECKING som används för att inaktivera API-felkontroll. medan värden som visas i icke-bold är helt inaktiverade. Dessutom anger ett **"Ja"** under rubriken **"Preemption Possible"** att anrop av tjänsten kan återuppta en tråd med högre prioritet, vilket gör att anropstråden preempting används.
 
-- **tx_block_allocate**: *allokera minnes block med fast storlek* 
-- **tx_block_pool_create**: *Skapa pool med minnes block med fast storlek* 
-- **tx_block_pool_delete**: *ta bort minnes block pool* 
-- **tx_block_pool_info_get**: *Hämta information om block pool* 
-- **tx_block_pool_performance_info_get**: *Hämta prestanda information för block pool* 
-- **tx_block_pool_performance_system_info_get**: *Hämta information om system prestanda för block pool* 
-- **tx_block_pool_prioritize**: *prioritera avstängnings lista för block-pool* 
-- **tx_block_release**: *frigör block med fast storlek i minnet*
-- **tx_byte_allocate**: *allokera byte minne* 
-- **tx_byte_pool_create**: *skapa en lagringspool med byte* 
-- **tx_byte_pool_delete**: *ta bort minnes byte pool* 
-- **tx_byte_pool_info_get**: *Hämta information om en byte-pool* 
-- **tx_byte_pool_performance_info_get**: *prestanda information för Hämta byte-pool* 
-- **tx_byte_pool_performance_system_info_get**: *Hämta information om prestanda för byte pool system* 
-- **tx_byte_pool_prioritize**: *prioritera överskjutande lista för byte-pool* 
-- **tx_byte_release**: *release byte tillbaka till mediepoolen* 
-- **tx_event_flags_create**: *Skapa händelse flaggor grupp* 
-- **tx_event_flags_delete**: *ta bort händelse flaggor grupp* 
-- **tx_event_flags_get**: *Hämta händelse flaggor från gruppen med händelse flaggor* 
-- **tx_event_flags_info_get**: *Hämta information om händelse flaggor gruppen* 
-- **tx_event_flags_performance_info_get**: *Hämta händelse flaggor grupp prestanda information* 
-- **tx_event_flags_performance_system_info_get**: *Hämta information om prestanda systemet* 
-- **tx_event_flags_set**: *Ange händelse flaggor i en grupp med händelse flaggor* 
-- **tx_event_flags_set_notify**: *meddela program när händelse flaggor anges*
-- **tx_interrupt_control**: *Aktivera och inaktivera avbrott* 
-- **tx_mutex_create**: *skapa ömsesidigt uteslutande mutex* 
-- **tx_mutex_delete**: *ta bort ömsesidigt uteslutande mutex* 
-- **tx_mutex_get**: *få ägande rätt till mutex* 
-- **tx_mutex_info_get**: *Hämta information om mutex* 
-- **tx_mutex_performance_info_get**: *Hämta information om mutex-prestanda* 
-- **tx_mutex_performance_system_info_get**: *Hämta information om prestanda för mutex-system* 
-- **tx_mutex_prioritize**: *prioritera mutex SUS pensions lista* 
-- **tx_mutex_put**: *frigör ägarskap för mutex* 
-- **tx_queue_create**: *skapa meddelandekö* 
-- **tx_queue_delete**: *ta bort meddelande kön* 
-- **tx_queue_flush**: *tomma meddelanden i meddelande kön* 
-- **tx_queue_front_send**: *Skicka meddelande till kön längst fram* 
-- **tx_queue_info_get**: *Hämta information om kö* 
-- **tx_queue_performance_info_get**: *Hämta prestanda information för kö* 
-- **tx_queue_performance_system_info_get**: *Hämta prestanda information för Queue system*
-- **tx_queue_prioritize**: *prioritera en lista över återkallade köer* 
-- **tx_queue_receive**: *Hämta meddelande från meddelandekö* 
-- **tx_queue_send**: *Skicka meddelande till meddelande kön* 
-- **tx_queue_send_notify**: *meddela programmet när ett meddelande skickas till kön* 
-- **tx_semaphore_ceiling_put**: *Placera en instans i räkna semaforen med tak* 
-- **tx_semaphore_create**: *skapa inventering av semafor* 
-- **tx_semaphore_delete**: *ta bort inventering semafor* 
-- **tx_semaphore_get**: *Hämta instans från semafor* 
-- **tx_semaphore_info_get**: *Hämta information om semaforen* 
-- **tx_semaphore_performance_info_get**: *Hämta information om semafor-prestanda* 
-- **tx_semaphore_performance_system_info_get**: *Hämta information om prestanda för semafor-systemet* 
-- **tx_semaphore_prioritize**: *prioritera semafor SUS Pension lista* 
-- **tx_semaphore_put**: *Placera en instans i inventering av semafor* 
-- **tx_semaphore_put_notify**: *meddela programmet när semaforen placeras* 
-- **tx_thread_create**: *skapa program tråd* 
-- **tx_thread_delete**: *ta bort program tråd*
-- **tx_thread_entry_exit_notify**: *meddela programmet vid tråd inmatning och avsluta* 
-- **tx_thread_identify**: *hämtar pekare till tråd som körs för tillfället* 
-- **tx_thread_info_get**: *Hämta information om tråd* 
-- **tx_thread_performance_info_get**: *Hämta information om tråd prestanda* 
-- **tx_thread_performance_system_info_get**: *Hämta information om tråd system prestanda* 
-- **tx_thread_preemption_change**: *ändra avstängningen-tröskel för program tråd* 
-- **tx_thread_priority_change**: *ändra prioritet för program tråd* 
-- **tx_thread_relinquish**: lämna *kontroll över andra program trådar* 
-- **tx_thread_reset**: *Återställ tråd* 
-- **tx_thread_resume**: *återuppta inaktive rad program tråd* 
-- **tx_thread_sleep**: *pausa den aktuella tråden för angiven tid* 
-- **tx_thread_smp_core_exclude**: *exkludera tråd körning på en uppsättning kärnor* 
-- **tx_thread_smp_core_exclude_get**: *hämtar trådens aktuella kärn undantag* 
-- **tx_thread_smp_core_get**: *Hämta kärnan för anroparen som körs* 
-- **tx_thread_stack_error_notify**: *Registrera ett återanrop i tråds tack* rings meddelande 
-- **tx_thread_suspend**: *pausa program tråd*
-- **tx_thread_terminate**: *avslutar program tråd* 
-- **tx_thread_time_slice_change**: *ändrar time-slice för program tråd* 
-- **tx_thread_wait_abort**: *Avbryt avstängning av angiven tråd* 
-- **tx_time_get**: *hämtar aktuell tid* 
-- **tx_time_set**: *anger aktuell tid* 
-- **tx_timer_activate**: *Aktivera programtimer* 
-- **tx_timer_change**: *ändra programmets timer* 
-- **tx_timer_create**: *skapa programtimer* 
-- **tx_timer_deactivate**: *inaktivera Application timer* 
-- **tx_timer_delete**: *ta bort program timer* 
-- **tx_timer_info_get**: *Hämta information om en program-timer* 
-- **tx_timer_performance_info_get**: *Hämta information om timer-prestanda* 
-- **tx_timer_performance_system_info_get**: *Hämta timer-systemets prestanda information* 
-- **tx_timer_smp_core_exclude**: *utesluta timer-körning i en uppsättning kärnor* 
-- **tx_timer_smp_core_exclude_get**: *hämtar timerns aktuella kärn undantag*
+- **tx_block_allocate:** Allokera *minnesblock med fast storlek* 
+- **tx_block_pool_create:** Skapa *en pool med minnesblock med fast storlek* 
+- **tx_block_pool_delete:** Ta *bort minnesblockpool* 
+- **tx_block_pool_info_get:** Hämta *information om blockpoolen* 
+- **tx_block_pool_performance_info_get:** Hämta *prestandainformation för blockpooler* 
+- **tx_block_pool_performance_system_info_get:** Hämta *systemprestandainformation för blockpooler* 
+- **tx_block_pool_prioritize:** Prioritera *blockeringspoolens spärrlista* 
+- **tx_block_release:** Släpp *minnesblock med fast storlek*
+- **tx_byte_allocate:** Allokera *minne i byte* 
+- **tx_byte_pool_create:** Skapa *en minnespool med byte* 
+- **tx_byte_pool_delete:** Ta *bort minnesbytepool* 
+- **tx_byte_pool_info_get:** Hämta *information om bytepoolen* 
+- **tx_byte_pool_performance_info_get:** Hämta *information om bytepoolens prestanda* 
+- **tx_byte_pool_performance_system_info_get:** Hämta *systemprestandainformation för bytepool* 
+- **tx_byte_pool_prioritize:** Prioritera *stängningslista för bytepooler* 
+- **tx_byte_release:** Frigöra *byte tillbaka till minnespoolen* 
+- **tx_event_flags_create:** *Skapa händelseflaggor* 
+- **tx_event_flags_delete:** Ta *bort händelseflaggor* 
+- **tx_event_flags_get:** Hämta *händelseflaggor från händelseflaggor-gruppen* 
+- **tx_event_flags_info_get:** Hämta *information om händelseflaggor* 
+- **tx_event_flags_performance_info_get:** Hämta *information om gruppprestanda för händelseflaggor* 
+- **tx_event_flags_performance_system_info_get:** Hämta *information om prestandasystem* 
+- **tx_event_flags_set:** Ange *händelseflaggor i en grupp med händelseflaggor* 
+- **tx_event_flags_set_notify:** Meddela *programmet när händelseflaggor har angetts*
+- **tx_interrupt_control:** Aktivera *och inaktivera avbrott* 
+- **tx_mutex_create:** *Skapa mutex för mutex för mutex* 
+- **tx_mutex_delete:** Ta *bort mutex för mutex* 
+- **tx_mutex_get:** Skaffa *ägarskap för mutex* 
+- **tx_mutex_info_get:** *Hämta information om mutex* 
+- **tx_mutex_performance_info_get:** Hämta *mutex-prestandainformation* 
+- **tx_mutex_performance_system_info_get:** Hämta *information om mutex-systemprestanda* 
+- **tx_mutex_prioritize:** Prioritera *mutex-stängningslista* 
+- **tx_mutex_put:** *Frisläpp ägarskapet för mutex* 
+- **tx_queue_create:** Skapa *meddelandekö* 
+- **tx_queue_delete:** Ta *bort meddelandekö* 
+- **tx_queue_flush:** Tomma *meddelanden i meddelandekön* 
+- **tx_queue_front_send:** Skicka *meddelande längst fram i kön* 
+- **tx_queue_info_get:** Hämta *information om kön* 
+- **tx_queue_performance_info_get:** Hämta *information om köprestanda* 
+- **tx_queue_performance_system_info_get:** Hämta *information om kösystemprestanda*
+- **tx_queue_prioritize:** Prioritera *listan över indragning av köer* 
+- **tx_queue_receive:** Hämta *meddelande från meddelandekö* 
+- **tx_queue_send:** Skicka *meddelande till meddelandekö* 
+- **tx_queue_send_notify:** *Meddela programmet när meddelandet skickas till kön* 
+- **tx_semaphore_ceiling_put:** *Placera en instans i räkning av semaphore med tak* 
+- **tx_semaphore_create:** Skapa *inventerings-semaphore* 
+- **tx_semaphore_delete:** Ta *bort inventerings-semaphore* 
+- **tx_semaphore_get:** *Hämta instansen från att räkna semaphore* 
+- **tx_semaphore_info_get:** Hämta *information om semaphore* 
+- **tx_semaphore_performance_info_get:** Hämta *information om semaphore-prestanda* 
+- **tx_semaphore_performance_system_info_get:** Hämta *information om semaphore-systemets prestanda* 
+- **tx_semaphore_prioritize:** Prioritera *semaphore-stängningslistan* 
+- **tx_semaphore_put:** Placera *en instans i räkning av semaphore* 
+- **tx_semaphore_put_notify:** Meddela *programmet när semaphore läggs till* 
+- **tx_thread_create:** Skapa *programtråd* 
+- **tx_thread_delete:** Ta *bort programtråd*
+- **tx_thread_entry_exit_notify:** Meddela *programmet vid trådinmatning och avsluta* 
+- **tx_thread_identify:** *Hämtar pekare till tråd som körs för närvarande* 
+- **tx_thread_info_get:** Hämta *information om tråden* 
+- **tx_thread_performance_info_get:** *Hämta information om trådprestanda* 
+- **tx_thread_performance_system_info_get:** Hämta *systemprestandainformation för trådar* 
+- **tx_thread_preemption_change:** Ändra *tröskelvärdet för preemption för programtråd* 
+- **tx_thread_priority_change:** *Ändra prioritet för programtråden* 
+- **tx_thread_relinquish:** *Relinquish control to other application threads (Återkänd kontroll till andra programtrådar)* 
+- **tx_thread_reset:** Återställ *tråd* 
+- **tx_thread_resume: Återuppta** *pausad programtråd* 
+- **tx_thread_sleep:** *Pausa aktuell tråd under angiven tid* 
+- **tx_thread_smp_core_exclude:** *Undanta trådkörning på en uppsättning kärnor* 
+- **tx_thread_smp_core_exclude_get:** Hämtar *trådens aktuella kärn uteslutning* 
+- **tx_thread_smp_core_get:** *Hämta den kärna som för närvarande körs av anroparen* 
+- **tx_thread_stack_error_notify: Registrera** *felmeddelande för trådstacksavisering motringning* 
+- **tx_thread_suspend:** *Pausa programtråd*
+- **tx_thread_terminate:** *Avslutar programtråden* 
+- **tx_thread_time_slice_change:** *Ändrar tidssegmentet för programtråden* 
+- **tx_thread_wait_abort:** Avbryt *instängning av angiven tråd* 
+- **tx_time_get:** Hämtar *den aktuella tiden* 
+- **tx_time_set:** Anger *aktuell tid* 
+- **tx_timer_activate:** Aktivera *programtimer* 
+- **tx_timer_change:** Ändra *programtimer* 
+- **tx_timer_create:** Skapa *programtimer* 
+- **tx_timer_deactivate:** *Inaktivera programtimer* 
+- **tx_timer_delete:** Ta *bort programtimer* 
+- **tx_timer_info_get:** Hämta *information om en programtimer* 
+- **tx_timer_performance_info_get:** *Hämta information om timerprestanda* 
+- **tx_timer_performance_system_info_get:** *Hämta information om timersystemets prestanda* 
+- **tx_timer_smp_core_exclude:** Undanta *timerkörning på en uppsättning kärnor* 
+- **tx_timer_smp_core_exclude_get:** Hämtar *timerns aktuella kärn uteslutning*
 
 ## <a name="tx_block_allocate"></a>tx_block_allocate
-Allokera minnes block med fast storlek
+Allokera minnesblock med fast storlek
 
 ### <a name="prototype"></a>Prototyp
 
@@ -114,45 +114,45 @@ Allokera minnes block med fast storlek
 UINT tx_block_allocate(TX_BLOCK_POOL *pool_ptr, VOID **block_ptr,
                           ULONG wait_option);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten allokerar ett minnes block med fast storlek från den angivna lagringspoolen. Minnes blockets faktiska storlek bestäms när minnesbufferten skapas.
+Den här tjänsten allokerar ett minnesblock med fast storlek från den angivna minnespoolen. Den faktiska storleken på minnesblocket bestäms när minnespoolen skapas.
 
 > [!WARNING]
-> Det är viktigt att se till att program koden inte skriver utanför det allokerade minnes blocket. Om detta inträffar inträffar skada i ett intilliggande (vanligt vis) minnes block. Resultatet är oförutsägbart och är ofta allvarligt!
+> Det är viktigt att se till att programkoden inte skriver utanför det allokerade minnesblocket. Om detta inträffar uppstår skada i ett intilliggande (vanligtvis efterföljande) minnesblock. Resultaten är oförutsägbara och är ofta allvarliga!
 
 ### <a name="parameters"></a>Parametrar
 
-- **pool_ptr**: pekar mot en tidigare skapad pool för minnes block.
-- **block_ptr**: pekar mot en mål Blocks pekare. Vid lyckad allokering placeras adressen till det allokerade minnes blocket där den här parametern pekar.
-- **wait_option**: definierar hur tjänsten fungerar om det inte finns några tillgängliga minnes block. Vänte alternativen definieras enligt följande:
+- **pool_ptr:** Pekare till en minnesblockpool som skapats tidigare.
+- **block_ptr:** Pekare till en målblockspekare. Vid lyckad allokering placeras adressen till det allokerade minnesblocket där den här parametern pekar.
+- **wait_option:** Definierar hur tjänsten beter sig om det inte finns några tillgängliga minnesblock. Väntealternativen definieras på följande sätt:
     - **TX_NO_WAIT**: (0x00000000)
     - **TX_WAIT_FOREVER**: (0xFFFFFFFF)
-    - timeout-värde: (0x00000001 till 0xFFFFFFFE)  
+    - timeout-värde: (0x00000001 via 0xFFFFFFFE)  
     
-    Om du väljer TX_NO_WAIT resulterar det i en omedelbar återgång från den här tjänsten oavsett om den lyckades eller inte. Detta är det enda giltiga alternativet om tjänsten anropas från en icke-tråd. t. ex., initiering, timer eller ISR.
+    Om TX_NO_WAIT här alternativet returneras omedelbart från den här tjänsten oavsett om det lyckades eller inte. Detta är det enda giltiga alternativet om tjänsten anropas från en icke-tråd; t.ex. initiering, timer eller ISR.
 
-    Om du väljer TX_WAIT_FOREVER stoppas den anropande tråden i oändlighet tills ett minnes block är tillgängligt.
+    Om TX_WAIT_FOREVER här alternativet pausas anropstråden på obestämd tid tills ett minnesblock är tillgängligt.
 
-    Om du väljer ett numeriskt värde (1-0xFFFFFFFE) anges det maximala antalet timer-Tick som ska förbli pausade i väntan på ett minnes block.
+    Om du väljer ett numeriskt värde (1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan du väntar på ett minnesblock.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad minnes Blocks tilldelning.
-- **TX_DELETED**: (0X01) minnes Blocks gruppen togs bort när tråden pausades.
-- **TX_NO_MEMORY**: (0X10) tjänsten kunde inte allokera ett minnes block inom den angivna tiden till väntan.
-- **TX_WAIT_ABORTED**: (0X1A) SUS pensionen avbröts av en annan tråd, timer eller ISR.
-- TX_POOL_ERROR: (protokollnumret 0x02) ogiltig pekare för minnes Blocks-pool.
-- TX_PTR_ERROR: (0x03) ogiltig pekare till mål pekaren.
-- TX_WAIT_ERROR: (0x04) ett annat wait-alternativ än TX_NO_WAIT angavs i ett anrop från en icke-tråd.
+- **TX_SUCCESS**: (0x00) Lyckad minnesblocksallokering.
+- **TX_DELETED:**(0x01) Minnesblockpoolen togs bort när tråden pausades.
+- **TX_NO_MEMORY**: (0x10) Det gick inte att allokera ett minnesblock inom den angivna väntetiden.
+- **TX_WAIT_ABORTED**: (0x1A) Instängningen avbröts av en annan tråd, timer eller ISR.
+- TX_POOL_ERROR: (0x02) Pekare för ogiltig minnesblockpool.
+- TX_PTR_ERROR: (0x03) Ogiltig pekare till målpekaren.
+- TX_WAIT_ERROR: (0x04) Ett annat väntealternativ än TX_NO_WAIT har angetts för ett anrop från en icke-läst.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Ja
+Yes
 
 ### <a name="example"></a>Exempel
 
@@ -182,7 +182,7 @@ status = tx_block_allocate(&my_pool, (VOID **) &memory_ptr,
 - tx_block_release
 
 ## <a name="tx_block_pool_create"></a>tx_block_pool_create
-Skapa pool med minnes block med fast storlek
+Skapa en pool med minnesblock med fast storlek
 
 ### <a name="prototype"></a>Prototyp
 
@@ -191,37 +191,37 @@ UINT tx_block_pool_create(TX_BLOCK_POOL *pool_ptr,
                           CHAR *name_ptr, ULONG block_size,
                           VOID *pool_start, ULONG pool_size);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skapar en pool med minnes block med fast storlek. Det angivna minnes området är indelat i så många minnes block med fast storlek som möjligt med hjälp av formeln:    
-**Totalt antal block** = (**Totalt antal byte**)/(**block storlek** + sizeof (void *))
+Den här tjänsten skapar en pool med minnesblock med fast storlek. Det angivna minnesområdet är indelat i så många minnesblock med fast storlek som möjligt med hjälp av formeln:    
+**total block** = (**totalt antal byte**) / (**blockstorlek** + sizeof(void *))
 
 > [!IMPORTANT]
-> Varje minnes block innehåller en pekare som är dold för användaren och representeras av "sizeof (void *)" i föregående formel.
+> Varje minnesblock innehåller en pekare över omkostnader som är osynligt för användaren och representeras av "sizeof(void *)" i föregående formel.
 
 ### <a name="parameters"></a>Parametrar
 
-- **pool_ptr**: pekar mot ett kontroll block för minnes Blocks-pool.
-- **name_ptr**: pekar mot namnet på minnes Blocks-poolen.
-- **block_size**: antal byte i varje minnes block.
-- **pool_start**: Start adress för minnes Blocks gruppen. Start adressen måste vara justerad till storleken på data typen ULONG..
-- **pool_size**: totalt antal byte som är tillgängliga för minnes Blocks gruppen.
+- **pool_ptr:** Pekare till ett kontrollblock för minnesblockpoolen.
+- **name_ptr:** Pekare till namnet på minnesblockpoolen.
+- **block_size:** Antal byte i varje minnesblock.
+- **pool_start:** Startadressen för minnesblockpoolen. Startadressen måste justeras efter storleken på ULONG-datatypen..
+- **pool_size:** Totalt antal byte som är tillgängliga för minnesblockpoolen.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad generering av minnes Blocks pool.
-- TX_POOL_ERROR: (protokollnumret 0x02) ogiltig pekare för minnes Blocks-pool. Antingen är pekaren NULL eller också har poolen redan skapats.
-- TX_PTR_ERROR: (0x03) ogiltig start adress för poolen.
-- TX_SIZE_ERROR: (0x05) storleken på poolen är ogiltig.
-- TX_CALLER_ERROR: (0x13) ogiltig anropare för den här tjänsten.
+- **TX_SUCCESS**: (0x00) Lyckad skapande av minnesblockpool.
+- TX_POOL_ERROR: (0x02) Pekare för ogiltig minnesblockpool. Antingen är pekaren NULL eller så har poolen redan skapats.
+- TX_PTR_ERROR: (0x03) Ogiltig startadress för poolen.
+- TX_SIZE_ERROR: (0x05) Storleken på poolen är ogiltig.
+- TX_CALLER_ERROR: (0x13) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering och trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -253,37 +253,37 @@ status = tx_block_pool_create(&my_pool, "my_pool_name",
 
 ## <a name="tx_block_pool_delete"></a>tx_block_pool_delete
 
-Ta bort pool för minnes block
+Ta bort minnesblockpool
 
 ### <a name="prototype"></a>Prototyp
 
 ```C
 UINT tx_block_pool_delete(TX_BLOCK_POOL *pool_ptr);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar bort den angivna block minnes poolen. Alla trådar som pausas i väntan på ett minnes block från den här poolen återupptas och får en TX_DELETED retur status.
+Den här tjänsten tar bort den angivna blockminnespoolen. Alla trådar som pausas i väntan på ett minnesblock från den här poolen återupptas och får en TX_DELETED returnerar status.
 
 > [!IMPORTANT]
-> Det är programmets ansvar att hantera det minnes område som är associerat med poolen, vilket är tillgängligt när tjänsten har slutförts. Dessutom måste programmet förhindra att en borttagen pool eller de tidigare minnes blocken används.
+> Det är programmets ansvar att hantera det minnesområde som är associerat med poolen, som är tillgängligt när den här tjänsten har slutförts. Dessutom måste programmet förhindra användning av en borttagna pool eller dess tidigare minnesblock.
 
 ### <a name="parameters"></a>Parametrar
 
-- **pool_ptr**: pekar mot en tidigare skapad pool för minnes block.
+- **pool_ptr:** Pekare till en minnesblockpool som skapats tidigare.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad borttagning av minnes Blocks pool.
-- TX_POOL_ERROR: (protokollnumret 0x02) ogiltig pekare för minnes Blocks-pool.
-- TX_CALLER_ERROR: (0x13) ogiltig anropare för den här tjänsten.
+- **TX_SUCCESS**: (0x00) Lyckad borttagning av minnesblockpool.
+- TX_POOL_ERROR: (0x02) Pekare för ogiltig minnesblockpool.
+- TX_CALLER_ERROR: (0x13) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Ja
+Yes
 
 ### <a name="example"></a>Exempel
 
@@ -311,7 +311,7 @@ UINT           status;
 
 ## <a name="tx_block_pool_info_get"></a>tx_block_pool_info_get
 
-Hämta information om blockera pool
+Hämta information om blockpoolen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -322,31 +322,31 @@ UINT tx_block_pool_info_get(TX_BLOCK_POOL *pool_ptr, CHAR **name,
                           ULONG *suspended_count,
                           TX_BLOCK_POOL **next_pool);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar information om den angivna block minnes poolen.
+Den här tjänsten hämtar information om den angivna blockminnespoolen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **pool_ptr**: pekare till tidigare skapade minnes Blocks-pool.
-- **Name**: pekare till målet för visaren i block poolens namn.
-- **tillgängligt**: pekare till målet för antalet tillgängliga block i den blockerande poolen.
-- **total_blocks**: pekar mot mål för det totala antalet block i block poolen.
-- **first_suspended**: pekar till målet för visaren i den tråd som är överst i listan över avbrytande av den här block-poolen.
-- **suspended_count**: pekar mot mål för antalet trådar som för närvarande har pausats på den här block-poolen.
-- **next_pool**: pekar mot destinationen för en pekare på nästa skapade block-pool.
+- **pool_ptr:** Pekare till minnesblockpool som skapats tidigare.
+- **name**: Pekaren till målet för pekaren till blockpoolens namn.
+- **available**: Pekare till mål för antalet tillgängliga block i blockpoolen.
+- **total_blocks:** Pekare till mål för det totala antalet block i blockpoolen.
+- **first_suspended:** Pekare till mål för pekaren till tråden som först finns i blockeringslistan för den här blockpoolen.
+- **suspended_count:** Pekare till mål för antalet trådar som för närvarande pausas i den här blockpoolen.
+- **next_pool:** Pekare till mål för pekaren för nästa skapade blockpool.
 
 > [!IMPORTANT]
-> Om du anger en TX_NULL för vilken parameter som helst är parametern inte obligatorisk.
+> Ange en TX_NULL för en parameter anger att parametern inte är obligatorisk.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0x00) Det gick inte att hämta information om block pool.
-- TX_POOL_ERROR: (protokollnumret 0x02) ogiltig pekare för minnes Blocks-pool.
+- **TX_SUCCESS**: (0x00) Information om lyckad blockpool hämtas.
+- TX_POOL_ERROR: (0x02) Pekare för ogiltig minnesblockpool.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
 ### <a name="example"></a>Exempel
 
@@ -383,7 +383,7 @@ status = tx_block_pool_info_get(&my_pool, &name,
 
 ## <a name="tx_block_pool_performance_info_get"></a>tx_block_pool_performance_info_get
 
-Hämta prestanda information för block pool
+Hämta prestandainformation för blockpooler
 
 ### <a name="prototype"></a>Prototyp
 
@@ -393,33 +393,33 @@ UINT tx_block_pool_performance_info_get(TX_BLOCK_POOL *pool_ptr,
        ULONG *suspensions, ULONG *timeouts));
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar prestanda information om den angivna Memory block-poolen.
+Den här tjänsten hämtar prestandainformation om den angivna minnesblockpoolen.
 
 > [!IMPORTANT]
-> ThreadX SMP-biblioteket och programmet måste skapas med **TX_BLOCK_POOL_ENABLE_PERFORMANCE_INFO** som definierats för den här tjänsten för att returnera prestanda information.
+> ThreadX SMP-biblioteket och programmet måste byggas med en **TX_BLOCK_POOL_ENABLE_PERFORMANCE_INFO** har definierats för att den här tjänsten ska returnera prestandainformation.
 
 ### <a name="parameters"></a>Parametrar
 
-- **pool_ptr**: pekare till tidigare skapade minnes Blocks-pool.
-- **allokerar**: pekare till målet för antalet allokerade begär Anden som utförts i den här poolen.
-- **versioner**: pekare till målet för antalet release-begäranden som har utförts på den här poolen.
-- **SUS pensioner**: pekare till målet för antalet avbrott i tråd tilldelningen för den här poolen.
-- **timeout**: pekar mot målets antal tids gräns värden för att allokera uppehåll i poolen.
+- **pool_ptr:** Pekare till minnesblockpool som skapats tidigare.
+- **allocates**: Pekare till mål för antalet allokerade begäranden som utförts på den här poolen.
+- **releases**: Pekare till mål för antalet release-begäranden som utförts på den här poolen.
+- **allokeringar:** Pekare till mål för antalet trådallokeringsuppstängningar i den här poolen.
+- **timeouter:** Pekare till mål för antalet allokerade tidsgränser för brytning i den här poolen.
 
 > [!IMPORTANT]
-> Om du anger en TX_NULL för någon parameter anges att parametern inte krävs.
+> Ange en TX_NULL för alla parametrar anger att parametern inte är obligatorisk.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0x00) prestanda för slutförd block pool har hämtats.
-- **TX_PTR_ERROR**: (0X03) ogiltig pekare för att blockera poolen.
-- **TX_FEATURE_NOT_ENABLED**: (0xFF) systemet har inte kompilerats med prestanda information aktive rad.
+- **TX_SUCCESS**: (0x00) Lyckade prestanda för blockpooler get.
+- **TX_PTR_ERROR**: (0x03) Ogiltig pekare för blockpool.
+- **TX_FEATURE_NOT_ENABLED**: (0xFF) Systemet kompilerades inte med aktiverad prestandainformation.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
 ### <a name="example"></a>Exempel
 
@@ -452,7 +452,7 @@ status = tx_block_pool_performance_info_get(&my_pool, &allocates,
 
 ## <a name="tx_block_pool_performance_system_info_get"></a>tx_block_pool_performance_system_info_get
 
-Hämta information om system prestanda för block pool
+Hämta prestandainformation för blockpoolsystem
 
 ### <a name="prototype"></a>Prototyp
 
@@ -460,31 +460,31 @@ Hämta information om system prestanda för block pool
 UINT tx_block_pool_performance_system_info_get(ULONG *allocates,
        ULONG *releases, ULONG *suspensions, ULONG *timeouts);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar prestanda information om alla minnes Blocks pooler i programmet.
+Den här tjänsten hämtar prestandainformation om alla minnesblockpooler i programmet.
 
 > [!IMPORTANT]
-> ThreadX SMP-biblioteket och programmet måste skapas med **TX_BLOCK_POOL_ENABLE_PERFORMANCE_INFO** som definierats för den här tjänsten för att returnera prestanda information.
+> ThreadX SMP-biblioteket och programmet måste byggas med en **TX_BLOCK_POOL_ENABLE_PERFORMANCE_INFO** har definierats för att den här tjänsten ska returnera prestandainformation.
 
 ### <a name="parameters"></a>Parametrar
 
-- **allokerar**: pekar mot mål för det totala antalet allokerade begär Anden som utförts på alla blockerade pooler.
-- **versioner**: pekare till målet för det totala antalet begär Anden som har utförts på alla blockerade pooler.
-- **SUS pensioner**: pekar mot mål för det totala antalet SUS pensioner i alla block-pooler.
-- **timeout**: pekar mot mål för det totala antalet tids gränser för att allokera uppehåll i alla block-pooler.
+- **allocates**: Pekare till mål för det totala antalet allokerade begäranden som utförts på alla blockpooler.
+- **releases**: Pekare till mål för det totala antalet lanseringsbegäranden som utförts på alla blockpooler.
+- **allokeringar:** Pekare till mål för det totala antalet trådallokeringsuppstängningar för alla blockpooler.
+- **timeouter:** Pekare till mål för det totala antalet allokerade tidsgränser för alla blockpooler.
 
 > [!IMPORTANT]
-> Om du anger en TX_NULL för någon parameter anges att parametern inte krävs.
+> Ange en TX_NULL för alla parametrar anger att parametern inte är obligatorisk.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) slutförd blockering av system prestanda för poolen.
-- **TX_FEATURE_NOT_ENABLED**: (0xFF) systemet har inte kompilerats med prestanda information aktive rad.
+- **TX_SUCCESS**: (0x00) Lyckat systemprestanda för blockpooler get.
+- **TX_FEATURE_NOT_ENABLED**: (0xFF) Systemet kompilerades inte med aktiverad prestandainformation.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
 ### <a name="example"></a>Exempel
 
@@ -514,33 +514,33 @@ status = tx_block_pool_performance_system_info_get(&allocates,
 
 ## <a name="tx_block_pool_prioritize"></a>tx_block_pool_prioritize
 
-Prioritera spärr lista för block-pool
+Prioritera blockeringslista för blockpooler
 
 ### <a name="prototype"></a>Prototyp
 
 ```C
 UINT tx_block_pool_prioritize(TX_BLOCK_POOL *pool_ptr);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten placerar tråden med högsta prioritet inaktive rad för ett minnes block på den här poolen längst fram i listan över SUS pensioner. Alla andra trådar förblir i samma FIFO-ordning som de inaktiverades.
+Den här tjänsten placerar den högsta prioritetstråden som pausas för ett minnesblock i den här poolen längst fram i spärrlistan. Alla andra trådar finns kvar i samma FIFO-ordning som de pausades i.
 
 ### <a name="parameters"></a>Parametrar 
 
-- **pool_ptr**: pekar mot ett kontroll block för minnes Blocks-pool.
+- **pool_ptr:** Pekare till ett kontrollblock för minnesblockpoolen.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0x00) prioritet för att blockera poolen.
-- TX_POOL_ERROR: (protokollnumret 0x02) ogiltig pekare för minnes Blocks-pool.
+- **TX_SUCCESS**: (0x00) Lyckade blockpooler prioriteras.
+- TX_POOL_ERROR: (0x02) Pekare för ogiltig minnesblockpool.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -568,36 +568,36 @@ status = tx_block_pool_prioritize(&my_pool);
 
 ## <a name="tx_block_release"></a>tx_block_release
 
-Frigör block med fast storlek i minnet
+Frigöra minnesblock med fast storlek
 
 ### <a name="prototype"></a>Prototyp
 
 ```C
 UINT tx_block_release(VOID *block_ptr);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten släpper ett tidigare allokerat block tillbaka till den kopplade poolen. Om det finns en eller flera trådar som pausas i väntan på minnes block från den här poolen, är den första tråden inaktive rad det här minnes blocket och återupptas.
+Den här tjänsten släpper ett tidigare allokerat block tillbaka till dess associerade minnespool. Om det finns en eller flera trådar som pausas i väntan på minnesblock från den här poolen får den första tråden pausat det här minnesblocket och återupptas.
 
 > [!IMPORTANT]
-> Programmet måste förhindra att ett minnes Blocks utrymme används när det har släppts tillbaka till poolen.
+> Programmet måste förhindra användning av ett minnesblockområde när det har släppts tillbaka till poolen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **block_ptr**: pekar mot det tidigare allokerade minnes blocket.
+- **block_ptr:** Pekare till det tidigare allokerade minnesblocket.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad minnes Blocks version.
-- TX_PTR_ERROR: (0x03) ogiltig pekare till minnes block.
+- **TX_SUCCESS**: (0x00) Lyckad minnesblocksutgåning.
+- TX_PTR_ERROR: (0x03) Ogiltig pekare till minnesblock.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Ja
+Yes
 
 ### <a name="example"></a>Exempel
 
@@ -635,51 +635,51 @@ UINT tx_byte_allocate(TX_BYTE_POOL *pool_ptr,
                           VOID **memory_ptr, ULONG memory_size,
                           ULONG wait_option);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten allokerar det angivna antalet byte från den angivna Memory byte-poolen.
+Den här tjänsten allokerar det angivna antalet byte från den angivna minnesbytepoolen.
 
 > [!WARNING]
-> Det är viktigt att se till att program koden inte skriver utanför det allokerade minnes blocket. Om detta inträffar inträffar skada i ett intilliggande (vanligt vis) minnes block. Resultatet är oförutsägbart och är ofta allvarligt!
+> Det är viktigt att se till att programkoden inte skriver utanför det allokerade minnesblocket. Om detta inträffar uppstår skada i ett angränsande (vanligtvis efterföljande) minnesblock. Resultaten är oförutsägbara och är ofta allvarliga!
 
 > [!IMPORTANT]
-> Prestanda för den här tjänsten är en funktion i block storlek och fragmenteringen i poolen. Därför bör den här tjänsten inte användas under tids kritiska körnings trådar.
+> Prestanda för den här tjänsten är en funktion av blockstorleken och mängden fragmentering i poolen. Därför bör den här tjänsten inte användas under tidskritiska körningstrådar.
 
 ### <a name="parameters"></a>Parametrar
 
-- **pool_ptr**: pekar mot en tidigare skapad lagringspool.
-- **memory_ptr**: pekar mot en mål minnes pekare. Vid lyckad allokering placeras adressen till det allokerade minnes området där parametern pekar på.
-- **memory_size**: antal byte som har begärts.
-- **wait_option**: definierar hur tjänsten fungerar om det inte finns tillräckligt med minne tillgängligt. Vänte alternativen definieras enligt följande:
+- **pool_ptr:** Pekare till en tidigare skapad minnespool.
+- **memory_ptr:** Pekare till en målminnes pekare. Vid lyckad allokering placeras adressen till det allokerade minnesområdet där den här parametern pekar på.
+- **memory_size:** Antal byte som begärts.
+- **wait_option:** Definierar hur tjänsten beter sig om det inte finns tillräckligt med tillgängligt minne. Väntealternativen definieras på följande sätt:
     - **TX_NO_WAIT**: (0x00000000)
     - **TX_WAIT_FOREVER**: (0xFFFFFFFF)
-    - timeout-värde: (0x00000001 till 0xFFFFFFFE)
+    - timeout-värde: (0x00000001 via 0xFFFFFFFE)
 
-    Om du väljer TX_NO_WAIT resulterar det i en omedelbar återgång från den här tjänsten oavsett om den lyckades eller inte. *Detta är det enda giltiga alternativet om tjänsten anropas från initiering.*
+    Om TX_NO_WAIT väljer du resulterar i en omedelbar retur från den här tjänsten oavsett om den lyckades eller inte. *Det här är det enda giltiga alternativet om tjänsten anropas från initieringen.*
 
-    Om du väljer TX_WAIT_FOREVER avbryts anrops tråden till oändligt tills tillräckligt med minne är tillgängligt.
+    Om TX_WAIT_FOREVER här alternativet pausas anropstråden på obestämd tid tills tillräckligt med minne är tillgängligt.
 
-    Om du väljer ett numeriskt värde (1-0xFFFFFFFE) anges det maximala antalet timer-Tick som ska förbli pausade i väntan på minnet.
+    Om du väljer ett numeriskt värde (1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan du väntar på minnet.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad minnesallokering.
-- **TX_DELETED**: (0x01)-mediepoolen togs bort medan tråden pausades.
-- **TX_NO_MEMORY**: tjänsten (0x10) kunde inte allokera minne inom den angivna tiden till väntan.
-- **TX_WAIT_ABORTED**: (0X1A) SUS pensionen avbröts av en annan tråd, timer eller ISR.
-- TX_POOL_ERROR: (protokollnumret 0x02) ogiltig pekare för skrivarpool.
-- TX_PTR_ERROR: (0x03) ogiltig pekare till mål pekaren.
-- TX_SIZE_ERROR: (0X05) den begärda storleken är noll eller större än poolen.
-- TX_WAIT_ERROR: (0x04) ett annat wait-alternativ än TX_NO_WAIT angavs i ett anrop från en icke-tråd.
-- TX_CALLER_ERROR: (0x13) ogiltig anropare för den här tjänsten.
+- **TX_SUCCESS**: (0x00) Lyckad minnesallokering.
+- **TX_DELETED:**(0x01) Minnespoolen togs bort när tråden pausades.
+- **TX_NO_MEMORY:**(0x10) Det gick inte att allokera minnet inom den angivna väntetiden.
+- **TX_WAIT_ABORTED**: (0x1A) Brytningen avbröts av en annan tråd, timer eller ISR.
+- TX_POOL_ERROR: (0x02) Ogiltig pekare för minnespool.
+- TX_PTR_ERROR: (0x03) Ogiltig pekare till målpekaren.
+- TX_SIZE_ERROR: (0X05) Den begärda storleken är noll eller större än poolen.
+- TX_WAIT_ERROR: (0x04) Ett annat väntealternativ än TX_NO_WAIT har angetts för ett anrop från en icke-read.
+- TX_CALLER_ERROR: (0x13) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering och trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Ja
+Yes
 
 ### <a name="example"></a>Exempel
 
@@ -709,7 +709,7 @@ status =  tx_byte_allocate(&my_pool, (VOID **) &memory_ptr,
 
 ## <a name="tx_byte_pool_create"></a>tx_byte_pool_create
 
-Skapa minnes-pool med byte
+Skapa en minnespool med byte
 
 ### <a name="prototype"></a>Prototyp
 
@@ -718,32 +718,32 @@ UINT tx_byte_pool_create(TX_BYTE_POOL *pool_ptr,
                           CHAR *name_ptr, VOID *pool_start,
                           ULONG pool_size);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skapar en pool för minnes byte i det angivna området. Från början består poolen av i princip ett mycket stort ledigt block. Poolen är dock bruten i mindre block som tilldelningar görs.
+Den här tjänsten skapar en minnesbytepool i det angivna området. Till en början består poolen av i princip ett mycket stort ledigt block. Poolen delas dock upp i mindre block när allokeringar görs.
 
 ### <a name="parameters"></a>Parametrar
 
-- **pool_ptr**: pekar mot ett kontroll block för minnes-pool.
-- **name_ptr**: pekar mot namnet på mediepoolen.
-- **pool_start**: Start adress för mediepoolen. Start adressen måste vara justerad till storleken på data typen ULONG.
-- **pool_size**: totalt antal byte som är tillgängliga för lagringspoolen.
+- **pool_ptr:** Pekare till ett kontrollblock för minnespoolen.
+- **name_ptr:** Pekare till namnet på minnespoolen.
+- **pool_start:** Startadressen för minnespoolen. Startadressen måste justeras efter storleken på ULONG-datatypen.
+- **pool_size:** Totalt antal byte som är tillgängliga för minnespoolen.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad minnesallokering.
-- TX_POOL_ERROR: (protokollnumret 0x02) ogiltig pekare för skrivarpool. Antingen är pekaren NULL eller också har poolen redan skapats.
-- TX_PTR_ERROR: (0x03) ogiltig start adress för poolen.
-- TX_SIZE_ERROR: (0x05) storleken på poolen är ogiltig.
-- TX_CALLER_ERROR: (0x13) ogiltig anropare för den här tjänsten.
+- **TX_SUCCESS**: (0x00) Minnespoolen har skapats.
+- TX_POOL_ERROR: (0x02) Ogiltig pekare för minnespool. Pekaren är antingen NULL eller så har poolen redan skapats.
+- TX_PTR_ERROR: (0x03) Ogiltig startadress för poolen.
+- TX_SIZE_ERROR: (0x05) Storleken på poolen är ogiltig.
+- TX_CALLER_ERROR: (0x13) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering och trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -771,37 +771,37 @@ status =  tx_byte_pool_create(&my_pool, "my_pool_name",
 
 ## <a name="tx_byte_pool_delete"></a>tx_byte_pool_delete
 
-Ta bort minnes byte pool
+Ta bort minnesbytepool
 
 ### <a name="prototype"></a>Prototyp
 
 ```C
 UINT tx_byte_pool_delete(TX_BYTE_POOL *pool_ptr);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar bort den angivna minnes bytes poolen. Alla trådar som pausas i väntan på minne från den här poolen återupptas och har en TX_DELETED retur status.
+Den här tjänsten tar bort den angivna minnesbytepoolen. Alla trådar som pausas i väntan på minne från den här poolen återupptas och får TX_DELETED returnerar status.
 
 > [!IMPORTANT]
-> Det är programmets ansvar att hantera det minnes område som är associerat med poolen, vilket är tillgängligt när tjänsten har slutförts. Dessutom måste programmet förhindra användning av en borttagen pool eller minne som tidigare har allokerats från den.
+> Det är programmets ansvar att hantera det minnesområde som är associerat med poolen, som är tillgängligt när den här tjänsten har slutförts. Dessutom måste programmet förhindra användning av en borttagna pool eller minne som tidigare allokerats från den.
 
 ### <a name="parameters"></a>Parametrar 
 
-- **pool_ptr**: pekar mot en tidigare skapad lagringspool.
+- **pool_ptr:** Pekare till en tidigare skapad minnespool.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) slutförd borttagning av minnesallokering.
-- TX_POOL_ERROR: (protokollnumret 0x02) ogiltig pekare för skrivarpool.
-- TX_CALLER_ERROR: (0x13) ogiltig anropare för den här tjänsten.
+- **TX_SUCCESS**: (0x00) Lyckad borttagning av minnespool.
+- TX_POOL_ERROR: (0x02) Ogiltig minnespoolspekare.
+- TX_CALLER_ERROR: (0x13) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Ja
+Yes
 
 ### <a name="example"></a>Exempel
 
@@ -827,7 +827,7 @@ status =   tx_byte_pool_delete(&my_pool);
 
 ## <a name="tx_byte_pool_info_get"></a>tx_byte_pool_info_get
 
-Hämta information om byte-poolen
+Hämta information om bytepoolen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -838,35 +838,35 @@ UINT tx_byte_pool_info_get(TX_BYTE_POOL *pool_ptr, CHAR **name,
                           ULONG *suspended_count,
                           TX_BYTE_POOL **next_pool);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar information om den angivna minnes bytes poolen.
+Den här tjänsten hämtar information om den angivna minnesbytepoolen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **pool_ptr**: pekare till den tidigare skapade lagringspoolen.
-- **Name**: pekare till målet för visaren i byte-poolens namn.
-- **tillgängligt**: pekare till målet för antalet tillgängliga byte i poolen.
-- **fragment**: pekar mot mål för det totala antalet minnes fragment i byte-poolen.
-- **first_suspended**: pekar till målet för visaren i den tråd som är överst i listan över återkallade byte för denna byte-pool.
-- **suspended_count**: pekar mot mål för antalet trådar som för närvarande har pausats i den här byte-poolen.
-- **next_pool**: pekar mot destinationen för en pekare på nästa skapade byte-pool.
+- **pool_ptr:** Pekare till en minnespool som skapats tidigare.
+- **name**: Pekaren till målet för pekaren till bytepoolens namn.
+- **available**: Pekare till mål för antalet tillgängliga byte i poolen.
+- **fragment:** Pekare till mål för det totala antalet minnesfragment i bytepoolen.
+- **first_suspended:** Pekare till mål för pekaren till tråden som först finns i listan över stängningslistor för den här bytepoolen.
+- **suspended_count:** Pekare till mål för antalet trådar som för närvarande pausas på den här bytepoolen.
+- **next_pool:** Pekare till mål för pekaren för nästa skapade bytepool.
 
 > [!IMPORTANT]
-> Om du anger en TX_NULL för någon parameter anges att parametern inte krävs.
+> Ange en TX_NULL för en parameter anger att parametern inte är obligatorisk.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckades hämta information om poolen.
-- TX_POOL_ERROR: (protokollnumret 0x02) ogiltig pekare för skrivarpool.
+- **TX_SUCCESS**: (0x00) Information om lyckad pool hämtas.
+- TX_POOL_ERROR: (0x02) Ogiltig minnespoolspekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -902,7 +902,7 @@ status =  tx_byte_pool_info_get(&my_pool, &name,
 
 ## <a name="tx_byte_pool_performance_info_get"></a>tx_byte_pool_performance_info_get
 
-Hämta prestanda information för byte-pool
+Hämta prestandainformation för bytepoolen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -912,36 +912,36 @@ UINT tx_byte_pool_performance_info_get(TX_BYTE_POOL *pool_ptr,
         ULONG *fragments_searched, ULONG *merges, ULONG *splits,
         ULONG *suspensions, ULONG *timeouts);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar prestanda information om den angivna minnes bytes poolen.
+Den här tjänsten hämtar prestandainformation om den angivna minnesbytepoolen.
 
 > [!IMPORTANT]
-> ThreadX SMP-biblioteket och programmet måste skapas med **TX_BYTE_POOL_ENABLE_PERFORMANCE_INFO** som definierats för den här tjänsten för att returnera prestanda information.
+> ThreadX SMP-biblioteket och programmet måste byggas med de **TX_BYTE_POOL_ENABLE_PERFORMANCE_INFO** för att den här tjänsten ska returnera prestandainformation.
 
 ### <a name="parameters"></a>Parametrar
 
-- **pool_ptr**: pekar mot tidigare skapade minnes byte pool.
-- **allokerar**: pekare till målet för antalet allokerade begär Anden som utförts i den här poolen.
-- **versioner**: pekare till målet för antalet release-begäranden som har utförts på den här poolen.
-- **fragments_searched**: pekar mot mål för antalet interna minnes fragment som genomsöks under tilldelnings begär anden i den här poolen.
-- **sammanslagningar**: pekare till målet för antalet interna minnes block som sammanfogas under tilldelnings begär anden i den här poolen.
-- **delningar**: pekare till målet för antalet interna minnes block delning (fragment) som skapas vid tilldelnings begär anden i den här poolen.
-- **SUS pensioner**: pekare till målet för antalet avbrott i tråd tilldelningen för den här poolen.
-- **timeout**: pekar mot målets antal tids gräns värden för att allokera uppehåll i poolen.
+- **pool_ptr:** Pekare till en tidigare skapad minnesbytepool.
+- **allocates**: Pekare till mål för antalet allokerade begäranden som utförts på den här poolen.
+- **releases**: Pekare till mål för antalet release-begäranden som utförts på den här poolen.
+- **fragments_searched:** Pekare till mål för antalet interna minnesfragment som genomsöks under allokeringsbegäranden för den här poolen.
+- **merges**: Pekare till mål för antalet interna minnesblock som sammanfogas under allokeringsbegäranden för den här poolen.
+- **splits**(delningar): Pekare till mål för antalet interna minnesblock som skapats under allokeringsbegäranden för den här poolen.
+- **allokeringar:** Pekare till mål för antalet trådallokeringsuppstängningar i den här poolen.
+- **timeouter:** Pekare till mål för antalet allokerade tidsgränser för brytning i den här poolen.
 
 > [!IMPORTANT]
-> Om du anger en TX_NULL för vilken parameter som helst är parametern inte obligatorisk.
+> Ange en TX_NULL för en parameter anger att parametern inte är obligatorisk.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- TX_SUCCESS: (0x00) prestanda för slutförd byte-pool har hämtats.
-- **TX_PTR_ERROR**: (0X03) ogiltig pekare för byte-pool.
-- **TX_FEATURE_NOT_ENABLED**: (0xFF) systemet har inte kompilerats med prestanda information aktive rad.
+- TX_SUCCESS: (0x00) Lyckad prestanda för bytepoolen get.
+- **TX_PTR_ERROR**: (0x03) Felaktig bytepoolspekare.
+- **TX_FEATURE_NOT_ENABLED**: (0xFF) Systemet kompilerades inte med aktiverad prestandainformation.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
 ### <a name="example"></a>Exempel
 
@@ -978,7 +978,7 @@ status =  tx_byte_pool_performance_info_get(&my_pool,
 
 ## <a name="tx_byte_pool_performance_system_info_get"></a>tx_byte_pool_performance_system_info_get
 
-Hämta information om prestanda för byte pool system
+Hämta systemprestandainformation för bytepool
 
 ### <a name="prototype"></a>Prototyp
 
@@ -987,34 +987,34 @@ UINT  tx_byte_pool_performance_system_info_get(ULONG *allocates,
         ULONG *releases, ULONG *fragments_searched, ULONG *merges,
         ULONG *splits, ULONG *suspensions, ULONG *timeouts);;
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar prestanda information om alla minnes byte pooler i systemet.
+Den här tjänsten hämtar prestandainformation om alla minnesbytepooler i systemet.
 
 > [!IMPORTANT]
-> ThreadX SMP-biblioteket och programmet måste skapas med **TX_BYTE_POOL_ENABLE_PERFORMANCE_INFO** som definierats för den här tjänsten för att returnera prestanda information.
+> ThreadX SMP-biblioteket och programmet måste byggas med de **TX_BYTE_POOL_ENABLE_PERFORMANCE_INFO** har definierats för att den här tjänsten ska returnera prestandainformation.
 
 ### <a name="parameters"></a>Parametrar
 
-- **allokerar**: pekare till målet för antalet allokerade begär Anden som utförts i den här poolen.
-- **versioner**: pekare till målet för antalet release-begäranden som har utförts på den här poolen.
-- **fragments_searched**: pekar mot mål för det totala antalet interna minnes fragment som genomsöks under tilldelnings begär Anden för alla byte-pooler.
-- **sammanslagningar**: pekare till mål för det totala antalet interna minnes block som sammanfogas under tilldelnings begär Anden för alla byte-pooler.
-- **delningar**: pekar mot mål för det totala antalet interna minnes block delning (fragment) som skapas vid tilldelnings begär Anden för alla byte pooler.
-- **SUS pensioner**: pekar mot mål för det totala antalet SUS pensioner i alla byte-pooler.
-- **tids gränser**: pekar mot mål för det totala antalet tids gränser för att allokera uppehåll i alla byte-pooler.
+- **allokerar:** Pekare till mål för antalet allokerade begäranden som utförts på den här poolen.
+- **releases**: Pekare till mål för antalet lanseringsbegäranden som utförts på den här poolen.
+- **fragments_searched:** Pekare till mål för det totala antalet interna minnesfragment som genomsökts under allokeringsbegäranden för alla bytepooler.
+- **merges**: Pekare till mål för det totala antalet interna minnesblock som sammanslags under allokeringsbegäranden för alla bytepooler.
+- **splits**(delningar): Pekare till mål för det totala antalet interna minnesblock som skapats under allokeringsbegäranden för alla bytepooler.
+- **allokeringar:** Pekare till mål för det totala antalet trådallokeringsavstängningar för alla bytepooler.
+- **timeouter:** Pekare till mål för det totala antalet allokerade tidsgränser för låsning för alla bytepooler.
 
 > [!IMPORTANT]
-> Om du anger en TX_NULL för vilken parameter som helst är parametern inte obligatorisk.
+> Om du anger TX_NULL en parameter anger att parametern inte är obligatorisk.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0x00) prestanda för slutförd byte-pool har hämtats.
-- **TX_FEATURE_NOT_ENABLED**: (0xFF) systemet har inte kompilerats med prestanda information aktive rad.
+- **TX_SUCCESS**: (0x00) Prestanda för bytepoolen får.
+- **TX_FEATURE_NOT_ENABLED**: (0xFF) Systemet kompilerades inte med aktiverad prestandainformation.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
 ### <a name="example"></a>Exempel
 
@@ -1049,33 +1049,33 @@ tx_byte_pool_performance_system_info_get(&fragments_searched,
 
 ## <a name="tx_byte_pool_prioritize"></a>tx_byte_pool_prioritize
 
-Prioritera överskjutande lista för byte-pool
+Prioritera listan över stängningsbytepooler
 
 ### <a name="prototype"></a>Prototyp
 
 ```c
 UINT tx_byte_pool_prioritize(TX_BYTE_POOL *pool_ptr);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten placerar den högsta prioritets tråden inaktive rad för minne på den här poolen överst i SUS pensions listan. Alla andra trådar förblir i samma FIFO-ordning som de inaktiverades.
+Den här tjänsten placerar den högsta prioritetstråden som pausas för minne på den här poolen längst fram i stängningslistan. Alla andra trådar finns kvar i samma FIFO-ordning som de pausades i.
 
 ### <a name="parameters"></a>Parametrar 
 
-- **pool_ptr**: pekar mot ett kontroll block för minnes-pool.
+- **pool_ptr:** Pekare till ett kontrollblock för minnespoolen.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad minnes uppsättnings prioritet.
-- TX_POOL_ERROR: (protokollnumret 0x02) ogiltig pekare för skrivarpool.
+- **TX_SUCCESS**: (0x00) Lyckad minnespool prioriteras.
+- TX_POOL_ERROR: (0x02) Ogiltig pekare för minnespool.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -1104,37 +1104,37 @@ status = tx_byte_pool_prioritize(&my_pool);
 
 ## <a name="tx_byte_release"></a>tx_byte_release
 
-Frisläpp byte tillbaka till minnesbuffert
+Frigöra byte tillbaka till minnespoolen
 
 ### <a name="prototype"></a>Prototyp
 
 ```C
 UINT tx_byte_release(VOID *memory_ptr);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten frigör ett tidigare allokerat minnes utrymme tillbaka till den associerade poolen. Om en eller flera trådar pausas i väntan på minne från den här poolen, tilldelas varje pausad tråd minne och återupptas tills minnet är slut eller tills det inte finns några fler pausade trådar. Den här processen för att allokera minne till pausade trådar börjar alltid med den första tråden inaktive rad.
+Den här tjänsten släpper ett tidigare allokerat minnesområde tillbaka till dess associerade pool. Om en eller flera trådar pausas i väntan på minne från den här poolen får varje pausad tråd minne och återupptas tills minnet är slut eller tills det inte finns några fler pausade trådar. Den här processen med att allokera minne till pausade trådar börjar alltid med den första tråden pausad.
 
 > [!IMPORTANT]
-> Programmet måste förhindra att minnes området används när det har släppts.
+> Programmet måste förhindra att minnesområdet används när det har släppts.
 
 ### <a name="parameters"></a>Parametrar
 
-- **memory_ptr**: pekar på det tidigare allokerade minnes området.
+- **memory_ptr:** Pekare till det tidigare allokerade minnesområdet.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad minnes version.
-- TX_PTR_ERROR: (0x03) ogiltig minnes områdets pekare.
-- TX_CALLER_ERROR: (0x13) ogiltig anropare för den här tjänsten.
+- **TX_SUCCESS**: (0x00) Lyckad minnesutgåning.
+- TX_PTR_ERROR: (0x03) Ogiltig pekare för minnesområdet.
+- TX_CALLER_ERROR: (0x13) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering och trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Ja
+Yes
 
 ### <a name="example"></a>Exempel
 
@@ -1161,7 +1161,7 @@ status =  tx_byte_release((VOID *) memory_ptr);
 
 ## <a name="tx_event_flags_create"></a>tx_event_flags_create
 
-Skapa händelse flaggor grupp
+Skapa händelseflaggor
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1169,28 +1169,28 @@ Skapa händelse flaggor grupp
 UINT tx_event_flags_create(TX_EVENT_FLAGS_GROUP *group_ptr,
                           CHAR *name_ptr);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skapar en grupp med 32 händelse flaggor. Alla händelse flaggor i 32 i gruppen initieras till noll. Varje händelse flagga representeras av en enskild bit.
+Den här tjänsten skapar en grupp med 32 händelseflaggor. Alla 32 händelseflaggor i gruppen initieras till noll. Varje händelseflagga representeras av en enda bit.
 
 ### <a name="parameters"></a>Parametrar
 
-- **group_ptr**: pekar på en grupp kontroll block för händelse flaggor. 
-- **name_ptr**: pekar på namnet på gruppen med händelse flaggor.
+- **group_ptr:** Pekare till ett gruppkontrollblock för händelseflaggor. 
+- **name_ptr:** Pekare till namnet på gruppen händelseflaggor.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0x00) en lyckad händelse grupp skapades.
-- TX_GROUP_ERROR: (0x06) ogiltig händelse grupp pekare. Antingen är pekaren NULL eller också har händelse gruppen redan skapats.
-- TX_CALLER_ERROR: (0x13) ogiltig anropare för den här tjänsten.
+- **TX_SUCCESS**: (0x00) Skapande av händelsegrupp lyckades.
+- TX_GROUP_ERROR: (0x06) Ogiltig pekare för händelsegrupp. Pekaren är antingen NULL eller så har händelsegruppen redan skapats.
+- TX_CALLER_ERROR: (0x13) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering och trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -1217,37 +1217,37 @@ status = tx_event_flags_create(&my_event_group,
 
 ## <a name="tx_event_flags_delete"></a>tx_event_flags_delete
 
-Ta bort händelse flaggor grupp
+Ta bort händelseflaggor
 
 ### <a name="prototype"></a>Prototyp
 
 ```c
 UINT tx_event_flags_delete(TX_EVENT_FLAGS_GROUP *group_ptr);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar bort den angivna händelse flaggas gruppen. Alla trådar som pausas i väntan på att händelser från den här gruppen återupptas och får en TX_DELETED retur status.
+Den här tjänsten tar bort den angivna gruppen händelseflaggor. Alla trådar som pausas i väntan på händelser från den här gruppen återupptas och får TX_DELETED returnerar status.
 
 > [!IMPORTANT]
-> Programmet måste se till att en Set notify motringning för den här händelse flaggor gruppen är slutförd (eller inaktive rad) innan du tar bort händelse flaggor gruppen. Dessutom måste programmet förhindra all framtida användning av en borttagen händelse flaggor grupp.
+> Programmet måste se till att en uppsättning meddelar återanrop för den här gruppen händelseflaggor slutförs (eller inaktiveras) innan gruppen händelseflaggor tas bort. Dessutom måste programmet förhindra all framtida användning av en borttagna händelseflaggor.
 
 ### <a name="parameters"></a>Parametrar 
 
-- **group_ptr**: pekar mot en tidigare skapad händelse flagg grupp.
+- **group_ptr:** Pekare till en tidigare skapad händelseflaggor-grupp.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0x00) händelse flaggor grupp borttagning har slutförts.
-- TX_GROUP_ERROR: (0x06) ogiltig grupp pekare för händelse flaggor.
-- TX_CALLER_ERROR: (0x13) ogiltig anropare för den här tjänsten.
+- **TX_SUCCESS**: (0x00) Lyckade händelseflaggor gruppborttagning.
+- TX_GROUP_ERROR: (0x06) Grupppekare över ogiltiga händelseflaggor.
+- TX_CALLER_ERROR: (0x13) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Ja
+Yes
 
 ### <a name="example"></a>Exempel
 
@@ -1275,7 +1275,7 @@ status = tx_event_flags_delete(&my_event_flags_group);
 
 ## <a name="tx_event_flags_get"></a>tx_event_flags_get
 
-Hämta händelse flaggor från gruppen med händelse flaggor
+Hämta händelseflaggor från händelseflaggor-gruppen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1284,52 +1284,52 @@ UINT tx_event_flags_get(TX_EVENT_FLAGS_GROUP *group_ptr,
                           ULONG requested_flags, UINT get_option,
                           ULONG *actual_flags_ptr, ULONG wait_option);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar händelse flaggor från den angivna händelse flaggor gruppen. Varje händelse flaggor grupp innehåller 32 händelse flaggor. Varje flagga representeras av en enskild bit. Den här tjänsten kan hämta en rad olika kombinationer av händelse flaggor som valts av indataparametrarna.
+Den här tjänsten hämtar händelseflaggor från den angivna gruppen händelseflaggor. Varje händelseflaggsgrupp innehåller 32 händelseflaggor. Varje flagga representeras av en enda bit. Den här tjänsten kan hämta en mängd olika kombinationer av händelseflaggor, som valts av indataparametrarna.
 
 ### <a name="parameters"></a>Parametrar
 
-- **group_ptr**: pekar mot en tidigare skapad händelse flagg grupp.
-- **requested_flags**: 32-bitars osignerad variabel som representerar de begärda händelse flaggorna.
-- **get_option**: anger om alla eller någon av de begärda händelse flaggorna krävs. Följande är giltiga val:
-    - **TX_AND**: (protokollnumret 0x02)
+- **group_ptr:** Pekare till en tidigare skapad händelseflaggor-grupp.
+- **requested_flags:** 32-bitars osignerad variabel som representerar de begärda händelseflaggorna.
+- **get_option:** Anger om alla eller någon av de begärda händelseflaggorna krävs. Följande är giltiga val:
+    - **TX_AND**: (0x02)
     - **TX_AND_CLEAR**: (0x03)
     - **TX_OR**: (0x00)
     - **TX_OR_CLEAR**: (0x01)
 
-    Om du väljer TX_AND eller TX_AND_CLEAR anger det att alla händelse flaggor måste finnas i gruppen. Om du väljer TX_OR eller TX_OR_CLEAR anges att en händelse flagga är tillfredsställande. Händelse flaggor som uppfyller begäran rensas (anges till noll) om TX_AND_CLEAR eller TX_OR_CLEAR har angetts.
+    Om TX_AND eller TX_AND_CLEAR anger att alla händelseflaggor måste finnas i gruppen. Om TX_OR eller TX_OR_CLEAR anger att en händelseflagga är tillfredsställande. Händelseflaggor som uppfyller begäran rensas (inställt på noll) om TX_AND_CLEAR eller TX_OR_CLEAR har angetts.
 
-- **actual_flags_ptr**: pekar mot målet där de hämtade händelse flaggorna placeras. Observera att de faktiska flaggor som erhålls kan innehålla flaggor som inte har begärts.
-- **wait_option**: definierar hur tjänsten beter sig om de valda händelse flaggorna inte har angetts. Vänte alternativen definieras enligt följande:
+- **actual_flags_ptr:** Pekare till målet där de hämtade händelseflaggorna placeras. Observera att de faktiska flaggor som hämtas kan innehålla flaggor som inte begärdes.
+- **wait_option:** Definierar hur tjänsten beter sig om de valda händelseflaggorna inte har angetts. Väntealternativen definieras på följande sätt:
     - **TX_NO_WAIT**: (0x00000000)
     - **TX_WAIT_FOREVER**: (0xFFFFFFFF)
-    - timeout-värde: (0x00000001 till 0xFFFFFFFE)
+    - timeout-värde: (0x00000001 via 0xFFFFFFFE)
 
-    Om du väljer TX_NO_WAIT resulterar det i en omedelbar återgång från den här tjänsten oavsett om den lyckades eller inte. Detta är det enda giltiga alternativet om tjänsten anropas från en icke-tråd. t. ex., initiering, timer eller ISR.
+    Om TX_NO_WAIT val resulterar i en omedelbar retur från den här tjänsten oavsett om den lyckades eller inte. Detta är det enda giltiga alternativet om tjänsten anropas från en icke-tråd; t.ex. initiering, timer eller ISR.
 
-    Om du väljer TX_WAIT_FOREVER stoppas den anropande tråden under obestämd tid tills händelse flaggorna är tillgängliga.
+    Om TX_WAIT_FOREVER här alternativet pausas anropstråden på obestämd tid tills händelseflaggorna är tillgängliga.
 
-    Om du väljer ett numeriskt värde (1-0xFFFFFFFE) anges det maximala antalet timer-Tick som ska pausas i väntan på händelse flaggor.
+    Om du väljer ett numeriskt värde (1-0xFFFFFFFE) anges det maximala antalet timer-tick som ska pausas medan du väntar på händelseflaggorna.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0x00) händelse flaggorna get.
-- **TX_DELETED**: (0X01) händelse flaggor gruppen togs bort när tråden pausades.
-- **TX_NO_EVENTS**: tjänsten (0x07) kunde inte hämta de angivna händelserna inom den angivna tiden till väntan.
-- **TX_WAIT_ABORTED**: (0X1A) SUS pensionen avbröts av en annan tråd, timer eller ISR.
-- TX_GROUP_ERROR: (0x06) ogiltig grupp pekare för händelse flaggor.
-- TX_PTR_ERROR: (0x03) ogiltig pekare för faktiska händelse flaggor.
-- TX_WAIT_ERROR: (0x04) ett annat wait-alternativ än TX_NO_WAIT angavs i ett anrop från en icke-tråd.
-- TX_OPTION_ERROR: (0x08) ogiltigt get-option angavs.
+- **TX_SUCCESS**: (0x00) Lyckade händelseflaggor hämtar.
+- **TX_DELETED:**(0x01) Gruppen Händelseflaggor togs bort när tråden pausades.
+- **TX_NO_EVENTS**: (0x07) Det gick inte att hämta de angivna händelserna inom den angivna väntetiden.
+- **TX_WAIT_ABORTED**: (0x1A) Brytning avbröts av en annan tråd, timer eller ISR.
+- TX_GROUP_ERROR: (0x06) Grupppekare över ogiltiga händelseflaggor.
+- TX_PTR_ERROR: (0x03) Ogiltig pekare för faktiska händelseflaggor.
+- TX_WAIT_ERROR: (0x04) Ett annat väntealternativ än TX_NO_WAIT har angetts för ett anrop från en icke-läst.
+- TX_OPTION_ERROR: (0x08) Ogiltigt get-option har angetts.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Ja
+Yes
 
 ### <a name="example"></a>Exempel
 
@@ -1360,7 +1360,7 @@ status = tx_event_flags_get(&my_event_flags_group, 0x111,
 
 ## <a name="tx_event_flags_info_get"></a>tx_event_flags_info_get
 
-Hämta information om händelse flaggor gruppen
+Hämta information om händelseflaggor
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1371,34 +1371,34 @@ UINT tx_event_flags_info_get(TX_EVENT_FLAGS_GROUP *group_ptr,
                          ULONG *suspended_count,
                          TX_EVENT_FLAGS_GROUP **next_group);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar information om den angivna händelse flagg gruppen.
+Den här tjänsten hämtar information om den angivna gruppen händelseflaggor.
 
 ### <a name="parameters"></a>Parametrar
 
-- **group_ptr**: pekar på en grupp kontroll block för händelse flaggor.
-- **Name**: pekare till målet för visaren i namnet på händelse flaggor gruppen.
-- **current_flags**: pekar mot mål för aktuella uppsättnings flaggor i gruppen med händelse flaggor.
-- **first_suspended**: pekar till målet för visaren i den tråd som är överst i listan över uppskjutnings listor för den här händelse flaggor gruppen.
-- **suspended_count**: pekar mot mål för antalet trådar som för närvarande har pausats på den här händelse flaggor gruppen.
-- **next_group**: pekar på destinations visaren för nästa skapade händelse flaggor grupp.
+- **group_ptr:** Pekare till en händelse flaggar gruppkontrollblock.
+- **name**: Pekaren till målet för pekaren till händelseflaggor gruppens namn.
+- **current_flags:** Pekare till mål för de aktuella uppsättningsflaggorna i gruppen händelseflaggor.
+- **first_suspended:** Pekare till mål för pekaren till tråden som först finns i listan över inställna händelser för den här händelseflaggsgruppen.
+- **suspended_count:** Pekare till mål för antalet trådar som för närvarande pausas i den här händelseflaggan.
+- **next_group:** Pekare till mål för pekaren för nästa skapade händelseflaggor.
 
 > [!IMPORTANT]
-> Om du anger en TX_NULL för någon parameter anges att parametern inte krävs.
+> Ange en TX_NULL för en parameter anger att parametern inte är obligatorisk.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckades hämta information om händelse grupps information.
-- TX_GROUP_ERROR: (0x06) ogiltig händelse grupp pekare.
+- **TX_SUCCESS**: (0x00) Information om lyckad händelsegrupp.
+- TX_GROUP_ERROR: (0x06) Markör för ogiltig händelsegrupp.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -1433,7 +1433,7 @@ status =  tx_event_flags_info_get(&my_event_group, &name,
 
 ## <a name="tx_event_flags_performance-info_get"></a>tx_event_flags_performance info_get
 
-Hämta information om händelse flaggor grupp prestanda information
+Hämta information om gruppprestanda för händelseflaggor
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1442,33 +1442,33 @@ UINT tx_event_flags_performance_info_get(TX_EVENT_FLAGS_GROUP
                         *group_ptr, ULONG *sets, ULONG *gets,
                         ULONG *suspensions, ULONG *timeouts);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar prestanda information om den angivna händelse flagg gruppen.
+Den här tjänsten hämtar prestandainformation om den angivna gruppen händelseflaggor.
 
 > [!IMPORTANT]
-> ThreadX SMP-bibliotek och program måste skapas med **TX_EVENT_FLAGS_ENABLE_PERFORMANCE_INFO** som definierats för den här tjänsten för att returnera prestanda information.
+> ThreadX SMP-biblioteket och -programmet måste byggas med TX_EVENT_FLAGS_ENABLE_PERFORMANCE_INFO **har definierats** för att den här tjänsten ska returnera prestandainformation.
 
 ### <a name="parameters"></a>Parametrar
 
-- **group_ptr**: pekar mot tidigare skapade händelse flagg grupper.
-- **uppsättningar**: pekare till målet för antalet händelse flaggor Ställ förfrågningar som utförs på den här gruppen.
-- **hämtar**: pekare till målet för antalet händelse flaggor Hämta begär Anden som utförs i den här gruppen.
-- **SUS pensioner**: pekare till målet för antalet trådar i tråden som ska skjuta upp den här gruppen.
-- **tids gränser**: pekare till målet för antalet händelse flaggor få timeout för inaktive ring för den här gruppen.
+- **group_ptr:** Pekare till gruppen händelseflaggor som skapats tidigare.
+- **sets**: Pekare till mål för antalet händelseflaggor ange begäranden som utförts på den här gruppen.
+- **hämtar**: Pekare till mål för antalet händelseflaggor som hämtar begäranden som utförts på den här gruppen.
+- **jäsningar:** Pekare till mål för antalet trådhändelseflaggor som får stängningar för den här gruppen.
+- **timeouter:** Pekare till mål för antalet händelseflaggor får tidsgränser för låsning i den här gruppen.
 
 > [!IMPORTANT]
-> Om du anger en TX_NULL för någon parameter anges att parametern inte krävs.
+> Ange en TX_NULL för alla parametrar anger att parametern inte är obligatorisk.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckade händelse flaggor grupp prestanda Hämta.
-- **TX_PTR_ERROR**: (0X03) ogiltig grupp pekare för händelse flaggor.
-- **TX_FEATURE_NOT_ENABLED**: (0xFF) systemet har inte kompilerats med prestanda information aktive rad.
+- **TX_SUCCESS**: (0x00) Lyckade händelseflaggor gruppprestanda hämta.
+- **TX_PTR_ERROR**: (0x03) Ogiltig händelseflaggor grupp pekare.
+- **TX_FEATURE_NOT_ENABLED**: (0xFF) Systemet kompilerades inte med aktiverad prestandainformation.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
 ### <a name="example"></a>Exempel
 
@@ -1500,7 +1500,7 @@ status =  tx_event_flags_performance_info_get(&my_event_flag_group,
 
 ## <a name="tx_event_flags_performance_system_info_get"></a>tx_event_flags_performance_system_info_get
 
-Hämta information om prestanda systemet
+Hämta information om prestandasystem
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1508,31 +1508,31 @@ Hämta information om prestanda systemet
 UINT  tx_event_flags_performance_system_info_get(ULONG *sets,
         ULONG *gets,ULONG *suspensions, ULONG *timeouts);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar prestanda information om alla händelse flaggor grupper i systemet.
+Den här tjänsten hämtar prestandainformation om alla händelseflaggor i systemet.
 
 > [!IMPORTANT]
-> ThreadX SMP-bibliotek och program måste skapas med **TX_EVENT_FLAGS_ENABLE_PERFORMANCE_INFO** som definierats för den här tjänsten för att returnera prestanda information.
+> ThreadX SMP-biblioteket och -programmet måste byggas med TX_EVENT_FLAGS_ENABLE_PERFORMANCE_INFO **har definierats** för att den här tjänsten ska returnera prestandainformation.
 
 ### <a name="parameters"></a>Parametrar
 
-- **anger**: pekar mot mål för det totala antalet händelse flaggor som har utförts i alla grupper.
-- **hämtar**: pekare till målet för det totala antalet händelse flaggor begär Anden som utförs på alla grupper.
-- **SUS pensioner**: pekare till mål för det totala antalet tråd händelse flaggor som får uppehåll i alla grupper.
-- **tids gränser**: pekare till målet för det totala antalet händelse flaggor få timeout för inaktive ring i alla grupper.
+- **sets**: Pekare till mål för det totala antalet händelseflaggor ange begäranden som utförts på alla grupper.
+- **gets**: Pekare till mål för det totala antalet händelseflaggor som hämtar begäranden som utförts på alla grupper.
+- **jäsningar:** Pekare till mål för det totala antalet trådhändelseflaggor får stängningar för alla grupper.
+- **timeouter:** Pekare till mål för det totala antalet händelseflaggor får tidsgränser för låsning i alla grupper.
 
 > [!IMPORTANT]
-> Om du anger en TX_NULL för någon parameter anges att parametern inte krävs.
+> Ange en TX_NULL för alla parametrar anger att parametern inte är obligatorisk.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckade händelse flaggor system prestanda Hämta.
-- **TX_FEATURE_NOT_ENABLED**: (0xFF) systemet har inte kompilerats med prestanda information aktive rad.
+- **TX_SUCCESS**: (0x00) Lyckade händelser flaggar systemprestanda get.
+- **TX_FEATURE_NOT_ENABLED**: (0xFF) Systemet kompilerades inte med aktiverad prestandainformation.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
 ### <a name="example"></a>Exempel
 
@@ -1562,7 +1562,7 @@ status = tx_event_flags_performance_system_info_get(&sets, &gets,
 
 ## <a name="tx_event_flags_set"></a>tx_event_flags_set
 
-Ange händelse flaggor i en grupp med händelse flaggor
+Ange händelseflaggor i en grupp med händelseflaggor
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1570,31 +1570,31 @@ Ange händelse flaggor i en grupp med händelse flaggor
 UINT tx_event_flags_set(TX_EVENT_FLAGS_GROUP *group_ptr,
                           ULONG  flags_to_set,UINT set_option);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten anger eller rensar händelse flaggor i en grupp med händelse flaggor, beroende på det angivna set-alternativet. Alla pausade trådar vars begär Anden om Event Flags nu är uppfyllda återupptas.
+Den här tjänsten anger eller rensar händelseflaggor i en grupp med händelseflaggor, beroende på det angivna uppsättningsalternativet. Alla pausade trådar vars begäran om händelseflaggor nu är uppfyllda återupptas.
 
 ### <a name="parameters"></a>Parametrar
 
-- **group_ptr**: pekar mot de tidigare skapade händelse flaggorna grupp kontroll block.
-- **flags_to_set**: anger vilka händelse flaggor som ska ställas in eller avmarkeras baserat på set-alternativet.
-- **set_option**: anger om de angivna händelse flaggorna är ANDed eller Ored till gruppens aktuella händelse flaggor. Följande är giltiga val:
-    - **TX_AND**: (protokollnumret 0x02)
-    - **TX_OR**: (0x00) om du väljer TX_AND anger att de angivna händelse flaggorna är **och** Erik i de aktuella händelse flaggorna i gruppen. Det här alternativet används ofta för att rensa händelse flaggor i en grupp. Annars, om TX_OR anges, är de angivna händelse flaggorna **eller** Erik med den aktuella händelsen i gruppen.
+- **group_ptr:** Pekare till de tidigare skapade händelseflaggorna gruppkontrollblock.
+- **flags_to_set:** Anger de händelseflaggor som ska anges eller rensas baserat på det valda uppsättningsalternativet.
+- **set_option:** Anger om de angivna händelseflaggorna är ANDed eller ORed i de aktuella händelseflaggorna i gruppen. Följande är giltiga val:
+    - **TX_AND**: (0x02)
+    - **TX_OR**: (0x00) TX_AND här alternativet anges att de angivna händelseflaggorna är **OCH** indelade i de aktuella händelseflaggorna i gruppen. Det här alternativet används ofta för att rensa händelseflaggor i en grupp. Annars, om TX_OR har angetts, anges de **angivna** händelseflaggorna med den aktuella händelsen i gruppen.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckade händelse flaggor angavs.
-- TX_GROUP_ERROR: (0x06) ogiltig pekare till händelse flaggor gruppen.
-- TX_OPTION_ERROR: (0x08) ogiltigt set-alternativ angavs.
+- **TX_SUCCESS**: (0x00) Lyckade händelseflaggor har angetts.
+- TX_GROUP_ERROR: (0x06) Ogiltig pekare till gruppen händelseflaggor.
+- TX_OPTION_ERROR: (0x08) Ogiltigt set-option har angetts.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Ja
+Yes
 
 ### <a name="example"></a>Exempel
 
@@ -1622,7 +1622,7 @@ status =  tx_event_flags_set(&my_event_flags_group,
 
 ## <a name="tx_event_flags_set_notify"></a>tx_event_flags_set_notify
 
-Meddela program när händelse flaggor anges
+Meddela programmet när händelseflaggor har angetts
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1630,26 +1630,26 @@ Meddela program när händelse flaggor anges
 UINT tx_event_flags_set_notify(TX_EVENT_FLAGS_GROUP *group_ptr,
        VOID (*events_set_notify)(TX_EVENT_FLAGS_GROUP *));
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten registrerar en funktion för motringning av meddelanden som anropas när en eller flera händelse flaggor anges i den angivna händelse flaggor gruppen. Bearbetningen av aviserings återanropet definieras av programmet.
+Den här tjänsten registrerar en funktion för återanrop av meddelanden som anropas när en eller flera händelseflaggor anges i den angivna händelseflaggor-gruppen. Bearbetningen av återanropet av meddelanden definieras av programmet.
 
 > [!NOTE]
-> Programmets händelse flaggor ange återanrop för meddelanden är inte tillåtet för att anropa ThreadX SMP-API med ett uppehålls alternativ.
+> Programmets händelseflaggor med återanrop av meddelanden tillåts inte att anropa ThreadX SMP API med ett alternativ för indragning.
 
 ### <a name="parameters"></a>Parametrar 
-- **group_ptr**: pekar mot tidigare skapade händelse flagg grupper.
-- **events_set_notify**: pekar på programmets händelse flaggor ange meddelande funktion. Om det här värdet är TX_NULL inaktive ras meddelande.
+- **group_ptr:** Pekare till gruppen med händelseflaggor som skapats tidigare.
+- **events_set_notify:** Pekare till programmets händelseflaggor ange meddelandefunktion. Om det här värdet TX_NULL inaktiveras meddelandet.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0x00) registreringen av event Flags set-aviseringar har slutförts.
-- TX_GROUP_ERROR: (0x06) ogiltig grupp pekare för händelse flaggor.
-- TX_FEATURE_NOT_ENABLED: (0xFF) systemet kompilerades med aviserings funktioner inaktiverade.
+- **TX_SUCCESS:**(0x00) Lyckad registrering av meddelande om händelseflaggor.
+- TX_GROUP_ERROR: (0x06) Grupppekare över ogiltiga händelseflaggor.
+- TX_FEATURE_NOT_ENABLED: (0xFF) Systemet kompilerades med meddelandefunktioner inaktiverade.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
 ### <a name="example"></a>Exempel
 
@@ -1686,31 +1686,31 @@ Aktivera och inaktivera avbrott
 ```C
 UINT tx_interrupt_control(UINT new_posture);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten aktiverar eller inaktiverar avbrott som anges i indataparametern **new_posture**.
+Den här tjänsten aktiverar eller inaktiverar avbrott som anges av indataparametern **new_posture**.
 
 > [!IMPORTANT]
-> Om den här tjänsten anropas från en program tråd förblir avbrotts position en del av trådens kontext. Om tråden till exempel anropar den här rutinen för att inaktivera avbrott och sedan pausar, så inaktive ras avbrott på nytt när de återupptas.
+> Om den här tjänsten anropas från en programtråd förblir avbrottsstatusen en del av trådens kontext. Om tråden till exempel anropar den här rutinen för att inaktivera avbrott och sedan pausar, när den återupptas, inaktiveras avbrotten igen.
 
 > [!WARNING]
-> Den här tjänsten bör inte användas för att aktivera avbrott under initiering! Om du gör det kan det orsaka oförutsägbara resultat.
+> Den här tjänsten ska inte användas för att aktivera avbrott under initieringen! Detta kan orsaka oförutsägbara resultat.
 
 ### <a name="parameters"></a>Parametrar
 
-- **new_posture**: den här parametern anger om avbrott är inaktiverade eller aktiverade. Giltiga värden är **TX_INT_DISABLE och TX_INT_ENABLE.** De faktiska värdena för dessa parametrar är specifika för porten. Dessutom kan vissa bearbetnings arkitekturer stödja ytterligare avbrott inaktivera postures. Mer information finns i **_readme_threadx.txt_** information som angavs på distributions disken.
+- **new_posture:** Den här parametern anger om avbrott är inaktiverade eller aktiverade. Juridiska värden omfattar **TX_INT_DISABLE och TX_INT_ENABLE.** De faktiska värdena för dessa parametrar är portspecifika. Dessutom kan vissa bearbetningsarkitekturer ha stöd för ytterligare avbrott av inaktiveringsstatusar. Mer information **_finnsreadme_threadx.txt_** på distributionsdisken.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- tidigare position: den här tjänsten returnerar föregående avbrotts position till anroparen. Detta gör att användare av tjänsten kan återställa de tidigare position när avbrott har inaktiverats.
+- föregående position: Den här tjänsten returnerar den tidigare avbrottsstatusen till anroparen. Detta gör att användare av tjänsten kan återställa den tidigare positionen efter att avbrott har inaktiverats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Trådar, timers och ISR: er
+Trådar, timers och ISR:er
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -1728,11 +1728,11 @@ tx_interrupt_control(my_old_posture);
 ```
 ### <a name="see-also"></a>Se även
 
-Inget
+Ingen
 
 ## <a name="tx_mutex_create"></a>tx_mutex_create
 
-Skapa ömsesidigt uteslutande mutex
+Skapa mutex för ömsesidig exkludering
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1740,30 +1740,30 @@ Skapa ömsesidigt uteslutande mutex
 UINT tx_mutex_create(TX_MUTEX *mutex_ptr,
                           CHAR *name_ptr, UINT priority_inherit);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
     
-Den här tjänsten skapar ett mutex för ömsesidigt undantag mellan trådar för resurs skydd.
+Den här tjänsten skapar en mutex för ömsesidig exkludering mellan trådar för resursskydd.
 
 ### <a name="parameters"></a>Parametrar
 
-- **mutex_ptr**: pekar på ett mutex-Control-Block.
-- **name_ptr**: pekar mot namnet på mutex.
-- **priority_inherit**: anger om denna mutex stöder arv av prioriteter. Om det här värdet är TX_INHERIT stöds prioriterat arv. Men om TX_NO_INHERIT anges stöds inte prioriterat arv av denna mutex.
+- **mutex_ptr:** Pekare till ett mutex-kontrollblock.
+- **name_ptr:** Pekare till namnet på mutex.
+- **priority_inherit:** Anger om denna mutex stöder prioritetsarv eller inte. Om det här värdet TX_INHERIT stöds arv av prioritet. Men om TX_NO_INHERIT anges stöds inte prioritetsarv av denna mutex.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) slutförde mutex-skapande.
-- TX_MUTEX_ERROR: (0x1C) ogiltig MUTEX-pekare. Antingen är pekaren NULL eller så har mutex redan skapats.
-- TX_CALLER_ERROR: (0x13) ogiltig anropare för den här tjänsten.
-- TX_INHERIT_ERROR: (0x1F) ogiltig prioritet Ärv parameter.
+- **TX_SUCCESS**: (0x00) Lyckad mutex-generering.
+- TX_MUTEX_ERROR: (0x1C) Ogiltig mutex-pekare. Pekaren är antingen NULL eller så har mutex redan skapats.
+- TX_CALLER_ERROR: (0x13) Ogiltig anropare för den här tjänsten.
+- TX_INHERIT_ERROR: (0x1F) Ogiltig prioritet ärver parametern .
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering och trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -1791,37 +1791,37 @@ status =  tx_mutex_create(&my_mutex,"my_mutex_name",
 
 ## <a name="tx_mutex_delete"></a>tx_mutex_delete
 
-Ta bort ömsesidigt uteslutande mutex
+Ta bort mutex för ömsesidig exkludering
 
 ### <a name="prototype"></a>Prototyp
 
 ```C
 UINT tx_mutex_delete(TX_MUTEX *mutex_ptr);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar bort angiven mutex. Alla trådar som pausas i väntan på att mutexen återupptas och har fått en TX_DELETED retur status.
+Den här tjänsten tar bort angiven mutex. Alla trådar pausas i väntan på att mutex ska återupptas och ges TX_DELETED returnerar status.
 
 > [!IMPORTANT]
-> Det är programmets ansvar att förhindra användning av en borttagen mutex.
+> Det är programmets ansvar att förhindra användningen av en borttagna mutex.
 
 ### <a name="parameters"></a>Parametrar
 
-- **mutex_ptr**: pekar mot en tidigare skapad mutex.
+- **mutex_ptr**: Pekare till en tidigare skapad mutex.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad borttagning av mutex.
-- TX_MUTEX_ERROR: (0x1C) ogiltig MUTEX-pekare.
-- TX_CALLER_ERROR: (0x13) ogiltig anropare för den här tjänsten.
+- **TX_SUCCESS**: (0x00) Lyckad mutex-borttagning.
+- TX_MUTEX_ERROR: (0x1C) Ogiltig mutex-pekare.
+- TX_CALLER_ERROR: (0x13) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Ja
+Yes
 
 ### <a name="example"></a>Exempel
 
@@ -1848,53 +1848,53 @@ status =  tx_mutex_delete(&my_mutex);
 
 ## <a name="tx_mutex_get"></a>tx_mutex_get
 
-Få ägarskap för mutex
+Skaffa ägarskap för mutex
 
 ### <a name="prototype"></a>Prototyp
 
 ```C
 UINT tx_mutex_get(TX_MUTEX *mutex_ptr, ULONG wait_option);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten försöker få exklusiv ägande rätt till angiven mutex. Om den anropande tråden redan äger mutex, ökar en intern räknare och en lyckad status returneras.
+Den här tjänsten försöker få exklusiv ägarskap för den angivna mutex. Om anropstråden redan äger mutex ökas en intern räknare och en lyckad status returneras.
 
-Om mutex ägs av en annan tråd och den här tråden är högre prioritet och arv av prioritet har angetts vid mutex Create, kommer den lägre prioritets Trådens prioritet att tillfälligt höjas till den för anrops tråden.
+Om mutex ägs av en annan tråd och den här tråden har högre prioritet och prioritetsarv angavs vid mutex create, höjs den lägre prioritetstrådens prioritet tillfälligt till den anropande trådens prioritet.
 
 > [!IMPORTANT]
-> Prioriteten för tråden med lägre prioritet som äger en mutex med priorityinheritance bör aldrig ändras av en extern tråd under mutex-ägarskapet.
+> Prioriteten för tråden med lägre prioritet som äger en mutex med priorityinheritance bör aldrig ändras av en extern tråd under mutex-ägarskap.
 
 ### <a name="parameters"></a>Parametrar
 
-- **mutex_ptr**: pekar mot en tidigare skapad mutex.
-- **wait_option**: definierar hur tjänsten fungerar om mutex redan ägs av en annan tråd. Vänte alternativen definieras enligt följande:
+- **mutex_ptr**: Pekare till en tidigare skapad mutex.
+- **wait_option:** Definierar hur tjänsten beter sig om mutex redan ägs av en annan tråd. Väntealternativen definieras på följande sätt:
     - **TX_NO_WAIT**: (0x00000000)
     - **TX_WAIT_FOREVER**: (0xFFFFFFFF)
-    - timeout-värde: (0x00000001 till 0xFFFFFFFE)
+    - timeout-värde: (0x00000001 via 0xFFFFFFFE)
 
-    Om du väljer TX_NO_WAIT resulterar det i en omedelbar återgång från den här tjänsten oavsett om den lyckades eller inte. *Detta är det enda giltiga alternativet om tjänsten anropas från initiering.*
+    Om TX_NO_WAIT väljer du resulterar i en omedelbar retur från den här tjänsten oavsett om den lyckades eller inte. *Det här är det enda giltiga alternativet om tjänsten anropas från initieringen.*
 
-    Om du väljer TX_WAIT_FOREVER stoppas den anropande tråden under obestämd tid tills mutex är tillgängligt.
+    Om TX_WAIT_FOREVER här alternativet pausas anropstråden på obestämd tid tills mutex är tillgängligt.
 
-    Om du väljer ett numeriskt värde (1-0xFFFFFFFE) anges det maximala antalet timer-Tick som ska förbli pausade i väntan på mutex.
+    Om du väljer ett numeriskt värde (1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan du väntar på mutex.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad åtgärd för hämtning av mutex.
-- **TX_DELETED**: (0X01) mutex togs bort när tråden pausades.
-- **TX_NOT_AVAILABLE**: (0x1D) Det gick inte att erhålla ägarskap för mutex inom den angivna tiden för att vänta.
-- **TX_WAIT_ABORTED**: (0X1A) SUS pensionen avbröts av en annan tråd, timer eller ISR.
-- TX_MUTEX_ERROR: (0x1C) ogiltig MUTEX-pekare.
-- TX_WAIT_ERROR: (0x04) ett annat wait-alternativ än TX_NO_WAIT angavs i ett anrop från en icke-tråd.
-- TX_CALLER_ERROR: (0x13) ogiltig anropare för den här tjänsten.
+- **TX_SUCCESS**: (0x00) Lyckad mutex get-åtgärd.
+- **TX_DELETED:**(0x01) Mutex togs bort när tråden pausades.
+- **TX_NOT_AVAILABLE**: (0x1D) Tjänsten kunde inte bli ägare till mutex inom den angivna väntetiden.
+- **TX_WAIT_ABORTED**: (0x1A) Brytningen avbröts av en annan tråd, timer eller ISR.
+- TX_MUTEX_ERROR: (0x1C) Ogiltig mutex-pekare.
+- TX_WAIT_ERROR: (0x04) Ett annat väntealternativ än TX_NO_WAIT har angetts för ett anrop från en icke-read.
+- TX_CALLER_ERROR: (0x13) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering och trådar och timers
+Initiering, trådar och timers
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Ja
+Yes
 
 ### <a name="example"></a>Exempel
 
@@ -1929,35 +1929,35 @@ UINT tx_mutex_info_get(TX_MUTEX *mutex_ptr, CHAR **name,
                           TX_THREAD **first_suspended,
                           ULONG *suspended_count, TX_MUTEX **next_mutex);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten hämtar information från angiven mutex.
 
 ### <a name="parameters"></a>Parametrar
 
-- **mutex_ptr**: pekar på mutex Control Block.
-- **Name**: pekare till målet för visaren i mutexens namn.
-- **antal**: pekar mot målets antal ägarskap för mutex.
-- **ägare**: pekare till målet för den ägande trådens pekare.
-- **first_suspended**: pekar till målet för visaren till den tråd som först finns i listan över återkallade i denna mutex.
-- **suspended_count**: pekar mot mål för antalet trådar som för närvarande har pausats på den här mutexen.
-- **next_mutex**: pekaren till målet för pekaren över nästa skapade mutex.
+- **mutex_ptr:** Pekare till mutex-kontrollblock.
+- **name**: Pekare till mål för pekaren till mutex-namnet.
+- **count**: Pekare till mål för ägarskapsantalet för mutex.
+- **owner**: Pekare till mål för den ägarande trådens pekare.
+- **first_suspended:** Pekare till mål för pekaren till tråden som först finns i stängningslistan för denna mutex.
+- **suspended_count:** Pekare till mål för antalet trådar som för närvarande pausas på denna mutex.
+- **next_mutex:** Pekare till mål för pekaren för nästa skapade mutex.
 
 > [!IMPORTANT]
-> Om du anger en TX_NULL för någon parameter anges att parametern inte krävs.
+> Om du anger TX_NULL för en parameter indikerar det att parametern inte är obligatorisk.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckades hämtning av mutex-information.
-- TX_MUTEX_ERROR: (0x1C) ogiltig MUTEX-pekare.
+- **TX_SUCCESS**: (0x00) Lyckad mutex-informationshämtning.
+- TX_MUTEX_ERROR: (0x1C) Ogiltig mutex-pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -2002,35 +2002,35 @@ UINT tx_mutex_performance_info_get(TX_MUTEX *mutex_ptr, ULONG *puts,
        ULONG *gets, ULONG *suspensions, ULONG *timeouts,
        ULONG *inversions, ULONG *inheritances);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar prestanda information om angiven mutex.
+Den här tjänsten hämtar prestandainformation om angiven mutex.
 
 > [!IMPORTANT]
-> ThreadX SMP-biblioteket och programmet måste skapas med **TX_MUTEX_ENABLE_PERFORMANCE_INFO** som definierats för den här tjänsten för att returnera prestanda information.
+> ThreadX SMP-biblioteket och programmet måste byggas med en TX_MUTEX_ENABLE_PERFORMANCE_INFO har **definierats** för att den här tjänsten ska returnera prestandainformation.
 
 ### <a name="parameters"></a>Parametrar
 
-- **mutex_ptr**: pekar mot tidigare skapad mutex.
-- **placerar**: pekare till målet för antalet placerings begär Anden som utförts på denna mutex.
-- **hämtar**: pekare till målet för antalet get-begäranden som har utförts på denna mutex.
-- **SUS pensioner**: pekare till målet för antalet tråd-mutex-återsusering av denna mutex.
-- **tids gränser**: pekare till målet för antalet mutex för att få timeout för den här mutexen.
-- **inversioner**: pekar mot mål för antalet tråd prioritets versioner på denna mutex.
-- **arv**: pekar mot mål för antalet arvs åtgärder för tråd prioritet på denna mutex.
+- **mutex_ptr:** Pekare till mutex som skapats tidigare.
+- **placerar**: Pekare till mål för antalet put-begäranden som utförts på denna mutex.
+- **hämtar**: Pekare till mål för antalet get-begäranden som utförts på denna mutex.
+- **jäsningar:** Pekare till mål för antalet tråd-mutex get-stängningar på denna mutex.
+- **timeouts:** Pekare till mål för antalet mutex get låsning timeouts på den här mutex.
+- **inversioner:** Pekare till mål för antalet trådprioritetsinversioner på denna mutex.
+- **arv:** Pekare till mål för antalet arvsåtgärder för trådprioritet på denna mutex.
 
 > [!IMPORTANT]
-> Om du anger en TX_NULL för någon parameter anges att parametern inte krävs.
+> Om du anger TX_NULL för en parameter indikerar det att parametern inte är obligatorisk.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad mutex prestanda Hämta. 
-- **TX_PTR_ERROR**: (0X03) ogiltig mutex-pekare.
-- **TX_FEATURE_NOT_ENABLED**: (0xFF) systemet har inte kompilerats med prestanda information aktive rad.
+- **TX_SUCCESS**: (0x00) Lyckad mutex-prestanda get. 
+- **TX_PTR_ERROR**: (0x03) Ogiltig mutex-pekare.
+- **TX_FEATURE_NOT_ENABLED**: (0xFF) Systemet kompilerades inte med aktiverad prestandainformation.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
 ### <a name="example"></a>Exempel
 
@@ -2064,7 +2064,7 @@ status =  tx_mutex_performance_info_get(&my_mutex_ptr, &puts, &gets,
 
 ## <a name="tx_mutex_performance_system_info_get"></a>tx_mutex_performance_system_info_get
 
-Hämta information om prestanda för mutex-system
+Hämta information om mutex-systemprestanda
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2073,33 +2073,33 @@ UINT  tx_mutex_performance_system_info_get(ULONG *puts, ULONG *gets,
         ULONG *suspensions, ULONG *timeouts,
         ULONG *inversions, ULONG *inheritances);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar prestanda information om alla mutexer i systemet.
+Den här tjänsten hämtar prestandainformation om alla mutexer i systemet.
 
 > [!IMPORTANT]
-> ThreadX SMP-biblioteket och programmet måste skapas med **TX_MUTEX_ENABLE_PERFORMANCE_INFO** som definierats för den här tjänsten för att returnera prestanda information.
+> ThreadX SMP-biblioteket och programmet måste byggas med en TX_MUTEX_ENABLE_PERFORMANCE_INFO har **definierats** för att den här tjänsten ska returnera prestandainformation.
 
 ### <a name="parameters"></a>Parametrar
 
-- **placerar**: pekar mot mål för det totala antalet placerings begär Anden som utförts på alla mutexer.
-- **hämtar**: pekare till mål för det totala antalet get-begäranden som utförts på alla mutexer.
-- **SUS pensioner**: pekare till målet för det totala antalet tråd-mutex får SUS pensioner på alla mutexer.
-- **tids gränser**: pekare till målet för det totala antalet mutexs-timeoutar för alla mutexer.
-- **inversion**: pekar mot mål för det totala antalet tråd prioritets versioner i alla mutexer.
-- **arv**: pekar mot mål för det totala antalet arvs åtgärder för tråd prioritet på alla mutexer.
+- **puts**: Pekare till mål för det totala antalet put-begäranden som utförts på alla mutexes.
+- **gets**: Pekare till mål för det totala antalet get-begäranden som utförts på alla mutexes.
+- **jäsningar:** Pekare till mål för det totala antalet tråd-mutex get-stängningar på alla mutex-stängningar.
+- **timeouts:** Pekare till mål för det totala antalet mutex get låsning timeouts på alla mutexes.
+- **inversioner:** Pekare till mål för det totala antalet trådprioritetsinversioner på alla mutexes.
+- **arv:** Pekare till mål för det totala antalet arvsåtgärder för trådprioritet på alla mutexes.
 
 > [!IMPORTANT]
-> Om du anger en TX_NULL för någon parameter anges att parametern inte krävs.
+> Om du anger TX_NULL för en parameter indikerar det att parametern inte är obligatorisk.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad mutex system prestanda Hämta.
-- **TX_FEATURE_NOT_ENABLED**: (0xFF) systemet har inte kompilerats med prestanda information aktive rad.
+- **TX_SUCCESS**: (0x00) Lyckad mutex-systemprestanda get.
+- **TX_FEATURE_NOT_ENABLED**: (0xFF) Systemet kompilerades inte med aktiverad prestandainformation.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
 ### <a name="example"></a>Exempel
 
@@ -2132,33 +2132,33 @@ status = tx_mutex_performance_system_info_get(&puts, &gets,
 
 ## <a name="tx_mutex_prioritize"></a>tx_mutex_prioritize
 
-Prioritera mutex SUS pensioner List
+Prioritera mutex-stängningslista
 
 ### <a name="prototype"></a>Prototyp
 
 ```C
 UINT tx_mutex_prioritize(TX_MUTEX *mutex_ptr);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten placerar den högsta prioritets tråden inaktive rad för ägarskapet av mutexen längst fram i SUS pensions listan. Alla andra trådar förblir i samma FIFO-ordning som de inaktiverades.
+Den här tjänsten placerar den tråd med högst prioritet som pausas för ägarskap av mutex framför uppstängningslistan. Alla andra trådar finns kvar i samma FIFO-ordning som de pausades i.
 
 ### <a name="parameters"></a>Parametrar 
 
-- **mutex_ptr**: pekar mot den tidigare skapade mutex.
+- **mutex_ptr**: Pekare till den tidigare skapade mutex.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad mutex-prioritering.
-- TX_MUTEX_ERROR: (0x1C) ogiltig MUTEX-pekare.
+- **TX_SUCCESS**: (0x00) Lyckad mutex-prioritering.
+- TX_MUTEX_ERROR: (0x1C) Ogiltig mutex-pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -2188,38 +2188,38 @@ status = tx_mutex_prioritize(&my_mutex);
 
 ## <a name="tx_mutex_put"></a>tx_mutex_put
 
-Frigör ägarskap för mutex
+Lanseringsägarskap för mutex
 
 ### <a name="prototype"></a>Prototyp
 
 ```C
 UINT tx_mutex_put(TX_MUTEX *mutex_ptr);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten minskar ägarskaps antalet för angiven mutex. Om antalet ägarskap är noll görs mutex tillgängligt.
+Den här tjänsten nedtar ägarskapsantalet för den angivna mutex. Om ägarskapsantalet är noll görs mutex tillgängligt.
 
 > [!IMPORTANT]
-> Om prioritets arv valdes när en mutex skapades återställs prioriteten för den frisläppta tråden till den prioritet den hade när den ursprungligen fick ägandet av mutex. Alla andra prioritets ändringar som görs i den sammanställda tråden under ägarskapet av mutex kan återställas.
+> Om prioritetsarv valdes när mutex skapades återställs prioriteten för den frigörande tråden till den prioritet som den hade när den ursprungligen fick ägarskap för mutex. Eventuella andra prioritetsändringar som gjorts i utsläppstråden under ägarskapet för mutex kan ångras.
 
 ### <a name="parameters"></a>Parametrar
 
-- **mutex_ptr**: pekar mot den tidigare skapade mutex.
+- **mutex_ptr**: Pekare till den tidigare skapade mutex.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad mutex-version.
-- **TX_NOT_OWNED**: (0X1E) mutex ägs inte av anroparen.
-- TX_MUTEX_ERROR: (0x1C) ogiltig pekare till MUTEX.
-- TX_CALLER_ERROR: (0x13) ogiltig anropare för den här tjänsten.
+- **TX_SUCCESS**: (0x00) Lyckad mutex-version.
+- **TX_NOT_OWNED**: (0x1E) Mutex ägs inte av anroparen.
+- TX_MUTEX_ERROR: (0x1C) Ogiltig pekare till mutex.
+- TX_CALLER_ERROR: (0x13) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering och trådar och timers
+Initiering, trådar och timers
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Ja
+Yes
 
 ### <a name="example"></a>Exempel
 
@@ -2253,36 +2253,36 @@ UINT tx_queue_create(TX_QUEUE *queue_ptr, CHAR *name_ptr,
                           UINT message_size,
                           VOID *queue_start, ULONG queue_size);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Tjänsten skapar en meddelandekö som vanligt vis används för kommunikation mellan trådar. Det totala antalet meddelanden beräknas från angiven meddelande storlek och det totala antalet byte i kön.
+Den här tjänsten skapar en meddelandekö som vanligtvis används för intertrådskommunikation. Det totala antalet meddelanden beräknas utifrån den angivna meddelandestorleken och det totala antalet byte i kön.
 
 > [!IMPORTANT]
-> Om det totala antalet byte som anges i köns minnes området inte är jämnt delbar med den angivna meddelande storleken, används inte återstående byte i minnes området.
+> Om det totala antalet byte som anges i köns minnesområde inte är jämnt delbart med den angivna meddelandestorleken används inte återstående byte i minnesområdet.
 
 ### <a name="parameters"></a>Parametrar
 
-- **queue_ptr**: pekar på ett kontroll block för meddelande kön.
-- **name_ptr**: pekar mot namnet på meddelande kön.
-- **message_size**: anger storleken på varje meddelande i kön. Meddelande storlekar sträcker sig från 1 32-bitars ord till 16 32-bitars ord. Giltiga alternativ för meddelande storlek är numeriska värden från 1 till 16.
-- **queue_start**: meddelande köns start adress. Start adressen måste vara justerad till storleken på data typen ULONG.
-- **queue_size**: totalt antal byte som är tillgängliga för meddelande kön.
+- **queue_ptr:** Pekare till ett kontrollblock för meddelandekö.
+- **name_ptr:** Pekare till namnet på meddelandekön.
+- **message_size:** Anger storleken på varje meddelande i kön. Meddelandestorlekarna sträcker sig från 1 32-bitars ord till 16 32-bitars ord. Giltiga alternativ för meddelandestorlek är numeriska värden från 1 till 16, inklusive.
+- **queue_start:** Startadressen för meddelandekön. Startadressen måste justeras efter storleken på ULONG-datatypen.
+- **queue_size:** Totalt antal byte som är tillgängliga för meddelandekön.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad meddelande kön har skapats.
-- TX_QUEUE_ERROR: (0x09) ogiltig pekare för meddelande kön. Antingen är pekaren NULL eller också har kön redan skapats.
-- TX_PTR_ERROR: (0x03) ogiltig start adress för meddelande kön.
-- TX_SIZE_ERROR: (0x05) storleken på meddelande kön är ogiltig.
-- TX_CALLER_ERROR: (0x13) ogiltig anropare för den här tjänsten.
+- **TX_SUCCESS:**(0x00) Lyckad skapande av meddelandekö.
+- TX_QUEUE_ERROR: (0x09) Pekare för ogiltig meddelandekö. Pekaren är antingen NULL eller så har kön redan skapats.
+- TX_PTR_ERROR: (0x03) Ogiltig startadress för meddelandekön.
+- TX_SIZE_ERROR: (0x05) Storleken på meddelandekön är ogiltig.
+- TX_CALLER_ERROR: (0x13) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering och trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -2315,39 +2315,39 @@ status = tx_queue_create(&my_queue, "my_queue_name",
 
 ## <a name="tx_queue_delete"></a>tx_queue_delete
 
-Ta bort meddelande kön
+Ta bort meddelandekö
 
 ### <a name="prototype"></a>Prototyp
 
 ```C
 UINT tx_queue_delete(TX_QUEUE *queue_ptr);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar bort den angivna meddelande kön. Alla trådar som pausas i väntan på ett meddelande från den här kön återupptas och ger en TX_DELETED retur status.
+Den här tjänsten tar bort den angivna meddelandekön. Alla trådar som pausas i väntan på ett meddelande från den här kön återupptas och får TX_DELETED returnerar status.
 
 > [!IMPORTANT]
-> Programmet måste se till att alla skicka aviserings återanrop för den här kön har slutförts (eller inaktiverats) innan kön tas bort. Dessutom måste programmet förhindra framtida användning av en borttagen kö.
+> Programmet måste se till att alla återanrop för att skicka meddelanden för den här kön slutförs (eller inaktiveras) innan kön tas bort. Dessutom måste programmet förhindra all framtida användning av en borttagna kö.
 
-*Det är också programmets ansvar att hantera det minnes område som är associerat med kön, vilket är tillgängligt när tjänsten har slutförts.*
+*Det är också programmets ansvar att hantera det minnesområde som är associerat med kön, som är tillgängligt när den här tjänsten har slutförts.*
 
 ### <a name="parameters"></a>Parametrar 
 
-- **queue_ptr**: pekar mot en tidigare skapad meddelande kö.
+- **queue_ptr:** Pekare till en meddelandekö som skapats tidigare.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad borttagning av meddelandekö.
-- TX_QUEUE_ERROR: (0x09) ogiltig pekare för meddelande kön.
-- TX_CALLER_ERROR: (0x13) ogiltig anropare för den här tjänsten.
+- **TX_SUCCESS:**(0x00) Borttagning av meddelandekö lyckades.
+- TX_QUEUE_ERROR: (0x09) Pekare för ogiltig meddelandekö.
+- TX_CALLER_ERROR: (0x13) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Ja
+Yes
 
 ### <a name="example"></a>Exempel
 
@@ -2378,33 +2378,33 @@ status = tx_queue_delete(&my_queue);
 
 ## <a name="tx_queue_flush"></a>tx_queue_flush
 
-Tomma meddelanden i meddelande kön
+Tomma meddelanden i meddelandekö
 
 ### <a name="prototype"></a>Prototyp
 
 ```C
 UINT tx_queue_flush(TX_QUEUE *queue_ptr);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar bort alla meddelanden som lagras i den angivna meddelande kön. Om kön är full ignoreras meddelanden från alla pausade trådar. Varje pausad tråd återupptas sedan med en retur status som anger att meddelandet skickades lyckades. Om kön är tom gör den här tjänsten ingenting.
+Den här tjänsten tar bort alla meddelanden som lagras i den angivna meddelandekön. Om kön är full tas meddelanden för alla inaktiverade trådar bort. Varje pausad tråd återupptas sedan med en returstatus som anger att meddelandet lyckades. Om kön är tom gör den här tjänsten ingenting.
 
 ### <a name="parameters"></a>Parametrar 
 
-- **queue_ptr**: pekar mot en tidigare skapad meddelande kö.
+- **queue_ptr:** Pekare till en meddelandekö som skapats tidigare.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) klar med att tömma meddelande kön.
-- TX_QUEUE_ERROR: (0x09) ogiltig pekare för meddelande kön.
+- **TX_SUCCESS**: (0x00) Lyckad meddelandekö rensas.
+- TX_QUEUE_ERROR: (0x09) Pekare för ogiltig meddelandekö.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Ja
+Yes
 
 ### <a name="example"></a>Exempel
 
@@ -2435,7 +2435,7 @@ status =  tx_queue_flush(&my_queue);
 
 ## <a name="tx_queue_front_send"></a>tx_queue_front_send
 
-Skicka meddelande till kön längst fram
+Skicka meddelande till kön
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2443,42 +2443,42 @@ Skicka meddelande till kön längst fram
 UINT tx_queue_front_send(TX_QUEUE *queue_ptr,
                            VOID *source_ptr, ULONG wait_option);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skickar ett meddelande till den första platsen i den angivna meddelande kön. Meddelandet **kopieras** till platsen längst fram i kön från det minnes området som anges av käll pekaren.
+Den här tjänsten skickar ett meddelande till den angivna meddelandeköns frontplats. Meddelandet **kopieras till framför** kön från det minnesområde som anges av käll pekaren.
 
 ### <a name="parameters"></a>Parametrar
 
-- **queue_ptr**: pekar på ett kontroll block för meddelande kön.
-- **source_ptr**: pekar mot meddelandet.
-- **wait_option**: definierar hur tjänsten fungerar om meddelande kön är full. Vänte alternativen definieras enligt följande:
+- **queue_ptr:** Pekare till ett kontrollblock för meddelandekö.
+- **source_ptr:** Pekaren till meddelandet.
+- **wait_option:** Definierar hur tjänsten beter sig om meddelandekön är full. Väntealternativen definieras på följande sätt:
     - **TX_NO_WAIT**: (0x00000000)
     - **TX_WAIT_FOREVER**: (0xFFFFFFFF)
-    - timeout-värde: (0x00000001 till 0xFFFFFFFE)
+    - timeout-värde: (0x00000001 via 0xFFFFFFFE)
 
-    Om du väljer TX_NO_WAIT resulterar det i en omedelbar återgång från den här tjänsten oavsett om den lyckades eller inte. *Detta är det enda giltiga alternativet om tjänsten anropas från en icke-tråd. t. ex., initiering, timer eller ISR.*
+    Om TX_NO_WAIT väljer du resulterar i en omedelbar retur från den här tjänsten oavsett om den lyckades eller inte. *Det här är det enda giltiga alternativet om tjänsten anropas från en icke-tråd. t.ex. initiering, timer eller ISR.*
 
-    Om du väljer TX_WAIT_FOREVER stoppas den anropande tråden i oändlighet tills det finns utrymme i kön.
+    Om TX_WAIT_FOREVER här alternativet pausas anropstråden på obestämd tid tills det finns utrymme i kön.
 
-    Om du väljer ett numeriskt värde (1-0xFFFFFFFE) anges det maximala antalet timer-Tick som ska förbli pausade vid väntan på plats i kön.
+    Om du väljer ett numeriskt värde (1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan du väntar på utrymme i kön.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0x00) överföringen av meddelandet har slutförts.
-- **TX_DELETED**: (0X01) meddelande kön togs bort när tråden pausades.
-- **TX_QUEUE_FULL**: (0x0B) Det gick inte att skicka meddelandet eftersom kön var full under den angivna tids perioden för att vänta.
-- **TX_WAIT_ABORTED**: (0X1A) SUS pensionen avbröts av en annan tråd, timer eller ISR.
-- TX_QUEUE_ERROR: (0x09) ogiltig pekare för meddelande kön.
-- TX_PTR_ERROR: (0x03) ogiltig käll pekare för meddelande.
-- TX_WAIT_ERROR: (0x04) ett annat wait-alternativ än TX_NO_WAIT angavs i ett anrop från en icke-tråd.
+- **TX_SUCCESS**: (0x00) Lyckad sändning av meddelande.
+- **TX_DELETED**: (0x01) Meddelandekön togs bort när tråden pausades.
+- **TX_QUEUE_FULL**: (0x0B) Tjänsten kunde inte skicka ett meddelande eftersom kön var full under den angivna väntetiden.
+- **TX_WAIT_ABORTED**: (0x1A) Brytningen avbröts av en annan tråd, timer eller ISR.
+- TX_QUEUE_ERROR: (0x09) Ogiltig pekare för meddelandekö.
+- TX_PTR_ERROR: (0x03) Ogiltig käll pekare för meddelande.
+- TX_WAIT_ERROR: (0x04) Ett annat väntealternativ än TX_NO_WAIT har angetts för ett anrop från en icke-read.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Ja
+Yes
 
 ### <a name="example"></a>Exempel
 
@@ -2512,7 +2512,7 @@ status = tx_queue_front_send(&my_queue, my_message,
 
 ## <a name="tx_queue_info_get"></a>tx_queue_info_get
 
-Hämta information om kö
+Hämta information om kön
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2522,35 +2522,35 @@ UINT tx_queue_info_get(TX_QUEUE *queue_ptr, CHAR **name,
         TX_THREAD **first_suspended, ULONG *suspended_count,
         TX_QUEUE **next_queue);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar information om den angivna meddelande kön.
+Den här tjänsten hämtar information om den angivna meddelandekön.
 
 ### <a name="parameters"></a>Parametrar
 
-- **queue_ptr**: pekar mot en tidigare skapad meddelande kö.
-- **namn**: pekar mot målets pekare till köns namn.
-- i **kö**: pekare till målet för antalet meddelanden som för närvarande finns i kön.
-- **available_storage**: pekar mot mål för det antal meddelanden som kön för närvarande har utrymme för.
-- **first_suspended**: pekar till målet för visaren i den tråd som är överst på listan över återkallade i den här kön.
-- **suspended_count**: pekar mot mål för antalet trådar som för närvarande har pausats i kön.
-- **next_queue**: pekar mot mål som pekar på nästa skapade kö.
+- **queue_ptr:** Pekare till en meddelandekö som skapats tidigare.
+- **name**: Pekare till mål för pekaren till köns namn.
+- **i kö: Pekare** till mål för det antal meddelanden som för närvarande finns i kön.
+- **available_storage:** Pekare till mål för det antal meddelanden som kön för närvarande har utrymme för.
+- **first_suspended**: Pekare till mål för pekaren till tråden som först finns i stängningslistan för den här kön.
+- **suspended_count:** Pekare till mål för antalet trådar som för närvarande pausas i den här kön.
+- **next_queue:** Pekare till mål för pekaren för nästa skapade kö.
 
 > [!IMPORTANT]
-> Om du anger en TX_NULL för någon parameter anges att parametern inte krävs.
+> Om du anger TX_NULL för en parameter indikerar det att parametern inte är obligatorisk.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0x00) information om lyckade köer hämtades.
-- TX_QUEUE_ERROR: (0x09) ogiltig pekare för meddelande kön.
+- **TX_SUCCESS**: (0x00) Information om lyckad kö hämta.
+- TX_QUEUE_ERROR: (0x09) Ogiltig pekare för meddelandekö.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -2589,7 +2589,7 @@ status = tx_queue_info_get(&my_queue, &name,
 
 ## <a name="tx_queue_performance_info_get"></a>tx_queue_performance_info_get
 
-Hämta prestanda information för kö
+Hämta information om köprestanda
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2599,35 +2599,35 @@ UINT  tx_queue_performance_info_get(TX_QUEUE *queue_ptr,
         ULONG *empty_suspensions, ULONG *full_suspensions,
         ULONG *full_errors, ULONG *timeouts);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar prestanda information om den angivna kön.
+Den här tjänsten hämtar prestandainformation om den angivna kön.
 
 > [!IMPORTANT]
-> ThreadX SMP-biblioteket och programmet måste skapas med **TX_QUEUE_ENABLE_PERFORMANCE_INFO** som definierats för den här tjänsten för att returnera prestanda information.
+> ThreadX SMP-biblioteket och programmet måste byggas med en **TX_QUEUE_ENABLE_PERFORMANCE_INFO** för att den här tjänsten ska returnera prestandainformation.
 
 ### <a name="parameters"></a>Parametrar
 
-- **queue_ptr**: pekare till kön som skapats tidigare.
-- **messages_sent**: pekare till målet för antalet sändnings begär Anden som utförts i kön.
-- **messages_received**: pekar mot mål för antalet mottagna mottagnings begär anden i kön.
-- **empty_suspensions**: pekar mot mål för antalet tomma köer i kön.
-- **full_suspensions**: pekar mot målets antal fullständiga uppehåll i kön.
-- **full_errors**: pekar mot mål för antalet fullständiga fel i kön.
-- **tids gränser**: pekar mot målet för antalet tids gränser för tråd SUS Pension i den här kön.
+- **queue_ptr**: Pekare till kö som skapats tidigare.
+- **messages_sent:** Pekare till mål för antalet skickade begäranden som utförts på den här kön.
+- **messages_received:** Pekare till mål för antalet mottagningsbegäranden som utförts på den här kön.
+- **empty_suspensions:** Pekare till mål för antalet tomma köstängningar i den här kön.
+- **full_suspensions:** Pekare till mål för antalet fullständiga stängningar av kön i den här kön.
+- **full_errors:** Pekare till mål för antalet fullständiga köfel i den här kön.
+- **timeouter:** Pekare till mål för antalet tidsgränser för trådavstängning i den här kön.
 
 > [!IMPORTANT]
-> Om du anger en TX_NULL för någon parameter anges att parametern inte krävs.
+> Om du anger TX_NULL för en parameter indikerar det att parametern inte är obligatorisk.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0x00) prestanda för slutförd kö hämtas.
-- **TX_PTR_ERROR**: (0X03) ogiltig Queue pekare.
-- **TX_FEATURE_NOT_ENABLED**: (0xFF) systemet har inte kompilerats med prestanda information aktive rad.
+- **TX_SUCCESS**: (0x00) Lyckad köprestanda get.
+- **TX_PTR_ERROR**: (0x03) Ogiltig kö pekare.
+- **TX_FEATURE_NOT_ENABLED**: (0xFF) Systemet kompilerades inte med aktiverad prestandainformation.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
 ### <a name="example"></a>Exempel
 
@@ -2664,7 +2664,7 @@ status = tx_queue_performance_info_get(&my_queue, &messages_sent,
 
 ## <a name="tx_queue_performance_system_info_get"></a>tx_queue_performance_system_info_get
 
-Hämta prestanda information för Queue system
+Hämta prestandainformation för kösystem
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2674,33 +2674,33 @@ UINT  tx_queue_performance_system_info_get(ULONG *messages_sent,
         ULONG *full_suspensions, ULONG *full_errors,
         ULONG *timeouts);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar prestanda information om alla köer i systemet.
+Den här tjänsten hämtar prestandainformation om alla köer i systemet.
 
 > [!IMPORTANT]
-> ThreadX SMP-biblioteket och programmet måste skapas med **TX_QUEUE_ENABLE_PERFORMANCE_INFO** som definierats för den här tjänsten för att returnera prestanda information.
+> ThreadX SMP-biblioteket och programmet måste byggas med en **TX_QUEUE_ENABLE_PERFORMANCE_INFO** för att den här tjänsten ska returnera prestandainformation.
 
 ### <a name="parameters"></a>Parametrar
 
-- **messages_sent**: pekar mot mål för det totala antalet sändnings begär Anden som utförts på alla köer.
-- **messages_received**: pekar mot mål för det totala antalet mottagnings begär Anden som utförts på alla köer.
-- **empty_suspensions**: pekar mot mål för det totala antalet tomma köer i kö i alla köer.
-- **full_suspensions**: pekar mot mål för det totala antalet fulla uppehåll i kön på alla köer.
-- **full_errors**: pekar mot mål för det totala antalet fullständiga fel i kön i alla köer.
-- **timeout**: pekar mot mål för det totala antalet tids gränser för tråd SUS pensioner i alla köer.
+- **messages_sent:** Pekare till mål för det totala antalet skicka begäranden som utförts på alla köer.
+- **messages_received:** Pekare till mål för det totala antalet mottagningsbegäranden som utförts på alla köer.
+- **empty_suspensions:** Pekare till mål för det totala antalet tomma köavstängningar för alla köer.
+- **full_suspensions:** Pekare till mål för det totala antalet fullständiga stängningar av kön i alla köer.
+- **full_errors:** Pekare till mål för det totala antalet fullständiga köfel i alla köer.
+- **timeouter:** Pekare till mål för det totala antalet tidsgränser för trådavstängning i alla köer.
 
 > [!IMPORTANT]
-> Om du anger en TX_NULL för någon parameter anges att parametern inte krävs.
+> Om du anger TX_NULL för en parameter indikerar det att parametern inte är obligatorisk.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckat system prestanda Hämta.
-- **TX_FEATURE_NOT_ENABLED**: (0xFF) systemet har inte kompilerats med prestanda information aktive rad.
+- **TX_SUCCESS**: (0x00) Lyckad prestanda för kösystem get.
+- **TX_FEATURE_NOT_ENABLED**: (0xFF) Systemet kompilerades inte med aktiverad prestandainformation.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
 ### <a name="example"></a>Exempel
 
@@ -2736,7 +2736,7 @@ status = tx_queue_performance_system_info_get(&messages_sent,
 
 ## <a name="tx_queue_prioritize"></a>tx_queue_prioritize
 
-Prioritera lista över återkallade köer
+Prioritera köavstängningslista
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2744,26 +2744,26 @@ Prioritera lista över återkallade köer
 UINT tx_queue_prioritize(TX_QUEUE *queue_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten placerar den högsta prioritets tråden inaktive rad för ett meddelande (eller för att placera ett meddelande) i den här kön överst i SUS pensions listan. Alla andra trådar förblir i samma FIFO-ordning som de inaktiverades.
+Den här tjänsten placerar den tråd med högst prioritet som pausas för ett meddelande (eller för att placera ett meddelande) i den här kön längst fram i uppstängningslistan. Alla andra trådar finns kvar i samma FIFO-ordning som de pausades i.
 
 ### <a name="parameters"></a>Parametrar 
 
-- **queue_ptr**: pekar mot en tidigare skapad meddelande kö.
+- **queue_ptr:** Pekare till en meddelandekö som skapats tidigare.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad prioritet för kön.
-- TX_QUEUE_ERROR: (0x09) ogiltig pekare för meddelande kön.
+- **TX_SUCCESS**: (0x00) Lyckad kö prioriteras.
+- TX_QUEUE_ERROR: (0x09) Ogiltig pekare för meddelandekö.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -2803,45 +2803,45 @@ Hämta meddelande från meddelandekö
 UINT tx_queue_receive(TX_QUEUE *queue_ptr,
                           VOID *destination_ptr, ULONG wait_option);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar ett meddelande från den angivna meddelande kön. Det hämtade meddelandet **kopieras** från kön till det minnes utrymme som anges av mål pekaren. Meddelandet tas sedan bort från kön.
+Den här tjänsten hämtar ett meddelande från den angivna meddelandekön. Det hämtade meddelandet kopieras **från kön** till det minnesområde som anges av mål pekaren. Meddelandet tas sedan bort från kön.
 
 > [!WARNING]
-> Det angivna mål minnes området måste vara tillräckligt stort för att rymma meddelandet. det vill säga att meddelande målet som refereras till av **destination_ptr** måste vara minst lika stort som meddelande storleken för den här kön. Annars, om målet inte är tillräckligt stort, sker minnes skada i följande minnes områden.
+> Det angivna målminnesområdet måste vara tillräckligt stort för att rymma meddelandet. Det meddelandemål som visas av en **destination_ptr** måste vara minst lika stort som meddelandestorleken för den här kön. Om målet inte är tillräckligt stort uppstår annars minnesfel i följande minnesområde.
 
 ### <a name="parameters"></a>Parametrar
 
-- **queue_ptr**: pekar mot en tidigare skapad meddelande kö.
-- **destination_ptr**: platsen där meddelandet ska kopieras.
-- **wait_option**: definierar hur tjänsten fungerar om meddelande kön är tom. Vänte alternativen definieras enligt följande:
+- **queue_ptr:** Pekare till en meddelandekö som skapats tidigare.
+- **destination_ptr:** Platsen där meddelandet ska kopieras.
+- **wait_option:** Definierar hur tjänsten beter sig om meddelandekön är tom. Väntealternativen definieras på följande sätt:
     - **TX_NO_WAIT**: (0x00000000) 
     - **TX_WAIT_FOREVER**: (0xFFFFFFFF) 
-    - timeout-värde: (0x00000001 till 0xFFFFFFFE)
+    - timeout-värde: (0x00000001 via 0xFFFFFFFE)
 
-    Om du väljer TX_NO_WAIT resulterar det i en omedelbar återgång från den här tjänsten oavsett om den lyckades eller inte. Detta är det enda giltiga alternativet om tjänsten anropas från en icke-tråd. t. ex., initiering, timer eller ISR.
+    Om TX_NO_WAIT väljer du resulterar i en omedelbar retur från den här tjänsten oavsett om den lyckades eller inte. Det här är det enda giltiga alternativet om tjänsten anropas från en icke-tråd. t.ex. initiering, timer eller ISR.
 
-    Om du väljer TX_WAIT_FOREVER stoppas den anropande tråden under obestämd tid tills ett meddelande är tillgängligt.
+    Om TX_WAIT_FOREVER här alternativet pausas anropstråden på obestämd tid tills ett meddelande är tillgängligt.
 
-    Om du väljer ett numeriskt värde (1-0xFFFFFFFE) anges det högsta antalet timer-Tick som ska vara pausat under väntan på ett meddelande.
+    Om du väljer ett numeriskt värde (1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan ett meddelande väntar.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad hämtning av meddelande.
-- **TX_DELETED**: (0X01) meddelande kön togs bort när tråden pausades.
-- **TX_QUEUE_EMPTY**: (0X0a) tjänsten kunde inte hämta ett meddelande eftersom kön var tom under den angivna tiden för att vänta.
-- **TX_WAIT_ABORTED**: (0X1A) SUS pensionen avbröts av en annan tråd, timer eller ISR.
-- TX_QUEUE_ERROR: (0x09) ogiltig pekare för meddelande kön.
-- TX_PTR_ERROR: (0x03) ogiltig mål pekare för meddelande.
-- TX_WAIT_ERROR: (0x04) ett annat wait-alternativ än TX_NO_WAIT angavs i ett anrop från en icke-tråd.
+- **TX_SUCCESS:**(0x00) Lyckad hämtning av meddelandet.
+- **TX_DELETED**: (0x01) Meddelandekön togs bort när tråden pausades.
+- **TX_QUEUE_EMPTY:**(0x0A) Tjänsten kunde inte hämta ett meddelande eftersom kön var tom under den angivna väntetiden.
+- **TX_WAIT_ABORTED**: (0x1A) Brytningen avbröts av en annan tråd, timer eller ISR.
+- TX_QUEUE_ERROR: (0x09) Ogiltig pekare för meddelandekö.
+- TX_PTR_ERROR: (0x03) Ogiltig mål pekare för meddelande.
+- TX_WAIT_ERROR: (0x04) Ett annat väntealternativ än TX_NO_WAIT har angetts för ett anrop från en icke-read.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Ja
+Yes
 
 ### <a name="example"></a>Exempel
 
@@ -2883,42 +2883,42 @@ Skicka meddelande till meddelandekö
 UINT tx_queue_send(TX_QUEUE *queue_ptr,
                           VOID *source_ptr, ULONG wait_option);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skickar ett meddelande till den angivna meddelande kön. Det skickade meddelandet **kopieras** till kön från det minnes utrymme som anges av käll pekaren.
+Den här tjänsten skickar ett meddelande till den angivna meddelandekön. Det skickade meddelandet **kopieras till kön** från det minnesområde som anges av käll pekaren.
 
 ### <a name="parameters"></a>Parametrar
 
-- **queue_ptr**: pekar mot en tidigare skapad meddelande kö.
-- **source_ptr**: pekar mot meddelandet.
-- **wait_option**: definierar hur tjänsten fungerar om meddelande kön är full. Vänte alternativen definieras enligt följande:
+- **queue_ptr:** Pekare till en meddelandekö som skapats tidigare.
+- **source_ptr:** Pekaren till meddelandet.
+- **wait_option:** Definierar hur tjänsten beter sig om meddelandekön är full. Väntealternativen definieras på följande sätt:
     - **TX_NO_WAIT**: (0x00000000)
     - **TX_WAIT_FOREVER**: (0xFFFFFFFF)
-    - timeout-värde: (0x00000001 till 0xFFFFFFFE)
+    - timeout-värde: (0x00000001 via 0xFFFFFFFE)
 
-    Om du väljer TX_NO_WAIT resulterar det i en omedelbar återgång från den här tjänsten oavsett om den lyckades eller inte. *Detta är det enda giltiga alternativet om tjänsten anropas från en icke-tråd. t. ex., initiering, timer eller ISR.*
+    Om TX_NO_WAIT val resulterar i en omedelbar retur från den här tjänsten oavsett om den lyckades eller inte. *Detta är det enda giltiga alternativet om tjänsten anropas från en icke-tråd; t.ex. initiering, timer eller ISR.*
 
-    Om du väljer TX_WAIT_FOREVER stoppas den anropande tråden i oändlighet tills det finns utrymme i kön.
+    Om TX_WAIT_FOREVER här alternativet pausas anropstråden på obestämd tid tills det finns utrymme i kön.
 
-    Om du väljer ett numeriskt värde (1-0xFFFFFFFE) anges det maximala antalet timer-Tick som ska förbli pausade vid väntan på plats i kön.
+    Om du väljer ett numeriskt värde (1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan du väntar på att få plats i kön.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0x00) överföringen av meddelandet har slutförts.
-- **TX_DELETED**: (0X01) meddelande kön togs bort när tråden pausades.
-- **TX_QUEUE_FULL**: (0x0B) Det gick inte att skicka meddelandet eftersom kön var full under den angivna tids perioden för att vänta.
-- **TX_WAIT_ABORTED**: (0X1A) SUS pensionen avbröts av en annan tråd, timer eller ISR.
-- TX_QUEUE_ERROR: (0x09) ogiltig pekare för meddelande kön.
-- TX_PTR_ERROR: (0x03) ogiltig käll pekare för meddelande.
-- TX_WAIT_ERROR: (0x04) ett annat wait-alternativ än TX_NO_WAIT angavs i ett anrop från en icke-tråd.
+- **TX_SUCCESS**: (0x00) Lyckad sändning av meddelande.
+- **TX_DELETED**: (0x01) Meddelandekön togs bort när tråden pausades.
+- **TX_QUEUE_FULL:**(0x0B) Tjänsten kunde inte skicka meddelandet eftersom kön var full under den angivna väntetiden.
+- **TX_WAIT_ABORTED**: (0x1A) Brytning avbröts av en annan tråd, timer eller ISR.
+- TX_QUEUE_ERROR: (0x09) Pekare för ogiltig meddelandekö.
+- TX_PTR_ERROR: (0x03) Ogiltig källpekare för meddelande.
+- TX_WAIT_ERROR: (0x04) Ett annat väntealternativ än TX_NO_WAIT har angetts för ett anrop från en icke-läst.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Ja
+Yes
 
 ### <a name="example"></a>Exempel
 
@@ -2950,7 +2950,7 @@ status =  tx_queue_send(&my_queue, my_message, TX_NO_WAIT);
 
 ## <a name="tx_queue_send_notify"></a>tx_queue_send_notify 
 
-Meddela program när ett meddelande skickas till kön
+Meddela programmet när meddelandet skickas till kön
 
 ### <a name="prototype"></a>Prototyp
 
@@ -2958,27 +2958,27 @@ Meddela program när ett meddelande skickas till kön
 UINT  tx_queue_send_notify(TX_QUEUE *queue_ptr,
         VOID (*queue_send_notify)(TX_QUEUE *));
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten registrerar en funktion för motringning av meddelanden som anropas när ett meddelande skickas till den angivna kön. Bearbetningen av aviserings återanropet definieras av programmet.
+Den här tjänsten registrerar en återanropsfunktion för meddelanden som anropas när ett meddelande skickas till den angivna kön. Bearbetningen av återanropet av meddelanden definieras av programmet.
 
 > [!NOTE]
-> Det går inte att anropa någon ThreadX SMP-API med ett uppehålls alternativ i programmets kö för att skicka meddelanden.
+> Programmets återanrop för att skicka meddelanden i kö tillåts inte att anropa något ThreadX SMP-API med ett alternativ för indragning.
 
 ### <a name="parameters"></a>Parametrar 
 
-- **queue_ptr**: pekare till kön som skapats tidigare.
-- **queue_send_notify**: pekare till programmets kö skicka meddelande funktion. Om det här värdet är TX_NULL inaktive ras meddelande.
+- **queue_ptr:** Pekare till kö som skapats tidigare.
+- **queue_send_notify:** Pekare till programmets funktion för att skicka meddelanden i kön. Om det här värdet TX_NULL inaktiveras meddelandet.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0x00) registreringen av kö-sändnings meddelande har slutförts.
-- TX_QUEUE_ERROR: (0x09) ogiltig Queue pekare.
-- TX_FEATURE_NOT_ENABLED: (0xFF) systemet kompilerades med aviserings funktioner inaktiverade.
+- **TX_SUCCESS**: (0x00) Lyckad registrering av meddelande om att kön ska skickas.
+- TX_QUEUE_ERROR: (0x09) Ogiltig köpekare.
+- TX_FEATURE_NOT_ENABLED: (0xFF) Systemet kompilerades med meddelandefunktioner inaktiverade.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
 ### <a name="example"></a>Exempel
 
@@ -3011,7 +3011,7 @@ void my_queue_send_notify(TX_QUEUE *queue_ptr)
 
 ## <a name="tx_semaphore_ceiling_put"></a>tx_semaphore_ceiling_put 
 
-Placera en instans vid räkning av semafor med tak
+Placera en instans i räkning av semaphore med tak
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3019,25 +3019,25 @@ Placera en instans vid räkning av semafor med tak
 UINT  tx_semaphore_ceiling_put(TX_SEMAPHORE *semaphore_ptr,
         ULONG ceiling);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten placerar en instans i den angivna räknaren semafor, som i verkligheten ökar inventerings semaforen med en. Om det aktuella värdet för Count-semaforen är större än eller lika med det angivna taket, kommer instansen inte att placeras och ett TX_CEILING_EXCEEDED fel kommer att returneras.
+Den här tjänsten placerar en instans i den angivna inventeringssemaforen, som i verkligheten ökar räkningen med en. Om beräknings-semaphores aktuella värde är större än eller lika med det angivna taket sätts inte instansen och ett TX_CEILING_EXCEEDED-fel returneras.
 
 ### <a name="parameters"></a>Parametrar 
 
-- **semaphore_ptr**: pekar mot tidigare skapad semafor.
-- **tak**: Max gränsen som tillåts för semaforen (giltiga värden är mellan 1 och 0xFFFFFFFF).
+- **semaphore_ptr:** Pekare till semaphore som skapats tidigare.
+- **ceiling**: Högsta tillåtna gräns för semaphore (giltiga värden sträcker sig från 1 till 0xFFFFFFFF).
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) slutförde semafor tak.
-- **TX_CEILING_EXCEEDED**: (0X21) placerings förfrågan överskrider tak.
-- TX_INVALID_CEILING: (0x22) ett ogiltigt nollvärde angavs för tak.
-- TX_SEMAPHORE_ERROR: (0x0C) ogiltig semafor-pekare.
+- **TX_SUCCESS**: (0x00) Lyckat tak för semaphore.
+- **TX_CEILING_EXCEEDED**: (0x21) Placera begäran överskrider taket.
+- TX_INVALID_CEILING: (0x22) Ett ogiltigt värde på noll angavs för tak.
+- TX_SEMAPHORE_ERROR: (0x0C) Ogiltig semaphore-pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
 ### <a name="example"></a>Exempel
 
@@ -3064,7 +3064,7 @@ status = tx_semaphore_ceiling_put(&my_semaphore, 7);
 
 ## <a name="tx_semaphore_create"></a>tx_semaphore_create
 
-Skapa inventering av semafor
+Skapa inventerings-semaphore
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3072,29 +3072,29 @@ Skapa inventering av semafor
 UINT tx_semaphore_create(TX_SEMAPHORE *semaphore_ptr,
                            CHAR *name_ptr, ULONG initial_count);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skapar en inventerings semafor för synkronisering mellan trådar. Det inledande antalet semaforer anges som en indataparameter.
+Den här tjänsten skapar en inventerings-semaphore för synkronisering mellan trådar. Det första antalet semaphore anges som en indataparameter.
 
 ### <a name="parameters"></a>Parametrar 
 
-- **semaphore_ptr**: pekar mot ett semafors kontroll block. 
-- **name_ptr**: pekar mot Semaforens namn.
-- **initial_count**: anger det inledande antalet för denna semafor. Juridiska värden sträcker sig från 0x00000000 till 0xFFFFFFFF.
+- **semaphore_ptr:** Pekare till ett semaphore-kontrollblock. 
+- **name_ptr:** Pekaren till namnet på semaphore.
+- **initial_count:** Anger det första antalet för den här semaphore. Juridiska värden sträcker sig från 0x00000000 till 0xFFFFFFFF.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad generering av semafor.
-- TX_SEMAPHORE_ERROR: (0x0C) ogiltig semafor-pekare. Antingen är pekaren NULL eller så har semaforen redan skapats.
-- TX_CALLER_ERROR: (0x13) ogiltig anropare för den här tjänsten.
+- **TX_SUCCESS**: (0x00) Lyckad semaphore-generering.
+- TX_SEMAPHORE_ERROR: (0x0C) Ogiltig semaphore-pekare. Pekaren är NULL eller så har semaphore redan skapats.
+- TX_CALLER_ERROR: (0x13) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering och trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -3126,37 +3126,37 @@ status = tx_semaphore_create(&my_semaphore,
 
 ## <a name="tx_semaphore_delete"></a>tx_semaphore_delete
 
-Ta bort inventering av semafor
+Ta bort räkning semaphore
 
 ### <a name="prototype"></a>Prototyp
 
 ```C
 UINT tx_semaphore_delete(TX_SEMAPHORE *semaphore_ptr);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar bort den angivna uppräknings semaforen. Alla trådar som pausats i väntan på en semafors instans återupptas och har fått en TX_DELETED retur status.
+Den här tjänsten tar bort den angivna inventeringssemaphore. Alla trådar som pausas i väntan på en semaphore-instans återupptas och får en TX_DELETED returnerar status.
 
 > [!IMPORTANT]
-> Programmet måste se till att en skicka avisering om återanrop för den här semaforen har slutförts (eller inaktiverats) innan du tar bort semaforen. Dessutom måste programmet förhindra all framtida användning av en borttagen semafor.
+> Programmet måste se till att ett sätt meddela återanrop för denna semaphore har slutförts (eller inaktiverats) innan du tar bort semaphore. Dessutom måste programmet förhindra all framtida användning av en borttagna semaphore.
 
 ### <a name="parameters"></a>Parametrar 
 
-- **semaphore_ptr**: pekar mot en tidigare skapad semafor.
+- **semaphore_ptr:** Pekare till en tidigare skapad semaphore.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad inventering av borttagning av semafor.
-- TX_SEMAPHORE_ERROR: (0x0C) ogiltig inventering av semafors pekare.
-- TX_CALLER_ERROR: (0x13) ogiltig anropare för den här tjänsten.
+- **TX_SUCCESS**: (0x00) Lyckad inventering semaphore-borttagning.
+- TX_SEMAPHORE_ERROR: (0x0C) Ogiltig inventering semaphore-pekare.
+- TX_CALLER_ERROR: (0x13) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Ja
+Yes
 
 ### <a name="example"></a>Exempel
 
@@ -3185,7 +3185,7 @@ status = tx_semaphore_delete(&my_semaphore);
 
 ## <a name="tx_semaphore_get"></a>tx_semaphore_get
 
-Hämta instans från semafor
+Hämta instans från att räkna semaphore
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3193,40 +3193,40 @@ Hämta instans från semafor
 UINT tx_semaphore_get(TX_SEMAPHORE *semaphore_ptr,
                           ULONG wait_option)
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar en instans (ett enda antal) från den angivna semaforen i beräkningen. Därför minskar antalet angivna semaforer med ett.
+Den här tjänsten hämtar en instans (ett enda antal) från den angivna inventeringssemaforen. Därför minskas det angivna antalet semaphore med ett.
 
 ### <a name="parameters"></a>Parametrar
 
-- **semaphore_ptr**: pekar mot en tidigare skapad inventerings semafor.
-- **wait_option**: definierar hur tjänsten fungerar om det inte finns några instanser av semaforen. det vill säga antalet semaforer är noll. Vänte alternativen definieras enligt följande:
+- **semaphore_ptr:** Pekare till en tidigare skapad inventerings-semaphore.
+- **wait_option:** Definierar hur tjänsten beter sig om det inte finns några instanser av semaphore tillgänglig. Det vill säga att antalet semaphore är noll. Väntealternativen definieras på följande sätt:
     - **TX_NO_WAIT**: (0x00000000)
     - **TX_WAIT_FOREVER**: (0xFFFFFFFF)
-    - timeout-värde: (0x00000001 till 0xFFFFFFFE)
+    - timeout-värde: (0x00000001 via 0xFFFFFFFE)
 
-    Om du väljer TX_NO_WAIT resulterar det i en omedelbar återgång från den här tjänsten oavsett om den lyckades eller inte. *Detta är det enda giltiga alternativet om tjänsten anropas från en icke-tråd. t. ex., initiering, timer eller ISR.*
+    Om TX_NO_WAIT val resulterar i en omedelbar retur från den här tjänsten oavsett om den lyckades eller inte. *Detta är det enda giltiga alternativet om tjänsten anropas från en icke-tråd; t.ex. initiering, timer eller ISR.*
 
-    Om du väljer TX_WAIT_FOREVER stoppas den anropande tråden under obestämd tid tills det finns en instans av semaforen. 
+    Om TX_WAIT_FOREVER här alternativet pausas anropstråden på obestämd tid tills en semaphore-instans är tillgänglig. 
 
-    Om du väljer ett numeriskt värde (1-0xFFFFFFFE) anges det maximala antalet timer-Tick som ska förbli pausade vid väntan på en semafors instans.
+    Om du väljer ett numeriskt värde (1-0xFFFFFFFE) anges det maximala antalet timer-tick som ska pausas medan du väntar på en semaphore-instans.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad hämtning av en semafors instans.
-- **TX_DELETED**: (0X01) inventering av semafor togs bort medan tråden pausades.
-- **TX_NO_INSTANCE**: (0x0D) Det gick inte att hämta en instans av inventerings semaforen (antalet semaforer är noll inom den angivna tiden för att vänta).
-- **TX_WAIT_ABORTED**: (0X1A) SUS pensionen avbröts av en annan tråd, timer eller ISR.
-- TX_SEMAPHORE_ERROR: (0x0C) ogiltig inventering av semafors pekare.
-- TX_WAIT_ERROR: (0x04) ett annat wait-alternativ än TX_NO_WAIT angavs i ett anrop från en icke-tråd.
+- **TX_SUCCESS**: (0x00) Lyckad hämtning av en semaphore-instans.
+- **TX_DELETED**: (0x01) Inventerings-semaphore togs bort när tråden pausades.
+- **TX_NO_INSTANCE:**(0x0D) Det gick inte att hämta en instans av räkna semaphore (semaphore-antalet är noll inom den angivna väntetiden).
+- **TX_WAIT_ABORTED**: (0x1A) Brytning avbröts av en annan tråd, timer eller ISR.
+- TX_SEMAPHORE_ERROR: (0x0C) Ogiltig inventering semaphore-pekare.
+- TX_WAIT_ERROR: (0x04) Ett annat väntealternativ än TX_NO_WAIT har angetts för ett anrop från en icke-tråd.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Ja
+Yes
 
 ### <a name="example"></a>Exempel
 
@@ -3257,7 +3257,7 @@ status =  tx_semaphore_get(&my_semaphore, TX_WAIT_FOREVER);
 
 ## <a name="tx_semaphore_info_get"></a>tx_semaphore_info_get
 
-Hämta information om semafor
+Hämta information om semaphore
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3268,34 +3268,34 @@ UINT tx_semaphore_info_get(TX_SEMAPHORE *semaphore_ptr,
                           ULONG *suspended_count,
                           TX_SEMAPHORE **next_semaphore)
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar information om den angivna semaforen.
+Den här tjänsten hämtar information om den angivna semaphore.
 
 ### <a name="parameters"></a>Parametrar
 
-- **semaphore_ptr**: pekar mot semafor-kontroll block.
-- **Name**: pekare till målet för visaren i Semaforens namn.
-- **Current_value**: pekar mot mål för den aktuella Semaforens antal.
-- **first_suspended**: pekar till målet för visaren i den tråd som är överst i listan över återkallade semaforer.
-- **suspended_count**: pekar mot mål för antalet trådar som för närvarande har pausats på denna semafor.
-- **next_semaphore**: pekaren till målet för pekaren över nästa skapade semafor.
+- **semaphore_ptr:** Pekare till semaphore-kontrollblocket.
+- **name**: Pekaren till målet för pekaren till semaphores namn.
+- **current_value:** Pekare till mål för det aktuella antalet semaphore.
+- **first_suspended:** Pekare till mål för pekaren till tråden som först finns i stängningslistan för den här semaforen.
+- **suspended_count:** Pekare till mål för antalet trådar som för närvarande pausas på den här semaphore.
+- **next_semaphore:** Pekare till mål för pekaren för nästa skapade semaphore.
 
 > [!IMPORTANT]
-> Om du anger en TX_NULL för någon parameter anges att parametern inte krävs.
+> Ange en TX_NULL för en parameter anger att parametern inte är obligatorisk.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad semafors informations hämtning.
-- TX_SEMAPHORE_ERROR: (0x0C) ogiltig semafor-pekare.
+- **TX_SUCCESS**: (0x00) Lyckad hämtning av semaphore-information.
+- TX_SEMAPHORE_ERROR: (0x0C) Ogiltig semaphore-pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -3332,7 +3332,7 @@ status =  tx_semaphore_info_get(&my_semaphore, &name,
 
 ## <a name="tx_semaphore_performance_info_get"></a>tx_semaphore_performance_info_get 
 
-Hämta information om semafor-prestanda
+Hämta information om prestanda för semaphore
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3341,33 +3341,33 @@ UINT  tx_semaphore_performance_info_get(TX_SEMAPHORE *semaphore_ptr,
         ULONG *puts, ULONG *gets,
         ULONG *suspensions, ULONG *timeouts);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar prestanda information om den angivna semaforen.
+Den här tjänsten hämtar prestandainformation om den angivna semaphore.
 
 > [!NOTE]
-> ThreadX SMP-biblioteket och programmet måste skapas med **TX_SEMAPHORE_ENABLE_PERFORMANCE_INFO** som definierats för den här tjänsten för att returnera prestanda information.
+> ThreadX SMP-biblioteket och programmet måste byggas med en TX_SEMAPHORE_ENABLE_PERFORMANCE_INFO har **definierats** för att den här tjänsten ska returnera prestandainformation.
 
 ### <a name="parameters"></a>Parametrar
 
-- **semaphore_ptr**: pekar mot tidigare skapad semafor.
-- **placerar**: pekare till målet för antalet begär Anden som utförts på denna semafor.
-- **hämtar**: pekare till målet för antalet get-begäranden som utförts på denna semafor.
-- **SUS pensioner**: pekare till målet för antalet tråd avbrott i denna semafor.
-- **tids gränser**: pekar mot målet för antalet tids gränser för tråd SUS Pension på denna semafor.
+- **semaphore_ptr:** Pekare till semaphore som skapats tidigare.
+- **puts**: Pekare till mål för antalet put-begäranden som utförts på den här semaphore.
+- **hämtar**: Pekare till mål för antalet get-begäranden som utförts på den här semaphore.
+- **jäser:** Pekare till mål för antalet trådavstängningar på den här semaforen.
+- **timeouter:** Pekare till mål för antalet timeouter för trådavstängning i den här semaphore.
 
 > [!IMPORTANT]
-> Om du anger en TX_NULL för någon parameter anges att parametern inte krävs.
+> Ange en TX_NULL för en parameter anger att parametern inte är obligatorisk.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad semafor-prestanda Hämta.
-- **TX_PTR_ERROR**: (0X03) ogiltig semafor-pekare.
-- **TX_FEATURE_NOT_ENABLED**: (0xFF) systemet har inte kompilerats med prestanda information aktive rad.
+- **TX_SUCCESS**: (0x00) Lyckat semaphore-prestanda get.
+- **TX_PTR_ERROR**: (0x03) Ogiltig semaphore-pekare.
+- **TX_FEATURE_NOT_ENABLED**: (0xFF) Systemet kompilerades inte med aktiverad prestandainformation.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
 ### <a name="example"></a>Exempel
 
@@ -3400,7 +3400,7 @@ status =  tx_semaphore_performance_info_get(&my_semaphore, &puts,
 
 ## <a name="tx_semaphore_performance_system_info_get"></a>tx_semaphore_performance_system_info_get 
 
-Hämta information om prestanda för semafor-systemet
+Hämta information om prestanda för semaphore-systemet
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3408,31 +3408,31 @@ Hämta information om prestanda för semafor-systemet
 UINT tx_semaphore_performance_system_info_get(ULONG *puts,
        ULONG *gets, ULONG *suspensions, ULONG *timeouts);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar prestanda information om alla semaforer i systemet.
+Den här tjänsten hämtar prestandainformation om alla semaforer i systemet.
 
 > [!IMPORTANT]
-> ThreadX SMP-biblioteket och programmet måste skapas med **TX_SEMAPHORE_ENABLE_PERFORMANCE_INFO** som definierats för den här tjänsten för att returnera prestanda information.
+> ThreadX SMP-biblioteket och programmet måste byggas med en TX_SEMAPHORE_ENABLE_PERFORMANCE_INFO har **definierats** för att den här tjänsten ska returnera prestandainformation.
 
 ### <a name="parameters"></a>Parametrar
 
-- **placerar**: pekar mot mål för det totala antalet begär Anden som utförts på alla semaforer.
-- **hämtar**: pekare till mål för det totala antalet get-begäranden som utförts på alla semaforer.
-- **SUS pensioner**: pekar mot mål för det totala antalet tråd SUS pensioner på alla semaforer.
-- **timeout**: pekar mot mål för det totala antalet tids gränser för tråd SUS Pension på alla semaforer.
+- **puts**: Pekare till mål för det totala antalet put-begäranden som utförts på alla semaforer.
+- **gets**: Pekare till mål för det totala antalet get-begäranden som utförts på alla semaforer.
+- **jäser:** Pekare till mål för det totala antalet tråduppstängningar på alla semaforer.
+- **timeouter:** Pekare till mål för det totala antalet trådavstängningar i alla semaforer.
 
 > [!IMPORTANT]
-> Om du anger en TX_NULL för någon parameter anges att parametern inte krävs.
+> Ange en TX_NULL för en parameter anger att parametern inte är obligatorisk.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- TX_SUCCESS: (0x00) lyckad semafor system prestanda Hämta.
-- **TX_FEATURE_NOT_ENABLED**: (0xFF) systemet har inte kompilerats med prestanda information aktive rad.
+- TX_SUCCESS: (0x00) Lyckat semaphore-systemprestanda get.
+- **TX_FEATURE_NOT_ENABLED**: (0xFF) Systemet kompilerades inte med aktiverad prestandainformation.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
 ### <a name="example"></a>Exempel
 
@@ -3464,33 +3464,33 @@ status = tx_semaphore_performance_system_info_get(&puts, &gets,
 
 ## <a name="tx_semaphore_prioritize"></a>tx_semaphore_prioritize
 
-Prioritera lista över återkallade semaforer
+Prioritera semaphore-stängningslista
 
 ### <a name="prototype"></a>Prototyp
 
 ```C
 UINT tx_semaphore_prioritize(TX_SEMAPHORE *semaphore_ptr);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten placerar den högsta prioritets tråden inaktive rad för en instans av semaforen överst i SUS pensions listan. Alla andra trådar förblir i samma FIFO-ordning som de inaktiverades.
+Den här tjänsten placerar tråden med högst prioritet som pausas för en instans av semaphore längst fram i tjänstgöringslistan. Alla andra trådar finns kvar i samma FIFO-ordning som de pausades i.
 
 ### <a name="parameters"></a>Parametrar 
 
-- **semaphore_ptr**: pekar mot en tidigare skapad semafor.
+- **semaphore_ptr:** Pekare till en tidigare skapad semaphore.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad semafor-prioritering.
-- TX_SEMAPHORE_ERROR: (0x0C) ogiltig inventering av semafors pekare.
+- **TX_SUCCESS**: (0x00) Lyckat semaphore prioritera.
+- TX_SEMAPHORE_ERROR: (0x0C) Ogiltig inventering semaphore-pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -3517,36 +3517,36 @@ status =  tx_semaphore_prioritize(&my_semaphore);
 
 ## <a name="tx_semaphore_put"></a>tx_semaphore_put
 
-Placera en instans i inventering av semafor
+Placera en instans i räkningssemaphore
 
 ### <a name="prototype"></a>Prototyp
 
 ```C
 UINT tx_semaphore_put(TX_SEMAPHORE *semaphore_ptr);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten placerar en instans i den angivna räknaren semafor, som i verkligheten ökar inventerings semaforen med en.
+Den här tjänsten placerar en instans i den angivna inventeringssemaforen, som i verkligheten ökar räkningen med en.
 
 > [!IMPORTANT]
-> Om den här tjänsten anropas när semaforen är alla (OxFFFFFFFF) gör den nya åtgärden att semaforen återställs till noll.
+> Om den här tjänsten anropas när semaphore är ettor (OxFFFFFFFF), kommer den nya put-åtgärden att göra att semaphore återställs till noll.
 
 ### <a name="parameters"></a>Parametrar
 
-- **semaphore_ptr**: pekar mot det tidigare skapade semafors kontroll blocket.
+- **semaphore_ptr:** Pekare till det tidigare skapade räknings-semaphore-kontrollblocket.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad semafor-placering.
-- TX_SEMAPHORE_ERROR: (0x0C) ogiltig pekare för att räkna semaforen.
+- **TX_SUCCESS**: (0x00) Lyckad semaphore put.
+- TX_SEMAPHORE_ERROR: (0x0C) Ogiltig pekare till att räkna semaphore.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Ja
+Yes
 
 ### <a name="example"></a>Exempel
 
@@ -3575,7 +3575,7 @@ status =  tx_semaphore_put(&my_semaphore);
 
 ## <a name="tx_semaphore_put_notify"></a>tx_semaphore_put_notify
 
-Meddela program när semaforen placeras
+Meddela programmet när semaphore sätts
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3583,27 +3583,27 @@ Meddela program när semaforen placeras
 UINT  tx_semaphore_put_notify(TX_SEMAPHORE *semaphore_ptr,
         VOID (*semaphore_put_notify)(TX_SEMAPHORE *));
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten registrerar en funktion för motringning av meddelanden som anropas när den angivna semaforen placeras. Bearbetningen av aviserings återanropet definieras av programmet.
+Den här tjänsten registrerar en funktion för återanrop av meddelanden som anropas när den angivna semaphore anges. Bearbetningen av återanropet av meddelanden definieras av programmet.
 
 > [!NOTE]
-> Det går inte att anropa någon ThreadX SMP-API med ett uppehålls alternativ i programmets SMP-motanrop.
+> Programmets återanrop av semaphore-meddelanden tillåts inte att anropa något ThreadX SMP-API med ett alternativ för indragning.
 
 ### <a name="parameters"></a>Parametrar 
 
-- **semaphore_ptr**: pekar mot tidigare skapad semafor.
-- **semaphore_put_notify**: pekar på programmets varnings funktion för semafors placering. Om det här värdet är TX_NULL inaktive ras meddelande.
+- **semaphore_ptr**: Pekare till tidigare skapad semaphore.
+- **semaphore_put_notify:** Pekare till programmets semaphore put notification-funktion. Om det här värdet TX_NULL inaktiveras meddelandet.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad registrering av semafors meddelande.
-- TX_SEMAPHORE_ERROR: (0x0C) ogiltig semafor-pekare.
-- **TX_FEATURE_NOT_ENABLED**: (0xFF) systemet kompilerades med aviserings funktioner inaktiverade.
+- **TX_SUCCESS**: (0x00) Lyckad registrering av semaphore put-meddelande.
+- TX_SEMAPHORE_ERROR: (0x0C) Ogiltig semaphore-pekare.
+- **TX_FEATURE_NOT_ENABLED**: (0xFF) Systemet kompilerades med meddelandefunktioner inaktiverade.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
 ### <a name="example"></a>Exempel
 
@@ -3637,7 +3637,7 @@ void my_semaphore_put_notify(TX_SEMAPHORE *semaphore_ptr)
 
 ## <a name="tx_thread_create"></a>tx_thread_create
 
-Skapa program tråd
+Skapa programtråd
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3649,45 +3649,45 @@ UINT tx_thread_create(TX_THREAD *thread_ptr,
                           UINT preempt_threshold, ULONG time_slice,
                           UINT auto_start);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skapar en program tråd som startar körningen vid den angivna aktivitets inmatnings funktionen. Stack, Priority, avstängningen-Threshold och Time-slice är bland de attribut som anges av indataparametrarna. Dessutom anges även det första körnings läget för tråden.
+Den här tjänsten skapar en programtråd som startar körningen vid den angivna uppgiftsinmatningsfunktionen. Stacken, prioritet, tröskelvärde för avtid och tidssegment är bland de attribut som anges av indataparametrarna. Dessutom anges det inledande körningstillståndet för tråden.
 
 ### <a name="parameters"></a>Parametrar
 
-- **thread_ptr**: pekar mot ett tråd kontroll block.
-- **name_ptr**: pekar mot namnet på tråden.
-- **entry_function**: anger den inledande C-funktionen för tråd körning. När en tråd returnerar från den här post funktionen placeras den i ett slutfört tillstånd och inaktive ras på obestämd tid.
-- **entry_input**: ett 32-bitars värde som skickas till trådens post funktion första gången den körs. Användningen av den här indatamängden fastställs exklusivt av programmet.
-- **stack_start**: Start adress för stackens minnes områden. 
-- **stack_size**: antal byte i stack minnes området. Trådens stack område måste vara tillräckligt stort för att hantera dess värsta fall funktions anrop till kapsling och lokal variabel användning.
-- **prioritet**: numerisk prioritet för tråd. Giltiga värden är mellan 0 och (TX_MAX_PRIORITES-1), där värdet 0 representerar den högsta prioriteten.
-- **preempt_threshold**: högsta prioritets nivå (0 till (TX_MAX_PRIORITIES-1)) av inaktiverade avstängningen. Endast prioriteter som är större än den här nivån tillåts för den här tråden. Värdet måste vara mindre än eller lika med den angivna prioriteten. Ett värde som är lika med tråd prioriteten inaktiverar avstängningen-Threshold.
-- **time_slice**: antalet timer-Tick som den här tråden tillåts köra innan andra redo trådar med samma prioritet ges möjlighet att köra. Observera att med avstängningen-tröskelvärdet inaktive ras tids segmentering. Legal Time-slice-värden sträcker sig från 1 till 0xFFFFFFFF (inklusive). Värdet **TX_NO_TIME_SLICE** (värdet 0) inaktiverar tids segmentering av tråden.
+- **thread_ptr:** Pekare till ett trådkontrollblock.
+- **name_ptr:** Pekare till trådens namn.
+- **entry_function:** Anger den första C-funktionen för trådkörning. När en tråd returneras från den här postfunktionen placeras den i ett slutfört tillstånd och pausas på obestämd tid.
+- **entry_input:** Ett 32-bitars värde som skickas till trådens postfunktion första gången den körs. Användningen av dessa indata bestäms uteslutande av programmet.
+- **stack_start:** Startadressen för stackens minnesområde. 
+- **stack_size:** Antal byte i stackens minnesområde. Trådens stackområde måste vara tillräckligt stort för att hantera sitt sämsta funktionsanrop för kapsling och användning av lokala variabler.
+- **priority**: Numerisk prioritet för tråden. Juridiska värden sträcker sig från 0 till (TX_MAX_PRIORITES-1), där värdet 0 representerar den högsta prioriteten.
+- **preempt_threshold:** Högsta prioritetsnivå (0 till (TX_MAX_PRIORITIES-1)) för inaktiverad avstängning. Endast prioriteringar som är högre än den här nivån tillåts att avse den här tråden. Det här värdet måste vara mindre än eller lika med den angivna prioriteten. Ett värde som är lika med trådprioritet inaktiverar tröskelvärdet för avaktivering.
+- **time_slice:** Antalet timer tick som den här tråden får köras innan andra färdiga trådar med samma prioritet får möjlighet att köras. Observera att användning av tröskelvärdet preemption inaktiverar tidsdelicering. Värdena för juridiska tidssegment sträcker sig från 1 till 0xFFFFFFFF (inklusive). Värdet för **TX_NO_TIME_SLICE** (värdet 0) inaktiverar tidsslicering av den här tråden.
 
     > [!IMPORTANT]
-    > Om du använder tids segmentering blir det en liten del av systemets kostnader. Eftersom tids segmentering bara är användbart i fall där flera trådar delar samma prioritet, ska trådar som har en unik prioritet inte tilldelas en tid-sektor.
+    > Användning av tidsdeling resulterar i en liten mängd systemkostnader. Eftersom tidssegmentering endast är användbart i fall där flera trådar delar samma prioritet, bör trådar som har en unik prioritet inte tilldelas en tidssegment.
 
-- **auto_start**: anger om tråden startar omedelbart eller om den placeras i ett uppehålls läge. Juridiska alternativ är **TX_AUTO_START** (0x01) och **TX_DONT_START** (0x00). Om TX_DONT_START anges måste programmet senare anropa tx_thread_resume för att tråden ska kunna köras.
+- **auto_start:** Anger om tråden startar omedelbart eller förs i pausat tillstånd. Juridiska alternativ **är TX_AUTO_START** (0x01) och **TX_DONT_START** (0x00). Om TX_DONT_START har angetts måste programmet senare anropa tx_thread_resume för att tråden ska kunna köras.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad tråd skapande.
-- TX_THREAD_ERROR: (0x0E) ogiltig tråd kontroll pekare. Antingen är pekaren NULL eller också har tråden redan skapats.
-- TX_PTR_ERROR: (0x03) ogiltig start adress för start punkten eller stackområdet är ogiltigt, vanligt vis NULL.
-- TX_SIZE_ERROR: (0x05) storleken på stackområdet är ogiltig. Trådar måste ha minst **TX_MINIMUM_STACK** byte för att kunna köras.
-- TX_PRIORITY_ERROR: (0x0F) ogiltig tråd prioritet, vilket är ett värde utanför intervallet (0 till (TX_MAX_PRIORITIES-1)).
-- TX_THRESH_ERROR: (0x18) ogiltig preemptionthreshold har angetts. Värdet måste vara en giltig prioritet som är mindre än eller lika med trådens inledande prioritet.
-- TX_START_ERROR: (0x10) ogiltig markering för automatisk start.
-- TX_CALLER_ERROR: (0x13) ogiltig anropare för den här tjänsten.
+- **TX_SUCCESS**: (0x00) Lyckad trådskapande.
+- TX_THREAD_ERROR: (0x0E) Ogiltig trådkontrollspekare. Pekaren är antingen NULL eller så har tråden redan skapats.
+- TX_PTR_ERROR: (0x03) Ogiltig startadress för startpunkten eller så är stackområdet ogiltigt, vanligtvis NULL.
+- TX_SIZE_ERROR: (0x05) Storleken på stackområdet är ogiltig. Trådar måste ha minst **TX_MINIMUM_STACK** byte för att köras.
+- TX_PRIORITY_ERROR: (0x0F) Ogiltig trådprioritet, vilket är ett värde utanför intervallet (0 till (TX_MAX_PRIORITIES-1)).
+- TX_THRESH_ERROR: (0x18) Ogiltig preemptionthreshold har angetts. Det här värdet måste vara en giltig prioritet som är mindre än eller lika med den inledande prioriteten i tråden.
+- TX_START_ERROR: (0x10) Ogiltigt val av automatisk start.
+- TX_CALLER_ERROR: (0x13) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering och trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Ja
+Yes
 
 ### <a name="example"></a>Exempel
 
@@ -3751,38 +3751,38 @@ VOID my_thread_entry (ULONG initial_input)
 
 ## <a name="tx_thread_delete"></a>tx_thread_delete
 
-Ta bort program tråd
+Ta bort programtråd
 
 ### <a name="prototype"></a>Prototyp
 
 ```C
 UINT tx_thread_delete(TX_THREAD *thread_ptr);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar bort den angivna program tråden. Eftersom den angivna tråden måste vara i ett avslutat eller slutfört tillstånd, kan den här tjänsten inte anropas från en tråd som försöker ta bort sig själv.
+Den här tjänsten tar bort den angivna programtråden. Eftersom den angivna tråden måste vara i ett avslutat eller slutfört tillstånd kan den här tjänsten inte anropas från en tråd som försöker ta bort sig själv.
 
 > [!IMPORTANT]
-> Det är programmets ansvar att hantera det minnes område som är associerat med trådens stack, vilket är tillgängligt när tjänsten har slutförts. Dessutom måste programmet förhindra att en borttagen tråd används.
+> Det är programmets ansvar att hantera det minnesområde som är associerat med trådens stack, som är tillgängligt när den här tjänsten har slutförts. Dessutom måste programmet förhindra användning av en borttagna tråd.
 
 ### <a name="parameters"></a>Parametrar
 
-- **thread_ptr**: pekar mot en tidigare skapad program tråd.
+- **thread_ptr:** Pekare till en tidigare skapad programtråd.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad tråd borttagning.
-- TX_THREAD_ERROR: (0x0E) ogiltig Application Thread-pekare.
-- **TX_DELETE_ERROR**: (0x11) den angivna tråden är inte i ett avslutat eller slutfört tillstånd.
-- TX_CALLER_ERROR: (0x13) ogiltig anropare för den här tjänsten.
+- **TX_SUCCESS**: (0x00) Lyckad trådborttagning.
+- TX_THREAD_ERROR: (0x0E) Ogiltig programtrådspekare.
+- **TX_DELETE_ERROR**: (0x11) Angiven tråd är inte i ett avslutat eller slutfört tillstånd.
+- TX_CALLER_ERROR: (0x13) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar och timers
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -3820,7 +3820,7 @@ status =  tx_thread_delete(&my_thread);
 
 ## <a name="tx_thread_entry_exit_notify"></a>tx_thread_entry_exit_notify
 
-Meddela programmet vid tråd inmatning och avsluta
+Meddela programmet vid trådinmatning och avsluta
 
 ### <a name="prototype"></a>Prototyp
 
@@ -3828,27 +3828,27 @@ Meddela programmet vid tråd inmatning och avsluta
 UINT  tx_thread_entry_exit_notify(TX_THREAD *thread_ptr,
         VOID (*entry_exit_notify)(TX_THREAD *, UINT));
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten registrerar en funktion för motringning av meddelanden som anropas när den angivna tråden anges eller avslutas. Bearbetningen av aviserings återanropet definieras av programmet.
+Den här tjänsten registrerar en återanropsfunktion för meddelanden som anropas när den angivna tråden anges eller avslutas. Bearbetningen av återanropet av meddelanden definieras av programmet.
 
 > [!NOTE]
-> Det går inte att anropa någon ThreadX SMP-API med ett uppehålls alternativ i programmets tråd post-eller avslutnings meddelande återanrop.
+> Programmets återanrop för trådinmatning/avslutsmeddelande tillåts inte att anropa något ThreadX SMP-API med ett stängningsalternativ.
 
 ### <a name="parameters"></a>Parametrar
 
-- **thread_ptr**: pekare till en tidigare skapad tråd.
-- **entry_exit_notify**: pekare till programmets tråd post/avslutnings meddelande funktion. Den andra parametern för funktionen post-/avslutnings meddelande anger om en post eller Exit finns. Värdet TX_THREAD_ENTRY (0x00) anger att tråden angavs, medan värdet TX_THREAD_EXIT (0x01) anger att tråden avslutades. Om det här värdet är TX_NULL inaktive ras meddelande.
+- **thread_ptr:** Pekare till tråd som skapats tidigare.
+- **entry_exit_notify:** Pekare till programmets trådinmatnings-/avslutsmeddelandefunktion. Den andra parametern i meddelandefunktionen entry/exit anger om det finns en post eller ett avslut. Värdet TX_THREAD_ENTRY (0x00) anger att tråden har angetts, medan värdet TX_THREAD_EXIT (0x01) anger att tråden har avslutats. Om det här värdet TX_NULL inaktiveras meddelandet.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad registrering av aviserings funktionen för tråd post/avslutning.
-- TX_THREAD_ERROR: (0x0E) ogiltig tråd pekare.
-- **TX_FEATURE_NOT_ENABLED (0xFF)** Systemet kompilerades med aviserings funktioner inaktiverade.
+- **TX_SUCCESS**: (0x00) Lyckad registrering av trådinmatnings-/avslutsmeddelandefunktionen.
+- TX_THREAD_ERROR: (0x0E) Ogiltig trådpekare.
+- **TX_FEATURE_NOT_ENABLED(0xFF)** Systemet kompilerades med meddelandefunktioner inaktiverade.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
 ### <a name="example"></a>Exempel
 
@@ -3896,35 +3896,35 @@ void my_entry_exit_notify(TX_THREAD *thread_ptr, UINT condition)
 
 ## <a name="tx_thread_identify"></a>tx_thread_identify
 
-Hämtar pekare till tråd som körs för tillfället
+Hämtar pekare till tråd som körs för närvarande
 
 ### <a name="prototype"></a>Prototyp
 
 ```C
 TX_THREAD* tx_thread_identify(VOID);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten returnerar en pekare till den aktuella tråden som körs. Om ingen tråd körs returnerar den här tjänsten en null-pekare.
+Den här tjänsten returnerar en pekare till den tråd som körs för närvarande. Om ingen tråd körs returnerar den här tjänsten en null-pekare.
 
 > [!IMPORTANT]
-> Om den här tjänsten anropas från en ISR representerar returvärdet den tråd som körs innan avbrotts hanteraren körs.
+> Om den här tjänsten anropas från en ISR representerar returvärdet tråden som körs innan avbrottshanteraren körs.
 
 ### <a name="parameters"></a>Parametrar
 
 Ingen
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- tråd pekare: pekare till den aktuella tråden som körs. Om ingen tråd körs TX_NULL det returnerade värdet.
+- tråd pekare: Pekare till den tråd som körs för närvarande. Om ingen tråd körs är returvärdet TX_NULL.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Trådar och ISR: er
+Trådar och ISR
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -3975,18 +3975,18 @@ UINT tx_thread_info_get(TX_THREAD *thread_ptr, CHAR **name,
                           TX_THREAD **next_thread,
                           TX_THREAD **suspended_thread);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten hämtar information om den angivna tråden.
 
 ### <a name="parameters"></a>Parametrar 
 
-- **thread_ptr**: pekar på tråd kontroll block.
-- **Name**: pekare till målet för visaren till trådens namn.
-- **tillstånd**: pekare till målet för trådens aktuella körnings tillstånd. Möjliga värden är:
+- **thread_ptr:** Pekare till trådkontrollblock.
+- **name**: Pekare till mål för pekaren till trådens namn.
+- **state**: Pekare till mål för trådens aktuella körningstillstånd. Möjliga värden är:
     - **TX_READY**: (0x00)
     - **TX_COMPLETED**: (0x01)
-    - **TX_TERMINATED**: (protokollnumret 0x02)
+    - **TX_TERMINATED**: (0x02)
     - **TX_SUSPENDED**: (0x03)
     - **TX_SLEEP**: (0x04)
     - **TX_QUEUE_SUSP**: (0x05)
@@ -3996,28 +3996,28 @@ Den här tjänsten hämtar information om den angivna tråden.
     - **TX_BYTE_MEMORY**: (0x09)
     - **TX_MUTEX_SUSP**: (0x0D)
 
-- **run_count**: pekar mot målet för trådens antal körningar. 
-- **prioritet**: pekar mot målets prioritet för tråden.
-- **preemption_threshold**: pekar mot mål för trådens avstängningen-tröskelvärde.
-- **time_slice**: pekar mot målet för trådens tids segment. 
-- **next_thread**: pekare till mål för nästa skapade tråd pekare.
-- **suspended_thread**: pekare till destination för pekare till nästa tråd i SUS pensions listan.
+- **run_count:** Pekare till mål för trådens körningsantal. 
+- **priority**: Pekare till mål för trådens prioritet.
+- **preemption_threshold:** Pekare till mål för trådens tröskelvärde för avinköp.
+- **time_slice:** Pekare till mål för trådens tidssegment. 
+- **next_thread:** Pekare till mål för nästa skapade tråd pekare.
+- **suspended_thread:** Pekare till mål för pekare till nästa tråd i stängningslistan.
 
 > [!IMPORTANT]
-> Om du anger en TX_NULL för någon parameter anges att parametern inte krävs.
+> Om du anger TX_NULL för en parameter indikerar det att parametern inte är obligatorisk.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad tråd informations hämtning.
-- TX_THREAD_ERROR: (0x0E) ogiltig tråd kontroll pekare.
+- **TX_SUCCESS**: (0x00) Lyckad trådinformationshämtning.
+- TX_THREAD_ERROR: (0x0E) Ogiltig trådkontrollspekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -4064,7 +4064,7 @@ status =  tx_thread_info_get(&my_thread, &name,
 
 ## <a name="tx_thread_performance_info_get"></a>tx_thread_performance_info_get 
 
-Hämta information om tråd prestanda
+Hämta trådprestandainformation
 
 ### <a name="prototype"></a>Prototyp
 
@@ -4076,39 +4076,39 @@ UINT  tx_thread_performance_info_get(TX_THREAD *thread_ptr,
         ULONG *relinquishes, ULONG *timeouts, ULONG *wait_aborts,
         TX_THREAD **last_preempted_by);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar prestanda information om den angivna tråden.
+Den här tjänsten hämtar prestandainformation om den angivna tråden.
 
 > [!IMPORTANT]
-> ThreadX SMP-biblioteket och programmet måste ha skapats med **TX_THREAD_ENABLE_PERFORMANCE_INFO** definierat för att den här tjänsten ska returnera prestanda information.
+> ThreadX SMP-biblioteket och programmet måste byggas **med TX_THREAD_ENABLE_PERFORMANCE_INFO** för att den här tjänsten ska returnera prestandainformation.
 
 ### <a name="parameters"></a>Parametrar 
 
-- **thread_ptr**: pekare till en tidigare skapad tråd.
-- **återupptar**: pekare till målet för antalet återupptagningar av den här tråden.
-- **SUS pensioner**: pekare till målet för antalet SUS pensioner av den här tråden.
-- **solicited_preemptions**: pekare till målet för antalet preemptions till följd av ett ThreadX API-tjänst anrop som gjorts av den här tråden.
-- **interrupt_preemptions**: pekar mot mål för antalet preemptions för den här tråden som ett resultat av avbrotts bearbetningen.
-- **priority_inversions**: pekar mot mål för antalet prioritets versioner av den här tråden.
-- **time_slices**: pekare till målet för antalet timeslices för den här tråden.
-- **låser** sig: pekare till målet för antalet trådar som utförs av den här tråden.
-- **timeout**: pekar mot målets antal tids gräns värden för tids gränsen på den här tråden.
-- **wait_aborts**: pekar mot mål för antalet väntande avbrott som utförs på den här tråden.
-- **last_preempted_by**: pekar mot mål för tråd pekaren som senast blockerade tråden.
+- **thread_ptr:** Pekare till tråd som skapats tidigare.
+- **återantaganden:** Pekare till mål för antalet återupptaganden av den här tråden.
+- **jäser:** Pekare till mål för antalet stängningar av den här tråden.
+- **solicited_preemptions**: Pekare till mål för antalet preemptions som ett resultat av ett ThreadX API-tjänstanrop som gjorts av den här tråden.
+- **interrupt_preemptions:** Pekare till mål för antalet avinkopplingar av den här tråden som ett resultat av avbrottsbearbetningen.
+- **priority_inversions:** Pekare till målet för antalet prioritetsinversioner av den här tråden.
+- **time_slices:** Pekare till mål för antalet tidslicer i den här tråden.
+- **relinquishes**: Pekare till mål för antalet trådrelinquishes som utförs av den här tråden.
+- **timeouter:** Pekare till mål för antalet tidsgränser för låsning i den här tråden.
+- **wait_aborts:** Pekare till mål för antalet väntande avbrott som utförts på den här tråden.
+- **last_preempted_by:** Pekare till mål för trådpekaren som senast avmålade den här tråden.
 
 > [!IMPORTANT]
-> Om du anger en TX_NULL för någon parameter anges att parametern inte krävs.
+> Ange en TX_NULL för en parameter anger att parametern inte är obligatorisk.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad tråd prestanda Hämta.
-- **TX_PTR_ERROR**: (0X03) ogiltig tråd pekare.
-- **TX_FEATURE_NOT_ENABLED**: (0xFF) systemet har inte kompilerats med prestanda information aktive rad.
+- **TX_SUCCESS**: (0x00) Lyckad trådprestanda get.
+- **TX_PTR_ERROR**: (0x03) Ogiltig trådpekare.
+- **TX_FEATURE_NOT_ENABLED**: (0xFF) Systemet kompilerades inte med aktiverad prestandainformation.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
 ### <a name="example"></a>Exempel
 
@@ -4159,7 +4159,7 @@ status = tx_thread_performance_info_get(&my_thread, &resumptions,
 
 ## <a name="tx_thread_performance_system_info_get"></a>tx_thread_performance_system_info_get 
 
-Hämta information om tråd system prestanda
+Hämta prestandainformation för trådsystem
 
 ### <a name="prototype"></a>Prototyp
 
@@ -4171,38 +4171,38 @@ UINT tx_thread_performance_system_info_get(ULONG *resumptions,
        ULONG *wait_aborts, ULONG *non_idle_returns,
        ULONG *idle_returns);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar prestanda information om alla trådar i systemet.
+Den här tjänsten hämtar prestandainformation om alla trådar i systemet.
 
 > [!IMPORTANT]
-> ThreadX SMP-biblioteket och programmet måste ha skapats med **TX_THREAD_ENABLE_PERFORMANCE_INFO** definierat för att den här tjänsten ska returnera prestanda information.
+> ThreadX SMP-biblioteket och programmet måste byggas med **TX_THREAD_ENABLE_PERFORMANCE_INFO** för att tjänsten ska returnera prestandainformation.
 
 ### <a name="parameters"></a>Parametrar
 
-- **återupptar**: pekar mot mål för det totala antalet trådar som återupptas.
-- **SUS pensioner**: pekar mot mål för det totala antalet tråd SUS pensioner.
-- **solicited_preemptions**: pekar mot mål för det totala antalet tråd-preemptions som ett resultat av en tråd som anropar en THREADX-API-tjänst.
-- **interrupt_preemptions**: pekar mot mål för det totala antalet tråd-preemptions som ett resultat av avbrotts bearbetningen.
-- **priority_inversions**: pekar mot mål för det totala antalet tråd prioritets versioner.
-- **time_slices**: pekar mot mål för det totala antalet tråd-Time-Slices.
-- **låser** sig: pekare till målet för det totala antalet trådar.
-- **timeout**: pekar mot mål för det totala antalet tids gränser för tråd upphängning.
-- **wait_aborts**: pekar mot mål för det totala antalet avbrott i tråden. 
-- **non_idle_returns**: pekar mot mål för antalet gånger som en tråd återgår till systemet när en annan tråd är redo att köras. 
-- **idle_returns**: pekar mot mål för antalet gånger som en tråd återgår till systemet när ingen annan tråd är redo att köras (inaktivt system).
+- **återantaganden:** Pekare till mål för det totala antalet tråd återupptas.
+- **jäser:** Pekare till mål för det totala antalet tråduppstängningar.
+- **solicited_preemptions:** Pekare till mål för det totala antalet trådförseningar som ett resultat av en tråd som anropar en ThreadX API-tjänst.
+- **interrupt_preemptions:** Pekare till mål för det totala antalet trådavbrott som ett resultat av avbrottsbearbetningen.
+- **priority_inversions:** Pekare till mål för det totala antalet trådprioritetsinversioner.
+- **time_slices:** Pekare till mål för det totala antalet trådtidssegment.
+- **relinquishes**: Pekare till mål för det totala antalet trådrelinquishes.
+- **timeouter:** Pekare till mål för det totala antalet tidsgränser för trådupplåsning.
+- **wait_aborts:** Pekare till mål för det totala antalet avbrott i trådväntan. 
+- **non_idle_returns:** Pekare till mål för antalet gånger som en tråd återgår till systemet när en annan tråd är redo att köras. 
+- **idle_returns:** Pekare till mål för antalet gånger som en tråd återgår till systemet när ingen annan tråd är redo att köras (inaktivt system).
 
 > [!IMPORTANT]
-> Om du anger en TX_NULL för någon parameter anges att parametern inte krävs.
+> Ange en TX_NULL för en parameter anger att parametern inte är obligatorisk.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad tråd system prestanda Hämta.
-- **TX_FEATURE_NOT_ENABLED**: (0xFF) systemet har inte kompilerats med prestanda information aktive rad.
+- **TX_SUCCESS**: (0x00) Successful thread system performance get.
+- **TX_FEATURE_NOT_ENABLED**: (0xFF) Systemet kompilerades inte med aktiverad prestandainformation.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
 ### <a name="example"></a>Exempel
 
@@ -4253,7 +4253,7 @@ status = tx_thread_performance_system_info_get(&resumptions,
 
 ## <a name="tx_thread_preemption_change"></a>tx_thread_preemption_change
 
-Ändra avstängningen-tröskel för program tråd
+Ändra tröskelvärdet för preemption för programtråd
 
 ### <a name="prototype"></a>Prototyp
 
@@ -4261,34 +4261,34 @@ status = tx_thread_performance_system_info_get(&resumptions,
 UINT tx_thread_preemption_change(TX_THREAD *thread_ptr,
                           UINT new_threshold, UINT *old_threshold);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten ändrar avstängningen-tröskeln för den angivna tråden. Avstängningen-Threshold förhindrar avstängningen av den angivna tråden efter trådar som är lika med eller lägre än värdet för avstängningen-tröskelvärdet.
+Den här tjänsten ändrar tröskelvärdet för preemption för den angivna tråden. Tröskelvärdet preemption-förhindrar att den angivna tråden av trådar är lika med eller mindre än tröskelvärdet preemption-threshold.
 
 > [!IMPORTANT]
-> Om du använder avstängningen-tröskelvärdet inaktive ras tids segmentering för den angivna tråden.
+> Om du använder preemption-threshold inaktiveras tidsdelicering för den angivna tråden.
 
 ### <a name="parameters"></a>Parametrar
 
-- **thread_ptr**: pekar mot en tidigare skapad program tråd.
-- **new_threshold**: ny avstängningen prioritets nivå (0 till (TX_MAX_PRIORITIES-1)).
-- **old_threshold**: pekar på en plats för att returnera föregående avstängningen-tröskelvärde.
+- **thread_ptr:** Pekare till en tidigare skapad programtråd.
+- **new_threshold:** Ny prioritetsnivå för tröskelvärdet före avbrott (0 till (TX_MAX_PRIORITIES-1)).
+- **old_threshold:** Pekare till en plats för att returnera det tidigare tröskelvärdet för preemption.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckades avstängningen-tröskel ändring.
-- TX_THREAD_ERROR: (0x0E) ogiltig Application Thread-pekare.
-- **TX_THRESH_ERROR**: (0X18) angiven ny avstängningen-tröskel är inte en giltig tråd prioritet (ett annat värde än (0 till (TX_MAX_PRIORITIES-1)) eller är större än (lägre prioritet) än den aktuella tråd prioriteten.
-- TX_PTR_ERROR: (0x03) ogiltig pekare till den tidigare preemptionthreshold lagrings platsen.
-- TX_CALLER_ERROR: (0x13) ogiltig anropare för den här tjänsten.
+- **TX_SUCCESS**: (0x00) Lyckad ändring av tröskelvärdet för avställning.
+- TX_THREAD_ERROR: (0x0E) Ogiltig programtrådspekare.
+- **TX_THRESH_ERROR:**(0x18) Angivet tröskelvärde för ny spärr är inte en giltig trådprioritet (ett annat värde än (0 till (TX_MAX_PRIORITIES-1)) eller större än (lägre prioritet) än den aktuella trådprioritet.
+- TX_PTR_ERROR: (0x03) Ogiltig pekare till tidigare lagringsplats för preemptionthreshold.
+- TX_CALLER_ERROR: (0x13) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar och timers
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Ja
+Yes
 
 ### <a name="example"></a>Exempel
 
@@ -4330,7 +4330,7 @@ status = tx_thread_preemption_change(&my_thread,
 
 ## <a name="tx_thread_priority_change"></a>tx_thread_priority_change
 
-Ändra prioritet för program tråd
+Ändra prioritet för programtråden
 
 ### <a name="prototype"></a>Prototyp
 
@@ -4338,34 +4338,34 @@ status = tx_thread_preemption_change(&my_thread,
 UINT tx_thread_priority_change(TX_THREAD *thread_ptr,
                           UINT new_priority, UINT *old_priority);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten ändrar prioriteten för den angivna tråden. Giltiga prioriteter är mellan 0 och (TX_MAX_PRIORITES-1), där 0 representerar den högsta prioritets nivån.
+Den här tjänsten ändrar prioriteten för den angivna tråden. Giltiga prioriteringar sträcker sig från 0 till (TX_MAX_PRIORITES-1), där 0 representerar den högsta prioritetsnivån.
 
 > [!IMPORTANT]
-> Avstängningen-tröskelvärdet för den angivna tråden anges automatiskt till den nya prioriteten. Om ett nytt tröskelvärde önskas måste **tx_thread_preemption_changes** tjänsten användas efter det här anropet.
+> Preemption-threshold för den angivna tråden anges automatiskt till den nya prioriteten. Om ett nytt tröskelvärde önskas måste **tx_thread_preemption_change** tjänst användas efter det här anropet.
 
 ### <a name="parameters"></a>Parametrar
 
-- **thread_ptr**: pekar mot en tidigare skapad program tråd.
-- **new_priority**: ny tråd prioritets nivå (0 till (TX_MAX_PRIORITIES-1)).
-- **old_priority**: pekar på en plats för att returnera trådens föregående prioritet.
+- **thread_ptr:** Pekare till en tidigare skapad programtråd.
+- **new_priority:** Ny trådprioritetsnivå (0 till (TX_MAX_PRIORITIES-1)).
+- **old_priority:** Pekare till en plats för att returnera trådens tidigare prioritet.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad prioritets ändring.
-- TX_THREAD_ERROR: (0x0E) ogiltig Application Thread-pekare.
-- TX_PRIORITY_ERROR: (0x0F) angiven ny prioritet är inte giltig (ett värde annat än (0 till (TX_MAX_PRIORITIES-1)).
-- TX_PTR_ERROR: (0x03) ogiltig pekare till den tidigare prioritets lagrings platsen.
-- TX_CALLER_ERROR: (0x13) ogiltig anropare för den här tjänsten.
+- **TX_SUCCESS**: (0x00) Lyckad prioritetsändring.
+- TX_THREAD_ERROR: (0x0E) Ogiltig programtrådspekare.
+- TX_PRIORITY_ERROR: (0x0F) Angiven ny prioritet är inte giltig (ett annat värde än (0 till (TX_MAX_PRIORITIES-1)).
+- TX_PTR_ERROR: (0x03) Ogiltig pekare till lagringsplats med tidigare prioritet.
+- TX_CALLER_ERROR: (0x13) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar och timers
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Ja
+Yes
 
 ### <a name="example"></a>Exempel
 
@@ -4404,35 +4404,35 @@ status = tx_thread_priority_change(&my_thread,
 
 ## <a name="tx_thread_relinquish"></a>tx_thread_relinquish
 
-Lämna kontroll till andra program trådar
+Relinquish control to other application threads (Återkänd kontroll till andra programtrådar)
 
 ### <a name="prototype"></a>Prototyp
 
 ```C
 VOID tx_thread_relinquish(VOID);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten övervärderar processor kontroll till andra trådar som är redo att köra med samma eller högre prioritet.
+Den här tjänsten lämnar över processorkontrollen till andra färdiga trådar med samma eller högre prioritet.
 
 > [!IMPORTANT]
-> Förutom att förhindra kontroll till trådar med samma prioritet, förhindrar den här tjänsten också kontroll till att tråden med högsta prioritet förhindras från att köras på grund av den aktuella trådens avstängningen-inställning.
+> Förutom att återsända kontrollen till trådar med samma prioritet, lämnar den här tjänsten även över kontrollen till den tråd med högst prioritet som förhindras från att utföra på grund av den aktuella trådens inställning för tröskelvärde för tröskel för avslut.
 
 ### <a name="parameters"></a>Parametrar
 
 Ingen
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-Inget
+Ingen
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Ja
+Yes
 
 ### <a name="example"></a>Exempel
 
@@ -4502,27 +4502,27 @@ VOID my_second_thread(ULONG thread_input)
 ```C
 UINT tx_thread_reset(TX_THREAD *thread_ptr);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten återställer den angivna tråden så att den körs vid den Start punkt som definieras vid skapandet av tråden. Tråden måste vara antingen i ett **TX_COMPLETED** eller **TX_TERMINATED** tillstånd för att den ska kunna återställas
+Den här tjänsten återställer den angivna tråden så att den körs vid startpunkten som definierades när tråden skapades. Tråden måste antingen vara i **ett TX_COMPLETED** **eller TX_TERMINATED** tillstånd för att den ska återställas
 
 > [!IMPORTANT]
 > Tråden måste återupptas för att den ska kunna köras igen.
 
 ### <a name="parameters"></a>Parametrar 
 
-- **thread_ptr**: pekar mot en tidigare skapad tråd.
+- **thread_ptr:** Pekare till en tidigare skapad tråd.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad tråd återställning.
-- **TX_NOT_DONE**: (0x20) den angivna tråden är inte i ett TX_COMPLETED eller TX_TERMINATED tillstånd.
-- TX_THREAD_ERROR: (0x0E) ogiltig tråd pekare.
-- TX_CALLER_ERROR: (0x13) ogiltig anropare för den här tjänsten.
+- **TX_SUCCESS**: (0x00) Lyckad trådåterställning.
+- **TX_NOT_DONE**: (0x20) Angiven tråd är inte i ett TX_COMPLETED eller TX_TERMINATED tillstånd.
+- TX_THREAD_ERROR: (0x0E) Ogiltig tråd pekare.
+- TX_CALLER_ERROR: (0x13) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -4556,35 +4556,35 @@ status = tx_thread_reset(&my_thread);
 
 ## <a name="tx_thread_resume"></a>tx_thread_resume
 
-Återuppta inaktive rad program tråd
+Återuppta pausad programtråd
 
 ### <a name="prototype"></a>Prototyp
 
 ```C
 UINT tx_thread_resume(TX_THREAD *thread_ptr);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten återupptar eller förbereder körning av en tråd som tidigare har avbrutits av ett ***tx_thread_suspend*** -anrop. Dessutom återupptar den här tjänsten trådar som skapats utan automatisk start.
+Den här tjänsten återupptar eller förbereder körningen av en tråd som tidigare pausas av ett ***tx_thread_suspend anrop.*** Dessutom återupptar den här tjänsten trådar som har skapats utan automatisk start.
 
 ### <a name="parameters"></a>Parametrar
 
-- **thread_ptr**: pekar mot en inaktive rad program tråd.
+- **thread_ptr: Pekare** till en pausad programtråd.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad tråd återgång.
-- **TX_SUSPEND_LIFTED**: (0x19) fastställde tidigare fördröjd avstängning.
-- TX_THREAD_ERROR: (0x0E) ogiltig Application Thread-pekare.
-- **TX_RESUME_ERROR**: (0x12) den angivna tråden har inte pausats eller har tidigare avbrutits av en annan tjänst än **_tx_thread_suspend_**.
+- **TX_SUCCESS**: (0x00) Lyckad tråd-ÅTERUPPTA.
+- **TX_SUSPEND_LIFTED**: (0x19) Tidigare fördröjd stängning lyftes.
+- TX_THREAD_ERROR: (0x0E) Ogiltig pekare för programtråd.
+- **TX_RESUME_ERROR**: (0x12) Angiven tråd pausas inte eller pausas tidigare av en annan tjänst än **_tx_thread_suspend_**.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Ja
+Yes
 
 ### <a name="example"></a>Exempel
 
@@ -4620,34 +4620,34 @@ status =  tx_thread_resume(&my_thread);
 
 ## <a name="tx_thread_sleep"></a>tx_thread_sleep
 
-Pausa den aktuella tråden för angiven tid
+Pausa aktuell tråd under angiven tid
 
 ### <a name="prototype"></a>Prototyp
 
 ```C
 UINT tx_thread_sleep(ULONG timer_ticks);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten gör att den anropande tråden pausas för det angivna antalet timer-Tick. Mängden fysiskt klock slag som är associerad med ett timer-Tick är programspecifik. Den här tjänsten kan endast anropas från en program tråd.
+Den här tjänsten gör att anropstråden pausas för det angivna antalet timer tick. Mängden fysisk tid som är associerad med ett tids tick är programspecifik. Den här tjänsten kan bara anropas från en programtråd.
 
 ### <a name="parameters"></a>Parametrar
 
-- **timer_ticks**: antalet timer-Tick för att pausa den anropande program tråden, mellan 0 och 0xffffffff. Om 0 anges returnerar tjänsten omedelbart.
+- **timer_ticks:** Antalet timer tick för att pausa den anropande programtråden från 0 till 0xFFFFFFFF. Om 0 anges returnerar tjänsten omedelbart.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad tråd ström.
-- **TX_WAIT_ABORTED**: (0X1A) SUS pensionen avbröts av en annan tråd, timer eller ISR.
-- **TX_CALLER_ERROR**: (0X13)-tjänsten anropades från en icke-tråd.
+- **TX_SUCCESS**: (0x00) Lyckad trådströmsparläge.
+- **TX_WAIT_ABORTED**: (0x1A) Brytningen avbröts av en annan tråd, timer eller ISR.
+- **TX_CALLER_ERROR**: (0x13) Tjänst som anropas från en icke-tråd.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Ja
+Yes
 
 ### <a name="example"></a>Exempel
 
@@ -4684,7 +4684,7 @@ status = tx_thread_sleep(100);
 
 ## <a name="tx_thread_smp_core_exclude"></a>tx_thread_smp_core_exclude
 
-Exkludera tråd körning i en uppsättning kärnor
+Undanta trådkörning på en uppsättning kärnor
 
 ### <a name="prototype"></a>Prototyp
 
@@ -4692,26 +4692,26 @@ Exkludera tråd körning i en uppsättning kärnor
 UINT  tx_thread_smp_core_exclude(TX_THREAD *thread_ptr,
                           ULONG exclusion_map);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen utesluter den angivna tråden från att köras på den eller de kärnor som anges i bit kartan som kallas "*exclusion_map*". Varje bit i "*exclusion_map*" representerar en kärna (bit 0 representerar Core 0 osv.). Om biten anges undantas motsvarande kärna från att köra den angivna tråden.
+Den här funktionen utesluter den angivna tråden från att köras på de kärnor som anges i bitkartan med *namnet "exclusion_map*." Varje bit i "*exclusion_map*" representerar en kärna (bit 0 representerar core 0 osv.). Om biten anges undantas motsvarande kärna från att köra den angivna tråden.
 
 > [!IMPORTANT]
-> Användningen av processor undantag kan orsaka ytterligare bearbetning i tråden till kärn mappnings logik för att hitta den optimala matchningen. Den här bearbetningen har bundits av antalet färdiga trådar.
+> Användning av processor exkludering kan orsaka ytterligare bearbetning i tråden till kärnmappningslogiken för att hitta den optimala matchningen. Bearbetningen begränsas av antalet färdiga trådar.
 
 ### <a name="parameters"></a>Parametrar 
 
-- **thread_ptr**: pekare till tråd för att ändra kärn undantag.
-- **exclusion_map**: bit karta där en Sit-bit visar att kärnan är exkluderad. Genom att ange ett 0-värde kan tråden köras på alla kärnor (standard).
+- **thread_ptr:** Pekare till tråd för att ändra kärn uteslutningen.
+- **exclusion_map:** Bitmappning där en sit bit anger att kärnan är exkluderad. Genom att ange ett 0-värde kan tråden köras på valfri kärna (standard).
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- TX_SUCCESS: (0x00) lyckad kärn undantag.
-- TX_THREAD_ERROR: (0x0E) ogiltig tråd pekare.
+- TX_SUCCESS: (0x00) Lyckad kärn uteslutning.
+- TX_THREAD_ERROR: (0x0E) Ogiltig trådpekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, ISR: er, trådar och timers
+Initiering, ISR, trådar och timers
 
 ### <a name="example"></a>Exempel
 
@@ -4727,7 +4727,7 @@ tx_thread_smp_core_exclude(&thread_0, 0x01);
 
 ## <a name="tx_thread_smp_core_exclude_get"></a>tx_thread_smp_core_exclude_get
 
-Hämtar trådens aktuella kärn undantag
+Hämtar trådens aktuella kärn uteslutning
 
 ### <a name="prototype"></a>Prototyp
 
@@ -4735,24 +4735,24 @@ Hämtar trådens aktuella kärn undantag
 UINT tx_thread_smp_core_exclude_get(TX_THREAD *thread_ptr,
                          ULONG *exclusion_map_ptr);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen returnerar den aktuella huvud undantags listan.
+Den här funktionen returnerar den aktuella kärn uteslutningslistan.
 
 ### <a name="parameters"></a>Parametrar
 
-- **thread_ptr**: pekare till tråd från vilken du vill hämta kärn undantaget.
-- **exclusion_map_ptr**: målet för den aktuella Core exkluderings-bitars kartan.
+- **thread_ptr:** Pekare till tråd som du vill hämta kärn uteslutningen från.
+- **exclusion_map_ptr:** Mål för den aktuella core exclusion bit-kartan.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- TX_SUCCESS: (0x00) lyckad hämtning av trådens kärn undantag.
-- TX_THREAD_ERROR: (0x0E) ogiltig tråd pekare.
-- TX_PTR_ERROR: (0x03) ogiltig utelämnande destinations pekare.
+- TX_SUCCESS: (0x00) Lyckad hämtning av trådens kärn uteslutning.
+- TX_THREAD_ERROR: (0x0E) Ogiltig trådpekare.
+- TX_PTR_ERROR: (0x03) Pekare för ogiltigt undantagsmål.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, ISR: er, trådar och timers
+Initiering, ISR, trådar och timers
 
 ### <a name="example"></a>Exempel
 
@@ -4769,28 +4769,28 @@ tx_thread_smp_core_exclude_get(&thread_0, &excluded_cores);
 
 ## <a name="tx_thread_smp_core_get"></a>tx_thread_smp_core_get
 
-Hämta kärnan i anroparen som körs
+Hämta den kärna som för närvarande körs av anroparen
 
 ### <a name="prototype"></a>Prototyp
 
 ```C
 UINT  tx_thread_smp_core_get(void);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen returnerar kärn-ID för den kärna som kör den här tjänsten.
+Den här funktionen returnerar kärn-ID:t för den kärna som kör den här tjänsten.
 
 ### <a name="parameters"></a>Parametrar
 
 Ingen
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- core_id: ID för den aktuella körnings kärnan (0 till TX_THREAD_SMP_MAX_CORES-1)
+- core_id: ID för den kärna som körs för närvarande, (0 till TX_THREAD_SMP_MAX_CORES-1)
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, ISR: er, trådar och timers
+Initiering, ISR, trådar och timers
 
 ### <a name="example"></a>Exempel
 
@@ -4808,32 +4808,32 @@ core = tx_thread_smp_core_get();
 
 ## <a name="tx_thread_stack_error_notify"></a>tx_thread_stack_error_notify
 
-Registrera återanrop för tråds tack rings meddelande
+Återanrop av meddelande om fel vid registrering av trådstack
 
 ### <a name="prototype"></a>Prototyp
 
 ```C
 UINT tx_thread_stack_error_notify(VOID (*error_handler)(TX_THREAD *));
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten registrerar en funktion för motringning av meddelanden för hantering av tråds tack fel. När ThreadX SMP identifierar ett tråds tack fel under körningen, anropar den denna aviserings funktion för att bearbeta felet. Bearbetningen av felet har definierats fullständigt av programmet. Allt från att pausa den överträdande tråden för att återställa hela systemet kan göras.
+Den här tjänsten registrerar en återanropsfunktion för meddelanden för hantering av fel i trådstacken. När ThreadX SMP identifierar ett trådstackfel under körningen anropas den här meddelandefunktionen för att bearbeta felet. Bearbetningen av felet definieras helt av programmet. Allt från att pausa den bryta tråden till att återställa hela systemet kan göras.
 
 > [!IMPORTANT]
-> ThreadX SMP-biblioteket måste ha skapats med **TX_ENABLE_STACK_CHECKING** definierat för att den här tjänsten ska returnera prestanda information.
+> ThreadX SMP-biblioteket måste byggas **TX_ENABLE_STACK_CHECKING** definieras för att tjänsten ska returnera prestandainformation.
 
 ### <a name="parameters"></a>Parametrar
 
-- **error_handler**: pekar mot programmets stack fel hanterings funktion. Om det här värdet är TX_NULL inaktive ras meddelandet.
+- **error_handler:** Pekare till programmets felhanteringsfunktion för stacken. Om det här TX_NULL inaktiveras meddelandet.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad tråd återställning.
-- **TX_FEATURE_NOT_ENABLED**: (0xFF) systemet har inte kompilerats med prestanda information aktive rad.
+- **TX_SUCCESS**: (0x00) Lyckad trådåterställning.
+- **TX_FEATURE_NOT_ENABLED**: (0xFF) Systemet kompilerades inte med aktiverad prestandainformation.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
 ### <a name="example"></a>Exempel
 
@@ -4868,40 +4868,40 @@ status =  tx_thread_stack_error_notify(my_stack_error_handler);
 
 ## <a name="tx_thread_suspend"></a>tx_thread_suspend
 
-Pausa program tråd
+Pausa programtråd
 
 ### <a name="prototype"></a>Prototyp
 
 ```C
 UINT tx_thread_suspend(TX_THREAD *thread_ptr);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten pausar den angivna program tråden. En tråd kan anropa den här tjänsten för att inaktivera den.
+Den här tjänsten pausar den angivna programtråden. En tråd kan anropa den här tjänsten för att pausa sig själv.
 
 > [!IMPORTANT]
-> Om den angivna tråden redan har pausats av en annan anledning hålls denna SUS Pension internt tills den föregående uppskjutningen har lyfts upp. När detta sker utförs denna avbrytande avstängning av den angivna tråden. Ytterligare avstängnings begär Anden utan tillstånd har ingen påverkan.
+> Om den angivna tråden redan har pausats av en annan orsak, hålls den här uppstängningen internt tills den tidigare uppstängningen har lyfts. I så fall utförs den här inställna avstängningen av den angivna tråden. Ytterligare villkorslösa begäranden om indragning har ingen effekt.
 
-Efter inaktive rad måste tråden återupptas genom att ***tx_thread_resume*** köras igen.
+När tråden har pausats måste den återupptas ***av*** tx_thread_resume köras igen.
 
 ## <a name="parameters"></a>Parametrar
 
-- **thread_ptr**: pekar mot en program tråd.
+- **thread_ptr**: Pekare till en programtråd.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0x00) en lyckad tråd har pausats.
-- TX_THREAD_ERROR: (0x0E) ogiltig Application Thread-pekare.
-- **TX_SUSPEND_ERROR**: (0x14) den angivna tråden är i ett avslutat eller slutfört tillstånd.
-- TX_CALLER_ERROR: (0x13) ogiltig anropare för den här tjänsten.
+- **TX_SUCCESS**: (0x00) Lyckad tråd paus.
+- TX_THREAD_ERROR: (0x0E) Ogiltig pekare för programtråd.
+- **TX_SUSPEND_ERROR**: (0x14) Angiven tråd är i ett avslutat eller slutfört tillstånd.
+- TX_CALLER_ERROR: (0x13) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Ja
+Yes
 
 ### <a name="example"></a>Exempel
 
@@ -4937,40 +4937,40 @@ status = tx_thread_suspend(&my_thread);
 
 ## <a name="tx_thread_terminate"></a>tx_thread_terminate
 
-Avslutar program tråd
+Avslutar programtråden
 
 ### <a name="prototype"></a>Prototyp
 
 ```C
 UINT tx_thread_terminate(TX_THREAD *thread_ptr);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten avslutar den angivna program tråden oavsett om tråden är inaktive rad eller inte. En tråd kan anropa den här tjänsten för att avsluta sig själv.
+Den här tjänsten avslutar den angivna programtråden oavsett om tråden pausas eller inte. En tråd kan anropa den här tjänsten för att avsluta sig själv.
 
 > [!IMPORTANT]
-> Efter att ha avslut ATS måste tråden återställas för att den ska kunna köras igen.
+> När den har avslutats måste tråden återställas för att den ska kunna köras igen.
 
 > [!WARNING]
-> Det är programmets ansvar att se till att tråden är i ett tillstånd som är lämpligt för uppsägning. En tråd bör till exempel inte avslutas under kritisk program bearbetning eller i andra komponenter för mellanprogram där den kan lämna sådan bearbetning i ett okänt tillstånd.
+> Det är programmets ansvar att se till att tråden är i ett tillstånd som är lämpligt för avslutning. Till exempel bör en tråd inte avslutas under kritisk programbearbetning eller inuti andra mellanprogramkomponenter där den kan lämna sådan bearbetning i ett okänt tillstånd.
 
 ### <a name="parameters"></a>Parametrar
 
-- **thread_ptr**: pekar på program tråd.
+- **thread_ptr:** Pekare till programtråd.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad tråd avslutas.
-- TX_THREAD_ERROR: (0x0E) ogiltig Application Thread-pekare.
-- TX_CALLER_ERROR: (0x13) ogiltig anropare för den här tjänsten.
+- **TX_SUCCESS**: (0x00) Lyckad tråd avslutas.
+- TX_THREAD_ERROR: (0x0E) Ogiltig pekare för programtråd.
+- TX_CALLER_ERROR: (0x13) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar och timers
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Ja
+Yes
 
 ### <a name="example"></a>Exempel
 
@@ -5006,7 +5006,7 @@ status =  tx_thread_terminate(&my_thread);
 
 ## <a name="tx_thread_time_slice_change"></a>tx_thread_time_slice_change
 
-Ändra tid – sektor för program tråd
+Ändrar tidssegmentet för programtråden
 
 ### <a name="prototype"></a>Prototyp
 
@@ -5014,33 +5014,33 @@ status =  tx_thread_terminate(&my_thread);
 UINT tx_thread_time_slice_change(TX_THREAD *thread_ptr,
                           ULONG new_time_slice, ULONG *old_time_slice);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten ändrar tids segmentet för den angivna program tråden. Om du väljer en tids gräns för en tråd är det inte säkert att det kör fler än det angivna antalet timer-Tick innan andra trådar av samma eller högre prioritet har möjlighet att köra.
+Den här tjänsten ändrar tidssegmentet för den angivna programtråden. Att välja en tidssegment för en tråd garanterar att den inte kör mer än det angivna antalet timer tick innan andra trådar med samma eller högre prioritet har möjlighet att köras.
 
 > [!IMPORTANT]
-> Om du använder avstängningen-tröskelvärdet inaktive ras tids segmentering för den angivna tråden.
+> Om du använder tröskelvärdet preemption-inaktiveras tidsdelicering för den angivna tråden.
 
 ### <a name="parameters"></a>Parametrar
 
-- **thread_ptr**: pekar på program tråd.
-- **new_time_slice**: nytt tids segment värde. Giltiga värden är TX_NO_TIME_SLICE och numeriska värden från 1 till 0xFFFFFFFF.
-- **old_time_slice**: pekar på plats för lagring av föregående timeslice-värde för den angivna tråden.
+- **thread_ptr:** Pekare till programtråd.
+- **new_time_slice:** Nytt tidssegmentvärde. Juridiska värden omfattar TX_NO_TIME_SLICE numeriska värden från 1 till 0xFFFFFFFF.
+- **old_time_slice:** Pekare till plats för att lagra det tidigare tidsliceringsvärdet för den angivna tråden.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) slutförd Time-slice-chans.
-- TX_THREAD_ERROR: (0x0E) ogiltig Application Thread-pekare.
-- TX_PTR_ERROR: (0x03) ogiltig pekare till föregående tid – sektor lagrings plats.
-- TX_CALLER_ERROR: (0x13) ogiltig anropare för den här tjänsten.
+- **TX_SUCCESS**: (0x00) Lyckad tidssegmentchans.
+- TX_THREAD_ERROR: (0x0E) Ogiltig pekare för programtråd.
+- TX_PTR_ERROR: (0x03) Ogiltig pekare till lagringsplats för tidigare tidssegment.
+- TX_CALLER_ERROR: (0x13) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Trådar och timers
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -5083,7 +5083,7 @@ status = tx_thread_time_slice_change(&my_thread, 20,
 
 ## <a name="tx_thread_wait_abort"></a>tx_thread_wait_abort
 
-Avbryt avstängning av angiven tråd
+Avbryt instängning av angiven tråd
 
 ### <a name="prototype"></a>Prototyp
 
@@ -5091,30 +5091,30 @@ Avbryt avstängning av angiven tråd
 UINT tx_thread_wait_abort(TX_THREAD *thread_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten avbryter vilo läge eller andra objekt avbrott i den angivna tråden. Om vänte tiden avbryts returneras ett TX_WAIT_ABORTED-värde från den tjänst som tråden väntade på.
+Den här tjänsten avbryter viloläget eller något annat objekt som avbryter den angivna tråden. Om väntetiden avbryts returneras TX_WAIT_ABORTED värde från den tjänst som tråden väntade på.
 
 > [!IMPORTANT]
-> Den här tjänsten frigör inte explicit avstängning som görs av tjänsten tx_thread_suspend.
+> Den här tjänsten frigör inte explicit stängning som görs av tx_thread_suspend tjänsten.
 
 ### <a name="parameters"></a>Parametrar
 
-- **thread_ptr**: pekar mot en tidigare skapad program tråd.
+- **thread_ptr:** Pekare till en tidigare skapad programtråd.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad tråd väntan avbryts.
-- TX_THREAD_ERROR: (0x0E) ogiltig Application Thread-pekare.
-- **TX_WAIT_ABORT_ERROR**: (0x1B) den angivna tråden är inte i ett vänte läge.
+- **TX_SUCCESS**: (0x00) Lyckad trådvänte avbryts.
+- TX_THREAD_ERROR: (0x0E) Ogiltig pekare för programtråd.
+- **TX_WAIT_ABORT_ERROR**: (0x1B) Angiven tråd är inte i väntetillstånd.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Ja
+Yes
 
 ### <a name="example"></a>Exempel
 
@@ -5151,35 +5151,35 @@ status =  tx_thread_wait_abort(&my_thread);
 
 ## <a name="tx_time_get"></a>tx_time_get
 
-Hämtar aktuell tid
+Hämtar den aktuella tiden
 
 ### <a name="prototype"></a>Prototyp
 
 ```C
 ULONG tx_time_get(VOID);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten returnerar innehållet i den interna system klockan. Varje timertick ökar den interna system klockan med ett. System klockan är inställd på noll under initieringen och kan ändras till ett särskilt värde av tjänsten ***tx_time_set***.
+Den här tjänsten returnerar innehållet i den interna systemklockan. Varje timertick ökar den interna systemklockan med en. Systemklockan är inställd på noll under initieringen och kan ändras till ett specifikt värde av tjänsten ***tx_time_set***.
 
 > [!IMPORTANT]
-> Den faktiska tiden som varje timer-Tick representerar är programspecifik.
+> Den faktiska tid som varje timer tick representerar är programspecifik.
 
 ### <a name="parameters"></a>Parametrar
 
 Ingen
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- system klock streck: värde för intern, kostnads fri körning, system klocka.
+- systemklocka tick: Värdet för den interna, kostnadsfria körningen, systemklockan.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -5205,28 +5205,28 @@ Anger aktuell tid
 ```C
 VOID tx_time_set(ULONG new_time);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten anger den interna system klockan för det angivna värdet. Varje timer-Ticket ökar den interna system klockan med ett.
+Den här tjänsten anger den interna systemklockan till det angivna värdet. Varje timer-tick ökar den interna systemklockan med en.
 
 > [!IMPORTANT]
-> Den faktiska tiden som varje timer-Tick representerar är programspecifik.
+> Den faktiska tid som varje timer tick representerar är programspecifik.
 
 ### <a name="parameters"></a>Parametrar
 
-- **new_time**: en ny tid för att ställa system klockan, giltiga värden är mellan 0 och 0xffffffff.
+- **new_time:** Ny tid att placera i systemklockan, juridiska värden sträcker sig från 0 till 0xFFFFFFFF.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-Inget
+Ingen
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Trådar, timers och ISR: er
+Trådar, timers och ISR:er
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -5243,37 +5243,37 @@ tx_time_set(0x1234);
 
 ## <a name="tx_timer_activate"></a>tx_timer_activate
 
-Aktivera program-timer
+Aktivera programtimer
 
 ### <a name="prototype"></a>Prototyp
 
 ```C
 UINT tx_timer_activate(TX_TIMER *timer_ptr);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten aktiverar den angivna program-timern. Utgångs rutinerna för timers som går ut samtidigt körs i den ordning som de aktiverades.
+Den här tjänsten aktiverar den angivna programtimern. Förfallorutinerna för timers som upphör att gälla samtidigt körs i den ordning som de aktiverades.
 
 > [!NOTE]
-> Att en förfallen timer med en bild måste återställas via **tx_timer_change** innan den kan aktive ras igen.
+> Att en utgången one-shot-timer måste återställas **via tx_timer_change** innan den kan aktiveras igen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **timer_ptr**: pekar mot en tidigare skapad program-timer.
+- **timer_ptr**: Pekare till en tidigare skapad programtimer.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad aktivering av programtimer.
-- **TX_TIMER_ERROR**: (0X15) ogiltig Application timer-pekare.
-- **TX_ACTIVATE_ERROR**: (0X17) timern var redan aktiv eller är en timer för en bild som redan har upphört att gälla.
+- **TX_SUCCESS**: (0x00) Lyckad programtimeraktivering.
+- **TX_TIMER_ERROR**: (0x15) Ogiltig pekare för programtimer.
+- **TX_ACTIVATE_ERROR:**(0x17) Timern var redan aktiv eller är en one-shot-timer som redan har gått ut.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -5300,7 +5300,7 @@ status = tx_timer_activate(&my_timer);
 
 ## <a name="tx_timer_change"></a>tx_timer_change
 
-Ändra programmets timer
+Ändra programtimer
 
 ### <a name="prototype"></a>Prototyp
 
@@ -5308,36 +5308,36 @@ status = tx_timer_activate(&my_timer);
 UINT tx_timer_change(TX_TIMER *timer_ptr,
                           ULONG initial_ticks, ULONG reschedule_ticks);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten ändrar utgångs egenskaperna för den angivna program-timern. Timern måste inaktive ras innan den här tjänsten anropas.
+Den här tjänsten ändrar förfalloegenskaperna för den angivna programtimern. Timern måste inaktiveras innan den här tjänsten anropas.
 
 > [!IMPORTANT]
-> Ett anrop till tjänsten **tx_timer_activate** krävs efter den här tjänsten för att starta timern igen.
+> Ett anrop till **tx_timer_activate tjänsten** krävs efter den här tjänsten för att starta timern igen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **timer_ptr**: pekar mot ett timer Control-Block.
-- **initial_ticks**: anger det ursprungliga antalet Tick för förfallo datum för timer. Giltiga värden är mellan 1 och 0xFFFFFFFF.
-- **reschedule_ticks**: anger antalet Tick för alla timer-förfaller efter den första. En noll för den här parametern gör timern till en timer med en bild. Annars, för periodiska timers, är de juridiska värdena mellan 1 och 0xFFFFFFFF.
+- **timer_ptr:** Pekare till ett timerkontrollblock.
+- **initial_ticks:** Anger det första antalet tick för timerförfallotid. Juridiska värden sträcker sig från 1 till 0xFFFFFFFF.
+- **reschedule_ticks:** Anger antalet tick för alla timerförfallotid efter den första. En nolla för den här parametern gör timern till en enslagstimer. För periodiska timers är annars juridiska värden mellan 1 och 0xFFFFFFFF.
 
    > [!NOTE]
-   > Att en förfallen timer med en bild måste återställas via **tx_timer_change** innan den kan aktive ras igen.
+   > Att en utgången one-shot-timer måste återställas **via tx_timer_change** innan den kan aktiveras igen.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad ändring av programtimern.
-- TX_TIMER_ERROR: (0x15) ogiltig Application timer-pekare.
-- TX_TICK_ERROR: (0x16) ogiltigt värde (noll) angavs för inledande Tick.
-- TX_CALLER_ERROR: (0x13) ogiltig anropare för den här tjänsten.
+- **TX_SUCCESS**: (0x00) Lyckad ändring av programtimer.
+- TX_TIMER_ERROR: (0x15) Ogiltig pekare för programtimer.
+- TX_TICK_ERROR: (0x16) Ogiltigt värde (noll) har angetts för inledande tick.
+- TX_CALLER_ERROR: (0x13) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Trådar, timers och ISR: er
+Trådar, timers och ISR:er
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -5378,39 +5378,39 @@ UINT tx_timer_create(TX_TIMER *timer_ptr, CHAR *name_ptr,
                           ULONG expiration_input, ULONG initial_ticks,
                           ULONG reschedule_ticks, UINT auto_activate)
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skapar en programtimer med angiven förfallo funktion och periodisk.
+Den här tjänsten skapar en programtimer med den angivna förfallofunktionen och periodisk.
 
 ### <a name="parameters"></a>Parametrar
 
-- **timer_ptr**: pekar mot ett timer Control-Block
-- **name_ptr**: pekar mot namnet på timern.
-- **expiration_function**: program funktion som anropas när timern upphör att gälla.
-- **expiration_input**: indatamängden för att skicka till Expires-funktionen när timern upphör att gälla.
-- **initial_ticks**: anger det ursprungliga antalet Tick för förfallo datum för timer. Giltiga värden är mellan 1 och 0xFFFFFFFF.
-- **reschedule_ticks**: anger antalet Tick för alla timer-förfaller efter den första. En noll för den här parametern gör timern till en timer med en bild. Annars, för periodiska timers, är de juridiska värdena mellan 1 och 0xFFFFFFFF.
+- **timer_ptr:** Pekare till ett kontrollblock för timer
+- **name_ptr:** Pekare till namnet på timern.
+- **expiration_function:** Programfunktion som anropas när timern upphör att gälla.
+- **expiration_input: Indata** som ska överföras till förfallofunktionen när timern upphör att gälla.
+- **initial_ticks:** Anger det första antalet tick för timerförfallotid. Juridiska värden sträcker sig från 1 till 0xFFFFFFFF.
+- **reschedule_ticks:** Anger antalet tick för alla timerförfallotid efter den första. En nolla för den här parametern gör timern till en enslagstimer. För periodiska timers är annars juridiska värden mellan 1 och 0xFFFFFFFF.
 
    > [!NOTE]
-   > När en timer för en bild har gått ut måste den återställas via tx_timer_change innan den kan aktive ras igen.
+   > När en one-shot-timer går ut måste den återställas via tx_timer_change innan den kan aktiveras igen.
 
-- **auto_activate**: anger om timern aktive ras automatiskt när den skapas. Om det här värdet är **TX_AUTO_ACTIVATE** (0x01) blir timern aktiv. Annars, om värdet **TX_NO_ACTIVATE** (0x00) är markerat, skapas timern i ett icke-aktivt tillstånd. I det här fallet är ett efterföljande **_tx_timer_activate_** tjänst anrop nödvändigt för att hämta den timer som faktiskt startades.
+- **auto_activate:** Anger om timern aktiveras automatiskt när den skapas. Om det här **TX_AUTO_ACTIVATE** (0x01) aktiveras timern. Om annars värdet **TX_NO_ACTIVATE** (0x00) har valts skapas timern i ett icke-aktivt tillstånd. I det här fallet krävs **_tx_timer_activate_** efterföljande tjänstsamtal för att få igång timern.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckad programgenerering av program.
-- TX_TIMER_ERROR: (0x15) ogiltig Application timer-pekare. Antingen är pekaren NULL eller också har timern redan skapats.
-- TX_TICK_ERROR: (0x16) ogiltigt värde (noll) angavs för inledande Tick.
-- TX_ACTIVATE_ERROR: (0x17) ogiltig aktivering har valts.
-- TX_CALLER_ERROR: (0x13) ogiltig anropare för den här tjänsten.
+- **TX_SUCCESS**: (0x00) Det går att skapa en programtimer.
+- TX_TIMER_ERROR: (0x15) Ogiltig pekare för programtimer. Pekaren är antingen NULL eller så har timern redan skapats.
+- TX_TICK_ERROR: (0x16) Ogiltigt värde (noll) har angetts för inledande tick.
+- TX_ACTIVATE_ERROR: (0x17) Ogiltig aktivering har valts.
+- TX_CALLER_ERROR: (0x13) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering och trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -5443,7 +5443,7 @@ status =  tx_timer_create(&my_timer,"my_timer_name",
 
 ## <a name="tx_timer_deactivate"></a>tx_timer_deactivate
 
-Inaktivera Application timer
+Inaktivera programtimer
 
 ### <a name="prototype"></a>Prototyp
 
@@ -5451,26 +5451,26 @@ Inaktivera Application timer
 UINT tx_timer_deactivate(TX_TIMER *timer_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten inaktiverar den angivna programtimern. Om timern redan är inaktive rad har den här tjänsten ingen påverkan.
+Den här tjänsten inaktiverar den angivna programtimern. Om timern redan är inaktiverad har den här tjänsten ingen effekt.
 
 ### <a name="parameters"></a>Parametrar 
 
-- **timer_ptr**: pekar mot en tidigare skapad program-timer.
+- **timer_ptr:** Pekare till en tidigare skapad programtimer.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) slutförde inaktive ring av program.
-- TX_TIMER_ERROR: (0x15) ogiltig Application timer-pekare.
+- **TX_SUCCESS**: (0x00) Lyckad inaktivering av programtimer.
+- TX_TIMER_ERROR: (0x15) Ogiltig pekare för programtimer.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -5497,37 +5497,37 @@ status =  tx_timer_deactivate(&my_timer);
 
 ## <a name="tx_timer_delete"></a>tx_timer_delete
 
-Ta bort program timer
+Ta bort programtimer
 
 ### <a name="prototype"></a>Prototyp
 
 ```C
 UINT tx_timer_delete(TX_TIMER *timer_ptr);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar bort den angivna program-timern.
+Den här tjänsten tar bort den angivna programtimern.
 
 > [!IMPORTANT]
-> Det är programmets ansvar att förhindra användning av en borttagen timer.
+> Det är programmets ansvar att förhindra användning av en borttagna timer.
 
 ### <a name="parameters"></a>Parametrar 
 
-- **timer_ptr**: pekar mot en tidigare skapad program-timer.
+- **timer_ptr:** Pekare till en tidigare skapad programtimer.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0x00) en slutförd borttagning av program timer.
-- TX_TIMER_ERROR: (0x15) ogiltig Application timer-pekare.
-- TX_CALLER_ERROR: (0x13) ogiltig anropare för den här tjänsten.
+- **TX_SUCCESS**: (0x00) Borttagning av programtimer lyckades.
+- TX_TIMER_ERROR: (0x15) Ogiltig pekare för programtimer.
+- TX_CALLER_ERROR: (0x13) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -5564,34 +5564,34 @@ UINT tx_timer_info_get(TX_TIMER *timer_ptr, CHAR **name,
                           ULONG *reschedule_ticks,
                           TX_TIMER **next_timer)
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar information om den angivna program-timern.
+Den här tjänsten hämtar information om den angivna programtimern.
 
 ### <a name="parameters"></a>Parametrar
 
-- **timer_ptr**: pekar mot en tidigare skapad program-timer.
-- **Name**: pekare till målet för visaren till timerns namn.
-- **aktiv**: pekare till målet för den timer-aktiva indikeringen. Om timern är inaktiv eller om den här tjänsten anropas från själva timern returneras ett TX_FALSE-värde. Annars returneras ett TX_TRUE-värde om timern är aktiv.
-- **remaining_ticks**: pekar mot mål för antalet timer-Tick kvar innan timern upphör att gälla.
-- **reschedule_ticks**: pekar mot mål för antalet timer-Tick som ska användas för att automatiskt schemalägga denna timer. Om värdet är noll är timern en One-bild och kommer inte att omplaneras.
-- **next_timer**: pekar på destinationen för visaren för nästa skapade program-timer.
+- **timer_ptr:** Pekare till en tidigare skapad programtimer.
+- **name**: Pekare till mål för pekaren till timerns namn.
+- **active**: Pekare till mål för den aktiva timerindikeringen. Om timern är inaktiv eller om den här tjänsten anropas från själva timern returneras TX_FALSE värde. Om timern är aktiv returneras annars TX_TRUE värde.
+- **remaining_ticks:** Pekare till mål för det antal timer tick som återstår innan timern upphör att gälla.
+- **reschedule_ticks:** Pekare till mål för antalet timer tick som ska användas för att automatiskt omplanera den här timern. Om värdet är noll är timern ett försök och kommer inte att omplaneras.
+- **next_timer:** Pekare till mål för pekaren för nästa skapade programtimer.
 
 > [!NOTE]
-> Om du anger en TX_NULL för någon parameter anges att parametern inte krävs.
+> Om du anger TX_NULL för en parameter indikerar det att parametern inte är obligatorisk.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0x00) information om slutförd timer-information.
-- TX_TIMER_ERROR: (0x15) ogiltig Application timer-pekare.
+- **TX_SUCCESS**: (0x00) Lyckad timerinformationshämtning.
+- TX_TIMER_ERROR: (0x15) Ogiltig pekare för programtimer.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
-### <a name="preemption-possible"></a>Avstängningen möjlig
+### <a name="preemption-possible"></a>Avtagande möjlig
 
-Inga
+No
 
 ### <a name="example"></a>Exempel
 
@@ -5627,7 +5627,7 @@ status =  tx_timer_info_get(&my_timer, &name,
 
 ## <a name="tx_timer_performance_info_get"></a>tx_timer_performance_info_get 
 
-Hämta information om timer-prestanda
+Hämta information om timerprestanda
 
 ### <a name="prototype"></a>Prototyp
 
@@ -5637,34 +5637,34 @@ UINT  tx_timer_performance_info_get(TX_TIMER *timer_ptr,
         ULONG *deactivates, ULONG *expirations,
         ULONG *expiration_adjusts);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar prestanda information om den angivna program tids gränsen.
+Den här tjänsten hämtar prestandainformation om den angivna programtimern.
 
 > [!IMPORTANT]
-> ThreadX SMP-biblioteket och programmet måste skapas med **TX_TIMER_ENABLE_PERFORMANCE_INFO** som definierats för den här tjänsten för att returnera prestanda information.
+> ThreadX SMP-biblioteket och programmet måste byggas med en TX_TIMER_ENABLE_PERFORMANCE_INFO har **definierats** för att den här tjänsten ska returnera prestandainformation.
 
 ### <a name="parameters"></a>Parametrar 
 
-- **timer_ptr**: pekare till tidigare skapad timer.
-- **aktiverar**: pekar mot mål för antalet aktiverings begär Anden som utförts i denna timer.
-- **återaktiverar**: pekare till målet för antalet automatiska återaktiveringar som utförs på denna periodiska timer.
-- **inaktive ras**: pekare till målet för antalet förfrågningar om inaktivitet som utförts på denna timer.
-- **förfaller**: pekar mot mål för antalet förfallo datum för den här timern.
-- **expiration_adjusts**: pekar mot mål för antalet interna utgångs justeringar som utförts i denna timer. De här justeringarna görs i den tids lösa bearbetningen för timers som är större än standard storleken för timer-listan (som standard timers med förfallo datum som är större än 32 Tick).
+- **timer_ptr:** Pekare till timern du skapade tidigare.
+- **aktiverar:** Pekare till mål för antalet aktiveringsbegäranden som utförts på den här timern.
+- **återaktiverar:** Pekare till mål för antalet automatiska återaktiveringar som utförts på den periodiska timern.
+- **inaktiverar**: Pekare till mål för antalet inaktiveringsbegäranden som utförts på den här timern.
+- **förfallotid:** Pekare till mål för antalet förfallotid för den här timern.
+- **expiration_adjusts:** Pekare till mål för antalet interna förfallojusteringar som utförts på den här timern. Dessa justeringar görs i timeravbrottsbearbetningen för timers som är större än standardstorleken för timerlistan (som standardtimer med förfallotidsvärden som är större än 32 tick).
 
 > [!IMPORTANT]
-> Om du anger en TX_NULL för vilken parameter som helst är parametern inte obligatorisk.
+> Om du anger TX_NULL en parameter anger det att parametern inte krävs.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0x00) prestanda för slutförd timer.
-- **TX_PTR_ERROR**: (0X03) ogiltig timer-pekare.
-- **TX_FEATURE_NOT_ENABLED**: (0xFF) systemet har inte kompilerats med prestanda information aktive rad.
+- **TX_SUCCESS**: (0x00) Lyckad timerprestanda get.
+- **TX_PTR_ERROR**: (0x03) Ogiltig timerpekare.
+- **TX_FEATURE_NOT_ENABLED**: (0xFF) Systemet kompilerades inte med aktiverad prestandainformation.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
 ### <a name="example"></a>Exempel
 
@@ -5697,7 +5697,7 @@ status =  tx_timer_performance_info_get(&my_timer, &activates,
 
 ## <a name="tx_timer_performance_system_info_get"></a>tx_timer_performance_system_info_get 
 
-Hämta information om system prestanda för timer
+Hämta information om timersystemets prestanda
 
 ### <a name="prototype"></a>Prototyp
 
@@ -5706,32 +5706,32 @@ UINT  tx_timer_performance_system_info_get(ULONG *activates,
         ULONG *reactivates, ULONG *deactivates,
         ULONG *expirations, ULONG *expiration_adjusts);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar prestanda information om alla program timers i systemet.
+Den här tjänsten hämtar prestandainformation om alla programtimer i systemet.
 
 > [!IMPORTANT]
-> ThreadX SMP-biblioteket och programmet måste skapas med **TX_TIMER_ENABLE_PERFORMANCE_INFO** som definierats för den här tjänsten för att returnera prestanda information.
+> ThreadX SMP-biblioteket och programmet måste byggas med en TX_TIMER_ENABLE_PERFORMANCE_INFO har **definierats** för att den här tjänsten ska returnera prestandainformation.
 
 ### <a name="parameters"></a>Parametrar
 
-- **aktiverar**: pekar mot mål för det totala antalet aktiverings begär Anden som utförts på alla timers.
-- **återaktiverar**: pekar mot mål för det totala antalet automatiska återaktivitet som utförts på alla periodiska timers.
-- **inaktive ras**: pekare till mål för det totala antalet begär Anden om inaktive ring som utförts för alla timers.
-- **förfaller**: pekar mot mål för det totala antalet förfallo datum för alla timers.
-- **expiration_adjusts**: pekar mot mål för det totala antalet interna utgångs justeringar som utförts för alla timers. De här justeringarna görs i den tids lösa bearbetningen för timers som är större än standard storleken för timer-listan (som standard timers med förfallo datum som är större än 32 Tick).
+- **aktiverar:** Pekare till mål för det totala antalet aktiveringsbegäranden som utförts på alla timers.
+- **återaktiverar:** Pekare till mål för det totala antalet automatiska återaktiveringar som utförts på alla periodiska timers.
+- **inaktiverar:** Pekare till mål för det totala antalet inaktiveringsbegäranden som utförts på alla timers.
+- **expirations**(förfallotid): Pekare till mål för det totala antalet förfallotid för alla timers.
+- **expiration_adjusts:** Pekare till mål för det totala antalet interna förfallojusteringar som utförts på alla timers. Dessa justeringar görs i timerbearbetningen av avbrott för timers som är större än standardstorleken för timerlistan (som standard timers med förfallotidsvärden som är större än 32 tick).
 
 > [!IMPORTANT]
-> Om du anger en TX_NULL för någon parameter anges att parametern inte krävs.
+> Ange en TX_NULL för en parameter anger att parametern inte är obligatorisk.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS**: (0X00) lyckades system prestanda Hämta.
-- **TX_FEATURE_NOT_ENABLED**: (0xFF) systemet har inte kompilerats med prestanda information aktive rad.
+- **TX_SUCCESS**: (0x00) Lyckad prestanda för timersystemet get.
+- **TX_FEATURE_NOT_ENABLED**: (0xFF) Systemet kompilerades inte med aktiverad prestandainformation.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers och ISR: er
+Initiering, trådar, timers och ISR
 
 ### <a name="example"></a>Exempel
 
@@ -5762,33 +5762,33 @@ status =  tx_timer_performance_system_info_get(&activates,
 
 ## <a name="tx_timer_smp_core_exclude"></a>tx_timer_smp_core_exclude
 
-Uteslut timer-körning i en uppsättning kärnor
+Undanta timerkörning på en uppsättning kärnor
 
 ### <a name="prototype"></a>Prototyp
 
 ```C
 UINT  tx_timer_smp_core_exclude(TX_TIMER *timer_ptr, ULONG exclusion_map);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen utesluter den angivna timern från att köras på de kärnor som anges i bit kartan med namnet "*exclusion_map*". Varje bit i "*exclusion_map*" representerar en kärna (bit 0 representerar Core 0 osv.). Om biten anges undantas motsvarande kärna från att köra den angivna timern.
+Den här funktionen utesluter den angivna timern från att köra på de kärnor som anges i bitkartan med *namnet "exclusion_map*." Varje bit i "*exclusion_map*" representerar en kärna (bit 0 representerar core 0 osv.). Om biten anges undantas motsvarande kärna från att köra den angivna timern.
 
 > [!IMPORTANT]
-> Användningen av processor undantag kan orsaka ytterligare bearbetning i tråden till kärn mappnings logik för att hitta den optimala matchningen. Den här bearbetningen har bundits av antalet färdiga trådar.
+> Användning av processor exkludering kan orsaka ytterligare bearbetning i tråden till kärnmappningslogiken för att hitta den optimala matchningen. Bearbetningen begränsas av antalet färdiga trådar.
 
 ### <a name="parameters"></a>Parametrar
 
-- **timer_ptr**: pekar mot timer för att ändra kärn undantag.
-- **exclusion_map**: bit karta där en Sit-bit visar att kärnan är exkluderad. Om du anger ett 0-värde kan timern köras på alla kärnor (standard).
+- **timer_ptr:** Pekare till timer för att ändra kärn uteslutningen.
+- **exclusion_map:** Bitmappning där en sit bit anger att kärnan är exkluderad. Genom att ange ett 0-värde kan timern köras på valfri kärna (standard).
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS** (0X00) lyckad kärn undantag.
-- **TX_TIMER_ERROR** (0X0E) ogiltig timer-pekare.
+- **TX_SUCCESS** (0x00) Lyckad kärn uteslutning.
+- **TX_TIMER_ERROR** (0x0E) Ogiltig timerpekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, ISR: er, trådar och timers
+Initiering, ISR, trådar och timers
 
 ### <a name="example"></a>Exempel
 
@@ -5803,7 +5803,7 @@ tx_timer_smp_core_exclude(&timer_0, 0x01);
 
 ## <a name="tx_timer_smp_core_exclude_get"></a>tx_timer_smp_core_exclude_get
 
-Hämtar timerns aktuella kärn undantag
+Hämtar timerns aktuella kärn uteslutning
 
 ### <a name="prototype"></a>Prototyp
 
@@ -5811,24 +5811,24 @@ Hämtar timerns aktuella kärn undantag
 UINT tx_timer_smp_core_exclude_get(TX_TIMER *timer_ptr,
                          ULONG *exclusion_map_ptr);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen returnerar den aktuella huvud undantags listan.
+Den här funktionen returnerar den aktuella kärn uteslutningslistan.
 
 ### <a name="parameters"></a>Parametrar
 
-- **timer_ptr**: pekare till timer från vilken du vill hämta kärn undantaget.
-- **exclusion_map_ptr**: målet för den aktuella Core exkluderings-bitars kartan.
+- **timer_ptr:** Pekare till timer som du vill hämta kärn uteslutningen från.
+- **exclusion_map_ptr:** Mål för den aktuella core exclusion bit-kartan.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- TX_SUCCESS: (0x00) lyckad hämtning av timerns kärn undantag.
-- TX_TIMER_ERROR: (0x0E) ogiltig timer-pekare.
-- TX_PTR_ERROR: (0x03) ogiltig utelämnande destinations pekare.
+- TX_SUCCESS: (0x00) Lyckad hämtning av timerns kärn uteslutning.
+- TX_TIMER_ERROR: (0x0E) Ogiltig timerpekare.
+- TX_PTR_ERROR: (0x03) Pekare för ogiltigt undantagsmål.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, ISR: er, trådar och timers
+Initiering, ISR, trådar och timers
 
 ### <a name="example"></a>Exempel
 

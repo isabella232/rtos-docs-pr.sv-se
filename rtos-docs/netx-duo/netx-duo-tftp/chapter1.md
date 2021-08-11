@@ -1,118 +1,118 @@
 ---
-title: Kapitel 1 – Introduktion till Azure återställnings tider NetX Duo TFTP
-description: Trivial File Transfer Protocol (TFTP) är ett Lightweight-protokoll som är utformat för fil överföringar.
+title: Kapitel 1 – Introduktion till Azure RTOS NetX Duo TFTP
+description: Tftp Trivial File Transfer Protocol (The Trivial File Transfer Protocol) är ett enkelt protokoll som utformats för filöverföringar.
 author: philmea
 ms.author: philmea
 ms.date: 06/04/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 4431b23e143d05214090547e7f179a6f5def8217
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 4854f96d8f230d7c1f21700ac731d6430854a950009d3ed51fbf90d37885f255
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104825710"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116791983"
 ---
-# <a name="chapter-1---introduction-to-azure-rtos-netx-duo-tftp"></a>Kapitel 1 – Introduktion till Azure återställnings tider NetX Duo TFTP 
+# <a name="chapter-1---introduction-to-azure-rtos-netx-duo-tftp"></a>Kapitel 1 – Introduktion till Azure RTOS NetX Duo TFTP 
 
-Trivial File Transfer Protocol (TFTP) är ett Lightweight-protokoll som är utformat för fil överföringar. Till skillnad från robusta protokoll utför TFTP inte en omfattande fel kontroll och kan också ha begränsad prestanda eftersom det är ett stopp-och-wait-protokoll. När ett TFTP-datapaket har skickats väntar avsändaren tills en bekräftelse skickas tillbaka av mottagaren. Även om detta är enkelt begränsar det det övergripande TFTP-dataflödet. Med TFTP-paketet kan värdar använda TFTP-protokollet över IP-nätverk.
+Tftp Trivial File Transfer Protocol (The Trivial File Transfer Protocol) är ett enkelt protokoll som utformats för filöverföringar. Till skillnad från mer robusta protokoll utför TFTP inte omfattande felkontroller och kan också ha begränsad prestanda eftersom det är ett stopp- och vänteprotokoll. När ett TFTP-datapaket har skickats väntar avsändaren på att ett ACK ska returneras av mottagaren. Även om detta är enkelt begränsar det övergripande TFTP-dataflödet. TFTP-paketet gör att värdar kan använda TFTP-protokollet via IP-nätverk.
 
 ## <a name="tftp-requirements"></a>TFTP-krav
 
-För att fungera korrekt kräver TFTP-klienter i NetX Duo-paketet att en IP-instans redan har skapats. Dessutom måste UDP vara aktiverat på samma IP-instans. Klient delen av NetX Duo TFTP-paketet har inga ytterligare krav.
+För att tftp-klienterna ska fungera korrekt i NetX Duo TFTP-paketet måste en IP-instans redan ha skapats. Dessutom måste UDP vara aktiverat på samma IP-instans. Klientdelen av NetX Duo TFTP-paketet har inga ytterligare krav.
 
-TFTP-server delen av NetX Duo TFTP-paketet har flera ytterligare krav. Först måste du ha fullständig åtkomst till den UDP- *välkända porten 69* för att hantera alla förfrågningar om klient-TFTP. TFTP-servern är också avsedd att användas med det inbäddade fil systemet FileX. Om FileX inte är tillgängligt kan användaren hamna i de delar av FileX som används i sin egen miljö. Detta beskrivs i senare avsnitt i den här hand boken.
+TFTP-serverdelen av NetX Duo TFTP-paketet har flera ytterligare krav. För det första krävs fullständig åtkomst till UDP:s *välkända port 69 för* hantering av alla TFTP-klientbegäranden. TFTP-servern är också utformad för användning med filex-inbäddat filsystem. Om FileX inte är tillgängligt kan användaren porta de delar av FileX som används i deras egen miljö. Detta beskrivs i senare avsnitt i den här guiden.
 
 ## <a name="tftp-file-names"></a>TFTP-filnamn 
 
-TFTP-filnamn ska vara i formatet för mål fil systemet. De ska vara NULL-terminerade ASCII-strängar, med fullständig Sök vägs information vid behov. Det finns ingen angiven gräns i storleken på TFTP-filnamn i NetX Duo TFTP-implementeringen.
+TFTP-filnamn ska vara i formatet för målfilsystemet. De bör vara NULL-avslutade ASCII-strängar, med fullständig sökvägsinformation om det behövs. Det finns ingen angiven gräns för storleken på TFTP-filnamn i NetX Duo TFTP-implementeringen.
 
 ## <a name="tftp-messages"></a>TFTP-meddelanden
 
-TFTP har en väldigt enkel mekanism för att öppna, läsa, skriva och stänga filer. Det finns i princip 2-4 byte i TFTP-huvudet under UDP-huvudet. Definitionen av TFTP-filen öppna meddelanden har följande format:
+TFTP har en mycket enkel mekanism för att öppna, läsa, skriva och stänga filer. Det finns i princip 2–4 byte TFTP-rubrik under UDP-rubriken. Definitionen av öppna TFTP-filmeddelanden har följande format:
 
-**oooof... f0OCTET0**
-
-Plats:
-
-- **Oooo** 2 – byte opcode-fält  
-0x0001-> öppen för läsning  
-0x0002-> öppna för skrivning
-
-- **f...** fält för f-byte-filnamn
-
-- 0 1 – byte NULL avslutnings Character
-
-- **Oktett** ASCII "OKTETT" för att ange binär överföring
-
-- 0 1 – byte NULL avslutnings Character
-
-Definitionen av TFTP Write-, ACK-och fel meddelanden skiljer sig något från varandra och definieras enligt följande:
-
-**oooobbbbd... styr**
+**hhf... f0OCTET0**
 
 Plats:
 
-- **Oooo** 2 – byte opcode-fält  
-0x0003-> data paket  
-0x0004 – > ACK för senaste läsning  
-0x0005 – fel villkor för >  
+- **fältet** 2 byte Opcode  
+0x0001 -> Open för läsning  
+0x0002 -> Open för skrivning
 
-- **bbbb** 2-byte block Number (1-n)
+- **f... f** n-byte filnamnsfält
 
-- **d...** data fält för d n-byte
+- NULL-avslutningstecken på 1 byte
+
+- **OKTETT** ASCII "OCTET" för att ange binär överföring
+
+- NULL-avslutningstecken på 1 byte
+
+Definitionen av TFTP-skriv-, ACK- och felmeddelandena skiljer sig något åt och definieras på följande sätt:
+
+**lobbbbbd... D**
+
+Plats:
+
+- **fältet** 2 byte Opcode  
+0x0003 -> datapaket  
+0x0004 -> ACK för senaste läsning  
+0x0005 -> feltillstånd  
+
+- **bbbb** 2-bytes blocknummerfält (1-n)
+
+- **d... d** n-byte datafält
 
 
-- 0x0001 (Läs) fil namn 0 OKTETT 0
+- 0x0001 (läst) Filnamn 0 OKTETT 0
 
-- 0x0002 (Skriv) fil namn 0 OKTETT 0
+- 0x0002 (skrivning) Filnamn 0 OKTETT 0
 
 ## <a name="tftp-communication"></a>TFTP-kommunikation
 
-TFTP-servrar använder välkända UDP-port 69 för att lyssna efter klient förfrågningar. TFTP-klientens Sockets kan bindas till valfri tillgänglig UDP-port. Data paketets nytto last som innehåller filen som ska laddas upp eller hämtas skickas i 512 byte-segment tills det sista paketet som innehåller < 512 byte. Ett paket som innehåller färre än 512 byte signalerar därför slutet av filen. Den allmänna sekvensen av händelser är följande:
+TFTP-servrar använder den välkända UDP-port 69 för att lyssna efter klientbegäranden. TFTP-klientsocketar kan bindas till alla tillgängliga UDP-portar. Datapaketnyttolasten som innehåller filen som ska laddas upp eller ned skickas i 512 byte-segment tills det sista paketet som innehåller < 512 byte. Därför signalerar ett paket som innehåller färre än 512 byte slutet på filen. Den allmänna händelsesekvensen är följande:
 
-TFTP-Läs fil begär Anden:
+TFTP-läsfilbegäranden:
 
-1.  Klienten utfärdar en "öppen för läsning"-begäran med fil namnet och väntar på ett svar från servern.
+1.  Klienten skickar en "Open For Read"-begäran med filnamnet och väntar på ett svar från servern.
 
-2.  Servern skickar den första 512 byten av filen eller mindre om fil storleken är mindre än 512 byte.
+2.  Servern skickar de första 512 bytena i filen eller mindre om filstorleken är mindre än 512 byte.
 
-3.  Klienten tar emot data, skickar en bekräftelse och väntar på nästa paket från servern för filer som innehåller mer än 512 byte.
+3.  Klienten tar emot data, skickar en ACK och väntar på nästa paket från servern för filer som innehåller mer än 512 byte.
 
-4.  Sekvensen slutar när klienten tar emot ett paket som innehåller färre än 512 byte.
+4.  Sekvensen avslutas när klienten tar emot ett paket som innehåller mindre än 512 byte.
 
-TFTP-Skriv begär Anden:
+TFTP-skrivbegäranden:
 
-1.  Klienten utfärdar en "öppen för skrivning"-begäran med fil namnet och väntar på en bekräftelse med block antalet 0 från servern.
+1.  Klienten skickar en "Open for Write"-begäran med filnamnet och väntar på en ACK med blocknumret 0 från servern.
 
-2.  När servern är redo att skriva filen skickas en bekräftelse med ett block antal noll.
+2.  När servern är redo att skriva filen skickar den ett ACK med blocknumret noll.
 
-3.  Klienten skickar de första 512 byten av filen (eller mindre för filer som är mindre än 512 byte) till servern och väntar på en ACK tillbaka.
+3.  Klienten skickar de första 512 bytena av filen (eller mindre för filer som är mindre än 512 byte) till servern och väntar på en ACK tillbaka.
 
-4.  Servern skickar en ACK efter att byte har skrivits.
+4.  Servern skickar en ACK när byte har skrivits.
 
-5.  Sekvensen slutar när klienten har skrivit ett paket som innehåller färre än 512 byte.
+5.  Sekvensen avslutas när klienten har skrivit ett paket som innehåller färre än 512 byte.
  
 
-## <a name="tftp-server-session-timer"></a>Timer för TFTP-serversessionen
+## <a name="tftp-server-session-timer"></a>TFTP-serversessionstimer
 
-TFTP-servern har ett begränsat antal klient begär ande platser. Om en klientsession verkar släppas, kan den platsen inte vara tillgänglig för åter användning. Om NX_TFTP_SERVER_RETRANSMIT_ENABLE alternativet är aktive rad skapar dock NetX Duo TFTP-servern en session-timer som övervakar tids gränsen för var och en av dess klientsessioner. När tids gränsen för sessionen upphör att gälla avslutas den och alla öppna filer stängs. Facket blir därför tillgängligt för en annan TFTP-klientbegäran.
+TFTP-servern har ett begränsat antal platser för klientbegäran. Om en klientsession verkar ha tagits bort kan det facket inte vara tillgängligt för återanvändning. Men om NX_TFTP_SERVER_RETRANSMIT_ENABLE är aktiverat skapar NetX Duo TFTP-servern en sessionstimer som övervakar tidsgränsen för var och en av dess klientsessioner. När tidsgränsen för en session upphör att gälla avslutas den och alla öppna filer stängs. Därför blir "platsen" tillgänglig för en annan TFTP-klientbegäran.
 
-Om du vill ange tids gränsen justerar du konfigurations alternativet NX_TFTP_SERVER_RETRANSMIT_TIMEOUT som som standard är 200 timer-Tick. Intervallet mellan vilka sessions-timeout-värden kontrol leras anges av NX_TFTP_SERVER_TIMEOUT_PERIOD som är 20 timer-Tick som standard.
+Om du vill ange tidsgränsen justerar du konfigurationsalternativet NX_TFTP_SERVER_RETRANSMIT_TIMEOUT som standard är 200 timer tick. Intervallet mellan vilka tidsgränser för sessioner kontrolleras anges av NX_TFTP_SERVER_TIMEOUT_PERIOD som är 20 timer tick som standard.
 
-När TFTP-klienten har laddat upp (skrivna) filer till TFTP FileX-mediet, måste mediet rensas så att data kan skrivas från TFTP-serverns RAM-disk till det underliggande mediet (TFTP-klientens disk minne). Detta kan göras med hjälp av fx_media_flush tjänsten om programmet inte vill stänga TFTP-servern.
+När TFTP-klienten har laddat upp (skrivit) filer till TFTP FileX-mediet måste mediet tömmas så att data kan skrivas från TFTP-serverns RAM-disk till det underliggande mediet (TFTP-klientens diskminne). Detta kan göras med hjälp fx_media_flush tjänsten om programmet inte vill stänga TFTP-servern.
 
-Men när du har stängt TFTP-servern bör programmet, om det inte har någon annan användning för FileX-mediet, stänga mediet med hjälp av tjänsten fx_media_close. Detta tömmer fil data tillbaka till TFTP-klientdatorn, stänger öppna filer och uppdaterar katalog informationen till mediet.
+När TFTP-servern har stängts bör programmet, om det inte har någon ytterligare användning för FileX-mediet, sedan stänga med hjälp av fx_media_close tjänsten. Detta rensar fildata tillbaka till TFTP-klientdisken, stänger öppna filer och uppdaterar kataloginformationen till mediet.
 
-Avsnittet "små exempel" i det här kapitlet visar detta.
+Avsnittet "Litet exempel" i det här kapitlet visar detta.
 
-Ett tredje alternativ för att uppdatera FileX-mediet är att kompilera FileX-biblioteket med FX_FAULT_TOLERANT eller FX_FAULT_TOLERANT_DATA alternativ i stället för att använda FileX-tjänster explicit. Om det har definierats skickar FileX automatiskt Skriv förfrågningar till medie driv rutinen. De här alternativen kan begränsa prestanda men ger bättre skydd mot förlorade fildata eller förlorade kluster. Mer information om detta och FileX i allmänhet finns i användar handboken för Express Logic FileX.
+Ett tredje alternativ för att uppdatera FileX-media är att kompilera FileX-biblioteket med FX_FAULT_TOLERANT eller FX_FAULT_TOLERANT_DATA istället för att använda FileX-tjänster explicit. Om det här definieras skickar FileX automatiskt skrivbegäranden till mediedrivrutinen. De här alternativen kan begränsa prestandan men ger bättre skydd mot förlorade fildata eller förlorade kluster. Mer information om detta och FileX i allmänhet finns i användarhandboken för Express Logic FileX.
 
-## <a name="tftp-multi-thread-support"></a>Stöd för TFTP-flera trådar
+## <a name="tftp-multi-thread-support"></a>TFTP-stöd för flera trådar
 
-Klient tjänsterna NetX Duo TFTP kan anropas från flera trådar samtidigt. Läs-eller Skriv begär Anden för en viss TFTP-serverinstans bör dock göras i följd från samma tråd.
+NetX Duo TFTP-klienttjänsterna kan anropas från flera trådar samtidigt. Läs- eller skrivbegäranden för en viss TFTP-klientinstans bör dock göras i följd från samma tråd.
 
-## <a name="tftp-rfcs"></a>TFTP-rapporter
+## <a name="tftp-rfcs"></a>TFTP-RFC:er
 
 NetX Duo TFTP är kompatibelt med RFC1350 och relaterade RFC: er.
 

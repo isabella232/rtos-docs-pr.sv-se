@@ -6,12 +6,12 @@ ms.author: philmea
 ms.date: 5/19/2020
 ms.service: rtos
 ms.topic: overview
-ms.openlocfilehash: a6f9cfd772c81340a90b7dc217c0ccc160c7f957
-ms.sourcegitcommit: 7993d2c3b0711ae2c246561a0c8bf963d8e0324a
+ms.openlocfilehash: d9bd7cfda454e73e9bd270b86616780ab7ceab1a76160a66cf49a9ef82efae05
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 07/24/2021
-ms.locfileid: "114661206"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116792408"
 ---
 # <a name="what-is-microsoft-azure-rtos"></a>Vad är Microsoft Azure RTOS?
 
@@ -62,7 +62,7 @@ Azure RTOS ger följande fördelar jämfört med andra operativsystem i realtid.
 
 Azure RTOS har över 6,2 miljarder distributioner över hela världen, enligt det ledande M2M-marknadsinformationsföretaget VDC Research. Populariteten för Azure RTOS är en stor del av dess tillförlitlighet, kvalitet, storlek, prestanda, avancerade funktioner, användarvänlighet och övergripande fördelar vad gäller tid till marknad.
 
-> *"Vi har följt threadx-tillväxten på de trådlösa och IoT-marknader sedan företagets grundande, och är allt mer imponerande av det omfattande branschintagandet av THREADX."* – Chris Rommel, Executive Vice President, VDC Research
+> *"Vi har följt den ökade tillväxten av THREADX på de trådlösa och IoT-marknader sedan företagets grundande, och är allt mer imponerande av det omfattande branschintagandet av THREADX."* – Chris Rommel, Executive Vice President, VDC Research
 
 ### <a name="intuitive-and-consistent-api-design"></a>Intuitiv och konsekvent API-design
 
@@ -83,7 +83,7 @@ Azure RTOS har över 6,2 miljarder distributioner över hela världen, enligt de
 
 ### <a name="fastest-time-to-market"></a>Snabbaste tid till marknad
 
-Azure RTOS är enkelt att installera, lära sig, använda, felsöka, verifiera, certifiera och underhålla. Därför är Azure RTOS ett av de mest populära realtidsoperativsystemet för inbäddade IoT-enheter, inklusive många soc från Broadcom, Gainspan och så vidare. Vår konsekventa time-to-market-fördel bygger på:
+Azure RTOS är enkelt att installera, lära sig, använda, felsöka, verifiera, certifiera och underhålla. Därför är Azure RTOS ett av de mest populära realtidsoperativsystemet för inbäddade IoT-enheter, inklusive många soc från Broadcom, Gainspan och så vidare. Vår konsekventa tid till marknad-fördel bygger på:
 
 * Fullständig källkodstillgänglighet.
 * Lätt att använda API:et.
@@ -96,11 +96,11 @@ Det kostar inget att använda och testa källkoden och ingen kostnad för produk
 
 ### <a name="full-highest-quality-source-code"></a>Fullständig källkod av högsta kvalitet
 
-Under åren har Azure RTOS angett stapeln i kvalitet och förståelse. Dessutom möjliggör konventionen att ha en funktion per fil enkel källnavigering.
+Under åren har Azure RTOS angett stapeln i kvalitet och förståelse. Dessutom ger konventionen att ha en funktion per fil enkel källnavigering.
 
 ### <a name="pre-certified-by-tuv-and-ul-to-many-safety-standards"></a>Förcertifierat av TUV och UL enligt många säkerhetsstandarder
 
-Azure RTOS har certifierats av SGS-TUV Saar för användning i säkerhetskritiska system, enligt IEC-61508 SIL 4, IEC-62304 SW-säkerhetsklass C, ISO 26262 ASIL D och EN 50128. Certifieringen bekräftar att Azure RTOS kan användas i utvecklingen av säkerhetsrelaterad programvara för de högsta säkerhetsintegritetsnivåerna IEC-61508, IEC-62304, ISO 26262 och EN 50128 för "funktionell säkerhet för elektriska, elektroniska och programmerbara elektroniska säkerhetsrelaterade system". SGS-TUV Saar, som bildas genom en gemensam sats av Tysklands SGS-Group och TUV Saarland, har blivit det ledande ackrediterade, oberoende företaget för testning, granskning, verifiering och certifiering av inbäddad programvara för säkerhetsrelaterade system över hela världen. Den industriella säkerhetsstandarden IEC 61508 och alla standarder som härleds från den, inklusive IEC-62304, ISO 26262 och EN 50128, används för att garantera funktionell säkerhet för elektriska, elektroniska och programmerbara elektroniska säkerhetsrelaterade medicinska enheter, processkontrollsystem, industriella maskiner, bilar och system för kontrollsystem.
+Azure RTOS har certifierats av SGS-TUV Saar för användning i säkerhetskritiska system, enligt IEC-61508 SIL 4, IEC-62304 SW-säkerhetsklass C, ISO 26262 ASIL D och EN 50128. Certifieringen bekräftar att Azure RTOS kan användas i utvecklingen av säkerhetsrelaterad programvara för de högsta säkerhetsintegritetsnivåerna IEC-61508, IEC-62304, ISO 26262 och EN 50128 för "funktionell säkerhet för elektriska, elektroniska och programmerbara elektroniska säkerhetsrelaterade system". SGS-TUV Saar, som bildas genom en gemensam sats av Tysklands SGS-Group och TUV Saarland, har blivit det ledande ackrediterade, oberoende företaget för testning, granskning, verifiering och certifiering av inbäddad programvara för säkerhetsrelaterade system över hela världen. Den industriella säkerhetsstandarden IEC 61508, och alla standarder som härleds från den, inklusive IEC-62304, ISO 26262 och EN 50128, används för att garantera funktionell säkerhet för elektriska, elektroniska och programmerbara elektroniska säkerhetsrelaterade medicinska enheter, processkontrollsystem, industriella maskiner, bilar och system för kontroll.
 
 :::image type="content" source="media/partener-logo-sgs-tuv-saar.png" alt-text="SGS-TUV-certifiering":::
 
@@ -110,7 +110,7 @@ Azure RTOS har identifierats av UL för efterlevnad med UL 60730-1 H, CSA E60730
 
 Artefakter (certifikat, säkerhetshandbok, testrapport osv.) som är associerade med TUV- och UL-certifieringar är tillgängliga för försäljning.
 
-I de fall där programmet behöver ytterligare certifiering är en certifieringstjänst tillgänglig via Microsoft för att tillhandahålla nyckelnyckelcertifiering för olika standarder med hjälp av den faktiska maskinvaruplattformen och även täcker programkoden. Kontakta oss om du vill ha mer information om vår certifieringstjänst.
+I fall där programmet behöver ytterligare certifiering är en certifieringstjänst tillgänglig via Microsoft för att tillhandahålla nyckelnyckelcertifiering för olika standarder med hjälp av den faktiska maskinvaruplattformen och även täcker programkoden. Kontakta oss om du vill ha mer information om vår certifieringstjänst.
 
 ### <a name="eal4-common-criteria-security-certification"></a>EAL4+ Vanliga kriterier för säkerhetscertifiering
 
@@ -122,7 +122,7 @@ Den IT-säkerhetsutvärderingsfunktion som används för Microsoft Azure RTOS SC
 
 ### <a name="fips-140-2-validated"></a>FIPS 140-2 Verifierad
 
-Azure RTOS Crypto-bibliotek har certifierats med FIPS 140-2 (Federal Information Processing Standardization 140-2) för programvara, som anger krav för kryptografimoduler. FIPS 140-2 kräver alla federala myndigheter och avdelningar som använder kryptografisk säkerhet för att uppfylla specifika standarder som rör krypteringsstyrka och funktioner. Dessa kryptografiska säkerhetsstandarder är också kända i Kanada och EU.
+Azure RTOS Crypto-bibliotek har certifierats med FIPS 140-2 (Federal Information Processing Standardization 140-2) för programvara, som anger krav för kryptografimoduler. FIPS 140-2 kräver alla federala myndigheter och avdelningar som använder kryptografisk säkerhet för att uppfylla specifika standarder som rör krypteringsstyrka och -funktioner. Dessa kryptografiska säkerhetsstandarder är också kända i Kanada och EU.
 
 Utvärderingslabbet för Information Security som Azure RTOS Crypto-biblioteken var atsec och certifikatutfärdaren är [The National Institute of Standards and Technology (NIST).](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3394)
 
@@ -174,4 +174,4 @@ Azure RTOS på de populäraste 32/64-bitars mikroprocessorerna, fullständigt te
 
 ## <a name="in-the-context-of-azure-iot"></a>I samband med Azure IoT
 
-Förutom att ansluta direkt till Azure IoT eller indirekt via Azure IoT Edge, finns Azure RTOS också tillgängligt på Azure Sphere enheter. Kombinationen av Azure RTOS och Azure Sphere samman bästa realtidsbearbetning och säkerhet på en enhet.
+Förutom att ansluta direkt till Azure IoT eller indirekt ansluta via Azure IoT Edge, är Azure RTOS också tillgängligt på Azure Sphere enheter. Kombinationen av Azure RTOS och Azure Sphere samman bästa realtidsbearbetning och säkerhet på en enhet.

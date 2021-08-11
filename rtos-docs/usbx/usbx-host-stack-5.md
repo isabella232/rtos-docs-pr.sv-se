@@ -6,12 +6,12 @@ ms.author: philmea
 ms.date: 5/19/2020
 ms.service: rtos
 ms.topic: article
-ms.openlocfilehash: 2e9e2e0286300b3f79f7f9e6ad2d7fab96ba7337
-ms.sourcegitcommit: 62cfdf02628530807f4d9c390d6ab623e2973fee
+ms.openlocfilehash: 62750ab4a5540b243665a7a7d9000a0d60c4435313b6de2e1579ae7f1c20fe55
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 08/05/2021
-ms.locfileid: "115177753"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116790674"
 ---
 # <a name="chapter-5---usbx-host-classes-api"></a>Kapitel 5 – API för USBX-värdklasser
 
@@ -93,7 +93,7 @@ Den här funktionen används för att registrera ett återanrop från HID-klasse
 
 - **UX_SUCCESS** (0x00) Dataöverföringen slutfördes
 - **UX_HOST_CLASS_INSTANCE_UNKNOWN** (0x5b) Ogiltig HID-instans.
-- **UX_HOST_CLASS_HID_REPORT_ERROR** (0x79) Fel i registreringen av återanrop i rapporten.
+- **UX_HOST_CLASS_HID_REPORT_ERROR** (0x79) Fel i rapportens återanropsregistrering.
 
 ### <a name="example"></a>Exempel
 
@@ -127,7 +127,7 @@ UINT ux_host_class_hid_periodic_report_start(UX_HOST_CLASS_HID *hid);
 
 ### <a name="description"></a>Description
 
-Den här funktionen används för att starta den periodiska slutpunkten (avbrott) för instansen av HID-klassen som är bunden till den här HID-klienten. HID-klassen kan inte starta den periodiska slutpunkten förrän HID-klienten har aktiverats och därför är det upp till HID-klienten att starta slutpunkten för att ta emot rapporter.
+Den här funktionen används för att starta den periodiska slutpunkten (avbrott) för instansen av HID-klassen som är bunden till den här HID-klienten. HID-klassen kan inte starta den periodiska slutpunkten förrän HID-klienten har aktiverats och därför lämnas det till HID-klienten att starta den här slutpunkten för att ta emot rapporter.
 
 ### <a name="input-parameter"></a>Indataparameter
 
@@ -164,7 +164,7 @@ UINT ux_host_class_hid_periodic_report_stop(UX_HOST_CLASS_HID *hid);
 
 ### <a name="description"></a>Description
 
-Den här funktionen används för att stoppa den periodiska slutpunkten (avbrott) för instansen av HID-klassen som är bunden till den här HID-klienten. HID-klassen kan inte stoppa den periodiska slutpunkten förrän HID-klienten har inaktiverats, alla dess resurser frigörs och därför lämnas den till HID-klienten för att stoppa den här slutpunkten.
+Den här funktionen används för att stoppa den periodiska slutpunkten (avbrott) för instansen av HID-klassen som är bunden till den här HID-klienten. HID-klassen kan inte stoppa den periodiska slutpunkten förrän HID-klienten har inaktiverats, alla dess resurser frigörs och därför lämnas det till HID-klienten att stoppa den här slutpunkten.
 
 ### <a name="input-parameter"></a>Indataparameter
 
@@ -202,7 +202,7 @@ UINT ux_host_class_hid_report_get(
 
 ### <a name="description"></a>Description
 
-Den här funktionen används för att ta emot en rapport direkt från enheten utan att förlita sig på den periodiska slutpunkten. Den här rapporten kommer från kontrollslutpunkten, men dess behandling är densamma som om den kom till den periodiska slutpunkten.
+Den här funktionen används för att ta emot en rapport direkt från enheten utan att förlita sig på den periodiska slutpunkten. Den här rapporten kommer från kontrollslutpunkten, men dess behandling är densamma som för den periodiska slutpunkten.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -464,7 +464,7 @@ UINT ux_host_class_hid_keyboard_ioctl(
 
 ### <a name="description"></a>Description
 
-Den här funktionen utför en specifik ioctl-funktion till HID-tangentbordet. Anropet blockerar och returnerar endast när det finns ett fel eller när kommandot har slutförts.
+Den här funktionen utför en specifik ioctl-funktion för HID-tangentbordet. Anropet blockerar och returnerar endast när det finns ett fel eller när kommandot har slutförts.
 
 ### <a name="parameters"></a>Parametrar
 

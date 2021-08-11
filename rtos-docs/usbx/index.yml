@@ -1,33 +1,33 @@
 ### YamlMime:Landing
-title: Dokumentation om Azure återställnings tider USBX
-summary: Azure återställnings tider-USBX är en högpresterande USB-värd, enhet och on-Go (OTG)-inbäddad stack. Azure återställnings tider USBX är helt integrerat med Azure återställnings tider ThreadX och är tillgängligt för alla Azure återställnings tider-ThreadX – processorer som stöds.
+title: Azure RTOS USBX-dokumentation
+summary: Azure RTOS USBX är en inbäddad STACK med höga prestanda för USB-värd, -enhet och on-the-go (OTG). Azure RTOS USBX är helt integrerat med Azure RTOS ThreadX och tillgängligt för alla Azure RTOS ThreadX-processorer som stöds.
 metadata:
-  title: Vad är Azure återställnings tider USBX?
-  description: Azure återställnings tider-USBX är en högpresterande USB-värd, enhet och on-Go (OTG)-inbäddad stack. Azure återställnings tider USBX är helt integrerat med Azure återställnings tider ThreadX och är tillgängligt för alla Azure återställnings tider-ThreadX – processorer som stöds.
+  title: Vad är Azure RTOS USBX?
+  description: Azure RTOS USBX är en inbäddad STACK med höga prestanda för USB-värd, -enhet och on-the-go (OTG). Azure RTOS USBX är helt integrerat med Azure RTOS ThreadX och tillgängligt för alla Azure RTOS ThreadX-processorer som stöds.
   services: rtos
   ms.service: rtos
   ms.topic: landing-page
   author: philmea
   ms.author: philmea
   ms.date: 5/19/2020
-  ms.openlocfilehash: 05ff41048304d3cb66b74cbf342de664e8ad88ab
-  ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+  ms.openlocfilehash: da805afb17e7b9a77b5fc3a65be7ec36b3129080d6b5081e4b517076d3547fa0
+  ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
   ms.translationtype: MT
   ms.contentlocale: sv-SE
-  ms.lasthandoff: 03/22/2021
-  ms.locfileid: "104798085"
+  ms.lasthandoff: 08/07/2021
+  ms.locfileid: "116796284"
 landingContent:
-- title: Introduktion till Azure återställnings tider USBX
+- title: Introduktion till AZURE RTOS USBX
   linkLists:
   - linkListType: overview
     links:
-    - text: Vad är Azure återställnings tider USBX?
+    - text: Vad är Azure RTOS USBX?
       url: overview-usbx.md
-- title: Kom igång med Azure återställnings tider USBX
+- title: Kom igång med Azure RTOS USBX
   linkLists:
   - linkListType: get-started
     links:
-    - text: Användar handbok för Azure återställnings tider USBX Device stack
+    - text: Azure RTOS användarhandbok för USBX-enhetsstack
       url: usbx-device-stack-about.md
-    - text: Användar handbok för värd stack för Azure återställnings tider USBX
+    - text: Azure RTOS användarhandbok för USBX-värdstacken
       url: usbx-host-stack-about.md

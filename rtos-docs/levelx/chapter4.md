@@ -1,37 +1,37 @@
 ---
-title: 'Kapitel 4 – Azure återställnings tider LevelX NAND-API: er'
-description: 'De Azure återställnings tider LevelX-NAND-API: er som är tillgängliga för programmet.'
+title: Kapitel 4 – Azure RTOS LEVELX FÖRD-API:er
+description: Den Azure RTOS LevelX FÖRD-API:er som är tillgängliga för programmet.
 author: philmea
 ms.author: philmea
 ms.date: 05/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 73bb94768396b4b8461791a164a102d1f8ef159f
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: d92b6c10921b4d04345610e139101e93c7a439ff695a89a79245894ad9ef1fec
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104827063"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116790296"
 ---
-# <a name="chapter-4---azure-rtos-levelx-nand-apis"></a>Kapitel 4 – Azure återställnings tider LevelX NAND-API: er
+# <a name="chapter-4---azure-rtos-levelx-nand-apis"></a>Kapitel 4 – Azure RTOS LEVELX FÖRD-API:er
 
-De Azure återställnings tider LevelX-NAND-API: erna som är tillgängliga för programmet är:
+De Azure RTOS LEVELX KPI:er som är tillgängliga för programmet är:
 
-- ***lx_nand_flash_close** _: _Close NAND Flash instance *
-- ***lx_nand_flash_defragment** _: _Defragment NAND Flash instance *
-- ***lx_nand_flash_extended_cache_enable** _: _Enable/Disable utökad NAND-cache *
-- ***lx_nand_flash_initialize** _: _Initialize NAND Flash Support *
-- ***lx_nand_flash_open** _: _Open NAND Flash instance *
-- ***lx_nand_flash_page_ecc_check** _: _Check sida för ECC-fel med korrigering *
-- ***lx_nand_flash_page_ecc_compute** _: _Computes ECC för sida *
-- ***lx_nand_flash_partial_defragment** _: _Partial defragmentera NAND Flash instance *
-- ***lx_nand_flash_sector_read** _: _Read NAND Flash-sektor *
-- ***lx_nand_flash_sector_release** _: _Release NAND Flash-sektor *
-- ***lx_nand_flash_sector_write** _: _Write NAND Flash-sektor *
+- ***lx_nand_flash_close** _: _Close FLASH-instans*
+- ***lx_nand_flash_defragment** _: _Defragment FLASH-instans*
+- ***lx_nand_flash_extended_cache_enable** _: _Enable/inaktivera utökad UTÖKADD-cache*
+- ***lx_nand_flash_initialize** _: _Initialize FÖR FLASH-stöd*
+- ***lx_nand_flash_open** _: _Open FLASH-instans*
+- ***lx_nand_flash_page_ecc_check** _: _Check sida för ECC-fel med korrigering*
+- ***lx_nand_flash_page_ecc_compute** _: _Computes ECC för sida*
+- ***lx_nand_flash_partial_defragment** _: _Partial defragmentering av FLASH-flashinstansen FLASH*
+- ***lx_nand_flash_sector_read** _: _Read FLASH-sektor*
+- ***lx_nand_flash_sector_release** _: _Release FLASH-sektor*
+- ***lx_nand_flash_sector_write** _: _Write FLASH-sektor*
 
 ## <a name="lx_nand_flash_close"></a>lx_nand_flash_close
 
-Stäng NAND Flash instance
+Stäng FLASH-instansen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -39,22 +39,22 @@ Stäng NAND Flash instance
 UINT lx_nand_flash_close(LX_NAND_FLASH *nand_flash);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten stänger den tidigare öppnade NAND Flash-instansen.
+Den här tjänsten stänger den tidigare öppnade FLASH-instansen.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **nand_flash**: NAND Flash instance Pointer.
+- **nand_flash:** FLASH-instans pekare.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **LX_SUCCESS**: (0X00) lyckad begäran.
-- **LX_ERROR**: (0x01) Det gick inte att stänga Flash-instansen.
+- **LX_SUCCESS**: (0x00) Lyckad begäran.
+- **LX_ERROR**: (0x01) Fel vid stängning av flash-instans.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -80,7 +80,7 @@ status = lx_nand_flash_close(&my_nand_flash);
 
 ## <a name="lx_nand_flash_defragment"></a>lx_nand_flash_defragment
 
-Defragmentera NAND Flash instance
+Defragmentering AV FLASH-instans
 
 ### <a name="prototype"></a>Prototyp
 
@@ -88,22 +88,22 @@ Defragmentera NAND Flash instance
 UINT lx_nand_flash_defragment(LX_NAND_FLASH *nand_flash);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten defragmenterar den tidigare öppnade NAND-Flash-instansen. Defragmenteringen maximerar antalet fria sidor och block.
+Den här tjänsten defragmenteras den tidigare öppnade FLASH-instansen. Defragmenteringsprocessen maximerar antalet kostnadsfria sidor och block.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **nand_flash**: NAND Flash instance Pointer.
+- **nand_flash:** FLASH-instans pekare.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **LX_SUCCESS**: (0X00) lyckad begäran.
-- **LX_ERROR**: (0x01) Det gick inte att defragmentera Flash-instansen.
+- **LX_SUCCESS**: (0x00) Lyckad begäran.
+- **LX_ERROR**: (0x01) Fel vid defragmentering av flash-instans.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -129,7 +129,7 @@ status = lx_nand_flash_defragment(&my_nand_flash);
 
 ## <a name="lx_nand_flash_extended_cache_enable"></a>lx_nand_flash_extended_cache_enable
 
-Aktivera/inaktivera utökad NAND-cache
+Aktivera/inaktivera utökad INVALIDD-cache
 
 ### <a name="prototype"></a>Prototyp
 
@@ -141,9 +141,9 @@ UINT lx_nand_flash_extended_cache_enable(
     ULONG size);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten implementerar ett cache-skikt i RAM-minnet med det minne som tillhandahålls av programmet. Den totala mängd minne som krävs för fullständig cache-åtgärd kan beräknas på följande sätt:
+Den här tjänsten implementerar ett cachelager i RAM med hjälp av det minne som tillhandahålls av programmet. Den totala mängden minne som krävs för en fullständig cacheåtgärd kan beräknas på följande sätt:
 
 ```c
 size (in_bytes) = number_of_blocks (rounded up to be divisible by 4) +  
@@ -151,24 +151,24 @@ size (in_bytes) = number_of_blocks (rounded up to be divisible by 4) +
     ((number_of_blocks * (pages_per_block + 1)) * 4)
 ```
 
-Om det tillhandahållna minnet inte är tillräckligt stort för att rymma fullständig NAND cache, så gör den här rutinen så att Flash-cachen i NAND är så stor som möjligt baserat på det angivna minnet.
+Om det angivna minnet inte är tillräckligt stort för att få plats med den fullständigaEDD-cachen aktiverar den här rutinen så mycket av FLASHD-flashcachen som möjligt baserat på det angivna minnet.
 
-NAND-cachen är inaktive rad om den angivna minnes adressen är NULL. Därför kan NAND-cachen användas på ett tillfälligt sätt.
+CACHEminnet FÖR KAN INAKTIVERAS om den angivna minnesadressen är NULL. DÄRFÖR kan CACHEMINNEt FÖR DATALAGRING användas på ett tillfälligt sätt.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **nand_flash**: NAND Flash instance Pointer.  
-- **minne**: Start adress för cache-minne som är justerat för ulong-åtkomst. Värdet LX_NULL inaktiverar cacheminnet.  
-- **storlek**: storleken i byte för det angivna minnet.
+- **nand_flash:** FLASH-instans pekare.  
+- **memory**: Startadress för cacheminne justerat för ULONG-åtkomst. Värdet för LX_NULL inaktiverar cachen.  
+- **size**: Storleken i byte för det angivna minnet.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **LX_SUCCESS**: (0X00) lyckad begäran.
-- **LX_ERROR**: (0x01) det finns inte tillräckligt med minne för ett element i NAND-cachen.
+- **LX_SUCCESS**: (0x00) Lyckad begäran.
+- **LX_ERROR**: (0x01) Det finns inte tillräckligt med minne för ett element i CACHEMINNET FÖR DATALAGRING.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -195,7 +195,7 @@ status = lx_nand_flash_extended_cache_enable(&my_nand_flash,
 
 ## <a name="lx_nand_flash_initialize"></a>lx_nand_flash_initialize
 
-Initiera stöd för NAND Flash
+Initiera FLASH-stöd för FLASH
 
 ### <a name="prototype"></a>Prototyp
 
@@ -203,20 +203,20 @@ Initiera stöd för NAND Flash
 UINT lx_nand_flash_initialize(void);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten initierar LevelX NAND Flash-stöd. Den måste anropas före andra LevelX NAND-API: er.
+Den här tjänsten initierar Flash-stöd för LevelX FLASH. Den måste anropas före andra LevelX- OCH BED-API:er.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **Ingen**
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **LX_SUCCESS**: (0X00) lyckad begäran.
-- **LX_ERROR**: (0x01) Det gick inte att initiera stöd för NAND Flash.
+- **LX_SUCCESS**: (0x00) Lyckad begäran.
+- **LX_ERROR:**(0x01) Fel vid initiering av FLASH-stöd.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
@@ -244,7 +244,7 @@ status = lx_nand_flash_initialize();
 
 ## <a name="lx_nand_flash_open"></a>lx_nand_flash_open
 
-Öppna NAND Flash instance
+Öppna FLASH-instansen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -255,25 +255,25 @@ UINT lx_nand_flash_open(
     UINT (*nand_driver_initialize) (LX_NAND_FLASH *));
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten öppnar en NAND Flash-instans med angivet NAND för Flash-kontroll block och driv rutins initiering. Observera att driv Rutinens initierings funktion ansvarar för att installera olika funktions pekare för att läsa, skriva och radera block/sidor för den NAND maskin vara som är associerad med NAND Flash-instansen.
+Den här tjänsten öppnar en FLASH-instans med det angivna FLASH-kontrollblocket och initieringsfunktionen för drivrutiner. Observera att initieringsfunktionen för drivrutiner ansvarar för att installera olika funktionspekare för läsning, skrivning och radering av block/sidor i DEN UTF-maskinvara som är associerad med den här FLASH-instansen.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **nand_flash**: NAND Flash instance Pointer.
-- **namn**: namnet på NAND-Flash-instansen.
-- **nand_driver_initialize**: funktions pekare till NAND för Flash-drivrutinen. Se kapitel 3 i den här guiden för mer information om NAND för Flash-drivrutinen.
+- **nand_flash:** FLASH-instans pekare.
+- **name**: Namnet på FLASH-instansen.
+- **nand_driver_initialize: Funktionspekaren** till INITIERINGsfunktionen för FLASH-drivrutin. Se kapitel 3 i den här guiden för mer information om ansvar för FLASH-drivrutiner.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **LX_SUCCESS**: (0X00) lyckad begäran.
-- **LX_ERROR**: (0x01) Det gick inte att öppna NAND Flash instance.
-- **LX_NO_MEMORY**: (0X08) driv rutinen tillhandahöll ingen buffert för att läsa en sida i RAM-minnet.
+- **LX_SUCCESS**: (0x00) Lyckad begäran.
+- **LX_ERROR**: (0x01) Fel vid öppning av FLASH-instansen.
+- **LX_NO_MEMORY**: (0x08) Drivrutinen har inte en buffert för att läsa in en sida i RAM-minnet.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -300,7 +300,7 @@ status = lx_nand_flash_open(&my_nand_flash,"my nand flash",
 
 ## <a name="lx_nand_flash_page_ecc_check"></a>lx_nand_flash_page_ecc_check
 
-Kontrol lera sidan för ECC-fel med korrigering
+Kontrollera sidan för ECC-fel med korrigering
 
 ### <a name="prototype"></a>Prototyp
 
@@ -311,23 +311,23 @@ UINT lx_nand_flash_page_ecc_check(
     UCHAR *ecc_buffer);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten verifierar integriteten för den tillhandahållna NAND-bufferten med angiven ECC. Sid storleken (definieras i NAND Flash instance Pointer) antas vara en multipel av 256-byte och den angivna ECC-koden kan korrigera ett 1-bitars fel i varje 256-byte-del av sidan.
+Den här tjänsten verifierar integriteten för den angivna UTF-sidbufferten med den angivna ECC:en. Sidstorleken (definieras i FLASH-instans pekaren) antas vara en multipel på 256 byte och DEN ECC-kod som anges kan korrigera ett 1-bitarsfel i varje 256 byte-del av sidan.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **nand_flash**: NAND Flash instance Pointer.
-- **page_buffer**: PEKAREN till NAND Flash Page buffer.
-- **ecc_buffer**: pekar på ECC för NAND Flash Page. Observera att det finns 3 ECC-byte per 256 byte-del av sidan.
+- **nand_flash:** FLASH-instans pekare.
+- page_buffer : **Pekare** till UTFRÅD-flash-sidbuffert.
+- **ecc_buffer:** Pekare till ECC för UTF-flash-sida. Observera att det finns 3 ECC-byte per 256 byte på sidan.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **LX_SUCCESS**: (0X00) NAND-sidan innehåller inga fel.
-- **LX_NAND_ERROR_CORRECTED**: (0X06) ett eller flera 1-bitars fel korrigerades på sidan NAND – korrigeringarna finns i kommandobufferten.
-- **LX_NAND_ERROR_NOT_CORRECTED**: (0X07) för många fel som ska korrigeras på NAND-sidan.
+- **LX_SUCCESS**: (0x00) UTTD-sidan har inga fel.
+- **LX_NAND_ERROR_CORRECTED:**(0x06) Ett eller flera 1-bitars fel har korrigerats på SIDAN UTSE – korrigeringar finns i sidbufferten.
+- **LX_NAND_ERROR_NOT_CORRECTED**: (0x07) För många fel för att korrigera på SIDAN UTT.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 LevelX-drivrutin
 
@@ -366,22 +366,22 @@ UINT lx_nand_flash_page_ecc_compute(
     UCHAR *ecc_buffer);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten beräknar ECC för den angivna NAND-kommandobufferten och returnerar ECC i den angivna ECC-bufferten. Sid storleken antas vara en multipel av 256 byte (definieras i NAND Flash instance Pointer). ECC-koden används för att verifiera sidans integritet när den läses vid ett senare tillfälle.
+Den här tjänsten beräknar ECC för den angivnaEDD-sidbufferten och returnerar ECC i den angivna ECC-bufferten. Sidstorleken förutsätts vara en multipel på 256 byte (definieras i FLASH-instans pekaren). ECC-koden används för att verifiera sidans integritet när den läses vid ett senare tillfälle.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **nand_flash**: NAND Flash instance Pointer.
-- **page_buffer**: PEKAREN till NAND Flash Page buffer.
-- **ecc_buffer**: pekare till destination för ECC på Flash-sidan NAND. Observera att måste vara 3 byte ECC-lagring per 256 byte-del av sidan. Till exempel kräver en 2048 byte-sida 24 byte för ECC.
+- **nand_flash:** FLASH-instans pekare.
+- page_buffer : **Pekare** till UTFRÅD-flash-sidbuffert.
+- **ecc_buffer:** Pekare till mål för ECC för FLASH-flash-sidan. Observera att måste vara 3 byte ECC-lagring per 256 byte på sidan. En 2 048 byte-sida skulle till exempel kräva 24 byte för ECC.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **LX_SUCCESS**: (0X00) ECC har beräknats.
-- **LX_ERROR**: (0x01) Det gick inte att beräkna ECC.
+- **LX_SUCCESS:**(0x00) ECC har beräknats.
+- **LX_ERROR**: (0x01) Fel vid beräkning av ECC.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 LevelX-drivrutin
 
@@ -409,7 +409,7 @@ status = lx_nand_flash_page_ecc_compute(&my_nand_flash, page_pointer, ecc_pointe
 
 ## <a name="lx_nand_flash_partial_defragment"></a>lx_nand_flash_partial_defragment
 
-Partiell defragmentering av NAND Flash instance
+Partiell defragmentering av FLASH-instansen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -419,23 +419,23 @@ UINT lx_nand_flash_partial_defragment(
     UINT max_blocks);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten defragmenterar den tidigare öppnade NAND Flash-instansen upp till det maximala antalet block som anges. Defragmenteringen maximerar antalet fria sidor och block.
+Den här tjänsten defragmenteras den tidigare öppnade FLASH-flash-instansen upp till det maximala antalet block som har angetts. Defragmenteringsprocessen maximerar antalet kostnadsfria sidor och block.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **nand_flash**: NAND Flash instance Pointer.
-- **max_blocks**: maximalt antal block.
+- **nand_flash:** FLASH-instans pekare.
+- **max_blocks:** Maximalt antal block.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **LX_SUCCESS**: (0X00) lyckad begäran.
-- **LX_ERROR**: (0x01) Det gick inte att defragmentera Flash-instansen.
+- **LX_SUCCESS**: (0x00) Lyckad begäran.
+- **LX_ERROR**: (0x01) Fel vid defragmentering av flash-instans.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -461,7 +461,7 @@ status = lx_nand_flash_partial_defragment(&my_nand_flash, 1);
 
 ## <a name="lx_nand_flash_sector_read"></a>lx_nand_flash_sector_read
 
-Läs NAND-Flash-sektor
+Läsa FLASH-sektor
 
 ### <a name="prototype"></a>Prototyp
 
@@ -472,24 +472,24 @@ UINT lx_nand_flash_sector_read(
     VOID *buffer);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten läser den logiska sektorn från NAND Flash-instansen och returnerar innehållet i den angivna bufferten om det lyckas. Observera att NAND sektor storlek alltid är sid storleken för den underliggande NAND-maskinvaran.
+Den här tjänsten läser den logiska sektorn från FLASH-instansen och returnerar innehållet i den angivna bufferten om det lyckas. Observera att DATORD-sektorstorleken alltid är sidstorleken för den underliggande DATORD-maskinvaran.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **nand_flash**: NAND Flash instance Pointer.
-- **logical_sector**: logisk sektor som ska läsas.
-- **buffert**: pekare till målet för innehållet i den logiska sektorn. Observera att bufferten antas vara storleken på storleken på NAND Flash-sidan och justeras för ULONG-åtkomst.
+- **nand_flash:** FLASH-instans pekare.
+- **logical_sector:** Logisk sektor att läsa.
+- **buffer**: Pekare till mål för innehållet i den logiska sektorn. Observera att bufferten antas vara storleken på DENDD-flashsidans storlek och justerad för ULONG-åtkomst.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **LX_SUCCESS**: (0X00) lyckad begäran.
-- **LX_ERROR**: (0x01) Det gick inte att läsa NAND Flash-sektor.
+- **LX_SUCCESS**: (0x00) Lyckad begäran.
+- **LX_ERROR**: (0x01) Fel vid läsning av FLASH-sektor FÖR FLASH.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -515,7 +515,7 @@ status = lx_nand_flash_sector_read(&my_nand_flash, 20, buffer);
 
 ## <a name="lx_nand_flash_sector_release"></a>lx_nand_flash_sector_release
 
-Version NAND Flash sektor
+Släpp FLASH-sektor
 
 ### <a name="prototype"></a>Prototyp
 
@@ -525,23 +525,23 @@ UINT lx_nand_flash_sector_release(
     ULONG logical_sector);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten släpper den logiska sektor mappningen i NAND Flash-instansen. Att släppa en logisk sektor när den inte används gör att LevelX slitaget är mer effektivt.
+Den här tjänsten släpper mappningen av den logiska sektorn i FLASH-instansen AVD. Om du frigör en logisk sektor när den inte används blir nivå X-förslitningen effektivare.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **nand_flash**: NAND Flash instance Pointer.
-- **logical_sector**: logisk sektor som ska frisläppas.
+- **nand_flash:** FLASH-instans pekare.
+- **logical_sector:** Logisk sektor som ska släppas.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **LX_SUCCESS**: (0X00) lyckad begäran.
-- **LX_ERROR**: (0X01) fel NAND Flash sektor Write.
+- **LX_SUCCESS**: (0x00) Lyckad begäran.
+- **LX_ERROR**: (0x01) Fel VID skrivning till FLASH-sektor.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -567,7 +567,7 @@ status = lx_nand_flash_sector_release(&my_nand_flash, 20);
 
 ## <a name="lx_nand_flash_sector_write"></a>lx_nand_flash_sector_write
 
-Skriv NAND Flash-sektor
+Skriva FLASH-sektor
 
 ### <a name="prototype"></a>Prototyp
 
@@ -578,25 +578,25 @@ UINT lx_nand_flash_sector_write(
     VOID *buffer);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skriver den angivna logiska sektorn i NAND-Flash-instansen.
+Den här tjänsten skriver den angivna logiska sektorn i FLASH-instansen AVD.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **nand_flash**: NAND Flash instance Pointer.
-- **logical_sector**: logisk sektor som ska skrivas.
-- **Buffer**: pekar mot innehållet i den logiska sektorn. Observera att bufferten antas vara storleken på storleken på NAND Flash-sidan och justeras för ULONG-åtkomst.
+- **nand_flash:** FLASH-instans pekare.
+- **logical_sector:** Logisk sektor att skriva.
+- **buffer**: Pekare till innehållet i den logiska sektorn. Observera att bufferten antas vara storleken på DENDD-flashsidans storlek och justerad för ULONG-åtkomst.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **LX_SUCCESS**: (0X00) lyckad begäran.
-- **LX_NO_SECTORS**: (protokollnumret 0x02) det finns inga fler kostnads fria sektorer att utföra skrivningen.
-- **LX_ERROR**: (0x01) Det gick inte att frigöra NAND Flash-sektor.
+- **LX_SUCCESS**: (0x00) Lyckad begäran.
+- **LX_NO_SECTORS**: (0x02) Inga fler lediga sektorer är tillgängliga för att utföra skrivning.
+- **LX_ERROR**: (0x01) Fel vid frisläppning av FLASH-sektor.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 

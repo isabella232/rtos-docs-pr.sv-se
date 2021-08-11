@@ -1,23 +1,23 @@
 ---
-title: Kapitel 4 – Beskrivning av USBX Device Services
-description: Läs mer om USBX Device Services.
+title: Kapitel 4 – Beskrivning av USBX-enhetstjänster
+description: Läs mer om USBX-enhetstjänster.
 author: philmea
 ms.author: philmea
 ms.date: 5/19/2020
 ms.service: rtos
 ms.topic: article
-ms.openlocfilehash: d4aea7470ba2d9075296164b9d1fb61db4f88523
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 9d88d9bd177a251a00fec6757fc1f1494b56bab9655a55f973481f273f0683ee
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104828137"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116797559"
 ---
-# <a name="description-of-usbx-device-services"></a>Beskrivning av USBX Device Services
+# <a name="description-of-usbx-device-services"></a>Beskrivning av USBX-enhetstjänster
 
 ### <a name="ux_device_stack_alternate_setting_get"></a>ux_device_stack_alternate_setting_get
 
-Hämta aktuell alternativ inställning för ett gränssnitts värde
+Hämta aktuell alternativ inställning för ett gränssnittsvärde
 
 ### <a name="prototype"></a>Prototyp
 
@@ -25,18 +25,18 @@ Hämta aktuell alternativ inställning för ett gränssnitts värde
 UINT ux_device_stack_alternate_setting_get(ULONG interface_value);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen används av USB-värden för att hämta den aktuella alternativa inställningen för ett angivet gränssnitts värde. Den anropas av styrenhetens driv rutin när en **GET_INTERFACE** -begäran tas emot.
+Den här funktionen används av USB-värden för att hämta den aktuella alternativa inställningen för ett specifikt gränssnittsvärde. Den anropas av kontrollantdrivrutinen när en **GET_INTERFACE** tas emot.
 
 ### <a name="input-parameter"></a>Indataparameter
 
-- **Interface_value** Gränssnitts värde som den aktuella alternativa inställningen efterfrågar
+- **Interface_value** Gränssnittsvärde som den aktuella alternativa inställningen efterfrågas för
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **UX_SUCCESS** (0x00) data överföringen har slutförts.
-- **UX_ERROR** (0Xff) felaktigt gränssnitts värde.
+- **UX_SUCCESS** (0x00) Dataöverföringen slutfördes.
+- **UX_ERROR** (0xFF) Fel gränssnittsvärde.
 
 ### <a name="example"></a>Exempel
 
@@ -52,7 +52,7 @@ status = ux_device_stack_alternate_setting_get(interface_value);
 
 ### <a name="ux_device_stack_alternate_setting_set"></a>ux_device_stack_alternate_setting_set
 
-Ange den aktuella alternativa inställningen för ett gränssnitts värde
+Ange aktuell alternativ inställning för ett gränssnittsvärde
 
 ### <a name="prototype"></a>Prototyp
 
@@ -62,23 +62,23 @@ UINT ux_device_stack_alternate_setting_set(
     ULONG alternate_setting_value);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen används av USB-värden för att ange den aktuella alternativa inställningen för ett angivet gränssnitts värde. Den anropas av styrenhetens driv rutin när en **SET_INTERFACE** -begäran tas emot. När **SET_INTERFACE** har slutförts används värdena för de alternativa inställningarna i klassen.
+Den här funktionen används av USB-värden för att ange den aktuella alternativa inställningen för ett specifikt gränssnittsvärde. Den anropas av kontrollantdrivrutinen när en **SET_INTERFACE** tas emot. När **SET_INTERFACE** har slutförts tillämpas värdena för de alternativa inställningarna på klassen .
 
-Enhets stacken utfärdar en **UX_SLAVE_CLASS_COMMAND_CHANGE** till den klass som äger det här gränssnittet för att återspegla ändringen av en alternativ inställning.
+Enhetsstacken utfärdar en **UX_SLAVE_CLASS_COMMAND_CHANGE** den klass som äger det här gränssnittet för att återspegla ändringen av den alternativa inställningen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **interface_value**: gränssnitts värde som den aktuella alternativa inställningen har angetts för.
-- **alternate_setting_value**: det nya värdet för alternativ inställning.
+- **interface_value:** Gränssnittsvärde som den aktuella alternativa inställningen har angetts för.
+- **alternate_setting_value:** Det nya alternativa inställningsvärdet.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **UX_SUCCESS** (0x00) data överföringen har slutförts.
-- **UX_INTERFACE_HANDLE_UNKNOWN** (0X52) inget gränssnitt har bifogats.
-- **UX_FUNCTION_NOT_SUPPORTED** -enheten (0x54) har inte kon figurer ATS.
-- **UX_ERROR** (0Xff) felaktigt gränssnitts värde.
+- **UX_SUCCESS** (0x00) Dataöverföringen slutfördes.
+- **UX_INTERFACE_HANDLE_UNKNOWN** (0x52) Inget gränssnitt kopplat.
+- **UX_FUNCTION_NOT_SUPPORTED** (0x54) Enheten har inte konfigurerats.
+- **UX_ERROR** (0xFF) Fel gränssnittsvärde.
 
 ### <a name="example"></a>Exempel
 
@@ -95,7 +95,7 @@ status = ux_device_stack_alternate_setting_set(interface_value, alternate_settin
 
 ### <a name="ux_device_stack_class_register"></a>ux_device_stack_class_register
 
-Registrera en ny USB-enhets klass
+Registrera en ny USB-enhetsklass
 
 ### <a name="prototype"></a>Prototyp
 
@@ -108,28 +108,28 @@ UINT ux_device_stack_class_register(
     VOID *parameter);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen används av programmet för att registrera en ny USB-enhets klass. Den här registreringen startar en klass behållare och inte en instans av klassen. En klass måste ha en aktiv tråd och vara kopplad till ett särskilt gränssnitt.
+Den här funktionen används av programmet för att registrera en ny USB-enhetsklass. Den här registreringen startar en klasscontainer och inte en instans av klassen . En klass ska ha en aktiv tråd och kopplas till ett specifikt gränssnitt.
 
-Vissa klasser förväntar sig en parameter-eller parameter lista. Enhets lagrings klassen förväntar sig till exempel geometrin för lagrings enheten som den försöker emulera. Parameter fältet är därför beroende av klass kravet och kan vara ett värde eller en pekare till en struktur som är ifylld med klass värden.
+Vissa klasser förväntar sig en parameter eller parameterlista. Enhetslagringsklassen förväntar sig till exempel geometrin för lagringsenheten som den försöker emulera. Parameterfältet är därför beroende av klasskravet och kan vara ett värde eller en pekare till en struktur som är fylld med klassvärdena.
 
 > [!NOTE]
-> C-strängen för class_name måste vara NULL-terminerad och längden på den (utan själva NULL-begränsaren) får inte vara större än **UX_MAX_CLASS_NAME_LENGTH**.
+> C-strängen för class_name måste vara NULL-avslutad och längden på den (utan själva NULL-terminatorn) får inte vara **större än UX_MAX_CLASS_NAME_LENGTH**.
 
 ### <a name="parameters"></a>Parametrar
 
-- **class_name** Klass namn
-- **class_entry_function** Funktionen post i klassen.
-- **configuration_number** Konfigurations numret som den här klassen är kopplad till.
-- **interface_number** Gränssnitts numret som den här klassen är kopplad till.
-- **parameter** En pekare till en lista med landsspecifika parametrar.
+- **class_name** Klassnamn
+- **class_entry_function** Entry-funktionen för klassen .
+- **configuration_number** Konfigurationsnumret som den här klassen är kopplad till.
+- **interface_number** Gränssnittsnumret som den här klassen är kopplad till.
+- **parameter** En pekare till en klassspecifik parameterlista.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **UX_SUCCESS** (0x00) klassen har registrerats
-- **UX_MEMORY_INSUFFICIENT** (0X12) inga poster kvar i klass tabellen.
-- **UX_THREAD_ERROR** (0X16) kan inte skapa en klass tråd.
+- **UX_SUCCESS** (0x00) Klassen registrerades
+- **UX_MEMORY_INSUFFICIENT** (0x12) Inga poster kvar i klasstabellen.
+- **UX_THREAD_ERROR** (0x16) Det går inte att skapa en klasstråd.
 
 ### <a name="example"></a>Exempel
 
@@ -145,7 +145,7 @@ status = ux_device_stack_class_register(_ux_system_slave_class_storage_name ux_d
 
 ### <a name="ux_device_stack_class_unregister"></a>ux_device_stack_class_unregister
 
-Avregistrera en USB-enhets klass
+Avregistrera en USB-enhetsklass
 
 ### <a name="prototype"></a>Prototyp
 
@@ -155,22 +155,22 @@ UINT ux_device_stack_class_unregister(
     UINT (*class_entry_function)(struct UX_SLAVE_CLASS_COMMAND_STRUCT*));
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen används av programmet för att avregistrera en USB-enhets klass.
+Den här funktionen används av programmet för att avregistrera en USB-enhetsklass.
 
 > [!NOTE]
-> C-strängen för class_name måste vara NULL-terminerad och längden på den (utan själva NULL-begränsaren) får inte vara större än **UX_MAX_CLASS_NAME_LENGTH**.
+> C-strängen för class_name måste vara NULL-avslutad och längden på den (utan själva NULL-terminatorn) får inte vara **större än UX_MAX_CLASS_NAME_LENGTH**.
 
 ### <a name="parameters"></a>Parametrar
 
-- **class_name**: klass namn
-- **class_entry_function**: post funktionen i klassen.
+- **class_name**: Klassnamn
+- **class_entry_function:** Postfunktionen i klassen .
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **UX_SUCCESS** (0x00) klassen har avregistrerats.
-- **UX_NO_CLASS_MATCH** (0x57) klassen är inte registrerad.
+- **UX_SUCCESS** (0x00) Klassen avregistrerades.
+- **UX_NO_CLASS_MATCH** (0x57) Klassen är inte registrerad.
 
 ### <a name="example"></a>Exempel
 
@@ -193,17 +193,17 @@ Hämta den aktuella konfigurationen
 UINT ux_device_stack_configuration_get(VOID);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen används av värden för att hämta den aktuella konfigurationen som körs i enheten.
+Den här funktionen används av värden för att hämta den aktuella konfigurationen som körs på enheten.
 
 ### <a name="input-parameter"></a>Indataparameter
 
-Inget
+Ingen
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0x00) data överföringen har slutförts.
+- **UX_SUCCESS** (0x00) Dataöverföringen slutfördes.
 
 ### <a name="example"></a>Exempel
 
@@ -226,17 +226,17 @@ Ange den aktuella konfigurationen
 UINT ux_device_stack_configuration_set(ULONG configuration_value);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen används av värden för att ange den aktuella konfigurationen som körs i enheten. Vid mottagande av det här kommandot aktiverar USB-enheten den alternativa inställningen 0 för varje gränssnitt som är anslutet till den här konfigurationen.
+Den här funktionen används av värden för att ange den aktuella konfigurationen som körs på enheten. Vid mottagning av det här kommandot aktiverar USB-enhetsstacken den alternativa inställningen 0 för varje gränssnitt som är anslutet till den här konfigurationen.
 
 ### <a name="input-parameter"></a>Indataparameter
 
-- **configuration_value** Konfiguration svärdet som valts av värden.
+- **configuration_value** Konfigurationsvärdet som valts av värden.
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0x00) konfigurationen har angetts.
+- **UX_SUCCESS** (0x00) Konfigurationen har angetts.
 
 ### <a name="example"></a>Exempel
 
@@ -263,25 +263,25 @@ UINT ux_device_stack_descriptor_send(
     ULONG host_length);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen används av enhets sidan för att returnera en beskrivning till värden. Den här beskrivningen kan vara en enhets beskrivning, en konfigurations beskrivning eller en sträng beskrivning.
+Den här funktionen används av enheten för att returnera en beskrivning till värden. Den här beskrivningen kan vara en enhetsbeskrivning, en konfigurationsbeskrivning eller en strängbeskrivning.
 
 ### <a name="parameters"></a>Parametrar
 
-- **descriptor_type**: typ av beskrivning. Måste vara något av följande värden.
+- **descriptor_type:** Beskrivningens typ. Måste vara något av följande värden.
   - **UX_DEVICE_DESCRIPTOR_ITEM**
   - **UX_CONFIGURATION_DESCRIPTOR_ITEM**
   - **UX_STRING_DESCRIPTOR_ITEM**
   - **UX_DEVICE_QUALIFIER_DESCRIPTOR_ITEM**
   - **UX_OTHER_SPEED_DESCRIPTOR_ITEM**
-- **request_index**: indexet för beskrivningen.
-- **host_length**: längden som krävs av värden.
+- **request_index:** Indexet för beskrivningen.
+- **host_length:** Den längd som krävs av värden.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **UX_SUCCESS** (0x00) data överföringen har slutförts.
-- **UX_ERROR** (0xFF) överföringen slutfördes inte.
+- **UX_SUCCESS** (0x00) Dataöverföringen slutfördes.
+- **UX_ERROR** (0xFF) Överföringen slutfördes inte.
 
 ### <a name="example"></a>Exempel
 
@@ -299,7 +299,7 @@ status = ux_device_stack_descriptor_send(descriptor_type, request_index, host_le
 
 ### <a name="ux_device_stack_disconnect"></a>ux_device_stack_disconnect
 
-Koppla bort enhets stack
+Koppla från enhetsstack
 
 ### <a name="prototype"></a>Prototyp
 
@@ -307,17 +307,17 @@ Koppla bort enhets stack
 UINT ux_device_stack_disconnect(VOID);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-VBUS Manager anropar den här funktionen när det finns en enhets anslutning. Enhets stacken meddelar alla klasser som är registrerade för enheten och släpper därefter alla enhets resurser.
+VBUS-hanteraren anropar den här funktionen när enheten kopplas från. Enhetsstacken informerar alla klasser som är registrerade på den här enheten och kommer därefter att släppa alla enhetsresurser.
 
 ### <a name="input-parameter"></a>Indataparameter
 
-Inget
+Ingen
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0x00) enheten kopplades från.
+- **UX_SUCCESS** (0x00) Enheten kopplades från.
 
 ### <a name="example"></a>Exempel
 
@@ -332,7 +332,7 @@ status = ux_device_stack_disconnect();
 
 ### <a name="ux_device_stack_endpoint_stall"></a>ux_device_stack_endpoint_stall
 
-Villkor för begär slut punkts ficka
+Villkor för slutpunktsstopp för begäran
 
 ### <a name="prototype"></a>Prototyp
 
@@ -340,18 +340,18 @@ Villkor för begär slut punkts ficka
 UINT ux_device_stack_endpoint_stall(UX_SLAVE_ENDPOINT*endpoint);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen anropas av USB-enhetens klass när en slut punkt ska returnera ett ficka-villkor till värden.
+Den här funktionen anropas av USB-enhetsklassen när en slutpunkt ska returnera ett stoppvillkor till värden.
 
 ### <a name="input-parameter"></a>Indataparameter
 
-- **slut punkt** Den slut punkt där parkerings villkoret har begärts.
+- **slutpunkt** Slutpunkten där villkoret Stall begärs.
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0X00) den här åtgärden lyckades.
-- **UX_ERROR** (0xFF) enheten är i ett ogiltigt tillstånd.
+- **UX_SUCCESS** (0x00) Den här åtgärden lyckades.
+- **UX_ERROR** (0xFF) Enheten är i ett ogiltigt tillstånd.
 
 ### <a name="example"></a>Exempel
 
@@ -366,7 +366,7 @@ status = ux_device_stack_endpoint_stall(endpoint);
 
 ### <a name="ux_device_stack_host_wakeup"></a>ux_device_stack_host_wakeup
 
-Väcka värden
+Väck värden
 
 ### <a name="prototype"></a>Prototyp
 
@@ -374,18 +374,18 @@ Väcka värden
 UINT ux_device_stack_host_wakeup(VOID);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen anropas när enheten vill aktivera värden. Det här kommandot är endast giltigt när enheten är i paus läge. Det är upp till enhets programmet som avgör när du vill aktivera USB-värden. Ett USB-modem kan till exempel aktivera en värd när den identifierar en RING signal på telefon linjen.
+Den här funktionen anropas när enheten vill väcka värden. Det här kommandot är endast giltigt när enheten är i pausläge. Det är upp till enhetsprogrammet att bestämma när det vill väcka USB-värden. Ett USB-modem kan till exempel väcka en värd när den identifierar en RING-signal på telefonlinjen.
 
 ### <a name="input-parameter"></a>Indataparameter
 
-Inget
+Ingen
 
 ### <a name="return-values"></a>Returvärden
 
-- **UX_SUCCESS** (0x00) anropet lyckades.
-- **UX_FUNCTION_NOT_SUPPORTED** (0x54) anropet misslyckades (enheten var förmodligen inte i paus läge).
+- **UX_SUCCESS** (0x00) Anropet lyckades.
+- **UX_FUNCTION_NOT_SUPPORTED** (0x54) Anropet misslyckades (enheten var förmodligen inte i inaktiverat läge).
 
 ### <a name="example"></a>Exempel
 
@@ -400,7 +400,7 @@ status = ux_device_stack_host_wakeup();
 
 ### <a name="ux_device_stack_initialize"></a>ux_device_stack_initialize
 
-Initiera USB-enhets stack
+Initiera USB-enhetsstack
 
 ### <a name="prototype"></a>Prototyp
 
@@ -417,27 +417,27 @@ UINT ux_device_stack_initialize(
     UINT (*ux_system_slave_change_function)(ULONG)));
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen anropas av programmet för att initiera USB-enhetens stack. De initierar inga klasser eller styrenheter. Detta bör göras med separata funktions anrop. Det här anropet tillhandahåller huvudsakligen stacken med enhets ramverket för USB-funktionen. Det stöder både hög och fullständig hastighet med möjligheten att ha helt separata enhets ramverk för varje hastighet. Sträng ramverk och flera språk stöds.
+Den här funktionen anropas av programmet för att initiera USB-enhetsstacken. Inga klasser eller kontrollanter initieras. Detta bör göras med separata funktionsanrop. Det här anropet tillhandahåller huvudsakligen stacken med enhetsramverket för USB-funktionen. Den stöder både höga och fullständiga hastigheter med möjlighet att ha ett helt separat enhetsramverk för varje hastighet. Strängramverk och flera språk stöds.
 
 ### <a name="parameters"></a>Parametrar
 
-- **device_framework_high_speed**: pekar mot ramverket med hög hastighet.
-- **device_framework_length_high_speed**: längden på ramverket med hög hastighet.
-- **device_framework_full_speed**: pekar mot ramverket med full hastighet.
-- **device_framework_length_full_speed**: längden på ramverket med full hastighet.
-- **string_framework**: pekar mot sträng ramverk.
-- **string_framework_length**: sträng ramverkets längd.
-- **language_id_framework**: pekar mot sträng språks ramverk.
-- **language_id_framework_length**: längden på sträng språk ramverket.
-- **ux_system_slave_change_function**: funktion som ska anropas när enhetens tillstånd ändras.
+- **device_framework_high_speed:** Pekare till ramverket för hög hastighet.
+- **device_framework_length_high_speed:** Längden på ramverket för hög hastighet.
+- **device_framework_full_speed:** Pekare till ramverket för full hastighet.
+- **device_framework_length_full_speed:** Längden på ramverket för full hastighet.
+- **string_framework**: Pekare till strängramverk.
+- **string_framework_length:** Längden på strängramverket.
+- **language_id_framework**: Pekare till ramverket för strängspråk.
+- **language_id_framework_length:** Längden på ramverket för strängspråk.
+- **ux_system_slave_change_function:** Funktionen anropas när enhetens tillstånd ändras.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **UX_SUCCESS** (0X00) den här åtgärden lyckades.
-- **UX_MEMORY_INSUFFICIENT** (0x12) det finns inte tillräckligt med minne för att initiera stacken.
-- **UX_DESCRIPTOR_CORRUPTED** (0x42) beskrivningen är ogiltig.
+- **UX_SUCCESS** (0x00) Den här åtgärden lyckades.
+- **UX_MEMORY_INSUFFICIENT** (0x12) Det finns inte tillräckligt med minne för att initiera stacken.
+- **UX_DESCRIPTOR_CORRUPTED** (0x42) Beskrivningen är ogiltig.
 
 ### <a name="example"></a>Exempel
 
@@ -527,12 +527,12 @@ UCHAR language_id_framework[] = {
 };
 ```
 
-Programmet kan begära ett anrop igen när styrenheten ändrar sitt tillstånd. De två huvud tillstånden för kontrollanten är:
+Programmet kan begära ett samtal tillbaka när kontrollanten ändrar sitt tillstånd. Kontrollantens två huvud tillstånd är:
 
 - **UX_DEVICE_SUSPENDED**
 - **UX_DEVICE_RESUMED**
 
-Om programmet inte behöver pausa/återuppta signaler, skulle det tillhandahålla en UX_NULL-funktion.
+Om programmet inte behöver pausa/återuppta-signaler skulle det tillhandahålla en UX_NULL funktion.
 
 ```c
 UINT status;
@@ -550,7 +550,7 @@ status = ux_device_stack_initialize(&device_framework_high_speed,
 
 ### <a name="ux_device_stack_interface_delete"></a>ux_device_stack_interface_delete
 
-Ta bort ett stack gränssnitt
+Ta bort ett stackgränssnitt
 
 ### <a name="prototype"></a>Prototyp
 
@@ -558,17 +558,17 @@ Ta bort ett stack gränssnitt
 UINT ux_device_stack_interface_delete(UX_SLAVE_INTERFACE*interface);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen anropas när ett gränssnitt ska tas bort. Ett gränssnitt tas bort när en enhet extraheras eller följer en återställning av bussen eller när det finns en ny alternativ inställning.
+Den här funktionen anropas när ett gränssnitt ska tas bort. Ett gränssnitt tas antingen bort när en enhet extraheras eller efter en bussåterställning, eller när det finns en ny alternativ inställning.
 
 ### <a name="input-parameter"></a>Indataparameter
 
-- **gränssnitt**: pekar på det gränssnitt som ska tas bort.
+- **interface**: Pekare till gränssnittet som ska tas bort.
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0X00) den här åtgärden lyckades.
+- **UX_SUCCESS** (0x00) Den här åtgärden lyckades.
 
 ### <a name="example"></a>Exempel
 
@@ -583,7 +583,7 @@ status = ux_device_stack_interface_delete(interface);
 
 ### <a name="ux_device_stack_interface_get"></a>ux_device_stack_interface_get
 
-Hämta det aktuella gränssnitt svärdet
+Hämta det aktuella gränssnittsvärdet
 
 ### <a name="prototype"></a>Prototyp
 
@@ -591,21 +591,21 @@ Hämta det aktuella gränssnitt svärdet
 UINT ux_device_stack_interface_get(UINT interface_value);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen anropas när värden frågar det aktuella gränssnittet. Enheten returnerar det aktuella gränssnitt svärdet.
+Den här funktionen anropas när värden frågar det aktuella gränssnittet. Enheten returnerar det aktuella gränssnittsvärdet.
 
 > [!NOTE]
-> Den här funktionen är föråldrad. Den är tillgänglig för äldre program vara, men den nya program varan bör använda funktionen ***ux_device_stack_alternate_setting_get*** i stället.
+> Den här funktionen är inaktuell. Den är tillgänglig för äldre programvara, men ny programvara bör använda ***ux_device_stack_alternate_setting_get*** i stället.
 
 ### <a name="input-parameter"></a>Indataparameter
 
-- **interface_value** Gränssnitts värde att returnera.
+- **interface_value** Gränssnittsvärde som ska returneras.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **UX_SUCCESS** (0X00) den här åtgärden lyckades.
-- **UX_ERROR** (0Xff) inget gränssnitt finns.
+- **UX_SUCCESS** (0x00) Den här åtgärden lyckades.
+- **UX_ERROR** (0xFF) Det finns inget gränssnitt.
 
 ### <a name="example"></a>Exempel
 
@@ -622,7 +622,7 @@ status = ux_device_stack_interface_get(interface_value);
 
 ### <a name="ux_device_stack_interface_set"></a>ux_device_stack_interface_set
 
-Ändra gränssnittets alternativa inställning
+Ändra den alternativa inställningen för gränssnittet
 
 ### <a name="prototype"></a>Prototyp
 
@@ -633,20 +633,20 @@ UINT ux_device_stack_interface_set(
     ULONG alternate_setting_value);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här funktionen anropas när värden begär en ändring av den alternativa inställningen för gränssnittet.
 
 ### <a name="parameters"></a>Parametrar
 
-- **device_framework**: adressen för det här gränssnittets enhets ramverk.
-- **device_framework_length**: enhets ramverkets längd.
-- **alternate_setting_value**: alternativ inställnings värde som ska användas av det här gränssnittet.
+- **device_framework:** Adressen till enhetsramverket för det här gränssnittet.
+- **device_framework_length:** Enhetens ramverks längd.
+- **alternate_setting_value:** Alternativt inställningsvärde som ska användas av det här gränssnittet.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **UX_SUCCESS** (0X00) den här åtgärden lyckades.
-- **UX_ERROR** (0Xff) inget gränssnitt finns.
+- **UX_SUCCESS** (0x00) Den här åtgärden lyckades.
+- **UX_ERROR** (0xFF) Det finns inget gränssnitt.
 
 ### <a name="example"></a>Exempel
 
@@ -665,7 +665,7 @@ status = ux_device_stack_interface_set(device_framework,
 
 ### <a name="ux_device_stack_interface_start"></a>ux_device_stack_interface_start
 
-Starta sökning efter en klass för att äga en gränssnitts instans
+Börja söka efter en klass för att äga en gränssnittsinstans
 
 ### <a name="prototype"></a>Prototyp
 
@@ -673,18 +673,18 @@ Starta sökning efter en klass för att äga en gränssnitts instans
 UINT ux_device_stack_interface_start(UX_SLAVE_INTERFACE*interface);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen anropas när ett gränssnitt har valts av värden och enhets stacken måste söka efter en enhets klass för att äga den här gränssnitts instansen.
+Den här funktionen anropas när ett gränssnitt har valts av värden och enhetsstacken måste söka efter en enhetsklass för att äga den här gränssnittsinstansen.
 
 ### <a name="input-parameter"></a>Indataparameter
 
-- **gränssnitt**: pekar mot gränssnittet som skapats.
+- **interface**: Pekare till det gränssnitt som skapats.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **UX_SUCCESS** (0X00) den här åtgärden lyckades.
-- **UX_NO_CLASS_MATCH** (0x57) det finns ingen klass för det här gränssnittet.
+- **UX_SUCCESS** (0x00) Den här åtgärden lyckades.
+- **UX_NO_CLASS_MATCH** (0x57) Det finns ingen klass för det här gränssnittet.
 
 ### <a name="example"></a>Exempel
 
@@ -710,21 +710,21 @@ UINT ux_device_stack_transfer_request(
     ULONG host_length);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen anropas när en klass eller stacken vill överföra data till värden. Värden avsöker alltid enheten men enheten kan förbereda data i förväg.
+Den här funktionen anropas när en klass eller stack vill överföra data till värden. Värden avsöker alltid enheten, men enheten kan förbereda data i förväg.
 
 ### <a name="parameters"></a>Parametrar
 
-- **transfer_request**: pekar mot överförings förfrågan.
-- **slave_length**: den längd som enheten vill returnera.
-- **host_length**: längden på värden har begärts.
+- **transfer_request:** Pekare till överföringsbegäran.
+- **slave_length:** Längden som enheten vill returnera.
+- **host_length:** Längden som värden har begärt.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **UX_SUCCESS** (0X00) den här åtgärden lyckades.
-- **UX_TRANSFER_NOT_READY** (0x25) enheten är i ett ogiltigt tillstånd. den måste vara **ansluten**, **konfigurerad** eller **adresserad**.
-- **UX_ERROR** (0Xff) transport fel.
+- **UX_SUCCESS** (0x00) Den här åtgärden lyckades.
+- **UX_TRANSFER_NOT_READY** (0x25) Enheten är i ett ogiltigt tillstånd. den måste vara **ANSLUTEN,** **KONFIGURERAD** eller **ADRESSERAD.**
+- **UX_ERROR** (0xFF) Transportfel.
 
 ### <a name="example"></a>Exempel
 
@@ -769,18 +769,18 @@ UINT ux_device_stack_transfer_abort(
     ULONG completion_code);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen anropas när ett program måste avbryta en överförings förfrågan eller när stacken måste avbryta en överföringsbegäran som är associerad med en slut punkt.
+Den här funktionen anropas när ett program behöver avbryta en överföringsbegäran eller när stacken behöver avbryta en överföringsbegäran som är associerad med en slutpunkt.
 
 ### <a name="parameters"></a>Parametrar
 
-- **transfer_request**: pekar mot överförings förfrågan.
-- **completion_code**: den felkod som ska returneras till klassen som väntar på att denna överföringsbegäran ska slutföras.
+- **transfer_request:** Pekare till överföringsbegäran.
+- **completion_code:** Felkod som ska returneras till klassen som väntar på att överföringsbegäran ska slutföras.
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0X00) den här åtgärden lyckades.
+- **UX_SUCCESS** (0x00) Den här åtgärden lyckades.
 
 ### <a name="example"></a>Exempel
 
@@ -804,9 +804,9 @@ Unitialize-stack
 UINT ux_device_stack_uninitialize();
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen anropas när ett program behöver unitialize USBX Device-stacken – alla enhets stack resurser frigörs. Detta ska anropas när alla klasser har avregistrerats via ux_device_stack_class_unregister.
+Den här funktionen anropas när ett program behöver unitialisera USBX-enhetsstacken – alla enhetsstackresurser frigörs. Detta bör anropas när alla klasser har avregistrerats via ux_device_stack_class_unregister.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -814,4 +814,4 @@ Ingen
 
 ### <a name="return-value"></a>Returvärde
 
-**UX_SUCCESS** (0X00) den här åtgärden lyckades.
+**UX_SUCCESS** (0x00) Den här åtgärden lyckades.

@@ -1,96 +1,96 @@
 ---
-title: Kapitel 2 – installation & användning av Azure återställnings tider ThreadX SMP
-description: Det här kapitlet innehåller en beskrivning av olika problem som rör Installation, konfiguration och användning av HighPerformance Azure återställnings tider ThreadX SMP kernel.
+title: Kapitel 2 – Installation & användning av Azure RTOS ThreadX SMP
+description: Det här kapitlet innehåller en beskrivning av olika problem som rör installation, installation och användning av Azure RTOS ThreadX SMP-kernel.
 author: philmea
 ms.author: philmea
 ms.date: 06/04/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: cc352ebd7965c84c341d25dfa7bff2671dfb5e66
-ms.sourcegitcommit: 60ad844b58639d88830f2660ab0c4ff86b92c10f
+ms.openlocfilehash: d0a63f3798adbc634a43cdda7e9d44941de655d9333f9ae0fb4181f1a6c0566e
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 04/07/2021
-ms.locfileid: "106550260"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116801911"
 ---
-# <a name="chapter-2---installation--use-of-azure-rtos-threadx-smp"></a>Kapitel 2 – installation & användning av Azure återställnings tider ThreadX SMP
+# <a name="chapter-2---installation--use-of-azure-rtos-threadx-smp"></a>Kapitel 2 – Installation & användning av Azure RTOS ThreadX SMP
 
-Det här kapitlet innehåller en beskrivning av olika problem som rör Installation, konfiguration och användning av HighPerformance Azure återställnings tider ThreadX SMP kernel.
+Det här kapitlet innehåller en beskrivning av olika problem som rör installation, installation och användning av Azure RTOS ThreadX SMP-kernel.
 
-## <a name="host-considerations"></a>Värd överväganden
+## <a name="host-considerations"></a>Värdöverväganden
 
-Inbäddad program vara utvecklas vanligt vis på Windows-eller Linux-värddatorer (UNIX). När programmet har kompilerats, länkats och finns på värden laddas den ned till mål maskin varan för körning.
+Inbäddad programvara utvecklas vanligtvis på Windows- eller Linux-värddatorer (Unix). När programmet har kompilerats, länkats och finns på värden laddas det ned till målmaskinvaran för körning.
 
-Normalt görs mål hämtningen från utvecklings verktygets fel sökare. Efter nedladdningen ansvarar fel sökaren för att tillhandahålla mål körnings kontroll (gå till, stoppa, Bryt punkt osv.) samt åtkomst till minne och processor register.
+Vanligtvis görs målnedladdningen inifrån felsökningsprogrammet för utvecklingsverktyget. Efter nedladdningen ansvarar felsökningsprogrammet för att tillhandahålla målkörningskontroll (go, halt, brytpunkt osv.) samt åtkomst till minne och processorregister.
 
-De flesta utvecklings verktyg för fel sökning kommunicerar med mål maskin varan via OCD-anslutningar (on-chip debug) som JTAG (IEEE 1149,1) och fel söknings läge för bakgrunden (BDM). Fel sökare kommunicerar också med mål maskin vara via ICE-anslutningar (In-Circuit emulation). Både OCD-och ICE-anslutningar ger robusta lösningar med minimalt intrång på den inhemske program varan.
+De flesta felsökningsverktyg kommunicerar med målmaskinvaran via OCD-anslutningar (on-chip debug), till exempel JTAG (IEEE 1149.1) och Bakgrundsfelsökningsläge (BDM). Felsökare kommunicerar också med målmaskinvaran via In-Circuit(ICE)-anslutningar. Både OCD- och ICE-anslutningar ger robusta lösningar med minimal intrång på målprogramvaran.
 
-För resurser som används på värden levereras käll koden för ThreadX SMP i ASCII-format och kräver cirka 1 MB utrymme på värddatorns hård disk.
-
-> [!IMPORTANT]
-> Granska den tillhandahållna **readme_threadx.txt** -filen för ytterligare överväganden och alternativ för värd systemet.
-
-## <a name="target-considerations"></a>Mål överväganden
-
-ThreadX SMP kräver mellan 2 KByte och 20 KB skrivskyddat minne (ROM) på målet. Ytterligare 1 till 2 KByte av målets RAM-minne (Random Access Memory) krävs för den ThreadX SMP-systemstacken och andra globala data strukturer.
-
-För timer-relaterade funktioner som tids gränser för tjänst anrop, tids segmentering och programtimers för att fungera, måste den underliggande mål maskin varan tillhandahålla en regelbunden avbrotts källa. Om processorn har den här funktionen används den av ThreadX SMP. Annars, om mål processorn inte har möjlighet att generera ett periodiskt avbrott måste användarens maskin vara tillhandahålla den. Installation och konfiguration av timer-avbrott finns vanligt vis i ***tx_initialize_low_level*** sammansättnings filen i ThreadX SMP-distribution.
+Precis som för resurser som används på värden levereras källkoden för ThreadX SMP i ASCII-format och kräver cirka 1 MB utrymme på värddatorns hårddisk.
 
 > [!IMPORTANT]
-> ThreadX SMP fungerar fortfarande även om ingen återkommande timer-källa för avbrott är tillgänglig. Men ingen av de timer-relaterade tjänsterna fungerar. Granska den tillhandahållna **readme_threadx.txt** -filen för eventuella ytterligare överväganden och/eller alternativ i värd systemet.
+> Granska den angivna **readme_threadx.txt** ytterligare överväganden och alternativ för värdsystem.
 
-## <a name="product-distribution"></a>Produkt distribution
+## <a name="target-considerations"></a>Målöverväganden
 
-Det exakta innehållet på distributions disken beror på mål processorn, utvecklingsverktyg och ThreadX SMP-paketet som köpts. Följande är dock en lista över flera viktiga filer som är gemensamma för de flesta produkt distributioner:
+ThreadX SMP kräver mellan 2 KByte och 20 KByte skrivskyddad minne (ROM) på målet. Ytterligare 1 till 2 KByte av målets RAM-minne (Random Access Memory) krävs för ThreadX SMP-systemstacken och andra globala datastrukturer.
+
+För timerrelaterade funktioner som time out-time-out för tjänstanrop, tidsslikning och programtimer för att fungera måste den underliggande målmaskinvaran tillhandahålla en periodisk avbrottskälla. Om processorn har den här funktionen används den av ThreadX SMP. Om målprocessorn inte har möjlighet att generera ett regelbundet avbrott måste användarens maskinvara ange det. Installation och konfiguration av timeravbrottet finns vanligtvis i tx_initialize_low_level ***i*** ThreadX SMP-distributionen.
+
+> [!IMPORTANT]
+> ThreadX SMP fungerar fortfarande även om det inte finns någon källa för periodiskt timeravbrott. Ingen av de timerrelaterade tjänsterna fungerar dock. Granska den angivna **readme_threadx.txt** ytterligare värdsystemöverväganden och/eller alternativ.
+
+## <a name="product-distribution"></a>Produktdistribution
+
+Det exakta innehållet på distributionsdisken beror på målprocessorn, utvecklingsverktygen och det ThreadX SMP-paket som köpts. Följande är dock en lista över flera viktiga filer som är gemensamma för de flesta produktdistributioner:
 
 ### <a name="threadx_express_startuppdf"></a>ThreadX_Express_Startup.pdf
 
-Den här PDF-filen innehåller en enkel, fyra stegs procedur för att få ThreadX SMP som körs på en speciell mål processor/tavla och specifika utvecklingsverktyg.
+Den här PDF-filen innehåller en enkel procedur i fyra steg för att få ThreadX SMP att köras på en specifik målprocessor/-tavla och specifika utvecklingsverktyg.
 
 ### <a name="readme_threadxtxt"></a>readme_threadx.txt
 
-Textfil som innehåller detaljerad information om ThreadX SMP-port, inklusive information om mål processorn och utvecklingsverktyg.
+Textfil som innehåller specifik information om ThreadX SMP-porten, inklusive information om målprocessorn och utvecklingsverktygen.
 
 | Verktyg | Beskrivning |
 | -------------- | ------------------------------------------------------------------------------------------------- |
-| **tx_api. h**  | C-huvudfilen som innehåller alla system likställda, data strukturer och tjänst prototyper.             |
-| **tx_port. h** | C-huvudfil som innehåller alla utvecklings verktyg och targetspecific data definitioner och strukturer. |
-|**demo_threadx. c**| C-fil som innehåller ett litet demo program.|
-|**TX. a (eller TX. lib)**| Binär version av ThreadX SMP C-biblioteket som distribueras med *standard* paketet.|
+| **tx_api.h**  | C-rubrikfilen som innehåller alla system är lika med, datastrukturer och tjänstprototyper.             |
+| **tx_port.h** | C-rubrikfil som innehåller alla utvecklingsverktyget och målspecifika datadefinitioner och strukturer. |
+|**demo_threadx.c**| C-fil som innehåller ett litet demoprogram.|
+|**tx.a (eller tx.lib)**| Binär version av ThreadX SMP C-biblioteket som distribueras med *standardpaketet.*|
 
 > [!IMPORTANT]
-> Alla fil namn är i gemener. Med den här namngivnings konventionen blir det enklare att konvertera kommandon till plattformar med Linux (UNIX).
+> Alla filnamn har gemener. Den här namngivningskonventionen gör det enklare att konvertera kommandona till Linux-utvecklingsplattformar (Unix).
 
 ## <a name="threadx-smp-installation"></a>ThreadX SMP-installation
 
-Det är enkelt att installera ThreadX SMP. Se ***ThreadX_Express_Startup.pdf** _-filen och _ *_readme_threadx.txt_**-filen för information om hur du installerar ThreadX SMP för din speciella miljö.
+Det är enkelt att installera ThreadX SMP. Se filen ***ThreadX_Express_Startup.pdf** _ och filen _ *_readme_threadx.txt_** för specifik information om hur du installerar ThreadX SMP för din specifika miljö.
 
 > [!IMPORTANT]
-> Se till att säkerhetskopiera ThreadX SMP-postdistributionsgrupp och lagra den på en säker plats.
+> Se till att backa upp ThreadX SMP-distributionsdisken och lagra den på en säker plats.
 
 > [!IMPORTANT]
-> Program varan behöver åtkomst till ThreadX SMP-biblioteks fil (vanligt vis **TX. a** eller **TX. lib**) och C include-filerna **tx_api. h** och **tx_port. h**. Detta åstadkommer du genom att ange lämplig sökväg för utvecklingsverktyg eller genom att kopiera filerna till program utvecklings ytan.
+> Programprogramvaran behöver åtkomst till ThreadX SMP-biblioteksfilen (vanligtvis **tx.a** eller **tx.lib**) och C innehåller filerna **tx_api.h** **och tx_port.h**. Detta åstadkoms antingen genom att ange lämplig sökväg för utvecklingsverktygen eller genom att kopiera dessa filer till programutvecklingsområdet.
 
 ## <a name="using-threadx-smp"></a>Använda ThreadX SMP
 
-Det är enkelt att använda ThreadX SMP. I princip måste program koden innehålla ***tx_api. h** _ under kompileringen och länkas med ThreadX SMP-testbiblioteket _*_TX. a_*_ (eller _ *_TX. lib)_* *.
+Det är enkelt att använda ThreadX SMP. I princip måste programkoden innehålla ***tx_api.h** _ under kompileringen och länka till ThreadX SMP-körningsbiblioteket _*_tx.a_*_ (eller _*_tx.lib)_**.
 
-Det krävs fyra steg för att bygga ett ThreadX SMP-program:
+Det krävs fyra steg för att skapa ett ThreadX SMP-program:
 
-Inkludera filen ***tx_api. h*** i alla filer som använder ThreadX SMP-tjänster eller data strukturer.
+Inkludera filen ***tx_api.h i*** alla programfiler som använder ThreadX SMP-tjänster eller datastrukturer.
 
-Skapa standard C *-funktionen **main** _. Den här funktionen måste slutligen anropa _ *_tx_kernel_enter_** för att starta ThreadX SMP. Programspecifik initiering som inte omfattar ThreadX SMP kan läggas till innan du anger kärnan.
+Skapa standardfunktionen C ***main** _ . Den här funktionen måste så småningom anropa _ *_tx_kernel_enter_** för att starta ThreadX SMP. Programspecifik initiering som inte omfattar ThreadX SMP kan läggas till innan kerneln matas in.
 
 > [!IMPORTANT]
-> ThreadX SMP-funktionen **tx_kernel_enter** returnerar inte. Se därför till att inte placera några bearbetnings-eller funktions anrop efter det.
+> Funktionen ThreadX **SMP-tx_kernel_enter** returnerar inte. Se därför till att inte placera några bearbetnings- eller funktionsanrop efter den.
 
-Skapa funktionen ***tx_application_define*** . Det är här som de ursprungliga system resurserna skapas. Exempel på system resurser är trådar, köer, minnesmoduler, händelse flaggor grupper, mutexer och semaforer.
+Skapa ***tx_application_define*** funktion. Det är här som de första systemresurserna skapas. Exempel på systemresurser är trådar, köer, minnespooler, händelseflaggor, mutexes och semaforer.
 
-Kompilera program källan och länka med ThreadX SMP körnings bibliotek ***TX. lib***. Den resulterande bilden kan laddas ned till målet och köras!
+Kompilera programkällan och länka till ThreadX SMP-körningsbiblioteket ***tx.lib***. Den resulterande avbildningen kan laddas ned till målet och köras!
 
-## <a name="small-example-system"></a>Litet exempel system
+## <a name="small-example-system"></a>Litet exempelsystem
 
-I det lilla exempel systemet i bild 1 på sidan 28 visas skapandet av en enskild tråd med prioritet 3. Tråden körs, ökar en räknare och sedan vilo läge för ett klock streck. Den här processen fortsätter för alltid.
+Det lilla exempelsystemet i bild 1 på sidan 28 visar skapandet av en enda tråd med prioriteten 3. Tråden körs, ökar en räknare och för viloläger sedan för en klock tick. Den här processen fortsätter för alltid.
 
 ```c
 #include              "tx_api.h"
@@ -127,38 +127,38 @@ void my_thread_entry(ULONG thread_input)
       }
 }
 ```
-**BILD 1. Mall för program utveckling**
+**BILD 1. Mall för programutveckling**
 
-Även om det här är ett enkelt exempel ger det en lämplig mall för verklig program utveckling. Se ***readme_threadx.txt*** -filen igen om du vill ha mer information.
+Även om det här är ett enkelt exempel är det en bra mall för verklig programutveckling. Mer information finns i ***readme_threadx.txt*** filen.
 
 ## <a name="troubleshooting"></a>Felsökning
 
-Varje ThreadX SMP-port levereras med ett demonstrations program. Det är alltid en bra idé att först se till att demonstrations systemet körs, antingen på faktiskt mål maskin vara eller simulerad miljö.
+Varje ThreadX SMP-port levereras med ett demonstrationsprogram. Det är alltid en bra idé att först få igång demonstrationssystemet – antingen på faktisk målmaskinvara eller simulerad miljö.
 
 > [!IMPORTANT]
-> Mer information om demonstrations systemet finns i **readme_threadx.txt** -filen som medföljer distributionen.
+> Mer **readme_threadx.txt** information om demonstrationssystemet finns i filenreadme_threadx.txtsom medföljer distributionen.
 
-Om demonstrations systemet inte körs korrekt är följande fel söknings tips:
+Om demonstrationssystemet inte körs korrekt är följande några felsökningstips:
 
-  - Ta reda på hur mycket av demonstrationen som körs-ning.
+  - Fastställ hur mycket av demonstrationen som körs.
 
-  - Öka stack storlekarna (detta är mer viktigt i den faktiska program koden än för demonstrationen).
+  - Öka stackstorlekarna (det här är viktigare i den faktiska programkoden än i demonstrationen).
 
-  - Återskapa ThreadX SMP-biblioteket med TX_ENABLE_STACK_CHECKING definierat. Detta aktiverar den inbyggda SMP-ThreadX.
+  - Återskapa ThreadX SMP-biblioteket med TX_ENABLE_STACK_CHECKING definierat. Detta aktiverar den inbyggda ThreadX SMP-stackkontrollen.
 
-  - Kringgå tillfälligt eventuella nyligen gjorda ändringar för att se om problemet försvinner eller ändras. Sådan information bör vara användbar för support tekniker.
+  - Kringgå tillfälligt de senaste ändringarna för att se om problemet försvinner eller ändras. Sådan information bör vara användbar för supporttekniker.
 
-Följ de procedurer som beskrivs i "vad vi behöver från dig" på sidan 12 för att skicka informationen som samlas in från fel söknings stegen.
+Följ procedurerna som beskrivs i "What We Need From You" på sidan 12 för att skicka den information som samlats in från felsökningsstegen.
 
-## <a name="configuration-options"></a>Konfigurations alternativ
+## <a name="configuration-options"></a>Konfigurationsalternativ
 
-Det finns flera konfigurations alternativ när du skapar ThreadX SMP-biblioteket och programmet med ThreadX SMP. Alternativen nedan kan definieras i program källan, på kommando raden eller i filen ***tx_user. h*** include.
+Det finns flera konfigurationsalternativ när du skapar ThreadX SMP-biblioteket och programmet med ThreadX SMP. Alternativen nedan kan definieras i programkällan, på kommandoraden eller i filen ***tx_user.h*** include.
 
 > [!IMPORTANT]
-> Alternativ som definieras i **tx_user. h** tillämpas endast om program-och ThreadX SMP-biblioteket har skapats med **TX_INCLUDE_USER_DEFINE_FILE** definierade.
+> Alternativ som **definieras i tx_user.h** tillämpas endast om programmet och ThreadX SMP-biblioteket har skapats med **TX_INCLUDE_USER_DEFINE_FILE** definieras.
 
 ### <a name="smallest-configuration"></a>Minsta konfiguration
-För den minsta tecken storleken bör följande konfigurations alternativ för ThreadX SMP anses vara (i avsaknad av alla andra alternativ):
+För den minsta kodstorleken bör följande ThreadX SMP-konfigurationsalternativ övervägas (utan alla andra alternativ):
 
 - TX_DISABLE_ERROR_CHECKING
 - TX_DISABLE_PREEMPTION_THRESHOLD
@@ -168,63 +168,63 @@ För den minsta tecken storleken bör följande konfigurations alternativ för T
 - TX_NOT_INTERRUPTABLE 
 - TX_TIMER_PROCESS_IN_ISR
 
-### <a name="fastest-configuration"></a>Snabbast konfiguration 
-För den snabbaste körningen har samma konfigurations alternativ som används för den minsta konfigurationen, men med det här alternativet övervägs även:
+### <a name="fastest-configuration"></a>Snabbaste konfiguration 
+För den snabbaste körningen bör samma konfigurationsalternativ som användes för den minsta konfigurationen tidigare, men med det här alternativet också övervägas:
 
 - TX_REACTIVATE_INLINE
 
-Granska ***readme_threadx.txt*** -filen för ytterligare alternativ för din aktuella version av ThreadX SMP. Detaljerade konfigurations alternativ beskrivs i början på sidan 28.
+Granska ***readme_threadx.txt*** ytterligare alternativ för din specifika version av ThreadX SMP. Detaljerade konfigurationsalternativ beskrivs från och med sidan 28.
 
-### <a name="global-time-source"></a>Global tids källa  
-För andra Azure återställnings tider-produkter (FileX, NetX, GUIX, USBX osv.), definierar ThreadX SMP antalet ThreadX SMP timer-Tick som representerar en sekund. Andra uppfyller sina tids krav baserat på denna konstant. Som standard är värdet 100, vilket förutsätter ett periodiskt avbrott i 10ms. Användaren kan åsidosätta det här värdet genom att definiera TX_TIMER_TICKS_PER_SECOND med det önskade värdet i ***tx_port. h*** eller i IDE-eller kommando raden.
+### <a name="global-time-source"></a>Global tidskälla  
+För andra Azure RTOS produkter (FileX, NetX, GUIX, USBX osv.) definierar ThreadX SMP antalet ThreadX SMP-timer tick som representerar en sekund. Andra härleder sina tidskrav baserat på den här konstanten. Som standard är värdet 100, förutsatt ett periodiskt avbrott på 10 ms. Användaren kan åsidosätta det här värdet genom TX_TIMER_TICKS_PER_SECOND definiera med önskat ***värde i tx_port.h*** eller i IDE eller kommandoraden.
 
-### <a name="detailed-configuration-options"></a>Detaljerade konfigurations alternativ
+### <a name="detailed-configuration-options"></a>Detaljerade konfigurationsalternativ
 
-- **TX_BLOCK_POOL_ENABLE_PERFORMANCE_INFO** : när den definieras, aktiverar insamling av prestanda information på blockera pooler. Som standard är det här alternativet inte definierat.
-- **TX_BYTE_POOL_ENABLE_PERFORMANCE_INFO** : när den definieras, aktiverar insamling av prestanda information i byte-pooler. Som standard är det här alternativet inte definierat.
-- **TX_DISABLE_ERROR_CHECKING**: kringgår grundläggande fel kontroll av tjänst anrop. När den är definierad i program källan är all grundläggande parameter fel kontroll inaktive rad. Detta kan förbättra prestandan med så mycket som 30% och kan också minska bild storleken.
-
-> [!NOTE]
-> *Det är bara säkert att inaktivera fel kontrollen om programmet kan vara absolut garantera att alla indataparametrar alltid är giltiga under alla omständigheter, inklusive indataparametrar härledda från externa ingångar. Om ogiltiga indata har angetts i API: et med fel kontrollen inaktive rad, är det resulterande beteendet odefinierat och kan leda till minnes skada eller system krasch.*
+- **TX_BLOCK_POOL_ENABLE_PERFORMANCE_INFO:** När detta definieras möjliggör insamling av prestandainformation för blockpooler. Det här alternativet är inte definierat som standard.
+- **TX_BYTE_POOL_ENABLE_PERFORMANCE_INFO:** När detta definieras möjliggör insamling av prestandainformation för bytepooler. Det här alternativet är inte definierat som standard.
+- **TX_DISABLE_ERROR_CHECKING: Kringgår** grundläggande felkontroll av tjänstsamtal. När den definieras i programkällan inaktiveras all grundläggande parameterfelkontroll. Detta kan förbättra prestandan med upp till 30 % och kan också minska bildstorleken.
 
 > [!NOTE]
-> *ThreadX SMP API returnerar värden som inte påverkas av att fel kontroll inaktive ras i fetstil i avsnittet "retur värden" i varje API-beskrivning i kapitel 4. Retur värden i fet stil är ogiltiga om fel kontrollen har inaktiverats med alternativet TX_DISABLE_ERROR_CHECKING.*
-- **TX_DISABLE_NOTIFY_CALLBACKS** : när det är definierat inaktive ras aviserings återanrop för olika ThreadX SMP-objekt. Genom att använda det här alternativet minskar du kodens storlek och förbättrar prestandan. Som standard är det här alternativet inte definierat.
-- **TX_DISABLE_PREEMPTION_THRESHOLD** : när det är definierat inaktive ras avstängningen-tröskelvärdet, vilket minskar kod storleken och ökar prestandan. Preemptionthreshold-funktionerna är naturligtvis inte längre tillgängliga. Som standard är det här alternativet inte definierat.
-- **TX_DISABLE_REDUNDANT_CLEARING** : när du definierar den här koden tas logiken bort för att initiera globala C-datastrukturer för THREADX-SMP till noll. Detta bör endast användas om kompilatorns initierings kod anger alla oinitierade C globala data till noll. Genom att använda det här alternativet minskar du kodens storlek och förbättrar prestandan under initieringen. Som standard är det här alternativet inte definierat.
-- **TX_DISABLE_STACK_FILLING** : när det är definierat inaktive ras 0xEF-värdet i varje byte av varje tråds stack när de skapas. Som standard är det här alternativet inte definierat.
-- **TX_ENABLE_EVENT_TRACE** : när det är definierat aktiverar ThreadX SMP händelse insamlings koden för att skapa en TraceX-spårningssession. Mer information finns i användar handboken för TraceX.
-- **TX_ENABLE_STACK_CHECKING** : när det är definierat aktiverar ThreadX SMP körnings stack kontroll, vilket innefattar analys av hur mycket stack som har använts och granskning av data mönster "avgränsningar" före och efter stackområdet. Om ett stack fel upptäcks, anropas den registrerade program stackens fel hanterare. Det här alternativet resulterar i en något ökad omkostnader och kod storlek. Mer information finns i **_tx_-thread_stack_error_notify_-** API: et. Som standard är det här alternativet inte definierat.
-- **TX_EVENT_FLAGS_ENABLE_PERFORMANCE_INFO** : när det är definierat, aktiverar insamling av prestanda information på händelse flaggor grupper. Som standard är det här alternativet inte definierat.
-- **TX_INLINE_THREAD_RESUME_SUSPEND** : när den har definierats förbättrar ThreadX SMP **_tx_thread_resume_*_ och _*_tx_thread_suspend_** API-anrop via kod i rad. Detta ökar kod storleken men förbättrar prestandan för dessa två API-anrop.
-- **TX_MAX_PRIORITIES** : definierar prioritets nivåer för ThreadX SMP. Giltiga värden är mellan 32 och 1024 (inklusive) och måste vara jämnt delbar med 32. Om antalet tillåtna nivåer ökar ökar RAM-användningen med 128 byte för varje grupp med 32 prioriteter. Det finns dock bara en försumbar effekt på prestanda. Som standard är det här värdet inställt på 32 prioritets nivåer.
-- **TX_MINIMUM_STACK** : definierar den minsta stack storleken (i byte). Den används för fel kontroll när trådar skapas. Standardvärdet är port-Specific och finns i **_tx_port. h._**
-- **TX_MISRA_ENABLE** : när den definieras använder THREADX SMP Misra C-kompatibla konventioner. Mer information finns i **_ThreadX_MISRA_Compliance.pdf_** .
-- **TX_MUTEX_ENABLE_PERFORMANCE_INFO** : när det är definierat, aktiverar insamling av prestanda information på mutexer. Som standard är det här alternativet inte definierat.
-- **TX_NO_TIMER** : när det är definierat är ThreadX SMP-tidslogiken helt inaktive rad. Detta är användbart i de fall där funktionerna för ThreadX SMP-timer (tråd vila, API-tidsgräns, tids segmentering och program timers) inte används.
-- **TX_NOT_INTERRUPTABLE** : när det är definierat försöker ThreadX SMP inte minimera avbrotts utelåsnings tiden. Detta resulterar i snabbare körning men ökar snabbt avbrotts utelåsnings tiden.
-- **TX_QUEUE_ENABLE_PERFORMANCE_INFO** : när den definieras, aktiverar insamling av prestanda information i köer. Som standard är det här alternativet inte definierat.
-- **TX_REACTIVATE_INLINE** : när det är definierat utför återaktivering av ThreadX SMP timers på rad i stället för att använda ett funktions anrop. Detta förbättrar prestandan, men ökar kod storleken något. Som standard är det här alternativet inte definierat.
-- **TX_SEMAPHORE_ENABLE_PERFORMANCE_INFO** : när det är definierat, aktiverar insamling av prestanda information på semaforer. Som standard är det här alternativet inte definierat.
-- **TX_THREAD_ENABLE_PERFORMANCE_INFO** : när den definieras, aktiverar insamling av prestanda information på trådar. Som standard är det här alternativet inte definierat.
-- **TX_THREAD_SMP_CORE_MASK** : definierar en bit kart mask för kärn undantag. En 4-kärn-miljö har till exempel värdet 0xF för den här definierar.
-- **TX_THREAD_SMP_DEBUG_ENABLE** : när det är definierat sparas ThreadX SMP-felsöknings information i en cirkulär buffert.
-- **TX_THREAD_SMP_DYNAMIC_CORE_MAX** : aktiverar det dynamiska maximala antalet kärnor som kan justeras i körnings läge när det har definierats.
-- **TX_THREAD_SMP_EQUAL_PRIORITY** : när det är definierat schemalägger ThreadX SMP endast lika prioritets trådar parallellt. Detta bör definieras innan du skapar ThreadX SMP-biblioteket.
-- **TX_THREAD_SMP_INTER_CORE_INTERRUPT** : när det är definierat genererar ThreadX SMP ett avbrott mellan kärnor.
-- **TX_THREAD_SMP_MAX_CORES** : definierar det maximala antalet kärnor.
-- **TX_THREAD_SMP_ONLY_CORE_0_DEFAULT** : när det här definieras används standardvärden för ThreadX SMP alla trådar och timers som ska köras på Core 0 som standard. Programmet kan åsidosätta detta genom att anropa de viktigaste undantags-API: erna. Detta bör definieras innan du skapar ThreadX SMP-biblioteket.
-- **TX_THREAD_SMP_WAKEUP_LOGIC** : när det är definierat anropas program makrot för Väcknings Core "i". Detta bör definieras innan du kan inkludera **_tx_port. h._**
-- **TX_THREAD_SMP_WAKEUP (i)** : definierar ett program makro för Väcknings Core "i". Detta bör definieras innan du kan inkludera **_tx_port. h._**
-- **TX_TIMER_ENABLE_PERFORMANCE_INFO** : när den definieras, aktiverar insamling av prestanda information för timers. Som standard är det här alternativet inte definierat.
-- **TX_TIMER_PROCESS_IN_ISR** : om det här alternativet definieras elimineras den interna systemets timer-tråd för ThreadX SMP. Detta resulterar i bättre prestanda vid timer-händelser och mindre RAM-krav eftersom timer-stacken och kontroll blocket inte längre behövs. Om du använder det här alternativet flyttas all timer för förfallo tid till ISR-nivå. Som standard är det här alternativet inte definierat.
+> *Det är bara säkert att inaktivera felkontroll om programmet absolut kan garantera att alla indataparametrar alltid är giltiga under alla omständigheter, inklusive indataparametrar som härletts från externa indata. Om ogiltiga indata har angetts till API:et med felkontroll inaktiverat är det resulterande beteendet odefinierat och kan resultera i minnesfel eller systemkrasch.*
+
+> [!NOTE]
+> *ThreadX SMP API-returvärden som inte påverkas av inaktivering av felkontroll visas i fetstil i avsnittet "Returvärden" i varje API-beskrivning i kapitel 4. Returvärdena för icke-boliska värden annulleras om felkontrollen inaktiveras med hjälp TX_DISABLE_ERROR_CHECKING alternativet.*
+- **TX_DISABLE_NOTIFY_CALLBACKS:** Inaktiverar återanrop av avanrop för olika ThreadX SMP-objekt när de har definierats. Om du använder det här alternativet minskar kodstorleken något och prestandan förbättras. Det här alternativet är inte definierat som standard.
+- **TX_DISABLE_PREEMPTION_THRESHOLD:** Inaktiverar funktionen för tröskelvärde för avaktivering när den definieras och minskar kodstorleken något och förbättrar prestandan. Funktionen preemptionthreshold är förstås inte längre tillgänglig. Det här alternativet är inte definierat som standard.
+- **TX_DISABLE_REDUNDANT_CLEARING** : När det här definieras tar bort logiken för att initiera globala C-datastrukturer i ThreadX SMP till noll. Detta bör endast användas om kompilatorns initieringskod anger alla o initialiserade globala C-data till noll. Om du använder det här alternativet minskar kodstorleken något och prestandan förbättras under initieringen. Det här alternativet är inte definierat som standard.
+- **TX_DISABLE_STACK_FILLING:** När det här definieras inaktiverar det 0xEF värdet i varje byte i varje trådstack när den skapas. Det här alternativet är inte definierat som standard.
+- **TX_ENABLE_EVENT_TRACE:** När det här definieras aktiverar ThreadX SMP händelseinsamlingskoden för att skapa en TraceX-spårningsbuffert. Mer information finns i användarhandboken för TraceX.
+- **TX_ENABLE_STACK_CHECKING:** När det här definieras aktiverar threadX SMP körningsstackkontroll, vilket innefattar analys av hur mycket stack som har använts och undersökning av datamönstret "stängsel" före och efter stackområdet. Om ett stackfel identifieras anropas felhanteraren för den registrerade programstacken. Det här alternativet resulterar i något högre omkostnader och kodstorlek. Läs **_api:et tx_- thread_stack_error_notify_** för mer information. Det här alternativet är inte definierat som standard.
+- **TX_EVENT_FLAGS_ENABLE_PERFORMANCE_INFO:** När detta definieras möjliggör insamling av prestandainformation om händelseflaggor grupper. Det här alternativet är inte definierat som standard.
+- **TX_INLINE_THREAD_RESUME_SUSPEND:** När ThreadX SMP definieras förbättrar den tx_thread_resume _ och ***_*** tx_thread_suspend API-anrop via in-line-kod. Detta ökar kodstorleken men förbättrar prestandan för dessa två API-anrop.
+- **TX_MAX_PRIORITIES:** Definierar prioritetsnivåer för ThreadX SMP. De juridiska värdena sträcker sig från 32 till 1024 (inklusive) och måste vara jämnt delbara med 32. Om du ökar antalet prioritetsnivåer som stöds ökar RAM-användningen med 128 byte för varje grupp med 32 prioriteringar. Det finns dock bara en försumbar effekt på prestanda. Som standard är det här värdet inställt på 32 prioritetsnivåer.
+- **TX_MINIMUM_STACK:** Definierar den minsta stackstorleken (i byte). Den används för felkontroll när trådar skapas. Standardvärdet är portspecifikt och finns i **_tx_port.h._**
+- **TX_MISRA_ENABLE:** När det här definieras använder ThreadX SMP MISRA C-kompatibla konventioner. Mer information **_ThreadX_MISRA_Compliance.pdf_** i den här informationen.
+- **TX_MUTEX_ENABLE_PERFORMANCE_INFO:** När detta definieras möjliggör insamling av prestandainformation om mutexer. Det här alternativet är inte definierat som standard.
+- **TX_NO_TIMER** : När det här definieras är ThreadX SMP-timerlogiken helt inaktiverad. Detta är användbart i fall där ThreadX SMP-timerfunktionerna (trådströmsparläge, API-timeouter, tidsslicering och programtimer) inte används.
+- **TX_NOT_INTERRUPTABLE:** När det här definieras försöker Inte ThreadX SMP minimera avbrottslåsningstiden. Detta resulterar i snabbare körning men ökar något avbrottslåsningstiden.
+- **TX_QUEUE_ENABLE_PERFORMANCE_INFO:** När detta definieras möjliggör insamling av prestandainformation i köer. Det här alternativet är inte definierat som standard.
+- **TX_REACTIVATE_INLINE:** När detta definieras utför återaktivering av ThreadX SMP-timers in-line i stället för att använda ett funktionsanrop. Detta förbättrar prestandan men ökar kodstorleken något. Det här alternativet är inte definierat som standard.
+- **TX_SEMAPHORE_ENABLE_PERFORMANCE_INFO:** När detta definieras möjliggör insamling av prestandainformation om semaforer. Det här alternativet är inte definierat som standard.
+- **TX_THREAD_ENABLE_PERFORMANCE_INFO:** När detta definieras möjliggör insamling av prestandainformation om trådar. Det här alternativet är inte definierat som standard.
+- **TX_THREAD_SMP_CORE_MASK: Definierar** bitkartmask för CORE-exkludering. En 4-kärnig miljö har till exempel värdet 0xF för den här definiera.
+- **TX_THREAD_SMP_DEBUG_ENABLE** : När det här definieras sparas Felsökningsinformation för ThreadX SMP i en cirkulär buffert.
+- **TX_THREAD_SMP_DYNAMIC_CORE_MAX:** När detta definieras aktiverar det dynamiska maximala antalet kärnor som kan justeras vid körning.
+- **TX_THREAD_SMP_EQUAL_PRIORITY:** När det här definieras schemalägger ThreadX SMP endast trådar med samma prioritet parallellt. Detta bör definieras innan du skapar ThreadX SMP-biblioteket.
+- **TX_THREAD_SMP_INTER_CORE_INTERRUPT:** När det här definieras genererar ThreadX SMP avbrott mellan kärnor.
+- **TX_THREAD_SMP_MAX_CORES:** Definierar det maximala antalet kärnor.
+- **TX_THREAD_SMP_ONLY_CORE_0_DEFAULT:** När detta definieras kör ThreadX SMP som standard alla trådar och timers endast på core 0 som standard. Programmet kan åsidosätta detta genom att anropa API:erna för att exkludera kärnor. Detta bör definieras innan du skapar ThreadX SMP-biblioteket.
+- **TX_THREAD_SMP_WAKEUP_LOGIC:** När det här definieras anropas programmafafa för att aktivera "i"-kärnan. Detta bör definieras innan du tar med **_tx_port.h._**
+- **TX_THREAD_SMP_WAKEUP(i)** : Definierar ett programma makro för att väcka kärnvärden "i". Detta bör definieras innan du tar med **_tx_port.h._**
+- **TX_TIMER_ENABLE_PERFORMANCE_INFO:** När detta definieras möjliggör insamling av prestandainformation för timers. Det här alternativet är inte definierat som standard.
+- **TX_TIMER_PROCESS_IN_ISR:** Eliminerar den interna systemtimertråden för ThreadX SMP när den definieras. Detta resulterar i bättre prestanda för timerhändelser och mindre RAM-krav eftersom timerstacken och kontrollblocket inte längre behövs. Om du använder det här alternativet flyttas dock all förfallotidsbearbetning till timer-ISR-nivån. Det här alternativet är inte definierat som standard.
 
     > [!NOTE]
-    > De tjänster som tillåts från timers kan inte vara tillåtna från ISR: er och kan därför inte tillåtas när du använder det här alternativet.
+    > Att tjänster som tillåts från timers kanske inte tillåts från ISR:er och därför inte tillåts när du använder det här alternativet.
 
-- **TX_TIMER_THREAD_PRIORITY** : definierar prioriteten för den interna ThreadX-tråden i SMP-systemet. Standardvärdet är Priority 0, högst prioritet i ThreadX SMP. Standardvärdet är definierat i **_tx_port. h._**
-- **TX_TIMER_THREAD_STACK_SIZE** : definierar stack storleken (i byte) för den interna ThreadX-tråden för SMP-systemtimer. Den här tråden bearbetar alla tråd Ströms begär Anden och alla tids gränser för tjänst anrop. Dessutom anropas alla rutiner för återanrop från program timer från den här kontexten. Standardvärdet är port-Specific och finns i **_tx_port. h._**
+- **TX_TIMER_THREAD_PRIORITY:** Definierar prioriteten för den interna ThreadX SMP-systemtimertråden. Standardvärdet är prioritet 0 – den högsta prioriteten i ThreadX SMP. Standardvärdet definieras i **_tx_port.h._**
+- **TX_TIMER_THREAD_STACK_SIZE:** Definierar stackstorleken (i byte) för den interna ThreadX SMP-systemtimertråden. Den här tråden bearbetar alla trådströmsparbegäranden samt alla tidsgränser för tjänstanrop. Dessutom anropas alla rutiner för återanrop av programtimer från den här kontexten. Standardvärdet är portspecifikt och finns i **_tx_port.h._**
 
-## <a name="threadx-smp-version-id"></a>ID för ThreadX SMP-version
+## <a name="threadx-smp-version-id"></a>Version-ID för ThreadX SMP
 
-Du hittar ThreadX SMP-versions-ID i ***readme_threadx.txt** _-filen. Den här filen innehåller också en versions historik för motsvarande port. Program varan kan hämta ThreadX SMP-versionen genom att undersöka den globala strängen _ *_ _tx_version_id._**
+Versions-ID:t för ThreadX SMP finns i filen ***readme_threadx.txt** _ . Den här filen innehåller också en versionshistorik för motsvarande port. Programprogramvara kan hämta ThreadX SMP-versionen genom att undersöka den globala strängen _ *_ _tx_version_id._**

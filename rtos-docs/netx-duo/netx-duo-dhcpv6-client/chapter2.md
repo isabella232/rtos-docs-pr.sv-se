@@ -1,69 +1,69 @@
 ---
-title: Kapitel 2 – installation och användning av Azure återställnings tider NetX Duo DHCPv6-klienten
-description: Det här kapitlet innehåller en beskrivning av olika problem som rör Installation, konfiguration och användning av Azure återställnings tider NetX Duo DHCPv6-klient komponenten.
+title: Kapitel 2 – Installation och användning av Azure RTOS NetX Duo DHCPv6-klient
+description: Det här kapitlet innehåller en beskrivning av olika problem som rör installation, installation och användning av Azure RTOS NetX Duo DHCPv6-klientkomponenten.
 author: philmea
 ms.author: philmea
 ms.date: 06/04/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: a154dbeb91b46a2c8bd5f4585e168a6b62d042ff
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 481e29cc674edfa7e437e8e14253172b89aeae6856114192f4ca5b35717c91e0
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104826094"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116791541"
 ---
-# <a name="chapter-2---installation-and-use-of-azure-rtos-netx-duo-dhcpv6-client"></a>Kapitel 2 – installation och användning av Azure återställnings tider NetX Duo DHCPv6-klienten
+# <a name="chapter-2---installation-and-use-of-azure-rtos-netx-duo-dhcpv6-client"></a>Kapitel 2 – Installation och användning av Azure RTOS NetX Duo DHCPv6-klient
 
-Det här kapitlet innehåller en beskrivning av olika problem som rör Installation, konfiguration och användning av Azure återställnings tider NetX Duo DHCPv6-klient komponenten.
+Det här kapitlet innehåller en beskrivning av olika problem som rör installation, installation och användning av Azure RTOS NetX Duo DHCPv6-klientkomponenten.
 
-## <a name="product-distribution"></a>Produkt distribution
+## <a name="product-distribution"></a>Produktdistribution
 
-NetX Duo DHCPv6-klienten är tillgänglig på [https://github.com/azure-rtos/netxduo](https://github.com/azure-rtos/netxduo) . Paketet innehåller två källfiler och en PDF-fil som innehåller det här dokumentet, enligt följande:
+NetX Duo DHCPv6-klienten finns på [https://github.com/azure-rtos/netxduo](https://github.com/azure-rtos/netxduo) . Paketet innehåller två källfiler och en PDF-fil som innehåller det här dokumentet, enligt följande:
 
-- **nxd_dhcpv6_client. h** Rubrik fil för NetX DuoDHCPv6-klient
+- **nxd_dhcpv6_client.h** Huvudfil för NetX DuoDHCPv6-klient
 
-- **nxd_dhcpv6_client. c** Käll kods fil för NetX Duo DHCPv6-klienten
+- **nxd_dhcpv6_client.c** Källkodsfil för NetX Duo DHCPv6-klienten
 
-- **demo_netxduo_dhcpv6_client. c** Exempel program som demonstrerar installationen av NetX Duo DHCPv6-klienten
+- **demo_netxduo_dhcpv6_client.c** Exempelprogram som demonstrerar installationen av NetX Duo DHCPv6-klienten
 
-- **nxd_dhcpv6_client.pdf** PDF-Beskrivning av NetX Duo DHCPv6-klienten
+- **nxd_dhcpv6_client.pdf** PDF-beskrivning av NetX Duo DHCPv6-klienten
 
-## <a name="netx-duo-dhcpv6-client-installation"></a>NetX Duo DHCPv6-klient installation
+## <a name="netx-duo-dhcpv6-client-installation"></a>NetX Duo DHCPv6-klientinstallation
 
-Om du vill använda NetX Duo DHCPv6 client API kan hela distributionen som nämns ovan kopieras till samma katalog där NetX Duo är installerat. Om t. ex. NetX Duo är installerat i katalogen "*\threadx\arm7\green*" kan *nxd_dhcpv6_client. h* -och *nxd_dhpcv6_client. c* -filer kopieras till den här katalogen.
+Om du vill använda NetX Duo DHCPv6-klient-API:et kan hela fördelningen som nämns ovan kopieras till samma katalog där NetX Duo är installerat. Om NetX Duo till exempel är installerat i katalogen "*\threadx\arm7\green*" kan *filerna nxd_dhcpv6_client.h* *och nxd_dhpcv6_client.c* kopieras till den här katalogen.
 
 ## <a name="using-the-netx-duo-dhcpv6-client"></a>Använda NetX Duo DHCPv6-klienten
 
-Program koden måste innehålla *nxd_dhcpv6_client. h* när den innehåller *tx_api. h* och *nx_api. h*, för att använda Dhcpv6-klienten, ThreadX respektive netx Duo-tjänsterna. *nxd_dhcpv6_client. c* måste kompileras i projektet på samma sätt som andra programfiler och dess objekt formulär måste vara länkade tillsammans med programmets filer.
+Programkoden måste innehålla *nxd_dhcpv6_client.h* när den innehåller *tx_api.h* och *nx_api.h* för att använda DHCPv6-klienten, ThreadX- respektive NetX Duo-tjänster. *nxd_dhcpv6_client.c* måste kompileras i projektet på samma sätt som andra programfiler och dess objektformulär måste länkas tillsammans med programmets filer.
 
-### <a name="span-classunderlineclient-dhcp-unique-identifier-duidspan"></a><span class="underline">Klientens DHCP-unika identifierare (DUID)</span>
+### <a name="span-classunderlineclient-dhcp-unique-identifier-duidspan"></a><span class="underline">Klientens unika DHCP-identifierare (DUID)</span>
 
-Klientens DUID definierar unikt varje klient i ett nätverk. Ett program måste skapa ett klient-DUID innan du begär en IPv6-adress från en server. Klientens DUID ingår automatiskt i alla meddelanden till servern. För att skapa ett DUID anropar programmet tjänsten *nx_dhcpv6_create_client_duid:*
+Klient-DUID definierar unikt varje klient i ett nätverk. Ett program måste skapa ett klient-DUID innan en IPv6-adress begärs från en server. Klientens DUID inkluderas automatiskt i alla meddelanden till servern. För att skapa ett DUID anropar programmet tjänsten *nx_dhcpv6_create_client_duid:*
 ```C
 UINT nx_dhcpv6_create_client_duid(NX_DHCPV6 *dhcpv6_ptr, 
                                   UINT duid_type, 
                                   UINT hardware_type, ULONG time);
 ```
 
-Programmet anropar den här tjänsten och anger typen av DUID (endast länk lagret eller länk lagret plus tiden). För länk skiktet och tids DUIDs, kommer den här tjänsten att tillhandahålla fältet tid om tiden inte har angetts.
+Programmet anropar den här tjänsten och anger typen av DUID (endast länkskikt eller länkskikt plus tid. För länklager plus tids-DUID:er anger den här tjänsten tidsfältet om tidsinmatningen inte har angetts.
 
-För att enheter ska starta om och vill använda ett tidigare tilldelat IPv6-adresslån måste programmet skapa klientens DUID som det som användes när du tilldelade IPv6-adressen. Länk skikt adressen är allt som behövs för att skapa ett DUID för ett länk lager klient. Detta kräver inte tidigare icke-flyktig minnes lagring om enheten har åtkomst till länk skikt adressen. För DUIDs av typen tid måste programmet ha åtkomst till samma tids data som används i föregående DUID och detta kräver icke-flyktigt minne. Klienter som inte har någon stabil lagring får inte använda DUIDs av typen Time.
+För enheter som startar om och vill använda ett tidigare tilldelat IPv6-adresslån måste programmet skapa klient-DUID som det som användes när det tilldelade IPv6-adressen. Adressen för länklagret är allt som behövs för att skapa ett klient-DUID för länkskikt. Detta kräver inte tidigare beständiga minneslagring om enheten har åtkomst till adressen på länklagret. För DUID:er av typen tid måste programmet ha åtkomst till samma tidsdata som användes vid den tidigare DUID-genereringen och detta kräver icke-beständigt minne. Klienter som inte har någon stabil lagring får inte använda DUID:er av typen time.
 
-### <a name="span-classunderlineclient-identity-association-for-non-temporary-addresses-ianaspan"></a><span class="underline">Klient identitets Association för icke-temporära adresser (IANA)</span>
+### <a name="span-classunderlineclient-identity-association-for-non-temporary-addresses-ianaspan"></a><span class="underline">Klientidentitetsassociating för icke-tillfälliga adresser (IANA)</span>
 
-Programmet måste skapa en IANA och eventuellt en eller flera IA-adresser innan du begär en IPv6-adress. För att göra detta anropar programmet *nx_dhcpv6_create_client_ianas* tjänsten. Om du vill skapa ett alternativ för en IA-adress anropar programmet *nx_dhcpv6_add_client_ia* tjänsten med en begärd IPv6-adress och livstids värden som ett tips till-servern.
+Programmet måste skapa en IANA och eventuellt en eller flera IA-adresser innan en IPv6-adress begärs. För att göra det anropar programmet *nx_dhcpv6_create_client_iana* tjänsten. För att skapa ett alternativ för IA-adress anropar *programmet nx_dhcpv6_add_client_ia-tjänsten* med en begärd IPv6-adress och livslängdsvärden som ett tips till servern.
 
-I IANA och dess IAs definieras parametrarna för klientens IPv6-adress tilldelning:
+IANA och dess IA definierar kumulativt tilldelningsparametrarna för klientens IPv6-adress:
 
-Innan DHCPv6-klienten startas skapar DHCPv6-klient programmet en IANA med hjälp av tjänsten *nx_dhcpv6_create_client_iana* :
+Innan du startar DHCPv6-klienten skapar DHCPv6-klientprogrammet en IANA nx_dhcpv6_create_client_iana *tjänsten:*
 
 ```C
 UINT    nx_dhcpv6_create_client_iana(NX_DHCPV6 *dhcpv6_ptr, 
                                      UINT IA_ident, ULONG T1, ULONG T2);
 ```
 
-Det måste också skapa en eller flera IAs med hjälp av *nx_dhcpv6_create_client_ia* tjänsten och begärda IPv6-adresser innan du startar Dhcpv6-klienten.
+Den måste också skapa en eller flera IA:er *med nx_dhcpv6_create_client_ia-tjänsten* och begärda IPv6-adresser innan DHCPv6-klienten startas.
 
 ```C
 UINT    nx_dhcpv6_add_client_ia(NX_DHCPV6 *dhcpv6_ptr, 
@@ -73,34 +73,34 @@ UINT    nx_dhcpv6_add_client_ia(NX_DHCPV6 *dhcpv6_ptr,
 ```
 
 > [!NOTE]
-> Antalet AI-adresser som programmet skapar får inte överskrida NX_DHCPV6_MAX_IA_ADDRESS parameter vars standardvärde är 1.
+> Antalet IA-adresser som programmet skapar får inte överskrida NX_DHCPV6_MAX_IA_ADDRESS vars standardvärde är 1.
 
-NetX Duo DHCPv6-klienten har stöd för *nx_dhcpv6_create_client_ia* för äldre DHCPv6-klientprogram och som är identiska med *nx_dhcpv6_add_client_ia* men utvecklare uppmuntras att använda *nx_dhcpv6_add_client_ia* tjänsten.
+NetX Duo DHCPv6-klienten stöder *nx_dhcpv6_create_client_ia* äldre DHCPv6-klientprogram och som är identiska med *nx_dhcpv6_add_client_ia* men utvecklare uppmuntras att *använda nx_dhcpv6_add_client_ia tjänsten.*
 
-Dessa tjänster visas i "litet exempel system" i det här kapitlet.
+Dessa tjänster visas i "Litet exempelsystem" någon annanstans i det här kapitlet.
 
-### <a name="span-classunderlinenon-volatile-memory-considerations-to-reuse-ianas-and-iasspan"></a><span class="underline">Icke-beständiga minnes överväganden för åter användning av IANAs och IAs</span>
+### <a name="span-classunderlinenon-volatile-memory-considerations-to-reuse-ianas-and-iasspan"></a><span class="underline">Överväganden för icke-beständigt minne vid återanvändning av IANA:er och IA:er</span>
 
-Programmet måste spara IANA-parametrarna T1, T2 och IANA-identifieraren till icke-flyktigt minne om det vill använda samma adress (er) för att starta om. Programmet måste också spara sitt IA som innehåller dess IPv6-adress till icke-flyktigt minne.
+Programmet måste spara IANA-parametrarna T1, T2 och IANA-identifieraren till ej beständigt minne om det vill använda samma adress(er) vid omstart. Programmet måste också spara sin IA som innehåller dess IPv6-adress till icke-beständigt minne.
 
-Programmet måste också lagra den tid som förflutit som det har bundits till tilldelade IPv6-adresslån till icke-flyktigt minne om den stängs av. Detta sker genom att anropa tjänsten *nx_dhcpv6_get_time_accrued* innan den stoppar Dhcpv6-klienten.
+Programmet måste också lagra den tid som förflutit att det har varit bundet till sina tilldelade IPv6-adresslån till icke-beständigt minne om det stängs av. Den gör detta genom att *anropa nx_dhcpv6_get_time_accrued tjänsten* innan den stoppar DHCPv6-klienten.
 
 ```C
 UINT nx_dhcpv6_get_time_accrued(NX_DHCPV6 *dhcpv6_ptr, 
                                 ULONG *time_accrued);
 ```
 
-Förutsatt att programmet har en oberoende klocka för att spåra tidsintervallet från när det stoppas och startas om DHCPv6-klienten efter en omstart, läggs den till den förfluten tid som förväntas i IPv6-lånet innan den stoppas. Nu startas aktiviteten klient tråd med den totala förfluten tid som har bundits till IPv6-lånet som nv_time indatatypen nedan:
+Förutsatt att programmet har en oberoende klocka för att spåra tidsintervallet från när det stoppade och startade om DHCPv6-klienten efter en omstart, lägger det till den förflutna tiden till den tid som ackumuleras på IPv6-lånet innan det stoppas. Nu startar den klienttrådaktiviteten med den totala förflutna tiden som är bunden till IPv6-lånet som nv_time indata nedan:
 
 ```C
 UINT nx_dhcpv6_start(NX_DHCPV6 *dhcpv6_ptr, ULONG nv_time);
 ```
 
-Från och med nu tar aktiviteten DHCPv6 client-tråd över den tid som periodiseras för IPv6-lånet för när lånet ska förnyas.
+Från och med nu tar DHCPv6-klienttrådaktiviteten över övervakningen av den tid som ackumuleras på IPv6-lånet för när lånet ska förnyas.
 
-### <a name="span-classunderlinesetting-dhcpv6-option-dataspan"></a><span class="underline">Ange DHCPv6-alternativ data</span>
+### <a name="span-classunderlinesetting-dhcpv6-option-dataspan"></a><span class="underline">Ange DHCPv6-alternativdata</span>
 
-Innan ett IPv6-lån begärs kan programmet begära andra nätverks parameter data, till exempel DNS-server och tids Server. Vissa av dessa parametrar har vissa tjänster. Några visas nedan:
+Innan ett IPv6-lån begärs kan programmet begära andra nätverksparameterdata, till exempel DNS-server och tidsserver. Vissa av dessa parametrar har specifika tjänster. Några visas nedan:
 
 ```C
 UINT  nx_dhcpv6_request_option_DNS_server(NX_DHCPV6 *dhcpv6_ptr, 
@@ -110,53 +110,53 @@ UINT  nx_dhcpv6_request_option_time_server(NX_DHCPV6 *dhcpv6_ptr,
                                            UINT enable);
 ```
 
-### <a name="span-classunderlineinitiating-the-ipv6-address-requestspan"></a><span class="underline">Initierar IPv6-adress förfrågan</span>
+### <a name="span-classunderlineinitiating-the-ipv6-address-requestspan"></a><span class="underline">Initiera IPv6-adressbegäran</span>
 
-Programmet startar DHCPv6-klient tråden genom att anropa tjänsten *nx_dhcpv6_start* med noll som ingångs tid. För att initiera DHCPv6-protokollet för att begära en IPv6-adress anropar programmet *nx_dhcpv6_request_solicit.*
+Programmet startar DHCPv6-klienttråden genom att anropa *nx_dhcpv6_start-tjänsten* med nolltidsinmatning. För att initiera DHCPv6-protokollet för att begära en IPv6-adress anropar *programmet nx_dhcpv6_request_solicit.*
 
-Om programmet vill använda ett tidigare tilldelat IPv6-lån anropas *nx_dhcpv6_start* med en tids gräns som inte är noll. Den ska inte anropa *nx_dhcpv6_request_solicit*.
+Om programmet vill använda ett tidigare tilldelat IPv6-lån anropar det nx_dhcpv6_start *med* indata som inte är noll. Den bör inte anropa *nx_dhcpv6_request_solicit*.
 
-Därefter behöver programmet inte göra något mer och DHCPv6-klienten övervakas automatiskt när det är dags att förnya eller binda om en IPv6-adress.
+Därefter behöver programmet inte göra något mer och DHCPv6-klienten övervakar automatiskt när det är dags att förnya eller binda om en IPv6-adress.
 
-## <a name="small-example-system"></a>Litet exempel system
+## <a name="small-example-system"></a>Litet exempelsystem
 
-Ett exempel på hur enkelt det är att använda NetX Duo DHCPv6-klienten beskrivs i det lilla exemplet nedan med en DHCPv6-klient och en virtuell "RAM"-driv rutin. Den här demon förutsätter en enhet med endast ett enda fysiskt nätverks gränssnitt.
+Ett exempel på hur enkelt det är att använda NetX Duo DHCPv6-klienten beskrivs i det lilla exemplet nedan med hjälp av en DHCPv6-klient och en virtuell RAM-drivrutin. Den här demonstrationen förutsätter att en enhet endast har ett enda fysiskt nätverksgränssnitt.
 
-*tx_application_define* skapar en modempool för Dhcpv6-klienten att skicka DHCPv6-meddelanden. Det skapar också en program tråd och en IP-instans. Den aktiverar sedan UDP och ICMP på IP på raderna 130-148. Sedan skapas DHCPv6-klienten med återanrops funktioner för tillstånds ändring (*dhcpv6_state_change_notify* ) och Server fel (*dhcpv6_server_error_handler*) i line151.
+*tx_application_define* skapar paketpool för DHCPv6-klienten för att skicka DHCPv6-meddelanden. Det skapar också en programtråd och en IP-instans. Den aktiverar sedan UDP och ICMP på IP på raderna 130–148. DHCPv6-klienten skapas sedan med funktioner för *tillståndsändring* ( dhcpv6_state_change_notify ) och serverfel *(dhcpv6_server_error_handler)* på rad151.
 
-I funktionen klient tråd inmatning *thread_client_entry*-klientens IP-adress konfigureras med en länk lokal adress och aktive ras för IPv6-och ICMPv6-tjänster på rad 202-217. Innan du startar DHCPv6-klienten skapar programmet en klient-DUID, ett IANA-alternativ och ett alternativ för en IA-adress på lines219-303. Alternativet för IA-adressen är valfritt om klienten vill begära en IPv6-adress och giltiga och önskade livs längder från servern. Servern kan eventuellt bevilja den begärda IPv6-adressen eller låne tiden. Programmet kan lägga till fler IA-alternativ (upp till NX_DHCPV6_MAX_IA_ADDRESS) som ska tilldelas flera globala adresser.
+I funktionen Client thread entry *,thread_client_entry*, konfigureras klient-IP med en lokal länkadress och aktiverad för IPv6- och ICMPv6-tjänster på raderna 202-217. Innan du startar DHCPv6-klienten skapar programmet ett Klient-DUID, ett IANA-alternativ och ett IA-adressalternativ på raderna219–303. Alternativet IA-adress är valfritt om klienten vill begära en IPv6-adress och giltig och önskad livslängd från servern. Servern kan bevilja den begärda IPv6-adressen eller lånetiderna. Programmet kan lägga till fler IA-alternativ (upp till NX_DHCPV6_MAX_IA_ADDRESS) som ska tilldelas flera globala adresser.
 
-Slutligen anger programmet olika alternativ för att begära nätverks parametrar i sina meddelanden till DHCPv6-servern. DHCPv6-klientens aktivitet startas genom att anropa *nx_dhcpv6_start* i line306 och det faktiska DHCPv6-protokollet startas i SOLICIT-tillstånd med anropet till *nx_dhcpv6_request_solicit* på rad 317. DHCPv6-klienten hanterar sedan automatiskt befordran av klientens tillstånd via DHCPv6-protokollet tills det är kopplat till en adress eller ett fel uppstår. Under den här tiden väntar programmet på att protokollet ska slutföras, samt den duplicerade adress identifieringen (pappa) som ska slutföras om IP-instansen har kon figurer ATS för pappa (vilket är standard konfigurationen).
+Slutligen anger programmet olika alternativ för att begära nätverksparametrar i sina meddelanden till DHCPv6-servern. DHCPv6-klientaktiviteten startas genom att *anropa nx_dhcpv6_start* på rad306 och det faktiska DHCPv6-protokollet startas i TILLSTÅNDET BEGÄRD med *anropet till nx_dhcpv6_request_solicit* på rad 317. DHCPv6-klienten hanterar sedan automatiskt befordran av klienttillståndet via DHCPv6-protokollet tills den är bunden till en adress eller ett fel inträffar. Under den här tiden väntar programmet på att protokollet ska slutföras, samt ATTPlicera adressidentifiering (DUPLICATE) för att slutföras om IP-instansen är konfigurerad för ISP (vilket är standardkonfigurationen).
 
-Efter tx_thread_sleep-anropet kontrollerar programmet på de globala parametrarna som anges i tillstånds ändringens motanrop för att fastställa framgången för både DHCPv6-klient aktiviteten för att få tilldelats ett IPv6-lån och i så fall att pappa-kontrollen är klar. Detta görs med hjälp av de räknare som ställts in i funktionerna för att återställa tillstånd och Server fel. Programmet avsöker för antalet address_not_assigned, address_expired och server_errors för misslyckad adress tilldelning. Om antalet bound_addresses inte är noll (minst en adress har tilldelats) söker den efter ett fel som inte är noll address_failed_dad för en pappa-kontroll. En förklaring av tillstånds ändringen och återanrop till Server fel följer:
+Efter tx_thread_sleep-anropet kontrollerar programmet på de globala parametrar som angetts i tillståndsändringens återanrop för att fastställa om både DHCPv6-klientuppgiften har lyckats tilldelas ett IPv6-lån och i så fall att KONTROLL av unikhet lyckades. Detta görs med hjälp av räknarna som har ställts in i funktionerna för tillståndsändring och återanrop av serverfel. Programmet söker efter antal som inte är noll address_not_assigned, address_expired och server_errors efter misslyckad adresstilldelning. Om antalet användare bound_addresses inte är noll (minst en adress har tilldelats) söker den efter en icke-noll-address_failed_dad efter en misslyckad CHECK. En förklaring av tillståndsändringen och återanrop av serverfel följer:
 
-Återanrop för tillstånds ändring, *dhcpv6_state_change_notify*, föregående och aktuella Dhcpv6-klient tillstånd för att avgöra om klienten tog emot några giltiga Server svar:
+Tillståndsändringens *återanrop, dhcpv6_state_change_notify*, det tidigare och aktuella DHCPv6-klienttillståndet för att avgöra om klienten tog emot giltiga serversvar:
 
-  - *dhcpv6_state_change_notify* söker efter över gångar direkt från begär att init, och om så är fallet ökar en räknare för att Dhcpv6-klienten får inga svar från servern.
+  - *dhcpv6_state_change_notify* söker efter övergångar direkt från SOLICIT till INIT och ökar i så sätt en räknare för DHCPv6-klienten som inte får några svar från servern.
 
-Nästa *dhcpv6_state_change_notify* kontrollerar om klienten har tilldelats (bundits) till en eller flera IPv6-adresser:
+Nästa *dhcpv6_state_change_notify* kontrollerar om klienten har tilldelats (bunden) till en eller flera IPv6-adresser:
 
-  - Om det nya läget är kopplat ökar en räknare med adresser som är kopplade till klienten.
+  - Om det nya tillståndet är BOUND ökas en räknare med adresser som är bundna till klienten.
     
-*Dhcpv6_state_change_notify* kontrollerar också om det finns en inpappa-kontroll:
+Den *dhcpv6_state_change_notify söker* även efter en misslyckad CHECK:
 
-  - Om tillstånds över gången från neka till INIT har DHCPv6-klienten upptäckt en pappa-kontroll på en av dess tilldelade adresser och ökar antalet misslyckade adress tilldelningar.
+  - Om tillståndet övergår från NEKA till INIT, har DHCPv6-klienten misslyckats MED ATT kontrollera en av dess tilldelade adresser och ökar antalet misslyckade adresstilldelningar.
     
-Den senaste kontrollen av *dhcpv6_state_change_notify* i det här exemplet är för en korrekt tilldelad adress som godkände pappa-kontrollen för att inte förnyas eller återbindas:
+Den sista kontrollen *dhcpv6_state_change_notify* i det här exemplet är att en tilldelad adress som godkänts i NLA-kontrollen inte kan förnyas eller bindas om:
 
-  - Om tillståndet ändras från ombind till INIT fick klienten inga svar på antingen förnyelse-eller OMBINDNINGS begär Anden och *dhcpv6_state_change_notify* ökar antalet utgångna adresser.
+  - Om tillståndet ändras från REBIND till INIT får klienten inga svar på sina RENEW- eller REBIND-begäranden och *dhcpv6_state_change_notify* ökar antalet utgångna adresser.
 
-Om *dhcpv6_server_error_handler* om det visas ett meddelande om att Dhcpv6-klientens uppgift av en fel status som mottagits från servern, ökar antalet Server fel.
+Om *dhcpv6_server_error_handler* meddelas av DHCPv6-klienten om en felstatus som tagits emot från servern ökas antalet serverfel.
 
-Under förutsättning att alla går bra skickar appen en fråga till DHCPv6-klienten för adress data, inklusive låne tider. Det får ett antal giltiga (tilldelade) adresser genom att anropa den *nx_dhcpv6_get_valid_ip_address_count* tjänsten och tiden att förnya i IANA (gäller alla IA-adresser tilldelade) genom att anropa *nx_dhcpv6_get_iana_lease_time* på raderna 372-392. Den skickar sedan en fråga till DHCPv6-klienten för var och en av dess IA-alternativ för IPv6-adress och låne tider med hjälp av adress index.
+Förutsatt att allt går bra frågar programmet DHCPv6-klienten efter adressdata, inklusive lånetider. Det får ett antal giltiga (tilldelade) adresser genom att anropa *nx_dhcpv6_get_valid_ip_address_count-tjänsten* och tid för att förnya i IANA (gäller för alla tilldelade IA-adresser) genom att *anropa nx_dhcpv6_get_iana_lease_time* på raderna 372–392. Den frågar sedan DHCPv6-klienten efter var och en av dess IA-alternativ för IPv6-adress och lånetider efter adressindex.
 
-Vissa DHCPv6-klient tjänster (*nx_dhcpv6_get_lease_time_data, nx_dhcpv6_get_IP_address*) kräver inte ett adress index som indata och returnerar DHCPv6-parametrar för den primära klientens globala adress. Detta är lämpligt för klienter med en enda global IPv6-adress när den anropar *nx_dhcpv6_get_valid_ip_address_lease_time* på rad 384.
+Vissa DHCPv6-klienttjänster (*nx_dhcpv6_get_lease_time_data, nx_dhcpv6_get_IP_address*) kräver inte ett adressindex som indata och returnerar DHCPv6-parametrar för den primära klientens globala adress. Detta är lämpligt för klienter med en enda global IPv6-adress när *den anropar nx_dhcpv6_get_valid_ip_address_lease_time* på rad 384.
 
-Med DHCPv6-klientens konfiguration NX_DHCPV6_CLIENT_RESTORE_STATE kan ett system återställa en tidigare skapad DHCPv6-klient i ett begränsat tillstånd mellan omstarter av systemet. Anropar *nx_dhcpv6_client_get_record* för att hämta Dhcpv6-klient posten mellan omstarter av systemet på rad 434, och anropar *nx_dhcpv6_client_restore_record* för att lagra DHCPV6-klient posten när systemet har startats på rad 525.
+DHCPv6-klientkonfigurationen, NX_DHCPV6_CLIENT_RESTORE_STATE, tillåter inte att ett system återställer en tidigare skapad DHCPv6-klient i bundet tillstånd mellan systemstarter. Anropa  nx_dhcpv6_client_get_record för att hämta DHCPv6-klientposten mellan omstarter av systemet på rad 434 och anropa *nx_dhcpv6_client_restore_record* för att lagra DHCPv6-klientposten efter att systemet startats på rad 525.
 
-Programmet släpper sedan de tilldelade adresserna med hjälp av *nx_dhcpv6_request_release* tjänsten på rad 552. För att starta om programmet stoppar DHCPv6-klienten med *nx_dhcpv6_client_stop* tjänsten på rad 567 och rensar alla IPv6-adresser som registrerats med IP-instansen som har kon figurer ATS throughthe dhcpv6 client. Detta sker genom att anropa *nx_dhcpv6_reinitialize* på rad 578. Sedan startar den om DHCPv6-klient aktiviteten med *nx_dhcpv6_start* -och *nx_dhcpv6_request_solicit* -tjänster som tidigare.
+Programmet släpper sedan de tilldelade adresserna med hjälp *av nx_dhcpv6_request_release tjänsten* på rad 552. Om du vill starta om programmet stoppas DHCPv6-klienten med *nx_dhcpv6_client_stop-tjänsten* på rad 567 och rensar alla IPv6-adresser som registrerats med IP-instansen som konfigurerades via DHCPv6-klienten. Det gör den genom att *anropa nx_dhcpv6_reinitialize* på rad 578. Sedan startar den om DHCPv6-klientuppgiften *med nx_dhcpv6_start* och *nx_dhcpv6_request_solicit* tjänster som tidigare.
 
-DHCPv6-klienten tas bort med anropet till *nx_dhcpv6_delete* i line626. Observera att den inte tar bort den *e* -adresspool som den skapade för DHCPv6-klienten, eftersom den här poolen också används av IP-instansen. Annars bör den ta bort poolen om den inte längre används för att använda tjänsten NetX Duo *nx_packet_pool_delete* .
+DHCPv6-klienten tas bort med anropet till *nx_dhcpv6_delete* på rad626. Observera att den inte tar bort den *paketpool* som skapades för DHCPv6-klienten eftersom den här paketpoolen också används av IP-instansen. Annars bör paketpoolen tas bort om den inte har någon  ytterligare användning för den med hjälp av NetX Duo nx_packet_pool_delete tjänsten.
 
 ```C
 /* This is a small demo of the NetX Duo DHCPv6 Client for the high-performance NetX Duo stack. */

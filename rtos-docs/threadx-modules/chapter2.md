@@ -1,75 +1,75 @@
 ---
-title: Kapitel 2 – modulens krav
-description: Den här artikeln beskriver kraven för att bygga en ThreadX-modul.
+title: Kapitel 2 – Modulkrav
+description: Den här artikeln är en beskrivning av kraven för att skapa en ThreadX-modul.
 author: philmea
 ms.author: philmea
 ms.date: 06/08/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 32288d78ceffb74ab088a1d720dbac657f6d3ed4
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 24b814e7c2b510093b809b70b02d9a11ed39996d114f2306e0993893799453cc
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104825494"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116791966"
 ---
-# <a name="chapter-2---module-requirements"></a>Kapitel 2 – modulens krav
+# <a name="chapter-2---module-requirements"></a>Kapitel 2 – Modulkrav
 
-En ThreadX-modul innehåller en inledning som definierar modulens grundläggande egenskaper. Inledningen följs av instruktions avsnittet i modulen. Moduler kan köras på plats eller kan läsas in i modulens minnes området av modul hanteraren innan körningen. Det enda kravet är att inledningen alltid finns i den första adressen i modulen. Bild 2 visar en grundläggande modulens layout.
+En ThreadX-modul innehåller en ingress som definierar modulens grundläggande egenskaper. Ingressen följs av instruktionsområdet för modulen. Moduler kan köras på plats eller läsas in i modulminnesområdet av modulhanteraren innan de körs. Det enda kravet är att ingressen alltid finns på modulens första adress. Bild 2 visar en grundläggande modullayout.
 
-| Modulens layout |
+| Modullayout |
 |:---:|
-| \[modul, inledning\]         |
-| \[modulens instruktions områden\] |
-| \[modul RAM-yta\]         |
+| \[modulinamble\]         |
+| \[modulinstruktionsområde\] |
+| \[ram-området för modulen\]         |
 
-**Bild 2** – modulens layout
-
-> [!NOTE]
-> Modulerna måste vara skapade med lämpliga placerings oberoende kod-och data kompilator/länknings alternativ. Detta aktiverar körning av modulen i alla minnes områden.
-
-När en modulreferens skapas allokeras ett andra stack utrymme för användning när tråden är i den minnesbaserade kerneln. Storleken på trådens kernel stack-utrymme kan konfigureras av användaren med hjälp av **TXM_MODULE_KERNEL_STACK_SIZE** i **_txm_module_port. h_*_. På så sätt kan du använda en mindre stack storlek när du skapar en modulreferens, eftersom stacken som anges av användaren när du anropar _*_tx_thread_create_** endast används i modulen.
+**Bild 2** – Modullayout
 
 > [!NOTE]
-> Den översta delen i en modul tråds tack innehåller information strukturen för tråd posten (**TXM_MODULE_THREAD_ENTRY_INFO**), så den tillgängliga stack storleken minskas med storleken på den här strukturen. När du skapar en tråd i en modul ökar du dess stack storlek genom att minst den här strukturen.
+> Moduler måste byggas med lämplig positionsoberoende kod och alternativ för datakompilerare/länkare. Detta möjliggör körning av modulen i alla minnesutrymme.
 
-Följande steg krävs för att skapa och skapa en ThreadX-modul (varje steg beskrivs mer detaljerat nedan).
+När en modultråd skapas allokeras ett andra stackutrymme för användning när tråden finns i den minnesskyddade kerneln. Storleken på trådens kernelstackutrymme kan konfigureras av användaren med hjälp **av TXM_MODULE_KERNEL_STACK_SIZE** **_i txm_module_port.h_*_. Detta gör att* en mindre stackstorlek kan användas när du skapar en modultråd, eftersom stacken som anges av användaren _vid anrop av_ _ tx_thread_create** endast används i modulen.
 
-1. Alla C-filer i en modul måste #define **TXM_MODULE** innan du kan ta med **_txm_module. h_**. Detta kan utföras i käll filen som kompileras eller som en del av projekt inställningarna. Om du gör det omavbildas ThreadX-API-anrop till den modul-specifika versionen av API: et som anropar funktionen Dispatch i den inhemska modulen Manager för att utföra anropet till den faktiska API-funktionen.
-2. Varje modul måste ha en inledning i den första instruktions delens adress som definierar egenskaperna och resurs behoven för modulen.
-3. Varje modul måste länka inledningen i början av modulens instruktions områden.
-4. Varje modul måste länka till ett-modul bibliotek (***TXM. a***), som innehåller moduler-/regionsspecifika funktioner som används för att interagera med ThreadX.
+> [!NOTE]
+> Överst i en modultrådstack finns strukturen för trådinmatningsinformation (**TXM_MODULE_THREAD_ENTRY_INFO**), så den tillgängliga stackstorleken minskas med storleken på den här strukturen. När du skapar en tråd i en modul ska du öka stackstorleken med minst den storleken på den här strukturen.
 
-## <a name="module-sources"></a>Modul källor
+Följande steg krävs för att skapa och skapa en ThreadX-modul (varje steg beskrivs i detalj nedan).
 
-ThreadX-moduler har en egen uppsättning källfiler som är utformade för att länkas och placeras direkt med modulens käll kod. Dessa filer tillhandahåller bryggan mellan den separata modulen och den inhemska modul hanteraren. Filerna är följande.
+1. Alla C-filer i en modul måste #define **TXM_MODULE** innan du inkluderar **_txm_module.h_**. Detta kan åstadkommas i källfilen som kompileras eller som en del av projektinställningarna. När du gör det mappar du om ThreadX API-anropen till den modulspecifika versionen av API:et som anropar dispatch-funktionen i den invarande modulhanteraren för att utföra anropet till den faktiska API-funktionen.
+2. Varje modul måste ha en ingress vid sin första instruktionsområdesadress som definierar modulens egenskaper och resursbehov.
+3. Varje modul måste länka ingressen i början av modulens instruktionsområde.
+4. Varje modul måste länka till ett modulbibliotek (***txm.a***), som innehåller modulspecifika funktioner som används för att interagera med ThreadX.
+
+## <a name="module-sources"></a>Modulkällor
+
+ThreadX-moduler har en egen uppsättning källfiler som är utformade för att länkas och placeras direkt med modulens källkod. De här filerna utgör bryggan mellan den separata modulen och den lokala modulhanteraren. Modulfilerna är följande.
 
 | Filnamn | Innehåll |
 |---|---|
-| **txm_module. h** | Inkludera en fil som definierar information om moduler. |
-| **txm_module_port. h** | Inkludera en fil som definierar information om portbaserad moduler. |
-| **txm_module_user. h** | Definierar och värden som användaren kan anpassa. |
-| **txm_module_initialize. s [1] [3]** | Anropar inbyggda funktioner i startup-modulen. |
-| **txm_module_preamble. \{ s/S/68\}** | Sammansättnings fil för modul inledning. Den här filen definierar olika platsspecifika attribut och är länkade till modulens program kod. |
-| **txm_module_application_request. c [1]** | Funktionen module Application Request skickar en programspecifik begäran till den inhemska koden. |
-| **txm_module_callback_request_thread_entry. c &nbsp; [1]** | Återanrops tråd för modul som ansvarar för bearbetning av återanrop som begärts av modulen, inklusive timers och timers och återanrop till meddelanden. |
-| **txm_ *. c [1] [2]** | Standard-API-tjänsterna i ThreadX anropar kernel dispatcher.
-| **txm_module_object_allocate. c [1]** | Module-funktion för att allokera minne för modul-objekt som finns i Manager-lagringspoolen. |
-| **txm_module_object_deallocate. c [1]** | Modul funktion för att frigöra minne för modul objekt som finns i Manager-lagringspoolen. |
-| **txm_module_object_pointer_get. c [1]** | Module funktion för att hämta en pekare till ett system objekt. |
-| **txm_module_object_pointer_get_extended. c [1]** | Module funktion för att hämta en pekare till ett system objekt, namn längds säkerhet. |
-| **txm_module_thread_shell_entry. c [1]** | Funktionen för tråd inmatning i modulen. |
-| **txm_module_thread_system_suspend. c [1]** | Module funktion för att pausa en tråd. |
+| **txm_module.h** | Inkludera fil som definierar modulinformation. |
+| **txm_module_port.h** | Inkludera fil som definierar portspecifik modulinformation. |
+| **txm_module_user.h** | Definierar och värden som användaren kan anpassa. |
+| **txm_module_initialize.s [1][3]** | Anropar inbyggda funktioner till startmodulen. |
+| **txm_module_preamble. \{ s/S/68\}** | Modulindelabar sammansättningsfil. Den här filen definierar olika modulspecifika attribut och är länkad till modulens programkod. |
+| **txm_module_application_request.c [1]** | Funktionen för modulprogrambegäran skickar en programspecifik begäran till den hemmavarande koden. |
+| **txm_module_callback_request_thread_entry.c &nbsp; [1]** | Återanropstråd för modulen som ansvarar för bearbetning av återanrop som begärs av modulen, inklusive timers och återanrop av meddelanden. |
+| **txm_*.c [1][2]** | ThreadX API-standardtjänsterna anropar kernel dispatcher.
+| **txm_module_object_allocate.c [1]** | Modulfunktionen för att allokera minne för modulobjekt som finns i manager-minnespoolen. |
+| **txm_module_object_deallocate.c [1]** | Modulfunktionen för att avallokera minne för modulobjekt som finns i manager-minnespoolen. |
+| **txm_module_object_pointer_get.c [1]** | Modulfunktionen för att hämta en pekare till ett systemobjekt. |
+| **txm_module_object_pointer_get_extended.c [1]** | Modulfunktionen för att hämta en pekare till ett systemobjekt, namnlängdens säkerhet. |
+| **txm_module_thread_shell_entry.c [1]** | Modultrådens postfunktion. |
+| **txm_module_thread_system_suspend.c [1]** | Modulfunktion för att pausa en tråd. |
 
-**[1]** finns i biblioteket **_TXM. a_**.
+**[1]** Finns i biblioteket **_txm.a_**.
 
-**[2]** de här filerna har samma namn som THREADX-API-filerna, med **txm_** prefix i stället för **TX_** prefix.
+**[2] De** här filerna har samma namn som ThreadX API-filerna, **med txm_** prefix i stället för **tx_** prefix.
 
-**[3]** filen **txm_module_initialize. s** är bara för portar som använder arm-verktyg.
+**[3]** Filen **txm_module_initialize.s är** endast för portar som använder ARM-verktyg.
 
-## <a name="module-preamble"></a>Modul, inledning
+## <a name="module-preamble"></a>Modulens ingress
 
-I modulen inledning definieras egenskaper och resurser för modulen. Information som den första tråd inmatnings funktionen och det första minnes området som är kopplat till tråden definieras i inledningen. Port-/regionsspecifika inlednings exempel finns i [bilagan](appendix.md). Bild 3 visar ett exempel på ThreadX module för ett allmänt mål (raderna som börjar med * är värden som vanligt vis ändras av programmet):
+Modulinledningen definierar egenskaper och resurser för modulen. Information som den första trådinmatningsfunktionen och det inledande minnesområdet som är associerat med tråden definieras i ingressen. Portspecifika ingressexempel finns i [bilagan](appendix.md). Bild 3 visar ett exempel på en ThreadX-modul preamble för ett allmänt mål (raderna som börjar med * ändras vanligtvis av programmet):
 
 ```c
     AREA Init, CODE, READONLY
@@ -131,43 +131,43 @@ __txm_module_preamble
 
 **Bild 3**
 
-I de flesta fall behöver utvecklaren bara definiera modulens start tråd (offset 0x1C), modul-ID (offset-0x10), starta/stoppa tråd prioritet (förskjutning 0x24) och starta/stoppa trådens stack storlek (förskjutning 0x28). Demonstrationen ovan är inställd så att den första tråden i modulen är ***demo_module_start** _, modul-ID: t är _*_0x12345678_*_ och start tråden har prioritet _*_1_*_ och en stack storlek på _ *_2048_** byte.
+I de flesta fall behöver utvecklaren bara definiera modulens starttråd (offset 0x1C), modul-ID (offset 0x10), start/stopp-trådprioritet (förskjuten 0x24) och starta/stoppa trådstackstorlek (förskjuten 0x28). Demonstrationen ovan är konfigurerad så att modulens starttråd är ***demo_module_start** _, modul-ID:t _*_är 0x12345678_*_ och starttråden har _*_prioriteten 1_*_ och stackstorleken _ *_2 048_** byte.
 
-Vissa program kan eventuellt definiera en stoppad tråd, som körs när module Manager stoppar modulen. Dessutom kan vissa program använda fältet modul egenskaper, som definieras enligt följande.
+Vissa program kan eventuellt definiera en stopptråd som körs när Modulhanteraren stoppar modulen. Dessutom kan vissa program använda fältet Modulegenskaper, som definieras på följande sätt.
 
-## <a name="module-properties-bit-map"></a>BITS-mappning för modul egenskaper
+## <a name="module-properties-bit-map"></a>Bitmappning för modulegenskaper
 
-I tabellen nedan visas ett exempel på en egenskaps-bitars karta. Bitmappar för portbaserad egenskaper finns i [bilagan](appendix.md).
+Tabellen nedan visar ett exempel på bitkartan för egenskaper. Portspecifika egenskapsmappar finns i [bilagan](appendix.md).
 
-| Bitmask | Värde | Innebörd |
+| Bitars | Värde | Innebörd |
 |---|---|---|
 | 0 | 0<br />1 | Körning av privilegierat läge<br />Körning av användarläge |
-| 1 | 0<br />1 | Inget MPU-skydd<br />MPU-skydd (användar läge måste vara valt) |
-| 2 | 0<br />1 | Inaktivera delad/extern minnes åtkomst<br />Aktivera delad/extern minnes åtkomst |
+| 1 | 0<br />1 | Inget MPU-skydd<br />MPU-skydd (måste ha användarläge valt) |
+| 2 | 0<br />1 | Inaktivera åtkomst till delat/externt minne<br />Aktivera åtkomst till delat/externt minne |
 | [23-3] | 0 | Reserverat
-| [31-24] | <br />0x01<br />0x02<br />0x03 | **Kompilator-ID**<br />IAR<br />ARM<br />GNU |
+| [31-24] | <br />0x01<br />0x02<br />0x03 | **Kompilator-ID**<br />Iar<br />ARM<br />Gnu |
 
 
-## <a name="module-linker-control-file"></a>Kontroll fil för modul länkar
+## <a name="module-linker-control-file"></a>Modullänkerkontrollfil
 
-När du skapar en modul måste modulens inledning placeras före andra kod avsnitt. En modul måste ha skapats med positions oberoende kod och data avsnitt. Port-/regionsspecifika exempel länkar filer finns i [bilagan](appendix.md).
+När du skapar en modul måste modulinledningen placeras före andra kodavsnitt. En modul måste byggas med positionsoberoende kod och dataavsnitt. Portspecifika exempellänkningsfiler finns i [bilagan](appendix.md).
 
-## <a name="module-threadx-library"></a>Modul ThreadX-bibliotek
+## <a name="module-threadx-library"></a>Module ThreadX-bibliotek
 
-Varje modul måste länka till ett särskilt, modulbaserade ThreadX-bibliotek. Det här biblioteket ger åtkomst till ThreadX-tjänster i den inhemska koden. Det mesta av åtkomsten görs via ***txm_ \* . c*** -filerna. Följande är ett exempel på anropet till modulen för API-funktionen ThreadX **_tx_thread_relinquish_* _ (i _*_ \_ txm_thread_relinquish. c \* * * * *).
+Varje modul måste länkas till ett särskilt modulcentrerat ThreadX-bibliotek. Det här biblioteket ger åtkomst till ThreadX-tjänster i den hemmavarande koden. Merparten av åtkomsten sker via de txm_ ***\* .c-filerna.*** Följande är ett exempel på modulåtkomstanropet för ThreadX API-funktionen **_tx_thread_relinquish_* _ _*_ \_ (i txm_thread_relinquish.c \* ).).
 
 ```c
 (_txm_module_kernel_call_dispatcher)(TXM_THREAD_RELINQUISH_CALL, 0, 0, 0);
 ```
 
-I det här exemplet används funktions pekaren som tillhandahållits av module Manager för att anropa modulen för hantering av modul Manager med det ID som är kopplat till tjänsten ***tx_thread_relinquish*** . Den här tjänsten tar inga parametrar.
+I det här exemplet används funktionspekaren som tillhandahålls av ***Modulhanteraren*** för att anropa dispatch-funktionen module manager med det ID som är associerat med tx_thread_relinquish tjänsten. Den här tjänsten tar inga parametrar.
 
-## <a name="module-example"></a>Modul-exempel
+## <a name="module-example"></a>Modulexempel
 
-Följande är ett exempel på standard demonstrationen av ThreadX i form av en modul. De viktigaste skillnaderna mellan standard demonstrationen av ThreadX och demonstrationen av modulen är.
+Följande är ett exempel på ThreadX-standarddemonstrationen i form av en modul. De största skillnaderna mellan ThreadX-standarddemonstrationen och moduldemonstrationen är.
 
-1. Ersätter ***tx_api. h** _ med _ *_txm_module. h_**
-2. Tillägg av **#define TXM_MODULE** innan **_txm_module. h_**
+1. Ersättning av ***tx_api.h** _ med _ *_txm_module.h_**
+2. Tillägg av **#define TXM_MODULE** före **_txm_module.h_**
 3. Ersättning av ***main** _ och _ *tx_application_define** med **_demo_module_start_**
 4. Deklarera *pekare* till ThreadX-objekt i stället för själva objekten.
 
@@ -578,9 +578,9 @@ void thread_6_and_7_entry(ULONG thread_input)
 
 ## <a name="building-modules"></a>Skapa moduler
 
-Att skapa en modul är beroende av den verktygs kedja som används. Se [tillägg](appendix.md) för port-/regionsspecifika exempel. Vanliga aktiviteter för alla portar är följande.
+Att skapa en modul beror på vilken verktygskedja som används. Se [bilaga](appendix.md) för portspecifika exempel. Vanliga aktiviteter för alla portar är följande.
 
-- Skapa ett modul bibliotek
-- Skapa modulens program
+- Skapa ett modulbibliotek
+- Skapa modulprogrammet
 
-Varje modul måste ha en **txm_module_preamble** (installationen är särskilt för modulen) och modul biblioteket (till exempel **_TXM. a_**).
+Varje modul måste ha en **txm_module_preamble** (särskilt konfiguration för modulen) och modulbiblioteket (till exempel **_txm.a_**).

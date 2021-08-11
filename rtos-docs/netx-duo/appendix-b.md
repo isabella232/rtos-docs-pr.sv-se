@@ -1,19 +1,19 @@
 ---
-title: Bilaga B – Azure återställnings tider NetX Duo-konstanter
-description: Utforska Azure återställnings tider NetX Duo-konstanterna.
+title: Bilaga B – Azure RTOS NetX Duo-konstanter
+description: Utforska de Azure RTOS NetX Duo-konstanterna.
 author: philmea
 ms.author: philmea
 ms.date: 05/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 04207c5183d732ccb49200c117d7e85a4ff80e33
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: d9063de460a09977ed4ee7a0a02ca578bdd116e9935394e600af75a74e8f34e1
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104826235"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116789824"
 ---
-# <a name="appendix-b---azure-rtos-netx-duo-constants"></a>Bilaga B – Azure återställnings tider NetX Duo-konstanter
+# <a name="appendix-b---azure-rtos-netx-duo-constants"></a>Bilaga B – Azure RTOS NetX Duo-konstanter
 
 ## <a name="alphabetic-listing"></a>Alfabetisk lista
 
@@ -228,7 +228,7 @@ ms.locfileid: "104826235"
 <td>56</td>
 </tr>
 <tr class="odd">
-<td>NX_ICMP_PACKET (IPv6 är inaktiverat</td>
+<td>NX_ICMP_PACKET (IPv6 inaktiverat</td>
 <td>36</td>
 </tr>
 <tr class="even">
@@ -784,7 +784,7 @@ ms.locfileid: "104826235"
 <td>56</td>
 </tr>
 <tr class="even">
-<td>NX_IP_PACKET (IPv6 är inaktiverat</td>
+<td>NX_IP_PACKET (IPv6 inaktiverat</td>
 <td>36</td>
 </tr>
 <tr class="odd">
@@ -1285,7 +1285,7 @@ ms.locfileid: "104826235"
 </tr>
 <tr class="even">
 <td>NX_OPTION_ERROR</td>
-<td>0x0A</td>
+<td>0x0a</td>
 </tr>
 <tr class="odd">
 <td>NX_OVERFLOW</td>
@@ -1558,7 +1558,7 @@ ms.locfileid: "104826235"
 <td>76</td>
 </tr>
 <tr class="even">
-<td>NX_TCP_PACKET (IPv6 inaktive rad)</td>
+<td>NX_TCP_PACKET (IPv6 inaktiverat)</td>
 <td>56</td>
 </tr>
 <tr class="odd">
@@ -1644,7 +1644,7 @@ ms.locfileid: "104826235"
 <td>64</td>
 </tr>
 <tr class="odd">
-<td>NX_UDP_PACKET (IPv6 inaktive rad)</td>
+<td>NX_UDP_PACKET (IPv6 inaktiverat)</td>
 <td>44</td>
 </tr>
 <tr class="even">

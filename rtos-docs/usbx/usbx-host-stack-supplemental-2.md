@@ -1,32 +1,32 @@
 ---
-title: API för USBX-värd klasser
-description: 'I det här kapitlet beskrivs alla exponerade API: er för USBX-värd klasser.'
+title: API för USBX-värdklasser
+description: Det här kapitlet beskriver alla exponerade API:er för USBX-värdklasserna.
 author: philmea
 ms.author: philmea
 ms.date: 5/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 39f3a71c28dd14e0093f72d1a3b1ff6837c6f1f7
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 28e733e37b06da7053f238e23e2b8b8046df2dd9940e50cd0321ccf15c27ec47
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104828113"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116802115"
 ---
-# <a name="chapter-2-usbx-host-classes-api"></a>Kapitel 2: API för USBX-värd klasser
+# <a name="chapter-2-usbx-host-classes-api"></a>Kapitel 2: API för USBX-värdklasser
 
-I det här kapitlet beskrivs alla exponerade API: er för USBX-värd klasser. Följande API: er för varje klass beskrivs i detalj.
+Det här kapitlet beskriver alla exponerade API:er för USBX-värdklasserna. Följande API:er för varje klass beskrivs i detalj.
 
-- Skrivar klass
-- Ljud klass
+- Skrivarklass
+- Ljudklass
 - Asix-klass
 - Pima/PTP-klass
 - Prolific-klass
-- Generisk serie klass
+- Allmän serieklass
 
 ## <a name="ux_host_class_printer_read"></a>ux_host_class_printer_read
 
-Läsa från skrivar gränssnittet.
+Läs från skrivargränssnittet.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -38,22 +38,22 @@ UINT ux_host_class_printer_read(
     ULONG *actual_length)
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen läser från skrivar gränssnittet. Anropet blockeras och returneras bara när det uppstår ett fel eller när överföringen är klar. En läsning tillåts bara på dubbelriktade skrivare.
+Den här funktionen läser från skrivargränssnittet. Anropet blockerar och returnerar bara när det finns ett fel eller när överföringen är klar. Läsningar tillåts endast på dubbelriktade skrivare.
 
 ### <a name="parameters"></a>Parametrar
 
-- **skrivare**: pekar på skrivarens klass instans.
-- **data_pointer**: pekar mot buffertstorleken för data nytto lasten.
-- **requested_length**: längden som ska tas emot.
-- **actual_length**: den längd som faktiskt mottagits.
+- **printer**: Pekare till skrivarklassinstansen.
+- **data_pointer:** Pekare till buffertadressen för datanyttolasten.
+- **requested_length:** Längd som ska tas emot.
+- **actual_length:** Längden togs faktiskt emot.
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS**: (0x00) data överföringen har slutförts.
-- **UX_FUNCTION_NOT_SUPPORTED**: (0X54) funktionen stöds inte eftersom skrivaren inte är dubbelriktad.
-- **UX_TRANSFER_TIMEOUT**: (0X5c) överförings tids gräns, Läsning ofullständig.
+- **UX_SUCCESS**: (0x00) Dataöverföringen slutfördes.
+- **UX_FUNCTION_NOT_SUPPORTED**: (0x54) Funktionen stöds inte eftersom skrivaren inte är dubbelriktad.
+- **UX_TRANSFER_TIMEOUT:**(0x5c) Tidsgräns för överföring, läsning ofullständig.
 
 ### <a name="example"></a>Exempel
 
@@ -68,7 +68,7 @@ status = ux_host_class_printer_read(printer, data_pointer, requested_length, &ac
 
 ## <a name="ux_host_class_printer_write"></a>ux_host_class_printer_write
 
-Skriv till skrivar gränssnittet.
+Skriv till skrivargränssnittet.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -80,21 +80,21 @@ UINT ux_host_class_printer_write(
     ULONG *actual_length)
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen skriver till skrivar gränssnittet. Anropet blockeras och returneras bara när det uppstår ett fel eller när överföringen är klar.
+Den här funktionen skriver till skrivargränssnittet. Anropet blockerar och returnerar bara när det finns ett fel eller när överföringen är klar.
 
 ### <a name="parameters"></a>Parametrar
 
-- **skrivare**: pekar på skrivarens klass instans.
-- **data_pointer**: pekar mot buffertstorleken för data nytto lasten.
-- **requested_length**: längden som ska skickas.
-- **actual_length**: den längd som faktiskt har skickats.
+- **printer**: Pekare till skrivarklassinstansen.
+- **data_pointer:** Pekare till buffertadressen för datanyttolasten.
+- **requested_length:** Längd som ska skickas.
+- **actual_length:** Längden skickas faktiskt.
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS**: (0x00) data överföringen har slutförts.
-- **UX_TRANSFER_TIMEOUT**: (0X5c) överförings tids gräns, skrivning ofullständig.
+- **UX_SUCCESS**: (0x00) Dataöverföringen slutfördes.
+- **UX_TRANSFER_TIMEOUT**: (0x5c) Tidsgräns för överföring, skriv ofullständig.
 
 ### <a name="example"></a>Exempel
 
@@ -117,18 +117,18 @@ Utför en mjuk återställning till skrivaren.
 UINT ux_host_class_printer_soft_reset(UX_HOST_CLASS_PRINTER *printer)
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här funktionen utför en mjuk återställning till skrivaren.
 
 ### <a name="input-parameter"></a>Indataparameter
 
-- **skrivare**: pekar på skrivarens klass instans.
+- **printer**: Pekare till skrivarklassinstansen.
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS**: (0x00) återställningen slutfördes.
-- **UX_TRANSFER_TIMEOUT**: (0X5c) överförings tids gräns, återställning är inte slutförd.
+- **UX_SUCCESS**: (0x00)Återställningen slutfördes.
+- **UX_TRANSFER_TIMEOUT:**(0x5c) Tidsgräns för överföring, återställning har inte slutförts.
 
 ### <a name="example"></a>Exempel
 
@@ -143,7 +143,7 @@ status = ux_host_class_printer_soft_reset(printer);
 
 ## <a name="ux_host_class_printer_status_get"></a>ux_host_class_printer_status_get
 
-Hämta skrivar status
+Hämta skrivarstatus
 
 ### <a name="prototype"></a>Prototyp
 
@@ -153,20 +153,20 @@ UINT ux_host_class_printer_status_get(
     ULONG *printer_status)
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen hämtar skrivarens status. Skrivarens status liknar LPT-statusen (1284 standard).
+Den här funktionen hämtar skrivarstatusen. Skrivarstatusen liknar LPT-statusen (1284 standard).
 
 ### <a name="parameters"></a>Parametrar
 
-- **skrivare**: pekar på skrivarens klass instans.
-- **printer_status**: adress till den status som ska returneras.
+- **printer**: Pekare till skrivarklassinstansen.
+- **printer_status:** Adressen till den status som ska returneras.
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0x00): återställningen slutfördes.
-- **UX_MEMORY_INSUFFICIENT**: (0x12) det finns inte tillräckligt med minne för att utföra åtgärden.
-- **UX_TRANSFER_TIMEOUT**: (0X5c) överförings tids gräns, återställning är inte slutförd
+- **UX_SUCCESS** (0x00): Återställningen slutfördes.
+- **UX_MEMORY_INSUFFICIENT**: (0x12) Det finns inte tillräckligt med minne för att utföra åtgärden.
+- **UX_TRANSFER_TIMEOUT:**(0x5c) Tidsgräns för överföring, återställning har inte slutförts
 
 ### <a name="example"></a>Exempel
 
@@ -181,7 +181,7 @@ status = ux_host_class_printer_status_get(printer, printer_status);
 
 ## <a name="ux_host_class_printer_device_id_get"></a>ux_host_class_printer_device_id_get
 
-Hämta skrivarens enhets-ID.
+Hämta skrivarenhetens ID.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -192,26 +192,26 @@ UINT ux_host_class_printer_device_id_get(
     ULONG length)
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen hämtar skrivarens ID-sträng för IEEE 1284 (inklusive längden i de två första byten i big endian-format).
+Den här funktionen hämtar skrivarens IEEE 1284-enhets-ID-sträng (inklusive längd i de första två bytena i big endian format).
 
 ### <a name="parameters"></a>Parametrar
 
-- **skrivare**: pekar på skrivarens klass instans.
-- **descriptor_buffer**: pekar mot en buffert för att fylla IEEE 1284-enhets-ID-sträng (inklusive längden i de första två byte som ska formateras) 
-- **length**: buffertens längd i byte.
+- **printer**: Pekare till skrivarklassinstansen.
+- **descriptor_buffer: Pekare** till en buffert för att fylla IEEE 1284-enhetens ID-sträng (inklusive längden i de första två byteen i BE-format) 
+- **length**: Längden på bufferten i byte.
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0x00): åtgärden lyckades.
-- **UX_MEMORY_INSUFFICIENT**: (0x12) det finns inte tillräckligt med minne för att utföra åtgärden.
-- **UX_TRANSFER_TIMEOUT**: 0X5c-överförings-timeout, begäran slutfördes inte
-- **UX_TRANSFER_NOT_READY**: (0x25) enheten var i ett ogiltigt tillstånd – måste vara ansluten, adresserad eller konfigurerad.
-- **UX_TRANSFER_STALL**: (0X21) överföring har stoppats.
-- **TX_WAIT_ABORTED** SUS pensionen (0x1a) avbröts av en annan tråd, timer eller ISR.
-- **TX_SEMAPHORE_ERROR** (0X0C) ogiltig inventering av semafors pekare.
-- **TX_WAIT_ERROR** (0X04) ett annat wait-alternativ än TX_NO_WAIT angavs i ett anrop från en icke-tråd.
+- **UX_SUCCESS** (0x00): Åtgärden lyckades.
+- **UX_MEMORY_INSUFFICIENT**: (0x12) Det finns inte tillräckligt med minne för att utföra åtgärden.
+- **UX_TRANSFER_TIMEOUT:**(0x5c) Tidsgräns för överföring, begäran slutfördes inte
+- **UX_TRANSFER_NOT_READY**: (0x25) Enheten var i ett ogiltigt tillstånd – måste vara ANSLUTEN, ADRESSERad eller KONFIGURERAd.
+- **UX_TRANSFER_STALL**: (0x21) Överföringen har stoppats.
+- **TX_WAIT_ABORTED** (0x1A) Brytningen avbröts av en annan tråd, timer eller ISR.
+- **TX_SEMAPHORE_ERROR** (0x0C) Ogiltig inventerings-semaphore-pekare.
+- **TX_WAIT_ERROR** (0x04) Ett annat väntealternativ än TX_NO_WAIT angavs för ett anrop från en icke-tråd.
 
 ### <a name="example"></a>Exempel
 
@@ -226,7 +226,7 @@ status = ux_host_class_printer_device_id_get(printer, descriptor_buffer, length)
 
 ## <a name="ux_host_class_audio_read"></a>ux_host_class_audio_read
 
-Läsa från ljud gränssnittet.
+Läs från ljudgränssnittet.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -237,19 +237,19 @@ UINT ux_host_class_audio_read(
     *audio_transfer_request)
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen läser från ljud gränssnittet. Anropet är inte blockerande. Programmet måste se till att rätt alternativ inställning har valts för ljud strömnings gränssnittet.
+Den här funktionen läser från ljudgränssnittet. Anropet är icke-blockerande. Programmet måste se till att lämplig alternativ inställning har valts för ljudströmningsgränssnittet.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ljud**: pekar mot klass instansen.
-- **audio_transfer_request**: pekar mot ljud överförings strukturen.
+- **audio**: Pekare till ljudklassinstansen.
+- **audio_transfer_request:** Pekare till ljudöverföringsstrukturen.
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS**: (0x00) data överföringen har slutförts
-- **UX_FUNCTION_NOT_SUPPORTED**"(0x54)-funktionen stöds inte
+- **UX_SUCCESS**: (0x00) Dataöverföringen slutfördes
+- **UX_FUNCTION_NOT_SUPPORTED**" (0x54) Funktionen stöds inte
 
 ### <a name="example"></a>Exempel
 
@@ -270,7 +270,7 @@ status = ux_host_class_audio_read(audio, audio_transfer_request);
 
 ## <a name="ux_host_class_audio_write"></a>ux_host_class_audio_write
 
-Skriv till ljud gränssnittet.
+Skriv till ljudgränssnittet.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -280,20 +280,20 @@ UINT ux_host_class_audio_write(
     UX_HOST_CLASS_AUDIO_TRANSFER_REQUEST *audio_transfer_request)
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen skriver till ljud gränssnittet. Anropet är inte blockerande. Programmet måste se till att rätt alternativ inställning har valts för ljud strömnings gränssnittet.
+Den här funktionen skriver till ljudgränssnittet. Anropet är icke-blockerande. Programmet måste se till att lämplig alternativ inställning har valts för ljudströmningsgränssnittet.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ljud**: pekar mot klassen Audio-klass
-- **audio_transfer_request**: pekar mot ljud överförings strukturen
+- **audio**: Pekare till ljudklassinstansen
+- **audio_transfer_request:** Pekare till ljudöverföringsstrukturen
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS**: (0x00) data överföringen har slutförts.
-- **UX_FUNCTION_NOT_SUPPORTED**: (0x54)-funktionen stöds inte.
-- **ux_host_CLASS_AUDIO_WRONG_INTERFACE**: (0X81) gränssnitt är felaktigt.
+- **UX_SUCCESS**: (0x00) Dataöverföringen slutfördes.
+- **UX_FUNCTION_NOT_SUPPORTED**: (0x54) Funktionen stöds inte.
+- **ux_host_CLASS_AUDIO_WRONG_INTERFACE**: (0x81) Felaktigt gränssnitt.
 
 ### <a name="example"></a>Exempel
 
@@ -315,7 +315,7 @@ status = ux_host_class_audio_write(audio, audio_transfer_request);
 
 ## <a name="ux_host_class_audio_control_get"></a>ux_host_class_audio_control_get
 
-Hämta en speciell kontroll från ljud kontroll gränssnittet.
+Hämta en specifik kontroll från ljudkontrollgränssnittet.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -325,20 +325,20 @@ UINT ux_host_class_audio_control_get(
     UX_HOST_CLASS_AUDIO_CONTROL *audio_control)
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen läser en speciell kontroll från ljud kontroll gränssnittet.
+Den här funktionen läser en specifik kontroll från ljudkontrollgränssnittet.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ljud**: pekar mot klassen Audio-klass
-- **audio_control**: pekar mot ljud kontroll strukturen
+- **audio**: Pekare till ljudklassinstansen
+- **audio_control:** Pekare till ljudkontrollstrukturen
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS**: (0x00) data överföringen har slutförts
-- **UX_FUNCTION_NOT_SUPPORTED**: (0x54)-funktionen stöds inte
-- **UX_HOST_CLASS_AUDIO_WRONG_INTERFACE**: (0x81) felaktigt gränssnitt
+- **UX_SUCCESS**: (0x00) Dataöverföringen slutfördes
+- **UX_FUNCTION_NOT_SUPPORTED**: (0x54) Funktionen stöds inte
+- **UX_HOST_CLASS_AUDIO_WRONG_INTERFACE**: (0x81) Felaktigt gränssnitt
 
 ### <a name="example"></a>Exempel
 
@@ -366,7 +366,7 @@ status = ux_host_class_audio_control_get(audio, &audio_control);
 
 ## <a name="ux_host_class_audio_control_value_set"></a>ux_host_class_audio_control_value_set
 
-Ange en speciell kontroll för ljud kontroll gränssnittet.
+Ange en specifik kontroll till ljudkontrollgränssnittet.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -376,20 +376,20 @@ UINT ux_host_class_audio_control_value_set(
     UX_HOST_CLASS_AUDIO_CONTROL *audio_control)
 ```
 
-* * Beskrivning * *
+**Beskrivning **
 
-Den här funktionen anger en speciell kontroll för ljud kontroll gränssnittet.
+Den här funktionen anger en specifik kontroll till ljudkontrollgränssnittet.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ljud**: pekar mot klassen Audio-klass
-- **audio_control**: pekar mot ljud kontroll strukturen
+- **audio**: Pekare till ljudklassinstansen
+- **audio_control:** Pekare till ljudkontrollstrukturen
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS**: (0x00) data överföringen har slutförts
-- **UX_FUNCTION_NOT_SUPPORTED**: (0x54)-funktionen stöds inte
-- **UX_HOST_CLASS_AUDIO_WRONG_INTERFACE**: (0x81) felaktigt gränssnitt
+- **UX_SUCCESS**: (0x00) Dataöverföringen slutfördes
+- **UX_FUNCTION_NOT_SUPPORTED**: (0x54) Funktionen stöds inte
+- **UX_HOST_CLASS_AUDIO_WRONG_INTERFACE**: (0x81) Felaktigt gränssnitt
 
 ### <a name="example"></a>Exempel
 
@@ -418,7 +418,7 @@ status = ux_host_class_audio_control_value_set(audio, &audio_control);
 
 ## <a name="ux_host_class_audio_streaming_sampling_set"></a>ux_host_class_audio_streaming_sampling_set
 
-Ange ett alternativt inställnings gränssnitt för ljud strömnings gränssnittet.
+Ange ett alternativt inställningsgränssnitt för ljudströmningsgränssnittet.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -428,21 +428,21 @@ UINT ux_host_class_audio_streaming_sampling_set
     UX_HOST_CLASS_AUDIO_SAMPLING *audio_sampling)
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen ställer in rätt alternativ gränssnitt för ljud strömnings gränssnittet enligt en speciell samplings struktur.
+Den här funktionen anger lämpligt alternativt inställningsgränssnitt för ljudströmningsgränssnittet enligt en specifik samplingsstruktur.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ljud**: pekar mot klass instansen.
-- **audio_sampling**: pekar mot ljud samplings strukturen.
+- **audio**: Pekare till ljudklassinstansen.
+- **audio_sampling:** Pekare till ljudsamplingsstrukturen.
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS**: (0x00) data överföringen har slutförts
-- **UX_FUNCTION_NOT_SUPPORTED**: (0x54)-funktionen stöds inte
-- **UX_HOST_CLASS_AUDIO_WRONG_INTERFACE**: (0x81) felaktigt gränssnitt
-- **UX_NO_ALTERNATE_SETTING**: (0X5e) ingen alternativ inställning för samplings värden
+- **UX_SUCCESS**: (0x00) Dataöverföringen slutfördes
+- **UX_FUNCTION_NOT_SUPPORTED**: (0x54) Funktionen stöds inte
+- **UX_HOST_CLASS_AUDIO_WRONG_INTERFACE**: (0x81) Felaktigt gränssnitt
+- **UX_NO_ALTERNATE_SETTING**: (0x5e) Ingen alternativ inställning för samplingsvärdena
 
 ### <a name="example"></a>Exempel
 
@@ -463,7 +463,7 @@ status = ux_host_class_audio_streaming_sampling_set(audio, &sampling);
 
 ## <a name="ux_host_class_audio_streaming_sampling_get"></a>ux_host_class_audio_streaming_sampling_get
 
-Hämta möjliga samplings inställningar för ljud strömnings gränssnitt.
+Hämta möjliga samplingsinställningar för ljudströmningsgränssnittet.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -473,21 +473,21 @@ UINT ux_host_class_audio_streaming_sampling_get(
     UX_HOST_CLASS_AUDIO_SAMPLING_CHARACTERISTICS *audio_sampling)
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen hämtar, en i taget, alla möjliga samplings inställningar som är tillgängliga i de olika alternativen för ljud strömnings gränssnittet. Första gången funktionen används måste alla fält i den anropande struktur pekaren återställas. Funktionen returnerar en speciell uppsättning strömmande värden vid RETUR om inte slutet på de alternativa inställningarna har uppnåtts. När den här funktionen återanvänds, kommer de tidigare samplings värdena att användas för att hitta nästa samplings värde.
+Den här funktionen hämtar alla möjliga samplingsinställningar som är tillgängliga i var och en av de alternativa inställningarna för ljudströmningsgränssnittet. Första gången funktionen används måste alla fält i pekaren för den anropande strukturen återställas. Funktionen returnerar en specifik uppsättning strömningsvärden vid retur såvida inte slutet av de alternativa inställningarna har uppnåtts. När den här funktionen återanvänds används de tidigare samplingsvärdena för att hitta nästa samplingsvärden.
 
 ### <a name="parameters"></a>Parametrar
 
-- **ljud**: pekar mot klass instansen.
-- **audio_sampling**: pekar mot ljud samplings strukturen.
+- **audio**: Pekare till ljudklassinstansen.
+- **audio_sampling:** Pekare till ljudsamplingsstrukturen.
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS**: (0x00) data överföringen har slutförts
-- **UX_FUNCTION_NOT_SUPPORTED**: (0x54)-funktionen stöds inte
-- **UX_HOST_CLASS_AUDIO_WRONG_INTERFACE**: (0x81) felaktigt gränssnitt
-- **UX_NO_ALTERNATE_SETTING**: (0X5e) ingen alternativ inställning för samplings värden
+- **UX_SUCCESS**: (0x00) Dataöverföringen slutfördes
+- **UX_FUNCTION_NOT_SUPPORTED**: (0x54) Funktionen stöds inte
+- **UX_HOST_CLASS_AUDIO_WRONG_INTERFACE**: (0x81) Felaktigt gränssnitt
+- **UX_NO_ALTERNATE_SETTING**: (0x5e) Ingen alternativ inställning för samplingsvärdena
 
 ### <a name="example"></a>Exempel
 
@@ -516,7 +516,7 @@ printf("Number of channels %d, Resolution %d bits, frequency range %d-%d\n",
 
 ## <a name="ux_host_class_asix_read"></a>ux_host_class_asix_read
 
-Läsa från asix-gränssnittet.
+Läs från asix-gränssnittet.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -528,21 +528,21 @@ UINT ux_host_class_asix_read(
     ULONG *actual_length)
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen läser från asix-gränssnittet. Anropet blockeras och returneras bara när det uppstår ett fel eller när överföringen är klar.
+Den här funktionen läser från asix-gränssnittet. Anropet blockerar och returnerar bara när det finns ett fel eller när överföringen är klar.
 
 ### <a name="parameters"></a>Parametrar
 
-- **asix**: pekar mot instans av asix-klassen.
-- **data_pointer**: pekar mot buffertstorleken för data nytto lasten.
-- **requested_length**: längden som ska tas emot.
-- **actual_length**: den längd som faktiskt mottagits.
+- **asix:** Pekare till asix-klassinstansen.
+- **data_pointer:** Pekare till buffertadressen för datanyttolasten.
+- **requested_length:** Längd som ska tas emot.
+- **actual_length:** Längden togs faktiskt emot.
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS**: (0x00) data överföringen har slutförts.
-- **UX_TRANSFER_TIMEOUT**: (0X5c) överförings tids gräns, Läsning ofullständig.
+- **UX_SUCCESS**: (0x00) Dataöverföringen slutfördes.
+- **UX_TRANSFER_TIMEOUT:**(0x5c) Tidsgräns för överföring, läsning ofullständig.
 
 ### <a name="example"></a>Exempel
 
@@ -568,19 +568,19 @@ UINT ux_host_class_asix_write(
     NX_PACKET *packet)
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen skriver till asix-gränssnittet. Anropet är inte blockerat.
+Den här funktionen skriver till asix-gränssnittet. Anropet är inte blockerande.
 
 ### <a name="parameters"></a>Parametrar
 
-- **asix**: pekar mot instans av asix-klassen.
-- **paket**: netx-datapaket
+- **asix:** Pekare till asix-klassinstansen.
+- **paket:** Netx-datapaket
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS**: (0x00) data överföringen har slutförts.
-- **UX_ERROR**: (0xFF) Det gick inte att begära överföring.
+- **UX_SUCCESS**: (0x00) Dataöverföringen slutfördes.
+- **UX_ERROR**: (0xFF) Överföring kunde inte begäras.
 
 ### <a name="example"></a>Exempel
 
@@ -596,7 +596,7 @@ status = ux_host_class_asix_write(asix, packet);
 
 ## <a name="ux_host_class_pima_session_open"></a>ux_host_class_pima_session_open
 
-Öppna en session mellan initierare och svarare.
+Öppna en session mellan Initierare och Svarare.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -606,19 +606,19 @@ UINT ux_host_class_pima_session_open(
     UX_HOST_CLASS_PIMA_SESSION *pima_session)
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här funktionen öppnar en session mellan en PIMA-initierare och en PIMA-svarare. När en session har öppnats kan de flesta PIMA-kommandon köras.
 
 ### <a name="parameters"></a>Parametrar
 
-- **Pima**: pekar mot instans av Pima-klassen.
-- **pima_sessio**: pekare till pima session<
+- **pima:** Pekare till pima-klassinstansen.
+- **pima_sessio:** Pekare till PIMA-<
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS**: (0X00) session har öppnats
-- **UX_HOST_CLASS_PIMA_RC_SESSION_ALREADY_OPENED**: (0x201E)-sessionen är redan öppen
+- **UX_SUCCESS:**(0x00) Sessionen har öppnats
+- **UX_HOST_CLASS_PIMA_RC_SESSION_ALREADY_OPENED**: (0x201E) Session har redan öppnats
 
 ### <a name="example"></a>Exempel
 
@@ -633,7 +633,7 @@ if (status != UX_SUCCESS)
 
 ## <a name="ux_host_class_pima_session_close"></a>ux_host_class_pima_session_close
 
-Stäng en session mellan initierare och svarare.
+Stäng en session mellan initieraren och svararen.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -643,19 +643,19 @@ UINT ux_host_class_pima_session_close(
     UX_HOST_CLASS_PIMA_SESSION *pima_session)
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen stänger en session som tidigare har öppnats mellan en PIMA-initierare och en PIMA-svarare. När en session har stängts går det inte längre att köra de flesta PIMA-kommandon.
+Den här funktionen stänger en session som tidigare öppnades mellan en PIMA-initierare och en PIMA-svarare. När en session har stängts kan de flesta PIMA-kommandon inte längre köras.
 
 ### <a name="parameters"></a>Parametrar
 
-- **Pima**: pekar mot instans av Pima-klassen.
-- **pima_session**: pekare till Pima-sessionen.
+- **pima:** Pekare till pima-klassinstansen.
+- **pima_session:** Pekare till PIMA-session.
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS**: (0x00) sessionen stängdes.
-- **UX_HOST_CLASS_PIMA_RC_SESSION_NOT_OPEN**: (0x2003)-sessionen har inte öppnats.
+- **UX_SUCCESS**: (0x00) Sessionen stängdes.
+- **UX_HOST_CLASS_PIMA_RC_SESSION_NOT_OPEN:**(0x2003) Session öppnas inte.
 
 ### <a name="example"></a>Exempel
 
@@ -667,7 +667,7 @@ status = ux_host_class_pima_session_close(pima, pima_session);
 
 ## <a name="ux_host_class_pima_storage_ids_get"></a>ux_host_class_pima_storage_ids_get
 
-Hämta lagrings-ID-matrisen från svarare.
+Hämta lagrings-ID-matrisen från svararen.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -679,22 +679,22 @@ UINT ux_host_class_pima_storage_ids_get(
     ULONG storage_id_length)
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här funktionen hämtar lagrings-ID-matrisen från svararen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **Pima**: pekar mot instans av Pima-klassen.
-- **pima_session**: pekare till Pima-session
-- **storage_ids_array**: matris där lagrings-ID: n ska returneras
-- **storage_id_length**: lagrings mat ris längden
+- **pima:** Pekare till pima-klassinstansen.
+- **pima_session:** Pekare till PIMA-session
+- **storage_ids_array:** Matris där lagrings-ID:er returneras
+- **storage_id_length:** Lagringsmatrisens längd
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS**: (0x00) matrisen med LAGRINGS-ID har fyllts i
-- **UX_HOST_CLASS_PIMA_RC_SESSION_NOT_OPEN**: (0x2003)-sessionen har inte öppnats
-- **UX_MEMORY_INSUFFICIENT**: (0x12) det finns inte tillräckligt med minne för att skapa PIMA-kommandot.
+- **UX_SUCCESS**: (0x00) Lagrings-ID-matrisen har fyllts i
+- **UX_HOST_CLASS_PIMA_RC_SESSION_NOT_OPEN:**(0x2003) Sessionen är inte öppen
+- **UX_MEMORY_INSUFFICIENT**: (0x12) Det finns inte tillräckligt med minne för att skapa PIMA-kommandot.
 
 ### <a name="example"></a>Exempel
 
@@ -714,7 +714,7 @@ if (status != UX_SUCCESS)
 
 ## <a name="ux_host_class_pima_storage_info_get"></a>ux_host_class_pima_storage_info_get
 
-Hämta lagrings informationen från svarare.
+Hämta lagringsinformationen från svararen.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -726,22 +726,22 @@ UINT ux_host_class_pima_storage_info_get(
     UX_HOST_CLASS_PIMA_STORAGE *storage)
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen hämtar lagrings informationen för en lagrings behållare med värde *storage_id*.
+Den här funktionen hämtar lagringsinformationen för en lagringscontainer med *värdet storage_id*.
 
 ### <a name="parameters"></a>Parametrar
 
-- **Pima**: pekar mot instans av Pima-klassen.
-- **pima_session**: pekare till Pima-session
-- **storage_id**: ID för lagrings containern
-- **lagring**: pekare till Storage information container
+- **pima:** Pekare till pima-klassinstansen.
+- **pima_session:** Pekare till PIMA-session
+- **storage_id:** ID för lagringscontainern
+- **storage**: Pekare till lagringsinformationscontainer
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS**: (0x00) lagrings informationen hämtades
-- **UX_HOST_CLASS_PIMA_RC_SESSION_NOT_OPEN**: (0x2003)-sessionen har inte öppnats
-- **UX_MEMORY_INSUFFICIENT** (0x12) det finns inte tillräckligt med minne för att skapa PIMA-kommandot.
+- **UX_SUCCESS**: (0x00) Lagringsinformationen hämtades
+- **UX_HOST_CLASS_PIMA_RC_SESSION_NOT_OPEN:**(0x2003) Sessionen är inte öppen
+- **UX_MEMORY_INSUFFICIENT** (0x12) Det finns inte tillräckligt med minne för att skapa PIMA-kommandot.
 
 ### <a name="example"></a>Exempel
 
@@ -762,7 +762,7 @@ if (status != UX_SUCCESS)
 
 ## <a name="ux_host_class_pima_num_objects_get"></a>ux_host_class_pima_num_objects_get
 
-Hämta antalet objekt på en lagrings behållare från svarare.
+Hämta antalet objekt i en lagringscontainer från svararen.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -774,59 +774,59 @@ UINT ux_host_class_pima_num_objects_get(
     ULONG object_format_code)
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen hämtar antalet objekt som lagras på en angiven lagrings behållare med värde storage_id som matchar en speciell format kod. Antalet objekt returneras i fältet: ux_host_class_pima_session_nb_objects i pima_sessions strukturen.
+Den här funktionen hämtar antalet objekt som lagras i en specifik lagringscontainer med storage_id som matchar en specifik formatkod. Antalet objekt returneras i fältet: ux_host_class_pima_session_nb_objects av pima_session struktur.
 
 ### <a name="parameters"></a>Parametrar
 
-- **Pima**: pekar mot instans av Pima-klassen.
-- **pima_session**: pekare till Pima-session
-- **storage_id**: ID för lagrings containern
-- **object_format_code**: objekt format kod filter.
+- **pima:** Pekare till pima-klassinstansen.
+- **pima_session:** Pekare till PIMA-session
+- **storage_id:** ID för lagringscontainern
+- **object_format_code:** Kodfilter för objektformat.
 
-Objekt format koderna kan ha ett av följande värden.
+Objektformatkoderna kan ha något av följande värden.
 
-| Objekt format kod               | Beskrivning   |     USBX-kod                          |
+| Objektformatkod               | Description   |     USBX-kod                          |
 |----------------------------------|---------------|------------------------------------------|
-| 0x3000                           | Odefinierat odefinierade icke-avbildnings objekt | UX_HOST_CLASS_PIMA_OFC_UNDEFINED   |
-| 0x3001                           | Associerings Association (t. ex. mapp) | UX_HOST_CLASS_PIMA_OFC_ASSOCIATION |
-| 0x3002                           | Skript enhet-modell för skript | UX_HOST_CLASS_PIMA_OFC_SCRIPT      |
-| 0x3003                           | Körbar enhets modell – en unik binär körbar fil | UX_HOST_CLASS_PIMA_OFC_EXECUTABLE  |
-| 0x3004                           | Text text fil  |   UX_HOST_CLASS_PIMA_OFC_TEXT        |
+| 0x3000                           | Odefinierat odefinierat objekt som inte är avbildningsobjekt | UX_HOST_CLASS_PIMA_OFC_UNDEFINED   |
+| 0x3001                           | Association Association (t.ex. mapp) | UX_HOST_CLASS_PIMA_OFC_ASSOCIATION |
+| 0x3002                           | Skript för enhetsmodellspecifikt skript | UX_HOST_CLASS_PIMA_OFC_SCRIPT      |
+| 0x3003                           | Körbar enhetsmodellspecifik binär körbar fil | UX_HOST_CLASS_PIMA_OFC_EXECUTABLE  |
+| 0x3004                           | Texttextfil  |   UX_HOST_CLASS_PIMA_OFC_TEXT        |
 | 0x3005                           | HTML HyperText Markup Language-fil (text) | UX_HOST_CLASS_PIMA_OFC_HTML        |
-| 0x3006                           | DPOF Digital utskrifts order format fil (text) | UX_HOST_CLASS_PIMA_OFC_DPOF        |
+| 0x3006                           | DPOF Digital Print Order Format-fil (text) | UX_HOST_CLASS_PIMA_OFC_DPOF        |
 | 0x3007                           | AIFF-ljudklipp  |  UX_HOST_CLASS_PIMA_OFC_AIFF        |
-| 0x3008                           | WAV-ljud klipp   |  UX_HOST_CLASS_PIMA_OFC_WAV         |
-| 0x3009                           | MP3-ljud klipp   |  UX_HOST_CLASS_PIMA_OFC_MP3         |
+| 0x3008                           | WAV-ljudklipp   |  UX_HOST_CLASS_PIMA_OFC_WAV         |
+| 0x3009                           | MP3-ljudklipp   |  UX_HOST_CLASS_PIMA_OFC_MP3         |
 | 0x300A                           | AVI-videoklipp   |  UX_HOST_CLASS_PIMA_OFC_AVI         |
 | 0x300B                           | MPEG-videoklipp  |  UX_HOST_CLASS_PIMA_OFC_MPEG        |
-| 0x300C                           | ASF Microsoft Advanced Streaming format (video) | UX_HOST_CLASS_PIMA_OFC_ASF         |
-| 0x3800                           | Odefinierat okänt bild objekt | UX_HOST_CLASS_PIMA_OFC_QT          |
-| 0x3801                           | EXIF/JPEG-utbytbart fil format, JEIDA standard | UX_HOST_CLASS_PIMA_OFC_EXIF_JPEG   |
-| 0x3802                           | TIFF/EP tag Image File Format för elektronisk fotografering | UX_HOST_CLASS_PIMA_OFC_TIFF_EP     |
-| 0x3803                           | Bild format för FlashPix-strukturerad lagring | UX_HOST_CLASS_PIMA_OFC_FLASHPIX    |
-| 0x3804                           | BMP Microsoft Windows-bitmappsfil | UX_HOST_CLASS_PIMA_OFC_BMP         |
-| 0x3805                           | CIFF Canon Camera Image File Format | UX_HOST_CLASS_PIMA_OFC_CIFF        |
+| 0x300C                           | ASF Microsoft Advanced Streaming Format (video) | UX_HOST_CLASS_PIMA_OFC_ASF         |
+| 0x3800                           | Odefinierat okänt bildobjekt | UX_HOST_CLASS_PIMA_OFC_QT          |
+| 0x3801                           | EXIF/JPEG Exchangeable File Format, JEIDA standard | UX_HOST_CLASS_PIMA_OFC_EXIF_JPEG   |
+| 0x3802                           | TIFF/EP Tag Image File Format for Electronic Photography | UX_HOST_CLASS_PIMA_OFC_TIFF_EP     |
+| 0x3803                           | FlashPix Structured Storage-bildformat | UX_HOST_CLASS_PIMA_OFC_FLASHPIX    |
+| 0x3804                           | BMP Microsoft Windows Bitmapp-fil | UX_HOST_CLASS_PIMA_OFC_BMP         |
+| 0x3805                           | Bildfilformat för CIFF Canon-kamera | UX_HOST_CLASS_PIMA_OFC_CIFF        |
 | 0x3806                           | Odefinierad reserverad |  |
 | 0x3807                           | GIF-Graphics Interchange Format | UX_HOST_CLASS_PIMA_OFC_GIF         |
-| 0x3808                           | JFIF JPEG File Interchange Format | UX_HOST_CLASS_PIMA_OFC_JFIF        |
-| 0x3809                           | PCD PhotoCD-avbildning PAC | UX_HOST_CLASS_PIMA_OFC_PCD         |
-| 0x380A                           | PICT QuickDraw bild format | UX_HOST_CLASS_PIMA_OFC_PICT        |
+| 0x3808                           | JFIF JPEG-filutbytesformat | UX_HOST_CLASS_PIMA_OFC_JFIF        |
+| 0x3809                           | PCD PhotoCD Image Pac | UX_HOST_CLASS_PIMA_OFC_PCD         |
+| 0x380A                           | PICT Quickdraw Image Format | UX_HOST_CLASS_PIMA_OFC_PICT        |
 | 0x380B                           | PNG-Portable Network Graphics | UX_HOST_CLASS_PIMA_OFC_PNG         |
 | 0x380C                           | Odefinierad reserverad |   |
-| 0x380D                           | TIFF-tagg bild fil format | UX_HOST_CLASS_PIMA_OFC_TIFF        |
-| 0x380E                           | TIFF/IT-tagga bild fil format för informations teknik (grafik) | UX_HOST_CLASS_PIMA_OFC_TIFF_IT     |
-| 0x380F                           | JP2 JPEG2000-format för original fil | UX_HOST_CLASS_PIMA_OFC_JP2         |
-| 0x3810                           | JPX JPEG2000-utökat fil format | UX_HOST_CLASS_PIMA_OFC_JPX         |
-| Alla andra koder med MSN 0011 | Alla odefinierade reserverade för framtida användning |                                    |
-| Alla övriga koder med MSN på 1011 | En leverantörsdefinierade typ som har angetts av leverantören: avbildning |                                    |
+| 0x380D                           | TIFF-taggbildfilformat | UX_HOST_CLASS_PIMA_OFC_TIFF        |
+| 0x380E                           | TIFF/IT Tag Image File Format for Information Technology (grafisk grafik) | UX_HOST_CLASS_PIMA_OFC_TIFF_IT     |
+| 0x380F                           | JP2 JPEG2000-baslinjefilformat | UX_HOST_CLASS_PIMA_OFC_JP2         |
+| 0x3810                           | JPX JPEG2000 utökat filformat | UX_HOST_CLASS_PIMA_OFC_JPX         |
+| Alla andra koder med MSN från 0011 | Odefinierad reserverad för framtida användning |                                    |
+| Alla andra koder med MSN från 1011 | Alla leverantörsdefinierade leverantörsdefinierade typer: Avbildning |                                    |
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS**: (0x00) data överföringen har slutförts.
-- **UX_HOST_CLASS_PIMA_RC_SESSION_NOT_OPEN**: (0x2003)-sessionen har inte öppnats
-- **UX_MEMORY_INSUFFICIENT**: (0x12) det finns inte tillräckligt med minne för att skapa PIMA-kommandot.
+- **UX_SUCCESS**: (0x00) Dataöverföringen slutfördes.
+- **UX_HOST_CLASS_PIMA_RC_SESSION_NOT_OPEN:**(0x2003) Sessionen är inte öppen
+- **UX_MEMORY_INSUFFICIENT**: (0x12) Det finns inte tillräckligt med minne för att skapa PIMA-kommandot.
 
 ### <a name="example"></a>Exempel
 
@@ -847,7 +847,7 @@ if (status != UX_SUCCESS)
 
 ## <a name="ux_host_class_pima_object_handles_get"></a>ux_host_class_pima_object_handles_get
 
-Hämta objekt referenser från svarare.
+Hämta objektreferenser från svararen.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -862,40 +862,40 @@ UINT ux_host_class_pima_object_handles_get(
     ULONG object_handle_association)
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Returnerar en matris med objekt referenser som finns i den lagrings behållare som anges av parametern storage_id. Om en sammanställd lista över alla butiker önskas, anges värdet 0xFFFFFFFF för värdet.
+Returnerar en matris med objektreferenser som finns i lagringscontainern som anges storage_id parametern. Om du vill ha en aggregerad lista över alla butiker ska värdet anges till 0xFFFFFFFF.
 
 ### <a name="parameters"></a>Parametrar
 
-- **Pima**: pekar mot instans av Pima-klassen.
-- **pima_session**: pekare till Pima-session
-- **object_handes_array**: matris där referenser returneras
-- **object_handles_length**: matrisens längd
-- **storage_id**: ID för lagrings containern
-- **object_format_code**: formatera kod för objekt (se tabell för funktionen ux_host_class_pima_num_objects_get)
-- **object_handle_association**: valfritt objekt kopplings värde
+- **pima:** Pekare till pima-klassinstansen.
+- **pima_session:** Pekare till PIMA-session
+- **object_handes_array:** Matris där referenser returneras
+- **object_handles_length:** Matrisens längd
+- **storage_id:** ID för lagringscontainern
+- **object_format_code:** Formatera kod för objekt (se tabell för ux_host_class_pima_num_objects_get)
+- **object_handle_association:** Valfritt objektassociationsvärde
 
-Objekt referens associationen kan vara något av värdet från tabellen nedan:
+Objekthandtagsassociationen kan vara ett av värdet i tabellen nedan:
 
 | AssociationCode                        | AssociationType      | Tolkning       |
 |----------------------------------------|----------------------|----------------------|
 | 0x0000                                 | Undefined (Odefinierad)            | Undefined (Odefinierad)            |
-| 0x0001                                 | GenericFolder        | Outnyttja               |
-| 0x0002                                 | Artist                | Reserverat             |
+| 0x0001                                 | GenericFolder        | Oanvända               |
+| 0x0002                                 | Album                | Reserverat             |
 | 0x0003                                 | TimeSequence         | DefaultPlaybackDelta |
-| 0x0004                                 | HorizontalPanoramic  | Outnyttja               |
-| 0x0005                                 | VerticalPanoramic    | Outnyttja               |
+| 0x0004                                 | HorizontalPanoramic  | Oanvända               |
+| 0x0005                                 | VerticalPanoramic    | Oanvända               |
 | 0x0006                                 | 2DPanoramic          | ImagesPerRow         |
-| 0x0007                                 | AncillaryData        | Undefined (Odefinierad)            |
+| 0x0007                                 | Extradata        | Undefined (Odefinierad)            |
 | Alla andra värden med bit 15 inställt på 0  | Reserverat             | Undefined (Odefinierad)            |
-| Alla värden med bit 15 inställt på 1        | Leverantörsdefinierade       | Leverantörsdefinierade       |
+| Alla värden med bit 15 inställt på 1        | Leverantörsdefinierad       | Leverantörsdefinierad       |
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS**: (0x00) data överföringen har slutförts.
-- **UX_HOST_CLASS_PIMA_RC_SESSION_NOT_OPEN**: (0x2003)-sessionen har inte öppnats
-- **UX_MEMORY_INSUFFICIENT**: (0x12) det finns inte tillräckligt med minne för att skapa PIMA-kommandot.
+- **UX_SUCCESS**: (0x00) Dataöverföringen slutfördes.
+- **UX_HOST_CLASS_PIMA_RC_SESSION_NOT_OPEN:**(0x2003) Sessionen är inte öppen
+- **UX_MEMORY_INSUFFICIENT**: (0x12) Det finns inte tillräckligt med minne för att skapa PIMA-kommandot.
 
 ### <a name="example"></a>Exempel
 
@@ -917,7 +917,7 @@ if (status != UX_SUCCESS)
 
 ## <a name="ux_host_class_pima_object_info_get"></a>ux_host_class_pima_object_info_get
 
-Hämta objekt informationen från svarare.
+Hämta objektinformationen från svararen.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -929,22 +929,22 @@ UINT ux_host_class_pima_object_info_get(
     UX_HOST_CLASS_PIMA_OBJECT *object)
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen hämtar objekt information för en objekt referens.
+Den här funktionen hämtar objektinformationen för en objekthanterare.
 
 ### <a name="parameters"></a>Parametrar
 
-- **Pima**: pekar mot instans av Pima-klassen.
-- **pima_session**: pekare till Pima-session
-- **object_handle**: referens för objektet
-- **objekt**: pekare till objekt information container
+- **pima:** Pekare till pima-klassinstansen.
+- **pima_session:** Pekare till PIMA-session
+- **object_handle**: Referens för objektet
+- **object**: Pekare till objektinformationscontainer
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS**: (0x00) data överföringen har slutförts.
-- **UX_HOST_CLASS_PIMA_RC_SESSION_NOT_OPEN**: (0x2003)-sessionen har inte öppnats
-- **UX_MEMORY_INSUFFICIENT**: (0x12) det finns inte tillräckligt med minne för att skapa PIMA-kommandot.
+- **UX_SUCCESS**: (0x00) Dataöverföringen slutfördes.
+- **UX_HOST_CLASS_PIMA_RC_SESSION_NOT_OPEN:**(0x2003) Sessionen är inte öppen
+- **UX_MEMORY_INSUFFICIENT**: (0x12) Det finns inte tillräckligt med minne för att skapa PIMA-kommandot.
 
 ### <a name="example"></a>Exempel
 
@@ -971,7 +971,7 @@ while (object_index < pima_session -> ux_host_class_pima_session_nb_objects)
 
 ## <a name="ux_host_class_pima_object_info_send"></a>ux_host_class_pima_object_info_send
 
-Skicka objekt informationen till responder.
+Skicka objektinformationen till svararen.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -984,23 +984,23 @@ UINT ux_host_class_pima_object_info_send(
     UX_HOST_CLASS_PIMA_OBJECT *object)
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen skickar lagrings informationen för en lagrings behållare med värde storage_id. Initieraren bör använda det här kommandot innan du skickar ett objekt till den svarande.
+Den här funktionen skickar lagringsinformation för en lagringscontainer med storage_id. Initieraren bör använda det här kommandot innan ett objekt skickas till svararen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **Pima**: pekar mot instans av Pima-klassen.
-- **pima_session**: pekare till Pima-sessionen.
-- **storage_id**: mål LAGRINGS-ID.
-- **parent_object_id**: överordnad ObjectHandle i svarare där objektet ska placeras.
-- **objekt**: pekar mot objekt informations behållare.
+- **pima:** Pekare till pima-klassinstansen.
+- **pima_session:** Pekare till PIMA-session.
+- **storage_id:** Mållagrings-ID.
+- **parent_object_id:** Överordnad ObjectHandle på Svarare där objektet ska placeras.
+- **object**: Pekare till objektinformationscontainern.
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS**: (0x00) data överföringen har slutförts.
-- **UX_HOST_CLASS_PIMA_RC_SESSION_NOT_OPEN**: (0x2003)-sessionen har inte öppnats
-- **UX_MEMORY_INSUFFICIENT**: (0x12) det finns inte tillräckligt med minne för att skapa PIMA-kommandot.
+- **UX_SUCCESS**: (0x00) Dataöverföringen slutfördes.
+- **UX_HOST_CLASS_PIMA_RC_SESSION_NOT_OPEN:**(0x2003) Sessionen är inte öppen
+- **UX_MEMORY_INSUFFICIENT**: (0x12) Det finns inte tillräckligt med minne för att skapa PIMA-kommandot.
 
 ### <a name="example"></a>Exempel
 
@@ -1020,7 +1020,7 @@ if (status != UX_SUCCESS)
 
 ## <a name="ux_host_class_pima_object_open"></a>ux_host_class_pima_object_open
 
-Öppna ett objekt som lagras i svarare.
+Öppna ett objekt som lagras i svararen.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1032,23 +1032,23 @@ UINT ux_host_class_pima_object_open(
     UX_HOST_CLASS_PIMA_OBJECT *object)
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen öppnar ett objekt på den svarande innan den läses eller skrivs.
+Den här funktionen öppnar ett objekt på svararen innan du läser eller skriver.
 
 ### <a name="parameters"></a>Parametrar
 
-- **Pima**: pekar mot instans av Pima-klassen.
-- **pima_session**: pekare till Pima-sessionen.
-- **object_handle**: objektets handtag.
-- **objec**: pekar mot objekt informations behållare.
+- **pima:** Pekare till pima-klassinstansen.
+- **pima_session:** Pekare till PIMA-session.
+- **object_handle**: referens för objektet.
+- **objec:** Pekare till objektinformationscontainer.
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS**: (0x00) data överföringen har slutförts.
-- **UX_HOST_CLASS_PIMA_RC_SESSION_NOT_OPEN**: (0x2003)-sessionen har inte öppnats
-- **UX_HOST_CLASS_PIMA_RC_OBJECT_ALREADY_OPENED**: (0x2021)-objektet har redan öppnats.
-- **UX_MEMORY_INSUFFICIENT**: (0x12) det finns inte tillräckligt med minne för att skapa PIMA-kommandot.
+- **UX_SUCCESS**: (0x00) Dataöverföringen slutfördes.
+- **UX_HOST_CLASS_PIMA_RC_SESSION_NOT_OPEN:**(0x2003) Sessionen är inte öppen
+- **UX_HOST_CLASS_PIMA_RC_OBJECT_ALREADY_OPENED**: (0x2021) Objektet har redan öppnats.
+- **UX_MEMORY_INSUFFICIENT**: (0x12) Det finns inte tillräckligt med minne för att skapa PIMA-kommandot.
 
 ### <a name="example"></a>Exempel
 
@@ -1065,7 +1065,7 @@ if (status != UX_SUCCESS)
 
 ## <a name="ux_host_class_pima_object_get"></a>ux_host_class_pima_object_get
 
-Hämta ett objekt som lagras i svarare.
+Hämta ett objekt som lagras i svararen.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1080,29 +1080,29 @@ UINT ux_host_class_pima_object_get(
     ULONG *object_actual_length)
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen hämtar ett objekt på den svarande.
+Den här funktionen hämtar ett -objekt på svararen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **Pima**: pekar mot instans av Pima-klassen.
-- **pima_session**: pekare till Pima-session
+- **pima:** Pekare till pima-klassinstansen.
+- **pima_session:** Pekare till PIMA-session
 - **object_handle**: referens för objektet
-- **objekt**: pekare till objekt information container
-- **object_buffer**: adress för objekt data
-- **object_buffer_length**: begärd objekt längd
-- **object_actual_length**: den returnerade objekt längden
+- **object**: Pekare till objektinformationscontainer
+- **object_buffer:** Adressen till objektdata
+- **object_buffer_length:** Begärd längd på objekt
+- **object_actual_length:** Längden på det objekt som returneras
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS**: (0x00) objektet överfördes
-- **UX_HOST_CLASS_PIMA_RC_SESSION_NOT_OPEN**: (0x2003)-sessionen har inte öppnats
-- **UX_HOST_CLASS_PIMA_RC_OBJECT_NOT_OPENED**: (0x2023)-objektet har inte öppnats.
-- **UX_HOST_CLASS_PIMA_RC_ACCESS_DENIED**: (0X200f) åtkomst till objekt nekad
-- **UX_HOST_CLASS_PIMA_RC_INCOMPLETE_TRANSFER**: (0X2007) överföring är ofullständig
-- **UX_MEMORY_INSUFFICIENT**: (0x12) det finns inte tillräckligt med minne för att skapa PIMA-kommandot.
-- **UX_TRANSFER_ERROR**: (0X23) överförings fel vid läsning av objekt
+- **UX_SUCCESS**: (0x00) Objektet överfördes
+- **UX_HOST_CLASS_PIMA_RC_SESSION_NOT_OPEN:**(0x2003) Sessionen är inte öppen
+- **UX_HOST_CLASS_PIMA_RC_OBJECT_NOT_OPENED**: (0x2023) Objektet har inte öppnats.
+- **UX_HOST_CLASS_PIMA_RC_ACCESS_DENIED**: (0x200f) Åtkomst till objekt nekad
+- **UX_HOST_CLASS_PIMA_RC_INCOMPLETE_TRANSFER:**(0x2007) Överföringen är ofullständig
+- **UX_MEMORY_INSUFFICIENT**: (0x12) Det finns inte tillräckligt med minne för att skapa PIMA-kommandot.
+- **UX_TRANSFER_ERROR:**(0x23) Överföringsfel vid läsning av objekt
 
 ### <a name="example"></a>Exempel
 
@@ -1164,7 +1164,7 @@ status = ux_host_class_pima_object_close(pima, pima_session,
 
 ## <a name="ux_host_class_pima_object_send"></a>ux_host_class_pima_object_send
 
-Skicka ett objekt som lagras i svarare.
+Skicka ett objekt som lagras i svararen.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1176,28 +1176,28 @@ UINT ux_host_class_pima_object_send(
     UCHAR *object_buffer, ULONG object_buffer_length)
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen skickar ett objekt till responder.
+Den här funktionen skickar ett -objekt till svararen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **Pima**: pekar mot instans av Pima-klassen.
-- **pima_sessio**: pekare till Pima-session
+- **pima:** Pekare till pima-klassinstansen.
+- **pima_sessio:** Pekare till PIMA-session
 - **object_handle**: referens för objektet
-- **objekt**: pekare till objekt information container
-- **object_buffer**: adress för objekt data
-- **object_buffer_length**: begärd objekt längd
+- **object**: Pekare till objektinformationscontainer
+- **object_buffer:** Adressen till objektdata
+- **object_buffer_length:** Begärd längd på objekt
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS**: (0x00) data överföringen har slutförts.
-- **UX_HOST_CLASS_PIMA_RC_SESSION_NOT_OPEN**: (0x2003)-sessionen har inte öppnats
-- **UX_HOST_CLASS_PIMA_RC_OBJECT_NOT_OPENED**: (0x2023)-objektet har inte öppnats.
-- **UX_HOST_CLASS_PIMA_RC_ACCESS_DENIED**: (0X200f) åtkomst till objekt nekad
-- **UX_HOST_CLASS_PIMA_RC_INCOMPLETE_TRANSFER**: (0X2007) överföring är ofullständig
-- **UX_MEMORY_INSUFFICIENT**: (0x12) det finns inte tillräckligt med minne för att skapa PIMA-kommandot.
-- **UX_TRANSFER_ERROR**: (0X23) överförings fel vid skrivning av objekt
+- **UX_SUCCESS**: (0x00) Dataöverföringen slutfördes.
+- **UX_HOST_CLASS_PIMA_RC_SESSION_NOT_OPEN:**(0x2003) Sessionen är inte öppen
+- **UX_HOST_CLASS_PIMA_RC_OBJECT_NOT_OPENED**: (0x2023) Objektet öppnas inte.
+- **UX_HOST_CLASS_PIMA_RC_ACCESS_DENIED**: (0x200f) Åtkomst till objekt nekad
+- **UX_HOST_CLASS_PIMA_RC_INCOMPLETE_TRANSFER:**(0x2007) Överföringen är ofullständig
+- **UX_MEMORY_INSUFFICIENT**: (0x12) Det finns inte tillräckligt med minne för att skapa PIMA-kommandot.
+- **UX_TRANSFER_ERROR:**(0x23) Överföringsfel vid skrivning av objekt
 
 ### <a name="example"></a>Exempel
 
@@ -1249,7 +1249,7 @@ status = ux_host_class_pima_object_close(pima, pima_session, object_handle,
 
 ## <a name="ux_host_class_pima_thumb_get"></a>ux_host_class_pima_thumb_get
 
-Hämta ett tumm-objekt som lagras i svarare.
+Hämta ett tumobjekt som lagras i svararen.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1263,29 +1263,29 @@ UINT ux_host_class_pima_thumb_get(
     ULONG *thumb_actual_length)
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen hämtar ett tumme-objekt på den svarande.
+Den här funktionen hämtar ett tumobjekt på svararen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **Pima**: pekar mot instans av Pima-klassen.
-- **pima_session**: pekare till Pima-sessionen.
-- **object_handle**: objektets handtag.
-- **objekt**: pekar mot objekt informations behållare.
-- **thumb_buffer**: adress för objekt data för tummen.
-- **thumb_buffer_length**: den begärda längden för tumm-objektet.
-- **thumb_actual_length**: längden på det returnerade objektet.
+- **pima:** Pekare till pima-klassinstansen.
+- **pima_session:** Pekare till PIMA-session.
+- **object_handle**: referens för objektet.
+- **object**: Pekare till objektinformationscontainern.
+- **thumb_buffer:** Adressen till tumobjektdata.
+- **thumb_buffer_length:** Begärd längd på tumobjektet.
+- **thumb_actual_length:** Längden på det tumobjekt som returneras.
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS**: (0x00) data överföringen har slutförts.
-- **UX_HOST_CLASS_PIMA_RC_SESSION_NOT_OPEN**: (0x2003)-sessionen har inte öppnats.
-- **UX_HOST_CLASS_PIMA_RC_OBJECT_NOT_OPENED**: (0x2023)-objektet har inte öppnats.
-- **UX_HOST_CLASS_PIMA_RC_ACCESS_DENIED**: (0X200f) åtkomst till objekt nekad.
-- **UX_HOST_CLASS_PIMA_RC_INCOMPLETE_TRANSFER**: (0X2007) överföring är ofullständig.
-- **UX_MEMORY_INSUFFICIENT**: (0x12) det finns inte tillräckligt med minne för att skapa PIMA-kommandot.
-- **UX_TRANSFER_ERROR**: (0X23) överförings fel vid läsning av objekt.
+- **UX_SUCCESS**: (0x00) Dataöverföringen slutfördes.
+- **UX_HOST_CLASS_PIMA_RC_SESSION_NOT_OPEN:**(0x2003) Session öppnas inte.
+- **UX_HOST_CLASS_PIMA_RC_OBJECT_NOT_OPENED**: (0x2023) Objektet öppnas inte.
+- **UX_HOST_CLASS_PIMA_RC_ACCESS_DENIED**: (0x200f) Åtkomst till objekt nekad.
+- **UX_HOST_CLASS_PIMA_RC_INCOMPLETE_TRANSFER:**(0x2007) Överföringen är ofullständig.
+- **UX_MEMORY_INSUFFICIENT**: (0x12) Det finns inte tillräckligt med minne för att skapa PIMA-kommandot.
+- **UX_TRANSFER_ERROR:**(0x23) Överföringsfel vid läsning av objekt.
 
 ### <a name="example"></a>Exempel
 
@@ -1307,7 +1307,7 @@ if (status != UX_SUCCESS)
 
 ## <a name="ux_host_class_pima_object_delete"></a>ux_host_class_pima_object_delete
 
-Ta bort ett objekt som lagras i svarare.
+Ta bort ett objekt som lagras i svararen.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1318,22 +1318,22 @@ UINT ux_host_class_pima_object_delete(
     ULONG object_handle)
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen tar bort ett objekt på den svarande
+Den här funktionen tar bort ett objekt på svararen
 
 ### <a name="parameters"></a>Parametrar
 
-- **Pima**: pekar mot instans av Pima-klassen.
-- **pima_session**: pekare till Pima-session
+- **pima:** Pekare till pima-klassinstansen.
+- **pima_session:** Pekare till PIMA-session
 - **object_handle**: referens för objektet
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS**: (0x00) objektet har tagits bort.
-- **UX_HOST_CLASS_PIMA_RC_SESSION_NOT_OPEN**: (0x2003)-sessionen har inte öppnats.
-- **UX_HOST_CLASS_PIMA_RC_ACCESS_DENIED**: (0X200f) Det går inte att ta bort objekt.
-- **UX_MEMORY_INSUFFICIENT**: (0x12) det finns inte tillräckligt med minne för att skapa PIMA-kommandot.
+- **UX_SUCCESS**: (0x00) Objektet har tagits bort.
+- **UX_HOST_CLASS_PIMA_RC_SESSION_NOT_OPEN:**(0x2003) Session öppnas inte.
+- **UX_HOST_CLASS_PIMA_RC_ACCESS_DENIED**: (0x200f) Det går inte att ta bort objektet.
+- **UX_MEMORY_INSUFFICIENT**: (0x12) Det finns inte tillräckligt med minne för att skapa PIMA-kommandot.
 
 ### <a name="example"></a>Exempel
 
@@ -1348,7 +1348,7 @@ if (status != UX_SUCCESS)
 
 ## <a name="ux_host_class_pima_object_close"></a>ux_host_class_pima_object_close
 
-Stäng ett objekt som lagras i svars listan
+Stäng ett objekt som lagras i svararen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1359,23 +1359,23 @@ UINT ux_host_class_pima_object_close(
     ULONG object_handle, UX_HOST_CLASS_PIMA_OBJECT *object)
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen stänger ett objekt på den svarande.
+Den här funktionen stänger ett objekt på svararen.
 
 ### <a name="parameters"></a>Parametrar
 
-- **Pima**: pekar mot instans av Pima-klassen.
-- **pima_session**: pekare till Pima-sessionen.
-- **object_handle**: objektets handtag.
-- **objekt**: pekar mot objekt.
+- **pima:** Pekare till pima-klassinstansen.
+- **pima_session:** Pekare till PIMA-session.
+- **object_handle**: Objektets referens.
+- **object**: Pekare till objekt.
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS**: (0x00) objektet stängdes.
-- **UX_HOST_CLASS_PIMA_RC_SESSION_NOT_OPEN**: (0x2003)-sessionen har inte öppnats.
-- **UX_HOST_CLASS_PIMA_RC_OBJECT_NOT_OPENED**: (0x2023)-objektet har inte öppnats.
-- **UX_MEMORY_INSUFFICIENT**: (0x12) det finns inte tillräckligt med minne för att skapa PIMA-kommandot.
+- **UX_SUCCESS**: (0x00) Objektet stängdes.
+- **UX_HOST_CLASS_PIMA_RC_SESSION_NOT_OPEN:**(0x2003) Session öppnas inte.
+- **UX_HOST_CLASS_PIMA_RC_OBJECT_NOT_OPENED**: (0x2023) Objektet öppnas inte.
+- **UX_MEMORY_INSUFFICIENT**: (0x12) Det finns inte tillräckligt med minne för att skapa PIMA-kommandot.
 
 ### <a name="example"></a>Exempel
 
@@ -1386,7 +1386,7 @@ status = ux_host_class_pima_object_close(pima, pima_session, object_handle, obje
 
 ## <a name="ux_host_class_gser_read"></a>ux_host_class_gser_read
 
-Läsa från det allmänna seriella gränssnittet.
+Läs från det allmänna seriegränssnittet.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1399,22 +1399,22 @@ UINT ux_host_class_gser_read(
     ULONG *actual_length)
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen läser från det allmänna serie gränssnittet. Anropet blockeras och returneras bara när det uppstår ett fel eller när överföringen är klar.
+Den här funktionen läser från det allmänna seriegränssnittet. Anropet blockerar och returnerar bara när det finns ett fel eller när överföringen är klar.
 
 ### <a name="parameters"></a>Parametrar
 
-- **gser**: pekar mot instans av gser-klassen.
-- **interface_index**: gränssnitts index som ska läsas från.
-- **data_pointer**: pekar mot buffertstorleken för data nytto lasten.
-- **requested_length**: längden som ska tas emot.
-- **actual_length**: den längd som faktiskt mottagits.
+- **gser:** Pekare till gser-klassinstansen.
+- **interface_index:** Gränssnittsindex att läsa från.
+- **data_pointer:** Pekare till buffertadressen för datanyttolasten.
+- **requested_length:** Längd som ska tas emot.
+- **actual_length:** Längden togs faktiskt emot.
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS**: (0x00) data överföringen har slutförts.
-- **UX_TRANSFER_TIMEOUT**: (0X5c) överförings tids gräns, Läsning ofullständig.
+- **UX_SUCCESS**: (0x00) Dataöverföringen slutfördes.
+- **UX_TRANSFER_TIMEOUT:**(0x5c) Tidsgräns för överföring, läsning ofullständig.
 
 ### <a name="example"></a>Exempel
 
@@ -1429,7 +1429,7 @@ status = ux_host_class_gser_read(cdc_acm, interface_index,data_pointer, requeste
 
 ## <a name="ux_host_class_gser_write"></a>ux_host_class_gser_write
 
-Skriv till det allmänna seriella gränssnittet.
+Skriv till det allmänna seriegränssnittet.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1442,22 +1442,22 @@ UINT ux_host_class_gser_write(
     ULONG *actual_length)
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen skriver till det allmänna serie gränssnittet. Anropet blockeras och returneras bara när det uppstår ett fel eller när överföringen är klar.
+Den här funktionen skriver till det allmänna seriegränssnittet. Anropet blockerar och returnerar bara när det finns ett fel eller när överföringen är klar.
 
 ### <a name="parameters"></a>Parametrar
 
-- **gser**: pekar mot instans av gser-klassen.
-- **interface_index**: gränssnittet som ska skrivas.
-- **data_pointer**: pekar mot buffertstorleken för data nytto lasten.
-- **requested_length**: längden som ska skickas.
-- **actual_length**: den längd som faktiskt har skickats.
+- **gser:** Pekare till gser-klassinstansen.
+- **interface_index:** Gränssnitt som du vill skriva till.
+- **data_pointer:** Pekare till buffertadressen för datanyttolasten.
+- **requested_length:** Längd som ska skickas.
+- **actual_length:** Längden skickas faktiskt.
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS**: (0x00) data överföringen har slutförts.
-- **UX_TRANSFER_TIMEOUT**: (0X5c) överförings tids gräns, skrivning ofullständig.
+- **UX_SUCCESS**: (0x00) Dataöverföringen slutfördes.
+- **UX_TRANSFER_TIMEOUT**: (0x5c) Tidsgräns för överföring, skriv ofullständig.
 
 ### <a name="example"></a>Exempel
 
@@ -1472,7 +1472,7 @@ status = ux_host_class_cdc_acm_write(gser, data_pointer, requested_length, &actu
 
 ## <a name="ux_host_class_gser_ioctl"></a>ux_host_class_gser_ioctl
 
-Utföra en IOCTL-funktion på det allmänna seriella gränssnittet.
+Utför en IOCTL-funktion i det generiska seriegränssnittet.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1483,22 +1483,22 @@ UINT ux_host_class_gser_ioctl(
     VOID *parameter)
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen utför en angiven IOCTL-funktion till gser-gränssnittet. Anropet blockeras och returneras bara när det uppstår ett fel eller när kommandot har slutförts.
+Den här funktionen utför en specifik ioctl-funktion för gser-gränssnittet. Anropet blockerar och returnerar endast när det finns ett fel eller när kommandot har slutförts.
 
 ### <a name="parameters"></a>Parametrar
 
-- **gser**: pekar mot instans av gser-klassen.
-- **ioctl_function**: IOCTL-funktion som ska utföras. Se tabellen nedan för en av de tillåtna IOCTL-funktionerna.
-- **parameter**: Pointerto en parameter som är unik för IOCTL
+- **gser:** Pekare till gser-klassinstansen.
+- **ioctl_function:** ioctl-funktion som ska utföras. Se tabellen nedan för en av de tillåtna ioctl-funktionerna.
+- **parameter**: Pekare till en parameter som är specifik för ioctl
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS**: (0x00) data överföringen har slutförts.
-- **UX_MEMORY_INSUFFICIENT**: (0x12) det finns inte tillräckligt med minne.
-- **UX_HOST_CLASS_UNKNOWN**: (0X59) fel klass instans
-- **UX_FUNCTION_NOT_SUPPORTED**: (0X54) Okänd IOCTL-funktion.
+- **UX_SUCCESS**: (0x00) Dataöverföringen slutfördes.
+- **UX_MEMORY_INSUFFICIENT**: (0x12) Det finns inte tillräckligt med minne.
+- **UX_HOST_CLASS_UNKNOWN**: (0x59) Fel klassinstans
+- **UX_FUNCTION_NOT_SUPPORTED**: (0x54) Funktionen Okänd IOCTL.
 
 ### <a name="ioctl-functions"></a>IOCTL-funktioner
 
@@ -1527,7 +1527,7 @@ status = ux_host_class_gser_ioctl(gser,
 
 ## <a name="ux_host_class_gser_reception_start"></a>ux_host_class_gser_reception_start
 
-Börja ta emot på det allmänna seriella gränssnittet
+Starta mottagning på det allmänna seriegränssnittet
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1537,19 +1537,19 @@ UINT ux_host_class_gser_reception_start(
     UX_HOST_CLASS_GSER_RECEPTION *gser_reception)
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen startar mottagningen på det generiska gränssnittet för seriella klassen. Den här funktionen tillåter icke-blockerande mottagning. När en buffert tas emot anropas en motringning i programmet.
+Den här funktionen startar mottagningen i det generiska serieklassgränssnittet. Den här funktionen tillåter icke-blockerande mottagning. När en buffert tas emot anropas ett återanrop i programmet.
 
 ### <a name="parameters"></a>Parametrar
 
-- **gser** Pekare till gser-klass instansen.
-- **gser_reception** Struktur som innehåller mottagnings parametrarna
+- **gser** Pekare till gser-klassinstansen.
+- **gser_reception** Struktur som innehåller mottagningsparametrarna
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0x00) data överföringen har slutförts.
-- **UX_HOST_CLASS_UNKNOWN** (0X59) fel klass instans
+- **UX_SUCCESS** (0x00) Dataöverföringen slutfördes.
+- **UX_HOST_CLASS_UNKNOWN** (0x59) Fel klassinstans
 - **UX_ERROR** (0x01)-fel
 
 ### <a name="example"></a>Exempel
@@ -1572,7 +1572,7 @@ ux_host_class_gser_reception_start(gser, &gser_reception);
 
 ## <a name="ux_host_class_gser_reception_stop"></a>ux_host_class_gser_reception_stop
 
-Sluta ta emot det allmänna seriella gränssnittet
+Stoppa mottagning på det allmänna seriegränssnittet
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1582,19 +1582,19 @@ UINT ux_host_class_gser_reception_stop(
     UX_HOST_CLASS_GSER_RECEPTION *gser_reception)
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen stoppar mottagningen av gränssnittet för den allmänna seriella klassen.
+Den här funktionen stoppar mottagningen i det generiska serieklassgränssnittet.
 
 ### <a name="parameters"></a>Parametrar
 
-- **gser** Pekare till gser-klass instansen.
-- **gser_reception** Struktur som innehåller mottagnings parametrarna
+- **gser** Pekare till gser-klassinstansen.
+- **gser_reception** Struktur som innehåller mottagningsparametrarna
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0x00) data överföringen har slutförts.
-- **UX_HOST_CLASS_UNKNOWN** (0X59) fel klass instans
+- **UX_SUCCESS** (0x00) Dataöverföringen slutfördes.
+- **UX_HOST_CLASS_UNKNOWN** (0x59) Fel klassinstans
 - **UX_ERROR** (0x01)-fel
 
 ### <a name="example"></a>Exempel

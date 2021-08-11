@@ -1,32 +1,32 @@
 ---
-title: Kapitel 1 – Introduktion till Azure återställnings tider NetX BSD
-description: 'Azure återställnings tider NetX BSD Sockets API kompatibilitet-omslutningen har stöd för några av de grundläggande BSD-API: erna med vissa begränsningar och använder NetX-primitiver under.'
+title: Kapitel 1 – Introduktion till Azure RTOS NetX BSD
+description: Den Azure RTOS NetX BSD Sockets API Compliancy Wrapper stöder några av de grundläggande BSD Sockets API-anropen med vissa begränsningar och använder NetX-primitiver under.
 author: philmea
 ms.author: philmea
 ms.date: 06/04/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: fce781ac97ae75c4148614453eeb35c3064f8849
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: b58283a38a25ffdd438d7853999f3b6e390f280a947aa45101d8df86447bf3dd
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104825608"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116796729"
 ---
-# <a name="chapter-1---introduction-to-azure-rtos-netx-bsd"></a>Kapitel 1 – Introduktion till Azure återställnings tider NetX BSD
+# <a name="chapter-1---introduction-to-azure-rtos-netx-bsd"></a>Kapitel 1 – Introduktion till Azure RTOS NetX BSD
 
-NetX BSD Sockets API kompatibilitet-omslutningen stöder vissa av de grundläggande BSD-API: erna med vissa begränsningar och använder NetX-primitiver under. Detta BSD-skikt i BSD Sockets-API: n ska fungera lika snabb eller något snabbare än vanliga BSD-implementeringar, eftersom den här omslutningen använder interna NetX-primitiver och kringgår grundläggande NetX fel kontroll.
+NetX BSD Sockets API Compliancy Wrapper stöder några av de grundläggande BSD Sockets API-anropen med vissa begränsningar och använder NetX-primitiver under. Det här BSD Sockets API-kompatibilitetslagret bör fungera lika snabbt eller något snabbare än typiska BSD-implementeringar, eftersom den här omslutningen använder interna NetX-primitiver och kringgår grundläggande NetX-felkontroll.
 
-## <a name="bsd-sockets-api-compliancy-wrapper-source"></a>BSD Sockets API kompatibilitet wrapper-källa
+## <a name="bsd-sockets-api-compliancy-wrapper-source"></a>BSD Sockets API-kompatibel wrapper-källa
 
-Käll koden för BSD-omslutningen är utformad för enkelhet och består bara av två filer, *nx_bsd. h* och *nx_bsd. c*. Filen *nx_bsd. h* definierar alla nödvändiga BSD-konstanter och subrutin-prototyper för BSD-Sockets-API, medan *nx_bsd. c* innehåller den faktiska käll koden för BSD Sockets-API-kompatibilitet. Dessa filer för BSD-omslutningen är gemensamma för alla NetX-support paket.
+Källkoden för BSD Wrapper är utformad för enkelhetens skull och består av endast två filer, *nx_bsd.h* *och nx_bsd.c*. Filen *nx_bsd.h* definierar alla nödvändiga BSD Sockets API Wrapper-konstanter och subrutinprototyper, medan *nx_bsd.c* innehåller den faktiska källkoden för BSD Sockets API-kompatibilitet. Dessa BSD Wrapper-källfiler är gemensamma för alla NetX-supportpaket.
 
 Paketet består av:
 
-- **nx_bsd. c**: gränssnitts käll kod
-- **nx_bsd. h**: huvud rubrik fil
+- **nx_bsd.c:** Källkod för wrapper
+- **nx_bsd.h:** Huvudhuvudfil
 
-Exempel på demo program:
+Exempel på demoprogram:
 
-- **bsd_demo_tcp. c**: *demo med en enda TCP-server och-klient*
-- **bsd_demo_udp. c**: *demo med två UDP-klienter och en UDP-Server*
+- **bsd_demo_tcp.c:** Demo *med en enda TCP-server och klient*
+- **bsd_demo_udp.c:** Demo *med två UDP-klienter och en UDP-server*

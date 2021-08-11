@@ -1,21 +1,21 @@
 ---
-title: Bilaga A – Azure återställnings tider NetX Duo-tjänster
-description: Lär dig mer om Azure återställnings tider NetX Duo-tjänsterna.
+title: Bilaga A – Azure RTOS NetX Duo Services
+description: Läs mer om Azure RTOS NetX Duo Services.
 author: philmea
 ms.author: philmea
 ms.date: 05/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: d093fbd8abe50ee1a21f62141329e84051c70006
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: a5c4f209819935e771ca47c8ff9b8cf8e4872978e1b73d3ea24e590e792e2059
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104827048"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116790147"
 ---
-# <a name="appendix-a---azure-rtos-netx-duo-services"></a>Bilaga A – Azure återställnings tider NetX Duo-tjänster
+# <a name="appendix-a---azure-rtos-netx-duo-services"></a>Bilaga A – Azure RTOS NetX Duo Services
 
-## <a name="address-resolution-protocol-arp"></a>ARP (Address Resolution Protocol)  
+## <a name="address-resolution-protocol-arp"></a>Address Resolution Protocol (ARP)  
 
 ```c
 UINT     nx_arp_dynamic_entries_invalidate(NX_IP *ip_ptr);
@@ -305,7 +305,7 @@ UINT     nxd_ipv6_address_set(UINT nxd_ipv6_address_set(NX_IP
             *ip_ptr, UINT address_index);
 ```
 
-## <a name="neighbor-discovery"></a>Identifiering av grannar  
+## <a name="neighbor-discovery"></a>Granneidentifiering  
 
 ```c
 UINT     nxd_nd_cache_entry_delete(NX_IP ip_ptr, ULONG
@@ -329,7 +329,7 @@ UINT     nxd_nd_cache_ip_address_find(NX_IP *ip_ptr, NXD_ADDRESS
             UINT *if_index)
 ```
 
-## <a name="packet-management"></a>Paket hantering  
+## <a name="packet-management"></a>Pakethantering  
 
 ```c
 UINT     nx_packet_allocate(NX_PACKET_POOL *pool_ptr,
@@ -382,7 +382,7 @@ UINT     nx_packet_release(NX_PACKET *packet_ptr);
 UINT     nx_packet_transmit_release(NX_PACKET *packet_ptr);
 ```
 
-## <a name="reverse-address-resolution-protocol-rarp"></a>RARP (reversed Address Resolution Protocol)  
+## <a name="reverse-address-resolution-protocol-rarp"></a>Reverse Address Resolution Protocol (RARP)  
 
 ```c
 UINT     nx_rarp_disable(NX_IP *ip_ptr);

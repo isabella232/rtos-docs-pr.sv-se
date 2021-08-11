@@ -1,19 +1,19 @@
 ---
-title: Bilaga C – data typer för Azure återställnings tider-ThreadX
-description: Utforska data typerna för Azure dataåterställnings tiders-ThreadX.
+title: Bilaga C – Azure RTOS ThreadX-datatyper
+description: Utforska de Azure RTOS ThreadX-datatyperna.
 author: philmea
 ms.author: philmea
 ms.date: 05/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 7c307bcefd54734b909bdcf7ae8fd19e1f1daca9
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 6fe310254d640a2ad77cfcac3b26e81d29ef28cbb6563c244b280e0d7f41ff81
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104825464"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116801825"
 ---
-# <a name="appendix-c---azure-rtos-threadx-data-types"></a>Bilaga C – data typer för Azure återställnings tider-ThreadX
+# <a name="appendix-c---azure-rtos-threadx-data-types"></a>Bilaga C – Azure RTOS ThreadX-datatyper
 
 ## <a name="tx_block_pool"></a>TX_BLOCK_POOL
 

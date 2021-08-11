@@ -1,72 +1,72 @@
 ---
-title: Om användar handboken för Azure återställnings tider NetX
-description: Den här guiden innehåller omfattande information om Azure återställnings tider NetX, Microsofts högpresterande nätverks stack.
+title: Om Azure RTOS NetX
+description: Den här guiden innehåller omfattande information om Azure RTOS NetX, Microsofts nätverksstack med höga prestanda.
 author: philmea
 ms.author: philmea
 ms.date: 05/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 01077e3315e87b918cdfd47423d8e0c1b6bbdbbd
-ms.sourcegitcommit: 60ad844b58639d88830f2660ab0c4ff86b92c10f
+ms.openlocfilehash: 7d77997e8c5bac598f382e1169a56727af09ab108f57c90cc6265df0691b5926
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 04/07/2021
-ms.locfileid: "106550277"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116796420"
 ---
-# <a name="about-the-azure-rtos-netx-user-guide"></a>Om användar handboken för Azure återställnings tider NetX
+# <a name="about-the-azure-rtos-netx-user-guide"></a>Om Azure RTOS NetX
 
-Den här guiden innehåller omfattande information om Azure återställnings tider NetX, Microsofts högpresterande nätverks stack.
+Den här guiden innehåller omfattande information om Azure RTOS NetX, Microsofts nätverksstack med höga prestanda.
 
-Den är avsedd för inbäddade program varu utvecklare i real tid som är bekanta med grundläggande nätverks koncept, Azure återställnings tider-ThreadX och programmeringsspråket C.
+Den är avsedd för inbäddade realtidsutvecklare som är bekanta med grundläggande nätverksbegrepp, Azure RTOS ThreadX och programmeringsspråket C.
 
 ## <a name="organization"></a>Organisation
 
-[Kapitel 1](chapter1.md) – introducerar Azure återställnings tider netx
+[Kapitel 1](chapter1.md) – Introducerar Azure RTOS NetX
 
-[Kapitel 2](chapter2.md) – innehåller grundläggande steg för att installera och använda Azure återställnings tider-netx med ditt ThreadX-program.
+[Kapitel 2](chapter2.md) – Ger grundläggande steg för att installera och använda Azure RTOS NetX med ditt ThreadX-program.
 
-[Kapitel 3](chapter3.md) – innehåller en funktionell översikt över Azure återställnings tider netx-systemet och grundläggande information om TCP/IP-nätverksfunktioner.
+[Kapitel 3](chapter3.md) – Ger en funktionell översikt över Azure RTOS NetX-systemet och grundläggande information om TCP/IP-nätverksstandarder.
 
-[Kapitel 4](chapter4.md) – information om programmets gränssnitt till Azure återställnings tider netx.
+[Kapitel 4](chapter4.md) – Beskriver programmets gränssnitt för att Azure RTOS NetX.
 
-[Kapitel 5](chapter5.md) – beskriver nätverks driv rutiner för Azure återställnings tider netx.
+[Kapitel 5](chapter5.md) – Beskriver nätverksdrivrutiner för Azure RTOS NetX.
 
-[Bilaga A](appendix-a.md) – Azure återställnings tider netx-tjänster
+[Bilaga A](appendix-a.md) – Azure RTOS NetX Services
 
-[Bilaga B](appendix-b.md) – Azure återställnings tider netx-konstanter
+[Bilaga B](appendix-b.md) – Azure RTOS NetX-konstanter
 
-[Bilaga C](appendix-c.md) – data typer för Azure återställnings tider-netx
+[Bilaga C](appendix-c.md) – Azure RTOS NetX-datatyper
 
-[Bilaga D](appendix-d.md) – BSD-Compatible socket-API
+[Bilaga D](appendix-d.md) – BSD-Compatible Socket API
 
-[Bilaga E](appendix-e.md) -ASCII-diagram
+[Bilaga E](appendix-e.md) – ASCII-diagram
 
-## <a name="azure-rtos-netx-data-types"></a>Data typer för Azure dataåterställnings tiders-NetX
+## <a name="azure-rtos-netx-data-types"></a>Azure RTOS NetX-datatyper
 
-Förutom de anpassade data typerna för kontroll strukturen i Azure återställnings tider-NetX, finns det flera särskilda data typer som används i Azure återställnings tider NetX service Call-gränssnitt. Dessa särskilda data typer mappar direkt till data typer för den underliggande C-kompilatorn. Detta görs för att säkerställa portabilitet mellan olika C-kompilatorer. Den exakta implementeringen ärvs från ThreadX och kan hittas i filen ***tx_port. h*** som ingår i ThreadX-distributionen.
+Förutom de anpassade datatyperna Azure RTOS NetX-kontrollstruktur finns det flera särskilda datatyper som används i Azure RTOS NetX-tjänstens anropsgränssnitt. Dessa särskilda datatyper mappar direkt till datatyperna i den underliggande C-kompilatorn. Detta görs för att säkerställa portabilitet mellan olika C-kompilatorer. Den exakta implementeringen ärvs från ThreadX och finns i ***filen tx_port.h*** som ingår i ThreadX-distributionen.
 
-Följande är en lista över data typer för Azure återställnings tider NetX service Call och deras associerade betydelser:
+Följande är en lista över de Azure RTOS netx-tjänstens anropsdatatyper och deras associerade betydelser:
 
 | Datatyper | Description  |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| **UINT**  | Basic-osignerat heltal. Den här typen måste ha stöd för 32-bitars osignerade data. den är dock mappad till den mest användbara osignerade data typen. |
+| **Uint**  | Grundläggande heltal utansignering. Den här typen måste ha stöd för 32-bitars osignerade data. Den mappas dock till den mest praktiska osignerade datatypen. |
 | **ULONG** | Osignerad lång typ. Den här typen måste ha stöd för 32-bitars osignerade data.                                                                      |
-| **VOID**  | Nästan alltid ekvivalent med kompilatorns void-typ.                                                                                 |
-| **HÄNGANDE**  | Oftast en vanlig 8-bitars tecken typ.                                                                                           |
+| **Void**  | Nästan alltid likvärdigt med kompilatorns void-typ.                                                                                 |
+| **Char**  | Oftast en standardtyp med 8 bitar.                                                                                           |
 
-Ytterligare data typer används i Azure återställnings tider NetX-källan. De finns antingen i ***tx_port. h** _ eller _ *_nx_port. h_** filer.
+Ytterligare datatyper används i Azure RTOS NetX-källan. De finns antingen i filerna ***tx_port.h** _ eller _ *_nx_port.h_** .
 
-## <a name="customer-support-center"></a>Kund Support Center
+## <a name="customer-support-center"></a>Customer Support Center
 
-Skicka in ett support ärende via Azure Portal om du har frågor eller hjälp med att följa stegen här. Lämna oss med följande information i ett e-postmeddelande så att vi effektivare kan lösa support förfrågan:
+Skicka en supportbiljett via Azure-portalen för frågor eller hjälp med att följa stegen här. Ange följande information i ett e-postmeddelande så att vi kan lösa din supportbegäran mer effektivt:
 
-1. En detaljerad beskrivning av problemet, inklusive frekvensen av händelser och huruvida det kan återskapas tillförlitligt.
+1. En detaljerad beskrivning av problemet, inklusive förekomstfrekvens och om det kan återskapas på ett tillförlitligt sätt.
 
-2. En detaljerad beskrivning av eventuella ändringar i programmet och/eller Azure återställnings tider-NetX som föregåde problemet.
+2. En detaljerad beskrivning av eventuella ändringar i programmet och/eller Azure RTOS NetX som föregick problemet.
 
-3. Innehållet i **_tx_version_id** -och **_nx_version_id** -strängar som finns i **_tx_port. h_*_-och _*_nx_port. h_** -filerna för distributionen. De här strängarna ger oss värdefull information om din kör tids miljö.
+3. Innehållet i de **_tx_version_id**  _nx_version_id strängarna som finns i **_filerna tx_port.h_ _ och *_*_nx_port.h_** i distributionen. Dessa strängar ger oss värdefull information om din körningsmiljö.
 
-4. Innehållet i RAM-minnet för följande **ulong** -variabler:
+4. Innehållet i RAM-minnet för följande **ULONG-variabler:**
 
     **_tx_build_options**
 
@@ -80,6 +80,6 @@ Skicka in ett support ärende via Azure Portal om du har frågor eller hjälp me
 
     **_nx_system_build_options5**
 
-    Dessa variabler ger oss information om hur dina Azure återställnings tider ThreadX-och Azure återställnings tider NetX-bibliotek skapades.
+    Dessa variabler ger oss information om hur dina Azure RTOS ThreadX- och Azure RTOS NetX-bibliotek har skapats.
 
-5. En spårnings-buffert som samlats in omedelbart efter det att problemet upptäcktes. Detta åstadkommer du genom att skapa Azure återställnings tider-ThreadX och Azure återställnings tider NetX-biblioteken med **TX_ENABLE_EVENT_TRACE** och anropa **tx_trace_enable** med information om spårnings-bufferten. Mer information finns i användar handboken för Azure återställnings tider TraceX.
+5. En spårningsbuffert avbildas omedelbart efter att problemet har identifierats. Detta åstadkoms genom att Azure RTOS ThreadX- och Azure RTOS NetX-bibliotek med TX_ENABLE_EVENT_TRACE och **anropa** **tx_trace_enable** med spårningsbuffertinformationen. Se användarhandboken Azure RTOS TraceX för mer information.

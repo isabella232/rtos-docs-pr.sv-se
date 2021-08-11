@@ -1,129 +1,129 @@
 ---
-title: Kapitel 2 – installation av enhets stack för Azure återställnings tider USBX
-description: Lär dig hur du installerar Azure återställnings tider USBX Device stack och de viktiga överväganden som du behöver tänka på innan du installerar.
+title: Kapitel 2 – Azure RTOS USBX-enhetsstackinstallation
+description: Lär dig hur du installerar Azure RTOS USBX-enhetsstacken, samt viktiga värdöverväganden som du behöver tänka på innan du installerar.
 author: philmea
 ms.author: philmea
 ms.date: 5/19/2020
 ms.service: rtos
 ms.topic: article
-ms.openlocfilehash: dd58f77130fa252be9163bd70c29f7deee400d30
-ms.sourcegitcommit: 60ad844b58639d88830f2660ab0c4ff86b92c10f
+ms.openlocfilehash: abe3e43e090890a5e51700fc2f587c59619fcdad5b71681fd4071c614dab5ce6
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 04/07/2021
-ms.locfileid: "106549784"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116791416"
 ---
-# <a name="chapter-2---azure-rtos-usbx-device-stack-installation"></a>Kapitel 2 – installation av enhets stack för Azure återställnings tider USBX
+# <a name="chapter-2---azure-rtos-usbx-device-stack-installation"></a>Kapitel 2 – Azure RTOS USBX-enhetsstackinstallation
 
-## <a name="host-considerations"></a>Värd överväganden
+## <a name="host-considerations"></a>Värdöverväganden
 
-### <a name="computer-type"></a>Typ av dator
+### <a name="computer-type"></a>Datortyp
 
-Inbäddad utveckling utförs vanligt vis på Windows-datorer eller UNIX-värddatorer. När programmet har kompilerats, länkats och finns på värden laddas den ned till mål maskin varan för körning.
+Inbäddad utveckling utförs vanligtvis på Windows- eller Unix-värddatorer. När programmet har kompilerats, länkats och finns på värden laddas det ned till målmaskinvaran för körning.
 
-### <a name="download-interfaces"></a>Hämta gränssnitt
+### <a name="download-interfaces"></a>Ladda ned gränssnitt
 
-Normalt görs mål hämtningen via ett seriellt RS-232-gränssnitt, även om Parallel Interfaces, USB och Ethernet blir mer populära. I utvecklings verktygets dokumentation finns tillgängliga alternativ.
+Vanligtvis görs målnedladdningen via ett RS-232-seriellt gränssnitt, även om parallella gränssnitt, USB och Ethernet blir allt mer populära. Se dokumentationen för utvecklingsverktyg för tillgängliga alternativ.
 
-### <a name="debugging-tools"></a>Fel söknings verktyg
+### <a name="debugging-tools"></a>Felsökningsverktyg
 
-Fel sökning sker vanligt vis via samma länk som nedladdningen av program avbildningen. Det finns en mängd olika fel söknings program som sträcker sig från små övervakningsprogram som körs på målet genom BDM-verktyg (Background debug Monitor) och In-Circuit emulator (ICE). Verktyget ICE ger den mest robusta fel sökningen av faktisk mål maskin vara.
+Felsökning utförs vanligtvis via samma länk som nedladdningen av programavbildningen. Det finns en mängd olika felsökningsprogram, från små övervakningsprogram som körs på målet till verktygen Background Debug Monitor (BDM) och In-Circuit Emulator (ICE). VERKTYGET ICE ger den mest robusta felsökningen av den faktiska målmaskinvaran.
 
-### <a name="required-hard-disk-space"></a>Nödvändigt hårddisk utrymme
+### <a name="required-hard-disk-space"></a>Nödvändigt hårddiskutrymme
 
-Käll koden för USBX levereras i ASCII-format och kräver cirka 500 KB utrymme på värddatorns hård disk.
+Källkoden för USBX levereras i ASCII-format och kräver cirka 500 KByte utrymme på värddatorns hårddisk.
 
-### <a name="target-considerations"></a>Mål överväganden
+### <a name="target-considerations"></a>Målöverväganden
 
-USBX kräver mellan 24 och 64 KB av skrivskyddat minne (ROM) på målet i värd läge. Mängden minne som krävs beror på vilken typ av styrenhet som används och vilka USB-klasser som är kopplade till USBX. En annan 32 KByte av målets RAM-minne (Random Access Memory) krävs för USBX globala data strukturer och minneskonfigurationer. Den här mediepoolen kan också justeras beroende på det förväntade antalet enheter på USB-enheten och typen av USB-styrenhet. Enhets sidan för USBX kräver ungefär 10-12 kB ROM beroende på typ av enhets styrenhet. Användningen av RAM-minnet beror på vilken typ av klass som emuleras av enheten.
+USBX kräver mellan 24 KByte och 64 KByte skrivskyddade minne (ROM) på målet i värdläge. Mängden minne som krävs beror på vilken typ av styrenhet som används och DE USB-klasser som är länkade till USBX. Ytterligare 32 KByte av målets RAM-minne (Random Access Memory) krävs för globala USBX-datastrukturer och minnespool. Den här minnespoolen kan också justeras beroende på det förväntade antalet enheter på USB-enheten och typen av USB-styrenhet. USBX-enhetssidan kräver ungefär 10–12 K ROM beroende på typ av styrenhet. RAM-minnesanvändningen beror på vilken typ av klass som emuleras av enheten.
 
-USBX förlitar sig även på ThreadX-semaforer, mutexer och trådar för flera tråd skydd och I/O-inskjutningar och regelbunden bearbetning för övervakning av USB-bussens topologi.
+USBX förlitar sig också på ThreadX-semaforer, mutexer och trådar för skydd av flera trådar och I/O-instängning och regelbunden bearbetning för övervakning av USB-busstopologin.
 
-### <a name="product-distribution"></a>Produkt distribution
+### <a name="product-distribution"></a>Produktdistribution
 
-Azure återställnings tider-USBX kan hämtas från vår offentliga käll kods lagrings plats på <https://github.com/azure-rtos/usbx/> .
+Azure RTOS USBX kan hämtas från vår offentliga källkodsdatabas på <https://github.com/azure-rtos/usbx/> .
 
-Följande är en lista över flera viktiga filer i lagrings platsen.
+Följande är en lista över flera viktiga filer på lagringsplatsen.
 
-* ***ux_api. h***: den här C-huvudfilen innehåller alla system likställda, data strukturer och tjänst prototyper.
-* ***ux_port. h***: den här C-huvudfilen innehåller alla data definitioner och strukturer för utveckling-verktyg.
-* ***UX. lib***: det här är den binära versionen av USBX C-biblioteket. Den distribueras med standard paketet.
-* ***demo_usbx. c***: c-filen som innehåller en enkel USBX-demo
+* ***ux_api.h:*** Den här C-huvudfilen innehåller alla systemekvat, datastrukturer och tjänstprototyper.
+* ***ux_port.h:*** Den här C-huvudfilen innehåller alla datadefinitioner och strukturer som är specifika för utvecklingsverktyg.
+* ***ux.lib:*** Det här är den binära versionen av USBX C-biblioteket. Den distribueras med standardpaketet.
+* ***demo_usbx.c:*** C-filen som innehåller en enkel USBX-demo
 
-Alla fil namn är i gemener. Den här namngivnings konventionen gör det lättare att konvertera kommandon till UNIX-utvecklings plattformar.
+Alla filnamn har gemener. Den här namngivningskonventionen gör det enklare att konvertera kommandona till Unix-utvecklingsplattformar.
 
 ## <a name="usbx-installation"></a>USBX-installation
 
-USBX installeras genom att klona GitHub-lagringsplatsen till den lokala datorn. Följande är en typisk syntax för att skapa en klon av USBX-lagringsplatsen på din dator:
+USBX installeras genom att klona GitHub på den lokala datorn. Följande är en vanlig syntax för att skapa en klon av USBX-lagringsplatsen på datorn:
 
 ```c
     git clone https://github.com/azure-rtos/usbx
 ```
 
-Alternativt kan du ladda ned en kopia av lagrings platsen med hjälp av knappen Ladda ned på GitHub-huvud sidan.
+Du kan också ladda ned en kopia av lagringsplatsen med hjälp av nedladdningsknappen GitHub på huvudsidan.
 
-Du hittar också instruktioner för att skapa USBX-biblioteket på den första sidan i online-lagringsplatsen.
+Du hittar också anvisningar för att skapa USBX-biblioteket på startsidan för onlinedatabasen.
 
-Följande allmänna instruktioner gäller för i princip vilken installation som helst:
+Följande allmänna anvisningar gäller för praktiskt taget alla installationer:
 
-1. Använd samma katalog som du tidigare installerade ThreadX på värd hård disken. Alla USBX namn är unika och påverkar inte den tidigare USBX-installationen.
-1. Lägg till ett anrop till ***ux_system_initialize** _ i eller nära början av _ *_tx_application_define_* *. Det är här som USBX-resurserna initieras.
-1. Lägg till ett anrop till ***ux_device_stack_initialize *.**
-1. Lägg till ett eller flera anrop för att initiera nödvändiga USBX-klasser (antingen värd-och/eller enhets klasser)
-1. Lägg till ett eller flera anrop för att initiera den tillgängliga enhets styrenheten i systemet.
-1. Du kan behöva ändra filen tx_low_level_initialize. c för att kunna lägga till maskin varu initiering på låg nivå och avbryta vektor routning. Detta är särskilt för maskin varu plattformen och beskrivs inte här. |
-1. Kompilera program käll koden och länka med USBX-och ThreadX-körnings biblioteken (FileX och/eller netx kan också krävas om klassen för USB-lagring och/eller USB-nätverksanslutningar ska kompileras), UX. a (eller UX. lib) och TX. a (eller TX. lib). Resultatet kan hämtas till målet och köras!
+1. Använd samma katalog som du tidigare installerade ThreadX i på värdhårdenheten. Alla USBX-namn är unika och stör inte den tidigare USBX-installationen.
+1. Lägg till ett anrop **till * ux_system_initialize** _ i eller nära början av _*_tx_application_define_**. Här initieras USBX-resurserna.
+1. Lägg till ett anrop till ***ux_device_stack_initialize*.**
+1. Lägg till ett eller flera anrop för att initiera nödvändiga USBX-klasser (antingen värd- och/eller enhetsklasser)
+1. Lägg till ett eller flera anrop för att initiera den enhetsstyrenhet som är tillgänglig i systemet.
+1. Det kan krävas att ändra filen tx_low_level_initialize.c för att lägga till maskinvaru-initiering på låg nivå och avbryta vektorroutning. Detta är specifikt för maskinvaruplattformen och kommer inte att diskuteras här.|
+1. Kompilera programmets källkod och länka till USBX- och ThreadX-körningsbiblioteken (FileX och/eller Netx kan också krävas om USB-lagringsklassen och/eller USB-nätverksklasserna ska kompileras i), ux.a (eller ux.lib) och tx.a (eller tx.lib). Resultatet kan laddas ned till målet och köras!
 
-## <a name="configuration-options"></a>Konfigurations alternativ
+## <a name="configuration-options"></a>Konfigurationsalternativ
 
-Det finns flera konfigurations alternativ för att skapa USBX-biblioteket. Alla alternativ finns i ***ux_user. h***.
+Det finns flera konfigurationsalternativ för att skapa USBX-biblioteket. Alla alternativ finns i ***ux_user.h***.
 
-I listan nedan beskrivs varje konfigurations alternativ.
+I listan nedan beskrivs varje konfigurationsalternativ.
 
-| Konfigurations &nbsp; alternativ | Description |
+| &nbsp;Konfigurationsalternativ | Description |
 | --- | --- |
-| **UX_PERIODIC_RATE** | Det här värdet anger hur många Tick per sekund för en viss maskin varu plattform. Standardvärdet är 1000 som anger 1 Tick per millisekund. |
-| **UX_THREAD_STACK_SIZE** | Det här värdet är storleken på stacken i byte för USBX-trådarna. Det kan vara vanligt vis 1024 byte eller 2048 byte beroende på vilken processor som används och värd styrenheten. |
-| **UX_THREAD_PRIORITY_ENUM** | Detta är prioritet svärdet för ThreadX för USBX-uppräknings trådar som övervakar buss sto pol Ogin. |
-| **UX_THREAD_PRIORITY_CLASS** | Detta är prioritet svärdet för ThreadX för standard trådarna för USBX. |
-| **UX_THREAD_PRIORITY_KEYBOARD** | Detta är ThreadX prioritets värde för HID-tangentbordet för USBX. |
-| **UX_THREAD_PRIORITY_DCD** | Detta är ThreadX prioritets värde för enhets styrenhetens tråd. |
-| **UX_NO_TIME_SLICE** | Det här värdet definierar i själva verket den tids sektor som ska användas för trådar. Om t. ex. har definierats till 0 används inte tids segment i ThreadX Target-porten. |
-| **UX_MAX_SLAVE_CLASS_DRIVER** | Detta är det maximala antalet USBX-klasser som kan registreras via ux_device_stack_class_register. |
-| **UX_MAX_SLAVE_LUN** | Värdet representerar det aktuella antalet SCSI-logiska enheter som representeras i enhetens lagrings klass driv rutin. |
-| **UX_SLAVE_CLASS_STORAGE_INCLUDE_MMC** | Om den har definierats hanterar lagrings klassen multi-media-kommandon (MMC), som är DVD-ROM. |
-| **UX_DEVICE_CLASS_CDC_ECM_NX_PKPOOL_ENTRIES** | Det här värdet representerar antalet NetX-paket i CDC-ECM-klassen ' Packet pool. Standardvärdet är 16. |
-| **UX_SLAVE_REQUEST_CONTROL_MAX_LENGTH** | Det här värdet representerar det maximala antalet byte som tagits emot på en kontroll slut punkt i enhets stacken. Standardvärdet är 256 byte, men kan minskas i miljöer med minnes begränsning. |
+| **UX_PERIODIC_RATE** | Det här värdet representerar hur många tick per sekund som gäller för en specifik maskinvaruplattform. Standardvärdet är 1 000, vilket anger 1 tick per millisekund. |
+| **UX_THREAD_STACK_SIZE** | Det här värdet är storleken på stacken i byte för USBX-trådarna. Det kan vanligtvis vara 1 024 byte eller 2 048 byte beroende på vilken processor som används och värdstyrenheten. |
+| **UX_THREAD_PRIORITY_ENUM** | Det här är ThreadX-prioritetsvärdet för DE USBX-uppräkningstrådar som övervakar busstopologin. |
+| **UX_THREAD_PRIORITY_CLASS** | Det här är ThreadX-prioritetsvärdet för USBX-standardtrådarna. |
+| **UX_THREAD_PRIORITY_KEYBOARD** | Det här är ThreadX-prioritetsvärdet för USBX HID-tangentbordsklassen. |
+| **UX_THREAD_PRIORITY_DCD** | Det här är ThreadX-prioritetsvärdet för enhetsstyrenhetstråden. |
+| **UX_NO_TIME_SLICE** | Det här värdet definierar faktiskt den tidssegment som ska användas för trådar. Om till exempel definieras till 0 använder Inte ThreadX-målporten tidssegment. |
+| **UX_MAX_SLAVE_CLASS_DRIVER** | Det här är det maximala antalet USBX-klasser som kan registreras via ux_device_stack_class_register. |
+| **UX_MAX_SLAVE_LUN** | Det här värdet representerar det aktuella antalet logiska SCSI-enheter som representeras i enhetens lagringsklassdrivrutin. |
+| **UX_SLAVE_CLASS_STORAGE_INCLUDE_MMC** | Om lagringsklassen definieras hanterar den KOMMANDON för flera medier (MMC), det vill säga DVD-ROM. |
+| **UX_DEVICE_CLASS_CDC_ECM_NX_PKPOOL_ENTRIES** | Det här värdet representerar antalet NetX-paket i CDC-ECM-klassens paketpool. Standardvärdet är 16. |
+| **UX_SLAVE_REQUEST_CONTROL_MAX_LENGTH** | Det här värdet representerar det maximala antalet byte som tas emot på en kontrollslutpunkt i enhetsstacken. Standardvärdet är 256 byte, men kan minskas i miljöer med minnesbegränsning. |
 | **UX_DEVICE_CLASS_HID_EVENT_BUFFER_LENGTH** | Det här värdet representerar den maximala längden i byte för en HID-rapport. |
 | **UX_DEVICE_CLASS_HID_MAX_EVENTS_QUEUE** | Det här värdet representerar det maximala antalet HID-rapporter som kan köas samtidigt. |
-| **UX_SLAVE_REQUEST_DATA_MAX_LENGTH** | Det här värdet representerar det maximala antalet byte som tagits emot på en Mass slut punkt i enhets stacken. Standardvärdet är 4096 byte, men kan minskas i miljöer med minnes begränsning. |
+| **UX_SLAVE_REQUEST_DATA_MAX_LENGTH** | Det här värdet representerar det maximala antalet byte som tas emot på en massslutpunkt i enhetsstacken. Standardvärdet är 4 096 byte, men kan minskas i miljöer med minnesbegränsning. |
 
-## <a name="source-code-tree"></a>Käll kods träd
+## <a name="source-code-tree"></a>Källkodsträd
 
 USBX-filerna finns i flera kataloger.
 
-![Käll kods träd](media/usbx-device-stack/source-code-tree.png)
+![Källkodsträd](media/usbx-device-stack/source-code-tree.png)
 
-Följande konvention har antagits för att göra filerna identifierbara med deras namn:
+För att göra filerna igenkännliga med deras namn har följande konvention godkänts:
 
-| Namnsuffix  | Fil Beskrivning                          |
+| Namn på filsuffix  | Filbeskrivning                          |
 | ----------------- | ----------------------------------------- |
-| ux_host_stack   | USBX Host stack core-filer                |
-| ux_host_class   | USBX värd stack klasser filer             |
-| ux_hcd           | USBX för värd stack kontrollant   |
-| ux_device_stack | USBX Device stack core-filer              |
-| ux_device_class | filer för USBX Device stack-klasser           |
-| ux_dcd           | USBX enhets stack Controller-drivrutinsfiler |
-| ux_otg           | USBX OTG Controller-relaterade filer  |
-| ux_pictbridge    | USBX PictBridge-filer                     |
-| ux_utility       | USBX verktygs funktioner                    |
-| demo_usbx        | demonstrations filer för USBX              |
+| ux_host_stack   | usbx-värdstackens kärnfiler                |
+| ux_host_class   | usbx-värdstackklassfiler             |
+| ux_hcd           | drivrutinsfiler för usbx-värdstacksstyrenhet   |
+| ux_device_stack | usbx-enhetsstackens kärnfiler              |
+| ux_device_class | usbx-enhetsstackklassfiler           |
+| ux_dcd           | drivrutinsfiler för usbx-enhetsstack |
+| ux_otg           | usbx otg controller driver related files  |
+| ux_pictbridge    | usbx pictbridge-filer                     |
+| ux_utility       | usbx-verktygsfunktioner                    |
+| demo_usbx        | demonstrationsfiler för USBX              |
 
 ## <a name="initialization-of-usbx-resources"></a>Initiering av USBX-resurser
 
-USBX har en egen minnes hanterare. Minnet måste allokeras till USBX innan värden eller enhets sidan på USBX initieras. USBX minnes hanteraren kan hantera system där minnet kan cachelagras.
+USBX har en egen minneshanterare. Minnet måste allokeras till USBX innan värden eller enheten på USBX initieras. USBX-minneshanteraren kan hantera system där minne kan cachelagras.
 
-Följande funktion initierar USBX minnes resurser med 128 kB reguljärt minne och ingen separat pool för cache-säkert minne:
+Följande funktion initierar USBX-minnesresurser med 128 K vanligt minne och ingen separat pool för cacheminnet:
 
 ```c
 /* Initialize USBX Memory */
@@ -143,18 +143,18 @@ Indataparametrar:
 
 | Parameter                          | Beskrivning                             |
 | ---------------------------------- | --------------------------------------- |
-| VOID * regular_memory_pool_start    | Början av den vanliga mediepoolen    |
-| ULONG regular_memory_size          | Storlek på den ordinarie lagringspoolen         |
-| VOID * cache_safe_memory_pool_start | Början av cacheminnet för säker cache |
-| ULONG cache_safe_memory_size       | Storlek på cachen för cache-säker pool      |
+| VOID *regular_memory_pool_start    | Början av den vanliga minnespoolen    |
+| ULONG-regular_memory_size          | Storleken på den vanliga minnespoolen         |
+| VOID *cache_safe_memory_pool_start | Början av cacheminnespoolen |
+| ULONG-cache_safe_memory_size       | Storleken på cacheminnets säkra minnespool      |
 
-Inte alla system kräver definitionen av cache-säkert minne. I ett sådant system kommer värdena som skickas under initieringen av minnes pekaren att anges till UX_NULL och storleken på poolen till 0. USBX kommer sedan att använda den vanliga lagringspoolen i stället för den betrodda cache-poolen.
+Alla system kräver inte definitionen av säkert cacheminne. I ett sådant system anges de värden som skickas under initieringen för minnespekaren till UX_NULL och storleken på poolen till 0. USBX använder sedan den vanliga minnespoolen i stället för den säkra cachepoolen.
 
-I ett system där det normala minnet inte är cache-säkert och en styrenhet kräver DMA-minne är det nödvändigt att definiera en minnesbuffert i en säker cache-zon.
+I ett system där det vanliga minnet inte cachelagras på ett säkert sätt och en kontrollant kräver DMA-minne är det nödvändigt att definiera en minnespool i en säker cachezon.
 
-## <a name="uninitialization-of-usbx-resources"></a>Avinitiering av USBX-resurser
+## <a name="uninitialization-of-usbx-resources"></a>Oinitiering av USBX-resurser
 
-USBX kan avbrytas genom att frisläppa sina resurser. Innan du avslutar USBX måste alla klasser och styrenhets resurser avbrytas korrekt. Följande funktion avinitierar USBX minnes resurser:
+USBX kan avslutas genom att dess resurser frigörs. Innan usbx avslutas måste alla klasser och kontrollantresurser avslutas korrekt. Följande funktion uninitialiserar USBX-minnesresurser:
 
 ```c
 /* Unitialize USBX Resources */
@@ -168,15 +168,15 @@ Prototypen för ux_system_initialize är följande:
 UINT ux_system_uninitialize(VOID);
 ```
 
-## <a name="definition-of-usb-device-controller"></a>Definition av USB-enhets styrenhet
+## <a name="definition-of-usb-device-controller"></a>Definition av USB-enhetsstyrenhet
 
-Endast en USB-enhets styrenhet kan definieras när som helst för att köras i enhets läge. Programmets initierings fil ska innehålla den här definitionen. Följande rad utför definitionen av en allmän USB-styrenhet:
+Endast en USB-styrenhet kan definieras när som helst för att fungera i enhetsläge. Programmets initieringsfil ska innehålla den här definitionen. Följande rad utför definitionen av en allmän USB-styrenhet:
 
 ```c
 ux_dcd_controller_initialize(0x7BB00000, 0, 0xB7A00000);
 ```
 
-Initieringen av USB-enheten har följande prototyp:
+INitieringen av USB-enheten har följande prototyp:
 
 ```c
 UINT ux_dcd_controller_initialize(ULONG dcd_io,
@@ -187,11 +187,11 @@ med följande parametrar:
 
 | Pararmeter               | Description                      |
 | ------------------------ | -------------------------------- |
-| ULONG dcd_io            | Adress till styrenhetens IO     |
-| ULONG dcd_irq           | Avbrott som används av kontrollanten |
-| ULONG dcd_vbus_address | Adressen för VBUS-GPIO         |
+| ULONG-dcd_io            | Adress för kontrollantens IO     |
+| ULONG-dcd_irq           | Avbrott som används av kontrollanten |
+| ULONG-dcd_vbus_address | Adress för VBUS GPIO         |
 
-Följande exempel är initieringen av USBX i enhets läge med lagrings enhets klassen och en allmän styrenhet:
+Följande exempel är initieringen av USBX i enhetsläge med klassen för lagringsenheter och en allmän styrenhet:
 
 ```c
 /* Initialize USBX Memory */
@@ -231,8 +231,8 @@ status = ux_dcd_controller_initialize(0x7BB00000, 0, 0xB7A00000);
 
 ## <a name="troubleshooting"></a>Felsökning
 
-USBX levereras med en demonstrations fil och en simulerings miljö. Det är alltid en bra idé att få demonstrations plattformen igång först – antingen på mål maskin varan eller en speciell demonstrations plattform.
+USBX levereras med en demonstrationsfil och en simuleringsmiljö. Det är alltid en bra idé att få igång demonstrationsplattformen först – antingen på målmaskinvaran eller en specifik demonstrationsplattform.
 
-## <a name="usbx-version-id"></a>USBX versions-ID
+## <a name="usbx-version-id"></a>USBX-versions-ID
 
-Den aktuella versionen av USBX är tillgänglig både för användaren och program varan under körnings tillfället. Programmerare kan hämta USBX-versionen från undersökningen av filen ***ux_port. h** _. Dessutom innehåller den här filen även en versions historik för motsvarande port. Program varan kan hämta USBX-versionen genom att undersöka den globala strängen _ *_ _ux_version_id_* _, som definieras i _ *_ux_port. h_* *.
+Den aktuella versionen av USBX är tillgänglig för både användaren och programprogramvaran under körningen. Programmeraren kan hämta USBX-versionen från undersökningen av filen ***ux_port.h** _ . Dessutom innehåller den här filen även en versionshistorik för motsvarande port. Programprogramvara kan hämta USBX-versionen genom att undersöka den globala strängen *_ _ _ux_version_id_* _, som definieras i _*_ux_port.h_**.

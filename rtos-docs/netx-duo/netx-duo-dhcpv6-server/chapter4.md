@@ -1,44 +1,44 @@
 ---
-title: Kapitel 4 – Azure återställnings tider NetX Duo DHCPv6-server tjänster
+title: Kapitel 4 – Azure RTOS NetX Duo DHCPv6-servertjänster
 description: Det här kapitlet innehåller en beskrivning av alla NetX Duo DHCPv6Server-tjänster
 author: philmea
 ms.author: philmea
 ms.date: 06/08/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 1d45139031b5a687baacf86c7a2e0a53c90533be
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: cf6b43f70a7159af6c24496ec2ae2276d5e271af2ad3af99687181df3bf6be6c
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104826028"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116792034"
 ---
-# <a name="chapter-4---azure-rtos-netx-duo-dhcpv6-server-services"></a>Kapitel 4 – Azure återställnings tider NetX Duo DHCPv6-server tjänster
+# <a name="chapter-4---azure-rtos-netx-duo-dhcpv6-server-services"></a>Kapitel 4 – Azure RTOS NetX Duo DHCPv6-servertjänster
 
-Det här kapitlet innehåller en beskrivning av alla NetX Duo DHCPv6Server-tjänster (visas nedan).
+Det här kapitlet innehåller en beskrivning av alla NetX Duo DHCPv6Server-tjänster (anges nedan).
 
-I avsnittet "retur värden" i följande API-beskrivningar påverkas inte värden i **fetstil** av **NX_DISABLE_ERROR_CHECKING** definiera som används för att inaktivera API-felkontroll, medan icke-Fetstilade värden är helt inaktiverade.
+I avsnittet "Returvärden" i följande API-beskrivningar påverkas inte värden i **FETSTIL** av **den NX_DISABLE_ERROR_CHECKING-definition** som används för att inaktivera API-felkontroll, medan värden som inte är fetstilta är helt inaktiverade.
 
-- nx_dhcpv6_server_create *skapa en DHCPv6-serverinstance*
-- nx_dhcpv6_server_delete *ta bort ett DHCPv6-serverinstance*
-- nx_dhcpv6_server_start *starta aktiviteten DHCPv6-server*
-- nx_dhcpv6_server_suspend *pausa aktiviteten DHCPv6-server*
-- nx_dhcpv6_server_resume *återuppta DHCPV6-klient bearbetning*
-- nx_dhcpv6_server_suspend *pausa DHCPV6-klient bearbetning*
-- nx_dhcpv6_create_dns_address *ställa in DNS-servern för Options-begäranden*
-- nx_dhcpv6_create_ip_address_range *skapa intervallet av IP-adresser som ska lånas*
-- nx_dhcpv6_reserve_ip_address_range *reserv intervall med IP-adresser i Server listan*
-- nx_dhcpv6_set_server_duid *ange serverns DUID för DHCPv6-paket*
-- nx_dhcpv6_add_ip_address_lease *lägga till en låne post i DHCPv6-server tabellen*
-- Nx_dhcpv6_retrieve_ip_address_lease *Hämta en IP-adresslån från Server tabellen*
-- nx_dhcpv6_add_client_record *lägga till en DHCPV6-klient post i Server tabellen*
-- nx_dhcpv6_retrieve_client_record *Hämta en klient post från Server tabellen*
-- nx_dhcpv6_server_interface_set *Ange gränssnitts index för serverns DHCPv6-tjänster*
-- nx_dhcpv6_server_option_request_handler_set *Ange hanteraren för Options-begäran*
+- nx_dhcpv6_server_create skapa *en DHCPv6-serverinance*
+- nx_dhcpv6_server_delete Ta *bort en DHCPv6-server*
+- nx_dhcpv6_server_start starta *DHCPv6-serveraktiviteten*
+- nx_dhcpv6_server_suspend *pausa DHCPv6-serveraktiviteten*
+- nx_dhcpv6_server_resume återuppta *DHCPv6-klientbearbetning*
+- nx_dhcpv6_server_suspend *pausa DHCPv6-klientbearbetning*
+- nx_dhcpv6_create_dns_address Ange *DNS-servern för alternativbegäranden*
+- nx_dhcpv6_create_ip_address_range Skapa *det IP-adressintervall som ska lånas ut*
+- nx_dhcpv6_reserve_ip_address_range *reservera ip-adressintervall i serverlistan*
+- nx_dhcpv6_set_server_duid *Ange Server DUID för DHCPv6-paket*
+- nx_dhcpv6_add_ip_address_lease Lägga *till en lånepost i DHCPv6-servertabellen*
+- Nx_dhcpv6_retrieve_ip_address_lease Hämta *en IP-lånepost från servertabellen*
+- nx_dhcpv6_add_client_record lägga *till en DHCPv6-klientpost i servertabellen*
+- nx_dhcpv6_retrieve_client_record Hämta *en klientpost från servertabellen*
+- nx_dhcpv6_server_interface_set Ange *gränssnittsindex för Server DHCPv6-tjänster*
+- nx_dhcpv6_server_option_request_handler_set *Ange hanteraren för alternativbegäran*
 
 ## <a name="nx_dhcpv6_create_dns_address"></a>nx_dhcpv6_create_dns_address
 
-### <a name="set-the-network-dns-server"></a>Ange nätverks-DNS-Server
+### <a name="set-the-network-dns-server"></a>Ange nätverkets DNS-server
 
 **Prototyp**
 
@@ -50,22 +50,22 @@ UINT nx_dhcpv6_create_dns_address(
 
 **Beskrivning**
 
-Den här tjänsten läser in DHCPv6-servern med DNS-serveradressen för serverns DHCPv6-nätverks gränssnitt.
+Den här tjänsten läser in DHCPv6-servern med DNS-serveradressen för server-DHCPv6-nätverksgränssnittet.
 
 **Indataparametrar**
 
 - **dhcpv6_server_ptr** Pekare till DHCPv6-server
 - **dns_ipv6_address** Pekare till DNS-servern
 
-**Retur värden**
+**Returvärden**
 
-- **NX_SUCCESS** (0X00) DNS-Serversaved till DHCPv6-serverinstansen
-- **NX_DHCPV6_INVALID_INTERFACE_IP_ADDRESS** (0XE95) en ogiltig adress har angetts
-- NX_PTR_ERROR (0x16) ogiltigt inmatade pekare
+- **NX_SUCCESS** (0x00) DNS-servrar som sparats till DHCPv6-serverinstansen
+- **NX_DHCPV6_INVALID_INTERFACE_IP_ADDRESS** (0xE95) En ogiltig adress har angetts
+- NX_PTR_ERROR (0x16) Ogiltig pekarindata
 
-**Tillåten från**
+**Tillåts från**
 
-Program kod
+Programkod
 
 **Exempel**
 
@@ -77,7 +77,7 @@ status = nx_dhcpv6_create__dns_address(&dhcp_server_0, &dns_ipv6_address);
 
 ## <a name="nx_dhcpv6_create_ip_address_range"></a>nx_dhcpv6_create_ip_address_range
 
-### <a name="create-the-server-ip-address-list"></a>Skapa serverns IP-adress lista
+### <a name="create-the-server-ip-address-list"></a>Skapa listan med SERVER-IP-adresser
 
 **Prototyp**
 
@@ -90,24 +90,24 @@ UINT _nx_dhcpv6_create_ip_address_range(
 
 **Beskrivning**
 
-Den här tjänsten skapar IP-adress listan som anges av start-och slut adresserna för serverns tilldelnings bara adress intervall. Start-och slut adresserna måste överensstämma med adressprefixet för Server gränssnittet (måste finnas på samma länk som serverns DHCPv6-gränssnitt). Antalet adresser som faktiskt har lagts till returneras.
+Den här tjänsten skapar ip-adresslistan som anges av start- och slutadresserna för serverns tilldelningsbara adressintervall. Start- och slutadresserna måste matcha servergränssnittets adressprefix (måste finnas på samma länk som server-DHCPv6-gränssnittet). Det antal adresser som faktiskt har lagts till returneras.
 
 **Indataparametrar**
 
 - **dhcpv6_server_ptr** Pekare till DHCPv6-server
-- **start_ipv6_address** Början av adresser som ska läggas till
+- **start_ipv6_address** Start för adresser som ska läggas till
 - **end_ipv6_address** Slut på adresser som ska läggas till
-- ***addresses_added** Utdata från adresser har lagts till
+- ***addresses_added** Utdata från tillagda adresser
 
-**Retur värden**
+**Returvärden**
 
-- **NX_SUCCESS** (0X00) IP-adress lista har skapats
-- **NX_DHCPV6_INVALID_INTERFACE_IP_ADDRESS** (0XE95) en ogiltig adress har angetts
-- NX_PTR_ERROR (0x16) ogiltigt inmatade pekare
+- **IP-NX_SUCCESS** (0x00) har skapats
+- **NX_DHCPV6_INVALID_INTERFACE_IP_ADDRESS** (0xE95) En ogiltig adress har angetts
+- NX_PTR_ERROR (0x16) Ogiltig pekarindata
 
-**Tillåten från**
+**Tillåts från**
 
-Program kod
+Programkod
 
 **Exempel**
 
@@ -120,7 +120,7 @@ status = nx_dhcpv6_create_ip_address_range(&dhcp_server_0,
 
 ## <a name="nx_dhcpv6_reserve_ip_address_range"></a>nx_dhcpv6_reserve_ip_address_range
 
-### <a name="reserve-specified-range-of-ip-addresses"></a>Reservera angivet intervall av IP-adresser
+### <a name="reserve-specified-range-of-ip-addresses"></a>Reservera angivet intervall med IP-adresser
 
 **Prototyp**
 
@@ -133,25 +133,25 @@ UINT _nx_dhcpv6_reserve_ip_address_range(
 
 **Beskrivning**
 
-Den här tjänsten reserverar det IP-adressintervall som anges av start-och slut adresserna. Dessa adresser måste ligga inom det tidigare skapade Server-IP-adressintervallet. Dessa adresser kommer inte att tilldelas till några klienter av DHCPv6-servern. Start-och slut adresserna måste överensstämma med adressprefixet för Server gränssnittet (måste finnas på samma länk som serverns DHCPv6-nätverks gränssnitt). Antalet adresser som faktiskt reserver ATS returneras.
+Den här tjänsten reserverar det IP-adressintervall som anges av start- och slutadresserna. De här adresserna måste finnas inom det tidigare skapade server-IP-adressintervallet. Dessa adresser tilldelas inte till några klienter av DHCPv6-servern. Start- och slutadresserna måste matcha servergränssnittets adressprefix (måste finnas på samma länk som server-DHCPv6-nätverksgränssnittet). Antalet adresser som faktiskt är reserverade returneras.
 
 **Indataparametrar**
 
 - **dhcpv6_server_ptr** Pekare till DHCPv6-server
-- **start_ipv6_address** Början av adresser som ska reserveras
+- **start_ipv6_address** Start för adresser som ska reserveras
 - **end_ipv6_address** Slut på adresser som ska reserveras
 - ***addresses_reserved** Antal reserverade adresser
 
-**Retur värden**
+**Returvärden**
 
-- **NX_SUCCESS** (0X00) versions meddelandet har skapats och bearbetats
-- **NX_DHCPV6_INVALID_INTERFACE_IP_ADDRESS** (0XE95) en ogiltig adress har angetts
-- Det gick inte att hitta **NX_DHCPV6_INVALID_IP_ADDRESS** (0xED1) med start adress i server adress listan.
-- NX_PTR_ERROR (0x16) ogiltigt inmatade pekare
+- **NX_SUCCESS** (0x00) RELEASE-meddelandet har skapats och bearbetats
+- **NX_DHCPV6_INVALID_INTERFACE_IP_ADDRESS** (0xE95) En ogiltig adress har angetts
+- **NX_DHCPV6_INVALID_IP_ADDRESS** (0xED1) Startadressen hittades inte i listan Serveradress.
+- NX_PTR_ERROR (0x16) Ogiltig pekarindata
 
-**Tillåten från**
+**Tillåts från**
 
-Program kod
+Programkod
 
 **Exempel**
 
@@ -167,7 +167,7 @@ status = nx_dhcpv6_reserve_ip_address_range(&dhcp_server_0,
 
 ## <a name="nx_dhcpv6_server_create"></a>nx_dhcpv6_server_create
 
-### <a name="create-the-dhcpv6-server-instance"></a>Skapa DHCPv6-Server instansen 
+### <a name="create-the-dhcpv6-server-instance"></a>Skapa DHCPv6-serverinstansen 
 
 **Prototyp**
 
@@ -187,30 +187,30 @@ UINT nx_dhcpv6_server_create(NX_DHCPV6_SERVER *dhcpv6_server_ptr,
 
 **Beskrivning**
 
-Den här tjänsten skapar DHCPv6-servern med angivna inuppgifter. Återanrops hanterarna är valfria ingångar. Stack pekaren, indatamängden för IP-instansen och Packet-poolen krävs. IP-instansen och Packet-poolen måste redan ha skapats.
+Den här tjänsten skapar DHCPv6-serveruppgiften med angivna indata. Motringningarna är valfria indata. Stackpekaren, IP-instansen och indata för paketpoolen krävs. IP-instansen och paketpoolen måste redan skapas.
 
-Användaren uppmanas att anropa nx_dhcpv6_server_option_request_handler_set för att ställa in option Request handler.
+Användaren uppmanas att anropa nx_dhcpv6_server_option_request_handler_set för att ange hanteraren för alternativbegäran.
 
 **Indataparametrar**
 
 - **dhcpv6_server_ptr** Pekare till DHCPv6-server
 - **ip_ptr** Pekare till IP-instansen
-- **name_str** Pekare till Server namn
-- **packet_pool_ptr** Pekare till Server paketets pool
-- **stack_ptr** Pekare till serverns stack minne
-- **stack_size** Storlek på serverns stack-minne
-- **dhcpv6_address_declined_handler** Pekare till klienten nekar eller frigör meddelande hanterare
-- **dhcpv6_option_request_handler** Pekare till alternativ hanteraren för begär ande alternativ
+- **name_str** Pekare till servernamn
+- **packet_pool_ptr** Pekare till serverpaketpool
+- **stack_ptr** Pekare till serverstackens minne
+- **stack_size** Storleken på serverstackens minne
+- **dhcpv6_address_declined_handler** Pekare till klientens nekande eller meddelandehanterare för version
+- **dhcpv6_option_request_handler** Pekare till alternativ hanteraren för begärandealternativ
 
-**Retur värden**
+**Returvärden**
 
-- **NX_SUCCESS** (0X00) servern har återupptagits
-- NX_PTR_ERROR (0x16) ogiltigt inmatade pekare
-- NX_DHCPV6_PARAM_ERROR ogiltiga inmatade pekare
+- **NX_SUCCESS** (0x00) Servern har återupptagits
+- NX_PTR_ERROR (0x16) Ogiltig pekarindata
+- NX_DHCPV6_PARAM_ERROR Ogiltiga indata som inte pekare
 
-**Tillåten från**
+**Tillåts från**
 
-Program kod
+Programkod
 
 **Exempel**
 
@@ -234,20 +234,20 @@ UINT _nx_dhcpv6_server_delee(NX_DHCPV6_SERVER *dhcpv6_server_ptr)
 
 **Beskrivning**
 
-Den här tjänsten tar bort aktiviteten DHCPv6-server och alla begär Anden som servern har bearbetat.
+Den här tjänsten tar bort DHCPv6-serveruppgiften och alla förfrågningar som servern bearbetar.
 
 **Indataparametrar**
 
 - **dhcpv6_server_ptr** Pekare till DHCPv6-server
 
-**Retur värden**
+**Returvärden**
 
-- **NX_SUCCESS** (0x00)-servern har tagits bort
-- NX_PTR_ERROR (0x16) ogiltigt inmatade pekare
+- **NX_SUCCESS** (0x00) Servern har tagits bort
+- NX_PTR_ERROR (0x16) Ogiltig pekare
 
-**Tillåten från**
+**Tillåts från**
 
-Konversation
+Trådar
 
 **Exempel**
 
@@ -259,7 +259,7 @@ status = nx_dhcpv6_server_delete(&dhcp_server_0);
 
 ## <a name="nx_dhcpv6_server_resume"></a>nx_dhcpv6_server_resume
 
-### <a name="resume-dhcpv6-server-task"></a>Återuppta DHCPv6-server uppgift 
+### <a name="resume-dhcpv6-server-task"></a>Återuppta DHCPv6-serveruppgiften 
 
 **Prototyp**
 
@@ -269,22 +269,22 @@ UINT _nx_dhcpv6_server_resume(NX_DHCPV6_SERVER *dhcpv6_server_ptr)
 
 **Beskrivning**
 
-Den här tjänsten återupptar DHCPv6-server uppgiften och alla begär Anden som servern har bearbetat.
+Den här tjänsten återupptar DHCPv6-serveruppgiften och alla förfrågningar som servern bearbetar.
 
 **Indataparametrar**
 
 - **dhcpv6_server_ptr** Pekare till DHCPv6-server
 
-**Retur värden**
+**Returvärden**
 
-- **NX_SUCCESS** (0X00) servern har återupptagits
-- **NX_DHCPV6_ALREADY_STARTED** -servern (0xE91) körs redan
-- **status** (variabel) ThreadX och netx Duo-fel status
-- NX_PTR_ERROR (0x16) ogiltigt inmatade pekare
+- **NX_SUCCESS** (0x00) Servern har återupptagits
+- **NX_DHCPV6_ALREADY_STARTED** (0xE91) Servern körs redan
+- **status** (variabel) Felstatus för ThreadX och NetX Duo
+- NX_PTR_ERROR (0x16) Ogiltig pekare
 
-**Tillåten från**
+**Tillåts från**
 
-Konversation
+Trådar
 
 **Exempel**
 
@@ -296,7 +296,7 @@ status = nx_dhcpv6_server_resume(&dhcp_server_0);
 
 ## <a name="nx_dhcpv6_server_suspend"></a>nx_dhcpv6_server_suspend
 
-### <a name="suspend-dhcpv6-server-task"></a>Pausa DHCPv6-server aktivitet 
+### <a name="suspend-dhcpv6-server-task"></a>Pausa DHCPv6-serveraktivitet 
 
 **Prototyp**
 
@@ -306,22 +306,22 @@ UINT _nx_dhcpv6_server_suspend(NX_DHCPV6_SERVER *dhcpv6_server_ptr)
 
 **Beskrivning**
 
-Den här tjänsten gör att DHCPv6-server aktiviteten stoppas och alla begär Anden om att servern har bearbetats.
+Den här tjänsten pausar DHCPv6-serveruppgiften och alla förfrågningar som servern bearbetar.
 
 **Indataparametrar**
 
 - **dhcpv6_server_ptr** Pekare till DHCPv6-server
 
-**Retur värden**
+**Returvärden**
 
-- **NX_SUCCESS** (0X00) servern har återupptagits
-- **NX_DHCPV6_NOT_STARTED** -servern (0xE92) har inte startats 
-- **Status** (variabel) ThreadX och netx Duo-fel status
-- NX_PTR_ERROR (0x16) ogiltigt inmatade pekare
+- **NX_SUCCESS** (0x00) Servern har återupptagits
+- **NX_DHCPV6_NOT_STARTED** (0xE92) Servern har inte startats 
+- **Status** (variabel) Felstatus för ThreadX och NetX Duo
+- NX_PTR_ERROR (0x16) Ogiltig pekare
 
-**Tillåten från**
+**Tillåts från**
 
-Konversation
+Trådar
 
 **Exempel**
 
@@ -334,7 +334,7 @@ status = nx_dhcpv6_server_suspend(&dhcp_server_0);
 
 ## <a name="nx_dhcpv6_server_start"></a>nx_dhcpv6_server_start
 
-### <a name="start-the-dhcpv6-server-task"></a>Starta aktiviteten DHCPv6-server 
+### <a name="start-the-dhcpv6-server-task"></a>Starta DHCPv6-serveruppgiften 
 
 **Prototyp**
 
@@ -344,28 +344,28 @@ UINT _nx_dhcpv6_server_start(NX_DHCPV6_SERVER *dhcpv6_server_ptr)
 
 **Beskrivning**
 
-Den här tjänsten startar DHCPv6-server aktiviteten och läser servern för att bearbeta program begär Anden för att ta emot DHCPv6-klient meddelanden. Den verifierar att Server instansen har tillräckligt med information (Server-DUID), skapar och binder UDP-socketen för att skicka och ta emot DHCPv6-meddelanden och aktiverar timers för att hålla reda på sessionens tid och förfallo datum för IP-lån.
+Den här tjänsten startar DHCPv6-serveruppgiften och läser servern för att bearbeta programbegäranden för att ta emot DHCPv6-klientmeddelanden. Den verifierar att serverinstansen har tillräckligt med information (Server DUID), skapar och binder UDP-socketen för att skicka och ta emot DHCPv6-meddelanden och aktiverar timers för att hålla reda på sessionstid och IP-lånetid.
 
 >[!NOTE] 
-> Innan DHCPv6-servern kan köras ansvarar värd programmet för att skapa det IP-adressintervall som servern kan tilldela IP-adresser från. Det är också ansvarigt för att ställa in serverns DUID och DHCPv6-gränssnitt (se *nx_dhcpv6_server_duid_set* respektive *nx_dhcpv6_server_interface_set* .
+> Innan DHCPv6-servern kan köras ansvarar värdprogrammet för att skapa IP-adressintervallet som servern kan tilldela IP-adresser från. Det ansvarar också för att ställa in server-DUID- och DHCPv6-gränssnittet *(se nx_dhcpv6_server_duid_set* *respektive nx_dhcpv6_server_interface_set).*
 
 **Indataparametrar**
 
 - **dhcpv6_server_ptr** Pekare till DHCPv6-server
 
-**Retur värden**
+**Returvärden**
 
-- **NX_SUCCESS** (0X00) servern har startats
-- **NX_DHCPV6_ALREADY_STARTED** -servern (0xE91) körs redan
-- **NX_DHCPV6_NO_ASSIGNABLE_ADDRESSES** -servern (0xEA7) har inga adresser som kan tilldelas till lån
-- **NX_DHCPV6_INVALID_GLOBAL_INDEX** (0xE97) inget globalt adress index har angetts
-- **NX_DHCPV6_NO_SERVER_DUID** (0XE92) inget Server-DUID har skapats 
-- **status** (variabel) ThreadX och netx Duo-fel status
-- NX_PTR_ERROR (0x16) ogiltigt inmatade pekare
+- **NX_SUCCESS** (0x00) Servern har startats
+- **NX_DHCPV6_ALREADY_STARTED** (0xE91) Servern körs redan
+- **NX_DHCPV6_NO_ASSIGNABLE_ADDRESSES** (0xEA7) Server har inga tilldelningsbara adresser att låna ut
+- **NX_DHCPV6_INVALID_GLOBAL_INDEX** (0xE97) Globalt adressindex har inte angetts
+- **NX_DHCPV6_NO_SERVER_DUID** (0xE92) Ingen SERVER DUID har skapats 
+- **status** (variabel) Felstatus för ThreadX och NetX Duo
+- NX_PTR_ERROR (0x16) Ogiltig pekare
 
-**Tillåten från**
+**Tillåts från**
 
-Konversation
+Trådar
 
 **Exempel**
 
@@ -377,7 +377,7 @@ status = nx_dhcpv6_server_start(&dhcp_server_0);
 
 ## <a name="nx_dhcpv6_retrieve_ip_address_lease"></a>nx_dhcpv6_retrieve_ip_address_lease
 
-### <a name="get-an-ip-address-lease-from-the-server-table"></a>Hämta ett IP-adresslån från Server tabellen
+### <a name="get-an-ip-address-lease-from-the-server-table"></a>Hämta ett IP-adresslån från servertabellen
 
 **Prototyp**
 
@@ -390,32 +390,32 @@ UINT _nx_dhcpv6_retrieve_ip_address_lease(
 
 **Beskrivning**
 
-Den här tjänsten hämtar en post för IP-adresslån från Server tabellen på den angivna tabell index platsen. Detta kan göras innan eller efter att klient post data har hämtats.
+Den här tjänsten hämtar en IP-adresslånpost från servertabellen på den angivna tabellens indexplats. Detta kan göras före eller efter hämtning av klientpostdata.
 
-Möjligheten att lagra och hämta data mellan DHCPv6-servern och icke-flyktigt minne är ett krav i DHCPv6-protokollet. Det innebär ingen skillnad i vilken ordning IP-adresslån data och klient post data sparas till icke-flyktigt minne.
+Möjligheten att lagra och hämta data mellan DHCPv6-servern och icke-beständigt minne är ett krav i DHCPv6-protokollet. Det spelar ingen roll i vilken ordning IP-lånedata och klientpostdata sparas i icke-volatilt minne.
 
 >[!NOTE] 
-> Vi rekommenderar inte att du kopierar data till eller från Server tabeller utan att stoppa eller pausa DHCPv6-servern först.
+> Vi rekommenderar inte att du kopierar data till eller från servertabeller utan att stoppa eller pausa DHCPv6-servern först.
 
 **Indataparametrar**
 
 - **dhcpv6_server_ptr** Pekare till DHCPv6-server
-- **table_index** Tabell index för att lagra lån på
-- **lease_IP_address** Pekare till IP-adress som är lånad till klienten
-- **T1** Klient begärd förnyelse tid
-- **T2** Klienten begärde OMBINDNINGS tid
-- **valid_lifetime** Klient lånet blir föråldrat
-- **preferred_lifetime** Klient lånet blir ogiltigt
+- **table_index** Tabellindex för lagring av lån på
+- **lease_IP_address** Pekare till IP-adress som lånats ut till klienten
+- **T1** Klienten begärde förnyelsetid
+- **T2** Klienten begärde bindningstid
+- **valid_lifetime** Klientlånet blir inaktuellt
+- **preferred_lifetime** Klientlånet blir ogiltigt
 
-**Retur värden**
+**Returvärden**
 
-- **NX_SUCCESS** (0X00) servern har startats
-- **NX_DHCPV6_PARAMETER_ERROR** (0XE93) ogiltiga indata från IP-adresslån
-- NX_PTR_ERROR (0x16) ogiltigt inmatade pekare
+- **NX_SUCCESS** (0x00) Servern har startats
+- **NX_DHCPV6_PARAMETER_ERROR** (0xE93) Ogiltiga indata för IP-lån
+- NX_PTR_ERROR (0x16) Ogiltig pekare
 
-**Tillåten från**
+**Tillåts från**
 
-Program kod
+Programkod
 
 **Exempel**
 
@@ -433,7 +433,7 @@ For (I = 0; I < NX_DHCPV6_MAX_LEASES; i++)
 
 ## <a name="nx_dhcpv6_add_ip_address_lease"></a>nx_dhcpv6_add_ip_address_lease
 
-### <a name="add-an-ip-address-lease-to-the-server-table"></a>Lägg till ett IP-adresslån till Server tabellen
+### <a name="add-an-ip-address-lease-to-the-server-table"></a>Lägga till ett IP-adresslån i servertabellen
 
 **Prototyp**
 
@@ -445,34 +445,34 @@ UINT _nx_dhcpv6_add_ip_address_lease(
 
 **Beskrivning**
 
-Den här tjänsten läser in IP-adresslån från en tidigare DHCPv6-server-session från icke-flyktigt minne till Server leasing tabellen. Detta är inte nödvändigt om servern körs för första gången och inte har några tidigare låne data. Om detta är fallet måste värd programmet skapa ett IP-adressintervall för att tilldela IP-adresser med hjälp av tjänsten *nx_dhcpv6_create_ip_address_range*. Data räcker för att rekonstruera en DHCPv6-låne post. Tabell indexet behöver inte anges. Om värdet är 0xFFFFFFFF (oändlighet) kommer DHCPv6-servern att hitta nästa tillgängliga plats för att kopiera data till.
+Den här tjänsten läser in IP-lånedata från en tidigare DHCPv6-serversession från icke-beständigt minne till tabellen För serverlån. Detta är inte nödvändigt om servern körs för första gången och inte har några tidigare lånedata. Om så är fallet måste värdprogrammet skapa ett IP-adressintervall för att tilldela IP-adresser med hjälp *av nx_dhcpv6_create_ip_address_range tjänsten.* Data räcker för att rekonstruera en DHCPv6-lånepost. Tabellindexet behöver inte anges. Om det är 0xFFFFFFFF (oändlighet) hittar DHCPv6-servern nästa tillgängliga plats att kopiera data till.
 
 >[!NOTE] 
-> Överföring av IP-adresslån måste göras innan klient poster överförs. båda måste utföras före (åter) start av DHCPv6-servern.
+> Överföring av IP-lånedata MÅSTE göras innan klientposter laddas upp. båda MÅSTE göras innan (åter)startar DHCPv6-servern.
 
-Möjligheten att lagra och hämta data mellan DHCPv6-servern och icke-flyktigt minne är ett krav i DHCPv6-protokollet.
+Möjligheten att lagra och hämta data mellan DHCPv6-servern och icke-beständigt minne är ett krav i DHCPv6-protokollet.
 
 **Indataparametrar**
 
 - **dhcpv6_server_ptr** Pekare till DHCPv6-server
-- **table_index** Tabell index för att lagra lån på
-- **lease_IP_address** Pekare till IP-adress som är lånad till klienten
-- **T1** Klient begärd förnyelse tid
-- **T2** Klienten begärde OMBINDNINGS tid
-- **valid_lifetime** Klient lånet blir föråldrat
-- **preferred_lifetime** Klient lånet blir ogiltigt
+- **table_index** Tabellindex för lagring av lån på
+- **lease_IP_address** Pekare till IP-adress som lånats ut till klienten
+- **T1** Klienten begärde förnyelsetid
+- **T2** Klienten begärde bindningstid
+- **valid_lifetime** Klientlånet blir inaktuellt
+- **preferred_lifetime** Klientlånet blir ogiltigt
 
-**Retur värden**
+**Returvärden**
 
-- **NX_SUCCESS** (0X00) servern har startats
-- **NX_DHCPV6_TABLE_FULL** (0XEC4) inget rum för fler låne data * *
-- **NX_DHCPV6_INVALID_INTERFACE_IP_ADDRESS** (0XE95) låne data visas inte på länk med serverns DHCPv6-gränssnitt
-- **NX_DHCPV6_PARAM_ERROR** (0XE93) ogiltiga indata från IP-adresslån
-- NX_PTR_ERROR (0x16) ogiltigt inmatade pekare
+- **NX_SUCCESS** (0x00) Servern har startats
+- **NX_DHCPV6_TABLE_FULL** (0xEC4) Inget utrymme för mer lånedata**
+- **NX_DHCPV6_INVALID_INTERFACE_IP_ADDRESS** (0xE95) Lånedata verkar inte finnas på länken med server-DHCPv6-gränssnittet
+- **NX_DHCPV6_PARAM_ERROR** (0xE93) Ogiltig indata för IP-lån
+- NX_PTR_ERROR (0x16) Ogiltig pekare
 
-**Tillåten från**
+**Tillåts från**
 
-Program kod
+Programkod
 
 **Exempel**
 
@@ -494,7 +494,7 @@ for each lease. */
 
 ## <a name="nx_dhcpv6_add_client_record"></a>nx_dhcpv6_add_client_record
 
-### <a name="add-a-client-record-to-the-server-table"></a>Lägga till en klient post i Server tabellen
+### <a name="add-a-client-record-to-the-server-table"></a>Lägga till en klientpost i servertabellen
 
 **Prototyp**
 
@@ -509,33 +509,33 @@ UINT _nx_dhcpv6_add_client_record(NX_DHCPV6_SERVER *dhcpv6_server_ptr,
 
 **Beskrivning**
 
-Den här tjänsten kopierar klient data från icke-flyktigt minne till Server tabellen en post i taget. Detta är bara nödvändigt om servern startas om och har klient data från en tidigare session som ska återställas från minnet. Om en server saknar tidigare data initierar DHCPv6-servern klient tabellen för att kunna lägga till klient poster.
+Den här tjänsten kopierar klientdata från icke-beständigt minne till servertabellen en post i taget. Detta är bara nödvändigt om servern startas om och har klientdata från en tidigare session för att återställa från minnet. Om en server inte har några tidigare data initierar DHCPv6-servern klienttabellen för att kunna lägga till klientposter.
 
-Du behöver inte ange tabell indexet. Om värdet är 0xFFFFFFFF (oändlighet) kommer DHCPv6-servern att hitta nästa tillgängliga plats. DHCPv6-servern kan rekonstruera en klient post från dessa data.
-
->[!NOTE] 
-> Värd programmet måste ladda upp IP-adresslån innan klienten registrerar data. Detta är så att en intern DHCPv6-server kan korsa länkar tabellerna så att varje klient post är kopplad till motsvarande IP-adresslån i respektive tabell. Se *nx_dhcpv6_add_ip_address_lease* för information om hur du överför IP-adresslån från minnet.
+Du behöver inte ange tabellindexet. Om det är 0xFFFFFFFF (oändlighet) letar DHCPv6-servern upp nästa tillgängliga plats. DHCPv6-servern kan rekonstruera en klientpost från dessa data.
 
 >[!NOTE] 
-> Inte alla data måste anges beroende på DUID-typ. Om till exempel en klient har tilldelats en leverantör som har tilldelats typen DUID, kan den skicka i noll för DUID-länk skikts parametrar (MAC-adress, maskin varu typ, DUID-tid).
+> Värdprogrammet MÅSTE ladda upp IP-lånedata före klientpostdata. Detta är så att DHCPv6-servern internt kan korslänka tabellerna så att varje klientpost är ansluten med motsvarande IP-lånepost i sina respektive tabeller. Se *nx_dhcpv6_add_ip_address_lease* information om hur du laddar upp IP-lånedata från minnet.
 
-Möjligheten att lagra och hämta data mellan DHCPv6-servern och icke-flyktigt minne är ett krav i DHCPv6-protokollet.
+>[!NOTE] 
+> Beroende på DUID-typ måste inte alla data anges. Om en klient till exempel har en leverantör tilldelad DUID-typ kan den skicka in noll för PARAMETRAR för DUID-länkskikt (MAC-adress, maskinvarutyp, DUID-tid).
+
+Möjligheten att lagra och hämta data mellan DHCPv6-servern och icke-beständigt minne är ett krav i DHCPv6-protokollet.
 
 **Indataparametrar**
 
 - **dhcpv6_server_ptr** Pekare till DHCPv6-server
 
-**Retur värden**
+**Returvärden**
 
-- **NX_SUCCESS** (0X00) servern har startats
-- **NX_ INVALID_PARAMETERS** (0X4D) ogiltig information om icke-pekare * *
-- **NX_DHCPV6_TABLE_FULL** (0XEC4) inga tomma platser kvar för att lägga till en annan klient post
-- **NX_DHCPV6_ADDRESS_NOT_FOUND** (0XEA8) kunde inte hitta en klient som har tilldelats adressen i serverns leasing tabell.
-- NX_PTR_ERROR (0x16) ogiltigt inmatade pekare
+- **NX_SUCCESS** (0x00) Servern har startats
+- **NX_ INVALID_PARAMETERS** (0x4D) Ogiltiga indata som inte pekare**
+- **NX_DHCPV6_TABLE_FULL** (0xEC4) Inga tomma platser kvar för att lägga till en annan klientpost
+- **NX_DHCPV6_ADDRESS_NOT_FOUND** (0xEA8) Klientadressen hittades inte i tabellen Serverlån.
+- NX_PTR_ERROR (0x16) Ogiltig pekare
 
-**Tillåten från**
+**Tillåts från**
 
-Program kod
+Programkod
 
 **Exempel**
 
@@ -579,7 +579,7 @@ it is ok to start the DHCPv6 server now. */
 
 ## <a name="nx_dhcpv6_retrieve_client_record"></a>nx_dhcpv6_retrieve_client_record
 
-### <a name="retrieve-a-client-record-from-the-server-table"></a>Hämta en klient post från Server tabellen
+### <a name="retrieve-a-client-record-from-the-server-table"></a>Hämta en klientpost från servertabellen
 
 **Prototyp**
 
@@ -599,33 +599,33 @@ UINT _nx_dhcpv6_retrieve_client_record(
 
 **Beskrivning**
 
-Den här tjänsten kopierar viktiga data från serverns klient post tabell för lagring till beständigt minne. Servern kan konstruera om en lämplig klient post från sådana data i den omvända processen (Ladda upp data till Server tabellen). Oavsett DUID-typ kan ingen av punkterna vara NULL-pekare; data initieras till noll för alla parametrar. Om t. ex. klientens DUID-typ är länk skikt och tid returneras leverantörs numret som noll och det privata ID: t är en tom sträng.
+Den här tjänsten kopierar viktiga data från serverns klientposttabell för lagring till icke-beständigt minne. Servern kan rekonstruera en lämplig klientpost från sådana data i omvänd process (ladda upp data till servertabellen). Oavsett DUID-typ kan ingen av pekarna vara NULL-pekare. data initieras till noll för alla parametrar. Om client DUID-typen till exempel är Link Layer Plus Time returneras leverantörsnumret som noll och det privata ID:t är en tom sträng.
 
-Möjligheten att lagra och hämta data mellan DHCPv6-servern och icke-flyktigt minne är ett krav i DHCPv6-protokollet. Det innebär ingen skillnad i vilken ordning IP-adresslån data och klient post data sparas till icke-flyktigt minne.
+Möjligheten att lagra och hämta data mellan DHCPv6-servern och icke-beständigt minne är ett krav i DHCPv6-protokollet. Det spelar ingen roll i vilken ordning IP-lånedata och klientpostdata sparas i icke-volatilt minne.
 
 >[!NOTE] 
-> Vi rekommenderar inte att du kopierar data till eller från Server tabeller utan att stoppa eller pausa DHCPv6-servern först.
+> Vi rekommenderar inte att du kopierar data till eller från servertabeller utan att stoppa eller pausa DHCPv6-servern först.
 
 **Indataparametrar**
 
 - **dhcpv6_server_ptr** Pekare till DHCPv6-server
-- **table_index** Index i serverns klient tabell
-- **message_xid** Transaktions-ID för klient server
-- **client_address** IPv6-adress lånad till klient
-- **client_state** Klientens DHCPv6-tillstånd (t. ex. Bound)
-- **IP_lease_time_accrued** Tiden upphörde att gälla för lån **dhcpv6_server_ptr** pekare till Dhcpv6-servern
+- **table_index** Indexera till serverns klienttabell
+- **message_xid** Transaktions-ID för klientserver
+- **client_address** IPv6-adress som lånats ut till klienten
+- **client_state** Klientens DHCPv6-tillstånd (t.ex. bunden)
+- **IP_lease_time_accrued** Tiden har gått ut när lånet redan **dhcpv6_server_ptr** pekaren till DHCPv6-servern
 - **dhcpv6_server_ptr** Pekare till DHCPv6-server
 
-**Retur värden**
+**Returvärden**
 
-- **NX_SUCCESS** (0X00) servern har startats
-- **NX_DHCPV6_INVALID_DUID** (0XECC) ogiltiga eller inkonsekventa DUID-data
-- **NX_PTR_ERROR** (0X16) ogiltigt inmatade pekare
-- NX_INVALID_PARAMETERS (0x4D) ogiltig inmatad icke-pekare
+- **NX_SUCCESS** (0x00) Servern har startats
+- **NX_DHCPV6_INVALID_DUID** (0xECC) Ogiltiga eller inkonsekventa DUID-data
+- **NX_PTR_ERROR** (0x16) Ogiltig pekare
+- NX_INVALID_PARAMETERS (0x4D) Ogiltiga icke-pekarindata
 
-**Tillåten från**
+**Tillåts från**
 
-Program kod
+Programkod
 
 **Exempel**
 
@@ -645,7 +645,7 @@ For (i = 0; i< NX_MAX_DHCPV6_CLIENTS; i++)
 
 ## <a name="nx_dhcpv6_server_interface_set"></a>nx_dhcpv6_server_interface_set
 
-### <a name="setthe-interface-index-for-server-dhcpv6-interface"></a>Setthe Interface index för Server DHCPv6-gränssnittet
+### <a name="setthe-interface-index-for-server-dhcpv6-interface"></a>Ange gränssnittsindexet för server-DHCPv6-gränssnittet
 
 **Prototyp**
 
@@ -657,26 +657,26 @@ UINT _nx_dhcpv6_server_interface_set(
 
 **Beskrivning**
 
-Den här tjänsten anger det nätverks gränssnitt där DHCPv6-servern hanterar DHCPv6-klient förfrågningar. För versioner av NetX Duo som inte har stöd för multihome är gränssnittets värde standard värdet noll. Det globala adress indexet krävs för att hämta serverns globala adress i DHCPv6-gränssnittet. Detta används av DHCPv6-logiken för att säkerställa att låne adresser och andra DHCPv6-data finns på länken till DHCPv6-servern.
+Den här tjänsten anger nätverksgränssnittet där DHCPv6-servern hanterar DHCPv6-klientbegäranden. Inte för versioner av NetX Duo som inte stöder multihome, är gränssnittsvärdet noll som standard. Det globala adressindexet är nödvändigt för att hämta serverns globala adress i dess DHCPv6-gränssnitt. Detta används av DHCPv6-logiken för att säkerställa att lånadresser och andra DHCPv6-data finns på länken till DHCPv6-servern.
 
-Detta måste anropas innan DHCPv6-servern startas, även för program på enskilda enheter eller utan support för flera hem.
+Detta måste anropas innan DHCPv6-servern startas, även för program på enskilda homed-enheter eller utan multihome-stöd.
 
 **Indataparametrar**
 
 - **dhcpv6_server_ptr** Pekare till DHCPv6-server
-- **iface_index** Serverns DHCPv6-server gränssnitt
-- **ga_address_index** Index för serverns globala adress i adress tabellen för serverns IP-instans
+- **iface_index** Server-DHCPv6-servergränssnitt
+- **ga_address_index** Index för serverns globala adress i tabellen Server-IP-instansadress
 
-**Retur värden**
+**Returvärden**
 
-- **NX_SUCCESS** (0X00) servern har startats
-- **NX_INVALID_INTERFACE** -gränssnittet (0x4C) finns inte
-- NX_NO_INTERFACE_ADDRESS (0x50) globalt index överskrider IP-instansens högsta IPv6-adresser (NX_MAX_IPV6_ADDRESSES)
-- NX_PTR_ERROR (0x16) ogiltigt inmatade pekare
+- **NX_SUCCESS** (0x00) Servern har startats
+- **NX_INVALID_INTERFACE** (0x4C) Gränssnittet finns inte
+- NX_NO_INTERFACE_ADDRESS (0x50) Globalt index överskrider ip-instansens maximala IPv6-adresser (NX_MAX_IPV6_ADDRESSES)
+- NX_PTR_ERROR (0x16) Ogiltig pekare
 
-**Tillåten från**
+**Tillåts från**
 
-Program kod
+Programkod
 
 **Exempel**
 
@@ -689,7 +689,7 @@ status = nx_dhcpv6_server_interface_set(&dhcp_server_0, 0, 1);
 ```
 ## <a name="nx_dhcpv6_set_server_duid"></a>nx_dhcpv6_set_server_duid
 
-### <a name="set-the-server-duid-for-dhcpv6-packets"></a>Ange serverns DUID för DHCPv6-paket
+### <a name="set-the-server-duid-for-dhcpv6-packets"></a>Ange Server DUID för DHCPv6-paket
 
 **Prototyp**
 
@@ -702,30 +702,30 @@ UINT _nx_dhcpv6_set_server_duid(NX_DHCPV6_SERVER *dhcpv6_server_ptr,
 
 **Beskrivning**
 
-Den här tjänsten ställer in serverns DUID och måste anropas innan värd programmet startar servern. För länk skikts typer och länk lager tids typer av DUID måste värd programmet ange maskin varu typ och MAC-Datadata. För länk skiktets tids DUIDs måste tids pekaren peka på en giltig tid. Antalet sekunder sedan 1 januari 2000 är ett typiskt Seed-värde. Om serverns DUID-typ är företag, tilldelad typ, skapas DUIDen från användar konfigurerbara alternativ NX_DHCPV6_SERVER_DUID_VENDOR_PRIVATE_ID och NX_DHCPV6_SERVER_DUID_VENDOR_ASSIGNED_ID, och värdena för tid och MAC-adress kan anges till NULL.
+Den här tjänsten anger Server DUID och måste anropas innan värdprogrammet startar servern. För DUID-typer för länkskikt och länkskikt måste värdprogrammet ange maskinvarutyp och MAC-adressdata. För duID:er för länklagertid måste tidspekaren peka på en giltig tid. Antalet sekunder sedan den 1 januari 2000 är ett typiskt startvärde. Om DuID-typen för server är företaget, leverantörs tilldelad typ, skapas DUID från de användarkonfigurerbara alternativen NX_DHCPV6_SERVER_DUID_VENDOR_PRIVATE_ID och NX_DHCPV6_SERVER_DUID_VENDOR_ASSIGNED_ID, och värdena för tid och MAC-adress kan anges till NULL.
 
 >[!NOTE] 
-> Det är värd programmets ansvar att spara DUID-parametrarna för servern på ett beständigt minne, så att den använder samma DUID i meddelanden till klienter mellan omstarter. Detta är ett krav för DHCPv6-protokollet (RFC 3315).
+> Det är värdprogrammets ansvar att spara server-DUID-parametrarna till icke-volatilt minne så att samma DUID används i meddelanden till klienter mellan omstarter. Detta är ett krav för DHCPv6-protokollet (RFC 3315).
 
 **Indataparametrar**
 
 - **dhcpv6_server_ptr** Pekare till DHCPv6-server
-- **duid_type** DUID-typ för DHCPv6-server
-- **hardware_type** Maskin varu typ (t. ex. Ethernet)
+- **duid_type** DHCPv6 Server DUID-typ
+- **hardware_type** Maskinvarutyp (t.ex. Ethernet)
 - **mac_address_msw** Pekare till DHCPv6-server
 - **mac_address_lsw** Pekare till DHCPv6-server
-- **tid** Tids värde för DUID
+- **tid** Tidsvärde för DUID
 
-**Retur värden**
+**Returvärden**
 
-- **NX_SUCCESS** (0X00) servern har pausats
-- **NX_DHCPV6_INVALID_SERVER_DUID** (0XE98) okänd eller DUID-typ som inte stöds
-- **NX_INVALID_PARAMETERS** (0X4D) ogiltig inmatad icke-pekare
-- NX_PTR_ERROR (0x16) ogiltigt inmatade pekare
+- **NX_SUCCESS** (0x00) Har pausat servern
+- **NX_DHCPV6_INVALID_SERVER_DUID** (0XE98) DUID-typ som inte stöds
+- **NX_INVALID_PARAMETERS** (0x4D) Ogiltiga icke-pekarindata
+- NX_PTR_ERROR (0x16) Ogiltig pekarindata
 
-**Tillåten från**
+**Tillåts från**
 
-Program kod
+Programkod
 
 **Exempel**
 
@@ -741,7 +741,7 @@ status = nx_dhcpv6_set_server_duid(&dhcp_server_0,1, 0x6,
 
 ## <a name="nx_dhcpv6_server_option_request_handler_set"></a>nx_dhcpv6_server_option_request_handler_set
 
-### <a name="set-the-option-request-handler-for-dhcpv6-server-instance"></a>Ange option Request Handler för DHCPv6-Server instans 
+### <a name="set-the-option-request-handler-for-dhcpv6-server-instance"></a>Ange hanteraren för alternativbegäran för DHCPv6-serverinstansen 
 
 **Prototyp**
 
@@ -756,21 +756,21 @@ UINT nx_dhcpv6_server_option_request_handler_set(
 
 **Beskrivning**
 
-Den här tjänsten anger hanterings hanteraren för utökade alternativ för DHCPv6-servern.
+Den här tjänsten anger DHCPv6-serverns hanterare för utökade alternativbegäran.
 
 **Indataparametrar**
 
 - **dhcpv6_server_ptr** Pekare till DHCPv6-server
-- **dhcpv6_option_request_handler_extended** Pekare till begär ande hanterare för utökade alternativ
+- **dhcpv6_option_request_handler_extended** Pekare till begärandehanteraren för utökade alternativ
 
-**Retur värden**
+**Returvärden**
 
-- **NX_SUCCESS** (0X00) servern har återupptagits
-- NX_PTR_ERROR (0x16) ogiltigt inmatade pekare
+- **NX_SUCCESS** (0x00) Servern har återupptagits
+- NX_PTR_ERROR (0x16) Ogiltig pekarindata
 
-**Tillåten från**
+**Tillåts från**
 
-Program kod
+Programkod
 
 **Exempel**
 

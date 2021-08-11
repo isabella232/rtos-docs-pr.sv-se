@@ -1,36 +1,36 @@
 ---
 title: Överväganden för USBX DPUMP-klass
-description: USBX innehåller en DPUMP-klass för värden och enhets sidan.
+description: USBX innehåller en DPUMP-klass för värd- och enhetssidan.
 author: philmea
 ms.author: philmea
 ms.date: 5/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 9960b391418fa2f9203e761115bcba71cc3619e8
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 72aa9c1e2200049bf81d64543b690edd001c4ecf9c2cdeb4c3bea5f1b03aa5b8
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104828074"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116802589"
 ---
-# <a name="chapter-3-usbx-dpump-class-considerations"></a>Kapitel 3: USBX DPUMP-klass överväganden
+# <a name="chapter-3-usbx-dpump-class-considerations"></a>Kapitel 3: Usbx DPUMP-klassöverväganden
 
-USBX innehåller en DPUMP-klass för värden och enhets sidan. Den här klassen är inte en standard klass i sig själv, utan i stället ett exempel som illustrerar hur du skapar en enkel enhet med två Mass ledningar och hur du skickar data till och från dessa två ledningar. DPUMP-klassen kan användas för att starta en anpassad klass eller för äldre RS232-enheter.
+USBX innehåller en DPUMP-klass för värd- och enhetssidan. Den här klassen är inte en standardklass i sig, utan snarare ett exempel som illustrerar hur du skapar en enkel enhet med hjälp av två masspipelar och skickar data fram och tillbaka på dessa två pipes. DPUMP-klassen kan användas för att starta en anpassad klass eller för äldre RS232-enheter.
 
-Flödes diagram för USB-DPUMP:
+FLÖDESSCHEMA FÖR USB DPUMP:
 
-![Flödes diagram för USB-DPUMP](./media/usbx-host-stack-supplemental/usb-dpump-flow-chart.png)
+![Flödesdiagram för USB DPUMP](./media/usbx-host-stack-supplemental/usb-dpump-flow-chart.png)
 
-## <a name="usbx-dpump-host-class"></a>Värd klass för USBX-DPUMP
+## <a name="usbx-dpump-host-class"></a>USBX DPUMP-värdklass
 
-Värd sidan i DPUMP-klassen har två funktioner, en för att skicka data och en för att ta emot data:
+Värdsidan av DPUMP-klassen har två funktioner, en för att skicka data och en för att ta emot data:
 
 - `ux_host_class_dpump_write`
 - `ux_host_class_dpump_read`
 
-Båda funktionerna blockeras för att göra DPUMP-programmet lättare. Om båda pipes (IN och ut) måste köras samtidigt måste programmet skapa en överförings tråd och en Receive-tråd.
+Båda funktionerna blockerar för att göra DPUMP-programmet enklare. Om det är nödvändigt att köra båda rören (IN och OUT) samtidigt måste programmet skapa en överföringstråd och en mottagningstråd.
 
-Prototypen för funktionen Skriv är följande.
+Prototypen för skrivfunktionen ser ut så här.
 
 ```C
 UINT ux_host_class_dpump_write(UX_HOST_CLASS_DPUMP *dpump,
@@ -42,11 +42,11 @@ UINT ux_host_class_dpump_write(UX_HOST_CLASS_DPUMP *dpump,
 Plats:
 
 - dpump är instansen av klassen
-- data_pointer är pekaren till den buffert som ska skickas
-- requested_length är den längd som ska skickas
-- actual_length är den längd som skickas när överföringen har slutförts, antingen korrekt eller delvis.
+- data_pointer pekaren till bufferten som ska skickas
+- requested_length är längden på att skicka
+- actual_length är den längd som skickas efter slutförandet av överföringen, antingen korrekt eller delvis.
 
-Prototypen för funktionen Inleverera är liknande.
+Prototypen för den mottagande funktionen är liknande.
 
 ```C
 UINT ux_host_class_dpump_read(
@@ -56,7 +56,7 @@ UINT ux_host_class_dpump_read(
     ULONG *actual_length)
 ```
 
-Här är ett exempel på en värd DPUMP-klass där ett program skriver ett paket till enhets sidan och tar emot samma paket för mottagningen:
+Här är ett exempel på klassen värd-DPUMP där ett program skriver ett paket till enhetssidan och tar emot samma paket i mottagningen:
 
 ```C
 /* We start with a 'A' in buffer. */
@@ -90,6 +90,6 @@ while(1)
 }
 ```
 
-## <a name="usbx-dpump-device-class"></a>USBX DPUMP-enhets klass
+## <a name="usbx-dpump-device-class"></a>USBX DPUMP-enhetsklass
 
-Enhetens DPUMP-klass använder en tråd som startas vid anslutning till USB-värden. Tråden väntar på ett paket som kommer från den utgående slut punkten. När ett paket tas emot kopierar det innehållet till Mass-och slut punktens buffert och publicerar en transaktion på den här slut punkten, väntar på att värden ska utfärda en begäran om att läsa från den här slut punkten. Detta ger en loopback-mekanism mellan utsamlings-och Mass slut punkter.
+Enhetens DPUMP-klass använder en tråd som startas vid anslutning till USB-värden. Tråden väntar på att ett paket ska komma på massutfyllnadsslutpunkten. När ett paket tas emot kopieras innehållet till bufferten Bulk In endpoint (Mass in slutpunkt) och en transaktion skickas på den här slutpunkten i väntan på att värden ska utfärda en begäran om att läsa från den här slutpunkten. Detta ger en loopback-mekanism mellan slutpunkterna Bulk Out och Bulk In.

@@ -6,19 +6,19 @@ ms.author: philmea
 ms.date: 07/09/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 89df0ab5f09be8ad50a27d23bae8b20d71caa0b4
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 6e37698ac6023b4cff6cb4fc05330a73b678ef3d2a813a706c9b821381e123db
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104825917"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116797576"
 ---
 # <a name="chapter-4---description-of-mdns-services"></a>Kapitel 4 – Beskrivning av mDNS-tjänster
 
-Det här kapitlet innehåller en beskrivning av alla NetX mDNS-tjänster (visas nedan).
+Det här kapitlet innehåller en beskrivning av alla NetX mDNS-tjänster (se nedan).
 
 > [!NOTE]
-> I avsnittet "retur värden" i följande API-beskrivningar påverkas inte värden i **fetstil** av **NX_DISABLE_ERROR_CHECKING** definiera som används för att inaktivera API-felkontroll, medan icke-Fetstilade värden är helt inaktiverade.
+> I avsnittet "Returvärden" i följande API-beskrivningar påverkas inte värden i **BOLD** av **den NX_DISABLE_ERROR_CHECKING-definition** som används för att inaktivera API-felkontroll, medan värden som inte är i fetstil är helt inaktiverade.
 
 ## <a name="nx_mdns_create"></a>nx_mdns_create
 
@@ -39,32 +39,32 @@ UINT nx_mdns_create(NX_MDNS *mdns_ptr, NX_IP *ip_ptr,
         UCHAR *name, UINT probing_state));
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skapar en mDNS-instans på den angivna IP-instansen och associerade resurser. En tråd skapas också för att hantera inkommande mDNS-meddelanden, för att svara på frågor och för att regelbundet överföra frågemeddelanden.
+Den här tjänsten skapar en mDNS-instans på den specifika IP-instansen och tillhörande resurser. En tråd skapas också för att hantera inkommande mDNS-meddelanden, svara på frågor och regelbundet överföra frågemeddelanden.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **mdns_ptr** Pekare till mDNS Control Block.
+- **mdns_ptr** Pekare till mDNS-kontrollblocket.
 - **ip_ptr** Pekare till den associerade IP-instansen.
-- **packet_pool** Pekar mot en giltig adresspool.
+- **packet_pool** Pekare till en giltig paketpool.
 - **prioritet** Prioritet för mDNS-tråden.
 - **stack_ptr** Pekare till stackområdet för mDNS-tråden
-- **stack_size** Storlek på stackområdet.
-- **host_name** Värd namnet tilldelat till den här noden.
-- **local_service_cache** Lagrings utrymme för lokala registrerade tjänster.
-- **local_service_cache_size** Storlek på den lokala tjänstens cacheminne.
-- **peer_service_cache** Lagrings utrymme för mottagen tjänst information
-- **peer_service_cache_size** Storlek på peer-tjänstecache
-- **probing_notify** Valfri callback-funktion anropades i slutet av avsöknings åtgärden. Det meddelar programmet oavsett om värd namnet (när du aktiverar mDNS på ett lokalt gränssnitt), eller om tjänst namnet (efter registreringen av en tjänst) är unikt.
+- **stack_size** Stackområdets storlek.
+- **host_name** Värdnamn som tilldelats den här noden.
+- **local_service_cache** Storage utrymme för lokala registrerade tjänster.
+- **local_service_cache_size** Storleken på den lokala tjänstcachen.
+- **peer_service_cache** Storage för mottagna tjänstinformation
+- **peer_service_cache_size** Storleken på peer-tjänstcachen
+- **probing_notify** Valfri återanropsfunktion anropas i slutet av avsökningsåtgärden. Den meddelar programmet om värdnamnet (när du aktiverar mDNS i ett lokalt gränssnitt) eller om tjänstnamnet (efter registreringen av en tjänst) är unikt.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) skapade mdns-instansen.
+- **NX_SUCCESS** (0x00) MDNS-instansen har skapats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -94,21 +94,21 @@ Ta bort en mDNS-instans
 UINT nx_mdns_delete(NX_MDNS *mdns_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten tar bort mDNS-instansen och frigör dess resurser.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **mdns_ptr** Pekare till kontroll blocket mDNS.
+- **mdns_ptr** Pekare till mDNS-kontrollblocket.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) har tagit bort mdns-instansen.
+- **NX_SUCCESS** (0x00) MDNS-instansen har tagits bort.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -130,22 +130,22 @@ Starta mDNS-tjänsten
 UINT nx_mdns_enable(NX_MDNS *mdns_ptr, UINT interface_index);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Detta API aktiverar mDNS-tjänsten på ett angivet fysiskt gränssnitt. När tjänsten är aktive rad avsöker mDNS-modulen först alla sina unika tjänst namn i nätverket innan de svarar på frågor som tagits emot i gränssnittet.
+Det här API:et aktiverar mDNS-tjänsten i ett specifikt fysiskt gränssnitt. När tjänsten har aktiverats avser mDNS-modulen först alla sina unika tjänstnamn i nätverket innan den svarar på frågor som tas emot i gränssnittet.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **mdns_ptr** Pekar mot kontroll blocket för mDNS-instansen.
-- **interface_index** Indexera det gränssnitt där tjänsten ska aktive ras
+- **mdns_ptr** Pekare till mDNS-instansens kontrollblock.
+- **interface_index** Indexera till gränssnittet där tjänsten ska aktiveras
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) aktiverade tjänsten.
+- **NX_SUCCESS** (0x00) Har aktiverat tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -159,7 +159,7 @@ status = nx_mdns_enable(&my_mdns, 0);
 
 ## <a name="nx_mdns_disable"></a>nx_mdns_disable
 
-Inaktivera tjänsten mDNS
+Inaktivera mDNS-tjänsten
 
 ### <a name="prototype"></a>Prototyp
 
@@ -167,22 +167,22 @@ Inaktivera tjänsten mDNS
 UINT nx_mdns_disable(NX_MDNS *mdns_ptr, UINT interface_index);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Detta API inaktiverar mDNS-tjänsten för det angivna fysiska gränssnittet. När tjänsten är inaktive rad skickar mDNS meddelandet "Hej" för varje lokal tjänst till nätverket som är kopplat till gränssnittet, så att intilliggande noder meddelas.
+Det här API:et inaktiverar mDNS-tjänsten i det specifika fysiska gränssnittet. När tjänsten har inaktiverats skickar mDNS "goodbye"-meddelanden för varje lokal tjänst till nätverket som är kopplat till gränssnittet, så att närliggande noder meddelas.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **mdns_ptr** Pekare till mDNS Control Block.
-- **interface_index** Indexera till gränssnittet där tjänsten ska inaktive ras
+- **mdns_ptr** Pekare till mDNS-kontrollblocket.
+- **interface_index** Indexera till gränssnittet där tjänsten ska inaktiveras
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) har inaktiverat tjänsten.
+- **NX_SUCCESS** (0x00) Har inaktiverat tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -196,7 +196,7 @@ status = nx_mdns_disable(&my_mdns, 0);
 
 ## <a name="nx_mdns_cache_notify_set"></a>nx_mdns_cache_notify_set
 
-Installerar funktionen mDNS cache full notify
+Installerar mDNS cache full notify-funktion
 
 ### <a name="prototype"></a>Prototyp
 
@@ -206,21 +206,21 @@ UINT nx_mdns_cache_notify_set(NX_MDNS *mdns_ptr,
         UINT state, UINT cache_type));
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten installerar en motringnings funktion som anges av användaren, som anropas när antingen den lokala tjänstecachen eller peer-tjänstecachen blir full. När tjänstecachen är full kan ingen mer mDNS-resurspost läggas till. Observera att tjänstecachen kan bli full till följd av intern fragmentering när tjänster med olika sträng längd läggs till och tas bort. Vid mottagning av en cache fullständig avisering i peer service cache kan programmet använda tjänsten "*nx_mdns_service_cache_clear"* för att radera alla poster i peer-tjänstecachen.
+Den här tjänsten installerar en återanropsfunktion som tillhandahålls av användaren, som anropas när antingen den lokala tjänstcachen eller peer-tjänstcachen blir full. När tjänstcachen är full går det inte att lägga till fler mDNS-resursposter. Observera att tjänstcachen kan bli full på grund av intern fragmentering när tjänster med olika stränglängder läggs till och tas bort. När ett fullständigt cachemeddelande tas emot i peer-tjänstcachen kan programmet använda tjänsten *"nx_mdns_service_cache_clear"* för att radera alla poster i peer-tjänstens cacheminne.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **mdns_ptr** Pekare till kontroll blocket mDNS.
+- **mdns_ptr** Pekare till mDNS-kontrollblocket.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) har installerat funktionen mdns cache notify motringning.
+- **NX_SUCCESS** (0x00) MDNS Cache notify callback-funktionen har installerats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -234,7 +234,7 @@ status = nx_mdns_cache_notify_set(&my_mdns, cache_full_nofiy_cb);
 
 ## <a name="nx_mdns_cache_notify_clear"></a>nx_mdns_cache_notify_clear
 
-Rensa funktionen mDNS service cache full notify
+Rensa mDNS-tjänstens fullständiga av meddela-funktion
 
 ### <a name="prototype"></a>Prototyp
 
@@ -242,21 +242,21 @@ Rensa funktionen mDNS service cache full notify
 UINT nx_mdns_cache_notify_clear(NX_MDNS *mdns_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten rensar en funktion för att skicka ett tjänst-cache som tillhandahålls av användaren.
+Den här tjänsten rensar en tjänstcache som användaren har angett för att meddela återanropsfunktionen.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **mdns_ptr** Pekare till kontroll blocket mDNS.
+- **mdns_ptr** Pekare till mDNS-kontrollblocket.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) rensade funktionen mdns service cache notify motringning.
+- **NX_SUCCESS** (0x00) Har rensat funktionen mDNS-tjänstens cache för att meddela återanrop.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -270,7 +270,7 @@ status = nx_mdns_cache_notify_clear(&my_mdns);
 
 ## <a name="nx_mdns_domain_name_set"></a>nx_mdns_domain_name_set
 
-Anger domän namnet
+Anger domännamnet
 
 ### <a name="prototype"></a>Prototyp
 
@@ -278,22 +278,22 @@ Anger domän namnet
 UINT nx_mdns_domain_name_set(NX_MDNS *mdns_ptr, CHAR *domain_name);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten konfigurerar det lokala standard domän namnet. När mDNS-instansen skapas anges standard namnet för den lokala domänen till ". local". Detta API gör att ett program kan skriva över det lokala standard domän namnet.
+Den här tjänsten ställer in det lokala standarddomännamnet. När mDNS-instansen skapas anges det lokala standarddomännamnet till ".local". Med det här API:et kan ett program skriva över det lokala standarddomännamnet.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **mdns_ptr** Pekare till mDNS Control Block.
-- **domain_name** Det domän namn som ska användas.
+- **mdns_ptr** Pekare till mDNS-kontrollblocket.
+- **domain_name** Det domännamn som ska användas.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) har konfigurerat en lokal domän.
+- **NX_SUCCESS** (0x00) Har konfigurerats på den lokala domänen.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -307,7 +307,7 @@ status = nx_mdns_domain_name_set(&my_mdns, “home”);
 
 ## <a name="nx_mdns_service_announcement_timing_set"></a>nx_mdns_service_announcement_timing_set
 
-Anger tids parametrar för service meddelande meddelanden
+Anger tidsparametrar för meddelanden om tjänstmeddelanden
 
 ### <a name="prototype"></a>Prototyp
 
@@ -317,27 +317,27 @@ UINT nx_mdns_service_announcement_timing_set(NX_MDNS *mdns_ptr,
     UINT period_interval, UINT max_time);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten konfigurerar om de tids parametrar som används av mDNS när de skickar tjänst meddelanden. Publicerings perioden börjar från *t* -Tick och kan utökas telescopically med 2 till kraften i *k* faktor. Antalet upprepningar per annons är *p*, intervallet mellan varje upprepad annons är *intervall* Tick och antalet meddelande perioder är max_time. Som standard anges den inledande perioden till 1 sekund, med k = 1 (perioden dubbleras varje gång), *p = 1* (ingen upprepning), retrans_interval = 0 (inget tidsintervall), Period_interval = 0xFFFFFFFF (max period intervall) och max_time = 3 (antal annonser).
+Den här tjänsten konfigurerar om de tidsparametrar som används av mDNS när tjänstmeddelanden skickas. Publiceringsperioden börjar *från tick* och kan utökas telegrafiskt med 2 till kraften hos *k-faktorn.* Antalet upprepningar per annons är *p*, intervallet  mellan varje upprepad annons är intervall tick och antalet meddelanden är max_time. Som standard är den inledande perioden inställd på 1 sekund, med k = 1 (perioden fördubblas varje gång), *p = 1* (ingen upprepning), retrans_interval = 0(inget tidsintervall), period_interval = 0xFFFFFFFF(maxintervall) och max_time = 3(antal annonser).
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **mdns_ptr** Pekare till mDNS Control Block.
-- **t** antal Tick för den inledande perioden. Standardvärdet är 100 för 1 sekund.
-- **p** antal upprepningar. Standardvärdet är 1.
-- **k** Telescopic faktor. Standardvärdet är 1.
-- **retrans_interval** Antal Tick som ska förflyta innan meddelanden skickas ut från upprepade meddelanden. Standardvärdet är 0.
-- **period_interval** Antalet Tick mellan två meddelande perioder. Standardvärdet är 0xFFFFFFFF.
-- **max_time** Antal meddelande perioder som ska användas för annonsen. Efter *max_time* meddelande perioder skickas inga fler meddelande meddelanden. Standardvärdet är 3.
+- **mdns_ptr** Pekare till mDNS-kontrollblocket.
+- **t** Antal tick för den första perioden. Standardvärdet är 100 tick i 1 sekund.
+- **p** Antal upprepningar. Standardvärdet är 1.
+- **k** Telemetrifaktor. Standardvärdet är 1.
+- **retrans_interval** Antal tick som ska vänta innan upprepade meddelanden skickas. Standardvärdet är 0.
+- **period_interval** Antal tick mellan två meddelandeperioder. Standardvärdet är 0xFFFFFFFF.
+- **max_time** Antal meddelanden som ska användas för annonsen. Efter *max_time* skickas inga fler meddelanden. Standardvärdet är 3.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) har angett tids värden.
+- **NX_SUCCESS** (0x00) Anger tidsvärden.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -352,7 +352,7 @@ status = nx_mdns_service_announcement_timing_set(&my_mdns, 100,
 
 ## <a name="nx_mdns_service_add"></a>nx_mdns_service_add
 
-Lägg till en lokal tjänst
+Lägga till en lokal tjänst
 
 ### <a name="prototype"></a>Prototyp
 
@@ -363,30 +363,30 @@ UINT nx_mdns_service_add(NX_MDNS *mdns_ptr, CHAR *instance,
     UINT interface_index);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Detta API registrerar en tjänst som erbjuds av programmet. Om flaggan *is_unique* har angetts avsöker mdns tjänst namnet för att kontrol lera att det är unikt i det lokala nätverket innan du börjar meddela tjänsten i nätverket. *Instans* är instans delen av tjänst namnet. *Tjänsten* är tjänst delen av tjänst namnet. Till exempel "_http. _ TCP" är en tjänst. För att beskriva en tjänst med undertyp måste anroparen använda under *typ* parametern. Om den önskade tjänsten t. ex. är "_printer. _sub. _http. _ TCP", är tjänst fältet "_http. _ TCP:, och under Typ fältet är" _printer ".
+Detta API registrerar en tjänst som erbjuds av programmet. Om flaggan *is_unique* har angetts avser mDNS tjänstnamnet för att se till att det är unikt i det lokala nätverket innan det börjar meddela tjänsten i nätverket. *Instansen* är instansdelen av tjänstnamnet. Tjänsten *är* tjänstdelen av namnet på tjänsten. Till exempel är "_http._tcp" en tjänst. För att beskriva en tjänst med undertyp måste anroparen använda *undertypsparametern.* Om den önskade tjänsten till exempel är "_printer._sub._http._tcp" är tjänstfältet "_http._tcp:, och fältet för undertyp är "_printer".
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **mdns_ptr** Pekare till mDNS Control Block.
-- **instans** Pekar mot instans namnet för tjänsten.
-- **tjänsten** Pekare till tjänst typen mDNS, exklusive information om undertyp.
-- **undertyp** Pekar på under typs delen av mDNS-tjänsten, om tillämpligt.
-- **prioritet** Tjänst prioritet
-- **vikt** Tjänst vikt
-- **port** TCP-eller UDP-portnummer som tjänsten använder
-- **text** Ytterligare text information
-- **is_unique** Boolesk flagga som anger om tjänsten är delad eller unik. För tjänster som är registrerade som unika måste mDNS avsöka tjänsten i nätverket innan de påbörjar erbjudandet.
-- **Interface_index** Det fysiska gränssnitt som tjänsten erbjuds via. För en tjänst som erbjuds via någon av de anslutna tjänsterna används värdet *NX_MDNS_ALL_INTERFACES* .
+- **mdns_ptr** Pekare till mDNS-kontrollblocket.
+- **instans** Pekare till instansnamnet för tjänsten.
+- **tjänst** Pekare till mDNS-tjänsttypen, exklusive information om undertyp.
+- **undergrupp** Pekare till undertypsdelen av mDNS-tjänsten, om tillämpligt.
+- **prioritet** Tjänstprioritet
+- **vikt** Tjänstvikt
+- **port** TCP- eller UDP-portnummer som tjänsten använder
+- **text** Ytterligare textinformation
+- **is_unique** Boolesk flagga som anger om tjänsten är delad eller unik. För tjänster som registrerats som unika måste mDNS avsläsa tjänsten i nätverket innan det börjar erbjudas.
+- **Interface_index** Det fysiska gränssnitt som tjänsten erbjuds via. För en tjänst som erbjuds via någon av de anslutna tjänsterna används *NX_MDNS_ALL_INTERFACES* värdet.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) har registrerat tjänsten.
+- **NX_SUCCESS** (0x00) Har registrerat tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -412,24 +412,24 @@ UINT nx_mdns_service_delete(NX_MDNS *mdns_ptr,
     CHAR *subtype);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Detta API tar bort en tidigare registrerad tjänst. När tjänsten tas bort skickas "" rader "meddelanden till det lokala nätverket så att intilliggande noder meddelas.
+Detta API tar bort en tidigare registrerad tjänst. När tjänsten tas bort skickas "goodbye"-meddelanden till det lokala nätverket så att närliggande noder meddelas.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **mdns_ptr** Pekare till mDNS Control Block.
-- **instans** Pekar mot instans namnet för tjänsten.
-- **tjänsten** Pekare till tjänst typen mDNS, exklusive information om undertyp.
-- **undertyp** Pekar på under typs delen av mDNS-tjänsten, om tillämpligt.
+- **mdns_ptr** Pekare till mDNS-kontrollblocket.
+- **instans** Pekare till instansnamnet för tjänsten.
+- **tjänst** Pekare till mDNS-tjänsttypen, exklusive information om undertyp.
+- **undergrupp** Pekare till undertypsdelen av mDNS-tjänsten, om tillämpligt.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) har tagit bort tjänsten.
+- **NX_SUCCESS** (0x00) Tjänsten har tagits bort.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -443,7 +443,7 @@ status = nx_mdns_service_delete(&my_mdns, “NETX-SERVICE”, “_http._tcp”, 
 
 ## <a name="nx_mdns_service_one_shot_query"></a>nx_mdns_service_one_shot_query
 
-Starta tjänst identifiering för en bild
+Initiera identifiering av en shot-tjänst
 
 ### <a name="prototype"></a>Prototyp
 
@@ -455,26 +455,26 @@ UINT nx_mdns_service_one_shot_query(NX_MDNS *mdns_ptr,
     NX_MDNS_SERVICE *service_ptr, ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten utför en mDNS-fråga med en bild. Om den angivna tjänsten finns i peer-tjänstecachen returneras den första instansen. Om inga tjänster hittas i den lokala peer-tjänstecachen, utfärdar mDNS-modulen ett Query-kommando och väntar på svar. Tjänsten är blockerad till antingen det första svaret eller tids gränsen för frågan.
+Den här tjänsten utför en enda mDNS-fråga. Om den angivna tjänsten finns i peer-tjänstens cacheminne returneras den första instansen. Om inga tjänster hittas i den lokala peer-tjänstcachen utfärdar mDNS-modulen ett frågekommando och väntar på svar. Tjänsten blockeras tills antingen det första svaret tas emot eller så går frågan ut.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **mdns_ptr** Pekare till mDNS Control Block.
-- **instans** Pekar mot instans namnet för tjänsten, om det är tillämpligt.
-- **tjänsten** Pekare till tjänst typen mDNS, exklusive information om undertyp. programmet måste ange tjänst typen.
-- **undertyp** Pekar på under typs delen av mDNS-tjänsten, om tillämpligt.
-- **service_ptr** Användaren tillhandahöll NX_MDNS_SERVICE struktur som lagrar frågeresultaten.
-- **wait_option** Tiden, i Tick, för att vänta på ett svar.
+- **mdns_ptr** Pekare till mDNS-kontrollblocket.
+- **instans** Pekare till instansnamnet för tjänsten, om tillämpligt.
+- **tjänst** Pekare till mDNS-tjänsttypen, exklusive information om undertyp. programmet måste ange tjänsttypen.
+- **undergrupp** Pekare till undertypsdelen av mDNS-tjänsten, om tillämpligt.
+- **service_ptr** Användaren angav en pekare NX_MDNS_SERVICE en struktur som lagrar frågeresultatet.
+- **wait_option** Hur lång tid det tar att vänta på ett svar i tick.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- Information om tjänsten **NX_SUCCESS** (0X00) har hämtats.
+- **NX_SUCCESS** (0x00) Tjänstinformation har erhållits.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -492,7 +492,7 @@ status = nx_mdns_service_one_shot_query(&my_mdns, “NETX-SERVICE”, “_http._
 
 ## <a name="nx_mdns_service_continuous_query"></a>nx_mdns_service_continuous_query
 
-Initiera kontinuerlig identifiering av tjänst
+Initiera kontinuerlig tjänstidentifiering
 
 ### <a name="prototype"></a>Prototyp
 
@@ -501,24 +501,24 @@ UINT nx_mdns_service_continous_query(NX_MDNS *mdns_ptr,
     CHAR *instance, CHAR *service, CHAR *subtype);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten startar en kontinuerlig fråga. Observera att tjänsten returnerar omedelbart. När du har utfärdat en kontinuerlig fråga kan programmet Hämta tjänst poster med hjälp av API- *nx_mdns_service_lookup*. För att stoppa den kontinuerliga frågan kan programmet använda API- *nx_mdns_service_query_stop*
+Den här tjänsten startar en kontinuerlig fråga. Observera att tjänsten returneras omedelbart. När en kontinuerlig fråga har utfärdats kan programmet hämta tjänstposten med hjälp av *API:et nx_mdns_service_lookup*. För att stoppa den kontinuerliga frågan kan programmet använda *API-nx_mdns_service_query_stop*
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **mdns_ptr** Pekare till mDNS Control Block.
-- **instans** Pekar mot instans namnet för tjänsten, om det är tillämpligt.
-- **tjänsten** Pekare till tjänst typen mDNS, exklusive information om undertyp, om tillämpligt.
-- **undertyp** Pekar på under typs delen av mDNS-tjänsten, om tillämpligt.
+- **mdns_ptr** Pekare till mDNS-kontrollblocket.
+- **instans** Pekare till instansnamnet för tjänsten, om tillämpligt.
+- **tjänst** Pekare till mDNS-tjänsttypen, exklusive information om undertyp, om tillämpligt.
+- **undergrupp** Pekare till undertypsdelen av mDNS-tjänsten, om tillämpligt.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) har börjat fortsätta fråga.
+- **NX_SUCCESS** (0x00) Frågan har startats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -536,7 +536,7 @@ status = nx_mdns_service_continuous_query(&my_mdns,
 
 ## <a name="nx_mdns_service_query_stop"></a>nx_mdns_service_query_stop
 
-Upphöra med en tidigare utfärdad kontinuerlig tjänst identifiering
+Upphöra med en tidigare utfärdad kontinuerlig tjänstidentifiering
 
 ### <a name="prototype"></a>Prototyp
 
@@ -545,24 +545,24 @@ UINT nx_mdns_service_query_stop(NX_MDNS *mdns_ptr,
     CHAR *instance, CHAR *service, CHAR *subtype);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Detta API avslutar en tidigare utfärdad kontinuerlig tjänst identifiering.
+Det här API:et avslutar en tidigare utfärdad kontinuerlig tjänstidentifiering.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **mdns_ptr** Pekare till mDNS Control Block.
-- **instans** Pekar mot instans namnet för tjänsten.
-- **tjänsten** Pekare till mDNS Service Type, undertyp information.
-- **undertyp** Pekar på under typs delen av mDNS-tjänsten, om tillämpligt.
+- **mdns_ptr** Pekare till mDNS-kontrollblocket.
+- **instans** Pekare till instansnamnet för tjänsten.
+- **tjänst** Pekare till mDNS-tjänsttypen, undertypsinformation.
+- **undergrupp** Pekare till undertypsdelen av mDNS-tjänsten, om tillämpligt.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) har stoppats Fortsätt frågan.
+- **NX_SUCCESS** (0x00) Frågan har stoppats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -578,7 +578,7 @@ status = nx_mdns_service_query_stop(&my_mdns, “NETX-SERVICE”, “_http._tcp�
 
 ## <a name="nx_mdns_service_lookup"></a>nx_mdns_service_lookup
 
-Hämtar tjänsten från den lokala peer-tjänstecachen
+Hämtar tjänsten från den lokala peer-tjänstcachen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -589,27 +589,27 @@ UINT nx_mdns_service_lookup(NXD_MDNS *mdns_ptr,
     NXD_MDNS_SERVICE *service_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten söker efter tjänster som matchar instans namnet (om det finns) och typen av tjänst i den lokala peer-tjänstecachen. Programmet ska starta tjänstens sökning med *instance_index* har värdet noll för den första tjänsten i cachen som matchar beskrivningen. Programmet måste fortsätta använda den här tjänsten med ökande *instance_index* värde för ytterligare tjänster som finns i cacheminnet, till tjänsten returnerar *NX_NO_MORE_ENTRIES*, vilket indikerar cacheminnets slut.
+Den här tjänsten söker efter tjänster som matchar instansnamnet (om det finns) och typen av tjänst i den lokala peer-tjänstcachen. Programmet ska starta tjänstsökningen med *en* instance_index inställd på noll för den första tjänsten i cacheminnet som matchar beskrivningen. Programmet ska fortsätta att använda den här *tjänsten med instance_index* öka värdet för ytterligare tjänster som finns i cacheminnet tills tjänsten returnerar *NX_NO_MORE_ENTRIES*, vilket anger slutet av cacheminnet.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **mdns_ptr** Pekare till mDNS Control Block.
-- **instans** Pekar mot instans namnet för tjänsten, om det är tillämpligt.
-- **tjänsten** Pekare till tjänst typen mDNS, exklusive information om undertyp, om tillämpligt.
-- **undertyp** Pekar på under typs delen av mDNS-tjänsten, om tillämpligt.
-- **Instance_index** Index numret till den instans som ska returneras.
-- **service_ptr** Användaren tillhandahöll en NX_MDNS_SERVICE struktur som lagrar Sök resultaten.
+- **mdns_ptr** Pekare till mDNS-kontrollblocket.
+- **instans** Pekare till instansnamnet för tjänsten, om tillämpligt.
+- **tjänst** Pekare till mDNS-tjänsttypen, exklusive information om undertyp, om tillämpligt.
+- **undergrupp** Pekare till undertypsdelen av mDNS-tjänsten, om tillämpligt.
+- **Instance_index** Indexnummer till den instans som ska returneras.
+- **service_ptr** Användaren angav en pekare NX_MDNS_SERVICE en struktur som lagrar uppslagsresultatet.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) har hämtat tjänsten
-- **NX_NO_MORE_ENTRIES** (0x17) Det gick inte att hitta någon tjänst post på det angivna index numret. Den här fel koden anger slutet på sökningen.
+- **NX_SUCCESS** (0x00) Har hämtat tjänsten
+- **NX_NO_MORE_ENTRIES** (0x17) Ingen tjänstpost hittas på det angivna indexnumret. Den här felkoden anger slutet av sökningen.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -625,7 +625,7 @@ status = nx_mdns_service_lookup(&my_mdns, “NETX-SERVICE”, “_http._tcp”, 
 
 ## <a name="nx_mdns_service_ignore_set"></a>nx_mdns_service_ignore_set
 
-Konfigurerar en tjänst som ignorerar
+Konfigurerar en ignorerad tjänstuppsättning
 
 ### <a name="prototype"></a>Prototyp
 
@@ -633,22 +633,22 @@ Konfigurerar en tjänst som ignorerar
 UINT nx_mdns_service_ignore_set(NX_MDNS *mdns_ptr, ULONG service_mask);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Detta API konfigurerar en mask för att ignorera tjänster som anges av *service_mask* bitmask. Användaren kan eventuellt använda service_mask för att välja tjänst typer som inte vill cachelagras. En lista över tjänster definieras i tabellen *nx_mdns_service_types* i *nxd_mdns. c.* Motsvarande mask för den första tjänst typen i nx_mdns_service_types [] är 0x00000001, masken för den andra tjänst typen är 0x00000002 och så vidare.
+Detta API konfigurerar en mask för att ignorera tjänster som anges av *service_mask* bitmask. Användaren kan också använda service_mask för att välja tjänsttyper som inte ska cachelagras. En lista över tjänster definieras i tabellen *nx_mdns_service_types* i *nxd_mdns.c.* Motsvarande mask för den första tjänsttypen i nx_mdns_service_types[] är 0x00000001, masken för den andra tjänsttypen är 0x00000002 och så vidare.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **mdns_ptr** Pekare till mDNS Control Block.
-- **service_mask** Användardefinierade tjänst typer att ignorera. Masken är en 32-bitars ULONG-typ. Varje bit representerar en post i den användardefinierade *nx_mdns_service_types* matrisen. Om en bit anges kommer motsvarande tjänst typ som anges i *nx_mdns_service_type* matrisen inte att lagras i peer-tjänstecacheminnet.
+- **mdns_ptr** Pekare till mDNS-kontrollblocket.
+- **service_mask** Användardefinierade tjänsttyper som ska ignoreras. Masken är en 32-bitars ULONG-typ. Varje bit representerar en post i den användardefinierade *nx_mdns_service_types* matrisen. Om en bit har angetts lagras inte motsvarande tjänsttyp *som anges nx_mdns_service_type* matrisen i peer-tjänstens cacheminne.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) har angett en mask för att ignorera tjänsten.
+- **NX_SUCCESS** (0x00) Anger tjänstens ignorerade mask.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -663,7 +663,7 @@ status = nx_mdns_service_ignore_set(&my_mdns, 0x00000003);
 
 ## <a name="nx_mdns_service_notify_set"></a>nx_mdns_service_notify_set
 
-Konfigurerar en tjänst ändring Avisera motringning funktion
+Konfigurerar en återanropsfunktion för att meddela om tjänständring
 
 ### <a name="prototype"></a>Prototyp
 
@@ -673,25 +673,25 @@ UINT nx_mdns_service_notify_set(NX_MDNS *mdns_ptr, ULONG service_mask,
     NX_MDNS_SERVICE *service_ptr, UINT state));
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Detta API konfigurerar en tjänst ändrings avisering om motringning. Den här callback-funktionen anropas när en tjänst som erbjuds av andra noder i nätverket läggs till, ändras eller inte längre är tillgänglig. Användaren kan eventuellt använda service_mask för att välja tjänst typer som det vill övervaka. En lista över tjänster som övervakas är hårdkodade i tabellen *nx_mdns_service_types* i *nxd_mdns. c.*
+Det här API:et konfigurerar en tjänständringsfunktion för att meddela om återanrop. Den här återanropsfunktionen anropas när en tjänst som erbjuds av andra noder i nätverket läggs till, ändras eller inte längre är tillgänglig. Användaren kan också använda service_mask för att välja vilka tjänsttyper som ska övervakas. En lista över tjänster som övervakas är hårdkodade i tabellen *nx_mdns_service_types* i *nxd_mdns.c.*
 
-Motsvarande mask för den första tjänst typen i nx_mdns_service_types [] är 0x00000001, masken för den andra tjänst typen är 0x00000002 och så vidare.
+Motsvarande mask för den första tjänsttypen i nx_mdns_service_types[] är 0x00000001, masken för den andra tjänsttypen är 0x00000002 och så vidare.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **mdns_ptr** Pekare till mDNS Control Block.
-- **service_mask** Användardefinierade tjänst typer som ska övervakas. Masken är en 32-bitars ULONG-typ. Varje bit representerar en post i *nx_mdns_service_types* matrisen.
-- **service_change_notify** Motringningsfunktionen som anropas när den angivna tjänsten ändras. Detaljerad tjänst information returneras i minnet som pekas på *service_ptr.* Observera att innehållet i minnet är ogiltigt när du har returnerat från funktionen meddela motringning.
+- **mdns_ptr** Pekare till mDNS-kontrollblocket.
+- **service_mask** Användardefinierade tjänsttyper som ska övervakas. Masken är en 32-bitars ULONG-typ. Varje bit representerar en post i *nx_mdns_service_types* matrisen.
+- **service_change_notify** Återanropsfunktionen som ska anropas när den angivna tjänsten ändras. Den detaljerade tjänstinformationen returneras i minnet som *service_ptr.* Observera att innehållet i minnet är ogiltigt efter att ha returnerats från återanropsfunktionen notify.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) har installerat motringningsfunktionen.
+- **NX_SUCCESS** (0x00) Återanropsfunktionen har installerats.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -706,7 +706,7 @@ status = nx_mdns_service_notify_set(&my_mdns, 0x00000002, service_change_notify)
 
 ## <a name="nx_mdns_service_notify_clear"></a>nx_mdns_service_notify_clear
 
-Rensa aviserings funktionen för tjänst ändringar
+Rensa funktionen för att meddela återanrop om tjänständring
 
 ### <a name="prototype"></a>Prototyp
 
@@ -714,21 +714,21 @@ Rensa aviserings funktionen för tjänst ändringar
 UINT nx_mdns_service_notify_clear(NX_MDNS *mdns_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Detta API rensar tjänst ändringen meddela motringning och.
+Det här API:et rensar funktionen för att meddela återanrop om tjänständring och .
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **mdns_ptr** Pekare till mDNS kontroll block..
+- **mdns_ptr** Pekare till mDNS-kontrollblocket..
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) rensade återanrops funktionen.
+- **NX_SUCCESS** (0x00) Har rensat återanropsfunktionen.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -742,7 +742,7 @@ status = nx_mdns_service_notify_clear(&my_mdns);
 
 ## <a name="nx_mdns_host_address_get"></a>nx_mdns_host_address_get
 
-Hämta värd adressen
+Hämta värdadressen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -752,25 +752,25 @@ UINT nx_mdns_host_address_get(NX_MDNS *mdns_ptr,
     ULONG *ipv6_address, ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten utför en mDNS-fråga på värd-IPv4-och IPv6-adresser. Om adressen för det angivna värd namnet finns i peer-tjänstecachen returneras adressen. Om ingen adress hittas i peer-tjänstecachen, utfärdar mDNS-modulen en och AAAA-typfrågor och väntar på svar. Detta API-block tills antingen ett svar tas emot eller tids gränsen för frågan har uppnåtts.
+Den här tjänsten utför en mDNS-fråga på värd-IPv4- och IPv6-adresser. Om adressen för det angivna värdnamnet hittas i peer-tjänstcachen returneras adressen. Om ingen adress hittas i peer-tjänstens cacheminne utfärdar mDNS-modulen frågor av typen A och AAAA och väntar på svar. Det här API:et blockerar tills antingen ett svar tas emot eller tills frågan får sin tid.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **mdns_ptr** Pekare till mDNS Control Block.
-- **host_name** Pekare till värd namnet.
-- **ipv4_address** Pekar på en 4-bytes justerad adress för IPv4-adress lagrings utrymme. Användaren ska allokera 4 byte av utrymme för IPv4-adressen. NX_NULL adress kan skickas till det här API: et om programmet inte behöver hämta IPv4-adressen.
-- **ipv6_address** Pekar på 4-bytes justerad adress för IPv6-adress lagrings utrymme. Användaren tilldelas 16 bytes utrymme för-IPv6-adressen. NX_NULL adress kan skickas till det här API: et om programmet inte behöver hämta IPv6-adressen.
-- **wait_option** Tiden, i Tick, för att vänta på ett svar.
+- **mdns_ptr** Pekare till mDNS-kontrollblocket.
+- **host_name** Pekare till värdnamn.
+- **ipv4_address** Pekare till en 4 byte-justerad adress för IPv4-adresslagringsutrymme. Användaren ska allokera 4 byte utrymme för IPv4 -adressen. NX_NULL-adressen kan skickas till det här API:et om programmet inte behöver hämta IPv4-adressen.
+- **ipv6_address** Pekare till den 4 byte-justerade adressen för IPv6-adresslagringsutrymmet. Användaren ska allokera 16 byte utrymme för - IPv6-adressen. NX_NULL-adressen kan skickas till det här API:et om programmet inte behöver hämta IPv6-adressen.
+- **wait_option** Hur lång tid det tar att vänta på ett svar i tick.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) hämtade värd adressen.
+- **NX_SUCCESS** (0x00) Värdadressen har erhållits.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -794,21 +794,21 @@ Radera alla lokala tjänster
 UINT nx_mdns_local_cache_clear(NX_MDNS *mdns_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten rensar alla poster i den lokala tjänstecachen när meddelandet har skickats.
+Den här tjänsten rensar alla poster i den lokala tjänstcachen efter att ha skickat meddelandet Goodbye.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **mdns_ptr** Pekare till mDNS Control Block.
+- **mdns_ptr** Pekare till mDNS-kontrollblocket.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) raderade alla poster i cacheminnet.
+- **NX_SUCCESS** (0x00) Har raderat alla poster i cacheminnet.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -830,21 +830,21 @@ Radera alla identifierade tjänster
 UINT nx_mdns_peer_cache_clear(NX_MDNS *mdns_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten rensar alla poster i peer-tjänstecachen.
+Den här tjänsten rensar alla poster i peer-tjänstens cacheminne.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **mdns_ptr** Pekare till mDNS Control Block.
+- **mdns_ptr** Pekare till mDNS-kontrollblocket.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0x00) raderade alla poster i cacheminnet.
+- **NX_SUCCESS** (0x00) Har raderat alla poster i cacheminnet.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 

@@ -1,48 +1,48 @@
 ---
-title: Kapitel 2 – installation och användning av Azure återställnings tider NetX Duo AutoIP
-description: Det här kapitlet innehåller en beskrivning av olika problem som rör Installation, konfiguration och användning av Azure återställnings tider NetX Duo AutoIP-komponenten.
+title: Kapitel 2 – Installation och användning av Azure RTOS NetX Duo AutoIP
+description: Det här kapitlet innehåller en beskrivning av olika problem som rör installation, installation och användning av Azure RTOS NetX Duo AutoIP-komponenten.
 author: philmea
 ms.author: philmea
 ms.date: 06/04/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 42c58a4cdec34a03eda9f42315438e5fbe2ea594
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 56bd8cd3cc361bbe0ec435012251e751af8c1566d01e8d52ff38d2eb9c381bfd
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104826169"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116790521"
 ---
-# <a name="chapter-2---installation-and-use-of-azure-rtos-netx-duo-autoip"></a>Kapitel 2 – installation och användning av Azure återställnings tider NetX Duo AutoIP
+# <a name="chapter-2---installation-and-use-of-azure-rtos-netx-duo-autoip"></a>Kapitel 2 – Installation och användning av Azure RTOS NetX Duo AutoIP
 
-Det här kapitlet innehåller en beskrivning av olika problem som rör Installation, konfiguration och användning av Azure återställnings tider NetX Duo AutoIP-komponenten.
+Det här kapitlet innehåller en beskrivning av olika problem som rör installation, installation och användning av Azure RTOS NetX Duo AutoIP-komponenten.
 
-## <a name="product-distribution"></a>Produkt distribution
+## <a name="product-distribution"></a>Produktdistribution
 
-Azure återställnings tider NetX-AutoIP kan hämtas från vår offentliga käll kods lagrings plats på [https://github.com/azure-rtos/netx/](https://github.com/azure-rtos/netx/) . Paketet innehåller tre källfiler, en inkludera filer och en PDF-fil som innehåller det här dokumentet, enligt följande:
+Azure RTOS NetX AutoIP kan hämtas från vår offentliga källkodsdatabas på [https://github.com/azure-rtos/netx/](https://github.com/azure-rtos/netx/) . Paketet innehåller tre källfiler, en med filer och en PDF-fil som innehåller det här dokumentet, enligt följande:
 
-- **nx_auto_ip. h**: rubrik fil för netx AutoIP
-- **nx_auto_ip. c**: c-källfil för netx AutoIP
-- **demo_netx_auto_ip. c**: c-källfil för netx AutoIP-demo
-- **nx_auto_ip.pdf**: PDF-Beskrivning av netx AutoIP
+- **nx_auto_ip.h:** Rubrikfil för NetX AutoIP
+- **nx_auto_ip.c:** C-källfil för NetX AutoIP
+- **demo_netx_auto_ip.c:** C-källfil för NetX AutoIP Demo
+- **nx_auto_ip.pdf:** PDF-beskrivning av NetX AutoIP
 
 ## <a name="autoip-installation"></a>AutoIP-installation
 
-För att kunna använda NetX-AutoIP bör hela distributionen som nämnts tidigare kopieras till samma katalog där NetX är installerad. Om NetX till exempel är installerat i katalogen "*\threadx\arm7\green*", ska *nx_auto_ip. h*-, *nx_auto_ip. c*-och *demo_netx_auto_ip. c* -filer kopieras till den här katalogen.
+För att kunna använda NetX AutoIP bör hela distributionen som nämns ovan kopieras till samma katalog där NetX är installerat. Om NetX till exempel är installerat i katalogen "*\threadx\arm7\green*" ska filerna *nx_auto_ip.h* *, nx_auto_ip.c* och *demo_netx_auto_ip.c* kopieras till den här katalogen.
 
 ## <a name="using-autoip"></a>Använda AutoIP
 
-Det är enkelt att använda NetX AutoIP. I princip måste program koden innehålla *nx_auto_ip. h* när den innehåller *tx_api. h* och *nx_api. h* för att kunna använda ThreadX och netx. När *nx_auto_ip. h* ingår kan program koden sedan göra AutoIP-funktions anropen senare i den här hand boken. Programmet måste även innehålla *nx_auto_ip. c* i build-processen. De här filerna måste kompileras på samma sätt som andra programfiler och dess objekt formulär måste vara länkade tillsammans med programmets filer. Detta är allt som krävs för att använda NetX AutoIP.
+Det är enkelt att använda NetX AutoIP. I princip måste programkoden innehålla *nx_auto_ip.h* efter att den *innehåller tx_api.h* och *nx_api.h* för att kunna använda ThreadX och NetX. När *nx_auto_ip.h* ingår kan programkoden göra AutoIP-funktionsanrop som anges senare i den här guiden. Programmet måste även innehålla *nx_auto_ip.c* i byggprocessen. Dessa filer måste kompileras på samma sätt som andra programfiler och dess objektformulär måste länkas tillsammans med programmets filer. Det här är allt som krävs för att använda NetX AutoIP.
 
 > [!NOTE]
-> Eftersom AutoIP använder NetX ARP-tjänster måste ARP vara aktiverat med det *nx_arp_enable* anropet innan du använder AutoIP.
+> Eftersom AutoIP använder NetX ARP-tjänster måste ARP aktiveras med nx_arp_enable *innan* du använder AutoIP.
 
-## <a name="small-example-system"></a>Litet exempel system
+## <a name="small-example-system"></a>Litet exempelsystem
 
-Ett exempel på hur enkelt det är att använda NetX AutoIP beskrivs i bild 1,1, som visas nedan. I det här exemplet tas AutoIP-filen *nx_auto_ip. h* in på rad 002. Därefter skapas NetX AutoIP-instansen i "*tx_application_define*" på rad 090. Observera att NetX AutoIP Control Block (auto_ip_0) definierades tidigare som en global variabel på rad 015. När du har skapat en NetX-AutoIP startas den på rad 098. Funktionen för att ändra motringning till IP-adress startar på rad 105, som används för att hantera efterföljande konflikter eller möjlig DHCP-adress matchning.
+Ett exempel på hur enkelt det är att använda NetX AutoIP beskrivs i bild 1.1, som visas nedan. I det här exemplet tas filen AutoIP include *nx_auto_ip.h* in på rad 002. Därefter skapas NetX AutoIP-instansen i "*tx_application_define*" på rad 090. Observera att NetX AutoIP-kontrollblocket "auto_ip_0" definierades tidigare som en global variabel på rad 015. När det har skapats startas en NetX AutoIP på rad 098. Bearbetningen av funktionen för återanrop av IP-adressändring börjar på rad 105, som används för att hantera efterföljande konflikter eller möjlig DHCP-adressupplösning.
 
 > [!NOTE]
-> Exemplet nedan förutsätter att värd enheten är en enskild enhet. För en multihomed-enhet kan värd programmet använda NetX AutoIP-tjänsten för *nx_auto_ip_interface_* ange att ett sekundärt nätverks gränssnitt ska avsökas för en IP-adress. I [användar handboken för netx](https://docs.microsoft.com/azure/rtos/netx/about-this-guide) finns mer information om hur du konfigurerar multihomed-program. Observera att värd programmet ska använda NetX API- *nx_status_ip_interface_check* för att verifiera att AutoIP har fått en IP-adress.
+> I exemplet nedan förutsätts att värdenheten är en enhet med en enda värd. För en multihomed-enhet kan värdprogrammet använda NetX *AutoIP-nx_auto_ip_interface_* för att ange ett sekundärt nätverksgränssnitt för avsökning efter en IP-adress. Se [NetX-användarhandboken](https://docs.microsoft.com/azure/rtos/netx/about-this-guide) för mer information om hur du ställer in program med flera startprogram. Observera också att värdprogrammet ska använda NetX API-nx_status_ip_interface_check för *att* verifiera att AutoIP har fått en IP-adress.
 
 ```c
 #include "tx_api.h"
@@ -219,20 +219,20 @@ NX_AUTO_IP    *auto_ip_ptr;
 }
 ```
 
-Figur 1,1 exempel på AutoIP användning med NetX
+Bild 1.1 Exempel på automatiskIP-användning med NetX
 
-## <a name="configuration-options"></a>Konfigurations alternativ
+## <a name="configuration-options"></a>Konfigurationsalternativ
 
-Det finns flera konfigurations alternativ för att skapa NetX-AutoIP. Följande är en lista över alla alternativ, där var och en beskrivs i detalj:
+Det finns flera konfigurationsalternativ för att skapa NetX AutoIP. Följande är en lista över alla alternativ, där vart och ett beskrivs i detalj:
 
-- **NX_DISABLE_ERROR_CHECKING**: det här alternativet tar bort den grundläggande fel kontrollen i AutoIP. Den används vanligt vis när programmet har felsökts.
-- **NX_AUTO_IP_PROBE_WAIT**: antalet sekunder som ska förflyta innan den första avsökningen skickas. Som standard definieras värdet som 1.
-- **NX_AUTO_IP_PROBE_NUM**: antalet ARP-avsökningar som ska skickas. Som standard definieras värdet som 3.
-- **NX_AUTO_IP_PROBE_MIN**: det minsta antal sekunder som ska förflyta mellan att skicka avsökningar. Som standard definieras värdet som 1.
-- **NX_AUTO_IP_PROBE_MAX**: det maximala antalet sekunder som ska förflyta mellan att skicka avsökningar. Som standard definieras värdet som 2.
-- **NX_AUTO_IP_MAX_CONFLICTS**: antalet AutoIP-konflikter innan bearbetnings fördröjningar ökar. Som standard definieras värdet som 10.
-- **NX_AUTO_IP_RATE_LIMIT_INTERVAL**: antalet sekunder som vänte tiden ska utsträckas när det totala antalet konflikter överskrids. Som standard definieras värdet som 60.
-- **NX_AUTO_IP_ANNOUNCE_WAIT**: hur många sekunder som ska förflyta innan meddelande skickas. Som standard definieras värdet som 2.
-- **NX_AUTO_IP_ANNOUNCE_NUM**: antalet ARP tillkännager att skicka. Som standard definieras värdet som 2.
-- **NX_AUTO_IP_ANNOUNCE_INTERVAL**: antalet sekunder som sändningen ska förflyta. Som standard definieras värdet som 2.
-- **NX_AUTO_IP_DEFEND_INTERVAL**: antalet sekunder att vänta mellan försvar tillkännager. Som standard definieras värdet som 10.
+- **NX_DISABLE_ERROR_CHECKING:** Det här alternativet tar bort den grundläggande autoIP-felkontrollen. Det används vanligtvis när programmet har felsökts.
+- **NX_AUTO_IP_PROBE_WAIT:** Antalet sekunder som ska vänta innan den första avsökningen skickas. Som standard definieras det här värdet som 1.
+- **NX_AUTO_IP_PROBE_NUM:** Antalet ARP-avsökningar som ska skickas. Som standard definieras det här värdet som 3.
+- **NX_AUTO_IP_PROBE_MIN:** Det minsta antal sekunder som ska vänta mellan att skicka avsökningar. Som standard definieras det här värdet som 1.
+- **NX_AUTO_IP_PROBE_MAX:** Det maximala antalet sekunder att vänta mellan att skicka avsökningar. Som standard definieras det här värdet som 2.
+- **NX_AUTO_IP_MAX_CONFLICTS:** Antalet AutoIP-konflikter innan bearbetningsfördröjningar ökar. Som standard definieras det här värdet som 10.
+- **NX_AUTO_IP_RATE_LIMIT_INTERVAL:** Antalet sekunder som väntetiden ska utökas när det totala antalet konflikter överskrids. Som standard definieras det här värdet som 60.
+- **NX_AUTO_IP_ANNOUNCE_WAIT:** Antalet sekunder som ska vänta innan meddelandet skickas. Som standard definieras det här värdet som 2.
+- **NX_AUTO_IP_ANNOUNCE_NUM:** Antalet ARP som ska skickas. Som standard definieras det här värdet som 2.
+- **NX_AUTO_IP_ANNOUNCE_INTERVAL:** Antalet sekunder som ska vänta mellan att skicka meddelanden. Som standard definieras det här värdet som 2.
+- **NX_AUTO_IP_DEFEND_INTERVAL:** Antalet sekunder som ska vänta mellan försvaren. Som standard definieras det här värdet som 10.

@@ -1,60 +1,60 @@
 ---
 title: Kapitel 5 – USBX OTG
-description: Lär dig hur USBX stöder OTG-funktionerna i USB när en OTG-kompatibel USB-styrenhet är tillgänglig i maskin varu designen.
+description: Lär dig hur USBX stöder OTG-funktionerna i USB när en OTG-kompatibel USB-styrenhet är tillgänglig i maskinvarudesignen.
 author: philmea
 ms.author: philmea
 ms.date: 5/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 64a3c44f84b9ffca31d9e616d14d3d5d87c56bd7
-ms.sourcegitcommit: 60ad844b58639d88830f2660ab0c4ff86b92c10f
+ms.openlocfilehash: 1a0abe355f05492edb74635db2aa6607abbcf9de6b2693290b06b740d2b9286d
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 04/07/2021
-ms.locfileid: "106550328"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116791065"
 ---
 # <a name="chapter-5---usbx-otg"></a>Kapitel 5 – USBX OTG
 
-USBX stöder OTG-funktionerna i USB när en OTG-kompatibel USB-styrenhet är tillgänglig i maskin varu designen.
+USBX stöder OTG-funktionerna i USB när en OTG-kompatibel USB-styrenhet är tillgänglig i maskinvarudesignen.
 
-USBX stöder OTG i kärn USB-stacken. Men för att OTG ska fungera krävs en speciell USB-styrenhet. USBX OTG Controller-funktioner finns i usbx_otg-katalogen. Den aktuella USBX-versionen stöder bara NXP-LPC3131 med fullständiga OTG-funktioner.
+USBX stöder OTG i USB-kärnstacken. Men för att OTG ska fungera krävs en specifik USB-styrenhet. USBX OTG-styrenhetsfunktioner finns i usbx_otg katalogen. Den aktuella USBX-versionen stöder endast NXP LPC3131 med fullständiga OTG-funktioner.
 
-Driv rutins funktionerna för vanliga kontrollanter (värd eller enhet) finns fortfarande i standard-USBX usbx_device_controllers och usbx_host_controllers, men usbx_otg katalogen innehåller de speciella OTG-funktioner som är associerade med USB-styrenheten.
+De vanliga styrenhetsdrivrutinsfunktionerna (värd eller enhet) finns fortfarande i STANDARD USBX-usbx_device_controllers och usbx_host_controllers, men usbx_otg-katalogen innehåller de specifika OTG-funktioner som är associerade med USB-styrenheten.
 
-Det finns fyra funktions kategorier för en OTG-styrenhet Förutom vanliga funktioner för värd/enhet.
+Det finns fyra typer av funktioner för en OTG-styrenhet utöver de vanliga värd-/enhetsfunktioner.
 
-- VBUS-/regionsspecifika funktioner
+- VBUS-specifika funktioner
 - Starta och stoppa styrenheten
-- USB-roll hanterare
-- Avbrotts hanterare
+- USB-rollhanterare
+- Avbrottshanterare
 
 ## <a name="vbus-functions"></a>VBUS-funktioner
 
-Varje kontrollant måste ha en VBUS-ansvarig för att ändra status för VBUS baserat på energispar funktioner. Den här funktionen utför vanligt vis bara att aktivera eller inaktivera VBUS.
+Varje styrenhet måste ha en VBUS-hanterare för att ändra tillståndet för VBUS baserat på energisparkrav. Den här funktionen utför vanligtvis bara att aktivera eller inaktivera VBUS.
 
 ## <a name="start-and-stop-the-controller"></a>Starta och stoppa styrenheten
 
-Till skillnad från en vanlig USB-implementering kräver OTG att värden och/eller enhets stacken aktive ras och inaktive ras när rollen ändras.
+Till skillnad från en vanlig USB-implementering kräver OTG att värden och/eller enhetsstacken aktiveras och inaktiveras när rollen ändras.
 
-## <a name="usb-role-manager"></a>USB-roll hanterare
+## <a name="usb-role-manager"></a>USB-rollhanterare
 
-USB-rolltjänsten tar emot kommandon för att ändra status för USB-filen. Det finns flera tillstånd som behöver över gångar till och från:
+USB-rollhanteraren tar emot kommandon för att ändra USB-tillståndet. Det finns flera tillstånd som behöver övergångar till och från:
 
 | Tillstånd                    | Värde | Beskrivning                                           |
 | ------------------------ | ----- | ----------------------------------------------------- |
 | UX_OTG_IDLE            | 0     | Enheten är inaktiv. Inte ansluten till något |
-| UX_OTG_IDLE_TO_HOST  | 1     | Enheten är ansluten med typen anslutning             |
+| UX_OTG_IDLE_TO_HOST  | 1     | Enheten är ansluten med typ A-anslutning             |
 | UX_OTG_IDLE_TO_SLAVE | 2     | Enheten är ansluten med typ B-anslutning             |
-| UX_OTG_HOST_TO_IDLE  | 3     | Värd enheten har kopplats från                          |
-| UX_OTG_HOST_TO_SLAVE | 4     | Roll växling från värd till slav                          |
-| UX_OTG_SLAVE_TO_IDLE | 5     | Slaven het är frånkopplad                          |
-| UX_OTG_SLAVE_TO_HOST | 6     | Roll växling från slav till värd                          |
+| UX_OTG_HOST_TO_IDLE  | 3     | Värdenheten kopplades från                          |
+| UX_OTG_HOST_TO_SLAVE | 4     | Rollbyte från värd till undernod                          |
+| UX_OTG_SLAVE_TO_IDLE | 5     | Den underkopplade enheten är frånkopplad                          |
+| UX_OTG_SLAVE_TO_HOST | 6     | Rollbyte från undernod till värd                          |
 
-## <a name="interrupt-handlers"></a>Avbrotts hanterare
+## <a name="interrupt-handlers"></a>Avbrottshanterare
 
-Både värd-och enhets styrenhetens driv rutiner för OTG kräver olika avbrotts hanterare för att övervaka signaler bortom traditionella USB-avbrott, särskilt signaler på grund av enhets-och VBUS.
+Både värd- och enhetsstyrenhetsdrivrutiner för OTG behöver olika avbrottshanterare för att övervaka signaler utöver traditionella USB-avbrott, särskilt signaler som beror på SRP och VBUS.
 
-Initiera en USB-OTG kontrollant. Vi använder NXP-LPC3131 som ett exempel här.
+Så här initierar du en USB OTG-styrenhet. Vi använder NXP LPC3131 som exempel här.
 
 ```C
 /* Initialize the LPC3131 OTG controller. */
@@ -62,9 +62,9 @@ status = ux_otg_lpc3131_initialize(0x19000000, lpc3131_vbus_function,
     tx_demo_change_mode_callback);
 ```
 
-I det här exemplet initierar vi LPC3131 i OTG-läge genom att skicka en VBUS-funktion och en motringning för läges ändring (från värd till slav eller vice versa).
+I det här exemplet initierar vi LPC3131 i OTG-läge genom att skicka en VBUS-funktion och ett återanrop för lägesändring (från värd till undervärd eller vice versa).
 
-Funktionen motringning ska bara registrera det nya läget och aktivera en väntande tråd för att skapa det nya läget.
+Återanropsfunktionen bör helt enkelt registrera det nya läget och väcka en väntande tråd för att aktivera det nya tillståndet.
 
 ```C
 void tx_demo_change_mode_callback(ULONG mode) {
@@ -76,13 +76,13 @@ void tx_demo_change_mode_callback(ULONG mode) {
 }
 ```
 
-Läge svärdet som skickas kan ha följande värden.
+Det lägesvärde som skickas kan ha följande värden.
 
 - **UX_OTG_MODE_IDLE**
 - **UX_OTG_MODE_SLAVE**
 - **UX_OTG_MODE_HOST**
 
-Programmet kan alltid kontrol lera vad enheten är genom att titta på variabeln:
+Programmet kan alltid kontrollera vad enheten är genom att titta på variabeln :
 
 ```C
 _ux_system_otg -> ux_system_otg_device_type
@@ -94,14 +94,14 @@ Dess värden kan vara något av följande.
 - **UX_OTG_DEVICE_B**
 - **UX_OTG_DEVICE_IDLE**
 
-En USB-OTG kan alltid fråga efter en roll växling genom att utfärda följande kommando.
+En USB OTG-värdenhet kan alltid fråga efter ett rollbyte genom att utfärda följande kommando.
 
 ```C
 /* Ask the stack to perform a HNP swap with the device. We relinquish the host role to A device. */
 ux_host_stack_role_swap(storage -> ux_host_class_storage_device);
 ```
 
-För en slav enhet finns det inget kommando att utfärda, men den sekundära enheten kan ange ett tillstånd för att ändra rollen, som kommer att hämtas av värden när den utfärdar en **GET_STATUS** och växlingen initieras.
+För en undersämd enhet finns det inget kommando att utfärda, men den underrede enheten kan ange ett tillstånd för att ändra rollen, som hämtas av värden när den utfärdar en **GET_STATUS** och växlingen initieras sedan.
 
 ```C
 /* We are a B device, ask for role swap.

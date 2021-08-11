@@ -1,121 +1,115 @@
-### YamlMime:Hub
-title: Dokumentation om Microsoft Azure återställnings tider
-summary: Utforska Azure återställnings tider-dokumentationen.
+### YamlMime:Hub 
+title: Microsoft Azure RTOS-dokumentation
+summary: Utforska den Azure RTOS dokumentationen.
 brand: azure
 metadata:
-  title: Microsoft Azure återställnings tider Document Hub
-  description: Utforska Azure återställnings tider-dokumentationen.
+  title: Microsoft Azure RtOS-dokumentationshubb
+  description: Utforska den Azure RTOS dokumentationen.
   ms.service: rtos
   ms.topic: hub-page
   author: philmea
   ms.author: philmea
   ms.date: 5/19/2020
-  ms.openlocfilehash: 12f6535be21d072fd9500c43d7a10f5f7bf0b10a
-  ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
-  ms.translationtype: MT
-  ms.contentlocale: sv-SE
-  ms.lasthandoff: 03/22/2021
-  ms.locfileid: "104798014"
 highlightedContent:
   items:
-  - title: Vad är Azure återställnings tider?
-    itemType: overview
-    url: overview-rtos.md
-  - title: Kom igång med inbäddad enhets utveckling
-    itemType: quickstart
-    url: https://docs.microsoft.com/azure/iot-develop/quickstart-device-development
-  - title: Ladda ned käll koden på GitHub
-    itemType: download
-    url: https://github.com/azure-rtos/
-  - title: Defender för IoT-återställnings tider (för hands version)
-    itemType: overview
-    url: https://docs.microsoft.com/azure/defender-for-iot/iot-security-azure-rtos
+    - title: Vad är Azure RTOS?
+      itemType: overview
+      url: overview-rtos.md
+    - title: Kom igång med utveckling av inbäddade enheter
+      itemType: quickstart
+      url: 'https://docs.microsoft.com/azure/iot-develop/quickstart-device-development'
+    - title: Ladda ned källkoden på GitHub
+      itemType: download
+      url: 'https://github.com/azure-rtos/'
+    - title: Defender for IoT – RTOS (förhandsversion)
+      itemType: overview
+      url: 'https://docs.microsoft.com/azure/defender-for-iot/iot-security-azure-rtos'
 conceptualContent:
   title: Azure-återställningstider
-  summary: Bygg djupt inbäddade IoT-program och gräns enheter.
+  summary: Skapa djupt inbäddade IoT-program och gränsenheter.
   items:
-  - title: Bygg ditt inbäddade program
-    links:
-    - url: ./threadx/overview-threadx.md
-      itemType: overview
-      text: Vad är Azure återställnings tider ThreadX?
-    - url: ./threadx/about-this-guide.md
-      itemType: how-to-guide
-      text: Utforska användar handboken
-    footerLink:
-      url: ./threadx/index.yml
-      text: Mer information
-  - title: Aktivera fil hantering
-    links:
-    - url: ./filex/overview-filex.md
-      itemType: overview
-      text: Vad är Azure återställnings tider FileX?
-    - url: ./filex/about-this-guide.md
-      itemType: how-to-guide
-      text: Utforska användar handboken
-    footerLink:
-      url: ./filex/index.yml
-      text: Mer information
-  - title: Integrera grafiska element
-    links:
-    - url: ./guix/overview-guix.md
-      itemType: overview
-      text: Vad är Azure återställnings tider GUIX?
-    - url: ./guix/about-guix.md
-      itemType: how-to-guide
-      text: Utforska användar handboken
-    footerLink:
-      url: ./guix/index.yml
-      text: Mer information
-  - title: Felsöka och lösa problem
-    links:
-    - url: ./tracex/overview-tracex.md
-      itemType: overview
-      text: Vad är Azure återställnings tider TraceX?
-    footerLink:
-      url: ./tracex/index.yml
-      text: Mer information
-  - title: Aktivera nätverks anslutning
-    links:
-    - url: ./netx/overview-netx.md
-      itemType: overview
-      text: Vad är Azure återställnings tider NetX?
-    - url: ./netx/about-this-guide.md
-      itemType: how-to-guide
-      text: Utforska användar handboken
-    footerLink:
-      url: ./netx/index.yml
-      text: Mer information
-  - title: Aktivera nätverks anslutning och IPv6-funktioner
-    links:
-    - url: ./netx-duo/overview-netx-duo.md
-      itemType: overview
-      text: Vad är Azure återställnings tider NetX Duo?
-    - url: ./netx-duo/about-this-guide.md
-      itemType: how-to-guide
-      text: Utforska användar handboken
-    footerLink:
-      url: ./netx-duo/index.yml
-      text: Mer information
-  - title: Gränssnitt med USB-enheter
-    links:
-    - url: ./usbx/overview-usbx.md
-      itemType: overview
-      text: Vad är Azure återställnings tider USBX?
-    - url: ./usbx/usbx-device-stack-about.md
-      itemType: how-to-guide
-      text: Utforska användar handboken för enhets stacken
-    - url: ./usbx/usbx-host-stack-about.md
-      itemType: how-to-guide
-      text: Utforska användar handboken för värd stacken
-    footerLink:
-      url: ./usbx/index.yml
-      text: Mer information
-  - title: Ange utjämning av blixt minne
-    links:
-    - url: ./levelx/chapter1.md
-      itemType: overview
-      text: Vad är Azure återställnings tider LevelX?
-    footerLink:
-      url: ./levelx/index.yml
-      text: Mer information
+    - title: Skapa ditt inbäddade program
+      links:
+        - url: ./threadx/overview-threadx.md
+          itemType: overview
+          text: Vad är Azure RTOS ThreadX?
+        - url: ./threadx/about-this-guide.md
+          itemType: how-to-guide
+          text: Utforska användarhandboken
+      footerLink:
+        url: ./threadx/index.yml
+        text: Mer information
+    - title: Aktivera filhantering
+      links:
+        - url: ./filex/overview-filex.md
+          itemType: overview
+          text: Vad är Azure RTOS FileX?
+        - url: ./filex/about-this-guide.md
+          itemType: how-to-guide
+          text: Utforska användarhandboken
+      footerLink:
+        url: ./filex/index.yml
+        text: Mer information
+    - title: Integrera grafiska element
+      links:
+        - url: ./guix/overview-guix.md
+          itemType: overview
+          text: Vad är Azure RTOS GUIX?
+        - url: ./guix/about-guix.md
+          itemType: how-to-guide
+          text: Utforska användarhandboken
+      footerLink:
+        url: ./guix/index.yml
+        text: Mer information
+    - title: Felsöka och lösa problem
+      links:
+        - url: ./tracex/overview-tracex.md
+          itemType: overview
+          text: Vad är Azure RTOS TraceX?
+      footerLink:
+        url: ./tracex/index.yml
+        text: Mer information
+    - title: Aktivera nätverksanslutning
+      links:
+        - url: ./netx/overview-netx.md
+          itemType: overview
+          text: Vad är Azure RTOS NetX?
+        - url: ./netx/about-this-guide.md
+          itemType: how-to-guide
+          text: Utforska användarhandboken
+      footerLink:
+        url: ./netx/index.yml
+        text: Mer information
+    - title: Aktivera nätverksanslutning och IPv6-funktioner
+      links:
+        - url: ./netx-duo/overview-netx-duo.md
+          itemType: overview
+          text: Vad är Azure RTOS NetX Duo?
+        - url: ./netx-duo/about-this-guide.md
+          itemType: how-to-guide
+          text: Utforska användarhandboken
+      footerLink:
+        url: ./netx-duo/index.yml
+        text: Mer information
+    - title: Gränssnitt med USB-enheter
+      links:
+        - url: ./usbx/overview-usbx.md
+          itemType: overview
+          text: Vad är Azure RTOS USBX?
+        - url: ./usbx/usbx-device-stack-about.md
+          itemType: how-to-guide
+          text: Utforska användarhandboken för enhetsstacken
+        - url: ./usbx/usbx-host-stack-about.md
+          itemType: how-to-guide
+          text: Utforska användarhandboken för värdstacken
+      footerLink:
+        url: ./usbx/index.yml
+        text: Mer information
+    - title: Ange nivå för flashminnesslitage
+      links:
+        - url: ./levelx/chapter1.md
+          itemType: overview
+          text: Vad är Azure RTOS LevelX?
+      footerLink:
+        url: ./levelx/index.yml
+        text: Mer information

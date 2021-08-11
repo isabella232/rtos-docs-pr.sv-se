@@ -1,46 +1,46 @@
 ---
-title: Kapitel 2 – installation och användning av Azure återställnings tider NetX Duo DNS Client
-description: Det här kapitlet innehåller en beskrivning av olika problem som rör Installation, konfiguration och användning av Azure återställnings tider NetX Duo DNS-klienten.
+title: Kapitel 2 – Installation och användning av Azure RTOS NetX Duo DNS-klient
+description: Det här kapitlet innehåller en beskrivning av olika problem som rör installation, installation och användning av Azure RTOS NetX Duo DNS-klienten.
 author: philmea
 ms.author: philmea
 ms.date: 06/04/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 75b85829f80462015d66e1623b880d5139349ce0
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: d18e6444f13f069347719901b24234aebe04cdc5cd6230212e0781a50ed245d1
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104827000"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116792017"
 ---
-# <a name="chapter-2---installation-and-use-of-azure-rtos-netx-duo-dns-client"></a>Kapitel 2 – installation och användning av Azure återställnings tider NetX Duo DNS Client
+# <a name="chapter-2---installation-and-use-of-azure-rtos-netx-duo-dns-client"></a>Kapitel 2 – Installation och användning av Azure RTOS NetX Duo DNS-klient
 
-Det här kapitlet innehåller en beskrivning av olika problem som rör Installation, konfiguration och användning av Azure återställnings tider NetX Duo DNS-klienten.
+Det här kapitlet innehåller en beskrivning av olika problem som rör installation, installation och användning av Azure RTOS NetX Duo DNS-klienten.
 
-## <a name="product-distribution"></a>Produkt distribution
+## <a name="product-distribution"></a>Produktdistribution
 
-NetX Duo DNS-klient finns på [https://github.com/azure-rtos/netxduo](https://github.com/azure-rtos/netxduo) . Paketet innehåller två källfiler och en PDF-fil som innehåller det här dokumentet, enligt följande:
+NetX Duo DNS-klienten finns på [https://github.com/azure-rtos/netxduo](https://github.com/azure-rtos/netxduo) . Paketet innehåller två källfiler och en PDF-fil som innehåller det här dokumentet, enligt följande:
 
-- **nxd_dns. h** Rubrik fil för NetX Duo DNS-klient
-- **nxd_dns. c** C-källfil för NetX Duo DNS-klient
-- **nxd_dns.pdf** PDF-Beskrivning av NetX Duo DNS-klient
+- **nxd_dns.h** Rubrikfil för NetX Duo DNS-klienten
+- **nxd_dns.c** C-källfil för NetX Duo DNS-klienten
+- **nxd_dns.pdf** PDF-beskrivning av NetX Duo DNS-klienten
 
-## <a name="dns-client-installation"></a>DNS-klient installation
+## <a name="dns-client-installation"></a>Installation av DNS-klient
 
-Om du vill använda NetX Duo DNS Client kopierar du källfilerna *nxd_dns. c* och *nxd_dns. h* till samma katalog där netx Duo är installerat. Om t. ex. NetX Duo är installerat i katalogen "*\threadx\arm7\green*", ska *nxd_dns. h* -och *nxd_dns. c* -filerna kopieras till den här katalogen.
+Om du vill använda NetX Duo DNS-klienten kopierar du källkodsfilerna *nxd_dns.c* och *nxd_dns.h* till samma katalog där NetX Duo är installerat. Om NetX Duo till exempel är installerat i katalogen "*\threadx\arm7\green*" ska *filerna nxd_dns.h* *och nxd_dns.c* kopieras till den här katalogen.
 
 ## <a name="using-the-dns-client"></a>Använda DNS-klienten
 
-Det är enkelt att använda NetX Duo DNS-klienten. I princip måste program koden innehålla *nxd_dns. h* när den innehåller *tx_api. h* och *nx_api. h* för att kunna använda ThreadX respektive netx Duo. När *nxd_dns. h* ingår kan program koden sedan göra DNS-funktions anropen senare i den här hand boken. Programmet måste också lägga till *nxd_dns. c* i bygg processen. Den här filen måste kompileras på samma sätt som andra programfiler och dess objekt formulär måste vara länkade tillsammans med programmets filer. Detta är allt som krävs för att använda NetX Duo DNS.
+Det är enkelt att använda NetX Duo DNS-klienten. I princip måste programkoden innehålla *nxd_dns.h* efter att den *innehåller tx_api.h* och *nx_api.h*, för att kunna använda ThreadX respektive NetX Duo. När *nxd_dns.h* ingår kan programkoden sedan göra DNS-funktionsanrop som anges senare i den här guiden. Programmet måste också lägga *till nxd_dns.c* i byggprocessen. Den här filen måste kompileras på samma sätt som andra programfiler och dess objektformulär måste länkas tillsammans med programmets filer. Det här är allt som krävs för att använda NetX Duo DNS.
 
 > [!NOTE]
-> Eftersom DNS använder NetX Duo UDP-tjänster måste UDP aktive ras med det *nx_udp_enable* anropet innan DNS används.
+> Eftersom DNS använder NetX Duo UDP-tjänster måste UDP aktiveras med nx_udp_enable *innan* DNS används.
 
-## <a name="small-example-system-for-netx-duo-dns-client"></a>Litet exempel system för NetX Duo DNS-klient 
+## <a name="small-example-system-for-netx-duo-dns-client"></a>Litet exempelsystem för NetX Duo DNS-klient 
 
 NetX Duo DNS-klienten är kompatibel med befintliga NetX DNS-program. Listan över äldre tjänster och deras NetX Duo-motsvarighet visas nedan:
 
-| NetX DNS API-tjänst (endast IPv4) | NetX Duo DNS API service (IPv4 och IPv6 stöds) |
+| NetX DNS API-tjänsten (endast IPv4) | NetX Duo DNS API-tjänsten (IPv4 och IPv6 stöds) |
 |----------------------------------|----------------------------------------------------|
 | nx_dns_host_by_name_get          | nxd_dns_host_by_name_get                           |
 | nx_dns_host_by_address_get       | nxd_dns_host_by_address_get                        |
@@ -48,32 +48,32 @@ NetX Duo DNS-klienten är kompatibel med befintliga NetX DNS-program. Listan öv
 | nx_dns_server_add                | nxd_dns_server_add                                 |
 | nx_dns_server_remove             | nxd_dns_server_remove                              |
 
-Se beskrivningen av NetX Duo DNS Client API Services i kapitel 3 för mer information.
+Mer information finns i beskrivningen av NetX Duo DNS-klient-API-tjänster i kapitel 3.
 
-I det exempel på DNS-programprogrammet som anges i det här avsnittet finns *nxd_dns. h* på rad 6. NX_DNS_CLIENT_USER_CREATE_PACKET_POOL, vilket gör att DNS-klientprogrammet kan skapa poolen för DNS-klienten, deklareras på raderna 24-26. Den här poolen används för att allokera paket för att skicka DNS-meddelanden. Om NX_DNS_CLIENT_USER_CREATE_PACKET_POOL har definierats skapas en adresspool på raderna 78-98. Om det här alternativet inte är aktiverat skapar DNS-klienten sin egen modempool enligt paketets nytto last och Poolens storlek som anges av konfigurations parametrar i *nxd_dns. h* och beskrivs på andra platser i det här kapitlet.
+I dns-exempelprogrammet i det här avsnittet *ingår nxd_dns.h* på rad 6. NX_DNS_CLIENT_USER_CREATE_PACKET_POOL, som gör att DNS-klientprogrammet kan skapa paketpoolen för DNS-klienten, deklareras på raderna 24–26. Den här paketpoolen används för att allokera paket för att skicka DNS-meddelanden. Om NX_DNS_CLIENT_USER_CREATE_PACKET_POOL definieras skapas en paketpool på raderna 78–98. Om det här alternativet inte är aktiverat skapar DNS-klienten sin egen paketpool enligt paketnyttolasten och poolstorleken som angetts av konfigurationsparametrarna *i nxd_dns.h* och beskrivs någon annanstans i det här kapitlet.
 
-En annan modempool skapas i rader 100-112 för klientens IP-instans som används för interna NetX Duo-åtgärder. Därefter skapas IP-instansen med hjälp av *nx_ip_create* anropet på rad 115. Det går att använda IP-aktiviteten och DNS-klienten för att dela samma adresspool, men eftersom DNS-klienten vanligt vis skickar större meddelanden än de kontroll paket som skickas av IP-aktiviteten, är det möjligt att använda separata paket pooler för att utnyttja minnet mer effektivt.
+En annan paketpool skapas på raderna 100–112 för klientens IP-instans som används för interna NetX Duo-åtgärder. Därefter skapas IP-instansen med hjälp *nx_ip_create* anropet på rad 115. DET är möjligt för IP-uppgiften och DNS-klienten att dela samma paketpool, men eftersom DNS-klienten vanligtvis skickar ut större meddelanden än kontrollpaketen som skickas av IP-aktiviteten, gör användningen av separata paketpooler att minnet används effektivare.
 
-ARP och UDP (som används av IPv4-nätverk) är aktiverade på raderna 129 och 141.
+ARP och UDP (som används av IPv4-nätverk) aktiveras på raderna 129 respektive 141.
 
 >[!NOTE]
-> Den här demon använder driv rutinen ram som deklarerats på rad 44 och används i *nx_ip_create* -anropet. Den här ram-drivrutinen distribueras med NetX Duo-källkoden. För att köra DNS-klienten måste programmet tillhandahålla en faktisk fysisk nätverks driv rutin för att skicka och ta emot paket från DNS-servern.
+> Den här demonstrationen använder RAM-drivrutinen som deklarerats på rad 44 och används i *nx_ip_create anropet.* Ram-drivrutinen distribueras med NetX Duo-källkoden. För att faktiskt köra DNS-klienten måste programmet ange en faktisk fysisk nätverksdrivrutin för att överföra och ta emot paket från DNS-servern.
 
-Funktionen klient tråd post *thread_client_entry* definieras under funktionen *tx_application_define* . Den avstår från början kontrollen till systemet för att tillåta att IP-programtråden initieras av nätverks driv rutinen.
+Funktionen Client thread entry *thread_client_entry* definieras under *den tx_application_define* funktionen. Den lämnar inledningsvis över kontrollen till systemet så att IP-uppgiftstråden kan initieras av nätverksdrivrutinen.
 
-Den skapar sedan DNS-klienten på rad 257, initierar DNS-cachen på raderna 267-278 och anger den adresspool som tidigare skapades till DNS-klienttjänsten på rad 281-295. Den lägger sedan till DNS-servern på raderna 297-341.
+Den skapar sedan DNS-klienten på rad 257, initierar DNS-cachen på raderna 267–278 och anger den paketpool som tidigare skapades till DNS-klientinstansen på raderna 281–295. Den lägger sedan till DNS-servern på raderna 297-341.
 
-Resten av exempel programmet använder DNS-klienttjänster för att göra DNS-frågor. Sökning efter värd-IP-adresser utförs på raderna 193 och 207. Skillnaden mellan dessa två tjänster, *nxd_dns_host_by_name_get* och *nx_dns_host_by_name_get*, är att den tidigare sparar adress data i en NXD_ADDRESS data typ, medan den senare sparar data i data typen ulong. Ytterligare den sistnämnda är begränsad till IPv4-nätverk, medan den tidigare kan användas med IPv6-eller IPv4-nätverk. Detta är endast möjligt om IP-instansen är aktive rad för IPv6. I användar handboken för NetX Duo finns mer information om hur du aktiverar IP-instansen för IPv6-nätverk.
+Resten av exempelprogrammet använder DNS-klienttjänsterna för att skapa DNS-frågor. Ip-adressuppslag för värd utförs på raderna 193 och 207. Skillnaden mellan dessa två tjänster, *nxd_dns_host_by_name_get* *och nx_dns_host_by_name_get,* är att den tidigare sparar adressdata i en NXD_ADDRESS-datatyp, medan den senare sparar data i en ULONG-datatyp. Det senare är begränsat till IPv4-nätverk, medan det tidigare kan användas med IPv6- eller IPv4-nätverk. Detta är endast möjligt om IP-instansen är aktiverad för IPv6. Se användarhandboken för NetX Duo för mer information om hur du aktiverar IP-instansen för IPv6-nätverk.
 
-En annan tjänst för värd sökning av IP-adresser visas på rad 464, *nx_dns_ipv4_address_by_name_get*. Den här tjänsten skiljer sig från *nx_dns_host_by_name_get* i så att den returnerar alla (eller så många som får plats i den angivna bufferten) för IPv4-adresserna som identifierats för domän namnet, inte bara den första adressen som tas emot i DNS-servern.
+En annan tjänst för ip-adressuppslag för värd visas på rad 464, *nx_dns_ipv4_address_by_name_get*. Den här tjänsten skiljer sig *från nx_dns_host_by_name_get* eftersom den returnerar alla (eller så många som får plats i den angivna bufferten) för de IPv4-adresser som identifierats för domännamnet, inte bara den första adressen som tas emot i DNS-serverns svar.
 
-På samma sätt returnerar *nxd_dns_ipv6_address_by_name_get* -tjänsten, som kallas på rad 380, alla IPv6-adresser som identifierats av DNS-klienten, inte bara den första.
+På samma sätt *returnerar* nxd_dns_ipv6_address_by_name_get tjänsten, som anropas på rad 380, alla IPv6-adresser som identifierats av DNS-klienten, inte bara den första.
 
-Omvänd sökning (värd namnet från IP-adressen) utförs på raderna 606 (*nx_dns_host_by_address_get*) och igen på rad 564 och 588 (*nxd_dns_host_by_address_get*). *nx_dns_host_by_address_get* fungerar bara på IPv4-nätverk, medan *nxd_dns_host_by_address_get* fungerar i antingen IPv4-eller IPv6-nätverk (t. ex. IP-instansen är aktive rad för IPv6 och IPv4-nätverk).
+Omvända uppslag (värdnamn från IP-adress) utförs på raderna 606 (*nx_dns_host_by_address_get*) och igen på rad 564 och 588 (*nxd_dns_host_by_address_get*). *nx_dns_host_by_address_get* fungerar bara i IPv4-nätverk, medan *nxd_dns_host_by_address_get* fungerar på Antingen IPv4- eller IPv6-nätverk (t.ex. är IP-instansen aktiverad för IPv6 och IPv4-nätverk).
 
-Två fler tjänster för DNS-sökningar, CNAME och TXT visas på raderna 627 och 649 för att identifiera CNAME-och domän namns data för det angivna domän namnet. NetX Duo DNS-klienten som liknande tjänster för andra post typer, t. ex. MX, NS, SRV och SOA. I kapitel 3 finns detaljerade beskrivningar av alla post typs uppslag som är tillgängliga i NetX Duo DNS-klienten.
+Ytterligare två tjänster för DNS-sökning, CNAME och TXT, visas på raderna 627 respektive 649 för att identifiera CNAME- och domännamnsdata för indatadomännamnet. NetX Duo DNS-klienten som liknande tjänster för andra posttyper, t.ex. MX, NS, SRV och SOA. Se kapitel 3 för detaljerade beskrivningar av alla posttypsuppslag som är tillgängliga i NetX Duo DNS-klienten.
 
-När DNS-klienten tas bort på rad 846 med hjälp av tjänsten *nx_dns_delete* , tas inte paketschemaläggaren för DNS-klienten bort om inte DNS-klienten har skapat sin egen modempool. I annat fall är det upp till programmet att ta bort poolen om den inte längre används.
+När DNS-klienten tas bort på rad 846, med *hjälp av nx_dns_delete-tjänsten,* tas inte paketpoolen för DNS-klienten bort såvida inte DNS-klienten har skapat en egen paketpool. Annars är det upp till programmet att ta bort paketpoolen om den inte har någon ytterligare användning för den.
 
 ```C
 /* This is a small demo of DNS Client for the high-performance NetX TCP/IP stack. */
@@ -922,38 +922,38 @@ USHORT          host_port;
     return;
 }
 ```
-## <a name="configuration-options"></a>Konfigurations alternativ
+## <a name="configuration-options"></a>Konfigurationsalternativ
 
-Det finns flera konfigurations alternativ för att skapa DNS för NetX. De här alternativen kan definieras om i *nxd_dns. h.* I följande lista beskrivs var och en i detalj:  
+Det finns flera konfigurationsalternativ för att skapa DNS för NetX. Dessa alternativ kan definieras om i *nxd_dns.h.* I följande lista beskrivs var och en i detalj:  
 
-- **NX_DNS_TYPE_OF_SERVICE** Typ av tjänst som krävs för DNS UDP-begäranden. Som standard definieras värdet som NX_IP_NORMAL för tjänsten för normala IP-paket.
+- **NX_DNS_TYPE_OF_SERVICE** Typ av tjänst som krävs för DNS UDP-begäranden. Som standard definieras det här värdet som NX_IP_NORMAL för normal IP-pakettjänst.
 
 - **NX_DNS_TIME_TO_LIVE** Anger det maximala antalet routrar som ett paket kan passera innan det tas bort. Standardvärdet är 0x80.
 
-- **NX_DNS_FRAGMENT_OPTION** Ställer in egenskapen socket för att tillåta eller neka fragmentering av utgående paket. Standardvärdet är NX_DONT_FRAGMENT.
+- **NX_DNS_FRAGMENT_OPTION** Anger socketegenskapen för att tillåta eller förhindra fragmentering av utgående paket. Standardvärdet är NX_DONT_FRAGMENT.
 
-- **NX_DNS_QUEUE_DEPTH** Anger det maximala antalet paket som ska lagras i kön Receive-kön. Standardvärdet är 5.
+- **NX_DNS_QUEUE_DEPTH** Anger det maximala antalet paket som ska lagras på socket-mottagningskön. Standardvärdet är 5.
 
-- **NX_DNS_MAX_SERVERS** Anger det maximala antalet DNS-servrar i klient server listan. Standardvärdet är 5.
+- **NX_DNS_MAX_SERVERS** Anger det maximala antalet DNS-servrar i listan Klientserver. Standardvärdet är 5.
 
-- **NX_DNS_MESSAGE_MAX** Högsta DNS-meddelande storlek för att skicka DNS-frågor. Standardvärdet är 512, vilket också är den maximala storlek som anges i RFC 1035 section 2.3.4.
+- **NX_DNS_MESSAGE_MAX** Den maximala DNS-meddelandestorleken för att skicka DNS-frågor. Standardvärdet är 512, vilket också är den maximala storleken som anges i RFC 1035 avsnitt 2.3.4.
 
-- **NX_DNS_PACKET_PAYLOAD_UNALIGNED** Om den inte är definierad, är storleken på klient paketets nytto last som inkluderar Ethernet, IP (eller IPv6) och UDP-huvuden samt den maximala storleken för DNS-meddelanden som anges av NX_DNS_MESSAGE_MAX. Oavsett om den har definierats är paketets nytto Last 4-bytet justerad och lagras i NX_DNS_PACKET_PAYLOAD.
+- **NX_DNS_PACKET_PAYLOAD_UNALIGNED** Om det inte definieras, storleken på klientpaketnyttolasten som innehåller Ethernet-, IP- (eller IPv6) och UDP-huvuden plus den maximala DNS-meddelandestorlek som anges av NX_DNS_MESSAGE_MAX. Oavsett om den definieras är paketnyttolasten 4 byte justerad och lagras i NX_DNS_PACKET_PAYLOAD.
 
-- **NX_DNS_PACKET_POOL_SIZE** Storlek på klient paketets pool för att skicka DNS-frågor om NX_DNS_CLIENT_USER_CREATE_PACKET_POOL inte har definierats. Standardvärdet är tillräckligt stort för 16 paket med nytto Last storlek som definieras av NX_DNS_PACKET_PAYLOAD och är 4 byte justerade.
+- **NX_DNS_PACKET_POOL_SIZE** Storleken på klientpaketpoolen för att skicka DNS-frågor om NX_DNS_CLIENT_USER_CREATE_PACKET_POOL inte har definierats. Standardvärdet är tillräckligt stort för 16 paket med nyttolaststorlek som definieras av NX_DNS_PACKET_PAYLOAD och är justerat med 4 byte.
 
-- **NX_DNS_MAX_RETRIES** Det maximala antal gånger som DNS-klienten kommer att fråga den aktuella DNS-servern innan den provar en annan server eller avbryter DNS-frågan. Standardvärdet är 3.
+- **NX_DNS_MAX_RETRIES** Det maximala antalet gånger som DNS-klienten frågar den aktuella DNS-servern innan en annan server provas eller DNS-frågan avbryts. Standardvärdet är 3.
 
-- **NX_DNS_MAX_RETRANS_TIMEOUT** Maximal timeout för återöverföring på en DNS-fråga till en angiven DNS-server. Standardvärdet är 64 sekunder (64 * NX_IP_PERIODIC_RATE).
+- **NX_DNS_MAX_RETRANS_TIMEOUT** Maximal tidsgräns för återöverföring på en DNS-fråga till en specifik DNS-server. Standardvärdet är 64 sekunder (64 * NX_IP_PERIODIC_RATE).
 
-- **NX_DNS_IP_GATEWAY_AND_DNS_SERVER** Om den är definierad och klientens IPv4-Gateway-adress är icke-noll, ställer DNS-klienten in IPv4-gatewayen som klientens primära DNS-server. Standardvärdet är inaktiverat.
+- **NX_DNS_IP_GATEWAY_AND_DNS_SERVER** Om den definieras och klientens IPv4-gatewayadress inte är noll, anger DNS-klienten IPv4-gatewayen som klientens primära DNS-server. Standardvärdet är inaktiverat.
 
-- **NX_DNS_PACKET_ALLOCATE_TIMEOUT** Detta anger timeout-alternativet för att allokera ett paket från DNS-klientcachen. Standardvärdet är 1 sekund (1 * NX_IP_PERIODIC_RATE).
+- **NX_DNS_PACKET_ALLOCATE_TIMEOUT** Detta anger tidsgränsalternativet för att allokera ett paket från DNS-klientpaketpoolen. Standardvärdet är 1 sekund (1*NX_IP_PERIODIC_RATE).
 
-- **NX_DNS_CLIENT_USER_CREATE_PACKET_POOL** Detta gör att DNS-klienten kan låta programmet skapa och ange DNS-anslutningspoolen. Som standard är det här alternativet inaktiverat och DNS-klienten skapar en egen modempool i *nx_dns_create*.
+- **NX_DNS_CLIENT_USER_CREATE_PACKET_POOL** Detta gör det möjligt för DNS-klienten att låta programmet skapa och ange DNS-klientens paketpool. Som standard är det här alternativet inaktiverat och DNS-klienten skapar sin egen paketpool i *nx_dns_create*.
 
-- **NX_DNS_CLIENT_CLEAR_QUEUE** Detta gör att DNS-klienten kan rensa gamla DNS-meddelanden från Receive-kön innan en ny fråga skickas. Om du tar bort dessa paket från tidigare DNS-frågor förhindras DNS-klientens socket-kö från att flöda över och släppa giltiga paket.
+- **NX_DNS_CLIENT_CLEAR_QUEUE** Detta gör att DNS-klienten kan rensa gamla DNS-meddelanden från mottagningskön innan en ny fråga skickas. Om du tar bort dessa paket från tidigare DNS-frågor förhindras dns-klientens socketkö från att spilla över och släppa giltiga paket.
 
-- **NX_DNS_ENABLE_EXTENDED_RR_TYPES** Detta gör att DNS-klienten kan fråga efter ytterligare DNS-posttyper i (t. ex. CNAME, NS, MX, SOA, SRV och TXT).
+- **NX_DNS_ENABLE_EXTENDED_RR_TYPES** Detta gör att DNS-klienten kan fråga efter ytterligare DNS-posttyper i (t.ex. CNAME, NS, MX, SOA, SRV och TXT).
 
-- **NX_DNS_CACHE_ENABLE** Detta gör att DNS-klienten kan lagra svars poster i DNS-cache.
+- **NX_DNS_CACHE_ENABLE** Detta gör att DNS-klienten kan lagra svarsposterna i DNS-cachen.

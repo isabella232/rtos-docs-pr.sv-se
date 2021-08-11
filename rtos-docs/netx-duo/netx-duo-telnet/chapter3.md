@@ -1,43 +1,43 @@
 ---
-title: Kapitel 3 – Beskrivning av Azure återställnings tider NetX Duo Telnet-tjänster
-description: Det här kapitlet innehåller en beskrivning av alla Azure återställnings tider NetX Duo Telnet-tjänster (visas nedan) i alfabetisk ordning.
+title: Kapitel 3 – Beskrivning av Azure RTOS NetX Duo Telnet-tjänster
+description: Det här kapitlet innehåller en beskrivning av alla Azure RTOS NetX Duo Telnet Services (listas nedan) i alfabetisk ordning.
 author: philmea
 ms.author: philmea
 ms.date: 06/04/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 991ec53aaba052b4f42da6e5a541151953121e76
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 70bf4016793572d7327d12be182750316659c3c4260d2f7db8acddbba00c5601
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104825713"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116792000"
 ---
-# <a name="chapter-3---description-of-azure-rtos-netx-duo-telnet-services"></a>Kapitel 3 – Beskrivning av Azure återställnings tider NetX Duo Telnet-tjänster
+# <a name="chapter-3---description-of-azure-rtos-netx-duo-telnet-services"></a>Kapitel 3 – Beskrivning av Azure RTOS NetX Duo Telnet-tjänster
 
-Det här kapitlet innehåller en beskrivning av alla Azure återställnings tider NetX Duo Telnet-tjänster (visas nedan) i alfabetisk ordning.
+Det här kapitlet innehåller en beskrivning av alla Azure RTOS NetX Duo Telnet Services (listas nedan) i alfabetisk ordning.
 
-I avsnittet "retur värden" i följande API-beskrivningar påverkas inte värden i **fetstil** av **NX_DISABLE_ERROR_CHECKING** definiera som används för att inaktivera API-felkontroll, medan icke-Fetstilade värden är helt inaktiverade.
+I avsnittet "Returvärden" i följande API-beskrivningar påverkas inte värden i **BOLD** av **den NX_DISABLE_ERROR_CHECKING-definition** som används för att inaktivera API-felkontroll, medan värden som inte är i fetstil är helt inaktiverade.
 
 - **nx_telnet_client_connect**: *Anslut en Telnet-klient med IPv4-adress*
-- **nxd_telnet_client_connect**: *Anslut en IPv6 Telnet-klient med IPv6-adress*
-- **nx_telnet_client_create**: *skapa en Telnet-klient*
-- **nx_telnet_client_delete**: *ta bort en Telnet-klient*
-- **nx_telnet_client_disconnect**: *Koppla från en Telnet-klient*
-- **nx_telnet_client_packet_receive**: *ta emot paket via Telnet-klienten*
-- **nx_telnet_client_packet_send**: *skicka paket via Telnet-klienten*
-- **nx_telnet_server_create**: *skapa en Telnet-Server*
-- **nx_telnet_server_delete**: *ta bort en Telnet-Server*
-- **nx_telnet_server_disconnect**: *Koppla från en Telnet-klient*
-- **nx_telnet_server_get_open_connection_count**: *Hämta antalet öppna anslutningar*
-- **nx_telnet_server_packet_send**: *skicka paket via klient anslutning*
-- **nx_telnet_server_packet_pool_set**: *Ange paket bassäng som programpool för Telnet-Server*
-- **nx_telnet_server_start**: *starta en Telnet-Server*
-- **nx_telnet_server_stop**: *stoppa en Telnet-Server*
+- **nxd_telnet_client_connect:** Anslut *en IPv6 Telnet-klient med IPv6-adress*
+- **nx_telnet_client_create:** Skapa *en Telnet-klient*
+- **nx_telnet_client_delete:** Ta *bort en Telnet-klient*
+- **nx_telnet_client_disconnect:** Koppla *från en Telnet-klient*
+- **nx_telnet_client_packet_receive:** Ta *emot paket via Telnet-klienten*
+- **nx_telnet_client_packet_send:** *Skicka paket via Telnet-klienten*
+- **nx_telnet_server_create:** Skapa *en Telnet-server*
+- **nx_telnet_server_delete:** Ta *bort en Telnet-server*
+- **nx_telnet_server_disconnect:** Koppla *från en Telnet-klient*
+- **nx_telnet_server_get_open_connection_count:** Hämta *antalet öppna anslutningar*
+- **nx_telnet_server_packet_send:** Skicka *paket via klientanslutning*
+- **nx_telnet_server_packet_pool_set:** Ange *paketpoolen som Telnet Server-paketpool*
+- **nx_telnet_server_start:** *Starta en Telnet-server*
+- **nx_telnet_server_stop:** *Stoppa en Telnet-server*
 
 ## <a name="nx_telnet_client_connect"></a>nx_telnet_client_connect
 
-Ansluta en Telnet-klient med IPv4-adress
+Anslut en Telnet-klient med IPv4-adress
 
 ### <a name="prototype"></a>Prototyp
 
@@ -47,31 +47,31 @@ UINT nx_telnet_client_connect(NX_TELNET_CLIENT *client_ptr,
                               ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten försöker ansluta den tidigare skapade Telnet-klientprogrammet till servern på den angivna IP-adressen och porten med hjälp av en IPv4-adress för Telnet-servern. Den här tjänsten infogar faktiskt ULONG-serverns IP-adress i ett NXD_ADDRESS Control-Block och ställer in IP-versionen på 4 innan du anropar den *nxd_telnet_client_connect* tjänst som beskrivs nedan.
+Den här tjänsten försöker ansluta den tidigare skapade Telnet-klientinstansen till servern på den angivna IP-adressen och porten med hjälp av en IPv4-adress för Telnet-servern. Den här tjänsten infogar faktiskt ULONG-serverns IP-adress i ett NXD_ADDRESS-kontrollblock och anger IP-versionen till 4 innan *den anropar nxd_telnet_client_connect tjänsten* som beskrivs nedan.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **client_ptr**: pekar på kontroll block för Telnet-klienten.
-- **server_ip**: Telnet-serverns IPv4-adress.
-- **SERVER_PORT**: TCP-porten för Server (Telnet Server är port 23).
-- **wait_option**: anger hur länge tjänsten ska vänta på anslutning till Telnet-klienten. Vänte alternativen definieras enligt följande:
+- **client_ptr:** Pekare till Telnet-klientens kontrollblock.
+- **server_ip:** IPv4-adressen för Telnet-servern.
+- **server_port:** TCP-serverporten (Telnet-servern är port 23).
+- **wait_option:** Definierar hur länge tjänsten ska vänta på telnet-klientens anslutning. Väntealternativen definieras på följande sätt:
 
-    - **timeout-värde**: (0X00000001 till 0xFFFFFFFE) om du väljer ett numeriskt värde (1-0xFFFFFFFE) anger det maximala antalet timer-Tick som ska pausas i väntan på Telnet-serverns svar.
-    - **TX_WAIT_FOREVER**: (0Xffffffff) väljer TX_WAIT_FOREVER gör att anrops tråden inaktive ras under obestämd tid tills Telnet-servern svarar på begäran.
+    - **timeout-värde:**(0x00000001 till och med 0xFFFFFFFE) Om du väljer ett numeriskt värde (1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan Telnet Server-svaret väntar.
+    - **TX_WAIT_FOREVER**: (0xFFFFFFFF)Om du TX_WAIT_FOREVER här alternativet pausas anropstråden på obestämd tid tills Telnet-servern svarar på begäran.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) lyckad klient anslutning.
-- **NX_TELNET_NOT_DISCONNECTED**: (0xF4)-klienten är redan ansluten.
-- NX_PTR_ERROR: (0x07) ogiltig klient pekare.
-- NX_IP_ADDRESS_ERROR: (0x21) ogiltig IP-adress.
-- NX_CALLER_ERROR: (0x11) ogiltig anropar tjänst.
+- **NX_SUCCESS**: (0x00) Lyckad klient-anslutning.
+- **NX_TELNET_NOT_DISCONNECTED**: (0xF4) Klienten är redan ansluten.
+- NX_PTR_ERROR: (0x07) Ogiltig klient pekare.
+- NX_IP_ADDRESS_ERROR: (0x21) Ogiltig IP-adress.
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare av tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -86,7 +86,7 @@ status =  nx_telnet_client_connect(&my_client, IP_ADDRESS(1,2,3,4), 23, 100);
 
 ## <a name="nxd_telnet_client_connect"></a>nxd_telnet_client_connect
 
-Ansluta en Telnet-klient med IPv6-eller IPv4-adress
+Anslut en Telnet-klient med IPv6- eller IPv4-adress
 
 ### <a name="prototype"></a>Prototyp
 
@@ -97,32 +97,32 @@ UINT nxd_telnet_client_connect(NX_TELNET_CLIENT *client_ptr,
                                ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten försöker ansluta den tidigare skapade Telnet-klientprogrammet till servern på den angivna IP-adressen och porten med hjälp av Telnet-serverns IPv6-adress. Den här tjänsten kan ta en IPv4-eller IPv6-adress men måste finnas i NXD_ADDRESS variabel *server_ip_address.*
+Den här tjänsten försöker ansluta den tidigare skapade Telnet-klientinstansen till servern på den angivna IP-adressen och porten med hjälp av Telnet-serverns IPv6-adress. Den här tjänsten kan ta en IPv4- eller IPv6-adress, men måste finnas i *NXD_ADDRESS-server_ip_address.*
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **client_ptr**: pekar på kontroll block för Telnet-klienten.
-- **server_ip_address**: serverns IP-adress.
-- **SERVER_PORT**: TCP-porten för Server (Telnet Server är port 23).
-- **wait_option**: anger hur länge tjänsten ska vänta på anslutning till Telnet-klienten. Vänte alternativen definieras enligt följande:
+- **client_ptr:** Pekare till Telnet-klientens kontrollblock.
+- **server_ip_address:** IP-adress för server.
+- **server_port:** TCP-serverporten (Telnet-servern är port 23).
+- **wait_option:** Definierar hur länge tjänsten ska vänta på telnet-klientens anslutning. Väntealternativen definieras på följande sätt:
 
-    - **timeout-värde**: (0X00000001 till 0xFFFFFFFE) om du väljer ett numeriskt värde (1-0xFFFFFFFE) anger det maximala antalet timer-Tick som ska pausas i väntan på Telnet-serverns svar.
-    - **TX_WAIT_FOREVER**: (0Xffffffff) väljer TX_WAIT_FOREVER gör att anrops tråden inaktive ras under obestämd tid tills Telnet-servern svarar på begäran.
+    - **timeout-värde:**(0x00000001 till och med 0xFFFFFFFE) Om du väljer ett numeriskt värde (1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan Telnet Server-svaret väntar.
+    - **TX_WAIT_FOREVER**: (0xFFFFFFFF) Om du TX_WAIT_FOREVER här alternativet pausas anropstråden på obestämd tid tills Telnet-servern svarar på begäran.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) lyckad klient anslutning.
-- **NX_TELNET_ERROR**: (0XF0) klient anslutnings fel.
-- **NX_TELNET_NOT_DISCONNECTED**: (0xF4)-klienten är redan ansluten.
-- NX_PTR_ERROR: (0x07) ogiltig klient pekare.
-- NX_CALLER_ERROR: (0x11) ogiltig anropar tjänst.
-- NX_TELNET_INVALID_PARAMETER: (0xF5) ogiltig inmatad icke-pekare
+- **NX_SUCCESS**: (0x00) Lyckad klient-anslutning.
+- **NX_TELNET_ERROR**: (0xF0) Klient connect-fel.
+- **NX_TELNET_NOT_DISCONNECTED**: (0xF4) Klienten är redan ansluten.
+- NX_PTR_ERROR: (0x07) Ogiltig klient pekare.
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare av tjänsten.
+- NX_TELNET_INVALID_PARAMETER: (0xF5) Ogiltiga indata som inte pekare
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -147,24 +147,24 @@ UINT nx_telnet_client_create(NX_TELNET_CLIENT *client_ptr,
                              ULONG window_size);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skapar en Telnet-klient instans.
+Den här tjänsten skapar en Telnet-klientinstans.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **client_ptr**: pekar på kontroll block för Telnet-klienten.
-- **client_name**: namnet på klient instansen.
-- **ip_ptr**: pekare till IP-instans.
-- **window_size**: storleken på TCP Receive-fönstret för den här klienten.
+- **client_ptr:** Pekare till Telnet-klientens kontrollblock.
+- **client_name:** Namnet på klientinstansen.
+- ip_ptr : **Pekare** till IP-instans.
+- **window_size:** Storleken på TCP-mottagningsfönstret för den här klienten.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) lyckad klient skapande.
-- **NX_TELNET_ERROR**: (0XF0) socket-skapande fel.
-- NX_PTR_ERROR: (0x07) ogiltig klient eller IP-pekare.
+- **NX_SUCCESS**: (0x00) Lyckades Klient skapas.
+- **NX_TELNET_ERROR:**(0xF0) Socket create-fel.
+- NX_PTR_ERROR: (0x07) Ogiltig klient eller IP-pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
@@ -187,24 +187,24 @@ Ta bort en Telnet-klient
 UINT nx_telnet_client_delete(NX_TELNET_CLIENT *client_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar bort en tidigare skapad Telnet-klient instans.
+Den här tjänsten tar bort en telnet-klientinstans som skapats tidigare.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **client_ptr**: pekar på kontroll block för Telnet-klienten.
+- **client_ptr:** Pekare till Telnet-klientens kontrollblock.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) lyckad klient borttagning.
-- **NX_TELNET_NOT_DISCONNECTED**: (0XF4) klienten är fortfarande ansluten.
-- NX_PTR_ERROR: (0x07) ogiltig klient pekare.
-- NX_CALLER_ERROR: (0x11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS**: (0x00) Borttagning av klient.
+- **NX_TELNET_NOT_DISCONNECTED**: (0xF4) Klienten är fortfarande ansluten.
+- NX_PTR_ERROR: (0x07) Ogiltig klient pekare.
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -226,29 +226,29 @@ Koppla från en Telnet-klient
 UINT nx_telnet_client_disconnect(NX_TELNET_CLIENT *client_ptr, ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten kopplar från en tidigare ansluten Telnet-klient instans.
+Den här tjänsten kopplar från en tidigare ansluten Telnet-klientinstans.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **client_ptr**: pekar på kontroll block för Telnet-klienten.
-- **wait_option**: anger hur länge tjänsten ska vänta tills Telnet-klienten kopplas från. Vänte alternativen definieras enligt följande:
+- **client_ptr:** Pekare till Telnet-klientkontrollblocket.
+- **wait_option:** Definierar hur länge tjänsten ska vänta på att Telnet-klienten kopplas från. Väntealternativen definieras på följande sätt:
 
-    - **timeout-värde**: (0X00000001 till 0xFFFFFFFE) om du väljer ett numeriskt värde (1-0xFFFFFFFE) anger det maximala antalet timer-Tick som ska pausas i väntan på Telnet-serverns svar.
-    - **TX_WAIT_FOREVER**: (0Xffffffff) väljer TX_WAIT_FOREVER gör att anrops tråden inaktive ras under obestämd tid tills Telnet-servern svarar på begäran.
+    - **timeout-värde:**(0x00000001 till och med 0xFFFFFFFE) Om du väljer ett numeriskt värde (1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan du väntar på Telnet Server-svaret.
+    - **TX_WAIT_FOREVER**: (0xFFFFFFFF) Om du TX_WAIT_FOREVER här alternativet pausas anropstråden på obestämd tid tills Telnet-servern svarar på begäran.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) lyckad klient från koppling.
-- **NX_TELNET_NOT_CONNECTED**: (0XF3) klienten är inte ansluten.
-- NX_PTR_ERROR: (0x07) ogiltig klient pekare.
-- NX_CALLER_ERROR: (0x11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS**: (0x00) Klienten kopplas från.
+- **NX_TELNET_NOT_CONNECTED**: (0xF3) Klienten är inte ansluten.
+- NX_PTR_ERROR: (0x07) Ogiltig klientpekare.
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare för den här tjänsten.
 
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -263,7 +263,7 @@ status =  nx_telnet_client_disconnect(&my_client, 100);
 
 ## <a name="nx_telnet_client_packet_receive"></a>nx_telnet_client_packet_receive
 
-Ta emot paket via Telnet Client
+Ta emot paket via Telnet-klienten
 
 ### <a name="prototype"></a>Prototyp
 
@@ -273,27 +273,27 @@ UINT nx_telnet_client_packet_receive(NX_TELNET_CLIENT *client_ptr,
                                      ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar emot ett paket från den tidigare anslutna Telnet Client-instansen.
+Den här tjänsten tar emot ett paket från den tidigare anslutna Telnet-klientinstansen.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **client_ptr**: pekar på kontroll block för Telnet-klienten.
-- **packet_ptr**: pekar mot målet för det mottagna paketet.
-- **wait_option**: anger hur länge tjänsten ska vänta på att det tar emot Telnet-klientcertifikatet. Vänte alternativen definieras enligt följande:
-    - **timeout-värde**: (0X00000001 till 0xFFFFFFFE) om du väljer ett numeriskt värde (1-0xFFFFFFFE) anger det maximala antalet timer-Tick som ska pausas i väntan på Telnet-serverns svar.
-    - **TX_WAIT_FOREVER**: (0Xffffffff) väljer TX_WAIT_FOREVER gör att anrops tråden inaktive ras under obestämd tid tills Telnet-servern svarar på begäran.
+- **client_ptr:** Pekare till Telnet-klientkontrollblocket.
+- **packet_ptr:** Pekare till målet för det mottagna paketet.
+- **wait_option:** Definierar hur länge tjänsten ska vänta på att Telnet-klientpaketet tas emot. Väntealternativen definieras på följande sätt:
+    - **timeout-värde:**(0x00000001 till och med 0xFFFFFFFE) Om du väljer ett numeriskt värde (1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan du väntar på Telnet Server-svaret.
+    - **TX_WAIT_FOREVER**: (0xFFFFFFFF) Om du TX_WAIT_FOREVER här alternativet pausas anropstråden på obestämd tid tills Telnet-servern svarar på begäran.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) lyckad klient paket mottagning.
-- NX_PTR_ERROR: (0x07) ogiltigt inmatade pekare
-- NX_CALLER_ERROR: (0x11) ogiltig anropar tjänst.
+- **NX_SUCCESS**: (0x00) Lyckad klientpaket tar emot.
+- NX_PTR_ERROR: (0x07) Ogiltig pekare
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare av tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -307,7 +307,7 @@ status =  nx_telnet_client_packet_receive(&my_client, &my_packet, 100);
 ```
 ## <a name="nx_telnet_client_packet_send"></a>nx_telnet_client_packet_send
 
-Skicka paket via Telnet Client
+Skicka paket via Telnet-klienten
 
 ### <a name="prototype"></a>Prototyp
 
@@ -317,28 +317,28 @@ UINT nx_telnet_client_packet_send(NX_TELNET_CLIENT *client_ptr,
                                   ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skickar ett paket genom den tidigare anslutna Telnet-klientprogrammet.
+Den här tjänsten skickar ett paket via den tidigare anslutna Telnet-klientinstansen.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **client_ptr**: pekar på kontroll block för Telnet-klienten.
-- **packet_ptr**: pekar på det paket som ska skickas.
-- **wait_option**: anger hur länge tjänsten ska vänta på att skicka Telnet-klienten. Vänte alternativen definieras enligt följande:
-    - **timeout-värde**: (0X00000001 till 0xFFFFFFFE) om du väljer ett numeriskt värde (1-0xFFFFFFFE) anger det maximala antalet timer-Tick som ska pausas i väntan på Telnet-serverns svar.
-    - **TX_WAIT_FOREVER**: (0Xffffffff) väljer TX_WAIT_FOREVER gör att anrops tråden inaktive ras under obestämd tid tills Telnet-servern svarar på begäran.
+- **client_ptr:** Pekare till Telnet-klientkontrollblocket.
+- **packet_ptr:** Pekare till det paket som ska skickas.
+- **wait_option:** Definierar hur länge tjänsten ska vänta på att Telnet-klientpaketet skickas. Väntealternativen definieras på följande sätt:
+    - **timeout-värde:**(0x00000001 till och med 0xFFFFFFFE) Om du väljer ett numeriskt värde (1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan du väntar på Telnet Server-svaret.
+    - **TX_WAIT_FOREVER**: (0xFFFFFFFF) Om du TX_WAIT_FOREVER här alternativet pausas anropstråden på obestämd tid tills Telnet-servern svarar på begäran.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) lyckades skicka klient paket.
-- **NX_TELNET_ERROR**: (0xF0) Det gick inte att skicka paket – anroparen ansvarar för att släppa paketet.
-- NX_PTR_ERROR: (0x07) ogiltigt inmatade pekare
-- NX_CALLER_ERROR: (0x11) ogiltig anropar tjänst.
+- **NX_SUCCESS:**(0x00) Lyckad klientpaketssändning.
+- **NX_TELNET_ERROR**: (0xF0) Skicka paket misslyckades – anroparen ansvarar för att släppa paketet.
+- NX_PTR_ERROR: (0x07) Ogiltig pekare
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare av tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -351,7 +351,7 @@ status =  nx_telnet_client_packet_send(&my_client, my_packet, 100);
 
 ## <a name="nx_telnet_server_create"></a>nx_telnet_server_create
 
-Skapa en Telnet-Server
+Skapa en Telnet-server
 
 ### <a name="prototype"></a>Prototyp
 
@@ -367,27 +367,27 @@ UINT nx_telnet_server_create(NX_TELNET_SERVER *server_ptr, CHAR *server_name, NX
 
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten skapar en Telnet Server-instans på den angivna IP-instansen.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **server_ptr**: pekar mot kontroll block för Telnet-Server.
-- **server_name**: namnet på Telnet Server-instansen.
-- **ip_ptr**: pekar mot associerad IP-instans.
-- **stack_ptr**: pekare till stack för den interna Server tråden.
-- **sack_size**: stackens storlek i byte.
-- **new_connection**: funktions pekare för motringning av program. Den här rutinen anropas när en ny anslutnings förfrågan för Telnet-klienten identifieras av servern.
-- **receive_data**: funktions pekare för motringning av program. Den här rutinen anropas när det finns nya Telnet-klientinställningar på anslutningen. Den här rutinen ansvarar för att släppa paketet.
-- **end_connection**: funktions pekare för motringning av program. Den här rutinen anropas när en anslutning för Telnet-klienten kopplas från av klienten eller om klient anslutnings tiden upphör ("aktivitetens timeout upphör att gälla). Servern kan också koppla från tjänsten *nx_telnet_server_disconnect* som beskrivs nedan.
+- **server_ptr:** Pekare till Telnet Server-kontrollblocket.
+- **server_name:** Namnet på Telnet Server-instansen.
+- **ip_ptr: Pekare** till associerad IP-instans.
+- **stack_ptr:** Pekare till stack för den interna servertråden.
+- **sack_size:** Stackens storlek, i byte.
+- **new_connection: Funktionspekare** för programanropsrutinen. Den här rutinen anropas när en ny Telnet-klientanslutningsbegäran identifieras av servern.
+- **receive_data: Funktionspekare** för programanropsrutinen. Den här rutinen anropas när det finns nya Telnet-klientdata i anslutningen. Den här rutinen ansvarar för att släppa paketet.
+- **end_connection: Funktionspekare** för programanropsrutinen. Den här rutinen anropas när en Telnet-klientanslutning kopplas från av klienten eller om klientanslutningen går ut ("tidsgräns för aktivitet" upphör). Servern kan också koppla från via *nx_telnet_server_disconnect* som beskrivs nedan.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) lyckad Server skapande.
-- NX_PTR_ERROR: (0x07) ogiltig pekare för Server, IP, stack eller program.
+- **NX_SUCCESS**: (0x00) Skapa servern.
+- NX_PTR_ERROR: (0x07) Ogiltig server, IP- eller stack- eller programanropspekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
@@ -404,7 +404,7 @@ status =  nx_telnet_server_create(&my_server, "Telnet Server", &ip_0,
 ```
 ## <a name="nx_telnet_server_delete"></a>nx_telnet_server_delete
 
-Ta bort en Telnet-Server
+Ta bort en Telnet-server
 
 ### <a name="prototype"></a>Prototyp
 
@@ -412,23 +412,23 @@ Ta bort en Telnet-Server
 UINT nx_telnet_server_delete(NX_TELNET_SERVER *server_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar bort en tidigare skapad Telnet Server-instans.
+Den här tjänsten tar bort en telnet-serverinstans som skapats tidigare.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **server_ptr**: pekar mot kontroll block för Telnet-Server.
+- **server_ptr:** Pekare till Telnet Server-kontrollblocket.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) lyckad Server borttagning.
-- NX_PTR_ERROR: (0x07) ogiltig Server pekare.
-- NX_CALLER_ERROR: (0x11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS**: (0x00) Lyckad server-borttagning.
+- NX_PTR_ERROR: (0x07) Ogiltig server-pekare.
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -449,26 +449,26 @@ Koppla från en Telnet-klient
 UINT nx_telnet_server_disconnect(NX_TELNET_SERVER *server_ptr, UINT logical_connection);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten kopplar från en tidigare ansluten klient på den här Telnet-serverinstansen. Den här rutinen anropas vanligt vis från programmets motringnings funktion för mottagning av data som svar på ett villkor som upptäckts i mottagna data.
+Den här tjänsten kopplar från en tidigare ansluten klient på den här Telnet Server-instansen. Den här rutinen anropas vanligtvis från programmets återanropsfunktion för att ta emot data som svar på ett villkor som identifierats i de data som tas emot.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **server_ptr**: pekar mot kontroll block för Telnet-Server.
-- **logical_connection**: logisk anslutning motsvarande klient anslutningen på den här servern. Giltigt värde intervall från 0 till NX_TELENET_MAX_CLIENTS.
+- **server_ptr:** Pekare till Telnet Server-kontrollblocket.
+- **logical_connection:** Logisk anslutning som motsvarar klientanslutningen på den här servern. Giltigt värdeintervall mellan 0 och NX_TELENET_MAX_CLIENTS.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) lyckad Server från koppling.
-- **NX_TELNET_ERROR**: det gick inte att koppla från servern (0xF0).
-- NX_OPTION_ERROR: (0x0A) ogiltig logisk anslutning.
-- NX_PTR_ERROR: (0x07) ogiltig Server pekare.
-- NX_CALLER_ERROR: (0x11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS**: (0x00) Servern kopplas från.
+- **NX_TELNET_ERROR**: (0xF0) Det gick inte att koppla från servern.
+- NX_OPTION_ERROR: (0x0A) Ogiltig logisk anslutning.
+- NX_PTR_ERROR: (0x07) Ogiltig server-pekare.
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -484,7 +484,7 @@ status =  nx_telnet_server_disconnect(&my_server, 2);
 
 ## <a name="nx_telnet_server_get_open_connection_count"></a>nx_telnet_server_get_open_connection_count
 
-Returnera antalet öppna anslutningar
+Returnera antalet anslutningar som är öppna för tillfället
 
 ### <a name="prototype"></a>Prototyp
 
@@ -492,24 +492,24 @@ Returnera antalet öppna anslutningar
 UINT nx_telnet_server_get_open_connection_count(NX_TELNET_SERVER *server_ptr, UINT *connection_count);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten returnerar antalet Telnet-klienter som är anslutna till varandra.
+Den här tjänsten returnerar antalet telnet-klienter som för närvarande är anslutna.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **server_ptr**: pekar mot kontroll block för Telnet-Server.
-- **Connection_count**: pekar på minne för att lagra antal anslutningar
+- **server_ptr:** Pekare till Telnet Server-kontrollblocket.
+- **Connection_count:** Pekare till minnet för att lagra antalet anslutningar
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) slutfördes.
-- NX_PTR_ERROR: (0x07) ogiltig Server pekare.
-- NX_CALLER_ERROR: (0x11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS**: (0x00) Lyckades.
+- NX_PTR_ERROR: (0x07) Ogiltig server-pekare.
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -524,7 +524,7 @@ status =  nx_telnet_server_get_open_connection_count(&my_server, &conn_count);
 
 ## <a name="nx_telnet_server_packet_send"></a>nx_telnet_server_packet_send
 
-Skicka paket via klient anslutning
+Skicka paket via klientanslutning
 
 ### <a name="prototype"></a>Prototyp
 
@@ -535,30 +535,30 @@ UINT nx_telnet_server_packet_send(NX_TELNET_SERVER *server_ptr,
                                   ULONG wait_option);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skickar ett paket till klient anslutningen på den här Telnet-serverinstansen. Den här rutinen anropas vanligt vis från programmets motringnings funktion för mottagning av data som svar på ett villkor som upptäckts i mottagna data.
+Den här tjänsten skickar ett paket till klientanslutningen på den här Telnet Server-instansen. Den här rutinen anropas vanligtvis från programmets återanropsfunktion för att ta emot data som svar på ett villkor som identifierats i de data som tas emot.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **server_ptr**: pekar mot kontroll block för Telnet-Server.
-- **logical_connection**: logisk anslutning motsvarande klient anslutningen på den här servern. Giltigt värde intervall från 0 till NX_TELENET_MAX_CLIENTS.
-- **packet_ptr**: pekar på det mottagna paketet.
-- **wait_option**: anger hur länge tjänsten ska vänta på att Telnet Server-paketet ska skickas. Vänte alternativen definieras enligt följande:
-    - **timeout-värde**: (0X00000001 till 0xFFFFFFFE) om du väljer ett numeriskt värde (1-0xFFFFFFFE) anger det maximala antalet timer-Tick som ska pausas i väntan på Telnet-serverns svar.
-    - **TX_WAIT_FOREVER**: (0Xffffffff) väljer TX_WAIT_FOREVER gör att anrops tråden inaktive ras under obestämd tid tills Telnet-servern svarar på begäran. 
+- **server_ptr:** Pekare till Telnet Server-kontrollblocket.
+- **logical_connection:** Logisk anslutning som motsvarar klientanslutningen på den här servern. Giltigt värdeintervall mellan 0 och NX_TELENET_MAX_CLIENTS.
+- **packet_ptr:** Pekare till det mottagna paketet.
+- **wait_option:** Definierar hur länge tjänsten ska vänta på att Telnet Server-paketet ska skickas. Väntealternativen definieras på följande sätt:
+    - **timeout-värde:**(0x00000001 till och med 0xFFFFFFFE) Om du väljer ett numeriskt värde (1-0xFFFFFFFE) anges det maximala antalet timer tick som ska pausas medan du väntar på Telnet Server-svaret.
+    - **TX_WAIT_FOREVER**: (0xFFFFFFFF) Om du TX_WAIT_FOREVER här alternativet pausas anropstråden på obestämd tid tills Telnet-servern svarar på begäran. 
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) slutfört paket sändning.
-- **NX_TELNET_FAILED**: (0XF2) TCP-socket-sändning misslyckades.
-- NX_OPTION_ERROR: (0x0A) ogiltig logisk anslutning.
-- NX_PTR_ERROR: (0x07) ogiltig Server pekare.
-- NX_CALLER_ERROR: (0x11) ogiltig anropar tjänst.
+- **NX_SUCCESS:**(0x00) Lyckad paketsändning.
+- **NX_TELNET_FAILED**: (0xF2) TCP socket send misslyckades.
+- NX_OPTION_ERROR: (0x0A) Ogiltig logisk anslutning.
+- NX_PTR_ERROR: (0x07) Ogiltig server-pekare.
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare av tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -573,7 +573,7 @@ status =  nx_telnet_server_packet_send(&my_server, 2, my_packet, 100);
 
 ## <a name="nx_telnet_server_packet_pool_set"></a>nx_telnet_server_packet_pool_set
 
-Ange tidigare skapade Packet bassäng som Telnet-adresspool
+Ange en paketpool som skapats tidigare som Telnet-serverpool
 
 ### <a name="prototype"></a>Prototyp
 
@@ -582,25 +582,25 @@ UINT nx_telnet_server_packet_pool_set(NX_TELNET_SERVER *server_ptr, NX_PACKET_PO
 
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten anger en tidigare skapad modempool som programpoolen för Telnet-servern om NX_TELNET_SERVER_USER_CREATE_PACKET_POOL har definierats. Det kräver också att NX_TELNET_SERVER_OPTION_DISABLE inte definieras så att Telnet-servern behöver en modempool för att överföra Telnet-alternativ till Telnet-klienter.
+Den här tjänsten anger en paketpool som skapats tidigare som Telnet Server-paketpool om NX_TELNET_SERVER_USER_CREATE_PACKET_POOL har definierats. Det kräver också att NX_TELNET_SERVER_OPTION_DISABLE definieras så att Telnet-servern behöver en paketpool för att överföra Telnet-alternativ till Telnet-klienter.
 
-Detta gör det möjligt för program att skapa en modempool i olika minnen, t. ex. minne utan cache, än i Telnet-serverns stack. Observera att om den här funktionen inte kontrollerar om programpoolen för Telnet-servern redan har angetts. Om den anropas på en icke-null-pekare för en Telnet-Server, kommer den att skriva över den och ersätta den befintliga poolen med pakethuvuden som intrycks av insamlings pekaren.
+Detta gör att program kan skapa paketpoolen i ett annat minne, t.ex. inget cacheminne, än Telnet Server-stacken. Observera att om den här funktionen inte kontrollerar om Telnet Server-paketpoolen redan har angetts. Om den anropas på en Telnet Server-paketpoolspekare som inte är null skriver den över den och ersätter den befintliga paketpoolen med paketpoolen som pekaren på.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **server_ptr**: pekare till kontroll block för Telnet-Server
-- **packet_pool_ptr**: pekare till tidigare skapade paketets pool
+- **server_ptr:** Pekare till Telnet-serverkontrollblocket
+- **packet_pool_ptr:** Pekare till paketpool som skapats tidigare
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) har angett poolen.
-- NX_PTR_ERROR: (0x07) ogiltig Server pekare.
+- **NX_SUCCESS**: (0x00) Konfigurerad pool.
+- NX_PTR_ERROR: (0x07) Ogiltig server-pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Init, trådar
+Init, Threads
 
 ### <a name="example"></a>Exempel
 
@@ -616,7 +616,7 @@ status =  nx_telnet_server_packet_pool_set(&my_server, &telnet_server_packet_poo
 ```
 ## <a name="nx_telnet_server_start"></a>nx_telnet_server_start
 
-Starta en Telnet-Server
+Starta en Telnet-server
 
 ### <a name="prototype"></a>Prototyp
 
@@ -625,23 +625,23 @@ UINT nx_telnet_server_start(NX_TELNET_SERVER *server_ptr);
 
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten startar en tidigare skapad Telnet Server-instans.
+Den här tjänsten startar en Telnet Server-instans som skapats tidigare.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **server_ptr**: pekar mot kontroll block för Telnet-Server.
+- **server_ptr:** Pekare till Telnet Server-kontrollblocket.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) har startats.
-- **NX_TELNET_NO_PACKET_POOL**: (0XF6) ingen paket uppsättnings uppsättning
-- NX_PTR_ERROR: (0x07) ogiltig Server pekare.
+- **NX_SUCCESS**: (0x00) Har startats.
+- **NX_TELNET_NO_PACKET_POOL**: (0xF6) Ingen paketpool har angetts
+- NX_PTR_ERROR: (0x07) Ogiltig server-pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar
+Initiering, Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -654,7 +654,7 @@ status =  nx_telnet_server_start(&my_server);
 
 ## <a name="nx_telnet_server_stop"></a>nx_telnet_server_stop
 
-Stoppa en Telnet-Server
+Stoppa en Telnet-server
 
 ### <a name="prototype"></a>Prototyp
 
@@ -662,23 +662,23 @@ Stoppa en Telnet-Server
 UINT nx_telnet_server_stop(NX_TELNET_SERVER *server_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten stoppar en tidigare skapad och startad Telnet Server-instans.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **server_ptr**: pekar mot kontroll block för Telnet-Server.
+- **server_ptr:** Pekare till Telnet Server-kontrollblocket.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) har stoppats
-- NX_PTR_ERROR: (0x07) ogiltig Server pekare.
-- NX_CALLER_ERROR: (0x11) ogiltig anropare av tjänst
+- **NX_SUCCESS**: (0x00) Har stoppats
+- NX_PTR_ERROR: (0x07) Ogiltig server-pekare.
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare av tjänsten
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 

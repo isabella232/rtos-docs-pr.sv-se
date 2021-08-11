@@ -1,36 +1,36 @@
 ---
-title: Kapitel 1 – Introduktion till Azure återställnings tider NetX-kryptografi
-description: NetX-kryptografi är en real tids implementering av kryptografiska algoritmer som har utformats för att tillhandahålla data krypterings-och autentiserings tjänster.
+title: Kapitel 1 – Introduktion till Azure RTOS NetX Crypto
+description: NetX Crypto är en högpresterande realtidsimplementering av kryptografiska algoritmer som är utformade för att tillhandahålla tjänster för datakryptering och autentisering.
 author: philmea
 ms.author: philmea
 ms.date: 05/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 0bde9be472584308894cfd702ccd014578afe753
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 1b5ee0336ba9e867a628dc5db4f0c029f68ff45c81d68ceb6299e3469d5e2b49
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104825596"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116796811"
 ---
-# <a name="chapter-1---introduction-to-azure-rtos-netx-crypto"></a>Kapitel 1 – Introduktion till Azure återställnings tider NetX-kryptografi
+# <a name="chapter-1---introduction-to-azure-rtos-netx-crypto"></a>Kapitel 1 – Introduktion till Azure RTOS NetX Crypto
 
-Azure återställnings tider NetX-kryptografi är en real tids implementering av kryptografiska algoritmer som är utformad för att tillhandahålla data krypterings-och autentiserings tjänster. NetX-kryptografi är utformat för att ansluta för NetX säkra TLS-, DTLS-och IPsec-moduler. Program kan också använda NetX-kryptografi som en fristående modul utanför nätverks säkerheten.
+Azure RTOS NetX Crypto är en högpresterande realtidsimplementering av kryptografiska algoritmer som är utformade för att tillhandahålla tjänster för datakryptering och autentisering. NetX Crypto är utformat för att ansluta till NetX Secure TLS-, DTLS- och IPsec-moduler. Program kan också använda NetX Crypto som en fristående modul utanför nätverkssäkerheten.
 
-## <a name="netx-crypto-unique-features"></a>Unika funktioner för NetX-kryptografi
+## <a name="netx-crypto-unique-features"></a>Unika funktioner i NetX Crypto
 
-NetX-kryptering implementeras på standard språket C (C99), kompatibel med praktiskt taget alla C/C++-kompilatorer. Den modulära designen gör det möjligt för ett program att endast länka i de krypteringsalgoritmer som den behöver använda, vilket ger minimal kod storlek. Implementeringen har utformats för att fungera med de flesta 32-bitars mikroprocessorer och använder bara de grundläggande matematiska åtgärderna (addition, subtraktion, multiplikation, Division, logisk och, eller, eller, eller, och bit växlings åtgärder). Alla dessa åtgärder används med 32-bitars mängder, vilket gör NetX-kryptering portabelt över de flesta 32-bitars mikroprocessorer. Implementeringen är särskilt optimerad för att köras på resurs begränsade mikroprocessorer, vilket riktar sig till djupt inbäddade program.
+NetX Crypto implementeras i C-standardspråket (C99), som är kompatibelt med i stort sett alla C/C++-kompilatorer. Den modulära designen gör att ett program endast kan länka i de krypteringsalgoritmer som det behöver använda, vilket ger minimal kodstorlek. Implementeringen är utformad för att fungera med de flesta 32-bitars mikroprocessorer och använder endast de grundläggande matematikåtgärderna (addition, subtraktion, multiplikation, division, logiska AND-, OR-, NOR- och bitväxlingsåtgärder). Alla dessa åtgärder används med 32-bitars kvantiteter, vilket gör NetX Crypto portabel över de flesta 32-bitars mikroprocessorer. Implementeringen är särskilt optimerad för att köras på resursbegränsade mikroprocessorer med inriktning på djupt inbäddade program.
 
-## <a name="algorithms-supported-by-netx-crypto"></a>Algoritmer som stöds av NetX-kryptografi
+## <a name="algorithms-supported-by-netx-crypto"></a>Algoritmer som stöds av NetX Crypto
 
-NetX-kryptering stöder följande krypteringsalgoritmer. NetX-kryptering följer alla allmänna rekommendationer och grundläggande krav inom begränsningar i ett operativ system med real tid och plattformar som kräver liten minnes storlek och effektiv körning.
+NetX Crypto stöder följande kryptografiska algoritmer. NetX Crypto följer alla allmänna rekommendationer och grundläggande krav inom begränsningarna för ett operativsystem och plattformar i realtid som kräver ett litet fotavtryck för minne och effektiv körning.
 
-| Integritetsalgoritm       | Nyckel längd (bitar)      |
+| Algoritm       | Nyckellängd (bitar)      |
 | --------------- | ---------------------- |
-| AES (CBC,/MASKIN)   | 128, 192, 256          |
+| AES(CBC, CTR)   | 128, 192, 256          |
 | AES (XCBC)       | 128                    |
 | AES-CCM 8       | 128                    |
-| 3DES (CBC)       | 192                    |
+| 3DES(CBC)       | 192                    |
 | HMAC-SHA1       | Valfri längd             |
 | HMAC-SHA224     | Valfri längd             |
 | HMAC-SHA256     | Valfri längd             |
@@ -41,7 +41,7 @@ NetX-kryptering stöder följande krypteringsalgoritmer. NetX-kryptering följer
 | HMAC-MD5        | Valfri längd             |
 | RSA             | 1024, 2048, 3072, 4096 |
 
-| Integritetsalgoritm       | Digest-längd (bitar) | Block storlek (bitar) |
+| Algoritm       | Sammanfattad längd (bitar) | Blockstorlek (bitar) |
 | --------------- | -------------------- | ----------------- |
 | SHA1            | 160                  | 512               |
 | SHA224          | 224                  | 512               |
@@ -57,12 +57,12 @@ NetX-kryptering stöder följande krypteringsalgoritmer. NetX-kryptering följer
 | HMAC-SHA512/224 | 224                  | 1024              |
 | HMAC-SHA512/256 | 256                  | 1024              |
 | HMAC-MD5        | 128                  | 512               |
-| Elliptic kurva  | P192/224/256/384/521 |                   |
+| Elliptic Curve  | P192/224/256/384/521 |                   |
 
-## <a name="netx-crypto-requirements"></a>Krav för NetX-kryptering
+## <a name="netx-crypto-requirements"></a>Krav för NetX-kryptografi
 
-TBD: minnes krav.. Vill du avbryta/återställa? Behöver diskussion
+TBD: Minneskrav.. Avbryter/återerar säker? Diskussion om behov
 
-## <a name="netx-crypto-constraints"></a>Begränsningar för NetX-kryptografi
+## <a name="netx-crypto-constraints"></a>NetX Crypto-begränsningar
 
 Inga.

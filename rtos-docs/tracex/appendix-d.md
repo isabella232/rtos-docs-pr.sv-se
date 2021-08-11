@@ -1,127 +1,127 @@
 ---
-title: Bilaga D – dumpning och spårning av spårning
-description: Dumpning av den sökta bufferten som skapades av Azure återställnings tider-ThreadX till en fil på värddatorn görs via kommandon och/eller verktyg som tillhandahålls av det verktyg som används för att använda verktyget.
+title: Bilaga D – Dumpning och spårningsbuffert
+description: Dumpning av spårningsbufferten som skapats av Azure RTOS ThreadX till en fil på värddatorn görs via kommandon och/eller verktyg som tillhandahålls av det specifika utvecklingsverktyg som används.
 author: philmea
 ms.service: rtos
 ms.topic: article
 ms.date: 5/19/2020
 ms.author: philmea
-ms.openlocfilehash: 30f6b5e329feeb2dca37dda391fd738aba587c9a
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: afbbabbd04ac4c33a747bb0cce4a9f36ca2d197a819cb48d834429e29fe5572c
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104827723"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116802403"
 ---
-# <a name="appendix-d---dumping-and-trace-buffer"></a>Bilaga D – dumpning och spårning av spårning
+# <a name="appendix-d---dumping-and-trace-buffer"></a>Bilaga D – Dumpning och spårningsbuffert
 
-Dumpning av den sökta bufferten som skapades av Azure återställnings tider-ThreadX till en fil på värddatorn görs via kommandon och/eller verktyg som tillhandahålls av det verktyg som används för att använda verktyget. Den här bilagan innehåller exempel på dumpning av en spårningssession till en värd fil i några av de populäraste utvecklingsverktyg som används med ThreadX. 
+Dumpning av spårningsbufferten som skapats av Azure RTOS ThreadX till en fil på värddatorn görs via kommandon och/eller verktyg som tillhandahålls av det specifika utvecklingsverktyg som används. Den här bilagan innehåller exempel på att dumpa en spårningsbuffert till en värdfil i några av de populäraste utvecklingsverktygen som används med ThreadX. 
 
-## <a name="benchx-tools"></a>BenchX-verktyg
+## <a name="benchx-tools"></a>Brax-verktyg
 
-Det går att dumpa kommandobufferten till en värd fil enkelt med BenchX-verktygen genom att välja ***lagra minne till fil** _ i vyn _ *_Memory_* *, enligt nedan:
+Du kan enkelt ta spårningsbufferten till en värdfil med Verktyg för programflöde genom att välja knappen ***Lagra** minne till fil _ i vyn _*_Minne_**, enligt nedan:
 
-![Skärm bild av vyn minne i BenchX-verktygen.](./media/user-guide/image642.jpg)
+![Skärmbild av minnesvyn i Verktyg för beredskap.](./media/user-guide/image642.jpg)
 
-I det här läget anger du adressen till spårningsprovider, storlek, mål fil namn (inklusive sökväg) och väljer knappen ***Spara*** som visas nedan. Då skapas den binära spårnings filen för visning i TraceX.
+Nu anger du spårningsbuffertens adress, storlek, målfilnamn (inklusive sökväg) och väljer ***knappen*** Spara enligt nedan. Detta skapar den binära spårningsfilen för visning i TraceX.
 
-![Skärm bild av dialog rutan Spara BenchX-verktyg.](./media/user-guide/image643.jpg)
+![Skärmbild av dialogrutan För att spara verktyg för uppläckning.](./media/user-guide/image643.jpg)
 
 ## <a name="realview-tools"></a>RealView-verktyg
 
-Det går lätt att dumpa kommandobufferten till en värd fil med ARM RealView-verktygen genom att ange följande kommando i kommando tolken i RealView:
+Du kan enkelt ta spårningsbufferten till en värdfil med ARM RealView-verktygen genom att ange följande kommando i kommandotolken i RealView:
 
 ```c 
 > WRITEFILE,raw trace_file.trx=0x6860..0xE560
 ```
 
-När åtgärden har slutförts innehåller filen ***trace_file. trx*** den sökta bufferten som börjar på adressen 0x6860 och går upp för att adressera 0xE560. Den här filen är klar för visning av TraceX.
+När det är klart ***innehåller filen trace_file.trx*** spårningsbufferten som finns med början vid 0x6860 och går upp till 0xE560. Den här filen är klar för visning av TraceX.
 
 ## <a name="iar-tools"></a>IAR-verktyg
 
-Spårningssessionen kan dumpas till en värd fil enkelt med IAR-verktygen genom att helt enkelt Högerklicka i vyn minne och välja ***minnet Spara...*** alternativ, som du ser nedan.
+Du kan enkelt ta spårningsbufferten till en värdfil med IAR-verktygen genom att helt enkelt högerklicka i minnesvyn och välja ***Minnessläcka...*** som du ser nedan.
 
-![Skärm bild av alternativet för minnes sparande i IAR-verktygen.](./media/user-guide/image0_311.jpg)
+![Skärmbild av alternativet Minnessläcka i IAR-verktygen.](./media/user-guide/image0_311.jpg)
 
-Detta resulterar i att dialog rutan ***minne Spara** _ visas. Ange start-och slut adress och spårnings filens namn och välj sedan knappen _*_Spara_*_ . I det exempel som visas nedan sparar IAR-verktygen den angivna spårningssessionen i Intel HEX-poster i filen _ *_trace_file. hex_* *.
+Detta resulterar i dialogrutan ***Minnessläcka** _ som ska visas. Ange start- och slutadressen och spårningsfilens namn och välj _*_sedan knappen_*_ Spara. I exemplet nedan sparar IAR-verktygen den angivna spårningsbufferten i Intel HEX-poster i filen _*_trace_file.hex_**.
 
-![Skärm bild av dialog rutan för att spara IAR-verktyg.](./media/user-guide/image648.jpg)
+![Skärmbild av dialogrutan Minnessläcka i IAR-verktyg.](./media/user-guide/image648.jpg)
 
-Nu har vi en spårnings-buffert Sparad i ***trace_file. hex*** -filen på värden och är klar för visning med TraceX.
+Nu har vi spårningsbufferten sparad ***i trace_file.hex-filen*** på värden och är redo att visas med TraceX.
 
-## <a name="codewarrior-tools"></a>CodeWarrior-verktyg
+## <a name="codewarrior-tools"></a>CodeWarrior Tools
 
-Det går lätt att dumpa kommandobufferten till en värd fil med CodeWarrior-verktygen genom att ange ***Save** _-kommandot i kommando fönstret. I följande exempel _ *_Save_**-kommando förutsätter att spårningssessionen börjar vid 0x102200 och slutar på 0x109F00:
+Du kan enkelt ta spårningsbufferten till en värdfil med CodeWarrior-verktygen genom att ange kommandot ***save** _ i kommandofönstret. I följande exempel _ *_save_** förutsätter kommandot att spårningsbufferten börjar vid 0x102200 slutar vid 0x109F00:
 
 ```c
 > save –b p:0x102200..0x109F00 trace_file.trx -a 32bit
 ```
 
-Detta resulterar i att den sökta kommandobufferten sparas i filen ***trace_file. trx*** på värden.
+Detta resulterar i att spårningsbufferten ***sparas i filen trace_file.trx*** på värden.
 
 ## <a name="mplab-tools"></a>MPLAB-verktyg
 
-MPLAB kan skapa en TraceX-kompatibel spårnings fil via verktyget export Table, som tillåter export av alla minnes intervall till en värd fil. Fortsätt enligt följande om du vill använda det här verktyget för att skapa en spårnings fil för TraceX:
+MPLAB kan skapa en TraceX-kompatibel spårningsfil via verktyget Exportera tabell, som tillåter export av alla minnesintervall till en värdfil. Om du vill använda det här verktyget för att skapa en spårningsfil för TraceX fortsätter du på följande sätt:
 
-**Steg 1** Öppna ett minnes fönster genom att välja Visa > minne.
+**Steg 1** Öppna ett minnesfönster genom att välja Visa -> minne.
 
-![Skärm bild av det valda minnet på menyn Visa.](./media/user-guide/image0_316.jpg)
+![Skärmbild av valt minne på menyn Visa.](./media/user-guide/image0_316.jpg)
 
-**Steg 2** Högerklicka i **vyn minne** om du vill visa en lista med alternativ. Ange **visnings format – 1 byte** för att välja byte-visning..
+**Steg 2** Högerklicka i minnesvyn **för att** visa en lista med alternativ. Ange **Visningsformat -1 Byte för** att välja bytevisning..
 
-![Skärm bild av vyn minne med alternativet visnings format markerat.](./media/user-guide/image650.png)
+![Skärmbild av minnesvyn med alternativet Visningsformat valt.](./media/user-guide/image650.png)
 
-![Skärm bild av dialog rutan gå till.](./media/user-guide/image651.jpg)
+![Skärmbild av dialogrutan Gå till.](./media/user-guide/image651.jpg)
 
-**Steg 3** Högerklicka igen i fönstret **minnes visning** och välj **gå till**, så öppnas en dialog ruta där du kan ange adressen till händelsesessionen. I det här exemplet visas **_event_buffer_** visas.
+**Steg 3** Högerklicka igen i fönstret **Minnesvy** och välj **Gå till**, vilket öppnar en dialogruta där du kan ange adressen till händelsebufferten. Det här exemplet **_event_buffer_** visas.
 
-![Skärm bild av minnes visning med alternativet gå till valt.](./media/user-guide/image0_312.jpg)
+![Skärmbild av minnesvyn med alternativet Gå till valt.](./media/user-guide/image0_312.jpg)
 
-![Skärm bild av ett exempel som visar event_buffer som visas.](./media/user-guide/image653.png)
+![Skärmbild av ett exempel som visar event_buffer visas.](./media/user-guide/image653.png)
 
-**Steg 4** Detta markerar innehållet på den första platsen i spårningssessionen, som alltid är strängen BTXT....
+**Steg 4** Då markeras innehållet på den första platsen i spårningsbufferten, som alltid är strängen BTXT....
 
-![Skärm bild av den första platsen i den sökta kommandobufferten.](./media/user-guide/image0_313.jpg)
+![Skärmbild av den första platsen i spårningsbufferten.](./media/user-guide/image0_313.jpg)
 
-**Steg 5** Högerklicka sedan igen för att öppna menyn Alternativ och välj **Exportera tabell**.
+**Steg 5** Högerklicka nu igen för att öppna alternativmenyn och välj **Exportera tabell.**
 
-![Skärm bild av vyn minne med alternativet Exportera tabell markerat.](./media/user-guide/image0_314.jpg)
+![Skärmbild av minnesvyn med alternativet Exportera tabell valt.](./media/user-guide/image0_314.jpg)
 
-**Steg 6** Dialog rutan **Exportera tabell** visas, som du ser. Ange det adress intervall som ska exporteras. För en 8K-spårningssession, som är fallet i det här exemplet, anger du intervallet 0xA00006AC till 0xA00026AC och anger ett namn för den värd fil som ska skapas (demo_threadx. trx i det här exemplet).
+**Steg 6** Nu öppnas dialogrutan **Exportera** tabell, som du ser i bilden. Ange adressintervallet som ska exporteras. För en 8K-spårningsbuffert, vilket är fallet i det här exemplet, anger du intervallet 0xA00006AC till 0xA00026AC och anger ett namn för den värdfil som ska skapas (demo_threadx.trx i det här exemplet).
 
-! [[Skärm bild av dialog rutan exportera som.](./media/user-guide/image656.jpg)
+! [[Skärmbild av dialogrutan Exportera som.](./media/user-guide/image656.jpg)
 
-**Steg 7** En fil med namnet **demo_threadx. trx** kommer att skapas på värden och den här filen kan öppnas av TraceX.
+**Steg 7** En fil **med demo_threadx.trx** skapas på värden och den här filen kan öppnas av TraceX.
 
 ## <a name="ghs-tools"></a>GHS-verktyg
 
-Spårningssessionen kan dumpas till en värd fil enkelt med GHS-verktygen genom att ange följande kommando i kommando tolken i fel söknings kommando fönstret:
+Du kan enkelt ta spårningsbufferten till en värdfil med GHS-verktygen genom att ange följande kommando i kommandotolken i kommandofönstret för felsökning:
 
 ```c
 memdump raw c:releasethreadxdemo_threadx.trx event_buffer 32768
 ```
 
-Vid slut för Ande kommer filen **demo_threadx. trx** att innehålla den spårningsprovider som finns i event_buffer med en storlek på 32 768 byte och är klar för visning av TraceX.
+När det är klart **innehåller filen demo_threadx.trx** spårningsbufferten som finns i event_buffer med en storlek på 32 768 byte och är redo att visas av TraceX.
 
 ## <a name="renesas-hew"></a>Renesas HEW
 
-Det går lätt att dumpa kommandobufferten till en värd fil med Renasas HEW-verktygen genom att följa de tre stegen (och under stegen) nedan:
+Du kan enkelt ta spårningsbufferten till en värdfil med Renasas HEW-verktygen genom att följa de tre stegen (och understegen) nedan:
 
-**Steg 1** Öppna minnes fönstret.
+**Steg 1** Öppna fönstret Minne.
 
-! [[Skärm bild av minnes fönstret.](./media/user-guide/image657.jpg)
+! [[Skärmbild av fönstret Minne.](./media/user-guide/image657.jpg)
 
-**Steg 2** Placera markören i minnes fönstret och högerklicka.
+**Steg 2** Placera markören i minnesfönstret och högerklicka.
 
-![Skärm bild av minnes fönstret med alternativet Spara valt.](./media/user-guide/image0_315.jpg)
+![Skärmbild av fönstret Minne med alternativet Spara valt.](./media/user-guide/image0_315.jpg)
 
-**Steg 3** Välj Spara och gör följande i fönstret Spara minne som:
+**Steg 3** Välj Spara och gör sedan följande i fönstret Spara minne som:
 
-- Välj fil format: Binary.
-- Ange fil namn: efter behov
-- Ange start adress: trace_buffer
-- Ange slut adress: (trace_buffer + storlek)
-- Ange åtkomst storlek: 1
+- Välj Filformat: Binär.
+- Ange filnamn: Efter behov
+- Ange Startadress: trace_buffer
+- Ange slutadress: (trace_buffer+storlek)
+- Ange åtkomststorlek: 1
 - Klicka på Spara
 
-![Skärm bild av dialog rutan Spara minne som.](./media/user-guide/image659.jpg)
+![Skärmbild av dialogrutan Spara minne som.](./media/user-guide/image659.jpg)

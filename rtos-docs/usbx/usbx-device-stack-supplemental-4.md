@@ -1,37 +1,37 @@
 ---
-title: Kapitel 4 – USBX PictBridge-implementering
-description: UBSX stöder fullständig PictBridge-implementering både på enheten och värden. PictBridge är ovanpå USBX PIMA-klassen på båda sidor.
+title: Kapitel 4 – IMPLEMENTERING AV USBX Pictbridge
+description: UBSX stöder den fullständiga Pictbridge-implementeringen både på enheten och värden. Pictbridge ligger ovanpå USBX PIMA-klassen på båda sidor.
 author: philmea
 ms.author: philmea
 ms.date: 5/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 4fdf1e46a7123c10d17e11d09c1b16c2f68f4a31
-ms.sourcegitcommit: 60ad844b58639d88830f2660ab0c4ff86b92c10f
+ms.openlocfilehash: 5a1bab2cb60ce5df6c0662eb1a31f542a3b1d7a87d4584d485cbd621e3342abc
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 04/07/2021
-ms.locfileid: "106550243"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116791127"
 ---
-# <a name="chapter-4---usbx-pictbridge-implementation"></a>Kapitel 4 – USBX PictBridge-implementering
+# <a name="chapter-4---usbx-pictbridge-implementation"></a>Kapitel 4 – USBX Pictbridge-implementering
 
-UBSX stöder fullständig PictBridge-implementering både på värden och på enheten. PictBridge är ovanpå USBX PIMA-klassen på båda sidor.
+UBSX stöder den fullständiga Pictbridge-implementeringen både på värden och enheten. Pictbridge ligger ovanpå USBX PIMA-klassen på båda sidor.
 
-PictBridge-standarden tillåter anslutning av en digital stillbilds kamera eller en smart telefon direkt till en skrivare utan en dator, vilket möjliggör direkt utskrift till vissa PictBridge-medvetna skrivare.
+PictBridge-standarden tillåter anslutning av en digital fortfarande kamera eller en smart telefon direkt till en skrivare utan dator, vilket möjliggör direktutskrift till vissa Pictbridge-medvetna skrivare.
 
-När en kamera eller telefon är ansluten till en skrivare är skrivaren USB-värden och kameran är USB-enheten. Men med PictBridge visas kameran som värd och kommandona drivs från kameran. Kameran är lagrings servern, skrivaren på lagrings klienten. Kameran är utskrifts klienten och skrivaren är naturligtvis utskrifts servern.
+När en kamera eller telefon är ansluten till en skrivare är skrivaren USB-värden och kameran är USB-enheten. Men med Pictbridge visas kameran som värden och kommandona körs från kameran. Kameran är lagringsservern, skrivaren som är lagringsklienten. Kameran är utskriftsklienten och skrivaren är naturligtvis utskriftsservern.
 
-PictBridge använder USB som transport lager men förlitar sig på PTP (Picture Transfer Protocol) för kommunikations protokollet.
+Pictbridge använder USB som transportlager men förlitar sig på PTP (Picture Transfer Protocol) för kommunikationsprotokollet.
 
-Följande är ett diagram över kommandon/svar mellan DPS-klienten och DPS-servern när ett utskrifts jobb inträffar:
+Följande är ett diagram över kommandona/svaren mellan DPS-klienten och DPS-servern när ett utskriftsjobb inträffar:
 
-![DPS-kommandon och-svar](./media/usbx-device-stack-supplemental/dps-client-server.png)
+![DPS-kommandon och -svar](./media/usbx-device-stack-supplemental/dps-client-server.png)
 
-## <a name="pictbridge-client-implementation"></a>PictBridge-klient implementering
+## <a name="pictbridge-client-implementation"></a>Pictbridge-klientimplementering
 
-PictBridge på klienten kräver att USBX Device-stacken och PIMA-klassen körs först.
+Pictbridge på klienten kräver att USBX-enhetsstacken och PIMA-klassen körs först.
 
-Ett Device Framework beskriver PIMA-klassen på följande sätt.
+Ett enhetsramverk beskriver PIMA-klassen på följande sätt.
 
 ```C
 UCHAR device_framework_full_speed[] =
@@ -53,11 +53,11 @@ UCHAR device_framework_full_speed[] =
 };
 ```
 
-Pima-klassen använder ID-fältet 0x06 och har underklassen är 0x01 för stillbild och protokollet är 0x01 för PIMA 15740.
+Klassen Pima använder fältet ID 0x06 och har sin underklass är 0x01 för Still Image och protokollet är 0x01 PIMA 15740.
 
-Tre slut punkter definieras i den här klassen. två mängder för att skicka/ta emot data och ett avbrott för händelser.
+Tre slutpunkter definieras i den här klassen. två massutskick för att skicka/ta emot data och ett avbrott för händelser.
 
-Till skillnad från andra USBX enhets implementeringar behöver inte PictBridge-programmet definiera en klass själva. I stället anropas funktionen ***ux_pictbridge_dpsclient_start***. Ett exempel är nedan.
+Till skillnad från andra USBX-enhetsimplementeringar behöver Pictbridge-programmet inte definiera en egen klass. I stället anropar den funktionen ***ux_pictbridge_dpsclient_start***. Ett exempel visas nedan.
 
 ```C
 /* Initialize the Pictbridge string components. */
@@ -85,7 +85,7 @@ if(status != UX_SUCCESS)
     return;
 ```
 
-De parametrar som skickas till PictBridge-klienten är följande.
+De parametrar som skickas till pictbridge-klienten är följande.
 
 ```C
 pictbridge.ux_pictbridge_dpslocal.ux_pictbridge_devinfo_vendor_name
@@ -100,9 +100,9 @@ pictbridge.ux_pictbridge_dpslocal.ux_pictbridge_devinfo_vendor_specific_version
     : Value set to 0x0100;
 ```
 
-Nästa steg är för enheten och värden för att synkronisera och vara redo att utbyta information.
+Nästa steg är att enheten och värden synkroniserar och är redo att utbyta information.
 
-Detta görs genom att vänta på en händelse flagga på följande sätt.
+Detta görs genom att vänta på en händelseflagga enligt följande.
 
 ```C
 /* We should wait for the host and the client to discover one another. */
@@ -111,9 +111,9 @@ status = ux_utility_event_flags_get(&pictbridge.ux_pictbridge_event_flags_group,
     &actual_flags, UX_PICTBRIDGE_EVENT_TIMEOUT);
 ```
 
-Om tillstånds datorn är i **DISCOVERY_COMPLETEs** tillstånd kommer kamera sidan (DPS-klienten) att samla in information om skrivaren och dess funktioner.
+Om tillståndsdatorn är **i DISCOVERY_COMPLETE** tillstånd samlar kamerasidan (DPS-klienten) in information om skrivaren och dess funktioner.
 
-Om DPS-klienten är redo att acceptera ett utskrifts jobb anges dess status till **UX_PICTBRIDGE_NEW_JOB_TRUE**. Det kan kontrol leras nedan.
+Om DPS-klienten är redo att godkänna ett utskriftsjobb anges dess status till **UX_PICTBRIDGE_NEW_JOB_TRUE**. Det kan kontrolleras nedan.
 
 ```C
 /* Check if the printer is ready for a print job. */
@@ -122,7 +122,7 @@ if (pictbridge.ux_pictbridge_dpsclient.ux_pictbridge_devinfo_newjobok ==
 /* We can print something … */
 ```
 
-Efterföljande joib-beskrivningar måste fyllas på följande sätt:
+Därefter måste vissa skrivutskriftsbeskrivningar fyllas i på följande sätt:
 
 ```C
 /* We can start a new job. Fill in the JobConfig and PrintInfo structures. */
@@ -185,17 +185,17 @@ ux_utility_string_to_unicode("JPEG Image", object ->
 status =ux_pictbridge_dpsclient_api_start_job(&pictbridge);
 ```
 
-PictBridge-klienten har nu ett utskrifts jobb för att göra och hämtar avbildnings blocken i taget från programmet via det motanrop som definierats i fältet
+Pictbridge-klienten har nu ett utskriftsjobb att göra och hämtar bildblocken i taget från programmet via återanropet som definierats i fältet
 
 ```C
 jobinfo -> ux_pictbridge_jobinfo_object_data_read
 ```
 
-Prototypen för den funktionen definieras som:
+Prototypen av den funktionen definieras som:
 
 ## <a name="ux_pictbridge_jobinfo_object_data_read"></a>ux_pictbridge_jobinfo_object_data_read
 
-Kopiera ett data block från användar utrymmet för utskrift
+Kopiera ett datablock från användarutrymme för utskrift
 
 ### <a name="prototype"></a>Prototyp
 
@@ -210,20 +210,20 @@ UINT ux_pictbridge_jobinfo_object_data_read(
 
 ### <a name="description"></a>Description
 
-Den här funktionen anropas när DPS-klienten behöver hämta ett data block för att skriva ut till mål PictBridge-skrivaren.
+Den här funktionen anropas när DPS-klienten behöver hämta ett datablock för att skriva ut till Pictbridge-målskrivaren.
 
 ### <a name="parameters"></a>Parametrar
 
-- **PictBridge**: pekare till klass instansen PictBridge.
-- **object_buffer**: pekar mot objekt-buffert
-- **object_offset**: där data blocket börjar läsas
-- **object_length**: längden som ska returneras
-- **actual_length**: den faktiska längden som returnerades
+- **pictbridge:** Pekare till pictbridge-klassinstansen.
+- **object_buffer:** Pekare till objektbuffert
+- **object_offset:** Här börjar vi läsa datablocket
+- **object_length:** Längd som ska returneras
+- **actual_length:** Faktisk längd returnerad
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0X00) den här åtgärden lyckades.
-- **UX_ERROR** (0x01) programmet kunde inte hämta data.
+- **UX_SUCCESS** (0x00) Den här åtgärden lyckades.
+- **UX_ERROR** (0x01) Programmet kunde inte hämta data.
 
 ### <a name="example"></a>Exempel
 
@@ -246,11 +246,11 @@ UINT ux_demo_object_data_copy(
 }
 ```
 
-## <a name="pictbridge-host-implementation"></a>PictBridge-värd implementering
+## <a name="pictbridge-host-implementation"></a>Pictbridge-värdimplementering
 
-Värd implementeringen av PictBridge skiljer sig från klienten.
+Värdimplementering av Pictbridge skiljer sig från klienten.
 
-Det första du gör i en PictBridge-värd miljö är att registrera klassen Pima som exemplet nedan visar:
+Det första du ska göra i en Pictbridge-värdmiljö är att registrera klassen Pima enligt exemplet nedan:
 
 ```C
 status = ux_host_stack_class_register(_ux_system_host_class_pima_name,
@@ -259,60 +259,60 @@ if(status != UX_SUCCESS)
     return;
 ```
 
-Den här klassen är det generiska PTP-lagret som sitter mellan USB-stacken och PictBridge-skiktet.
+Den här klassen är det allmänna PTP-lagret som finns mellan USB-stacken och Pictbridge-skiktet.
 
-Nästa steg är att initiera PictBridge-standardvärden för utskrifts tjänster enligt följande:
+Nästa steg är att initiera Pictbridge-standardvärdena för utskriftstjänster på följande sätt:
 
-| PictBridge-fält       | Värde                                  |
+| Fältet Pictbridge       | Värde                                  |
 |------------------------|----------------------------------------|
-| DpsVersion [0]          | 0x00010000                             |
-| DpsVersion [1]          | 0x00010001                             |
-| DpsVersion [2]          | 0x00000000                             |
+| DpsVersion[0]          | 0x00010000                             |
+| DpsVersion[1]          | 0x00010001                             |
+| DpsVersion[2]          | 0x00000000                             |
 | VendorSpecificVersion  | 0x00010000                             |
 | PrintServiceAvailable  | 0x30010000                             |
-| Kvaliteter [0]           | UX_PICTBRIDGE_QUALITIES_DEFAULT        |
-| Kvaliteter [1]           | UX_PICTBRIDGE_QUALITIES_NORMAL         |
-| Kvaliteter [2]           | UX_PICTBRIDGE_QUALITIES_DRAFT          |
-| Kvaliteter [3]           | UX_PICTBRIDGE_QUALITIES_FINE           |
-| PaperSizes [0]          | UX_PICTBRIDGE_PAPER_SIZES_DEFAULT      |
-| PaperSizes [1]          | UX_PICTBRIDGE_PAPER_SIZES_4IX6I        |
-| PaperSizes [2]          | UX_PICTBRIDGE_PAPER_SIZES_L            |
-| PaperSizes [3]          | UX_PICTBRIDGE_PAPER_SIZES_2L           |
-| PaperSizes [4]          | UX_PICTBRIDGE_PAPER_SIZES_LETTER       |
-| PaperTypes [0]          | UX_PICTBRIDGE_PAPER_TYPES_DEFAULT      |
-| PaperTypes [1]          | UX_PICTBRIDGE_PAPER_TYPES_PLAIN        |
-| PaperTypes [2           | UX_PICTBRIDGE_PAPER_TYPES_PHOTO        |
-| Filtypen [0]           | UX_PICTBRIDGE_FILE_TYPES_DEFAULT       |
-| Filtypen [1]           | UX_PICTBRIDGE_FILE_TYPES_EXIF_JPEG     |
-| Filtypen [2]           | UX_PICTBRIDGE_FILE_TYPES_JFIF          |
-| Filfiltyp [3]           | UX_PICTBRIDGE_FILE_TYPES_DPOF          |
-| DatePrints [0]          | UX_PICTBRIDGE_DATE_PRINTS_DEFAULT      |
-| DatePrints [1]          | UX_PICTBRIDGE_DATE_PRINTS_OFF          |
-| DatePrints [2]          | UX_PICTBRIDGE_DATE_PRINTS_ON           |
-| FileNamePrints [0]      | UX_PICTBRIDGE_FILE_NAME_PRINTS_DEFAULT |
-| FileNamePrints [1]      | UX_PICTBRIDGE_FILE_NAME_PRINTS_OFF     |
-| FileNamePrints [2]      | UX_PICTBRIDGE_FILE_NAME_PRINTS_ON      |
-| ImageOptimizes [0]      | UX_PICTBRIDGE_IMAGE_OPTIMIZES_DEFAULT  |
-| ImageOptimizes [1]      | UX_PICTBRIDGE_IMAGE_OPTIMIZES_OFF      |
-| ImageOptimizes [2]      | UX_PICTBRIDGE_IMAGE_OPTIMIZES_ON       |
-| Layouter [0]             | UX_PICTBRIDGE_LAYOUTS_DEFAULT          |
-| Layouter [1]             | UX_PICTBRIDGE_LAYOUTS_1_UP_BORDER      |
-| Layouter [2]             | UX_PICTBRIDGE_LAYOUTS_INDEX_PRINT      |
-| Layouter [3]             | UX_PICTBRIDGE_LAYOUTS_1_UP_BORDERLESS  |
-| FixedSizes [0]          | UX_PICTBRIDGE_FIXED_SIZE_DEFAULT       |
-| FixedSizes [1]          | UX_PICTBRIDGE_FIXED_SIZE_35IX5I        |
-| FixedSizes [2]          | UX_PICTBRIDGE_FIXED_SIZE_4IX6I         |
-| FixedSizes [3]          | UX_PICTBRIDGE_FIXED_SIZE_5IX7I         |
-| FixedSizes [4]          | UX_PICTBRIDGE_FIXED_SIZE_7CMX10CM      |
-| FixedSizes [5]          | UX_PICTBRIDGE_FIXED_SIZE_LETTER        |
-| FixedSizes [6]          | UX_PICTBRIDGE_FIXED_SIZE_A4            |
-| Beskärningar [0]           | UX_PICTBRIDGE_CROPPINGS_DEFAULT        |
-| Beskärningar [1]           | UX_PICTBRIDGE_CROPPINGS_OFF            |
-| Beskärningar [2]           | UX_PICTBRIDGE_CROPPINGS_ON             |
+| Egenskaper[0]           | UX_PICTBRIDGE_QUALITIES_DEFAULT        |
+| Egenskaper[1]           | UX_PICTBRIDGE_QUALITIES_NORMAL         |
+| Egenskaper[2]           | UX_PICTBRIDGE_QUALITIES_DRAFT          |
+| Egenskaper[3]           | UX_PICTBRIDGE_QUALITIES_FINE           |
+| PaperSizes[0]          | UX_PICTBRIDGE_PAPER_SIZES_DEFAULT      |
+| PaperSizes[1]          | UX_PICTBRIDGE_PAPER_SIZES_4IX6I        |
+| PaperSizes[2]          | UX_PICTBRIDGE_PAPER_SIZES_L            |
+| PaperSizes[3]          | UX_PICTBRIDGE_PAPER_SIZES_2L           |
+| PaperSizes[4]          | UX_PICTBRIDGE_PAPER_SIZES_LETTER       |
+| PaperTypes[0]          | UX_PICTBRIDGE_PAPER_TYPES_DEFAULT      |
+| PaperTypes[1]          | UX_PICTBRIDGE_PAPER_TYPES_PLAIN        |
+| PaperTypes[2           | UX_PICTBRIDGE_PAPER_TYPES_PHOTO        |
+| FileTypes[0]           | UX_PICTBRIDGE_FILE_TYPES_DEFAULT       |
+| FileTypes[1]           | UX_PICTBRIDGE_FILE_TYPES_EXIF_JPEG     |
+| FileTypes[2]           | UX_PICTBRIDGE_FILE_TYPES_JFIF          |
+| FileTypes[3]           | UX_PICTBRIDGE_FILE_TYPES_DPOF          |
+| DatePrints[0]          | UX_PICTBRIDGE_DATE_PRINTS_DEFAULT      |
+| DatePrints[1]          | UX_PICTBRIDGE_DATE_PRINTS_OFF          |
+| DatePrints[2]          | UX_PICTBRIDGE_DATE_PRINTS_ON           |
+| FileNamePrints[0]      | UX_PICTBRIDGE_FILE_NAME_PRINTS_DEFAULT |
+| FileNamePrints[1]      | UX_PICTBRIDGE_FILE_NAME_PRINTS_OFF     |
+| FileNamePrints[2]      | UX_PICTBRIDGE_FILE_NAME_PRINTS_ON      |
+| ImageOptimizes[0]      | UX_PICTBRIDGE_IMAGE_OPTIMIZES_DEFAULT  |
+| ImageOptimizes[1]      | UX_PICTBRIDGE_IMAGE_OPTIMIZES_OFF      |
+| ImageOptimizes[2]      | UX_PICTBRIDGE_IMAGE_OPTIMIZES_ON       |
+| Layouter[0]             | UX_PICTBRIDGE_LAYOUTS_DEFAULT          |
+| Layouter[1]             | UX_PICTBRIDGE_LAYOUTS_1_UP_BORDER      |
+| Layouter[2]             | UX_PICTBRIDGE_LAYOUTS_INDEX_PRINT      |
+| Layouter[3]             | UX_PICTBRIDGE_LAYOUTS_1_UP_BORDERLESS  |
+| FixedSizes[0]          | UX_PICTBRIDGE_FIXED_SIZE_DEFAULT       |
+| FixedSizes[1]          | UX_PICTBRIDGE_FIXED_SIZE_35IX5I        |
+| FixedSizes[2]          | UX_PICTBRIDGE_FIXED_SIZE_4IX6I         |
+| FixedSizes[3]          | UX_PICTBRIDGE_FIXED_SIZE_5IX7I         |
+| FixedSizes[4]          | UX_PICTBRIDGE_FIXED_SIZE_7CMX10CM      |
+| FixedSizes[5]          | UX_PICTBRIDGE_FIXED_SIZE_LETTER        |
+| FixedSizes[6]          | UX_PICTBRIDGE_FIXED_SIZE_A4            |
+| Beskärningar[0]           | UX_PICTBRIDGE_CROPPINGS_DEFAULT        |
+| Beskärningar[1]           | UX_PICTBRIDGE_CROPPINGS_OFF            |
+| Beskärningar[2]           | UX_PICTBRIDGE_CROPPINGS_ON             |
 
-Tillstånds datorn för DPS-värden ställs in på inaktiv och är redo att acceptera ett nytt utskrifts jobb.
+DpS-värdens tillståndsdator är inaktiv och redo att acceptera ett nytt utskriftsjobb.
 
-Värd delen av PictBridge kan nu startas som exemplet nedan visar:
+Värddelen av Pictbridge kan nu startas som exemplet nedan visar:
 
 ```C
 /* Activate the pictbridge dpshost. */
@@ -322,7 +322,7 @@ if (status != UX_SUCCESS)
     return;
 ```
 
-Funktionen PictBridge Host kräver ett motanrop när data är klara att skrivas ut. Detta åstadkommer du genom att skicka en funktions pekare i den PictBridge värd strukturen enligt följande.
+Pictbridge-värdfunktionen kräver ett återanrop när data är klara att skrivas ut. Detta åstadkoms genom att skicka en funktionspekare i pictbridge-värdstrukturen på följande sätt.
 
 ```C
 /* Set a callback when an object is being received. */
@@ -334,7 +334,7 @@ Den här funktionen har följande egenskaper.
 
 ## <a name="ux_pictbridge_application_object_data_write"></a>ux_pictbridge_application_object_data_write
 
-Skriva ett data block för utskrift
+Skriva ett datablock för utskrift
 
 ### <a name="prototype"></a>Prototyp
 
@@ -349,20 +349,20 @@ UINT ux_pictbridge_application_object_data_write(
 
 ### <a name="description"></a>Description
 
-Den här funktionen anropas när DPS-servern behöver hämta ett data block från DPS-klienten för att skriva ut till den lokala skrivaren.
+Den här funktionen anropas när DPS-servern behöver hämta ett datablock från DPS-klienten för att skriva ut till den lokala skrivaren.
 
 ### <a name="parameters"></a>Parametrar
 
-- **PictBridge**: pekare till klass instansen PictBridge.
-- **object_buffer**: pekar mot objekt-buffert
-- **object_offset**: där data blocket börjar läsas
-- **total_length**: hela objekt längden
-- **längd**: buffertens längd
+- **pictbridge:** Pekare till pictbridge-klassinstansen.
+- **object_buffer:** Pekare till objektbuffert
+- **object_offset:** Här börjar vi läsa datablocket
+- **total_length:** Hela längden på objektet
+- **length**: Längden på den här bufferten
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0X00) den här åtgärden lyckades.
-- **UX_ERROR** (0x01) programmet kunde inte skriva ut data.
+- **UX_SUCCESS** (0x00) Den här åtgärden lyckades.
+- **UX_ERROR** (0x01) Programmet kunde inte skriva ut data.
 
 ### <a name="example"></a>Exempel
 

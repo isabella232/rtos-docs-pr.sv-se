@@ -1,21 +1,21 @@
 ---
 title: Förstå Azure RTOS NetX Duo
-description: Azure RTOS NetX Duo är en avancerad TCP/IP-nätverksstack i branschklass som är utformad specifikt för djupt inbäddade realtids- och IoT-program.
+description: Azure RTOS NetX Duo är en avancerad TCP/IP-nätverksstack i branschklass som är speciellt utformad för djupt inbäddade realtids- och IoT-program.
 author: philmea
 ms.author: philmea
 ms.date: 5/19/2020
 ms.service: rtos
 ms.topic: overview
-ms.openlocfilehash: b40a57bf385ddcf623ff7cbe0d2e798c547227d7
-ms.sourcegitcommit: dbbec3ba6a7eb6097c7888b235c433a2efd6e5b9
+ms.openlocfilehash: 4fa67f9a740e731618c200b80e2ff3278530abe8aaf7f1d73b9a7f4acc02e543
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 07/14/2021
-ms.locfileid: "113754904"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116791641"
 ---
 # <a name="overview-of-azure-rtos-netx-duo"></a>Översikt över Azure RTOS NetX Duo
 
-Azure RTOS Inbäddad TCP/IP-nätverksstack för NetX Duo är Microsofts avancerade, industriella dubbla IPv4- och IPv6 TCP/IP-nätverksstack som är utformad specifikt för djupt inbäddade, realtids- och IoT-program. NetX Duo tillhandahåller inbäddade program med kärnnätverksprotokoll som IPv4, IPv6, TCP och UDP samt en komplett uppsättning ytterligare tilläggsprotokoll på högre nivå. Azure RTOS NetX Duo erbjuder säkerhet via ytterligare tilläggssäkerhetsprodukter, inklusive Azure RTOS NetX Secure IPsec och Azure RTOS NetX Secure SSL/TLS/DTLS. Allt detta i kombination med ett litet fotavtryck, snabb körning och överlägsen användarvänlighet gör Azure RTOS NetX Duo till det perfekta valet för de mest krävande inbäddade IoT-programmen.
+Azure RTOS Inbäddad TCP/IP-nätverksstack i NetX Duo är Microsofts avancerade, industriella klass med dubbla IPv4- och IPv6 TCP/IP-nätverksstackar som är särskilt utformade för djupt inbäddade, realtids- och IoT-program. NetX Duo tillhandahåller inbäddade program med kärnnätverksprotokoll som IPv4, IPv6, TCP och UDP samt en komplett uppsättning ytterligare protokoll på högre nivå. Azure RTOS NetX Duo erbjuder säkerhet via ytterligare tillägg säkerhetsprodukter, inklusive Azure RTOS NetX Secure IPsec och Azure RTOS NetX Secure SSL/TLS/DTLS. Allt detta i kombination med ett litet fotavtryck, snabb körning och överlägsen användarvänlighet gör Azure RTOS NetX Duo till det perfekta valet för de mest krävande inbäddade IoT-programmen.
 
 ## <a name="api-protocols"></a>API-protokoll
 
@@ -35,44 +35,44 @@ NetX Duo stöder följande HTTP/HTTPS-protokoll.
 #### <a name="http-10"></a>HTTP 1.0
 
 * Hypertext Transfer Protocol(HTTP)
-* Minimalt 2,8 KB till 4,8 KB FLASH/0,4 KB till 1,0 KB RAM
+* Minimalt 2,8 KB till 4,8 KB FLASH/0,4 KB till 1,0 KB RAM-minne
 * Stöd för klienter och servrar
 
 #### <a name="httphttps-11"></a>HTTP/HTTPS 1.1
 
 * Hypertext Transfer Protocol(HTTP)
-* Minimalt 3,0 TILL 9,5 KB FLASH/0,5 KB till 2 KB RAM
+* Minimalt 3,0 KB till 9,5 KB FLASH/0,5 KB till 2 KB RAM
 * Stöd för klienter och servrar
 * Flera inkommande klientsessioner
 * Oformaterad text och krypterad HTTPS
-* Stöd för beständig anslutning
+* Stöd för beständiga anslutningar
 * Filuppladdning med flera delar
 * Helt integrerad med Azure RTOS NetX Secure TLS
 
 ### <a name="smtp"></a>SMTP
 
 * Simple Mall Transfer Protocol (SMTP)
-* Minimalt RAM-fotavtryck på 4,1 kB och 0,6 kB
+* Minimalt RAM-fotavtryck på 4,1 kB och 0,6 KB
 * Klientstöd
 
 ### <a name="dhcp"></a>DHCP
 
 * DHCP (Dynamic Host Configuration Protocol)
-* Minimalt 3,6 kB till 4,6 KB FLASH, 2,7 KB RAM-fotavtryck
+* Minimalt 3,6 KB till 4,6 KB FLASH, 2,7 KB RAM-fotavtryck
 * Stöd för klienter och servrar
 * Stöd för IPv4 och IPv6
 
 ### <a name="nat"></a>NAT
 
 * NAT (Network Address Translation)
-* Minimalt RAM-fotavtryck på 3,5 K6 och 0,6 kB
+* Minimalt RAM-fotavtryck på 3,5 K6 och 0,6 KB
 * Stöd för IPv4-adresser
 * NAT är endast tillgängligt med Azure RTOS NetX Duo
 
 ### <a name="snmp"></a>SNMP
 
 * Simple Network Management Protocol (SNMP)
-* Minimalt RAM-fotavtryck på 10,9 kB och 2,6 kB
+* Minimalt RAM-fotavtryck på 10,9 kB och 2,6 KB
 * Agentstöd för VI, V2 och V3
 
 ### <a name="dns-mdns-dns-sd"></a>DNS, mDNS, DNS-SD
@@ -80,14 +80,14 @@ NetX Duo stöder följande HTTP/HTTPS-protokoll.
 * DNS (Domain Name System)
 * Multicast Domain Name System (mDNS)
 * DNS-baserad tjänstidentifiering (DNS-SD)
-* DNS Minimalt 2,4 kB till 3 KB FLASH, 1 KB RAM-fotavtryck
+* DNS Minimalt 2,4 KB till 3 KB FLASH, 1 KB RAM-fotavtryck
 * Klientstöd
 * mDNS och DNS-SD är endast tillgängliga med Azure RTOS NetX Duo
 
 ### <a name="pop3"></a>POP3
 
 * Post Office Protocol Version 3 (POP3)
-* Minimalt RAM-fotavtryck på 8,1 kB och 1,4 kB
+* Minimalt RAM-fotavtryck på 8,1 kB och 1,4 KB
 * Klientstöd
 
 ### <a name="telnet"></a>Telnet
@@ -100,16 +100,16 @@ NetX Duo stöder följande HTTP/HTTPS-protokoll.
 
 * File Transfer Protocol (FTP)
 * Trivial file transfer protocol (TFTP)
-* FTP minimalt 1,8 kB till 7,2 KB FLASH, 0,6 kB till 2,1 KB RAM-fotavtryck
-* TFTP minimalt 1,7 kB till 2,4 KB FLASH, 0,3 kB till 1,8 KB RAM-fotavtryck
+* FTP minimalt 1,8 KB till 7,2 KB FLASH, 0,6 kB till 2,1 KB RAM-fotavtryck
+* TFTP Minimal 1,7 KB till 2,4 KB FLASH, 0,3 kB till 1,8 KB RAM-fotavtryck
 * Stöd för klienter och servrar
 * Intuitiva FTP- och *TFTP-API:er: \* nx_ftp_* eller *\* nx_tftp_*
 
 ### <a name="ppp-pppoe"></a>PPP, PPPoE
 
-* PPP (Polnt-to-PoInt Protocol)
+* Polnt-to-PoInt Protocol (PPP)
 * Point-to-Point Protocol over Ethernet(PPPoE)
-* Minimalt RAM-fotavtryck på 7,1 kB och 3,8 kB
+* Minimalt RAM-fotavtryck på 7,1 kB och 3,8 KB
 * Intuitiva PPP-API:er: *nx_ppp_ \**
 
 * PPPoE är endast tillgängligt med Azure RTOS NetX Duo
@@ -117,7 +117,7 @@ NetX Duo stöder följande HTTP/HTTPS-protokoll.
 ### <a name="sntp"></a>Sntp
 
 * Simple Network Time Protocol (SNTP)
-* Minimalt RAM-minne på 4 kB och 0,5 kB
+* Minimalt 4 KB och 0,5 KB RAM
 * Klientstöd
 * Intuitiva SNTP-API:er: *nx_sntp_ \**
 
@@ -138,8 +138,8 @@ NetX Duo stöder följande HTTP/HTTPS-protokoll.
 ### <a name="azure-rtos-netx-secure-dtls"></a>Azure RTOS NetX Secure DTLS
 
 * Datagram Transport Layer Security (DTLS) 1.0 och 1.2
-* Minimal 11 KB FLASH
-* Snabb RSA 2048-bitars nyckelstorlek för programvara ~ 1 sekund @120MHz
+* Minimalt 11 KB FLASH
+* Snabb, programvara RSA 2048-bitars nyckelstorlek ~ 1 sekund @120MHz
 * Effektiviserad X.509-implementering
 * Helt integrerad med Azure RTOS NetX Duo UDP-sockets
 * Stöd för maskinvarukryptutor
@@ -151,7 +151,7 @@ NetX Duo stöder följande HTTP/HTTPS-protokoll.
 
 * Transport Layer Security (TLS) 1.0, 1.1 och 1.2
 * Minimal 8,8 KB FLASH
-* Snabb RSA 2048-bitars nyckelstorlek för programvara ~ 1 sekund @120MHz
+* Snabb, programvara RSA 2048-bitars nyckelstorlek ~ 1 sekund @120MHz
 * Effektiviserad X.509-implementering
 * Helt integrerad med Azure RTOS NetX Duo TCP-sockets
 * Stöd för maskinvarukryptutor
@@ -166,8 +166,8 @@ NetX Duo stöder följande HTTP/HTTPS-protokoll.
 * Stöd för IPv4 och IPv6
 * IXIA IxANVL-verifierad
 * Pingbegäran och pingsvar
-* Valfri trådavstängning vid ping-begäranden
-* Valfri tidsgräns vid all låsning
+* Valfri trådavstängning vid pingbegäranden
+* Valfri tidsgräns för all låsning
 * Valfri ICMP-statistik
 * Spårning på systemnivå via Azure RTOS TraceX
 * Intuitiva ICMP-API:er: *nx_icmp_ \**
@@ -175,15 +175,15 @@ NetX Duo stöder följande HTTP/HTTPS-protokoll.
 ### <a name="udp"></a>UDP
 
 * UDP (User Datagram Protocol)
-* Minimalt 2,5 KB FLASH, 124 sockets byte RAM-minne per socket
-* Snabb TCP-paketbearbetning med nära wire speed:
+* Minimal 2,5 KB FLASH, 124 sockets byte RAM-minne per socket
+* Snabb, nära trådad TCP-paketbearbetning:
     * RX 95 Mbit/s på 100 Mbit/s Ethernet, @100MHz MCU, 14 % MCU-användning
     * TX 94 Mbit/s på 100 Mbit/s Ethernet, @100MHz MCU, 10 % MCU-användning
 * UDP Fast Path™teknik
 * Inga gränser för antalet UDP
 * IXIA IxANVL-verifierad
 * Valfri stängning vid socket-mottagning
-* Valfri tidsgräns vid all låsning
+* Valfri tidsgräns för all låsning
 * Valfri UDP-statistik
 * Spårning på systemnivå via Azure RTOS TraceX
 * Intuitiva UDP-API:er: *nx_udp_ \**
@@ -192,14 +192,14 @@ NetX Duo stöder följande HTTP/HTTPS-protokoll.
 
 * Transmission Control Protocol (TCP)
 * Minimal 10,5K8 till 12,5 KB FLASH, 280 byte RAM-minne per socket
-* Snabb, nära wlre speed TCP-paketbearbetning:
+* Snabb, nästan wlre tcp-paketbearbetning:
     * RX 93 Mbit/s på 100 Mbit/s Ethernet, @100MHz MCU, 20 % MCU-användning
     * TX 94 Mbit/s på 100 Mbit/s Ethernet, @100MHz MCU, 27 % MCU-användning
 * Tillförlitlig anslutning
-* Inga gränser för antalet TCP-socketar
+* Inga gränser för antalet TCP-sockets
 * IXIA IxANVL-verifierad
-* Valfri stängning vid socket-mottagning/-överföring
-* Valfri tidsgräns vid all låsning
+* Valfri uppstängning vid socket-mottagning/-överföring
+* Valfri tidsgräns för all låsning
 * Valfri TCP-statistik
 * Spårning på systemnivå via Azure RTOS TraceX
 * Intuitiva TCP-API:er: *nx_tcp_ \**
@@ -207,7 +207,7 @@ NetX Duo stöder följande HTTP/HTTPS-protokoll.
 ### <a name="arprarp"></a>ARP/RARP
 
 * Address Resolution Protocol (ARP)
-* Reverse Address Resolution Protocol (RARP)
+* REVERSE Address Resolution Protocol (RARP)
 * Minimal 1,7 KB FLASH, RAM-storlek
 * Dynamisk upplösning av 32-blt IPv4- och 48-blt MAC-adresser
 * IXIA IxANVL-verifierad
@@ -215,33 +215,33 @@ NetX Duo stöder följande HTTP/HTTPS-protokoll.
 * Gratuitous ARP support
 * Valfri ARP/RARP-statistik som bestäms av programmet
 * Spårning på systemnivå via Azure RTOS TraceX
-* Intuitiva ARP/RARP-API:nx_arp_ *\**, *\* nx_rarp_*
+* Intuitiva ARP/RARP-API:er: *nx_arp_ \**, *\* nx_rarp_*
 
 ### <a name="ipv4-amp-ipv6"></a>IPv4 &amp; IPv6
 
 * Internet Protocol (IP)
-* Minimal 3,5 kB till 8,5 KB FLASH, 2 KB till 3 KB RAM-fotavtryck
+* Minimalt 3,5 KB till 8,5 KB FLASH, 2 KB till 3 KB RAM-fotavtryck
 * Piconet™arkitektur
-* Snabb, nära wire speed-prestanda
+* Snabb, nära trådhastighetsprestanda
 * Stöd för flera gränssnitt
 * Stöd för flera start
 * Stöd för statisk routning
 * Stöd för IP-fragmentering/återmontering
 * Stöd för IPv4- och IPv6-adresser
 * IXIA IxANVL-verifierad
-* Fas II IPv6 Ready Logo Certification (IPv6-redo logotypcertifiering)
+* Phase II IPv6 Ready Logo Certification
 * Valfri IP-statistik
 * Väldefinierat, intuitivt drivrutinsgränssnitt på fysiskt lager
 * Spårning på systemnivå via Azure RTOS TraceX
-* Intuitiva API:er för *IP-lager: \* nx_ip_*, *nxd_ip_ \** *\** , nxd_ipv6_
-* Förcertifierat av TUV och UL till IEC 61508 SIL 4, IEC 62304 Klass C, ISO 26262 ASIL D och EN 50128 SW-SIL4
+* Intuitiva API:er för *IP-lager: \* nx_ip_,* *nxd_ip_ \** *\** , nxd_ipv6_
+* Förcertifierat av TUV och UL till IEC 61508 SIL 4, IEC 62304 klass C, ISO 26262 ASIL D och EN 50128 SW-SIL4
 
 ### <a name="azure-rtos-netx-secure-ipsec"></a>Azure RTOS NetX Secure IPSEC
 
 * Internet Protocol Security (IPSEC)
 * IP-lager
 * Stöd för maskinvarukryptutor
-* Stöd för kryptografiprogram, inklusive:
+* Kryptografistöd för programvara, inklusive:
     * DES, 3DES
     * AES
     * HMAC-MD5
@@ -254,15 +254,15 @@ NetX Duo stöder följande HTTP/HTTPS-protokoll.
 
 Azure RTOS NetX Duo är säker. Den här säkerheten tillhandahålls via tilläggssäkerhetsprodukter, inklusive IPsec, SSL, TLS och DTLS. Dessutom har programmet fullständig kontroll över all extern åtkomst till Azure RTOS NetX Duo, vilket gör det mycket enklare att fastställa säkerhetsrisker.
 
-Microsoft Azure RTOS tillhandahåller OEM-tillverkare med komponenter för säker kommunikation och för att skapa kod- och dataisolering med underliggande MCU/MPU-maskinvaruskyddsmekanismer. Det är i slutänden enhetsbyggaren som ansvarar för att säkerställa att enheten uppfyller de föränderliga säkerhetskrav som är associerade med dess specifika användningsfall.
+Microsoft Azure RTOS tillhandahåller OEM-tillverkare med komponenter för säker kommunikation och för att skapa kod- och dataisolering med underliggande maskinvaruskyddsmekanismer för MCU/MPU. Det är i slutänden enhetsbyggaren som ansvarar för att säkerställa att enheten helt uppfyller de föränderliga säkerhetskrav som är associerade med dess specifika användningsfall.
 
 ## <a name="interoperability-verification"></a>Interoperabilitetsverifiering
 
 NetX Duo följer RFC-standarder och erbjuder fullständig samverkan med enheter för de flesta leverantörer.
 
-![Logotyp för IPv6-klar](./media/overview-netx-duo/ipv6-ready-logo.png)
+![Logotyp för iPv6-klar](./media/overview-netx-duo/ipv6-ready-logo.png)
 
-Azure RTOS NetX Duo är en av de enda inbäddade TCP/IP-stackarna för att uppnå rigorös IPv6-Ready Logo-certifiering, bevis på att den har klarat överensstämmelse- och samverkanstester som administreras och verifierats av IPv6-forumet. NetX Duo använder också branschstandarden IxANVL (Automated Network Validation Library) för netX Duo core TCP/IP-protokollimplementering.
+Azure RTOS NetX Duo är en av de enda inbäddade TCP/IP-stackarna för att uppnå rigorös IPv6-Ready Logo-certifiering, bevis på att den har klarat överensstämmelse- och samverkanstester, administrerats och verifierats av IPv6-forumet. NetX Duo använder också branschstandarden IxANVL (Automated Network Validation Library) för implementeringen av NetX Duo Core TCP/IP-protokollet.
 
 ## <a name="comprehensive-iot-solution"></a>Omfattande IoT-lösning
 
@@ -301,27 +301,27 @@ Azure RTOS NetX Duo är avancerad teknik som omfattar följande.
 * Flexibel pakethantering
 * API med nollkopiering och implementering
 * Stöd för flera start
-* Valfri tidsgräns vid all låsning
+* Valfri tidsgräns för all låsning
 * Stöd för statisk routning
 * IPsec
 * SSL/TLS/DTLS
-* Azure RTOS traceX-systemanalysstöd
+* Azure RTOS TraceX-systemanalysstöd
 
 ## <a name="related-services"></a>Relaterade tjänster
 
 NetX Duo tillhandahåller följande ytterligare tjänster.
 
-* Azure IoT Middleware
+* Azure IoT-mellanprogram
 * Azure Defender
 * Enhetsuppdatering för IoT Hub.
 
-### <a name="azure-iot-middleware"></a>Azure IoT Middleware
+### <a name="azure-iot-middleware"></a>Azure IoT-mellanprogram
 
 NetX Duo innehåller [Azure IoT Middleware för Azure RTOS](https://github.com/azure-rtos/netxduo/blob/master/addons/azure_iot/docs/README.md), ett plattformsspecifikt bibliotek som fungerar som ett bindningslager mellan Azure RTOS och Azure SDK för Embedded C för att underlätta anslutningen till Azure IoT-tjänster. Målen med Azure IoT Middleware är följande.
 * Tillhandahåll de smarta klientgränssnitt (IoTHub_Client, DeviceProvisioning_Client) som utvecklare behöver för sina program.
 * Samordna interaktionen mellan Embedded C SDK och plattformen.
 * Tillhandahåll Azure RTOS plattformsinitiering.
-* IoT Plug and Play support.
+* IoT Plug and Play stöd.
 * Säkerhetsfunktioner.
 * Resursbegränsningsmedveten.
 * Protokollstöd.
@@ -330,15 +330,15 @@ NetX Duo innehåller [Azure IoT Middleware för Azure RTOS](https://github.com/a
 
 ### <a name="azure-defender"></a>Azure Defender
 
-Säkerhetsmodulen Azure Defender for IoT innehåller en omfattande säkerhetslösning för Azure RTOS enheter. Säkerhetsmodulen för Azure RTOS erbjuder identifiering av aktiviteter i skadliga nätverk, anpassade aviseringsbaserade enhetsbeteenden som baserar sig på och hjälper till att förbättra enhetens säkerhetshygien. Läs mer om [säkerhetsmodulen för Azure RTOS](https://docs.microsoft.com/azure/asc-for-iot/iot-security-azure-rtos) eller kom igång med [snabbstarten Configure Security Module for Azure RTOS](https://docs.microsoft.com/azure/asc-for-iot/quickstart-azure-rtos-security-module) (Konfigurera säkerhetsmodul för Azure RTOS).
+Säkerhetsmodulen Azure Defender for IoT innehåller en omfattande säkerhetslösning för Azure RTOS enheter. Säkerhetsmodulen för Azure RTOS erbjuder identifiering av aktiviteter i skadliga nätverk, anpassad aviseringsbaserad enhetsbeteendegrundning och hjälper till att förbättra enhetens säkerhetshygien. Läs mer om [säkerhetsmodulen för Azure RTOS](https://docs.microsoft.com/azure/asc-for-iot/iot-security-azure-rtos) eller kom igång med [snabbstarten Configure Security Module for Azure RTOS](https://docs.microsoft.com/azure/asc-for-iot/quickstart-azure-rtos-security-module) (Konfigurera säkerhetsmodul för Azure RTOS).
 
 ### <a name="device-update-for-iot-hub"></a>Enhetsuppdatering för IoT Hub
 
-[Azure Device Update for IoT Hub](https://docs.microsoft.com/azure/iot-hub-device-update/understand-device-update) är en tjänst som gör att du kan distribuera trådlösa uppdateringar (OTA) för dina IoT-enheter. Modulen Enhetsuppdatering för IoT Hub är implementeringen av Enhetsuppdatering för IoT Hub Agent i Azure RTOS NetX Duo. Den innehåller enkla API:er som gör att enhetsbyggare kan integrera funktionen Enhetsuppdatering i sina program.
+[Azure Device Update for IoT Hub](https://docs.microsoft.com/azure/iot-hub-device-update/understand-device-update) är en tjänst som gör att du kan distribuera trådlösa uppdateringar (OTA) för dina IoT-enheter. Modulen Enhetsuppdatering för IoT Hub är implementeringen av Enhetsuppdatering för IoT Hub Agent i Azure RTOS NetX Duo. Den innehåller enkla API:er som gör att enhetsbyggare kan integrera funktionen Enhetsuppdatering i sitt program.
 
-Se exempel på viktiga utvärderingstavlor som innehåller kom igång-guiderna för att lära dig att konfigurera, bygga och distribuera trådlösa uppdateringar (OTA) till enheterna.
+Se exempel på viktiga utvärderingstavlor som innehåller guiderna för att komma igång för att lära dig att konfigurera, bygga och distribuera trådlösa uppdateringar (OTA) till enheterna.
 
-Du kan också läsa mer om hur du [använder Enhetsuppdatering för IoT Hub med Azure RTOS](https://docs.microsoft.com/azure/iot-hub-device-update/device-update-azure-real-time-operating-system).
+Du kan också läsa mer om hur du [använder enhetsuppdatering för IoT Hub med Azure RTOS](https://docs.microsoft.com/azure/iot-hub-device-update/device-update-azure-real-time-operating-system).
 
 ## <a name="next-steps"></a>Nästa steg
 

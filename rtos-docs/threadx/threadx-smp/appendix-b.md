@@ -1,19 +1,19 @@
 ---
-title: Bilaga B – Azure återställnings tider ThreadX SMP-konstanter
+title: Bilaga B – Azure RTOS ThreadX SMP-konstanter
 description: ThreadX SMP-konstanter
 author: philmea
 ms.author: philmea
 ms.date: 06/04/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 7245b53e78e657ce8059ee8f013a8d2faa4f7b14
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 32eab718b2b9b4c050ca0f1f39dbf1fda7d74eb49cabfe99be988b60d709d87a
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104825443"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116801774"
 ---
-# <a name="appendix-b---azure-rtos-threadx-smp-constants"></a>Bilaga B – Azure återställnings tider ThreadX SMP-konstanter
+# <a name="appendix-b---azure-rtos-threadx-smp-constants"></a>Bilaga B – Azure RTOS ThreadX SMP-konstanter
 
 ## <a name="alphabetic-listings"></a>Alfabetiska listor
 

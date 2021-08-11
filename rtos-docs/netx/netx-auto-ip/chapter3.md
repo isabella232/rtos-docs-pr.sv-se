@@ -1,30 +1,30 @@
 ---
-title: Kapitel 3 – Beskrivning av Azure återställnings tider NetX AutoIP Services
-description: Det här kapitlet innehåller en beskrivning av alla Azure återställnings tider NetX AutoIP-tjänster (visas nedan) i alfabetisk ordning.
+title: Kapitel 3 – Beskrivning av Azure RTOS NetX AutoIP-tjänster
+description: Det här kapitlet innehåller en beskrivning av alla Azure RTOS NetX AutoIP-tjänster (anges nedan) i alfabetisk ordning.
 author: philmea
 ms.author: philmea
 ms.date: 06/04/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 22cc06c32cc9f1857b32d1d2b44a506ea1652cfd
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 15a70416f9d4d1324d930820b09366a7e7cd6f4525872472cd88edfbb25ee155
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104826847"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116796879"
 ---
-# <a name="chapter-3---description-of-azure-rtos-netx-autoip-services"></a>Kapitel 3 – Beskrivning av Azure återställnings tider NetX AutoIP Services
+# <a name="chapter-3---description-of-azure-rtos-netx-autoip-services"></a>Kapitel 3 – Beskrivning av Azure RTOS NetX AutoIP-tjänster
 
-Det här kapitlet innehåller en beskrivning av alla Azure återställnings tider NetX AutoIP-tjänster (visas nedan) i alfabetisk ordning.
+Det här kapitlet innehåller en beskrivning av alla Azure RTOS NetX AutoIP-tjänster (anges nedan) i alfabetisk ordning.
 
-I avsnittet "retur värden" i följande API-beskrivningar påverkas inte värden i **fetstil** av **NX_DISABLE_ERROR_CHECKING** definiera som används för att inaktivera API-felkontroll, medan icke-Fetstilade värden är helt inaktiverade.
+I avsnittet "Returvärden" i följande API-beskrivningar påverkas inte värden i **BOLD** av **den NX_DISABLE_ERROR_CHECKING-definition** som används för att inaktivera API-felkontroll, medan värden som inte är i fetstil är helt inaktiverade.
 
-- **nx_auto_ip_create**: *skapa AutoIP-instans*
-- **nx_auto_ip_delete**: *ta bort AutoIP-instans*
-- **nx_auto_ip_get_address**: *Hämta aktuell AutoIP-adress*
-- **nx_auto_ip_set_interface**: *Ange IP-gränssnitt som behöver en AutoIP-adress*
-- **nx_auto_ip_start**: *Starta AutoIP-bearbetning*
-- **nx_auto_ip_stop**: *stoppa AutoIP-bearbetning*
+- **nx_auto_ip_create:** Skapa *En AutoIP-instans*
+- **nx_auto_ip_delete:** Ta *bort AutoIP-instans*
+- **nx_auto_ip_get_address:** Hämta *aktuell AutoIP-adress*
+- **nx_auto_ip_set_interface:** Ange *IP-gränssnitt som behöver en AutoIP-adress*
+- **nx_auto_ip_start:** Starta *automatiskIP-bearbetning*
+- **nx_auto_ip_stop:** Stoppa *automatiskIP-bearbetning*
 
 ## <a name="nx_auto_ip_create"></a>nx_auto_ip_create
 
@@ -38,28 +38,28 @@ UINT nx_auto_ip_create(NX_AUTO_IP *auto_ip_ptr, CHAR *name,
             UINT priority);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten skapar en AutoIP-instans på den angivna IP-instansen.
 
-- **auto_ip_ptr**: pekare till AutoIP Control Block.
-- **namn**: namnet på AutoIP-instansen.
-- **ip_ptr**: pekare till IP-instans.
-- **stack_ptr**: pekar på AutoIP tråds tack yta.
-- **stack_size**: storleken på AutoIP trådens stack Area.
-- **prioritet**: prioriteten för AutoIP-tråden.
+- **auto_ip_ptr:** Pekare till AutoIP-kontrollblock.
+- **name**: Namnet på AutoIP-instansen.
+- ip_ptr : **Pekare** till IP-instans.
+- **stack_ptr:** Pekare till Området AutoIP-trådstack.
+- **stack_size:** Storleken på området för AutoIP-trådstacken.
+- **prioritet:** Prioritet för AutoIP-tråden.
 
 > [!NOTE]
-> Om DHCP används måste DHCP-tråden ha högre prioritet än IP-instansen och AutoIP-tråden.
+> Om DHCP används måste DHCP-tråden ha högre prioritet än IP-instanstråden och AutoIP-tråden.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) lyckades skapa AutoIP.
-- **NX_AUTO_IP_ERROR**: (0XA00) AutoIP skapa fel.
-- NX_PTR_ERROR: (0x16) ogiltig AutoIP, ip_ptr eller stack pekare.
-- NX_CALLER_ERROR: (0x11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS**: (0x00) AutoIP-skapa.
+- **NX_AUTO_IP_ERROR:**(0xA00) AutoIP-skapa fel.
+- NX_PTR_ERROR: (0x16) Ogiltig AutoIP, ip_ptr eller stack pekare.
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
@@ -86,24 +86,24 @@ Ta bort AutoIP-instans
 UINT nx_auto_ip_delete(NX_AUTO_IP *auto_ip_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten tar bort en tidigare skapad AutoIP-instans på den angivna IP-instansen.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **auto_ip_ptr**: pekare till AutoIP Control Block.
+- **auto_ip_ptr:** Pekare till AutoIP-kontrollblock.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) lyckad AutoIP-borttagning.
-- **NX_AUTO_IP_ERROR**: (0XA00) AutoIP Delete-fel.
-- NX_PTR_ERROR (0x16): ogiltig AutoIP-pekare.
-- NX_CALLER_ERROR (0x11): ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS:**(0x00) Lyckad AutoIP-borttagning.
+- **NX_AUTO_IP_ERROR:**(0xA00) AutoIP-borttagningsfel.
+- NX_PTR_ERROR (0x16): Ogiltig AutoIP-pekare.
+- NX_CALLER_ERROR (0x11): Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -129,25 +129,25 @@ UINT nx_auto_ip_get_address(NX_AUTO_IP *auto_ip_ptr,
                             ULONG *local_ip_address);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar den aktuella AutoIP-adressen. Om det inte finns någon returneras en IP-adress 0.0.0.0.
+Den här tjänsten hämtar den autoIP-adress som är konfigurerad för tillfället. Om det inte finns någon returneras EN IP-adress på 0.0.0.0.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **auto_ip_ptr**: pekare till AutoIP Control Block.
-- **local_ip_address**: målet för retur-IP-adressen.
+- **auto_ip_ptr:** Pekare till AutoIP-kontrollblock.
+- **local_ip_address:** Mål för ip-returadress.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) lyckad AutoIP-adress Hämta.
-- **NX_AUTO_IP_NO_LOCAL**: (0XA01) ingen giltig AutoIP-adress.
-- NX_PTR_ERROR: (0x16) ogiltig AutoIP-pekare.
-- NX_CALLER_ERROR: (0x11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS**: (0x00) Lyckad AutoIP-adress hämta.
+- **NX_AUTO_IP_NO_LOCAL**: (0xA01) Ingen giltig AutoIP-adress.
+- NX_PTR_ERROR: (0x16) Ogiltig AutoIP-pekare.
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, timers, trådar, ISR: er
+Initiering, timers, trådar, ISR
 
 ### <a name="example"></a>Exempel
 
@@ -166,7 +166,7 @@ nx_auto_ip_create, nx_auto_ip_set_interface, nx_auto_ip_delete, nx_auto_ip_start
 
 ## <a name="nx_auto_ip_set_interface"></a>nx_auto_ip_set_interface
 
-Ange nätverks gränssnitt för AutoIP
+Ange nätverksgränssnitt för AutoIP
 
 ### <a name="prototype"></a>Prototyp
 
@@ -175,25 +175,25 @@ UINT nx_auto_ip_set_interface(NX_AUTO_IP *auto_ip_ptr,
                                 UINT interface_index);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten anger index för nätverks gränssnittets AutoIP som avsöker en IP-adress för nätverket. Standardvärdet är noll (det primära nätverks gränssnittet). Gäller endast för multihomed-enheter.
+Den här tjänsten anger indexet för nätverksgränssnittet som AutoIP avsökning efter en nätverks-IP-adress. Standardvärdet är noll (det primära nätverksgränssnittet). Gäller endast för enheter med flera startenheter.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **auto_ip_ptr**: pekare till AutoIP Control Block.
-- **interface_index**: gränssnitt till avsökning av IP-adress för
+- **auto_ip_ptr:** Pekare till AutoIP-kontrollblock.
+- **interface_index: Gränssnitt** för avsökning av IP-adress för
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) lyckad AutoIP-gränssnitts uppsättning
-- **NX_AUTO_IP_BAD_INTERFACE_INDEX**: (0XA02) ogiltigt nätverks gränssnitt 
-- NX_PTR_ERROR: (0x16) ogiltig AutoIP-pekare.
-- NX_CALLER_ERROR: (0x11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS**: (0x00) Lyckad AutoIP-gränssnittsuppsättning
+- **NX_AUTO_IP_BAD_INTERFACE_INDEX**: (0xA02) Ogiltigt nätverksgränssnitt 
+- NX_PTR_ERROR: (0x16) Ogiltig AutoIP-pekare.
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, timers, trådar, ISR: er
+Initiering, timers, trådar, ISR
 
 ### <a name="example"></a>Exempel
 
@@ -212,7 +212,7 @@ nx_auto_ip_create, nx_auto_ip_get_address, nx_auto_ip_delete, nx_auto_ip_start, 
 
 ## <a name="nx_auto_ip_start"></a>nx_auto_ip_start
 
-Starta AutoIP-bearbetning
+Starta automatiskIP-bearbetning
 
 ### <a name="prototype"></a>Prototyp
 
@@ -221,25 +221,25 @@ UINT nx_auto_ip_start(NX_AUTO_IP *auto_ip_ptr,
                     ULONG starting_local_address);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten startar AutoIP-protokollet på en tidigare skapad AutoIP-instans.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **auto_ip_ptr**: pekare till AutoIP Control Block.
-- **starting_local_address**: valfri start adress för AutoIP. Värdet IP_ADDRESS (0, 0, 0) anger att en slumpmässig AutoIP-adress ska härledas. Annars, om en giltig AutoIP-adress har angetts försöker NetX AutoIP tilldela adressen.
+- **auto_ip_ptr:** Pekare till AutoIP-kontrollblock.
+- **starting_local_address:** Valfri AutoIP-startadress. Värdet för IP_ADDRESS(0,0,0,0) anger att en slumpmässig AutoIP-adress ska härledas. Om en giltig AutoIP-adress har angetts försöker NetX AutoIP i annat fall tilldela den adressen.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) lyckades AutoIP-start.
-- **NX_AUTO_IP_ERROR**: (0XA00) AutoIP start fel.
-- NX_PTR_ERROR: (0x16) ogiltig AutoIP-pekare.
-- NX_CALLER_ERROR: (0x11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS**: (0x00) Lyckad AutoIP-start.
+- **NX_AUTO_IP_ERROR:**(0xA00) AutoIP-startfel.
+- NX_PTR_ERROR: (0x16) Ogiltig AutoIP-pekare.
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar
+Initiering, Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -256,7 +256,7 @@ nx_auto_ip_create, nx_auto_ip_set_interface, nx_auto_ip_delete, nx_auto_ip_get_a
 
 ## <a name="nx_auto_ip_stop"></a>nx_auto_ip_stop
 
-Stoppa AutoIP-bearbetning
+Stoppa automatiskIP-bearbetning
 
 ### <a name="prototype"></a>Prototyp
 
@@ -264,24 +264,24 @@ Stoppa AutoIP-bearbetning
 UINT nx_auto_ip_stop(NX_AUTO_IP *auto_ip_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten stoppar AutoIP-protokollet på en tidigare skapad och startad AutoIP-instans. Den här tjänsten används vanligt vis när IP-adressen ändras via DHCP eller manuellt till en icke-AutoIP adress.
+Den här tjänsten stoppar AutoIP-protokollet på en tidigare skapad och startad AutoIP-instans. Den här tjänsten används vanligtvis när IP-adressen ändras via DHCP eller manuellt till en icke-AutoIP-adress.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **auto_ip_ptr**: pekare till AutoIP Control Block.
+- **auto_ip_ptr:** Pekare till AutoIP-kontrollblock.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) lyckades AutoIP-stopp.
-- **NX_AUTO_IP_ERROR**: (0XA00) AutoIP Stop-fel.
-- NX_PTR_ERROR: (0x16) ogiltig AutoIP-pekare.
-- NX_CALLER_ERROR: (0x11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS**: (0x00) Lyckat autoIP-stopp.
+- **NX_AUTO_IP_ERROR:**(0xA00) AutoIP-stoppfel.
+- NX_PTR_ERROR: (0x16) Ogiltig AutoIP-pekare.
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 

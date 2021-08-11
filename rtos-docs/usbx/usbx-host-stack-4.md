@@ -1,23 +1,23 @@
 ---
-title: Kapitel 4 – Beskrivning av USBX-värd tjänster
-description: Läs mer om USBX-värd tjänsterna.
+title: Kapitel 4 – Beskrivning av USBX-värdtjänster
+description: Läs mer om USBX-värdtjänsterna.
 author: philmea
 ms.author: philmea
 ms.date: 5/19/2020
 ms.service: rtos
 ms.topic: article
-ms.openlocfilehash: d730658c07f3cd7cec8c75a47818314bdc63f35a
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 6cbeff83d8e3812f13aa3f8f66d4013b70490d556911939186b4b43840aac50d
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104828455"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116790691"
 ---
-# <a name="chapter-4---description-of-usbx-host-services"></a>Kapitel 4 – Beskrivning av USBX-värd tjänster
+# <a name="chapter-4---description-of-usbx-host-services"></a>Kapitel 4 – Beskrivning av USBX-värdtjänster
 
 ## <a name="ux_host_stack_initialize"></a>ux_host_stack_initialize
 
-Initiera USBX för värd åtgärd.
+Initiera USBX för värdåtgärd.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -27,18 +27,18 @@ UINT ux_host_stack_initialize(
     (ULONG, UX_HOST_CLASS *));
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen initierar USB-värdstyrenheten. Det tillhandahållna minnes området kommer att konfigureras för intern användning av USBX. Om UX_SUCCESS returneras är USBX redo för värd styrenhet och klass registrering.
+Den här funktionen initierar USB-värdstacken. Det angivna minnesområdet kommer att konfigureras för intern USBX-användning. Om UX_SUCCESS returneras är USBX redo för värdstyrenhet och klassregistrering.
 
 ### <a name="input-parameter"></a>Indataparameter
 
-- **system_change_function** Pekare till valfri callback-rutin för att meddela program om enhets ändringar.
+- **system_change_function** Pekare till valfri motringningsrutin för att meddela tillämpning av enhetsändringar.
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0X00) lyckades.
-- **UX_MEMORY_INSUFFICIENT** (0X12) en minnesallokering misslyckades.
+- **UX_SUCCESS** (0x00) Lyckad initiering.
+- **UX_MEMORY_INSUFFICIENT** (0x12) En minnesallokering misslyckades.
 
 ### <a name="example"></a>Exempel
 
@@ -53,7 +53,7 @@ status = ux_host_stack_initialize(UX_NULL);
 
 ## <a name="ux_host_stack_endpoint_transfer_abort"></a>ux_host_stack_endpoint_transfer_abort
 
-Avbryt alla transaktioner som är kopplade till en överföringsbegäran för en slut punkt.
+Avbryt alla transaktioner som är kopplade till en överföringsbegäran för en slutpunkt.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -61,18 +61,18 @@ Avbryt alla transaktioner som är kopplade till en överföringsbegäran för en
 UINT ux_host_stack_endpoint_transfer_abort(UX_ENDPOINT *endpoint);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen avbryter alla transaktioner som är aktiva eller väntar på en angiven överföringsbegäran som är kopplad till en slut punkt. Den överförings förfrågan har en kopplad motringning, anropas funktionen motringning med UX_TRANSACTION_ABORTEDs status.
+Den här funktionen avbryter alla aktiva eller väntande transaktioner för en specifik överföringsbegäran som är kopplad till en slutpunkt. Om överföringsbegäran har en återanropsfunktion kopplad anropas återanropsfunktionen med UX_TRANSACTION_ABORTED status.
 
 ### <a name="input-parameter"></a>Indataparameter
 
-- **slut punkt** Pekare till en slut punkt.
+- **slutpunkt** Pekare till en slutpunkt.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **UX_SUCCESS** (0X00) inga fel.
-- Slut punkts referensen för **UX_ENDPOINT_HANDLE_UNKNOWN** (0x53) är ogiltig.
+- **UX_SUCCESS** (0x00) Inga fel.
+- **UX_ENDPOINT_HANDLE_UNKNOWN** (0x53) Slutpunktshandtaget är inte giltigt.
 
 ### <a name="example"></a>Exempel
 
@@ -97,7 +97,7 @@ status = ux_host_stack_endpoint_transfer_abort
 
 ## <a name="ux_host_stack_class_get"></a>ux_host_stack_class_get
 
-Hämta pekaren till en klass behållare.
+Hämta pekaren till en klasscontainer.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -107,22 +107,22 @@ UINT ux_host_stack_class_get(
     UX_HOST_CLASS **class);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen returnerar en pekare till klass containern. En klass behöver hämta sin behållare från USB-stacken för att söka efter instanser när en klass eller ett program vill öppna en enhet.
+Den här funktionen returnerar en pekare till klasscontainern. En klass måste hämta sin container från USB-stacken för att söka efter instanser när en klass eller ett program vill öppna en enhet.
 
 > [!NOTE]
-> C-strängen för class_name måste vara NULL-terminerad och längden på den (utan själva NULL-begränsaren) får inte vara större än UX_MAX_CLASS_NAME_LENGTH.
+> C-strängen för class_name måste vara NULL-avslutad och längden på den (utan själva NULL-terminatorn) får inte vara större än UX_MAX_CLASS_NAME_LENGTH.
 
 ### <a name="parameters"></a>Parametrar
 
-- **class_name** Pekar mot klass namnet.
-- **klass** En pekare som uppdaterats av funktions anropet och som innehåller klass behållaren för namnet på klassen.
+- **class_name** Pekare till klassnamnet.
+- **klass** En pekare som uppdateras av funktionsanropet som innehåller klasscontainern för namnet på klassen.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **UX_SUCCESS** (0X00) inga fel, i returnera klass fältet arkiveras med pekaren till klass behållaren.
-- **UX_HOST_CLASS_UNKNOWN** (0x59)-klassen är okänd i stacken.
+- **UX_SUCCESS** (0x00) Inga fel, när klassfältet returneras arkiveras med pekaren till klasscontainern.
+- **UX_HOST_CLASS_UNKNOWN** (0x59) Klass är okänd av stacken.
 
 ### <a name="example"></a>Exempel
 
@@ -138,7 +138,7 @@ status = ux_host_stack_class_get("ux_host_class_printer", &printer_container);
 
 ## <a name="ux_host_stack_class_register"></a>ux_host_stack_class_register
 
-Registrera en USB-klass på USB-stacken.
+Registrera en USB-klass till USB-stacken.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -148,27 +148,27 @@ UINT ux_host_stack_class_register(
     UINT (*class_entry_address) (struct UX_HOST_CLASS_COMMAND_STRUCT *));
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen registrerar en USB-klass i USB-stacken. Klassen måste ange en start punkt för USB-stacken för att skicka kommandon som följande.
+Den här funktionen registrerar en USB-klass till USB-stacken. Klassen måste ange en startpunkt för USB-stacken för att skicka kommandon som följande.
 
 - **UX_HOST_CLASS_COMMAND_QUERY**
 - **UX_HOST_CLASS_COMMAND_ACTIVATE**
 - **UX_HOST_CLASS_COMMAND_DESTROY**
 
 > [!NOTE]
-> C-strängen för *class_name* måste vara null-terminerad och längden på den (utan själva null-begränsaren) får inte vara större än **UX_MAX_CLASS_NAME_LENGTH**.
+> C-strängen *för class_name* måste vara NULL-avslutad och längden på den (utan själva NULL-terminatorn) får inte vara större än **UX_MAX_CLASS_NAME_LENGTH**.
 
 ### <a name="parameters"></a>Parametrar
 
-- **class_name** Pekar till namnet på klassen. giltiga poster finns i filen ux_system_initialize. c under USB-klasserna för USBX.
-- **class_entry_address** Adress till post-funktionen för klassen.
+- **class_name** Om du pekar på namnet på klassen finns giltiga poster i filen ux_system_initialize.c under USB-klasserna för USBX.
+- **class_entry_address** Adressen till entry-funktionen för klassen .
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- Klassen **UX_SUCCESS** (0x00) har installerats.
-- **UX_MEMORY_ARRAY_FULL** (0x1a) Det går inte att lagra den här klassen med mer minne.
-- Värd klassen för **UX_HOST_CLASS_ALREADY_INSTALLED** (0x58) är redan installerad.
+- **UX_SUCCESS** (0x00) Har installerats.
+- **UX_MEMORY_ARRAY_FULL** (0x1a) Inget mer minne för att lagra den här klassen.
+- **UX_HOST_CLASS_ALREADY_INSTALLED** (0x58) Värdklass redan installerad.
 
 ### <a name="example"></a>Exempel:
 
@@ -183,7 +183,7 @@ status = ux_host_stack_class_register("ux_host_class_hub", ux_host_class_hub_ent
 
 ## <a name="ux_host_stack_class_instance_create"></a>ux_host_stack_class_instance_create
 
-Skapa en ny klass instans för en klass behållare.
+Skapa en ny klassinstans för en klasscontainer.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -193,18 +193,18 @@ UINT ux_host_stack_class_instance_create(
     VOID *class_instance);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen skapar en ny klass instans för en klass behållare. Instansen för en klass ingår inte i klass koden för att minska klass komplexiteten. I stället är varje klass instans kopplad till klass behållaren som finns i huvud stacken.
+Den här funktionen skapar en ny klassinstans för en klasscontainer. Instansen av en klass ingår inte i klasskoden för att minska klasskomplexiteten. I stället är varje klassinstans kopplad till klasscontainern som finns i huvudstacken.
 
 ### <a name="parameters"></a>Parametrar
 
-- **klass** Pekare till klass behållaren.
-- **class_instance** Pekare till klass instansen som ska skapas.
+- **klass** Pekare till klasscontainern.
+- **class_instance** Pekare till klassinstansen som ska skapas.
 
 ### <a name="return-value"></a>Returvärde
 
-- **UX_SUCCESS** (0x00) klass instansen anslöts till klass containern.
+- **UX_SUCCESS** (0x00) Klassinstansen kopplades till klasscontainern.
 
 ### <a name="example"></a>Exempel
 
@@ -231,7 +231,7 @@ status = ux_host_stack_class_instance_create(printer -> printer_class, (VOID *)p
 
 ## <a name="ux_host_stack_class_instance_destroy"></a>ux_host_stack_class_instance_destroy
 
-Förstör en klass instans för en klass behållare.
+Förstöra en klassinstans för en klasscontainer.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -241,19 +241,19 @@ UINT ux_host_stack_class_instance_destroy(
     VOID *class_instance);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen förstör en klass instans för en klass behållare.
+Den här funktionen förstör en klassinstans för en klasscontainer.
 
 ### <a name="parameters"></a>Parametrar
 
-- **klass** Pekare till klass behållaren.
-- **class_instance** Pekar på den instans som ska förstöras.
+- **klass** Pekare till klasscontainern.
+- **class_instance** Pekare till instansen som ska förstöras.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **UX_SUCCESS** (0x00) klass instansen har förstörts.
-- **UX_HOST_CLASS_INSTANCE_UNKNOWN** (0x5b) klass instansen är inte kopplad till klass containern.
+- **UX_SUCCESS** (0x00) Klassinstansen förstörs.
+- **UX_HOST_CLASS_INSTANCE_UNKNOWN** (0x5b) Klassinstansen är inte kopplad till klasscontainern.
 
 ### <a name="example"></a>Exempel
 
@@ -275,7 +275,7 @@ status = ux_host_stack_class_instance_destroy(printer -> printer_class, (VOID *)
 
 ## <a name="ux_host_stack_class_instance_get"></a>ux_host_stack_class_instance_get
 
-Hämta en klass instans pekare för en speciell klass.
+Hämta en klassinstans pekare för en specifik klass.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -286,21 +286,21 @@ UINT ux_host_stack_class_instance_get(
     VOID **class_instance);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen returnerar en klass instans pekare för en speciell klass. Instansen för en klass ingår inte i klass koden för att minska klass komplexiteten. Varje klass instans är i stället kopplad till klass behållaren. Den här funktionen används för att söka efter klass instanser i en klass behållare.
+Den här funktionen returnerar en klassinstans pekare för en specifik klass. Instansen av en klass ingår inte i klasskoden för att minska klasskomplexiteten. I stället är varje klassinstans kopplad till klasscontainern. Den här funktionen används för att söka efter klassinstanser i en klasscontainer.
 
 ### <a name="parameters"></a>Parametrar
 
-- **klass** Pekare till klass behållaren.
-- **class_index** Ett index som ska användas av funktions anropet i listan över anslutna klasser till behållaren.
-- **class_instance** Pekare till den instans som ska returneras av funktions anropet.
+- **klass** Pekare till klasscontainern.
+- **class_index** Ett index som ska användas av funktionsanropet i listan över anslutna klasser till containern.
+- **class_instance** Pekare till den instans som ska returneras av funktionsanropet.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **UX_SUCCESS** (0x00) klass instansen påträffades.
+- **UX_SUCCESS** (0x00) Klassinstansen hittades.
 
-- **UX_HOST_CLASS_INSTANCE_UNKNOWN** (0X5b) det finns inga fler klass instanser kopplade till klass behållaren.
+- **UX_HOST_CLASS_INSTANCE_UNKNOWN** (0x5b) Det finns inga fler klassinstanser kopplade till klasscontainern.
 
 ### <a name="example"></a>Exempel
 
@@ -322,7 +322,7 @@ status = ux_host_stack_class_instance_get(class, 2, (VOID *) printer);
 
 ## <a name="ux_host_stack_device_configuration_get"></a>ux_host_stack_device_configuration_get
 
-Hämta en pekare till en konfigurations behållare.
+Hämta en pekare till en konfigurationscontainer.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -333,21 +333,21 @@ UINT ux_host_stack_device_configuration_get(
     UX_CONFIGURATION *configuration);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen returnerar en konfigurations behållare baserat på en enhets referens och ett konfigurations index.
+Den här funktionen returnerar en konfigurationscontainer baserat på en enhetshanterare och ett konfigurationsindex.
 
 ### <a name="parameters"></a>Parametrar
 
-- **enhet** Pekar till enhets behållaren som äger den begärda konfigurationen.
-- **configuration_index** Index för den konfiguration som ska genomsökas.
-- **konfiguration** Adress till den-pekare till den konfigurations behållare som ska returneras.
+- **enhet** Pekare till den enhetscontainer som äger den begärda konfigurationen.
+- **configuration_index** Index för konfigurationen som ska genomsökas.
+- **konfiguration** Adressen för pekaren till konfigurationscontainern som ska returneras.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **UX_SUCCESS** (0x00) konfigurationen hittades.
-- **UX_DEVICE_HANDLE_UNKNOWN** (0x50) enhets containern finns inte.
-- **UX_CONFIGURATION_HANDLE_UNKNOWN** (0x51) konfigurations referensen för indexet finns inte.
+- **UX_SUCCESS** (0x00) Konfigurationen hittades.
+- **UX_DEVICE_HANDLE_UNKNOWN** (0x50) Enhetscontainern finns inte.
+- **UX_CONFIGURATION_HANDLE_UNKNOWN** (0x51) Indexets konfigurationshanterare finns inte.
 
 ### <a name="example"></a>Exempel
 
@@ -372,7 +372,7 @@ status = ux_host_stack_device_configuration_get(printer -> printer_device,
 
 ## <a name="ux_host_stack_device_configuration_select"></a>ux_host_stack_device_configuration_select
 
-Välj en speciell konfiguration för en enhet.
+Välj en specifik konfiguration för en enhet.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -380,19 +380,19 @@ Välj en speciell konfiguration för en enhet.
 UINT ux_host_stack_device_configuration_select (UX_CONFIGURATION *configuration);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen väljer en speciell konfiguration för en enhet. När den här konfigurationen är inställd på enheten aktive ras som standard alla enhets gränssnitt och den tillhör ande alternativa inställningen 0 på enheten. Om enhets-och gränssnitts klassen vill ändra inställningen för ett visst gränssnitt måste den utfärda ett **ux_host_stack_interface_setting_select** tjänst anrop.
+Den här funktionen väljer en specifik konfiguration för en enhet. När den här konfigurationen är inställd på enheten aktiveras som standard varje enhetsgränssnitt och dess associerade alternativa inställning 0 på enheten. Om enhets-/gränssnittsklassen vill ändra inställningen för ett visst gränssnitt måste den utfärda ett ux_host_stack_interface_setting_select service-anrop. 
 
 ### <a name="parameters"></a>Parametrar
 
-- **konfiguration** Pekar till den konfigurations behållare som ska aktive ras för den här enheten.
+- **konfiguration** Pekare till den konfigurationscontainer som ska aktiveras för den här enheten.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **UX_SUCCESS** (0x00) konfigurations valet har slutförts.
-- **UX_CONFIGURATION_HANDLE_UNKNOWN** (0x51) konfigurations referensen finns inte.
-- **UX_OVER_CURRENT_CONDITION** (0X43) ett över aktuellt villkor finns på bussen för den här konfigurationen.
+- **UX_SUCCESS** (0x00) Valet av konfiguration lyckades.
+- **UX_CONFIGURATION_HANDLE_UNKNOWN** (0x51) Konfigurationshandtaget finns inte.
+- **UX_OVER_CURRENT_CONDITION** (0x43) Ett över aktuellt villkor finns på buss för den här konfigurationen.
 
 ### <a name="example"></a>Exempel
 
@@ -418,7 +418,7 @@ status = ux_host_stack_device_configuration_select(configuration);
 
 ## <a name="ux_host_stack_device_get"></a>ux_host_stack_device_get
 
-Hämta en pekare till en enhets behållare.
+Hämta en pekare till en enhetscontainer.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -428,18 +428,18 @@ UINT ux_host_stack_device_get(
     UX_DEVICE *device);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen returnerar en enhets behållare baserat på dess index. Enhets indexet börjar med 0. Observera att indexet är en ULONG eftersom vi kan ha flera styrenheter och ett byte-index kanske inte räcker till. Enhets indexet ska inte förväxlas med den enhets adress som är buss-/regionsspecifika.
+Den här funktionen returnerar en enhetscontainer baserat på dess index. Enhetsindexet börjar med 0. Observera att indexet är en ULONG eftersom vi kan ha flera styrenheter och ett byteindex kanske inte räcker. Enhetsindexet ska inte förväxlas med den enhetsadress som är bussspecifik.
 
 ### <a name="parameters"></a>Parametrar
 
-- **device_index** Enhetens index.
-- **enhet** Adress till den enhets behållare som ska returneras.
+- **device_index** Index för enheten.
+- **enhet** Adressen till pekaren som enhetscontainern ska returnera.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **UX_SUCCESS** (0x00) enhets containern finns och returneras
+- **UX_SUCCESS** (0x00) Enhetscontainern finns och returneras
 - **UX_DEVICE_HANDLE_UNKNOWN** (0x50) Okänd enhet
 
 ### <a name="example"></a>Exempel
@@ -455,7 +455,7 @@ status = ux_host_stack_device_get(0, device);
 
 ## <a name="ux_host_stack_interface_endpoint_get"></a>ux_host_stack_interface_endpoint_get
 
-Hämta en slut punkts behållare.
+Hämta en slutpunktscontainer.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -466,21 +466,21 @@ UINT ux_host_stack_interface_endpoint_get(
     UX_ENDPOINT *endpoint);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen returnerar en slut punkts behållare baserat på gränssnitts referensen och ett slut punkts index. Det förutsätts att den alternativa inställningen för gränssnittet har marker ATS eller att standardinställningen används innan de slut punkter som genomsöks.
+Den här funktionen returnerar en slutpunktscontainer baserat på gränssnittshandtaget och ett slutpunktsindex. Det förutsätts att den alternativa inställningen för gränssnittet har valts eller att standardinställningen används innan slutpunkterna genomsöks.
 
 ### <a name="parameters"></a>Parametrar
 
-- **gränssnitt** Pekare till den gränssnitts behållare som innehåller den begärda slut punkten.
-- **endpoint_index** Index för slut punkten i det här gränssnittet.
-- **slut punkt** Adress till den slut punkts behållare som ska returneras.
+- **gränssnitt** Pekare till gränssnittscontainern som innehåller den begärda slutpunkten.
+- **endpoint_index** Index för slutpunkten i det här gränssnittet.
+- **slutpunkt** Adressen till den slutpunktscontainer som ska returneras.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **UX_SUCCESS** (0x00) slut punkts containern finns och returneras.
-- Det angivna **UX_INTERFACE_HANDLE_UNKNOWN** -gränssnittet (0x52) finns inte.
-- **UX_ENDPOINT_HANDLE_UNKNOWN** (0X53) slut punkts indexet finns inte.
+- **UX_SUCCESS** (0x00) Slutpunktscontainern finns och returneras.
+- **det UX_INTERFACE_HANDLE_UNKNOWN** (0x52)-gränssnittet finns inte.
+- **UX_ENDPOINT_HANDLE_UNKNOWN** (0x53) Slutpunktsindex finns inte.
 
 ### <a name="example"></a>Exempel
 
@@ -510,7 +510,7 @@ for(endpoint_index = 0;
 
 ## <a name="ux_host_stack_hcd_register"></a>ux_host_stack_hcd_register
 
-Registrera en USB-styrenhet i USB-stacken.
+Registrera en USB-styrenhet till USB-stacken.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -521,23 +521,23 @@ UINT ux_host_stack_hcd_register(
     ULONG hcd_param1, ULONG hcd_param2);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen registrerar en USB-styrenhet till USB-stacken. Det allokerar främst det minne som används av den här styrenheten och skickar initierings kommandot till kontrollanten.
+Den här funktionen registrerar en USB-styrenhet till USB-stacken. Den allokerar främst det minne som används av den här styrenheten och skickar initieringskommandot till kontrollanten.
 
 ### <a name="parameters"></a>Parametrar
 
-- **hcd_name** Namn på värd styrenheten
-- **hcd_function** Funktionen i värd styrenheten som ansvarar för initieringen.
-- **hcd_param1** Den IO-eller minnes resurs som används av HCD.
-- **hcd_param2** IRQ som används av värd styrenheten.
+- **hcd_name** Värdstyrenhetens namn
+- **hcd_function** Funktionen i värdstyrenheten som ansvarar för initieringen.
+- **hcd_param1** I/H eller minnesresursen som används av hcd.
+- **hcd_param2** Den IRQ som används av värdstyrenheten.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **UX_SUCCESS** (0x00) kontrollanten initierades korrekt.
-- **UX_MEMORY_INSUFFICIENT** (0x12) det finns inte tillräckligt med minne för den här styrenheten.
-- **UX_PORT_RESET_FAILED** (0X31) Det gick inte att återställa kontrollanten.
-- **UX_CONTROLLER_INIT_FAILED** (0x32) styrenheten kunde inte initieras korrekt.
+- **UX_SUCCESS** (0x00) Kontrollanten initierades korrekt.
+- **UX_MEMORY_INSUFFICIENT** (0x12) Det finns inte tillräckligt med minne för den här styrenheten.
+- **UX_PORT_RESET_FAILED** (0x31) Återställningen av kontrollanten misslyckades.
+- **UX_CONTROLLER_INIT_FAILED** (0x32) Kontrollanten kunde inte initieras korrekt.
 
 ### <a name="example"></a>Exempel
 
@@ -558,7 +558,7 @@ status = ux_host_stack_hcd_register("ux_hcd_controller",
 
 ## <a name="ux_host_stack_configuration_interface_get"></a>ux_host_stack_configuration_interface_get
 
-Hämta en gränssnitts container pekare.
+Hämta en gränssnittscontainer pekare.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -570,22 +570,22 @@ UINT ux_host_stack_configuration_interface_get (
     UX_INTERFACE **interface);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen returnerar en gränssnitts behållare baserat på en konfigurations referens, ett gränssnitts index och ett alternativ inställnings index.
+Den här funktionen returnerar en gränssnittscontainer baserat på en konfigurationshanterare, ett gränssnittsindex och ett alternativt inställningsindex.
 
 ### <a name="parameters"></a>Parametrar
 
-- **konfiguration** Pekare till den konfigurations behållare som äger gränssnittet.
-- **interface_index** Gränssnitts index som ska genomsökas.
-- **alternate_setting_index** Alternativ i det gränssnitt som ska genomsökas.
-- **gränssnitt** Adress till den gränssnitts container pekare som ska returneras.
+- **konfiguration** Pekare till konfigurationscontainern som äger gränssnittet.
+- **interface_index** Gränssnittsindex som ska genomsökas.
+- **alternate_setting_index** Alternativ inställning i gränssnittet för att söka.
+- **gränssnitt** Adressen till gränssnittscontainern som ska returneras.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **UX_SUCCESS** (0x00) gränssnitts behållaren för gränssnitts indexet och den alternativa inställningen hittades och returnerades.
-- **UX_CONFIGURATION_HANDLE_UNKNOWN** (0x51) konfigurationen finns inte.
-- **UX_INTERFACE_HANDLE_UNKNOWN** (0x52) gränssnittet finns inte.
+- **UX_SUCCESS** (0x00) Gränssnittscontainern för gränssnittsindexet och den alternativa inställningen hittades och returnerades.
+- **UX_CONFIGURATION_HANDLE_UNKNOWN** (0x51) Konfigurationen finns inte.
+- **UX_INTERFACE_HANDLE_UNKNOWN** (0x52) Gränssnittet finns inte.
 
 ### <a name="example"></a>Exempel
 
@@ -609,18 +609,18 @@ Välj en alternativ inställning för ett gränssnitt.
 UINT ux_host_stack_interface_setting_select(UX_INTERFACE *interface);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen väljer en specifik alternativ inställning för ett angivet gränssnitt som tillhör den valda konfigurationen. Den här funktionen används för att ändra från standard alternativ inställningen till en ny inställning eller att gå tillbaka till standard alternativ inställningen. När en ny alternativ inställning väljs, är tidigare slut punkts egenskaper ogiltiga och bör läsas in igen.
+Den här funktionen väljer en specifik alternativ inställning för ett visst gränssnitt som hör till den valda konfigurationen. Den här funktionen används för att ändra från den alternativa standardinställningen till en ny inställning eller för att gå tillbaka till den alternativa standardinställningen. När en ny alternativ inställning väljs är de tidigare slutpunktsegenskaperna ogiltiga och bör läsas in på nytt.
 
 ### <a name="input-parameter"></a>Indataparameter
 
-- **gränssnitt** Pekar till gränssnitts behållaren vars alternativa inställning ska väljas.
+- **gränssnitt** Pekare till gränssnittscontainern vars alternativa inställning ska väljas.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **UX_SUCCESS** (0X00) den alternativa inställningen för det här gränssnittet har marker ATS.
-- **UX_INTERFACE_HANDLE_UNKNOWN** (0x52) gränssnittet finns inte.
+- **UX_SUCCESS** (0x00) Den alternativa inställningen för det här gränssnittet har valts.
+- **UX_INTERFACE_HANDLE_UNKNOWN** (0x52) Gränssnittet finns inte.
 
 ### <a name="example"></a>Exempel
 
@@ -635,7 +635,7 @@ status = ux_host_stack_interface_setting_select(interface);
 
 ## <a name="ux_host_stack_transfer_request_abort"></a>ux_host_stack_transfer_request_abort
 
-Avbryt en väntande överförings förfrågan.
+Avbryt en väntande överföringsbegäran.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -643,17 +643,17 @@ Avbryt en väntande överförings förfrågan.
 UINT ux_host_stack_transfer_request_abort(UX_TRANSFER REQUEST *transfer request);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen avbryter en väntande överförings förfrågan som redan har skickats. Den här funktionen avbryter bara en begäran om överföring. Anropet till funktionen kommer att ha statusen UX_TRANSFER REQUEST_STATUS_ABORT.
+Den här funktionen avbryter en väntande överföringsbegäran som har skickats tidigare. Den här funktionen avbryter bara en specifik överföringsbegäran. Anropet tillbaka till funktionen har UX_TRANSFER REQUEST_STATUS_ABORT status.
 
 ### <a name="parameters"></a>Parametrar
 
-- **överförings förfrågan** Pekare till överförings förfrågan som ska avbrytas.
+- **överföringsbegäran** Pekare till överföringsbegäran som ska avbrytas.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **UX_SUCCESS** (0X00) USB-överföringen för den här överföringsbegäran har avbrutits.
+- **UX_SUCCESS** (0x00) USB-överföringen för den här överföringsbegäran avbröts.
 
 ### <a name="example"></a>Exempel
 
@@ -676,21 +676,21 @@ Begär en USB-överföring.
 UINT ux_host_stack_transfer_request(UX_TRANSFER REQUEST *transfer request);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här funktionen utför en USB-transaktion. Vid inmatning ger överföringsbegäran den valda slut punkts pipe för den här transaktionen och de parametrar som är kopplade till överföringen (data nytto Last, transaktions längd). För Control pipe blockeras transaktionen och kommer bara att returneras när de tre faserna av kontroll överföringen har slutförts eller om det finns ett tidigare fel. För andra pipes kommer USB-stacken att schemalägga transaktionen på USB-enheten, men väntar inte på slut för ande. Varje överföringsbegäran för icke-blockerande pipes måste ange en rutin hanterare för slut för ande.
+Den här funktionen utför en USB-transaktion. Vid inmatningen ger överföringsbegäran den slutpunktspipe som valts för den här transaktionen och de parametrar som är associerade med överföringen (datanyttolast, transaktionslängd). För Kontrollpipe- blockeras transaktionen och returneras endast när de tre faserna av kontrollöverföringen har slutförts eller om det finns ett tidigare fel. För andra pipes schemalägger USB-stacken transaktionen via USB men väntar inte på att den ska slutföras. Varje överföringsbegäran för icke-blockerande pipes måste ange en slutföranderutinhanterare.
 
-När funktions anropet returnerar, bör statusen för överförings förfrågan undersökas eftersom den innehåller resultatet av transaktionen.
+När funktionsanropet returnerar bör status för överföringsbegäran undersökas eftersom den innehåller resultatet av transaktionen.
 
 ### <a name="input-parameter"></a>Indataparameter
 
-- **transfer_request** Pekare till överförings förfrågan. Överföringsbegäran innehåller all nödvändig information som krävs för överföringen.
+- **transfer_request** Pekare till överföringsbegäran. Överföringsbegäran innehåller all nödvändig information som krävs för överföringen.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **UX_SUCCESS** (0X00) USB-överföringen av denna överföringsbegäran schemalades korrekt. Status koden för överföringsbegäran bör undersökas när överföringsbegäran slutförs.
-- **UX_MEMORY_INSUFFICIENT** (0x12) det finns inte tillräckligt med minne för att allokera nödvändiga styrenhets resurser.
-- **UX_TRANSFER_NOT_READY** (0x25) enheten var i ett ogiltigt tillstånd – måste vara ansluten, adresserad eller konfigurerad.
+- **UX_SUCCESS** (0x00) USB-överföringen för den här överföringsbegäran har schemalagts korrekt. Statuskoden för överföringsbegäran bör undersökas när överföringsbegäran har slutförts.
+- **UX_MEMORY_INSUFFICIENT** (0x12) Det finns inte tillräckligt med minne för att allokera nödvändiga kontrollantresurser.
+- **UX_TRANSFER_NOT_READY** (0x25) Enheten var i ett ogiltigt tillstånd – måste vara ANSLUTEN, ADRESSERad eller KONFIGURERAD.
 
 ### <a name="example"></a>Exempel:
 

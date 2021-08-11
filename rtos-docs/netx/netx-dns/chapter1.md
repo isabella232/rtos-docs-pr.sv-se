@@ -1,80 +1,80 @@
 ---
-title: Kapitel 1 – Introduktion till Azure återställnings tider NetX DNS-klienten
-description: Azure återställnings tider NetX DNS tillhandahåller en distribuerad databas som innehåller mappning mellan domän namn och fysiska IP-adresser.
+title: Kapitel 1 – Introduktion till Azure RTOS NetX DNS-klienten
+description: Den Azure RTOS NetX DNS tillhandahåller en distribuerad databas som innehåller mappning mellan domännamn och fysiska IP-adresser.
 author: philmea
 ms.author: philmea
 ms.date: 06/04/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 3426b0895e259bd70e758aae8b56349082a3a95a
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: fda8c5b1bdb35e8312204374592e411a6a1e44f79a4a75a035a7886223c22b53
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104826775"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116796401"
 ---
-# <a name="chapter-1---introduction-to-the-azure-rtos-netx-dns-client"></a>Kapitel 1 – Introduktion till Azure återställnings tider NetX DNS-klienten
+# <a name="chapter-1---introduction-to-the-azure-rtos-netx-dns-client"></a>Kapitel 1 – Introduktion till Azure RTOS NetX DNS-klienten
 
-Azure återställnings tider NetX DNS tillhandahåller en distribuerad databas som innehåller mappning mellan domän namn och fysiska IP-adresser. Databasen kallas *distribuerad* eftersom det inte finns någon enskild entitet på Internet som innehåller den fullständiga mappningen. En entitet som underhåller en del av mappningen kallas för en DNS-server. Internet består av flera DNS-servrar, som var och en innehåller en delmängd av databasen. DNS-servrar svarar också på DNS-klientcertifikat för mappnings information för domän namn, endast om servern har den begärda mappningen.
+Den Azure RTOS NetX DNS tillhandahåller en distribuerad databas som innehåller mappning mellan domännamn och fysiska IP-adresser. Databasen kallas distribuerad eftersom *det inte* finns någon enskild entitet på Internet som innehåller den fullständiga mappningen. En entitet som underhåller en del av mappningen kallas för en DNS-server. Internet består av flera DNS-servrar som var och en innehåller en delmängd av databasen. DNS-servrar svarar också på DNS-klientbegäranden om domännamnsmappningsinformation, endast om servern har den begärda mappningen.
 
-DNS-klientcertifikatet för NetX tillhandahåller programmet med tjänster för att begära mappnings information från en eller flera DNS-servrar.
+DNS-klientprotokollet för NetX ger programmet tjänster för att begära mappningsinformation från en eller flera DNS-servrar.
 
-## <a name="dns-client-setup"></a>DNS-klient installation
+## <a name="dns-client-setup"></a>Konfiguration av DNS-klient
 
-För att kunna fungera korrekt kräver DNS-klientprogrammet att en NetX-IP-instans redan har skapats.
+För att fungera korrekt kräver DNS-klientpaketet att en NetX IP-instans redan har skapats.
 
-När du har skapat DNS-klienten måste programmet lägga till en eller flera DNS-servrar i Server listan som underhålls av DNS-klienten. Om du vill lägga till DNS-servrar använder programmet tjänsten *nx_dns_server_add* .
+När du har skapat DNS-klienten måste programmet lägga till en eller flera DNS-servrar i serverlistan som underhålls av DNS-klienten. För att lägga till DNS-servrar använder programmet *nx_dns_server_add tjänsten.*
 
-Om alternativet NX_DNS_IP_GATEWAY_SERVER är aktiverat och gateway-adressen för IP-instansen inte är noll läggs gatewayen för IP-instansen automatiskt till som den primära DNS-servern. Om DNS-serverns information inte är statiskt känd kan den också härledas via Dynamic Host Configuration Protocol (DHCP) för NetX. Mer information finns i användar handboken för DHCP-NetX.
+Om alternativet NX_DNS_IP_GATEWAY_SERVER aktiverat och IP-instansens gatewayadress inte är noll läggs IP-instansgatewayen automatiskt till som den primära DNS-servern. Om DNS-serverinformationen inte är statiskt känd kan den också härleds via Dynamic Host Configuration Protocol (DHCP) för NetX. Mer information finns i NetX DHCP-användarhandboken.
 
-DNS-klienten kräver en modempool för överföring av DNS-meddelanden. Som standard skapar DNS-klienten den här poolen när tjänsten *nx_dns_create* anropas. Konfigurations alternativen NX_DNS_PACKET_PAYLOAD och NX_DNS_PACKET_POOL_SIZE tillåter att programmet fastställer paketets nytto last och paketets pool storlek (t. ex. antalet paket) för den här poolen. De här alternativen beskrivs i avsnittet "konfigurations alternativ" i kapitel två.
+DNS-klienten kräver en paketpool för överföring av DNS-meddelanden. Som standard skapar DNS-klienten den här paketpoolen *när nx_dns_create tjänsten* anropas. Konfigurationsalternativen NX_DNS_PACKET_PAYLOAD och NX_DNS_PACKET_POOL_SIZE att programmet kan fastställa paketnyttolasten och paketpoolens storlek (t.ex. antal paket) för den här paketpoolen. Dessa alternativ beskrivs i avsnittet "Konfigurationsalternativ" i kapitel två.
 
-Ett alternativ till DNS-klienten som skapar en egen modempool är för att programmet ska skapa poolen och ange den som DNS-klientens modempool med hjälp av tjänsten *nx_dns_packet_pool_set* . För att göra det måste NX_DNS_CLIENT_USER_CREATE_PACKET_POOL alternativet definieras. Det här alternativet kräver också en tidigare skapad modempool som använder *nx_packet_pool_create* som paketets pool pekare in på *nx_dns_packet_pool_set*. När DNS-klienttjänsten tas bort ansvarar programmet för att ta bort poolen för DNS-klienter om NX_DNS_CLIENT_USER_CREATE_PACKET_POOL är aktive rad om den inte längre behövs.
+Ett alternativ till dns-klienten som skapar en egen paketpool är att programmet skapar paketpoolen och anger den som DNS-klientens paketpool med *hjälp av nx_dns_packet_pool_set tjänsten.* För att göra det måste NX_DNS_CLIENT_USER_CREATE_PACKET_POOL här alternativet definieras. Det här alternativet kräver också en tidigare skapad paketpool *med nx_packet_pool_create* som indata från paketpoolens pekare *till nx_dns_packet_pool_set*. När DNS-klientinstansen tas bort ansvarar programmet för att ta bort DNS-klientens paketpool om NX_DNS_CLIENT_USER_CREATE_PACKET_POOL är aktiverad om den inte längre behövs.
 
 >[!NOTE] 
-> För program som väljer att tillhandahålla en egen modempool med hjälp av **alternativet NX_DNS_CLIENT_USER_CREATE_PACKET_POOL** måste paket storleken kunna innehålla den maximala storleken för DNS-massage (512 byte) plus rum för UDP-huvud, IPv4-SIDHUVUD och Mac-huvudet.
+> För program som väljer att tillhandahålla en egen paketpool med hjälp av **NX_DNS_CLIENT_USER_CREATE_PACKET_POOL-alternativet** måste paketstorleken kunna innehålla DNS-maximal storlek (512 byte) plus rum för UDP-huvud, IPv4-huvud och MAC-huvud.
 
 ## <a name="dns-messages"></a>DNS-meddelanden
 
-DNS har en mycket enkel mekanism för att hämta mappning mellan värdnamn och IP-adresser. För att hämta en mappning förbereder DNS-klienten ett DNS-frågemeddelanden som innehåller namnet eller IP-adressen som måste matchas. Meddelandet skickas sedan till den första DNS-servern i Server listan. Om servern har en sådan mappning svarar den på DNS-klienten med ett DNS-svarsmeddelande som innehåller den begärda mappnings informationen. Om servern inte svarar frågar DNS-klienten nästa server i listan tills alla DNS-servrar har frågats. Om inget svar från alla DNS-servrar tas emot har DNS-klienten återförsök för att överföra DNS-meddelandet igen. Vid återsändning av en DNS-fråga dubbleras tids gränsen för återöverföring. Den här processen fortsätter tills Max gränsen för överföring (definieras som NX_DNS_MAX_RETRANS_TIMEOUT i *nxd_dns. h*) har nåtts eller tills ett lyckat svar tas emot från servern.
+DNS har en mycket enkel metod för att hämta mappning mellan värdnamn och IP-adresser. För att hämta en mappning förbereder DNS-klienten ett DNS-frågemeddelande som innehåller det namn eller den IP-adress som måste matchas. Meddelandet skickas sedan till den första DNS-servern i serverlistan. Om servern har en sådan mappning svarar den DNS-klienten med hjälp av ett DNS-svarsmeddelande som innehåller den begärda mappningsinformationen. Om servern inte svarar frågar DNS-klienten nästa server i listan tills alla dess DNS-servrar har frågats. Om inget svar från alla dess DNS-servrar tas emot, har DNS-klienten logik för omförsök för att skicka DNS-meddelandet igen. Vid återsändning av en DNS-fråga fördubblas tidsgränsen för återöverföring. Den här processen fortsätter tills den maximala tidsgränsen för överföring (definieras som *NX_DNS_MAX_RETRANS_TIMEOUT i nxd_dns.h*) har nåtts eller tills ett lyckat svar tas emot från den servern.
 
-NetX DNS-klient kan utföra IPv4-adress ökningar (typ A) genom att anropa *nx_dns_host_by_name_get eller* *nx_dns_ipv4_address_by_name_get*. DNS-klienten kan utföra omvänd sökning av IP-adresser (Skriv PTR-frågor) för att hämta webb värd namn med hjälp av *nx_dns_host_by_address_get*.
+NetX DNS-klienten kan utföra IPv4-adressuppslag (typ A) genom *att anropa nx_dns_host_by_name_get eller* *nx_dns_ipv4_address_by_name_get*. DNS-klienten kan utföra omvända sökningar av IP-adresser (typ PTR-frågor) för att hämta webbvärdnamn med *hjälp av nx_dns_host_by_address_get*.
 
-DNS-meddelanden använder UDP-protokollet för att skicka begär Anden och fält svar. En DNS-Server lyssnar på port nummer 53 för frågor från klienter. Därför måste UDP-tjänsterna vara aktiverade i NetX med hjälp av tjänsten ***nx_udp_enable** _ på en tidigare skapad IP-instans (_ *_nx_ip_create_* *).
+DNS-meddelanden använder UDP-protokollet för att skicka begäranden och fältsvar. En DNS-server lyssnar på portnummer 53 efter frågor från klienter. Därför måste UDP-tjänster aktiveras i NetX med hjälp av tjänsten ***nx_udp_enable** _ på en tidigare skapad IP-instans (_*_nx_ip_create_**).
 
-I det här läget är DNS-klienten redo att ta emot begär Anden från programmet och skicka DNS-frågor.
+I det här läget är DNS-klienten redo att acceptera begäranden från programmet och skicka ut DNS-frågor.
 
-## <a name="extended-dns-resource-record-types"></a>Utökade DNS-resurs post typer
+## <a name="extended-dns-resource-record-types"></a>Utökade DNS-resursposttyper
 
-Om NX_DNS_ENABLE_EXTENDED_RR_TYPES är aktive rad stöder NetX DNS-klienten även följande frågor om post typer:
+Om NX_DNS_ENABLE_EXTENDED_RR_TYPES har aktiverats stöder NetX DNS-klienten även följande posttypsfrågor:
 
-- **CNAME**: innehåller det kanoniska namnet för ett alias
+- **CNAME:** innehåller det kanoniska namnet för ett alias
 
-- **Txt**: innehåller en text sträng
+- **TXT**: innehåller en textsträng
 
-- **Ns**: innehåller en auktoritativ namnserver
+- **NS:** innehåller en auktoritativ namnserver
 
-- **SOA**: innehåller start för en zon för auktoritet
+- **SOA:** innehåller början av en auktoritetszon
 
-- **MX**: används för e-postutbyte
+- **MX:** används för e-postutbyte
 
-- **SRV**: innehåller information om den tjänst som erbjuds av domänen
+- **SRV:** innehåller information om den tjänst som erbjuds av domänen
 
-Med undantag för CNAME-och TXT-posttyper måste programmet tillhandahålla en 4-byte-justerad buffert för att ta emot DNS-dataposten.
+Med undantag för posttyperna CNAME och TXT måste programmet ange en 4 byte-justerad buffert för att ta emot DNS-dataposten.
 
-I NetX DNS-klient lagras post data på ett sådant sätt för att effektivt utnyttja buffertutrymme.
+I NetX DNS-klienten lagras postdata på ett sådant sätt att du på bästa sätt kan använda buffertutrymmet på bästa sätt.
 
-För de frågor vars post typer har variabel data längd, till exempel NS-poster vars värdnamn är varierande längd, sparar NetX DNS-klienten data på följande sätt. Bufferten som anges i DNS-klientens fråga är ordnad i ett området med fasta längd data och ett del av ostrukturerat minne. Den övre delen av minnesbufferten är indelad i 4 bytes justerade post poster. Varje post post innehåller IP-adressen och en pekare till data för variabel längd för den IP-adressen. Variabla längd data för varje IP-adress lagras i det ostrukturerade områdets minne som börjar i slutet av minnesbufferten. Variabla längd data för varje post i följd sparas i nästa områdes minne intill variabel data för föregående post poster. Därmed växer variabeln data mot det strukturerade minnes området som innehåller post posterna tills det inte finns tillräckligt med minne för att lagra ytterligare post-och variabel data.
+För de frågor vars posttyper har variabel datalängd, till exempel NS-poster vars värdnamn har variabel längd, sparar NetX DNS-klienten data på följande sätt. Bufferten som anges i DNS-klientfrågan är ordnad i ett område med data med fast längd och ett område med ostrukturerat minne. Överst i minnesbufferten är indelade i postposter som är justerade med 4 byte. Varje postpost innehåller IP-adressen och en pekare till variabellängdsdata för den IP-adressen. Variabellängdsdata för varje IP-adress lagras i det ostrukturerade områdets minne med början i slutet av minnesbufferten. Variabellängdsdata för varje efterföljande postpost sparas i nästa områdesminne bredvid tidigare poster för variabeldata. Därför "växer" variabeldata mot det strukturerade området i minnet som innehåller postposterna tills det inte finns tillräckligt med minne för att lagra en annan postpost och variabeldata.
 
 Detta visas i bilden nedan:
 
-![Diagram över ett exempel på ett D N S domän namn (N) data lagring](media/image1.png)
+![Diagram över ett exempel på datalagring för D N S-domännamn (N S)](media/image1.png)
 
-Exemplet på DNS-datalagringen (NS) för DNS-domännamn visas ovan.
+Exemplet på datalagring för DNS-domännamn (NS) visas ovan.
 
-NetX DNS-klientfrågor med post Storage-formatet returnerar antalet poster som har sparats i postbufferten. Med den här informationen kan programmet extrahera NS-poster från bufferten för poster.
+NetX DNS-klientfrågor med postlagringsformatet returnerar antalet poster som sparats i postbufferten. Den här informationen gör att programmet kan extrahera NS-poster från postbufferten.
 
-Ett exempel på en DNS-klient fråga som lagrar DNS-data för variabel längd med det här post lagrings formatet visas nedan:
+Ett exempel på en DNS-klientfråga som lagrar DNS-data med variabel längd med det här postlagringsformatet visas nedan:
 
 ```c
 UINT     _nx_dns_domain_name_server_get(NX_DNS *dns_ptr, UCHAR  *host_name, 
@@ -86,21 +86,21 @@ Mer information finns i kapitel 3, "Beskrivning av DNS-klienttjänster".
 
 ## <a name="dns-cache"></a>DNS-cache
 
-Om NX_DNS_CACHE_ENABLE är aktive rad stöder NetX DNS-klienten funktionen DNS-cache. När du har skapat DNS-klienten kan programmet anropa API *-nx_dns_cache_initialize ()* för att ange det särskilda DNS-cacheminnet. Om Aktivera DNS-cache-funktion hittar DNS-klienten det tillgängliga svaret från DNS-cachen innan den börjar skicka DNS-fråga, om du hittar det tillgängliga svaret, returnerar svaret till programmet, annars skickas ett meddelande till DNS-servern i DNS-klienten och väntar på svar. När DNS-klienten hämtar svarsmeddelandet och det finns ledigt cache tillgängligt, returnerar DNS-klienten svaret till programmet och lägger även till svaret som resurs post i DNS-cachen.
+Om NX_DNS_CACHE_ENABLE är aktiverat stöder NetX DNS-klienten DNS Cache-funktionen. När du har skapat DNS-klienten kan programmet anropa *API:et nx_dns_cache_initialize() för* att ange den särskilda DNS-cachen. Om du aktiverar funktionen DNS Cache hittar DNS-klienten det tillgängliga svaret från DNS Cache innan börjar skicka DNS-fråga. Om du hittar det tillgängliga svaret returnerar den svaret direkt till programmet. Annars skickar DNS-klienten frågemeddelandet till DNS-servern och väntar på svaret. När DNS-klienten får svarsmeddelandet och det finns ledigt cacheminne tillgängligt returnerar DNS-klienten svaret till programmet och lägger även till svaret som resurspost i DNS-cachen.
 
-Varje svar är en data struktur *NX_DNS_RR* (resurs post) i cacheminnet. Strängar (resurs post namn och data) i poster är variabel längd och lagras därför inte i NX_DNS_RRs strukturen. Posten innehåller pekare till den faktiska minnes platsen där strängarna lagras. Sträng tabellen och posterna delar cacheminnet. Poster lagras från cachens början och växer mot slutet av cacheminnet. Sträng tabellen börjar från slutet av cacheminnet och växer till början av cachen. Varje sträng i sträng tabellen har fältet längd och ett räknar fält. När en sträng läggs till i sträng tabellen, och om samma sträng redan finns i tabellen, ökar räknarvärdet och inget minne allokeras för strängen. Cachen anses vara full om inga fler resurs poster eller nya strängar kan läggas till i cachen.
+Varje svarar på en *datastruktur NX_DNS_RR* (Resurspost) i cacheminnet. Strängar (resurspostnamn och data) i Poster är variabel längd och lagras därför inte i NX_DNS_RR struktur. Posten innehåller pekare till den faktiska minnesplatsen där strängarna lagras. Strängtabellen och posterna delar cachen. Poster lagras från början av cachen och växer mot slutet av cachen. Strängtabellen startar från slutet av cachen och växer mot början av cachen. Varje sträng i strängtabellen har ett längdfält och ett räknarfält. Om samma sträng redan finns i tabellen när en sträng läggs till i strängtabellen ökas räknarvärdet och inget minne allokeras för strängen. Cachen anses vara full om inga fler resursposter eller nya strängar kan läggas till i cacheminnet.
 
-## <a name="dns-client-limitations"></a>Begränsningar för DNS-klient
+## <a name="dns-client-limitations"></a>Begränsningar för DNS-klienter
 
-DNS-klienten har stöd för en DNS-begäran åt gången. Trådar som försöker göra en annan DNS-begäran blockeras tillfälligt tills den tidigare DNS-begäran har slutförts.
+DNS-klienten stöder en DNS-begäran i taget. Trådar som försöker göra en annan DNS-begäran blockeras tillfälligt tills den tidigare DNS-begäran har slutförts.
 
-DNS-klienten NetX använder inte data från auktoritativa svar för att vidarebefordra ytterligare DNS-frågor till andra DNS-servrar.
+NetX DNS-klienten använder inte data från auktoritativa svar för att vidarebefordra ytterligare DNS-frågor till andra DNS-servrar.
 
-## <a name="dns-rfcs"></a>DNS-RFC
+## <a name="dns-rfcs"></a>DNS-RFC:er
 
-NetX DNS är kompatibelt med följande RFC: er:
+NetX DNS är kompatibelt med följande RFC:er:
 
-- RFC1034 DOMÄN NAMN – KONCEPT OCH ANLÄGGNINGAR
-- RFC1035 DOMÄN NAMN – IMPLEMENTERING OCH SPECIFIKATION
-- RFC1480 USA-domänen
-- RFC 2782 A DNS RR för att ange plats för tjänster (DNS SRV)
+- RFC1034-DOMÄNNAMN – BEGREPP OCH ANLÄGGNINGAR
+- RFC1035-DOMÄNNAMN – IMPLEMENTERING OCH SPECIFIKATION
+- RFC1480– domänen USA
+- RFC 2782 En DNS-RR för att ange platsen för tjänster (DNS SRV)

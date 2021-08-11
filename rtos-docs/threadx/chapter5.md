@@ -1,96 +1,96 @@
 ---
-title: Kapitel 5 – driv rutiner för Azure återställnings tider ThreadX
-description: Det här kapitlet innehåller en beskrivning av enhets driv rutiner för Azure återställnings tider-ThreadX.
+title: Kapitel 5 – Enhetsdrivrutiner för Azure RTOS ThreadX
+description: Det här kapitlet innehåller en beskrivning av enhetsdrivrutiner för Azure RTOS ThreadX.
 author: philmea
 ms.author: philmea
 ms.date: 05/04/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 2432b291f2b3fa7d6d798b8b4c187dd20b97db6b
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: fd31c586a8b582215d2f0e54e3e543cd1127594599162ca93bbba69b07565f12
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104827357"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116791267"
 ---
-# <a name="chapter-5---device-drivers-for-azure-rtos-threadx"></a>Kapitel 5 – driv rutiner för Azure återställnings tider ThreadX
+# <a name="chapter-5---device-drivers-for-azure-rtos-threadx"></a>Kapitel 5 – Enhetsdrivrutiner för Azure RTOS ThreadX
 
-Det här kapitlet innehåller en beskrivning av enhets driv rutiner för Azure återställnings tider-ThreadX. Informationen som presenteras i det här kapitlet är utformad för att hjälpa utvecklare att skriva programspecifika driv rutiner.
+Det här kapitlet innehåller en beskrivning av enhetsdrivrutiner för Azure RTOS ThreadX. Informationen i det här kapitlet är utformad för att hjälpa utvecklare att skriva programspecifika drivrutiner.
 
-## <a name="device-driver-introduction"></a>Introduktion till driv rutin
+## <a name="device-driver-introduction"></a>Introduktion till enhetsdrivrutiner
 
-Kommunikation med den externa miljön är en viktig komponent i de flesta inbäddade program. Den här kommunikationen sker via maskin varu enheter som är tillgängliga för den inbäddade program varan. De program varu komponenter som ansvarar för att hantera sådana enheter kallas ofta för *enhets driv rutiner*.
+Kommunikation med den externa miljön är en viktig komponent i de flesta inbäddade program. Den här kommunikationen sker via maskinvaruenheter som är tillgängliga för inbäddad programvara. De programvarukomponenter som ansvarar för att hantera sådana enheter kallas ofta *enhetsdrivrutiner.*
 
-Enhets driv rutiner i Embedded är real tids system program beroende av varandra. Detta är sant för två huvudsakliga orsaker: den stora mångfalden av mål maskin vara och de lika stora prestanda kraven för program i real tid. Därför är det praktiskt taget omöjligt att tillhandahålla en gemensam uppsättning driv rutiner som uppfyller kraven för varje program. Av dessa skäl är informationen i det här kapitlet utformad för att hjälpa användare att anpassa driv rutiner för ThreadX-driv rutinen *från hylla* och skriva egna specifika driv rutiner.
+Enhetsdrivrutiner i inbäddade realtidssystem är beroende av programmet. Detta gäller av två huvudsakliga skäl: den stora variationen av målmaskinvara och de lika stora prestandakrav som gäller för realtidsprogram. Därför är det praktiskt taget omöjligt att tillhandahålla en gemensam uppsättning drivrutiner som uppfyller kraven för varje program. Av dessa skäl är informationen i det här  kapitlet utformad för att hjälpa användarna att anpassa de gamla ThreadX-enhetsdrivrutinerna och skriva egna specifika drivrutiner.
 
-## <a name="driver-functions"></a>Driv rutins funktioner
+## <a name="driver-functions"></a>Drivrutinsfunktioner
 
-ThreadX enhets driv rutiner består av åtta grundläggande funktionella områden, enligt följande.
+ThreadX-enhetsdrivrutiner består av åtta grundläggande funktionsområden, enligt följande.
 
-- **Driv rutins initiering**
-- **Driv rutins kontroll**
-- **Driv rutins åtkomst**
-- **Driv rutins Indatatyp**
-- **Driv rutins utdata**
-- **Driv rutins avbrott**
-- **Driv rutins status**
-- **Driv rutins avslutning**
+- **Drivrutinsinitiering**
+- **Drivrutinskontroll**
+- **Drivrutinsåtkomst**
+- **Drivrutinsinmatning**
+- **Drivrutinsutdata**
+- **Drivrutinsavbrott**
+- **Drivrutinsstatus**
+- **Drivrutinsavslut**
 
-Med undantag för initiering, är varje funktions områden valfritt. Dessutom är den exakta bearbetningen i varje zon specifika för enhets driv rutinen.
+Med undantag för initiering är varje drivrutinsfunktionsområde valfritt. Dessutom är den exakta bearbetningen i varje område specifik för enhetsdrivrutinen.
 
-### <a name="driver-initialization"></a>Driv rutins initiering
-Det här funktions avsnittet ansvarar för initiering av den faktiska maskin varu enheten och de interna data strukturerna för driv rutinen. Det är inte tillåtet att anropa andra driv rutins tjänster förrän initieringen är klar.
+### <a name="driver-initialization"></a>Drivrutinsinitiering
+Det här funktionsområdet ansvarar för initieringen av den faktiska maskinvaruenheten och drivrutinens interna datastrukturer. Det går inte att anropa andra drivrutinstjänster förrän initieringen är klar.
 
 > [!NOTE]
-> * Driv Rutinens initierings funktions komponent anropas vanligt vis från ***tx_application_define** _-funktionen eller från en initierings Thread._
+> *Drivrutinens initieringsfunktionskomponent anropas vanligtvis från funktionen ***tx_application_define** _ eller från en thread._
 
-### <a name="driver-control"></a>Driv rutins kontroll
+### <a name="driver-control"></a>Drivrutinskontroll
 
-När driv rutinen har initierats och är klar för drift är det här funktions avsnittet ansvarigt för körnings kontroll. Vanligt vis består körnings kontroll av att göra ändringar i den underliggande maskin varu enheten. Exempel på detta är att ändra överföringshastigheten för en seriell enhet eller att söka efter en ny sektor på en disk.
+När drivrutinen har initierats och är redo för drift ansvarar det här funktionsområdet för körningskontrollen. Körningskontrollen består vanligtvis av att göra ändringar i den underliggande maskinvaruenheten. Exempel på detta är att ändra överföringshastigheten för en seriell enhet eller söka efter en ny sektor på en disk.
 
-### <a name="driver-access"></a>Driv rutins åtkomst
+### <a name="driver-access"></a>Drivrutinsåtkomst
 
-Vissa enhets driv rutiner anropas bara från en enda program tråd. I sådana fall behövs inte det här funktions fältet. I program där flera trådar behöver åtkomst till samtidiga driv rutiner måste dock deras interaktion kontrol leras genom att lägga till tilldelnings-/publicerings anläggningar i enhets driv rutinen. Alternativt kan programmet använda en semafor för att kontrol lera åtkomsten till driv rutinen och undvika extra kostnader i driv rutinen.
+Vissa enhetsdrivrutiner anropas bara från en enda programtråd. I sådana fall behövs inte det här funktionsområdet. Men i program där flera trådar behöver samtidig drivrutinsåtkomst måste interaktionen styras genom att lägga till tilldelnings- och lanseringsmöjligheter i enhetsdrivrutinen. Programmet kan också använda en semaphore för att styra drivrutinsåtkomsten och undvika extra kostnader och problem i drivrutinen.
 
-### <a name="driver-input"></a>Driv rutins Indatatyp
+### <a name="driver-input"></a>Drivrutinsinmatning
 
-Det här funktions avsnittet ansvarar för all enhets information. Huvud problemen som är kopplade till driv rutins inflödet omfattar vanligt vis hur indatamängden buffras och hur trådar väntar på sådana indatatyper.
+Det här funktionsområdet ansvarar för alla enhetsindata. Huvudproblemen som är associerade med drivrutinsinmatningen omfattar vanligtvis hur indata buffrar och hur trådar väntar på sådana indata.
 
-### <a name="driver-output"></a>Driv rutins utdata
+### <a name="driver-output"></a>Drivrutinsutdata
 
-Det här funktions avsnittet ansvarar för all enhets utdata. Huvud problemen som är associerade med driv rutins utdata omfattar vanligt vis hur utdata buffras och hur trådar väntar på att utföra utdata.
+Det här funktionsområdet ansvarar för alla enhetsutdata. Huvudproblemen som är associerade med drivrutinsutdata handlar vanligtvis om hur utdata buffrar och hur trådar väntar på att utföra utdata.
 
-### <a name="driver-interrupts"></a>Driv rutins avbrott
+### <a name="driver-interrupts"></a>Drivrutinsavbrott
 
-De flesta real tids system är beroende av maskin varu avbrott för att meddela driv rutinen för enhetens indata, utdata, kontroll och fel händelser. Avbrott ger en garanterad svars tid för sådana externa händelser. I stället för avbrott kan driv rutins program varan regelbundet kontrol lera den externa maskin varan för sådana händelser. Den här tekniken kallas *avsökning*. Det är mindre i real tid än avbrott, men avsökningen kan vara begriplig för vissa mindre real tids program.
+De flesta realtidssystem förlitar sig på maskinvaruavbrott för att meddela drivrutinen om enhetsindata, utdata, kontroll och felhändelser. Avbrott ger en garanterad svarstid för sådana externa händelser. I stället för avbrott kan drivrutinsprogramvaran regelbundet kontrollera den externa maskinvaran efter sådana händelser. Den här tekniken kallas *avsökning.* Det är mindre realtid än avbrott, men avsökning kan vara meningsfullt för vissa mindre realtidsprogram.
 
-### <a name="driver-status"></a>Driv rutins status
+### <a name="driver-status"></a>Drivrutinsstatus
 
-Detta funktions områden ansvarar för att tillhandahålla körnings status och statistik som är associerad med driv rutins åtgärden. Information som hanteras av detta funktions områden innehåller vanligt vis följande.
+Det här funktionsområdet ansvarar för att tillhandahålla körningsstatus och statistik som är associerad med drivrutinsåtgärden. Information som hanteras av det här funktionsområdet omfattar vanligtvis följande.
 
-- Aktuell enhets status
-- Inkommande byte
-- Antal utdata
-- Antal enhets fel
+- Aktuell enhetsstatus
+- Byte för indata
+- Byte för utdata
+- Antal enhetsfel
 
-### <a name="driver-termination"></a>Driv rutins avslutning
+### <a name="driver-termination"></a>Drivrutinsavslut
 
-Det här funktions fältet är valfritt. Det krävs endast om driv rutinen och/eller den fysiska maskin varu enheten måste stängas av. När den har avslut ATS får driv rutinen inte anropas igen förrän den har initierats om.
+Det här funktionsområdet är valfritt. Det krävs bara om drivrutinen och/eller den fysiska maskinvaruenheten måste stängas av. När den har avslutats får drivrutinen inte anropas igen förrän den har initierats om.
 
-## <a name="simple-driver-example"></a>Exempel på enkel driv rutin
+## <a name="simple-driver-example"></a>Exempel på enkel drivrutin
 
-Ett exempel är det bästa sättet att beskriva en enhets driv rutin. I det här exemplet förutsätter driv rutinen en enkel seriell maskin varu enhet med en konfigurations registrering, en inmatnings registrering och en utmatnings registrering. Det här enkla driv rutins exemplet illustrerar funktions områdena initiering, indata, utdata och avbrott.
+Ett exempel är det bästa sättet att beskriva en enhetsdrivrutin. I det här exemplet förutsätter drivrutinen en enkel seriell maskinvaruenhet med ett konfigurationsregister, ett indataregister och ett utdataregister. Det här enkla drivrutinsexempel illustrerar initierings-, indata-, utdata- och avbrottsfunktionsområden.
 
-### <a name="simple-driver-initialization"></a>Enkel driv Rutins initiering
+### <a name="simple-driver-initialization"></a>Enkel drivrutinsinitiering
 
-***Tx_sdriver_initialize*** funktionen för den enkla driv rutinen skapar två räknar semaforer som används för att hantera driv Rutinens indata-och utdata-åtgärd. Semaforen för indatamängden anges av den inmatade ISR när ett meddelande tas emot av den seriella maskin varu enheten. Därför skapas indatamängds-semaforen med ett inledande antal noll.
+Funktionen ***tx_sdriver_initialize*** för den enkla drivrutinen skapar två inventerings-semaforer som används för att hantera drivrutinens indata- och utdataåtgärd. Indata-semaphore anges av indata-ISR när ett tecken tas emot av den seriella maskinvaruenheten. Därför skapas indatasemaphore med det inledande antalet noll.
 
-I motsatsen anger utdata-semaforen tillgängligheten för den seriella maskin varu registreringen. Den skapas med ett värde på en som anger att sändnings registreringen är tillgänglig först.
+Omvänt anger utdata-semaphore tillgängligheten för seriemaskinvarans överföringsregister. Den skapas med värdet ett för att indikera att överföringsregistret är tillgängligt från början.
 
-Initierings funktionen ansvarar också för att installera avbrotts vektor hanterare på låg nivå för aviseringar om indata och utdata. Precis som andra ThreadX avbrotts tjänst rutiner måste den lägsta nivån anropa ***_tx_thread_context_save** _ innan du anropar ISR-drivrutinen för enkel driv rutin. När ISR-drivrutinen returnerar, måste den lågnivå hanteraren anropa _ * _ _tx_thread_context_restore_* *.
+Initieringsfunktionen ansvarar också för att installera hanteraren för vektoravbrott på låg nivå för indata- och utdatameddelanden. Precis som andra ThreadX-avbrottstjänstrutiner måste hanteraren på låg nivå anropa ***_tx_thread_context_save** _ innan den enkla drivrutinen ISR anropas. När drivrutinens ISR returneras måste hanteraren på låg nivå anropa _*_ _tx_thread_context_restore_**.
 
 > [!IMPORTANT]
-> * Det är viktigt att initiering anropas före någon av de andra driv rutins funktionerna. Normalt kallas driv rutins initiering från ***tx_application_define***.
+> *Det är viktigt att initieringen anropas innan någon av de andra drivrutinsfunktionerna. Vanligtvis anropas drivrutinsinitiering från ***tx_application_define***.
 
 ```c
 VOID tx_sdriver_initialize(VOID)
@@ -110,18 +110,18 @@ VOID tx_sdriver_initialize(VOID)
     generation, baud rate, stop bits, etc. */
 }
 ```
-**BILD 9. Enkel driv Rutins initiering**
+**BILD 9. Enkel drivrutinsinitiering**
 
-### <a name="simple-driver-input"></a>Enkel driv Rutins Indatatyp
+### <a name="simple-driver-input"></a>Enkla drivrutinsinmatningar
 
-Inmatade för enkla driv rutins Center kring semaforen för indatamängden. När ett avbrotts meddelande för seriell enhet tas emot anges indatamängden. Om en eller flera trådar väntar på ett kort från driv rutinen fortsätter tråden att vänta den längsta tiden. Om inga trådar väntar, förblir semaforen bara inställd tills en tråd anropar funktionen för enhets ingång.
+Indata för den enkla drivrutinen centreras kring indatasemaphore. När ett indataavbrott på en seriell enhet tas emot anges indatasemaphore. Om en eller flera trådar väntar på ett tecken från drivrutinen återupptas tråden som väntar längst. Om inga trådar väntar förblir semaphore helt enkelt inställt tills en tråd anropar enhetens indatafunktion.
 
-Det finns flera begränsningar för den enkla hantering av driv rutiner. Det viktigaste är möjligheten att släppa indatavärden. Detta kan bero på att det inte går att mata in indataportar som kommer innan föregående tecken bearbetas. Detta hanteras enkelt genom att lägga till en buffert för inmatade Character.
+Det finns flera begränsningar för enkel hantering av drivrutinsinmatning. Det viktigaste är risken för att släppa indatatecken. Detta är möjligt eftersom det inte finns någon möjlighet att buffra indatatecken som kommer innan det föregående tecknet bearbetas. Detta hanteras enkelt genom att lägga till en buffert för indatatecken.
 
 > [!NOTE]
-> *Endast trådar kan anropa*  * **tx_sdriver_input** _ _function. *
+> *Endast trådar tillåts anropa*  * **tx_sdriver_input** _ _function.*
 
-Bild 10 visar käll koden som är kopplad till enkel driv rutins Indatatyp.
+Bild 10 visar källkoden som är associerad med enkla drivrutinsinmatningar.
 
 ```c
 UCHAR tx_sdriver_input(VOID)
@@ -144,18 +144,18 @@ UCHAR tx_sdriver_input(VOID)
   }
 }
 ```
-**BILD 10. Enkel driv Rutins Indatatyp**
+**BILD 10. Enkla drivrutinsinmatningar**
 
-### <a name="simple-driver-output"></a>Enkla driv Rutins utdata
+### <a name="simple-driver-output"></a>Utdata från enkel drivrutin
 
-Bearbetning av utdata använder semaforen för utdata till signal när den seriella enhetens sändnings register är kostnads fri. Innan ett utmatnings avstånd skrivs till enheten hämtas utdata-semaforen. Om den inte är tillgänglig är den tidigare överföringen inte slutförd ännu.
+Utdatabearbetningen använder utdata-semaphore för att signalera när serieenhetens överföringsregister är kostnadsfritt. Innan ett utdatatecken skrivs till enheten hämtas utdatasemaphore. Om den inte är tillgänglig är den tidigare överföringen ännu inte klar.
 
-Den ISR-uteffekten ansvarar för hantering av avbrotts överföringen. Bearbetning av de utgångna ISR-beloppen för att ställa in semaforen för utdata och därmed tillåta utdata från ett annat.
+UTDATA-ISR ansvarar för att hantera överföringens fullständiga avbrott. Bearbetning av utdata-ISR-mängder för att ställa in utdata-semaphore, vilket möjliggör utdata från ett annat tecken.
 
 > [!NOTE]
-> *Endast trådar kan anropa*  * **tx_sdriver_output** _ _function. *
+> *Endast trådar tillåts anropa*  * **tx_sdriver_output** _ _function.*
 
-Bild 11 visar käll koden som är kopplad till enkla driv rutins utdata.
+Bild 11 visar källkoden som är associerad med enkla drivrutinsutdata.
 
 ```c
 VOID tx_sdriver_output(UCHAR alpha)
@@ -177,31 +177,31 @@ VOID tx_sdriver_output_ISR(VOID)
   tx_semaphore_put(&tx_sdriver_output_semaphore);
 }
 ```
-**BILD 11. Enkla driv Rutins utdata**
+**BILD 11. Utdata för enkel drivrutin**
 
-### <a name="simple-driver-shortcomings"></a>Brister i enkla driv rutiner
+### <a name="simple-driver-shortcomings"></a>Enkla drivrutinsbrister
 
-Den här enkla driv rutins exemplet illustrerar den grundläggande idén med en ThreadX enhets driv rutin. Men eftersom den enkla enhets driv rutinen inte hanterar DataBuffer eller eventuella problem, representerar den inte fullständigt verkliga ThreadX-drivrutiner. I följande avsnitt beskrivs några av de mer avancerade problem som är associerade med enhets driv rutiner.
+Det här enkla exemplet på enhetsdrivrutiner illustrerar den grundläggande idén med en ThreadX-enhetsdrivrutin. Men eftersom den enkla enhetsdrivrutinen inte behandlar databuffring eller eventuella overheadproblem representerar den inte helt verkliga ThreadX-drivrutiner. I följande avsnitt beskrivs några av de mer avancerade problem som är associerade med enhetsdrivrutiner.
 
-## <a name="advanced-driver-issues"></a>Problem med avancerad driv rutin
+## <a name="advanced-driver-issues"></a>Problem med avancerad drivrutin
 
-Som tidigare nämnts har enhets driv rutinerna krav som unika som program. Vissa program kan kräva en enorma mängd databuffation, medan ett annat program kan kräva optimerad driv rutins ISR: er på grund av enhets avbrott med hög frekvens.
+Som tidigare nämnts har enhetsdrivrutiner krav som är lika unika som deras program. Vissa program kan kräva en enorm mängd databuffring medan ett annat program kan kräva optimerade drivrutins-ISR:er på grund av enhetsavbrott med hög frekvens.
 
 ### <a name="io-buffering"></a>I/O-buffring
 
-Databuffring i inbäddade program i real tid kräver avsevärd planering. En del av designen styrs av den underliggande maskin varu enheten. Om enheten tillhandahåller grundläggande byte i/O är en enkel cirkulär buffert förmodligen i ordning. Men om enheten tillhandahåller block-, DMA-eller paket-I/O är ett buffertminne förmodligen motiverat.
+Databuffertning i inbäddade realtidsprogram kräver omfattande planering. En del av designen styrs av den underliggande maskinvaruenheten. Om enheten tillhandahåller grundläggande byte-I/O är en enkel cirkelbuffert förmodligen i ordning. Men om enheten tillhandahåller block-, DMA- eller paket-I/O är ett bufferthanteringsschema förmodligen befogat.
 
-### <a name="circular-byte-buffers"></a>Cirkelformade byte-buffertar
+### <a name="circular-byte-buffers"></a>Cirkulära bytebuffertar
 
-Cirkelformade byte-buffertar används vanligt vis i driv rutiner som hanterar en enkel seriell maskin varu enhet som en UART. Två cirkelformade buffertar används oftast i sådana situationer – en för indata och en för utdata.
+Cirkulära bytebuffertar används vanligtvis i drivrutiner som hanterar en enkel seriell maskinvaruenhet som en UART. Två cirkelbuffertar används oftast i sådana situationer – en för indata och en för utdata.
 
-Varje cirkulär byte-buffert består av ett byte minnes utrymme (vanligt vis en matris av **UCHAR** s), en Läs pekare och en Skriv pekare. En buffert anses vara tom när Läs pekaren och skriv pekarna hänvisar till samma minnes plats i bufferten. Driv rutins initiering anger både läsa-och skrivbara pekare till Start adressen för bufferten.
+Varje cirkelformad bytebuffert består av ett byteminnesområde (vanligtvis en matris med **UCHAR:er),** en läs pekare och en skriv pekare. En buffert anses vara tom när läs pekaren och skrivnings pekarna refererar till samma minnesplats i bufferten. Initieringen av drivrutinen anger både läs- och skrivbuffert pekare till buffertens startadress.
 
-### <a name="circular-buffer-input"></a>Cirkulära buffer-ingångar
+### <a name="circular-buffer-input"></a>Cirkelbuffertindata
 
-Indatabufferten används för att lagra tecken som kommer innan programmet är redo för dem. När ett indatavärde tas emot (vanligt vis i ett Interrupt Service Routine), hämtas det nya specialtecknet från maskin varu enheten och placeras i indatabufferten vid den plats som pekas på av skriv pekaren. Skriv pekaren är sedan avancerad till nästa position i bufferten. Om nästa position är i slutet av bufferten anges skriv pekaren till början av bufferten. Kön med fullständigt tillstånd hanteras genom att skriva pekare avbryts om den nya skriv pekaren är samma som Läs pekaren.
+Indatabufferten används för att innehålla tecken som tas emot innan programmet är redo för dem. När ett indatatecken tas emot (vanligtvis i en avbrottstjänstrutin) hämtas det nya tecknet från maskinvaruenheten och placeras i indatabufferten på den plats som pekaren pekare pekaren på. Skriv pekaren avancerar sedan till nästa position i bufferten. Om nästa position är förbi buffertens slut anges skriv pekaren till början av bufferten. Det fullständiga villkoret för kön hanteras genom att skrivningspekaren avbryts om den nya skriv pekaren är samma som läs pekaren.
 
-Begär Anden om programinspelnings-byte till driv rutinen kontrollerar först Läs-och skriv pekarna för indatabufferten. Om Läs-och skriv pekarna är identiska är bufferten tom. Annars, om Läs pekaren inte är densamma, kopieras den byte som pekas av Läs pekaren från indatabufferten och Läs pekaren är avancerad till nästa buffertplats. Om den nya Läs pekaren överskrider buffertens slut återställs den till början. Bild 12 visar logiken för den cirkelformade indatabufferten.
+Programindatabytebegäranden till drivrutinen undersöker först indatabuffertens läs- och skriv pekare. Om läs- och skriv pekarna är identiska är bufferten tom. Om läs pekaren inte är densamma kopieras den byte som pekaren mot från indatabufferten och läs pekaren avancerat till nästa buffertplats. Om den nya läs pekaren är förbi slutet av bufferten återställs den till början. Bild 12 visar logiken för cirkelformad indatabuffert.
 
 ```c
 UCHAR   tx_input_buffer[MAX_SIZE];
@@ -228,15 +228,15 @@ if (tx_input_read_ptr != tx_input_write_ptr)
       tx_input_read_ptr = &tx_input_buffer[0];
 }
 ```
-**FIGUR 12. Logik för cirkulär inmatad buffert**
+**BILD 12. Logik för cirkulär indatabuffert**
 
 > [!NOTE]
-> * För tillförlitlig åtgärd kan det vara nödvändigt att utelåsning av avbrott när du ändrar Läs-och skriv pekarna för både indata och utdata med cirkulära buffertar. *
+> *För tillförlitlig drift kan det vara nödvändigt att låsa avbrott vid manipulering av läs- och skriv pekare för både indata- och utdata cirkulära buffertar. *
 
-### <a name="circular-output-buffer"></a>Cirkulär utdatabufferten
+### <a name="circular-output-buffer"></a>Cirkulär utdatabuffert
 
-Utdatabufferten används för att lagra tecken som har anlänt för utdata innan maskin varan har skickat tidigare byte. Bearbetning av utdatabufferten fungerar på samma sätt som bearbetningen av indata-buffring, förutom att överföringen av avbrotts processen ändrar utdata till Läs-och utdata-pekaren, medan begäran om program utdata använder skriv pekaren för utdata.
-Annars är bearbetningen av utdatabufferten densamma. Bild 13 visar logiken för den cirkelformade utdatabufferten.
+Utdatabufferten används för att innehålla tecken som har anlänt för utdata innan maskinvaruenheten har skickat den tidigare byten. Bearbetning av utdatabuffert liknar bearbetning av indatabufferten, förutom att den fullständiga avbrottsbearbetningen manipulerar utdataläsningspekaren, medan programutdatabegäran använder utdataskrivningspekaren.
+Annars är utdatabuffertbearbetningen densamma. Bild 13 visar logiken för den cirkelformade utdatabufferten.
 
 ```c
 UCHAR   tx_output_buffer[MAX_SIZE];
@@ -263,13 +263,13 @@ if (tx_output_write_ptr > &tx_output_buffer[MAX_SIZE-1])
 if (tx_output_write_ptr == tx_output_read_ptr)
     tx_output_write_ptr = save_ptr; /* Buffer full! */
 ```
-**FIGUR 13. Logik för cirkelformad utdatabuffert**
+**BILD 13. Logik för cirkulär utdatabuffert**
 
-### <a name="buffer-io-management"></a>I/O-hantering för buffert
+### <a name="buffer-io-management"></a>Buffert-I/O-hantering
 
-För att förbättra prestandan hos inbäddade mikroprocessorer, skickar många enheter för kring utrustning till och tar emot data med buffertar som tillhandahålls av program vara. I vissa implementeringar kan flera buffertar användas för att skicka eller ta emot enskilda data paket.
+För att förbättra prestanda för inbäddade mikroprocessorer överför och tar många kringutrustningsenheter emot data med buffertar som tillhandahålls av programvara. I vissa implementeringar kan flera buffertar användas för att överföra eller ta emot enskilda datapaket.
 
-Storlek och plats för I/O-buffertar bestäms av programmet och/eller driv rutins program varan. Normalt är buffertar fasta i storlek och hanteras i en ThreadX block-lagringspool. I bild 14 beskrivs en typisk I/O-buffert och en ThreadX block-pool som hanterar sin allokering.
+Storleken och platsen för I/O-buffertar bestäms av programmet och/eller drivrutinsprogramvaran. Vanligtvis är buffertar fasta i storlek och hanteras i en ThreadX-blockminnespool. I bild 14 beskrivs en typisk I/O-buffert och en ThreadX-blockminnespool som hanterar allokeringen.
 
 ```c
 typedef struct TX_IO_BUFFER_STRUCT
@@ -294,45 +294,45 @@ tx_block_pool_create(&tx_io_block_pool,
 
 ### <a name="tx_io_buffer"></a>TX_IO_BUFFER
 
-TypeDef-TX_IO_BUFFER består av två pekare. **Tx_next_packets** pekaren används för att länka flera paket antingen i indata-eller utmatnings listan. **Tx_next_buffers** pekaren används för att länka samman buffertar som utgör ett enskilt data paket från enheten. Båda dessa pekare är inställda på NULL när bufferten tilldelas från poolen. Dessutom kan vissa enheter kräva ett annat fält för att ange hur mycket av buffertutrymme som faktiskt innehåller data.
+Typedef-TX_IO_BUFFER består av två pekare. Pekaren **tx_next_packet** används för att länka flera paket i antingen indata- eller utdatalistan. Pekaren **tx_next_buffer** används för att länka samman buffertar som utgör ett enskilt datapaket från enheten. Båda dessa pekare är inställda på NULL när bufferten allokeras från poolen. Dessutom kan vissa enheter kräva ett annat fält för att ange hur mycket av buffertområdet som faktiskt innehåller data.
 
 ### <a name="buffered-io-advantage"></a>Buffrad I/O-fördel
 
-Vilka är fördelarna med ett I/O-schema för bufferten? Den största fördelen är att data inte kopieras mellan enhets registren och programmets minne. I stället tillhandahåller driv rutinen enheten med en serie buffertar. Fysisk enhet I/O använder det tillhandahållna buffertminne direkt.
+Vilka är fördelarna med ett buffert-I/O-schema? Den största fördelen är att data inte kopieras mellan enhetsregister och programmets minne. Drivrutinen ger i stället enheten en serie buffertpekare. Fysisk enhets-I/O använder det angivna buffertminnet direkt.
 
-Att använda processorn för att kopiera indata eller utgående paket med information är mycket kostsam och bör undvikas i en hög genom strömnings-I/O-situation.
+Att använda processorn för att kopiera indata- eller utdatapaket med information är mycket kostsamt och bör undvikas i alla I/O-situationer med högt dataflöde.
 
-En annan fördel med den buffrade I/O-metoden är att indata-och utmatnings listor inte har fullständiga villkor. Alla tillgängliga buffertar kan finnas i någon av listorna vid ett och samma tillfälle. Detta skiljer sig åt cirkulära buffertar i enkla byte som presenteras tidigare i kapitlet. Var och en hade en fast storlek som bestämts vid kompileringen.
+En annan fördel med den buffrade I/O-metoden är att indata- och utdatalistorna inte har fullständiga villkor. Alla tillgängliga buffertar kan finnas i endera listan åt gången. Detta kontrasterar med de enkla cirkelformade bytebuffertar som presenteras tidigare i kapitlet. Var och en hade en fast storlek som bestäms vid kompileringen.
 
-### <a name="buffered-driver-responsibilities"></a>Tillskrivs driv Rutins ansvar
+### <a name="buffered-driver-responsibilities"></a>Buffrad drivrutinsansvar
 
-Buffrade enhets driv rutiner är bara berörda för hantering av länkade listor med I/O-buffertar. En lista med inmatade buffertar underhålls för paket som tas emot innan program varan är klar. En lista över utdatacache bevaras för paket som skickas snabbare än maskin varu enheten kan hantera dem. Bild 15 visar enkla indata och utdata länkade listor över data paket och de buffertar som utgör varje paket.
+Buffrade enhetsdrivrutiner hanterar endast länkade listor med I/O-buffertar. En lista över indatabuffertar behålls för paket som tas emot innan programmet är klart. På samma sätt behålls en utdatabuffertlista för paket som skickas snabbare än maskinvaruenheten kan hantera dem. Bild 15 visar enkla länkade indata- och utdatalistor med datapaket och de buffertar som utgör varje paket.
 
-**Inmatad lista**
+**Indatalista**
 
-![Inmatad lista](./media/user-guide/input-list.png)
+![Indatalista](./media/user-guide/input-list.png)
 
-**Lista över utdata**
+**Utdatalista**
 
-![Lista över utdata](./media/user-guide/output-list.png)
+![Utdatalista](./media/user-guide/output-list.png)
 
-**FIGUR 15. Input-Output listor**
+**BILD 15. Input-Output listor**
 
-Program gränssnittet med buffrade driv rutiner med samma I/O-buffertar. Vid överföring tillhandahåller program vara driv rutinen en eller flera buffertar som ska överföras. När program varan begär indata returnerar driv rutinen indata i i/O-buffertar.
+Programgränssnitt med buffrade drivrutiner med samma I/O-buffertar. Vid överföring ger programprogramvara drivrutinen en eller flera buffertar att överföra. När programmet begär indata returnerar drivrutinen indata i I/O-buffertar.
 
 > [!NOTE]
-> *I vissa program kan det vara praktiskt att bygga ett indatamängds gränssnitt för driv rutin som kräver att programmet utbyter en kostnads fri buffert för en buffert från driv rutinen. Detta kan under lätta vissa bearbetningar av buffertstorleken i driv rutinen.*
+> *I vissa program kan det vara användbart att skapa ett gränssnitt för drivrutinsinmatning som kräver att programmet utbyter en kostnadsfri buffert för en indatabuffert från drivrutinen. Detta kan minska bearbetningen av buffertallokering i drivrutinen.*
 
-### <a name="interrupt-management"></a>Avbryt hantering
+### <a name="interrupt-management"></a>Avbrottshantering
 
-I vissa program kan enhetens avbrotts frekvens förhindra skrivning av ISR i C eller att interagera med ThreadX på varje avbrott. Om det till exempel tar 25us att spara och återställa den avbrutna kontexten är det inte lämpligt att utföra en fullständig kontext genom att spara om avbrotts frekvensen var 50uS. I sådana fall används ett litet mängd-ISR för att hantera de flesta av enhetens avbrott. Denna låga ISR-information skulle bara interagera med ThreadX vid behov.
+I vissa program kan enhetens avbrottsfrekvens förhindra att ISR skrivs i C eller att interagera med ThreadX vid varje avbrott. Om det till exempel krävs 25us för att spara och återställa den avbrutna kontexten, är det inte lämpligt att utföra en fullständig kontextsräckning om avbrottsfrekvensen var 50us. I sådana fall används ett litet sammansättningsspråk ISR för att hantera de flesta av enhetsavbrotten. Denna ISR med låg belastning interagerar bara med ThreadX när det behövs.
 
-En liknande diskussion finns i den avbrotts hanterings diskussionen i slutet av kapitel 3.
+En liknande diskussion finns i diskussionen om avbrottshantering i slutet av kapitel 3.
 
-### <a name="thread-suspension"></a>Tråd upphängning
+### <a name="thread-suspension"></a>Trådavstängning
 
-I exemplet på den enkla driv rutin som tidigare fanns i det här kapitlet, inaktive ras anroparen för Indataporten om ett kort inte är tillgängligt. I vissa program kanske detta inte är acceptabelt.
+I det enkla drivrutinsexempel som presenterades tidigare i det här kapitlet pausar anroparen av indatatjänsten om ett tecken inte är tillgängligt. I vissa program kanske detta inte är acceptabelt.
 
-Om till exempel tråden som ansvarar för bearbetning av indata från en driv rutin också har andra uppgifter, så kommer det förmodligen inte att gå att göra en inaktive ring av driv Rutinens indata. I stället måste driv rutinen anpassas för bearbetning av begäran på samma sätt som andra bearbetnings begär Anden görs i tråden.
+Om till exempel tråden som ansvarar för bearbetning av indata från en drivrutin också har andra uppgifter, kommer det förmodligen inte att fungera att pausa bara förarindata. Drivrutinen måste i stället anpassas för bearbetning av begäranden på liknande sätt som andra bearbetningsbegäranden görs till tråden.
 
-I de flesta fall placeras indatabufferten i en länkad lista och ett meddelande om inloggning skickas till trådens indatakö.
+I de flesta fall placeras indatabufferten i en länkad lista och ett meddelande om indatahändelse skickas till trådens indatakö.

@@ -1,132 +1,132 @@
 ---
 title: Kapitel 1 – Introduktion till HTTP och HTTPS
-description: I det här kapitlet introduceras Azure återställnings tider NetX Duo HTTP/HTTPS för Web-modulen.
+description: I det här kapitlet introduceras Azure RTOS NetX Duo HTTP/HTTPS för webbmodulen.
 author: philmea
 ms.author: philmea
 ms.date: 07/24/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: c784843e4d3f11ee306e866223c0a19bfcba3b85
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: e5f50419be3171d3df8544d1b34d603822f339785923f8a8199dc5b5ddcac281
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104826994"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116801766"
 ---
 # <a name="chapter-1---introduction-to-http-and-https"></a>Kapitel 1 – Introduktion till HTTP och HTTPS
 
-Hypertext Transfer Protocol (HTTP) är ett protokoll som har utformats för att överföra innehåll på webben. HTTP är ett enkelt protokoll som använder Reliable Transmission Control Protocol (TCP)-tjänster för att utföra sin innehålls överförings funktion. Därför är HTTP ett mycket tillförlitligt innehålls överförings protokoll. HTTP är ett av de mest använda program protokollen. Alla åtgärder på webben använder HTTP-protokollet.
+Den Hypertext Transfer Protocol (HTTP) är ett protokoll som utformats för att överföra innehåll på webben. HTTP är ett enkelt protokoll som använder tillförlitliga Transmission Control Protocol (TCP)-tjänster för att utföra sin innehållsöverföringsfunktion. Därför är HTTP ett mycket tillförlitligt protokoll för innehållsöverföring. HTTP är ett av de mest använda programprotokollen. Alla åtgärder på webben använder HTTP-protokollet.
 
-HTTPS är en säker version av HTTP-protokollet, som implementerar HTTP med hjälp av Transport Layer Security (TLS) för att skydda den underliggande TCP-anslutningen. Förutom den ytterligare konfiguration som krävs för att konfigurera TLS, är HTTPS i princip identiskt med HTTP som används.
+HTTPS är den säkra versionen av HTTP-protokollet, som implementerar HTTP med hjälp Transport Layer Security (TLS) för att skydda den underliggande TCP-anslutningen. Förutom den ytterligare konfiguration som krävs för att konfigurera TLS är HTTPS i princip identiskt med HTTP som används.
 
 ## <a name="general-http-requirements"></a>Allmänna HTTP-krav
 
-För att kunna fungera korrekt kräver NetX-webbhttp-paketet att NetX Duo (version 5,10 eller senare) är installerat. Dessutom måste en IP-instans skapas och TCP måste vara aktiverat på samma IP-instans. För HTTPS-stöd måste NetX Secure TLS (version 5,11 eller senare) också installeras (se nästa avsnitt). Demo filen i avsnittet "litet exempel system" i **kapitel 2** visar hur detta görs.
+För att NetX Web HTTP-paketet ska fungera korrekt måste NetX Duo (version 5.10 eller senare) vara installerat. Dessutom måste en IP-instans skapas och TCP måste aktiveras på samma IP-instans. För HTTPS-stöd måste även NetX Secure TLS (version 5.11 eller senare) installeras (se nästa avsnitt). Demofilen i avsnittet "Litet exempelsystem" i **kapitel 2** visar hur detta görs.
 
-HTTP-klient delen av NetX-webb-HTTP-paketet har inga ytterligare krav.
+HTTP-klientdelen av NetX Web HTTP-paketet har inga ytterligare krav.
 
-HTTP-server delen av NetX-webb-HTTP-paketet har flera ytterligare krav. Först måste du ha fullständig åtkomst till den *välkända TCP-porten 80* för att hantera alla klient-HTTP-begäranden (detta kan ändras av programmet till någon annan giltig TCP-port). HTTP-servern är också avsedd att användas med det inbäddade fil systemet FileX. Om FileX inte är tillgängligt kan användaren hamna i de delar av FileX som används i sin egen miljö. Detta beskrivs i senare avsnitt i den här hand boken.
+HTTP Server-delen av NetX Web HTTP-paketet har flera ytterligare krav. För det första krävs fullständig åtkomst till TCP *välkänd port 80* för hantering av alla HTTP-klientbegäranden (detta kan ändras av programmet till en annan giltig TCP-port). HTTP-servern är också utformad för användning med filex-inbäddat filsystem. Om FileX inte är tillgängligt kan användaren porta de delar av FileX som används i deras egen miljö. Detta beskrivs i senare avsnitt i den här guiden.
 
 ## <a name="https-requirements"></a>HTTPS-krav
 
-För att HTTPS ska fungera korrekt kräver NetX webb-HTTP-paketet att NetX Duo (version 5,10 eller senare) och NetX Secure TLS (version 5,11 eller senare) båda är installerade. Dessutom måste en IP-instans skapas och TCP måste vara aktiverat på samma IP-instans för användning med TLS. TLS-sessionen måste initieras med lämpliga kryptografiska rutiner, ett certifikat för betrodd certifikat utfärdare och utrymme måste allokeras för certifikat som kommer att tillhandahållas av fjärrserverns värdar under TLS-handskakningen. Demo filen i avsnittet "litet exempel HTTPS system" i **kapitel 2** visar hur detta görs.
+För att HTTPS ska fungera korrekt kräver NetX Web HTTP-paketet att Både NetX Duo (version 5.10 eller senare) och NetX Secure TLS (version 5.11 eller senare) är installerade. Dessutom måste en IP-instans skapas och TCP måste aktiveras på samma IP-instans för användning med TLS. TLS-sessionen måste initieras med lämpliga kryptografiska rutiner, ett betrott CA-certifikat och utrymme måste allokeras för certifikat som kommer att tillhandahållas av fjärrservervärdar under TLS-handskakningen. Demofilen i avsnittet "Small Example HTTPS System" i **kapitel 2** visar hur detta görs.
 
-HTTPS-klient delen av NetX-webb-HTTP-paketet har inga ytterligare krav.
+HTTPS-klientdelen av NetX Web HTTP-paketet har inga ytterligare krav.
 
-HTTPS-server delen av NetX-webb-HTTP-paketet har flera ytterligare krav. Först måste du ha fullständig åtkomst till den TCP *-välkända porten 443* för att hantera alla KLIENTERs HTTPS-begäranden (som med http med oformaterad text, den här porten kan ändras av programmet). Därefter måste TLS-sessionen initieras med rätt kryptografiska rutiner och ett Server identitets certifikat (eller i förväg delad nyckel). HTTPS-servern är också avsedd att användas med det inbäddade fil systemet FileX. Om FileX inte är tillgängligt kan användaren hamna i de delar av FileX som används i sin egen miljö. Användningen av FileX beskrivs i senare avsnitt i den här hand boken.
+HTTPS-serverdelen av NetX Web HTTP-paketet har flera ytterligare krav. För det första krävs fullständig åtkomst till DEN välkända *TCP-porten 443* för hantering av alla KLIENT-HTTPS-begäranden (precis som med HTTP i klartext kan den här porten ändras av programmet). För det andra måste TLS-sessionen initieras med rätt kryptografiska rutiner och ett serveridentitetscertifikat (eller i förväg delad nyckel). HTTPS-servern är också utformad för användning med filex-inbäddat filsystem. Om FileX inte är tillgängligt kan användaren porta de delar av FileX som används i deras egen miljö. Användningen av FileX beskrivs i senare avsnitt i den här guiden.
 
-Mer information om konfigurations alternativen för TLS hittar du i NetX Secure Documentation.
+Mer information om konfigurationsalternativ för TLS finns i NetX Secure-dokumentationen.
 
-Om inget annat anges gäller alla HTTP-funktioner som beskrivs i det här dokumentet också för HTTPS.
+Om inget annat anges gäller alla HTTP-funktioner som beskrivs i det här dokumentet även HTTPS.
 
-## <a name="http-and-https-constraints"></a>HTTP-och HTTPS-begränsningar
+## <a name="http-and-https-constraints"></a>HTTP- och HTTPS-begränsningar
 
-NetX webb-HTTP implementerar HTTP 1,1-standarden. Följande begränsningar gäller dock:
+NetX Web HTTP implementerar HTTP 1.1-standarden. Här är dock följande begränsningar:
 
 1. Pipelining för begäran stöds inte
-1. HTTP-servern stöder både Basic-och MD5 Digest-autentisering, men inte MD5-sess. HTTP-klienten har nu bara stöd för grundläggande autentisering. När du använder TLS för HTTPS kan HTTP-autentisering fortfarande användas.
-1. Det finns inte stöd för innehålls komprimering.
-1. SPÅRNINGs-, alternativ-och ANSLUTNINGS begär Anden stöds inte.
-1. Den modempool som är kopplad till HTTP-servern eller-klienten måste vara tillräckligt stor för att rymma det fullständiga HTTP-huvudet.
-1. HTTP-klienttjänster är endast för innehålls överföring – det finns inga visnings verktyg i det här paketet.
+1. HTTP-servern stöder både grundläggande och MD5-sammanfattad autentisering, men inte MD5-sess. HTTP-klienten stöder för närvarande endast grundläggande autentisering. När du använder TLS för HTTPS kan HTTP-autentisering fortfarande användas.
+1. Ingen innehållskomprimering stöds.
+1. TRACE-, OPTIONS- och CONNECT-begäranden stöds inte.
+1. Paketpoolen som är associerad med HTTP-servern eller klienten måste vara tillräckligt stor för att rymma hela HTTP-huvudet.
+1. HTTP-klienttjänster är endast till för innehållsöverföring – det finns inga visningsverktyg i det här paketet.
 
-## <a name="http-url-resource-names"></a>HTTP-URL (resurs namn)
+## <a name="http-url-resource-names"></a>HTTP-URL (resursnamn)
 
-HTTP-protokollet är utformat för att överföra innehåll på webben. Det begärda innehållet anges av URL: en (Universal Resource Locator). Detta är den primära komponenten i varje HTTP-begäran. URL: er börjar alltid med ett "/"-Character och motsvarar vanligt vis filer på HTTP-servern. Vanliga HTTP-filtillägg visas nedan:
+HTTP-protokollet är utformat för att överföra innehåll på webben. Det begärda innehållet anges av Universal Resource Locator (URL). Det här är den primära komponenten i varje HTTP-begäran. URL:er börjar alltid med ett "/"-tecken och motsvarar vanligtvis filer på HTTP-servern. Vanliga HTTP-filnamnstillägg visas nedan:
 
-- **. htm** (eller **. html**) Hypertext Markup Language (HTML)
-- **. txt** Oformaterad ASCII-text
-- **. gif** Binär GIF-bild
-- **. XBM** Binär Xbitmap-avbildning
+- **.htm** (eller **.html**) Hypertext Markup Language (HTML)
+- **.txt** Oformaterad ASCII-text
+- **.gif** Binär GIF-bild
+- **.xbm** Bild av binär Xbitmap
 
-## <a name="http-client-requests"></a>HTTP-klient begär Anden
+## <a name="http-client-requests"></a>HTTP-klientbegäranden
 
-HTTP har en enkel mekanism för att begära webb innehåll. Det finns en uppsättning standard-HTTP-kommandon som utfärdas av klienten när en anslutning har upprättats på den välkända TCP *-porten 80 (port 443 för https)*. Nedan visas några av de grundläggande HTTP-kommandona:
+HTTP har en enkel mekanism för att begära webbinnehåll. Det finns en uppsättning http-standardkommandon som utfärdas av klienten när en anslutning har upprättats på den välkända *TCP-porten 80 (port 443 för HTTPS).* Nedan visas några av de grundläggande HTTP-kommandona:
 
-- **Hämta *resurs* -http/1.1** Hämta den angivna resursen
-- **Publicera *resurs* -http/1.1** Hämta den angivna resursen och skicka kopplade inmatade till HTTP-servern
-- **Head- *resurs* http/1.1** Behandlas som en GET men inte innehåll returneras av HTTP-servern
-- **Lägg till *resurs* http/1.1** Placera resurs på HTTP-Server
-- **Ta bort *resurs* http/1.1** Ta bort resurs på servern
+- **GET *resource* HTTP/1.1** Hämta den angivna resursen
+- ***POST-resursen* HTTP/1.1** Hämta den angivna resursen och skicka anslutna indata till HTTP-servern
+- ***HEAD-resursen* HTTP/1.1** Behandlas som en GET men inte innehåll returneras av HTTP-servern
+- ***PUT-resursen* HTTP/1.1** Placera resurs på HTTP-server
+- **DELETE *resource* HTTP/1.1** Ta bort resurs på servern
 
-Dessa ASCII-kommandon genereras internt av webbläsare och NetX-webb-HTTP-klient tjänsterna för att utföra HTTP-åtgärder med en HTTP-server.
+Dessa ASCII-kommandon genereras internt av webbläsare och NetX Web HTTP-klienttjänster för att utföra HTTP-åtgärder med en HTTP-server.
 
-Observera att HTTP-klientprogrammet ska använda port 80 eller port 443 om HTTPS används. Både klient-och Server-HTTP-API: erna tar porten som en parameter – makron NX_WEB_HTTP_SERVER_PORT (port 80) och NX_WEB_HTTPS_SERVER_PORT (port 443) definieras för bekvämligheten. HTTP-Server porten kan också ändras vid körning med hjälp av tjänsten *nx_web_http_client_set_connect_port ()* . Mer information om den här tjänsten finns i kapitel 4.
+Observera att HTTP-klientprogrammet ska använda port 80 eller port 443 om HTTPS används. Både KLIENT- och server-HTTP-API:er tar porten som en parameter – makrona NX_WEB_HTTP_SERVER_PORT (port 80) och NX_WEB_HTTPS_SERVER_PORT (port 443) har definierats för enkelhetens skull. HTTP-serverporten kan också ändras vid körning med hjälp *av nx_web_http_client_set_connect_port()-tjänsten.* Mer information om den här tjänsten finns i kapitel 4.
 
-## <a name="http-server-responses"></a>Svar på HTTP-Server
+## <a name="http-server-responses"></a>HTTP-serversvar
 
-HTTP-servern använder samma *välkända TCP-port 80 (443 för https)* för att skicka klient kommando svar. När HTTP-servern bearbetar klient kommandot returneras en ASCII-svarskod som innehåller en tresiffrig numerisk status kod. Det numeriska svaret används av HTTP-klientens program vara för att avgöra om åtgärden lyckades eller misslyckades. Nedan visas en lista över olika HTTP-server svar på klient kommandon:
+HTTP-servern använder samma välkända *TCP-port 80 (443 för HTTPS)* för att skicka klientkommandosvar. När HTTP-servern bearbetar klientkommandot returneras en ASCII-svarssträng som innehåller en 3-siffrig numerisk statuskod. Det numeriska svaret används av HTTP-klientprogrammet för att avgöra om åtgärden lyckades eller misslyckades. Följande är en lista över olika HTTP-serversvar på klientkommandon:
 
-- **200** begäran har slutförts
-- **400** -begäran har inte formaterats korrekt
-- **401** obehörig begäran, klienten måste skicka autentisering
-- Det gick inte att hitta den angivna resursen i **404**
-- **500** internt http-server fel
-- **501** -begäran har inte implementerats av HTTP-servern
-- **502** -tjänsten är inte tillgänglig
+- **200-begäran** lyckades
+- **400-begäran** har inte formats korrekt
+- **401** Obehörig begäran, klienten måste skicka autentisering
+- **404 Angiven** resurs i begäran hittades inte
+- **500 Internt** HTTP-serverfel
+- **501-begäran** implementeras inte av HTTP Server
+- **502-tjänsten** är inte tillgänglig
 
-Till exempel är en lyckad klientbegäran att skicka filen "test.htm" svars med meddelandet "HTTP/1.1 200 OK".
+Till exempel besvaras en lyckad klientbegäran om att PLACERA filen "test.htm" med meddelandet "HTTP/1.1 200 OK".
 
 ## <a name="http-communication"></a>HTTP-kommunikation
 
-Som tidigare nämnts använder HTTP-servern den *välkända TCP-porten 80 (443 för https)* till fält klient begär Anden. HTTP-klienter kan använda alla tillgängliga TCP-portar för utgående anslutningar. Den allmänna sekvensen av HTTP-händelser är följande:
+Som tidigare nämnts använder HTTP-servern den välkända *TCP-port 80 (443 för HTTPS)* för att ange klientbegäranden. HTTP-klienter kan använda alla tillgängliga TCP-portar för utgående anslutningar. Den allmänna sekvensen med HTTP-händelser är följande:
 
-**Http GET-begäran**:
+**HTTP GET-begäran:**
 
-1. Klient problem TCP Connect to server port 80 (eller 443 för HTTPS).
+1. Klientproblem TCP-anslutning till serverport 80 (eller 443 för HTTPS).
 1. Om HTTPS används följs TCP-anslutningen av en TLS-handskakning för att autentisera servern och upprätta en säker kanal.
-1. Klienten skickar begäran om att **få *resurs* -http/1.1**(tillsammans med annan rubrik information).
-1. Servern skapar ett "**http/1.1 200 OK"-** meddelande med ytterligare information som omedelbart följs av resurs innehållet (om det finns några).
+1. Klienten skickar en **HTTP/1.1-begäran** för GET-resursen (tillsammans med annan rubrikinformation).
+1. Servern skapar ett **"HTTP/1.1 200** OK"-meddelande med ytterligare information följt av resursinnehållet (om sådant finns).
 1. Servern kopplar från klienten (TLS stängs av om HTTPS används).
-1. Klienten kopplar från socketen (TLS stängs av efter från kopplings aviseringen från servern).
+1. Klienten kopplar från socketen (TLS stängs av efter aviseringen om frånkoppling från servern).
 
-**Http-begäran**:
+**HTTP PUT-begäran:**
 
-1. Klient problem TCP Connect to server port 80 (eller 443).
+1. Klientproblem TCP-anslutning till serverport 80 (eller 443).
 1. Om HTTPS används följs TCP-anslutningen av en TLS-handskakning för att autentisera servern och upprätta en säker kanal.
-1. Klienten skickar begäran "placera resurs HTTP/1.1", tillsammans med annan rubrik information och följt av resurs innehållet.
-1. Servern skapar ett "HTTP/1.1 200 OK"-meddelande med ytterligare information som direkt åtföljs av resurs innehållet.
-1. Servern utför en från koppling.
-1. Klienten utför en från koppling.
+1. Klienten skickar en HTTP/1.1-begäran för PUT-resursen tillsammans med annan rubrikinformation, följt av resursinnehållet.
+1. Servern skapar ett "HTTP/1.1 200 OK"-meddelande med ytterligare information följt av resursinnehållet direkt.
+1. Servern utför en frånkoppling.
+1. Klienten utför en frånkoppling.
 
 > [!NOTE]
-> Som tidigare nämnts kan HTTP-servern ändra standard anslutnings porten (80 eller 443) vid körning till en annan port med hjälp av *nx_web_http_client_set_connect_port ()* för webb servrar som använder alternativa portar för att ansluta till klienter.
+> Som tidigare nämnts kan HTTP-servern ändra standardporten för anslutning (80 eller 443) vid körning med hjälp av *nx_web_http_client_set_connect_port()* för webbservrar som använder alternativa portar för att ansluta till klienter.
 
 ## <a name="http-authentication"></a>HTTP-autentisering
 
-HTTP-autentisering är valfritt och krävs inte för alla webb förfrågningar. Det finns två varianter-autentisering, nämligen *Basic* och *Digest*. Grundläggande autentisering motsvarar autentisering med *namn* och *lösen ord* som finns i många protokoll. I HTTP Basic-autentisering sammanfogas namn och lösen ord och kodas i base64-format. Den största nack delen med grundläggande autentisering är att namnet och lösen ordet skickas på ett öppet sätt i begäran. Detta gör det något enkelt för namn och lösen ord att bli stulen. Digest-autentisering löser problemet genom att aldrig skicka namnet och lösen ordet i begäran. I stället används en algoritm för att härleda en 128-bitars Digest från namnet, lösen ordet och annan information. NetX webb-HTTP-Server stöder standardalgoritmen för MD5-sammandrag.
+HTTP-autentisering är valfritt och krävs inte för alla webbförfrågningar. Det finns två varianter av autentisering, *nämligen grundläggande* och *sammanfattande*. Grundläggande autentisering motsvarar namn- och *lösenordsautentisering* som finns i många protokoll.  I grundläggande HTTP-autentisering sammanfogas namn och lösenord och kodas i base64-format. Den största nackdelen med grundläggande autentisering är att namn och lösenord överförs öppet i begäran. Det gör det lite enkelt att stjäla namn och lösenord. Sammanfattad autentisering löser det här problemet genom att aldrig överföra namn och lösenord i begäran. I stället används en algoritm för att härleda en 128-bitars sammanfattning från namn, lösenord och annan information. NetX Web HTTP Server stöder standardalgoritmen för MD5-sammanfattning.
 
-När krävs autentisering? HTTP-servern bestämmer om en begärd resurs kräver autentisering. Om autentisering krävs och klientbegäran inte inkluderade rätt autentisering, skickas "HTTP/1.1 401 oauktoriserad" svar med den typ av autentisering som krävs skickas till klienten. Klienten förväntas sedan skapa en ny begäran med korrekt autentisering.
+När krävs autentisering? HTTP-servern avgör om en begärd resurs kräver autentisering. Om autentisering krävs och klientbegäran inte innehåller rätt autentisering, skickas svaret "HTTP/1.1 401 Unauthorized" med den typ av autentisering som krävs till klienten. Klienten förväntas sedan skapa en ny begäran med rätt autentisering.
 
-När HTTPS används kan HTTPS-servern fortfarande använda HTTP-autentisering. I det här fallet används TLS för att kryptera all HTTP-trafik så att användningen av *grundläggande* http-autentisering inte utgör en säkerhets risk. *Sammanfattad* autentisering tillåts också, men ger ingen betydande säkerhets förbättring för grundläggande autentisering över TLS.
+När HTTPS används kan HTTPS-servern fortfarande använda HTTP-autentisering. I det här fallet används TLS för  att kryptera all HTTP-trafik så att grundläggande HTTP-autentisering inte utgör en säkerhetsrisk. *Sammanfattad* autentisering tillåts också, men ger ingen betydande säkerhetsförbättring jämfört med grundläggande autentisering över TLS.
 
-## <a name="http-authentication-callback"></a>Motanrop för HTTP-autentisering
+## <a name="http-authentication-callback"></a>Återanrop för HTTP-autentisering
 
-Som tidigare nämnts är HTTP-autentisering valfritt och krävs inte för alla webb överföringar. Dessutom är autentiseringen vanligt vis resurs beroende. Åtkomst till vissa resurser på servern kräver autentisering, medan andra inte gör det. NetX Web HTTP server-paketet gör att programmet kan ange (via ***nx_web_http_server_create*** -anrop) en rutin för autentisering av motringning som anropas i början av hantering av varje http-klientbegäran.
+Som tidigare nämnts är HTTP-autentisering valfritt och krävs inte för alla weböverföringar. Dessutom är autentisering vanligtvis resursberoende. Åtkomst till vissa resurser på servern kräver autentisering, medan andra inte gör det. Med NetX Web HTTP Server-paketet kan  programmet (via nx_web_http_server_create-anropet) ange en rutin för autentiseringsanrop som anropas i början av hanteringen av varje HTTP-klientbegäran.
 
-Återanrops rutinen tillhandahåller NetX webb-HTTP-server med användar namn, lösen ord och sfär-strängar som är associerade med resursen och returnerar den typ av autentisering som krävs. Om ingen autentisering krävs för resursen ska återanropet av autentiseringen returnera värdet för **NX_WEB_HTTP_DONT_AUTHENTICATE**. Annars, om grundläggande autentisering krävs för den angivna resursen, bör rutinen returnera **NX_WEB_HTTP_BASIC_AUTHENTICATE**. Slutligen, om MD5 Digest-autentisering krävs, bör återanrops rutinen returnera **NX_WEB_HTTP_DIGEST_AUTHENTICATE**. Om ingen autentisering krävs för någon resurs som tillhandahålls av HTTP-servern behövs inte återanropet och en NULL-pekare kan ges till HTTP-servern för att skapa samtal.
+Återanropsrutinen förser NetX Web HTTP Server med användarnamn, lösenord och sfärsträngar som är associerade med resursen och returnerar den typ av autentisering som krävs. Om ingen autentisering krävs för resursen ska återanropet av autentisering returnera värdet för **NX_WEB_HTTP_DONT_AUTHENTICATE**. Annars, om grundläggande autentisering krävs för den angivna resursen, ska rutinen returnera **NX_WEB_HTTP_BASIC_AUTHENTICATE**. Och slutligen, om sammanfattad MD5-autentisering krävs ska återanropsrutinen returnera **NX_WEB_HTTP_DIGEST_AUTHENTICATE**. Om ingen autentisering krävs för en resurs som tillhandahålls av HTTP-servern behövs inte motringning och en NULL-pekare kan anges för HTTP-serverns skapa-anrop.
 
-Formatet på appen för att autentisera återanrop är mycket enkelt och definieras nedan:
+Formatet för programmet autentiserar motringning är mycket enkelt och definieras nedan:
 
 ```C
 UINT nx_web_http_server_authentication_check(NX_WEB_HTTP_SERVER *server_ptr,
@@ -135,24 +135,24 @@ UINT nx_web_http_server_authentication_check(NX_WEB_HTTP_SERVER *server_ptr,
     CHAR **realm);
 ```
 
-Indataparametrarna definieras enligt följande:
+Indataparametrarna definieras på följande sätt:
 
-- **request_type** Anger HTTP-klientbegäran, giltiga begär Anden definieras som:
+- **request_type** Anger HTTP-klientbegäran, giltiga begäranden definieras som:
   - **NX_WEB_HTTP_SERVER_GET_REQUEST**
   - **NX_WEB_HTTP_SERVER_POST_REQUEST**
   - **NX_WEB_HTTP_SERVER_HEAD_REQUEST**
   - **NX_WEB_HTTP_SERVER_PUT_REQUEST**
   - **NX_WEB_HTTP_SERVER_DELETE_REQUEST**
-- **resurs** Angiven resurs har begärts.
-- **namn** Mål för pekaren till det begärda användar namnet.
-- **lösen ord** Destination för pekaren till det lösen ord som krävs.
+- **resurs** Specifik resurs som begärdes.
+- **namn** Mål för pekaren till det användarnamn som krävs.
+- **lösenord** Mål för pekaren till det lösenord som krävs.
 - **sfär** Mål för pekaren till sfären för den här autentiseringen.
 
-Returvärdet för autentiseringsmetoden anger om autentisering krävs. namn, lösen ord och domän pekare används inte om **NX_WEB_HTTP_DONT_AUTHENTICATE** returneras av rutinen för återanrop av autentisering. Annars måste HTTP-serverns utvecklare se till att **NX_WEB_HTTP_MAX_USERNAME** och **NX_WEB_HTTP_MAX_PASSWORD** som definieras i *nx_web_http_server. h* är tillräckligt stora för det användar namn och lösen ord som anges i återanropet för autentisering. Båda har en standard storlek på 20 tecken.
+Returvärdet för autentiseringsrutinen anger om autentisering krävs. pekare för namn, lösenord och sfär används inte **om NX_WEB_HTTP_DONT_AUTHENTICATE** returneras av autentiseringsrutinen för återanrop. Annars måste HTTP-serverutvecklaren se **till att NX_WEB_HTTP_MAX_USERNAME** och **NX_WEB_HTTP_MAX_PASSWORD** som definierats *i nx_web_http_server.h* är tillräckligt stora för användarnamnet och lösenordet som anges i autentiseringsanropet. Båda dessa har en standardstorlek på 20 tecken.
 
-## <a name="http-invalid-usernamepassword-callback"></a>HTTP ogiltigt användar namn/lösen ord för motringning
+## <a name="http-invalid-usernamepassword-callback"></a>HTTP ogiltigt användarnamn/återanrop av lösenord
 
-Det valfria ogiltigt lösen ord för användar namn/lösen ord i NetX webb-HTTP-server anropas om HTTP-servern får en ogiltig kombination av användar namn och lösen ord i en klientbegäran. Om HTTP-serverprogrammet registrerar ett återanrop med HTTP-servern, anropas det om antingen Basic-eller Digest-autentisering Miss lyckas *i nx_web_http_server_get_process ()*, i *nx_web_http_server_put_process ()* eller *i nx_web_http_server_delete_process ().*
+Det valfria ogiltiga återanropet av användarnamn/lösenord i NetX-webb-HTTP-servern anropas om HTTP-servern får en ogiltig kombination av användarnamn och lösenord i en klientbegäran. Om HTTP-serverprogrammet registrerar ett återanrop med HTTP-servern anropas det om antingen grundläggande eller sammanfattad autentisering misslyckas i *nx_web_http_server_get_process()*, *i nx_web_http_server_put_process()* eller *i nx_web_http_server_delete_process().*
 
 För att registrera ett återanrop med HTTP-servern definieras följande tjänst för NetX-webb-HTTP-servern.
 
@@ -164,7 +164,7 @@ UINT nx_web_http_server_invalid_userpassword_notify_set(
         UINT request_type));
 ```
 
-Förfrågnings typerna definieras enligt följande:
+Begärandetyperna definieras på följande sätt:
 
 - **NX_WEB_HTTP_SERVER_GET_REQUEST**
 - **NX_WEB_HTTP_SERVER_POST_REQUEST**
@@ -172,11 +172,11 @@ Förfrågnings typerna definieras enligt följande:
 - **NX_WEB_HTTP_SERVER_PUT_REQUEST**
 - **NX_WEB_HTTP_SERVER_DELETE_REQUEST**
 
-## <a name="http-insert-gmt-date-header-callback"></a>HTTP-infoga GMT-datum huvud återanrop
+## <a name="http-insert-gmt-date-header-callback"></a>HTTP Insert GMT Date Header Callback
 
-Det finns ett valfritt motanrop i NetX webb-HTTP-server för att infoga en datum rubrik i dess svarsmeddelanden. Detta motanrop anropas när HTTP-servern svarar på en skicka-eller GET-begäran
+Det finns ett valfritt återanrop i NetX Web HTTP Server för att infoga en datumrubrik i svarsmeddelandena. Det här återanropet anropas när HTTP-servern svarar på en put- eller get-begäran
 
-För att registrera ett GMT-datum återanrop med HTTP-servern definieras följande tjänst.
+Följande tjänst definieras för att registrera ett GMT-datumanrop med HTTP-servern.
 
 ```C
 UINT nx_web_http_server_gmt_callback_set(
@@ -184,7 +184,7 @@ UINT nx_web_http_server_gmt_callback_set(
     VOID (*gmt_get)(NX_WEB_HTTP_SERVER_DATE *date);
 ```
 
-Data typen NX_WEB_HTTP_SERVER_DATE definieras enligt följande:
+Datatypen NX_WEB_HTTP_SERVER_DATE definieras på följande sätt:
 
 ```C
 typedef struct NX_WEB_HTTP_SERVER_DATE_STRUCT
@@ -199,11 +199,11 @@ typedef struct NX_WEB_HTTP_SERVER_DATE_STRUCT
 } NX_WEB_HTTP_SERVER_DATE;
 ```
 
-## <a name="http-cache-info-get-callback"></a>HTTP cache-information Hämta motringning
+## <a name="http-cache-info-get-callback"></a>HTTP Cache Info Get Callback
 
-HTTP-servern har ett återanrop för att begära högsta ålder och datum från HTTP-programmet för en specifik resurs. Den här informationen används för att avgöra om HTTP-servern skickar en hel sida som svar på en klient GET-begäran. Om den "om det har ändrats sedan" i klientbegäran inte hittas eller inte matchar datumet "senast ändrad" som returnerades av Get cache-återanropet, skickas hela sidan.
+HTTP-servern har ett återanrop för att begära högsta ålder och datum från HTTP-programmet för en specifik resurs. Den här informationen används för att avgöra om HTTP-servern skickar en hel sida som svar på en Client Get-begäran. Om "if modified since" i klientbegäran inte hittas eller inte matchar datumet för senaste ändring som returnerades av get cache-återanropet, skickas hela sidan.
 
-Följande tjänst definieras för att registrera återanropet med HTTP-servern:
+För att registrera motringning med HTTP-servern definieras följande tjänst:
 
 ```C
 UINT nx_web_http_server_cache_info_callback_set(
@@ -212,9 +212,9 @@ UINT nx_web_http_server_cache_info_callback_set(
     (CHAR *, UINT *, NX_WEB_HTTP_SERVER_DATE *));
 ```
 
-## <a name="http-chunked-transfer-coding-support"></a>Stöd för kodning av HTTP-segmenterad överföring
+## <a name="http-chunked-transfer-coding-support"></a>Kodningsstöd för HTTP-segmenterad överföring
 
-När den totala längden för HTTP-meddelanden inte kan fastställas innan du skickar den, kan du använda funktionen för Chunked Transfer-kodning för att skicka meddelanden som en serie segment utan rubrik fältet Content-Length. Den här funktionen stöds i alla HTTP-begäranden och svarsmeddelanden. Som mottagare stöds den här funktionen och segment huvudet bearbetas transparent med intern logik. Som avsändare måste API- *nx_web_http_client_request_chunked_set* och *nx_web_http_server_response_chunked_set* anropas av klienten respektive servern.
+När den totala längden på HTTP-meddelanden inte kan fastställas innan det skickas kan funktionen Chunked Transfer Coding användas för att skicka meddelanden som en serie med segment utan rubrikfältet "Content-Length". Den här funktionen stöds i alla HTTP-begäran- och svarsmeddelanden. Som mottagare stöds den här funktionen och segmentrubriken bearbetas transparent av intern logik. Som avsändare måste *API-nx_web_http_client_request_chunked_set* *nx_web_http_server_response_chunked_set* anropas av klienten respektive servern.
 
 ```C
 UINT nx_web_http_client_request_chunked_set(NX_WEB_HTTP_CLIENT *client_ptr,
@@ -228,9 +228,9 @@ UINT nx_web_http_server_response_chunked_set(NX_WEB_HTTP_SERVER *server_ptr,
 
 Mer information om dessa tjänster finns i beskrivningarna i kapitel 3 "Beskrivning av HTTP-tjänster".
 
-## <a name="http-multipart-support"></a>Stöd för HTTP-multipart
+## <a name="http-multipart-support"></a>HTTP-stöd för flera delar
 
-Multipurpose Internet Mail Extensions (MIME) ursprungligen avsåg SMTP-protokollet, men dess användning har spridit till HTTP. MIME tillåter meddelanden som innehåller blandade meddelande typer (t. ex. image/jpg och text/plain) i samma meddelande. NetX-webb-HTTP-servern har tjänster för att fastställa innehålls typ i HTTP-meddelanden som innehåller MIME från klienten. Om du vill aktivera stöd för HTTP-multipart och använda dessa tjänster måste konfigurations alternativet **NX_WEB_HTTP_MULTIPART_ENABLE** definieras.
+Multipurpose Internet Mail Extensions (MIME) var ursprungligen avsett för SMTP-protokollet, men dess användning har spridits till HTTP. MIME gör att meddelanden kan innehålla blandade meddelandetyper (t.ex. bild/jpg och text/oformaterad) i samma meddelande. NetX-webb-HTTP-servern har tjänster för att fastställa innehållstyp i HTTP-meddelanden som innehåller MIME från klienten. Om du vill aktivera stöd för HTTP med flera delar och använda dessa **tjänster NX_WEB_HTTP_MULTIPART_ENABLE** konfigurationsalternativet definieras.
 
 ```C
 UINT nx_web_http_server_get_entity_header(NX_WEB_HTTP_SERVER *server_ptr,
@@ -244,16 +244,16 @@ UINT nx_web_http_server_get_entity_content(NX_WEB_HTTP_SERVER *server_ptr,
     ULONG *available_length);
 ```
 
-Mer information om hur du använder dessa tjänster finns i beskrivningen i kapitel 3 "Beskrivning av HTTP-tjänster".
+Mer information om användningen av dessa tjänster finns i beskrivningen i kapitel 3 "Beskrivning av HTTP-tjänster".
 
-## <a name="http-multi-thread-support"></a>Stöd för HTTP multi-threading
+## <a name="http-multi-thread-support"></a>HTTP-stöd för flera trådar
 
-NetX webb-HTTP-klienttjänster kan anropas från flera trådar samtidigt. Läs-eller Skriv begär Anden för en viss HTTP-klient måste dock göras i följd från samma tråd.
+NetX Web HTTP-klienttjänsterna kan anropas från flera trådar samtidigt. Läs- eller skrivbegäranden för en viss HTTP-klientinstans bör dock göras i följd från samma tråd.
 
-Om du använder HTTPS kan NetX webb-HTTP-klienter anropas från flera trådar, men på grund av ökad komplexitet för de underliggande TLS-funktionerna bör varje tråd ha en enda, oberoende HTTP-klient instans (NX_WEB_HTTP_CLIENT kontroll struktur).
+Om du använder HTTPS kan NetX Web HTTP-klienttjänster anropas från flera trådar, men på grund av den ytterligare komplexiteten i de underliggande TLS-funktionerna bör varje tråd ha en enda, oberoende HTTP-klientinstans (NX_WEB_HTTP_CLIENT-kontrollstruktur).
 
 ## <a name="http-rfcs"></a>HTTP-RFC
 
-NetX webb-HTTP är kompatibel med RFC1945 "Hypertext Transfer Protocol/1.0", RFC 2616 "Hypertext Transfer Protocol-HTTP/1.1", RFC 2581 "TCP överbelastnings kontroll", RFC 1122 "krav för Internet värdar" och relaterade RFC: er.
+NetX Web HTTP är kompatibel med RFC1945 "Hypertext Transfer Protocol/1.0", RFC 2616 "Hypertext Transfer Protocol – HTTP/1.1", RFC 2581 "TCP Congestion Control", RFC 1122 "Krav för Internetvärdar" och relaterade RFC: er.
 
-NetX webb-HTTP är kompatibel med RFC 2818 "HTTP över TLS" för HTTPS.
+För HTTPS är NetX Web HTTP kompatibelt med RFC 2818 "HTTP över TLS".

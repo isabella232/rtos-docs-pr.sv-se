@@ -1,30 +1,30 @@
 ---
-title: Kapitel 1 – Översikt över Azure återställnings tider-LevelX
-description: Azure återställnings tider-LevelX innehåller NAND och eller Flash slitage-funktioner till inbäddade program.
+title: Kapitel 1 – Översikt över Azure RTOS LevelX
+description: Azure RTOS LevelX tillhandahåller FÖRSämnings- och FLASH-förslitning för inbäddade program.
 author: philmea
 ms.author: philmea
 ms.date: 05/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 045446fec74164f125bc0ad27e8b7a904be14ab2
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 73c06d48b98081291d83635e049e6cf8641714c87efe815f9399f3fbab3a6211
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104826274"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116790606"
 ---
-# <a name="chapter-1---overview-of-azure-rtos-levelx"></a>Kapitel 1 – Översikt över Azure återställnings tider-LevelX
+# <a name="chapter-1---overview-of-azure-rtos-levelx"></a>Kapitel 1 – Översikt över Azure RTOS LevelX
 
-Azure återställnings tider-LevelX innehåller NAND och eller Flash slitage-funktioner till inbäddade program. Eftersom både NAND och eller Flash-minne bara kan raderas ett visst antal gånger är det viktigt att distribuera Flash-minnet jämnt. Detta kallas vanligt vis "slitages utjämning" och är syftet bakom LevelX.
+Azure RTOS LevelX tillhandahåller FÖRSämnings- och FLASH-förslitning för inbäddade program. Eftersom både GRAFD- och NOR-flashminnet bara kan raderas ett begränsat antal gånger är det viktigt att distribuera flashminnet jämnt. Detta kallas vanligtvis för "utslitning" och är syftet bakom LevelX.
 
-Algoritmen som väljer vilket Flash-block som ska återanvändas huvudsakligen baseras på antalet rader, men inte helt. Det går inte att välja blocket med det lägsta antalet raderingar om det finns ett annat block som har ett antal rader i en acceptabel delta från det minsta antalet raderingar och som har ett större antal föråldrade mappningar. I sådana fall raderas blocket med det högsta antalet föråldrade mappningar och återanvänds, vilket innebär att det går att flytta giltiga mappnings poster.
+Algoritmen som väljer vilket flash-block som ska återanvändas baseras främst på raderingsantalet, men inte helt. Blocket med det lägsta antalet radering kanske inte väljs om det finns ett annat block som har ett raderingsantal inom ett acceptabelt delta från det minsta antalet radering och som har ett större antal föråldrade mappningar. I sådana fall kommer blocket med det största antalet föråldrade mappningar att raderas och återanvändas, vilket sparar kostnader vid flytt av giltiga mappningsposter.
 
-LevelX stöder flera instanser av NAND och/eller delar, d.v.s. programmet kan använda separata instanser av LevelX i samma program. Varje instans kräver ett eget kontroll block som tillhandahålls av programmet samt dess egna Flash-drivrutin.
+LevelX har stöd för flera instanser avPLAD- och/eller NOR-delar, det vill säga att programmet kan använda separata instanser av LevelX i samma program. Varje instans kräver ett eget kontrollblock som tillhandahålls av programmet samt en egen flash-drivrutin.
 
-LevelX presenterar användaren en matris med logiska sektorer som är mappade till det fysiska Flash-minnet inuti LevelX. För att förbättra prestanda tillhandahåller LevelX också en cache med de senaste logiska sektor mappningarna. Storleken på den här cachen definieras av programmeraren. Program kan använda LevelX tillsammans med FileX eller kan läsa/skriva logiska sektorer direkt. LevelX har inget beroende av FileX och mycket litet beroende av ThreadX (endast primitiva ThreadX-datatyper används).
+LevelX visar för användaren en matris med logiska sektorer som mappas till fysiskt flashminne i LevelX. För att förbättra prestandan tillhandahåller LevelX även en cache med de senaste mappningarna för logiska sektorer. Storleken på cacheminnet definieras av programmeraren. Program kan använda LevelX tillsammans med FileX eller läsa/skriva logiska sektorer direkt. LevelX är inte beroende av FileX och är mycket litet beroende av ThreadX (endast primitiva ThreadX-datatyper används).
 
-LevelX är utformad för fel tolerans. Flash-uppdateringar utförs i en process med flera steg som kan avbrytas i varje steg. LevelX återställs automatiskt till det optimala läget under nästa åtgärd.
+LevelX är utformat för feltolerans. Flash-uppdateringar utförs i en process med flera steg som kan avbrytas i varje steg. LevelX återställs automatiskt till det optimala tillståndet under nästa åtgärd.
 
-LevelX kräver en Flash-drivrutin för fysisk åtkomst till det underliggande Flash-minnet. Exempel på NAND och eller simulerade driv rutiner tillhandahålls och kan användas som en lämplig start punkt för att implementera faktiska LevelX-drivrutiner. Dessutom beskrivs driv rutins kraven längre fram i den här dokumentationen.
+LevelX kräver en flash-drivrutin för fysisk åtkomst till det underliggande flashminnet. Exempel PÅ SIMULERAD och NOR-simulerade drivrutiner tillhandahålls och kan användas som en bra utgångspunkt för implementering av faktiska LevelX-drivrutiner. Dessutom beskrivs drivrutinskraven senare i den här dokumentationen.
 
-I följande kapitel beskrivs funktions åtgärden för NAND-och-och-LevelX-stöd.
+I följande kapitel beskrivs funktionsåtgärden för STÖD FÖR MAND och NOR LevelX.

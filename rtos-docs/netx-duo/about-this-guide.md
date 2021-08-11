@@ -1,78 +1,78 @@
 ---
-title: Om användar handboken för Azure återställnings tider NetX Duo
-description: Den här guiden innehåller omfattande information om Azure återställnings tider NetX Duo, Microsofts högpresterande IPv4/IPv6-stack med dubbla nätverk.
+title: Om användarhandboken Azure RTOS NetX Duo
+description: Den här guiden innehåller omfattande information om Azure RTOS NetX Duo, Microsofts högpresterande IPv4/IPv6 dubbla nätverksstack.
 author: philmea
 ms.author: philmea
 ms.date: 05/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: b1eef5bfa28f13d7a6b627792f96039b252f2355
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 032cca3ccdaa7600732d52894d63e5bef366010abaa1145417201f48cb034ab5
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104826238"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116790181"
 ---
-# <a name="about-the-azure-rtos-netx-duo-user-guide"></a>Om användar handboken för Azure återställnings tider NetX Duo
+# <a name="about-the-azure-rtos-netx-duo-user-guide"></a>Om användarhandboken Azure RTOS NetX Duo
 
-Den här guiden innehåller omfattande information om Azure återställnings tider NetX Duo, Microsofts högpresterande IPv4/IPv6-stack med dubbla nätverk. 
+Den här guiden innehåller omfattande information om Azure RTOS NetX Duo, Microsofts högpresterande IPv4/IPv6 dubbla nätverksstack. 
 
-Den är avsedd för inbäddade program varu utvecklare i real tid som är bekanta med grundläggande nätverks koncept, Azure återställnings tider-ThreadX och programmeringsspråket C.
+Den är avsedd för inbäddade realtidsutvecklare som är bekanta med grundläggande nätverksbegrepp, Azure RTOS ThreadX och programmeringsspråket C.
 
 ## <a name="organization"></a>Organisation
 
-[Kapitel 1](chapter1.md) – introducerar Azure återställnings tider netx Duo
+[Kapitel 1](chapter1.md) – Introducerar Azure RTOS NetX Duo
 
-[Kapitel 2](chapter2.md) – innehåller grundläggande steg för att installera och använda Azure återställnings tider netx Duo med ditt ThreadX-program
+[Kapitel 2](chapter2.md) – Ger grundläggande steg för att installera och använda Azure RTOS NetX Duo med ditt ThreadX-program
 
-[Kapitel 3](chapter3.md) – innehåller en funktionell översikt över Azure återställnings tider netx Duo-systemet och grundläggande information om TCP/IP nätverks standarder
+[Kapitel 3](chapter3.md) – Ger en funktionell översikt över Azure RTOS NetX Duo-systemet och grundläggande information om TCP/IP-nätverksstandarder
 
-[Kapitel 4](chapter4.md) – information om programmets gränssnitt till Azure återställnings tider netx Duo
+[Kapitel 4](chapter4.md) – Beskriver programmets gränssnitt för att Azure RTOS NetX Duo
 
-[Kapitel 5](chapter5.md) – beskriver nätverks driv rutiner för Azure återställnings tider netx Duo
+[Kapitel 5](chapter5.md) – Beskriver nätverksdrivrutiner för Azure RTOS NetX Duo
 
-[Bilaga A](appendix-a.md) – Azure återställnings tider netx Duo-tjänster
+[Bilaga A](appendix-a.md) – Azure RTOS NetX Duo Services
 
-[Bilaga B](appendix-b.md) – Azure återställnings tider netx Duo-konstanter
+[Bilaga B](appendix-b.md) – Azure RTOS NetX Duo-konstanter
 
-[Bilaga C](appendix-c.md) – Azure återställnings tider netx Duo-datatyper
+[Bilaga C](appendix-c.md) – Azure RTOS NetX Duo-datatyper
 
-[Bilaga D](appendix-d.md) – BSD-Compatible socket-API
+[Bilaga D](appendix-d.md) – BSD-Compatible Socket API
 
-[Bilaga E](appendix-e.md) -ASCII-diagram
+[Bilaga E](appendix-e.md) – ASCII-diagram
 
-## <a name="guide-conventions"></a>Guide konventioner
+## <a name="guide-conventions"></a>Guidekonventioner
 
-Kursiv stil – teckensnittet noterar bok titlar, betonar viktiga ord och indikerar variabler.
+Italics – Typeface anger boktitlar, betonar viktiga ord och anger variabler.
 
-**Fetstil** – typsnitt anger fil namn, viktiga ord och betonar viktiga ord och variabler.
+**Boldface** – Typeface anger filnamn, nyckelord och betonar viktiga ord och variabler ytterligare.
 
 > [!IMPORTANT]
-> Informations symboler drar uppmärksamheten till viktig eller ytterligare information som kan påverka prestandan eller funktionen.
+> Informationssymboler uppmärksammar viktig eller ytterligare information som kan påverka prestanda eller funktion.
  
 > [!WARNING]
-> Varnings symboler drar uppmärksamhet till situationer som utvecklare bör undvika eftersom de kan orsaka allvarliga fel.
+> Varningssymboler uppmärksammar situationer som utvecklare bör undvika eftersom de kan orsaka allvarliga fel.
 
-## <a name="azure-rtos-netx-duo-data-types"></a>Data typer för Azure återställnings tider-NetX Duo
+## <a name="azure-rtos-netx-duo-data-types"></a>Azure RTOS NetX Duo-datatyper
 
-Förutom de anpassade data typerna för Azure återställnings tider NetX Duo-kontrollen finns det flera särskilda data typer som används i Azure återställnings tider NetX Duo-tjänstens anrops gränssnitt. Dessa särskilda data typer mappar direkt till data typer för den underliggande C-kompilatorn. Detta görs för att säkerställa portabilitet mellan olika C-kompilatorer. Den exakta implementeringen ärvs från ThreadX och kan hittas i filen ***tx_port. h*** som ingår i ThreadX-distributionen.
+Förutom de anpassade datatyperna Azure RTOS NetX Duo-kontrollstruktur finns det flera särskilda datatyper som används i Azure RTOS Anropsgränssnitt för NetX Duo-tjänsten. Dessa särskilda datatyper mappar direkt till datatyper för den underliggande C-kompilatorn. Detta görs för att säkerställa portabilitet mellan olika C-kompilatorer. Den exakta implementeringen ärvs från ThreadX och finns i ***filen tx_port.h*** som ingår i ThreadX-distributionen.
 
-Följande är en lista över data typerna för Azure återställnings tider NetX Duo-tjänstens anrop och deras associerade betydelser:
+Följande är en lista över datatyper Azure RTOS NetX Duo-tjänstens anrop och deras associerade betydelser:
 
-**Uint**: Basic-osignerat heltal. Den här typen måste ha stöd för 32-bitars osignerade data. den är dock mappad till den mest användbara osignerade data typen.  
-**Ulong**: osignerad lång typ. Den här typen måste ha stöd för 32-bitars osignerade data.
-**Void**: nästan alltid likvärdigt med kompilatorns void-typ.  
-**Char**: oftast en vanlig 8-bitars tecken typ.  
+**UINT:** Grundläggande osignerat heltal. Den här typen måste ha stöd för 32-bitars osignerade data. Den mappas dock till den mest praktiska osignerade datatypen.  
+**ULONG:** Osignerad lång typ. Den här typen måste ha stöd för 32-bitars osignerade data.
+**VOID:** Nästan alltid likvärdigt med kompilatorns void-typ.  
+**CHAR:** Är oftast en standardtyp med 8 bitar.  
 
-Ytterligare data typer används i Azure återställnings tider-NetX Duo-källan. De finns antingen i ***tx_port. h** _ eller _ *_nx_port. h_** filer.
+Ytterligare datatyper används i Azure RTOS NetX Duo-källa. De finns antingen i filerna ***tx_port.h** _ eller _ *_nx_port.h_** .
 
-## <a name="customer-support-center"></a>Kund Support Center
+## <a name="customer-support-center"></a>Kundsupport
 
-Skicka in ett support ärende via Azure Portal om du har frågor eller hjälp med att följa stegen här. Lämna oss med följande information i ett e-postmeddelande så att vi effektivare kan lösa support förfrågan:
+Skicka en supportbiljett via Azure-portalen för frågor eller hjälp med att följa stegen här. Ange följande information i ett e-postmeddelande så att vi kan lösa din supportbegäran mer effektivt:
 
-1. En detaljerad beskrivning av problemet, inklusive frekvensen av händelser och huruvida det kan återskapas tillförlitligt.
-2. En detaljerad beskrivning av eventuella ändringar i programmet och/eller Azure återställnings tider NetX Duo som föregåde problemet.
-3. Innehållet i _tx_version_id-och _nx_version_id-strängar som finns i tx_port. h-och nx_port. h-filerna för distributionen. De här strängarna ger oss värdefull information om din kör tids miljö.
+1. En detaljerad beskrivning av problemet, inklusive förekomstfrekvens och huruvida det kan återskapas på ett tillförlitligt sätt.
+2. En detaljerad beskrivning av eventuella ändringar i programmet och/eller Azure RTOS NetX Duo som föregick problemet.
+3. Innehållet i de _tx_version_id och _nx_version_id som finns i tx_port.h- och nx_port.h-filerna för distributionen. Dessa strängar ger oss värdefull information om din körningsmiljö.
 4. Innehållet i RAM-minnet för följande ULONG-variabler:
 
     **_tx_build_options**
@@ -87,6 +87,6 @@ Skicka in ett support ärende via Azure Portal om du har frågor eller hjälp me
 
     **_nx_system_build_options5**
 
-    Dessa variabler ger oss information om hur dina Azure återställnings tider ThreadX-och Azure återställnings tider NetX Duo-bibliotek skapades.
+    Dessa variabler ger oss information om hur dina Azure RTOS ThreadX- och Azure RTOS NetX Duo-bibliotek har skapats.
 
-5. En spårnings-buffert som samlats in omedelbart efter det att problemet upptäcktes. Detta åstadkommer du genom att skapa Azure återställnings tider-ThreadX och Azure återställnings tider NetX Duo-bibliotek med TX_ENABLE_EVENT_TRACE och anropa tx_trace_enable med information om spårnings-bufferten.
+5. En spårningsbuffert avbildas omedelbart efter att problemet har identifierats. Detta åstadkoms genom att skapa Azure RTOS ThreadX- och Azure RTOS NetX Duo-bibliotek med TX_ENABLE_EVENT_TRACE och anropa tx_trace_enable med spårningsbuffertinformationen.

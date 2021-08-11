@@ -1,80 +1,80 @@
 ---
-title: Kapitel 3 – funktionella komponenter i USBX Device stack
-description: Det här kapitlet innehåller en beskrivning av stacken med USBX inbäddade USB-enheter med hög prestanda från ett funktionellt perspektiv.
+title: Kapitel 3 – Funktionella komponenter i USBX-enhetsstacken
+description: Det här kapitlet innehåller en beskrivning av stacken med USBX-inbäddad USB-enhet med höga prestanda ur ett funktionellt perspektiv.
 author: philmea
 ms.author: philmea
 ms.date: 5/19/2020
 ms.service: rtos
 ms.topic: article
-ms.openlocfilehash: dc57f3e0f6aa6731f4aaedee8169313ca7276cff
-ms.sourcegitcommit: 1aeca2f91960856d8cc24fef65f909639e527599
+ms.openlocfilehash: 104badcbf1ec682cd8b09008578ba91768834d694473ecccf59e35637dfd9f3c
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/31/2021
-ms.locfileid: "106082208"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116791365"
 ---
-# <a name="chapter-3---functional-components-of-usbx-device-stack"></a>Kapitel 3 – funktionella komponenter i USBX Device stack
+# <a name="chapter-3---functional-components-of-usbx-device-stack"></a>Kapitel 3 – Funktionella komponenter i USBX-enhetsstacken
 
-Det här kapitlet innehåller en beskrivning av stacken med USBX inbäddade USB-enheter med hög prestanda från ett funktionellt perspektiv.
+Det här kapitlet innehåller en beskrivning av stacken med USBX-inbäddad USB-enhet med höga prestanda ur ett funktionellt perspektiv.
 
-## <a name="execution-overview"></a>Översikt över körning
+## <a name="execution-overview"></a>Körningsöversikt
 
 USBX för enheten består av flera komponenter.
 
 - Initiering
-- Program gränssnitts anrop
-- Enhets klasser
-- USB-enhets stack
-- Enhets styrenhet
-- VBUS Manager
+- Anrop till programgränssnitt
+- Enhetsklasser
+- USB-enhetsstack
+- Enhetsstyrenhet
+- VBUS-chef
 
-Följande diagram illustrerar USBX Device-stacken.
+Följande diagram illustrerar USBX-enhetsstacken.
 
-![USBX Device-stack](media/usbx-device-stack/usbx-device-stack.png)
+![USBX-enhetsstack](media/usbx-device-stack/usbx-device-stack.png)
 
 ### <a name="initialization"></a>Initiering
 
-Funktionen ***ux_system_initialize*** måste anropas för att aktivera USBX. Den här funktionen initierar minnes resurserna för USBX.
+För att aktivera USBX måste funktionen ***ux_system_initialize*** anropas. Den här funktionen initierar minnesresurserna för USBX.
 
-Funktionen ***ux_device_stack_initialize*** måste anropas för att kunna aktivera enhets anläggningar för USBX. Den här funktionen kommer att initiera alla resurser som används av USBX Device stack, till exempel ThreadX-trådar, mutexer och semaforer.
+För att aktivera USBX-enhetsanläggningar måste ***funktionen ux_device_stack_initialize*** anropas. Den här funktionen initierar i sin tur alla resurser som används av USBX-enhetsstacken, till exempel ThreadX-trådar, mutexer och semaforer.
 
-Det är upp till program initieringen att aktivera USB-styrenheten och en eller flera USB-klasser. Till skillnad från USB-värdstyrenheten kan enhets sidan bara ha en USB Controller-drivrutin som körs när som helst. När klasserna har registrerats till stacken och enhets styrenhetens (a) initierings funktion har anropats, är bussen aktiv och stacken svarar på kommandona för Bus-återställning och värd uppräkning.
+Det är upp till programmets initiering att aktivera USB-enhetsstyrenheten och en eller flera USB-klasser. Till skillnad från USB-värdsidan kan enhetssidan bara ha en USB-styrenhetsdrivrutin som körs när som helst. När klasserna har registrerats i stacken och initieringsfunktionen för enhetsstyrenheter har anropats är buss aktiv och stacken svarar på kommandon för bussåterställning och värduppräkning.
 
-### <a name="application-interface-calls"></a>Program gränssnitts anrop
+### <a name="application-interface-calls"></a>Anrop till programgränssnitt
 
-Det finns två nivåer av API: er i USBX.
+Det finns två nivåer av API:er i USBX.
 
-- Stack-API: er för USB-enhet
-- API: er för USB-enhets klass
+- API:er för USB-enhetsstack
+- API:er för USB-enhetsklass
 
-Normalt behöver ett USBX-program inte anropa någon av USB-API: erna för USB-enhet. De flesta program får bara åtkomst till API: er för USB-klass.
+Normalt bör ett USBX-program inte behöva anropa något av API:erna för USB-enhetsstacken. De flesta program kommer endast åt USB-klass-API:er.
 
-### <a name="usb-device-stack-apis"></a>Stack-API: er för USB-enhet
+### <a name="usb-device-stack-apis"></a>API:er för USB-enhetsstack
 
-API: erna för enhets stacken ansvarar för registreringen av USBX-enhets komponenter, till exempel klasser och enhets ramverket.
+API:erna för enhetsstackar ansvarar för registreringen av USBX-enhetskomponenter, till exempel klasser och enhetsramverket.
 
-### <a name="usb-device-class-apis"></a>API: er för USB-enhets klass
+### <a name="usb-device-class-apis"></a>API:er för USB-enhetsklass
 
-Klass-API: erna är särskilt speciella för varje USB-klass. De flesta vanliga API: er för USB-klasser tillhandahåller tjänster som att öppna/stänga en enhet och läsa från och skriva till en enhet. API: erna liknar värd sidans typ.
+Klass-API:erna är mycket specifika för varje USB-klass. De flesta vanliga API:er för USB-klasser tillhandahåller tjänster som att öppna/stänga en enhet och läsa från och skriva till en enhet. API:erna liknar värdsidan.
 
-## <a name="device-framework"></a>Enhets ramverk
+## <a name="device-framework"></a>Enhetsramverk
 
-USB-enhetens sida ansvarar för definitionen av enhets ramverket. Enhets ramverket är uppdelat i tre kategorier, enligt beskrivningen i följande avsnitt.
+USB-enheten ansvarar för definitionen av enhetsramverket. Enhetsramverket är indelat i tre kategorier, enligt beskrivningen i följande avsnitt.
 
-### <a name="definition-of-the-components-of-the-device-framework"></a>Definition av komponenterna i enhets ramverket
+### <a name="definition-of-the-components-of-the-device-framework"></a>Definition av komponenterna i Device Framework
 
-Definitionen av varje komponent i enhets ramverket är relaterad till enhetens beskaffenhet och de resurser som används av enheten. Följande är de viktigaste kategorierna.
+Definitionen av varje komponent i enhetsramverket är relaterad till enhetens typ och de resurser som används av enheten. Följande är huvudkategorierna.
 
-- Enhets Beskrivning
-- Konfigurations Beskrivning
-- Gränssnitts Beskrivning
-- Slut punkts Beskrivning
+- Enhetsbeskrivning
+- Konfigurationsbeskrivning
+- Gränssnittsbeskrivning
+- Slutpunktsbeskrivning
 
-USBX stöder enhets komponent definition för både hög och fullständig hastighet (låg hastighet behandlas på samma sätt som full hastighet). Detta gör att enheten fungerar annorlunda när den är ansluten till en hög hastighets-eller full hastighets värd. De typiska skillnaderna är storleken på varje slut punkt och den ström som förbrukas av enheten.
+USBX stöder enhetskomponentdefinitioner för både hög och full hastighet (låg hastighet behandlas på samma sätt som full hastighet). Detta gör att enheten kan fungera på olika sätt när den är ansluten till en värd med hög hastighet eller full hastighet. De vanligaste skillnaderna är storleken på varje slutpunkt och den ström som förbrukas av enheten.
 
-Definitionen av enhets komponenten tar formen av en byte-sträng som följer USB-specifikationen. Definitionen är sammanhängande och den ordning som ramverket är representerat i minnet är samma som det som returneras till värden under uppräkningen.
+Definitionen av enhetskomponenten har formen av en bytesträng som följer USB-specifikationen. Definitionen är sammanhängande och den ordning i vilken ramverket representeras i minnet är samma som det som returnerades till värden under uppräkningen.
 
-Följande är ett exempel på ett enhets ramverk för en USB-flash-disk med hög hastighet.
+Följande är ett exempel på ett enhetsramverk för en USB-flashdisk med hög hastighet.
 
 ```c
 #define DEVICE_FRAMEWORK_LENGTH_HIGH_SPEED 60
@@ -99,13 +99,13 @@ UCHAR device_framework_high_speed[] = {
 };
 ```
 
-### <a name="definition-of-the-strings-of-the-device-framework"></a>Definition av strängarna i enhets ramverket
+### <a name="definition-of-the-strings-of-the-device-framework"></a>Definition av strängar i Device Framework
 
-Strängar är valfria i en enhet. Syftet med detta är att låta USB-värden veta om enhetens tillverkare, produktens namn och revisions numret genom Unicode-strängarna.
+Strängar är valfria i en enhet. Deras syfte är att meddela USB-värden om tillverkaren av enheten, produktnamnet och revisionsnumret via Unicode-strängar.
 
-Huvud strängarna är inbäddade index i enhets beskrivarna. Ytterligare sträng index kan bäddas in i enskilda gränssnitt.
+Huvudsträngarna är index som är inbäddade i enhetsbeskrivningarna. Ytterligare strängindex kan bäddas in i enskilda gränssnitt.
 
-Förutsatt att enhets ramverket ovan har tre sträng index inbäddade i enhets beskrivningen kan sträng Ramverks definitionen se ut som den här exempel koden.
+Förutsatt att enhetsramverket ovan har tre strängindex inbäddade i enhetsbeskrivningen kan definitionen av strängramverket se ut som den här exempelkoden.
 
 ```c
 /* String Device Framework:
@@ -132,15 +132,15 @@ UCHAR string_framework[] = {
 };
 ```
 
-Om olika strängar måste användas för varje hastighet måste olika index användas när indexen är hastigheten oberoende.
+Om olika strängar måste användas för varje hastighet måste olika index användas eftersom indexen är hastighetsoberoende.
 
-Kodningen för strängen är UNICODE-baserad. Mer information om UNICODE-encoding-standarden hittar du i följande publikation:
+Strängens kodning är UNICODE-baserad. Mer information om UNICODE-kodningsstandarden finns i följande publikation:
 
-*Unicode-standarden, global tecken kodning, version 1., volym 1 och 2, Unicode-konsortiet, Addison-Wesley publicerings företag, läser MA.*
+*Unicode Standard, Worldwide Character Encoding, Version 1., Volumes 1 och 2, Unicode Consortium, Addison-Wesley Publishing Company, Reading MA.*
 
 ### <a name="definition-of-the-languages-supported-by-the-device-for-each-string"></a>Definition av de språk som stöds av enheten för varje sträng
 
-USBX har möjlighet att stödja flera språk även om engelska är standard. Definitionen av varje språk för sträng beskrivningar är i form av en matris med språk definition som definieras enligt följande.
+USBX har stöd för flera språk, även om engelska är standard. Definitionen av varje språk för strängbeskrivningarna är i form av en matris med språkdefinition som definieras på följande sätt.
 
 ```c
 #define LANGUAGE_ID_FRAMEWORK_LENGTH 2
@@ -150,18 +150,18 @@ UCHAR language_id_framework[] = {
 };
 ```
 
-För att stödja ytterligare språk lägger du helt enkelt till språk kodens dubbla byte-definition efter den engelska standard koden. Språk koden har definierats av Microsoft i dokumentet.
+För att stödja ytterligare språk lägger du helt enkelt till språkkoden double-byte definition efter den engelska standardkoden. Språkkoden har definierats av Microsoft i dokumentet.
 
-*Utveckla internationell program vara för Windows 95 och Windows NT, Nadine Kano, Microsoft Press, Redmond, WA*
+*Utveckla internationell programvara för Windows 95 och Windows NT, Nadine Kano, Microsoft Press, Redmond WA*
 
 ## <a name="vbus-manager"></a>VBUS Manager
 
-I de flesta USB-enheter är VBUS inte en del av USB-enhetens kärna utan är i stället ansluten till en extern GPIO, som övervakar linje signalen.
+I de flesta USB-enhetsutformningar är VBUS inte en del av USB-enhetskärnan utan ansluten till en extern GPIO som övervakar linjesignalen.
 
-Därför måste VBUS hanteras separat från enhets styrenhetens driv rutin.
+Därför måste VBUS hanteras separat från enhetsstyrenhetsdrivrutinen.
 
-Det är upp till programmet att tillhandahålla enhets styrenheten med adressen för VBUS i/o. VBUS måste initieras före initieringen av enhets styrenheten.
+Det är upp till programmet att förse enhetskontrollanten med adressen till VBUS-IO:t. VBUS måste initieras innan styrenheten initieras.
 
-Beroende på plattforms specifikationen för övervakning av VBUS, är det möjligt att låta kontrollantens driv rutin hantera VBUS-signaler när VBUS i/o har initierats eller om detta inte är möjligt måste programmet tillhandahålla koden för att hantera VBUS.
+Beroende på plattformsspecifikationen för övervakning av VBUS är det möjligt att låta styrenhetsdrivrutinen hantera VBUS-signaler när VBUS IO har initierats eller om detta inte är möjligt, måste programmet tillhandahålla koden för hantering av VBUS.
 
-Om programmet vill hantera VBUS själva, är det enda kravet att anropa funktionen ***ux_device_stack_disconnect*** när den upptäcker att en enhet har extraherats. Det är inte nödvändigt att meddela kontrollanten när en enhet sätts in, eftersom styrenheten kommer att aktive ras när bussen Återställ kontrollerad/avkontrollerande signalen identifieras.
+Om programmet vill hantera VBUS på egen hand är det enda kravet att anropa funktionen ***ux_device_stack_disconnect*** den upptäcker att en enhet har extraherats. Det är inte nödvändigt att informera kontrollanten när en enhet infogas eftersom styrenheten aktiveras när BUS RESET assert/deassert-signalen har identifierats.

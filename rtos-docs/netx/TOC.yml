@@ -1,143 +1,143 @@
-- name: Dokumentation om NetX
+- name: NetX-dokumentation
   href: index.yml
 - name: Översikt över NetX
   href: overview-netx.md
-- name: Användar handbok för NetX
+- name: NetX-användarhandbok
   expanded: true
   items:
     - name: Om den här guiden
       href: about-this-guide.md
-    - name: V. 1 – Introduktion till NetX
+    - name: Ch. 1 – Introduktion till NetX
       href: chapter1.md
-    - name: V. 2 – installation och användning av NetX
+    - name: Ch. 2 – Installation och användning av NetX
       href: chapter2.md
-    - name: V. 3-funktionella komponenter i NetX
+    - name: Ch. 3 – Funktionella komponenter i NetX
       href: chapter3.md
-    - name: V. 4 – Beskrivning av NetX-tjänster
+    - name: Ch. 4 – Beskrivning av NetX-tjänster
       href: chapter4.md
-    - name: V. 5-NetX nätverks driv rutiner
+    - name: Ch. 5 – NetX-nätverksdrivrutiner
       href: chapter5.md
-    - name: Mobilappar. A-NetX tjänster
+    - name: App. A – NetX-tjänster
       href: appendix-a.md
-    - name: Mobilappar. B-NetX konstanter
+    - name: App. B – NetX-konstanter
       href: appendix-b.md
-    - name: Mobilappar. C-NetX data typer
+    - name: App. C – NetX-datatyper
       href: appendix-c.md
-    - name: Mobilappar. D-BSD-kompatibelt socket-API
+    - name: App. D – BSD-kompatibelt socket-API
       href: appendix-d.md
-    - name: Mobilappar. E-ASCII-tecken koder
+    - name: App. E – ASCII-teckenkoder
       href: appendix-e.md
-- name: NetX-tillägg
+- name: NetX-addons
   items:
-    - name: Användar handbok för NetX AutoIP
+    - name: Användarhandbok för NetX AutoIP
       items:
-        - name: V. 1 – Introduktion till NetX AutoIP
+        - name: Ch. 1 – Introduktion till NetX AutoIP
           href: netx-auto-ip/chapter1.md
-        - name: V. 2 – installation och användning av NetX AutoIP
+        - name: Ch. 2 – Installation och användning av NetX AutoIP
           href: netx-auto-ip/chapter2.md
-        - name: V. 3 – Beskrivning av NetX AutoIP-tjänster
+        - name: Ch. 3 – Beskrivning av NetX AutoIP-tjänster
           href: netx-auto-ip/chapter3.md
-    - name: Användar handbok för NetX BSD
+    - name: Användarhandbok för NetX BSD
       items:
-        - name: V. 1 – Introduktion till NetX BSD
+        - name: Ch. 1 – Introduktion till NetX BSD
           href: netx-bsd/chapter1.md
-        - name: V. 2 – installation och användning av NetX BSD
+        - name: Ch. 2 – Installation och användning av NetX BSD
           href: netx-bsd/chapter2.md
-        - name: V. 3-NetX BSD-tjänster
+        - name: Ch. 3 – NetX BSD-tjänster
           href: netx-bsd/chapter3.md
     - name: NetX DHCP-klient
       items:
-        - name: V. 1 – Introduktion till NetX DHCP-klient
+        - name: Ch. 1 – Introduktion till NetX DHCP-klient
           href: netx-dhcp-client/chapter1.md
-        - name: V. 2 – installation och användning av NetX DHCP-klienten
+        - name: Ch. 2 – Installation och användning av NetX DHCP-klient
           href: netx-dhcp-client/chapter2.md
-        - name: V. 3 – Beskrivning av NetX DHCP Client Services
+        - name: Ch. 3 – Beskrivning av NetX DHCP-klienttjänster
           href: netx-dhcp-client/chapter3.md
-        - name: Mobilappar. A – Beskrivning av funktionen återställnings tillstånd
+        - name: App. A – Beskrivning av funktionen för återställningstillstånd
           href: netx-dhcp-client/appendix-a.md
-    - name: Användar guide för NetX DHCP-server
+    - name: Användarhandbok för NetX DHCP-server
       items:
-        - name: V. 1 – Introduktion till NetX DHCP-server
+        - name: Ch. 1 – Introduktion till NetX DHCP-server
           href: netx-dhcp-server/chapter1.md
-        - name: V. 2 – installation och användning av NetX DHCP-server
+        - name: Ch. 2 – Installation och användning av NetX DHCP-servern
           href: netx-dhcp-server/chapter2.md
-        - name: V. 3 – Beskrivning av NetX DHCP server Services
+        - name: Ch. 3 – Beskrivning av NetX DHCP-servertjänster
           href: netx-dhcp-server/chapter3.md
-    - name: Användar handbok för NetX DNS-klient
+    - name: Användarhandbok för NetX DNS-klienten
       items:
-        - name: V. 1 – Introduktion till DNS-klienten NetX
+        - name: Ch. 1 – Introduktion till NetX DNS-klienten
           href: netx-dns/chapter1.md
-        - name: V. 2 – installation och användning av NetX DNS-klient
+        - name: Ch. 2 – Installation och användning av NetX DNS-klient
           href: netx-dns/chapter2.md
-        - name: V. 3 – Beskrivning av NetX DNS Client Services
+        - name: Ch. 3 – Beskrivning av NetX DNS-klienttjänster
           href: netx-dns/chapter3.md
-    - name: Användar handbok för FTP-NetX
+    - name: Användarhandbok för NetX FTP
       items:
-        - name: V. 1 – Introduktion till NetX FTP
+        - name: Ch. 1 – Introduktion till NetX FTP
           href: netx-ftp/chapter1.md
-        - name: V. 2 – installation och användning av NetX FTP
+        - name: Ch. 2 – Installation och användning av NetX FTP
           href: netx-ftp/chapter2.md
-        - name: V. 3 – Beskrivning av NetX FTP-tjänster
+        - name: Ch. 3 – Beskrivning av NetX FTP-tjänster
           href: netx-ftp/chapter3.md
     - name: NetX HTTP
       items:
-        - name: V. 1 – Introduktion till NetX HTTP
+        - name: Ch. 1 – Introduktion till NetX HTTP
           href: netx-http/chapter1.md
-        - name: V. 2 – installation och användning av NetX HTTP
+        - name: Ch. 2 – Installation och användning av NetX HTTP
           href: netx-http/chapter2.md
-        - name: V. 3 – Beskrivning av NetX HTTP-tjänster
+        - name: Ch. 3 – Beskrivning av NetX HTTP-tjänster
           href: netx-http/chapter3.md
-    - name: Användar handbok för NetX LWM2M
+    - name: Användarhandbok för NetX LWM2M
       items:
-        - name: V. 1 – Introduktion till NetX LWM2M
+        - name: Ch. 1 – Introduktion till NetX LWM2M
           href: netx-lwm2m/chapter1.md
-        - name: V. 2 – installation och användning av NetX LWM2M
+        - name: Ch. 2 – Installation och användning av NetX LWM2M
           href: netx-lwm2m/chapter2.md
-        - name: V. 3-funktionell beskrivning av NetX LWM2M
+        - name: Ch. 3 – Funktionell beskrivning av NetX LWM2M
           href: netx-lwm2m/chapter3.md
-        - name: V. 4 – Beskrivning av NetX LWM2M-tjänster
+        - name: Ch. 4 – Beskrivning av NetX LWM2M-tjänster
           href: netx-lwm2m/chapter4.md
-    - name: Användar handbok för NetX POP3-klient
+    - name: Användarhandbok för NetX POP3-klient
       items:
-        - name: V. 1 – Introduktion till NetX POP3
+        - name: Ch. 1 – Introduktion till NetX POP3
           href: netx-pop3-client/chapter1.md
-        - name: V. 2 – installation och användning av NetX POP3-klienten
+        - name: Ch. 2 – Installation och användning av NetX POP3-klient
           href: netx-pop3-client/chapter2.md
-        - name: V. 3 – Beskrivning av NetX POP3-klient tjänster
+        - name: Ch. 3 – Beskrivning av NetX POP3-klienttjänster
           href: netx-pop3-client/chapter3.md
-    - name: Användar handbok för NetX-PPP
+    - name: Användarhandbok för NetX PPP
       items:
-        - name: V. 1 – Introduktion till NetX-Point-to-Point Protocol (PPP)
+        - name: Ch. 1 – Introduktion till NetX Point-to-Point Protocol (PPP)
           href: netx-ppp/chapter1.md
-        - name: V. 2 – installation och användning av NetX Point-to-Point Protocol (PPP)
+        - name: Ch. 2 – Installation och användning av NetX Point-to-Point Protocol (PPP)
           href: netx-ppp/chapter2.md
-        - name: V. 3 – Beskrivning av NetX Point-to-Point Protocol-tjänster (PPP)
+        - name: Ch. 3 – Beskrivning av NetX Point-to-Point Protocol tjänster (PPP)
           href: netx-ppp/chapter3.md
-    - name: Användar handbok för NetX PPPoE-klienten
+    - name: Användarhandbok för NetX PPPoE-klienten
       items:
         - name: Kapitel 1 – Introduktion till NetX PPPoE-klient
           href: netx-pppoe-client/chapter1.md
-        - name: Kapitel 2 – installation och användning av NetX PPPoE-klienten
+        - name: Kapitel 2 – Installation och användning av NetX PPPoE-klienten
           href: netx-pppoe-client/chapter2.md
-        - name: Kapitel 3 – Beskrivning av NetX PPPoE-klient tjänster
+        - name: Kapitel 3 – Beskrivning av NetX PPPoE-klienttjänster
           href: netx-pppoe-client/chapter3.md
-    - name: Användar handbok för NetX PPPoE-Server
+    - name: Användarhandbok för NetX PPPoE-server
       items:
-        - name: V. 1 – Introduktion till NetX PPPoE-Server
+        - name: Ch. 1 – Introduktion till NetX PPPoE-server
           href: netx-pppoe-server/chapter1.md
-        - name: V. 2 – installation och användning av NetX PPPoE-Server
+        - name: Ch. 2 – Installation och användning av NetX PPPoE-server
           href: netx-pppoe-server/chapter2.md
-        - name: V. 3 – Beskrivning av NetX PPPoE Server Services
+        - name: Ch. 3 – Beskrivning av NetX PPPoE-servertjänster
           href: netx-pppoe-server/chapter3.md
 - name: NetX-lagringsplats
   href: 'https://github.com/azure-rtos/netx'
 - name: Relaterade tjänster
   items:
-    - name: Defender för IoT-återställnings tider (för hands version)
+    - name: Defender for IoT – RTOS (förhandsversion)
       href: /azure/asc-for-iot
 - name: Microsoft-komponenter
   items:
-    - name: Microsoft Azure återställnings tider
+    - name: Microsoft Azure RTOS
       href: ../index.yml
     - name: ThreadX
       href: ../threadx/index.yml
@@ -145,7 +145,7 @@
       href: ../threadx-modules/index.yml
     - name: NetX Duo
       href: ../netx-duo/index.yml
-    - name: NetX
+    - name: Netx
       href: ../netx/index.yml
     - name: GUIX
       href: ../guix/index.yml

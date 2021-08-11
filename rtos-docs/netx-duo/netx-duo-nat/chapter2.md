@@ -1,49 +1,49 @@
 ---
-title: Kapitel 2 – installation och användning av NAT
-description: Det här kapitlet innehåller en beskrivning av hur du installerar, konfigurerar och använder NetX Duo NAT-tjänster.
+title: Kapitel 2 – Installation och användning av NAT
+description: Det här kapitlet innehåller en beskrivning av hur du installerar, installerar och använder NAT-tjänsterna för NetX Duo.
 author: philmea
 ms.author: philmea
 ms.date: 07/14/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 47816c8a62aed9e2b096b121d1676c66178ad825
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: e1eb96e53f600eac56f8a82f3ca02ccfdaabf5cc12d95989e1e38e87775ff24f
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104825863"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116797389"
 ---
-# <a name="chapter-2---installation-and-use-of-nat"></a>Kapitel 2 – installation och användning av NAT
+# <a name="chapter-2---installation-and-use-of-nat"></a>Kapitel 2 – Installation och användning av NAT
 
-Det här kapitlet innehåller en beskrivning av hur du installerar, konfigurerar och använder NetX Duo NAT-tjänster.
+Det här kapitlet innehåller en beskrivning av hur du installerar, installerar och använder NAT-tjänsterna för NetX Duo.
 
-## <a name="netx-duo-nat-installation"></a>NetX Duo NAT-installation
+## <a name="netx-duo-nat-installation"></a>NETX Duo NAT-installation
 
-NetX Duo NAT finns på [https://github.com/azure-rtos/netxduo](https://github.com/azure-rtos/netxduo) . NetX Duo NAT-paketet innehåller en källfil och en huvud fil, en demonstrations program fil och en PDF-fil för det här dokumentet, enligt följande:
+NetX Duo NAT finns på [https://github.com/azure-rtos/netxduo](https://github.com/azure-rtos/netxduo) . NAT-paketet NetX Duo innehåller en källfil och en huvudfil, en demonstrationsprogramfil och en PDF-fil för det här dokumentet, enligt följande:
 
-- **nx_nat. c** C-källfil för NetX Duo NAT
-- **nx_nat. h** C-huvud fil för NetX Duo NAT
-- **demo_netx_nat. c** Exempel på värd NetX Duo C-källfil
-- **nx_nat.docx** Beskrivning av användar handboken för NetX Duo NAT (detta dokument)
+- **nx_nat.c** C-källfil för NetX Duo NAT
+- **nx_nat.h** C-rubrikfil för NetX Duo NAT
+- **demo_netx_nat.c** Exempel på netX Duo C-källfil
+- **nx_nat.docx** Beskrivning av NETX Duo NAT-användarhandboken (det här dokumentet)
 
-Kopiera NetX Duo NAT-källfilerna till samma katalog där NetX Duo och ThreadX är installerade. Om t. ex. NetX Duo och ThreadX är installerade i katalogen "*\threadx\mcf5485\green*", ska *nx_nat. c*, *nx_nat. h och de modifierade netx Duo-filerna* kopieras till den här katalogen. Kopiera de ändrade NetX Duo-filerna över de befintliga NetX Duo-filerna. Kopiera även drivrutinsfiler för Ethernet-styrenheten till den här katalogen.
+Kopiera NETX Duo NAT-källkodsfilerna till samma katalog där NetX Duo och ThreadX är installerade. Om Till exempel NetX Duo och ThreadX installeras i katalogen "*\threadx\mcf5485\green*" ska *nx_nat.c*, nx_nat.h och de ändrade *NetX Duo-filerna* kopieras till den här katalogen. Kopiera de ändrade NetX Duo-filerna över de befintliga NetX Duo-filerna. Kopiera även Ethernet-styrenhetens drivrutinsfiler till den här katalogen.
 
-Så här skapar du ett NetX Duo NAT-program:
+Så här skapar du ett NETX Duo NAT-program:
 
-- NetX Duo-biblioteket *nxduo. a* måste skapas med NX_NAT_ENABLED definierat. Detta kan göras i *nx_user. h*, (se till att NX_INCLUDE_USER_DEFINE_FILE också har definierats för att se till att konfigurations alternativen i *nx_user. h* ingår i versionen.
-- Programprojektet måste innehålla *nx_nat. h* efter *tx_api. h* och *nx_api. h. De två sistnämnda huvudfilerna är nödvändiga* för att använda ThreadX-och netx Duo-tjänster.
-- Programmet aktiverar sedan NAT på en tidigare skapad IP-instans med hjälp av tjänsten *nx_nat_enable* .
-- Program koden kan aktivera/inaktivera NAT dynamiskt genom att anropa tjänsten *nx_nat_enable* och *nx_nat_disable* .
-- Programmets projekt kod kompileras och länkas till det NAT-aktiverade NetX Duo-biblioteket för att skapa den körbara filen.
-- För att stödja NAT-anslutningar med TCP-, UDP-eller ICMP-protokoll måste NetX Duo vara aktiverat för att stödja det protokollet. Detta görs genom att anropa *nx_tcp_enable, nx_udp_enable* och *nx_icmp_enable* för den tidigare skapade IP-instansen.
+- NetX Duo-biblioteket *nxduo.a* måste byggas med NX_NAT_ENABLED definieras. Detta kan göras *i nx_user.h*(se till att NX_INCLUDE_USER_DEFINE_FILE också har definierats för att säkerställa att konfigurationsalternativen *i nx_user.h* ingår i versionen.
+- Programprojektet måste innehålla *nx_nat.h efter* *tx_api.h* och *nx_api.h. De två senare huvudfilerna är nödvändiga för* att använda ThreadX- och NetX Duo-tjänster.
+- Programmet aktiverar sedan NAT på en tidigare  skapad IP-instans med hjälp av nx_nat_enable tjänsten.
+- Programkoden kan dynamiskt aktivera/inaktivera NAT genom att anropa nx_nat_enable *och* *nx_nat_disable* tjänsten.
+- Programprojektkoden kompileras och länkas till det NAT-aktiverade NetX Duo-biblioteket för att skapa den körbara filen.
+- NetX Duo måste vara aktiverat för att stödja det protokollet för att stödja NAT-anslutningar med TCP-, UDP- eller ICMP-protokoll. Detta görs genom att *anropa nx_tcp_enable, nx_udp_enable* *och nx_icmp_enable* för ip-instansen som du skapade tidigare.
 
-## <a name="small-example-demo-nat-setup"></a>Installations program för den lilla exempel demon NAT
+## <a name="small-example-demo-nat-setup"></a>Litet exempel på NAT-konfiguration för demo
 
-Ett exempel på hur ett program konfigurerar NetX Duo NAT visas i *tx_application_define* -funktionen i bild 4 nedan. Till skillnad från de flesta NetX Duo-demonstrationer som distribueras på installations-CD: n, körs den här demon på en faktisk processor med två Ethernet-styrenheter, i stället för en Windows-dator med hjälp av den virtuella nätverks driv rutinen *_nx_ram_network_driver* NAT-enheten är ansluten till den lokala domänen via en lokal växel på det lokala gränssnittet och till det externa nätverket via den andra växeln på det externa gränssnittet.
+Ett exempel på hur ett program uppsättningar NetX Duo NAT visas *i tx_application_define* i bild 4 nedan. Till skillnad från de flesta NetX Duo-demofiler som distribueras på installations-CD:n körs den här demonstrationen på ett faktiskt processorkort med två Ethernet-styrenheter, i stället för en Windows-dator som använder den virtuella *nätverksdrivrutinen _nx_ram_network_driver*(). NAT-enheten är ansluten till den lokala domänen via en lokal växel i det lokala gränssnittet och till det externa nätverket via den andra växeln i det externa gränssnittet.
 
-NetXDuo grundläggande konfiguration visas i demo_netx_nat. c. Det privata nätverket definieras som 192.168.2. xx och har två lokala noder. Det globala nätverket definieras som Sök omfånget 192.168.0. xx och definierar gatewayen för slut på nätverks paket som 192.168.0.1. NetX Duo IP-instanserna skapas på raderna 118-171 och anropar ram-drivrutinen. nat_ip instans som är kopplad till två gränssnitt fungerar som NAT-router, local_ip instans som är ansluten till gränssnittet fungerar som lokal värd. external_ip instans som är kopplad till ett gränssnitt fungerar som extern värd.
+Grundläggande NetXDuo-konfiguration visas i demo_netx_nat.c. Det privata nätverket definieras som 192.168.2.xx och har två lokala värdnoder. Det globala nätverket definieras som 192.168.0.xx och definierar sin gateway för utgående nätverkspaket som 192.168.0.1. NETX Duo IP-instanser skapas på raderna 118–171 och anropar RAM-drivrutinen. nat_ip instansen kopplade två gränssnitt fungerar som en NAT-router, local_ip instans som är ansluten på gränssnittet fungerar som lokal värd; external_ip instansen ett gränssnitt fungerar som en extern värd.
 
-NAT skapas på rad 252 och anropar cachen för att lagra dynamiska översättnings poster. Aktivera funktionen NAT i line319, statisk översättnings entrie (inkommande post) skapas i rad 362 för att extern värd ska kunna komma åt den lokala värden.
+NAT skapas på rad 252 och anropar cachen för att lagra poster för dynamisk översättning. Aktivera NAT-funktionen på rad 319. Statisk översättningsentrie (inkommande post) skapas på rad 362 för att tillåta extern värd åtkomst till den lokala värden.
 
 ```C
 /*

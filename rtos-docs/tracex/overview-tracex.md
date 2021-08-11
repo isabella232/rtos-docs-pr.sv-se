@@ -1,173 +1,173 @@
 ---
-title: Förstå Azure återställnings tider-TraceX
-description: Azure återställnings tider TraceX är Microsofts värdbaserade analys verktyg som ger utvecklare en grafisk vy över system händelser i real tid och gör det möjligt för dem att visualisera och bättre förstå hur real tids system fungerar.
+title: Förstå Azure RTOS TraceX
+description: Azure RTOS TraceX är Microsofts värdbaserade analysverktyg som ger utvecklare en grafisk vy över systemhändelser i realtid och gör det möjligt för dem att visualisera och bättre förstå beteendet för deras realtidssystem.
 author: philmea
 ms.author: philmea
 ms.date: 5/19/2020
 ms.service: rtos
 ms.topic: overview
-ms.openlocfilehash: 9fd33eec6da69e6dda421a125a2dde5eae93b46d
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 966f3be5ebe34e006067175e422480fbf1ab664bb0ff627d7b01e71036dc5e82
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104828626"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116792225"
 ---
-# <a name="overview-of-azure-rtos-tracex"></a>Översikt över Azure återställnings tider-TraceX
+# <a name="overview-of-azure-rtos-tracex"></a>Översikt över Azure RTOS TraceX
 
-Azure återställnings tider TraceX är Microsofts värdbaserade analys verktyg som ger utvecklare en grafisk vy över system händelser i real tid och gör det möjligt för dem att visualisera och bättre förstå hur real tids system fungerar. Med Azure återställnings tider-TraceX kan utvecklare tydligt visa förekomst av system händelser som avbrott och kontext byten som inträffar utanför vyn med standard fel söknings verktyg. Möjligheten att identifiera och studera de här händelserna, och för att precisera tidpunkten för deras förekomst i samband med det övergripande systemets funktion gör det möjligt för utvecklare att lösa programmerings problem genom att hitta oväntade beteenden och låta dem undersöka specifika områden ytterligare spårnings information lagras i en buffert i mål systemet, med den buffertstorlek och storlek som fastställs av programmet vid körning. Azure återställnings tider TraceX kan bearbeta alla buffertar som konstruerats på rätt sätt, inte bara från Azure återställnings tider-ThreadX, utan från alla program och återställnings tider. Spårnings informationen kan överföras till värden för analys när som helst, antingen efter slakt eller vid en Bryt punkt. Azure återställnings tider ThreadX implementerar en cirkulär buffert, som gör att de senaste "N" händelserna blir tillgängliga för granskning i händelse av systemfel eller andra viktiga händelser.
+Azure RTOS TraceX är Microsofts värdbaserade analysverktyg som ger utvecklare en grafisk vy över systemhändelser i realtid och gör det möjligt för dem att visualisera och bättre förstå beteendet för deras realtidssystem. Med Azure RTOS TraceX kan utvecklare tydligt se förekomsten av systemhändelser som avbrott och kontextväxlar som sker utanför standardverktygen för felsökning. Möjligheten att identifiera och studera dessa händelser och fastställa tidpunkten för deras förekomst i kontexten för det övergripande systemets drift gör det möjligt för utvecklare att lösa programmeringsproblem genom att hitta oväntat beteende och låta dem undersöka specifika områden ytterligare Spårningsinformation lagras i en buffert i målsystemet, där buffertplatsen och storleken bestäms av programmet vid körning. Azure RTOS TraceX kan bearbeta alla buffertar som konstrueras på rätt sätt, inte bara från Azure RTOS ThreadX, utan även från alla program eller RTOS. Spårningsinformationen kan laddas upp till värden för analys när som helst – antingen efter en brytning eller vid en brytpunkt. Azure RTOS ThreadX implementerar en cirkulär buffert som gör att de senaste "N"-händelserna kan inspekteras i händelse av systemfel eller andra betydande händelser.
 
-![Azure återställnings tider TraceX Single-Core display](./media/user-guide/screen_shot_33.png)
+![Azure RTOS TraceXSingle-Core visning](./media/user-guide/screen_shot_33.png)
 
-**TraceX Single-Core visning**
+**TraceXSingle-Core visning**
 
-## <a name="key-capabilites"></a>Key funktioner
+## <a name="key-capabilites"></a>Viktiga funktioner
 
-### <a name="azure-rtos-tracex-built-in-system-analysis"></a>Inbyggda system analyser i Azure återställnings tider TraceX
+### <a name="azure-rtos-tracex-built-in-system-analysis"></a>Azure RTOS inbyggd systemanalys för TraceX
 
-Azure återställnings tider TraceX innehåller inbyggda system analys rapporter som är tillgängliga via en enda knapp genom att klicka på TraceX-verktygsfältet. Följande knappar och rapporter innehåller:
+Azure RTOS TraceX innehåller inbyggda systemanalysrapporter som är tillgängliga via ett enda knapptryck från TraceX-verktygsfältet. Dessa knappar och rapporter är:
 
-![Skapa rapport för körnings profil](./media/overview-tracex/execution-profile-report-button.jpg) Skapa rapport för körnings profil
+![Generera körningsprofilrapport](./media/overview-tracex/execution-profile-report-button.jpg) Generera körningsprofilrapport
 
-![Generera rapport över prestanda statistik](./media/overview-tracex/performance-statistics-report-button.jpg) Generera rapport över prestanda statistik
+![Generera prestandastatistikrapport](./media/overview-tracex/performance-statistics-report-button.jpg) Generera prestandastatistikrapport
 
-![Generera rapport över tråds tack användning](./media/overview-tracex/thread-stack-usage-report-button.jpg) Generera rapport över tråds tack användning
+![Generera användningsrapport för trådstack](./media/overview-tracex/thread-stack-usage-report-button.jpg) Generera användningsrapport för trådstack
 
-### <a name="trace-data-collected-by-azure-rtos-threadx"></a>Spårnings data som samlats in av Azure återställnings tider ThreadX
+### <a name="trace-data-collected-by-azure-rtos-threadx"></a>Spårningsdata som samlas in av Azure RTOS ThreadX
 
-Azure återställnings tider TraceX har utformats för att fungera med Azure återställnings tider-ThreadX, som skapar en databas med system-och program händelser i mål systemet vid körning. Dessa händelser omfattar:
+Azure RTOS TraceX är utformat för att fungera med Azure RTOS ThreadX, som skapar en databas med system- och programhändelser på målsystemet under körning. Dessa händelser omfattar:
 
-* tråd kontexts växlar
+* trådkontextväxlar
 * preemptions
-* SUS pensioner
-* avslutningar
-* system avbrott
+* Suspensioner
+* Avslutningar
+* systemavbrott
 * programspecifika händelser
-* alla Azure återställnings tider ThreadX API-anrop
-* alla Azure återställnings tider NetX API-anrop
-* alla Azure återställnings tider FileX API-anrop
-* alla Azure återställnings tider USBX API-anrop
+* alla Azure RTOS ThreadX API-anrop
+* alla Azure RTOS NetX API-anrop
+* alla Azure RTOS FileX API-anrop
+* alla Azure RTOS USBX API-anrop
 * programdefinierade ikoner och information
 
-Händelser loggas under program kontroll, med tids stämpling och identifiering av aktiva trådar så att de kan visas senare i rätt tidssekvens och associeras med lämplig tråd. Händelse loggning kan stoppas och startas om av program programmet dynamiskt, till exempel när ett intresse områden påträffas. På så sätt undviker du att databasen fylls i och att mål minnet används när systemet fungerar som det ska.
+Händelser loggas under programkontroll, med tidsstämplar och aktiv trådidentifiering så att de kan visas senare i rätt tidssekvens och associeras med lämplig tråd. Händelseloggning kan stoppas och startas om av programmet dynamiskt, till exempel när ett intresseområde påträffas. På så sätt undviker du oreda i databasen och använder upp målminnet när systemet fungerar som det ska.
 
-### <a name="azure-rtos-tracex-is-like-a-software-logic-analyzer"></a>Azure återställnings tider-TraceX är som en program logik analys
+### <a name="azure-rtos-tracex-is-like-a-software-logic-analyzer"></a>Azure RTOS TraceX är som en logikanalys för programvara
 
-När händelse loggen har laddats upp från mål minnet till värden, visar Azure återställnings tider TraceX händelserna grafiskt på en vågrät axel som representerar tid, med de olika program trådar och system rutiner som händelserna är relaterade till i listan längs den lodräta axeln. Azure återställnings tider TraceX skapar en "Software Logic Analyzer" på värden och gör system händelser som visas i klartext. Händelser representeras av färgkodade ikoner, som finns på förekomst punkten längs den vågräta tids linjen till höger om relevant tråd-eller system rutin. När en händelse ikon väljs, visas motsvarande information för händelsen, samt information om de två föregående och två efterföljande händelser. Detta ger snabb och enkel klickning till den mest omedelbara informationen om händelsen och de omedelbart omgivande händelserna. Azure återställnings tider TraceX innehåller en sammanfattnings visning som visar alla system händelser på en enda vågrät linje för att förenkla analyser av system med många trådar.
+När händelseloggen har laddats upp från målminnet till värden visar Azure RTOS TraceX händelserna grafiskt på en vågrät axel som representerar tid, med de olika programtrådar och systemrutiner som händelserna är relaterade till listade längs den lodräta axeln. Azure RTOS TraceX skapar ett "logikanalysverktyg för programvara" på värden, vilket gör systemhändelser synliga. Händelser representeras av färgkodade ikoner, som finns vid tidpunkten för händelsen längs den vågräta tidslinjen, till höger om relevant tråd eller systemrutin. När en händelseikon väljs visas motsvarande information för händelsen, samt information för de två föregående och två efterföljande händelserna. Detta ger snabb åtkomst med enkelklickning till den mest omedelbara informationen om händelsen och dess direkt omgivande händelser. Azure RTOS TraceX innehåller en "Sammanfattning"-skärm som visar alla systemhändelser på en enda vågrät linje för att förenkla analysen av system med många trådar.
 
-### <a name="sequential-view-mode"></a>Sekventiellt visnings läge
+### <a name="sequential-view-mode"></a>Sekventiellt visningsläge
 
-Det sekventiella visnings läget är valt genom att klicka på fliken "sekventiell vy". Detta är standard läget. I det här läget visas händelser direkt efter varandra, oavsett hur lång tid som förflutit. Observera också linjalen ovanför visnings ytan. Det visar det relativa händelse numret från början av spåret. Det här läget är standard läget och är särskilt användbart för att få en bra översikt över vad som händer i systemet.
+Det sekventiella visningsläget väljs genom att klicka på fliken Sekventiell vy. Det här är standardläget. I det här läget visas händelser direkt efter varandra, oavsett tiden mellan dem. Observera även linjalen ovanför visningsområdet. Det visar det relativa händelsenumret från början av spårningen. Det här läget är standardläget och är särskilt användbart för att få en bra översikt över vad som händer i systemet.
 
-![Sekventiellt visnings läge](./media/user-guide/screen_shot_10.png)
+![Sekventiellt visningsläge](./media/user-guide/screen_shot_10.png)
 
-**Sekventiellt visnings läge**
+**Sekventiellt visningsläge**
 
-### <a name="time-view-mode"></a>Tids visnings läge
+### <a name="time-view-mode"></a>Tidsvisningsläge
 
-I det här läget visas händelser i ett relativt relativt läge – med ett fyllt grönt fält som används för att Visa körning mellan händelser. Det här läget är särskilt användbart för att se var bearbetningen sker i systemet, vilket kan hjälpa utvecklare att finjustera systemet för att få bättre prestanda och/eller svars tider.
+I det här läget visas händelser i ett relativt tidsläge, där en heldragen grön stapel används för att visa körning mellan händelser. Det här läget är särskilt användbart för att se var den största delen av bearbetningen sker i systemet, vilket kan hjälpa utvecklare att finjustera systemet för bättre prestanda och/eller svarstider.
 
-Observera också linjalen ovanför händelse visningen. Den här linjalen visar relativa skal streck från början av spåret, som härletts från den tidsstämpeln som instrumenteras i händelse spårnings loggningen i Azure återställnings tider-ThreadX. Om tidsstämplarna är för nära (låg frekvens, timer), kommer händelserna att köras tillsammans. Om tidsstämplar är för långt ifrån varandra (med hög frekvens), kommer händelserna att vara för långt ifrån varandra. Att välja rätt tidsintervall är ett viktigt övervägande för att göra tiden relativt meningsfull vy.
+Observera även linjalen ovanför händelsevisningen. Den här linjalen visar relativa tick från början av spårningen, som härleds från tidsstämpeln som instrumenterades i händelsespårningsloggningen inuti Azure RTOS ThreadX. Om tidsstämplarna är för nära varandra (timer med låg frekvens) körs händelserna tillsammans. Om tidsstämplarna däremot är för långt ifrån varandra (timer med hög frekvens) är händelserna för långt ifrån varandra. Att välja rätt tidsstämpel för frekvens är viktigt när det gäller att göra tidsre relativa vyn meningsfull.
 
-![Tids visnings läge](./media/user-guide/screen_shot_31.png)
+![Tidsvisningsläge](./media/user-guide/screen_shot_31.png)
 
-### <a name="system-summary-line"></a>System sammanfattnings rad
+### <a name="system-summary-line"></a>Systemsammanfattningsrad
 
-Azure återställnings tider TraceX innehåller också en enda sammanfattnings rad som innehåller alla händelser på samma rad. Sammanfattnings raden innehåller en sammanfattning av kontexten samt motsvarande händelse Sammanfattning under. Detta gör det enkelt att se en översikt över ett komplext system. Sammanfattnings fältet är särskilt fördelaktigt i system som har ett stort antal trådar. Utan en sådan sammanfattnings rad skulle användaren behöva följa komplexa system interaktioner med den lodräta rullnings listen för att följa körnings kontexten.
+Azure RTOS TraceX innehåller också en enda sammanfattningsrad som innehåller alla händelser på samma rad. Sammanfattningsraden innehåller en sammanfattning av kontexten samt motsvarande händelsesammanfattning under. Detta gör det enkelt att se en översikt över ett komplext system. Sammanfattningsfältet är särskilt användbart i system som har ett stort antal trådar. Utan en sådan sammanfattningsrad skulle användaren behöva följa komplexa systeminteraktioner med hjälp av den lodräta rullningslisten för att följa körningskontexten.
 
-Azure återställnings tider-TraceX visar en lista över system kontexterna till vänster i visningen.
-Händelser som inträffar i en viss kontext visas på den vågräta linjen till höger om kontexten. På så sätt kan användaren enkelt se vilken kontext händelsen har inträffat samt följa den kontext linjen för att se alla händelser som inträffat i en viss kontext.
+Azure RTOS TraceX visar en lista över systemkontexterna till vänster på skärmen.
+Händelser som inträffar i en viss kontext visas på den vågräta linjen till höger om den kontexten. På så sätt kan användaren enkelt fastställa vilken kontext händelsen inträffade och följa den kontextraden för att se alla händelser som inträffade i en viss kontext.
 
-![System sammanfattnings rad](./media/user-guide/screen_shot_32.png)
+![Systemsammanfattningsrad](./media/user-guide/screen_shot_32.png)
 
-**System sammanfattnings rad**
+**Systemsammanfattningsrad**
 
-De första två kontext posterna är alltid "avbrotts" och "initiera/inaktive"-kontexter. Kontexten "avbrott" representerar alla system händelser som har gjorts från avbrotts tjänst rutiner (ISR: er). Kontexten "initiera/passiv" representerar två kontexter i Azure återställnings tider ThreadX. Händelser som inträffar under tx_application_define är "initiera" händelser och visas i kontexten "initiera/inaktiv". Om systemet är inaktivt och inga händelser inträffar, visas det gröna fältet som representerar "körs" i vyn tid på kontexten "initiera/inaktiv".
+De första två kontextposterna är alltid kontexterna "Avbrott" och "Initiera/inaktiv". Kontexten "Avbrott" representerar alla systemhändelser som görs från ISR(Interrupt Service Routines). Kontexten "Initiera/inaktiv" representerar två kontexter i Azure RTOS ThreadX. Händelser som inträffar tx_application_define, är "Initiera" händelser och visas i kontexten "Initiera/inaktiv". Om systemet är inaktivt och därför inte inträffar ritas den gröna stapeln som representerar "Körs" i tidsvyn i kontexten "Initiera/inaktiv".
 
-## <a name="methods-of-navigation"></a>Navigerings metoder
+## <a name="methods-of-navigation"></a>Navigeringsmetoder
 
-Med Azure återställnings tider TraceX kan utvecklaren ange hur navigerings knapparna "Nästa" och "föregående" ska användas.
+Azure RTOS TraceX gör att utvecklaren kan ange hur navigeringsknapparna "Nästa" och "Föregående" fungerar.
 
-![Navigerings knappar](./media/user-guide/event.png)
+![Navigeringsknappar](./media/user-guide/event.png)
 
-Om "event" är markerat görs navigeringen på nästa/föregående händelse. Om "context" är markerat görs navigeringen på nästa/föregående-händelse i samma kontext. Om du väljer "objekt" görs navigering på nästa/föregående händelse av det aktuella objektet, t. ex. händelser som är associerade med en viss kö. Om "växlar" är markerat görs navigeringen på nästa/föregående kontext växel. Om du väljer samma ID görs navigeringen på nästa/föregående händelse för samma händelse-ID.
+Om "Händelse" har valts görs navigeringen vid nästa/föregående händelse. Om "Kontext" har valts görs navigeringen i nästa/föregående händelse i samma kontext. Om "Objekt" har valts görs navigeringen vid nästa/föregående händelse för det aktuella objektet, t.ex. händelser som är associerade med en specifik kö. Om "Växlar" är markerat görs navigeringen på nästa/föregående kontextväxel. Om "Samma ID" har valts görs navigeringen i nästa/föregående händelse för samma händelse-ID.
 
-### <a name="event-information-display"></a>Visning av händelse information
+### <a name="event-information-display"></a>Visning av händelseinformation
 
-Azure återställnings tider TraceX innehåller detaljerad information om vissa 300-händelser. Dessa omfattar sex interna Azure återställnings tider ThreadX-händelser, två ISR-händelser (retur och exit), 14 interna Azure återställnings tider FileX-händelser, 42 interna Azure återställnings tider NetX-händelser och en användardefinierad händelse. Återstående händelser motsvarar direkt till Azure återställnings tider-ThreadX, Azure återställnings tider-FileX och Azure återställnings tider NetX API-tjänster.
-Oavsett om visnings läget sekventiellt eller tiden är markerat visas detaljerad händelse information i händelse av en mus på valfri händelse i visnings ytan. Mus för händelse 494 i demonstrationen demo_threadx. trx spårnings fil visas här:
+Azure RTOS TraceX innehåller detaljerad information om cirka 300 händelser. Dessa omfattar sex interna Azure RTOS ThreadX-händelser, två ISR-händelser (enter och exit), 14 interna Azure RTOS FileX-händelser, 42 interna Azure RTOS NetX-händelser och en användardefinierad händelse. De återstående händelserna motsvarar direkt Azure RTOS ThreadX, Azure RTOS FileX och Azure RTOS NetX API-tjänster.
+Oavsett om sekventiellt läge eller tidsvisningsläge har valts, resulterar en muspekar över en händelse i visningsområdet i detaljerad händelseinformation som visas nära händelsen. Muspekaren över händelse 494 i demonstrationsfilen demo_threadx.trx visas här:
 
 ![Mouse-Over visar mer information](./media/user-guide/screen_shot_37.png)
 
-**Mus över visar mer information**
+**Muspekaren visar mer information**
 
-Varje händelse som visas innehåller standard information om kontext och både relativ tid och tidstämpel. Kontext fältet visar vilken kontext händelsen ägde rum i. Det finns exakt fyra kontexter: tråd, inaktivitet, ISR och initiering. När en händelse inträffar i en tråd kontext samlas tråd namnet och dess prioritet vid tidpunkten och visas som ovan. Den relativa tiden visar det relativa antalet timer-Tick från början av spårningen. Tidsstämpeln för rå data visar händelsens råa tids källa. Slutligen visas all information som är speciell för händelsen.
+Varje händelse som visas innehåller standardinformation om Kontext och både relativ tid och tidsstämpel. Fältet Kontext visar vilken kontext händelsen ägde rum i. Det finns exakt fyra kontexter: tråd, inaktivitet, ISR och initiering. När en händelse äger rum i en trådkontext samlas trådnamnet och dess prioritet vid den tidpunkten in och visas enligt ovan. Relativ tid visar det relativa antalet timer tick från början av spårningen. Råtidsstämpeln visar raw-tidskällan för händelsen. Slutligen visas all händelsespecifik information.
 
 ### <a name="zooming-in-and-out"></a>Zooma in och ut
 
-Som standard visar Azure återställnings tider TraceX händelser i en lättläst storlek med en 1:1 pixel: Tick-mappning. Användaren kan zooma in eller ut efter behov. Att zooma ut till 100% är användbart för att se hela spårningen i den aktuella visnings vyn, medan zoomning i är användbart i villkor där händelserna överlappar på grund av upplösningen för tids stämplings källan.
+Som standard Azure RTOS TraceX händelserna i en storlek som är enkel att visa, med mappningen 1:1 pixel:tick. Användaren kan zooma in eller zooma ut efter behov. Att zooma ut till 100 % är användbart för att se hela spårningen i den aktuella visningsvyn, medan zoomning är användbart i förhållanden där händelserna överlappar på grund av tidsstämpelkällans upplösning.
 
-![Zoom-Out till 100% Visa eller zooma in för mer information](./media/user-guide/screen_shot_41.png)
+![Zoom-Out till 100 % visa eller zooma in för information](./media/user-guide/screen_shot_41.png)
 
-**Zooma ut till 100% Visa eller zooma in för mer information**
+**Zooma ut till 100 % vy eller zooma in för mer information**
 
-När du zoomar ut med 100% – visar hela spårningen på den aktuella visnings sidan – det är enkelt att se all kontext körning som fångats in i spårningen samt de allmänna händelser som inträffar i dessa sammanhang. Observera att "tråd 1" och "tråd 2" körs oftast. De blå färgning för deras händelser innebär också att de här trådarna gör Queue Service-anrop (köa händelser är blå i färg).
+När du zoomar ut med 100 % – visar hela spårningen på den aktuella visningssidan – är det enkelt att se alla kontextkörningar som fångats in i spårningen samt de allmänna händelser som inträffar i dessa kontexter. Observera att "tråd 1" och "tråd 2" körs oftast. Den blå färgen för deras händelser tyder också på att dessa trådar gör kötjänstanrop (köhändelser är blå i färg).
 
-Att återställa till en hel ikonvy är lika enkelt. Antingen kan du välja knappen Zooma in flera gånger eller så kan en viss faktor på 100 anges.
+Det är lika enkelt att återställa till en fullständig ikonvy. Zoomningsknappen kan antingen väljas upprepade gånger eller så kan någon faktor på 100 anges.
 
-### <a name="delta-ticks-between-events"></a>Delta-Tick mellan händelser
+### <a name="delta-ticks-between-events"></a>Delta tickar mellan händelser
 
-Det är enkelt att fastställa antalet Tick mellan olika händelser i Azure återställnings tider TraceX genom att klicka på Start händelsen och dra musen till avslutande händelse.
-Delta antalet Tick mellan händelserna visas i det övre högra hörnet av skärmen.
+Det är enkelt att fastställa antalet tick mellan olika händelser Azure RTOS TraceX. Klicka bara på starthändelsen och dra musen till sluthändelsen.
+Deltaantalet tick mellan händelserna visas i det övre högra hörnet på skärmen.
 
-![Delta-Tick](./media/user-guide/screen_shot_42.png)
+![Delta tick](./media/user-guide/screen_shot_42.png)
 
-**Delta-Tick**
+**Delta tick**
 
-Delta-skalstrecken visar att 5032 Tick har förflutit mellan händelse 494 och händelse 496. Detta kan också beräknas manuellt genom att titta på de relativa tidsstämplar i varje händelse och subtraktion, men det är enkelt och momentant att använda det grafiska användar gränssnittet.
+Delta tick visar att 5032 tick har förflutit mellan händelse 494 och händelse 496. Detta kan också beräknas manuellt genom att titta på de relativa tidsstämplarna i varje händelse och subtrahera, men det är enkelt och omedelbart att använda det grafiska användargränssnittet.
 
-### <a name="priority-inversions"></a>Prioritets version
+### <a name="priority-inversions"></a>Prioritetsinversioner
 
-Azure återställnings tider TraceX visar automatiskt de prioritets versioner som identifieras i spårnings filen. Prioritets versioner definieras som villkor där en tråd med högre prioritet blockeras försöker erhålla en mutex som för närvarande ägs av en tråd med lägre prioritet. Det här villkoret kallas "deterministisk", eftersom systemet var konfigurerat för att köras på det här sättet. För att informera användaren visar Azure återställnings tider TraceX "deterministiska" prioritets versions intervall som en ljus lax färg.
+Azure RTOS TraceX visar automatiskt prioritetsinversioner som identifierats i spårningsfilen. Prioritetsinversioner definieras som villkor där en tråd med högre prioritet blockeras och försöker hämta en mutex som för närvarande ägs av en tråd med lägre prioritet. Det här villkoret kallas "deterministiskt" eftersom systemet konfigurerades för att fungera på det här sättet. För att informera användaren visar Azure RTOS TraceX "deterministiska" prioritetsintervall för inversion som en ljus färg.
 
-Azure återställnings tider TraceX visar också "icke-deterministisk" prioritets versioner. De här prioritets versionerna skiljer sig från de "deterministiska" prioritets versionerna i att en annan tråd av en annan prioritets nivå har körts i mitten av vad som var en "deterministisk" prioritets version, vilket gör tiden inom prioriteten inversion lite "icke-deterministisk". Det här tillståndet är ofta okänt för användaren och kan vara mycket allvarligt. För att varna användaren om detta villkor visar Azure återställnings tider TraceX "icke-deterministisk" prioritets version som en lysande lax-färg.
+Azure RTOS TraceX visar även "icke-deterministiska" prioritetsinversioner. Dessa prioritetsinversioner skiljer sig från de "deterministiska" prioritetsinversionerna på så sätt att en annan tråd på en annan prioritetsnivå har körts mitt i det som var en "deterministisk" prioritetsinversion, vilket gör tiden inom prioritetsinversionen något "o deterministisk". Det här tillståndet är ofta okänt för användaren och kan vara mycket allvarligt. För att varna användaren om det här villkoret visar Azure RTOS TraceX "icke-deterministiska" prioritetsinversioner som en ljusare färg.
 
-![Inversion av deterministisk och icke-deterministisk prioritet](./media/user-guide/screen_shot_43.png)
+![Deterministisk och icke-deterministisk prioritetsinversion](./media/user-guide/screen_shot_43.png)
 
-**Inversion av deterministisk och icke-deterministisk prioritet**
+**Deterministisk och icke-deterministisk prioritetsinversion**
 
-### <a name="execution-profile"></a>Körnings profil
+### <a name="execution-profile"></a>Körningsprofil
 
-Azure återställnings tider TraceX innehåller en inbyggd körnings profil rapport för alla körnings kontexter inom den aktuella inlästa spårnings filen.
+Azure RTOS TraceX innehåller en inbyggd körningsprofilrapport för alla körningskontexter i den för tillfället inlästa spårningsfilen.
 
-![Körnings profil](./media/user-guide/execution_profile.png)
+![Körningsprofil](./media/user-guide/execution_profile.png)
 
-### <a name="performance-statistics"></a>Prestanda statistik
+### <a name="performance-statistics"></a>Prestandastatistik
 
-Azure återställnings tider TraceX innehåller en inbyggd prestanda statistik rapport för den aktuella inlästa spårnings filen.
+Azure RTOS TraceX innehåller en inbyggd prestandastatistikrapport för den aktuella inlästa spårningsfilen.
 
-![Prestanda statistik](./media/user-guide/performance_statistics.png)
+![Prestandastatistik](./media/user-guide/performance_statistics.png)
 
-### <a name="thread-stack-usage"></a>Användning av tråds Tacken
+### <a name="thread-stack-usage"></a>Användning av trådstack
 
-Azure återställnings tider TraceX innehåller en inbyggd stack användnings rapport för alla trådar som körs i den aktuella inlästa spårnings filen.
+Azure RTOS TraceX innehåller en inbyggd stackanvändningsrapport för alla trådar som körs i den inlästa spårningsfilen.
 
-![Stack användning](./media/user-guide/thread_stack_usage.png)
+![Stackanvändning](./media/user-guide/thread_stack_usage.png)
 
-Azure återställnings tider TraceX visar Azure-återställnings tider FileX prestanda statistik för den aktuella inlästa spårnings filen. Den här informationen visas för hela systemet – på alla öppna medie objekt.
+Azure RTOS TraceX visar prestandastatistik Azure RTOS FileX för den aktuella inlästa spårningsfilen. Den här informationen visas för hela systemet – för alla medieobjekt som har öppnats.
 
 ![FileX-statistik](./media/user-guide/filex_statistics.png)
 
-### <a name="azure-rtos-netx-statistics"></a>Statistik för Azure återställnings tider-NetX
+### <a name="azure-rtos-netx-statistics"></a>Azure RTOS NetX-statistik
 
-Azure återställnings tider-TraceX visar också NetX prestanda statistik för den aktuella inlästa spårnings filen. Den här informationen visas för hela systemet.
+Azure RTOS TraceX visar även NetX-prestandastatistik för den aktuella inlästa spårningsfilen. Den här informationen visas för hela systemet.
 
 ![NetX-statistik](./media/user-guide/netx_statistics.png)
 
-### <a name="raw-trace-dump"></a>Rå stackdump
+### <a name="raw-trace-dump"></a>Råspårningsdump
 
-Azure återställnings tider TraceX kan bygga en spårnings fil i text format och starta anteckningar för att visa den.
+Azure RTOS TraceX kan skapa en råspårningsfil i textformat och starta Anteckningar för att visa den.
 
-![Rå stackdump](./media/user-guide/raw_trace_dump.png)
+![Råspårningsdump](./media/user-guide/raw_trace_dump.png)
 
-Observera att alla tids gränser och storleks värden i listan är uppskattningar och kan skilja sig från din utvecklings plattform.
+Observera att alla siffror för tidsinställning och storlek som anges är uppskattningar och kan vara olika på din utvecklingsplattform

@@ -6,12 +6,12 @@ ms.author: philmea
 ms.date: 05/19/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 34110e74e8ad0a6acd376c00c1284a3ea715c5f5
-ms.sourcegitcommit: 4ebe7c51ba850951c6a9d0f15e22d07bb752bc28
+ms.openlocfilehash: cfd2d616896e1797114e55abcaf1a7559685282f29c2d0dee8274d2a26ea8f0e
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 05/20/2021
-ms.locfileid: "110223323"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116790317"
 ---
 # <a name="chapter-2---installation-and-use-of-azure-rtos-levelx"></a>Kapitel 2 – Installation och användning av Azure RTOS LevelX
 
@@ -66,16 +66,16 @@ Det finns även simulator- och FileX-drivrutinsexempel för både LevelX PROVEND
 - fx_nor_flash_simulated_driver.c
 - lx_nor_flash_simulator.c
 
-Om det bara är FLASHD-flash-minne som krävs behövs naturligtvis endast Flash-filerna i LevelX LX_NAND_ ***\* .c.*** På samma sätt krävs endast NOR flash-filer _(**_ lx_nor .c**) om endast FLASH-minne \_ krävs.
+Om det bara är FLASHD-flashminnet som krävs behövs naturligtvis endast Flash-filerna i LevelX FLASH ***(lx_nand_ \* .c).*** På samma sätt behövs endast NOR flash-filer _(**_ lx_nor .c).) om det bara krävs NOR \_ flash-filer.
 
 ## <a name="configuration-options"></a>Konfigurationsalternativ
 
 LevelX kan konfigureras vid kompileringen via de villkorliga definierar som beskrivs nedan. Lägg bara till önskad definition i kompileringen av varje LevelX-källa för att använda alternativet .
 
-- **LX_DIRECT_READ:** Det här alternativet kringgår NOR-flashdrivrutinens läsrutin till förmån för eller läsning av NOR-minnet direkt, vilket resulterar i en betydande prestandaökning.
+- **LX_DIRECT_READ:** Det här alternativet kringgår NOR flash-drivrutinens läsrutin till förmån för eller läser NOR-minnet direkt, vilket resulterar i en betydande prestandaökning.
 - **LX_FREE_SECTOR_DATA_VERIFY:** Detta gör att LevelX NOR-instansens öppna logik för att verifiera att alla kostnadsfria NOR-sektorer är sådana.
-- **LX_NAND_SECTOR_MAPPING_CACHE_SIZE:** Som standard är det här värdet 16 och definierar cachestorleken för mappning av logisk sektor. Stora värden förbättrar prestanda, men kostar minne. Den minsta storleken är 8 och alla värden måste vara 2.
-- **LX_NAND_FLASH_DIRECT_MAPPING_CACHE**: Definieras, detta skapar en direkt mappningscache, så att det inte finns några cachemissar. Det kräver också att LX_NAND_SECTOR_MAPPING_CACHE_SIZE representerar det exakta antalet totalt antal sidor i flash-enheten.
+- **LX_NAND_SECTOR_MAPPING_CACHE_SIZE:** Som standard är det här värdet 16 och definierar cachestorleken för mappning av logisk sektor. Stora värden förbättrar prestandan, men kostar minne. Den minsta storleken är 8 och alla värden måste vara 2.
+- **LX_NAND_FLASH_DIRECT_MAPPING_CACHE**: Definieras, detta skapar en direkt mappningscache, så att det inte finns några cachemissar. Det kräver också LX_NAND_SECTOR_MAPPING_CACHE_SIZE representerar det exakta antalet sidor i flash-enheten.
 - **LX_NOR_DISABLE_EXTENDED_CACHE:** Här inaktiverades den utökade NOR-cachen.
 - **LX_NOR_EXTENDED_CACHE_SIZE:** Som standard är det här värdet 8, vilket representerar högst 8 sektorer som kan cachelagras i en NOR-instans.
 - **LX_NOR_SECTOR_MAPPING_CACHE_SIZE:** Som standard är det här värdet 16 och definierar cachestorleken för mappning av logisk sektor. Stora värden förbättrar prestandan, men kostar minne. Den minsta storleken är 8 och alla värden måste vara 2.
@@ -87,4 +87,4 @@ LevelX kan konfigureras vid kompileringen via de villkorliga definierar som besk
 
 ## <a name="using-levelx"></a>Använda LevelX
 
-Om du vill använda LevelX, antingen i sig själv eller med FileX, inkluderar du filen ***lx_api.h** _ i koden som refererar till LevelX-API:et. Kontrollera också att LevelX-objektkoden är tillgänglig vid länktiden. Granska filerna i _*_demo_filex_nand_flash.c och_*_ _ *_demo_filex_nor_flash.c_** för exempel på hur du använder LevelX.
+Om du vill använda LevelX, antingen i sig själv eller med FileX, inkluderar du filen ***lx_api.h** _ i koden som refererar till LevelX-API:et. Kontrollera också att LevelX-objektkoden är tillgänglig vid länktiden. Granska filerna _*_demo_filex_nand_flash.c och_*_ _ *_demo_filex_nor_flash.c_** för exempel på hur du använder LevelX.

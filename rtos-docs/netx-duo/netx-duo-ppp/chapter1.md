@@ -1,47 +1,47 @@
 ---
-title: Kapitel 1 – Introduktion till Azure återställnings tider NetX Duo Point-to-Point Protocol (PPP)
-description: I det här kapitlet introduceras Azure återställnings tider NetX Duo Point-to-Point Protocol (PPP)-modulen.
+title: Kapitel 1 – Introduktion till Azure RTOS NetX Duo Point-to-Point Protocol (PPP)
+description: I det här kapitlet Azure RTOS modulen NetX Duo Point-to-Point Protocol (PPP).
 author: philmea
 ms.author: philmea
 ms.date: 06/04/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: f439cf66e6619652ae8ab9097b2de5e584d78c59
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 56343d563833f30ca0d48f594b547f37fa264b8961a7cd75b0786aac4791d065
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104825839"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116797219"
 ---
-# <a name="chapter-1---introduction-to-the-azure-rtos-netx-duo-point-to-point-protocol-ppp"></a>Kapitel 1 – Introduktion till Azure återställnings tider NetX Duo Point-to-Point Protocol (PPP)
+# <a name="chapter-1---introduction-to-the-azure-rtos-netx-duo-point-to-point-protocol-ppp"></a>Kapitel 1 – Introduktion till Azure RTOS NetX Duo Point-to-Point Protocol (PPP)
 
-Vanligt vis ansluter NetX-program till det faktiska fysiska nätverket via Ethernet. Detta ger nätverks åtkomst som är både snabb och effektiv. Det finns dock situationer där programmet inte har Ethernet-åtkomst. I sådana fall kan programmet fortfarande ansluta till nätverket via ett seriellt gränssnitt som är anslutet direkt till en annan medlem i nätverket. Det vanligaste program varu protokollet som används för att hantera en sådan anslutning är Point-to-Point Protocol (PPP).
+NetX-program ansluter vanligtvis till det faktiska fysiska nätverket via Ethernet. Detta ger nätverksåtkomst som är både snabb och effektiv. Det finns dock situationer där programmet inte har Ethernet-åtkomst. I sådana fall kan programmet fortfarande ansluta till nätverket via ett seriellt gränssnitt som är anslutet direkt till en annan nätverksmedlem. Det vanligaste programprotokollet som används för att hantera en sådan anslutning är Point-to-Point Protocol (PPP).
 
-Även om seriell kommunikation är relativt enkelt är PPP ganska komplex. PPP består faktiskt av flera protokoll, till exempel Link Control Protocol (LCP), Internet Protocol Control Protocol (IPCP), PAP (Password Authentication Protocol) och CHAP (Challenge-Handshake Authentication Protocol). LCP är det huvudsakliga protokollet för PPP. Det är här som bas komponenterna i länken förhandlas dynamiskt i en peer-to-peer-miljö. När grundläggande egenskaper för länken har förhandlats, används PAP och/eller CHAP för att säkerställa att en ansluten peer är giltig. Om båda peer-datorerna är giltiga används sedan IPCP för att förhandla IP-adresserna som används av peer-datorerna. När IPCP är klar kan PPP skicka och ta emot IP-paket.
+Även om seriekommunikationen är relativt enkel är PPP något komplex. PPP består faktiskt av flera protokoll, till exempel Link Control Protocol (LCP), Internet Protocol Control Protocol (IPCP), Password Authentication Protocol (PAP) och CHAP (Challenge-Handshake Authentication Protocol). LCP är det huvudsakliga protokollet för PPP. Här förhandlas de grundläggande komponenterna i länken dynamiskt på ett peer-to-peer-sätt. När de grundläggande egenskaperna för länken har förhandlats, används PAP och/eller CHAP för att säkerställa att en ansluten peer är giltig. Om båda peer-adresserna är giltiga används IPCP för att förhandla de IP-adresser som används av peer-peer-adresserna. När IPCP har slutförts kan PPP skicka och ta emot IP-paket.
 
-NetX visar PPP-filen främst som en enhets driv rutin. Funktionen *nx_ppp_driver* anges för funktionen netx IP create, *nx_ip_create*. Annars har NetX inte några direkta kunskaper om PPP.
+NetX visar PPP främst som en enhetsdrivrutin. Funktionen *nx_ppp_driver* till NetX IP create-funktionen, som *nx_ip_create*. Annars har NetX ingen direkt kunskap om PPP.
 
-## <a name="ppp-serial-communication"></a>PPP-seriell kommunikation
+## <a name="ppp-serial-communication"></a>Seriell PPP-kommunikation
 
-NetX PPP-paketet kräver att programmet tillhandahåller en seriell kommunikations driv rutin. Driv rutinen måste ha stöd för 8-bitars tecken och kan också använda program flödes kontroll. Det är programmets ansvar att initiera driv rutinen, vilket bör göras innan du skapar en PPP-instans.
+NetX PPP-paketet kräver att programmet tillhandahåller en drivrutin för seriell kommunikation. Drivrutinen måste ha stöd för 8-bitars tecken och kan även använda programflödeskontroll. Det är programmets ansvar att initiera drivrutinen, vilket bör göras innan du skapar PPP-instansen.
 
-För att kunna skicka PPP-paket måste en seriell driv rutin för utdata från en seriell driv rutin tillhandahållas PPP (anges i funktionen *nx_ppp_create* ). Den här seriella driv Rutinens utdata-rutin kommer att anropas upprepas för att överföra hela PPP-paketet. Det är den seriella driv Rutinens ansvar att buffra utdata. På den mottagande sidan måste programmets seriella driv rutin anropa funktionen för PPP- *nx_ppp_byte_receive* varje gång som en ny byte tas emot. Detta görs vanligt vis inom ramen för en avbrotts tjänst rutin (ISR). Funktionen *nx_ppp_byte_receive* placerar inkommande byte i en cirkelformad buffert och aviserar att PPP-mottagningsfönstret har sin närvaro.
+För att kunna skicka PPP-paket måste en seriedrivrutinens rutin för utdatabyte tillhandahållas till PPP (anges *i nx_ppp_create-funktionen).* Den här seriedrivrutinens byteutdatarutin anropas repetitivt för att överföra hela PPP-paketet. Det är seriedrivrutinens ansvar att buffra utdata. På mottagningssidan måste programmets seriedrivrutin anropa *PPP-nx_ppp_byte_receive* när en ny byte kommer. Detta görs vanligtvis inom ramen för isr-rutiner (Interrupt Service Routine). Funktionen *nx_ppp_byte_receive* placerar den inkommande byten i en cirkulär buffert och varnar PPP-mottagningstråden om dess närvaro.
 
 ## <a name="ppp-over-ethernet-communication"></a>PPP över Ethernet-kommunikation
 
-NetX PPP kan också överföra PPP-meddelanden över Ethernet, i det här fallet kräver PPP-paketet NetX att programmet tillhandahåller en Ethernet-kommunikations driv rutin.
+NetX PPP kan också överföra PPP-meddelande via Ethernet. I den här situationen kräver NetX PPP-paketet att programmet tillhandahåller en Ethernet-kommunikationsdrivrutin.
 
-För att kunna skicka PPP-paket över Ethernet måste en utmatnings rutin tillhandahållas till PPP (anges i funktionen *nx_ppp_packet_send_set* ). Den här utmatnings rutinen kommer att anropas upprepas för att överföra hela PPP-paketet. På mottagar sidan måste programmets mottagare anropa funktionen PPP *nx_ppp_packet_receive* varje gång ett nytt paket tas emot.
+För att kunna skicka PPP-paket via Ethernet måste en utdatarutin tillhandahållas till PPP (anges *i nx_ppp_packet_send_set* funktion). Den här utdatarutinen anropas repetitivt för att kunna överföra hela PPP-paketet. På mottagarsidan måste programmets mottagare anropa *PPP-nx_ppp_packet_receive* när ett nytt paket anländer.
 
 ## <a name="ppp-packet"></a>PPP-paket
 
-PPP använder AHDLC-ramar (en delmängd av HDLC) för att kapsla in all PPP-protokollhanterare och användar data. En AHDLC ram ser ut ungefär så här:
+PPP använder AHDLC-inramning (en delmängd av HDLC) för att kapsla in alla PPP-protokollkontroller och användardata. En AHDLC-ram ser ut så här:
 
-|**Flagga**|**Addr**|**Nedtryckt**|**Information**|**CRC**|**Flagga**|
+|**Flagga**|**Addr**|**Ctrl**|**Information**|**Crc**|**Flagga**|
 |--------|--------|--------|---------------|-------|--------|
-|7E |FF|03|[0-1502 byte]|2 byte| 7E|
+|7e |Ff|03|[0–1 502 byte]|2 byte| 7e|
 
-Varje PPP-ram har detta övergripande utseende. De första två byten i informations fältet innehåller protokoll typen PPP. Giltiga värden definieras enligt följande:
+Varje PPP-ram har det här övergripande utseendet. De första två bytena i informationsfältet innehåller PPP-protokolltypen. Giltiga värden definieras på följande sätt:
 
 - C021: LCP
 - 8021: IPCP
@@ -49,38 +49,38 @@ Varje PPP-ram har detta övergripande utseende. De första två byten i informat
 - C223: CHAP
 - 0021: IP-datapaket
 
-Om 0x0021-protokoll typen finns, följer IP-paketet omedelbart. Annars, om något av de andra protokollen finns, motsvarar följande byte det specifika protokollet.
+Om 0x0021-protokolltypen finns följer IP-paketet omedelbart. Om något av de andra protokollen finns motsvarar annars följande byte det specifika protokollet.
 
-För att säkerställa unika 0x7E start-och slut punkts markörer och för att stödja flödes kontroll av program vara, använder AHDLC escape-sekvenser för att representera olika byte värden. Värdet 0x7D anger att följande Character är kodat, vilket är i princip det ursprungliga tecknen exklusivt ORed med 0x20. Till exempel representeras 0x03-värdet för CTRL-fältet i rubriken av den två byte-sekvensen: 7D 23. Som standard konverteras värden som är mindre än 0x20 till en escape-sekvens, samt 0x7E-och 0x7D-värden som finns i fältet information. Observera att escape-sekvenser även gäller för CRC-fältet.
+För att säkerställa unika 0x7E för början/slutet av bildrutemarkörer och för att stödja programflödeskontroll använder AHDLC escape-sekvenser för att representera olika bytevärden. Värdet 0x7D anger att följande tecken är kodat, vilket i princip är det ursprungliga tecknet med ORed med 0x20. Till exempel representeras 0x03 för fältet Ctrl i rubriken av den två bytesekvensen: 7D 23. Värden som är mindre än 0x20 konverteras som standard till en escape-sekvens, samt värden 0x7E och 0x7D som finns i fältet Information. Observera att escape-sekvenser även gäller för CRC-fältet.
 
-## <a name="link-control-protocol-lcp"></a>LCP (Link Control Protocol)
+## <a name="link-control-protocol-lcp"></a>Link Control Protocol (LCP)
 
-LCP är det primära PPP-protokollet och är det första protokollet som ska köras. LCP ansvarar för förhandling av olika PPP-parametrar, inklusive den högsta mottagnings enheten (MRU) och autentiseringsprotokollet (PAP, CHAP eller none) som ska användas. När båda sidorna av LCP samtycker till PPP-parametrar, är autentiseringsprotokollen, om det finns några, och sedan börjar körs.
+LCP är det primära PPP-protokollet och är det första protokollet som ska köras. LCP ansvarar för att förhandla om olika PPP-parametrar, inklusive den högsta mottagningsenheten (MRU) och autentiseringsprotokollet (PAP, CHAP eller ingen) som ska användas. När båda sidor av LCP är överens om PPP-parametrarna börjar autentiseringsprotokollen, om några, att köras.
 
 ## <a name="password-authentication-protocol-pap"></a>PAP (Password Authentication Protocol)
 
-PAP är ett relativt enkelt protokoll som förlitar sig på ett namn och lösen ord som tillhandahålls av en sida av anslutningen (som förhandlas under LCP). Den andra sidan verifierar sedan den här informationen. Om det är korrekt returneras ett godkännande meddelande till avsändaren och PPP kan sedan gå vidare till datorn IPCP-tillstånd. Annars avvisas anslutningen om antingen namnet eller lösen ordet är felaktigt.
+PAP är ett relativt enkelt protokoll som förlitar sig på ett namn och lösenord som anges av en sida av anslutningen (som förhandlas under LCP). Den andra sidan verifierar sedan den här informationen. Om det är korrekt returneras ett godkännandemeddelande till avsändaren och PPP kan sedan fortsätta till IPCP-tillståndsdatorn. Om antingen namnet eller lösenordet är felaktigt avvisas anslutningen.
 
 >[!NOTE]
-> Båda sidor av gränssnittet kan begära PAP, men PAP används vanligt vis endast i en riktning.
+> Båda sidor av gränssnittet kan begära PAP, men PAP används vanligtvis bara i en riktning.
 
-## <a name="challenge-handshake-authentication-protocol-chap"></a>CHAP (Challenge-Handshake Authentication Protocol)
+## <a name="challenge-handshake-authentication-protocol-chap"></a>Challenge-Handshake Authentication Protocol (CHAP)
 
-CHAP är ett mer komplext autentiseringsprotokoll än PAP. CHAP-autentiseraren förser sin peer med ett namn och ett värde. Motparten använder sedan det angivna namnet för att hitta en delad "hemlig" mellan de två entiteterna. Beräkningen görs sedan över ID, värde och "hemlighet". Resultatet av den här beräkningen returneras i svaret. Om detta är korrekt kan PPP fortsätta till datorn IPCP-tillstånd. Annars avvisas anslutningen om resultatet är felaktigt.
+CHAP är ett mer komplext autentiseringsprotokoll än PAP. CHAP-autentiseraren förser sin peer med ett namn och ett värde. Peer-datorn använder sedan det angivna namnet för att hitta en delad "hemlighet" mellan de två entiteterna. En beräkning görs sedan över ID, värde och "hemlighet". Resultatet av den här beräkningen returneras i svaret. Om det är korrekt kan PPP fortsätta till IPCP-tillståndsdatorn. Om resultatet är felaktigt avvisas annars anslutningen.
 
-En annan intressant aspekt av CHAP är att det kan ske med slumpmässiga intervall när en anslutning har upprättats. Detta används för att förhindra att en anslutning kapas – när den har autentiserats. Om en utmaning Miss lyckas vid någon av dessa slumpmässiga tidpunkter, avbryts anslutningen omedelbart.
+En annan intressant aspekt av CHAP är att den kan ske slumpmässigt när en anslutning har upprättats. Detta används för att förhindra att en anslutning kapas – efter att den har autentiserats. Om en utmaning misslyckas någon av dessa slumpmässiga gånger avslutas anslutningen omedelbart.
 
 >[!NOTE]
-> Båda sidor av gränssnittet kan begära CHAP, men CHAP används vanligt vis bara i en riktning.
+> Båda sidor av gränssnittet kan begära CHAP, men CHAP används vanligtvis bara i en riktning.
 
-## <a name="internet-protocol-control-protocol-ipcp"></a>IPCP (Internet Protocol Control Protocol)
+## <a name="internet-protocol-control-protocol-ipcp"></a>Internet Protocol Control Protocol (IPCP)
 
-IPCP är det sista protokoll som ska köras innan PPP-kommunikationen är tillgänglig för NetX IP-dataöverföring. Det huvudsakliga syftet med det här protokollet är att en peer ska informera den andra av dess IP-adress. När IP-adressen har kon figurer ATS aktive ras NetX IP-dataöverföring.
+IPCP är det sista protokollet som ska köras innan PPP-kommunikationen är tillgänglig för NetX IP-dataöverföring. Det huvudsakliga syftet med det här protokollet är att en peer ska informera den andra om dess IP-adress. När IP-adressen har ställts in aktiveras NetX IP-dataöverföring.
 
 ## <a name="data-transfer"></a>Dataöverföring
 
-Som tidigare nämnts finns NetX IP-datapaket i PPP-ramar med protokoll-ID: t 0x0021. Alla mottagna data paket placeras i en eller flera NX_PACKET strukturer och överförs till NetX Receive-bearbetningen. Vid överföring placeras NetX-paketets innehåll i en AHDLC-ram och överförs.
+Som tidigare nämnts finns NetX IP-datapaket i PPP-bildrutor med protokoll-ID:t 0x0021. Alla mottagna datapaket placeras i en eller flera NX_PACKET strukturer och överförs till NetX-mottagningsbearbetningen. Vid överföring placeras NetX-paketinnehållet i en AHDLC-ram och överförs.
 
-## <a name="ppp-rfcs"></a>PPP-RFC
+## <a name="ppp-rfcs"></a>PPP-RFC:er
 
 NetX PPP är kompatibelt med RFC1332, RFC1334, RFC1661, RFC1994 och relaterade RFC: er.
