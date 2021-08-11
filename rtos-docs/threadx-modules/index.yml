@@ -1,25 +1,25 @@
 ### YamlMime:Landing
-title: Dokumentation om Azure återställnings tider ThreadX-moduler
-summary: Komponenten Azure återställnings tider ThreadX-moduler innehåller en infrastruktur för program för att dynamiskt läsa in moduler som skapats separat från den inhemska delen av programmet.
+title: Azure RTOS om ThreadX-moduler
+summary: Komponenten Azure RTOS ThreadX-moduler tillhandahåller en infrastruktur för program som dynamiskt kan läsa in moduler som är byggda separat från den inbyggda delen av programmet.
 metadata:
-  title: Vad är Azure återställnings tider ThreadX-moduler?
-  description: Azure återställnings tider ThreadX-moduler tillhandahåller dynamiskt inlästa moduler som har skapats separat från ditt program.
+  title: Vad är Azure RTOS ThreadX-moduler?
+  description: Azure RTOS ThreadX-moduler innehåller dynamiskt inlästa moduler som är byggda separat från ditt program.
   services: rtos
   ms.service: rtos
   ms.topic: landing-page
   author: philmea
   ms.author: philmea
   ms.date: 07/10/2020
-  ms.openlocfilehash: 40958716dfaa14813279fbce3b63d696e3dc21d2
-  ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+  ms.openlocfilehash: 36fb45ffb348ce0807caffb9f6e8a09bae03a58ce51585e9f4e583e0f278796d
+  ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
   ms.translationtype: MT
   ms.contentlocale: sv-SE
-  ms.lasthandoff: 03/22/2021
-  ms.locfileid: "104797960"
+  ms.lasthandoff: 08/07/2021
+  ms.locfileid: "116799106"
 landingContent:
-- title: Introduktion till Azure återställnings tider ThreadX-moduler
+- title: Introduktion till Azure RTOS ThreadX-moduler
   linkLists:
   - linkListType: overview
     links:
-    - text: Vad är Azure återställnings tider ThreadX-moduler?
+    - text: Vad är Azure RTOS ThreadX-moduler?
       url: chapter1.md

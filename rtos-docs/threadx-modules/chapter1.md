@@ -1,34 +1,34 @@
 ---
 title: Kapitel 1 – Översikt
 author: philmea
-description: Den här artikeln är en översikt över Azure återställnings tider ThreadX-moduler
+description: Den här artikeln är en översikt över Azure RTOS ThreadX-moduler
 ms.author: philmea
 ms.date: 07/15/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 0c9698086468d7bb41c33ebe9fa9d1ebb61b5f1f
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 9018c10e6fe92b2237ec94b633f2f0030ad1cef4bcbcb7afa5ace20548f012ed
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104825497"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116799444"
 ---
-# <a name="chapter-1-overview"></a>Kapitel 1: översikt
+# <a name="chapter-1-overview"></a>Kapitel 1: Översikt
 
-ThreadX module-komponenten innehåller en infrastruktur för program för att dynamiskt läsa in moduler som skapats separat från den inhemska delen av programmet. Detta är särskilt användbart i situationer där program kod storleken överskrider tillgängligt minne. Det kan också hjälpa när nya funktioner måste läggas till när kärn avbildningen har distribuerats. Dessutom kan modulerna för dynamisk inläsning användas när en partiell uppdatering av den inbyggda program varan krävs.
+Komponenten ThreadX-modul tillhandahåller en infrastruktur för program som dynamiskt kan läsa in moduler som är byggda separat från den inbyggda delen av programmet. Detta är särskilt användbart i situationer där programkodstorleken överskrider det tillgängliga minnet. Det kan också vara till hjälp när nya funktioner måste läggas till när kärnavbildningen har distribuerats. Dessutom kan moduler med dynamisk inläsning användas när partiella uppdateringar av inbyggd programvara krävs.
 
-Minnes skydd för den inlästa modulen är valfritt, baserat på de egenskaper som anges i modulen inledning. När du har angett minnes skydd är processorns minnes hanterings maskin vara konfigurerad så att alla trådar i modulen endast beviljas åtkomst till modulens kod och data minne. Eventuell ovidkommande minnes åtkomst eller körning resulterar i ett minnes fel och den felaktiga modulens tråd avbryts. Om programmet registrerar ett återanrop för minnes Fels meddelanden kallas detta även för att varna programmet för minnes felet.
+Minnesskydd för den inlästa modulen är valfritt baserat på de egenskaper som anges i modulens ingress. När minnesskydd anges konfigureras processorns maskinvara för minneshantering så att alla trådar i modulen endast tillåts åtkomst till modulens kod och dataminne. Eventuell överflödig minnesåtkomst eller körning resulterar i ett minnesfel och den felaktiga modultråden avslutas. Om programmet registrerar ett återanrop av minnesfelsaviseringar anropas detta också för att varna om minnesfelet.
 
-ThreadX module-komponenten använder programmet för att tillhandahålla ett minnes utrymme där moduler kan läsas in. Instruktions området i varje modul kan köras på plats eller kopieras till minnes området RAM-modul för körning. I samtliga fall allokeras data minnets krav från modulens minnes yta.
+Komponenten ThreadX-modul förlitar sig på programmet för att tillhandahålla ett minnesområde där moduler kan läsas in. Instruktionsområdet för varje modul kan köras på plats eller kopieras till RAM-modulens minnesområde för körning. I samtliga fall allokeras minneskraven för moduldata från modulens minnesområde.
 
-Det finns ingen gräns för hur många moduler som kan läsas in samtidigt (utöver mängden tillgängligt minne), medan det bara finns en kopia av den inhemska modul Manager-koden. Bild 1 illustrerar förhållandet mellan modul hanteraren och själva moduler.
+Det finns inga begränsningar för hur många moduler som kan läsas in samtidigt (förutom mängden tillgängligt minne), medan det bara finns en kopia av den lokala Module Manager-koden. Bild 1 illustrerar modulhanterarens relation och själva modulerna.
 
-![Moduler och modul Manager-relation](media/image2.png)
+![Relationer mellan moduler och modulhanterare](media/image2.png)
 
-**Bild 1** Moduler och modul Manager
+**Bild 1** Moduler och modulhanterare
 
-Varje modul måste ha ett eget minnes område, vilket är programmets ansvar att definiera. Modulen och modul hanteraren interagerar med en program varu sändnings funktion via fördefinierade fråge-ID: n som motsvarar ThreadX-tjänster som begärts av modulen. Dessutom krävs modulen för att tillhandahålla en enda tråd start punkt samt den nödvändiga stack storleken, prioritet, modul-ID, återanrops stackens storlek/prioritet osv. Den här informationen definieras i varje moduls inledning.
+Varje modul måste ha ett eget minnesområde, vilket är programmets ansvar att definiera. Modulen och modulhanteraren interagerar via en funktion för programsändning via fördefinierade begärande-ID:er som motsvarar ThreadX-tjänster som begärs av modulen. Dessutom krävs modulen för att tillhandahålla en enda tråd-startpunkt samt den stackstorlek, prioritet, modul-ID, storlek/prioritet för återanropstrådstacken som krävs. Den här informationen definieras i varje moduls ingress.
 
-Module manager ansvarar för att skapa den första modulens tråd och initiera körningen. När modulens första tråd körs ansvarar module Manager för att ange alla ThreadX API-begäranden som gjorts av modulen. En modul har fullständig åtkomst till ThreadX-API: et, inklusive möjligheten att skapa ytterligare trådar i modulen.  
+Modulhanteraren ansvarar för att skapa den första modultråden och initiera körningen. När modulens inledande tråd körs ansvarar modulhanteraren för att sätta in alla ThreadX API-begäranden som görs av modulen. En modul har fullständig åtkomst till ThreadX-API:et, inklusive möjligheten att skapa ytterligare trådar i modulen.  
   
-Namngivnings konventionerna för modulens käll kod är enkla: alla källfiler för module-hanteraren heter ***txm_module_manager_ \**** och alla filer som associeras exklusivt med modulen utelämnar delen "**_chef_*_" i namnet. Huvud include-filen _*_txm_module. h_** delas av käll koden Manager och module.
+Namngivningskonventionerna för källkod för modulen är enkla: alla modulhanterarens källfiler heter ***txm_module_manager_ \**** och alla filer som är associerade med modulen utelämnar **_"manager_*_"-delen av namnet. Den huvudsakliga include-filen _*_txm_module.h_** delas av källkoden för ansvarig och modul.

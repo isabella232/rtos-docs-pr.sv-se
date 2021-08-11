@@ -1,19 +1,19 @@
 ---
-title: Bilaga C – Azure återställnings tider ThreadX SMP-datatyper
+title: Bilaga C – Azure RTOS ThreadX SMP-datatyper
 description: ThreadX SMP-datatyper
 author: philmea
 ms.author: philmea
 ms.date: 06/04/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: d99a158201ebc37ef4194b7b3ac942435daf7b59
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: e71706c2ef0adec6b49bf637fc5c4a1547bfa305df2ea4d86e0ac21e9902c721
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104827336"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116798733"
 ---
-# <a name="appendix-c---azure-rtos-threadx-smp-data-types"></a>Bilaga C – Azure återställnings tider ThreadX SMP-datatyper
+# <a name="appendix-c---azure-rtos-threadx-smp-data-types"></a>Bilaga C – Azure RTOS ThreadX SMP-datatyper
 
 ## <a name="tx_block_pool"></a>TX_BLOCK_POOL
 

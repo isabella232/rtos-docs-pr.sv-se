@@ -1,30 +1,30 @@
 ---
-title: Kapitel 3 – krav för modul Manager
-description: Den här artikeln beskriver de steg som krävs för att skapa ThreadX module Manager.
+title: Kapitel 3 – Krav för modulhanteraren
+description: Den här artikeln är en beskrivning av de steg som krävs för att skapa ThreadX-modulhanteraren.
 author: philmea
 ms.author: philmea
 ms.date: 07/15/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: e8ea1a05096b5975de203648fddfb19c1a6105e0
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 6c4d0993284c8e0b8264020d721ac12bdfe8117df4480fb54ee4d5b20a1f677e
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104826595"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116799191"
 ---
-# <a name="chapter-3---module-manager-requirements"></a>Kapitel 3 – krav för modul Manager
+# <a name="chapter-3---module-manager-requirements"></a>Kapitel 3 – Krav för modulhanteraren
 
-ThreadX module Manager finns i den inhemska delen av programmet tillsammans med ThreadX-återställnings tider. Den är ansvarig för att starta modulen samt för att ställa in och skicka alla begär Anden om ThreadX API-tjänster.
+ThreadX-modulhanteraren finns i den invarande delen av programmet tillsammans med ThreadX RTOS. Den ansvarar för att starta modulen samt att sätta in och skicka alla modulbegäranden för ThreadX API-tjänster.
 
 > [!NOTE]
-> Källfilerna för ThreadX module **Manager** (C och Assembly) måste läggas till i biblioteks projektet "**TX**" för ThreadX.
+> Källfilerna för **ThreadX-modulhanteraren** (C och sammansättning) ska läggas till i ThreadX-biblioteksprojektet "**tx**".
 
-Följande steg krävs för att skapa ThreadX module Manager (varje steg beskrivs mer detaljerat nedan).
+Följande steg krävs för att skapa ThreadX-modulhanteraren (varje steg beskrivs i detalj nedan).
 
-1. **TX_THREAD** kontroll blocket måste utökas för att innehålla information om moduler. Det enklaste sättet att åstadkomma detta är att ersätta definitionen av **TX_THREAD_EXTENSION_2** i **filen _tx_port. h_*_ med* TX_THREAD_EXTENSION_2** som finns i **_txm_module_port. h_**. Se [tillägg](appendix.md) för port-/regionsspecifika tillägg.
+1. Kontrollblocket **TX_THREAD** utökas till att omfatta modulinformation. Det enklaste sättet att åstadkomma detta är att ersätta **definitionen av TX_THREAD_EXTENSION_2** i filen **_tx_port.h_ _ med *_* TX_THREAD_EXTENSION_2** som finns i **_txm_module_port.h_**. Se [bilaga](appendix.md) för portspecifika tillägg.
 
-Exempel tillägg:
+Exempeltillägg:
 
    ```c
    #define TX_THREAD_EXTENSION_2                     \
@@ -42,7 +42,7 @@ Exempel tillägg:
        VOID     *tx_thread_module_reserved;
    ```
 
-   Följande tillägg måste definieras i ***tx_port. h***.
+   Följande tillägg måste definieras i ***tx_port.h***.
 
    ```c
    #define TX_EVENT_FLAGS_GROUP_EXTENSION  VOID    *tx_event_flags_group_module_instance; \
@@ -58,65 +58,65 @@ Exempel tillägg:
         VOID   (*tx_timer_module_expiration_function)(ULONG id);
    ```
 
-2. Lägg till alla ***txm_module_manager_ \**** C-och Assembly-filerna i ThreadX Library Project **_TX_**.
-3. Återskapa alla bibliotek och körbara projekt. Om NetX Duo krävs måste all modul-och modul Manager C-kod skapas med **TXM_MODULE_ENABLE_NETX_DUO** definierat.
+2. Lägg till alla ***txm_module_manager_ \**** C och sammansättningsfiler i ThreadX-biblioteksprojektet **_tx_**.
+3. Återskapa alla bibliotek och körbara projekt. Om NetX Duo krävs ska all C-kod för Module och Module Manager byggas **TXM_MODULE_ENABLE_NETX_DUO** definieras.
 
-## <a name="module-manager-sources"></a>Källor i modul Manager
+## <a name="module-manager-sources"></a>Module Manager-källor
 
-ThreadX module Manager har en uppsättning källfiler som är utformade för att länkas och placeras direkt med den inhemska ThreadX-koden. Dessa filer ger möjlighet att starta en modul och fält efter ThreadX API-begäranden från modulen. Modul Manager-filerna är följande.
+ThreadX-modulhanteraren har en uppsättning källfiler som är utformade för att länkas och finns direkt med den lokala ThreadX-koden. Dessa filer ger möjlighet att starta en modul och sätta in efterföljande ThreadX API-begäranden från modulen. Modulhanterarens filer är följande.
 
-| **Fil namn** |  **Innehåll** |
+| **Filnamn** |  **Innehåll** |
 |-------------- | ------------- |
-| ***txm_module. h*** | Ta med en fil som definierar information om moduler (även i modulens käll kod). |
-| ***txm_module_manager_dispatch. h*** | Inkludera en fil som definierar stöd för Dispatch-funktioner.|
-| ***txm_module_manager_util. h*** | Inkludera en fil som definierar makron & funktioner för intern funktion. |
-| ***txm_module_port. h*** | Inkludera en fil som definierar portbaserad information om moduler (som också ingår i modulens käll kod). |
-| ***tx_initialize_low_level. \[ s, S, 68 \]** _ | Ersätter befintlig biblioteks fil för ThreadX. Uppdaterad vektor tabell och ytterligare vektor hanterare för modul Manager och minnes undantag. _This-filen finns bara i cortex-A7/ARM, cortex-M7/ARM, cortex-R4/ARM, cortex-R4/IAR, MCF544xx/GHS, RX63/IAR, RX65N/IAR. *|
-| ***tx_thread_context_restore. s** _ | Ersätter befintlig biblioteks fil för ThreadX. Återställ tråd kontext efter avbrott-bearbetning. _This-filen finns bara i cortex-A7/ARM, cortex-R4/ARM, cortex-R4/IAR. *|
-| ***tx_thread_schedule. \[ s, S, 68\]*** | Ersätter befintlig biblioteks fil för ThreadX. Utökad Scheduler Code, som i det här fallet används för att uppdatera minnes hanterings register. |
-| ***tx_thread_stack_build. s** _ | Ersätter befintlig biblioteks fil för ThreadX. Skapar stack ramen för en tråd. _This-filen finns bara i cortex-A7/ARM, cortex-R4/ARM, cortex-R4/IAR. *|
-| ***txm_module_manager_thread_stack_build. \[ s, S, 68\]*** | Skapar alla inledande stackar för moduler, inklusive inställningar för positions oberoende data åtkomst. |
-| ***txm_module_manager_user_mode_entry. \[ s, S \]** _ | Tillåter att modulen går in i kernel-läge. _This-filen finns bara i cortex-A7/ARM, cortex-R4/ARM, cortex-R4/IAR. *|
-| ***txm_module_manager_alignment_adjust. c*** | Hanterar de portbaserade justerings kraven.|
-| ***txm_module_manager_application_request. c*** | Hanterar programspecifika förfrågningar till den inhemska koden. |
-| ***txm_module_manager_callback_request. c*** | Skickar en callback-begäran till en modul. |
-| ***txm_module_manager_event_flags_notify_trampoline. c*** | Bearbetar händelse flaggorna ange meddelande anrop från ThreadX. |
-| ***txm_module_manager_external_memory_enable. c*** | Skapar en post i minnes hanterings tabellen för ett delat minnes utrymme som modulen har åtkomst till. |
-| ***txm_module_manager_file_load. c*** | Allokerar och läser in en fil för en binär modul i minnesmodulens minnes området och förbereder den för körning. |
-| ***txm_module_manager_in_place_load. c*** | Allokerar modulens data områden och förbereder för att köra modulen från den angivna kod adressen. |
-| ***txm_module_manager_initialize. c*** | Initierar modul hanteraren, inklusive specifikation av modulens minnes området som är tillgängligt för att läsa in och köra moduler. |
-| ***txm_module_manager_initialize_mmu. c** _ | Initiera MMU. Användare kan redigera den här filen enligt minnes kartan. _This-filen finns bara i cortex-A7/ARM * |
-| ***txm_module_manager_mm_initialize. c** _ | Initiera MPU/MMU. Användare kan redigera den här filen enligt minnes kartan. _This-filen finns bara i cortex-A7/ARM * |
-| ***txm_module_manager_kernel_dispatch. c*** | Hanterar API-begäranden baserat på ID för begäran. |
-| ***txm_module_manager_maximum_module_priority_set. c*** | Anger högsta tillåtna tråd prioritet i en modul. |
-| ***txm_module_manager_memory_fault_handler. c*** | Hanterar minnes fel som identifierats i en modul som körs. |
-| ***txm_module_manager_memory_fault_notify. c*** | Registrerar ett återanrop för program meddelanden när ett minnes fel inträffar. |
-| ***txm_module_manager_memory_load. c*** | Allokerar och läser in modulens kod och data och förbereder modulen för körning. |
-| ***txm_module_manager_mm_register_setup. c*** | Ställer in MPU/MMU-register för modulen baserat på var koden och data läses in. |
-| ***txm_module_manager_object_allocate. c*** | Allokerar minne för ett module-objekt. |
-| ***txm_module_manager_object_deallocate. c*** | Frigör minne för ett modul objekt. |
-| ***txm_module_manager_object_pointer_get. c*** | Söker efter angiven objekt typ och namn, och returnerar objekt pekaren om den hittas. |
-| ***txm_module_manager_object_pointer_get_extended. c*** | Söker efter angiven objekt typ och namn, och returnerar objekt pekaren om den hittas. Namn längd som angetts för säkerhet. |
-| ***txm_module_manager_object_pool_create. c***  | Skapar en pool av objekt utanför modulens data områden som module-program kan allokera från. |
-| ***txm_module_manager_properties_get. c*** | Hämtar egenskaperna för den angivna modulen. |
-| ***txm_module_manager_queue_notify_trampoline. c*** | Bearbetar köns meddelande anropet från ThreadX. |
-| ***txm_module_manager_semaphore_notify_trampoline. c*** | Bearbetar meddelandet om semafors meddelande anropet från ThreadX.|
-| ***txm_module_manager_start. c*** | Startar körning av en modul. |
-| ***txm_module_manager_stop. c*** | Stoppar körningen av en modul. |
-| ***txm_module_manager_thread_create. c*** | Skapar alla-modul-trådar. |
-| ***txm_module_manager_thread_notify_trampoline. c*** | Bearbetar anropet för tråd-och avslutnings meddelande från ThreadX. |
-| ***txm_module_manager_thread_reset. c*** | Återställ en modul tråd. |
-| ***txm_module_manager_timer_notify_trampoline. c*** | Förfaller av processer från ThreadX. |
-| ***txm_module_manager_unload. c*** | Laddar bort modulen från modulens minnes yta. |
-| ***txm_module_manager_util. c*** | Interna hjälp funktioner för Manager. |
+| ***txm_module.h*** | Inkludera fil som definierar modulinformation (ingår även i modulens källkod). |
+| ***txm_module_manager_dispatch.h*** | Inkludera fil som definierar dispatch helper-funktioner.|
+| ***txm_module_manager_util.h*** | Inkludera fil som definierar interna verktygshjälp makron & funktioner. |
+| ***txm_module_port.h*** | Inkludera fil som definierar portspecifik modulinformation (ingår även i modulens källkod). |
+| ***tx_initialize_low_level. \[ s,S,68 \]** _ | Ersätter befintlig ThreadX-biblioteksfil. Uppdaterad vektortabell och ytterligare vektorhanterare för modulhanterare och minnesundantag. _This filen finns bara i Cortex-A7/ARM, Cortex-M7/ARM, Cortex-R4/ARM, Cortex-R4/IAR, MCF544xx/GHS, RX63/IAR, RX65N/IAR.*|
+| ***tx_thread_context_restore.s** _ | Ersätter befintlig ThreadX-biblioteksfil. Återställ trådkontexten efter avbrottsbearbetning. _This filen finns bara i Cortex-A7/ARM, Cortex-R4/ARM, Cortex-R4/IAR.*|
+| ***tx_thread_schedule. \[ s,S,68\]*** | Ersätter befintlig ThreadX-biblioteksfil. Utökad scheduler-kod, som i det här fallet används för att uppdatera minneshanteringsregister. |
+| ***tx_thread_stack_build.s** _ | Ersätter befintlig ThreadX-biblioteksfil. Skapar stackramen för en tråd. _This filen finns bara i Cortex-A7/ARM, Cortex-R4/ARM, Cortex-R4/IAR.*|
+| ***txm_module_manager_thread_stack_build. \[ s,S,68\]*** | Skapar alla modulens initiala stackar, inklusive konfiguration för positionsoberoende dataåtkomst. |
+| ***txm_module_manager_user_mode_entry. \[ s,S \]** _ | Tillåter att modulen går in i kernelläge. _This filen finns bara i Cortex-A7/ARM, Cortex-R4/ARM, Cortex-R4/IAR.*|
+| ***txm_module_manager_alignment_adjust.c*** | Hanterar portspecifika justeringskrav.|
+| ***txm_module_manager_application_request.c*** | Hanterar programspecifika begäranden till den hemmavarande koden. |
+| ***txm_module_manager_callback_request.c*** | Skickar en återanropsbegäran till en modul. |
+| ***txm_module_manager_event_flags_notify_trampoline.c*** | Bearbetar händelseflaggorna med meddelandeanrop från ThreadX. |
+| ***txm_module_manager_external_memory_enable.c*** | Skapar en post i minneshanteringstabellen för ett delat minnesutrymme som modulen kan komma åt. |
+| ***txm_module_manager_file_load.c*** | Allokerar och läser in en binär modulfil i modulminnesområdet och förbereder den för körning. |
+| ***txm_module_manager_in_place_load.c*** | Allokerar moduldataområdet och förbereder för modulkörning från den angivna kodadressen. |
+| ***txm_module_manager_initialize.c*** | Initierar modulhanteraren, inklusive specifikation av modulminnesområdet som är tillgängligt för inläsning och körning av moduler. |
+| ***txm_module_manager_initialize_mmu.c** _ | Initiera MMU. Användare kan redigera den här filen enligt sin minneskarta. _This filen finns bara i Cortex-A7/ARM* |
+| ***txm_module_manager_mm_initialize.c** _ | Initiera MPU/MMU. Användare kan redigera den här filen enligt sin minneskarta. _This filen finns bara i Cortex-A7/ARM* |
+| ***txm_module_manager_kernel_dispatch.c*** | Hanterar modul-API-begäranden baserat på begäran-ID. |
+| ***txm_module_manager_maximum_module_priority_set.c*** | Anger den högsta trådprioritet som tillåts i en modul. |
+| ***txm_module_manager_memory_fault_handler.c*** | Hanterar minnesfel som identifierats i en körningsmodul. |
+| ***txm_module_manager_memory_fault_notify.c*** | Registrerar ett återanrop av programmeddelanden när ett minnesfel inträffar. |
+| ***txm_module_manager_memory_load.c*** | Allokerar och läser in en moduls kod och data och förbereder modulen för körning. |
+| ***txm_module_manager_mm_register_setup.c*** | Uppsättningar MPU/MMU-register för modulen baserat på var koden och data läses in. |
+| ***txm_module_manager_object_allocate.c*** | Allokerar minne för ett modulobjekt. |
+| ***txm_module_manager_object_deallocate.c*** | Avallokerar minne för ett modulobjekt. |
+| ***txm_module_manager_object_pointer_get.c*** | Söker efter den angivna objekttypen och namnet, och returnerar objekt pekaren om den hittas. |
+| ***txm_module_manager_object_pointer_get_extended.c*** | Söker efter den angivna objekttypen och namnet, och returnerar objekt pekaren om den hittas. Namnlängden har angetts för säkerhet. |
+| ***txm_module_manager_object_pool_create.c***  | Skapar en pool med objekt utanför modulens dataområde som modulprogram kan allokera från. |
+| ***txm_module_manager_properties_get.c*** | Hämtar egenskaperna för den angivna modulen. |
+| ***txm_module_manager_queue_notify_trampoline.c*** | Bearbetar kömeddelandeanropet från ThreadX. |
+| ***txm_module_manager_semaphore_notify_trampoline.c*** | Bearbetar aviseringsanropet semaphore put från ThreadX.|
+| ***txm_module_manager_start.c*** | Startar körningen av en modul. |
+| ***txm_module_manager_stop.c*** | Stoppar körningen av en modul. |
+| ***txm_module_manager_thread_create.c*** | Skapar alla modultrådar. |
+| ***txm_module_manager_thread_notify_trampoline.c*** | Bearbetar trådmeddelandeanropet för inmatning/avslut från ThreadX. |
+| ***txm_module_manager_thread_reset.c*** | Återställa en modultråd. |
+| ***txm_module_manager_timer_notify_trampoline.c*** | Bearbetar förfallotid från ThreadX. |
+| ***txm_module_manager_unload.c*** | Tar bort modulen från modulens minnesutrymme. |
+| ***txm_module_manager_util.c*** | Interna hjälpfunktioner för chef. |
 
-## <a name="module-manager-initialization"></a>Initiering av modul Manager
+## <a name="module-manager-initialization"></a>Modulhanterarens initiering
 
-Den inhemska delen av programmet ansvarar för att anropa modul hanterarens initierings funktion ***txm_module_manager_initialize***. Den här funktionen konfigurerar de interna strukturerna för att läsa in och ta bort moduler, inklusive konfiguration av det minnes området som används för att allokera minnesmodulens minne.
+Den ursprungliga delen av programmet ansvarar för att anropa modulhanterarens initieringsfunktion ***txm_module_manager_initialize***. Den här funktionen ställer in de interna strukturerna för inläsning och avlastning av moduler, inklusive att konfigurera det minnesområde som används för att allokera modulminne.
 
-## <a name="module-manager-loading"></a>Inläsning av modul Manager
+## <a name="module-manager-loading"></a>Module Manager-inläsning
 
-Module Manager kan läsa in moduler dynamiskt i modulens minne från binärfiler för binärfiler eller från ett modul kods avsnitt som redan finns i det inhemska kod området. Dessutom kan module Manager köra kod på plats, det vill säga att endast modulens data allokeras i minnesmodulen och att kod körningen görs på plats. Följande inläsnings-API-funktioner i module Manager är tillgängliga.
+Modulhanteraren kan läsa in moduler dynamiskt i modulminnet från binära modulfiler eller från ett modulkodavsnitt som redan finns i det lokala kodområdet. Modulhanteraren kan dessutom köra kod på plats, det vill säga att endast moduldata allokeras i modulminnet och kodkörningen utförs på plats. Följande api-funktioner för module manager-inläsning är tillgängliga.
 
 * ***txm_module_manager_file_load***
 
@@ -124,31 +124,31 @@ Module Manager kan läsa in moduler dynamiskt i modulens minne från binärfiler
 
 * ***txm_module_manager_memory_load***
 
-Den minnes säkra versionen av module Manager ser också till att modulen läses in med rätt justering och minnes hanterings registren konfigureras korrekt för varje modul. När minnes skydd aktive ras via modulen inlednings alternativ, är minnesmodulens minnes åtkomst begränsad till modulens kod och data områden.
+Den minnesskyddade versionen av Modulhanteraren ser också till att modulen har lästs in med rätt justering och att minneshanteringsregister har ställts in korrekt för varje modul. När minnesskydd har aktiverats via modulens ingressalternativ begränsas modulminnesåtkomsten till modulkoden och dataområdena.
 
 ## <a name="module-manager-starting"></a>Module Manager startar
 
-Modul hanteraren initierar körning av en tidigare inläst modul via ***txm_module_manager_start*** API-funktionen. Den här funktionen skapar en tråd som går in i modulen på den Start plats som anges i modulen inledning för att initiera modul körning. Trådens prioritet och stack storlek anges också i modulen inledning.
+Modulhanteraren initierar körningen av en tidigare  inläst modul via txm_module_manager_start API-funktionen. För att initiera modulkörningen skapar den här funktionen en tråd som går in i modulen på den startplats som anges i modulinledningen. Prioritet och stackstorlek för den här tråden anges också i modulens ingress.
 
-## <a name="module-manager-stopping"></a>Stänger av module Manager
+## <a name="module-manager-stopping"></a>Modulhanteraren stoppas
 
-Module Manager avslutar körningen av en modul som har lästs in och körs via funktionen ***txm_module_manager_stop*** . Den här API-funktionen avslutar först och tar bort den första start tråden. Om modulen inledning anger en stopp tråd skapas och körs den här tråden. Module Manager väntar under en bestämd tids period då stopp tråden ska slutföras. När du är klar tas alla system resurser som skapats av modulen bort och modulen placeras i ett inaktivt tillstånd, från vilken den kan startas om eller tas bort från minnet.
+Modulhanteraren avslutar körningen av en tidigare inläst  och körande modul via txm_module_manager_stop funktion. Den här API-funktionen avslutas först och tar bort den första starttråden. Om modulinledningen anger en stopptråd skapas och körs den här tråden. Modulhanteraren väntar en fast tidsperiod på att stopptråden ska slutföras. När du är klar tas alla systemresurser som skapats av modulen bort och modulen placeras i ett vilande tillstånd där den antingen kan startas om eller tas bort.
 
-## <a name="module-manager-unloading"></a>Borttagning av modul Manager
+## <a name="module-manager-unloading"></a>Module Manager-avlastning
 
-Module Manager inaktiverar en tidigare inläst men inte exekverande modul via funktionen ***txm_module_manager_unload*** . Detta API frigör allt minne som är associerat med modulen och frigör det för användning med en annan modul i framtiden.
+Modulhanteraren tar bort en tidigare inläst men  inte kör modulen via txm_module_manager_unload funktion. Det här API:et släpper allt minne som är associerat med modulen och frigör det för användning med en annan modul i framtiden.
 
 ## <a name="module-manager-requests"></a>Module Manager-begäranden
 
-Begär Anden som görs av moduler till modul Manager utförs via makron i ***txm_module. h*** som mappar alla ThreadX-anrop för att anropa modul hanterarens sändnings funktion via en funktions pekare som tillhandahålls till modulen av modul Manager.
+Begäranden som görs av moduler till modulhanteraren görs via makron i ***txm_module.h*** som mappar alla ThreadX-anrop för att anropa dispatchfunktionen i Module Manager via en funktionspekare som tillhandahålls till modulen av modulhanteraren.
 
-Ytterligare programspecifika tjänster som görs via modulen anropar ***txm_module_application_request*** hanteras av samma makro mekanism som används för ThreadX-API: et. Som standard är den här hanterings funktionen i modul Manager Tom och utformad så att programmet lägger till den nödvändiga koden för att bearbeta programspecifika begär Anden.
+Ytterligare programspecifika tjänster som görs via modulen som ***anropar txm_module_application_request*** hanteras av samma makromekanism som används för ThreadX-API:et. Som standard är den här hanteringsfunktionen i Modulhanteraren tom och utformad så att programmet lägger till nödvändig kod för att bearbeta programspecifika begäranden.
 
-Om begäran inte implementeras av module Manager returneras ett värde för **TX_NOT_AVAILABLE** fel status av modul Manager. Den här felkoden returneras även om modulen begär en åtgärd som ligger utanför omfånget för modulens åtkomst. En modul kan till exempel inte skapa en timer med timer-kontrollens block eller återanrops adress utanför modulens kod områden.
+Om begäran inte implementeras av modulhanteraren returneras värdet **TX_NOT_AVAILABLE** felstatus av modulhanteraren. Den här felkoden returneras också om modulen begär en åtgärd som ligger utanför omfånget för modulens åtkomst. En modul kan till exempel inte skapa en timer med timerkontrollblocket eller återanropsadressen utanför modulens kodområde.
 
-## <a name="module-manager-example"></a>Exempel på modul hanteraren
+## <a name="module-manager-example"></a>Module Manager-exempel
 
-Följande är ett exempel på en modul Manager-kod som startar exempel-modulen som definierades tidigare i kapitel 2. Det förutsätts att modulen redan har lästs in, antagen av fel söknings programmet, i ROM-0x00800000.
+Följande är ett exempel på modulhanterarens kod som startar exempelmodulen som tidigare definierades i kapitel 2. Det förutsätts att modulen redan har lästs in, förmodligen av felsökaren, på ROM-0x00800000.
 
 ```c
 #include "tx_api.h"
@@ -261,8 +261,8 @@ void module_manager_entry(ULONG thread_input)
 }
 ```
 
-## <a name="module-manager-building"></a>Skapa modul Manager
+## <a name="module-manager-building"></a>Modulhanterarens byggnad
 
-***Txm_module_manager_ \**** källfiler måste läggas till i ThreadX-biblioteket.
+Den ***txm_module_manager_ \**** måste läggas till i ThreadX-biblioteket.
 
-Ett ThreadX module Manager-program är i praktiken detsamma som ett standard program för ThreadX, vilket är en eller flera programfiler som är länkade tillsammans med ThreadX-biblioteket ***TX. a***. Att skapa en modul Manager-applikation är beroende av den verktygs kedja som används. Se [tillägg](appendix.md) för port-/regionsspecifika exempel.
+Ett ThreadX Module Manager-program är i praktiken detsamma som ett ThreadX-standardprogram, som är en eller flera programfiler som är länkade tillsammans med ThreadX-biblioteket ***tx.a***. Att skapa ett modulhanteraresprogram beror på vilken verktygskedja som används. Se [bilaga](appendix.md) för portspecifika exempel.

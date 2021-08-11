@@ -1,52 +1,52 @@
 ---
-title: Kapitel 2 – installation och användning av Azure återställnings tider NetX FTP
-description: Det här kapitlet innehåller en beskrivning av olika problem som rör Installation, konfiguration och användning av Azure återställnings tider NetX FTP-komponenten.
+title: Kapitel 2 – Installation och användning av Azure RTOS NetX FTP
+description: Det här kapitlet innehåller en beskrivning av olika problem som rör installation, installation och användning av Azure RTOS NetX FTP-komponenten.
 author: philmea
 ms.author: philmea
 ms.date: 06/04/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 812422566b9761baac5f9c2477dba1f0fcc0a778
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 9da2761ed9483a920ab6f735b8a3a6bd82936c867ece8047b622788d5fb99804
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104826724"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116799497"
 ---
-# <a name="chapter-2---installation-and-use-of-azure-rtos-netx-ftp"></a>Kapitel 2 – installation och användning av Azure återställnings tider NetX FTP
+# <a name="chapter-2---installation-and-use-of-azure-rtos-netx-ftp"></a>Kapitel 2 – Installation och användning av Azure RTOS NetX FTP
 
-Det här kapitlet innehåller en beskrivning av olika problem som rör Installation, konfiguration och användning av Azure återställnings tider NetX FTP-komponenten.
+Det här kapitlet innehåller en beskrivning av olika problem som rör installation, installation och användning av Azure RTOS NetX FTP-komponenten.
 
-## <a name="product-distribution"></a>Produkt distribution
+## <a name="product-distribution"></a>Produktdistribution
 
-Azure återställnings tider-NetX kan hämtas från vår offentliga käll kods lagrings plats på [https://github.com/azure-rtos/netx/](https://github.com/azure-rtos/netx/]) . Paketet innehåller två källfiler och en PDF-fil som innehåller det här dokumentet, enligt följande:
+Azure RTOS NetX kan hämtas från vår offentliga källkodsdatabas på [https://github.com/azure-rtos/netx/](https://github.com/azure-rtos/netx/]) . Paketet innehåller två källfiler och en PDF-fil som innehåller det här dokumentet, enligt följande:
 
-- **nx_ftp. h**: rubrik fil för FTP för netx
-- **nx_ftp_client. c**: c-källfil för FTP-klient för netx
-- **nx_ftp_server. c**: c-källfil för FTP-server för netx
-- **filex_stub. h**: stub-fil om filex inte finns
-- **nx_ftp.pdf**: PDF-Beskrivning av FTP för netx
-- **demo_netx_ftp. c**: FTP demonstrations system
+- **nx_ftp.h:** Rubrikfil för FTP för NetX
+- **nx_ftp_client.c:** C-källfil för FTP-klient för NetX
+- **nx_ftp_server.c:** C-källfil för FTP-server för NetX
+- **filex_stub.h:** Stub-fil om FileX inte finns
+- **nx_ftp.pdf:** PDF-beskrivning av FTP för NetX
+- **demo_netx_ftp.c:** FTP-demonstrationssystem
 
 ## <a name="ftp-installation"></a>FTP-installation
 
-För att du ska kunna använda FTP för NetX bör hela distributionen som nämnts tidigare kopieras till samma katalog där NetX har installerats. Om NetX till exempel är installerat i katalogen "*\threadx\arm7\green*", ska *nx_ftp. h*-, *nx_ftp_client. c*-och *nx_ftp_server. c* -filer kopieras till den här katalogen.
+För att kunna använda FTP för NetX ska hela distributionen som nämns ovan kopieras till samma katalog där NetX är installerat. Om NetX till exempel är installerat i katalogen "*\threadx\arm7\green*" ska *filerna nx_ftp.h* *, nx_ftp_client.c* och *nx_ftp_server.c* kopieras till den här katalogen.
 
 ## <a name="using-ftp"></a>Använd FTP
 
-Det är enkelt att använda FTP för NetX. I princip måste program koden innehålla *nx_ftp. h* när den innehåller *tx_api. h, fx_api. h* , och *nx_api. h*, för att kunna använda ThreadX, FileX respektive netx. När *nx_ftp. h* ingår kan program koden sedan göra FTP-funktions anropen angivna senare i den här hand boken. Programmet måste även innehålla *nx_ftp_client. c* och *nx_ftp_server. c* i build-processen. De här filerna måste kompileras på samma sätt som andra programfiler och dess objekt formulär måste vara länkade tillsammans med programmets filer. Detta är allt som krävs för att använda NetX FTP.
+Det är enkelt att använda FTP för NetX. I princip måste programkoden innehålla *nx_ftp.h* efter att den innehåller *tx_api.h, fx_api.h* och *nx_api.h* för att kunna använda ThreadX, FileX respektive NetX. När *nx_ftp.h* ingår kan programkoden sedan göra FTP-funktionsanrop som anges senare i den här guiden. Programmet måste även innehålla *nx_ftp_client.c* *och nx_ftp_server.c* i byggprocessen. Dessa filer måste kompileras på samma sätt som andra programfiler och dess objektformulär måste länkas tillsammans med programmets filer. Det här är allt som krävs för att använda NetX FTP.
 
 > [!NOTE]
-> Eftersom FTP använder sig av NetX TCP-tjänster måste TCP aktive ras med det *nx_tcp_enable* samtalet innan FTP används.
+> Eftersom FTP använder NetX TCP-tjänster måste TCP aktiveras med nx_tcp_enable *innan* DU använder FTP.
 
-## <a name="small-example-system"></a>Litet exempel system
+## <a name="small-example-system"></a>Litet exempelsystem
 
-Ett exempel på hur enkelt det är att använda NetX FTP beskrivs i bild 1,1 som visas nedan.
+Ett exempel på hur enkelt det är att använda NetX FTP beskrivs i bild 1.1 som visas nedan.
 
 > [!NOTE]
-> Detta är för en värd enhet med ett enda nätverks gränssnitt.
+> Det här är för en värdenhet med ett enda nätverksgränssnitt.
 
-I det här exemplet tas FTP-filen *nx_ftp_client. h* och *nx_ftp_server. h* till rad 10 och 11. Därefter skapas FTP-servern i "*tx_application_define*" på rad 134. Observera att FTP Server Control Block "*Server*" har definierats som en global variabel på rad 31 tidigare. När den har skapats startas en FTP-server på rad 363. På rad 183 skapas FTP-klienten. Slutligen skriver klienten filen på rad 229 och läser tillbaka filen på rad 318.
+I det här exemplet kommer *FTP-indelningsfilen nx_ftp_client.h* *och nx_ftp_server.h* på rad 10 och 11. Därefter skapas FTP-servern i "*tx_application_define*" på rad 134. Observera att FTP-serverkontrollblocket "*Server*" definierades som en global variabel på rad 31 tidigare. När det har skapats startas en FTP-server på rad 363. På rad 183 skapas FTP-klienten. Slutligen skriver klienten filen på rad 229 och läser tillbaka filen på rad 318.
 
 ```c
 /* This is a small demo of NetX FTP on the high-performance NetX TCP/IP stack. This demo
@@ -435,38 +435,38 @@ UINT     server_logout(struct NX_FTP_SERVER_STRUCT *ftp_server_ptr,
 }
 ```
 
-Figur 1,1 exempel på en FTP-klient och server med NetX (Single Network Interface Host)
+Bild 1.1 Exempel på FTP-klient och server med NetX (värd för ett enda nätverksgränssnitt)
 
-## <a name="configuration-options"></a>Konfigurations alternativ
+## <a name="configuration-options"></a>Konfigurationsalternativ
 
-Det finns flera konfigurations alternativ för att skapa FTP för NetX. I följande lista beskrivs var och en i detalj:  
+Det finns flera konfigurationsalternativ för att skapa FTP för NetX. I följande lista beskrivs var och en i detalj:  
 
-- **NX_FTP_SERVER_PRIORITY**: prioriteten för FTP-serverrollen. Som standard definieras värdet som 16 för att ange prioritet 16.
+- **NX_FTP_SERVER_PRIORITY:** FTP-servertrådens prioritet. Som standard definieras det här värdet som 16 för att ange prioritet 16.
 
-- **NX_FTP_MAX_CLIENTS**: det maximala antalet klienter som servern kan hantera på en och samma tidpunkt. Som standard är det här värdet 4 för att stödja 4 klienter på en gång.
+- **NX_FTP_MAX_CLIENTS:** Det maximala antalet klienter som servern kan hantera samtidigt. Som standard är det här värdet 4 för att stödja 4 klienter samtidigt.
 
-- **NX_FTP_SERVER_MIN_PACKET_PAYLOAD**: den minsta storleken på nytto lasten i byte för Server paketets pool, inklusive TCP-, IP-och nätverks ram-rubriker och http-data. Standardvärdet är 256 (den maximala längden på filename i FileX) + 12 byte för fil information och NX_PHYSICAL_TRAILER.
+- **NX_FTP_SERVER_MIN_PACKET_PAYLOAD:** Den minsta storleken på nyttolasten för serverpaketpoolen i byte, inklusive TCP, IP och nätverksramrubriker plus HTTP-data. Standardvärdet är 256 (maximal längd på filnamn i FileX) + 12 byte för filinformation och NX_PHYSICAL_TRAILER.
 
-- **NX_FTP_NO_FILEX**: det här alternativet är ett stub-alternativ för FILEX-beroenden. FTP-klienten fungerar utan några ändringar om det här alternativet har definierats. FTP-servern måste antingen ändras eller så måste användaren skapa en fåtal av FileX-tjänster för att fungera korrekt.
+- **NX_FTP_NO_FILEX:** Det här alternativet tillhandahåller en stub för FileX-beroenden. FTP-klienten fungerar utan ändringar om det här alternativet har definierats. FTP-servern måste antingen ändras eller så måste användaren skapa ett fåtal FileX-tjänster för att fungera korrekt.
 
-- **NX_FTP_CONTROL_TOS**: typ av tjänst som krävs för förfrågningar om FTP TCP-kontroll. Som standard definieras det här värdet som NX_IP_NORMAL för att indikera den normala IP-paketfiltrering. Den här inställningen kan anges av programmet innan *nx_ftp. h*.
+- **NX_FTP_CONTROL_TOS: Typ** av tjänst som krävs för FTP TCP-kontrollbegäranden. Som standard definieras det här värdet som NX_IP_NORMAL för att indikera normal IP-pakettjänst. Den här definierar kan anges av programmet innan du tar med *nx_ftp.h*.
 
-- **NX_FTP_DATA_TOS**: typ av tjänst som krävs för FTP TCP-data begär Anden. Som standard definieras det här värdet som NX_IP_NORMAL för att indikera den normala IP-paketfiltrering. Den här inställningen kan anges av programmet innan *nx_ftp. h*.
+- **NX_FTP_DATA_TOS:** Typ av tjänst som krävs för FTP TCP-databegäranden. Som standard definieras det här värdet som NX_IP_NORMAL för att indikera normal IP-pakettjänst. Den här definierar kan anges av programmet innan du tar med *nx_ftp.h*.
 
-- **NX_FTP_FRAGMENT_OPTION**: fragment aktivera för FTP TCP-begäranden. Som standard är det här värdet NX_DONT_FRAGMENT för att inaktivera FTP TCP-fragmentering. Den här inställningen kan anges av programmet innan *nx_ftp. h*.
+- **NX_FTP_FRAGMENT_OPTION:** Aktivera fragment för FTP TCP-begäranden. Som standard är det här värdet NX_DONT_FRAGMENT inaktivera FTP TCP-fragmentering. Den här definierar kan anges av programmet innan du tar med *nx_ftp.h*.
 
-- **NX_FTP_CONTROL_WINDOW_SIZE**: kontrol lera socket-fönstrets storlek. Som standard är det här värdet 400 byte. Den här inställningen kan anges av programmet innan *nx_ftp. h*.
+- **NX_FTP_CONTROL_WINDOW_SIZE:** Kontrollera socketfönstrets storlek. Som standard är det här värdet 400 byte. Den här definierar kan anges av programmet innan du tar med *nx_ftp.h*.
 
-- **NX_FTP_DATA_WINDOW_SIZE**: storlek för datasocket window. Som standard är det här värdet 2048 byte. Den här inställningen kan anges av programmet innan *nx_ftp. h*.
+- **NX_FTP_DATA_WINDOW_SIZE:** Fönsterstorlek för datasocket. Som standard är det här värdet 2 048 byte. Den här definierar kan anges av programmet innan du tar med *nx_ftp.h*.
 
-- **NX_FTP_TIME_TO_LIVE**: anger antalet routrar som det här paketet kan passera innan det tas bort. Standardvärdet är inställt på 0x80, men kan omdefinieras innan du tar med *nx_ftp. h.*
+- **NX_FTP_TIME_TO_LIVE:** Anger antalet routrar som det här paketet kan passera innan det tas bort. Standardvärdet är inställt på 0x80, men kan definieras om innan du tar *nx_ftp.h.*
 
-- **NX_FTP_SERVER_TIMEOUT**: anger antalet ThreadX-Tick som interna tjänster ska pausas för. Standardvärdet är inställt på 100, men kan omdefinieras innan *nx_ftp. h.*
+- **NX_FTP_SERVER_TIMEOUT:** Anger antalet ThreadX-tick som interna tjänster ska pausa för. Standardvärdet är inställt på 100, men kan definieras om innan du tar *med nx_ftp.h.*
 
-- **NX_FTP_USERNAME_SIZE**: anger antalet byte som tillåts i en klient som har angett *användar namn*. Standardvärdet är inställt på 20, men kan omdefinieras innan *nx_ftp. h.*
+- **NX_FTP_USERNAME_SIZE:** Anger antalet byte som tillåts i ett användarnamn som angetts av *klienten.* Standardvärdet är inställt på 20, men kan definieras om innan du tar *med nx_ftp.h.*
 
-- **NX_FTP_PASSWORD_SIZE**: anger antalet byte som tillåts i ett *lösen ord* som angetts av klienten. Standardvärdet är inställt på 20, men kan omdefinieras innan *nx_ftp. h.*
+- **NX_FTP_PASSWORD_SIZE:** Anger antalet byte som tillåts i ett lösenord som anges av *klienten.* Standardvärdet är inställt på 20, men kan definieras om innan du tar *med nx_ftp.h.*
 
-- **NX_FTP_ACTIVITY_TIMEOUT**: anger antalet sekunder som en klient anslutning upprätthålls om det inte finns någon aktivitet. Standardvärdet är inställt på 240, men kan omdefinieras innan *nx_ftp. h.*
+- **NX_FTP_ACTIVITY_TIMEOUT:** Anger antalet sekunder som en klientanslutning upprätthålls om det inte finns någon aktivitet. Standardvärdet är inställt på 240, men kan definieras om innan du *tar med nx_ftp.h.*
 
-- **NX_FTP_TIMEOUT_PERIOD**: anger antalet sekunder mellan server kontrollen för inaktivitet i klienten. Standardvärdet är inställt på 60, men kan omdefinieras innan *nx_ftp. h.*
+- **NX_FTP_TIMEOUT_PERIOD:** Anger antalet sekunder mellan serverkontrollen för klient inaktivitet. Standardvärdet är inställt på 60, men kan definieras om innan du tar *nx_ftp.h.*

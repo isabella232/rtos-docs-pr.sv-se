@@ -1,34 +1,34 @@
 ---
-title: Kapitel 2 – installation och användning av Azure återställnings tider NetX Duo PTP-klienten
-description: Det här kapitlet innehåller en beskrivning av olika problem som rör Installation, konfiguration och användning av NetX Duo PTP-klient komponenten.
+title: Kapitel 2 – Installation och användning av Azure RTOS NetX Duo PTP-klient
+description: Det här kapitlet innehåller en beskrivning av olika problem som rör installation, installation och användning av NetX Duo PTP-klientkomponenten.
 author: v-condav
 ms.author: v-condav
 ms.date: 01/27/2021
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: cab2c31099bded953753fd530cef931cf0d7aaf7
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: ee2e4184ce041679b5ae5368d91c436cf8a0bc2ac6f59deba67d996b318151bd
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104825800"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116798035"
 ---
-# <a name="chapter-2---installation-and-use-of-azure-rtos-netx-duo-ptp-client"></a>Kapitel 2 – installation och användning av Azure återställnings tider NetX Duo PTP-klienten
+# <a name="chapter-2---installation-and-use-of-azure-rtos-netx-duo-ptp-client"></a>Kapitel 2 – Installation och användning av Azure RTOS NetX Duo PTP-klient
 
-Det här kapitlet innehåller en beskrivning av olika problem som rör Installation, konfiguration och användning av NetX Duo PTP-klient komponenten.
+Det här kapitlet innehåller en beskrivning av olika problem som rör installation, installation och användning av NetX Duo PTP-klientkomponenten.
 
-## <a name="product-distribution"></a>Produkt distribution
+## <a name="product-distribution"></a>Produktdistribution
 
-Azure återställnings tider NetX Duo kan hämtas från den offentliga käll kods lagrings platsen på https://github.com/azure-rtos/netxduo/tree/master/addons/ptp .
+Azure RTOS NetX Duo kan hämtas från den offentliga källkodsdatabasen på https://github.com/azure-rtos/netxduo/tree/master/addons/ptp .
 
-***nxd_ptp_client. h*** Rubrik fil för PTP-klient för NetX Duo ***nxd_ptp_client. c*** c-KÄLLFIL för PTP-klient för NetX Duo ***demo_netx_duo_ptp_client. c*** netx Duo-klient demonstration
+***nxd_ptp_client.h*** Huvudfil för PTP-klient för NetX Duo ***nxd_ptp_client.c*** C-källfil för PTP-klient för NetX Duo ***demo_netx_duo_ptp_client.c*** NetX Duo PTP-klientdemonstration
 
 
 ## <a name="using-ptp-client"></a>Använda PTP-klient
-Det är enkelt att använda PTP-klienten för NetX Duo. I princip måste program koden innehålla ***nxd_ptp_client. h** _ efter att den innehåller _*_tx_api. h_*_ och _*_nx_api. h_*_ för att kunna använda ThreadX respektive netx Duo. När PTP-klientens huvud fil ingår kan program koden göra PTP-klientens funktions anrop senare i den här hand boken. Programmet måste även innehålla _ *_nxd_ptp_client. c_** i build-processen. Den här filen måste kompileras på samma sätt som andra programfiler och dess objekt formulär måste vara länkade tillsammans med programmets filer. Detta är allt som krävs för att använda NetX Duo PTP-klienten.
+Det är enkelt att använda PTP-klienten för NetX Duo. I princip måste programkoden innehålla ***nxd_ptp_client.h** _ när den innehåller _*_tx_api.h_*_ och _*_nx_api.h_*_, för att kunna använda ThreadX respektive NetX Duo. När PTP-klienthuvudfilen har inkluderats kan programkoden sedan göra PTP-klientfunktionsanrop som anges senare i den här guiden. Programmet måste också innehålla _ *_nxd_ptp_client.c_** i byggprocessen. Den här filen måste kompileras på samma sätt som andra programfiler och dess objektformulär måste länkas tillsammans med programmets filer. Detta är allt som krävs för att använda NetX Duo PTP-klienten.
 
-## <a name="small-example-system"></a>Litet exempel system
-Ett exempel på hur du använder NetX Duo PTP Client Services beskrivs i bild 1 som visas nedan.
+## <a name="small-example-system"></a>Litet exempelsystem
+Ett exempel på hur du använder NetX Duo PTP-klienttjänster beskrivs i bild 1 som visas nedan.
 ```C
 /*
    This is a small demo of the NetX Duo PTP client on the high-performance NetX Duo TCP/IP stack.
@@ -303,11 +303,11 @@ ULONG   gw_address;
 #endif /* SAMPLE_DHCP_DISABLE  */
 ```
 
-## <a name="configuration-options"></a>Konfigurations alternativ
-Det finns flera konfigurations alternativ med NetX Duo PTP-klienten. Nedan visas en lista över alla alternativ som beskrivs i detalj:
-* **NX_PTP_CLIENT_THREAD_TIME_SLICE** Detta definierar tids sektorn för PTP-klient tråd. Standardvärdet är ingen tids sektor.
-* **NX_PTP_CLIENT_TIMER_TICKS_PER_SECOND** Detta definierar den interna frekvensen för PTP-klienten. Standardvärdet är 10, vilket indikerar en 100 MS-timer.
-* **NX_PTP_CLIENT_ANNOUNCE_RECEIPT_TIMEOUT** Detta definierar det maximala antalet meddelande paket som saknas före tids gränsen. Standardvärdet är 3.
-* **NX_PTP_CLIENT_LOG_ANNOUNCE_INTERVAL** Detta definierar tidsintervall mellan efterföljande meddelande paket, uttryckt som logg 2. Det här värdet ska vara enhetligt i en domän. Standardvärdet är 1, vilket är 2s.
-* **NX_PTP_CLIENT_DELAY_REQ_INTERVAL** Detta definierar intervallet för att skicka fördröjnings paket för begäran. Standardvärdet är 2 sekunder.
-* **NX_PTP_CLIENT_MAX_QUEUE_DEPTH** Detta definierar det maximala ködjup för klient-socket. Standardvärdet är 5.
+## <a name="configuration-options"></a>Konfigurationsalternativ
+Det finns flera konfigurationsalternativ med NetX Duo PTP-klienten. Här följer en lista över alla alternativ som beskrivs i detalj:
+* **NX_PTP_CLIENT_THREAD_TIME_SLICE** Detta definierar PTP-klientens trådtidssegment. Standardvärdet är ingen tidssegment.
+* **NX_PTP_CLIENT_TIMER_TICKS_PER_SECOND** Detta definierar PTP-klientens interna timerfrekvens. Standardvärdet är 10, vilket anger en timer på 100 ms.
+* **NX_PTP_CLIENT_ANNOUNCE_RECEIPT_TIMEOUT** Detta definierar det maximala antalet saknade meddela paket före tidsgränsen. Standardvärdet är 3.
+* **NX_PTP_CLIENT_LOG_ANNOUNCE_INTERVAL** Detta definierar tidsintervallet mellan efterföljande meddela paket, uttryckt som logg 2. Det här värdet ska vara enhetligt i hela en domän. Standardvärdet är 1, vilket är 2:e.
+* **NX_PTP_CLIENT_DELAY_REQ_INTERVAL** Detta definierar intervallet för att skicka fördröjningsbegärandepaket. Standardvärdet är 2 sekunder.
+* **NX_PTP_CLIENT_MAX_QUEUE_DEPTH** Detta definierar det maximala ködjupet för klientsocket. Standardvärdet är 5.

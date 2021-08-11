@@ -1,21 +1,21 @@
 ---
-title: Kapitel 6 – Azure återställnings tider ThreadX trace Events
-description: I det här kapitlet beskrivs Azure återställnings tider ThreadX-händelser.
+title: Kapitel 6 – Azure RTOS ThreadX-spårningshändelser
+description: I det här kapitlet beskrivs Azure RTOS ThreadX-händelser.
 author: philmea
 ms.service: rtos
 ms.topic: article
 ms.date: 5/19/2020
 ms.author: philmea
-ms.openlocfilehash: 8f0ff03d112597371059d925f64b7511454e123c
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 9fefc43002d4e0d6df817ad56d79b3e41a3d649504be50f5a39f67c1896b2e9a
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104827555"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116800982"
 ---
-# <a name="chapter-6---azure-rtos-threadx-trace-events"></a>Kapitel 6 – Azure återställnings tider ThreadX trace Events
+# <a name="chapter-6---azure-rtos-threadx-trace-events"></a>Kapitel 6 – Azure RTOS ThreadX-spårningshändelser
 
-I det här kapitlet beskrivs Azure återställnings tider ThreadX-händelser. 
+I det här kapitlet beskrivs Azure RTOS ThreadX-händelser. 
 
 ## <a name="list-of-events-and-icons"></a>Lista över händelser och ikoner
 
@@ -23,114 +23,114 @@ Följande är en lista över ThreadX-händelser som visas av TraceX:
 
 | **Ikon**                         | **Innebörd** |
 | -------------------------------- | ------------------------------------- |
-| ![Aktiverings ikon för intern tråd](./media/user-guide/tx-events/image1.png)    | Återuppta intern tråd  |
-| ![Inaktivera ikon för intern tråd](./media/user-guide/tx-events/image2.png)    | Inaktive ring av intern tråd |
-| ![Ikon för att avbryta tjänstens rutin retur](./media/user-guide/tx-events/image3.png)    | Avbrotts service rutin (ISR)-retur |
-| ![Avbrotts ikon för tjänst rutin](./media/user-guide/tx-events/image4.png)    | Avbryta service rutin (ISR)-avsluta  |
-| ![Intern Time-slice-ikon](./media/user-guide/tx-events/image5.png)    | Intern tid-sektor |
-| ![Kör ikon](./media/user-guide/tx-events/image6.png)    | Körs |
-| ![Ikonen för att blockera pool tilldelning](./media/user-guide/tx-events/image7.png)    | **Blockera allokering av pool** (*tx_block_allocate*)  |
-| ![Skapa ikon för att blockera pool](./media/user-guide/tx-events/image8.png)    | **Blockera skapande av pool** (*tx_block_pool_create*) |
-| ![Ta bort ikon för borttagning av pool](./media/user-guide/tx-events/image9.png)    | **Blockera borttagning av pool** (*tx_block_pool_delete*) |
-| ![Hämta ikon för Hämta pool information](./media/user-guide/tx-events/image10.png)    | **Blockera pool information get** (*tx_block_pool_info_get*) |
-| ![Blockera prestanda information för pool Hämta con](./media/user-guide/tx-events/image11.png)    | **Blockera prestanda information för pool Hämta** (*tx_block_pool_performance_info_get*) |
-| ![Hämta ikon för Hämta pool system prestanda information](./media/user-guide/tx-events/image12.png)    | **Blockera pool system prestanda information get** (*tx_block_pool_performance_system_info_get*) |
-| ![Prioritets ikon för att blockera pool](./media/user-guide/tx-events/image13.png)    | **Blockera poolens prioritet** (*tx_block_pool_prioritize*) |
-| ![Ikonen blockera att släppa till poolen](./media/user-guide/tx-events/image14.png)    | **Blockera version till pool** (*tx_block_release*) |
-| ![Ikon för allokera minne för byte pool](./media/user-guide/tx-events/image15.png)    | **Byte pool allokera minne** (*tx_byte_allocate*) |
-| ![Ikon för att skapa byte pool](./media/user-guide/tx-events/image16.png)    | **Skapa byte-pool** (*tx_byte_pool_create*) |
-| ![Borttagnings ikon för byte pool](./media/user-guide/tx-events/image17.png)    | **Borttagning av byte pool** (*tx_byte_pool_delete*) |
-| ![Ikon för hämta information om byte pool](./media/user-guide/tx-events/image18.png)    | **Information om byte pool get** (*tx_byte_pool_info_get*) |
-| ![Ikon för hämta prestanda information för byte-pool](./media/user-guide/tx-events/image19.png)    | **Hämta prestanda information för byte-pool** (*tx_byte_pool_performance_info_get*) |
-| ![Ikon för Hämta byte i byte pool system prestanda information](./media/user-guide/tx-events/image20.png)    | **Hämta information om byte pool system prestanda information** (*tx_byte_pool_performance_system_info_get*) |
-| ![* Prioritets ikon för byte pool](./media/user-guide/tx-events/image21.png)    | **Prioritering av byte-pool** (*tx_byte_pool_prioritize*) |
-| ![Ikon för att frigöra byte minne](./media/user-guide/tx-events/image22.png)    | **Byte minnes version till pool** (*tx_byte_release*) |
-| ![Ikonen Skapa händelse flaggor](./media/user-guide/tx-events/image23.png)    | **Skapa händelse flaggor** (*tx_event_flags_create*) |
-| ![Borttagnings ikon för händelse flaggor](./media/user-guide/tx-events/image24.png)    | **Ta bort händelse flaggor** (*tx_event_flags_delete*) |
-| ![Ikonen Hämta händelse flaggor](./media/user-guide/tx-events/image25.png)    | **Händelse flaggor Hämta** (*tx_event_flags_get*) |
-| ![Ikonen Hämta information om händelse flaggor](./media/user-guide/tx-events/image26.png)    | **Händelse flaggor information get** (*tx_event_flags_info_get*) |
-| ![Händelse flaggor prestanda information Hämta ikon](./media/user-guide/tx-events/image27.png)    | **Händelse flaggor prestanda information get** (*tx_event_flags_performance_info_get*) |
-| ![Händelse flaggor system prestanda information Hämta ikon](./media/user-guide/tx-events/image28.png)    | **Händelse flaggor system prestanda information get** (*tx_event_flags_performance_system_info_get*) |
-| ![Ikonen händelse flaggor uppsättning](./media/user-guide/tx-events/image29.png)    | **Angivna händelse flaggor** (*tx_event_flags_set*) |
-| ![Händelse flaggor ange aviserings ikon](./media/user-guide/tx-events/image30.png)    | **Meddelande om inställd händelse flaggor** (*tx_event_flags_set_notify*) |
-| ![Avbryt aktivering/inaktivera ikon](./media/user-guide/tx-events/image31.png)    | **Avbryt aktivering/inaktive ring** (*tx_interrupt_control*) |
-| ![Ikon för mutex-skapande](./media/user-guide/tx-events/image32.png)    | **Mutex-skapande** (*tx_mutex_create*) |
-| ![Ikon för mutex-borttagning](./media/user-guide/tx-events/image33.png)    | **Mutex-borttagning** (*tx_mutex_delete*) |
-| ![Ikon för att hämta mutex](./media/user-guide/tx-events/image34.png)    | **Mutex get** (*tx_mutex_get*) |
-| ![Get-ikon för mutex information](./media/user-guide/tx-events/image35.png)    | **Mutex information get** (*tx_mutex_info_get*) |
-| ![Ikon för hämta information om mutex-prestanda](./media/user-guide/tx-events/image36.png)    | **Information om mutex-prestanda Hämta** (*tx_mutex_performance_info_get*) |
-| ![Ikon för att hämta mutex-system prestanda information](./media/user-guide/tx-events/image37.png)    | **Mutex system prestanda information get** (*tx_mutex_performance_system_info_get*) |
-| ![Ikon för mutex-prioritet](./media/user-guide/tx-events/image38.png)    | **Mutex-prioritering** (*tx_mutex_prioritize*) |
-| ![Ikon för mutex-placering](./media/user-guide/tx-events/image39.png)    | **Mutex-placering** (*tx_mutex_put*) |
+| ![Ikon för internt tråd-CV](./media/user-guide/tx-events/image1.png)    | Återuppta intern tråd  |
+| ![Pausikon för intern tråd](./media/user-guide/tx-events/image2.png)    | Pausa intern tråd |
+| ![Ikonen Avbryt tjänstrutin Retur](./media/user-guide/tx-events/image3.png)    | Avbryt tjänstrutin (ISR) Ange |
+| ![Ikonen Avbryt tjänstrutinens avslut](./media/user-guide/tx-events/image4.png)    | Isr-avslut (Interrupt Service Routine)  |
+| ![Ikon för internt tidssegment](./media/user-guide/tx-events/image5.png)    | Intern tidssegment |
+| ![Ikonen Körs](./media/user-guide/tx-events/image6.png)    | Körs |
+| ![Ikonen Blockera allokera pool](./media/user-guide/tx-events/image7.png)    | **Blockera allokera pool** (*tx_block_allocate*)  |
+| ![Ikonen Skapa blockpool](./media/user-guide/tx-events/image8.png)    | **Blockera pool create** (*tx_block_pool_create*) |
+| ![Ikonen Blockera borttagning av pool](./media/user-guide/tx-events/image9.png)    | **Blockera borttagning av pool** (*tx_block_pool_delete*) |
+| ![Hämta-ikonen Blockera poolinformation](./media/user-guide/tx-events/image10.png)    | **Blockpoolinformation hämta** (*tx_block_pool_info_get*) |
+| ![Block pool performance information get con](./media/user-guide/tx-events/image11.png)    | **Block pool performance information get** (*tx_block_pool_performance_info_get*) |
+| ![Hämta ikon för blockpoolsystemsprestanda](./media/user-guide/tx-events/image12.png)    | **Block pool system performance information get** (*tx_block_pool_performance_system_info_get*) |
+| ![Ikonen Blockera poolprioritering](./media/user-guide/tx-events/image13.png)    | **Blockera poolprioritering** (*tx_block_pool_prioritize*) |
+| ![Ikonen Blockera version till pool](./media/user-guide/tx-events/image14.png)    | **Blockera version till pool** (*tx_block_release*) |
+| ![Ikonen Allokera minne för bytepool](./media/user-guide/tx-events/image15.png)    | **Bytepoolen allokerar minne** (*tx_byte_allocate*) |
+| ![Ikon för att skapa bytepool](./media/user-guide/tx-events/image16.png)    | **Skapa bytepool** (*tx_byte_pool_create*) |
+| ![Ikon för borttagning av bytepool](./media/user-guide/tx-events/image17.png)    | **Ta bort bytepool** (*tx_byte_pool_delete*) |
+| ![Hämta ikon för bytepoolsinformation](./media/user-guide/tx-events/image18.png)    | **Bytepoolsinformation hämta** (*tx_byte_pool_info_get*) |
+| ![Hämta ikon för prestandainformation för bytepool](./media/user-guide/tx-events/image19.png)    | **Prestandainformation för bytepoolen hämtar** (*tx_byte_pool_performance_info_get*) |
+| ![Hämta ikon för systemprestanda för bytepool](./media/user-guide/tx-events/image20.png)    | **Prestandainformation för bytepooler hämtar** (*tx_byte_pool_performance_system_info_get*) |
+| ![*Prioritera ikon för bytepool](./media/user-guide/tx-events/image21.png)    | **Prioritera bytepool** (*tx_byte_pool_prioritize*) |
+| ![Ikon för byteminnes frisläppning till pool](./media/user-guide/tx-events/image22.png)    | **Byteminnesutgågås till pool** (*tx_byte_release*) |
+| ![Ikonen Skapa händelseflaggor](./media/user-guide/tx-events/image23.png)    | **Händelseflaggor skapar** (*tx_event_flags_create*) |
+| ![Ikonen Ta bort händelseflaggor](./media/user-guide/tx-events/image24.png)    | **Ta bort händelseflaggor** (*tx_event_flags_delete*) |
+| ![Ikonen Hämta händelseflaggor](./media/user-guide/tx-events/image25.png)    | **Händelseflaggor hämtar** (*tx_event_flags_get*) |
+| ![Information om händelseflaggor – hämta ikon](./media/user-guide/tx-events/image26.png)    | **Information om händelseflaggor hämta** (*tx_event_flags_info_get*) |
+| ![Ikonen Hämta prestandainformation för händelseflaggor](./media/user-guide/tx-events/image27.png)    | **Prestandainformation för händelseflaggor hämtar** (*tx_event_flags_performance_info_get*) |
+| ![Ikonen Hämta information om systemprestanda för händelseflaggor](./media/user-guide/tx-events/image28.png)    | **Händelseflaggor systemprestandainformation hämta** (*tx_event_flags_performance_system_info_get*) |
+| ![Ikon för uppsättning av händelseflaggor](./media/user-guide/tx-events/image29.png)    | **Händelseflaggor (** *tx_event_flags_set*) |
+| ![Händelseflaggor ange av meddela-ikon](./media/user-guide/tx-events/image30.png)    | **Händelseflaggor anger notify** (*tx_event_flags_set_notify*) |
+| ![Ikonen Aktivera/inaktivera avbrott](./media/user-guide/tx-events/image31.png)    | **Aktivera/inaktivera avbrott** (*tx_interrupt_control*) |
+| ![Ikon för att skapa Mutex](./media/user-guide/tx-events/image32.png)    | **Mutex create** (*tx_mutex_create*) |
+| ![Ta bort mutex-ikon](./media/user-guide/tx-events/image33.png)    | **Mutex delete** (*tx_mutex_delete*) |
+| ![Mutex-hämta-ikon](./media/user-guide/tx-events/image34.png)    | **Mutex get** (*tx_mutex_get*) |
+| ![Ikon för att hämta Mutex-information](./media/user-guide/tx-events/image35.png)    | **Mutex-information get** (*tx_mutex_info_get*) |
+| ![Information om Mutex-prestanda – hämta ikon](./media/user-guide/tx-events/image36.png)    | **Information om Mutex-prestanda får** (*tx_mutex_performance_info_get*) |
+| ![Ikon för att hämta information om Mutex-systemprestanda](./media/user-guide/tx-events/image37.png)    | **Information om Mutex-systemprestanda får** (*tx_mutex_performance_system_info_get*) |
+| ![Ikonen För att prioritera Mutex](./media/user-guide/tx-events/image38.png)    | **Mutex prioritize** (*tx_mutex_prioritize*) |
+| ![Mutex-put-ikon](./media/user-guide/tx-events/image39.png)    | **Mutex put** (*tx_mutex_put*) |
 | ![Ikon för att skapa kö](./media/user-guide/tx-events/image40.png)    | **Skapa kö** (*tx_queue_create*) |
-| ![Borttagnings ikon för kö](./media/user-guide/tx-events/image41.png)    | **Köa borttagning** (*tx_queue_delete*) |
-| ![Ikon för köa tömning](./media/user-guide/tx-events/image42.png)    | **Köa rensning** (*tx_queue_flush*) |
-| ![Ikon för att skicka kön direkt](./media/user-guide/tx-events/image43.png)    | **Kö-sändning** (*tx_queue_front_send*) |
-| ![Hämta ikon för köa information](./media/user-guide/tx-events/image44.png)    | **Köa information get** (*tx_queue_info_get*) |
-| ![Hämta ikon för köns prestanda information](./media/user-guide/tx-events/image45.png)    | **Hämta prestanda information för kö** (*tx_queue_performance_info_get*) |
-| ![Hämta ikon för prestanda information för Queue system](./media/user-guide/tx-events/image46.png)    | **Hämta information om köa system prestanda information** (*tx_queue_performance_system_info_get*) |
-| ![Ikon för köa prioritet](./media/user-guide/tx-events/image47.png)    | **Prioritet för kön** (*tx_queue_prioritize*) |
-| ![Ikon för mottagnings meddelande i kö](./media/user-guide/tx-events/image48.png)    | **Mottagnings meddelande i kö** (*tx_queue_receive*) |
-| ![Ikon för att skicka meddelande i kö](./media/user-guide/tx-events/image49.png)    | **Köa sändnings meddelande** (*tx_queue_send*) |
-| ![Ikon för att skicka meddelande i kö](./media/user-guide/tx-events/image50.png)    | **Köa sändnings meddelande** (*tx_queue_send_notify*) |
-| ![Ikon för Semaforens tak placering](./media/user-guide/tx-events/image51.png)    | **Utplacering av semafor-tak** (*tx_semaphore_ceiling_put*) |
-| ![Ikon för att skapa semafor](./media/user-guide/tx-events/image52.png)    | **Skapa semafor** (*tx_semaphore_create*) |
-| ![Ikon för borttagning av semafor](./media/user-guide/tx-events/image53.png)    | **Semafors borttagning** (*tx_semaphore_delete*) |
-| ![Ikon för Hämta semafor](./media/user-guide/tx-events/image54.png)    | **Hämta semafor** (*tx_semaphore_get*) |
-| ![Ikon för Hämta semafors information](./media/user-guide/tx-events/image55.png)    | **Hämta semafors information** (*tx_semaphore_info_get*) |
-| ![Ikon för Hämta semafor-prestanda information](./media/user-guide/tx-events/image56.png)    | **Information om semafor-prestanda** (*tx_semaphroe_performance_info_get*) |
-| ![Ikon för Hämta semafor-system prestanda information](./media/user-guide/tx-events/image57.png)    | **Prestanda information om semafor-systemet get** (*tx_semaphore_performance_system_info_get*) |
-| ![Ikon för semafor-prioritet](./media/user-guide/tx-events/image58.png)    | **Semafor-prioritet** (*tx_semaphore_prioritize*) |
-| ![Ikon för semafor-placering](./media/user-guide/tx-events/image59.png)    | **Semafor-placering** (*tx_semaphore_put*) |
-| ![Varnings ikon för semafor-placering](./media/user-guide/tx-events/image60.png)    | **Meddelande om semafor-placering** (*tx_semaphore_put_notify*) |
-| ![Ikon för tråd skapande](./media/user-guide/tx-events/image61.png)    | **Skapa tråd** (*tx_thread_create*) |
-| ![Ikon för tråd borttagning](./media/user-guide/tx-events/image62.png)    | **Tråd borttagning** (*tx_thread_delete*) |
-| ![Aviserings ikon för tråds utträde/Entry](./media/user-guide/tx-events/image63.png)    | **Avisering om slut punkt/inmatning av tråd** (*tx_thread_entry_exit_notify*) |
-| ![Ikon för tråd identifiering](./media/user-guide/tx-events/image64.png)    | **Identifiera tråd** (*tx_thread_identify*) |
-| ![Ikon för Hämta tråd information](./media/user-guide/tx-events/image65.png)    | **Hämta tråd information** (*tx_thread_info_get*) |
-| ![Ikon för att hämta tråd prestanda information](./media/user-guide/tx-events/image66.png)    | **Hämta information om tråd prestanda information** (*tx_thread_performance_info_get*) |
-| ![Hämta ikon för tråd prestanda system information](./media/user-guide/tx-events/image67.png)    | **Tråd prestanda system information get** (*tx_thread_performance_system_info_get*) |
-| ![Ändra ikon för tråd avstängningen](./media/user-guide/tx-events/image68.png)    | **Avstängningen ändring av tråd** (*tx_thread_preemption_change*) |
-| ![Ändrings ikon för tråd prioritet](./media/user-guide/tx-events/image69.png)    | **Ändring av tråd prioritet** (*tx_thread_priority_change*) |
-| ![Ikon för tråd som låser sig](./media/user-guide/tx-events/image70.png)    | **Tråd överkörning** (*tx_thread_relinquish*) |
-| ![Ikon för tråd återställning](./media/user-guide/tx-events/image71.png)    | **Återställning av tråd** (*tx_thread_reset*) |
-| ![* Trådens återställnings ikon](./media/user-guide/tx-events/image72.png)    | **Tråd återupptagning** (**tx_thread_resume*) |
-| ![Ikon för trådens ström spar läge](./media/user-guide/tx-events/image73.png)    | **Ström spar läge för tråd** (*tx_thread_sleep*) * |
-| ![Aviserings ikon för tråds tack](./media/user-guide/tx-events/image74.png)    | **Fel meddelande om tråds tack** (*tx_thread_stack_error_notify*) |
-| ![Ikon för att pausa tråd](./media/user-guide/tx-events/image75.png)    | **Paus av tråd** (*tx_thread_suspend*) |
-| ![Avsluta ikon för tråd](./media/user-guide/tx-events/image76.png)    | **Tråden avslutas** (*tx_thread_terminate*) |
-| ![Tråd tids segmentets ändrings ikon](./media/user-guide/tx-events/image77.png)    | **Trådens tids sektor ändring** (*tx_thread_time_slice_change*) |
-| ![Ikon för Avbryt väntan](./media/user-guide/tx-events/image78.png)    | **Avbryt väntan på avbrott** (*tx_thread_wait_abort*) |
-| ![Ikonen Hämta tid](./media/user-guide/tx-events/image79.png)    | **Hämtnings tid** (*tx_time_get*) |
-| ![Ikon för tids uppsättning](./media/user-guide/tx-events/image80.png)    | **Tids uppsättning** (*tx_time_set*) |
-| ![* Ikon för timer-aktivering](./media/user-guide/tx-events/image81.png)    | **Aktivera timer** (*tx_timer_activate*) |
-| ![Ändrings ikon för timer](./media/user-guide/tx-events/image82.png)    | **Ändring av timer** (*tx_timer_change*) |
-| ![Ikon för timer-skapande](./media/user-guide/tx-events/image83.png)    | **Skapa timer** (*tx_timer_create*) |
-| ![Ikonen timer-inaktivera](./media/user-guide/tx-events/image84.png)    | **Timer-inaktive rad** (*tx_timer_deactivate*) |
-| ![Ikon för timer-borttagning](./media/user-guide/tx-events/image85.png)    | **Borttagning av timer** (*tx_timer_delete*) |
-| ![Hämta ikon för timer-information](./media/user-guide/tx-events/image86.png)    | **Visa timer-information** (*tx_timer_info_get*) |
-| ![Ikon för hämtning av timer-prestanda information](./media/user-guide/tx-events/image87.png)    | **Hämta information om timer-prestanda** (*tx_timer_performance_info_get*) |
-| ![* Timer för prestanda system information Hämta ikon](./media/user-guide/tx-events/image88.png)    | **Timer Performance system information get** (*tx_timer_performance_system_info_get*) |
+| ![Ikonen Ta bort kö](./media/user-guide/tx-events/image41.png)    | **Ta bort kö** (*tx_queue_delete*) |
+| ![Ikon för att tömma köer](./media/user-guide/tx-events/image42.png)    | **Kö flush** (*tx_queue_flush*) |
+| ![Ikonen För att skicka i kö fram](./media/user-guide/tx-events/image43.png)    | **Queue front send** (*tx_queue_front_send*) |
+| ![Hämta ikon för köinformation](./media/user-guide/tx-events/image44.png)    | **Köinformation get** (*tx_queue_info_get*) |
+| ![Information om köprestanda – hämta ikon](./media/user-guide/tx-events/image45.png)    | **Information om köprestanda hämta** (*tx_queue_performance_info_get*) |
+| ![Information om prestandainformation för kösystem – hämta ikon](./media/user-guide/tx-events/image46.png)    | **Information om prestanda för kösystem får** (*tx_queue_performance_system_info_get*) |
+| ![Köprioriteringsikon](./media/user-guide/tx-events/image47.png)    | **Köprioritera** (*tx_queue_prioritize*) |
+| ![Ikon för att ta emot meddelande i kö](./media/user-guide/tx-events/image48.png)    | **Ta emot meddelande i kö** (*tx_queue_receive*) |
+| ![Ikon för att skicka meddelande i kö](./media/user-guide/tx-events/image49.png)    | **Skicka meddelande i kö** (*tx_queue_send*) |
+| ![Meddelandeikon för att skicka kö](./media/user-guide/tx-events/image50.png)    | **Meddelande om att skicka kö** (*tx_queue_send_notify*) |
+| ![Ikon för att sätta ett tak i Semaphore](./media/user-guide/tx-events/image51.png)    | **Semaphore ceiling put** (*tx_semaphore_ceiling_put*) |
+| ![Ikonen För att skapa Semaphore](./media/user-guide/tx-events/image52.png)    | **Semaphore create** (*tx_semaphore_create*) |
+| ![Ikonen Ta bort Semaphore](./media/user-guide/tx-events/image53.png)    | **Ta bort Semaphore** (*tx_semaphore_delete*) |
+| ![Ikonen Semaphore get](./media/user-guide/tx-events/image54.png)    | **Semaphore get** (*tx_semaphore_get*) |
+| ![Hämta information om Semaphore-ikonen](./media/user-guide/tx-events/image55.png)    | **Semaphore information get** (*tx_semaphore_info_get*) |
+| ![Hämta ikon för semaphore-prestandainformation](./media/user-guide/tx-events/image56.png)    | **Semaphore performance information get** (*tx_semaphroe_performance_info_get*) |
+| ![Information om semaphore-systemprestanda – hämta ikon](./media/user-guide/tx-events/image57.png)    | **Semaphore system performance information get** (*tx_semaphore_performance_system_info_get*) |
+| ![Ikonen Prioritera Semaphore](./media/user-guide/tx-events/image58.png)    | **Semaphore prioritize** (*tx_semaphore_prioritize*) |
+| ![Semaphore put-ikon](./media/user-guide/tx-events/image59.png)    | **Semaphore put** (*tx_semaphore_put*) |
+| ![Aviseringsikon för Semaphore put](./media/user-guide/tx-events/image60.png)    | **Semaphore put notify** (*tx_semaphore_put_notify*) |
+| ![Ikon för att skapa tråd](./media/user-guide/tx-events/image61.png)    | **Tråd skapa** (*tx_thread_create*) |
+| ![Ikonen Ta bort tråd](./media/user-guide/tx-events/image62.png)    | **Borttagning av tråd** (*tx_thread_delete*) |
+| ![Meddelandeikon för avslut/inmatning av tråd](./media/user-guide/tx-events/image63.png)    | **Avslut/inmatning av tråd** (*tx_thread_entry_exit_notify*) |
+| ![Ikon för tråd-identifiering](./media/user-guide/tx-events/image64.png)    | **Tråd-identifiera** (*tx_thread_identify*) |
+| ![Ikonen Hämta trådinformation](./media/user-guide/tx-events/image65.png)    | **Trådinformation get** (*tx_thread_info_get*) |
+| ![Ikonen Hämta trådprestandainformation](./media/user-guide/tx-events/image66.png)    | **Trådprestandainformation hämta** (*tx_thread_performance_info_get*) |
+| ![Ikonen Hämta information om trådprestandasystem](./media/user-guide/tx-events/image67.png)    | **Systeminformation för trådprestanda hämta** (*tx_thread_performance_system_info_get*) |
+| ![Ikon för ändring av trådförsening](./media/user-guide/tx-events/image68.png)    | **Ändring av trådförsening** (*tx_thread_preemption_change*) |
+| ![Ikon för ändring av trådprioritet](./media/user-guide/tx-events/image69.png)    | **Ändring av trådprioritet** (*tx_thread_priority_change*) |
+| ![Ikon för trådrelinering](./media/user-guide/tx-events/image70.png)    | **Trådrelinquish** *(tx_thread_relinquish)* |
+| ![Ikon för trådåterställning](./media/user-guide/tx-events/image71.png)    | **Trådåterställning** (*tx_thread_reset*) |
+| ![*Ikon för tråd återuppta](./media/user-guide/tx-events/image72.png)    | **Tråd-RESUME** (**tx_thread_resume*) |
+| ![Ikon för tråd strömsparläge](./media/user-guide/tx-events/image73.png)    | **Trådsparläge** (*tx_thread_sleep*)* |
+| ![Meddelandeikon för trådstacksfel](./media/user-guide/tx-events/image74.png)    | **Meddela om trådstacksfel** (*tx_thread_stack_error_notify*) |
+| ![Ikonen För att pausa trådar](./media/user-guide/tx-events/image75.png)    | **Tråd paus** (*tx_thread_suspend*) |
+| ![Ikonen Avsluta tråd](./media/user-guide/tx-events/image76.png)    | **Tråd avslutas** (*tx_thread_terminate*) |
+| ![Ikon för ändring av trådtidssegment](./media/user-guide/tx-events/image77.png)    | **Ändring av trådtidssegment** (*tx_thread_time_slice_change*) |
+| ![Ikon för väntande av tråd](./media/user-guide/tx-events/image78.png)    | **Trådvänte abort** (*tx_thread_wait_abort*) |
+| ![Ikonen För tids get](./media/user-guide/tx-events/image79.png)    | **Time get** (*tx_time_get*) |
+| ![Ikon för tidsuppsättning](./media/user-guide/tx-events/image80.png)    | **Tidsuppsättning** (*tx_time_set*) |
+| ![*Aktiveringsikon för timer](./media/user-guide/tx-events/image81.png)    | **Aktivera timer** (*tx_timer_activate*) |
+| ![Ikon för timerändring](./media/user-guide/tx-events/image82.png)    | **Timerändring** (*tx_timer_change*) |
+| ![Ikon för att skapa timer](./media/user-guide/tx-events/image83.png)    | **Skapa timer** (*tx_timer_create*) |
+| ![Inaktivera timerikon](./media/user-guide/tx-events/image84.png)    | **Timeraktivering** (*tx_timer_deactivate*) |
+| ![Borttagningsikon för timer](./media/user-guide/tx-events/image85.png)    | **Ta bort timer** (*tx_timer_delete*) |
+| ![Hämta ikon för timerinformation](./media/user-guide/tx-events/image86.png)    | **Timerinformation hämta** (*tx_timer_info_get*) |
+| ![Information om timerprestanda – hämta ikon](./media/user-guide/tx-events/image87.png)    | **Information om timerprestanda hämta** (*tx_timer_performance_info_get*) |
+| ![*Information om timerprestandasystem – hämta ikon](./media/user-guide/tx-events/image88.png)    | **Information om timerprestandasystem få** (*tx_timer_performance_system_info_get*) |
 | ![User-Defined Eventicon](./media/user-guide/tx-events/image0.png)    | **Användardefinierad händelse** (se kapitel 10)    |
 
-## <a name="event-descriptions"></a>Händelse beskrivningar
+## <a name="event-descriptions"></a>Händelsebeskrivningar
 
 ### <a name="internal-thread-resume"></a>Återuppta intern tråd
 
 #### <a name="internal-thread-resume"></a>Återuppta intern tråd
 
-**Ikonen** ![ Aktiverings ikon för intern tråd](./media/user-guide/tx-events/image1.png)
+**Ikon** ![ Ikon för internt tråd-CV](./media/user-guide/tx-events/image1.png)
 
 **Beskrivning**
 
-Den här händelsen representerar intern bearbetning i ThreadX som återupptar en tråd för körning. Om den angivna tråden är den högsta prioriteten och avstängningen-tröskelvärdet inte blockerar körningen kommer systemet att starta den nya färdiga tråden.
+Den här händelsen representerar den interna bearbetningen i ThreadX som återupptar en tråd för körning. Om den angivna tråden har högst prioritet och preemption-threshold inte blockerar körningen börjar systemet köra den nya tråden.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: visar en pekare till tråden som återupptas.
-- Info fält 2: föregående tillstånd för tråden som återupptas, enligt följande:
+- Informationsfält 1: Pekare till tråden som återupptas.
+- Informationsfält 2: Föregående tillstånd för tråden som återupptas, enligt följande:
 
-  |  Tråd tillstånd                     | Värde        |
+  |  Trådtillstånd                     | Värde        |
   |---------------------------------- | --------|
   |  TX_READY                         | 0       |
   |  TX_COMPLETED                     | 1       |
@@ -145,25 +145,25 @@ Den här händelsen representerar intern bearbetning i ThreadX som återupptar e
   |  TX_TCP_IP                        | 12      |
   |  TX_MUTEX_SUSP                    | 13      |
 
-- Info-fält 3: stack pekarens värde under anropet. 
-- Info fält 4: pekare till näst högsta prioritets tråd att köra.
+- Informationsfält 3: Stackpekarvärde under anropet. 
+- Informationsfält 4: Pekare till nästa tråd med näst högsta prioritet att köra.
 
-### <a name="internal-thread-suspend"></a>Inaktive ring av intern tråd
+### <a name="internal-thread-suspend"></a>Pausa intern tråd
 
-#### <a name="internal-thread-suspend"></a>Inaktive ring av intern tråd
+#### <a name="internal-thread-suspend"></a>Pausa intern tråd
 
-**Ikonen** ![ Inaktivera ikon för intern tråd](./media/user-guide/tx-events/image2.png)
+**Ikon** ![ Pausikon för intern tråd](./media/user-guide/tx-events/image2.png)
 
 **Beskrivning**
 
-Den här händelsen representerar intern bearbetning i ThreadX som pausar körningen av en tråd. Den näst högsta prioritets tråden som är klar för körning placeras i det fjärde informations fältet. Om det här värdet är NULL finns det ingen annan tråd klar för körning och systemet är inaktivt.
+Den här händelsen representerar den interna bearbetningen i ThreadX som pausar körningen av en tråd. Den näst högsta prioritetstråden som är redo för körning placeras i det fjärde informationsfältet. Om det här värdet är NULL finns det ingen annan tråd som är redo för körning och systemet är inaktivt.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar på tråden som pausas.
-- Informations fält 2: det nya tillståndet för tråden som pausas, enligt följande:
+- Informationsfält 1: Pekare till tråden som pausas.
+- Informationsfält 2: Nytt tillstånd för tråden som pausas enligt följande:
 
-  |  Tråd tillstånd                     | Värde        |
+  |  Trådtillstånd                     | Värde        |
   |---------------------------------- | --------|
   |  TX_COMPLETED                     | 1       |
   |  TX_TERMINATED                    | 2       |
@@ -177,1452 +177,1452 @@ Den här händelsen representerar intern bearbetning i ThreadX som pausar körni
   |  TX_TCP_IP                        | 12      |
   |  TX_MUTEX_SUSP                    | 13      |
 
-- Info-fält 3: stack pekarens värde under anropet. Info fält 4: pekare till näst högsta prioritets tråd att köra. Om värdet är NULL är systemet inaktivt.
+- Informationsfält 3: Stackpekarvärde under anropet. Informationsfält 4: Pekare till nästa tråd med näst högsta prioritet att köra. Om NULL är systemet inaktivt.
 
-### <a name="interrupt-service-routine-isr-enter"></a>Avbrotts service rutin (ISR)-retur 
+### <a name="interrupt-service-routine-isr-enter"></a>Avbryt tjänstrutin (ISR) ange 
 
 #### <a name="enter-isr"></a>Ange ISR 
 
-**Ikonen** ![ Ange en R-ikon](./media/user-guide/tx-events/image3.png)
+**Ikon** ![ Ange I S R-ikon](./media/user-guide/tx-events/image3.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att ange en avbrotts tjänst rutin (ISR) i programmet. Interrupt Service Routine körningen fortsätter tills den ISR-avsluts händelse äger rum.
+Den här händelsen representerar att en ISR (Interrupt Service Routine) matas in i programmet. Avbrottstjänstens rutinkörning fortsätter tills ISR-avslutshändelsen äger rum.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: stack pekarens värde under anropet.
-- Info fält 2: Programdefinierat ISR-nummer (valfritt).
-- Informations fält 3: kapslat avbrotts antal.
-- Info fält 4: intern avstängningen-inaktivera flagga.
+- Informationsfält 1: Stackpekarvärde under anropet.
+- Informationsfält 2: Programdefinierat ISR-nummer (valfritt).
+- Informationsfält 3: Kapslat avbrottsantal.
+- Informationsfält 4: Inaktiveringsflagga för intern avstängning.
 
-### <a name="interrupt-service-routine-isr-exit"></a>Avbryta service rutin (ISR)-avsluta 
+### <a name="interrupt-service-routine-isr-exit"></a>Avbryta ISR-avslut (Service Routine) 
 
 #### <a name="exit-isr"></a>Avsluta ISR
 
-**Ikonen** ![ Avsluta I S-ikon](./media/user-guide/tx-events/image4.png)
+**Ikon** ![ Ikonen Avsluta I SR](./media/user-guide/tx-events/image4.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att avsluta en avbrotts tjänst rutin (ISR) i programmet.
+Den här händelsen representerar att en ISR (Interrupt Service Routine) avslutas i programmet.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: stack pekarens värde under anropet.
-- Info fält 2: Programdefinierat ISR-nummer (valfritt).
-- Informations fält 3: kapslat avbrotts antal.
-- Info fält 4: intern avstängningen-inaktivera flagga.
+- Informationsfält 1: Stackpekarvärde under anropet.
+- Informationsfält 2: Programdefinierat ISR-nummer (valfritt).
+- Informationsfält 3: Kapslat avbrottsantal.
+- Informationsfält 4: Inaktiveringsflagga för intern avstängning.
 
-### <a name="internal-time-slice"></a>Intern tid-sektor
+### <a name="internal-time-slice"></a>Intern tidssegment
 
-#### <a name="internal-time-slice"></a>Intern tid-sektor
+#### <a name="internal-time-slice"></a>Intern tidssegment
 
-**Ikonen** ![ Intern Time-slice-ikon](./media/user-guide/tx-events/image5.png)
+**Ikon** ![ Ikon för internt tidssegment](./media/user-guide/tx-events/image5.png)
 
 **Beskrivning**
 
-Den här händelsen representerar den interna bearbetningen i ThreadX som utför tids segments åtgärden. Nästa tråd av samma prioritet placeras i det första informations fältet. Om det här värdet är samma som den aktuella tråden utfördes ingen tid-sektor.
+Den här händelsen representerar den interna bearbetningen i ThreadX som utför åtgärden för ett tidssegment. Nästa tråd med samma prioritet placeras i det första informationsfältet. Om det här värdet är samma som den aktuella tråden utfördes ingen tidssegment.
 
-- Info fält 1: pekar mot nästa tråd som ska köras.
-- Informations fält 2: kapslat avbrotts antal.
-- Info-fält 3: intern avstängningen-inaktivera flagga.
-- Info-fält 4: stack pekarens värde under anropet.
+- Informationsfält 1: Pekare till nästa tråd som ska köras.
+- Informationsfält 2: Kapslat avbrottsantal.
+- Informationsfält 3: Inaktiveringsflagga för intern avstängning.
+- Informationsfält 4: Stackpekarvärde under anropet.
 
 ### <a name="running"></a>Körs
 
-#### <a name="running-in-context"></a>Körs i kontext
+#### <a name="running-in-context"></a>Köra i kontext
 
-**Ikonen** ![ Kör ikon](./media/user-guide/tx-events/image6.png)
+**Ikon** ![ Ikonen Körs](./media/user-guide/tx-events/image6.png)
 
 **Beskrivning**
 
-Den här händelsen representerar körning i en tråd kontext eller inaktivt system. Den används för att illustrera efterföljande ändringar i sammanhanget som ett resultat av ett avbrott.
+Den här händelsen representerar körning i en trådkontext eller ett inaktivt system. Den används för att illustrera efterföljande ändringar i kontexten som ett resultat av ett avbrott.
 
-**Informations fält**
-- Informations fält 1: används inte.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+**Informationsfält**
+- Informationsfält 1: Används inte.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="block-allocate"></a>Blockera tilldelning 
+### <a name="block-allocate"></a>Blockera allokera 
 
 #### <a name="tx_block_allocate"></a>tx_block_allocate
 
-**Ikonen** ![ Ikonen blockera tilldelning](./media/user-guide/tx-events/image7.png)
+**Ikon** ![ Ikonen Blockera allokera](./media/user-guide/tx-events/image7.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att allokera ett minnes block via tx_block_allocate. Om det lyckas returneras adressen för det tilldelade blocket i det andra informations fältet.
+Den här händelsen representerar allokering av ett minnesblock via tx_block_allocate. Om det lyckas returneras adressen till det allokerade blocket i det andra informationsfältet.
 
-**Informations fält**
-- Info fält 1: pekar mot motsvarande block-pool.
-- Info fält 2: visar en pekare till det minnes block som returnerades (om det lyckades).
-- Informations fält 3: vänte alternativet som angavs i tx_block_allocate-anropet.
-- Info fält 4: återstående tillgängliga block i poolen efter den här allokeringen.
+**Informationsfält**
+- Informationsfält 1: Pekare till motsvarande blockpool.
+- Informationsfält 2: Pekare till det minnesblock som returneras (om det lyckas).
+- Informationsfält 3: Väntealternativet som anges till tx_block_allocate anropet.
+- Informationsfält 4: Återstående tillgängliga block i poolen efter den här allokeringen.
 
-### <a name="block-pool-create"></a>Blockera skapande av pool
+### <a name="block-pool-create"></a>Skapa blockpool
 
 #### <a name="tx_block_pool_create"></a>tx_block_pool_create
 
-**Ikonen** ![ Skapa ikon för att blockera pool](./media/user-guide/tx-events/image8.png)
+**Ikon** ![ Ikonen Skapa poolblock](./media/user-guide/tx-events/image8.png)
 
 **Beskrivning**
 
-Den här händelsen representerar skapandet av en Memory block-pool via tx_block_pool_create.
+Den här händelsen representerar skapandet av en minnesblockpool via tx_block_pool_create.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekar mot motsvarande block pool kontroll block.
-- Info fält 2: pekar på poolens start minne.
-- Informations fält 3: antalet block i poolen. Info fält 4: storleken på varje block i poolen i byte.
+- Informationsfält 1: Pekare till motsvarande blockpoolskontrollblock.
+- Informationsfält 2: Pekare till poolens startminnesområde.
+- Informationsfält 3: Antalet block i poolen. Informationsfält 4: Storleken på varje block i poolen i byte.
 
 ### <a name="block-pool-delete"></a>Blockera borttagning av pool
 
 #### <a name="tx_block_pool_delete"></a>tx_block_pool_delete
 
-**Ikonen** ![ Ta bort ikon för borttagning av pool](./media/user-guide/tx-events/image9.png)
+**Ikon** ![ Ikonen Blockera borttagning av pool](./media/user-guide/tx-events/image9.png)
 
 **Beskrivning**
 
-Den här händelsen representerar borttagning av en Memory block-pool via tx_block_pool_delete.
+Den här händelsen representerar borttagning av en minnesblockpool via tx_block_pool_delete.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekar mot kontroll block för block-pool.
-- Info-fält 2: stack pekarens värde under anropet.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till blockpoolens kontrollblock.
+- Informationsfält 2: Stack pekarvärde under anropet.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="block-pool-information-get"></a>Blockera information om poolen Hämta 
+### <a name="block-pool-information-get"></a>Hämta information om blockpooler 
 
 #### <a name="tx_block_pool_info_get"></a>tx_block_pool_info_get
 
-**Ikonen** ![ Hämta ikon för Hämta pool information](./media/user-guide/tx-events/image10.png)
+**Ikon** ![ Hämta-ikonen Blockera poolinformation](./media/user-guide/tx-events/image10.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att hämta information om en Memory block-pool via tx_block_pool_info_get.
+Den här händelsen representerar att hämta information om en minnesblockpool via tx_block_pool_info_get.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekar mot kontroll block för block-pool.
-- Info-fält 2: stack pekarens värde under anropet.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till blockpoolens kontrollblock.
+- Informationsfält 2: Stack pekarvärde under anropet.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="block-pool-performance-information-get"></a>Blockera prestanda information för pool
+### <a name="block-pool-performance-information-get"></a>Hämta information om blockpoolsprestanda
 
 #### <a name="tx_block_pool_performance_info_get"></a>tx_block_pool_performance_info_get
 
-**Ikonen** ![ Hämta ikon för att blockera poolens prestanda information](./media/user-guide/tx-events/image11.png)
+**Ikon** ![ Hämta ikon för att blockera poolprestanda](./media/user-guide/tx-events/image11.png)
 
 **Beskrivning**
 
-Den här händelsen representerar prestanda information om en Memory block-pool via tx_block_pool_performance_info_get.
+Den här händelsen representerar att få prestandainformation om en minnesblockpool via tx_block_pool_performance_info_get.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekar mot kontroll block för block-pool.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till blockpoolens kontrollblock.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="block-pool-performance-system-information-get"></a>Blockera prestanda system information för poolen Hämta
+### <a name="block-pool-performance-system-information-get"></a>Block Pool Performance Systeminformation Get
 
 #### <a name="tx_block_pool_performance_system_info_get"></a>tx_block_pool_performance_system_info_get
 
-**Ikonen** ![ Blockera pool prestanda system information get-ikon](./media/user-guide/tx-events/image12.png)
+**Ikon** ![ Hämta ikon för blockpoolsprestandasystem](./media/user-guide/tx-events/image12.png)
 
 **Beskrivning**
 
-Den här händelsen representerar prestanda information om alla minnes Blocks pooler via tx_block_pool_performance_system_info_get.
+Den här händelsen representerar att få prestandainformation om alla minnesblockpooler via tx_block_pool_performance_system_info_get.
 
-**Informations fält**
-- Informations fält 1: används inte.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+**Informationsfält**
+- Informationsfält 1: Används inte.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="block-pool-prioritize"></a>Prioritera block pool
+### <a name="block-pool-prioritize"></a>Prioritera blockpool
 
 #### <a name="tx_block_pool_prioritize"></a>tx_block_pool_prioritize
 
-**Ikonen** ![ Prioritets ikon för att blockera pool](./media/user-guide/tx-events/image13.png)
+**Ikon** ![ Prioritetsikonen Blockera pool](./media/user-guide/tx-events/image13.png)
 
 **Beskrivning**
 
-Den här händelsen representerar placeringen av den HighestPriority suspenderade tråden längst fram i listan över blockerade SUS-listor. Om detta görs innan du anropar tx_block_release, tar den inaktiverade tråden med högsta prioritet det släppta blocket.
+Den här händelsen representerar att placera den högstprioritetsavstängda tråden framför blockeringslistan för blockpoolen. Om detta görs innan du anropar tx_block_release tråd med högst prioritet inaktiveras det utgivna blocket.
 
-**Informations fält**
-- Informations fält 1: pekare för minnes Blocks-pool.
-- Informations fält 2: antal pausade trådar i den här block poolen.
-- Info-fält 3: stack pekare vid tidpunkten för anropet.
-- Info fält 4: används inte.
+**Informationsfält**
+- Informationsfält 1: Pekare för minnesblockpool.
+- Informationsfält 2: Antal trådar som pausas i den här blockpoolen.
+- Informationsfält 3: Stack pekare vid tidpunkten för anropet.
+- Informationsfält 4: Används inte.
 
 ### <a name="block-release"></a>Blockera version 
 
 #### <a name="tx_block_release"></a>tx_block_release
 
-**Ikonen** ![ Ikonen blockera version](./media/user-guide/tx-events/image14.png)
+**Ikon** ![ Ikonen Blockera version](./media/user-guide/tx-events/image14.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att släppa ett tidigare allokerat block tillbaka till block-poolen.
+Den här händelsen representerar lanserar ett tidigare allokerat block tillbaka till blockpoolen.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare för minnes Blocks-pool.
-- Info fält 2: pekare för att blockera till version.
-- Informations fält 3: antal pausade trådar i den här block poolen.
-- Info-fält 4: stack pekare vid tidpunkten för anropet.
+- Informationsfält 1: Pekare för minnesblockpool.
+- Informationsfält 2: Pekare för att blockera till lansering.
+- Informationsfält 3: Antal trådar som pausas i den här blockpoolen.
+- Informationsfält 4: Stack pekare vid tidpunkten för anropet.
 
 ### <a name="byte-allocate"></a>Allokera byte 
 
 #### <a name="tx_byte_allocate"></a>tx_byte_allocate
 
-**Ikonen** ![ Ikon för byte tilldelning](./media/user-guide/tx-events/image15.png)
+**Ikon** ![ Ikon för bytealaler](./media/user-guide/tx-events/image15.png)
 
 **Beskrivning**
 
-Den här händelsen representerar allokering av minne via tx_byte_allocate. Om det lyckas returneras adressen för det tilldelade minnet i det andra informations fältet.
+Den här händelsen representerar allokering av minne via tx_byte_allocate. Om det lyckas returneras adressen till det allokerade minnet i det andra informationsfältet.
 
-**Informations fält**
-- Info fält 1: pekar mot motsvarande byte-pool.
-- Info fält 2: pekar på det returnerade minnet (om det lyckades).
-- Informations fält 3: antal byte som har begärts. Info fält 4: vänte alternativet som angavs för tx_byte_allocate-anropet.
+**Informationsfält**
+- Informationsfält 1: Pekare till motsvarande bytepool.
+- Informationsfält 2: Pekare till det returnerade minnet (om det lyckas).
+- Informationsfält 3: Antal byte som begärts. Informationsfält 4: Väntealternativet som anges till tx_byte_allocate anropet.
 
-### <a name="byte-pool-create"></a>Skapa byte pool
+### <a name="byte-pool-create"></a>Skapa bytepool
 
 #### <a name="tx_byte_pool_create"></a>tx_byte_pool_create
 
-**Ikonen** ![ Ikon för att skapa byte pool](./media/user-guide/tx-events/image16.png)
+**Ikon** ![ Ikon för att skapa bytepool](./media/user-guide/tx-events/image16.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att skapa en byte-pool via tx_byte_pool_create.
+Den här händelsen representerar skapandet av en bytepool via tx_byte_pool_create.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot motsvarande byte-pool.
-- Info fält 2: pekar mot början av minnes området. Informations fält 3: antal byte i byte-poolen.
-- Info-fält 4: stack pekaren vid tidpunkten för anropet.
+- Informationsfält 1: Pekare till motsvarande bytepool.
+- Informationsfält 2: Pekare till början av minnesområdet. Informationsfält 3: Antal byte i bytepoolen.
+- Informationsfält 4: Stackpekaren vid tidpunkten för anropet.
 
-### <a name="byte-pool-delete"></a>Borttagning av byte pool 
+### <a name="byte-pool-delete"></a>Ta bort bytepool 
 
 #### <a name="tx_byte_pool_delete"></a>tx_byte_pool_delete
 
-**Ikonen** ![ Borttagnings ikon för byte pool](./media/user-guide/tx-events/image17.png)
+**Ikon** ![ Ikonen Ta bort bytepool](./media/user-guide/tx-events/image17.png)
 
 **Beskrivning**
 
-Den här händelsen representerar borttagning av en byte-pool via tx_byte_pool_delete.
+Den här händelsen representerar borttagning av en bytepool via tx_byte_pool_delete.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot motsvarande byte-pool.
-- Info fält 2: stack pekaren vid tidpunkten för anropet.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till motsvarande bytepool.
+- Informationsfält 2: Stackpekaren vid tidpunkten för anropet.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="byte-pool-information-get"></a>Hämta information om byte pool
+### <a name="byte-pool-information-get"></a>Hämta information om bytepool
 
 #### <a name="tx_byte_pool_info_get"></a>tx_byte_pool_info_get
 
-**Ikonen** ![ Ikon för hämta information om byte pool](./media/user-guide/tx-events/image18.png)
+**Ikon** ![ Hämta ikon för bytepoolsinformation](./media/user-guide/tx-events/image18.png)
 
 **Beskrivning**
 
-Den här händelsen representerar hämtning av information om byte-pool via tx_byte_pool_info_get.
+Den här händelsen representerar hämtning av information om bytepoolen via tx_byte_pool_info_get.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot motsvarande byte-pool.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till motsvarande bytepool.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="byte-pool-performance-info-get"></a>Hämta prestanda information för byte-pool 
+### <a name="byte-pool-performance-info-get"></a>Information om bytepoolsprestanda hämta 
 
 #### <a name="tx_byte_pool_info_get"></a>tx_byte_pool_info_get
 
-**Ikonen** ![ Ikon för hämta prestanda information för byte-pool](./media/user-guide/tx-events/image19.png)
+**Ikon** ![ Hämta ikon för prestandainformation för bytepool](./media/user-guide/tx-events/image19.png)
 
 **Beskrivning**
 
-Den här händelsen representerar hämtning av prestanda information för byte-pool via tx_byte_pool_performance_info_get.
+Den här händelsen representerar hämtning av prestandainformation för bytepoolen via tx_byte_pool_performance_info_get.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot motsvarande byte-pool.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till motsvarande bytepool.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="byte-pool-performance-system-info-get"></a>Hämta prestanda system information för byte-pool 
+### <a name="byte-pool-performance-system-info-get"></a>Hämta information om prestandasystem för bytepooler 
 
 #### <a name="tx_byte_pool_performance_system_info_get"></a>tx_byte_pool_performance_system_info_get
 
-**Ikonen** ![ Hämta ikon för prestanda system information för byte pool](./media/user-guide/tx-events/image20.png)
+**Ikon** ![ Ikon för systeminformation om bytepoolsprestanda](./media/user-guide/tx-events/image20.png)
 
 **Beskrivning**
 
-Den här händelsen representerar hämtning av prestanda system information för byte-pool via tx_byte_pool_performance_system_info_get.
+Den här händelsen representerar hämtning av systeminformation om bytepoolsprestanda via tx_byte_pool_performance_system_info_get.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: används inte.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Används inte.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="byte-pool-prioritize"></a>Prioritet för byte pool
+### <a name="byte-pool-prioritize"></a>Prioritera bytepool
 
 #### <a name="tx_byte_pool_prioritize"></a>tx_byte_pool_prioritize
 
-**Ikonen** ![ Prioritets ikon för byte pool](./media/user-guide/tx-events/image21.png)
+**Ikon** ![ Prioritera ikon för bytepool](./media/user-guide/tx-events/image21.png)
 
 **Beskrivning**
 
-Den här händelsen representerar prioritering av byte-poolens SUS Pension-lista via tx_byte_pool_prioritize.
+Den här händelsen representerar prioritering av bytepoolens stängningslista via tx_byte_pool_prioritize.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekare till motsvarande byte-pool.
-- Informations fält 2: antal trådar som för närvarande har pausats i byte-poolen.
-- Info-fält 3: stack pekare vid tidpunkten för anropet.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till motsvarande bytepool.
+- Informationsfält 2: Antalet trådar som för närvarande pausas i bytepoolen.
+- Informationsfält 3: Stack pekare vid tidpunkten för anropet.
+- Informationsfält 4: Används inte.
 
 ### <a name="byte-release"></a>Byte-version
 
 #### <a name="tx_byte_release"></a>tx_byte_release
 
-**Ikonen** ![ Ikon för byte-version](./media/user-guide/tx-events/image22.png)
+**Ikon** ![ Ikon för byte-version](./media/user-guide/tx-events/image22.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att släppa ett minnes block som tilldelas från en byte-pool via tx_byte_release.
+Den här händelsen representerar att frigöra ett minnesblock som allokerats från en bytepool via tx_byte_release.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekare till motsvarande byte-pool.
-- Info fält 2: pekare till tidigare allokerat minne i byte-poolen.
-- Informations fält 3: antal pausade trådar i den här byte-poolen.
-- Info fält 4: antal tillgängliga byte i minnet.
+- Informationsfält 1: Pekare till motsvarande bytepool.
+- Informationsfält 2: Pekare till tidigare allokerat bytepoolminne.
+- Informationsfält 3: Antal trådar som pausas på den här bytepoolen.
+- Informationsfält 4: Antal tillgängliga byte minne.
 
-### <a name="event-flags-create"></a>Händelse flaggor skapa 
+### <a name="event-flags-create"></a>Skapa händelseflaggor 
 
 #### <a name="tx_event_flags_create"></a>tx_event_flags_create
 
-**Ikonen** ![ Ikonen Skapa händelse flaggor](./media/user-guide/tx-events/image23.png)
+**Ikon** ![ Ikonen Skapa händelseflaggor](./media/user-guide/tx-events/image23.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att skapa en ny grupp med händelse flaggor via tx_event_flags_create.
+Den här händelsen representerar skapandet av en ny händelseflaggasgrupp via tx_event_flags_create.
 
-**Informations fält** 
-- Info fält 1: pekar på händelse flaggor grupp kontroll block.
-- Info fält 2: stack pekare vid tidpunkten för anropet.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+**Informationsfält** 
+- Informationsfält 1: Pekare till händelseflaggor gruppkontrollblock.
+- Informationsfält 2: Stack pekare vid tidpunkten för anropet.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="event-flags-delete"></a>Ta bort händelse flaggor 
+### <a name="event-flags-delete"></a>Ta bort händelseflaggor 
 
 #### <a name="tx_event_flags_delete"></a>tx_event_flags_delete
 
-**Ikonen** ![ Borttagnings ikon för händelse flaggor](./media/user-guide/tx-events/image24.png)
+**Ikon** ![ Ikonen Ta bort händelseflaggor](./media/user-guide/tx-events/image24.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att ta bort en grupp med händelse flaggor via tx_event_flags_delete.
+Den här händelsen representerar borttagning av en händelseflaggor via tx_event_flags_delete.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Info fält 1: pekar på händelse flaggor grupp.
-- Info fält 2: stack pekare vid tidpunkten för anropet.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till händelseflaggor.
+- Informationsfält 2: Stack pekare vid tidpunkten för anropet.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="event-flags-get"></a>Händelse flaggor Hämta 
+### <a name="event-flags-get"></a>Event Flags Get 
 
 #### <a name="tx_event_flags_get"></a>tx_event_flags_get
 
-**Ikonen** ![ Ikon för händelse flaggor gt](./media/user-guide/tx-events/image25.png)
+**Ikon** ![ Ikon för händelseflaggor gt](./media/user-guide/tx-events/image25.png)
 
 **Beskrivning**
 
-Den här händelsen representerar hämtning av händelse flaggor från en befintlig grupp för händelse flaggor via tx_event_flags_get.
+Den här händelsen representerar hämtning av händelseflaggor från en befintlig händelseflaggor via tx_event_flags_get.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar på händelse flaggor grupp.
-- Informations fält 2: händelse flaggor begärs.
-- Info-fält 3: händelse flaggor som för närvarande anges i gruppen.
-- Info Field 4: alternativet som begärdes för händelse flaggorna get.
+- Informationsfält 1: Pekare till händelseflaggor.
+- Informationsfält 2: Händelseflaggor begärda.
+- Informationsfält 3: Händelseflaggor som för närvarande anges i gruppen.
+- Informationsfält 4: Alternativet som begärdes för händelseflaggorna hämtar.
 
-### <a name="event-flags-information-get"></a>Händelse flaggor information Hämta
+### <a name="event-flags-information-get"></a>Information om händelseflaggor hämta
 
 #### <a name="tx_event_flags_info_get"></a>tx_event_flags_info_get
 
-**Ikonen** ![ Ikonen Hämta information om händelse flaggor](./media/user-guide/tx-events/image26.png)
+**Ikon** ![ Information om händelseflaggor – hämta ikon](./media/user-guide/tx-events/image26.png)
 
 **Beskrivning**
 
-Den här händelsen representerar hämtning av information om en befintlig händelse flaggor grupp via tx_event_flags_info_get.
+Den här händelsen representerar hämtning av information om en befintlig händelseflaggasgrupp via tx_event_flags_info_get.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar på händelse flaggor grupp.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till händelseflaggor.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="event-flags-performance-information-get"></a>Händelse flaggor prestanda information Hämta 
+### <a name="event-flags-performance-information-get"></a>Prestandainformation för händelseflaggor hämta 
 
 #### <a name="tx_event_flags_performance_info_get"></a>tx_event_flags_performance_info_get
 
-**Ikonen** ![ Händelse flaggor prestanda information Hämta ikon](./media/user-guide/tx-events/image27.png)
+**Ikon** ![ Ikonen Hämta prestandainformation för händelseflaggor](./media/user-guide/tx-events/image27.png)
 
 **Beskrivning**
 
-Den här händelsen representerar hämtning av prestanda information om en befintlig händelse flaggor grupp via tx_event_flags_performance_info_get.
+Den här händelsen representerar hämtning av prestandainformation om en befintlig händelseflaggor via tx_event_flags_performance_info_get.
 
-**Informations fält** 
-- Info fält 1: pekar på händelse flaggor grupp.
-- Informations fält 2: används inte
-- Informations fält 3: används inte
-- Info fält 4: används inte
+**Informationsfält** 
+- Informationsfält 1: Pekare till händelseflaggor.
+- Informationsfält 2: Används inte
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
-### <a name="event-flags-performance-system-info-get"></a>Händelse flaggor prestanda system information get
+### <a name="event-flags-performance-system-info-get"></a>Event Flags Performance System Info Get
 
 #### <a name="tx_event_flags_performance_system_info_get"></a>tx_event_flags_performance_system_info_get
 
-**Ikonen** ![ Händelse flaggor prestanda system information Hämta ikon](./media/user-guide/tx-events/image28.png)
+**Ikon** ![ Ikonen Hämta information om prestandasystem för händelseflaggor](./media/user-guide/tx-events/image28.png)
 
 **Beskrivning**
 
-Den här händelsen representerar hämtning av prestanda information om en befintlig händelse flaggor grupp via tx_event_flags_performance_system_info_get.
+Den här händelsen representerar hämtning av prestandainformation om en befintlig händelseflaggor via tx_event_flags_performance_system_info_get.
 
-**Informations fält**
-- Informations fält 1: används inte.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+**Informationsfält**
+- Informationsfält 1: Används inte.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="event-flags-set"></a>Angivna händelse flaggor 
+### <a name="event-flags-set"></a>Ange händelseflaggor 
 
 #### <a name="tx_event_flags_set"></a>tx_event_flags_set
 
-**Ikonen** ![ Ikonen händelse flaggor uppsättning](./media/user-guide/tx-events/image29.png)
+**Ikon** ![ Ikon för uppsättning av händelseflaggor](./media/user-guide/tx-events/image29.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att ange (eller avmarkera) händelse flaggor i en befintlig grupp för händelse flaggor via tx_event_flags_set.
+Den här händelsen representerar flaggor för inställning (eller rensning) i en befintlig händelseflaggor via tx_event_flags_set.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar på händelse flaggor grupp.
-- Info-fält 2: händelse flaggor som ska anges (eller rensas).
-- Informations fält 3: och eller eller alternativ för händelse flagga.
-- Info fält 4: antal pausade trådar i händelse flaggas gruppen.
+- Informationsfält 1: Pekare till händelseflaggor.
+- Informationsfält 2: Händelseflaggor som ska anges (eller rensas).
+- Informationsfält 3: Alternativet AND eller OR event flag.
+- Informationsfält 4: Antal trådar som pausas i händelseflaggan.
 
-### <a name="event-flags-set-notify"></a>Meddelande om inställd händelse flaggor
+### <a name="event-flags-set-notify"></a>Meddelande om händelseflaggor
 
 #### <a name="tx_event_flags_set_notify"></a>tx_event_flags_set_notify
 
-**Ikonen** ![ Händelse flaggor ange aviserings ikon](./media/user-guide/tx-events/image30.png)
+**Ikon** ![ Händelseflaggor ange av meddela-ikon](./media/user-guide/tx-events/image30.png)
 
 **Beskrivning**
 
-Den här händelsen representerar registrering av ett meddelande återanrop för en händelse flagga som har åtgärd ATS i en befintlig grupp för händelse flaggor via tx_event_flags_set_notify.
+Den här händelsen representerar registrering av ett återanrop av meddelanden för en åtgärd för händelseflaggan i en befintlig händelseflaggor via tx_event_flags_set_notify.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar på händelse flaggor grupp.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till händelseflaggor.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="interrupt-control"></a>Avbrotts kontroll 
+### <a name="interrupt-control"></a>Avbrottskontroll 
 
 #### <a name="tx_interrupt_control"></a>tx_interrupt_control
 
-**Ikonen** ![ Avbrotts kontroll ikon](./media/user-guide/tx-events/image31.png)
+**Ikon** ![ Ikon för avbrottskontroll](./media/user-guide/tx-events/image31.png)
 
 **Beskrivning**
 
-Den här händelsen representerar ändring av position för avbrotts utelåsning via tx_interrupt_control.
+Den här händelsen representerar ändring av processorns avbrottslåsningsstatus via tx_interrupt_control.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: nytt avbrotts position.
-- Info fält 2: stack pekare vid tidpunkten för anropet.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Ny avbrottsstatus.
+- Informationsfält 2: Stack pekare vid tidpunkten för anropet.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="mutex-create"></a>Skapa mutex 
+### <a name="mutex-create"></a>Mutex–skapa 
 
 #### <a name="tx_mutex_create"></a>tx_mutex_create
 
-**Ikonen** ![ Ikon för mutex-skapande](./media/user-guide/tx-events/image32.png)
+**Ikon** ![ Ikon för att skapa Mutex](./media/user-guide/tx-events/image32.png)
 
 **Beskrivning**
 
 Den här händelsen representerar skapandet av en mutex via tx_mutex_create.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot mutex-kontroll block.
-- Informations fält 2: alternativet prioritera arv
+- Informationsfält 1: Pekare till mutex-kontrollblock.
+- Informationsfält 2: Alternativ för prioritetsarv
 - (TX_INHERIT eller TX_NO_INHERIT).
-- Info-fält 3: stack pekare vid tidpunkten för anropet.
-- Info fält 4: används inte.
+- Informationsfält 3: Stack pekare vid tidpunkten för anropet.
+- Informationsfält 4: Används inte.
 
-### <a name="mutex-delete"></a>Ta bort mutex 
+### <a name="mutex-delete"></a>Mutex Delete 
 
 #### <a name="tx_mutex_delete"></a>tx_mutex_delete
 
-**Ikonen** ![ Ikon för mutex-borttagning](./media/user-guide/tx-events/image33.png)
+**Ikon** ![ Ta bort mutex-ikon](./media/user-guide/tx-events/image33.png)
 
 **Beskrivning**
 
 Den här händelsen representerar borttagning av en mutex via tx_mutex_delete.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Info fält 1: pekar mot mutex.
-- Info fält 2: stack pekare vid tidpunkten för anropet.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till mutex.
+- Informationsfält 2: Stack pekare vid tidpunkten för anropet.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="mutex-get"></a>Hämta mutex 
+### <a name="mutex-get"></a>Mutex Get 
 
 #### <a name="tx_mutex_get"></a>tx_mutex_get
 
-**Ikonen** ![ Ikon för att hämta mutex](./media/user-guide/tx-events/image34.png)
+**Ikon** ![ Mutex-hämta-ikon](./media/user-guide/tx-events/image34.png)
 
 **Beskrivning**
 
-Den här händelsen representerar hämtning av en mutex via tx_mutex_get.
+Den här händelsen representerar att du får en mutex via tx_mutex_get.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot mutex.
-- Informations fält 2: vänte alternativet som angavs för tx_mutex_get-anropet.
-- Informations fält 3: en pekare till tråd som äger mutex (NULL betyder att mutex inte ägs).
-- Info fält 4: antal gånger som den ägande tråden har anropat tx_mutex_get.
+- Informationsfält 1: Pekare till mutex.
+- Informationsfält 2: Väntealternativet som anges till tx_mutex_get anropet.
+- Informationsfält 3: Pekare till tråd som äger mutex (NULL antyder att mutex inte ägs).
+- Informationsfält 4: Antal gånger som den äger tråden har anropat tx_mutex_get.
 
-### <a name="mutex-information-get"></a>Hämtning av mutex-information
+### <a name="mutex-information-get"></a>Mutex-information Hämta
 
 #### <a name="tx_mutex_info_get"></a>tx_mutex_info_get
 
-**Ikonen** ![ Get-ikon för mutex information](./media/user-guide/tx-events/image35.png)
+**Ikon** ![ Ikon för att hämta Mutex-information](./media/user-guide/tx-events/image35.png)
 
 **Beskrivning**
 
 Den här händelsen representerar hämtning av mutex-information via tx_mutex_info_get.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot mutex.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till mutex.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="mutex-performance-information-get"></a>Information om mutex-prestanda 
+### <a name="mutex-performance-information-get"></a>Information om Mutex-prestanda hämta 
 
 #### <a name="tx_mutex_performance_info_get"></a>tx_mutex_performance_info_get
 
-**Ikonen** ![ Ikon för hämta information om mutex-prestanda](./media/user-guide/tx-events/image36.png)
+**Ikon** ![ Information om Mutex-prestanda – hämta ikon](./media/user-guide/tx-events/image36.png)
 
 **Beskrivning**
 
-Den här händelsen representerar hämtning av information om mutex-prestanda via tx_mutex_performance_info_get.
+Den här händelsen representerar hämtning av mutex-prestandainformation via tx_mutex_performance_info_get.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot mutex.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till mutex.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="mutex-performance-system-info-get"></a>Information om att hämta mutex-prestanda
+### <a name="mutex-performance-system-info-get"></a>Information om Mutex-prestandasystem – Hämta
 
 #### <a name="tx_mutex_performance_system_info_get"></a>tx_mutex_performance_system_info_get
 
-**Ikonen** ![ Mutex Performance system information get-ikon](./media/user-guide/tx-events/image37.png)
+**Ikon** ![ Ikon för att hämta information om Mutex-prestandasystem](./media/user-guide/tx-events/image37.png)
 
 **Beskrivning**
 
-Den här händelsen representerar hämtning av information om mutex-systemets prestanda via tx_mutex_performance_system_info_get.
+Den här händelsen representerar hämtning av mutex-systemprestandainformation via tx_mutex_performance_system_info_get.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: används inte.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Används inte.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="mutex-prioritize"></a>Mutex-prioritering 
+### <a name="mutex-prioritize"></a>Mutex Prioritize 
 
 #### <a name="tx_mutex_prioritize"></a>tx_mutex_prioritize
 
-**Ikonen** ![ Ikon för mutex-prioritet](./media/user-guide/tx-events/image38.png)
+**Ikon** ![ Ikonen För att prioritera Mutex](./media/user-guide/tx-events/image38.png)
 
 **Beskrivning**
 
-Den här händelsen representerar prioritering av mutexens SUS Pension-lista via tx_mutex_prioritize.
+Den här händelsen representerar prioritering av mutex-stängningslistan via tx_mutex_prioritize.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekare till motsvarande mutex.
-- Informations fält 2: antal trådar som för närvarande har pausats på mutex.
-- Info-fält 3: stack pekare vid tidpunkten för anropet.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till motsvarande mutex.
+- Informationsfält 2: Antalet trådar som för närvarande pausas på mutex.
+- Informationsfält 3: Stackpekare vid anrop.
+- Informationsfält 4: Används inte.
 
-### <a name="mutex-put"></a>Mutex-placering 
+### <a name="mutex-put"></a>Mutex Put 
 
 #### <a name="tx_mutex_put"></a>tx_mutex_put
 
-**Ikonen** ![ Ikon för mutex-placering](./media/user-guide/tx-events/image39.png)
+**Ikon** ![ Mutex-put-ikon](./media/user-guide/tx-events/image39.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att släppa en tidigare ägd mutex via tx_mutex_put.
+Den här händelsen representerar lanserar en tidigare ägd mutex via tx_mutex_put.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekare till motsvarande mutex.
-- Info fält 2: en pekare på en tråd som äger mutex.
-- Informations fält 3: antal utestående mutex get-begäranden.
-- Info-fält 4: stack pekare vid tidpunkten för anropet.
+- Informationsfält 1: Pekare till motsvarande mutex.
+- Informationsfält 2: Pekare av tråden som äger mutex.
+- Informationsfält 3: Antal utestående mutex get-begäranden.
+- Informationsfält 4: Stackpekare vid anrop.
 
 ### <a name="queue-create"></a>Skapa kö 
 
 #### <a name="tx_queue_create"></a>tx_queue_create
 
-**Ikonen** ![ Ikon för att skapa kö](./media/user-guide/tx-events/image40.png)
+**Ikon** ![ Ikon för att skapa kö](./media/user-guide/tx-events/image40.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att skapa en meddelandekö via tx_queue_create.
+Den här händelsen representerar skapandet av en meddelandekö via tx_queue_create.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar på kontroll block för kö.
-- Info fält 2: meddelandets storlek – i termer av 32-bitars ord.
-- Info-fält 3: pekar till början av kös Memory Area.
-- Info-fält 4: antal byte i köns minnes område.
+- Informationsfält 1: Pekare till kökontrollblock.
+- Informationsfält 2: Meddelandestorlek – i termer av 32-bitars ord.
+- Informationsfält 3: Pekare för att starta köminnesområdet.
+- Informationsfält 4: Antal byte i köminnesområdet.
 
-### <a name="queue-delete"></a>Köa borttagning 
+### <a name="queue-delete"></a>Ta bort kö 
 
 #### <a name="tx_queue_delete"></a>tx_queue_delete
 
-**Ikonen** ![ Borttagnings ikon för kö](./media/user-guide/tx-events/image41.png)
+**Ikon** ![ Ikonen Ta bort kö](./media/user-guide/tx-events/image41.png)
 
 **Beskrivning**
 
 Den här händelsen representerar borttagning av en kö via tx_queue_delete.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekare till Queue.
-- Info fält 2: stack pekare vid tidpunkten för anropet.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till kö.
+- Informationsfält 2: Stackpekare vid anrop.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="queue-flush"></a>Köa rensning 
+### <a name="queue-flush"></a>Queue Flush 
 
 #### <a name="tx_queue_flush"></a>tx_queue_flush
 
-**Ikonen** ![ Ikon för köa tömning](./media/user-guide/tx-events/image42.png)
+**Ikon** ![ Ikon för att tömma köer](./media/user-guide/tx-events/image42.png)
 
 **Beskrivning**
 
-Den här händelsen representerar tömning (rensa allt innehåll i kön) i en kö via tx_queue_flush.
+Den här händelsen representerar tömning (rensa allt köinnehåll) i en kö via tx_queue_flush.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekare till Queue.
-- Info fält 2: stack pekare vid tidpunkten för anropet.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till kö.
+- Informationsfält 2: Stackpekare vid anrop.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="queue-front-send"></a>Skicka kö, klient 
+### <a name="queue-front-send"></a>Queue Front Send 
 
 #### <a name="tx_queue_front_send"></a>tx_queue_front_send
 
-**Ikonen** ![ Ikon för att skicka kön direkt](./media/user-guide/tx-events/image43.png)
+**Ikon** ![ Ikonen För att skicka i kö fram](./media/user-guide/tx-events/image43.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att skicka ett meddelande längst fram i kön via tx_queue_front_send.
+Den här händelsen representerar sändning av ett meddelande framför en kö via tx_queue_front_send.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekare till Queue.
-- Info fält 2: pekare till början av meddelandet.
-- Informations fält 3: vänte alternativ har angetts till
-- tx_queue_front_send-anrop.
-- Info fält 4: antal meddelanden som redan har placerats i kö.
+- Informationsfält 1: Pekare till kö.
+- Informationsfält 2: Pekare till meddelandestart.
+- Informationsfält 3: Väntealternativet har angetts till
+- tx_queue_front_send anropa.
+- Informationsfält 4: Antalet meddelanden som redan har förts i kontakt.
 
-### <a name="queue-information-get"></a>Hämta information om kön 
+### <a name="queue-information-get"></a>Hämta köinformation 
 
 #### <a name="tx_queue_info_get"></a>tx_queue_info_get
 
-**Ikonen** ![ Hämta ikon för köa information](./media/user-guide/tx-events/image44.png)
+**Ikon** ![ Hämta ikon för köinformation](./media/user-guide/tx-events/image44.png)
 
 **Beskrivning**
 
 Den här händelsen representerar att hämta information om en kö via tx_queue_info_get.
 
-**Informations fält** 
-- Info fält 1: pekare till Queue.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+**Informationsfält** 
+- Informationsfält 1: Pekare till kö.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="queue-performance-info-get"></a>Hämta prestanda information för kö 
+### <a name="queue-performance-info-get"></a>Information om köprestanda hämta 
 
 #### <a name="tx_queue_performance_info_get"></a>tx_queue_performance_info_get
 
-**Ikonen** ![ Hämta ikon för köns prestanda information](./media/user-guide/tx-events/image45.png)
+**Ikon** ![ Hämta ikon för information om köprestanda](./media/user-guide/tx-events/image45.png)
 
 **Beskrivning**
 
-Den här händelsen representerar prestanda information om en kö via tx_queue_performance_info_get.
+Den här händelsen representerar att hämta prestandainformation om en kö via tx_queue_performance_info_get.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Info fält 1: pekare till Queue.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till kö.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="queue-performance-system-info-get"></a>Hämta prestanda system information för kö 
+### <a name="queue-performance-system-info-get"></a>Information om köprestandasystem – Hämta 
 
 #### <a name="tx_queue_performance_system_info_get"></a>tx_queue_performance_system_info_get
 
-**Ikonen** ![ Hämta ikon för prestanda system information i kö](./media/user-guide/tx-events/image46.png)
+**Ikon** ![ Hämta ikon för systeminformation för köprestanda](./media/user-guide/tx-events/image46.png)
 
 **Beskrivning**
 
-Den här händelsen representerar system prestanda information om alla köer i systemet.
+Den här händelsen representerar att hämta systemprestandainformation om alla köer i systemet.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: används inte.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Används inte.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="queue-prioritize"></a>Prioritet för kö 
+### <a name="queue-prioritize"></a>Köprioritera 
 
 #### <a name="tx_queue_prioritize"></a>tx_queue_prioritize
 
-**Ikonen** ![ Ikon för köa prioritet](./media/user-guide/tx-events/image47.png)
+**Ikon** ![ Köprioriteringsikon](./media/user-guide/tx-events/image47.png)
 
 **Beskrivning**
 
-Den här händelsen representerar prioritering av köns SUS Pension-lista via tx_queue_prioritize.
+Den här händelsen representerar prioritering av köns stängningslista via tx_queue_prioritize.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Info fält 1: pekare till motsvarande kö.
-- Informations fält 2: antal trådar som för närvarande har pausats i kön.
-- Info-fält 3: stack pekare vid tidpunkten för anropet.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till motsvarande kö.
+- Informationsfält 2: Antalet trådar som för närvarande pausas i kön.
+- Informationsfält 3: Stack pekare vid tidpunkten för anropet.
+- Informationsfält 4: Används inte.
 
-#### <a name="queue-receive"></a>Ta emot kön 
+#### <a name="queue-receive"></a>Kö ta emot 
 
 ##### <a name="tx_queue_receive"></a>tx_queue_receive
 
-**Ikonen** ![ Ikon för köa mottagning](./media/user-guide/tx-events/image48.png)
+**Ikon** ![ Ikon för kö mottagning](./media/user-guide/tx-events/image48.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att ta emot ett meddelande från en kö via tx_queue_receive.
+Den här händelsen representerar mottagandet av ett meddelande från en kö via tx_queue_receive.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Info fält 1: pekare till Queue.
-- Info fält 2: pekare till målet för meddelandet. Info-fält 3: vänte alternativ har angetts för anropet.
-- Info fält 4: antal meddelanden som för närvarande finns i kö.
+- Informationsfält 1: Pekare till kö.
+- Informationsfält 2: Pekare till mål för meddelande. Informationsfält 3: Väntealternativet anges till anropet.
+- Informationsfält 4: Antalet meddelanden som för närvarande är i kö.
 
-### <a name="queue-send"></a>Köa sändning 
+### <a name="queue-send"></a>Skicka i kö 
 
 #### <a name="tx_queue_send"></a>tx_queue_send
 
-**Ikonen** ![ Ikon för Queue-sändning](./media/user-guide/tx-events/image49.png)
+**Ikon** ![ Ikonen För att skicka kö](./media/user-guide/tx-events/image49.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att skicka ett meddelande till en kö via tx_queue_send.
+Den här händelsen representerar att ett meddelande skickas till en kö via tx_queue_send.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Info fält 1: pekare till Queue.
-- Info fält 2: pekare till meddelande.
-- Info-fält 3: vänte alternativ har angetts för anropet.
-- Info fält 4: antal meddelanden som för närvarande finns i kö.
+- Informationsfält 1: Pekare till kö.
+- Informationsfält 2: Pekare till meddelande.
+- Informationsfält 3: Väntealternativet anges till anropet.
+- Informationsfält 4: Antalet meddelanden som för närvarande är i kö.
 
-### <a name="queue-send-notify"></a>Skicka meddelande om kö 
+### <a name="queue-send-notify"></a>Queue Send Notify 
 
 #### <a name="tx_queue_send_notify"></a>tx_queue_send_notify
 
-**Ikonen** ![ Ikon för att skicka meddelande i kö](./media/user-guide/tx-events/image50.png)
+**Ikon** ![ Meddelandeikon för att skicka i kö](./media/user-guide/tx-events/image50.png)
 
 **Beskrivning**
 
 <p>Den här händelsen representerar registrering av ett återanrop via tx_queue_send_notify som anropas när ett meddelande skickas till en kö.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Info fält 1: pekare till Queue.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till kö.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="semaphore-ceiling-put"></a>Utplacering av semafors tak 
+### <a name="semaphore-ceiling-put"></a>Semaphore Ceiling Put 
 
 #### <a name="tx_semaphore_ceiling_put"></a>tx_semaphore_ceiling_put
 
-**Ikonen** ![ Ikon för Semaforens tak placering](./media/user-guide/tx-events/image51.png)
+**Ikon** ![ Put-ikon för semaphore-tak](./media/user-guide/tx-events/image51.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att placera en semafor via tx_semaphore_ceiling_put. Detta skiljer sig från tx_semaphore_put i så fall att det maximala värdet för semaforen kontrol leras så att placerings åtgärden inte får överskrida det högsta värdet eller taket.
+Den här händelsen representerar en semafor via tx_semaphore_ceiling_put. Detta skiljer sig tx_semaphore_put eftersom det högsta värdet för semaphore undersöks så att put-åtgärden inte får överskrida det högsta värdet eller taket.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot semafor.
-- Informations fält 2: aktuellt semafor-antal.
-- Informations fält 3: antal pausade trådar i semaforen.
-- Info-fält 4: gräns värdet för tak har angetts till anropet.
+- Informationsfält 1: Pekare till semaphore.
+- Informationsfält 2: Aktuellt semaforantal.
+- Informationsfält 3: Antal trådar som pausas på semaphore.
+- Informationsfält 4: Takgräns som anges för anropet.
 
-#### <a name="semaphore-create"></a>Skapa semafor 
+#### <a name="semaphore-create"></a>Skapa Semaphore 
 
 ##### <a name="tx_semaphore_create"></a>tx_semaphore_create
 
-**Ikonen** ![ Ikon för att skapa semafor](./media/user-guide/tx-events/image52.png)
+**Ikon** ![ Ikonen För att skapa Semaphore](./media/user-guide/tx-events/image52.png)
 
 **Beskrivning**
 
 Den här händelsen representerar skapandet av en semafor via tx_semaphore_create.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekar mot semafor-kontroll block.
-- Informations fält 2: inledande semafor-antal.
-- Info-fält 3: stack pekare vid tidpunkten för anropet.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till semaphore-kontrollblock.
+- Informationsfält 2: Inledande semaforantal.
+- Informationsfält 3: Stack pekare vid tidpunkten för anropet.
+- Informationsfält 4: Används inte.
 
-### <a name="semaphore-delete"></a>Ta bort semafor 
+### <a name="semaphore-delete"></a>Ta bort semaphore 
 
 #### <a name="tx_semaphore_delete"></a>tx_semaphore_delete
 
-**Ikonen** ![ Ikon för borttagning av semafor](./media/user-guide/tx-events/image53.png)
+**Ikon** ![ Ta bort semaphore-ikon](./media/user-guide/tx-events/image53.png)
 
 **Beskrivning**
 
 Den här händelsen representerar borttagning av en semafor via tx_semaphore_delete.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot semafor.
-- NFO-fält 2: stack pekare vid tidpunkten för anropet.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till semaphore.
+- nfo Fält 2: Stack pekare vid tidpunkten för anropet.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="semaphore-get"></a>Hämta semafor 
+### <a name="semaphore-get"></a>Semaphore Get 
 
 #### <a name="tx_semaphore_get"></a>tx_semaphore_get
 
-**Ikonen** ![ Ikon för Hämta semafor](./media/user-guide/tx-events/image54.png)
+**Ikon** ![ Ikonen Hämta semaphore](./media/user-guide/tx-events/image54.png)
 
 **Beskrivning**
 
-Den här händelsen representerar hämtning av en semafor via tx_semaphore_get.
+Den här händelsen representerar att få en semaphore via tx_semaphore_get.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot semafor.
-- Info fält 2: vänte alternativet angavs för anropet.
-- Informations fält 3: Aktuellt antal semaforer.
-- Info-fält 4: stack pekare vid tidpunkten för anropet.
+- Informationsfält 1: Pekare till semaphore.
+- Informationsfält 2: Väntealternativet anges till anropet.
+- Informationsfält 3: Aktuellt semaphore-antal.
+- Informationsfält 4: Stack pekare vid tidpunkten för anropet.
 
-### <a name="semaphore-information-get"></a>Hämta semafors information 
+### <a name="semaphore-information-get"></a>Semaphore Information Get 
 
 #### <a name="tx_semaphore_info_get"></a>tx_semaphore_info_get
 
-**Ikonen** ![ Ikon för Hämta semafors information](./media/user-guide/tx-events/image55.png)
+**Ikon** ![ Hämta information om Semaphore](./media/user-guide/tx-events/image55.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att hämta information om en semafor via tx_semaphore_info_get.
+Den här händelsen representerar att få information om en semafor via tx_semaphore_info_get.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot semafor.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till semaphore.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="semaphore-performance-info-get"></a>Hämta information om semafor-prestanda 
+### <a name="semaphore-performance-info-get"></a>Semaphore Performance Info Get 
 
 #### <a name="tx_semaphore_performance_info_get"></a>tx_semaphore_performance_info_get
 
-**Ikonen** ![ Hämta ikon för semafor-prestanda info](./media/user-guide/tx-events/image56.png)
+**Ikon** ![ Hämta ikon för Semaphore-prestandainformation](./media/user-guide/tx-events/image56.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att hämta prestanda information om en semafor via tx_semaphore_performance_info_get.
+Den här händelsen representerar att hämta prestandainformation om en semafor via tx_semaphore_performance_info_get.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot semafor.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till semaphore.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="semaphore-performance-system-info"></a>Information om prestanda system för semafor 
+### <a name="semaphore-performance-system-info"></a>Semaphore Performance System Info 
 
 #### <a name="tx_semaphore_performance_system_info_get"></a>tx_semaphore_performance_system_info_get
 
-**Ikonen** ![ System informations ikon för semafor-prestanda](./media/user-guide/tx-events/image57.png)
+**Ikon** ![ Informationsikon för Semaphore-prestandasystem](./media/user-guide/tx-events/image57.png)
 
 **Beskrivning**
 
-Den här händelsen representerar prestanda information om alla semaforer i systemet via tx_semaphore_performance_system_info_get.
+Den här händelsen representerar att hämta prestandainformation om alla semaforer i systemet via tx_semaphore_performance_system_info_get.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: används inte.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Används inte.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="semaphore-prioritize"></a>Semafor-prioritet 
+### <a name="semaphore-prioritize"></a>Prioritera Semaphore 
 
 #### <a name="tx_semaphore_prioritize"></a>tx_semaphore_prioritize
 
-**Ikonen** ![ Ikon för semafor-prioritet](./media/user-guide/tx-events/image58.png)
+**Ikon** ![ Ikonen Prioritera Semaphore](./media/user-guide/tx-events/image58.png)
 
 **Beskrivning**
 
-Den här händelsen representerar prioriteringen av Semaforens SUS Pension-lista via tx_semaphore_prioritize.
+Den här händelsen representerar prioritering av semaphores uppstängningslista via tx_semaphore_prioritize.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekare till motsvarande semafor.
-- Informations fält 2: antal trådar som för närvarande har pausats på semaforen.
-- Info-fält 3: stack pekare vid tidpunkten för anropet.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till motsvarande semafor.
+- Informationsfält 2: Antalet trådar som för närvarande pausas på semaphore.
+- Informationsfält 3: Stackpekare vid anrop.
+- Informationsfält 4: Används inte.
 
-### <a name="semaphore-put"></a>Semafor-placering 
+### <a name="semaphore-put"></a>Semaphore Put 
 
 #### <a name="tx_semaphore_put"></a>tx_semaphore_put
 
-**Ikonen** ![ Ikon för semafor-placering](./media/user-guide/tx-events/image59.png)
+**Ikon** ![ Semaphore put-ikon](./media/user-guide/tx-events/image59.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att släppa en semafor-instans via tx_semaphore_put.
+Den här händelsen lanserar en semaphore-instans via tx_semaphore_put.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Info fält 1: pekare till motsvarande semafor. Informations fält 2: aktuellt semafor-antal.
-- Informations fält 3: antal pausade trådar i semaforen.
-- Info-fält 4: stack pekare vid tidpunkten för anropet.
+- Informationsfält 1: Pekare till motsvarande semafor. Informationsfält 2: Aktuellt semaphore-antal.
+- Informationsfält 3: Antal trådar som pausas på semaphore.
+- Informationsfält 4: Stackpekare vid anrop.
 
-### <a name="semaphore-put-notify"></a>Meddelande om semafors placering 
+### <a name="semaphore-put-notify"></a>Semaphore Put Notify 
 
 #### <a name="tx_semaphore_put_notify"></a>tx_semaphore_put_notify
 
-**Ikonen** ![ Varnings ikon för semafor-placering](./media/user-guide/tx-events/image60.png)
+**Ikon** ![ Aviseringsikon för Semaphore put](./media/user-guide/tx-events/image60.png)
 
 **Beskrivning**
 
-Den här händelsen representerar registrering av ett återanrop via tx_semaphore_put_notify som anropas när en semafors instans placeras.
+Den här händelsen representerar registrering av ett återanrop via tx_semaphore_put_notify som anropas när en semaphore-instans läggs till.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Info fält 1: pekar mot semafor.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till semaphore.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
 ### <a name="thread-create"></a>Skapa tråd 
 
 #### <a name="tx_thread_create"></a>tx_thread_create
 
-**Ikonen** ![ Ikon för tråd skapande](./media/user-guide/tx-events/image61.png)
+**Ikon** ![ Ikon för att skapa tråd](./media/user-guide/tx-events/image61.png)
 
 **Beskrivning**
 
 Den här händelsen representerar skapandet av en tråd via tx_thread_create.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekare till tråd kontroll block.
-- Informations fält 2: tråd prioritet.
-- Info-fält 3: stack pekare för tråd.
-- NFO-fält 4: storlek på stack i byte.
+- Informationsfält 1: Pekare till trådkontrollblock.
+- Informationsfält 2: Trådprioritet.
+- Informationsfält 3: Stackpekare för tråd.
+- nfo Field 4: Storlek på stack i byte.
 
 ### <a name="thread-delete"></a>Ta bort tråd 
 
 #### <a name="tx_thread_delete"></a>tx_thread_delete
 
-**Ikonen** ![ Ikon för tråd borttagning](./media/user-guide/tx-events/image62.png)
+**Ikon** ![ Ikonen Ta bort tråd](./media/user-guide/tx-events/image62.png)
 
 **Beskrivning**
 
 Den här händelsen representerar borttagning av en tråd via tx_thread_delete.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Info fält 1: pekare till Thread.
-- Info fält 2: stack pekare vid tidpunkten för anropet.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till tråd.
+- Informationsfält 2: Stackpekare vid anrop.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="thread-entryexit-notify"></a>Avisering om tråd inmatning/avsluta 
+### <a name="thread-entryexit-notify"></a>Meddelande om trådinmatning/avslut 
 
 #### <a name="tx_thread_entry_exit_notify"></a>tx_thread_entry_exit_notify
 
-**Ikonen** ![ Aviserings ikon för tråd post/avsluta](./media/user-guide/tx-events/image63.png)
+**Ikon** ![ Meddelandeikon för trådinmatning/avslut](./media/user-guide/tx-events/image63.png)
 
 **Beskrivning**
 
 Den här händelsen representerar registrering av ett återanrop via tx_thread_entry_exit_notify som anropas när en tråd anges eller avslutas.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Info fält 1: pekare till Thread.
-- Info fält 2: tråd tillstånd vid registreringen.
-- Info fält 3: pekare till stack vid tidpunkten för anropet.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till tråd.
+- Informationsfält 2: Trådtillstånd vid tidpunkten för registreringen.
+- Informationsfält 3: Pekare till stack vid anrop.
+- Informationsfält 4: Används inte.
 
-#### <a name="thread-identify"></a>Identifiera tråd 
+#### <a name="thread-identify"></a>Tråd-identifiera 
 
 ##### <a name="tx_thread_identify"></a>tx_thread_identify
 
-**Ikonen** ![ Ikon för tråd identifiering](./media/user-guide/tx-events/image64.png)
+**Ikon** ![ Ikon för tråd-identifiering](./media/user-guide/tx-events/image64.png)
 
 **Beskrivning**
 
-Den här händelsen representerar hämtning av den aktuella tråd pekaren via tx_thread_identify.
+Den här händelsen representerar att hämta den aktuella tråd pekaren via tx_thread_identify.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: används inte.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Används inte.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="thread-information-get"></a>Hämta tråd information 
+### <a name="thread-information-get"></a>Trådinformation hämta 
 
 #### <a name="tx_thread_info_get"></a>tx_thread_info_get
 
-**Ikonen** ![ Ikon för Hämta tråd information](./media/user-guide/tx-events/image65.png)
+**Ikon** ![ Ikonen Hämta trådinformation](./media/user-guide/tx-events/image65.png)
 
 **Beskrivning**
 
 Den här händelsen representerar att hämta information om den angivna tråden via tx_thread_info_get.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekare till Thread.
-- Informations fält 2: Trådens tillstånd vid tidpunkten för anropet.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till tråd.
+- Informationsfält 2: Trådtillstånd vid anrop.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-#### <a name="thread-performance-information-get"></a>Hämta information om tråd prestanda 
+#### <a name="thread-performance-information-get"></a>Hämta trådprestandainformation 
 
 ##### <a name="tx_thread_performance_info_get"></a>tx_thread_performance_info_get
 
-**Ikonen** ![ Ikon för att hämta tråd prestanda information](./media/user-guide/tx-events/image66.png)
+**Ikon** ![ Ikon för att hämta trådprestandainformation](./media/user-guide/tx-events/image66.png)
 
 **Beskrivning**
 
-Den här händelsen representerar prestanda information om den angivna tråden via tx_thread_performance_info_get.
+Den här händelsen representerar att få prestandainformation om den angivna tråden via tx_thread_performance_info_get.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekare till Thread.
-- Informations fält 2: Trådens tillstånd vid tidpunkten för anropet.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till tråd.
+- Informationsfält 2: Trådtillstånd vid tidpunkten för anropet.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="thread-performance-system-info-get"></a>Hämta information om tråd prestanda system information 
+### <a name="thread-performance-system-info-get"></a>Thread Performance System Info Get 
 
 #### <a name="tx_thread_performance_system_info_get"></a>tx_thread_performance_system_info_get
 
-**Ikonen** ![ Hämta ikon för tråd prestanda system information](./media/user-guide/tx-events/image67.png)
+**Ikon** ![ Ikonen Hämta information om trådprestandasystem](./media/user-guide/tx-events/image67.png)
 
 **Beskrivning**
 
-Den här händelsen representerar prestanda information om alla trådar via tx_thread_performance_system_info_get.
+Den här händelsen representerar att få prestandainformation om alla trådar via tx_thread_performance_system_info_get.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: används inte.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Används inte.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="thread-preemption-change"></a>Avstängningen ändring av tråd 
+### <a name="thread-preemption-change"></a>Ändring av trådförseing 
 
 #### <a name="tx_thread_preemption_change"></a>tx_thread_preemption_change
 
-**Ikonen** ![ Ändra ikon för tråd avstängningen](./media/user-guide/tx-events/image68.png)
+**Ikon** ![ Ikon för ändring av trådförsening](./media/user-guide/tx-events/image68.png)
 
 **Beskrivning**
 
-Den här händelsen representerar ändring av en tråds avstängningen-tröskelvärde via tx_thread_preemption_change.
+Den här händelsen representerar ändring av en tråds tröskel för avförbrukning via tx_thread_preemption_change.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Info fält 1: pekare till Thread.
-- Info fält 2: ny avstängningen-tröskel.
-- Info-fält 3: föregående avstängningen-tröskel.
-- Info Field 4: Trådens tillstånd vid tidpunkten för anropet.
+- Informationsfält 1: Pekare till tråd.
+- Informationsfält 2: Nytt tröskelvärde för avspärrning.
+- Informationsfält 3: Föregående tröskelvärde för avspärrning.
+- Informationsfält 4: Trådens tillstånd vid tidpunkten för anropet.
 
-### <a name="thread-priority-change"></a>Ändring av tråd prioritet 
+### <a name="thread-priority-change"></a>Ändring av trådprioritet 
 
 #### <a name="tx_thread_priority_change"></a>tx_thread_priority_change
 
-**Ikonen** ![ Ändrings ikon för tråd prioritet](./media/user-guide/tx-events/image69.png)
+**Ikon** ![ Ikon för ändring av trådprioritet](./media/user-guide/tx-events/image69.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att ändra en tråds prioritet via tx_thread_priority_change.
+Den här händelsen representerar ändring av en tråds prioritet via tx_thread_priority_change.
 
-- Informations fält 
-- Info fält 1: pekare till Thread.
-- Info fält 2: ny prioritet.
-- Info-fält 3: föregående prioritet.
-- Info Field 4: Trådens tillstånd vid tidpunkten för anropet.
+- Informationsfält 
+- Informationsfält 1: Pekare till tråd.
+- Informationsfält 2: Ny prioritet.
+- Informationsfält 3: Föregående prioritet.
+- Informationsfält 4: Trådens tillstånd vid tidpunkten för anropet.
 
-### <a name="thread-relinquish"></a>Tråd som låser sig 
+### <a name="thread-relinquish"></a>Trådrelinquish 
 
 #### <a name="tx_thread_relinquish"></a>tx_thread_relinquish
 
-**Ikonen** ![ Ikon för tråd som låser sig](./media/user-guide/tx-events/image70.png)
+**Ikon** ![ Ikonen för att ta bort trådar](./media/user-guide/tx-events/image70.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att lämna processorn från en tråd via tx_thread_relinquish.
+Den här händelsen representerar avslut av processorn från en tråd via tx_thread_relinquish.
 
-**Informations fält**
+**Informationsfält**
 
-- Info-fält 1: stack pekare vid tidpunkten för anropet.
-- Info fält 2: pekar mot nästa tråd som ska köras.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Stack pekare vid tidpunkten för anropet.
+- Informationsfält 2: Pekare till nästa tråd som ska köras.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="thread-reset"></a>Återställ tråd 
+### <a name="thread-reset"></a>Trådåterställning 
 
 #### <a name="tx_thread_reset"></a>tx_thread_reset
 
-**Ikonen** ![ Ikon för tråd återställning](./media/user-guide/tx-events/image71.png)
+**Ikon** ![ Ikon för trådåterställning](./media/user-guide/tx-events/image71.png)
 
 **Beskrivning**
 
 Den här händelsen representerar återställning av en slutförd eller avslutad tråd via tx_thread_reset.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekare till Thread.
-- Info fält 2: Trådens tillstånd vid tidpunkten för anropet.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till tråd.
+- Informationsfält 2: Trådens tillstånd vid tidpunkten för anropet.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-#### <a name="thread-resume"></a>Återuppta tråd 
+#### <a name="thread-resume"></a>Tråd-ÅTERUPPTA 
 
 ##### <a name="tx_thread_resume"></a>tx_thread_resume
 
-**Ikonen** ![ Återställnings ikon för tråd](./media/user-guide/tx-events/image72.png)
+**Ikon** ![ Ikon för tråd-CV](./media/user-guide/tx-events/image72.png)
 
 **Beskrivning**
 
-Den här händelsen representerar återuppta en pausad tråd via tx_thread_resume.
+Den här händelsen representerar att en pausad tråd återupptas via tx_thread_resume.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekare till Thread.
-- Info fält 2: Trådens tillstånd vid tidpunkten för anropet.
-- Info-fält 3: stack pekare vid tidpunkten för anropet.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till tråd.
+- Informationsfält 2: Trådens tillstånd vid tidpunkten för anropet.
+- Informationsfält 3: Stack pekare vid tidpunkten för anropet.
+- Informationsfält 4: Används inte.
 
-### <a name="thread-sleep"></a>Trådens vilo läge 
+### <a name="thread-sleep"></a>Tråd strömsparläge 
 
 #### <a name="tx_thread_sleep"></a>tx_thread_sleep
 
-**Ikonen** ![ Ikon för trådens ström spar läge](./media/user-guide/tx-events/image73.png)
+**Ikon** ![ Ikon för strömsparläge för tråd](./media/user-guide/tx-events/image73.png)
 
 **Beskrivning**
 
-Den här händelsen representerar uppehåll i den aktuella tråden för ett angivet antal timer-Tick via tx_thread_sleep.
+Den här händelsen innebär att den aktuella tråden pausas för ett angivet antal timer tick via tx_thread_sleep.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: antal markeringar som ska pausas.
-- Info fält 2: Trådens tillstånd vid tidpunkten för anropet.
-- Info-fält 3: stack pekare vid tidpunkten för anropet.
-- Info fält 4: används inte.
+- Informationsfält 1: Antal tick att pausa för.
+- Informationsfält 2: Trådens tillstånd vid tidpunkten för anropet.
+- Informationsfält 3: Stack pekare vid tidpunkten för anropet.
+- Informationsfält 4: Används inte.
 
-### <a name="thread-stack-error-notify"></a>Meddelande om tråds tack 
+### <a name="thread-stack-error-notify"></a>Meddelande om fel i trådstack 
 
 #### <a name="tx_thread_stack_error_notify_event"></a>tx_thread_stack_error_notify_event
 
-**Ikonen** ![ Aviserings ikon för tråds tack](./media/user-guide/tx-events/image74.png)
+**Ikon** ![ Meddelandeikon för fel i trådstack](./media/user-guide/tx-events/image74.png)
 
 **Beskrivning**
 
-Den här händelsen representerar registrering av ett fel meddelande i en tråd stack via tx_thread_stack_error_notify_event.
+Den här händelsen representerar registrering av en meddelanderutin för trådstacksfel via tx_thread_stack_error_notify_event.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: används inte.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Används inte.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="thread-suspend"></a>Tråden pausar 
+### <a name="thread-suspend"></a>Tråd pausa 
 
 #### <a name="tx_thread_suspend"></a>tx_thread_suspend
 
-**Ikonen** ![ Ikon för att pausa tråd](./media/user-guide/tx-events/image75.png)
+**Ikon** ![ Ikonen För att pausa trådar](./media/user-guide/tx-events/image75.png)
 
 **Beskrivning**
 
-Den här händelsen representerar paus av en tråd via tx_thread_suspend.
+Den här händelsen representerar att en tråd pausas via tx_thread_suspend.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Info fält 1: pekare till tråd för att pausa.
-- Info fält 2: Trådens tillstånd vid tidpunkten för anropet.
-- Info-fält 3: stack pekare vid tidpunkten för anropet.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till tråd för att pausa.
+- Informationsfält 2: Trådens tillstånd vid tidpunkten för anropet.
+- Informationsfält 3: Stack pekare vid tidpunkten för anropet.
+- Informationsfält 4: Används inte.
 
-### <a name="thread-terminate"></a>Tråden avslutas 
+### <a name="thread-terminate"></a>Tråd avslutas 
 
 #### <a name="tx_thread_terminate"></a>tx_thread_terminate
 
-**Ikonen** ![ Avsluta ikon för tråd](./media/user-guide/tx-events/image76.png)
+**Ikon** ![ Ikonen Avsluta tråd](./media/user-guide/tx-events/image76.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att avsluta en tråd via tx_thread_terminate.
+Den här händelsen representerar avslutande av en tråd via tx_thread_terminate.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Info fält 1: pekare till tråd för att avsluta.
-- Info fält 2: Trådens tillstånd vid tidpunkten för anropet.
-- Info-fält 3: stack pekare vid tidpunkten för anropet.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till tråd för att avsluta.
+- Informationsfält 2: Trådens tillstånd vid tidpunkten för anropet.
+- Informationsfält 3: Stackpekare vid anrop.
+- Informationsfält 4: Används inte.
 
-### <a name="thread-time-slice-change"></a>Ändring av tråd Time-Slice 
+### <a name="thread-time-slice-change"></a>Ändring Time-Slice tråd 
 
 #### <a name="tx_thread_time_slice_change"></a>tx_thread_time_slice_change
 
-**Ikonen** ![ Tråd tids segmentets ändrings ikon](./media/user-guide/tx-events/image77.png)
+**Ikon** ![ Ikon för ändring av trådtidssegment](./media/user-guide/tx-events/image77.png)
 
 **Beskrivning**
 
-Den här händelsen representerar ändring av en tråds Time-slice via tx_thread_time_slice_change.
+Den här händelsen representerar ändring av en tråds tidssegment via tx_thread_time_slice_change.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekare till Thread.
-- Info fält 2: ny Time-slice.
-- Info-fält 3: föregående Time-slice.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till tråd.
+- Informationsfält 2: Ny tidssegment.
+- Informationsfält 3: Föregående tidssegment.
+- Informationsfält 4: Används inte.
 
-### <a name="thread-wait-abort"></a>Avbryt väntan på konversation 
+### <a name="thread-wait-abort"></a>Trådvänte abort 
 
 #### <a name="tx_thread_wait_abort"></a>tx_thread_wait_abort
 
-**Ikonen** ![ Ikon för Avbryt väntan](./media/user-guide/tx-events/image78.png)
+**Ikon** ![ Ikon för väntande av tråd](./media/user-guide/tx-events/image78.png)
 
 **Beskrivning**
 
-Den här händelsen representerar avbrott i en tråds fjädring via tx_thread_wait_abort.
+Den här händelsen representerar att en tråds brytning avbryts via tx_thread_wait_abort.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekare till Thread.
-- Info fält 2: Trådens tillstånd vid tidpunkten för anropet.
-- Info-fält 3: stack pekare vid tidpunkten för anropet.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till tråd.
+- Informationsfält 2: Trådens tillstånd vid tidpunkten för anropet.
+- Informationsfält 3: Stackpekare vid anrop.
+- Informationsfält 4: Används inte.
 
-### <a name="time-get"></a>Hämta tid 
+### <a name="time-get"></a>Time Get 
 
 #### <a name="tx_time_get"></a>tx_time_get
 
-**Ikonen** ![ Ikonen Hämta tid](./media/user-guide/tx-events/image79.png)
+**Ikon** ![ Ikonen För tids get](./media/user-guide/tx-events/image79.png)
 
 **Beskrivning**
 
-Den här händelsen representerar det aktuella antalet timer-Tick via tx_time_get.
+Den här händelsen representerar att det aktuella antalet timer tick skickas via tx_time_get.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: Aktuellt antal timer-Tick.
-- Info fält 2: stack pekare vid tidpunkten för anropet.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Aktuellt antal timer tick.
+- Informationsfält 2: Stackpekare vid anrop.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="time-set"></a>Tids uppsättning 
+### <a name="time-set"></a>Tidsuppsättning 
 
 #### <a name="tx_time_set"></a>tx_time_set
 
-**Ikonen** ![ Ikon för tids uppsättning](./media/user-guide/tx-events/image80.png)
+**Ikon** ![ Ikon för tidsuppsättning](./media/user-guide/tx-events/image80.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att ange det aktuella antalet timer-Tick via tx_time_set.
+Den här händelsen representerar inställningen av det aktuella antalet timer tick via tx_time_set.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: nytt antal timer-Tick.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Nytt antal timer tick.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
 ### <a name="timer-activate"></a>Aktivera timer 
 
 #### <a name="tx_timer_activate"></a>tx_timer_activate
 
-**Ikonen** ![ Ikon för aktivering av timer](./media/user-guide/tx-events/image81.png)
+**Ikon** ![ Aktiveringsikon för timer](./media/user-guide/tx-events/image81.png)
 
 **Beskrivning**
 
-Den här händelsen representerar aktivering av angiven timer via tx_timer_activate.
+Den här händelsen representerar aktivering av den angivna timern via tx_timer_activate.
 
-**Informations fält**
+**Informationsfält**
 
-- Info-fält 1: pekar mot timer.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till timer.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
 ### <a name="timer-change"></a>Ändring av timer 
 
 #### <a name="tx_timer_change"></a>tx_timer_change
 
-**Ikonen** ![ Ändrings ikon för timer](./media/user-guide/tx-events/image82.png)
+**Ikon** ![ Ikon för timerändring](./media/user-guide/tx-events/image82.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att ändra den angivna timern via tx_timer_change.
+Den här händelsen representerar ändring av den angivna timern via tx_timer_change.
 
-**Informations fält**
+**Informationsfält**
 
-- Info-fält 1: pekar mot timer.
-- Info fält 2: Start-utgångs-Tick.
-- Info-fält 3: schemalägga om förfallo Tick.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till timer.
+- Informationsfält 2: Inledande förfallotid tick.
+- Informationsfält 3: Tids tick för omplanerade förfallotid.
+- Informationsfält 4: Används inte.
 
 ### <a name="timer-create"></a>Skapa timer 
 
 #### <a name="tx_timer_create"></a>tx_timer_create
 
-**Ikonen** ![ Ikon för timer-skapande](./media/user-guide/tx-events/image83.png)
+**Ikon** ![ Ikon för att skapa timer](./media/user-guide/tx-events/image83.png)
 
 **Beskrivning**
 
 Den här händelsen representerar skapandet av en timer via tx_timer_create.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekar mot timer-kontroll-block.
-- Info fält 2: Start-utgångs-Tick.
-- Info-fält 3: schemalägga om förfallo Tick.
-- Info fält 4: automatiskt aktiverings värde – antingen TX_AUTO_ACTIVATE (1) eller TX_NO_ACTIVATE (0).
+- Informationsfält 1: Pekare till timerkontrollblock.
+- Informationsfält 2: Inledande förfallotid tick.
+- Informationsfält 3: Tids tick för omplanerade förfallotid.
+- Informationsfält 4: Automatiskt aktivera värde – antingen TX_AUTO_ACTIVATE (1) eller TX_NO_ACTIVATE (0).
 
-### <a name="timer-deactivate"></a>Inaktivera timer 
+### <a name="timer-deactivate"></a>Timer– inaktivera 
 
 #### <a name="tx_timer_deactivate"></a>tx_timer_deactivate
 
-**Ikonen** ![ Ikonen timer-inaktivera](./media/user-guide/tx-events/image84.png)
+**Ikon** ![ Inaktivera timerikon](./media/user-guide/tx-events/image84.png)
 
 **Beskrivning**
 
-Den här händelsen representerar inaktive ring av en timer via tx_timer_deactivate.
+Den här händelsen representerar inaktivering av en timer via tx_timer_deactivate.
 
-**Informations fält**
+**Informationsfält**
 
-- Info-fält 1: pekar mot timer.
-- Info fält 2: stack pekare vid tidpunkten för anropet.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till timer.
+- Informationsfält 2: Stackpekare vid anrop.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="timer-delete"></a>Borttagning av timer 
+### <a name="timer-delete"></a>Ta bort timer 
 
 #### <a name="tx_timer_delete"></a>tx_timer_delete
 
-**Ikonen** ![ Ikon för timer-borttagning](./media/user-guide/tx-events/image85.png)
+**Ikon** ![ Borttagningsikon för timer](./media/user-guide/tx-events/image85.png)
 
 **Beskrivning**
 
 Den här händelsen representerar borttagning av en timer via tx_timer_delete.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Info-fält 1: pekar mot timer.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till timer.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="timer-information-get"></a>Hämta timer-information 
+### <a name="timer-information-get"></a>Hämta information om timer 
 
 #### <a name="tx_timer_info_get"></a>tx_timer_info_get
 
-**Ikonen** ![ Ikon för att hämta information om timer](./media/user-guide/tx-events/image86.png)
+**Ikon** ![ Ikon för timer för att hämta information](./media/user-guide/tx-events/image86.png)
 
 **Beskrivning**
 
-Den här händelsen representerar information om tidtagare via tx_timer_info_get.
+Den här händelsen representerar att timerinformation skickas via tx_timer_info_get.
 
-**Informations fält**
+**Informationsfält**
 
-- Info-fält 1: pekar mot timer.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till timer.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="timer-performance-information-get"></a>Hämta information om timer-prestanda 
+### <a name="timer-performance-information-get"></a>Information om timerprestanda hämta 
 
 #### <a name="tx_timer_performance_info_get"></a>tx_timer_performance_info_get
 
-**Ikonen** ![ Ikon för hämtning av timer-prestanda information](./media/user-guide/tx-events/image87.png)
+**Ikon** ![ Information om timerprestanda – hämta ikon](./media/user-guide/tx-events/image87.png)
 
 **Beskrivning** 
 
-Den här händelsen representerar hämtning av information om timer-prestanda via tx_timer_performance_info_get.
+Den här händelsen visar hur du hämtar information om timerprestanda via tx_timer_performance_info_get.
 
-**Informations fält**
+**Informationsfält**
 
-- Info-fält 1: pekar mot timer.
-- Info fält 2: stack pekare vid tidpunkten för anropet.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till timer.
+- Informationsfält 2: Stack pekare vid tidpunkten för anropet.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="timer-system-performance-info-get"></a>Hämta timer system prestanda information 
+### <a name="timer-system-performance-info-get"></a>Information om prestanda för timersystem – Hämta 
 
 #### <a name="tx_timer_performance_system_info_get"></a>tx_timer_performance_system_info_get
 
-**Ikonen** ![ Hämta ikon för timer-systemets prestanda information](./media/user-guide/tx-events/image88.png)
+**Ikon** ![ Information om timersystemprestanda – hämta ikon](./media/user-guide/tx-events/image88.png)
 
 
 **Beskrivning** 
 
-Den här händelsen representerar hämtning av all information om timer-prestanda via tx_timer_performance_system_info_get.
+Den här händelsen visar hur du hämtar all information om timerprestanda via tx_timer_performance_system_info_get.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: används inte.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Används inte.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.

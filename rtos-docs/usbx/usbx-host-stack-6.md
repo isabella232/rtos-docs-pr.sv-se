@@ -1,23 +1,23 @@
 ---
-title: Kapitel 6 – USBX CDC-ECM-klass användning
-description: 'USBX innehåller en CDC-ECM-klass för värden och enhets sidan. Den här klassen är utformad för att användas med NetX, särskilt USBX CDC-ECM-klassen fungerar som driv rutinen för NetX. Därför finns det inga CDC-ECM-API: er som anges i kapitel 5.'
+title: Kapitel 6 – USBX CDC-ECM-klassanvändning
+description: USBX innehåller en CDC-ECM-klass för värd- och enhetssidan. Den här klassen är avsedd att användas med NetX, särskilt fungerar USBX CDC-ECM-klassen som drivrutin för NetX. Det är därför det inte finns några CDC-ECM-API:er listade i kapitel 5.
 author: philmea
 ms.author: philmea
 ms.date: 5/19/2020
 ms.service: rtos
 ms.topic: article
-ms.openlocfilehash: 18e7e075788623916de36cf911597230295b56c5
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 7328b8c3537acac1ef02fced32b0c2731065aea0c6e2742a96f0644e9a8045f0
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104828437"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116798358"
 ---
-# <a name="chapter-6---usbx-cdc-ecm-class-usage"></a>Kapitel 6 – USBX CDC-ECM-klass användning
+# <a name="chapter-6---usbx-cdc-ecm-class-usage"></a>Kapitel 6 – USBX CDC-ECM-klassanvändning
 
-USBX innehåller en CDC-ECM-klass för värden och enhets sidan. Den här klassen är utformad för att användas med NetX, särskilt USBX CDC-ECM-klassen fungerar som driv rutinen för NetX. Därför finns det inga CDC-ECM-API: er som anges i kapitel 5.
+USBX innehåller en CDC-ECM-klass för värd- och enhetssidan. Den här klassen är avsedd att användas med NetX, särskilt fungerar USBX CDC-ECM-klassen som drivrutin för NetX. Det är därför det inte finns några CDC-ECM-API:er listade i kapitel 5.
 
-När NetX och USBX har initierats och en instans av en CDC-ECM-enhet hittas av USBX, använder programmet uteslutande NetX för att kommunicera med enheten. Initieringen följer mönstret som visas i exemplet nedan.
+När NetX och USBX har initierats och en instans av en CDC-ECM-enhet hittas av USBX använder programmet uteslutande NetX för att kommunicera med enheten. Initieringen följer mönstret som visas i exemplet nedan.
 
 ```c
 UINT status;

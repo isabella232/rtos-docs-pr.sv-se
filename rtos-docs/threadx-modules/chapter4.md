@@ -1,43 +1,43 @@
 ---
-title: Kapitel 4 – API för modul
+title: Kapitel 4 – Modul-API:er
 author: philmea
 ms.author: philmea
-description: 'Den här artikeln är en sammanfattning av de ytterligare API: er som är tillgängliga för en modul.'
+description: Den här artikeln är en sammanfattning av de ytterligare API:er som är tillgängliga för en modul.
 ms.date: 07/15/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: b5804e2dbb8d08a272abc85a583576f43b7204c1
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 1c7590d0ccddc606a6cacdfeb3b3a99631e125554b524c4ce65c8154e65a20ee
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104825488"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116799140"
 ---
-# <a name="chapter-4---module-apis"></a>Kapitel 4 – API för modul
+# <a name="chapter-4---module-apis"></a>Kapitel 4 – Modul-API:er
 
-## <a name="summary-of-module-apis"></a>Översikt över API: er för modul
+## <a name="summary-of-module-apis"></a>Sammanfattning av modul-API:er
 
-Det finns flera ytterligare API-funktioner som är tillgängliga för en modul enligt följande:
+Det finns flera ytterligare API-funktioner som är tillgängliga för en modul, enligt följande:
 
-- ***txm_module_application_request** _-_Application-speciell begäran till Resident kod *
-- ***txm_module_object_allocate** _-_Allocate minne utanför modulen för objekt *
-- ***txm_module_object_deallocate** _-_Deallocate tidigare allokerat objekt minne *
-- ***txm_module_object_pointer_get** _-_Find system objekt och hämta objekt pekare *
-- ***txm_module_object_pointer_get_extended** _-_Find system objekt och hämta objekt pekare, namn längd säkerhet *
+- ***txm_module_application_request** _ – _Application specifik begäran till den tillhörande koden*
+- ***txm_module_object_allocate** _ – _Allocate minne utanför modulen för objekt*
+- ***txm_module_object_deallocate** _ – _Deallocate tidigare allokerat objektminne*
+- ***txm_module_object_pointer_get** _ – _Find systemobjekt och hämta objekt pekare*
+- ***txm_module_object_pointer_get_extended** _ – _Find systemobjekt och hämta objekt pekare, namnlängdssäkerhet*
 
 ## <a name="return-values"></a>Returvärden
 
-Ytterligare fel koder returneras för vissa Azure återställnings tider-API: er. Dessa ytterligare fel koder definieras enligt följande:
+Ytterligare felkoder returneras för vissa Azure RTOS API:er. Dessa ytterligare felkoder definieras på följande sätt:
 
-- **TXM_MODULE_INVALID_PROPERTIES** (0xF3): visar att modulen inte har rätt egenskaper för att göra ett API-anrop. Du kan till exempel anropa trace-API: er i användarläge.
-- **TXM_MODULE_INVALID_MEMORY** (0xF4): anger att det minne som angavs av modulen är ogiltigt eller på en ogiltig plats. Till exempel, i minnesmoduler som är skyddade, kan objekt kontroll block inte finnas i minnet som modulen har åtkomst till.
-- **TXM_MODULE_INVALID_CALLBACK** (0xF5): motringning som anges i API: t ligger utanför intervallet för modulens kod och är därför ogiltig.
+- **TXM_MODULE_INVALID_PROPERTIES** (0xF3): Anger att modulen inte har rätt egenskaper för att göra ett API-anrop. Till exempel anropa spårnings-API:er i användarläge.
+- **TXM_MODULE_INVALID_MEMORY** (0xF4): Anger att det minne som tillhandahålls av modulen är ogiltigt eller finns på en ogiltig plats. I minnesskyddade moduler tillåts till exempel inte objektkontrollblock finnas i minnet som modulen kan komma åt.
+- **TXM_MODULE_INVALID_CALLBACK** (0xF5): Återanrop som anges i API:et ligger utanför intervallet för modulens kod och är därför ogiltigt.
 
 ---
 
 ## <a name="txm_module_application_request"></a>txm_module_application_request
 
-Programspecifik begäran till Resident kod.
+Programspecifik begäran till kod som finns i den aktuella koden.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -49,25 +49,25 @@ UINT txm_module_application_request(
     ULONG param_3);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten gör den angivna begäran till den inhemska delen av programmet. Det förutsätts att begär ande strukturen har förberetts före anropet. Den faktiska bearbetningen av begäran sker i den inhemska koden i funktionen ***_txm_module_manager_application_request***. Den här funktionen lämnas som standard Tom och är utformad för den inhemska programutvecklaren att ändra.
+Den här tjänsten gör den angivna begäran till den hemmavarande delen av programmet. Det förutsätts att begärandestrukturen förbereds före anropet. Den faktiska bearbetningen av begäran sker i den hemmaande koden i funktionen ***_txm_module_manager_application_request***. Som standard lämnas den här funktionen tom och är utformad för den lokala programutvecklaren att ändra.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **begäran** ID för begäran (program definierat)
+- **begäran** Begärande-ID (definierat program)
 - **param_1** Första parametern
-- **param_2** Andra parameter
+- **param_2** Andra parametern
 - **param_3** Tredje parametern
 
 ### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS** (0X00) lyckad begäran.
-- **TX_NOT_AVAILABLE** -begäran (0x1D) stöds inte av den inhemska koden.
+- **TX_SUCCESS** (0x00) Lyckad begäran.
+- **TX_NOT_AVAILABLE** (0x1D) Begäran som inte stöds av den hemmavarande koden.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Modul-trådar
+Modultrådar
 
 ### <a name="example"></a>Exempel
 
@@ -83,7 +83,7 @@ status = txm_module_application_request(77, 1, 2, 3);
 
 ## <a name="txm_module_object_allocate"></a>txm_module_object_allocate
 
-Allokera minne i objektcachen (som skapats av det inhemska programmet) för ett objekt kontroll block i modulen.
+Allokera minne i objektpoolen (som skapats av det hemmavarande programmet) för ett modulobjektkontrollblock.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -93,24 +93,24 @@ UINT txm_module_object_allocate(
    ULONG object_size);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten allokerar minne för ett modul-objekt från minnet utanför modulen, vilket förhindrar att objekt kontroll blocket skadas av modulens kod. I minnes skyddade system måste alla objekt kontroll block tilldelas med detta API innan de kan skapas.
+Den här tjänsten allokerar minne för ett modulobjekt från minnet utanför modulen, vilket förhindrar att objektkontrollblocket skadas av modulens kod. I minnesskyddade system måste alla objektkontrollblock allokeras med det här API:et innan de kan skapas.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **object_ptr** Objekt pekarens mål för lyckad allokering.
-- **object_size** Storlek i byte på det objekt som ska allokeras.
+- **object_ptr** Mål för objekt pekare för lyckad allokering.
+- **object_size** Storleken i byte för objektet som ska allokeras.
 
 ### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS** (0x00) objekt tilldelning har slutförts.
-- **TX_NO_MEMORY** (0x10) det finns inte tillräckligt med minne.
-- **TX_NOT_AVAILABLE** (0X1D) module Manager har inte skapat en objektmall att allokera från
+- **TX_SUCCESS** (0x00) Allokera objekt på rätt sätt.
+- **TX_NO_MEMORY** (0x10) Det finns inte tillräckligt med minne.
+- **TX_NOT_AVAILABLE** (0x1D) Modulhanteraren har inte skapat en objektpool att allokera från
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Modul-trådar
+Modultrådar
 
 ### <a name="example"></a>Exempel
 
@@ -134,7 +134,7 @@ status = txm_module_object_allocate(&queue_pointer, sizeof(TX_QUEUE));
 
 ## <a name="txm_module_object_deallocate"></a>txm_module_object_deallocate
 
-Frigör tidigare allokerat objekt minne
+Frisallokera tidigare allokerat objektminne
 
 ### <a name="prototype"></a>Prototyp
 
@@ -142,23 +142,23 @@ Frigör tidigare allokerat objekt minne
 UINT txm_module_object_deallocate(VOID *object_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 ***Den här tjänsten är inaktuell eftersom den inte längre behövs***.
 
-Minnet som tidigare har allokerats via ***txm_module_object_allocate **_ har* frigjorts i tjänsten _ _TX_ \_ _delete***.
+Det minne som tidigare allokerades ***via txm_module_object_allocate**_ frisallokeras* i tjänsten _ _tx_ \_ _delete***.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **object_ptr** Objekt pekare för att frigöra.
+- **object_ptr** Objekt pekare för att frisöka.
 
 ### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS** (0x00) objekt tilldelning har slutförts.
+- **TX_SUCCESS** (0x00) Allokera objekt på rätt sätt.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Modul-trådar
+Modultrådar
 
 ### <a name="example"></a>Exempel
 
@@ -181,7 +181,7 @@ status = txm_module_object_deallocate(queue_pointer);
 
 ## <a name="txm_module_object_pointer_get"></a>txm_module_object_pointer_get
 
-Hitta system objekt och hämta objekt pekare
+Hitta systemobjekt och hämta objekt pekare
 
 ### <a name="prototype"></a>Prototyp
 
@@ -191,9 +191,9 @@ UINT txm_module_object_pointer_get(
    VOID **object_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar objekt pekaren för en viss typ med ett visst namn. Om objektet inte hittas returneras ett fel. Annars placeras adressen för objektet i "object_ptr", om objektet hittas. Den här pekaren kan sedan användas för att göra system tjänst anrop, för att interagera med den inhemska koden och/eller andra inlästa moduler i systemet.
+Den här tjänsten hämtar objekt pekaren för en viss typ med ett visst namn. Om objektet inte hittas returneras ett fel. Om objektet hittas placeras annars adressen till objektet i "object_ptr". Den här pekaren kan sedan användas för att göra systemtjänst-anrop, för att interagera med den lokala koden och/eller andra inlästa moduler i systemet.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
@@ -210,20 +210,20 @@ Den här tjänsten hämtar objekt pekaren för en viss typ med ett visst namn. O
   - TXM_PACKET_POOL_OBJECT
   - TXM_UDP_SOCKET_OBJECT
   - TXM_TCP_SOCKET_OBJECT
-- **namn** Programspecifikt objekt namn som definieras när objektet skapades.
+- **namn** Programspecifikt objektnamn enligt definitionen när objektet skapades.
 - **object_ptr** Mål för objekt pekare.
 
 ### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS** (0x00) objekt hämtades.
-- **TX_OPTION_ERROR** (0X08) ogiltig objekt typ.
-- **TX_PTR_ERROR** (0X03) ogiltigt mål.
-- **TX_SIZE_ERROR** (0X05) ogiltig storlek.
-- Det gick inte att hitta **TX_NO_INSTANCE** -objektet (0x0D).
+- **TX_SUCCESS** (0x00) Successful object get.
+- **TX_OPTION_ERROR** (0x08) Ogiltig objekttyp.
+- **TX_PTR_ERROR** (0x03) Ogiltigt mål.
+- **TX_SIZE_ERROR** (0x05) Ogiltig storlek.
+- **TX_NO_INSTANCE** (0x0D) Det går inte att hitta objektet.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Modul-trådar
+Modultrådar
 
 ### <a name="example"></a>Exempel
 
@@ -248,7 +248,7 @@ status = txm_module_object_pointer_get(TXM_QUEUE_OBJECT,
 
 ## <a name="txm_module_object_pointer_get_extended"></a>txm_module_object_pointer_get_extended
 
-Hitta system objekt och hämta objekt pekare
+Hitta systemobjekt och hämta objekt pekare
 
 ### <a name="prototype"></a>Prototyp
 
@@ -259,9 +259,9 @@ UINT txm_module_object_pointer_get_extended(UINT object_type,
                                             VOID **object_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar objekt pekaren för en viss typ med ett visst namn. Om objektet inte hittas returneras ett fel. Annars placeras adressen för objektet i "object_ptr", om objektet hittas. Den här pekaren kan sedan användas för att göra system tjänst anrop, för att interagera med den inhemska koden och/eller andra inlästa moduler i systemet.
+Den här tjänsten hämtar objekt pekaren för en viss typ med ett visst namn. Om objektet inte hittas returneras ett fel. Om objektet hittas placeras annars adressen för objektet i "object_ptr". Den här pekaren kan sedan användas för att göra systemtjänstsamtal, för att interagera med den lokala koden och/eller andra inlästa moduler i systemet.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
@@ -278,21 +278,21 @@ Den här tjänsten hämtar objekt pekaren för en viss typ med ett visst namn. O
   - TXM_PACKET_POOL_OBJECT
   - TXM_UDP_SOCKET_OBJECT
   - TXM_TCP_SOCKET_OBJECT
-- **namn** Programspecifikt objekt namn som definieras när objektet skapades.
-- **name_length** Namnets längd.
+- **namn** Programspecifikt objektnamn enligt definitionen när objektet skapades.
+- **name_length** Namnlängd.
 - **object_ptr** Mål för objekt pekare.
 
 ### <a name="return-values"></a>Returvärden
 
-- **TX_SUCCESS** (0x00) objekt hämtades.
-- **TX_OPTION_ERROR** (0X08) ogiltig objekt typ.
-- **TX_PTR_ERROR** (0X03) ogiltigt mål.
-- **TX_SIZE_ERROR** (0X05) ogiltig storlek.
-- Det gick inte att hitta **TX_NO_INSTANCE** -objektet (0x0D).
+- **TX_SUCCESS** (0x00) Successful object get.
+- **TX_OPTION_ERROR** (0x08) Ogiltig objekttyp.
+- **TX_PTR_ERROR** (0x03) Ogiltigt mål.
+- **TX_SIZE_ERROR** (0x05) Ogiltig storlek.
+- **TX_NO_INSTANCE** (0x0D) Det går inte att hitta objektet.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Modul-trådar
+Modultrådar
 
 ### <a name="example"></a>Exempel
 

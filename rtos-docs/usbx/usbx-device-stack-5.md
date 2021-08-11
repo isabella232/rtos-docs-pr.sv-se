@@ -1,17 +1,17 @@
 ---
 title: Kapitel 5 – Överväganden för USBX-enhetsklass
-description: Lär dig mer om överväganden för USBX-enhetsklass.
+description: Lär dig mer om USBX-enhetsklassöverväganden.
 author: philmea
 ms.author: philmea
 ms.date: 5/19/2020
 ms.service: rtos
 ms.topic: article
-ms.openlocfilehash: ea348d94e83863c0e2652df29f92d952f2242661
-ms.sourcegitcommit: 62cfdf02628530807f4d9c390d6ab623e2973fee
+ms.openlocfilehash: b8fcfa251df9140d23b50a99f13f2755d2bdfae0ca6b9529633f25e263c7edcc
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 08/05/2021
-ms.locfileid: "115178025"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116798748"
 ---
 # <a name="chapter-5---usbx-device-class-considerations"></a>Kapitel 5 – Överväganden för USBX-enhetsklass
 
@@ -42,7 +42,7 @@ status = ux_device_stack_class_register(_ux_system_slave_class_hid_name,
 
 Varje klass kan även registrera en återanropsfunktion när en instans av klassen aktiveras. Motringning anropas sedan av enhetsstacken för att informera programmet om att en instans har skapats.
 
-Programmet skulle i sin brödtext ha två funktioner för aktivering och inaktivering, som du ser i följande exempel.
+Programmet skulle i sin brödtext ha de 2 funktionerna för aktivering och inaktivering, som du ser i följande exempel.
 
 ```c
 VOID tx_demo_hid_instance_activate(VOID *hid_instance)
@@ -58,19 +58,19 @@ VOID tx_demo_hid_instance_deactivate(VOID *hid_instance)
 }
 ```
 
-Vi rekommenderar inte att du gör något i dessa funktioner, utan att memorera instansen av klassen och synkronisera med resten av programmet.
+Vi rekommenderar inte att du gör något inom dessa funktioner, utan att memorera instansen av klassen och synkronisera med resten av programmet.
 
 ## <a name="general-considerations-for-bulk-transfer"></a>Allmänna överväganden för massöverföring
 
-Enligt USB 2.0-specifikationen måste en slutpunkt alltid överföra datanyttolaster med ett datafält som är mindre än eller lika med slutpunktens rapporterade wMaxPacketSize-värde. Storleken på ett datapaket är begränsad till bMaxPacketSize. Överföringen kan utföras i följande fall
+Enligt USB 2.0-specifikationen måste en slutpunkt alltid överföra datanyttolaster med ett datafält som är mindre än eller lika med slutpunktens rapporterade wMaxPacketSize-värde. Storleken på ett datapaket är begränsad till bMaxPacketSize. Överföringen kan slutföras med följande fall
 1. Slutpunkten har överfört exakt den mängd data som förväntas
-2. När en enhet eller värdslutpunkt tar emot ett paket med en storlek som är mindre än den maximala paketstorleken (wMaxPacketSize). Det här korta paketet anger att det inte finns några fler datapaket kvar och överföringen är klar eller när alla datapaket som ska skickas är lika med wMaxPacketSize, så kan överföringens slut inte fastställas. För att överföringen ska slutföras måste ett ZLP-paket (Zero Length Packet) skickas kortpaket och nolllängdspaket betyder slutet på en massöverföring av data. Ovanstående överväganden gäller för API:er för massöverföring av rådata, t.ex. ux_device_class_cdc_acm_read().
+2. När en enhet eller värdslutpunkt tar emot ett paket med en storlek som är mindre än den maximala paketstorleken (wMaxPacketSize). Det här korta paketet anger att det inte finns några fler datapaket kvar och överföringen är klar eller när alla datapaket som ska överföras är lika med wMaxPacketSize kan överföringens slut inte fastställas. För att överföringen ska slutföras måste ett ZLP-paket (Zero Length Packet) skickas kortpaket och nolllängdspaket innebära slutet på en massöverföring av data. Ovanstående överväganden gäller för API:er för massöverföring av rådata, t.ex. ux_device_class_cdc_acm_read().
 
 ## <a name="usb-device-storage-class"></a>USB-enhetsklass Storage enhet
 
 Usb-enhetens lagringsklass gör att en lagringsenhet som är inbäddad i systemet kan göras synlig för en USB-värd.
 
-USB-enhetens lagringsklass tillhandahåller inte en lagringslösning på egen hand. Den accepterar och tolkar bara SCSI-begäranden som kommer från värden. När en av dessa begäranden är ett läs- eller skrivkommando anropas ett fördefinierat anrop tillbaka till en verklig lagringsenhet som en ATA-enhetsdrivrutin eller en Flash-enhetsdrivrutin.
+USB-enhetens lagringsklass tillhandahåller inte en lagringslösning på egen hand. Den accepterar och tolkar bara SCSI-begäranden som kommer från värden. När en av dessa begäranden är ett läs- eller skrivkommando anropas ett fördefinierat anrop tillbaka till en verklig lagringsenhetshanterare, till exempel en ATA-enhetsdrivrutin eller en Flash-enhetsdrivrutin.
 
 När du initierar enhetslagringsklassen ges en pekarstruktur till klassen som innehåller all information som behövs. Ett exempel visas nedan.
 
@@ -119,9 +119,9 @@ status = ux_device_stack_class_register(_ux_system_slave_class_storage_name,
     ux_device_class_storage_entry, ux_device_class_storage_thread, 0, (VOID *)&storage_parameter);
 ```
 
-I det här exemplet anpassas drivrutinslagringssträngarna genom att tilldela strängpekare till motsvarande parameter. Om någon av sträng pekaren lämnas till UX_NULL används standardvärdet Azure RTOS strängen.
+I det här exemplet anpassas drivrutinslagringssträngarna genom att tilldela sträng pekare till motsvarande parameter. Om någon av sträng pekaren lämnas till UX_NULL används standardvärdet Azure RTOS strängen.
 
-I det här exemplet anges enhetens sista blockadress eller LBA samt storleken på den logiska sektorn. Lba är antalet sektorer som är tillgängliga på mediet –1. Blocklängden är inställd på 512 på vanliga lagringsmedier. Det kan anges till 2048 för optiska enheter.
+I det här exemplet anges enhetens sista blockadress eller LASTA samt storleken på den logiska sektorn. Lba är antalet sektorer som är tillgängliga på mediet –1. Blocklängden är inställd på 512 på vanliga lagringsmedier. Det kan anges till 2048 för optiska enheter.
 
 Programmet måste skicka tre återanropsfunktionspekare så att lagringsklassen kan läsa, skriva och hämta status för mediet.
 
@@ -154,7 +154,7 @@ Plats:
 - *lba* är sektoradressen att läsa.
 - *media_status* ska fyllas i exakt som returvärdet för återanrop av mediestatus.
 
-Returvärdet kan antingen ha värdet UX_SUCCESS eller UX_ERROR indikerar en lyckad eller misslyckad åtgärd. De här åtgärderna behöver inte returnera några andra felkoder. Om det finns ett fel i någon åtgärd anropar lagringsklassen statusanropsfunktionen.
+Returvärdet kan antingen ha värdet UX_SUCCESS eller UX_ERROR indikerar en lyckad eller misslyckad åtgärd. De här åtgärderna behöver inte returnera några andra felkoder. Om det finns ett fel i någon åtgärd anropar lagringsklassen funktionen för statusanrop tillbaka.
 
 Den här funktionen har följande prototyp.
 
@@ -166,7 +166,7 @@ ULONG media_status(
     ULONG *media_status);
 ```
 
-Anropsparametern media_id inte används för närvarande och bör alltid vara 0. I framtiden kan den användas för att särskilja flera lagringsenheter eller lagringsenheter med flera SCSI-LUN. Den här versionen av lagringsklassen stöder inte flera instanser av lagringsklassen eller lagringsenheter med flera SCSI-LUN.
+Anropsparametern media_id inte används för närvarande och bör alltid vara 0. I framtiden kan den användas för att särskilja flera lagringsenheter eller lagringsenheter med flera SCSI LUN. Den här versionen av lagringsklassen stöder inte flera instanser av lagringsklassen eller lagringsenheter med flera SCSI LUN.
 
 Returvärdet är en SCSI-felkod som kan ha följande format.
 
@@ -178,10 +178,10 @@ Följande tabell innehåller möjliga kombinationer av Sense/ASC/ASCQ.
 
 | Sense Key | ASC | ASCQ | Description                                       |
 | --------- | --- | ---- | ------------------------------------------------- |
-| 00        | 00  | 00   | INGEN MENING                                          |
+| 00        | 00  | 00   | NO SENSE                                          |
 | 01        | 17  | 01   | ÅTERSTÄLLDA DATA MED ÅTERFÖRSÖK                       |
 | 01        | 18  | 00   | ÅTERSTÄLLDA DATA MED ECC                           |
-| 02        | 04  | 01   | LOGISK ENHET ÄR INTE KLAR – REDO          |
+| 02        | 04  | 01   | LOGISK ENHET ÄR INTE KLAR – BLIR REDO          |
 | 02        | 04  | 02   | LOGISK ENHET ÄR INTE KLAR – INITIERING KRÄVS |
 | 02        | 04  | 04   | LOGISK ENHET ÄR INTE KLAR – FORMATET PÅGÅR       |
 | 02        | 04  | Ff   | LOGISK ENHET INTE KLAR – ENHETEN ÄR UPPTAGEN          |
@@ -218,7 +218,7 @@ Följande tabell innehåller möjliga kombinationer av Sense/ASC/ASCQ.
 | 07        | 27  | 00   | SKRIVA SKYDDADE MEDIA                             |
 | 0B        | 4E  | 00   | ÖVERLAPPANDE KOMMANDOFÖRSÖK                      |
 
-Det finns ytterligare två valfria återanrop som programmet kan implementera. den ena är för att **GET_STATUS_NOTIFICATION** ett kommando och den andra för att svara på SYNCHRONIZE_CACHE kommandot. 
+Det finns ytterligare två valfria återanrop som programmet kan implementera. den ena är till för **att GET_STATUS_NOTIFICATION** ett kommando och den andra används för att svara **SYNCHRONIZE_CACHE** kommandot.
 
 Om programmet vill hantera kommandot GET_STATUS_NOTIFICATION från värden bör det implementera ett återanrop med följande prototyp.
 
@@ -239,7 +239,7 @@ Plats:
 - *media_notification* ska anges av programmet till bufferten som innehåller svaret för meddelandet.
 - *media_notification_length* ska anges av programmet så att det innehåller längden på svarsbufferten.
 
-Returvärdet anger om kommandot lyckades – ska vara antingen UX_SUCCESS **eller** **UX_ERROR**.
+Returvärdet anger om kommandot lyckades – ska vara antingen **UX_SUCCESS** eller **UX_ERROR**.
 
 Om programmet inte implementerar det här återanropet meddelar USBX värden **att kommandot inte har** implementerats när GET_STATUS_NOTIFICATION-kommandot tas emot.
 
@@ -264,7 +264,7 @@ Plats:
 - *lba* är sektoradressen för det första blocket som ska synkroniseras.
 - *media_status* ska fyllas i exakt som returvärdet för återanrop av mediestatus.
 
-Returvärdet anger om kommandot lyckades – ska vara antingen UX_SUCCESS **eller** **UX_ERROR**.
+Returvärdet anger om kommandot lyckades – ska vara antingen **UX_SUCCESS** eller **UX_ERROR**.
 
 ### <a name="multiple-scsi-lun"></a>Flera SCSI LUN
 
@@ -393,9 +393,9 @@ status = ux_device_stack_class_register(_ux_system_slave_class_cdc_acm_name,ux_d
 
 De två parametrar som definieras är återanropspekare till de användarprogram som anropas när stacken aktiverar eller inaktiverar den här klassen.
 
-Den tredje parametern som definieras är en återanrops pekare till användarprogrammet som anropas när det finns en radkodning eller om rad tillståndsparametern ändras. När det t.ex. finns en begäran från värden om att ändra DTR-tillstånd till **TRUE** anropas återanropet. I det kan användarprogrammet kontrollera radtillstånd via IOCTL-funktionen till host är redo för kommunikation.
+Den tredje parametern som definieras är en återanrops pekare till användarprogrammet som anropas när det finns en radkodning eller om rad tillståndsparametern ändras. När det t.ex. finns en begäran från värden om att ändra DTR-tillståndet till **TRUE** anropas återanropet. I det kan användarprogrammet kontrollera radtillstånd via IOCTL-funktionen till host är redo för kommunikation.
 
-CDC-ACM baseras på en USB-IF-standard och identifieras automatiskt av MACOs och Linux-operativsystem. På Windows-plattformar kräver den här klassen en .inf-fil för Windows tidigare än 10. Windows 10 kräver inga INF-filer. Vi tillhandahåller en mall för CDC-ACM-klassen och  den finns i usbx_windows_host_files katalogen. För den senaste versionen Windows filen CDC_ACM_Template_Win7_64bit.inf användas (utom Win10). Den här filen måste ändras för att återspegla den PID/VID som används av enheten. PID/VID är specifik för den slutliga kunden när företaget och produkten registreras med USB-IF. I inf-filen finns de fält som ska ändras här.
+CDC-ACM baseras på en USB-IF-standard och identifieras automatiskt av MACOs och Linux-operativsystem. På Windows-plattformar kräver den här klassen en .inf-fil för Windows tidigare än 10. Windows 10 kräver inga INF-filer. Vi tillhandahåller en mall för CDC-ACM-klassen och  den finns i usbx_windows_host_files katalogen. För den senaste versionen Windows filen CDC_ACM_Template_Win7_64bit.inf användas (utom Win10). Den här filen måste ändras så att den återspeglar den PID/VID som används av enheten. PID/VID är specifik för den slutliga kunden när företaget och produkten registreras med USB-IF. I inf-filen finns de fält som ska ändras här.
 
 ```INF
 [DeviceList]
@@ -523,7 +523,7 @@ if (status != UX_SUCCESS)
 
 ### <a name="ux_device_class_cdc_acm_ioctl-ux_slave_class_cdc_acm_ioctl_get_line_coding"></a>ux_device_class_cdc_acm_ioctl: UX_SLAVE_CLASS_CDC_ACM_IOCTL_GET_LINE_CODING
 
-Utföra IOCTL Get Line Coding i CDC-ACM-gränssnittet
+Utför IOCTL Get Line Coding i CDC-ACM-gränssnittet
 
 ### <a name="prototype"></a>Prototyp
 
@@ -935,7 +935,7 @@ UINT ux_device_class_cdc_acm_write_with_callback(
 
 ### <a name="description"></a>Description
 
-Den här funktionen anropas när ett program behöver skriva till IN-datapipe pipe (IN från värden, OUT från enheten). Den här funktionen är icke-blockerande och slutförandet görs via en återanropsuppsättning i UX_SLAVE_CLASS_CDC_ACM_IOCTL_TRANSMISSION_START.
+Den här funktionen anropas när ett program behöver skriva till IN-datapipe pipe (IN från värden, OUT från enheten). Den här funktionen är icke-blockerande och slutförandet görs via en motringning i UX_SLAVE_CLASS_CDC_ACM_IOCTL_TRANSMISSION_START.
 
 ### <a name="parameters"></a>Parametrar
 
@@ -1083,7 +1083,7 @@ Nästa parametrar är för definitionen av nod-ID:erna. 2 noder krävs för CDC-
 
 CDC-ECM-klassen har inbyggda API:er för att överföra data åt båda sätten, men de är dolda för programmet eftersom användarprogrammet kommer att kommunicera med USB Ethernet-enheten via NetX.
 
-USBX CDC-ECM-klassen är nära kopplad till Azure RTOS NetX-nätverksstacken. Ett program som använder både NetX- och USBX CDC-ECM-klassen aktiverar NetX-nätverksstacken som vanligt men måste dessutom aktivera USB-nätverksstacken på följande sätt.
+USBX CDC-ECM-klassen är nära knuten Azure RTOS NetX-nätverksstacken. Ett program som använder både NetX- och USBX CDC-ECM-klassen aktiverar NetX-nätverksstacken som vanligt men måste dessutom aktivera USB-nätverksstacken på följande sätt.
 
 ```c
 /* Initialize the NetX system. */

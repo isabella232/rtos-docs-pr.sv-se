@@ -1,43 +1,43 @@
 ---
-title: Kapitel 1 – Introduktion till Azure återställnings tider NetX Duo Telnet
-description: Azure återställnings tider NetX Duo Telnet är ett protokoll som har utformats för att överföra kommandon och svar mellan två noder på Internet.
+title: Kapitel 1 – Introduktion till Azure RTOS NetX Duo Telnet
+description: Den Azure RTOS NetX Duo Telnet är ett protokoll som utformats för att överföra kommandon och svar mellan två noder på Internet.
 author: philmea
 ms.author: philmea
 ms.date: 06/04/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: d25f5ca4a7bf1ecf4c3d0c68ef6c8aeda7800098
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 50a2c4d8726863f4e609debadd9ddf2455cfd540219a476970756d3d250ec562
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104825734"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116799038"
 ---
-# <a name="chapter-1---introduction-to-the-azure-rtos-netx-duo-telnet"></a>Kapitel 1 – Introduktion till Azure återställnings tider NetX Duo Telnet
+# <a name="chapter-1---introduction-to-the-azure-rtos-netx-duo-telnet"></a>Kapitel 1 – Introduktion till Azure RTOS NetX Duo Telnet
 
-Azure återställnings tider NetX Duo Telnet är ett protokoll som har utformats för att överföra kommandon och svar mellan två noder på Internet. Telnet är ett enkelt protokoll som använder Reliable Transmission Control Protocol (TCP)-tjänster för att utföra sin överförings funktion. Därför är Telnet ett mycket tillförlitligt överförings protokoll. Telnet är också ett av de mest använda program protokollen.
+Den Azure RTOS NetX Duo Telnet är ett protokoll som utformats för att överföra kommandon och svar mellan två noder på Internet. Telnet är ett enkelt protokoll som använder tillförlitliga Transmission Control Protocol (TCP)-tjänster för att utföra sin överföringsfunktion. Därför är Telnet ett mycket tillförlitligt överföringsprotokoll. Telnet är också ett av de mest använda programprotokollen.
 
 ## <a name="telnet-requirements"></a>Telnet-krav
 
-För att kunna fungera korrekt kräver Telnet-paketet NetX Duo att en NetX-IP-instans redan har skapats. Dessutom måste TCP vara aktiverat på samma IP-instans. Telnet-klient delen av NetX Duo Telnet-paketet har inga ytterligare krav.
+NetX Duo Telnet-paketet kräver att en NetX IP-instans redan har skapats för att fungera korrekt. Dessutom måste TCP vara aktiverat på samma IP-instans. Telnet-klientdelen av NetX Duo Telnet-paketet har inga ytterligare krav.
 
-Telnet-Server delen av NetX Duo Telnet-paketet har ett ytterligare krav. Den kräver fullständig åtkomst till TCP *-välkända port 23* för hantering av alla Telnet-begäranden i klienten.
+Telnet-serverdelen av NetX Duo Telnet-paketet har ytterligare ett krav. Den kräver fullständig åtkomst till TCP *välkänd port 23 för hantering* av alla klient-Telnet-begäranden.
 
-## <a name="telnet-constraints"></a>Telnet-begränsningar 
+## <a name="telnet-constraints"></a>Begränsningar för Telnet 
 
-NetX Duo Telnet-protokollet implementerar Telnet-standarden. Tolkningen och svaret på Telnet-kommandon som anges av en byte med värdet 255, är dock programmets ansvar. De olika Telnet-kommandona och kommando parametrarna definieras i *nxd_telnet_client. h-och nxd_telnet_server. h* -filer.
+NetX Duo Telnet-protokollet implementerar Telnet-standarden. Tolkning och svar av Telnet-kommandon, som anges av en byte med värdet 255, är dock programmets ansvar. De olika Telnet-kommandona och kommandoparametrarna definieras *i filerna nxd_telnet_client.h och nxd_telnet_server.h.*
 
 ## <a name="telnet-communication"></a>Telnet-kommunikation
 
-Som tidigare nämnts använder Telnet-servern den *välkända TCP-porten 23* för att fält klient begär Anden. Telnet-klienter kan använda alla tillgängliga TCP-portar.
+Som tidigare nämnts använder Telnet-servern den välkända *TCP-port 23 för* fältet Klientbegäranden. Telnet-klienter kan använda valfri tillgänglig TCP-port.
 
 ## <a name="telnet-authentication"></a>Telnet-autentisering
 
-Telnet-autentisering är ansvaret för programmets motringnings funktion för Telnet-servern. Motringningen till programmets Telnet-Server "ny anslutning" skulle normalt fråga klienten om namn och/eller lösen ord. Klienten ansvarar då för att tillhandahålla informationen. Servern bearbetar sedan informationen i återanropet "Receive data". Det är här som program Server koden skulle behöva autentisera informationen och avgöra om den är giltig eller inte.
+Telnet-autentisering är ansvaret för programmets Telnet Server-återanropsfunktion. Programmets återanrop till Telnet Server "ny anslutning" uppmanar vanligtvis klienten att ange namn och/eller lösenord. Klienten skulle då ansvara för att tillhandahålla informationen. Servern bearbetar sedan informationen i motringningen "ta emot data". Det är här som programserverkoden måste autentisera informationen och avgöra om den är giltig eller inte.
 
-## <a name="telnet-new-connection-callback"></a>Telnet, ny motringning för anslutning
+## <a name="telnet-new-connection-callback"></a>Telnet – återanrop av anslutning
 
-NetX Duo Telnet-servern anropar den programspecifika återanrops funktionen när en ny begäran om Telnet-klienten tas emot. Programmet anger återanrops funktionen när Telnet-servern skapas via funktionen ***nx_telnet_server_create*** . Vanliga åtgärder för återanropet "ny anslutning" inkluderar att skicka en banderoll eller en prompt till klienten. Detta kan mycket bra innehålla en prompt för inloggnings information.
+NetX Duo Telnet Server anropar den programangivna återanropsfunktionen när en ny Telnet-klientbegäran tas emot. Programmet anger återanropsfunktionen när Telnet-servern skapas via nx_telnet_server_create ***funktionen.*** Vanliga åtgärder för återanropet "ny anslutning" är att skicka en banderoll eller en uppmaning till klienten. Detta kan mycket väl innehålla en uppmaning om inloggningsinformation.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -48,14 +48,14 @@ void  telnet_new_connection(NX_TELNET_SERVER *server_ptr,
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **server_ptr**: pekar mot den anropande Telnet-servern.
-- **logical_connection**: den interna logiska anslutningen för Telnet-servern. Detta kan användas av programmet som ett index i buffertar och/eller data strukturer som är specifika för varje klient anslutning. Värdet sträcker sig från 0 till NX_TELNET_MAX_CLIENTS-1.
+- **server_ptr**: Pekare till den anropande Telnet-servern.
+- **logical_connection:** Den interna logiska anslutningen för Telnet-servern. Detta kan användas av programmet som ett index i buffertar och/eller datastrukturer som är specifika för varje klientanslutning. Värdet sträcker sig från 0 till NX_TELNET_MAX_CLIENTS – 1.
 
-## <a name="telnet-receive-data-callback"></a>Motringning från Telnet-data
+## <a name="telnet-receive-data-callback"></a>Återanrop för Telnet-mottagningsdata
 
-NetX Duo Telnet-servern anropar den programspecificerade motringningsfunktionen varje gång som en ny Telnet-klient data tas emot. Programmet anger återanrops funktionen när Telnet-servern skapas via funktionen ***nx_telnet_server_create*** . Vanliga åtgärder för motringning till "ny anslutning" är att lägga till eko data och/eller parsa data och tillhandahålla data som ett resultat av att ett kommando från klienten tolkas.
+NetX Duo Telnet Server anropar den programangivna återanropsfunktionen när nya Telnet-klientdata tas emot. Programmet anger återanropsfunktionen när Telnet-servern skapas via nx_telnet_server_create ***funktionen.*** Vanliga åtgärder för återanropet "ny anslutning" omfattar att upprepa data tillbaka och/eller parsa data och tillhandahålla data som ett resultat av att tolka ett kommando från klienten.
 
-Observera att den här återkallnings rutinen även måste släppa det angivna paketet.
+Observera att den här återanropsrutinen också måste släppa det angivna paketet.
 
 ### <a name="prototype"></a>Prototyp
 
@@ -65,13 +65,13 @@ void  telnet_receive_data(NX_TELNET_SERVER *server_ptr,
 ```
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **server_ptr**: pekar mot den anropande Telnet-servern.
-- **logical_connection**: den interna logiska anslutningen för Telnet-servern. Detta kan användas av programmet som ett index i buffertar och/eller data strukturer som är specifika för varje klient anslutning. Värdet sträcker sig från 0 till NX_TELNET_MAX_CLIENTS-1.
-- **packet_ptr**: pekar mot paket som innehåller data från klienten.
+- **server_ptr**: Pekare till den anropande Telnet-servern.
+- **logical_connection:** Den interna logiska anslutningen för Telnet-servern. Detta kan användas av programmet som ett index i buffertar och/eller datastrukturer som är specifika för varje klientanslutning. Värdet sträcker sig från 0 till NX_TELNET_MAX_CLIENTS – 1.
+- **packet_ptr:** Pekare till paket som innehåller data från klienten.
 
-## <a name="telnet-end-connection-callback"></a>Återanrop för Telnet-avsluta anslutning
+## <a name="telnet-end-connection-callback"></a>Motringning av Telnet-slutanslutning
 
-NetX Duo Telnet-servern anropar den programspecificerade callback-funktionen när en Telnet-klient avslutar anslutningen. Programmet anger återanrops funktionen när Telnet-servern skapas via funktionen ***nx_telnet_server_create*** . Vanliga åtgärder för återanropet "Avsluta anslutning" är bland annat rensning av alla klient särskilda data strukturer som är associerade med den logiska anslutningen.
+NetX Duo Telnet Server anropar den programangivna återanropsfunktionen när en Telnet-klient avslutar anslutningen. Programmet anger återanropsfunktionen när Telnet-servern skapas via nx_telnet_server_create ***funktionen.*** Vanliga åtgärder för återanropet "slutanslutning" omfattar rensning av klientspecifika datastrukturer som är associerade med den logiska anslutningen.
 
 ### <a name="prototype"></a>Prototyp
 ```c
@@ -82,30 +82,30 @@ void  telnet_end_connection(NX_TELNET_SERVER *server_ptr,
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **server_ptr** Pekare till den anropande Telnet-servern.
-- **logical_connection** Den interna logiska anslutningen för Telnet-servern. Detta kan användas av programmet som ett index i buffertar och/eller data strukturer som är specifika för varje klient anslutning. Värdet sträcker sig från 0 till NX_TELNET_MAX_CLIENTS-1.
+- **logical_connection** Den interna logiska anslutningen för Telnet-servern. Detta kan användas av programmet som ett index i buffertar och/eller datastrukturer som är specifika för varje klientanslutning. Värdet sträcker sig från 0 till NX_TELNET_MAX_CLIENTS – 1.
 
-## <a name="telnet-option-negotiation"></a>Alternativ förhandling för Telnet
+## <a name="telnet-option-negotiation"></a>Telnet-alternativförhandling
 
-NetX Duo Telnet-servern har stöd för en begränsad uppsättning Telnet-alternativ, ECHO och förhindras gå vidare.
+NetX Duo Telnet Server stöder en begränsad uppsättning Telnet-alternativ, Echo och Suppress Go Ahead.
 
-Om du vill aktivera den här funktionen får NX_TELNET_SERVER_OPTION_DISABLE inte definieras. Som standard är den inte definierad. Telnet-servern skapar en adresspool i *nx_telnet_server_create* tjänst som den allokerar paket för att skicka Telnet-alternativ till klienten. Se "konfigurations alternativ" för att ange paketets nytto Last (NX_TELNET_SERVER_PACKET_PAYLOAD) och storlek för Packet pool (NX_TELNET_SERVER_PACKET_POOL_SIZE) för den här poolen. Den här poolen tas bort när *nx_telnet_server_deletes* tjänsten anropas.
+Om du vill aktivera den här NX_TELNET_SERVER_OPTION_DISABLE inte definieras. Som standard definieras den inte. Telnet-servern skapar en paketpool *i den nx_telnet_server_create-tjänst* som den tilldelar paket för att skicka telnet-alternativbegäranden till klienten. Se Konfigurationsalternativ för att ange paketnyttolasten (NX_TELNET_SERVER_PACKET_PAYLOAD) och paketpoolens storlek (NX_TELNET_SERVER_PACKET_POOL_SIZE) för den här paketpoolen. Paketpoolen tas bort när *nx_telnet_server_delete* anropas.
 
-När du upprättar en anslutning till Telnet-klienten kommer den att skicka ut den här uppsättningen Telnet-alternativ till klienten om den inte har fått alternativ begär Anden från klienten:
+När en anslutning upprättas med Telnet-klienten skickas den här uppsättningen telnet-alternativ till klienten om den inte har tagit emot alternativbegäranden från klienten:
 
-- kommer eko
-- eko inte
-- kommer att SGA
+- kommer att ge eko
+- upprepa inte
+- kommer sga
 
-När Telnet-data tas emot från klienten, kontrollerar Telnet-servern om den första byten är "IAC"-koden. I så fall kommer de att bearbeta alla alternativ i klient paketet. Alternativ som inte finns i listan ovan ignoreras.
+När Telnet-data tar emot data från klienten kontrollerar Telnet-servern om den första byten är IAC-koden. I så fall bearbetas alla alternativ i klientpaketet. Alternativ som inte finns i listan ovan ignoreras.
 
-Som standard skapar Telnet-servern sin egen interna adresspool om NX_TELNET_SERVER_OPTION_DISABLE inte har definierats och den måste överföra Telnet-alternativ. Programpoolen för Telnet Server definieras av NX_TELNET_SERVER_PACKET_PAYLOAD och NX_TELNET_SERVER_PACKET_POOLSIZE. Men om NX_TELNET_SERVER_USER_CREATE_PACKET_POOL har definierats måste programmet skapa paket poolen för Telnet-servern och ange den som en Programpakets-pool för Telnet genom att anropa *_nx_telnet_server_packet_pool_set*. Mer information om den här funktionen finns i kapitel 3 "Beskrivning av Telnet-tjänster".
+Som standard skapar Telnet-servern sin egen interna paketpool om NX_TELNET_SERVER_OPTION_DISABLE inte har definierats och den behöver överföra Telnet-alternativkommandon. Telnet Server-paketpoolen definieras av NX_TELNET_SERVER_PACKET_PAYLOAD och NX_TELNET_SERVER_PACKET_POOLSIZE. Men om NX_TELNET_SERVER_USER_CREATE_PACKET_POOL definieras måste programmet skapa Telnet Server-paketpoolen och ange den som Telnet Server-paketpoolen genom att *anropa _nx_telnet_server_packet_pool_set*. Se kapitel 3 "Beskrivning av Telnet Services" för mer information om den här funktionen.
 
-Till skillnad från NetX Duo Telnet-servern skickar och svarar inte NetX Duo Telnet-klientens uppgifts tråd automatiskt och svarar på mottagna alternativ från Telnet-servern. Detta måste göras av Telnets klient program.
+Till skillnad från NetX Duo Telnet Server skickar och svarar inte NetX Duo Telnet Client-uppgiftstråden automatiskt på mottagna alternativ från Telnet-servern. Detta måste göras av Telnet-klientprogrammet.
 
-## <a name="telnet-multi-thread-support"></a>Stöd för Telnet multi-Thread
+## <a name="telnet-multi-thread-support"></a>Telnet-stöd för flera trådar
 
-NetX Duo Telnet Client Services kan anropas från flera trådar samtidigt. Läs-eller Skriv förfrågningar för en viss Telnet-serverinstans bör dock göras i följd från samma tråd.
+NetX Duo Telnet-klienttjänsterna kan anropas från flera trådar samtidigt. Läs- eller skrivbegäranden för en viss Telnet-klientinstans bör dock göras i följd från samma tråd.
 
-## <a name="telnet-rfcs"></a>Telnet-rapporter
+## <a name="telnet-rfcs"></a>Telnet-RFC:er
 
-NetX Duo Telnet är kompatibel med RFC854 och relaterade RFC: er.
+NetX Duo Telnet är kompatibelt med RFC854 och relaterade RFC: er.

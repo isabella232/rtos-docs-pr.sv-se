@@ -1,28 +1,28 @@
 ---
-title: Kapitel 3 – klient Beskrivning av SMTP-klienttjänster
-description: Det här kapitlet innehåller en beskrivning av alla NetX Duo SMTP-klienttjänster (visas nedan) i användnings ordning i ett typiskt SMTP-klientcertifikat.
+title: Kapitel 3 – Klientbeskrivning av SMTP-klienttjänster
+description: Det här kapitlet innehåller en beskrivning av alla NetX Duo SMTP-klienttjänster (anges nedan) i användningsordning i ett typiskt SMTP-klientprogram.
 author: philmea
 ms.author: philmea
 ms.date: 07/09/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: f590ba5a4c020b4a0aec6628a89c0e5f0f8579d9
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: bc54e7763c4a3977ef4d760bc92025b1cda792b979d741fc7b82f8f1a3f2901b
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104825788"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116797815"
 ---
-# <a name="chapter-3---client-description-of-smtp-client-services"></a>Kapitel 3 – klient Beskrivning av SMTP-klienttjänster
+# <a name="chapter-3---client-description-of-smtp-client-services"></a>Kapitel 3 – Klientbeskrivning av SMTP-klienttjänster
 
-Det här kapitlet innehåller en beskrivning av alla NetX Duo SMTP-klienttjänster (visas nedan) i användnings ordning i ett typiskt SMTP-klientcertifikat.
+Det här kapitlet innehåller en beskrivning av alla NetX Duo SMTP-klienttjänster (anges nedan) i användningsordning i ett typiskt SMTP-klientprogram.
 
 > [!NOTE]
-> I avsnittet "retur värden" i följande API-beskrivningar påverkas inte värden i **fetstil** av **_NX_DISABLE_ERROR_CHECKING_** definiera som används för att inaktivera API-felkontroll, medan icke-Fetstilade värden är helt inaktiverade.
+> I avsnittet "Returvärden" i följande API-beskrivningar påverkas inte värden i **BOLD** av **_den NX_DISABLE_ERROR_CHECKING-definition_** som används för att inaktivera API-felkontroll, medan värden som inte är i fetstil är helt inaktiverade.
 
 ## <a name="nxd_smtp_client_create"></a>nxd_smtp_client_create
 
-Skapa en SMTP-klient instans
+Skapa en SMTP-klientinstans
 
 ### <a name="prototype"></a>Prototyp
 
@@ -37,36 +37,36 @@ UINT nxd_smtp_client_create(NX_SMTP_CLIENT *client_ptr,
     UINT port);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skapar en SMTP-klient instans på den angivna IP-instansen.
+Den här tjänsten skapar en SMTP-klientinstans på den angivna IP-instansen.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **client_ptr** Pekare till SMTP-klientens kontroll block;
+- **client_ptr** Pekare till SMTP-klientkontrollblock;
 - **ip_ptr** Pekare till IP-instans;
-- **packet_pool_ptr** Pekare till klient paketets pool;
-- **användar namn** NULL-terminerat * * användar namn för autentisering
-- **lösen ord** NULL-kopplat lösen ord för autentisering
-- **from_address** NULL-avbruten avsändar adress
-- **client_domain** NULL-avslutat domän namn
-- **authentication_type** Typ av klientautentisering. Typer som stöds:
+- **packet_pool_ptr** Pekare till klientpaketpoolen;
+- **användarnamn** NULL-avslutad** Användarnamn för autentisering
+- **lösenord** NULL-avslutat lösenord för autentisering
+- **from_address** NULL-avslutad avsändaradress
+- **client_domain** NULL-avslutat domännamn
+- **authentication_type** Klientautentiseringstyp. Typer som stöds är:
   - NX_SMTP_CLIENT_AUTH_LOGIN
   - NX_SMTP_CLIENT_AUTH_PLAIN
   - NX_SMTP_CLIENT_AUTH_NONE
 - **server_address** Pekare till SMTP-serverns IP-adress
-- **SERVER_PORT** TCP-port för SMTP-server
+- **server_port** TCP-port för SMTP-server
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) SMTP-klienten har skapats. Status för generering av TCP-socket
-- NX_SMTP_INVALID_PARAM (0xA5) ogiltig inmatad icke-pekare
-- NX_IP_ADDRESS_ERROR (0x21) ogiltig IP-adress typ
-- NX_PTR_ERROR (0x07) ogiltig parameter för inmatad pekare
+- **NX_SUCCESS** (0x00) SMTP-klienten har skapats. Status för skapande av TCP-socket
+- NX_SMTP_INVALID_PARAM (0xA5) Ogiltiga indata som inte pekare
+- NX_IP_ADDRESS_ERROR (0x21) Ogiltig IP-adresstyp
+- NX_PTR_ERROR (0x07) Ogiltig indata pekarparameter
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Program kod
+Programkod
 
 ### <a name="example"></a>Exempel
 
@@ -110,7 +110,7 @@ status = nxd_smtp_client_create(&demo_client, &client_ip, &client_packet_pool,
 
 ## <a name="nx_smtp_client_delete"></a>nx_smtp_client_delete
 
-Ta bort en SMTP-klient instans
+Ta bort en SMTP-klientinstans
 
 ### <a name="prototype"></a>Prototyp
 
@@ -118,22 +118,22 @@ Ta bort en SMTP-klient instans
 UINT nx_smtp_client_delete(NX_SMTP_CLIENT *client_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten tar bort en tidigare skapad SMTP-klient instans.
+Den här tjänsten tar bort en tidigare skapad SMTP-klientinstans.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **client_ptr** Pekare till SMTP-klient instans.
+- **client_ptr** Pekare till SMTP-klientinstansen.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) klienten har tagits bort
-- NX_PTR_ERROR (0x07) ogiltig parameter för inmatad pekare
+- **NX_SUCCESS** (0x00) Klienten har tagits bort
+- NX_PTR_ERROR (0x07) Ogiltig indata pekarparameter
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -161,30 +161,30 @@ UINT nx_smtp_mail_send(NX_SMTP_CLIENT *client_ptr,
     UINT mail_body_length);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skapar och skickar ett SMTP-e-postobjekt. SMTP-klienten upprättar en TCP-anslutning med SMTP-servern och skickar en serie med SMTP-kommandon. Om inga fel uppstår skickas e-postmeddelandet till servern. Oavsett om e-postmeddelandet har skickats avbryts TCP-anslutningen och returnerar en status som anger resultatet av e-postöverföringen. Programmet kan anropa den här tjänsten för så många e-postmeddelanden som det måste skickas utan begränsning.
+Den här tjänsten skapar och skickar ett SMTP-e-postobjekt. SMTP-klienten upprättar en TCP-anslutning med SMTP-servern och skickar en serie SMTP-kommandon. Om inga fel påträffas överförs e-postmeddelandet till servern. Oavsett om e-postmeddelandet har skickats avslutas TCP-anslutningen och en status returneras som anger resultatet av e-postöverföringen. Programmet kan anropa den här tjänsten för så många e-postmeddelanden som behövs för att skicka utan gräns.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
 - **client_ptr** Pekare till SMTP-klient
-- **recipient_address** NULL-avslutad mottagar adress.
-- **ämne** NULL-avslutad ämnes rad text;.
-- **prioritet** Prioritets nivå då e-post levereras
+- **recipient_address** NULL-avslutad mottagaradress.
+- **ämne** NULL-avslutad ämnesradstext;.
+- **prioritet** Prioritetsnivå där e-post levereras
 - **mail_body** Pekare till e-postmeddelande
-- **mail_body_length** Storlek på e-postmeddelande
+- **mail_body_length** Storleken på e-postmeddelandet
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS** (0X00) e-post har skickats
-- **NX_SMTP_CLIENT_NOT_INITIALIZED** (0XB2) SMTP-serverinstans har inte initierats för SMTP-sessionens status resultat för SMTP-session
-- NX_PTR_ERROR (0x07) ogiltig pekar parameter
-- NX_SMTP_INVALID_PARAM (0xA5) ogiltig inmatad icke-pekare
-- NX_CALLER_ERROR (0x11) ogiltig anropare för den här tjänsten
+- **NX_SUCCESS** (0x00) E-post har skickats
+- **NX_SMTP_CLIENT_NOT_INITIALIZED** (0xB2) SMTP-klientinstansen har inte initierats för SMTP-sessionsstatus Resultatet av SMTP-sessionen
+- NX_PTR_ERROR (0x07) Ogiltig pekarparameter
+- NX_SMTP_INVALID_PARAM (0xA5) Ogiltiga indata som inte pekare
+- NX_CALLER_ERROR (0x11) Ogiltig anropare för den här tjänsten
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 

@@ -1,21 +1,21 @@
 ---
-title: Kapitel 8 – Azure återställnings tider NetX trace Events
-description: Det här kapitlet innehåller en beskrivning av Azure återställnings tider NetX-händelser.
+title: Kapitel 8 – Azure RTOS NetX-spårningshändelser
+description: Det här kapitlet innehåller en beskrivning av Azure RTOS NetX-händelser.
 author: philmea
 ms.service: rtos
 ms.topic: article
 ms.date: 5/19/2020
 ms.author: philmea
-ms.openlocfilehash: ce355d86d7db0b7e259ae58e306d990277b77a8f
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: f785b421ffc6d588080eb45a50dad949daf1ca6a9bf36770110f0450cd465bf1
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104828353"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116805293"
 ---
-# <a name="chapter-8---azure-rtos-netx-trace-events"></a>Kapitel 8 – Azure återställnings tider NetX trace Events
+# <a name="chapter-8---azure-rtos-netx-trace-events"></a>Kapitel 8 – Azure RTOS NetX-spårningshändelser
 
-Det här kapitlet innehåller en beskrivning av Azure återställnings tider NetX-händelser. 
+Det här kapitlet innehåller en beskrivning av Azure RTOS NetX-händelser. 
 
 ## <a name="list-of-events-and-icons"></a>Lista över händelser och ikoner
 
@@ -23,2982 +23,2982 @@ Följande är en lista över NetX-händelser som visas av TraceX.
 
 | Ikon                                           | Innebörd                 |
 | -------------------------------- | ------------------------------------- |
-| ![Intern A R P P-ikon för mottagnings förfrågan](./media/user-guide/netx-events/image1.png)    | Mottagning av intern ARP-begäran |
-| ![Intern A R P P-ikon för att skicka förfrågan](./media/user-guide/netx-events/image2.png)    | Skicka intern ARP-begäran |
-| ![Intern A R P-ikon för svars mottagning](./media/user-guide/netx-events/image3.png)    | Mottagna interna ARP-svar |
-| ![Intern A R P P svar ikon för skicka](./media/user-guide/netx-events/image4.png)    | Skicka internt ARP-svar |
-| ![Intern I C M P-ikon för mottagning](./media/user-guide/netx-events/image5.png)    | Internt ICMP-mottagning |
-| ![Intern I/P e P skicka-ikon](./media/user-guide/netx-events/image6.png)    | Intern ICMP-sändning |
-| ![Intern NetX I G M P-ikon](./media/user-guide/netx-events/image7.png)    | Internt NetX IGMP Receive |
-| ![Intern I/e-ikon](./media/user-guide/netx-events/image8.png)    | Ta emot internt IP |
-| ![Intern I/e-ikon](./media/user-guide/netx-events/image9.png)    | Skicka intern IP |
-| ![Intern T C P data Receive-ikon](./media/user-guide/netx-events/image10.png)    | Mottagna interna TCP-data |
-| ![Inbyggt T C P data Send-ikon](./media/user-guide/netx-events/image11.png)    | Intern TCP-data överföring |
-| ![Intern T C P P-mottagnings ikon](./media/user-guide/netx-events/image12.png)    | Intern TCP FIN mottagning |
-| ![Inbyggt T C P F I N skicka ikon](./media/user-guide/netx-events/image13.png)    | Intern TCP RÄNTETRANS-sändning |
-| ![Inbyggt T C P R S T Inleverera-ikon](./media/user-guide/netx-events/image14.png)    | Internt TCP-mottagna |
-| ![Intern T R P R S T skicka-ikon](./media/user-guide/netx-events/image15.png)    | Intern TCP-överföring |
-| ![Ikon för intern T C P S Y N-mottagning](./media/user-guide/netx-events/image16.png)    | Ta emot internt TCP-SYN |
-| ![Intern T C P S Y N skicka-ikon](./media/user-guide/netx-events/image17.png)    | Skicka internt TCP-SYN |
-| ![Intern U D P-mottagnings ikon](./media/user-guide/netx-events/image18.png)    | Internt UDP-mottagning |
-| ![Intern U D P-skicka-ikon](./media/user-guide/netx-events/image19.png)    | Intern UDP-sändning |
-| ![Intern R A R P-ikon för mottagning](./media/user-guide/netx-events/image20.png)    | Intern RARP-mottagning |
-| ![Interna R A R P-ikonen skicka](./media/user-guide/netx-events/image21.png)    | Intern RARP-sändning |
-| ![Inbyggt T C P-återförsök-ikon](./media/user-guide/netx-events/image22.png)    | Internt TCP-försök |
-| ![Ändrings ikon för den interna T C P-statusen](./media/user-guide/netx-events/image23.png)    | Intern TCP-tillstånds ändring |
-| ![Ikon för att skicka intern I/O-drivrutin](./media/user-guide/netx-events/image24.png)    | Skicka internt I/O-drivrutins paket |
-| ![storleken på](./media/user-guide/netx-events/image25.png)    | Intern I/O-drivrutin initieras |
-| ![Initiera ikon för intern I/O-drivrutin](./media/user-guide/netx-events/image26.png)    | Intern I/O driv Rutins länk aktivera |
-| ![Ikon för inaktive ring av intern I/O-drivrutin](./media/user-guide/netx-events/image27.png)    | Inaktivera intern I/O driv Rutins länk |
-| ![Ikon för intern I/O-drivrutin för driv Rutins paket](./media/user-guide/netx-events/image28.png)    | Intern I/O-drivrutins paket sändning |
-| ![Skicka ikon för intern I/O-drivrutins-ARP](./media/user-guide/netx-events/image29.png)    | Överföring av intern I/O-drivrutins-ARP |
-| ![Intern I/O-drivrutin för ARP-svar skicka ikon](./media/user-guide/netx-events/image30.png)    | Intern I/O-drivrutin ARP-svar skicka |
-| ![Intern I/O driv rutin RARP skicka ikon](./media/user-guide/netx-events/image31.png)    | Intern I/O-drivrutin RARP skicka |
-| ![Ikon för multicast-anslutning för intern I/O-drivrutin](./media/user-guide/netx-events/image32.png)    | Intern I/O-drivrutin multicast-anslutning |
-| ![Ikon för multicast för intern I/O-drivrutin](./media/user-guide/netx-events/image33.png)    | Intern I/O-drivrutin för multicast-ledighet |
-| ![Status ikon för intern I/O-drivrutin](./media/user-guide/netx-events/image34.png)    | Status för intern I/O-drivrutin för hämtning |
-| ![Intern I/O driv rutin Hämta hastighets ikon](./media/user-guide/netx-events/image35.png)    | Intern I/O-drivrutin Hämta hastighet |
-| ![Intern I/O-drivrutin Hämta duplex-typ ikon](./media/user-guide/netx-events/image36.png)    | Intern I/O-drivrutin Hämta duplex-typ |
-| ![Ikon för Hämta fel antal för intern I/O-drivrutin](./media/user-guide/netx-events/image37.png)    | Fel antal för intern I/O-drivrutin |
-| ![Intern I/O-drivrutin Hämta RX-ikon](./media/user-guide/netx-events/image38.png)    | Intern I/O-drivrutin Hämta RX-antal |
-| ![Intern I/O-drivrutin för Hämta TX-antal](./media/user-guide/netx-events/image39.png)    | Intern I/O-drivrutin Hämta TX-antal |
-| ![Ikon för Hämta tilldelnings fel för intern I/O-drivrutin](./media/user-guide/netx-events/image40.png)    | Intern I/O-drivrutin Hämta tilldelnings fel |
-| ![Ikon för intern I/O-drivrutin för avinitiering](./media/user-guide/netx-events/image41.png)    | Intern I/O-drivrutin avinitieras |
-| ![Intern I/O-drivrutin för uppskjuten bearbetning](./media/user-guide/netx-events/image42.png)    | Intern I/O-drivrutin uppskjuten bearbetning |
-| ![En ogiltig ikon för R P dynamiska poster](./media/user-guide/netx-events/image43.png)    | **Avvalidering av dynamiska ARP-poster** (*nx_arp_dynamic_entries_invalidate*) |
-| ![En R P-ikon för dynamisk inmatnings uppsättning](./media/user-guide/netx-events/image44.png)    | **Dynamisk ARP-inmatnings uppsättning** (*nx_arp_dynamic_entry_set*) |
-| ![Ikonen R P aktivera](./media/user-guide/netx-events/image45.png)    | **Aktivera ARP** (*nx_arp_enable*) |
-| ![En R P-ikon för att skicka en kostnads fria sändning](./media/user-guide/netx-events/image46.png)    | **ARP, kostnads överföring** (*nx_arp_gratuitous_send*) |
-| ![Ikonen R P P maskin varu adress Sök](./media/user-guide/netx-events/image47.png)    | **Sök efter ARP-maskinvara** (*nx_arp_hardware_address_find*) |
-| ![En R P P information get-ikon](./media/user-guide/netx-events/image48.png)    | **Hämta ARP-information** (*nx_arp_info_get*) |
-| ![Ikonen R P P IP-adress Sök](./media/user-guide/netx-events/image49.png)    | **ARP IP-adress Sök** (*nx_arp_ip_address_find*) |
-| ![En ikon för att skapa R P statisk post](./media/user-guide/netx-events/image50.png)    | **Skapa statisk post i ARP** (*nx_arp_static_entry_create*) |
-| ![Ta bort ikon för R P statisk poster](./media/user-guide/netx-events/image51.png)    | **Ta bort ARP statiska poster** (*nx_arp_static_entries_delete*) |
-| ![Ikonen R P statisk post Delete](./media/user-guide/netx-events/image52.png)    | **Statisk borttagning av ARP-post** (*nx_arp_static_entry_delete*) |
-| ![Duo cache Entry ta bort ikon](./media/user-guide/netx-events/image53.png)    | **Borttagning av Duo-cachepost** (*nxd_nd_cache_entry_delete*) |
-| ![Ikon för Duo cache Entry set](./media/user-guide/netx-events/image54.png)    | **Duo cache-startpunkt** (*nxd_nd_cache_entry_set*) |
-| ![Ikonen för Duo cache-Invalidate](./media/user-guide/netx-events/image55.png)    | **Duo-cachelagring är ogiltig** (*nxd_nd_cache_invalidate*) |
-| ![Duo-cache I P-adress Sök ikon](./media/user-guide/netx-events/image56.png)    | **Duo-cache IP-adress Sök** (*nxd_nd_cache_ip_address_find*) |
-| ![Ikonen Duo I C M P Enable](./media/user-guide/netx-events/image57.png)    | **Duo ICMP Enable** (*nxd_icmp_enable*) |
-| ![Ikonen Duo I C M P I P v v 6-ping](./media/user-guide/netx-events/image58.png)    | **Duo ICMP IPv6-ping** (*nxd_icmp_ping*) |
-| ![Ikonen Duo I P Max storlek för nytto Last](./media/user-guide/netx-events/image59.png)    | **Duo IP Max storlek för nytto laster Sök** (*nx_max_payload_size_find*) |
-| ![Ikonen Duo I P RAW Packet sändning](./media/user-guide/netx-events/image60.png)    | **Duo IP RAW-paket sändning** (*nxd_ip_raw_packet_send*) |
-| ![Duo I P v v standard ikon för Lägg till router](./media/user-guide/netx-events/image61.png)    | **Duo IPv6 standard router Add** (*nxd_ipv6_default_router_add*) |
-| ![Duo I P v v standard ikon för ta bort router](./media/user-guide/netx-events/image62.png)    | **Duo IPv6 standardrouter ta bort** (*nxd_ipv6_default_router_delete)* |
-| ![Duo I P v v v Aktivera ikon](./media/user-guide/netx-events/image63.png)    | **Duo IPv6 Enable** (*nxd_ipv6_enable)* |
-| ![Ikonen Duo I P v v 6 global adress Hämta](./media/user-guide/netx-events/image64.png)    | **Duo IPv6 global adress get** (*nxd_ipv6_global_address_get*) |
-| ![Ikonen Duo I P v v v 6, global adress uppsättning](./media/user-guide/netx-events/image65.png)    | **Global adress uppsättning för Duo IPv6** (*nxd_ipv6_global_address_set*) |
-| ![Duo I P v v v Starta pappa-process ikon](./media/user-guide/netx-events/image66.png)    | **Duo IPv6-initiera pappa-process** (*nxd_ipv6_initiate_dad_process*) |
-| ![Duo I P v v v-ikonen Hämta ikon](./media/user-guide/netx-events/image67.png)    | **Duo IPv6-gränssnitt adress Hämta** (*nxd_ipv6_interface_address_get*) |
-| ![Ikon för ikonen Duo I P v v v-gränssnittet](./media/user-guide/netx-events/image68.png)    | **Duo IPv6 gränssnitts adress uppsättning** (*nxd_ipv6_interface_address_set*) |
-| ![Ikonen Duo I P v v v länk lokal adress Hämta ikon](./media/user-guide/netx-events/image69.png)    | **Duo IPv6 länk lokal adress hämtning** (*nxd_ipv6_linklocal_address_get*) |
-| ![Ikonen Duo I P v v v-länk lokalt adress uppsättning](./media/user-guide/netx-events/image70.png)    | **Duo IPv6-länk lokal adress uppsättning** (*nxd_ipv6_linklocal_address_set*) |
-| ![Duo I P v v v-ikon för RAW Packet-sändning](./media/user-guide/netx-events/image71.png)    | **Duo IPv6 RAW Packet Send** (*nxd_ipv6_raw_packet_send)* |
-| ![Duo T C P socket peer information get ikon](./media/user-guide/netx-events/image72.png)    | **Duo TCP socket peer information get** (*nxd_tcp_socket_peer_info_get*) |
-| ![Ikonen Duo T C P socket set Interface](./media/user-guide/netx-events/image73.png)    | **Duo TCP socket set Interface** (*nxd_tcp_socket_set_interface*) |
-| ![Duo U D P uttag ikon för skicka](./media/user-guide/netx-events/image74.png)    | **Duo UDP-socket sändning** (*nxd_udp_socket_send*) |
-| ![Ikonen Duo U D P socket set Interface](./media/user-guide/netx-events/image75.png)    | **Duo UDP socket set Interface** (*nxd_udp_socket_set_interface*) |
-| ![Duo U D P-käll extraherings ikon](./media/user-guide/netx-events/image76.png)    | **Duo UDP käll extrahering** (*nxd_udp_source_extract*) |
-| ![I C M P Enable-ikon](./media/user-guide/netx-events/image77.png)    | **Aktivera ICMP** (*nx_icmp_enable*) |
-| ![I C M P information get-ikonen](./media/user-guide/netx-events/image78.png)    | **ICMP information get** (*nx_icmp_info_get*) |
-| ![I C M P ping-ikonen](./media/user-guide/netx-events/image79.png)    | **ICMP-Ping** (*nx_icmp_ping*) |
-| ![I G M P Enable-ikon](./media/user-guide/netx-events/image80.png)    | **Aktivera IGMP** (*nx_igmp_enable*) |
-| ![I G M P information get-ikon](./media/user-guide/netx-events/image81.png)    | **Hämta IGMP information** (*nx_igmp_info_get*) |
-| ![I G M P loopback inaktivera ikon](./media/user-guide/netx-events/image82.png)    | **Inaktivera IGMP loopback** (*nx_igmp_loopback_disable*) |
-| ![I G M P loopback Aktivera ikon](./media/user-guide/netx-events/image83.png)    | **Aktivera IGMP loopback** (*nx_igmp_loopback_enable*) |
-| ![I G M P-ikon för multicast-anslutning](./media/user-guide/netx-events/image84.png)    | **IGMP multicast-anslutning** (*nx_igmp_multicast_join*) |
-| ![Ikonen I G M P multicast-tjänstledighet](./media/user-guide/netx-events/image85.png)    | **IGMP multicast-ledighet** (*nx_igmp_multicast_leave*) |
-| ![I P adress ändrings aviserings ikon](./media/user-guide/netx-events/image86.png)    | **Avisering om ändring av IP-adress** (*nx_ip_address_change_notify*) |
-| ![Hämta ikon för mitt P-adress](./media/user-guide/netx-events/image87.png)    | **Hämta IP-adress** (*nx_ip_address_get*) |
-| ![Ikonen I P Address set](./media/user-guide/netx-events/image88.png)    | **IP-adress uppsättning** (*nx_ip_address_set*) |
-| ![I P skapa ikon](./media/user-guide/netx-events/image89.png)    | **Skapa IP-adress** (*nx_ip_create*) |
-| ![I P ta bort-ikonen](./media/user-guide/netx-events/image90.png)    | **IP-borttagning** (*nx_ip_delete*) |
-| ![I P driv rutin Direct kommando ikon](./media/user-guide/netx-events/image91.png)    | **IP-drivrutin Direct-kommando** (*nx_ip_driver_direct_command*) |
-| ![I P-ikonen inaktivera](./media/user-guide/netx-events/image92.png)    | **Inaktivera IP-vidarebefordring** (*nx_ip_forwarding_disable*) |
-| ![Aktiverings ikon för I P P-vidarebefordring](./media/user-guide/netx-events/image93.png)    | **Aktivera IP-vidarebefordring** (*nx_ip_forwarding_enable*) |
-| ![I P fragment, inaktivera ikon](./media/user-guide/netx-events/image94.png)    | **Inaktivera IP-fragment** (*nx_ip_fragment_disable*) |
-| ![Ikon för att aktivera I f-fragment](./media/user-guide/netx-events/image95.png)    | **Aktivera IP-fragment** (*nx_ip_fragment_enable*)  |
-| ![Ikonen I P Gateway-adress uppsättning](./media/user-guide/netx-events/image96.png)    | **Adress uppsättning för IP-gateway** (*nx_ip_gateway_address_set*) |
-| ![I P information get-ikonen](./media/user-guide/netx-events/image97.png)    | **Hämta IP-information** (*nx_ip_info_get*) |
-| ![Ikon för att koppla mitt gränssnitt](./media/user-guide/netx-events/image98.png)    | **IP-gränssnitt kopplat** (*nx_ip_interface_attach*) |
-| ![I P gränssnitts information Hämta ikon](./media/user-guide/netx-events/image99.png)    | **Hämta information om IP-gränssnitt** (*nx_ip_interface_info_get*) |
-| ![Ikonen inaktivera I RAW-paket](./media/user-guide/netx-events/image100.png)    | **Inaktivera IP RAW-paket** (*nx_ip_raw_packet_disable*) |
-| ![Ikonen aktivera I RAW-paket](./media/user-guide/netx-events/image101.png)    | **Aktivera IP RAW-paket** (*nx_ip_raw_packet_enable*) |
-| ![Ikonen för att ta emot RAW-paket](./media/user-guide/netx-events/image102.png)    | **Ta emot IP RAW-paket** (*nx_ip_raw_packet_receive*) |
-| ![I P skicka ikon för RAW Packet-sändning](./media/user-guide/netx-events/image103.png)    | **Skicka IP RAW-paket** (*nx_ip_raw_packet_send*) |
-| ![I P statisk väg, Lägg till ikon](./media/user-guide/netx-events/image104.png)    | **Lägg till statisk väg för IP** (*nx_ip_static_route_add*) |
-| ![I P statisk väg ta bort ikon](./media/user-guide/netx-events/image105.png)    | **IP-statisk väg borttagning** (*nx_ip_static_route_delete)* |
-| ![Kontroll ikon för I P-status](./media/user-guide/netx-events/image106.png)    | **Kontroll av IP-status** (*nx_ip_status_check*)|
-| ![I P S E C Aktivera ikon](./media/user-guide/netx-events/image107.png)    | **Aktivera IPsec** (*nx_ipsec_enable)* |
-| ![Ikon för paket tilldelning](./media/user-guide/netx-events/image108.png)    | **Paket tilldelning** (*nx_packet_allocate*) |
-| ![Paket kopierings ikon](./media/user-guide/netx-events/image109.png)    | **Paket kopia** (*nx_packet_copy*) |
-| ![Ikon för Lägg till paket data](./media/user-guide/netx-events/image110.png)    | **Lägg till paket data** (*nx_packet_data_append*) |
-| ![Förskjutnings ikon för extrahering av paket data](./media/user-guide/netx-events/image111.png)    | **Offset för extrahering av paket data** (*nx_packet_data_extract_offset*) |
-| ![Hämta ikon för paket data](./media/user-guide/netx-events/image112.png)    | **Hämta paket data** (*nx_packet_data_retrieve*) |
-| ![Hämta ikon för paket längd](./media/user-guide/netx-events/image113.png)    | **Hämta paket längd** (*nx_packet_length_get*) |
-| ![Ikon för att skapa paket pool](./media/user-guide/netx-events/image114.png)    | **Skapa paket bassäng** (*nx_packet_pool_create*) |
-| ![Ikon för borttagning av paket pool](./media/user-guide/netx-events/image115.png)    | **Ta bort paket bassäng** (*nx_packet_pool_delete*) |
-| ![Hämta ikon för paket Pools information](./media/user-guide/netx-events/image116.png)    | **Hämta paketets pool information** (*nx_packet_pool_info_get*) |
-| ![Ikon för paket frigörelse](./media/user-guide/netx-events/image117.png)    | **Paket release** (*nx_packet_release*) |
-| ![Ikon för paket sändnings version](./media/user-guide/netx-events/image118.png)    | **Paket överförings version** (*nx_packet_transmit_release*) |
-| ![R A R P inaktivera ikon](./media/user-guide/netx-events/image119.png)    | **Inaktivera RARP** (*nx_rarp_disable*) |
-| ![R A R P Aktivera ikon](./media/user-guide/netx-events/image120.png)    | **Aktivera RARP** (*nx_rarp_enable*) |
-| ![R A R P P-ikonen Hämta information](./media/user-guide/netx-events/image121.png)    | **RARP information get** (*nx_rarp_info_get*) |
-| ![Ikon för system initiering](./media/user-guide/netx-events/image122.png)    | **System initiering** (*nx_system_initialize*) |
-| ![Ikonen för T C P client socket bind](./media/user-guide/netx-events/image123.png)    | **TCP-klientens socket bind** (*nx_tcp_client_socket_bind*) |
-| ![T C P P Connect-ikon för klient-socket](./media/user-guide/netx-events/image124.png)    | **TCP klient-socket Connect** (*nx_tcp_client_socket_connect*) |
-| ![Ikonen Hämta ikon för T C P client socket](./media/user-guide/netx-events/image125.png)    | **Hämta TCP-klientens socket-port** (*nx_tcp_client_socket_port_get*) |
-| ![Ikon för T C P P-bindning för klient-socket](./media/user-guide/netx-events/image126.png)    | **TCP-klientens socket-bindning** (*nx_tcp_client_socket_unbind*) |
-| ![Ikonen T C P Enable](./media/user-guide/netx-events/image127.png)    | **TCP-aktivering** (*nx_tcp_enable*) |
-| ![T C P kostnads fri port hitta ikon](./media/user-guide/netx-events/image128.png)    | **Sök efter lediga TCP-portar** (*nx_tcp_free_port_find*) |
-| ![T C P information get-ikon](./media/user-guide/netx-events/image129.png)    | **Hämta TCP-information** (*nx_tcp_info_get*) |
-| ![Ikonen för T C P P-mottagning för Server uttag](./media/user-guide/netx-events/image130.png)    | **TCP server-socket acceptera** (*nx_tcp_server_socket_accept*) |
-| ![Lyssnings ikon för T C P i Server uttag](./media/user-guide/netx-events/image131.png)    | **TCP server-socket lyssna** (*nx_tcp_server_socket_listen*) |
-| ![Ikon för T C P P relister för Server uttag](./media/user-guide/netx-events/image132.png)    | **TCP server socket relister** (*nx_tcp_server_socket_relisten*) |
-| ![Ikon för att ta emot en ikon för T C P-nätuttag](./media/user-guide/netx-events/image133.png)    | **TCP server-socket accepteras** inte (*nx_tcp_server_socket_unaccept*) |
-| ![Ikon för T C P P-avregistrering av Server-socket](./media/user-guide/netx-events/image134.png)    | **TCP-serverns socket avlistar** (*nx_tcp_server_socket_unlisten*) |
-| ![Ikon för T C P-socket-tillgängliga byte](./media/user-guide/netx-events/image135.png)    | **Tillgängliga TCP-socket byte** (*nx_tcp_socket_bytes_available*) |
-| ![T C P uttag ikon för skapa](./media/user-guide/netx-events/image136.png)    | **TCP-socket-skapande** (*nx_tcp_socket_create*) |
-| ![Ta bort ikon för T C P socket](./media/user-guide/netx-events/image137.png)    | **Ta bort TCP-socket** (*nx_tcp_socket_delete*) |
-| ![Ikon för T C P uttag från koppling](./media/user-guide/netx-events/image138.png)    | **TCP-socket från koppling** (*nx_tcp_socket_disconnect*) |
-| ![T C P socket information get-ikon](./media/user-guide/netx-events/image139.png)    | **TCP socket information get** (*nx_tcp_socket_info_get*) |
-| ![Ikon för T C P socket MSS get](./media/user-guide/netx-events/image140.png)    | **TCP-socket MSS get** (*nx_tcp_socket_mss_get*) |
-| ![T C P socket MSS peer get-ikon](./media/user-guide/netx-events/image141.png)    | **TCP-socket MSS peer get** (*nx_tcp_socket_mss_peer_get*) |
-| ![Ikon för T C P socket MSS-uppsättning](./media/user-guide/netx-events/image142.png)    | **TCP-socket MSS-uppsättning** (*nx_tcp_socket_mss_set*) |
-| ![Hämta ikon för T C P socket peer info](./media/user-guide/netx-events/image143.png)    | **Hämta peer-information för TCP-socket** (*nx_tcp_socket_peer_info_get*) |
-| ![Ikon för T C P socket Receive](./media/user-guide/netx-events/image144.png)    | **Mottagning av TCP-socket** (*nx_tcp_socket_receive*) |
-| ![Ikonen för T C P socket Receive-avisering](./media/user-guide/netx-events/image145.png)    | **Mottagnings meddelande för TCP-socket** (*nx_tcp_socket_receive_notify*) |
-| ![T C P socket-sändning, ikon](./media/user-guide/netx-events/image146.png)    | **TCP-socket-sändning** (*nx_tcp_socket_send*) |
-| ![Vänta-ikon för T C P-insocket-tillstånd](./media/user-guide/netx-events/image147.png)    | **Vänte läge för TCP-socket** (*nx_tcp_socket_state_wait*) |
-| ![Konfigurations ikon för T C P socket-överföring](./media/user-guide/netx-events/image148.png)    | **Konfigurera TCP socket-överföring** (*nx_tcp_socket_transmit_configure*) |
-| ![Ikon för att uppdatera aviserings uppsättning i T C P socket Window](./media/user-guide/netx-events/image149.png)    | **TCP-socket fönstret uppdatering av meddelande uppsättning** (*nx_tcp_socket_window_update_notify_set*)  |
-| ![U D P Enable-ikon](./media/user-guide/netx-events/image150.png)    | **UDP-aktivering** (*nx_udp_enable*) |
-| ![U D P kostnads fri port hitta ikon](./media/user-guide/netx-events/image151.png)    | **Kostnads fri UDP-port hitta** (*nx_udp_free_port_find*) |
-| ![U D P information get-ikon](./media/user-guide/netx-events/image152.png)    | **Hämta UDP-information** (*nx_udp_info_get*) |
-| ![U D P v socket bind-ikon](./media/user-guide/netx-events/image153.png)    | **UDP-socket bind** (*nx_udp_socket_bind*) |
-| ![Ikon för U D P socket-tillgängliga byte](./media/user-guide/netx-events/image154.png)    | **Tillgängliga UDP-socket-byte** (*nx_udp_socket_bytes_available*) |
-| ![Inaktivera ikon för U D P socket-kontrollsumma](./media/user-guide/netx-events/image155.png)    | **Inaktivera kontroll summa för UDP-socket** (*nx_udp_socket_checksum_disable*) |
-| ![Ikon för U D P-uttag för kontroll Summa](./media/user-guide/netx-events/image156.png)    | **Aktivera kontroll summa för UDP-uttag** *(nx_udp_socket_checksum_enable)* |
-| ![U D P uttag ikon för skapa](./media/user-guide/netx-events/image157.png)    | **Skapa UDP-socket** (*nx_udp_socket_create*) |
-| ![U D P socket ta bort ikon](./media/user-guide/netx-events/image158.png)    | **Ta bort UDP-socket** (*nx_udp_socket_delete*) |
-| ![U D socket information get-ikon](./media/user-guide/netx-events/image159.png)    | **Hämta UDP-socket information** (*nx_udp_socket_info_get*) |
-| ![Ikonen U D P socket interface set](./media/user-guide/netx-events/image160.png)    | **Gränssnitts uppsättning för UDP-socket** (*nx_udp_socket_interface_set*) |
-| ![U D P socket port get-ikon](./media/user-guide/netx-events/image161.png)    | **Hämta UDP-socket** (*nx_udp_socket_port_get*) |
-| ![U D P socket Receive-ikon](./media/user-guide/netx-events/image162.png)    | **Mottagning av UDP-socket** (*nx_udp_socket_receive*) |
-| ![U D P socket ta emot meddelande ikon](./media/user-guide/netx-events/image163.png)    | **Mottagnings meddelande för UDP-socket** (*nx_udp_socket_receive_notify*) |
-| ![U D P socket-skicka-ikon](./media/user-guide/netx-events/image164.png)    | **Skicka UDP-socket** (*nx_udp_socket_send*) |
-| ![U D P-uppbindning-ikon](./media/user-guide/netx-events/image165.png)    | **UDP-socket-avbindning** (*nx_udp_socket_unbind*) |
-| ![U D P P käll extraherings ikon](./media/user-guide/netx-events/image166.png)    | **UDP-käll extrahering** (*nx_udp_source_extract*) |
+| ![Ikon för intern mottagning av R P-begäran](./media/user-guide/netx-events/image1.png)    | Intern mottagning av ARP-begäran |
+| ![Ikonen Skicka en intern R P-begäran](./media/user-guide/netx-events/image2.png)    | Skicka intern ARP-begäran |
+| ![Ikon för intern R P-svars ta emot](./media/user-guide/netx-events/image3.png)    | Intern mottagning av ARP-svar |
+| ![Ikonen Skicka internt R P-svar](./media/user-guide/netx-events/image4.png)    | Intern ARP-svarssändning |
+| ![Ikon för intern IC M P-mottagning](./media/user-guide/netx-events/image5.png)    | Intern ICMP-mottagning |
+| ![Ikonen Skicka internt I C M P](./media/user-guide/netx-events/image6.png)    | Internt ICMP-meddelande |
+| ![Ikon för intern NetX I G M P-mottagning](./media/user-guide/netx-events/image7.png)    | Intern NetX IGMP-mottagning |
+| ![Ikonen Intern I P-mottagning](./media/user-guide/netx-events/image8.png)    | Intern IP-mottagning |
+| ![Ikonen Skicka internt I P](./media/user-guide/netx-events/image9.png)    | Internt IP-meddelande |
+| ![Ikon för intern T C P-data tar emot](./media/user-guide/netx-events/image10.png)    | Intern TCP-data tar emot |
+| ![Ikonen Skicka interna T C P-data](./media/user-guide/netx-events/image11.png)    | Intern TCP-datasänd |
+| ![Ikon för intern T C P FIN-mottagning](./media/user-guide/netx-events/image12.png)    | Intern TCP FIN-mottagning |
+| ![Ikonen Skicka internt T C P F I N](./media/user-guide/netx-events/image13.png)    | Internt TCP FIN-meddelande |
+| ![Ikon för intern T C P R S T-mottagning](./media/user-guide/netx-events/image14.png)    | Intern TCP RST-mottagning |
+| ![Ikonen Skicka internt T C P R S T](./media/user-guide/netx-events/image15.png)    | Internt TCP RST-meddelande |
+| ![Ikon för intern T C P S Y N-mottagning](./media/user-guide/netx-events/image16.png)    | Intern TCP SYN-mottagning |
+| ![Ikonen Skicka internt T C P S Y N](./media/user-guide/netx-events/image17.png)    | Internt TCP SYN-meddelande |
+| ![Ikon för intern U D P-mottagning](./media/user-guide/netx-events/image18.png)    | Intern UDP-mottagning |
+| ![Ikonen Skicka internt U D P](./media/user-guide/netx-events/image19.png)    | Intern UDP-skicka |
+| ![Ikon för intern R A R P-mottagning](./media/user-guide/netx-events/image20.png)    | Intern RARP-mottagning |
+| ![Ikonen Skicka internt R A R P](./media/user-guide/netx-events/image21.png)    | Internt RARP-meddelande |
+| ![Ikon för internt T C P-återförsök](./media/user-guide/netx-events/image22.png)    | Internt TCP-återförsök |
+| ![Ikon för ändring av internt T C P-tillstånd](./media/user-guide/netx-events/image23.png)    | Ändring av internt TCP-tillstånd |
+| ![Ikonen Skicka internt I/O-drivrutinspaket](./media/user-guide/netx-events/image24.png)    | Skicka internt I/O-drivrutinspaket |
+| ![storleken på](./media/user-guide/netx-events/image25.png)    | Initiera intern I/O-drivrutin |
+| ![Initieringsikon för intern I/O-drivrutin](./media/user-guide/netx-events/image26.png)    | Aktivera intern I/O-drivrutinslänk |
+| ![Ikon för inaktiverad intern I/O-drivrutinslänk](./media/user-guide/netx-events/image27.png)    | Inaktivera intern I/O-drivrutinslänk |
+| ![Ikon för sändning av internt I/O-drivrutinspaket](./media/user-guide/netx-events/image28.png)    | Sändning av interna I/O-drivrutinspaket |
+| ![Ikonen Skicka internt I/O-drivrutin för ARP](./media/user-guide/netx-events/image29.png)    | Intern ARP-skickad I/O-drivrutin |
+| ![Ikonen Skicka internt I/O-drivrutins-ARP-svar](./media/user-guide/netx-events/image30.png)    | Internt ARP-svarssvar för I/O-drivrutin |
+| ![Rarp-skicka-ikon för intern I/O-drivrutin](./media/user-guide/netx-events/image31.png)    | Internt RARP-meddelande för I/O-drivrutin |
+| ![Multicast-kopplingsikon för intern I/O-drivrutin](./media/user-guide/netx-events/image32.png)    | Intern Multicast-koppling för I/O-drivrutin |
+| ![Multicast-lämna-ikon för intern I/O-drivrutin](./media/user-guide/netx-events/image33.png)    | Multicast-ledighet för intern I/O-drivrutin |
+| ![Ikonen Hämta status för intern I/O-drivrutin](./media/user-guide/netx-events/image34.png)    | Hämta status för intern I/O-drivrutin |
+| ![Ikon för att hämta hastighet för intern I/O-drivrutin](./media/user-guide/netx-events/image35.png)    | Intern I/O-drivrutin – Hämta hastighet |
+| ![Ikon för intern I/O-drivrutin: Hämta duplex-typ](./media/user-guide/netx-events/image36.png)    | Intern I/O-drivrutin– Hämta duplex-typ |
+| ![Ikon för att hämta antal fel för intern I/O-drivrutin](./media/user-guide/netx-events/image37.png)    | Internt antal I/O-drivrutinsfel |
+| ![Ikon för att hämta RX-antal interna I/O-drivrutiner](./media/user-guide/netx-events/image38.png)    | Intern I/O-drivrutin får RX-antal |
+| ![Ikonen Hämta TX-antal för intern I/O-drivrutin](./media/user-guide/netx-events/image39.png)    | Intern I/O-drivrutin hämtar TX-antal |
+| ![Ikon för att hämta allokeringsfel för intern I/O-drivrutin](./media/user-guide/netx-events/image40.png)    | Interna I/O-drivrutin får allokeringsfel |
+| ![Ikon för avitiering av intern I/O-drivrutin](./media/user-guide/netx-events/image41.png)    | Avitiera intern I/O-drivrutin |
+| ![Ikon för uppskjuten bearbetning av intern I/O-drivrutin](./media/user-guide/netx-events/image42.png)    | Intern I/O-drivrutin för uppskjuten bearbetning |
+| ![Ikonen Ogiltiga R P dynamiska poster](./media/user-guide/netx-events/image43.png)    | **Dynamiska ARP-poster ogiltigförklaras** (*nx_arp_dynamic_entries_invalidate*) |
+| ![Ikon för dynamisk postuppsättning för R P](./media/user-guide/netx-events/image44.png)    | **Dynamisk postuppsättning för ARP** (*nx_arp_dynamic_entry_set*) |
+| ![En aktivera R P-ikon](./media/user-guide/netx-events/image45.png)    | **ARP Enable** (*nx_arp_enable*) |
+| ![En R P Gratuitous Send-ikon](./media/user-guide/netx-events/image46.png)    | **ARP Gratuitous Send** (*nx_arp_gratuitous_send*) |
+| ![En R P-ikon för att hitta maskinvaruadress](./media/user-guide/netx-events/image47.png)    | **ARP Hardware Address Find** (*nx_arp_hardware_address_find*) |
+| ![Ikonen Hämta R P-information](./media/user-guide/netx-events/image48.png)    | **ARP Information Get** (*nx_arp_info_get*) |
+| ![Ikonen Hitta EN R P IP-adress](./media/user-guide/netx-events/image49.png)    | **ARP IP-adress find** (*nx_arp_ip_address_find*) |
+| ![En R P-ikon för att skapa statisk post](./media/user-guide/netx-events/image50.png)    | **ARP Static Entry Create** (*nx_arp_static_entry_create*) |
+| ![Ikonen Ta bort statiska R P-poster](./media/user-guide/netx-events/image51.png)    | **Ta bort statiska ARP-poster** (*nx_arp_static_entries_delete*) |
+| ![Ikonen Ta bort statisk post för R P](./media/user-guide/netx-events/image52.png)    | **Ta bort statisk ARP-post** (*nx_arp_static_entry_delete*) |
+| ![Ikonen Ta bort post i Duo-cache](./media/user-guide/netx-events/image53.png)    | **Ta bort cachepost i Duo** (*nxd_nd_cache_entry_delete*) |
+| ![Ikon för Duo Cache Entry Set](./media/user-guide/netx-events/image54.png)    | **Postuppsättning för Duo-cache** (*nxd_nd_cache_entry_set*) |
+| ![Ikon för ogiltigt duo-cache](./media/user-guide/netx-events/image55.png)    | **Duo Cache Invalidate** (*nxd_nd_cache_invalidate*) |
+| ![Ikonen Hitta IP-adress för Duo-cache](./media/user-guide/netx-events/image56.png)    | **Duo Cache IP Address Find** (*nxd_nd_cache_ip_address_find*) |
+| ![Aktivera-ikonen för Duo I C M P](./media/user-guide/netx-events/image57.png)    | **Duo ICMP Enable** (*nxd_icmp_enable*) |
+| ![Pingikonen Duo I C M P I P v 6](./media/user-guide/netx-events/image58.png)    | **Duo ICMP IPv6 Ping** (*nxd_icmp_ping*) |
+| ![Ikonen Hitta största nyttostorlek för Duo I P](./media/user-guide/netx-events/image59.png)    | **Duo IP Max Payload Size Find** (*nx_max_payload_size_find*) |
+| ![Ikonen Skicka raw-paket i Duo I P](./media/user-guide/netx-events/image60.png)    | **Duo IP Raw Packet Send** *(nxd_ip_raw_packet_send)* |
+| ![Ikonen Lägg till standardrouter för Duo I P v 6](./media/user-guide/netx-events/image61.png)    | **Duo IPv6 Default Router Add** (*nxd_ipv6_default_router_add*) |
+| ![Ikonen Ta bort standardrouter för Duo I P v 6](./media/user-guide/netx-events/image62.png)    | **Ta bort IPv6-standardrouter** *(nxd_ipv6_default_router_delete)* |
+| ![Aktivera-ikonen för Duo I P v 6](./media/user-guide/netx-events/image63.png)    | **Duo IPv6 Enable** (*nxd_ipv6_enable)* |
+| ![Ikonen Hämta global adress för Duo I P v 6](./media/user-guide/netx-events/image64.png)    | **Duo IPv6 Global Address Get** (*nxd_ipv6_global_address_get*) |
+| ![Ikon för global adressuppsättning för Duo I P v 6](./media/user-guide/netx-events/image65.png)    | **Duo IPv6 Global Address Set** (*nxd_ipv6_global_address_set*) |
+| ![Ikonen Starta process för Duo I P v 6](./media/user-guide/netx-events/image66.png)    | **Duo IPv6 Initiate Process (** *nxd_ipv6_initiate_dad_process*) |
+| ![Ikonen Hämta gränssnittsadress för Duo I P v 6](./media/user-guide/netx-events/image67.png)    | **Duo IPv6-gränssnittsadress get** (*nxd_ipv6_interface_address_get*) |
+| ![Ikon för duo I P v 6-gränssnittsadressuppsättning](./media/user-guide/netx-events/image68.png)    | **Duo IPv6-gränssnittsadressuppsättning** (*nxd_ipv6_interface_address_set*) |
+| ![Ikonen Hämta lokal adress för Duo I P v 6-länk](./media/user-guide/netx-events/image69.png)    | **Duo IPv6 Link Local Address Get** (*nxd_ipv6_linklocal_address_get*) |
+| ![Ikon för duo I P v 6-länk för lokal adressuppsättning](./media/user-guide/netx-events/image70.png)    | **Duo IPv6 Link Local Address Set** (*nxd_ipv6_linklocal_address_set*) |
+| ![Ikonen Skicka raw-paket i Duo I P v 6](./media/user-guide/netx-events/image71.png)    | **Duo IPv6 Raw Packet Send** (*nxd_ipv6_raw_packet_send)* |
+| ![Hämta information om peer-information för duo T C P Socket](./media/user-guide/netx-events/image72.png)    | **Duo TCP Socket Peer Info Get** (*nxd_tcp_socket_peer_info_get*) |
+| ![Ikon för Duo T C Socket Set Interface](./media/user-guide/netx-events/image73.png)    | **Duo TCP Socket Set Interface** *(nxd_tcp_socket_set_interface)* |
+| ![Skicka-ikonen för Duo U D P Socket](./media/user-guide/netx-events/image74.png)    | **Duo UDP Socket Send** (*nxd_udp_socket_send*) |
+| ![Ikon för Duo U D P Socket Set Interface](./media/user-guide/netx-events/image75.png)    | **Duo UDP Socket Set Interface** *(nxd_udp_socket_set_interface)* |
+| ![Extraheringsikon för Duo U D P-källa](./media/user-guide/netx-events/image76.png)    | **UDP-källutdrag** *(nxd_udp_source_extract)* |
+| ![Aktivera-ikonen för IC M P](./media/user-guide/netx-events/image77.png)    | **ICMP Enable** (*nx_icmp_enable*) |
+| ![Hämta informationsikon för IC M P](./media/user-guide/netx-events/image78.png)    | **Hämta ICMP-information** (*nx_icmp_info_get*) |
+| ![I C M P Ping-ikon](./media/user-guide/netx-events/image79.png)    | **ICMP Ping** (*nx_icmp_ping*) |
+| ![Aktivera-ikonen för I M P](./media/user-guide/netx-events/image80.png)    | **IGMP Enable** (*nx_igmp_enable*) |
+| ![I G M P Information Hämta-ikon](./media/user-guide/netx-events/image81.png)    | **Hämta IGMP-information** (*nx_igmp_info_get*) |
+| ![Ikonen Inaktivera loopback för I M P](./media/user-guide/netx-events/image82.png)    | **IGMP Loopback Disable** (*nx_igmp_loopback_disable*) |
+| ![I G M P Loopback Aktivera-ikon](./media/user-guide/netx-events/image83.png)    | **IGMP Loopback Enable** (*nx_igmp_loopback_enable*) |
+| ![I G M P Multicast Join-ikon](./media/user-guide/netx-events/image84.png)    | **IGMP Multicast Join** (*nx_igmp_multicast_join*) |
+| ![I G M P Multicast Leave-ikon](./media/user-guide/netx-events/image85.png)    | **IGMP Multicast Leave** (*nx_igmp_multicast_leave*) |
+| ![I P-adressändringsikonen Meddela](./media/user-guide/netx-events/image86.png)    | **Meddela om IP-adressändring** (*nx_ip_address_change_notify*) |
+| ![Ikonen Hämta IP-adress](./media/user-guide/netx-events/image87.png)    | **IP-adress get** (*nx_ip_address_get*) |
+| ![Ikon för I P-adressuppsättning](./media/user-guide/netx-events/image88.png)    | **IP-adressuppsättning** (*nx_ip_address_set*) |
+| ![Ikonen Skapa i P](./media/user-guide/netx-events/image89.png)    | **IP-skapa** (*nx_ip_create*) |
+| ![Ikonen Ta bort i P](./media/user-guide/netx-events/image90.png)    | **IP-borttagning** (*nx_ip_delete*) |
+| ![Kommandoikon för I P-drivrutinskommando](./media/user-guide/netx-events/image91.png)    | **Kommandot IP Driver Direct** (*nx_ip_driver_direct_command*) |
+| ![Ikonen Inaktivera vidarebefordran av I P](./media/user-guide/netx-events/image92.png)    | **Inaktivera IP-vidarebefordran** (*nx_ip_forwarding_disable*) |
+| ![Ikonen Aktivera för vidarebefordran av I P](./media/user-guide/netx-events/image93.png)    | **Aktivera IP-vidarebefordran** (*nx_ip_forwarding_enable*) |
+| ![Ikonen Inaktivera fragment i I P](./media/user-guide/netx-events/image94.png)    | **Inaktivera IP-fragment** (*nx_ip_fragment_disable*) |
+| ![Aktivera fragmentikon för I P](./media/user-guide/netx-events/image95.png)    | **Aktivera IP-fragment** (*nx_ip_fragment_enable*)  |
+| ![Ikon för IP Gateway-adressuppsättning](./media/user-guide/netx-events/image96.png)    | **IP Gateway-adressuppsättning** (*nx_ip_gateway_address_set*) |
+| ![Ikonen Hämta information för I P](./media/user-guide/netx-events/image97.png)    | **IP-information hämta** (*nx_ip_info_get*) |
+| ![Ikonen Anslut I P-gränssnitt](./media/user-guide/netx-events/image98.png)    | **IP-gränssnitts attach** *(nx_ip_interface_attach)* |
+| ![Ikonen Hämta information om I P-gränssnitt](./media/user-guide/netx-events/image99.png)    | **Information om IP-gränssnitt hämta** (*nx_ip_interface_info_get*) |
+| ![Ikonen Inaktivera raw-paket](./media/user-guide/netx-events/image100.png)    | **Inaktivera IP-rådatapaket** (*nx_ip_raw_packet_disable*) |
+| ![Ikonen Aktivera raw-paket](./media/user-guide/netx-events/image101.png)    | **Aktivera IP-rådatapaket** (*nx_ip_raw_packet_enable*) |
+| ![Ikonen Ta emot raw-paket](./media/user-guide/netx-events/image102.png)    | **IP Raw Packet Receive** (*nx_ip_raw_packet_receive*) |
+| ![Ikonen Skicka raw-paket](./media/user-guide/netx-events/image103.png)    | **IP Raw Packet Send** (*nx_ip_raw_packet_send*) |
+| ![Lägg till ikon för statisk väg i I P](./media/user-guide/netx-events/image104.png)    | **Lägg till statisk IP-väg** (*nx_ip_static_route_add*) |
+| ![Ikonen Ta bort statisk väg i I P](./media/user-guide/netx-events/image105.png)    | **Ta bort statisk IP-väg** *(nx_ip_static_route_delete)* |
+| ![Ikon för I P-statuskontroll](./media/user-guide/netx-events/image106.png)    | **IP-statuskontroll** (*nx_ip_status_check*)|
+| ![Aktivera-ikonen för I P S E C](./media/user-guide/netx-events/image107.png)    | **IPSEC-aktivera** (*nx_ipsec_enable)* |
+| ![Ikonen Allokera paket](./media/user-guide/netx-events/image108.png)    | **Packet Allocate** (*nx_packet_allocate*) |
+| ![Ikon för paketkopiering](./media/user-guide/netx-events/image109.png)    | **Paketkopia** (*nx_packet_copy*) |
+| ![Ikon för tillägg av paketdata](./media/user-guide/netx-events/image110.png)    | **Tillägg av paketdata** (*nx_packet_data_append*) |
+| ![Ikon för förskjutning av extrahering av paketdata](./media/user-guide/netx-events/image111.png)    | **Offset för paketdatautdrag** *(nx_packet_data_extract_offset)* |
+| ![Ikonen Hämta paketdata](./media/user-guide/netx-events/image112.png)    | **Hämta paketdata** (*nx_packet_data_retrieve*) |
+| ![Hämta ikon för paketlängd](./media/user-guide/netx-events/image113.png)    | **Hämta paketlängd** (*nx_packet_length_get*) |
+| ![Ikonen Skapa paketpool](./media/user-guide/netx-events/image114.png)    | **Skapa paketpool** (*nx_packet_pool_create*) |
+| ![Ikonen Ta bort paketpool](./media/user-guide/netx-events/image115.png)    | **Ta bort paketpool** (*nx_packet_pool_delete*) |
+| ![Hämta ikon för information om paketpool](./media/user-guide/netx-events/image116.png)    | **Information om paketpool hämta** (*nx_packet_pool_info_get*) |
+| ![Ikon för paketutgås](./media/user-guide/netx-events/image117.png)    | **Paketutgår** *( nx_packet_release*) |
+| ![Ikon för lansering av paket överföring](./media/user-guide/netx-events/image118.png)    | **Paket överföring release** (*nx_packet_transmit_release*) |
+| ![Ikonen Inaktivera R A R P](./media/user-guide/netx-events/image119.png)    | **INAKTIVERA RARP** (*nx_rarp_disable*) |
+| ![Aktivera R A R P-ikon](./media/user-guide/netx-events/image120.png)    | **RARP Enable** (*nx_rarp_enable*) |
+| ![Ikonen Hämta R A R P-information](./media/user-guide/netx-events/image121.png)    | **RARP Information Get** (*nx_rarp_info_get*) |
+| ![Ikonen System initialize (System initialisering)](./media/user-guide/netx-events/image122.png)    | **System initialize** (*nx_system_initialize*) |
+| ![Ikon för T C P-klientsocketbindning](./media/user-guide/netx-events/image123.png)    | **TCP-klientsocketbindning** *(nx_tcp_client_socket_bind*) |
+| ![T C P Client Socket Anslut-ikon](./media/user-guide/netx-events/image124.png)    | **TCP Client Socket Anslut** (*nx_tcp_client_socket_connect*) |
+| ![Ikonen Hämta klientsocketport för T C P](./media/user-guide/netx-events/image125.png)    | **HÄMTA TCP-klientsocketport** (*nx_tcp_client_socket_port_get*) |
+| ![Ta bort bindningsikon för T C P-klientsocket](./media/user-guide/netx-events/image126.png)    | **TCP Client Socket Unbind** (*nx_tcp_client_socket_unbind*) |
+| ![Aktivera-ikonen för T C P](./media/user-guide/netx-events/image127.png)    | **TCP-aktivera** (*nx_tcp_enable*) |
+| ![Ikonen Hitta den kostnadsfria porten t C P](./media/user-guide/netx-events/image128.png)    | **Hitta den kostnadsfria TCP-porten** (*nx_tcp_free_port_find*) |
+| ![Hämta informationsikon för T C P](./media/user-guide/netx-events/image129.png)    | **TCP Information Get** (*nx_tcp_info_get*) |
+| ![Ikonen Acceptera t C P-serversocket](./media/user-guide/netx-events/image130.png)    | **TCP Server Socket Accept** (*nx_tcp_server_socket_accept*) |
+| ![Lyssnarikon för T C P Server Socket](./media/user-guide/netx-events/image131.png)    | **TCP Server Socket Listen** (*nx_tcp_server_socket_listen*) |
+| ![Ikon för återlistning av T C P-serversocket](./media/user-guide/netx-events/image132.png)    | **TCP Server Socket Relisten** (*nx_tcp_server_socket_relisten*) |
+| ![Unaccept-ikon för T C P-serversocket](./media/user-guide/netx-events/image133.png)    | **TCP Server Socket Unaccept** (*nx_tcp_server_socket_unaccept*) |
+| ![Ikon för avlistning av T C P-serversocket](./media/user-guide/netx-events/image134.png)    | **TCP Server Socket Unlisten** (*nx_tcp_server_socket_unlisten*) |
+| ![Ikon för tillgängliga T C P Socket-byte](./media/user-guide/netx-events/image135.png)    | **Tillgängliga TCP-socketbyte** *(nx_tcp_socket_bytes_available*) |
+| ![Ikonen Skapa t C P Socket](./media/user-guide/netx-events/image136.png)    | **TCP Socket Create** (*nx_tcp_socket_create*) |
+| ![Borttagningsikon för T C P Socket](./media/user-guide/netx-events/image137.png)    | **TCP Socket Delete** (*nx_tcp_socket_delete*) |
+| ![Frånkopplingsikon för T C P Socket](./media/user-guide/netx-events/image138.png)    | **TCP Socket Disconnect** (*nx_tcp_socket_disconnect*) |
+| ![Ikonen Hämta information om T C P Socket](./media/user-guide/netx-events/image139.png)    | **TCP Socket Information Get** (*nx_tcp_socket_info_get*) |
+| ![Hämta T C P Socket MSS-ikon](./media/user-guide/netx-events/image140.png)    | **TCP Socket MSS Get** (*nx_tcp_socket_mss_get*) |
+| ![T C P Socket MSS Peer Hämta-ikon](./media/user-guide/netx-events/image141.png)    | **TCP Socket MSS Peer Get** (*nx_tcp_socket_mss_peer_get*) |
+| ![T C P Socket MSS Set-ikon](./media/user-guide/netx-events/image142.png)    | **TCP Socket MSS Set** (*nx_tcp_socket_mss_set*) |
+| ![Hämta ikon för peer-information för T C P Socket](./media/user-guide/netx-events/image143.png)    | **Tcp Socket Peer Info Get** *(nx_tcp_socket_peer_info_get)* |
+| ![Ta emot T C P Socket-ikon](./media/user-guide/netx-events/image144.png)    | **TCP Socket Receive** (*nx_tcp_socket_receive*) |
+| ![Meddelandeikon för T C P Socket Receive](./media/user-guide/netx-events/image145.png)    | **Tcp Socket Receive Notify** (*nx_tcp_socket_receive_notify*) |
+| ![Ikonen Skicka t C P Socket](./media/user-guide/netx-events/image146.png)    | **TCP Socket Send** (*nx_tcp_socket_send*) |
+| ![Ikon för TC P Socket State Wait](./media/user-guide/netx-events/image147.png)    | **Tcp Socket State Wait** (*nx_tcp_socket_state_wait*) |
+| ![Konfigurationsikon för överföring av T C P Socket](./media/user-guide/netx-events/image148.png)    | **Tcp Socket Transmit Configure** (*nx_tcp_socket_transmit_configure*) |
+| ![Uppdateringsikon för T P Socket Window Update](./media/user-guide/netx-events/image149.png)    | **Tcp Socket Window Update Notify Set** (*nx_tcp_socket_window_update_notify_set*)  |
+| ![Aktivera ikon för U D P](./media/user-guide/netx-events/image150.png)    | **UDP Enable** (*nx_udp_enable*) |
+| ![Ikonen För att hitta kostnadsfri port i U D P](./media/user-guide/netx-events/image151.png)    | **UDP Free Port Find** (*nx_udp_free_port_find*) |
+| ![Ikonen Hämta information för U D P](./media/user-guide/netx-events/image152.png)    | **UDP Information Get** (*nx_udp_info_get*) |
+| ![Ikon för U D P Socket Bind](./media/user-guide/netx-events/image153.png)    | **UDP Socket Bind** *(nx_udp_socket_bind)* |
+| ![Ikon för tillgängliga U D P Socket-byte](./media/user-guide/netx-events/image154.png)    | **UDP Socket Bytes Available** *(nx_udp_socket_bytes_available)* |
+| ![Ikon för inaktiverad kontrollsumma för U D P Socket](./media/user-guide/netx-events/image155.png)    | **Inaktivera kontrollsumma för UDP-socket** (*nx_udp_socket_checksum_disable*) |
+| ![Aktivera-ikonen för U D P Socket Checksum](./media/user-guide/netx-events/image156.png)    | **Aktivera kontrollsumma för UDP-socket** *(nx_udp_socket_checksum_enable)* |
+| ![Ikonen Skapa U D P Socket](./media/user-guide/netx-events/image157.png)    | **UDP Socket Create** (*nx_udp_socket_create*) |
+| ![Borttagningsikon för U D P Socket](./media/user-guide/netx-events/image158.png)    | **UDP Socket Delete** (*nx_udp_socket_delete*) |
+| ![Ikonen Hämta information om U D Socket](./media/user-guide/netx-events/image159.png)    | **UDP Socket Information Get** (*nx_udp_socket_info_get*) |
+| ![Ikon för U D P Socket Interface Set](./media/user-guide/netx-events/image160.png)    | **UDP Socket Interface Set** (*nx_udp_socket_interface_set*) |
+| ![Ikonen Hämta port för U D P-socket](./media/user-guide/netx-events/image161.png)    | **UDP Socket Port Get** (*nx_udp_socket_port_get*) |
+| ![Ikon för U D P Socket Receive](./media/user-guide/netx-events/image162.png)    | **UDP Socket Receive** (*nx_udp_socket_receive*) |
+| ![Meddelandeikon för U D P Socket Receive](./media/user-guide/netx-events/image163.png)    | **UDP Socket Receive Notify** (*nx_udp_socket_receive_notify*) |
+| ![Ikonen Skicka U D P Socket](./media/user-guide/netx-events/image164.png)    | **UDP Socket Send** (*nx_udp_socket_send*) |
+| ![Ta bort bindningsikon för U D P Socket](./media/user-guide/netx-events/image165.png)    | **UDP Socket Unbind** (*nx_udp_socket_unbind*) |
+| ![Ikon för extrahering av U D P-källa](./media/user-guide/netx-events/image166.png)    | **UDP-källutdrag** (*nx_udp_source_extract*) |
 
-## <a name="event-descriptions"></a>Händelse beskrivningar
+## <a name="event-descriptions"></a>Händelsebeskrivningar
 
-Följande sidor beskriver NetX spårnings händelser.
+Följande sidor beskriver NetX-spårningshändelserna.
 
-### <a name="internal-arp-request-receive"></a>Mottagning av intern ARP-begäran 
+### <a name="internal-arp-request-receive"></a>Intern mottagning av ARP-begäran 
 
-#### <a name="internal-arp-request-receive"></a>Mottagning av intern ARP-begäran
+#### <a name="internal-arp-request-receive"></a>Intern mottagning av ARP-begäran
 
-**Ikonen** ![ Ta emot ikon för intern ARP-begäran](./media/user-guide/netx-events/image1.png)
+**Ikon** ![ Ikonen för att ta emot interna ARP-förfrågningar](./media/user-guide/netx-events/image1.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en intern NetX ARP-begäran ta emot händelse.
+Den här händelsen representerar en intern mottagningshändelse för NetX ARP-begäran.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot IP-instansen
-- Informations fält 2: Källans IP-adress
-- Info-fält 3: pekar mot paket
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Käll-IP-adress
+- Informationsfält 3: Pekare till paket
+- Informationsfält 4: Används inte
 
 ### <a name="internal-arp-request-send"></a>Skicka intern ARP-begäran 
 
 #### <a name="internal-arp-request-send"></a>Skicka intern ARP-begäran
 
-**Ikonen** ![ Skicka ikon för intern ARP-begäran](./media/user-guide/netx-events/image2.png)
+**Ikon** ![ Ikonen Skicka intern ARP-begäran](./media/user-guide/netx-events/image2.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en intern NetX ARP-begäran skicka händelse.
+Den här händelsen representerar en intern skickad NetX ARP-begäran.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot IP-instansen
-- Info fält 2: målets IP-adress
-- Info-fält 3: pekar mot paket
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Mål-IP-adress
+- Informationsfält 3: Pekare till paket
+- Informationsfält 4: Används inte
 
-### <a name="internal-arp-response-receive"></a>Mottagna interna ARP-svar 
+### <a name="internal-arp-response-receive"></a>Internt ARP-svar vid mottagning 
 
-#### <a name="internal-arp-request-receive"></a>Mottagning av intern ARP-begäran
+#### <a name="internal-arp-request-receive"></a>Intern mottagning av ARP-begäran
 
-**Ikonen** ![ Den interna ARP-begäran ta emot ikon](./media/user-guide/netx-events/image3.png)
+**Ikon** ![ Ikonen för att ta emot interna ARP-förfrågningar](./media/user-guide/netx-events/image3.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en händelse för en intern NetX ARP-svar.
+Den här händelsen representerar en intern NetX ARP-svarshändelse för mottagning.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot IP-instansen
-- Informations fält 2: Källans IP-adress
-- Info-fält 3: pekar mot paket
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Käll-IP-adress
+- Informationsfält 3: Pekare till paket
+- Informationsfält 4: Används inte
 
-### <a name="internal-arp-response-send"></a>Skicka internt ARP-svar 
+### <a name="internal-arp-response-send"></a>Internt ARP-svarssänd 
 
 #### <a name="internal-arp-request-send"></a>Skicka intern ARP-begäran
 
-**Ikonen** ![ Den interna ARP-begäran skicka ikon](./media/user-guide/netx-events/image4.png)
+**Ikon** ![ Ikonen Skicka intern ARP-begäran](./media/user-guide/netx-events/image4.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en intern NetX som skickar svars händelse.
+Den här händelsen representerar en intern skickad NetX-svarshändelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot IP-instansen
-- Info fält 2: målets IP-adress
-- Info-fält 3: pekar mot paket
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Mål-IP-adress
+- Informationsfält 3: Pekare till paket
+- Informationsfält 4: Används inte
 
-### <a name="internal-icmp-receive"></a>Internt ICMP-mottagning 
+### <a name="internal-icmp-receive"></a>Intern ICMP-mottagning 
 
-#### <a name="internal-icmp-receive"></a>Internt ICMP-mottagning
+#### <a name="internal-icmp-receive"></a>Intern ICMP-mottagning
 
-**Ikonen** ![ Intern I C M P-ikon för mottagning](./media/user-guide/netx-events/image5.png)
-
-**Beskrivning**
-
-Den här händelsen representerar en intern NetX ICMP Receive-händelse.
-
-**Informations fält**
-
-- Info fält 1: pekar mot IP-instansen
-- Informations fält 2: Källans IP-adress
-- Info-fält 3: pekar mot paket
-- Info fält 4: Word 0 av ICMP-sidhuvud
-
-### <a name="internal-icmp-send"></a>Intern ICMP-sändning 
-
-#### <a name="internal-icmp-send"></a>Intern ICMP-sändning
-
-**Ikonen** ![ Intern I/P e P skicka-ikon](./media/user-guide/netx-events/image6.png)
+**Ikon** ![ Ikon för intern IC M P-mottagning](./media/user-guide/netx-events/image5.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en intern NetX ICMP Send-händelse.
+Den här händelsen representerar en intern NetX ICMP-mottagningshändelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot IP-instansen
-- Info fält 2: målets IP-adress
-- Info-fält 3: pekar mot paket
-- Info fält 4: Word 0 av ICMP-sidhuvud
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Käll-IP-adress
+- Informationsfält 3: Pekare till paket
+- Informationsfält 4: Ord 0 i ICMP-rubriken
+
+### <a name="internal-icmp-send"></a>Internt ICMP-meddelande 
+
+#### <a name="internal-icmp-send"></a>Internt ICMP-meddelande
+
+**Ikon** ![ Ikonen För internt IC M P-meddelande](./media/user-guide/netx-events/image6.png)
+
+**Beskrivning**
+
+Den här händelsen representerar en intern NetX ICMP-skicka händelse.
+
+**Informationsfält**
+
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Mål-IP-adress
+- Informationsfält 3: Pekare till paket
+- Informationsfält 4: Ord 0 i ICMP-rubriken
 
 ### <a name="internal-igmp-receive"></a>Intern IGMP-mottagning 
 
 #### <a name="internal-igmp-receive"></a>Intern IGMP-mottagning
 
-**Ikonen** ![ Internt I G/P-ikon för mottagning](./media/user-guide/netx-events/image7.png)
+**Ikon** ![ Ikon för intern I G M P-mottagning](./media/user-guide/netx-events/image7.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en intern NetX IGMP Receive-händelse.
+Den här händelsen representerar en intern NetX IGMP-mottagningshändelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: IP-pekare
-- Informations fält 2: Källans IP-adress
-- Info-fält 3: pekar mot paket
-- Info fält 4: Word 0 av IGMP-huvud
+- Informationsfält 1: IP-pekare
+- Informationsfält 2: Käll-IP-adress
+- Informationsfält 3: Pekare till paket
+- Informationsfält 4: Ord 0 i IGMP-rubriken
 
-### <a name="internal-ip-receive"></a>Ta emot internt IP 
+### <a name="internal-ip-receive"></a>Intern IP-mottagning 
 
-#### <a name="internal-ip-receive"></a>Ta emot internt IP
+#### <a name="internal-ip-receive"></a>Intern IP-mottagning
 
-**Ikonen** ![ Intern I/e-ikon](./media/user-guide/netx-events/image8.png)
-
-**Beskrivning**
-
-Den här händelsen representerar en intern NetX IP-mottagnings händelse.
-
-**Informations fält**
-
-- Info fält 1: pekar mot IP-instansen
-- Informations fält 2: Källans IP-adress
-- Info-fält 3: pekar mot paket
-- Info fält 4: paket längd
-
-### <a name="internal-ip-send"></a>Skicka intern IP
-
-#### <a name="internal-ip-send"></a>Skicka intern IP
-
-**Ikonen** ![ Intern I/e-ikon](./media/user-guide/netx-events/image9.png)
+**Ikon** ![ Ikon för intern I P-mottagning](./media/user-guide/netx-events/image8.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en intern NetX IP-sändnings händelse.
+Den här händelsen representerar en intern NetX IP-mottagningshändelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot IP-instansen
-- Info fält 2: målets IP-adress
-- Info-fält 3: pekar mot paket
-- Info fält 4: paket längd
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Käll-IP-adress
+- Informationsfält 3: Pekare till paket
+- Informationsfält 4: Paketlängd
 
-### <a name="internal-tcp-data-receive"></a>Mottagna interna TCP-data 
+### <a name="internal-ip-send"></a>Internt IP-meddelande
 
-#### <a name="internal-tcp-data-receive"></a>Mottagna interna TCP-data
+#### <a name="internal-ip-send"></a>Intern IP-skicka
 
-**Ikonen** ![ Intern T C P data Receive-ikon](./media/user-guide/netx-events/image10.png)
-
-**Beskrivning**
-
-Den här händelsen representerar en intern NetX för mottagna TCP-data.
-
-**Informations fält**
-
-- Info fält 1: pekar mot IP-instansen
-- Informations fält 2: Källans IP-adress
-- Info-fält 3: pekar mot paket
-- Info fält 4: mottagnings ordnings nummer
-
-### <a name="internal-tcp-data-send"></a>Intern TCP-data överföring 
-
-#### <a name="internal-tcp-data-send"></a>Intern TCP-data överföring
-
-**Ikonen** ![ Inbyggt T C P data Send-ikon](./media/user-guide/netx-events/image11.png)
+**Ikon** ![ Ikonen Skicka internt I P](./media/user-guide/netx-events/image9.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en intern NetX TCP-data sändnings händelse.
+Den här händelsen representerar en intern NetX IP-skicka händelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot IP-instansen
-- Info fält 2: pekare till Socket
-- Info-fält 3: pekar mot paket
-- Info-fält 4: överförings ordnings nummer
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Mål-IP-adress
+- Informationsfält 3: Pekare till paket
+- Informationsfält 4: Paketlängd
 
-### <a name="internal-tcp-fin-receive"></a>Intern TCP FIN mottagning 
+### <a name="internal-tcp-data-receive"></a>Intern TCP-data tar emot 
 
-#### <a name="internal-tcp-fin-receive"></a>Intern TCP fin mottagning
+#### <a name="internal-tcp-data-receive"></a>Intern TCP-data tar emot
 
-**Ikonen** ![ Inbyggt T C P F I N ta emot-ikon](./media/user-guide/netx-events/image12.png)
-
-**Beskrivning**
-
-Den här händelsen representerar en intern NetX TCP FIN Receive-händelse.
-
-**Informations fält** 
-
-- Info fält 1: pekar mot IP-instansen
-- Info fält 2: pekare till Socket
-- Info-fält 3: pekar mot paket
-- Info fält 4: mottagnings ordnings nummer
-
-### <a name="internal-tcp-fin-send"></a>Intern TCP RÄNTETRANS-sändning 
-
-#### <a name="internal-tcp-fin-send"></a>Intern TCP räntetrans-sändning
-
-**Ikonen** ![ Inbyggt T C P F I N skicka ikon](./media/user-guide/netx-events/image13.png)
+**Ikon** ![ Ikon för intern T C P-data tar emot](./media/user-guide/netx-events/image10.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en intern NetX TCP RÄNTETRANS-sändning.
+Den här händelsen representerar en intern NetX TCP-data tar emot händelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot IP-instansen
-- Info fält 2: pekare till Socket
-- Info-fält 3: pekar mot paket
-- Info-fält 4: överförings ordnings nummer
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Käll-IP-adress
+- Informationsfält 3: Pekare till paket
+- Informationsfält 4: Ta emot sekvensnummer
 
-### <a name="internal-tcp-rst-receive"></a>Internt TCP-mottagna 
+### <a name="internal-tcp-data-send"></a>Intern TCP-datasändning 
 
-#### <a name="internal-tcp-rst-receive"></a>Internt TCP-mottagna
+#### <a name="internal-tcp-data-send"></a>Intern TCP-datasänding
 
-**Ikonen** ![ Inbyggt T C P R S T Inleverera-ikon](./media/user-guide/netx-events/image14.png)
-
-**Beskrivning**
-
-Den här händelsen representerar en intern NetX TCP reset Receive-händelse.
-
-**Informations fält**
-
-- Info fält 1: pekar mot IP-instansen.
-- Info fält 2: pekare till Socket.
-- Info-fält 3: pekar mot paket.
-- Info fält 4: mottagnings ordnings nummer.
-
-### <a name="internal-tcp-rst-send"></a>Intern TCP-överföring 
-
-#### <a name="internal-tcp-rst-send"></a>Intern TCP-överföring
-
-**Ikonen** ![ Intern T R P R S T skicka-ikon](./media/user-guide/netx-events/image15.png)
+**Ikon** ![ Ikonen Skicka interna T C P-data](./media/user-guide/netx-events/image11.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en intern NetX TCP reset Send-händelse.
+Den här händelsen representerar en intern NetX TCP-datasänd händelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot IP-instansen
-- Info fält 2: pekare till Socket
-- Info-fält 3: pekar mot paket
-- Info-fält 4: överförings ordnings nummer
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Pekare till socket
+- Informationsfält 3: Pekare till paket
+- Informationsfält 4: Överföringssekvensnummer
 
-### <a name="internal-tcp-syn-receive"></a>Ta emot internt TCP-SYN 
+### <a name="internal-tcp-fin-receive"></a>Intern TCP FIN-mottagning 
 
-#### <a name="internal-tcp-syn-receive"></a>Ta emot internt TCP-SYN
+#### <a name="internal-tcp-fin-receive"></a>Intern TCP-fin mottagning
 
-**Ikonen** ![ Ikon för intern T C P S Y N-mottagning](./media/user-guide/netx-events/image16.png)
-
-**Beskrivning**
-
-Den här händelsen representerar en intern NetX TCP SYN-händelse.
-
-**Informations fält**
-
-- Info fält 1: pekar mot IP-instansen
-- Info fält 2: pekare till Socket
-- Info-fält 3: pekar mot paket
-- Info fält 4: mottagnings ordnings nummer
-
-### <a name="internal-tcp-syn-send"></a>Skicka internt TCP-SYN 
-
-#### <a name="internal-tcp-syn-send"></a>Skicka internt TCP-SYN
-
-**Ikonen** ![ Intern T C P S Y N skicka-ikon](./media/user-guide/netx-events/image17.png)
+**Ikon** ![ Ikon för intern T C P F F I N-mottagning](./media/user-guide/netx-events/image12.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en intern NetX TCP SYN-sändning.
+Den här händelsen representerar en intern NetX TCP FIN-mottagningshändelse.
 
-Informations fält 
+**Informationsfält** 
 
-- Info fält 1: pekar mot IP-instansen
-- Info fält 2: pekare till Socket
-- Info-fält 3: pekar på paket-info fält 4: överförings ordnings nummer
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Pekare till socket
+- Informationsfält 3: Pekare till paket
+- Informationsfält 4: Ta emot sekvensnummer
 
-### <a name="internal-udp-receive"></a>Internt UDP-mottagning 
+### <a name="internal-tcp-fin-send"></a>Internt TCP FIN-meddelande 
 
-#### <a name="internal-udp-receive"></a>Internt UDP-mottagning
+#### <a name="internal-tcp-fin-send"></a>Internt TCP-finsänd
 
-**Ikonen** ![ Intern U D P-mottagnings ikon](./media/user-guide/netx-events/image18.png)
-
-**Beskrivning**
-
-Den här händelsen representerar en intern NetX UDP Receive-händelse.
-
-**Informations fält** 
-
-- Info fält 1: pekar mot IP-instansen
-- Info fält 2: pekare till Socket
-- Info-fält 3: pekar mot paket
-- Info fält 4: Word 0 av UDP-huvud
-
-### <a name="internal-udp-send"></a>Intern UDP-sändning 
-
-#### <a name="internal-udp-send"></a>Intern UDP-sändning
-
-**Ikonen** ![ Intern U D P-skicka-ikon](./media/user-guide/netx-events/image19.png)
+**Ikon** ![ Skicka ikon för intern T C P F I N](./media/user-guide/netx-events/image13.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en intern NetX UDP-sändning.
+Den här händelsen representerar en intern NetX TCP FIN-skicka-händelse.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot IP-instansen
-- Info fält 2: pekare till Socket
-- Info-fält 3: pekar mot paket
-- Info fält 4: Word 0 av UDP-huvud
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Pekare till socket
+- Informationsfält 3: Pekare till paket
+- Informationsfält 4:Överföringssekvensnummer
+
+### <a name="internal-tcp-rst-receive"></a>Intern TCP RST-mottagning 
+
+#### <a name="internal-tcp-rst-receive"></a>Intern TCP RST-mottagning
+
+**Ikon** ![ Ikon för intern T C P R S T-mottagning](./media/user-guide/netx-events/image14.png)
+
+**Beskrivning**
+
+Den här händelsen representerar en intern mottagningshändelse för NetX TCP-återställning.
+
+**Informationsfält**
+
+- Informationsfält 1: Pekare till IP-instansen.
+- Informationsfält 2: Pekare till socket.
+- Informationsfält 3: Pekare till paket.
+- Informationsfält 4: Ta emot sekvensnummer.
+
+### <a name="internal-tcp-rst-send"></a>Internt TCP RST-meddelande 
+
+#### <a name="internal-tcp-rst-send"></a>Internt TCP RST-meddelande
+
+**Ikon** ![ Skicka ikon för intern T C P R S T](./media/user-guide/netx-events/image15.png)
+
+**Beskrivning**
+
+Den här händelsen representerar en intern send-händelse för NetX TCP-återställning.
+
+**Informationsfält**
+
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Pekare till socket
+- Informationsfält 3: Pekare till paket
+- Informationsfält 4: Överföringssekvensnummer
+
+### <a name="internal-tcp-syn-receive"></a>Intern TCP SYN-mottagning 
+
+#### <a name="internal-tcp-syn-receive"></a>Intern TCP SYN-mottagning
+
+**Ikon** ![ Ikon för intern T C P S Y N-mottagning](./media/user-guide/netx-events/image16.png)
+
+**Beskrivning**
+
+Den här händelsen representerar en intern NetX TCP SYN-mottagningshändelse.
+
+**Informationsfält**
+
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Pekare till socket
+- Informationsfält 3: Pekare till paket
+- Informationsfält 4: Ta emot sekvensnummer
+
+### <a name="internal-tcp-syn-send"></a>Internt TCP SYN-meddelande 
+
+#### <a name="internal-tcp-syn-send"></a>Internt TCP SYN-meddelande
+
+**Ikon** ![ Skicka ikon för intern T C P S Y N](./media/user-guide/netx-events/image17.png)
+
+**Beskrivning**
+
+Den här händelsen representerar en intern NetX TCP SYN-skicka-händelse.
+
+Informationsfält 
+
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Pekare till socket
+- Informationsfält 3: Pekare till paket -Info Fält 4: Överföringssekvensnummer
+
+### <a name="internal-udp-receive"></a>Intern UDP-mottagning 
+
+#### <a name="internal-udp-receive"></a>Intern UDP-mottagning
+
+**Ikon** ![ Intern U D P-mottagningsikon](./media/user-guide/netx-events/image18.png)
+
+**Beskrivning**
+
+Den här händelsen representerar en intern NetX UDP-mottagningshändelse.
+
+**Informationsfält** 
+
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Pekare till socket
+- Informationsfält 3: Pekare till paket
+- Informationsfält 4: Ord 0 i UDP-rubrik
+
+### <a name="internal-udp-send"></a>Internt UDP-skicka 
+
+#### <a name="internal-udp-send"></a>Internt UDP-meddelande
+
+**Ikon** ![ Ikonen Skicka intern U D P](./media/user-guide/netx-events/image19.png)
+
+**Beskrivning**
+
+Den här händelsen representerar en intern NetX UDP-skicka händelse.
+
+**Informationsfält**
+
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Pekare till socket
+- Informationsfält 3: Pekare till paket
+- Informationsfält 4: Ord 0 i UDP-rubrik
 
 ### <a name="internal-rarp-receive"></a>Intern RARP-mottagning 
 
 #### <a name="internal-rarp-receive"></a>Intern RARP-mottagning 
 
-**Ikonen** ![ Intern R A R P-ikon för mottagning](./media/user-guide/netx-events/image20.png)
+**Ikon** ![ Ikon för intern R A R P-mottagning](./media/user-guide/netx-events/image20.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en intern NetX RARP Receive-händelse.
+Den här händelsen representerar en intern NetX RARP-mottagningshändelse.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Info fält 1: pekar mot IP-instansen
-- Informations fält 2: mål-IP-adress
-- Info-fält 3: pekar mot paket
-- Info fält 4: Word 1 av RARP-huvudet
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Mål-IP-adress
+- Informationsfält 3: Pekare till paket
+- Informationsfält 4: Word 1 i RARP-rubriken
 
-### <a name="internal-rarp-send"></a>Intern RARP-sändning 
+### <a name="internal-rarp-send"></a>Internt RARP-meddelande 
 
-#### <a name="internal-rarp-send"></a>Intern RARP-sändning 
+#### <a name="internal-rarp-send"></a>Internt RARP-meddelande 
 
-**Ikonen** ![ Interna R A R P-ikonen skicka](./media/user-guide/netx-events/image21.png)
-
-**Beskrivning**
-
-Den här händelsen representerar en intern NetX RARP-sändnings händelse.
-
-**Informations fält**
-
-- Info fält 1: pekar mot IP-instansen
-- Informations fält 2: mål-IP-adress
-- Info-fält 3: pekar mot paket
-- Info fält 4: Word 1 av RARP-huvudet
-
-### <a name="internal-tcp-retry"></a>Internt TCP-försök 
-
-#### <a name="internal-tcp-retry"></a>Internt TCP-försök 
-
-**Ikonen** ![ Inbyggt T C P-återförsök-ikon](./media/user-guide/netx-events/image22.png)
+**Ikon** ![ Ikonen Skicka intern R A R P](./media/user-guide/netx-events/image21.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en intern NetX-händelse för TCP-försök.
+Den här händelsen representerar en intern NetX RARP-skicka-händelse.
 
-**Informations fält**
-- Info fält 1: pekar mot IP-instansen
-- Info fält 2: pekare till Socket
-- Info-fält 3: pekar mot paket
-- Info-fält 4: antal återförsök
+**Informationsfält**
 
-### <a name="internal-tcp-state-change"></a>Intern TCP-tillstånds ändring 
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Mål-IP-adress
+- Informationsfält 3: Pekare till paket
+- Informationsfält 4: Word 1 i RARP-rubriken
 
-#### <a name="internal-tcp-state-change"></a>Intern TCP-tillstånds ändring 
+### <a name="internal-tcp-retry"></a>Internt TCP-återförsök 
 
-**Ikonen** ![ Ändrings ikon för den interna T C P-statusen](./media/user-guide/netx-events/image23.png)
+#### <a name="internal-tcp-retry"></a>Internt TCP-återförsök 
 
-**Beskrivning**
-
-Den här händelsen representerar en intern NetX av status ändrings händelse för TCP-socket.
-
-**Informations fält**
-
-- Info fält 1: pekar mot IP-instansen
-- Info fält 2: pekare till Socket
-- Info-fält 3: föregående tillstånd
-- Info fält 4: nytt tillstånd
-
-### <a name="internal-io-driver-packet-send"></a>Skicka internt I/O-drivrutins paket 
-
-#### <a name="internal-io-driver-packet-send"></a>Skicka internt I/O-drivrutins paket
-
-**Ikonen** ![ Ikon för att skicka intern I/O-drivrutin](./media/user-guide/netx-events/image24.png)
+**Ikon** ![ Ikon för internt T C P-återförsök](./media/user-guide/netx-events/image22.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en intern sändnings händelse för NetX I/O-drivrutinen.
+Den här händelsen representerar en intern NetX TCP-återförsökshändelse.
 
-**Informations fält**
+**Informationsfält**
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Pekare till socket
+- Informationsfält 3: Pekare till paket
+- Informationsfält 4: Antal återförsök
 
-- Info fält 1: pekar mot IP-instansen
-- Info fält 2: pekar mot paket
-- Informations fält 3: paket storlek
-- Info fält 4: används inte
+### <a name="internal-tcp-state-change"></a>Ändring av internt TCP-tillstånd 
 
-### <a name="internal-io-driver-initialize"></a>Intern I/O-drivrutin initieras 
+#### <a name="internal-tcp-state-change"></a>Ändring av internt TCP-tillstånd 
 
-#### <a name="internal-io-driver-initialize"></a>Intern I/O-drivrutin initieras
-
-**Ikonen** ![ Initiera ikon för intern I/O-drivrutin](./media/user-guide/netx-events/image25.png)
-
-**Beskrivning**
-
-Den här händelsen representerar en intern händelse för NetX I/O-drivrutinen.
-
-**Informations fält**
-
-- Info fält 1: pekar mot IP-instansen.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
-
-### <a name="internal-io-driver-link-enable"></a>Intern I/O driv Rutins länk aktivera 
-
-#### <a name="internal-io-driver-link-enable"></a>Intern I/O driv rutins länk aktivera
-
-**Ikonen** ![ Ikonen Aktivera ikon för intern I/O-drivrutin](./media/user-guide/netx-events/image26.png)
+**Ikon** ![ Ikon för ändring av internt T C P-tillstånd](./media/user-guide/netx-events/image23.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en intern NetX I/O-drivrutins länk aktivera händelse.
+Den här händelsen representerar en intern ändringshändelse för NetX TCP-sockettillstånd.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot IP-instansen.
-- Informations fält 2: används inte.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Pekare till socket
+- Informationsfält 3: Föregående tillstånd
+- Informationsfält 4: Nytt tillstånd
 
-### <a name="internal-io-driver-link-disable"></a>Inaktivera intern I/O driv Rutins länk 
+### <a name="internal-io-driver-packet-send"></a>Skicka internt I/O-drivrutinspaket 
 
-#### <a name="internal-io-driver-link-disable"></a>Inaktivera intern I/O driv rutins länk
+#### <a name="internal-io-driver-packet-send"></a>Skicka internt I/O-drivrutinspaket
 
-**Ikonen** ![ Ikon för inaktive ring av intern I/O-drivrutin](./media/user-guide/netx-events/image27.png)
-
-**Beskrivning**
-
-Den här händelsen representerar en intern inaktive rings händelse för NetX I/O-drivrutin.
-
-**Informations fält**
-
-- Info fält 1: pekar mot IP-instansen
-- Informations fält 2: används inte
-- Informations fält 3: används inte
-- Info fält 4: används inte
-
-### <a name="internal-io-driver-packet-broadcast"></a>Intern I/O-drivrutins paket sändning 
-
-#### <a name="internal-io-driver-packet-broadcast"></a>Intern I/O-drivrutins paket sändning
-
-**Ikonen** ![ Ikon för intern I/O-drivrutin för driv rutins paket](./media/user-guide/netx-events/image28.png)
+**Ikon** ![ Ikonen Skicka internt I/O-drivrutinspaket](./media/user-guide/netx-events/image24.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en intern sändnings händelse för NetX I/O-drivrutin.
+Den här händelsen representerar en intern skicka-händelse för NetX I/O-drivrutinspaket.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot IP-instansen
-- Info fält 2: pekar mot paket
-- Informations fält 3: paket storlek
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Pekare till paket
+- Informationsfält 3: Paketstorlek
+- Informationsfält 4: Används inte
 
-### <a name="internal-io-driver-arp-send"></a>Överföring av intern I/O-drivrutins-ARP 
+### <a name="internal-io-driver-initialize"></a>Initiera intern I/O-drivrutin 
 
-#### <a name="internal-io-driver-arp-send"></a>Överföring av intern I/O-drivrutins-ARP
+#### <a name="internal-io-driver-initialize"></a>Initiera intern I/O-drivrutin
 
-**Ikonen** ![ Skicka ikon för intern I/O-drivrutins-ARP](./media/user-guide/netx-events/image29.png)
-
-**Beskrivning**
-
-Den här händelsen representerar en intern sändnings händelse för NetX I/O-drivrutin.
-
-**Informations fält**
-
-- Info fält 1: pekar mot IP-instansen
-- Info fält 2: pekar mot paket
-- Informations fält 3: paket storlek
-- Info fält 4: används inte
-
-### <a name="internal-io-driver-arp-response-send"></a>Intern I/O-drivrutin ARP-svar skicka 
-
-#### <a name="internal-io-driver-arp-response-send"></a>Intern I/O-drivrutin ARP-svar skicka
-
-**Ikonen** ![ Intern I/O-drivrutin för ARP-svar skicka ikon](./media/user-guide/netx-events/image30.png)
+**Ikon** ![ Initieringsikon för intern I/O-drivrutin](./media/user-guide/netx-events/image25.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en intern NetX I/O-drivrutin ARP-svar skicka händelse.
+Den här händelsen representerar en intern NetX I/O-drivrutin som initierar händelsen.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot IP-instansen
-- Info fält 2: pekar mot paket
-- Informations fält 3: paket storlek
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instansen.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="internal-io-driver-rarp-send"></a>Intern I/O-drivrutin RARP skicka 
+### <a name="internal-io-driver-link-enable"></a>Aktivera intern I/O-drivrutinslänk 
 
-#### <a name="internal-io-driver-rarp-send"></a>Intern I/O-drivrutin RARP skicka
+#### <a name="internal-io-driver-link-enable"></a>Aktivera intern I/O-drivrutinslänk
 
-**Ikonen** ![ Intern I/O driv rutin RARP skicka ikon](./media/user-guide/netx-events/image31.png)
-
-**Beskrivning**
-
-Den här händelsen representerar en intern NetX I/O-drivrutin RARP skicka händelse.
-
-**Informations fält**
-
-- Info fält 1: pekar mot IP-instansen
-- Info fält 2: pekar mot paket
-- Informations fält 3: paket storlek
-- Info fält 4: används inte
-
-### <a name="internal-io-driver-multicast-join"></a>Intern I/O-drivrutin multicast-anslutning 
-
-#### <a name="internal-io-driver-multicast-join"></a>Intern I/O-drivrutin multicast-anslutning
-
-**Ikonen** ![ Ikon för multicast-anslutning för intern I/O-drivrutin](./media/user-guide/netx-events/image32.png)
+**Ikon** ![ Aktivera ikon för intern I/O-drivrutinslänk](./media/user-guide/netx-events/image26.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en intern NetX I/O-drivrutin för IO-anslutning.
+Den här händelsen representerar en intern NetX I/O-drivrutinslänk för att aktivera händelse.
 
-**Informations fält** 
+**Informationsfält**
 
-- Info fält 1: pekar mot IP-instansen
-- Informations fält 2: används inte
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instansen.
+- Informationsfält 2: Används inte.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="internal-io-driver-multicast-leave"></a>Intern I/O-drivrutin för multicast-ledighet 
+### <a name="internal-io-driver-link-disable"></a>Inaktivera intern I/O-drivrutinslänk 
 
-#### <a name="internal-io-driver-multicast-leave"></a>Intern I/O-drivrutin för multicast-ledighet
+#### <a name="internal-io-driver-link-disable"></a>Inaktivera intern I/O-drivrutinslänk
 
-**Ikonen** ![ Ikon för multicast för intern I/O-drivrutin](./media/user-guide/netx-events/image33.png)
-
-**Beskrivning**
-
-Den här händelsen representerar en intern NetX I/O-drivrutin.
-
-**Informations fält**
-
-- Info fält 1: pekar mot IP-instansen
-- Informations fält 2: används inte
-- Informations fält 3: används inte
-- Info fält 4: används inte
-
-### <a name="internal-io-driver-get-status"></a>Status för intern I/O-drivrutin för hämtning 
-
-#### <a name="internal-io-driver-get-status"></a>Status för intern I/O-drivrutin för hämtning
-
-**Ikonen** ![ Status ikon för intern I/O-drivrutin](./media/user-guide/netx-events/image34.png)
+**Ikon** ![ Inaktiveringsikon för intern I/O-drivrutinslänk](./media/user-guide/netx-events/image27.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en intern NetX I/O-drivrutin för att hämta status händelse.
+Den här händelsen representerar en intern inaktiveringshändelse för NetX I/O-drivrutinslänken.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot IP-instansen
-- Informations fält 2: används inte
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Används inte
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
-### <a name="internal-io-driver-get-speed"></a>Intern I/O-drivrutin Hämta hastighet 
+### <a name="internal-io-driver-packet-broadcast"></a>Sändning av interna I/O-drivrutinspaket 
 
-#### <a name="internal-io-driver-get-speed"></a>Intern I/O-drivrutin Hämta hastighet
+#### <a name="internal-io-driver-packet-broadcast"></a>Sändning av interna I/O-drivrutinspaket
 
-**Ikonen** ![ Intern I/O driv rutin Hämta hastighets ikon](./media/user-guide/netx-events/image35.png)
-
-**Beskrivning**
-
-Den här händelsen representerar en intern NetX I/O-drivrutin för att hämta hastighet.
-
-**Informations fält**
-
-- Info fält 1: pekar mot IP-instansen
-- Informations fält 2: används inte
-- Informations fält 3: används inte
-- Info fält 4: används inte
-
-### <a name="internal-io-driver-get-duplex-type"></a>Intern I/O-drivrutin Hämta duplex-typ 
-
-#### <a name="internal-io-driver-get-duplex-type"></a>Intern I/O-drivrutin Hämta duplex-typ
-
-**Ikonen** ![ Intern I/O-drivrutin Hämta duplex-typ ikon](./media/user-guide/netx-events/image36.png)
+**Ikon** ![ Sändikon för internt I/O-drivrutinspaket](./media/user-guide/netx-events/image28.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en intern NetX I/O-drivrutin för att hämta duplex-typ.
+Den här händelsen representerar en intern sändningshändelse för NetX I/O-drivrutinspaket.
 
-**Informations fält** 
+**Informationsfält**
 
-- Info fält 1: pekar mot IP-instansen
-- Informations fält 2: används inte
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Pekare till paket
+- Informationsfält 3: Paketstorlek
+- Informationsfält 4: Används inte
 
-### <a name="internal-io-driver-get-error-count"></a>Fel antal för intern I/O-drivrutin
+### <a name="internal-io-driver-arp-send"></a>Internt I/O-drivrutins-ARP-meddelande 
 
-#### <a name="internal-io-driver-get-error-count"></a>Fel antal för intern I/O-drivrutin
+#### <a name="internal-io-driver-arp-send"></a>Internt I/O-drivrutins-ARP-meddelande
 
-**Ikonen** ![ Ikon för Hämta fel antal för intern I/O-drivrutin](./media/user-guide/netx-events/image37.png)
-
-**Beskrivning**
-
-Den här händelsen representerar en intern NetX I/O-drivrutin för att hämta fel antal.
-
-**Informations fält**
-
-- Info fält 1: pekar mot IP-instansen
-- Informations fält 2: används inte
-- Informations fält 3: används inte
-- Info fält 4: används inte
-
-### <a name="internal-io-driver-get-rx-count"></a>Intern I/O-drivrutin Hämta RX-antal 
-
-#### <a name="internal-io-driver-get-rx-count"></a>Intern I/O-drivrutin Hämta RX-antal
-
-**Ikonen** ![ Intern I/O-drivrutin Hämta RX-ikon](./media/user-guide/netx-events/image38.png)
+**Ikon** ![ Skicka-ikon för intern I/O-drivrutin för ARP](./media/user-guide/netx-events/image29.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en intern NetX I/O-drivrutin för att hämta antal RX.
+Den här händelsen representerar en intern ARP-skickande händelse för NetX I/O-drivrutin.
 
-**Informations fält** 
+**Informationsfält**
 
-- Info fält 1: pekar mot IP-instansen
-- Informations fält 2: används inte
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Pekare till paket
+- Informationsfält 3: Paketstorlek
+- Informationsfält 4: Används inte
 
-### <a name="internal-io-driver-get-tx-count"></a>Intern I/O-drivrutin Hämta TX-antal 
+### <a name="internal-io-driver-arp-response-send"></a>Skicka internt ARP-svar för I/O-drivrutin 
 
-#### <a name="internal-io-driver-get-tx-count"></a>Intern I/O-drivrutin Hämta TX-antal
+#### <a name="internal-io-driver-arp-response-send"></a>Intern I/O-drivrutin för ARP-svarssändning
 
-**Ikonen** ![ Ikon för att hämta T X för intern I/O-drivrutin](./media/user-guide/netx-events/image39.png)
-
-**Beskrivning**
-
-Den här händelsen representerar en intern NetX I/O-drivrutin för att hämta TX-antal.
-
-**Informations fält**
-
-- Info fält 1: pekar mot IP-instansen
-- Informations fält 2: används inte
-- Informations fält 3: används inte
-- Info fält 4: används inte
-
-### <a name="internal-io-driver-get-allocation-errors"></a>Intern I/O-drivrutin Hämta tilldelnings fel 
-
-#### <a name="internal-io-driver-get-allocation-errors"></a>Intern I/O-drivrutin Hämta tilldelnings fel
-
-**Ikonen** ![ Ikon för Hämta tilldelnings fel för intern I/O-drivrutin](./media/user-guide/netx-events/image40.png)
+**Ikon** ![ Skicka-ikon för internt I/O-drivrutins-ARP-svar](./media/user-guide/netx-events/image30.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en intern NetX I/O-drivrutin för att hämta tilldelnings fel.
+Den här händelsen representerar en intern ARP-svarshändelse för NetX I/O-drivrutin.
 
-**Informations fält** 
+**Informationsfält**
 
-- Info fält 1: pekar mot IP-instansen
-- Informations fält 2: används inte
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Pekare till paket
+- Informationsfält 3: Paketstorlek
+- Informationsfält 4: Används inte
 
-### <a name="internal-io-driver-un-initialize"></a>Intern I/O-drivrutin avinitieras 
+### <a name="internal-io-driver-rarp-send"></a>Internt RARP-meddelande för I/O-drivrutin 
 
-#### <a name="internal-io-driver-un-initialize"></a>Intern I/O-drivrutin avinitieras 
+#### <a name="internal-io-driver-rarp-send"></a>INTERNT RARP-meddelande för I/O-drivrutin
 
-**Ikonen** ![ Ikon för intern I/O-drivrutin för avinitiering](./media/user-guide/netx-events/image41.png)
-
-**Beskrivning**
-
-Den här händelsen representerar en intern NetX I/O-drivrutin som avinitieras.
-
-**Informations fält** 
-
-- Info fält 1: pekar mot IP-instansen
-- Informations fält 2: används inte
-- Informations fält 3: används inte
-- Info fält 4: används inte
-
-### <a name="internal-io-driver-deferred-processing"></a>Intern I/O-drivrutin uppskjuten bearbetning 
-
-#### <a name="internal-io-driver-deferred-processing"></a>Intern I/O-drivrutin uppskjuten bearbetning 
-
-**Ikonen** ![ Intern I/O-drivrutin för uppskjuten bearbetning](./media/user-guide/netx-events/image42.png)
+**Ikon** ![ Rarp-skicka-ikon för intern I/O-drivrutin](./media/user-guide/netx-events/image31.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en intern NetX I/O-drivrutin som Uppskjut bearbetnings händelsen.
+Den här händelsen representerar en intern RARP-skickande händelse för NetX I/O-drivrutin.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot IP-instansen
-- Info fält 2: pekar mot paket
-- Informations fält 3: paket längd
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Pekare till paket
+- Informationsfält 3: Paketstorlek
+- Informationsfält 4: Används inte
 
-### <a name="arp-dynamic-entries-invalidate"></a>Avvalidering av dynamiska ARP-poster 
+### <a name="internal-io-driver-multicast-join"></a>Intern multicast-koppling för I/O-drivrutin 
+
+#### <a name="internal-io-driver-multicast-join"></a>Intern multicast-koppling för I/O-drivrutin
+
+**Ikon** ![ Multicast-kopplingsikon för intern I/O-drivrutin](./media/user-guide/netx-events/image32.png)
+
+**Beskrivning**
+
+Den här händelsen representerar en intern multicast-kopplingshändelse för NetX I/O-drivrutinen.
+
+**Informationsfält** 
+
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Används inte
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
+
+### <a name="internal-io-driver-multicast-leave"></a>Multicast-ledighet för intern I/O-drivrutin 
+
+#### <a name="internal-io-driver-multicast-leave"></a>Multicast-ledighet för intern I/O-drivrutin
+
+**Ikon** ![ Multicast-lämna-ikon för intern I/O-drivrutin](./media/user-guide/netx-events/image33.png)
+
+**Beskrivning**
+
+Den här händelsen representerar en intern Multicast Leave-händelse för NetX I/O-drivrutinen.
+
+**Informationsfält**
+
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Används inte
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
+
+### <a name="internal-io-driver-get-status"></a>Hämta status för intern I/O-drivrutin 
+
+#### <a name="internal-io-driver-get-status"></a>Hämta status för intern I/O-drivrutin
+
+**Ikon** ![ Ikon för att hämta status för intern I/O-drivrutin](./media/user-guide/netx-events/image34.png)
+
+**Beskrivning**
+
+Den här händelsen representerar en intern statushändelse för att hämta status för NetX I/O-drivrutinen.
+
+**Informationsfält**
+
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Används inte
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
+
+### <a name="internal-io-driver-get-speed"></a>Intern I/O-drivrutin – Hämta hastighet 
+
+#### <a name="internal-io-driver-get-speed"></a>Intern I/O-drivrutin får hastighet
+
+**Ikon** ![ Ikon för att hämta hastighet för intern I/O-drivrutin](./media/user-guide/netx-events/image35.png)
+
+**Beskrivning**
+
+Den här händelsen representerar en intern NetX I/O-drivrutin som kör en get speed-händelse.
+
+**Informationsfält**
+
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Används inte
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
+
+### <a name="internal-io-driver-get-duplex-type"></a>Intern I/O-drivrutin : Get Duplex Type (Hämta duplex-typ) 
+
+#### <a name="internal-io-driver-get-duplex-type"></a>Intern I/O-drivrutin får duplex-typ
+
+**Ikon** ![ Ikon för intern I/O-drivrutin för att hämta duplex-typ](./media/user-guide/netx-events/image36.png)
+
+**Beskrivning**
+
+Den här händelsen representerar en intern NetX I/O-drivrutin med en get duplex-typhändelse.
+
+**Informationsfält** 
+
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Används inte
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
+
+### <a name="internal-io-driver-get-error-count"></a>Internt antal I/O-drivrutinsfel
+
+#### <a name="internal-io-driver-get-error-count"></a>Intern I/O-drivrutin får antal fel
+
+**Ikon** ![ Ikon för internt I/O-drivrutin får antal fel](./media/user-guide/netx-events/image37.png)
+
+**Beskrivning**
+
+Den här händelsen representerar en intern NetX I/O-drivrutin som får felantalshändelse.
+
+**Informationsfält**
+
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Används inte
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
+
+### <a name="internal-io-driver-get-rx-count"></a>Intern I/O-drivrutin får RX-antal 
+
+#### <a name="internal-io-driver-get-rx-count"></a>Intern I/O-drivrutin får RX-antal
+
+**Ikon** ![ Ikon för internt I/O-drivrutin för att hämta RX-antal](./media/user-guide/netx-events/image38.png)
+
+**Beskrivning**
+
+Den här händelsen representerar en intern NetX I/O-drivrutin som får RX-antal händelser.
+
+**Informationsfält** 
+
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Används inte
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
+
+### <a name="internal-io-driver-get-tx-count"></a>Intern I/O-drivrutin hämtar TX-antal 
+
+#### <a name="internal-io-driver-get-tx-count"></a>Intern I/O-drivrutin får TX-antal
+
+**Ikon** ![ Intern I/O-drivrutin får T X-antal-ikon](./media/user-guide/netx-events/image39.png)
+
+**Beskrivning**
+
+Den här händelsen representerar en intern NetX I/O-drivrutin som hämtar TX-antal händelser.
+
+**Informationsfält**
+
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Används inte
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
+
+### <a name="internal-io-driver-get-allocation-errors"></a>Interna I/O-drivrutin får allokeringsfel 
+
+#### <a name="internal-io-driver-get-allocation-errors"></a>Intern I/O-drivrutin får allokeringsfel
+
+**Ikon** ![ Ikon för internt I/O-drivrutin för att hämta allokeringsfel](./media/user-guide/netx-events/image40.png)
+
+**Beskrivning**
+
+Den här händelsen representerar en intern NetX I/O-drivrutin som får allokeringsfel.
+
+**Informationsfält** 
+
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Används inte
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
+
+### <a name="internal-io-driver-un-initialize"></a>Avitiera intern I/O-drivrutin 
+
+#### <a name="internal-io-driver-un-initialize"></a>Avitiering av intern I/O-drivrutin 
+
+**Ikon** ![ Avitieringsikon för intern I/O-drivrutin](./media/user-guide/netx-events/image41.png)
+
+**Beskrivning**
+
+Den här händelsen representerar en intern I/O-drivrutin för NetX som avinitierar händelsen.
+
+**Informationsfält** 
+
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Används inte
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
+
+### <a name="internal-io-driver-deferred-processing"></a>Intern uppskjuten bearbetning av I/O-drivrutin 
+
+#### <a name="internal-io-driver-deferred-processing"></a>Intern uppskjuten bearbetning av I/O-drivrutin 
+
+**Ikon** ![ Ikon för uppskjuten bearbetning av intern I/O-drivrutin](./media/user-guide/netx-events/image42.png)
+
+**Beskrivning**
+
+Den här händelsen representerar en intern uppskjuten bearbetningshändelse i NetX I/O-drivrutinen.
+
+**Informationsfält**
+
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Pekare till paket
+- Informationsfält 3: Paketlängd
+- Informationsfält 4: Används inte
+
+### <a name="arp-dynamic-entries-invalidate"></a>Dynamiska ARP-poster ogiltigförklaras 
 
 #### <a name="nx_arp_dynamic_entries_invalidate"></a>nx_arp_dynamic_entries_invalidate
 
-**Ikonen** ![ En ogiltig ikon för R P dynamiska poster](./media/user-guide/netx-events/image43.png)
+**Ikon** ![ Ikonen Ogiltiga R P dynamiska poster](./media/user-guide/netx-events/image43.png)
 
 **Beskrivning**
 
-Den här händelsen representerar invalideringen av alla dynamiska ARP-hela via nx_arp_dynamic_entries_invalidate.
+Den här händelsen representerar ogiltighet av alla dynamiska ARP-helheter via nx_arp_dynamic_entries_invalidate.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Info fält 1: pekar mot IP-instansen
-- Informations fält 2: ogiltiga poster
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Poster ogiltigförklaras
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
-### <a name="arp-dynamic-entry-set"></a>Dynamisk ARP-post uppsättning 
+### <a name="arp-dynamic-entry-set"></a>Dynamisk ARP-postuppsättning 
 
 #### <a name="nx_arp_dynamic_entry_set"></a>nx_arp_dynamic_entry_set
 
-**Ikonen** ![ En R P-ikon för dynamisk inmatnings uppsättning](./media/user-guide/netx-events/image44.png)
+**Ikon** ![ Ikon för dynamisk postuppsättning för R P](./media/user-guide/netx-events/image44.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att ange en dynamisk ARP-post via nx_arp_dynamic_entry_set.
+Den här händelsen representerar inställning av en dynamisk ARP-post via nx_arp_dynamic_entry_set.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Info fält 1: pekar mot IP-instansen
-- Info fält 2: IP-adress
-- Informations fält 3: fysisk adress (MSW)
-- Info-fält 4: fysisk adress (LSW)
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: IP-adress
+- Informationsfält 3: Fysisk adress (MSW)
+- Informationsfält 4: Fysisk adress (LSW)
 
 ### <a name="arp-enable"></a>Aktivera ARP 
 
 #### <a name="nx_arp_enable"></a>nx_arp_enable
 
-**Ikonen** ![ Ikonen R P aktivera](./media/user-guide/netx-events/image45.png)
+**Ikon** ![ En R P-aktivera-ikon](./media/user-guide/netx-events/image45.png)
 
 **Beskrivning**
 
 Den här händelsen representerar aktivering av ARP via nx_arp_enable.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Info fält 1: pekar mot IP-instansen
-- Informations fält 2: minnes pekare för ARP-cache
-- Info-fält 3: minnes storlek för ARP-cache
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Minnes pekare för ARP-cache
+- Informationsfält 3: Minnesstorlek för ARP-cache
+- Informationsfält 4: Används inte
 
-### <a name="arp-gratuitous-send"></a>ARP, kostnads överföring 
+### <a name="arp-gratuitous-send"></a>ARP Gratuitous Send 
 
 #### <a name="nx_arp_gratuitous_send"></a>nx_arp_gratuitous_send
 
-**Ikonen** ![ En R P-ikon för att skicka en kostnads fria sändning](./media/user-guide/netx-events/image46.png)
+**Ikon** ![ En R P-ikon för att skicka utan att göra något](./media/user-guide/netx-events/image46.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en kostnads fria ARP-sändning via nx_arp_gratuitous_send.
+Den här händelsen representerar en överflödig ARP-skicka via nx_arp_gratuitous_send.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot IP-instansen
-- Informations fält 2: används inte
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Används inte
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
-### <a name="arp-hardware-address-find"></a>Sök efter ARP-maskinvara 
+### <a name="arp-hardware-address-find"></a>Hitta ARP-maskinvaruadress 
 
 #### <a name="nx_arp_hardware_address_find"></a>nx_arp_hardware_address_find
 
-**Ikonen** ![ Ikonen R P P maskin varu adress Sök](./media/user-guide/netx-events/image47.png)
+**Ikon** ![ Ikonen Hitta en R P-maskinvaruadress](./media/user-guide/netx-events/image47.png)
 
 **Beskrivning**
 
 Den här händelsen representerar att hitta en fysisk adress via nx_arp_hardware_address_find.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Info fält 1: pekar mot IP-instansen
-- Info fält 2: IP-adress
-- Informations fält 3: fysisk adress (MSW)
-- Info-fält 4: fysisk adress (LSW)
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: IP-adress
+- Informationsfält 3: Fysisk adress (MSW)
+- Informationsfält 4: Fysisk adress (LSW)
 
 ### <a name="arp-information-get"></a>Hämta ARP-information 
 
 #### <a name="nx_arp_info_get"></a>nx_arp_info_get
 
-**Ikonen** ![ En R P P informition get-ikon](./media/user-guide/netx-events/image48.png)
+**Ikon** ![ Hämta en R P-informationsikon](./media/user-guide/netx-events/image48.png)
 
 **Beskrivning**
 
 Den här händelsen representerar att hämta information via nx_arp_info_get.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Info fält 1: pekar mot IP-instansen
-- Informations fält 2: ARPs har skickats
-- Informations fält 3: ARP-svar
-- Info fält 4: ARPs mottagen
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: ADE:er skickade
+- Informationsfält 3: ARP-svar
+- Informationsfält 4: Mottagna ADE:er
 
-### <a name="arp-ip-address-find"></a>Sök efter ARP IP-adress 
+### <a name="arp-ip-address-find"></a>ARP IP-adress find 
 
 #### <a name="nx_arp_ip_address_find"></a>nx_arp_ip_address_find
 
-**Ikonen** ![ Ikonen R P I P-adress Sök](./media/user-guide/netx-events/image49.png)
+**Ikon** ![ Ikonen Hitta en R P I P-adress](./media/user-guide/netx-events/image49.png)
 
 **Beskrivning**
 
 Den här händelsen representerar att hitta en IP-adress som är associerad med den angivna fysiska adressen via nx_arp_ip_address_find.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Info fält 1: pekar mot IP-instansen
-- Info fält 2: IP-adress
-- Informations fält 3: fysisk adress (MSW)
-- Info-fält 4: fysisk adress (LSW)
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: IP-adress
+- Informationsfält 3: Fysisk adress (MSW)
+- Informationsfält 4: Fysisk adress (LSW)
 
 ### <a name="arp-static-entry-create"></a>Skapa statisk ARP-post 
 
 #### <a name="nx_arp_static_entry_create"></a>nx_arp_static_entry_create
 
-**Ikonen** ![ En ikon för att skapa R P statisk post](./media/user-guide/netx-events/image50.png)
+**Ikon** ![ En ikon för att skapa en statisk R P-post](./media/user-guide/netx-events/image50.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att skapa en statisk ARP-post via nx_arp_static_entry_create.
+Den här händelsen representerar skapandet av en statisk ARP-post via nx_arp_static_entry_create.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot IP-instansen
-- Info fält 2: IP-adress
-- Informations fält 3: fysisk adress (MSW)
-- Info-fält 4: fysisk adress (LSW)
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: IP-adress
+- Informationsfält 3: Fysisk adress (MSW)
+- Informationsfält 4: Fysisk adress (LSW)
 
-### <a name="arp-static-entries-delete"></a>Ta bort ARP statiska poster 
+### <a name="arp-static-entries-delete"></a>Ta bort statiska ARP-poster 
 
 #### <a name="nx_arp_static_entries_delete"></a>nx_arp_static_entries_delete
 
-**Ikonen** ![ Ta bort ikon för R P statisk poster](./media/user-guide/netx-events/image51.png)
+**Ikon** ![ Ikonen Ta bort statiska R P-poster](./media/user-guide/netx-events/image51.png)
 
 **Beskrivning**
 
 Den här händelsen representerar borttagning av alla statiska ARP-poster via nx_arp_static_entries_delete.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Info fält 1: pekar mot IP-instansen
-- Informations fält 2: poster har tagits bort
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Borttagna poster
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
-### <a name="arp-static-entry-delete"></a>Ta bort ARP statisk post 
+### <a name="arp-static-entry-delete"></a>Ta bort statisk ARP-post 
 
 ### <a name="nx_arp_static_entry_delete"></a>nx_arp_static_entry_delete
 
-**Ikonen** ![ Ikonen R P statisk post Delete](./media/user-guide/netx-events/image52.png)
+**Ikon** ![ En borttagningsikon för statisk R P-post](./media/user-guide/netx-events/image52.png)
 
 **Beskrivning**
 
 Den här händelsen representerar borttagning av en statisk ARP-post via nx_arp_static_entry_delete.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Info fält 1: pekar mot IP-instansen
-- Info fält 2: IP-adress
-- Informations fält 3: fysisk adress (MSW)
-- Info-fält 4: fysisk adress (LSW)
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: IP-adress
+- Informationsfält 3: Fysisk adress (MSW)
+- Informationsfält 4: Fysisk adress (LSW)
 
-### <a name="duo-cache-entry-delete"></a>Duo-cachepost ta bort 
+### <a name="duo-cache-entry-delete"></a>Ta bort duo-cachepost 
 
 #### <a name="nxd_und_cache_entry_delete"></a>nxd_und_cache_entry_delete
 
-**Ikonen** ![ Duo cache Entry ta bort ikon](./media/user-guide/netx-events/image53.png)
+**Ikon** ![ Borttagningsikon för Duo-cachepost](./media/user-guide/netx-events/image53.png)
 
 **Beskrivning**
 
-Den här händelsen representerar borttagning av en post i den närliggande cache-tabellen via nx_udp_socket_create.
+Den här händelsen representerar borttagning av en post i granncachen via nx_udp_socket_create.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: fjärde (minst signifikant) ord för den IPv6-länk lokala adressen som ska tas bort
-- Informations fält 2: används inte
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Fjärde (minst signifikanta) ordet i den lokala IPv6-länkens adress som ska tas bort
+- Informationsfält 2: Används inte
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
-### <a name="duo-cache-entry-set"></a>Duo cache-post uppsättning 
+### <a name="duo-cache-entry-set"></a>Postuppsättning för Duo-cache 
 
 #### <a name="nxd_nd_cache_entry_set"></a>nxd_nd_cache_entry_set
 
-**Ikonen** ![ Ikon för Duo cache Entry set](./media/user-guide/netx-events/image54.png)
+**Ikon** ![ Ikon för att ange duo-cachepost](./media/user-guide/netx-events/image54.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att skapa en cachepost och lägga till den i den närliggande cache-tabellen via nxd_nd_cache_entry_set.
+Den här händelsen representerar att skapa en cachepost och lägga till den angränsande cachetabellen via nxd_nd_cache_entry_set.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: fjärde (minst signifikant) ord för IPv6-adressen som ska läggas till
-- Info-fält 2: fysisk MSB
-- Info-fält 3: fysisk lsb
-- Info fält 4: används inte
+- Informationsfält 1: Fjärde (minst signifikanta) ordet i den IPv6-adress som ska läggas till
+- Informationsfält 2: Fysisk adress msb
+- Informationsfält 3: Fysisk adress lsb
+- Informationsfält 4: Används inte
 
-### <a name="duo-cache-invalidate"></a>Duo-cache ogiltig 
+### <a name="duo-cache-invalidate"></a>Duo Cache Invalidate 
 
 #### <a name="nxd_nd_cache_invalidate"></a>nxd_nd_cache_invalidate
 
-**Ikonen** ![ Ikonen för Duo cache-Invalidate](./media/user-guide/netx-events/image55.png)
+**Ikon** ![ Ikon för ogiltigt duo-cacheminne](./media/user-guide/netx-events/image55.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att hela den angränsande cache-tabellen ska verifieras via nxd_nd_cache_invalidate.
+Den här händelsen representerar att hela granncachens tabell ogiltigförklaras via nxd_nd_cache_invalidate.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Informations fält 2: används inte
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Används inte
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
-### <a name="duo-cache-ip-address-find"></a>Duo-cache IP-adress Sök 
+### <a name="duo-cache-ip-address-find"></a>Duo Cache IP Address Find 
 
 #### <a name="nxd_nd_cache_ip_address_find"></a>nxd_nd_cache_ip_address_find
 
-**Ikonen** ![ Duo-cache I P-adress Sök ikon](./media/user-guide/netx-events/image56.png)
+**Ikon** ![ Ikon för att hitta I P-adress för duo-cache](./media/user-guide/netx-events/image56.png)
 
 **Beskrivning**
 
-Den här händelsen representerar hämtning av en IP-adress som matchar den angivna fysiska adressen från cache-tabellen via nxd_nd_cache_ip_address_find.
+Den här händelsen representerar hämtning av en IP-adress som matchar den angivna fysiska adressen från cachetabellen via nxd_nd_cache_ip_address_find.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Informations fält 2: fjärde (minst signifikant) ord för IPv6-adressen
-- Info-fält 3: fysisk MSB
-- Info-fält 4: fysisk lsb
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Fjärde (minst signifikanta) ordet i IPv6-adressen
+- Informationsfält 3: Fysisk adress msb
+- Informationsfält 4: Fysisk adress lsb
 
-### <a name="duo-icmp-enable"></a>Duo ICMP-aktivering 
+### <a name="duo-icmp-enable"></a>Aktivera Duo ICMP 
 
 #### <a name="nxd_icmp_enable"></a>nxd_icmp_enable
 
-**Ikonen** ![ Ikonen Duo I C M P Enable](./media/user-guide/netx-events/image57.png)
+**Ikon** ![ Aktivera ikon för Duo I C M P](./media/user-guide/netx-events/image57.png)
 
 **Beskrivning**
 
-Den här händelsen representerar ICMPv4-och ICMPv6-tjänster som Aktiver ATS på den angivna IP-instansen via nxd_icmp_enable.
+Den här händelsen representerar ICMPv4- och ICMPv6-tjänster som aktiveras på den angivna IP-instansen via nxd_icmp_enable.
 
-**Informations fält**
-- Informations fält 1: pekare till IP-instans
-- Informations fält 2: används inte
-- Informations fält 3: används inte
-- Info fält 4: används inte
+**Informationsfält**
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Används inte
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
-### <a name="duo-icmp-ping"></a>Duo ICMP-Ping 
+### <a name="duo-icmp-ping"></a>Duo ICMP Ping 
 
 #### <a name="nxd_icmp_ping"></a>nxd_icmp_ping
 
-**Ikonen** ![ Ikonen Duo I C M P ping](./media/user-guide/netx-events/image58.png)
+**Ikon** ![ Pingikonen Duo I C M P](./media/user-guide/netx-events/image58.png)
 
 **Beskrivning**
 
-Den här händelsen representerar sändning av en ping-begäran (ekobegäran) till en IPv6-värd via nxd_icmp_ping.
+Den här händelsen representerar sändning av ett ping (ekobegäran) till en IPv6-värd via nxd_icmp_ping.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Informations fält 2: IPv6-adress
-- Informations fält 3: pekar på data i eko
-- Info fält 4: storlek på ECHO data
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: IPv6-adress
+- Informationsfält 3: Pekare till ekodata
+- Informationsfält 4: Storleken på ekodata
 
-### <a name="duo-ip-max-payload-size-find"></a>Duo IP-största nytto Last storlek hitta 
+### <a name="duo-ip-max-payload-size-find"></a>Duo IP Max Payload Size Find 
 
 #### <a name="nxd_ip_max_payload_size"></a>nxd_ip_max_payload_size
 
-**Ikonen** ![ Ikonen Duo I P Max storlek för nytto Last](./media/user-guide/netx-events/image59.png)
+**Ikon** ![ Ikonen Hitta maximal nyttolaststorlek för Duo I P](./media/user-guide/netx-events/image59.png)
 
 **Beskrivning**
 
-Den här händelsen beräknar den maximala nytto lasten som det angivna paketet kan medföra utan fragmentering.
+Den här händelsen beräknar den maximala nyttolasten som det angivna paketet kan medföra utan fragmentering.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: socket-pekare
-- Informations fält 2: peer-IP-adress
-- Informations fält 3: information om peer-Port 4: används inte
+- Informationsfält 1: Socket-pekare
+- Informationsfält 2: Peer-IP-adress
+- Informationsfält 3: Peer-port info fält 4: Används inte
 
-### <a name="duo-ip-raw-packet-send"></a>Överföring av Duo IP RAW-paket 
+### <a name="duo-ip-raw-packet-send"></a>Duo IP Raw Packet Send 
 
 #### <a name="nxd_ip_max_packet_send"></a>nxd_ip_max_packet_send
 
-**Ikonen** ![ Ikonen Duo I P RAW Packet sändning](./media/user-guide/netx-events/image60.png)
+**Ikon** ![ Ikonen Skicka raw-paket med Duo I P](./media/user-guide/netx-events/image60.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att skicka ett RAW IP-paket från det angivna nätverks gränssnittet till den angivna IP-addressvia nxd_ip_raw_packet_send.
+Den här händelsen representerar sändning av ett rådata-IP-paket från det angivna nätverksgränssnittet till den angivna IP-måladressenvia nxd_ip_raw_packet_send.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: pekare till IP-instans
-- Info fält 2: pekare till paket att skicka
-- Informations fält 3: pekare till mål adress
-- Info-fält 4: paket protokoll
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Pekare till paket som ska skickas
+- Informationsfält 3: Pekare till måladress
+- Informationsfält 4: Paketprotokoll
 
-### <a name="duo-ipv6-default-router-add"></a>Duo IPv6 standard router Lägg till 
+### <a name="duo-ipv6-default-router-add"></a>Duo IPv6 Standard router Lägg till 
 
 #### <a name="nxd_ipv6_default_router_add"></a>nxd_ipv6_default_router_add
 
-**Ikonen** ![ Duo I P v v standard ikon för Lägg till router](./media/user-guide/netx-events/image61.png)
+**Ikon** ![ Lägg till ikon för standardrouter med Duo I P v 6](./media/user-guide/netx-events/image61.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att lägga till en standard-router till IP-instansens IPv6-routningstabell via nxd_ipv6_default_router_add.
+Den här händelsen representerar tillägg av en standardrouter till IP-instansens IPv6-routningstabell via nxd_ipv6_default_router_add.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans.
-- Info-fält 2: mål nätverks adress.
-- Info fält 3: information om livs längd.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till IP-instans.
+- Informationsfält 2: Målnätverksadress.
+- Informationsfält 3: Information om livslängd.
+- Informationsfält 4: Används inte.
 
-### <a name="duo-ipv6-default-router-delete"></a>Duo IPv6 standardrouter ta bort 
+### <a name="duo-ipv6-default-router-delete"></a>Duo IPv6 standard router ta bort 
 
 #### <a name="nxd_ipv6_default_router_delete"></a>nxd_ipv6_default_router_delete
 
-**Ikonen** ![ Duo I P v v standard ikon för ta bort router](./media/user-guide/netx-events/image62.png)
+**Ikon** ![ Ikonen Ta bort standardrouter med Duo I P v 6](./media/user-guide/netx-events/image62.png)
 
 **Beskrivning**
 
-Den här händelsen representerar borttagning av en standard-router från IP-instansens IPv6-routningstabell via nxd_ipv6_default_router_delete.
+Den här händelsen representerar borttagning av en standardrouter från IP-instansens IPv6-routningstabell via nxd_ipv6_default_router_delete.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans.
-- Informations fält 2: fjärde ordet (minst signifikant) av IPv6-standardadressen för router.
-- Informations fält 3: används inte.
-- Info fält 4: används inte.
+- Informationsfält 1: Pekare till IP-instans.
+- Informationsfält 2: Fjärde ordet (minst signifikant) för standardrouter-IPv6-adressen.
+- Informationsfält 3: Används inte.
+- Informationsfält 4: Används inte.
 
-### <a name="duo-ipv6-enable"></a>Duo IPv6 Enable 
+### <a name="duo-ipv6-enable"></a>Aktivera Duo IPv6 
 
 #### <a name="nxd_ipv6_enable"></a>nxd_ipv6_enable
 
-**Ikonen** ![ Duo I P v v v Aktivera ikon](./media/user-guide/netx-events/image63.png)
+**Ikon** ![ Aktivera duo I P v 6-ikon](./media/user-guide/netx-events/image63.png)
 
 **Beskrivning**
 
 Den här händelsen representerar aktivering av IPv6-tjänster på den angivna IP-instansen via nxd_ipv6_enable.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Informations fält 2: används inte
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Används inte
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
-### <a name="duo-ipv6-global-address-get"></a>Global adress för Duo IPv6 get 
+### <a name="duo-ipv6-global-address-get"></a>Hämta global adress för Duo IPv6 
 
 #### <a name="nxd_ipv6_global_address_get"></a>nxd_ipv6_global_address_get
 
-**Ikonen** ![ Ikonen Duo I P v v 6 global adress Hämta](./media/user-guide/netx-events/image64.png)
+**Ikon** ![ Ikonen Hämta global adress för Duo I P v 6](./media/user-guide/netx-events/image64.png)
 
 **Beskrivning**
 
-Den här händelsen representerar hämtning av den globala (primära) IP-adressen på IP-instansen som finns på index 1 i tabellen IP-instans-gränssnitt via nxd_ipv6_global_address_get.
+Den här händelsen representerar hämtning av den globala (primära) IP-adressen på IP-instansen som finns vid index 1 i ip-instansgränssnittstabellen via nxd_ipv6_global_address_get.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans.
-- Informations fält 2: fjärde ordet (minst signifikant) av den globala adressen
-- Info-fält 3: längden på IPv6-adressprefixet.
-- Info fält 4: index i IP-gränssnitts tabell (1).
+- Informationsfält 1: Pekare till IP-instans.
+- Informationsfält 2: Fjärde ordet (minst signifikant) för den globala adressen
+- Informationsfält 3: IPv6-adressprefixets längd.
+- Informationsfält 4: Indexera till IP-gränssnittstabell (1).
 
-### <a name="duo-ipv6-global-address-set"></a>Global adress uppsättning för Duo IPv6 
+### <a name="duo-ipv6-global-address-set"></a>Duo IPv6 Global Address Set 
 
 #### <a name="nxd_ipv6_global_address_set"></a>nxd_ipv6_global_address_set
 
-**Ikonen** ![ Ikonen Duo I P v v v 6, global adress uppsättning](./media/user-guide/netx-events/image65.png)
+**Ikon** ![ Ikon för global adressuppsättning för Duo I P v 6](./media/user-guide/netx-events/image65.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att ange den globala (primära) IP-adressen på IP-instansen som finns på index 1 i tabellen IP-instans-gränssnitt via nxd_ipv6_global_address_set.
+Den här händelsen representerar inställningen av den globala (primära) IP-adressen på IP-instansen som finns vid index 1 i ip-instansgränssnittstabellen via nxd_ipv6_global_address_set.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: pekare till IP-instans
-- Informations fält 2: fjärde ordet (minst signifikant) av den globala adressen
-- Informations fält 3: längden på IPv6-adressprefixet
-- Info fält 4: index i IP-gränssnitts tabell (1)
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Fjärde ordet (minst signifikant) för den globala adressen
+- Informationsfält 3: IPv6-adressprefixlängd
+- Informationsfält 4: Indexera till IP-gränssnittstabell (1)
 
-### <a name="duo-ipv6-initiate-dad-process"></a>Duo IPv6-initiera pappa-process 
+### <a name="duo-ipv6-initiate-dad-process"></a>Duo IPv6 Initiate Dad Process 
 
 #### <a name="nxd_ipv6_initiate_dad_process"></a>nxd_ipv6_initiate_dad_process
 
-**Ikonen** ![ Duo I P v v v Starta pappa-process ikon](./media/user-guide/netx-events/image66.png)
+**Ikon** ![ Ikon för att starta process för Duo I P v 6](./media/user-guide/netx-events/image66.png)
 
 **Beskrivning**
 
-Den här händelsen representerar start processen för den duplicerade adress identifieringen (pappa) när IP-instansen tilldelas en länk lokal eller IP-gränssnitts adress via nxd_ipv6_initiate_dad_process.
+Den här händelsen representerar början av processen för dubblettadressidentifiering (ORDNAD) när IP-instansen tilldelas en lokal länk eller en IP-gränssnittsadress via nxd_ipv6_initiate_dad_process.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Informations fält 2: används inte
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Används inte
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
-### <a name="duo-ipv6-interface-address-get"></a>Duo IPv6-gränssnitt adress Hämta 
+### <a name="duo-ipv6-interface-address-get"></a>Hämta duo IPv6-gränssnittsadress 
 
 #### <a name="nxd_ipv6_interface_address_get"></a>nxd_ipv6_interface_address_get
 
-**Ikonen** ![ Duo I P v v v-ikonen Hämta ikon](./media/user-guide/netx-events/image67.png)
+**Ikon** ![ Hämta ikon för gränssnittsadress för Duo I P v 6](./media/user-guide/netx-events/image67.png)
 
 **Beskrivning**
 
-Den här händelsen representerar hämtning av IP-adressen och prefixet vid det angivna indexet i IP-instansens gränssnitts adress tabell via nxd_ipv6_interface_address_get.
+Den här händelsen representerar hämtning av IP-adressen och prefixet vid det angivna indexet till IP-instansens gränssnittsadresstabell via nxd_ipv6_interface_address_get.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Informations fält 2: fjärde ordet (minst signifikant) för IPv6-adressen som ska returneras
-- Info-fält 4: index för gränssnittet i IP-instansens gränssnitts tabell
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Fjärde ordet (minst signifikant) för IPv6-adressen som ska returneras
+- Informationsfält 4: Index för gränssnittet i gränssnittstabellen för IP-instansen
 
-### <a name="duo-ipv6-interface-address-set"></a>Adress uppsättning för Duo IPv6-gränssnitt 
+### <a name="duo-ipv6-interface-address-set"></a>Duo IPv6-gränssnittsadressuppsättning 
 
 ### <a name="nxd_ipv6_interface_address_set"></a>nxd_ipv6_interface_address_set
 
-**Ikonen** ![ Duo-ikonen I P v v v-gränssnittet](./media/user-guide/netx-events/image68.png)
+**Ikon** ![ Duo I P v 6-gränssnittsadresser et-ikon](./media/user-guide/netx-events/image68.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att ange IP-adressen och prefixet vid det angivna indexet i adress tabellen för IP-instansen. Tillåts inte för index noll (länk lokal adress) via nxd_ipv6_interface_address_set.
+Den här händelsen representerar inställning av IP-adressen och prefixet för det angivna indexet i IP-instansgränssnittets adresstabell. Tillåts inte på index noll (länka lokal adress) via nxd_ipv6_interface_address_set.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Informations fält 2: fjärde ordet (minst signifikant) för IPv6-adressen som ska returneras
-- Informations fält 3: prefixlängd
-- Info-fält 4: index för gränssnittet i IP-instansens gränssnitts tabell
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Fjärde ordet (minst signifikant) för IPv6-adressen som ska returneras
+- Informationsfält 3: Prefixlängd
+- Informationsfält 4: Index för gränssnittet i gränssnittstabellen för IP-instansen
 
-### <a name="duo-ipv6-link-local-address-get"></a>Duo IPv6-länk lokal adress Hämta 
+### <a name="duo-ipv6-link-local-address-get"></a>Hämta lokal adress för IPv6-länk i Duo 
 
 #### <a name="nxd_ipv6_linklocal_address_get"></a>nxd_ipv6_linklocal_address_get
 
-**Ikonen** ![ Ikonen Duo I P v v v länk lokal adress Hämta ikon](./media/user-guide/netx-events/image69.png)
+**Ikon** ![ Ikonen Hämta lokal adress för Duo I P v 6-länk](./media/user-guide/netx-events/image69.png)
 
 **Beskrivning**
 
-Den här händelsen representerar hämtning av länkens lokala adress för den angivna IP-instansen via nxd_ipv6_linklocal_address_get.
+Den här händelsen representerar hämtning av den lokala länkadressen för den angivna IP-instansen via nxd_ipv6_linklocal_address_get.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Informations fält 2: fjärde ordet (minst signifikant) av IP V6-länkens lokala adress
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Fjärde ordet (minst signifikant) för den lokala IP v6-länkens adress
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
-### <a name="duo-ipv6-link-local-address-set"></a>Duo IPv6-länk lokal adress uppsättning 
+### <a name="duo-ipv6-link-local-address-set"></a>Duo IPv6 Link Lokal adressuppsättning 
 
 #### <a name="nxd_ipv6_linklocal_address_set"></a>nxd_ipv6_linklocal_address_set
 
-**Ikonen** ![ Ikonen Duo I P v v v-länk lokalt adress uppsättning](./media/user-guide/netx-events/image70.png)
+**Ikon** ![ Duo I P v 6-länk ikon för lokal adressuppsättning](./media/user-guide/netx-events/image70.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att ange den lokala länk adressen för IP-instansen via nxd_ipv6_linklocal_address_set.
+Den här händelsen representerar inställningen av ip-instansens länk lokala adress via nxd_ipv6_linklocal_address_set.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Informations fält 2: fjärde (minst signifikant) ord för IPv6-länkens lokala adress
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Fjärde (minst signifikanta) ordet i den lokala IPv6-länkens adress
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
-### <a name="duo-ipv6-raw-packet-send"></a>Duo IPv6 RAW-paket sändning 
+### <a name="duo-ipv6-raw-packet-send"></a>Skicka Duo IPv6-rådatapaket 
 
 #### <a name="nxd_ipv6_raw_packet_send"></a>nxd_ipv6_raw_packet_send
 
-**Ikonen** ![ Duo I P v v v-ikon för RAW Packet-sändning](./media/user-guide/netx-events/image71.png)
+**Ikon** ![ Skicka obearbetat paket i Duo I P v 6](./media/user-guide/netx-events/image71.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att skicka ett RAW IP-paket via det primära IP-gränssnittet till Proxyport anges-målet via nxd_ip_raw_packet_send.
+Den här händelsen representerar sändning av ett rå IP-paket via det primära IP-gränssnittet till det speficierade målet via nxd_ip_raw_packet_send.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Info fält 2: pekare till paket att skicka
-- Informations fält 3: målets IP-adress
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Pekare till paket som ska skickas
+- Informationsfält 3: Mål-IP-adress
+- Informationsfält 4: Används inte
 
-### <a name="duo-tcp-socket-peer-info-get"></a>Duo TCP socket peer information get 
+### <a name="duo-tcp-socket-peer-info-get"></a>Hämta information om DUO TCP Socket-peer 
 
 #### <a name="nxd_tcp_socket_peer_info_get"></a>nxd_tcp_socket_peer_info_get
 
-**Ikonen** ![ Duo T C P socket peer information get ikon](./media/user-guide/netx-events/image72.png)
+**Ikon** ![ Hämta ikon för peer-information om duo T C P socket](./media/user-guide/netx-events/image72.png)
 
 **Beskrivning**
 
-Den här händelsen extraherar avsändar data från ett mottaget TCP-paket på den angivna socketen. Den returnerar avsändarens IP-adress och port.
+Den här händelsen extraherar avsändardata från ett mottaget TCP-paket på den angivna socketen. Den returnerar avsändarens IP-adress och port.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: socket-pekare
-- Informations fält 2: peer-IP-adress
-- Informations fält 3: peer-port
-- Info-fält 4: lånet är signifikant 32-bitars IP-adressen
+- Informationsfält 1: Socket pekare
+- Informationsfält 2: Peer-IP-adress
+- Informationsfält 3: Peer-port
+- Informationsfält 4: Lånet som är betydande 32-bitars av IP-adressen
 
-### <a name="duo-tcp-socket-set-interface"></a>Duo TCP socket set Interface 
+### <a name="duo-tcp-socket-set-interface"></a>Duo TCP Socket Set Interface 
 
 #### <a name="nxd_tcp_socket_set_interface"></a>nxd_tcp_socket_set_interface
 
-**Ikonen** ![ Ikonen Duo T C P socket set Interface](./media/user-guide/netx-events/image73.png)
+**Ikon** ![ Gränssnittsikon för Duo T C P socket set](./media/user-guide/netx-events/image73.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att ange utgående socket-gränssnitt när en klient ansluter med en TCP-server på den angivna serverns IP-adress via nxd_tcp_client_socket_connect.
+Den här händelsen representerar inställning av utgående socketgränssnitt när en klient ansluter till en TCP-server på den angivna serverns IP-adress via nxd_tcp_client_socket_connect.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: pekare till TCP-socket
-- Informations fält 2: gränssnitts-ID
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till TCP Socket
+- Informationsfält 2: Gränssnitts-ID
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
-### <a name="duo-udp-socket-send"></a>Duo UDP-socket skicka 
+### <a name="duo-udp-socket-send"></a>Skicka UDP-socket för Duo 
 
 #### <a name="nxd_udp_socket_send"></a>nxd_udp_socket_send
 
-**Ikonen** ![ Duo U D P uttag ikon för skicka](./media/user-guide/netx-events/image74.png)
+**Ikon** ![ Skicka-ikonen för Duo U D P-socket](./media/user-guide/netx-events/image74.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att skicka ett UDP-paket via den angivna socketen med IP-adressen för indata och port via nxd_udp_socket_send.
+Den här händelsen representerar sändning av ett UDP-paket via den angivna socketen med inkommande IP-adress och port via nxd_udp_socket_send.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Info fält 1: pekare UDP-socket
-- Info fält 2: pekare till UDP-paket
-- Informations fält 3: paket längd
-- Info fält 4: används inte
+- Informationsfält 1: UDP-pekarsocket
+- Informationsfält 2: Pekare till UDP-paket
+- Informationsfält 3: Paketlängd
+- Informationsfält 4: Används inte
 
 
-### <a name="duo-udp-socket-set-interface"></a>Duo UDP socket set Interface 
+### <a name="duo-udp-socket-set-interface"></a>Duo UDP Socket Set Interface 
 
 #### <a name="nxd_udp_socket_set_interface"></a>nxd_udp_socket_set_interface
 
-**Ikonen** ![ Ikonen Duo U D P socket set Interface](./media/user-guide/netx-events/image75.png)
+**Ikon** ![ Gränssnittsikon för Duo U D P socket set](./media/user-guide/netx-events/image75.png)
 
 **Beskrivning**
 
-Den här händelsen representerar inställningen för det angivna utgående UDP-socket-gränssnittet till gränssnittet som motsvarar ID för indataports-gränssnitt via nxd_udp_socket_set_interface.
+Den här händelsen representerar inställning av det angivna utgående UDP-gränssnittet till det gränssnitt som motsvarar ID:t för indatagränssnittet via nxd_udp_socket_set_interface.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Info fält 1: pekare till UDP-socket
-- Informations fält 2: gränssnitts-ID
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till UDP-socket
+- Informationsfält 2: Gränssnitts-ID
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
-### <a name="duo-udp-source-extract"></a>Duo UDP-käll extrahering 
+### <a name="duo-udp-source-extract"></a>Extrahera UDP-källa i Duo 
 
 #### <a name="nxd_udp_socket_extract"></a>nxd_udp_socket_extract
 
-**Ikonen** ![ Duo U D P-käll extraherings ikon](./media/user-guide/netx-events/image76.png)
+**Ikon** ![ Extraheringsikon för Duo U D P-källa](./media/user-guide/netx-events/image76.png)
 
 **Beskrivning**
 
-Den här händelsen representerar extrahering av IP-adressen och käll porten för ett mottaget paket (antingen IPv4 eller IPv6). Om IPv6 returneras det fjärde ordet (minst signifikant) av IP-adressen via nxd_udp_source_extract.
+Den här händelsen representerar extrahering av IP-adressen och källporten för ett mottaget paket (antingen IPv4 eller IPv6). Om IPv6 används returneras det fjärde ordet (minst betydande) i IP-adressen via nxd_udp_source_extract.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot paketet
-- Informations fält 2: IP-version
-- Informations fält 3: Källans IP-adress (IPv4 eller IPv6)
-- Info-fält 4: källport
+- Informationsfält 1: Pekare till paketet
+- Informationsfält 2: IP-version
+- Informationsfält 3: Käll-IP-adress (IPv4 eller IPv6)
+- Informationsfält 4: Källport
 
-### <a name="icmp-enable"></a>ICMP-aktivering 
+### <a name="icmp-enable"></a>ICMP-aktivera 
 
 #### <a name="nx_icmp_enable"></a>nx_icmp_enable
 
-**Ikonen** ![ I C M P Enable-ikon](./media/user-guide/netx-events/image77.png)
+**Ikon** ![ IC M P-aktivera-ikon](./media/user-guide/netx-events/image77.png)
 
 **Beskrivning**
 
 Den här händelsen representerar aktivering av ICMP via nx_icmp_enable.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekare till IP-instansen l;
-- Informations fält 2: används inte
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instansen l;
+- Informationsfält 2: Används inte
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
-### <a name="icmp-information-get"></a>ICMP information get 
+### <a name="icmp-information-get"></a>Hämta ICMP-information 
 
 #### <a name="nx_icmp_info_get"></a>nx_icmp_info_get
 
-**Ikonen** ![ I C M P information get-ikonen](./media/user-guide/netx-events/image78.png)
+**Ikon** ![ I C M P information hämta ikon](./media/user-guide/netx-events/image78.png)
 
 **Beskrivning**
 
 Den här händelsen representerar att hämta information via nx_icmp_info_get.
 
-**Informations fält**
-- Info fält 1: pekar mot IP-instansen
-- Informations fält 2: pingar skickas
-- Info-fält 3: ping-svar
-- Info fält 4: mottagna pingar
+**Informationsfält**
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Skickade pingar
+- Informationsfält 3: Pinga svar
+- Informationsfält 4: Mottagna pingar
 
-### <a name="icmp-ping"></a>ICMP-Ping 
+### <a name="icmp-ping"></a>ICMP Ping 
 
 #### <a name="nx_icmp_ping"></a>nx_icmp_ping
 
-**Ikonen** ![ I C M P ping-ikonen](./media/user-guide/netx-events/image79.png)
+**Ikon** ![ IC M P-pingikon](./media/user-guide/netx-events/image79.png)
 
 **Beskrivning**
 
-Den här händelsen representerar pinga en mål-IP-adress via nx_icmp_ping.
+Den här händelsen representerar pingning av en mål-IP-adress via nx_icmp_ping.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot IP-instansen
-- Info fält 2: IP-adress
-- Informations fält 3: pekare till data
-- Info fält 4: data storlek
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: IP-adress
+- Informationsfält 3: Pekare till data
+- Informationsfält 4: Datastorlek
 
 ### <a name="igmp-enable"></a>Aktivera IGMP 
 
 #### <a name="nx_icmp_enable"></a>nx_icmp_enable
 
-**Ikonen** ![ I G M P Enable-ikon](./media/user-guide/netx-events/image80.png)
+**Ikon** ![ Aktivera ikon för I M P](./media/user-guide/netx-events/image80.png)
 
 **Beskrivning**
 
 Den här händelsen representerar aktivering av IGMP via nx_igmp_enable.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Info fält 1: pekar mot IP-instansen
-- Informations fält 2: används inte
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Används inte
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
 ### <a name="igmp-information-get"></a>Hämta IGMP-information 
 
 #### <a name="nx_icmp_info_get"></a>nx_icmp_info_get
 
-**Ikonen** ![ I G M P information get-ikon](./media/user-guide/netx-events/image81.png)
+**Ikon** ![ I G M P information get icon](./media/user-guide/netx-events/image81.png)
 
 **Beskrivning**
 
 Den här händelsen representerar att hämta information via nx_igmp_info_get.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot IP-instansen
-- Informations fält 2: rapporter har skickats
-- Informations fält 3: frågor mottagna
-- Info fält 4: grupper kopplade
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Skickade rapporter
+- Informationsfält 3: Mottagna frågor
+- Informationsfält 4: Grupper som är sammanfogade
 
-### <a name="igmp-loopback-disable"></a>Inaktivera IGMP loopback 
+### <a name="igmp-loopback-disable"></a>Inaktivera IGMP Loopback 
 
 #### <a name="nx_igmp_loopback_disable"></a>nx_igmp_loopback_disable
 
-**Ikonen** ![ I G M P loopback inaktivera ikon](./media/user-guide/netx-events/image82.png)
+**Ikon** ![ Ikon för inaktivering av loopback för I M P](./media/user-guide/netx-events/image82.png)
 
 **Beskrivning**
 
-Den här händelsen representerar inaktive ring av IGMP loopback via nx_igmp_loopback_disable.
+Den här händelsen representerar inaktivering av IGMP-loopback via nx_igmp_loopback_disable.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot IP-instansen
-- Informations fält 2: används inte
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Används inte
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
-### <a name="igmp-loopback-enable"></a>Aktivera IGMP loopback 
+### <a name="igmp-loopback-enable"></a>Aktivera IGMP Loopback 
 
 #### <a name="nx_igmp_loopback_enable"></a>nx_igmp_loopback_enable
 
-**Ikonen** ![ I G M P loopback Aktivera ikon](./media/user-guide/netx-events/image83.png)
+**Ikon** ![ Aktivera-ikonen för I M P-loopback](./media/user-guide/netx-events/image83.png)
 
 **Beskrivning**
 
-Den här händelsen representerar aktivering av IGMP loopback via nx_igmp_loopback_enable.
+Den här händelsen representerar aktivering av IGMP-loopback via nx_igmp_loopback_enable.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Info fält 1: pekar mot IP-instansen
-- Informations fält 2: används inte
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Används inte
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
-### <a name="igmp-multicast-join"></a>IGMP multicast-anslutning 
+### <a name="igmp-multicast-join"></a>IGMP Multicast Join 
 
 #### <a name="nx_igmp_multicast_join"></a>nx_igmp_multicast_join
 
-**Ikonen** ![ I G M P-ikon för multicast-anslutning](./media/user-guide/netx-events/image84.png)
+**Ikon** ![ Multicast-kopplingsikon för I M P](./media/user-guide/netx-events/image84.png)
 
 **Beskrivning**
 
-Den här händelsen representerar anslutning till en multicast-grupp via nx_igmp_multicast_join.
+Den här händelsen representerar anslutning av en multicast-grupp via nx_igmp_multicast_join.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot IP-instansen
-- Info fält 2: grupp-IP-adress
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Grupp-IP-adress
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
-### <a name="igmp-multicast-leave"></a>IGMP multicast-tjänstledighet 
+### <a name="igmp-multicast-leave"></a>IGMP Multicast Leave 
 
 #### <a name="nx_igmp_multicast_leave"></a>nx_igmp_multicast_leave
 
-**Ikonen** ![ Ikonen I G M P multicast-tjänstledighet](./media/user-guide/netx-events/image85.png)
+**Ikon** ![ I G M P multicast leave-ikon](./media/user-guide/netx-events/image85.png)
 
 **Beskrivning**
 
 Den här händelsen representerar att lämna en multicast-grupp via nx_igmp_multicast_leave.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Info fält 1: pekar mot IP-instansen
-- Info fält 2: grupp-IP-adress
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Grupp-IP-adress
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
-### <a name="ip-address-change-notify"></a>Avisering om ändring av IP-adress 
+### <a name="ip-address-change-notify"></a>Meddela om IP-adressändring 
 
 #### <a name="nx_ip_address_change_notify"></a>nx_ip_address_change_notify
 
-**Ikonen** ![ I P adress ändrings aviserings ikon](./media/user-guide/netx-events/image86.png)
+**Ikon** ![ Meddelandeikon för ändring av I P-adress](./media/user-guide/netx-events/image86.png)
 
 **Beskrivning**
 
-Den här händelsen representerar registrering för meddelanden om IP-ändring via nx_ip_address_change_notify.
+Den här händelsen representerar registrering för IP-ändringsmeddelanden via nx_ip_address_change_notify.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot IP-instansen
-- Informations fält 2: återanrops funktions pekare
-- Informations fält 3: ytterligare informations pekare
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Pekare för återanropsfunktion
+- Informationsfält 3: Pekare för ytterligare information
+- Informationsfält 4: Används inte
 
-### <a name="ip-address-get"></a>Hämta IP-adress 
+### <a name="ip-address-get"></a>HÄMTA IP-adress 
 
 #### <a name="nx_ip_address_get"></a>nx_ip_address_get
 
-**Ikonen** ![ Hämta ikon för mitt P-adress](./media/user-guide/netx-events/image87.png)
+**Ikon** ![ Ikonen Hämta I P-adress](./media/user-guide/netx-events/image87.png)
 
 **Beskrivning**
 
-Den här händelsen representerar hämtning av IP-adressen via nx_ip_address_get.
+Den här händelsen representerar att IP-adressen skickas via nx_ip_address_get.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot IP-instansen
-- Info fält 2: IP-adress
-- Informations fält 3: nätverks mask
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: IP-adress
+- Informationsfält 3: Nätverksmask
+- Informationsfält 4: Används inte
 
-### <a name="ip-address-set"></a>IP-adress uppsättning 
+### <a name="ip-address-set"></a>IP-adressuppsättning 
 
 #### <a name="nx_ip_address_set"></a>nx_ip_address_set
 
-**Ikonen** ![ Ikonen I P Address set](./media/user-guide/netx-events/image88.png)
+**Ikon** ![ Ikon för I P-adressuppsättning](./media/user-guide/netx-events/image88.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att ange IP-adressen via nx_ip_address_set.
+Den här händelsen representerar inställningen av IP-adressen via nx_ip_address_set.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot IP-instansen
-- Info fält 2: IP-adress
-- Informations fält 3: nätverks mask
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: IP-adress
+- Informationsfält 3: Nätverksmask
+- Informationsfält 4: Används inte
 
-### <a name="ip-create"></a>Skapa IP 
+### <a name="ip-create"></a>IP-skapa 
 
 #### <a name="nx_ip_create"></a>nx_ip_create
 
-**Ikonen** ![ I P skapa ikon](./media/user-guide/netx-events/image89.png)
+**Ikon** ![ Ikonen Skapa i P](./media/user-guide/netx-events/image89.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att skapa en IP-instans via nx_ip_create.
+Den här händelsen representerar skapandet av en IP-instans via nx_ip_create.
 
-**Informations fält** 
-- Info fält 1: pekar mot IP-instansen
-- Info fält 2: IP-adress
-- Informations fält 3: nätverks mask
-- Info fält 4: standard pekare för Packet pool
+**Informationsfält** 
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: IP-adress
+- Informationsfält 3: Nätverksmask
+- Informationsfält 4: Pekare för standardpaketpool
 
-### <a name="ip-delete"></a>Ta bort IP 
+### <a name="ip-delete"></a>IP-borttagning 
 
 #### <a name="nx_ip_delete"></a>nx_ip_delete
 
-**Ikonen** ![ I P ta bort-ikonen](./media/user-guide/netx-events/image90.png)
+**Ikon** ![ Ikonen Ta bort I P](./media/user-guide/netx-events/image90.png)
 
 **Beskrivning**
 
 Den här händelsen representerar borttagning av en IP-instans via nx_ip_delete.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot IP-instansen
-- Informations fält 2: används inte
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Används inte
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
-### <a name="ip-driver-direct-command"></a>IP-drivrutin Direct-kommando 
+### <a name="ip-driver-direct-command"></a>Direktkommando för IP-drivrutin 
 
 #### <a name="nx_ip_driver_direct_command"></a>nx_ip_driver_direct_command
 
-**Ikonen** ![ I P driv rutin Direct kommando ikon](./media/user-guide/netx-events/image91.png)
+**Ikon** ![ Kommandoikon för I P-drivrutinskommando](./media/user-guide/netx-events/image91.png)
 
 **Beskrivning**
 
-Den här händelsen representerar ett direkt I/O-drivrutins kommando via nx_ip_driver_direct_command.
+Den här händelsen representerar ett direkt I/O-drivrutinskommando via nx_ip_driver_direct_command.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Info fält 1: pekar mot IP-instansen
-- Info-fält 2: driv Rutins kommando
-- Info-fält 3: retur värde
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instansen
+- Infofält 2: Drivrutinskommando
+- Informationsfält 3: Returvärde
+- Informationsfält 4: Används inte
 
-### <a name="ip-forwarding-disable"></a>Inaktivera IP-vidarebefordring 
+### <a name="ip-forwarding-disable"></a>Inaktivera IP-vidarebefordran 
 
 #### <a name="nx_ip_forwarding_disable"></a>nx_ip_forwarding_disable
 
-**Ikonen** ![ I P-ikonen inaktivera](./media/user-guide/netx-events/image92.png)
+**Ikon** ![ Inaktiveringsikon för I P-vidarebefordran](./media/user-guide/netx-events/image92.png)
 
 **Beskrivning**
 
-Den här händelsen representerar inaktive ring av IP-vidarebefordring via nx_ip_forwarding_disable.
+Den här händelsen representerar inaktivering av IP-vidarebefordran via nx_ip_forwarding_disable.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot IP-instansen
-- Informations fält 2: används inte
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Används inte
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
-### <a name="ip-forwarding-enable"></a>Aktivera IP-vidarebefordring 
+### <a name="ip-forwarding-enable"></a>Aktivera IP-vidarebefordran 
 
 #### <a name="nx_ip_forwarding_enable"></a>nx_ip_forwarding_enable
 
-**Ikonen** ![ Aktiverings ikon för I P P-vidarebefordring](./media/user-guide/netx-events/image93.png)
+**Ikon** ![ Aktivera-ikonen för I P-vidarebefordran](./media/user-guide/netx-events/image93.png)
 
 **Beskrivning**
 
-Den här händelsen representerar aktivering av IP-vidarebefordring via nx_ip_forwarding_enable.
+Den här händelsen representerar aktivering av IP-vidarebefordran via nx_ip_forwarding_enable.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot IP-instansen
-- Informations fält 2: används inte
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Används inte
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
 ### <a name="ip-fragment-disable"></a>Inaktivera IP-fragment 
 
 #### <a name="nx_ip_fragment_disable"></a>nx_ip_fragment_disable
 
-**Ikonen** ![ I P fragment, inaktivera ikon](./media/user-guide/netx-events/image94.png)
+**Ikon** ![ Inaktiveringsikon för I P-fragment](./media/user-guide/netx-events/image94.png)
 
 **Beskrivning**
 
-Den här händelsen representerar inaktive ring av IP-fragmentering via nx_ip_fragment_disable.
+Den här händelsen representerar inaktivering av IP-fragmentering via nx_ip_fragment_disable.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot IP-instansen
-- Informations fält 2: används inte
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Används inte
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
 ### <a name="ip-fragment-enable"></a>Aktivera IP-fragment 
 
 #### <a name="nx_ip_fragment_enable"></a>nx_ip_fragment_enable
 
-**Ikonen** ![ Ikon för att aktivera I f-fragment](./media/user-guide/netx-events/image95.png)
+**Ikon** ![ Aktivera fragmentikon för I P](./media/user-guide/netx-events/image95.png)
 
 **Beskrivning**
 
-Den här händelsen representerar aktivering av IP-fragment via nx_ip_fragment_enable.
+Den här händelsen representerar aktivering av IP-fragmentering via nx_ip_fragment_enable.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot IP-instansen
-- Informations fält 2: används inte
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Används inte
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
-### <a name="ip-gateway-address-set"></a>Adress uppsättning för IP-gateway 
+### <a name="ip-gateway-address-set"></a>IP Gateway-adressuppsättning 
 
 #### <a name="nx_ip_gateway_address_set"></a>nx_ip_gateway_address_set
 
-**Ikonen** ![ Ikonen I P Gateway-adress uppsättning](./media/user-guide/netx-events/image96.png)
+**Ikon** ![ Ikon för ip-gatewayadressuppsättning](./media/user-guide/netx-events/image96.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att ange IP-adressen för gatewayen via nx_ip_gateway_address_set.
+Den här händelsen representerar inställningen av gatewayens IP-adress via nx_ip_gateway_address_set.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot IP-instansen
-- Informations fält 2: Gateway-IP-adress
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Gateway-IP-adress
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
 ### <a name="ip-information-get"></a>Hämta IP-information 
 
 #### <a name="nx_ip_info_get"></a>nx_ip_info_get
 
-**Ikonen** ![ I P information get-ikonen](./media/user-guide/netx-events/image97.png)
+**Ikon** ![ Hämta ikon för I P-information](./media/user-guide/netx-events/image97.png)
 
-**Beskrivning** Den här händelsen representerar hämtning av IP-information via nx_ip_info_get.
+**Beskrivning** Den här händelsen representerar att hämta IP-information via nx_ip_info_get.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot IP-instansen
-- Informations fält 2: skickade IP-byte
-- Informations fält 3: mottagna IP-byte
-- Info fält 4: ignorerade IP-paket
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: SKICKADE IP-byte
+- Informationsfält 3: MOTTAGNA IP-byte
+- Informationsfält 4: IP-paket som släppts
 
 ### <a name="ip-interface-attach"></a>Koppla IP-gränssnitt 
 
 #### <a name="nx_interface_attach"></a>nx_interface_attach
 
-**Ikonen** ![ Ikonen I P iterface-koppling](./media/user-guide/netx-events/image98.png)
+**Ikon** ![ I P iterface attach icon (I P iterface attach icon)](./media/user-guide/netx-events/image98.png)
 
 **Beskrivning**
 
-Den här händelsen representerar ett sekundärt nätverks gränssnitt som kopplas till IP-instansen via nx_ip_interface_attach.
+Den här händelsen representerar ett sekundärt nätverksgränssnitt som kopplas till IP-instansen via nx_ip_interface_attach.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Informations fält 2: gränssnittets IP-adress
-- Info-fält 3: index i IP-gränssnitts tabellen
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: IP-adress för gränssnitt
+- Informationsfält 3: Indexera till IP-gränssnittstabell
+- Informationsfält 4: Används inte
 
 ### <a name="ip-interface-info-get"></a>Hämta information om IP-gränssnitt 
 
 #### <a name="nx_ip_interface_info_get"></a>nx_ip_interface_info_get
 
-**Ikonen** ![ Hämta ikon för IP-gränssnittets information](./media/user-guide/netx-events/image99.png)
+**Ikon** ![ Hämta ikon för INFORMATION OM IP-gränssnitt](./media/user-guide/netx-events/image99.png)
 
 **Beskrivning**
 
-Den här händelsen representerar information som hämtats från det angivna nätverks gränssnittet via nx_ip_interface_info_get.
+Den här händelsen representerar information som hämtats från det angivna nätverksgränssnittet via nx_ip_interface_info_get.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Informations fält 2: gränssnittets IP-adress
-- Info-fält 3: gränssnitts-MAC-MSB
-- Info-fält 4: gränssnitts-MAC-lsb
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: IP-adress för gränssnitt
+- Informationsfält 3: MAC-gränssnittsadress msb
+- Informationsfält 4: MAC-gränssnittsadress lsb
 
-### <a name="ip-raw-packet-disable"></a>Inaktivera IP RAW-paket 
+### <a name="ip-raw-packet-disable"></a>Inaktivera IP-rådatapaket 
 
 #### <a name="nx_ip_raw_packet_disable"></a>nx_ip_raw_packet_disable
 
-**Ikonen** ![ Ikonen inaktivera I RAW-paket](./media/user-guide/netx-events/image100.png)
+**Ikon** ![ Inaktiveringsikon för I P raw-paket](./media/user-guide/netx-events/image100.png)
 
 **Beskrivning**
 
-Den här händelsen representerar inaktive ring av kommunikation mellan rå IP-paket via nx_ip_raw_packet_disable.
+Den här händelsen representerar inaktivering av rå IP-paketkommunikation via nx_ip_raw_packet_disable.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot IP-instansen
-- Informations fält 2: används inte
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Används inte
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
-### <a name="ip-raw-packet-enable"></a>Aktivera IP RAW-paket 
+### <a name="ip-raw-packet-enable"></a>Aktivera IP-rådatapaket 
 
 #### <a name="nx_ip_raw_packet_enable"></a>nx_ip_raw_packet_enable
 
-**Ikonen** ![ Ikonen aktivera I RAW-paket](./media/user-guide/netx-events/image101.png)
+**Ikon** ![ I P raw packet enable icon (Aktivera I P-raw-paketikon)](./media/user-guide/netx-events/image101.png)
 
 **Beskrivning**
 
-Den här händelsen representerar aktivering av rå IP-paketfiltrering via nx_ip_raw_packet_enable.
+Den här händelsen representerar aktivering av rå IP-paketkommunikation via nx_ip_raw_packet_enable.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot IP-instansen
-- Informations fält 2: används inte
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Används inte
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
-### <a name="ip-raw-packet-receive"></a>Ta emot IP RAW-paket 
+### <a name="ip-raw-packet-receive"></a>IP-rådata inkommande paket 
 
 #### <a name="nx_ip_raw_packet_receive"></a>nx_ip_raw_packet_receive
 
-**Ikonen** ![ Ikonen för att ta emot RAW-paket](./media/user-guide/netx-events/image102.png)
+**Ikon** ![ Ikonen Ta emot raw-paket i I P](./media/user-guide/netx-events/image102.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att ta emot ett RAW IP-paket via nx_ip_raw_packet_receive.
+Den här händelsen representerar mottagandet av ett rådata-IP-paket via nx_ip_raw_packet_receive.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot IP-instansen
-- Info fält 2: pekar mot paket
-- Informations fält 3: vänte alternativ
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Pekare till paket
+- Informationsfält 3: Väntealternativ
+- Informationsfält 4: Används inte
 
-### <a name="ip-raw-packet-send"></a>Skicka IP RAW-paket 
+### <a name="ip-raw-packet-send"></a>SKICKA IP-rådatapaket 
 
 #### <a name="nx_ip_raw_packet_send"></a>nx_ip_raw_packet_send
 
-**Ikonen** ![ I P skicka ikon för RAW Packet-sändning](./media/user-guide/netx-events/image103.png)
+**Ikon** ![ Ikonen Skicka raw-paket](./media/user-guide/netx-events/image103.png)
 
 **Beskrivning**
 
-Den här händelsen representerar sändning av ett RAW IP-paket via nx_ip_raw_packet_send.
+Den här händelsen representerar sändning av ett obearbetat IP-paket via nx_ip_raw_packet_send.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot IP-instansen
-- Info fält 2: pekar mot paket
-- Informations fält 3: målets IP-adress
-- Info-fält 4: typ av tjänst
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Pekare till paket
+- Informationsfält 3: Mål-IP-adress
+- Informationsfält 4: Typ av tjänst
 
-### <a name="ip-static-route-add"></a>IP-statisk väg Lägg till 
+### <a name="ip-static-route-add"></a>Lägg till statisk IP-väg 
 
 #### <a name="nx_ip_static_route_add"></a>nx_ip_static_route_add
 
-**Ikonen** ![ I P statisk väg, Lägg till ikon](./media/user-guide/netx-events/image104.png)
+**Ikon** ![ Lägg till ikon för statisk väg för I P](./media/user-guide/netx-events/image104.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en statisk väg som läggs till i routningstabellen för IP-instansen via nx_ip_static_route_add.
+Den här händelsen representerar en statisk väg som läggs till i IP-instansroutningstabellen via nx_ip_static_route_add.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Informations fält 2: nätverks adress
-- Informations fält 3: nätverks mask
-- Info-fält 4: nästa hopp
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Nätverksadress
+- Informationsfält 3: Nätverksmask
+- Informationsfält 4: Nästa hopp
 
-### <a name="ip-static-route-delete"></a>Ta bort IP statisk väg 
+### <a name="ip-static-route-delete"></a>Ta bort statisk IP-väg 
 
 #### <a name="nx_ip_static_route_delete"></a>nx_ip_static_route_delete
 
-**Ikonen** ![ Ta bort-ikonen I P statisk Rute](./media/user-guide/netx-events/image105.png)
+**Ikon** ![ Ikonen Ta bort statiska spår för I P](./media/user-guide/netx-events/image105.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en statisk väg som tas bort från routningstabellen för IP-instansen via nx_ip_static_route_delete.
+Den här händelsen representerar en statisk väg som tas bort från IP-instansroutningstabellen via nx_ip_static_route_delete.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Informations fält 2: nätverks adress
-- Informations fält 3: nätverks mask
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Nätverksadress
+- Informationsfält 3: Nätverksmask
+- Informationsfält 4: Används inte
 
-### <a name="ip-status-check"></a>Kontroll av IP-status 
+### <a name="ip-status-check"></a>IP-statuskontroll 
 
 #### <a name="nx_ip_status_check"></a>nx_ip_status_check
 
-**Ikonen** ![ Kontroll ikon för I P-status](./media/user-guide/netx-events/image106.png)
+**Ikon** ![ Ikon för I P-statuskontroll](./media/user-guide/netx-events/image106.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att kontrol lera en IP-status via nx_ip_status_check.
+Den här händelsen representerar kontroll av IP-status via nx_ip_status_check.
 
-Informations fält 
+Informationsfält 
 
-- Info fält 1: pekar mot IP-instansen
-- Informations fält 2: begärd status
-- Info-fält 3: faktisk status
-- Info fält 4: vänte alternativ
+- Informationsfält 1: Pekare till IP-instansen
+- Informationsfält 2: Begärd status
+- Informationsfält 3: Faktisk status
+- Informationsfält 4: Väntealternativ
 
-### <a name="ipsec-enable"></a>Aktivera IPSEC 
+### <a name="ipsec-enable"></a>IPSEC-aktivera 
 
 #### <a name="nx_ipsec_enable"></a>nx_ipsec_enable
 
-**Ikonen** ![ I P S E C Aktivera ikon](./media/user-guide/netx-events/image107.png)
+**Ikon** ![ Aktivera-ikonen för I P S E C](./media/user-guide/netx-events/image107.png)
 
 **Beskrivning**
 
 Den här händelsen representerar aktivering av IPSec-tjänster på den angivna IP-instansen via nx_ipsec_enable.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Informations fält 2: används inte
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Används inte
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
-### <a name="packet-allocate"></a>Paket tilldelning 
+### <a name="packet-allocate"></a>Allokera paket 
 
 #### <a name="nx_packet_allocate"></a>nx_packet_allocate
 
-**Ikonen** ![ Ikon för paket tilldelning](./media/user-guide/netx-events/image108.png)
+**Ikon** ![ Ikon för att allokera paket](./media/user-guide/netx-events/image108.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att allokera ett paket via nx_packet_allocate.
+Den här händelsen representerar allokering av ett paket via nx_packet_allocate.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot paketschemaläggaren
-- Info fält 2: pekar på allokerat paket
-- Informations fält 3: pakettyp
-- Info fält 4: tillgängliga paket
+- Informationsfält 1: Pekare till paketpoolen
+- Informationsfält 2: Pekare till allokerat paket
+- Informationsfält 3: Pakettyp
+- Informationsfält 4: Tillgängliga paket
 
-### <a name="packet-copy"></a>Paket kopia 
+### <a name="packet-copy"></a>Paketkopiering 
 
 #### <a name="nx_packet_copy"></a>nx_packet_copy
 
-**Ikonen** ![ Ikon för paket CPY](./media/user-guide/netx-events/image109.png)
+**Ikon** ![ Paket cpy-ikon](./media/user-guide/netx-events/image109.png)
 
 **Beskrivning**
 
 Den här händelsen representerar kopiering av ett paket via nx_packet_copy.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 2: ny paket pekare
-- Informations fält 3: pekare till Packet bassäng
-- Info fält 4: vänte alternativ
+- Informationsfält 2: Ny paket pekare
+- Informationsfält 3: Pekare till paketpool
+- Informationsfält 4: Väntealternativ
 
-### <a name="packet-data-append"></a>Lägg till paket data 
+### <a name="packet-data-append"></a>Tillägg av paketdata 
 
 #### <a name="nx_packet_data_append"></a>nx_packet_data_append
 
-**Ikonen** ![ Ikon för Lägg till paket data](./media/user-guide/netx-events/image110.png)
+**Ikon** ![ Ikon för tillägg av paketdata](./media/user-guide/netx-events/image110.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att lägga till data i ett paket via nx_packet_data_append.
+Den här händelsen representerar att lägga till data till ett paket via nx_packet_data_append.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot paketet
-- Info fält 2: pekare till data
-- Informations fält 3: data storlek
-- Info fält 4: pekar mot Packet bassäng
+- Informationsfält 1: Pekare till paketet
+- Informationsfält 2: Pekare till data
+- Informationsfält 3: Datastorlek
+- Informationsfält 4: Pekare till paketpool
 
-### <a name="packet-data-extract-offset"></a>Förskjutning av paket data extrahering 
+### <a name="packet-data-extract-offset"></a>Offset för extrahering av paketdata 
 
 #### <a name="nx_udp_source_extract_offset"></a>nx_udp_source_extract_offset
 
-**Ikonen** ![ Förskjutnings ikon för extrahering av paket data](./media/user-guide/netx-events/image111.png)
+**Ikon** ![ Förskjutningsikon för paketdatautdrag](./media/user-guide/netx-events/image111.png)
 
 **Beskrivning**
 
-Den här händelsen representerar paket data som extraheras till en angiven buffert från ett paket via nx_udp_source_extract_offset.
+Den här händelsen representerar paketdata som extraheras till en tillhandahållen buffert från ett paket via nx_udp_source_extract_offset.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot paket
-- Informations fält 2: storleken på den angivna bufferten
-- Informations fält 3: antal kopierade byte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till paket
+- Informationsfält 2: Storleken på angiven buffert
+- Informationsfält 3: Antal kopierade byte
+- Informationsfält 4: Används inte
 
-### <a name="packet-data-retrieve"></a>Hämta paket data 
+### <a name="packet-data-retrieve"></a>Hämta paketdata 
 
 #### <a name="nx_packet_data_retrieve"></a>nx_packet_data_retrieve
 
-**Ikonen** ![ Hämta ikon för paket data](./media/user-guide/netx-events/image112.png)
+**Ikon** ![ Ikonen Hämta paketdata](./media/user-guide/netx-events/image112.png)
 
 **Beskrivning**
 
 Den här händelsen representerar hämtning av data från ett paket via nx_packet_data_retrieve.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Info fält 1: pekar mot paketet
-- Informations fält 2: pekar till början av bufferten
-- Informations fält 3: kopierade byte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till paketet
+- Informationsfält 2: Pekare till buffertens start
+- Informationsfält 3: Kopierade byte
+- Informationsfält 4: Används inte
 
-### <a name="packet-length-get"></a>Hämta paket längd 
+### <a name="packet-length-get"></a>Hämta paketlängd 
 
 #### <a name="nx_packet_length_get"></a>nx_packet_length_get
 
-**Ikonen** ![ Hämta ikon för paket längd](./media/user-guide/netx-events/image113.png)
+**Ikon** ![ Hämta ikon för paketlängd](./media/user-guide/netx-events/image113.png)
 
 **Beskrivning**
 
-Den här händelsen representerar hämtning av längden på ett paket via nx_packet_length_get.
+Den här händelsen representerar att hämta längden på ett paket via nx_packet_length_get.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot paketet
-- Informations fält 2: paket längd
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till paketet
+- Informationsfält 2: Paketlängd
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
-### <a name="packet-pool-create"></a>Skapa paket pool 
+### <a name="packet-pool-create"></a>Skapa paketpool 
 
 #### <a name="nx_packet_pool_create"></a>nx_packet_pool_create
 
-**Ikonen** ![ Ikon för att skapa paket pool](./media/user-guide/netx-events/image114.png)
+**Ikon** ![ Ikon för att skapa paketpool](./media/user-guide/netx-events/image114.png)
 
 **Beskrivning**
 
-Den här händelsen representerar skapandet av en adresspool via nx_packet_pool_create.
+Den här händelsen representerar skapandet av en paketpool via nx_packet_pool_create.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Info fält 1: pekar mot paketschemaläggaren
-- Informations fält 2: paketets nytto Last storlek
-- Informations fält 3: pekare till pool minnes område
-- Info fält 4: storlek på poolens minnes område
+- Informationsfält 1: Pekare till paketpoolen
+- Informationsfält 2: Paketnyttolaststorlek
+- Informationsfält 3: Pekare till poolminnesområdet
+- Informationsfält 4: Storlek på poolminnesområdet
 
-### <a name="packet-pool-delete"></a>Ta bort paket pool 
+### <a name="packet-pool-delete"></a>Ta bort paketpool 
 
 #### <a name="nx_packet_pool_delete"></a>nx_packet_pool_delete
 
-**Ikonen** ![ Ikon för borttagning av paket pool](./media/user-guide/netx-events/image115.png)
+**Ikon** ![ Ikonen Ta bort paketpool](./media/user-guide/netx-events/image115.png)
 
 **Beskrivning**
 
-Den här händelsen representerar borttagning av en modempool via nx_packet_pool_delete.
+Den här händelsen representerar borttagning av en paketpool via nx_packet_pool_delete.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Info fält 1: pekar mot paketschemaläggaren
-- Informations fält 2: används inte
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till paketpoolen
+- Informationsfält 2: Används inte
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
-#### <a name="packet-pool-information-get"></a>Hämta paket bassängs information 
+#### <a name="packet-pool-information-get"></a>Hämta information om paketpool 
 
 #### <a name="nx_packet_pool_info_get"></a>nx_packet_pool_info_get
 
-**Ikonen** ![ Hämta ikon för paket Pools information](./media/user-guide/netx-events/image116.png)
+**Ikon** ![ Hämta ikon för information om paketpool](./media/user-guide/netx-events/image116.png)
 
 **Beskrivning**
 
-Den här händelsen representerar hämtning av paketets pool med information via nx_packet_pool_info_get.
+Den här händelsen representerar att hämta information om paketpoolen via nx_packet_pool_info_get.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekare till Packet bassäng
-- Informations fält 2: totalt antal paket
-- Informations fält 3: tillgängliga paket
-- Info fält 4: tomma begär Anden
+- Informationsfält 1: Pekare till paketpool
+- Informationsfält 2: Totalt antal paket
+- Informationsfält 3: Tillgängliga paket
+- Informationsfält 4: Tomma begäranden
 
-### <a name="packet-release"></a>Paket version 
+### <a name="packet-release"></a>Paketutgågår 
 
 #### <a name="nx_packet_data_release"></a>nx_packet_data_release
 
-**Ikonen** ![ Ikon för paket frigörelse](./media/user-guide/netx-events/image117.png)
+**Ikon** ![ Ikon för paketutgås](./media/user-guide/netx-events/image117.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att släppa ett paket via nx_packet_release.
+Den här händelsen representerar lanserar ett paket via nx_packet_release.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot paketet
-- Informations fält 2: paket status
-- Informations fält 3: tillgängliga paket
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till paketet
+- Informationsfält 2: Paketstatus
+- Informationsfält 3: Tillgängliga paket
+- Informationsfält 4: Används inte
 
-### <a name="packet-transmit-release"></a>Paket överförings version 
+### <a name="packet-transmit-release"></a>Frisläppning av paket överföring 
 
 #### <a name="nx_packet_transmit_release"></a>nx_packet_transmit_release
 
-**Ikonen** ![ Ikon för paket sändnings version](./media/user-guide/netx-events/image118.png)
+**Ikon** ![ Ikon för lansering av paket överföring](./media/user-guide/netx-events/image118.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att släppa ett överförings paket via nx_packet_transmit_release.
+Den här händelsen representerar lanserar ett överföringspaket via nx_packet_transmit_release.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot paketet
-- Informations fält 2: paket status
-- Informations fält 3: tillgängliga paket
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till paketet
+- Informationsfält 2: Paketstatus
+- Informationsfält 3: Tillgängliga paket
+- Informationsfält 4: Används inte
 
 ### <a name="rarp-disable"></a>Inaktivera RARP 
 
 #### <a name="nx_rarp_disable"></a>nx_rarp_disable
 
-**Ikonen** ![ R A R P inaktivera ikon](./media/user-guide/netx-events/image119.png)
+**Ikon** ![ Inaktivera R A R P-ikon](./media/user-guide/netx-events/image119.png)
 
 **Beskrivning**
 
-Den här händelsen representerar inaktive ring av RARP via nx_rarp_disable.
+Den här händelsen representerar inaktivering av RARP via nx_rarp_disable.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Informations fält 2: används inte
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Används inte
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
-### <a name="rarp-enable"></a>Aktivera RARP 
+### <a name="rarp-enable"></a>RARP-aktivera 
 
 #### <a name="nx_rarp_enable"></a>nx_rarp_enable
 
-**Ikonen** ![ R A R P Aktivera ikon](./media/user-guide/netx-events/image120.png)
+**Ikon** ![ Aktivera R A R P-ikon](./media/user-guide/netx-events/image120.png)
 
 **Beskrivning**
 
 Den här händelsen representerar aktivering av RARP via nx_rarp_enable.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Informations fält 2: används inte
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Används inte
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
-### <a name="rarp-information-get"></a>RARP information get 
+### <a name="rarp-information-get"></a>Hämta RARP-information 
 
 #### <a name="nx_rarp_info_get"></a>nx_rarp_info_get
 
-**Ikonen** ![ R A R P P-ikonen Hämta information](./media/user-guide/netx-events/image121.png)
+**Ikon** ![ Hämta information om R A R P-information](./media/user-guide/netx-events/image121.png)
 
 **Beskrivning**
 
 Den här händelsen representerar att hämta RARP-information via nx_rarp_info_get.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Informations fält 2: begär Anden som skickats
-- Informations fält 3: svar mottagna
-- Info-fält 4: ogiltiga svar
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Skickade begäranden
+- Informationsfält 3: Mottagna svar
+- Informationsfält 4: Ogiltiga svar
 
-### <a name="system-initialize"></a>System initiering 
+### <a name="system-initialize"></a>Initiera systemet 
 
 #### <a name="nx_system_initialize"></a>nx_system_initialize
 
-**Ikonen** ![ Ikon för system initiering](./media/user-guide/netx-events/image122.png)
+**Ikon** ![ Ikonen Systemitiering](./media/user-guide/netx-events/image122.png)
 
 **Beskrivning**
 
 Den här händelsen representerar initiering av NetX via nx_system_initialize.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: används inte
-- Informations fält 2: används inte
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Används inte
+- Informationsfält 2: Används inte
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
-### <a name="tcp-client-socket-bind"></a>TCP-klientens socket-bindning 
+### <a name="tcp-client-socket-bind"></a>TCP-klientsocketbindning 
 
 #### <a name="nx_tcp_client_socket_bind"></a>nx_tcp_client_socket_bind
 
-**Ikonen** ![ Ikonen för T P client socket bind](./media/user-guide/netx-events/image123.png)
+**Ikon** ![ Bindningsikon för T P-klientsocket](./media/user-guide/netx-events/image123.png)
 
 **Beskrivning**
 
-Den här händelsen representerar bindning av en klient-socket till en port via nx_tcp_client_socket_bind.
+Den här händelsen representerar bindning av en klientsocket till en port via nx_tcp_client_socket_bind.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Info fält 2: pekare till Socket
-- Informations fält 3: port begärd
-- Info fält 4: vänte alternativ
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Pekare till socket
+- Informationsfält 3: Begärd port
+- Informationsfält 4: Väntealternativ
 
-### <a name="tcp-client-socket-connect"></a>TCP-klient-socket Connect 
+### <a name="tcp-client-socket-connect"></a>TCP Client Socket Anslut 
 
 #### <a name="nx_tcp_client_socket_connect"></a>nx_tcp_client_socket_connect
 
-**Ikonen** ![ T C P P Connect-ikon för klient-socket](./media/user-guide/netx-events/image124.png)
+**Ikon** ![ Anslutningsikon för T C P-klientsocket](./media/user-guide/netx-events/image124.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att skapa en klient anslutning via nx_tcp_client_socket_connect.
+Den här händelsen representerar att upprätta en klientsocketanslutning via nx_tcp_client_socket_connect.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Info fält 2: pekare till Socket
-- Informations fält 3: serverns IP-adress
-- Info fält 4: Server porten har begärts
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Pekare till socket
+- Informationsfält 3: Serverns IP-adress
+- Informationsfält 4: Serverport begärd
 
-### <a name="tcp-client-socket-port-get"></a>Hämta TCP-klientens socket-port 
+### <a name="tcp-client-socket-port-get"></a>Hämta TCP-klientsocketport 
 
 #### <a name="nx_tcp_client_socket_port_get"></a>nx_tcp_client_socket_port_get
 
-**Ikonen** ![ Ikonen Hämta ikon för T C P client socket](./media/user-guide/netx-events/image125.png)
+**Ikon** ![ Hämta ikon för T C P-klientsocketport](./media/user-guide/netx-events/image125.png)
 
 **Beskrivning**
 
-Den här händelsen representerar klientens socket port nummer via nx_tcp_client_socket_port_get.
+Den här händelsen representerar att portnumret för klientsocketen skickas via nx_tcp_client_socket_port_get.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Info fält 2: pekare till Socket
-- Informations fält 3: port nummer
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Pekare till socket
+- Informationsfält 3: Portnummer
+- Informationsfält 4: Används inte
 
-### <a name="tcp-client-socket-unbind"></a>TCP-klientens socket-DataBind 
+### <a name="tcp-client-socket-unbind"></a>Ta bort bindning för TCP-klientsocket 
 
 #### <a name="nx_tcp_client_socket_unbind"></a>nx_tcp_client_socket_unbind
 
-**Ikonen** ![ Ikon för T C P P-bindning för klient-socket](./media/user-guide/netx-events/image126.png)
+**Ikon** ![ Ta bort bindningsikon för T C P-klientsocket](./media/user-guide/netx-events/image126.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en avbindning av porten som är kopplad till socketen via nx_tcp_client_socket_unbind.
+Den här händelsen representerar avbindning av porten som är associerad med socketen via nx_tcp_client_socket_unbind.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Info fält 2: pekare till Socket
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Pekare till socket
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
-### <a name="tcp-enable"></a>TCP-aktivering 
+### <a name="tcp-enable"></a>TCP-aktivera 
 
 #### <a name="nx_tcp_enable"></a>nx_tcp_enable
 
-**Ikonen** ![ Ikonen T C P Enable](./media/user-guide/netx-events/image127.png)
+**Ikon** ![ Aktivera-ikonen T C P](./media/user-guide/netx-events/image127.png)
 
 **Beskrivning**
 
 Den här händelsen representerar aktivering av TCP via nx_tcp_enable.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Informations fält 2: används inte
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Används inte
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
-###  <a name="tcp-free-port-find-tcp-free-port-find"></a>Kostnads fri TCP-port hitta gratis TCP-port hitta 
+###  <a name="tcp-free-port-find-tcp-free-port-find"></a>Hitta den kostnadsfria TCP-porten hitta den kostnadsfria TCP-porten 
 
 #### <a name="nx_tcp_free_port_find"></a>nx_tcp_free_port_find
 
-**Ikonen** ![ T CP-kostnads fri port hitta ikon](./media/user-guide/netx-events/image128.png)
+**Ikon** ![ Ikonen T CP free port find (T CP kostnadsfri port för att hitta)](./media/user-guide/netx-events/image128.png)
 
 **Beskrivning**
 
-Den här händelsen motsvarar att hitta en kostnads fri TCP-port via nx_tcp_free_port_find.
+Den här händelsen representerar att hitta en kostnadsfri TCP-port via nx_tcp_free_port_find.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: pekare till IP-instans
-- Informations fält 2: startar Sök port nummer
-- Info-fält 3: ledigt port nummer
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Starta sökportnummer
+- Informationsfält 3: Kostnadsfritt portnummer
+- Informationsfält 4: Används inte
 
-###  <a name="tcp-infomation-get"></a>Hämta TCP-information 
+###  <a name="tcp-infomation-get"></a>TCP Infomation Get 
 
 #### <a name="nx_tcp_info_get"></a>nx_tcp_info_get
 
-**Ikonen** ![ T C P information get-ikon](./media/user-guide/netx-events/image129.png)
+**Ikon** ![ Hämta informationsikon för T C P](./media/user-guide/netx-events/image129.png)
 
 **Beskrivning**
 
 Den här händelsen representerar hämtning av TCP-information för den angivna IP-instansen via nx_tcp_info_get.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: pekare till IP-instans
-- Informations fält 2: antal byte som skickats
-- Informations fält 3: Antal mottagna byte
-- Info fält 4: antal ogiltiga paket
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Antal skickade byte
+- Informationsfält 3: Antal mottagna byte
+- Informationsfält 4: Antal ogiltiga paket
 
-###  <a name="tcp-server-socket-accept"></a>Acceptera TCP-serverns socket 
+###  <a name="tcp-server-socket-accept"></a>ACCEPTERA TCP-serversocket 
 
 #### <a name="nx_tcp_server_socket_accept"></a>nx_tcp_server_socket_accept
 
-**Ikonen** ![ Ikonen för T C P P-mottagning för Server uttag](./media/user-guide/netx-events/image130.png)
+**Ikon** ![ Ikonen acceptera t C P-serversocket](./media/user-guide/netx-events/image130.png)
 
 **Beskrivning**
 
-Den här händelsen representerar konfigurationen av Server-socketen efter en aktiv anslutningsbegäran togs emot via nx_tcp_server_socket_accept.
+Den här händelsen representerar att konfigurera serversocketen efter att en aktiv anslutningsbegäran togs emot via nx_tcp_server_socket_accept.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: pekare till IP-instans
-- Info fält 2: pekare till Socket
-- Informations fält 3: vänte alternativ
-- Info-fält 4: socket State
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Pekare till socket
+- Informationsfält 3: Alternativet Vänta
+- Informationsfält 4: Sockettillstånd
 
-###  <a name="tcp-server-socket-listen"></a>TCP server-socket Lyssna 
+###  <a name="tcp-server-socket-listen"></a>Lyssna på TCP-serversocket 
 
 #### <a name="nx_tcp_server_socket_listen"></a>nx_tcp_server_socket_listen
 
-**Ikonen** ![ T C P P lsten ikon för en server-socket](./media/user-guide/netx-events/image131.png)
+**Ikon** ![ Ikon för T C P-serversocket lsten](./media/user-guide/netx-events/image131.png)
 
 **Beskrivning**
 
-Den här händelsen representerar registrering av en lyssnande begäran och en server-socket för den angivna TCP-porten via nx_tcp_server_socket_listen.
+Den här händelsen representerar registrering av en lyssnarbegäran och en serversocket för den angivna TCP-porten via nx_tcp_server_socket_listen.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: pekare till IP-instans
-- Informations fält 2: TCP-portnummer
-- Informations fält 3: pekare till Socket
-- Informations fält 4: maximalt antal anslutningar som kan placeras i kö
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: TCP-portnummer
+- Informationsfält 3: Pekare till socket
+- Informationsfält 4: Maximalt antal anslutningar som kan köas
 
-###  <a name="tcp-server-socket-relisten"></a>TCP server socket relister 
+###  <a name="tcp-server-socket-relisten"></a>Omlistning av TCP-serversocket 
 
 #### <a name="nx_tcp_server_socket_relisten"></a>nx_tcp_server_socket_relisten
 
-**Ikonen** ![ Ikon för T C P P relister för Server uttag](./media/user-guide/netx-events/image132.png)
+**Ikon** ![ Ikon för återlistning av T C P-serversocket](./media/user-guide/netx-events/image132.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att registrera en annan server-socket för en befintlig lyssnande begäran på den angivna TCP-porten via nx_tcp_server_socket_relisten.
+Den här händelsen representerar registrering av en annan serversocket för en befintlig lyssna-begäran på den angivna TCP-porten via nx_tcp_server_socket_relisten.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: pekare till IP-instans
-- Informations fält 2: TCP-portnummer
-- Informations fält 3: pekare till Socket
-- Info-fält 4: socket State
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: TCP-portnummer
+- Informationsfält 3: Pekare till socket
+- Informationsfält 4: Sockettillstånd
 
-###  <a name="tcp-server-socket-unaccept"></a>TCP-serverns socket accepteras inte 
+###  <a name="tcp-server-socket-unaccept"></a>Tcp-serversocket unaccept 
 
 #### <a name="nx_tcp_server_socket_unaccept"></a>nx_tcp_server_socket_unaccept
 
-**Ikonen** ![ Ikon för att ta emot en ikon för T C P-nätuttag](./media/user-guide/netx-events/image133.png)
+**Ikon** ![ Unaccept-ikon för T C P-serversocket](./media/user-guide/netx-events/image133.png)
 
 **Beskrivning**
 
-Den här händelsen representerar borttagning av Server-socketen från associationen med porten som tar emot en tidigare passiv anslutning via nx_tcp_server_socket_unaccept.
+Den här händelsen representerar borttagning av serversocketen från associationen med porten som tar emot en tidigare passiv anslutning via nx_tcp_server_socket_unaccept.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: pekare till IP-instans
-- Info fält 2: pekare till Socket
-- Informations fält 3: socket State
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Pekare till socket
+- Informationsfält 3: Sockettillstånd
+- Informationsfält 4: Används inte
 
-###  <a name="tcp-server-socket-unlisten-tcp-server-socket-unlisten"></a>TCP-server-socket avlistat TCP-serverns socket avlistar 
+###  <a name="tcp-server-socket-unlisten-tcp-server-socket-unlisten"></a>TCP-serversocket avlistat TCP-serversocket avlistat 
 
 #### <a name="nx_tcp_server_socket_unlisten"></a>nx_tcp_server_socket_unlisten
 
-**Ikonen** ![ Ikon för T C P P-avregistrering av Server-socket](./media/user-guide/netx-events/image134.png)
+**Ikon** ![ Ikon för avlistning av T C P-serversocket](./media/user-guide/netx-events/image134.png)
 
 **Beskrivning**
 
-Den här händelsen representerar borttagning av en tidigare lyssnar-begäran för den angivna TCP-porten via nx_tcp_server_socket_unlisten.
+Den här händelsen representerar borttagning av en tidigare lyssnarbegäran för den angivna TCP-porten via nx_tcp_server_socket_unlisten.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: pekare till IP-instans
-- Informations fält 2: TCP-portnummer
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: TCP-portnummer
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
-### <a name="tcp-socket-bytes-available"></a>Tillgängliga TCP-socket-byte 
+### <a name="tcp-socket-bytes-available"></a>Tillgängliga TCP Socket-byte 
 
 #### <a name="nx_tcp_socket_bytes_available"></a>nx_tcp_socket_bytes_available
 
-**Ikonen** ![ Ikon för T C P-socket-tillgängliga byte](./media/user-guide/netx-events/image135.png)
+**Ikon** ![ Ikon för tillgängliga T C P-socketbyte](./media/user-guide/netx-events/image135.png)
 
 **Beskrivning**
 
-Den här händelsen representerar antalet byte som för närvarande är tillgängliga på den angivna TCP-mottagande socketen via nx_tcp_socket_bytes_available.
+Den här händelsen representerar det antal byte som för närvarande är tillgängliga på den angivna TCP-mottagande socketen via nx_tcp_socket_bytes_available.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: pekare till IP-instans
-- Informations fält 2: pekare till TCP-socket
-- Informations fält 3: byte mottagna på socketen
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Pekare till TCP-socket
+- Informationsfält 3: Mottagna byte på socketen
+- Informationsfält 4: Används inte
 
-### <a name="tcp-socket-create"></a>Skapa TCP-socket 
+### <a name="tcp-socket-create"></a>Skapa TCP Socket 
 
 #### <a name="nx_tcp_socket_create"></a>nx_tcp_socket_create
 
-**Ikonen** ![ T C P uttag ikon för skapa](./media/user-guide/netx-events/image136.png)
+**Ikon** ![ Ikon för att skapa T C P-socket](./media/user-guide/netx-events/image136.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att skapa en TCP-socket via nx_tcp_socket_create.
+Den här händelsen representerar skapandet av en TCP-socket via nx_tcp_socket_create.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Info fält 2: pekare till Socket
-- Informations fält 3: typ av tjänst
-- Info fält 4: mottagnings fönster storlek
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Pekare till socket
+- Informationsfält 3: Typ av tjänst
+- Informationsfält 4: Ta emot fönsterstorlek
 
 ### <a name="tcp-socket-delete"></a>Ta bort TCP-socket 
 
 #### <a name="nx_tcp_socket_delete"></a>nx_tcp_socket_delete
 
-**Ikonen** ![ Ta bort ikon för T C P socket](./media/user-guide/netx-events/image137.png)
+**Ikon** ![ Borttagningsikon för T C P-socket](./media/user-guide/netx-events/image137.png)
 
 **Beskrivning**
 
 Den här händelsen representerar borttagning av en socket via nx_tcp_socket_delete.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: pekare till IP-instans
-- Info fält 2: pekare till Socket
-- Informations fält 3: socket State
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Pekare till socket
+- Informationsfält 3: Sockettillstånd
+- Informationsfält 4: Används inte
 
 ### <a name="tcp-socket-disconnect"></a>Koppla från TCP-socket 
 
 #### <a name="nx_tcp_socket_disconnect"></a>nx_tcp_socket_disconnect
 
-**Ikonen** ![ Ikon för T C P uttag från koppling](./media/user-guide/netx-events/image138.png)
+**Ikon** ![ Frånkopplingsikon för T C P-socket](./media/user-guide/netx-events/image138.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att koppla från en socket via nx_tcp_socket_disconnect.
+Den här händelsen representerar frånkoppling av en socket via nx_tcp_socket_disconnect.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Info fält 2: pekare till Socket
-- Informations fält 3: vänte alternativ
-- Info-fält 4: socket State
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Pekare till socket
+- Informationsfält 3: Alternativet Vänta
+- Informationsfält 4: Sockettillstånd
 
-### <a name="tcp-socket-information-get"></a>Hämta TCP socket-information 
+### <a name="tcp-socket-information-get"></a>HÄMTA INFORMATION OM TCP-socket 
 
 #### <a name="nx_tcp_socket_info_get"></a>nx_tcp_socket_info_get
 
-**Ikonen** ![ T C P socket information get-ikon](./media/user-guide/netx-events/image139.png)
+**Ikon** ![ Information om T C P socket hämta ikon](./media/user-guide/netx-events/image139.png)
 
 **Beskrivning**
 
-Den här händelsen representerar hämtning av information om en socket via nx_tcp_socket_info_get.
+Den här händelsen representerar att hämta information om en socket via nx_tcp_socket_info_get.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Info fält 2: pekare till Socket
-- Informations fält 3: byte skickade via denna socket
-- Info fält 4: byte mottagna via denna socket
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Pekare till socket
+- Informationsfält 3: Byte som skickas via den här socketen
+- Informationsfält 4: Mottagna byte via den här socketen
 
-### <a name="tcp-socket-mss-get"></a>TCP-socket-MSS Hämta 
+### <a name="tcp-socket-mss-get"></a>TCP Socket MSS Get 
 
 #### <a name="nx_tcp_socket_mss_get"></a>nx_tcp_socket_mss_get
 
-**Ikonen** ![ T C P Socket M S S get-ikon](./media/user-guide/netx-events/image140.png)
+**Ikon** ![ Hämta-ikonen för T C P socket M S S](./media/user-guide/netx-events/image140.png)
 
 **Beskrivning**
 
-Den här händelsen representerar socketens MSS via nx_tcp_socket_mss_get.
+Den här händelsen representerar att hämta socketens MSS via nx_tcp_socket_mss_get.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Info fält 2: pekare till Socket
-- Informations fält 3: maximal segment storlek (MSS)
-- Info-fält 4: socket State
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Pekare till socket
+- Informationsfält 3: Maximal segmentstorlek (MSS)
+- Informationsfält 4: Sockettillstånd
 
-### <a name="tcp-socket-mss-peer-get"></a>TCP-socket MSS peer get 
+### <a name="tcp-socket-mss-peer-get"></a>TCP Socket MSS Peer Get 
 
 #### <a name="nx_tcp_socket_mss_peer_get"></a>nx_tcp_socket_mss_peer_get
 
-**Ikonen** ![ T C P Socket M S S peer get-ikon](./media/user-guide/netx-events/image141.png)
+**Ikon** ![ T C P socket M S S peer get-ikon](./media/user-guide/netx-events/image141.png)
 
 **Beskrivning**
 
-Den här händelsen representerar MSS-värdet för socketens peer via nx_tcp_socket_mss_peer_get.
+Den här händelsen representerar att hämta MSS-värdet för socketens peer via nx_tcp_socket_mss_peer_get.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Info fält 2: pekare till Socket
-- Info-fält 3: peer-MSS
-- Info-fält 4: socket State
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Pekare till socket
+- Informationsfält 3: Peers MSS
+- Informationsfält 4: Sockettillstånd
 
-### <a name="tcp-socket-mss-set"></a>TCP-socket MSS-uppsättning 
+### <a name="tcp-socket-mss-set"></a>MSS-uppsättning för TCP Socket 
 
 #### <a name="nx_tcp_socket_mss_set"></a>nx_tcp_socket_mss_set
 
-**Ikonen** ![ Ikon för T C P Socket M S S set](./media/user-guide/netx-events/image142.png)
+**Ikon** ![ Ikon för T C P socket M S S S-uppsättning](./media/user-guide/netx-events/image142.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att ange en Sockets MSS via nx_tcp_socket_mss_set.
+Den här händelsen representerar inställning av en sockets MSS via nx_tcp_socket_mss_set.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Info fält 2: pekare till Socket
-- Info-fält 3: MSS
-- Info-fält 4: socket State
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Pekare till socket
+- Informationsfält 3: MSS
+- Informationsfält 4: Sockettillstånd
 
-### <a name="tcp-socket-peer-info-get"></a>Hämta peer-information för TCP-socket 
+### <a name="tcp-socket-peer-info-get"></a>Hämta peerinformation för TCP Socket 
 
 #### <a name="nx_tcp_socket_peer_info_get"></a>nx_tcp_socket_peer_info_get
 
-**Ikonen** ![ Hämta ikon för T C P socket peer info](./media/user-guide/netx-events/image143.png)
+**Ikon** ![ Peerinfo för T C P socket hämta ikon](./media/user-guide/netx-events/image143.png)
 
 **Beskrivning**
 
-Den här händelsen representerar information som hämtats från TCP-socketen om peer-datorn (t. ex. >ansluter värd) IP-adress och port via nx_tcp_socket_peer_info_get.
+Den här händelsen representerar information som hämtas från TCP-socketen angående peer-IP-adressen (t.ex>som ansluter värden) och porten via nx_tcp_socket_peer_info_get.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till TCP-socket
-- Informations fält 2: peer-IP-adress
-- Informations fält 3: peer port nummer
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till TCP-socket
+- Informationsfält 2: Peer-IP-adress
+- Informationsfält 3: Peer-portnummer
+- Informationsfält 4: Används inte
 
-### <a name="tcp-socket-receive"></a>Ta emot TCP-socket 
+### <a name="tcp-socket-receive"></a>TCP Socket Receive 
 
 #### <a name="nx_tcp_socket_receive"></a>nx_tcp_socket_receive
 
-**Ikonen** ![ Ikon för T C P socket Receive](./media/user-guide/netx-events/image144.png)
+**Ikon** ![ Ta emot T C P-socketikonen](./media/user-guide/netx-events/image144.png)
 
 **Beskrivning**
 
-Den här händelsen representerar mottagning av data från en socket via nx_tcp_socket_receive.
+Den här händelsen representerar mottagande av data från en socket via nx_tcp_socket_receive.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till Socket
-- Info fält 2: pekare till mottaget paket
-- Informations fält 3: mottaget paket längd
-- Info fält 4: mottagnings ordnings nummer
+- Informationsfält 1: Pekare till socket
+- Informationsfält 2: Pekare till mottaget paket
+- Informationsfält 3: Mottagen paketlängd
+- Informationsfält 4: Ta emot sekvensnummer
 
-### <a name="tcp-socket-receive-notify"></a>Mottagnings meddelande för TCP-socket 
+### <a name="tcp-socket-receive-notify"></a>Meddelande om TCP Socket-mottagning 
 
 #### <a name="nx_tcp_socket_receive_notify"></a>nx_tcp_socket_receive_notify
 
-**Ikonen** ![ Ikonen för T C P socket Receive-avisering](./media/user-guide/netx-events/image145.png)
+**Ikon** ![ Meddelandeikon för att ta emot T C P-socket](./media/user-guide/netx-events/image145.png)
 
 **Beskrivning**
 
-Den här händelsen representerar registrering av ett mottagnings återanrop för en socket via nx_tcp_socket_receive_notify.
+Den här händelsen representerar registrering av ett meddelande om återanrop för en socket via nx_tcp_socket_receive_notify.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Info fält 2: pekare till Socket
-- Informations fält 3: pekare för att ta emot meddelande om återanrops information 4: används inte
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Pekare till socket
+- Informationsfält 3: Pekare för att ta emot infofält 4: Används inte
 
-### <a name="tcp-socket-send"></a>Skicka TCP-socket 
+### <a name="tcp-socket-send"></a>TCP Socket Send 
 
 #### <a name="nx_tcp_socket_send"></a>nx_tcp_socket_send
 
-**Ikonen** ![ T C P socket-sändning, ikon](./media/user-guide/netx-events/image146.png)
+**Ikon** ![ Ikonen Skicka T C P-socket](./media/user-guide/netx-events/image146.png)
 
 **Beskrivning**
 
 Den här händelsen representerar sändning av data på en socket via nx_tcp_socket_send.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till Socket
-- Info fält 2: pekar mot paket
-- Informations fält 3: Paketets längd
-- Info-fält 4: överförings ordnings nummer
+- Informationsfält 1: Pekare till socket
+- Informationsfält 2: Pekare till paket
+- Informationsfält 3: Paketlängd
+- Informationsfält 4: Överföringssekvensnummer
 
-### <a name="tcp-socket-state-wait"></a>Vänte läge för TCP-socket 
+### <a name="tcp-socket-state-wait"></a>TCP Socket State Wait 
 
 #### <a name="nx_tcp_socket_state_wait"></a>nx_tcp_socket_state_wait
 
-**Ikonen** ![ Vänta-ikon för T C P-insocket-tillstånd](./media/user-guide/netx-events/image147.png)
+**Ikon** ![ Ikon för t C P sockettillståndsvänteikon](./media/user-guide/netx-events/image147.png)
 
 **Beskrivning**
 
 Den här händelsen representerar väntan på att en socket ska ange ett visst tillstånd via nx_tcp_socket_state_wait.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Info fält 2: pekare till Socket
-- Info-fält 3: önskat socket-tillstånd
-- Info-fält 4: tidigare socket-tillstånd
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Pekare till socket
+- Informationsfält 3: Önskat sockettillstånd
+- Informationsfält 4: Tidigare sockettillstånd
 
-### <a name="tcp-socket-transmit-configure"></a>Konfigurera TCP socket-överföring 
+### <a name="tcp-socket-transmit-configure"></a>Konfigurera TCP Socket-överföring 
 
 #### <a name="nx_tcp_socket_transmit_configure"></a>nx_tcp_socket_transmit_configure
 
-**Ikonen** ![ Konfigurations ikon för T C P socket-överföring](./media/user-guide/netx-events/image148.png)
+**Ikon** ![ Konfigurationsikon för överföring av T C P-socket](./media/user-guide/netx-events/image148.png)
 
 **Beskrivning**
 
-Den här händelsen representerar konfigurering av överförings alternativ för en socket via nx_tcp_socket_transmit_configure.
+Den här händelsen representerar konfiguration av överföringsalternativen för en socket via nx_tcp_socket_transmit_configure.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Info fält 2: pekare till Socket
-- Informations fält 3: överförings köns djup
-- Info-fält 4: tids gräns värde
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Pekare till socket
+- Informationsfält 3: Överföringsködjup
+- Informationsfält 4: Tidsgränsvärde
 
-### <a name="tcp-socket-window-update-notify-set"></a>Meddelande uppsättning för uppdatering av TCP-socket-fönstret 
+### <a name="tcp-socket-window-update-notify-set"></a>Meddelandeuppsättning för TCP Socket-fönsteruppdatering 
 
 #### <a name="nx_tcp_window_update_notify_set"></a>nx_tcp_window_update_notify_set
 
-**Ikonen** ![ Ikon för att uppdatera aviserings uppsättning i T C P socket Window](./media/user-guide/netx-events/image149.png)
+**Ikon** ![ Meddelandeikon för uppdatering av T C P-socketfönster](./media/user-guide/netx-events/image149.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en TCP-socket som tar emot meddelanden om en ökning i fönstret för att ta emot fjärrvärdar via nx_tcp_window_update_notify_set.
+Den här händelsen representerar en TCP-socket som tar emot ett meddelande om en ökning i fjärrvärdens mottagningsfönster via nx_tcp_window_update_notify_set.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: pekare till TCP-socket
-- Informations fält 2: används inte
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till TCP-socket
+- Informationsfält 2: Används inte
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
-### <a name="udp-enable"></a>Aktivera UDP 
+### <a name="udp-enable"></a>UDP-aktivera 
 
 #### <a name="nx_udp_enable"></a>nx_udp_enable
 
-**Ikonen** ![ U D P Enable-ikon](./media/user-guide/netx-events/image150.png)
+**Ikon** ![ Aktivera ikon för U D P](./media/user-guide/netx-events/image150.png)
 
 **Beskrivning**
 
 Den här händelsen representerar aktivering av UDP via nx_udp_enable.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Informations fält 2: används inte
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Används inte
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
-### <a name="udp-free-port-find"></a>Kostnads fri UDP-port hitta 
+### <a name="udp-free-port-find"></a>Hitta kostnadsfri UDP-port 
 
 #### <a name="nx_udp_free_port_find"></a>nx_udp_free_port_find
 
-**Ikonen** ![ U D P kostnads fri port hitta ikon](./media/user-guide/netx-events/image151.png)
+**Ikon** ![ Ikon för att hitta den kostnadsfria porten i U D P](./media/user-guide/netx-events/image151.png)
 
 **Beskrivning**
 
-Den här händelsen motsvarar att hitta en kostnads fri UDP-port via nx_udp_free_port_find.
+Den här händelsen representerar att hitta en kostnadsfri UDP-port via nx_udp_free_port_find.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Informations fält 2: startar porten för sökning från
-- Info-fält 3: ledig port
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Startar porten att söka från
+- Informationsfält 3: Kostnadsfri port
+- Informationsfält 4: Används inte
 
 ### <a name="udp-information-get"></a>Hämta UDP-information 
 
 #### <a name="nx_udp_info_get"></a>nx_udp_info_get
 
-**Ikonen** ![ U D P information get-ikon](./media/user-guide/netx-events/image152.png)
+**Ikon** ![ Hämta information för U D P-information](./media/user-guide/netx-events/image152.png)
 
 **Beskrivning**
 
 Den här händelsen representerar att hämta information via nx_udp_info_get.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: pekare till IP-instans
-- Informations fält 2: skickade UDP-byte
-- Informations fält 3: mottagna UDP-byte
-- Info-fält 4: ogiltiga paket
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: UDP-byte skickade
+- Informationsfält 3: Mottagna UDP-byte
+- Informationsfält 4: Ogiltiga paket
 
-### <a name="udp-socket-bind"></a>UDP-socket-bindning 
+### <a name="udp-socket-bind"></a>UDP Socket Bind 
 
 #### <a name="nx_udp_socket_bind"></a>nx_udp_socket_bind
 
-**Ikonen** ![ U D P v socket bind-ikon](./media/user-guide/netx-events/image153.png)
+**Ikon** ![ Ikon för U D P-socketbindning](./media/user-guide/netx-events/image153.png)
 
 **Beskrivning**
 
 Den här händelsen representerar bindning av en UDP-socket till en port via nx_udp_socket_bind.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Info fält 2: pekare till Socket
-- Informations fält 3: port nummer
-- Info fält 4: vänte alternativ
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Pekare till socket
+- Informationsfält 3: Portnummer
+- Informationsfält 4: Väntealternativ
 
-### <a name="udp-socket-bytes-available"></a>Tillgängliga UDP-socket-byte 
+### <a name="udp-socket-bytes-available"></a>Tillgängliga UDP Socket Bytes 
 
 #### <a name="nx_udp_socket_bytes_available"></a>nx_udp_socket_bytes_available
 
-**Ikonen** ![ Ikon för U D P socket-tillgängliga byte](./media/user-guide/netx-events/image154.png)
+**Ikon** ![ Ikon för tillgängliga byte för U D P-socket](./media/user-guide/netx-events/image154.png)
 
 **Beskrivning**
 
-Den här händelsen representerar det aktuella antalet byte som tagits emot på UDP-socketen via nx_udp_socket_bytes_available.
+Den här händelsen representerar det aktuella antalet byte som tas emot på UDP-socketen via nx_udp_socket_bytes_available.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Info fält 2: pekare till Socket
-- Informations fält 3: byte mottagna på socket
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Pekare till socket
+- Informationsfält 3: Mottagna byte på socket
+- Informationsfält 4: Används inte
 
-### <a name="udp-socket-checksum-disable"></a>Inaktivera kontroll summa för UDP-socket 
+### <a name="udp-socket-checksum-disable"></a>Inaktivera kontrollsumma för UDP-socket 
 
 #### <a name="nx_udp_socket_checksum_disable"></a>nx_udp_socket_checksum_disable
 
-**Ikonen** ![ Inaktivera ikon för U D P socket-kontrollsumma](./media/user-guide/netx-events/image155.png)
+**Ikon** ![ Inaktivera ikon för kontrollsumma för U D P-socket](./media/user-guide/netx-events/image155.png)
 
 **Beskrivning**
 
-Den här händelsen representerar inaktive ring av kontroll summan för data på en UDP-socket via nx_udp_socket_checksum_disable.
+Den här händelsen representerar inaktivering av kontrollsumman för data på en UDP-socket via nx_udp_socket_checksum_disable.
 
-**Informations fält** 
+**Informationsfält** 
 
-- Informations fält 1: pekare till IP-instans
-- Info fält 2: pekare till Socket
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Pekare till socket
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
-### <a name="udp-socket-checksum-enable"></a>Aktivera kontroll summa för UDP-uttag 
+### <a name="udp-socket-checksum-enable"></a>Aktivera kontrollsumma för UDP-socket 
 
 #### <a name="nx_udp_socket_checksum_enable"></a>nx_udp_socket_checksum_enable
 
-**Ikonen** ![ Ikon för U D P-uttag för kontroll Summa](./media/user-guide/netx-events/image156.png)
+**Ikon** ![ Aktivera ikon för kontrollsumma för U D P-socket](./media/user-guide/netx-events/image156.png)
 
 **Beskrivning**
 
-Den här händelsen representerar aktivering av kontroll Summa bearbetning på en socket via nx_udp_socket_checksum_enable.
+Den här händelsen representerar aktivering av bearbetning av kontrollsumma på en socket via nx_udp_socket_checksum_enable.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Info fält 2: pekare till Socket
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Pekare till socket
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
 ### <a name="udp-socket-create"></a>Skapa UDP-socket 
 
 #### <a name="nx_udp_socket_create"></a>nx_udp_socket_create
 
-**Ikonen** ![ U D P uttag ikon för skapa](./media/user-guide/netx-events/image157.png)
+**Ikon** ![ Ikon för att skapa U D P-socket](./media/user-guide/netx-events/image157.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att skapa en UDP-socket via nx_udp_socket_create.
+Den här händelsen representerar skapandet av en UDP-socket via nx_udp_socket_create.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Info fält 2: pekare till Socket
-- Informations fält 3: typ av tjänst
-- Info-fält 4: Max mottagnings kön
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Pekare till socket
+- Informationsfält 3: Typ av tjänst
+- Informationsfält 4: Maximal mottagningskö
 
-### <a name="udp-socket-delete-event"></a>Ta bort händelse för UDP-socket 
+### <a name="udp-socket-delete-event"></a>UDP Socket Delete-händelse 
 
 #### <a name="nx_udp_socket_delete-event"></a>nx_udp_socket_delete händelse
 
-**Ikonen** ![ U D P socket ta bort händelse ikon](./media/user-guide/netx-events/image158.png)
+**Ikon** ![ Händelseikon för borttagning av U D P-socket](./media/user-guide/netx-events/image158.png)
 
 **Beskrivning**
 
 Den här händelsen representerar borttagning av en UDP-socket via nx_udp_socket_delete.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Info fält 2: pekare till Socket
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Pekare till socket
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
-### <a name="udp-socket-information-get-event"></a>UDP socket information get-händelse 
+### <a name="udp-socket-information-get-event"></a>Hämta händelse för UDP Socket-information 
 
 #### <a name="nx_udp_socket_info_get-event"></a>nx_udp_socket_info_get händelse
 
-**Ikonen** ![ U D P l socket information Hämta händelse ikon](./media/user-guide/netx-events/image159.png)
+**Ikon** ![ Information om U D P socket hämta händelseikon](./media/user-guide/netx-events/image159.png)
 
 **Beskrivning**
 
-Den här händelsen representerar hämtning av information om en UDP-socket via nx_udp_socket_info_get.
+Den här händelsen representerar att få information om en UDP-socket via nx_udp_socket_info_get.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Info fält 2: pekare till Socket
-- Informations fält 3: byte som skickats via socket
-- Info fält 4: byte mottagna via socket
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Pekare till socket
+- Informationsfält 3: Byte som skickas via socket
+- Informationsfält 4: Mottagna byte via socket
 
-### <a name="udp-socket-interface-set"></a>Gränssnitts uppsättning för UDP-socket 
+### <a name="udp-socket-interface-set"></a>UDP Socket Interface Set 
 
 #### <a name="nx_udp_socket_interface_set-event"></a>nx_udp_socket_interface_set händelse
 
-**Ikonen** ![ Ikonen U D P socket interface set](./media/user-guide/netx-events/image160.png)
+**Ikon** ![ Ikon för U D P socket-gränssnittsuppsättning](./media/user-guide/netx-events/image160.png)
 
 **Beskrivning**
 
-Den här händelsen representerar inställningen utgående gränssnitt för den angivna UDP-socketen med det angivna gränssnittet via nx_udp_socket_interface_set.
+Den här händelsen representerar inställning av det utgående gränssnittet för den angivna UDP-socketen med det angivna gränssnittet via nx_udp_socket_interface_set.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekare till UDP-socket
-- Info fält 2: index som motsvarar gränssnittet för socketen
-- Informations fält 3: används inte
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till UDP-socket
+- Informationsfält 2: Index som motsvarar gränssnittet för socketen
+- Informationsfält 3: Används inte
+- Informationsfält 4: Används inte
 
-### <a name="udp-socket-port-get"></a>Hämta UDP-socket port 
+### <a name="udp-socket-port-get"></a>Hämta UDP Socket-port 
 
 #### <a name="nx_udp_socket_port_get"></a>nx_udp_socket_port_get
 
-**Ikonen** ![ U D P socket port get-ikon](./media/user-guide/netx-events/image161.png)
+**Ikon** ![ Ikonen hämta U D P-socketport](./media/user-guide/netx-events/image161.png)
 
 **Beskrivning**
 
-Den här händelsen representerar hämtning av UDP-porten som den angivna UDP-socketen är kopplad till via nx_udp_socket_port_get.
+Den här händelsen representerar hämtning av den UDP-port som den angivna UDP-socketen är bunden till via nx_udp_socket_port_get.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Info fält 2: pekare till UDP-socket
-- Informations fält 3: port nummer
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Pekare till UDP-socket
+- Informationsfält 3: Portnummer
+- Informationsfält 4: Används inte
 
-### <a name="udp-socket-receive"></a>Ta emot UDP-socket 
+### <a name="udp-socket-receive"></a>UDP Socket Receive 
 
 #### <a name="nx_udp_socket_receive"></a>nx_udp_socket_receive
 
-**Ikonen** ![ U D P socket Receive-ikon](./media/user-guide/netx-events/image162.png)
+**Ikon** ![ Ta emot U D P-socketikon](./media/user-guide/netx-events/image162.png)
 
 **Beskrivning**
 
-Den här händelsen representerar mottagning av data på angiven UDP-socket via nx_udp_socket_receive.
+Den här händelsen representerar mottagande av data på den angivna UDP-socketen via nx_udp_socket_receive.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Info fält 2: pekare till UDP-socket
-- Informations fält 3: pekare till mottaget paket
-- Info fält 4: mottaget paket storlek
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Pekare till UDP-socket
+- Informationsfält 3: Pekare till mottaget paket
+- Informationsfält 4: Mottagen paketstorlek
 
-### <a name="udp-socket-receive-notify"></a>Mottagnings meddelande för UDP-socket 
+### <a name="udp-socket-receive-notify"></a>UDP Socket Receive Notify 
 
 #### <a name="nx_udp_socket_receive_notify"></a>nx_udp_socket_receive_notify
 
-**Ikonen** ![ Beskrivning av U D P socket Receive-ikonen ](./media/user-guide/netx-events/image163.png) 
+**Ikon** ![ U D P socket receive notify icon ](./media/user-guide/netx-events/image163.png) s **Description**
 
-Den här händelsen representerar registrering av mottagnings återanrop via nx_udp_socket_receive_notify.
+Den här händelsen representerar registrering av ett motringningsanrop via nx_udp_socket_receive_notify.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Info fält 2: pekare till Socket
-- Informations fält 3: pekare för att ta emot meddelande funktions information fält 4: används inte
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Pekare till socket
+- Informationsfält 3: Pekare för att ta emot notify-funktionen InfoFält 4: Används inte
 
-### <a name="udp-socket-send"></a>Skicka UDP-socket 
+### <a name="udp-socket-send"></a>UDP Socket Send 
 
 #### <a name="nx_udp_socket_send"></a>nx_udp_socket_send
 
-**Ikonen** ![ U D P socket-skicka-ikon](./media/user-guide/netx-events/image164.png)
+**Ikon** ![ Skicka U D P-socketikon](./media/user-guide/netx-events/image164.png)
 
 **Beskrivning**
 
 Den här händelsen representerar sändning av data via en UDP-socket via nx_udp_socket_send.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till Socket
-- Info fält 2: pekar mot paket
-- Informations fält 3: paket längd
-- Info-fält 4: målets IP-adress
+- Informationsfält 1: Pekare till socket
+- Informationsfält 2: Pekare till paket
+- Informationsfält 3: Paketlängd
+- Informationsfält 4: Mål-IP-adress
 
-### <a name="udp-socket-unbind"></a>UDP-socket-avbindning 
+### <a name="udp-socket-unbind"></a>UDP Socket Unbind 
 
 #### <a name="nx_udp_socket_unbind"></a>nx_udp_socket_unbind
 
-**Ikonen** ![ U D P-uppbindning-ikon](./media/user-guide/netx-events/image165.png)
+**Ikon** ![ Ta bort bindningsikon för U D P-socket](./media/user-guide/netx-events/image165.png)
 
 **Beskrivning**
 
-Den här händelsen representerar en avbindning av en UDP-port med en socket via nx_udp_socket_unbind.
+Den här händelsen representerar avbindning av en UDP-port med en socket via nx_udp_socket_unbind.
 
-**Informations fält**
+**Informationsfält**
 
-- Informations fält 1: pekare till IP-instans
-- Info fält 2: pekare till Socket
-- Informations fält 3: port nummer
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till IP-instans
+- Informationsfält 2: Pekare till socket
+- Informationsfält 3: Portnummer
+- Informationsfält 4: Används inte
 
-### <a name="udp-source-extract"></a>Extrahering av UDP-källa 
+### <a name="udp-source-extract"></a>UDP-källutdrag 
 
 #### <a name="nx_udp_socket_create"></a>nx_udp_socket_create
 
-**Ikonen** ![ U D P P käll extraherings ikon](./media/user-guide/netx-events/image166.png)
+**Ikon** ![ Extraheringsikon för U D P-källa](./media/user-guide/netx-events/image166.png)
 
 **Beskrivning**
 
-Den här händelsen representerar att hämta IP-adressen och port numret för ett mottaget UDP-paket via nx_udp_source_extract.
+Den här händelsen representerar att ip-adressen och portnumret för ett mottaget UDP-paket tas emot via nx_udp_source_extract.
 
-**Informations fält**
+**Informationsfält**
 
-- Info fält 1: pekar mot paket
-- Informations fält 2: avsändarens IP-adress
-- Informations fält 3: avsändarens port nummer
-- Info fält 4: används inte
+- Informationsfält 1: Pekare till paket
+- Informationsfält 2: Avsändarens IP-adress
+- Informationsfält 3: Avsändarens portnummer
+- Informationsfält 4: Används inte

@@ -1,57 +1,57 @@
 ---
-title: Kapitel 2 – installation och användning av NetX HTTP
-description: Det här kapitlet innehåller en beskrivning av olika problem som rör Installation, konfiguration och användning av NetX HTTP-komponenten.
+title: Kapitel 2 – Installation och användning av NetX HTTP
+description: Det här kapitlet innehåller en beskrivning av olika problem som rör installation, installation och användning av NetX HTTP-komponenten.
 author: philmea
 ms.author: philmea
 ms.date: 06/08/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: db621e38e9d2324ca3ce2398aee9f729b05886ee
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 5d4913c01de5cc7c41d44bda473bbaca06dd474a26570b056bfde3cd48acc4e4
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104826715"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116799412"
 ---
-# <a name="chapter-2---installation-and-use-of-netx-http"></a>Kapitel 2 – installation och användning av NetX HTTP
+# <a name="chapter-2---installation-and-use-of-netx-http"></a>Kapitel 2 – Installation och användning av NetX HTTP
 
-Det här kapitlet innehåller en beskrivning av olika problem som rör Installation, konfiguration och användning av NetX HTTP-komponenten.
+Det här kapitlet innehåller en beskrivning av olika problem som rör installation, installation och användning av NetX HTTP-komponenten.
 
-## <a name="product-distribution"></a>Produkt distribution
+## <a name="product-distribution"></a>Produktdistribution
 
-Azure återställnings tider-NetX kan hämtas från vår offentliga käll kods lagrings plats på [https://github.com/azure-rtos/netx](https://github.com/azure-rtos/netx) .
+Azure RTOS NetX kan hämtas från vår offentliga källkodsdatabas på [https://github.com/azure-rtos/netx](https://github.com/azure-rtos/netx) .
 
-- **nx_http_client. h** Rubrik fil för HTTP-klient för NetX
-- **nx_http_server. h** Rubrik fil för HTTP-server för NetX
-- **nx_http_client. c** C-källfil för HTTP-klient för NetX
-- **nx_http_server. c** C-källfil för HTTP-server för NetX
-- **nx_md5. c** MD5 Digest-algoritmer
-- **filex_stub. h** Stub-fil om FileX inte finns
+- **nx_http_client.h** Huvudfil för HTTP-klient för NetX
+- **nx_http_server.h** Huvudfil för HTTP Server för NetX
+- **nx_http_client.c** C-källfil för HTTP-klient för NetX
+- **nx_http_server.c** C-källfil för HTTP Server för NetX
+- **nx_md5.c** MD5-sammanfattande algoritmer
+- **filex_stub.h** Stub-fil om FileX inte finns
 - **nx_http.pdf** Beskrivning av HTTP för NetX
-- **demo_netx_http. c** NetX HTTP-demonstration
+- **demo_netx_http.c** NetX HTTP-demonstration
 
 ## <a name="http-installation"></a>HTTP-installation
 
-För att du ska kunna använda HTTP för NetX, ska hela distributionen som nämnts tidigare kopieras till samma katalog där NetX har installerats. Om t. ex. NetX har installerats i katalogen "*\threadx\arm7\green*", används *nx_http_client. h* och *NX_HTTP_CLIENT. c* för NetX http-klientprogram och *nx_http_server. h* och *nx_http_server. c* för netx http-serverprogram. *nx_md5. c* ska kopieras till den här katalogen. För demonstrationen av "ram-drivrutinen" program NetX HTTP-klient och server filer ska kopieras till samma katalog.
+För att kunna använda HTTP för NetX bör hela distributionen som nämns ovan kopieras till samma katalog där NetX är installerat. Om NetX till exempel är installerat i katalogen "*\threadx\arm7\green*" så är *nx_http_client.h* och *nx_http_client.c för* NetX HTTP-klientprogram och *nx_http_server.h* och *nx_http_server.c* för NetX HTTP Server-program. *nx_md5.c* ska kopieras till den här katalogen. För demonstrationen av RAM-drivrutinsprogrammet ska NetX HTTP Client- och Server-filer kopieras till samma katalog.
 
 ## <a name="using-http"></a>Använda HTTP
 
-Det är enkelt att använda HTTP för NetX. I princip måste program koden innehålla *nx_http_client. h* och/eller *nx_http_server. h* när den innehåller *tx_api. h, fx_api. h* och *nx_api. h*, för att kunna använda ThreadX, FileX och netx. När HTTP-huvudfilerna har inkluderats kan program koden göra HTTP-funktions anropen senare i den här hand boken. Programmet måste också innehålla *nx_http_client. c*, *nx_http_server. c* och *MD5. c* i build-processen. De här filerna måste kompileras på samma sätt som andra programfiler och dess objekt formulär måste vara länkade tillsammans med programmets filer. Detta är allt som krävs för att använda NetX HTTP.
+Det är enkelt att använda HTTP för NetX. I princip måste programkoden innehålla *nx_http_client.h* och/eller *nx_http_server.h* när den innehåller *tx_api.h, fx_api.h* och *nx_api.h* för att kunna använda ThreadX, FileX respektive NetX. När HTTP-huvudfilerna har inkluderats kan programkoden sedan göra HTTP-funktionsanrop som anges senare i den här guiden. Programmet måste också innehålla *nx_http_client.c*, *nx_http_server.c* och *md5.c* i byggprocessen. Dessa filer måste kompileras på samma sätt som andra programfiler och dess objektformulär måste länkas tillsammans med programmets filer. Det här är allt som krävs för att använda NetX HTTP.
 
 >[!NOTE] 
-> Om NX_HTTP_DIGEST_ENABLE inte anges i build-processen behöver inte *MD5. c* -filen läggas till i programmet. Om ingen HTTP-klient krävs, kan filen *nx_http_client. c* utelämnas.
+> Om NX_HTTP_DIGEST_ENABLE inte har angetts i byggprocessen behöver *filen md5.c* inte läggas till i programmet. Om inga HTTP-klientfunktioner krävs kan filen *nx_http_client.c* utelämnas.
 
 >[!NOTE] 
-> Eftersom HTTP använder sig av NetX TCP-tjänster måste TCP aktive ras med det *nx_tcp_enable* samtalet innan http används.
+> Eftersom HTTP använder NetX TCP-tjänster måste TCP aktiveras med nx_tcp_enable *innan* HTTP används.
 
-## <a name="small-example-system"></a>Litet exempel system
+## <a name="small-example-system"></a>Litet exempelsystem
 
-Ett exempel på hur enkelt det är att använda NetX HTTP beskrivs i bild 1,1 som visas nedan. I det här exemplet tas HTTP-filen *nx_http_client. h och nx_http_server. h* in på rad 8. Därefter skapas HTTP-servern i "*tx_application_define*" på rad 131.
+Ett exempel på hur enkelt det är att använda NetX HTTP beskrivs i bild 1.1 som visas nedan. I det här exemplet tas *HTTP-indelningsfilen nx_http_client.h och nx_http_server.h* in på rad 8. Därefter skapas HTTP-servern i "*tx_application_define*" på rad 131.
 
 >[!NOTE] 
-> HTTP Server Control Block "*Server*" har definierats som en global variabel på rad 25 tidigare.
+> HTTP-serverkontrollblocket "*Server*" definierades som en global variabel på rad 25 tidigare.
 
-När den har skapats startas en HTTP-server på rad 136. På rad 149 har HTTP-klienten skapats. Slutligen skriver klienten filen på rad 157 och läser tillbaka filen på rad 195.
+När det har skapats startas en HTTP-server på rad 136. På rad 149 skapas HTTP-klienten. Slutligen skriver klienten filen på rad 157 och läser tillbaka filen på rad 195.
 
 ```c
 /* This is a small demo of HTTP on the high-performance NetX TCP/IP stack.
@@ -267,34 +267,34 @@ UINT          status;
  }
 ```
 
-Figur 1,1 exempel på HTTP-användning med NetX
+Bild 1.1 Exempel på HTTP-användning med NetX
 
-## <a name="configuration-options"></a>Konfigurations alternativ
+## <a name="configuration-options"></a>Konfigurationsalternativ
 
-Det finns flera konfigurations alternativ för att skapa HTTP för NetX. Följande är en lista över alla alternativ, där var och en beskrivs i detalj. Standardvärdena visas, men kan omdefinieras innan du kan inkludera *nx_http_client. h och nx_http_server. h*:
+Det finns flera konfigurationsalternativ för att skapa HTTP för NetX. Nedan följer en lista över alla alternativ, där vart och ett beskrivs i detalj. Standardvärdena visas, men kan definieras om innan du tar *med nx_http_client.h och nx_http_server.h:*
 
-- **NX_DISABLE_ERROR_CHECKING** Definierad tar det här alternativet bort grundläggande HTTP-felkontroll. Den används vanligt vis när programmet har felsökts.
-- **NX_HTTP_SERVER_PRIORITY** Prioriteten för HTTP-serverns tråd. Som standard definieras värdet som 16 för att ange prioritet 16.
-- **NX_HTTP_NO_FILEX** Definierad är det här alternativet en stub för FileX-beroenden. HTTP-klienten fungerar utan några ändringar om det här alternativet har definierats. HTTP-servern måste antingen ändras eller så måste användaren skapa en fåtal av FileX-tjänsterna för att fungera korrekt.
-- **NX_HTTP_TYPE_OF_SERVICE** Typ av tjänst som krävs för HTTP TCP-begäranden. Som standard definieras det här värdet som NX_IP_NORMAL för att indikera den normala IP-paketfiltrering.
-- **NX_HTTP_SERVER_THREAD_TIME_SLICE** Antalet timer-Tick som server tråden får köra innan den tilldelas trådar av samma prioritet. Standardvärdet är 2.
-- **NX_HTTP_FRAGMENT_OPTION** Fragment aktivera för HTTP TCP-begäranden. Som standard är det här värdet NX_DONT_FRAGMENT för att inaktivera HTTP TCP-fragmentering.
-- **NX_HTTP_SERVER_WINDOW_SIZE** Serverns socket Window-storlek. Som standard är det här värdet 2048 byte.
-- **NX_HTTP_TIME_TO_LIVE** Anger antalet routrar som det här paketet kan passera innan det tas bort. Standardvärdet är inställt på 0x80.
-- **NX_HTTP_SERVER_TIMEOUT** Anger antalet ThreadX-Tick som interna tjänster ska pausas för. Standardvärdet är inställt på 10 sekunder (10 * NX_IP_PERIODIC_RATE).
-- **NX_HTTP_SERVER_TIMEOUT_ACCEPT** Anger antalet ThreadX-Tick som interna tjänster ska pausas för i interna *nx_tcp_server_socket_accept* -anrop. Standardvärdet är inställt på (10 * NX_IP_PERIODIC_RATE).
-- **NX_HTTP_SERVER_TIMEOUT_DISCONNECT** Anger antalet ThreadX-Tick som interna tjänster ska pausas för i interna *nx_tcp_socket_disconnect* -anrop. Standardvärdet är inställt på 10 sekunder (10 * NX_IP_PERIODIC_RATE).
-- **NX_HTTP_SERVER_TIMEOUT_RECEIVE** Anger antalet ThreadX-Tick som interna tjänster ska pausas för i interna *nx_tcp_socket_receive* -anrop. Standardvärdet är inställt på 10 sekunder (10 * NX_IP_PERIODIC_RATE).
-- **NX_HTTP_SERVER_TIMEOUT_SEND** Anger antalet ThreadX-Tick som interna tjänster ska pausas för i interna *nx_tcp_socket_send* -anrop. Standardvärdet är inställt på 10 sekunder (10 * NX_IP_PERIODIC_RATE).
-- **NX_HTTP_MAX_HEADER_FIELD** Anger den maximala storleken för fältet HTTP-huvud. Standardvärdet är 256.
-- **NX_HTTP_MULTIPART_ENABLE** Om det här alternativet har definierats kan HTTP-servern stödja multipart HTTP-begäranden.
+- **NX_DISABLE_ERROR_CHECKING** Det här alternativet tar bort den grundläggande HTTP-felkontrollen. Det används vanligtvis när programmet har felsökts.
+- **NX_HTTP_SERVER_PRIORITY** Prioriteten för HTTP-servertråden. Som standard definieras det här värdet som 16 för att ange prioritet 16.
+- **NX_HTTP_NO_FILEX** Det här alternativet har definierats och tillhandahåller en stub för FileX-beroenden. HTTP-klienten fungerar utan ändringar om det här alternativet har definierats. HTTP-servern måste antingen ändras eller så måste användaren skapa ett fåtal FileX-tjänster för att fungera korrekt.
+- **NX_HTTP_TYPE_OF_SERVICE** Typ av tjänst som krävs för HTTP TCP-begäranden. Som standard definieras det här värdet som NX_IP_NORMAL för att indikera normal IP-pakettjänst.
+- **NX_HTTP_SERVER_THREAD_TIME_SLICE** Antalet timer tick som Server-tråden tillåts köra innan den ger till trådar med samma prioritet. Standardvärdet är 2.
+- **NX_HTTP_FRAGMENT_OPTION** Aktivera fragment för HTTP TCP-begäranden. Som standard är det här värdet NX_DONT_FRAGMENT inaktivera HTTP TCP-fragmentering.
+- **NX_HTTP_SERVER_WINDOW_SIZE** Fönsterstorlek för serversocket. Som standard är det här värdet 2 048 byte.
+- **NX_HTTP_TIME_TO_LIVE** Anger antalet routrar som det här paketet kan skicka innan det tas bort. Standardvärdet är inställt på 0x80.
+- **NX_HTTP_SERVER_TIMEOUT** Anger antalet ThreadX-tick som interna tjänster ska pausas för. Standardvärdet är inställt på 10 sekunder (10 * NX_IP_PERIODIC_RATE).
+- **NX_HTTP_SERVER_TIMEOUT_ACCEPT** Anger antalet ThreadX-tick som interna tjänster ska pausas för i interna *nx_tcp_server_socket_accept anrop.* Standardvärdet är inställt på (10 * NX_IP_PERIODIC_RATE).
+- **NX_HTTP_SERVER_TIMEOUT_DISCONNECT** Anger antalet ThreadX-tick som interna tjänster pausar för i interna *nx_tcp_socket_disconnect anrop.* Standardvärdet är inställt på 10 sekunder (10 * NX_IP_PERIODIC_RATE).
+- **NX_HTTP_SERVER_TIMEOUT_RECEIVE** Anger antalet ThreadX-tick som interna tjänster pausar för i interna *nx_tcp_socket_receive anrop.* Standardvärdet är inställt på 10 sekunder (10 * NX_IP_PERIODIC_RATE).
+- **NX_HTTP_SERVER_TIMEOUT_SEND** Anger antalet ThreadX-tick som interna tjänster ska pausa för i interna *nx_tcp_socket_send anrop.* Standardvärdet är inställt på 10 sekunder (10 * NX_IP_PERIODIC_RATE).
+- **NX_HTTP_MAX_HEADER_FIELD** Anger den maximala storleken för HTTP-huvudfältet. Standardvärdet är 256.
+- **NX_HTTP_MULTIPART_ENABLE** Om http-servern har definierats kan den stödja HTTP-begäranden med flera delar.
 - **NX_HTTP_SERVER_MAX_PENDING** Anger antalet anslutningar som kan köas för HTTP-servern. Standardvärdet är inställt på 5.
-- **NX_HTTP_MAX_RESOURCE** Anger antalet byte som tillåts i ett klient *resurs namn* som anges. Standardvärdet är inställt på 40.
-- **NX_HTTP_MAX_NAME** Anger antalet byte som tillåts i en klient som har angett *användar namn*. Standardvärdet är inställt på 20.
-- **NX_HTTP_MAX_PASSWORD** Anger antalet byte som tillåts i ett *lösen ord* som anges av klienten. Standardvärdet är inställt på 20.
-- **NX_HTTP_SERVER_MIN_PACKET_SIZE** Anger minimi storleken på paketen i poolen som anges när servern skapas. Minimi storleken krävs för att säkerställa att det fullständiga HTTP-huvudet kan finnas i ett paket. Standardvärdet är inställt på 600.
-- **NX_HTTP_CLIENT_MIN_PACKET_SIZE** Anger minimi storleken på paketen i poolen som anges när klienten skapades. Minimi storleken krävs för att säkerställa att det fullständiga HTTP-huvudet kan finnas i ett paket. Standardvärdet är inställt på 300.
-- **NX_HTTP_SERVER_RETRY_SECONDS** *Ange tids gränsen för återöverföring av Server-socket i sekunder.* Standardvärdet är inställt på 2.
-- **NX_HTTP_SERVER_RETRY_MAX** Detta anger det maximala antalet återöverföringar på Server-socketen. Standardvärdet är inställt på 10.
-- **NX_HTTP_SERVER_RETRY_SHIFT** Det här värdet används för att ange nästa timeout för återöverföring. Den aktuella tids gränsen multipliceras med antalet återöverföringar, vilket innebär att värdet för timeout-värdet för socketen flyttas. Standardvärdet är inställt på 1 för dubblerad tids gräns.
-- **NX_HTTP_ SERVER_TRANSMIT_QUEUE_DEPTH** Detta anger det maximala antalet paket som kan köas på återställnings kön för Server-socket. Om antalet paket som har placerats i kö når det här antalet kan inga fler paket skickas förrän ett eller flera köade paket släpps. Standardvärdet är inställt på 20.
+- **NX_HTTP_MAX_RESOURCE** Anger antalet byte som tillåts i ett resursnamn som tillhandahålls *av en klient.* Standardvärdet är inställt på 40.
+- **NX_HTTP_MAX_NAME** Anger antalet byte som tillåts i ett användarnamn som tillhandahålls av *en klient.* Standardvärdet är inställt på 20.
+- **NX_HTTP_MAX_PASSWORD** Anger antalet byte som tillåts i ett lösenord som anges av *klienten.* Standardvärdet är inställt på 20.
+- **NX_HTTP_SERVER_MIN_PACKET_SIZE** Anger den minsta storleken på paketen i poolen som angavs när servern skapades. Den minsta storleken krävs för att säkerställa att det fullständiga HTTP-huvudet kan finnas i ett paket. Standardvärdet är inställt på 600.
+- **NX_HTTP_CLIENT_MIN_PACKET_SIZE** Anger den minsta storleken på paketen i poolen som angavs när klienten skapades. Den minsta storleken krävs för att säkerställa att det fullständiga HTTP-huvudet kan finnas i ett paket. Standardvärdet är inställt på 300.
+- **NX_HTTP_SERVER_RETRY_SECONDS** *Ange tidsgränsen för återöverföring av serversocket i sekunder. Standardvärdet* är inställt på 2.
+- **NX_HTTP_SERVER_RETRY_MAX** Detta anger det maximala antalet återöverföringar på serversocketen. Standardvärdet är inställt på 10.
+- **NX_HTTP_SERVER_RETRY_SHIFT** Det här värdet används för att ange nästa tidsgräns för återöverföring. Den aktuella tidsgränsen multipliceras med antalet återöverföringar hittills, skiftat med värdet för socket-timeout-skiftet. Standardvärdet är inställt på 1 för dubblering av tidsgränsen.
+- **NX_HTTP_ SERVER_TRANSMIT_QUEUE_DEPTH** Detta anger det maximala antalet paket som kan tas i kö för återöverföring av serversocket. Om antalet paket som tas iqueued når det här numret kan inga fler paket skickas förrän ett eller flera inkommande paket släpps. Standardvärdet är inställt på 20.

@@ -1,46 +1,46 @@
 ---
-title: Kapitel 2 – installation och användning av NetX Duo SMTP-klienten
-description: Det här kapitlet innehåller en beskrivning av olika problem som rör Installation, konfiguration och användning av NetX Duo SMTP-klient komponenten.
+title: Kapitel 2 – Installation och användning av NetX Duo SMTP-klient
+description: Det här kapitlet innehåller en beskrivning av olika problem som rör installation, installation och användning av NetX Duo SMTP-klientkomponenten.
 author: philmea
 ms.author: philmea
 ms.date: 07/09/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: 86f324935ba32aab010b81f825be0a6564983a2e
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: ba4d50048adba4ac992f6bbe90d236445546a5929ace74899833c686a90dadd9
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104825785"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116797848"
 ---
-# <a name="chapter-2---installation-and-use-of-netx-duo-smtp-client"></a>Kapitel 2 – installation och användning av NetX Duo SMTP-klienten
+# <a name="chapter-2---installation-and-use-of-netx-duo-smtp-client"></a>Kapitel 2 – Installation och användning av NetX Duo SMTP-klient
 
-Det här kapitlet innehåller en beskrivning av olika problem som rör Installation, konfiguration och användning av NetX Duo SMTP-klient komponenten.
+Det här kapitlet innehåller en beskrivning av olika problem som rör installation, installation och användning av NetX Duo SMTP-klientkomponenten.
 
-## <a name="netx-duo-smtp-client-installation"></a>NetX Duo SMTP-klient installation
+## <a name="netx-duo-smtp-client-installation"></a>Installation av NetX Duo SMTP-klient
 
 NetX Duo SMTP-klienten finns på [https://github.com/azure-rtos/netxduo](https://github.com/azure-rtos/netxduo) . Paketet innehåller följande filer:
 
-- **nxd_smtp_client. c** C-källfil för NetX Duo SMTP client API
-- **nxd_smtp_client. h** C-huvud fil för NetX Duo SMTP-klient-API
-- **demo_netxduo_smtp_client. c** Demo för NetX Duo SMTP-klient
-- **nxd_smtp_client.pdf användar guide för** NetX Duo SMTP-klient-API
+- **nxd_smtp_client.c** C-källfil för NetX Duo SMTP-klient-API
+- **nxd_smtp_client.h** C-rubrikfil för NetX Duo SMTP-klient-API
+- **demo_netxduo_smtp_client.c** Demo för NetX Duo SMTP-klient
+- **nxd_smtp_client.pdf användarhandbok för** NetX Duo SMTP-klient-API
 
-Om du vill använda NetX Duo SMTP client API, kan hela distributionen som tidigare har kopierats till samma katalog som NetX Duo är installerad på. Om t. ex. NetX Duo installeras i katalogen "c:*\myproject*" måste *nxd_smtp_client. h-och nxd_smtp_client. c-* filerna kopieras till den här katalogen.
+Om du vill använda NetX Duo SMTP-klient-API:et kan hela distributionen som nämns ovan kopieras till samma katalog där NetX Duo är installerat. Om NetX Duo till exempel är installerat i katalogen "c:*\myproject"* ska *filerna nxd_smtp_client.h och nxd_smtp_client.c* kopieras till den här katalogen.
 
-## <a name="using-netx-duo-smtp-client"></a>Använda NetX Duo SMTP client
+## <a name="using-netx-duo-smtp-client"></a>Använda NetX Duo SMTP-klient
 
-För att skapa NetX Duo SMTP-klientprogrammet måste du först skapa ThreadX-och NetX Duo-biblioteken och inkludera dem i build-projektet. Programmet måste sedan ta med TX-*_api. h* och *nx_api. h i programmets käll kod*. Detta aktiverar ThreadX-och NetX Duo-tjänster. Det måste också innehålla *nxd_smtp_client. c* och *nxd_smtp_client. h* efter *tx_api. h* och *nx_api. h för att använda SMTP-klienttjänster.*
+För att kunna skapa NETX Duo SMTP-klientprogrammet måste det först bygga Biblioteken ThreadX och NetX Duo och inkludera dem i byggprojektet. Programmet måste sedan inkludera tx *_api.h* *och nx_api.h i programmets källkod*. Detta aktiverar ThreadX- och NetX Duo-tjänster. Den måste också innehålla *nxd_smtp_client.c* *och nxd_smtp_client.h* *efter tx_api.h* och nx_api.h för att *kunna använda SMTP-klienttjänster.*
 
-Filerna måste kompileras på samma sätt som andra programfiler och objekt koden måste vara länkad tillsammans med programmets filer. Detta är allt som krävs för att skapa ett NetX Duo SMTP-klientprogram.
+Dessa filer måste kompileras på samma sätt som andra programfiler och objektkoden måste länkas tillsammans med programmets filer. Det här är allt som krävs för att skapa ett NetX Duo SMTP-klientprogram.
 
-## <a name="small-example-system"></a>Litet exempel system
+## <a name="small-example-system"></a>Litet exempelsystem
 
-Ett exempel på hur du använder NetX Duo SMTP-klienten beskrivs i bild 1 som visas nedan. Paketets pool för IP-instansen skapas med hjälp av nx_packet_pool_create-tjänsten, på rad 68 och har en mycket liten paket nytto Last. Detta beror på att IP-instansen bara skickar kontroll paket som inte kräver mycket nytto Last. SMTP-klientcachen som skapats på rad 84 och används för att överföra SMTP-klient meddelanden till servern och meddelande data. Paketets nytto Last är mycket större. IP-instansen skapas på rad 118 med samma adresspool. TCP, som krävs för SMTP-protokollet, är aktiverat på IP-instansen på rad 130.
+Ett exempel på hur du använder NetX Duo SMTP-klienten beskrivs i bild 1 som visas nedan. Paketpoolen för IP-instansen skapas med hjälp nx_packet_pool_create tjänst på rad 68 och har en mycket liten paketnyttolast. Det beror på att IP-instansen endast skickar kontrollpaket som inte kräver mycket nyttolast. SMTP-klientens paketpool som skapades på rad 84 och används för att överföra SMTP-klientmeddelanden till servern och meddelandedata. Paketnyttolasten är mycket större. IP-instansen skapas på rad 118 med samma paketpool. TCP, som krävs för SMTP-protokollet, är aktiverat på IP-instansen på rad 130.
 
-I program tråden skapas SMTP-klienten med hjälp av *nxd_smtp_client_create* -tjänsten, på rad 170. Tjänsten *nxd_smtp_client_create* stöder både IPv4-och IPv6 SMTP-server anslutningar, även om det här exemplet är begränsat till IPv4. Sedan skickas e-postmeddelandet till SMTP-klienten för överföring på rad 184 med hjälp av tjänsten *nx_smtp_mail_send* . Observera att ämnes raden med e-postmeddelandets innehålls rubrik skapas separat från meddelande texten. Observera också att skicka e-postbegäran endast accepterar en mottagares e-postadress som antas vara syntaktiskt korrekt.
+I programtråden skapas SMTP-klienten med tjänsten *nxd_smtp_client_create,* på rad 170. Tjänsten nxd_smtp_client_create stöder både IPv4- och IPv6 SMTP-serveranslutningar, även om det här *exemplet* är begränsat till IPv4. Sedan skickas e-postmeddelandet till SMTP-klienten för överföring på  rad 184 med nx_smtp_mail_send tjänsten. Observera att ämnesraden med rubriken för e-postinnehåll skapas separat från meddelandetexten. Observera också att begäran om att skicka e-post endast accepterar en mottagares e-postadress som antas vara syntaktiskt korrekt.
 
-Sedan avslutar programmet SMTP-klienten på rad 200. *Nx_smtp_client_deletes* tjänsten kontrollerar att socket-anslutningen är stängd och porten är obunden. Observera att det är upp till SMTP-klientprogrammet att ta bort poolen om den inte längre används för den.
+Sedan avslutar programmet SMTP-klienten på rad 200. Tjänsten *nx_smtp_client_delete* kontrollerar att socketanslutningen är stängd och porten är obunden. Observera att det är upp till SMTP-klientprogrammet att ta bort paketpoolen om den inte längre används för den.
 
 ```c
 /*
@@ -257,20 +257,20 @@ void    demo_client_thread_entry(ULONG info)
 }
 ```
 
-**Bild 1. Exempel på SMTP-klient användning med NetX Duo**
+**Bild 1. Exempel på användning av SMTP-klienten med NetX Duo**
 
-## <a name="client-configuration-options"></a>Alternativ för klient konfiguration
+## <a name="client-configuration-options"></a>Klientkonfigurationsalternativ
 
-Det finns flera konfigurations alternativ med NetX Duo SMTP client API. Nedan visas en lista över alla alternativ som beskrivs i detalj:
+Det finns flera konfigurationsalternativ med NetX Duo SMTP-klient-API:et. Här följer en lista över alla alternativ som beskrivs i detalj:
 
-- **NX_SMTP_CLIENT_TCP_WINDOW_SIZE** Det här alternativet anger storleken på klientens TCP-mottagningsfönstret. Detta ska anges till under MTU-storleken för den underliggande Ethernet-maskinvaran och tillåta utrymme för IP-och TCP-huvuden. Standardvärdet för NetX Duo SMTP-klienten TCP Window är 1460.
-- **NX_SMTP_CLIENT_PACKET_TIMEOUT** Det här alternativet anger tids gränsen för NetX-paket tilldelning. Standardvärdet för NetX Duo SMTP-klientprogrammet är 2 sekunder.
-- **NX_SMTP_CLIENT_CONNECTION_TIMEOUT** Det här alternativet anger klientens timeout för TCP-socket Connect. Standardvärdet för NetX Duo SMTP Client Connect är 10 sekunder.
-- **NX_SMTP_CLIENT_DISCONNECT_TIMEOUT** Det här alternativet anger timeout för klientens TCP-socket. Standardvärdet för NetX Duo SMTP client från koppling är 5 sekunder *. Observera att om SMTP-klienten påträffar ett internt fel, till exempel en bruten anslutning, kan det leda till att anslutningen avbryts med en timeout på noll vänte.
-- **NX_SMTP_GREETING_TIMEOUT** Med det här alternativet anges timeout-värdet för klienten för att ta emot servern svar på dess hälsning. Standardvärdet för NetX Duo SMTP-klienten är 10 sekunder.
-- **NX_SMTP_ENVELOPE_TIMEOUT** Med det här alternativet anges tids gränsen för klienten att ta emot servern svara på ett klient kommando. Standardvärdet för NetX Duo SMTP-klienten är 10 sekunder.
-- **NX_SMTP_MESSAGE_TIMEOUT** Med det här alternativet anges tids gränsen för klienten att ta emot Server svaret för att ta emot e-postmeddelande data. Standardvärdet för NetX Duo SMTP-klienten är 30 sekunder.
-- **NX_SMTP_CLIENT_SEND_TIMEOUT** Det här alternativet definierar vänte alternativet för bufferten för att lagra användar lösen ordet under SMTP-autentisering med-servern. Standardvärdet är 20 byte.
-- **NX_SMTP_SERVER_CHALLENGE_MAX_STRING** Med det här alternativet definieras storleken på bufferten för extrahering av Server utmaningen under SMTP-autentisering. Standardvärdet är 200 byte. För inloggning och enkel autentisering kan SMTP-klienten förmodligen använda en mindre buffert.
-- **NX_SMTP_CLIENT_MAX_PASSWORD** Med det här alternativet definieras storleken på bufferten för att lagra användar lösen ordet under SMTP-autentisering med-servern. Standardvärdet är 20 byte. 
-- **NX_SMTP_CLIENT_MAX_USERNAME** Med det här alternativet definieras storleken på bufferten för att lagra värd användar namnet under SMTP-autentisering med-servern. Standardvärdet är 40 byte. 
+- **NX_SMTP_CLIENT_TCP_WINDOW_SIZE** Det här alternativet anger storleken på klientens TCP-mottagningsfönster. Detta ska vara inställt på under MTU-storleken för den underliggande Ethernet-maskinvaran och ge utrymme för IP- och TCP-huvuden. Standardstorleken för TCP-fönstret för NetX Duo SMTP-klienten är 1460.
+- **NX_SMTP_CLIENT_PACKET_TIMEOUT** Det här alternativet anger tidsgränsen för NetX-paketallokering. Standardvärdet för NetX Duo SMTP-klientpakets timeout är 2 sekunder.
+- **NX_SMTP_CLIENT_CONNECTION_TIMEOUT** Det här alternativet anger tidsgränsen för klient-TCP-socketanslutning. Standardvärdet för NetX Duo SMTP-klientens anslutningstid är 10 sekunder.
+- **NX_SMTP_CLIENT_DISCONNECT_TIMEOUT** Det här alternativet anger tidsgränsen för frånkoppling av klient-TCP-socket. Standardtids gränsen för frånkoppling för NetX Duo SMTP-klienten är 5 sekunder*. Observera att om SMTP-klienten stöter på ett internt fel, till exempel en bruten anslutning, kan anslutningen avslutas med en timeout på noll.
+- **NX_SMTP_GREETING_TIMEOUT** Det här alternativet anger tidsgränsen för att klienten ska få servern att svara på sin hälsning. Standardvärdet för NetX Duo SMTP-klienten är 10 sekunder.
+- **NX_SMTP_ENVELOPE_TIMEOUT** Det här alternativet anger tidsgränsen för klienten att ta emot serversvaret till ett klientkommando. Standardvärdet för NetX Duo SMTP-klienten är 10 sekunder.
+- **NX_SMTP_MESSAGE_TIMEOUT** Det här alternativet anger tidsgränsen för klienten att ta emot serverns svar på att ta emot e-postdata. Standardvärdet för NetX Duo SMTP-klienten är 30 sekunder.
+- **NX_SMTP_CLIENT_SEND_TIMEOUT** Det här alternativet definierar väntealternativet för bufferten för att lagra användarlösenordet under SMTP-autentisering med servern. Standardvärdet är 20 byte.
+- **NX_SMTP_SERVER_CHALLENGE_MAX_STRING** Det här alternativet definierar storleken på bufferten för att extrahera serverutmaningen under SMTP-autentisering. Standardvärdet är 200 byte. För INLOGGNING och PLAIN-autentisering kan SMTP-klienten förmodligen använda en mindre buffert.
+- **NX_SMTP_CLIENT_MAX_PASSWORD** Det här alternativet definierar storleken på bufferten för att lagra användarlösenordet under SMTP-autentisering med servern. Standardvärdet är 20 byte. 
+- **NX_SMTP_CLIENT_MAX_USERNAME** Det här alternativet definierar storleken på bufferten för att lagra värdens användarnamn under SMTP-autentisering med servern. Standardvärdet är 40 byte. 

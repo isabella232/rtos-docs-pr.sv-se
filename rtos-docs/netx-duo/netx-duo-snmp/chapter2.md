@@ -1,57 +1,57 @@
 ---
-title: Kapitel 2 – installation och användning av Azure återställnings tider NetX Duo SNMP-agenten
-description: Det här kapitlet innehåller en beskrivning av olika problem som rör Installation, konfiguration och användning av NetX Duo SNMP agent-komponenten.
+title: Kapitel 2 – Installation och användning av Azure RTOS NetX Duo SNMP-agenten
+description: Det här kapitlet innehåller en beskrivning av olika problem som rör installation, installation och användning av komponenten NetX Duo SNMP Agent.
 author: philmea
 ms.author: philmea
 ms.date: 06/04/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: f011b73217c7f413dd19c555e9c2d40dace305ee
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 6e18906b6356bd8ff4efdc1ab0f2809d75493ad027c3d3e27e0536ee4b80f43b
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104825764"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116798290"
 ---
-# <a name="chapter-2---installation-and-use-of-the-azure-rtos-netx-duo-snmp-agent"></a>Kapitel 2 – installation och användning av Azure återställnings tider NetX Duo SNMP-agenten
+# <a name="chapter-2---installation-and-use-of-the-azure-rtos-netx-duo-snmp-agent"></a>Kapitel 2 – Installation och användning av Azure RTOS NetX Duo SNMP-agenten
 
-Det här kapitlet innehåller en beskrivning av olika problem som rör Installation, konfiguration och användning av Azure återställnings tider NetX Duo SNMP agent-komponenten.
+Det här kapitlet innehåller en beskrivning av olika problem som rör installation, installation och användning av Azure RTOS SNMP-agentkomponenten för NetX Duo.
 
-## <a name="product-distribution"></a>Produkt distribution
+## <a name="product-distribution"></a>Produktdistribution
 
-SNMP-agenten för NetX Duo finns på [https://github.com/azure-rtos/netxduo](https://github.com/azure-rtos/netxduo) . Paketet innehåller fyra källfiler, en include-fil och en PDF-fil som innehåller det här dokumentet, enligt följande:
+SNMP Agent för NetX Duo finns på [https://github.com/azure-rtos/netxduo](https://github.com/azure-rtos/netxduo) . Paketet innehåller fyra källfiler, en inkluderad fil och en PDF-fil som innehåller det här dokumentet, enligt följande:
 
-- **nxd_snmp. h** Rubrik fil för SNMP för NetX Duo
-- **demo_snmp_helper. h** Rubrik fil för SNMP MIB-data
-- **nxd_snmp. c** C-källfil för SNMP-agent för NetX Duo
-- **nx_md5. c** MD5 Digest-algoritmer
-- **nx_sha. c** SHA Digest-algoritmer
-- **nx_des. c** Algoritmer för DES-kryptering
-- **nxd_snmp.pdf** Användar handbok för SNMP-agenten för NetX Duo
-- **demo_netxduo_snmp. c** Enkel SNMP-demonstration
-- **demo_netxduo_mib2. c** Enkel MIB2-demonstration (MIB har IPv6-adress element)
-- **demo_snmp_helper. h** Rubrik fil som definierar MIB-element
+- **nxd_snmp.h** Rubrikfil för SNMP för NetX Duo
+- **demo_snmp_helper.h** Rubrikfil för SNMP MIB-data
+- **nxd_snmp.c** C-källfil för SNMP-agent för NetX Duo
+- **nx_md5.c** MD5-sammanfattande algoritmer
+- **nx_sha.c** SHA-sammanfattande algoritmer
+- **nx_des.c** DES-krypteringsalgoritmer
+- **nxd_snmp.pdf** Användarhandbok för SNMP-agent för NetX Duo
+- **demo_netxduo_snmp.c** Enkel SNMP-demonstration
+- **demo_netxduo_mib2.c** Enkel MIB2-demonstration (MIB har IPv6-adresselement)
+- **demo_snmp_helper.h** Rubrikfil som definierar MIB-element
 
 ## <a name="netx-duo-snmp-agent-installation"></a>Installation av NetX Duo SNMP-agent
 
-För att kunna använda NetX Duo SNMP bör hela den distribution som nämnts tidigare kopieras till samma katalog där NetX Duo är installerat. Om t. ex. NetX Duo är installerat i katalogen "*\threadx\arm7\green*" måste du kopiera *nxd_snmp. h*-, *nxd_snmp. c*-, *nx_md5. c-, nx_sha. c* -och nx_ *des. c* -filer till den här katalogen.
+För att kunna använda NetX Duo SNMP ska hela distributionen som nämns ovan kopieras till samma katalog där NetX Duo är installerat. Om NetX Duo till exempel är installerat i katalogen "*\threadx\arm7\green*" ska filerna *nxd_snmp.h*, *nxd_snmp.c*, *nx_md5.c, nx_sha.c* och nx_ *des.c kopieras* till den här katalogen.
 
 ## <a name="using-the-netx-duo-snmp-agent"></a>Använda NetX Duo SNMP-agenten
 
-Programmet måste ha *nxd_snmp. c*, *nx_md5. c, nx_sha. c* och *nx_des. c* i build-projektet. Program koden måste också innehålla *nxd_snmp. h* när den innehåller *nx_api. h för* att kunna anropa SNMP-tjänster. Filerna måste kompileras på samma sätt som andra programfiler och dess objekt formulär måste vara länkade till NetX Duo-biblioteket. Detta är allt som krävs för att använda NetX Duo SNMP.
+Programmet måste ha *nxd_snmp.c*, *nx_md5.c, nx_sha.c* och *nx_des.c* i byggprojektet. Programkoden måste också innehålla *nxd_snmp.h efter* att den *innehåller nx_api.h* för att kunna anropa SNMP-tjänster. Dessa filer måste kompileras på samma sätt som andra programfiler och dess objektformulär måste länkas till NetX Duo-biblioteket. Det här är allt som krävs för att använda NetX Duo SNMP.
 
 > [!NOTE]
-> *Om **NX_SNMP_NO_SECURITY** anges i build-processen behövs inte filerna nx_md5. c, nx_sha. c och nx_des. c.*
+> *Om **NX_SNMP_NO_SECURITY** anges i byggprocessen behövs inte filerna nx_md5.c, nx_sha.c och nx_des.c.*
 
 > [!NOTE]
-> Eftersom NetX Duo SNMP använder UDP-tjänster måste UDP aktive ras med det *nx_udp_enable* anropet innan SNMP används.
+> Eftersom NetX Duo SNMP använder UDP-tjänster måste UDP aktiveras med nx_udp_enable *innan* SNMP används.
 
-## <a name="small-example-system"></a>Litet exempel system
+## <a name="small-example-system"></a>Litet exempelsystem
 
-Ett exempel på hur du använder NetX Duo SNMP-agenten beskrivs i bild 1,0 som visas nedan. I det här exemplet tas SNMP-filen *nxd_snmp. h* in på rad 6. Rubrik filen som definierar MIB-databasens element, *demo_snmp_helper. h,* tas i rad 8. MIB: en definieras med början på rad 32. Därefter skapas SNMP-agenten i "*tx_application_define*" på rad 129. Observera att SNMP agent Control Block "*my_agent*" definierades som en global variabel på rad 18 tidigare. Om IPv6 är aktiverat registreras IPv6-adresserna med IP-instansen på raderna 166-223. SNMP-agenten startas på rad 229. Objekt för återanrop av SNMP-objekt för SNMP-hanteraren GET-, GETNEXT-och SET-förfrågningar, samt användar namn och MIB-begäranden, bearbetas med början på rad 250. I det här exemplet utförs ingen autentisering.
+Ett exempel på hur du använder NetX Duo SNMP Agent beskrivs i bild 1.0 som visas nedan. I det här exemplet kommer SNMP *include-filen nxd_snmp.h* in på rad 6. Huvudfilen som definierar MIB-databaselementen, *demo_snmp_helper.h,* finns på rad 8. MIB definieras med början på rad 32. Därefter skapas SNMP-agenten i "*tx_application_define*" på rad 129. Observera att SNMP Agent-kontrollblocket "*my_agent*" definierades som en global variabel på rad 18 tidigare. Om IPv6 är aktiverat registreras IPv6-adresserna med IP-instansen på raderna 166–223. SNMP-agenten startas på rad 229. SNMP-objektanropsdefinitioner för SNMP Manager GET-, GETNEXT- och SET-begäranden, samt begäranden om användarnamn och MIB-uppdatering, bearbetas från och med rad 250. I det här exemplet utförs ingen autentisering.
 
 > [!NOTE]
-> *MIB2-tabellen som visas nedan är bara ett exempel. Programmet kan använda en annan MIB och inkludera den i separata filer, samt definiera GET-, GETNEXT-eller SET-bearbetning enligt deras program krav.*
+> *MIB2-tabellen som visas nedan är bara ett exempel. Programmet kan använda en annan MIB och inkludera den i separata filer, samt definiera GET-, GETNEXT- eller SET-bearbetning enligt deras programkrav.*
 
 ```c
 /* This is a small demo of the NetX SNMP Agent on the high-performance NetX TCP/IP  
@@ -569,29 +569,29 @@ VOID  mib2_variable_update(NX_IP *ip_ptr, NX_SNMP_AGENT *agent_ptr)
       snmpOutTraps =              agent_ptr -> nx_snmp_agent_traps_sent;
 }   
 ```
-Figur 1,0 exempel på SNMP-agent användning med NetX Duo
+Bild 1.0 Exempel på SNMP-agentanvändning med NetX Duo
 
-## <a name="configuration-options"></a>Konfigurations alternativ
+## <a name="configuration-options"></a>Konfigurationsalternativ
 
-Det finns flera konfigurations alternativ för att skapa SNMP för NetX Duo. Följande är en lista över alla alternativ, där var och en beskrivs i detalj:  
+Det finns flera konfigurationsalternativ för att skapa SNMP för NetX Duo. Följande är en lista över alla alternativ, där vart och ett beskrivs i detalj:  
   
-| Definierar                     | Innebörd                                                                                                                                                                                                                                                                        |
+| Definiera                     | Innebörd                                                                                                                                                                                                                                                                        |
 |----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **NX_SNMP_AGENT_PRIORITY**     | Trådens prioritet för SNMP-AGENTen. Som standard definieras värdet som 16 för att ange prioritet 16.                                                                                                                                                                         |
-| **NX_SNMP_TYPE_OF_SERVICE**    | Typ av tjänst som krävs för SNMP UDP-svar. Som standard definieras det här värdet som NX_IP_NORMAL för att indikera den normala IP-paketfiltrering. Den här inställningen kan anges av programmet innan *nxd_snmp. h.*                                                       |
-| **NX_SNMP_FRAGMENT_OPTION**    | Fragment aktivera för SNMP UDP-begäranden. Som standard är det här värdet NX_DONT_FRAGMENT för att inaktivera SNMP UDP-fragmentering. Den här inställningen kan anges av programmet innan *nxd_snmp. h.*                                                                                 |
-| **NX_SNMP_TIME_TO_LIVE**       | Anger TTL-tiden innan den upphör att gälla. Standardvärdet är inställt på 0x80, men kan omdefinieras innan du tar med *nxd_snmp. h.*                                                                                                                                         |
-| **NX_SNMP_AGENT_TIMEOUT**      | Anger antalet ThreadX-Tick som interna tjänster ska pausas för. Standardvärdet är inställt på 100, men kan omdefinieras innan *nxd_snmp. h.*                                                                                                         |
-| **NX_SNMP_MAX_OCTET_STRING**   | Anger det maximala antalet byte som tillåts i en oktett-sträng i SNMP-agenten. Standardvärdet är inställt på 255, men kan omdefinieras innan *nxd_snmp. h.*                                                                                                    |
-| **NX_SNMP_MAX_CONTEXT_STRING** | Anger det maximala antalet byte för en kontext motor sträng i SNMP-agenten. Standardvärdet är inställt på 32, men kan omdefinieras innan *nxd_snmp. h.*                                                                                                    |
-| **NX_SNMP_MAX_USER_NAME**      | Anger maximalt antal byte i ett användar namn (inklusive grupp strängar). Standardvärdet är inställt på 64, men kan omdefinieras innan *nxd_snmp. h.*                                                                                                      |
-| **NX_SNMP_MAX_SECURITY_KEY**   | Anger antalet byte som tillåts i en säkerhets nyckel sträng. Standardvärdet är inställt på 64, men kan definieras om före nclusion av *nxd_snmp. h.*                                                                                                                          |
-| **NX_SNMP_PACKET_SIZE**        | Anger minimi storleken på paketen i poolen som anges vid skapande av SNMP-agent. Minimi storleken krävs för att säkerställa att den fullständiga SNMP-nyttolasten kan finnas i ett paket. Standardvärdet är inställt på 560, men kan omdefinieras innan *nxd_snmp. h.* |
-| **NX_SNMP_AGENT_PORT**         | Anger UDP-porten till fältet SNMP Manager-begäranden på. Standard porten är UDP-port 161, men den kan definieras om innan du kan inkludera *nxd_snmp. h.*                                                                                                                             |
-| **NX_SNMP_MANAGER_TRAP_PORT**  | Anger UDP-porten som SNMP-agentens trap-begär Anden ska skickas till. Standard porten är UDP-port 162, men den kan definieras om innan du kan inkludera *nxd_snmp. h.*                                                                                                                           |
-| **NX_SNMP_MAX_TRAP_NAME**      | Anger storleken på den matris som ska innehålla användar namnet som skickas med trap-meddelanden. Standardvärdet är 64.                                                                                                                                                                         |
-| **NX_SNMP_MAX_TRAP_KEY**       | Anger storleken på autentiserings-och sekretess nycklar för trap-meddelanden. Standardvärdet är 64.                                                                                                                                                                          |
-| **NX_SNMP_TIME_INTERVAL**      | Detta avgör ström spar intervallet i timer-Tick som tas av aktiviteten SNMP-tråd mellan att bearbeta mottagna SNMP-paket. Standardvärdet är 100. Under det här ström spar intervallet har värd programmet åtkomst till SNMP API-tjänster.                                           |
-| **NX_SNMP_DISABLE_V1**         | Definierad tar detta bort all bearbetning av SNMP version 1 i *nxd_snmp. c.* Som standard är detta inte definierat.                                                                                                                                                                         |
-| **NX_SNMP_DISABLE_V2**         | Definierad tar detta bort all bearbetning av SNMP version 2 i *nxd_snmp. c.* Som standard är detta inte definierat.                                                                                                                                                                         |
-| **NX_SNMP_DISABLE_V3**         | Definierad tar detta bort all SNMPv3-bearbetning i *nxd_snmp. c.* Som standard är detta inte definierat.                                                                                                                                                                                 |
+| **NX_SNMP_AGENT_PRIORITY**     | Prioriteten för SNMP AGENT-tråden. Som standard definieras det här värdet som 16 för att ange prioritet 16.                                                                                                                                                                         |
+| **NX_SNMP_TYPE_OF_SERVICE**    | Typ av tjänst som krävs för SNMP UDP-svaren. Som standard definieras det här värdet som NX_IP_NORMAL för att indikera normal IP-pakettjänst. Den här definierar kan anges av programmet innan den tas *nxd_snmp.h.*                                                       |
+| **NX_SNMP_FRAGMENT_OPTION**    | Aktivera fragment för SNMP UDP-begäranden. Som standard är det här värdet NX_DONT_FRAGMENT inaktivera SNMP UDP-fragmentering. Den här definierar kan anges av programmet innan den tas *nxd_snmp.h.*                                                                                 |
+| **NX_SNMP_TIME_TO_LIVE**       | Anger hur lång tid det tar innan den upphör att gälla. Standardvärdet är inställt på 0x80, men kan definieras om innan du tar *nxd_snmp.h.*                                                                                                                                         |
+| **NX_SNMP_AGENT_TIMEOUT**      | Anger antalet ThreadX-tick som interna tjänster ska pausas för. Standardvärdet är inställt på 100, men kan definieras om innan du *tar nxd_snmp.h.*                                                                                                         |
+| **NX_SNMP_MAX_OCTET_STRING**   | Anger det maximala antalet byte som tillåts i en oktettsträng i SNMP-agenten. Standardvärdet är inställt på 255, men kan definieras om innan du tar *med nxd_snmp.h.*                                                                                                    |
+| **NX_SNMP_MAX_CONTEXT_STRING** | Anger det maximala antalet byte för en kontextmotorsträng i SNMP-agenten. Standardvärdet är inställt på 32, men kan definieras om innan du tar *med nxd_snmp.h.*                                                                                                    |
+| **NX_SNMP_MAX_USER_NAME**      | Anger det maximala antalet byte i ett användarnamn (inklusive community-strängar). Standardvärdet är inställt på 64, men kan definieras om innan du tar *nxd_snmp.h.*                                                                                                      |
+| **NX_SNMP_MAX_SECURITY_KEY**   | Anger antalet byte som tillåts i en säkerhetsnyckelsträng. Standardvärdet är inställt på 64, men kan definieras om innan nclusion av *nxd_snmp.h.*                                                                                                                          |
+| **NX_SNMP_PACKET_SIZE**        | Anger den minsta storleken på paketen i poolen som anges när SNMP-agenten skapas. Den minsta storleken krävs för att säkerställa att den fullständiga SNMP-nyttolasten kan finnas i ett paket. Standardvärdet är inställt på 560, men kan definieras om innan du *tar nxd_snmp.h.* |
+| **NX_SNMP_AGENT_PORT**         | Anger UDP-porten till fältet SNMP Manager-begäranden på. Standardporten är UDP-port 161, men kan definieras om innan du *tar nxd_snmp.h.*                                                                                                                             |
+| **NX_SNMP_MANAGER_TRAP_PORT**  | Anger den UDP-port som SNMP-agentens trapbegäranden ska skickas till. Standardporten är UDP-port 162, men kan definieras om innan du tar *med nxd_snmp.h.*                                                                                                                           |
+| **NX_SNMP_MAX_TRAP_NAME**      | Anger storleken på matrisen som ska innehålla användarnamnet som skickas med trap-meddelanden. Standardvärdet är 64.                                                                                                                                                                         |
+| **NX_SNMP_MAX_TRAP_KEY**       | Anger storleken på autentiserings- och sekretessnycklarna för trap-meddelanden. Standardvärdet är 64.                                                                                                                                                                          |
+| **NX_SNMP_TIME_INTERVAL**      | Detta avgör vilointervallet i timer tick som tas av SNMP-trådaktiviteten mellan bearbetningen av mottagna SNMP-paket. Standardvärdet är 100. Under det här vilan har värdprogrammet åtkomst till SNMP API-tjänster.                                           |
+| **NX_SNMP_DISABLE_V1**         | Definierad tar detta bort all SNMP Version 1-bearbetning *i nxd_snmp.c.* Som standard definieras inte detta.                                                                                                                                                                         |
+| **NX_SNMP_DISABLE_V2**         | Definierad tar detta bort all SNMP Version 2-bearbetning *i nxd_snmp.c.* Som standard definieras inte detta.                                                                                                                                                                         |
+| **NX_SNMP_DISABLE_V3**         | Definierad tar detta bort all SNMPv3-bearbetning *i nxd_snmp.c.* Som standard definieras inte detta.                                                                                                                                                                                 |

@@ -1,51 +1,51 @@
 ---
-title: Kapitel 3 – Beskrivning av Azure återställnings tider-tjänster för NetX Point-to-Point Protocol (PPP)
-description: Det här kapitlet innehåller en beskrivning av alla Azure återställnings tider NetX PPP-tjänster (visas nedan) i alfabetisk ordning.
+title: Kapitel 3 – Beskrivning Azure RTOS Tjänster för NetX Point-to-Point Protocol tjänster (PPP)
+description: Det här kapitlet innehåller en beskrivning av alla Azure RTOS NetX PPP-tjänster (anges nedan) i alfabetisk ordning.
 author: philmea
 ms.author: philmea
 ms.date: 06/04/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: f24d7366d27a8223b069a54ef7b93f6b3e38bf3a
-ms.sourcegitcommit: e3d42e1f2920ec9cb002634b542bc20754f9544e
+ms.openlocfilehash: 980348b5c50acfb82b2d8fda8786a1d48bf59c69e7949b6f62b64515b59bf42d
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 03/22/2021
-ms.locfileid: "104826652"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116798766"
 ---
-# <a name="chapter-3---description-of-azure-rtos-netx-point-to-point-protocol-ppp-services"></a>Kapitel 3 – Beskrivning av Azure återställnings tider-tjänster för NetX Point-to-Point Protocol (PPP)
+# <a name="chapter-3---description-of-azure-rtos-netx-point-to-point-protocol-ppp-services"></a>Kapitel 3 – Beskrivning Azure RTOS Tjänster för NetX Point-to-Point Protocol tjänster (PPP)
 
-Det här kapitlet innehåller en beskrivning av alla Azure återställnings tider NetX PPP-tjänster (visas nedan) i alfabetisk ordning.
+Det här kapitlet innehåller en beskrivning av alla Azure RTOS NetX PPP-tjänster (anges nedan) i alfabetisk ordning.
 
-I avsnittet "retur värden" i följande API-beskrivningar påverkas inte värden i **fetstil** av **NX_DISABLE_ERROR_CHECKING** definiera som används för att inaktivera API-felkontroll, medan icke-Fetstilade värden är helt inaktiverade.
+I avsnittet "Returvärden" i följande API-beskrivningar påverkas inte värden i **FETSTIL** av **den NX_DISABLE_ERROR_CHECKING-definition** som används för att inaktivera API-felkontroll, medan värden som inte är fetstilta är helt inaktiverade.
 
-- **nx_ppp_byte_receive**: *ta emot en byte från serie-ISR*
-- **nx_ppp_chap_challenge**: *skapa en CHAP-utmaning*
-- **nx_ppp_chap_enable**: *Aktivera CHAP-autentisering*
-- **nx_ppp_create**: *skapa en PPP-instans*
-- **nx_ppp_delete**: *ta bort en PPP-instans*
-- **nx_ppp_dns_address_get**: *Hämta DNS-IP-adress*
-- **nx_ppp_dns_address_set**:*Ange DNS-serverns IP-adress*
-- **nx_ppp_secondary_dns_address_get**: *Hämta IP-adress för sekundär DNS-Server*
-- **nx_ppp_secondary_dns_address_set**: *Ange IP-adress för Secondary_DNS Server*
-- **nx_ppp_interface_index_get**: *Hämta IP-gränssnitts index*
-- **nx_ppp_ip_address_assign**: *tilldela IP-adresser för IPCP*
-- **nx_ppp_link_down_notify**: *meddela programmet vid en länk*
-- **nx_ppp_link_up_notify**: *meddela programmet vid länkning*
-- **nx_ppp_nak_authentication_notify**: *meddela program om autentiserings-NAK tas emot*
-- **nx_ppp_pap_enable**: *aktivera PAP-autentisering*
-- **nx_ppp_ping_request**: *skicka en LCP ECHO-begäran*
-- **nx_ppp_raw_string_send**: *skicka icke-PPP-sträng*
-- **nx_ppp_restart**: *starta om PPP-bearbetning*
-- **nx_ppp_start**: *Starta PPP-bearbetning*
-- **nx_ppp_status_get**: *Hämta aktuell PPP-status*
-- **nx_ppp_stop**: *stoppa PPP-bearbetning*
-- **nx_ppp_packet_receive**: *ta emot PPP-paket*
-- **nx_ppp_packet_send_set**: *Konfigurera funktionen för att skicka PPP-paket*
+- **nx_ppp_byte_receive:** *Ta emot en byte från seriell ISR*
+- **nx_ppp_chap_challenge:** Generera *en CHAP-utmaning*
+- **nx_ppp_chap_enable:** Aktivera *CHAP-autentisering*
+- **nx_ppp_create:** Skapa *en PPP-instans*
+- **nx_ppp_delete:** Ta *bort en PPP-instans*
+- **nx_ppp_dns_address_get:** Hämta *DNS IP-adress*
+- **nx_ppp_dns_address_set:** Ange *IP-adress för DNS-server*
+- **nx_ppp_secondary_dns_address_get: Hämta** *IP-adress för sekundär DNS-server*
+- **nx_ppp_secondary_dns_address_set:** Ange *IP Secondary_DNS serveradress*
+- **nx_ppp_interface_index_get:** Hämta *IP-gränssnittsindex*
+- **nx_ppp_ip_address_assign:** Tilldela *IP-adresser för IPCP*
+- **nx_ppp_link_down_notify:** Meddela *programmet via länk ned*
+- **nx_ppp_link_up_notify:** *Meddela programmet via länk*
+- **nx_ppp_nak_authentication_notify:** Meddela *programmet om autentiseringEN HAR tagits emot*
+- **nx_ppp_pap_enable:** *Aktivera PAP-autentisering*
+- **nx_ppp_ping_request:** Skicka *en LCP-ekobegäran*
+- **nx_ppp_raw_string_send:** Skicka *icke-PPP-sträng*
+- **nx_ppp_restart:** Starta *om PPP-bearbetning*
+- **nx_ppp_start:** Starta *PPP-bearbetning*
+- **nx_ppp_status_get:** *Hämta aktuell PPP-status*
+- **nx_ppp_stop:** *Stoppa PPP-bearbetning*
+- **nx_ppp_packet_receive:** Ta *emot PPP-paket*
+- **nx_ppp_packet_send_set:** Ange *funktionen skicka PPP-paket*
 
 ## <a name="nx_ppp_byte_receive"></a>nx_ppp_byte_receive
 
-Ta emot en byte från serie-ISR
+Ta emot en byte från seriell ISR
 
 ### <a name="prototype"></a>Prototyp
 
@@ -53,24 +53,24 @@ Ta emot en byte från serie-ISR
 UINT nx_ppp_byte_receive(NX_PPP *ppp_ptr, UCHAR byte);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten anropas vanligt vis från programmets (ISR) driv rutin för seriell driv rutins tjänsten för att överföra mottagna byte till PPP. Vid anrop placerar den här rutinen mottagna byte i en cirkelformad byte-buffert och meddelar lämplig PPP-tråd för bearbetning.
+Den här tjänsten anropas vanligtvis från programmets isr (Serial driver Interrupt Service Routine) för att överföra en mottagen byte till PPP. När den anropas placerar den här rutinen den mottagna byten i en cirkulär bytebuffert och meddelar lämplig PPP-tråd för bearbetning.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **ppp_ptr**: pekar mot PPP-kontroll block.
-- **byte**: byte mottaget från seriell enhet
+- **ppp_ptr:** Pekare till PPP-kontrollblock.
+- **byte:** Byte som tagits emot från serieenheten
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) lyckad PPP-byte-mottagning.
-- **NX_PPP_BUFFER_FULL**: (0XB1) PPP Serial buffer är redan full.
-- NX_PTR_ERROR: (0x07) ogiltig PPP-pekare.
+- **NX_SUCCESS**: (0x00) Lyckad PPP-byte-mottagning.
+- **NX_PPP_BUFFER_FULL:**(0xB1) PPP-seriebufferten är redan full.
+- NX_PTR_ERROR: (0x07) Ogiltig PPP-pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Trådar, ISR: er
+Trådar, ISR
 
 ### <a name="example"></a>Exempel
 
@@ -92,25 +92,25 @@ Generera en CHAP-utmaning
 UINT nx_ppp_chap_challenge(NX_PPP *ppp_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten initierar en CHAP-utmaning när PPP-anslutningen redan är igång. Detta ger programmet möjlighet att verifiera anslutningens äkthet på regelbunden basis. Om utmaningen Miss lyckas stängs PPP-länken.
+Den här tjänsten initierar en CHAP-utmaning när PPP-anslutningen redan är igång. Detta ger programmet möjlighet att verifiera anslutningens äkthet regelbundet. Om utmaningen misslyckas stängs PPP-länken.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **ppp_ptr**: pekar mot PPP-kontroll block.
+- **ppp_ptr:** Pekare till PPP-kontrollblock.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) lyckad PPP-utmaning har initierats.
-- **NX_PPP_FAILURE**: (0XB0) ogiltig PPP-utmaning. CHAP har bara Aktiver ATS för Response.
-- **NX_NOT_IMPLEMENTED**: (0X80) CHAP-logik har inaktiverats via NX_PPP_DISABLE_CHAP.
-- NX_PTR_ERROR: (0x07) ogiltig PPP-pekare.
-- NX_CALLER_ERROR: (0x11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS**: (0x00) Lyckad PPP-utmaning initierad.
+- **NX_PPP_FAILURE:**(0xB0) Ogiltig PPP-utmaning aktiverades CHAP endast för svar.
+- **NX_NOT_IMPLEMENTED**: (0x80) CHAP-logik har inaktiverats via NX_PPP_DISABLE_CHAP.
+- NX_PTR_ERROR: (0x07) Ogiltig PPP-pekare.
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -135,32 +135,32 @@ UINT nx_ppp_chap_enable(NX_PPP *ppp_ptr,
                         UINT (*get_verification_values)(CHAR *system,CHAR *name,CHAR *secret)); 
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten aktiverar CHAP (Challenge-Handshake Authentication Protocol) för den angivna PPP-instansen.
+Med den här tjänsten Challenge-Handshake CHAP (Authentication Protocol) för den angivna PPP-instansen.
 
-Om funktions pekarna "***get_challenge_values**_" och "_ * _get_verification_values_* *" anges, krävs CHAP av den här PPP-instansen. Annars svarar CHAP bara på motpartens utmanings begär Anden.
+Om funktionspekaren **"* get_challenge_values**_" och "_ get_verification_values **" anges krävs CHAP av den här * PPP-instansen. I annat fall svarar CHAP bara på peer-peerns utmaningsbegäranden.
 
-Det finns flera data objekt som refereras till nedan i de nödvändiga callback-funktionerna. Data objektets *hemlighet*, *namn* och *system* förväntas vara null-terminerade strängar med en maximal storlek på NX_PPP_NAME_SIZE-1. Data objekt *rand_value* förväntas vara en null-avslutad sträng med en maximal storlek på NX_PPP_VALUE_SIZE-1. Dataobjektets *ID* är en enkel osignerad tecken typ.
+Det finns flera dataobjekt som refereras nedan i de återanropsfunktioner som krävs. *Dataobjekthemligheten,* *namnet* och *systemet* förväntas vara NULL-avslutade strängar med en maximal storlek på NX_PPP_NAME_SIZE-1. Dataobjektet som *rand_value* förväntas vara en NULL-avslutad sträng med en maximal storlek på NX_PPP_VALUE_SIZE-1. Dataobjektets *ID* är en enkel osignerad teckentyp.
 
 >[!NOTE]
-> Den här funktionen måste anropas efter *nx_ppp_create* men innan nx_ip_create eller *nx_ip_interface_attach*.
+> Den här funktionen måste anropas *efter nx_ppp_create* men innan du nx_ip_create *eller nx_ip_interface_attach*.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **ppp_ptr**: pekar mot PPP-kontroll block.
-- **get_challenge_values**: pekare till program funktion för att hämta värden som används för utmaningen. Observera att värdena för *rand_value*, *ID* och *hemlighet* måste kopieras till de angivna målen.
-- **get_responder_values**: pekare till program funktion som hämtar värden som används för att svara på en utmaning. Observera att värdena *system*, *Name* och *Secret* måste kopieras till de angivna målen.
-- **get_verification_values**: pekare till program funktion som hämtar värden som används för att verifiera utmanings svaret. Observera att värdena *system*,*Name* och *Secret* måste kopieras till de angivna målen.
+- **ppp_ptr:** Pekare till PPP-kontrollblock.
+- **get_challenge_values:** Pekare till programfunktionen för att hämta värden som används för utmaningen. Observera att *värdena rand_value,* *id* och *hemlighet* måste kopieras till de angivna destinationerna.
+- **get_responder_values:** Pekare till programfunktion som hämtar värden som används för att svara på en utmaning. Observera att *systemvärdena,* *namnvärdena* *och de hemliga* värdena måste kopieras till de angivna destinationerna.
+- **get_verification_values:** Pekare till programfunktionen som hämtar värden som används för att verifiera utmaningssvaret. Observera att *systemvärdena,**namnvärdena* *och de hemliga* värdena måste kopieras till de angivna destinationerna.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) lyckades PPP CHAP Enable
-- **NX_NOT_IMPLEMENTED**: (0X80) CHAP-logik har inaktiverats via NX_PPP_DISABLE_CHAP.
-- NX_PTR_ERROR: (0x07) ogiltig PPP-pekare eller callback-funktions pekare. Observera att om *get_challenge_values* har angetts måste även *get_verification_values* -funktionen anges.
-- NX_CALLER_ERROR: (0x11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS:**(0x00) Aktivera PPP CHAP
+- **NX_NOT_IMPLEMENTED**: (0x80) CHAP-logik har inaktiverats via NX_PPP_DISABLE_CHAP.
+- NX_PTR_ERROR: (0x07) Ogiltig PPP-pekare eller återanropsfunktions pekare. Observera att *om get_challenge_values* anges måste *även get_verification_values-funktionen* anges.
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
@@ -266,33 +266,33 @@ UINT  nx_ppp_create(NX_PPP *ppp_ptr, CHAR *name, NX_IP *ip_ptr,
                     void (*ppp_byte_send)(UCHAR byte));
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten skapar en PPP-instans för den angivna NetX IP-instansen.
 
 >[!NOTE]
-> Det är vanligt vis en bra idé att skapa NetX IP-tråd med högre prioritet än PPP-Trådens prioritet. Mer information om hur du anger prioritet för IP-tråd finns i *nx_ip_create* -tjänsten.
+> Det är vanligtvis en bra idé att skapa NetX IP-tråden med högre prioritet än PPP-trådprioritet. Mer information om *hur du anger IP-trådprioritet* finns i nx_ip_create-tjänsten.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **ppp_ptr**: pekar mot PPP-kontroll block.
-- **namn**: namnet på den här PPP-instansen.
-- **ip_ptr**: pekare till kontroll block för en icke-skapad IP-instans.
-- **stack_memory_ptr**: pekare för att starta PPP-trådens stack Area.
-- **stack_size**: storlek i byte i trådens stack.
-- **pool_ptr**: pekar mot standardpaket-poolen.
-- **thread_priority**: prioritet för interna PPP-trådar (1-31).
-- **ppp_invalid_packet_handler**: funktions pekare till program hanterare för alla icke-PPP-paket. NetX PPP anropar vanligt vis den här rutinen under initieringen. Det är här som programmet kan svara på modem kommandon eller i Windows XP. NetX PPP-applikationen kan initiera PPP genom att svara på "klient SERVER" till den första "klienten" som skickas av Windows XP.
-- **ppp_byte_send**: funktions pekare till programmets serie byte-utdata.
+- **ppp_ptr:** Pekare till PPP-kontrollblock.
+- **name**: Namnet på den här PPP-instansen.
+- **ip_ptr:** Pekare för att styra blockeringen för ip-instanser som inte har skapats än.
+- **stack_memory_ptr:** Pekare till början av PPP-trådens stackområde.
+- **stack_size:** Storlek i byte i trådens stack.
+- **pool_ptr:** Pekare till standardpaketpoolen.
+- **thread_priority:** Prioritet för interna PPP-trådar (1–31).
+- **ppp_invalid_packet_handler:** Funktionspekare till programmets hanterare för alla icke-PPP-paket. NetX PPP anropar vanligtvis den här rutinen under initieringen. Det är här programmet kan svara på modemkommandon eller när det gäller Windows XP kan NetX PPP-programmet initiera PPP genom att svara med" KLIENTSERVER" till den första "KLIENT" som skickas av Windows XP.
+- **ppp_byte_send:** Funktionspekare till programmets utdatarutin för seriebyte.
 
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) lyckad PPP-skapande.
-- NX_PTR_ERROR: (0x07) ogiltig PPP-, IP-eller byte-utmatnings funktion.
-- NX_CALLER_ERROR: (0x11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS**: (0x00) Lyckad PPP-skapa.
+- NX_PTR_ERROR: (0x07) Ogiltig pekare för PPP-, IP- eller byteutdatafunktion.
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
@@ -317,23 +317,23 @@ Ta bort en PPP-instans
 UINT nx_ppp_delete(NX_PPP *ppp_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten tar bort den tidigare skapade PPP-instansen.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **ppp_ptr**: pekar mot PPP-kontroll block.
+- **ppp_ptr:** Pekare till PPP-kontrollblock.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) lyckad PPP-borttagning.
-- NX_PTR_ERROR: (0x07) ogiltig PPP-pekare.
-- NX_CALLER_ERROR: (0x11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS:**(0x00) Lyckad PPP-borttagning.
+- NX_PTR_ERROR: (0x07) Ogiltig PPP-pekare.
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -346,7 +346,7 @@ status =  nx_ppp_delete(&my_ppp);
 
 ## <a name="nx_ppp_dns_address_get"></a>nx_ppp_dns_address_get
 
-Hämta DNS-IP-adress
+Hämta DNS IP-adress
 
 ### <a name="prototype"></a>Prototyp
 
@@ -354,24 +354,24 @@ Hämta DNS-IP-adress
 UINT nx_ppp_dns_address_get(NX_PPP *ppp_ptr, ULONG *dns_address_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar den DNS-IP-adress som anges av peer-datorn. Om ingen IP-adress angavs av peer-datorn returneras en IP-adress på 0.
+Den här tjänsten hämtar DEN DNS-IP-adress som tillhandahålls av peer-datorn. Om ingen IP-adress har angetts av peer-datorn returneras EN IP-adress på 0.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **ppp_ptr**: pekar mot PPP-kontroll block.
-- **dns_address_ptr**: målet för DNS IP-adress
+- **ppp_ptr:** Pekare till PPP-kontrollblock.
+- **dns_address_ptr:** Mål för DNS IP-adress
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) lyckad PPP-adress Hämta.
-- **NX_PPP_NOT_ESTABLISHED**: (0XB5) PPP har inte slutfört förhandling med peer.
-- NX_PTR_ERROR: (0x07) ogiltig PPP-pekare.
+- **NX_SUCCESS**: (0x00) Lyckad PPP-adress hämta.
+- **NX_PPP_NOT_ESTABLISHED:**(0xB5) PPP har inte slutfört förhandling med peer.
+- NX_PTR_ERROR: (0x07) Ogiltig PPP-pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers, ISR: er
+Initiering, trådar, timers, ISR
 
 ### <a name="example"></a>Exempel
 
@@ -388,7 +388,7 @@ status =  nx_ppp_dns_address_get(&my_ppp, &my_dns_address);
 
 ## <a name="nx_ppp_secondary_dns_address_get"></a>nx_ppp_secondary_dns_address_get
 
-Hämta IP-adress för sekundär DNS-Server
+Hämta IP-adress för sekundär DNS-server
 
 ### <a name="prototype"></a>Prototyp
 
@@ -396,24 +396,24 @@ Hämta IP-adress för sekundär DNS-Server
 UINT nx_ppp_secondary_dns_address_get(NX_PPP *ppp_ptr, ULONG *dns_address_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar den sekundära DNS-IP-adressen som anges av peer-datorn i IPCP-handskakningen. Om ingen IP-adress angavs av peer-datorn returneras en IP-adress på 0.
+Den här tjänsten hämtar den sekundära DNS IP-adressen som tillhandahålls av peer i IPCP-handskakningen. Om ingen IP-adress har angetts av peer-datorn returneras EN IP-adress på 0.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **ppp_ptr**: pekar mot PPP-kontroll block.
-- **dns_address_ptr**: mål för sekundär DNS-serveradress
+- **ppp_ptr:** Pekare till PPP-kontrollblock.
+- **dns_address_ptr:** Mål för sekundär DNS-serveradress
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) lyckad DNS-adress Hämta.
-- **NX_PPP_NOT_ESTABLISHED**: (0XB5) PPP har inte slutfört förhandling med peer.
-- NX_PTR_ERROR: (0x07) ogiltig PPP-pekare.
+- **NX_SUCCESS**: (0x00) Lyckad DNS-adress get.
+- **NX_PPP_NOT_ESTABLISHED:**(0xB5) PPP har inte slutfört förhandling med peer.
+- NX_PTR_ERROR: (0x07) Ogiltig PPP-pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers, ISR: er
+Initiering, trådar, timers, ISR
 
 ### <a name="example"></a>Exempel
 
@@ -428,7 +428,7 @@ status =  nx_ppp_secondary_dns_address_get(&my_ppp, &my_dns_address);
 
 ## <a name="nx_ppp_dns_address_set"></a>nx_ppp_dns_address_set
 
-Ange IP-adress för primär DNS-Server
+Ange primär IP-adress för DNS-server
 
 ### <a name="prototype"></a>Prototyp
 
@@ -436,22 +436,22 @@ Ange IP-adress för primär DNS-Server
 UINT nx_ppp_dns_address_set(NX_PPP *ppp_ptr, ULONG dns_address);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten anger IP-adressen för DNS-servern. Om peer-servern skickar en DNS-Server Option-begäran i IPCP-tillstånd, kommer den här värden att tillhandahålla informationen.
+Den här tjänsten anger IP-adressen för DNS-servern. Om peer-servern skickar en begäran om DNS-serveralternativ i IPCP-tillstånd anger den här värden informationen.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **ppp_ptr**: pekar mot PPP-kontroll block.
-- **dns_address**: DNS-serveradress
+- **ppp_ptr:** Pekare till PPP-kontrollblock.
+- **dns_address:** DNS-serveradress
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0x00) en DNS-adress uppsättning har slutförts.
-- **NX_PPP_NOT_ESTABLISHED**: (0XB5) PPP har inte slutfört förhandling med peer.
-- NX_PTR_ERROR: (0x07) ogiltig PPP-pekare.
+- **NX_SUCCESS**: (0x00) Lyckad DNS-adressuppsättning.
+- **NX_PPP_NOT_ESTABLISHED:**(0xB5) PPP har inte slutfört förhandling med peer.
+- NX_PTR_ERROR: (0x07) Ogiltig PPP-pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
@@ -470,7 +470,7 @@ status =  nx_ppp_dns_address_set(&my_ppp, my_dns_address);
 
 ## <a name="nx_ppp_secondary_dns_address_set"></a>nx_ppp_secondary_dns_address_set
 
-Ange IP-adress för sekundär DNS-Server
+Ange sekundär IP-adress för DNS-server
 
 ### <a name="prototype"></a>Prototyp
 
@@ -478,22 +478,22 @@ Ange IP-adress för sekundär DNS-Server
 UINT nx_ppp_secondary_dns_address_set(NX_PPP *ppp_ptr, ULONG dns_address);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten anger IP-adressen för den sekundära DNS-servern. Om peer skickar en sekundär DNS-Server Options-begäran i IPCP-läget, kommer den här värden att tillhandahålla informationen.
+Den här tjänsten anger ip-adressen för den sekundära DNS-servern. Om peer-servern skickar en sekundär DNS-serveralternativbegäran i IPCP-tillstånd anger den här värden informationen.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **ppp_ptr**: pekar mot PPP-kontroll block.
-- **dns_address**: sekundär DNS-serveradress
+- **ppp_ptr:** Pekare till PPP-kontrollblock.
+- **dns_address:** Sekundär DNS-serveradress
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0x00) en DNS-adress uppsättning har slutförts. 
-- **NX_PPP_NOT_ESTABLISHED**: (0XB5) PPP har inte slutfört förhandling med peer.
-- NX_PTR_ERROR: (0x07) ogiltig PPP-pekare.
+- **NX_SUCCESS**: (0x00) Lyckad DNS-adressuppsättning. 
+- **NX_PPP_NOT_ESTABLISHED:**(0xB5) PPP har inte slutfört förhandling med peer.
+- NX_PTR_ERROR: (0x07) Ogiltig PPP-pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
@@ -510,7 +510,7 @@ status =  nx_ppp_secondary_dns_address_set(&my_ppp, my_dns_address);
 ```
 ## <a name="nx_ppp_interface_index_get"></a>nx_ppp_interface_index_get
 
-Hämta IP-gränssnitts index
+Hämta IP-gränssnittsindex
 
 ### <a name="prototype"></a>Prototyp
 
@@ -518,24 +518,24 @@ Hämta IP-gränssnitts index
 UINT nx_ppp_interface_index_get(NX_PPP *ppp_ptr, UINT *index_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar det IP-gränssnitts index som är associerat med denna PPP-instans. Detta är endast användbart om PPP-instansen inte är det primära gränssnittet för en IP-instans.
+Den här tjänsten hämtar DET IP-gränssnittsindex som är associerat med den här PPP-instansen. Detta är endast användbart när PPP-instansen inte är det primära gränssnittet för en IP-instans.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **ppp_ptr**: pekar mot PPP-kontroll block.
-- **index_ptr**: målet för gränssnitts index
+- **ppp_ptr:** Pekare till PPP-kontrollblock.
+- **index_ptr:** Mål för gränssnittsindex
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) lyckades PPP-index Hämta.
-- **NX_IN_PROGRESS**: (0X37) PPP har inte slutfört initieringen.
-- NX_PTR_ERROR: (0x07) ogiltig PPP-pekare.
+- **NX_SUCCESS**: (0x00) Lyckad PPP-index get.
+- **NX_IN_PROGRESS:**(0x37) PPP har inte slutfört initieringen.
+- NX_PTR_ERROR: (0x07) Ogiltig PPP-pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers, ISR: er
+Initiering, trådar, timers, ISR
 
 ### <a name="example"></a>Exempel
 
@@ -560,24 +560,24 @@ UINT nx_ppp_ip_address_assign(NX_PPP *ppp_ptr, ULONG local_ip_address,
             ULONG peer_ip_address);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten konfigurerar lokala och peer-IP-adresser som ska användas i IPCP-protokollet (Internet Protocol Control Protocol). PPP-programmet ska anropa den här tjänsten på en PPP-instans med giltiga IP-adresser för sig själv och den andra peer-datorn.  Om inga giltiga adresser är registrerade med en PPP-instans måste den förlita sig på PPP-peer för att definiera dess IP-adress.
+Den här tjänsten uppsättningar lokala och peer-IP-adresser för användning i Internet Protocol Control Protocol (IPCP). PPP-programmet ska anropa den här tjänsten på en PPP-instans med giltiga IP-adresser för sig själv och den andra peer-datorn.  Om inga giltiga adresser har registrerats med en PPP-instans måste PPP-peern definiera sin IP-adress.
 
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **ppp_ptr**: pekar mot PPP-kontroll block.
-- **local_ip_address**: lokal IP-adress.
-- **peer_ip_address**: peer-datorns IP-adress.
+- **ppp_ptr:** Pekare till PPP-kontrollblock.
+- **local_ip_address:** Lokal IP-adress.
+- **peer_ip_address:** Peers IP-adress.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) slutförde PPP-adresstilldelning.
-- NX_PTR_ERROR: (0x07) ogiltig PPP-pekare.
-- NX_CALLER_ERROR: (0x11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS:**(0x00) Lyckad PPP-adresstilldelning.
+- NX_PTR_ERROR: (0x07) Ogiltig PPP-pekare.
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
@@ -594,7 +594,7 @@ IP_ADDRESS(256,2,2,188));
 
 ## <a name="nx_ppp_link_down_notify"></a>nx_ppp_link_down_notify
 
-Meddela programmet vid en länk
+Meddela programmet via länk ned
 
 ### <a name="prototype"></a>Prototyp
 
@@ -603,23 +603,23 @@ UINT nx_ppp_link_down_notify(NX_PPP *ppp_ptr,
                              VOID (*link_down_callback)(NX_PPP *ppp_ptr));
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten registrerar programmets länk ned meddelande återanrop med den angivna PPP-instansen. Om det inte är NULL anropas programmets länk ned callback-funktion när länken slutar fungera.
+Den här tjänsten registrerar programmets länk till återanrop av meddelanden med den angivna PPP-instansen. Om den inte är NULL anropas programmets återanropsfunktion med länk nedåt när länken går ned.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **ppp_ptr**: pekar mot PPP-kontroll block.
-- **link_down_callback**: program varans länk ned meddelande funktions pekare. Om det här värdet är NULL inaktive ras länk ned meddelande.
+- **ppp_ptr:** Pekare till PPP-kontrollblock.
+- **link_down_callback:** Pekaren för programmets länk nedåt i meddelandefunktionen. Om NULL är länkning av meddelande inaktiverat.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) slutförd länk för att registrera meddelande återanrop.
-- NX_PTR_ERROR: (0x07) ogiltig PPP-pekare.
+- **NX_SUCCESS**: (0x00) Länk ned registrering av återanrop av meddelanden.
+- NX_PTR_ERROR: (0x07) Ogiltig PPP-pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers, ISR: er
+Initiering, trådar, timers, ISR
 
 ### <a name="example"></a>Exempel
 
@@ -641,7 +641,7 @@ VOID my_link_down_callback(NX_PPP *ppp_ptr)
 ```
 ## <a name="nx_ppp_link_up_notify"></a>nx_ppp_link_up_notify
 
-Avisera program vid länkning
+Meddela programmet vid länk
 
 ### <a name="prototype"></a>Prototyp
 
@@ -649,23 +649,23 @@ Avisera program vid länkning
 UINT nx_ppp_link_up_notify(NX_PPP *ppp_ptr, 
                            VOID (*link_up_callback)(NX_PPP *ppp_ptr));
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten registrerar programmets länk upp ett meddelande återanrop med den angivna PPP-instansen. Om det inte är NULL anropas programmets länk för motringning när länken visas.
+Den här tjänsten registrerar programmets återanrop av meddelanden med den angivna PPP-instansen. Om den inte är NULL anropas programmets återanropsfunktion när länken visas.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **ppp_ptr**: pekar mot PPP-kontroll block.
-- **link_up_callback**: programmets länk för meddelande funktions pekare. Om det här värdet är NULL är länkat meddelande inaktiverat. * *
+- **ppp_ptr:** Pekare till PPP-kontrollblock.
+- **link_up_callback:** Programmets länk upp meddelandefunktions pekare. Om NULL är länkmeddelandet inaktiverat.**
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0x00) länkad registrering av meddelande återanrop.
-- NX_PTR_ERROR: (0x07) ogiltig PPP-pekare.
+- **NX_SUCCESS**: (0x00) Lyckad länkning av registrering för återanrop av meddelanden.
+- NX_PTR_ERROR: (0x07) Ogiltig PPP-pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers, ISR: er
+Initiering, trådar, timers, ISR
 
 ### <a name="example"></a>Exempel
 
@@ -687,7 +687,7 @@ VOID my_link_up_callback(NX_PPP *ppp_ptr)
 
 ## <a name="nx_ppp_nak_authentication_notify"></a>nx_ppp_nak_authentication_notify
 
-Meddela program om autentisering NAK tas emot
+Meddela programmet om autentiseringEN ÄR mottagen
 
 ### <a name="prototype"></a>Prototyp
 
@@ -696,23 +696,23 @@ UINT    nx_ppp_nak_authentication_notify(NX_PPP *ppp_ptr,
                                          void (*nak_authentication_notify)(void));
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten registrerar programmets autentiserings-NAK meddelande återanrop med den angivna PPP-instansen. Om den inte är NULL anropas den här återanrops funktionen när PPP-instansen får en NAK under authentiaction.
+Den här tjänsten registrerar programmets återanrop av autentiseringsmeddelande med den angivna PPP-instansen. Om den inte är NULL anropas den här återanropsfunktionen när PPP-instansen tar emot en NULL under autentiseringen.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **ppp_ptr**: pekar mot PPP-kontroll block.
-- **nak_authentication_notify**: pekare till funktion som anropas när PPP-instansen får en autentiserings-NAK. Om värdet är NULL är meddelandet inaktiverat.
+- **ppp_ptr:** Pekare till PPP-kontrollblock.
+- **nak_authentication_notify:** Pekaren till funktionen anropas när PPP-instansen tar emot autentiseringEN SNAPO. Om NULL är meddelandet inaktiverat.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0x00) registreringen av återanrop i meddelande lyckades.
-- NX_PTR_ERROR: (0x07) ogiltig PPP-pekare.
+- **NX_SUCCESS:**(0x00) Registrering av motringning av meddelanden har lyckats.
+- NX_PTR_ERROR: (0x07) Ogiltig PPP-pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers, ISR: er
+Initiering, trådar, timers, ISR
 
 ### <a name="example"></a>Exempel
 
@@ -744,29 +744,29 @@ UINT  nx_ppp_pap_enable(NX_PPP *ppp_ptr,
                         UINT (*verify_login)(CHAR *name, CHAR *password));
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten aktiverar PAP-protokollet (Password Authentication Protocol) för den angivna PPP-instansen. Om funktions pekaren "***verify_login***" anges krävs PAP av den här PPP-instansen. Annars svarar PAP endast på motpartens PAP-krav som anges under LCP-förhandlingen.
+Den här tjänsten aktiverar PAP (Password Authentication Protocol) för den angivna PPP-instansen. Om ***funktionspekaren " verify_login***" anges krävs PAP av den här PPP-instansen. I annat fall svarar PAP endast på peerns PAP-krav som anges under LCP-förhandlingen.
 
-Det finns flera data objekt som refereras till nedan i de nödvändiga callback-funktionerna. Data objektets *namn* förväntas vara null-avslutad sträng med en maximal storlek på NX_PPP_NAME_SIZE-1. *Lösen ordet* för data objekt förväntas också vara en null-avslutad sträng med en maximal storlek på NX_PPP_PASSWORD_SIZE-1.
+Det finns flera dataobjekt som refereras nedan i de återanropsfunktioner som krävs. Namnet på *dataobjektet* förväntas vara EN NULL-avslutad sträng med en maximal storlek på NX_PPP_NAME_SIZE-1. Lösenordet för *dataobjektet* förväntas också vara en NULL-avslutad sträng med en maximal storlek på NX_PPP_PASSWORD_SIZE-1.
 
 >[!NOTE]
-> Den här funktionen måste anropas efter *nx_ppp_create* men innan *nx_ip_create* eller *nx_ip_interface_attach*.
+> Den här funktionen måste anropas *efter nx_ppp_create* men *innan nx_ip_create* eller *nx_ip_interface_attach*.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **ppp_ptr**: pekar mot PPP-kontroll block.
-- **generate_login**: pekare till program funktion som skapar ett *namn* och *lösen ord* för autentisering av peer-datorn. Observera att värdena för *namn* och *lösen ord* måste kopieras till de angivna målen.
-- **verify_login**: pekare till program funktion som verifierar det *namn* och *lösen ord* som anges av peer-datorn. Den här rutinen måste jämföra det angivna *namnet* och *lösen ordet*. Om den här rutinen returnerar NX_SUCCESS är namnet och lösen ordet rätt och PPP kan fortsätta till nästa steg. Annars returnerar den här rutinen NX_PPP_ERROR och PPP bara väntar på ett annat namn och lösen ord.
+- **ppp_ptr:** Pekare till PPP-kontrollblock.
+- **generate_login:** Pekare till programfunktion som genererar *ett namn* och *lösenord för* autentisering av peer-datorn. Observera att värdena *för* namn *och* lösenord måste kopieras till de angivna destinationerna.
+- **verify_login:** Pekare till programfunktion som verifierar det *namn och* lösenord *som anges* av peer-datorn. Den här rutinen måste jämföra det angivna *namnet* och *lösenordet*. Om rutinen returnerar NX_SUCCESS är namnet och lösenordet korrekta och PPP kan fortsätta till nästa steg. Annars returnerar den här rutinen NX_PPP_ERROR och PPP väntar bara på ett annat namn och lösenord.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) SLUTFÖRDE PPP PAP enable.
-- **NX_NOT_IMPLEMENTED**: (0X80) PAP-logiken inaktiverades via NX_PPP_DISABLE_PAP.
-- NX_PTR_ERROR: (0x07) ogiltig PPP-pekare eller program funktions pekare.
-- NX_CALLER_ERROR: (0x11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS**: (0x00) Lyckad PPP PAP-aktivera.
+- **NX_NOT_IMPLEMENTED**: (0x80) PAP-logik har inaktiverats via NX_PPP_DISABLE_PAP.
+- NX_PTR_ERROR: (0x07) Ogiltig PPP-pekare eller programfunktionspekare.
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
@@ -812,7 +812,7 @@ return(NX_SUCCESS);
 
 ## <a name="nx_ppp_ping_request"></a>nx_ppp_ping_request
 
-Skicka en LCP ping-begäran
+Skicka en LCP-pingbegäran
 
 ### <a name="prototype"></a>Prototyp
 
@@ -821,30 +821,30 @@ UINT  nx_ppp_ping_request(NX_PPP *ppp_ptr, CHAR *data,
                           UINT data_size, ULONG wait_opion);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skickar en LCP ping-begäran och anger en flagga som PPP-enheten väntar på ett eko svar. Tjänsten returnerar så fort begäran skickas. Det väntar inte på svar. 
+Den här tjänsten skickar en LCP-pingbegäran och anger en flagga att PPP-enheten väntar på ett ekosvar. Tjänsten returnerar när begäran skickas. Den väntar inte på svar. 
 
-När ett matchande eko svar tas emot, tar PPP-trådens aktivitet bort flaggan. PPP-enheten måste ha slutfört LCP-delen av PPP-förhandlingen.
+När ett matchande ekosvar tas emot rensar PPP-trådaktiviteten flaggan. PPP-enheten måste ha slutfört LCP-delen av PPP-förhandlingen.
 
-Den här tjänsten är användbar för PPP-konfiguration där det inte går att avsöka maskin vara för länk status.
+Den här tjänsten är användbar för PPP-installation där det inte är möjligt att avse maskinvaran efter länkstatus.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **ppp_ptr**: pekar mot PPP-kontroll block.
-- **data**: pekare till data som ska skickas i ekobegäran.
-- **data_size**: storleken på de data som ska skickas wait_option tid att vänta på att skicka LCP-eko meddelandet.
+- **ppp_ptr:** Pekare till PPP-kontrollblock.
+- **data**: Pekare till data som ska skickas i ekobegäran.
+- **data_size:** Storleken på data som ska skickas wait_option väntetiden för att skicka LCP-ekomeddelandet.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) lyckad begäran om ekobegäran.
-- **NX_PPP_NOT_ESTABLISHED**: (0XB5) PPP-anslutningen har inte upprättats.
-- NX_PTR_ERROR: (0x07) ogiltig PPP-pekare eller program funktions pekare.
-- NX_CALLER_ERROR (0x11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS**: (0x00) Lyckad skickad ekobegäran.
+- **NX_PPP_NOT_ESTABLISHED:**(0xB5) PPP-anslutning upprättas inte.
+- NX_PTR_ERROR: (0x07) Ogiltig PPP-pekare eller programfunktionspekare.
+- NX_CALLER_ERROR (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Program trådar
+Programtrådar
 
 ### <a name="example"></a>Exempel
 
@@ -869,7 +869,7 @@ while(my_ppp.nx_ppp_lcp_echo_reply_id > 0)
 
 ## <a name="nx_ppp_raw_string_send"></a>nx_ppp_raw_string_send
 
-Skicka en RAW ASCII-sträng
+Skicka en ASCII-råsträng
 
 ### <a name="prototype"></a>Prototyp
 
@@ -877,24 +877,24 @@ Skicka en RAW ASCII-sträng
 UINT  nx_ppp_raw_sting_send(NX_PPP *ppp_ptr, CHAR *string_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten skickar en icke-PPP ASCII-sträng direkt ut PPP-gränssnittet. Den används vanligt vis när PPP får ett icke-PPP-paket som innehåller information om modem kontroll.
+Den här tjänsten skickar en ICKE-PPP ASCII-sträng direkt från PPP-gränssnittet. Det används vanligtvis när PPP tar emot ett icke-PPP-paket som innehåller information om modemkontroll.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **ppp_ptr**: pekar mot PPP-kontroll block.
-- **string_ptr**: pekare till sträng som ska skickas.
+- **ppp_ptr:** Pekare till PPP-kontrollblock.
+- **string_ptr: Pekare** till sträng som ska skickas.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) lyckad PPP RAW-sträng skicka.
-- NX_PTR_ERROR: (0x07) ogiltig PPP-pekare eller sträng pekare.
-- NX_CALLER_ERROR: (0x11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS**: (0x00) Lyckad PPP-råsträngssändning.
+- NX_PTR_ERROR: (0x07) Ogiltig PPP-pekare eller sträng pekare.
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -916,23 +916,23 @@ Starta om PPP-bearbetning
 UINT  nx_ppp_restart(NX_PPP *ppp_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten startar om PPP-bearbetningen. Det kallas vanligt vis när länken måste upprättas igen antingen från en länk ned motringning eller av ett modem som inte är ett PPP-meddelande som anger att kommunikationen bröts.
+Den här tjänsten startar om PPP-bearbetningen. Den anropas vanligtvis när länken måste upprättas igen antingen från en återanrop av en länk ned eller via ett icke-PPP-modemmeddelande som anger att kommunikationen har gått förlorad.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **ppp_ptr**: pekar mot PPP-kontroll block.
+- **ppp_ptr:** Pekare till PPP-kontrollblock.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) lyckad PPP-omstart initierad.
-- NX_PTR_ERROR: (0x07) ogiltig PPP-pekare.
-- NX_CALLER_ERROR: (0x11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS**: (0x00) Lyckad PPP-omstart initierad.
+- NX_PTR_ERROR: (0x07) Ogiltig PPP-pekare.
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -953,27 +953,27 @@ Starta PPP-bearbetning
 UINT  nx_ppp_start(NX_PPP *ppp_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten startar PPP-bearbetningen. Den anropas vanligt vis efter att nx_ppp_stop () anropades.
+Den här tjänsten startar PPP-bearbetningen. Den anropas vanligtvis efter nx_ppp_stop() anropas.
 
 >[!NOTE]
-> PPP startar automatiskt PPP-bearbetningen när länken är aktive rad.
+> PPP startar automatiskt PPP-bearbetningen när länken är aktiverad.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **ppp_ptr**: pekar mot PPP-kontroll block.
+- **ppp_ptr:** Pekare till PPP-kontrollblock.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0x00) en lyckad PPP-start har initierats. 
-- **NX_PPP_ALREADY_STARTED**: (0XB9) PPP har redan startats.
-- NX_PTR_ERROR: (0x07) ogiltig PPP-pekare.
-- NX_CALLER_ERROR: (0x11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS**: (0x00) Lyckad PPP-start initierad. 
+- **NX_PPP_ALREADY_STARTED:**(0xb9) PPP har redan startats.
+- NX_PTR_ERROR: (0x07) Ogiltig PPP-pekare.
+- NX_CALLER_ERROR: (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -993,14 +993,14 @@ Hämta aktuell PPP-status
 ```c
 UINT  nx_ppp_status_get(NX_PPP *ppp_ptr, UINT *status_ptr);
 ```
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten hämtar aktuell status för den angivna PPP-instansen.
+Den här tjänsten hämtar den aktuella statusen för den angivna PPP-instansen.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **ppp_ptr**: pekar mot PPP-kontroll block.
-- **status_ptr**: målet för PPP-statusen är följande möjliga status värden:
+- **ppp_ptr:** Pekare till PPP-kontrollblock.
+- **status_ptr:** Målet för PPP-statusen är följande möjliga statusvärden:
     - **NX_PPP_STATUS_ESTABLISHED**
     - **NX_PPP_STATUS_LCP_IN_PROGRESS**
     - **NX_PPP_STATUS_LCP_FAILED**
@@ -1012,16 +1012,16 @@ Den här tjänsten hämtar aktuell status för den angivna PPP-instansen.
     - **NX_PPP_STATUS_IPCP_FAILED**
 
 >[!NOTE]
-> Statusen är bara giltig om API: et returnerar NX_SUCCESS. Om något av värdena för * _FAILED returneras, stoppas dessutom PPP-bearbetningen tills det startas om igen av programmet.
+> Statusen är endast giltig om API:et returnerar NX_SUCCESS. Om något av *_FAILED-statusvärdena returneras stoppas PPP-bearbetningen tills den startas om igen av programmet.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) lyckad PPP-status-begäran.
-- NX_PTR_ERROR: (0x07) ogiltig PPP-pekare.
+- **NX_SUCCESS:**(0x00) Lyckad PPP-statusbegäran.
+- NX_PTR_ERROR: (0x07) Ogiltig PPP-pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Initiering, trådar, timers, ISR: er
+Initiering, trådar, timers, ISR
 
 ### <a name="example"></a>Exempel
 
@@ -1046,24 +1046,24 @@ Starta PPP-bearbetning
 UINT  nx_ppp_stop(NX_PPP *ppp_ptr);
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten stoppar PPP-bearbetningen. Användaren kan också anropa nx_ppp_start () för att starta PPP-bearbetningen om det behövs.
+Den här tjänsten stoppar PPP-bearbetningen. Användaren kan också anropa nx_ppp_start() för att starta PPP-bearbetningen om det behövs.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **ppp_ptr**: pekar mot PPP-kontroll block.
+- **ppp_ptr:** Pekare till PPP-kontrollblock.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0x00) en lyckad PPP-start har initierats. 
-- **NX_PPP_ALREADY_STOPPED**: (0XB8) PPP har redan stoppats.
-- NX_PTR_ERROR: (0x07) ogiltig PPP-pekare.
-- NX_CALLER_ERROR (0x11) ogiltig anropare för den här tjänsten.
+- **NX_SUCCESS**: (0x00) Lyckad PPP-start initierad. 
+- **NX_PPP_ALREADY_STOPPED:**(0xb8) PPP har redan stoppats.
+- NX_PTR_ERROR: (0x07) Ogiltig PPP-pekare.
+- NX_CALLER_ERROR (0x11) Ogiltig anropare för den här tjänsten.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
-Konversation
+Trådar
 
 ### <a name="example"></a>Exempel
 
@@ -1084,21 +1084,21 @@ UINT  nx_ppp_packet_receive(NX_PPP *ppp_ptr, NX_PACKET *packet_ptr);
 
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
 Den här tjänsten tar emot PPP-paket.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **ppp_ptr**: pekar mot PPP-kontroll block.
-- **packet_ptr**: pekar mot PPP-paket.
+- **ppp_ptr:** Pekare till PPP-kontrollblock.
+- **packet_ptr:** Pekare till PPP-paket.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) lyckad PPP-status-begäran.
-- NX_PTR_ERROR: (0x07) ogiltig PPP-pekare.
+- **NX_SUCCESS:**(0x00) Lyckad PPP-statusbegäran.
+- NX_PTR_ERROR: (0x07) Ogiltig PPP-pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 
@@ -1114,7 +1114,7 @@ status =  nx_ppp_packet_receive(&my_ppp, packet_ptr);
 ```
 ## <a name="nx_ppp_packet_send_set"></a>nx_ppp_packet_send_set
 
-Ange funktionen Skicka PPP-paket
+Ange funktionen för att skicka PPP-paket
 
 ### <a name="prototype"></a>Prototyp
 
@@ -1124,21 +1124,21 @@ UINT  nx_ppp_packet_send_set(NX_PPP *ppp_ptr,
 
 ```
 
-### <a name="description"></a>Beskrivning
+### <a name="description"></a>Description
 
-Den här tjänsten anger PPP-paketets sändnings-funciton.
+Den här tjänsten ställer in att PPP-paketet ska skicka funciton.
 
 ### <a name="input-parameters"></a>Indataparametrar
 
-- **ppp_ptr**: pekar mot PPP-kontroll block.
-- **nx_ppp_packet_send**: rutin för att skicka PPP-paket.
+- **ppp_ptr:** Pekare till PPP-kontrollblock.
+- **nx_ppp_packet_send:** Rutin för att skicka PPP-paket.
 
-### <a name="return-values"></a>Retur värden
+### <a name="return-values"></a>Returvärden
 
-- **NX_SUCCESS**: (0X00) lyckad PPP-status-begäran.
-- NX_PTR_ERROR: (0x07) ogiltig PPP-pekare.
+- **NX_SUCCESS:**(0x00) Lyckad PPP-statusbegäran.
+- NX_PTR_ERROR: (0x07) Ogiltig PPP-pekare.
 
-### <a name="allowed-from"></a>Tillåten från
+### <a name="allowed-from"></a>Tillåts från
 
 Initiering, trådar
 

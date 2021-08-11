@@ -1,25 +1,25 @@
 ---
-title: Tillägg – port-/regionsspecifika exempel
-description: Den här artikeln visar enhetsspecifika exempel för ThreadX-moduler.
+title: Bilaga – Portspecifika exempel
+description: Den här artikeln visar portspecifika exempel för ThreadX-moduler.
 author: philmea
 ms.author: philmea
 ms.date: 07/15/2020
 ms.topic: article
 ms.service: rtos
-ms.openlocfilehash: c2324a2057bf2ddb2d255b2ff611d34fc664560a
-ms.sourcegitcommit: 60ad844b58639d88830f2660ab0c4ff86b92c10f
+ms.openlocfilehash: bc4721431810d72a72d5bc69e8382378cb7f95935a8ac755c25a8cff985cd185
+ms.sourcegitcommit: 93d716cf7e3d735b18246d659ec9ec7f82c336de
 ms.translationtype: MT
 ms.contentlocale: sv-SE
-ms.lasthandoff: 04/07/2021
-ms.locfileid: "106549818"
+ms.lasthandoff: 08/07/2021
+ms.locfileid: "116799378"
 ---
-# <a name="appendix---port-specific-examples"></a>Tillägg – port-/regionsspecifika exempel
+# <a name="appendix---port-specific-examples"></a>Bilaga – Portspecifika exempel
 
 ## <a name="arm11-processor"></a>ARM11-processor
 
 ### <a name="arm11-using-gcc"></a>ARM11 med GCC
 
-#### <a name="module-preamble-for-arm11-using-gcc"></a>Modulens inledning för ARM11 med GCC
+#### <a name="module-preamble-for-arm11-using-gcc"></a>Modulinledningen för ARM11 med GCC
 
 ```armasm
     .arm
@@ -67,14 +67,14 @@ _txm_module_preamble:
     .word       0                                               @ Reserved 15
 ```
 
-#### <a name="module-properties-for-arm11-using-gcc"></a>Egenskaper för ARM11 med GCC
+#### <a name="module-properties-for-arm11-using-gcc"></a>Modulegenskaper för ARM11 med GCC
 
-| Bitmask | Värde | Innebörd |
+| Bitars | Värde | Innebörd |
 |---|---|---|
 | [23-0] | 0 | Reserverat
-| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />IAR<br />ARM<br />GNU |
+| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />Iar<br />ARM<br />Gnu |
 
-#### <a name="module-linker-for-arm11-using-gcc"></a>Modul Länkar för ARM11 med GCC
+#### <a name="module-linker-for-arm11-using-gcc"></a>Modullänkare för ARM11 med GCC
 
 ```c
 MEMORY
@@ -290,7 +290,7 @@ SECTIONS
 
 #### <a name="building-modules-for-arm11-using-gcc"></a>Skapa moduler för ARM11 med GCC
 
-Ett enkelt kommando rads exempel för att skapa en ARM11-modul med GCC:
+Ett enkelt kommandoradsexempel för att skapa en ARM11-modul med GCC:
 
 ```dos
 arm-none-eabi-gcc -c -g -mcpu=arm1136j-s -msingle-pic-base -fPIC -mpic-register=r9 txm_module_preamble.S
@@ -299,24 +299,24 @@ arm-none-eabi-gcc -c -g -mcpu=arm1136j-s -msingle-pic-base -fPIC -mpic-register=
 arm-none-eabi-ld -A arm1136j-s -T demo_threadx_module.ld txm_module_preamble.o gcc_setup.o demo_threadx_module.o txm.a txm.a -o demo_threadx_module.out -M > demo_threadx_module.map
 ```
 
-#### <a name="thread-extension-definition-for-arm11-using-gcc"></a>Tråd tilläggs definition för ARM11 med GCC
+#### <a name="thread-extension-definition-for-arm11-using-gcc"></a>Definition av trådtillägg för ARM11 med GCC
 
 ```c
 #define TX_THREAD_EXTENSION_2   VOID    *tx_thread_module_instance_ptr;  \
                                 VOID    *tx_thread_module_entry_info_ptr;
 ```
 
-#### <a name="building-module-manager-for-arm11-using-gcc"></a>Skapa module Manager för ARM11 med GCC
+#### <a name="building-module-manager-for-arm11-using-gcc"></a>Skapa Module Manager för ARM11 med GCC
 
-Inget exempel har angetts.
+Inget exempel anges.
 
-#### <a name="attributes-for-external-memory-enable-api-for-arm11-using-gcc"></a>Attribut för extern minnes aktivering API för ARM11 med GCC
+#### <a name="attributes-for-external-memory-enable-api-for-arm11-using-gcc"></a>Attribut för externt minne aktiverar API för ARM11 med hjälp av GCC
 
-Den här funktionen är inte aktive rad på den här porten.
+Den här funktionen är inte aktiverad på den här porten.
 
 ### <a name="arm11-using-ac5"></a>ARM11 med AC5
 
-#### <a name="module-preamble-for-arm11-using-ac5"></a>Modulens inledning för ARM11 med AC5
+#### <a name="module-preamble-for-arm11-using-ac5"></a>Modulinamble för ARM11 med AC5
 
 ```armasm
     AREA  Init, CODE, READONLY
@@ -377,20 +377,20 @@ __txm_module_preamble
         END
 ```
 
-#### <a name="module-properties-for-arm11-using-ac5"></a>Egenskaper för ARM11 med AC5
+#### <a name="module-properties-for-arm11-using-ac5"></a>Modulegenskaper för ARM11 med AC5
 
-| Bitmask | Värde | Innebörd |
+| Bitars | Värde | Innebörd |
 |---|---|---|
 | [23-0] | 0 | Reserverat
-| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />IAR<br />ARM<br />GNU |
+| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />Iar<br />ARM<br />Gnu |
 
-#### <a name="module-linker-for-arm11-using-ac5"></a>Modul Länkar för ARM11 med AC5
+#### <a name="module-linker-for-arm11-using-ac5"></a>Modullänkare för ARM11 med AC5
 
-Ett exempel på en länkad fil som bygger på kommando raden.
+Bygger på kommandoraden, inget exempel på länkarfil.
 
 #### <a name="building-modules-for-arm11-using-ac5"></a>Skapa moduler för ARM11 med AC5
 
-Ett enkelt kommando rads exempel för att skapa en ARM11-modul med AC5:
+Ett enkelt kommandoradsexempel för att skapa en ARM11-modul med AC5:
 
 ```dos
 armasm -g --cpu ARM1136J-S --apcs /interwork --apcs /ropi --apcs /rwpi txm_module_preamble.s
@@ -398,16 +398,16 @@ armcc -g -c -O0 --cpu ARM1136J-S --apcs /interwork --apcs /ropi --apcs /rwpi dem
 armlink -d -o demo_threadx_module.axf --elf --ro 0 --first txm_module_preamble.o(Init) --entry=_txm_module_thread_shell_entry --ropi --rwpi --remove --map --symbols --list demo_threadx_module.map txm_module_preamble.o demo_threadx_module.o txm.a
 ```
 
-#### <a name="thread-extension-definition-for-arm11-using-ac5"></a>Tråd tilläggs definition för ARM11 med AC5
+#### <a name="thread-extension-definition-for-arm11-using-ac5"></a>Trådtilläggsdefinition för ARM11 med AC5
 
 ```c
 #define TX_THREAD_EXTENSION_2   VOID    *tx_thread_module_instance_ptr;  \
                                 VOID    *tx_thread_module_entry_info_ptr;
 ```
 
-#### <a name="building-module-manager-for-arm11-using-ac5"></a>Skapa module Manager för ARM11 med AC5
+#### <a name="building-module-manager-for-arm11-using-ac5"></a>Skapa Module Manager för ARM11 med AC5
 
-Ett enkelt kommando rads exempel för att skapa en ARM11 module-hanterare med AC5:
+Ett enkelt kommandoradsexempel för att skapa en ARM11-modulhanterare med AC5:
 
 ```dos
 armasm -g --cpu ARM1136J-S --apcs /interwork tx_initialize_low_level.s
@@ -416,15 +416,15 @@ armcc -g -c -O2 --cpu ARM1136J-S --apcs /interwork module_code.c
 armlink -d -o demo_threadx_module_manager.axf --elf --ro 0 --first tx_initialize_low_level.o(Init) --remove --map --symbols --list demo_threadx_module_manager.map tx_initialize_low_level.o demo_threadx_module_manager.o module_code.o tx.a
 ```
 
-#### <a name="attributes-for-external-memory-enable-api-for-arm11-using-ac5"></a>Attribut för extern minnes aktivering API för ARM11 med AC5
+#### <a name="attributes-for-external-memory-enable-api-for-arm11-using-ac5"></a>Attribut för externt minne aktiverar API för ARM11 med AC5
 
-Den här funktionen är inte aktive rad på den här porten.
+Den här funktionen är inte aktiverad på den här porten.
 
-## <a name="cortex-a7-processor"></a>Cortex – A7-processor
+## <a name="cortex-a7-processor"></a>Cortex-A7-processor
 
-### <a name="cortex-a7-using-ac5"></a>Cortex – A7 med hjälp av AC5
+### <a name="cortex-a7-using-ac5"></a>Cortex-A7 med AC5
 
-#### <a name="module-preamble-for-cortex-a7-using-ac5"></a>Modulens inledning för cortex-A7 med hjälp av AC5
+#### <a name="module-preamble-for-cortex-a7-using-ac5"></a>Modulinamble för Cortex-A7 med AC5
 
 ```armasm
     AREA  Init, CODE, READONLY
@@ -488,21 +488,21 @@ __txm_module_preamble
     END
 ```
 
-#### <a name="module-properties-for-cortex-a7-using-ac5"></a>Egenskaper för modulen för cortex-A7 med hjälp av AC5
+#### <a name="module-properties-for-cortex-a7-using-ac5"></a>Modulegenskaper för Cortex-A7 med AC5
 
-| Bitmask | Värde | Innebörd |
+| Bitars | Värde | Innebörd |
 |---|---|---|
 | 0 | 0<br />1 | Körning av privilegierat läge<br />Körning av användarläge |
 | [23-1] | 0 | Reserverat
-| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />IAR<br />ARM<br />GNU |
+| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />Iar<br />ARM<br />Gnu |
 
-#### <a name="module-linker-for-cortex-a7-using-ac5"></a>Modul Länkar för cortex-A7 med hjälp av AC5
+#### <a name="module-linker-for-cortex-a7-using-ac5"></a>Modullänkare för Cortex-A7 med AC5
 
-Ett exempel på en länkad fil som bygger på kommando raden.
+Bygger på kommandoraden, inget exempel på länkarfil.
 
-#### <a name="building-modules-for-cortex-a7-using-ac5"></a>Skapa moduler för cortex-A7 med hjälp av AC5
+#### <a name="building-modules-for-cortex-a7-using-ac5"></a>Skapa moduler för Cortex-A7 med AC5
 
-Ett enkelt kommando rads exempel för att skapa en cortex-A7-modul med hjälp av AC5:
+Ett enkelt kommandoradsexempel för att skapa en Cortex-A7-modul med AC5:
 
 ```dos
 armasm -g --cpu=cortex-a7.no_neon --fpu=softvfp --apcs=/interwork/ropi/rwpi txm_module_preamble.s
@@ -510,7 +510,7 @@ armcc  -g --cpu=cortex-a7.no_neon --fpu=softvfp -c --apcs=/interwork/ropi/rwpi -
 armlink -d -o demo_threadx_module.axf --elf --ro 0 --first txm_module_preamble.o(Init) --entry=_txm_module_thread_shell_entry --ropi --rwpi --remove --map --symbols --list demo_threadx_module.map txm_module_preamble.o demo_threadx_module.o txm.a
 ```
 
-#### <a name="thread-extension-definition-for-cortex-a7-using-ac5"></a>Tråd tilläggs definition för cortex-A7 med hjälp av AC5
+#### <a name="thread-extension-definition-for-cortex-a7-using-ac5"></a>Trådtilläggsdefinition för Cortex-A7 med AC5
 
 ```c
 #define TX_THREAD_EXTENSION_2   ULONG   tx_thread_vfp_enable;                   \
@@ -528,9 +528,9 @@ armlink -d -o demo_threadx_module.axf --elf --ro 0 --first txm_module_preamble.o
                                 VOID    *tx_thread_module_reserved;
 ```
 
-#### <a name="building-module-manager-for-cortex-a7-using-ac5"></a>Skapa module Manager för cortex-A7 med hjälp av AC5
+#### <a name="building-module-manager-for-cortex-a7-using-ac5"></a>Skapa modulhanteraren för Cortex-A7 med AC5
 
-Ett enkelt kommando rads exempel för att skapa en cortex-A7 module Manager med hjälp av AC5:
+Ett enkelt kommandoradsexempel för att skapa en Cortex-A7-modulhanterare med AC5:
 
 ```dos
 armasm -g --cpu=cortex-a7.no_neon --fpu=softvfp --apcs=interwork tx_initialize_low_level.s
@@ -539,25 +539,25 @@ armcc -g --cpu=cortex-a7.no_neon --fpu=softvfp -c module_code.c
 armlink -d -o demo_threadx_module_manager.axf --elf --ro 0x80000000 --first tx_initialize_low_level.o(VECTORS) --remove --map --symbols --list demo_threadx_module_manager.map tx_initialize_low_level.o demo_threadx_module_manager.o module_code.o tx.a
 ```
 
-#### <a name="attributes-for-external-memory-enable-api-for-cortex-a7-using-ac5"></a>Attribut för externt minne Aktivera API för cortex-A7 med hjälp av AC5
+#### <a name="attributes-for-external-memory-enable-api-for-cortex-a7-using-ac5"></a>Attribut för externt minne möjliggör API för Cortex-A7 med AC5
 
 Följande attribut kan användas för att konfigurera inställningar för delat minne:
 
-| Attribute-parameter | Innebörd |
+| Attributparameter | Innebörd |
 |---|---|
 | TXM_MMU_ATTRIBUTE_XN | Kör aldrig |
 | TXM_MMU_ATTRIBUTE_B | B-inställning |
-| TXM_MMU_ATTRIBUTE_C | Inställningen C |
+| TXM_MMU_ATTRIBUTE_C | C-inställning |
 | TXM_MMU_ATTRIBUTE_AP | AP-inställning |
-| TXM_MMU_ATTRIBUTE_TEX | TEX-inställning |
+| TXM_MMU_ATTRIBUTE_TEX | TEXAS-inställning |
 
 Se ARM-dokumentationen för hur dessa inställningar konfigureras.
 
 ## <a name="cortex-m3-processor"></a>Cortex-M3-processor
 
-### <a name="cortex-m3-using-ac5"></a>Cortex-m3 med AC5
+### <a name="cortex-m3-using-ac5"></a>Cortex-M3 med AC5
 
-#### <a name="module-preamble-for-cortex-m3-using-ac5"></a>Modulens inledning för cortex-m3 med AC5
+#### <a name="module-preamble-for-cortex-m3-using-ac5"></a>Modulens ingress för Cortex-M3 med AC5
 
 ```armasm
     AREA Init, CODE, READONLY
@@ -630,23 +630,23 @@ __txm_module_preamble
 
 ```
 
-#### <a name="module-properties-for-cortex-m3-using-ac5"></a>Egenskaper för modulen för cortex-m3 med AC5
+#### <a name="module-properties-for-cortex-m3-using-ac5"></a>Modulegenskaper för Cortex-M3 med AC5
 
-| Bitmask | Värde | Innebörd |
+| Bitars | Värde | Innebörd |
 |---|---|---|
 | 0 | 0<br />1 | Körning av privilegierat läge<br />Körning av användarläge |
-| 1 | 0<br />1 | Inget MPU-skydd<br />MPU-skydd (användar läge måste vara valt) |
-| 2 | 0<br />1 | Inaktivera delad/extern minnes åtkomst<br />Aktivera delad/extern minnes åtkomst |
+| 1 | 0<br />1 | Inget MPU-skydd<br />MPU-skydd (användarläge måste vara valt) |
+| 2 | 0<br />1 | Inaktivera åtkomst till delat/externt minne<br />Aktivera åtkomst till delat/externt minne |
 | [23-3] | 0 | Reserverat
-| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />IAR<br />ARM<br />GNU |
+| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />Iar<br />ARM<br />Gnu |
 
-#### <a name="module-linker-for-cortex-m3-using-ac5"></a>Modul Länkar för cortex-m3 med AC5
+#### <a name="module-linker-for-cortex-m3-using-ac5"></a>Modullänkare för Cortex-M3 med AC5
 
-Ingen exempel länks fil har angetts. länkning görs på kommando raden. Se nästa avsnitt.
+Ingen exempellänkfil tillhandahålls. länkning görs på kommandoraden. Se nästa avsnitt.
 
-#### <a name="building-modules-for-cortex-m3-using-ac5"></a>Skapa moduler för cortex-m3 med AC5
+#### <a name="building-modules-for-cortex-m3-using-ac5"></a>Skapa moduler för Cortex-M3 med AC5
 
-Ett exempel på ett build-skript har angetts:
+Ett exempel på ett byggskript tillhandahålls:
 
 ```dos
 armasm -g --cpu=cortex-m3 --apcs=/interwork/ropi/rwpi txm_module_preamble.S
@@ -654,7 +654,7 @@ armcc  -g --cpu=cortex-m3 -c --apcs=/interwork/ropi/rwpi --lower_ropi -I../inc -
 armlink -d -o sample_threadx_module.axf --elf --ro=0x30000 --rw=0x40000 --first txm_module_preamble.o(Init) --entry=_txm_module_thread_shell_entry --ropi --rwpi --remove --map --symbols --list sample_threadx_module.map txm_module_preamble.o sample_threadx_module.o txm.a
 ```
 
-#### <a name="thread-extension-definition-for-cortex-m3-using-ac5"></a>Tråd tilläggs definition för cortex-m3 med AC5
+#### <a name="thread-extension-definition-for-cortex-m3-using-ac5"></a>Trådtilläggsdefinition för Cortex-M3 med AC5
 
 ```c
 #define TX_THREAD_EXTENSION_2               VOID    *tx_thread_module_instance_ptr;         \
@@ -672,7 +672,7 @@ armlink -d -o sample_threadx_module.axf --elf --ro=0x30000 --rw=0x40000 --first 
                                             VOID    *tx_thread_module_reserved;
 ```
 
-#### <a name="building-module-manager-for-cortex-m3-using-ac5"></a>Skapa module Manager för cortex-m3 med AC5
+#### <a name="building-module-manager-for-cortex-m3-using-ac5"></a>Skapa modulhanteraren för Cortex-M3 med AC5
 
 Se exempel build_threadx_module_manager_demo.bat:
 
@@ -682,17 +682,17 @@ armcc -g --cpu=cortex-m3 -c -I../inc -I../../../../common_modules/inc -I../../..
 armlink -d -o sample_threadx_module_manager.axf --elf --ro 0x00000000 --first tx_initialize_low_level.o(RESET) --remove --map --symbols --list sample_threadx_module_manager.map tx_initialize_low_level.o sample_threadx_module_manager.o tx.a
 ```
 
-#### <a name="attributes-for-external-memory-enable-api-for-cortex-m3-using-ac5"></a>Attribut för externt minne Aktivera API för cortex-m3 med AC5
+#### <a name="attributes-for-external-memory-enable-api-for-cortex-m3-using-ac5"></a>Attribut för externt minne aktiverar API för Cortex-M3 med AC5
 
-Modulen har alltid Läs behörighet till delat minne.
+Modulen har alltid läsåtkomst till delat minne.
 
-| Attribute-parameter | Innebörd |
+| Attributparameter | Innebörd |
 |---|---|
 | TXM_MODULE_MANAGER_SHARED_ATTRIBUTE_WRITE | Skrivåtkomst |
 
-### <a name="cortex-m3-using-ac6"></a>Cortex-m3 med AC6
+### <a name="cortex-m3-using-ac6"></a>Cortex-M3 med AC6
 
-#### <a name="module-preamble-for-cortex-m3-using-ac6"></a>Modulens inledning för cortex-m3 med AC6
+#### <a name="module-preamble-for-cortex-m3-using-ac6"></a>Modulens ingress för Cortex-M3 med AC6
 
 ```armasm
     .text
@@ -759,25 +759,25 @@ __txm_module_preamble:
     .dc.l   0                                                   // Reserved 15
 ```
 
-#### <a name="module-properties-for-cortex-m3-using-ac6"></a>Egenskaper för modulen för cortex-m3 med AC6
+#### <a name="module-properties-for-cortex-m3-using-ac6"></a>Modulegenskaper för Cortex-M3 med AC6
 
-| Bitmask | Värde | Innebörd |
+| Bitars | Värde | Innebörd |
 |---|---|---|
 | 0 | 0<br />1 | Körning av privilegierat läge<br />Körning av användarläge |
-| 1 | 0<br />1 | Inget MPU-skydd<br />MPU-skydd (användar läge måste vara valt) |
-| 2 | 0<br />1 | Inaktivera delad/extern minnes åtkomst<br />Aktivera delad/extern minnes åtkomst |
+| 1 | 0<br />1 | Inget MPU-skydd<br />MPU-skydd (användarläge måste vara valt) |
+| 2 | 0<br />1 | Inaktivera åtkomst till delat/externt minne<br />Aktivera åtkomst till delat/externt minne |
 | [23-3] | 0 | Reserverat
-| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />IAR<br />ARM<br />GNU |
+| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />Iar<br />ARM<br />Gnu |
 
-#### <a name="module-linker-for-cortex-m3-using-ac6"></a>Modul Länkar för cortex-m3 med AC6
+#### <a name="module-linker-for-cortex-m3-using-ac6"></a>Modullänkare för Cortex-M3 med AC6
 
-Ingen länknings fil används. Se projekt inställningar.
+Ingen länkfil används. Se projektinställningar.
 
-#### <a name="building-modules-for-cortex-m3-using-ac6"></a>Skapa moduler för cortex-m3 med AC6
+#### <a name="building-modules-for-cortex-m3-using-ac6"></a>Skapa moduler för Cortex-M3 med AC6
 
-En exempel arbets yta tillhandahålls. Bygg ThreadX-biblioteket, ThreadX modules-biblioteket, projektmodulen och exempel module Manager-projektet.
+Ett exempel på en arbetsyta tillhandahålls. Skapa ThreadX-biblioteket, ThreadX-modulbiblioteket, exempelmodulprojektet och exempelprojekt för modulhanteraren.
 
-#### <a name="thread-extension-definition-for-cortex-m3-using-ac6"></a>Tråd tilläggs definition för cortex-m3 med AC6
+#### <a name="thread-extension-definition-for-cortex-m3-using-ac6"></a>Definition av trådtillägg för Cortex-M3 med AC6
 
 ```c
 #define TX_THREAD_EXTENSION_2               VOID    *tx_thread_module_instance_ptr;         \
@@ -795,21 +795,21 @@ En exempel arbets yta tillhandahålls. Bygg ThreadX-biblioteket, ThreadX modules
                                             VOID    *tx_thread_module_reserved;
 ```
 
-#### <a name="building-module-manager-for-cortex-m3-using-ac6"></a>Skapa module Manager för cortex-m3 med AC6
+#### <a name="building-module-manager-for-cortex-m3-using-ac6"></a>Skapa modulhanteraren för Cortex-M3 med AC6
 
-En exempel arbets yta tillhandahålls. Bygg ThreadX-biblioteket, ThreadX modules-biblioteket, projektmodulen och exempel module Manager-projektet.
+Ett exempel på en arbetsyta tillhandahålls. Skapa ThreadX-biblioteket, ThreadX-modulbiblioteket, exempelmodulprojektet och exempelprojekt för modulhanteraren.
 
-#### <a name="attributes-for-external-memory-enable-api-for-cortex-m3-using-ac6"></a>Attribut för externt minne Aktivera API för cortex-m3 med AC6
+#### <a name="attributes-for-external-memory-enable-api-for-cortex-m3-using-ac6"></a>Attribut för externt minne aktiverar API för Cortex-M3 med AC6
 
-Modulen har alltid Läs behörighet till delat minne.
+Modulen har alltid läsåtkomst till delat minne.
 
-| Attribute-parameter | Innebörd |
+| Attributparameter | Innebörd |
 |---|---|
 | TXM_MODULE_MANAGER_SHARED_ATTRIBUTE_WRITE | Skrivåtkomst |
 
-### <a name="cortex-m3-using-gnu"></a>Cortex-m3 med GNU
+### <a name="cortex-m3-using-gnu"></a>Cortex-M3 med GNU
 
-#### <a name="module-preamble-for-cortex-m3-using-gnu"></a>Modulens inledning för cortex-m3 med GNU
+#### <a name="module-preamble-for-cortex-m3-using-gnu"></a>Modulinledningen för Cortex-M3 med GNU
 
 ```armasm
     .text
@@ -873,17 +873,17 @@ __txm_module_preamble:
 
 ```
 
-#### <a name="module-properties-for-cortex-m3-using-gnu"></a>Egenskaper för modulen för cortex-m3 med GNU
+#### <a name="module-properties-for-cortex-m3-using-gnu"></a>Modulegenskaper för Cortex-M3 med GNU
 
-| Bitmask | Värde | Innebörd |
+| Bitars | Värde | Innebörd |
 |---|---|---|
 | 0 | 0<br />1 | Körning av privilegierat läge<br />Körning av användarläge |
-| 1 | 0<br />1 | Inget MPU-skydd<br />MPU-skydd (användar läge måste vara valt) |
-| 2 | 0<br />1 | Inaktivera delad/extern minnes åtkomst<br />Aktivera delad/extern minnes åtkomst |
+| 1 | 0<br />1 | Inget MPU-skydd<br />MPU-skydd (användarläge måste vara valt) |
+| 2 | 0<br />1 | Inaktivera åtkomst till delat/externt minne<br />Aktivera åtkomst till delat/externt minne |
 | [23-3] | 0 | Reserverat
-| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />IAR<br />ARM<br />GNU |
+| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />Iar<br />ARM<br />Gnu |
 
-#### <a name="module-linker-for-cortex-m3-using-gnu"></a>Modul Länkar för cortex-m3 med GNU
+#### <a name="module-linker-for-cortex-m3-using-gnu"></a>Modullänkare för Cortex-M3 med GNU
 
 ```c
 MEMORY
@@ -1097,7 +1097,7 @@ SECTIONS
 }
 ```
 
-#### <a name="building-modules-for-cortex-m3-using-gnu"></a>Skapa moduler för cortex-m3 med GNU
+#### <a name="building-modules-for-cortex-m3-using-gnu"></a>Skapa moduler för Cortex-M3 med GNU
 
 Se build_threadx_module_sample.bat:
 
@@ -1108,7 +1108,7 @@ arm-none-eabi-gcc -c -g -mcpu=cortex-m3 -fpie -fno-plt -mpic-data-is-text-relati
 arm-none-eabi-ld -A cortex-m3 -T sample_threadx_module.ld txm_module_preamble.o gcc_setup.o sample_threadx_module.o -e _txm_module_thread_shell_entry txm.a -o sample_threadx_module.axf -M > sample_threadx_module.map
 ```
 
-#### <a name="thread-extension-definition-for-cortex-m3-using-gnu"></a>Tråd tilläggs definition för cortex-m3 med GNU
+#### <a name="thread-extension-definition-for-cortex-m3-using-gnu"></a>Definition av trådtillägg för Cortex-M3 med GNU
 
 ```c
 #define TX_THREAD_EXTENSION_2               VOID    *tx_thread_module_instance_ptr;         \
@@ -1126,7 +1126,7 @@ arm-none-eabi-ld -A cortex-m3 -T sample_threadx_module.ld txm_module_preamble.o 
                                             VOID    *tx_thread_module_reserved;
 ```
 
-#### <a name="building-module-manager-for-cortex-m3-using-gnu"></a>Skapa module Manager för cortex-m3 med GNU
+#### <a name="building-module-manager-for-cortex-m3-using-gnu"></a>Skapa module manager för Cortex-M3 med GNU
 
 Se build_threadx_module_manager_sample.bat:
 
@@ -1137,17 +1137,17 @@ arm-none-eabi-gcc -c -g -mcpu=cortex-m3 -mthumb cortexm_crt0.S
 arm-none-eabi-ld -A cortex-m3 -ereset_handler -T sample_threadx.ld tx_simulator_startup.o cortexm_crt0.o sample_threadx_module_manager.o tx.a  libc.a -o sample_threadx_module_manager.axf -M > sample_threadx_module_manager.map
 ```
 
-#### <a name="attributes-for-external-memory-enable-api-for-cortex-m3-using-gnu"></a>Attribut för externt minne Aktivera API för cortex-m3 med GNU
+#### <a name="attributes-for-external-memory-enable-api-for-cortex-m3-using-gnu"></a>Attribut för externt minne aktiverar API för Cortex-M3 med GNU
 
-Modulen har alltid Läs behörighet till delat minne.
+Modulen har alltid läsåtkomst till delat minne.
 
-| Attribute-parameter | Innebörd |
+| Attributparameter | Innebörd |
 |---|---|
 | TXM_MODULE_MANAGER_SHARED_ATTRIBUTE_WRITE | Skrivåtkomst |
 
-### <a name="cortex-m3-using-iar"></a>Cortex-m3 med IAR
+### <a name="cortex-m3-using-iar"></a>Cortex-M3 med IAR
 
-#### <a name="module-preamble-for-cortex-m3-using-iar"></a>Modulens inledning för cortex-m3 med IAR
+#### <a name="module-preamble-for-cortex-m3-using-iar"></a>Modulens ingress för Cortex-M3 med IAR
 
 ```c
     SECTION .text:CODE
@@ -1223,17 +1223,17 @@ __txm_module_preamble:
     END
 ```
 
-#### <a name="module-properties-for-cortex-m3-using-iar"></a>Egenskaper för modulen för cortex-m3 med IAR
+#### <a name="module-properties-for-cortex-m3-using-iar"></a>Modulegenskaper för Cortex-M3 med IAR
 
-| Bitmask | Värde | Innebörd |
+| Bitars | Värde | Innebörd |
 |---|---|---|
 | 0 | 0<br />1 | Körning av privilegierat läge<br />Körning av användarläge |
-| 1 | 0<br />1 | Inget MPU-skydd<br />MPU-skydd (användar läge måste vara valt) |
-| 2 | 0<br />1 | Inaktivera delad/extern minnes åtkomst<br />Aktivera delad/extern minnes åtkomst |
+| 1 | 0<br />1 | Inget MPU-skydd<br />MPU-skydd (användarläge måste vara valt) |
+| 2 | 0<br />1 | Inaktivera åtkomst till delat/externt minne<br />Aktivera åtkomst till delat/externt minne |
 | [23-3] | 0 | Reserverat
-| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />IAR<br />ARM<br />GNU |
+| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />Iar<br />ARM<br />Gnu |
 
-#### <a name="module-linker-for-cortex-m3-using-iar"></a>Modul Länkar för cortex-m3 med IAR
+#### <a name="module-linker-for-cortex-m3-using-iar"></a>Modullänkare för Cortex-M3 med IAR
 
 ```c
 /*###ICF### Section handled by ICF editor, don't touch! ****/
@@ -1290,11 +1290,11 @@ place in ROM_region   { block ROPI };
 place in RAM_region   { block RWPI };
 ```
 
-#### <a name="building-modules-for-cortex-m3-using-iar"></a>Skapa moduler för cortex-m3 med IAR
+#### <a name="building-modules-for-cortex-m3-using-iar"></a>Skapa moduler för Cortex-M3 med IAR
 
-En exempel arbets yta tillhandahålls. Bygg ThreadX-biblioteket, ThreadX modules-biblioteket, demo module-projektet och demo module Manager-projektet.
+Ett exempel på en arbetsyta tillhandahålls. Skapa ThreadX-biblioteket, ThreadX-modulbiblioteket, demomodulprojektet och demomodulhanterarens projekt.
 
-#### <a name="thread-extension-definition-for-cortex-m3-using-iar"></a>Tråd tilläggs definition för cortex-m3 med IAR
+#### <a name="thread-extension-definition-for-cortex-m3-using-iar"></a>Definition av trådtillägg för Cortex-M3 med IAR
 
 ```c
 #define TX_THREAD_EXTENSION_2   VOID    *tx_thread_module_instance_ptr;         \
@@ -1313,23 +1313,23 @@ En exempel arbets yta tillhandahålls. Bygg ThreadX-biblioteket, ThreadX modules
                                 VOID    *tx_thread_iar_tls_pointer;
 ```
 
-#### <a name="building-module-manager-for-cortex-m3-using-iar"></a>Skapa module Manager för cortex-m3 med IAR
+#### <a name="building-module-manager-for-cortex-m3-using-iar"></a>Skapa modulhanteraren för Cortex-M3 med hjälp av IAR
 
-En exempel arbets yta tillhandahålls. Bygg ThreadX-biblioteket, ThreadX modules-biblioteket, demo module-projektet och demo module Manager-projektet.
+Ett exempel på en arbetsyta tillhandahålls. Skapa ThreadX-biblioteket, ThreadX-modulbiblioteket, demomodulprojektet och demomodulhanterarens projekt.
 
-#### <a name="attributes-for-external-memory-enable-api-for-cortex-m3-using-iar"></a>Attribut för externt minne Aktivera API för cortex-m3 med IAR
+#### <a name="attributes-for-external-memory-enable-api-for-cortex-m3-using-iar"></a>Attribut för externt minne aktiverar API för Cortex-M3 med hjälp av IAR
 
-Modulen har alltid Läs behörighet till delat minne.
+Modulen har alltid läsåtkomst till delat minne.
 
-| Attribute-parameter | Innebörd |
+| Attributparameter | Innebörd |
 |---|---|
 | TXM_MODULE_MANAGER_SHARED_ATTRIBUTE_WRITE | Skrivåtkomst |
 
-## <a name="cortex-m33-processor"></a>Cortex – M33-processor
+## <a name="cortex-m33-processor"></a>Cortex-M33-processor
 
-### <a name="cortex-m33-using-ac6"></a>Cortex – M33 med hjälp av AC6
+### <a name="cortex-m33-using-ac6"></a>Cortex-M33 med AC6
 
-#### <a name="module-preamble-for-cortex-m33-using-ac6"></a>Modulens inledning för cortex-M33 med hjälp av AC6
+#### <a name="module-preamble-for-cortex-m33-using-ac6"></a>Modulens ingress för Cortex-M33 med AC6
 
 ```c
     .text
@@ -1400,28 +1400,28 @@ __txm_module_preamble:
     .dc.l   0                                                   // Reserved 15
 ```
 
-#### <a name="module-properties-for-cortex-m33-using-ac6"></a>Egenskaper för modulen för cortex-M33 med hjälp av AC6
+#### <a name="module-properties-for-cortex-m33-using-ac6"></a>Modulegenskaper för Cortex-M33 med AC6
 
-| Bitmask | Värde | Innebörd |
+| Bitars | Värde | Innebörd |
 |---|---|---|
 | 0 | 0<br />1 | Körning av privilegierat läge<br />Körning av användarläge |
-| 1 | 0<br />1 | Inget MPU-skydd<br />MPU-skydd (användar läge måste vara valt) |
-| 2 | 0<br />1 | Inaktivera delad/extern minnes åtkomst<br />Aktivera delad/extern minnes åtkomst |
+| 1 | 0<br />1 | Inget MPU-skydd<br />MPU-skydd (måste ha användarläge valt) |
+| 2 | 0<br />1 | Inaktivera åtkomst till delat/externt minne<br />Aktivera åtkomst till delat/externt minne |
 | [23-3] | 0 | Reserverat
-| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />IAR<br />ARM<br />GNU |
+| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />Iar<br />ARM<br />Gnu |
 
-#### <a name="module-linker-for-cortex-m33-using-ac6"></a>Modul Länkar för cortex-M33 med hjälp av AC6
+#### <a name="module-linker-for-cortex-m33-using-ac6"></a>Modullänkare för Cortex-M33 med AC6
 
-Ingen länknings fil krävs för Keil verktygskedjan. Se versions inställningar i exempel projekt.
-Viktiga länknings alternativ visas nedan:
+Ingen länkningsfil behövs för Keil-verktygskedja. Se build-inställningar i exempelprojektet.
+Viktiga länkalternativ visas nedan:
 
 ```c
 --entry demo_module_start --first __txm_module_preamble
 ```
 
-#### <a name="building-modules-for-cortex-m33-using-ac6"></a>Skapa moduler för cortex-M33 med hjälp av AC6
+#### <a name="building-modules-for-cortex-m33-using-ac6"></a>Skapa moduler för Cortex-M33 med AC6
 
-Kompilator inställningar:
+Kompileringsinställningar:
 
 ```c
 -xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c
@@ -1434,7 +1434,7 @@ Kompilator inställningar:
 -o ./Objects/*.o -MD
 ```
 
-#### <a name="thread-extension-definition-for-cortex-m33-using-ac6"></a>Tråd tilläggs definition för cortex-M33 med hjälp av AC6
+#### <a name="thread-extension-definition-for-cortex-m33-using-ac6"></a>Trådtilläggsdefinition för Cortex-M33 med AC6
 
 ```c
 #define TX_THREAD_EXTENSION_2                   VOID    *tx_thread_module_instance_ptr;         \
@@ -1452,13 +1452,13 @@ Kompilator inställningar:
                                                 VOID    *tx_thread_module_reserved;
 ```
 
-#### <a name="building-module-manager-for-cortex-m33-using-ac6"></a>Skapa module Manager för cortex-M33 med hjälp av AC6
+#### <a name="building-module-manager-for-cortex-m33-using-ac6"></a>Skapa modulhanteraren för Cortex-M33 med AC6
 
-En exempel arbets yta tillhandahålls. Bygg biblioteket ThreadX, ThreadX modules, sample_threadx_module Project och demo_threadx_non secure_zone Project.
+Ett exempel på en arbetsyta tillhandahålls. Skapa ThreadX-biblioteket, ThreadX-modulbiblioteket, sample_threadx_module-projektet och demo_threadx_non-secure_zone-projektet.
 
-#### <a name="attributes-for-external-memory-enable-api-for-cortex-m33-using-ac6"></a>Attribut för externt minne Aktivera API för cortex-M33 med hjälp av AC6
+#### <a name="attributes-for-external-memory-enable-api-for-cortex-m33-using-ac6"></a>Attribut för externt minne möjliggör API för Cortex-M33 med AC6
 
-| Attribute-parameter |
+| Attributparameter |
 |---|
 | TXM_MODULE_ATTRIBUTE_NON_SHAREABLE |
 | TXM_MODULE_ATTRIBUTE_OUTER_SHAREABLE |
@@ -1466,31 +1466,31 @@ En exempel arbets yta tillhandahålls. Bygg biblioteket ThreadX, ThreadX modules
 | TXM_MODULE_ATTRIBUTE_READ_WRITE |
 | TXM_MODULE_ATTRIBUTE_READ_ONLY |
 
-### <a name="cortex-m33-using-gnu"></a>Cortex – M33 med hjälp av GNU
+### <a name="cortex-m33-using-gnu"></a>Cortex-M33 med GNU
 
-#### <a name="module-preamble-for-cortex-m33-using-gnu"></a>Modulens inledning för cortex-M33 med hjälp av GNU
+#### <a name="module-preamble-for-cortex-m33-using-gnu"></a>Modulinledningen för Cortex-M33 med GNU
 
-#### <a name="module-properties-for-cortex-m33-using-gnu"></a>Egenskaper för modulen för cortex-M33 med hjälp av GNU
+#### <a name="module-properties-for-cortex-m33-using-gnu"></a>Modulegenskaper för Cortex-M33 med GNU
 
-| Bitmask | Värde | Innebörd |
+| Bitars | Värde | Innebörd |
 |---|---|---|
 | 0 | 0<br />1 | Körning av privilegierat läge<br />Körning av användarläge |
-| 1 | 0<br />1 | Inget MPU-skydd<br />MPU-skydd (användar läge måste vara valt) |
-| 2 | 0<br />1 | Inaktivera delad/extern minnes åtkomst<br />Aktivera delad/extern minnes åtkomst |
+| 1 | 0<br />1 | Inget MPU-skydd<br />MPU-skydd (måste ha användarläge valt) |
+| 2 | 0<br />1 | Inaktivera åtkomst till delat/externt minne<br />Aktivera åtkomst till delat/externt minne |
 | [23-3] | 0 | Reserverat
-| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />IAR<br />ARM<br />GNU |
+| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />Iar<br />ARM<br />Gnu |
 
-#### <a name="module-linker-for-cortex-m33-using-gnu"></a>Modul Länkar för cortex-M33 med hjälp av GNU
+#### <a name="module-linker-for-cortex-m33-using-gnu"></a>Modullänkare för Cortex-M33 med GNU
 
-#### <a name="building-modules-for-cortex-m33-using-gnu"></a>Skapa moduler för cortex-M33 med hjälp av GNU
+#### <a name="building-modules-for-cortex-m33-using-gnu"></a>Skapa moduler för Cortex-M33 med GNU
 
-#### <a name="thread-extension-definition-for-cortex-m33-using-gnu"></a>Tråd tilläggs definition för cortex-M33 med hjälp av GNU
+#### <a name="thread-extension-definition-for-cortex-m33-using-gnu"></a>Trådtilläggsdefinition för Cortex-M33 med GNU
 
-#### <a name="building-module-manager-for-cortex-m33-using-gnu"></a>Skapa module Manager för cortex-M33 med hjälp av GNU
+#### <a name="building-module-manager-for-cortex-m33-using-gnu"></a>Skapa modulhanteraren för Cortex-M33 med GNU
 
-#### <a name="attributes-for-external-memory-enable-api-for-cortex-m33-using-gnu"></a>Attribut för externt minne Aktivera API för cortex-M33 med hjälp av GNU
+#### <a name="attributes-for-external-memory-enable-api-for-cortex-m33-using-gnu"></a>Attribut för externt minne möjliggör API för Cortex-M33 med GNU
 
-| Attribute-parameter |
+| Attributparameter |
 |---|
 | TXM_MODULE_ATTRIBUTE_NON_SHAREABLE |
 | TXM_MODULE_ATTRIBUTE_OUTER_SHAREABLE |
@@ -1498,9 +1498,9 @@ En exempel arbets yta tillhandahålls. Bygg biblioteket ThreadX, ThreadX modules
 | TXM_MODULE_ATTRIBUTE_READ_WRITE |
 | TXM_MODULE_ATTRIBUTE_READ_ONLY |
 
-### <a name="cortex-m33-using-iar"></a>Cortex – M33 med hjälp av IAR
+### <a name="cortex-m33-using-iar"></a>Cortex-M33 med IAR
 
-#### <a name="module-preamble-for-cortex-m33-using-iar"></a>Modulens inledning för cortex-M33 med hjälp av IAR
+#### <a name="module-preamble-for-cortex-m33-using-iar"></a>Modulinamble för Cortex-M33 med IAR
 
 ```c
     SECTION .text:CODE
@@ -1575,17 +1575,17 @@ __txm_module_preamble:
 
 ```
 
-#### <a name="module-properties-for-cortex-m33-using-iar"></a>Egenskaper för modulen för cortex-M33 med hjälp av IAR
+#### <a name="module-properties-for-cortex-m33-using-iar"></a>Modulegenskaper för Cortex-M33 med IAR
 
-| Bitmask | Värde | Innebörd |
+| Bitars | Värde | Innebörd |
 |---|---|---|
 | 0 | 0<br />1 | Körning av privilegierat läge<br />Körning av användarläge |
-| 1 | 0<br />1 | Inget MPU-skydd<br />MPU-skydd (användar läge måste vara valt) |
-| 2 | 0<br />1 | Inaktivera delad/extern minnes åtkomst<br />Aktivera delad/extern minnes åtkomst |
+| 1 | 0<br />1 | Inget MPU-skydd<br />MPU-skydd (måste ha användarläge valt) |
+| 2 | 0<br />1 | Inaktivera åtkomst till delat/externt minne<br />Aktivera åtkomst till delat/externt minne |
 | [23-3] | 0 | Reserverat
-| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />IAR<br />ARM<br />GNU |
+| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />Iar<br />ARM<br />Gnu |
 
-#### <a name="module-linker-for-cortex-m33-using-iar"></a>Modul Länkar för cortex-M33 med hjälp av IAR
+#### <a name="module-linker-for-cortex-m33-using-iar"></a>Modullänkare för Cortex-M33 med IAR
 
 ```c
 /*###ICF### Section handled by ICF editor, don't touch! ****/
@@ -1642,9 +1642,9 @@ place in ROM_region   { block ROPI };
 place in RAM_region   { block RWPI };
 ```
 
-#### <a name="building-modules-for-cortex-m33-using-iar"></a>Skapa moduler för cortex-M33 med hjälp av IAR
+#### <a name="building-modules-for-cortex-m33-using-iar"></a>Skapa moduler för Cortex-M33 med IAR
 
-#### <a name="thread-extension-definition-for-cortex-m33-using-iar"></a>Tråd tilläggs definition för cortex-M33 med hjälp av IAR
+#### <a name="thread-extension-definition-for-cortex-m33-using-iar"></a>Trådtilläggsdefinition för Cortex-M33 med IAR
 
 ```c
 #define TX_THREAD_EXTENSION_2                   VOID    *tx_thread_module_instance_ptr;         \
@@ -1663,13 +1663,13 @@ place in RAM_region   { block RWPI };
                                                 VOID    *tx_thread_iar_tls_pointer;
 ```
 
-#### <a name="building-module-manager-for-cortex-m33-using-iar"></a>Skapa module Manager för cortex-M33 med hjälp av IAR
+#### <a name="building-module-manager-for-cortex-m33-using-iar"></a>Skapa modulhanteraren för Cortex-M33 med IAR
 
-En exempel arbets yta har ännu inte tillhandahållits. Kommer snart.
+En exempelarbetsyta har ännu inte angetts. Kommer snart.
 
-#### <a name="attributes-for-external-memory-enable-api-for-cortex-m33-using-iar"></a>Attribut för externt minne Aktivera API för cortex-M33 med hjälp av IAR
+#### <a name="attributes-for-external-memory-enable-api-for-cortex-m33-using-iar"></a>Attribut för externt minne möjliggör API för Cortex-M33 med IAR
 
-| Attribute-parameter |
+| Attributparameter |
 |---|
 | TXM_MODULE_ATTRIBUTE_NON_SHAREABLE |
 | TXM_MODULE_ATTRIBUTE_OUTER_SHAREABLE |
@@ -1677,11 +1677,11 @@ En exempel arbets yta har ännu inte tillhandahållits. Kommer snart.
 | TXM_MODULE_ATTRIBUTE_READ_WRITE |
 | TXM_MODULE_ATTRIBUTE_READ_ONLY |
 
-## <a name="cortex-m4-processor"></a>Cortex – M4-processor
+## <a name="cortex-m4-processor"></a>Cortex-M4-processor
 
-### <a name="cortex-m4-using-ac5"></a>Cortex – M4 med hjälp av AC5
+### <a name="cortex-m4-using-ac5"></a>Cortex-M4 med AC5
 
-#### <a name="module-preamble-for-cortex-m4-using-ac5"></a>Modulens inledning för cortex-M4 med hjälp av AC5
+#### <a name="module-preamble-for-cortex-m4-using-ac5"></a>Modulinamble för Cortex-M4 med AC5
 
 ```armasm
     AREA Init, CODE, READONLY
@@ -1754,21 +1754,21 @@ __txm_module_preamble
     END
 ```
 
-#### <a name="module-properties-for-cortex-m4-using-ac5"></a>Egenskaper för modulen för cortex-M4 med hjälp av AC5
+#### <a name="module-properties-for-cortex-m4-using-ac5"></a>Modulegenskaper för Cortex-M4 med AC5
 
-| Bitmask | Värde | Innebörd |
+| Bitars | Värde | Innebörd |
 |---|---|---|
 | 0 | 0<br />1 | Körning av privilegierat läge<br />Körning av användarläge |
-| 1 | 0<br />1 | Inget MPU-skydd<br />MPU-skydd (användar läge måste vara valt) |
-| 2 | 0<br />1 | Inaktivera delad/extern minnes åtkomst<br />Aktivera delad/extern minnes åtkomst |
+| 1 | 0<br />1 | Inget MPU-skydd<br />MPU-skydd (måste ha användarläge valt) |
+| 2 | 0<br />1 | Inaktivera åtkomst till delat/externt minne<br />Aktivera åtkomst till delat/externt minne |
 | [23-3] | 0 | Reserverat
-| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />IAR<br />ARM<br />GNU |
+| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />Iar<br />ARM<br />Gnu |
 
-#### <a name="module-linker-for-cortex-m4-using-ac5"></a>Modul Länkar för cortex-M4 med hjälp av AC5
+#### <a name="module-linker-for-cortex-m4-using-ac5"></a>Modullänkare för Cortex-M4 med AC5
 
-Ingen exempel länks fil har angetts. länkning görs på kommando raden. Se nästa avsnitt.
+Ingen exempellänkfil tillhandahålls. länkning görs på kommandoraden. Se nästa avsnitt.
 
-#### <a name="building-modules-for-cortex-m4-using-ac5"></a>Skapa moduler för cortex-M4 med hjälp av AC5
+#### <a name="building-modules-for-cortex-m4-using-ac5"></a>Skapa moduler för Cortex-M4 med AC5
 
 Se exempel build_threadx_module_demo.bat:
 
@@ -1778,7 +1778,7 @@ armcc  -g --cpu=cortex-m4 --fpu=vfpv4 -c --apcs=/interwork/ropi/rwpi --lower_rop
 armlink -d -o sample_threadx_module.axf --elf --ro=0x30000 --rw=0x40000 --first txm_module_preamble.o(Init) --entry=_txm_module_thread_shell_entry --ropi --rwpi --remove --map --symbols --list sample_threadx_module.map txm_module_preamble.o sample_threadx_module.o txm.a
 ```
 
-#### <a name="thread-extension-definition-for-cortex-m4-using-ac5"></a>Tråd tilläggs definition för cortex-M4 med hjälp av AC5
+#### <a name="thread-extension-definition-for-cortex-m4-using-ac5"></a>Trådtilläggsdefinition för Cortex-M4 med AC5
 
 ```c
 #define TX_THREAD_EXTENSION_2               VOID    *tx_thread_module_instance_ptr;         \
@@ -1796,7 +1796,7 @@ armlink -d -o sample_threadx_module.axf --elf --ro=0x30000 --rw=0x40000 --first 
                                             VOID    *tx_thread_module_reserved;
 ```
 
-#### <a name="building-module-manager-for-cortex-m4-using-ac5"></a>Skapa module Manager för cortex-M4 med hjälp av AC5
+#### <a name="building-module-manager-for-cortex-m4-using-ac5"></a>Skapa modulhanteraren för Cortex-M4 med AC5
 
 Se exempel build_threadx_module_manager_demo.bat:
 
@@ -1806,17 +1806,17 @@ armcc -g --cpu=cortex-m4 --fpu=vfpv4 -c -I../inc -I../../../../common_modules/in
 armlink -d -o sample_threadx_module_manager.axf --elf --ro 0x00000000 --first tx_initialize_low_level.o(RESET) --remove --map --symbols --list sample_threadx_module_manager.map tx_initialize_low_level.o sample_threadx_module_manager.o tx.a
 ```
 
-#### <a name="attributes-for-external-memory-enable-api-for-cortex-m4-using-ac5"></a>Attribut för externt minne Aktivera API för cortex-M4 med hjälp av AC5
+#### <a name="attributes-for-external-memory-enable-api-for-cortex-m4-using-ac5"></a>Attribut för externt minne möjliggör API för Cortex-M4 med AC5
 
-Modulen har alltid Läs behörighet till delat minne.
+Modulen har alltid läsåtkomst till delat minne.
 
-| Attribute-parameter | Innebörd |
+| Attributparameter | Innebörd |
 |---|---|
 | TXM_MODULE_MANAGER_SHARED_ATTRIBUTE_WRITE | Skrivåtkomst |
 
-### <a name="cortex-m4-using-ac6"></a>Cortex – M4 med hjälp av AC6
+### <a name="cortex-m4-using-ac6"></a>Cortex-M4 med AC6
 
-#### <a name="module-preamble-for-cortex-m4-using-ac6"></a>Modulens inledning för cortex-M4 med hjälp av AC6
+#### <a name="module-preamble-for-cortex-m4-using-ac6"></a>Modulinamble för Cortex-M4 med AC6
 
 ```armasm
     .text
@@ -1883,25 +1883,25 @@ __txm_module_preamble:
     .dc.l   0                                                   // Reserved 15
 ```
 
-#### <a name="module-properties-for-cortex-m4-using-ac6"></a>Egenskaper för modulen för cortex-M4 med hjälp av AC6
+#### <a name="module-properties-for-cortex-m4-using-ac6"></a>Modulegenskaper för Cortex-M4 med AC6
 
-| Bitmask | Värde | Innebörd |
+| Bitars | Värde | Innebörd |
 |---|---|---|
 | 0 | 0<br />1 | Körning av privilegierat läge<br />Körning av användarläge |
-| 1 | 0<br />1 | Inget MPU-skydd<br />MPU-skydd (användar läge måste vara valt) |
-| 2 | 0<br />1 | Inaktivera delad/extern minnes åtkomst<br />Aktivera delad/extern minnes åtkomst |
+| 1 | 0<br />1 | Inget MPU-skydd<br />MPU-skydd (måste ha användarläge valt) |
+| 2 | 0<br />1 | Inaktivera åtkomst till delat/externt minne<br />Aktivera åtkomst till delat/externt minne |
 | [23-3] | 0 | Reserverat
-| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />IAR<br />ARM<br />GNU |
+| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />Iar<br />ARM<br />Gnu |
 
-#### <a name="module-linker-for-cortex-m4-using-ac6"></a>Modul Länkar för cortex-M4 med hjälp av AC6
+#### <a name="module-linker-for-cortex-m4-using-ac6"></a>Modullänkare för Cortex-M4 med AC6
 
-Ingen länknings fil används. Se projekt inställningar.
+Ingen länkfil används. Se projektinställningar.
 
-#### <a name="building-modules-for-cortex-m4-using-ac6"></a>Skapa moduler för cortex-M4 med hjälp av AC6
+#### <a name="building-modules-for-cortex-m4-using-ac6"></a>Skapa moduler för Cortex-M4 med AC6
 
-En exempel arbets yta tillhandahålls. Bygg ThreadX-biblioteket, ThreadX modules-biblioteket, projektmodulen och exempel module Manager-projektet.
+Ett exempel på en arbetsyta tillhandahålls. Skapa ThreadX-biblioteket, ThreadX-modulbiblioteket, exempelmodulprojektet och exempelprojekt för modulhanteraren.
 
-#### <a name="thread-extension-definition-for-cortex-m4-using-ac6"></a>Tråd tilläggs definition för cortex-M4 med hjälp av AC6
+#### <a name="thread-extension-definition-for-cortex-m4-using-ac6"></a>Trådtilläggsdefinition för Cortex-M4 med AC6
 
 ```c
 #define TX_THREAD_EXTENSION_2               VOID    *tx_thread_module_instance_ptr;         \
@@ -1919,21 +1919,21 @@ En exempel arbets yta tillhandahålls. Bygg ThreadX-biblioteket, ThreadX modules
                                             VOID    *tx_thread_module_reserved;
 ```
 
-#### <a name="building-module-manager-for-cortex-m4-using-ac6"></a>Skapa module Manager för cortex-M4 med hjälp av AC6
+#### <a name="building-module-manager-for-cortex-m4-using-ac6"></a>Skapa modulhanteraren för Cortex-M4 med AC6
 
-En exempel arbets yta tillhandahålls. Bygg ThreadX-biblioteket, ThreadX modules-biblioteket, projektmodulen och exempel module Manager-projektet.
+Ett exempel på en arbetsyta tillhandahålls. Skapa ThreadX-biblioteket, ThreadX-modulbiblioteket, exempelmodulprojektet och exempelprojekt för modulhanteraren.
 
-#### <a name="attributes-for-external-memory-enable-api-for-cortex-m4-using-ac6"></a>Attribut för externt minne Aktivera API för cortex-M4 med hjälp av AC6
+#### <a name="attributes-for-external-memory-enable-api-for-cortex-m4-using-ac6"></a>Attribut för externt minne möjliggör API för Cortex-M4 med AC6
 
-Modulen har alltid Läs behörighet till delat minne.
+Modulen har alltid läsbehörighet till delat minne.
 
-| Attribute-parameter | Innebörd |
+| Attributparameter | Innebörd |
 |---|---|
 | TXM_MODULE_MANAGER_SHARED_ATTRIBUTE_WRITE | Skrivåtkomst |
 
-### <a name="cortex-m4-using-gnu"></a>Cortex – M4 med hjälp av GNU
+### <a name="cortex-m4-using-gnu"></a>Cortex-M4 med GNU
 
-#### <a name="module-preamble-for-cortex-m4-using-gnu"></a>Modulens inledning för cortex-M4 med hjälp av GNU
+#### <a name="module-preamble-for-cortex-m4-using-gnu"></a>Modulinledningen för Cortex-M4 med GNU
 
 ```armasm
     .text
@@ -1996,17 +1996,17 @@ __txm_module_preamble:
     .dc.l      0                                                // Reserved 15
 ```
 
-#### <a name="module-properties-for-cortex-m4-using-gnu"></a>Egenskaper för modulen för cortex-M4 med hjälp av GNU
+#### <a name="module-properties-for-cortex-m4-using-gnu"></a>Modulegenskaper för Cortex-M4 med GNU
 
-| Bitmask | Värde | Innebörd |
+| Bitars | Värde | Innebörd |
 |---|---|---|
 | 0 | 0<br />1 | Körning av privilegierat läge<br />Körning av användarläge |
-| 1 | 0<br />1 | Inget MPU-skydd<br />MPU-skydd (användar läge måste vara valt) |
-| 2 | 0<br />1 | Inaktivera delad/extern minnes åtkomst<br />Aktivera delad/extern minnes åtkomst |
+| 1 | 0<br />1 | Inget MPU-skydd<br />MPU-skydd (måste ha användarläge valt) |
+| 2 | 0<br />1 | Inaktivera åtkomst till delat/externt minne<br />Aktivera åtkomst till delat/externt minne |
 | [23-3] | 0 | Reserverat
-| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />IAR<br />ARM<br />GNU |
+| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />Iar<br />ARM<br />Gnu |
 
-#### <a name="module-linker-for-cortex-m4-using-gnu"></a>Modul Länkar för cortex-M4 med hjälp av GNU
+#### <a name="module-linker-for-cortex-m4-using-gnu"></a>Modullänkare för Cortex-M4 med GNU
 
 ```c
 MEMORY
@@ -2220,7 +2220,7 @@ SECTIONS
 }
 ```
 
-#### <a name="building-modules-for-cortex-m4-using-gnu"></a>Skapa moduler för cortex-M4 med hjälp av GNU
+#### <a name="building-modules-for-cortex-m4-using-gnu"></a>Skapa moduler för Cortex-M4 med GNU
 
 Se build_threadx_module_sample.bat:
 
@@ -2231,7 +2231,7 @@ arm-none-eabi-gcc -c -g -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=vfpv4 -fpie -fno-
 arm-none-eabi-ld -A cortex-m4 -T sample_threadx_module.ld txm_module_preamble.o gcc_setup.o sample_threadx_module.o -e _txm_module_thread_shell_entry txm.a -o sample_threadx_module.axf -M > sample_threadx_module.map
 ```
 
-#### <a name="thread-extension-definition-for-cortex-m4-using-gnu"></a>Tråd tilläggs definition för cortex-M4 med hjälp av GNU
+#### <a name="thread-extension-definition-for-cortex-m4-using-gnu"></a>Trådtilläggsdefinition för Cortex-M4 med GNU
 
 ```c
 #define TX_THREAD_EXTENSION_2               VOID    *tx_thread_module_instance_ptr;         \
@@ -2249,7 +2249,7 @@ arm-none-eabi-ld -A cortex-m4 -T sample_threadx_module.ld txm_module_preamble.o 
                                             VOID    *tx_thread_module_reserved;
 ```
 
-#### <a name="building-module-manager-for-cortex-m4-using-gnu"></a>Skapa module Manager för cortex-M4 med hjälp av GNU
+#### <a name="building-module-manager-for-cortex-m4-using-gnu"></a>Skapa modulhanteraren för Cortex-M4 med GNU
 
 Se build_threadx_module_manager_sample.bat:
 
@@ -2261,17 +2261,17 @@ arm-none-eabi-gcc -c -g -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=vfpv4 -mthumb -I.
 arm-none-eabi-gcc -g -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=vfpv4 -mthumb -T sample_threadx.ld -ereset_handler -nostartfiles -o sample_threadx_module_manager.out -Wl,-Map=sample_threadx_module_manager.map cortexm_vectors.o cortexm_crt0.o tx_initialize_low_level.o sample_threadx_module_manager.o tx.a
 ```
 
-#### <a name="attributes-for-external-memory-enable-api-for-cortex-m4-using-gnu"></a>Attribut för externt minne Aktivera API för cortex-M4 med hjälp av GNU
+#### <a name="attributes-for-external-memory-enable-api-for-cortex-m4-using-gnu"></a>Attribut för externt minne möjliggör API för Cortex-M4 med GNU
 
-Modulen har alltid Läs behörighet till delat minne.
+Modulen har alltid läsbehörighet till delat minne.
 
-| Attribute-parameter | Innebörd |
+| Attributparameter | Innebörd |
 |---|---|
 | TXM_MODULE_MANAGER_SHARED_ATTRIBUTE_WRITE | Skrivåtkomst |
 
-### <a name="cortex-m4-using-iar"></a>Cortex – M4 med hjälp av IAR
+### <a name="cortex-m4-using-iar"></a>Cortex-M4 med IAR
 
-#### <a name="module-preamble-for-cortex-m4-using-iar"></a>Modulens inledning för cortex-M4 med hjälp av IAR
+#### <a name="module-preamble-for-cortex-m4-using-iar"></a>Modulinamble för Cortex-M4 med IAR
 
 ```c
     SECTION .text:CODE
@@ -2347,17 +2347,17 @@ __txm_module_preamble:
     END
 ```
 
-#### <a name="module-properties-for-cortex-m4-using-iar"></a>Egenskaper för modulen för cortex-M4 med hjälp av IAR
+#### <a name="module-properties-for-cortex-m4-using-iar"></a>Modulegenskaper för Cortex-M4 med IAR
 
-| Bitmask | Värde | Innebörd |
+| Bitars | Värde | Innebörd |
 |---|---|---|
 | 0 | 0<br />1 | Körning av privilegierat läge<br />Körning av användarläge |
-| 1 | 0<br />1 | Inget MPU-skydd<br />MPU-skydd (användar läge måste vara valt) |
-| 2 | 0<br />1 | Inaktivera delad/extern minnes åtkomst<br />Aktivera delad/extern minnes åtkomst |
+| 1 | 0<br />1 | Inget MPU-skydd<br />MPU-skydd (måste ha användarläge valt) |
+| 2 | 0<br />1 | Inaktivera åtkomst till delat/externt minne<br />Aktivera åtkomst till delat/externt minne |
 | [23-3] | 0 | Reserverat
-| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />IAR<br />ARM<br />GNU |
+| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />Iar<br />ARM<br />Gnu |
 
-#### <a name="module-linker-for-cortex-m4-using-iar"></a>Modul Länkar för cortex-M4 med hjälp av IAR
+#### <a name="module-linker-for-cortex-m4-using-iar"></a>Modullänkare för Cortex-M4 med IAR
 
 ```c
 /*###ICF### Section handled by ICF editor, don't touch! ****/
@@ -2414,11 +2414,11 @@ place in ROM_region   { block ROPI };
 place in RAM_region   { block RWPI };
 ```
 
-#### <a name="building-modules-for-cortex-m4-using-iar"></a>Skapa moduler för cortex-M4 med hjälp av IAR
+#### <a name="building-modules-for-cortex-m4-using-iar"></a>Skapa moduler för Cortex-M4 med IAR
 
-En exempel arbets yta tillhandahålls. Bygg ThreadX-biblioteket, ThreadX modules-biblioteket, demo module-projektet och demo module Manager-projektet.
+Ett exempel på en arbetsyta tillhandahålls. Skapa ThreadX-biblioteket, ThreadX-modulbiblioteket, demomodulprojektet och demomodulhanterarens projekt.
 
-#### <a name="thread-extension-definition-for-cortex-m4-using-iar"></a>Tråd tilläggs definition för cortex-M4 med hjälp av IAR
+#### <a name="thread-extension-definition-for-cortex-m4-using-iar"></a>Trådtilläggsdefinition för Cortex-M4 med IAR
 
 ```c
 #define TX_THREAD_EXTENSION_2   VOID    *tx_thread_module_instance_ptr;         \
@@ -2437,23 +2437,23 @@ En exempel arbets yta tillhandahålls. Bygg ThreadX-biblioteket, ThreadX modules
                                 VOID    *tx_thread_iar_tls_pointer;
 ```
 
-#### <a name="building-module-manager-for-cortex-m4-using-iar"></a>Skapa module Manager för cortex-M4 med hjälp av IAR
+#### <a name="building-module-manager-for-cortex-m4-using-iar"></a>Skapa modulhanteraren för Cortex-M4 med IAR
 
-En exempel arbets yta tillhandahålls. Bygg ThreadX-biblioteket, ThreadX modules-biblioteket, demo module-projektet och demo module Manager-projektet.
+Ett exempel på en arbetsyta tillhandahålls. Skapa ThreadX-biblioteket, ThreadX-modulbiblioteket, demomodulprojektet och demomodulhanterarens projekt.
 
-#### <a name="attributes-for-external-memory-enable-api-for-cortex-m4-using-iar"></a>Attribut för externt minne Aktivera API för cortex-M4 med hjälp av IAR
+#### <a name="attributes-for-external-memory-enable-api-for-cortex-m4-using-iar"></a>Attribut för externt minne aktiverar API för Cortex-M4 med IAR
 
-Modulen har alltid Läs behörighet till delat minne.
+Modulen har alltid läsåtkomst till delat minne.
 
-| Attribute-parameter | Innebörd |
+| Attributparameter | Innebörd |
 |---|---|
 | TXM_MODULE_MANAGER_SHARED_ATTRIBUTE_WRITE | Skrivåtkomst |
 
-## <a name="cortex-m7-processor"></a>Cortex – M7-processor
+## <a name="cortex-m7-processor"></a>Cortex-M7-processor
 
-### <a name="cortex-m7-using-ac5"></a>Cortex – M7 med hjälp av AC5
+### <a name="cortex-m7-using-ac5"></a>Cortex-M7 med AC5
 
-#### <a name="module-preamble-for-cortex-m7-using-ac5"></a>Modulens inledning för cortex-M7 med hjälp av AC5
+#### <a name="module-preamble-for-cortex-m7-using-ac5"></a>Modulens ingress för Cortex-M7 med AC5
 
 ```c
     AREA Init, CODE, READONLY
@@ -2527,23 +2527,23 @@ __txm_module_preamble
     END
 ```
 
-#### <a name="module-properties-for-cortex-m7-using-ac5"></a>Egenskaper för modulen för cortex-M7 med hjälp av AC5
+#### <a name="module-properties-for-cortex-m7-using-ac5"></a>Modulegenskaper för Cortex-M7 med AC5
 
-| Bitmask | Värde | Innebörd |
+| Bitars | Värde | Innebörd |
 |---|---|---|
 | 0 | 0<br />1 | Körning av privilegierat läge<br />Körning av användarläge |
-| 1 | 0<br />1 | Inget MPU-skydd<br />MPU-skydd (användar läge måste vara valt) |
-| 2 | 0<br />1 | Inaktivera delad/extern minnes åtkomst<br />Aktivera delad/extern minnes åtkomst |
+| 1 | 0<br />1 | Inget MPU-skydd<br />MPU-skydd (användarläge måste vara valt) |
+| 2 | 0<br />1 | Inaktivera åtkomst till delat/externt minne<br />Aktivera åtkomst till delat/externt minne |
 | [23-3] | 0 | Reserverat
-| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />IAR<br />ARM<br />GNU |
+| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />Iar<br />ARM<br />Gnu |
 
-#### <a name="module-linker-for-cortex-m7-using-ac5"></a>Modul Länkar för cortex-M7 med hjälp av AC5
+#### <a name="module-linker-for-cortex-m7-using-ac5"></a>Modullänkare för Cortex-M7 med AC5
 
-Ett exempel på en länkad fil som bygger på kommando raden.
+Bygger på kommandoraden, inget linker-filexempel.
 
-#### <a name="building-modules-for-cortex-m7-using-ac5"></a>Skapa moduler för cortex-M7 med hjälp av AC5
+#### <a name="building-modules-for-cortex-m7-using-ac5"></a>Skapa moduler för Cortex-M7 med AC5
 
-Ett enkelt kommando rads exempel för att skapa en cortex-M7-modul med hjälp av AC5:
+Ett enkelt kommandoradsexempel för att skapa en Cortex-M7-modul med AC5:
 
 ```dos
 armasm -g --cpu=cortex-m7 --fpu=softvfp --apcs=/interwork/ropi/rwpi txm_module_preamble.s
@@ -2551,7 +2551,7 @@ armcc  -g --cpu=cortex-m7 --fpu=softvfp -c --apcs=/interwork/ropi/rwpi --lower_r
 armlink -d -o sample_threadx_module.axf --elf --ro 0 --first txm_module_preamble.o(Init) --entry=_txm_module_thread_shell_entry --ropi --rwpi --remove --map --symbols --list sample_threadx_module.map txm_module_preamble.o sample_threadx_module.o txm.a
 ```
 
-#### <a name="thread-extension-definition-for-cortex-m7-using-ac5"></a>Tråd tilläggs definition för cortex-M7 med hjälp av AC5
+#### <a name="thread-extension-definition-for-cortex-m7-using-ac5"></a>Trådtilläggsdefinition för Cortex-M7 med AC5
 
 ```c
 #define TX_THREAD_EXTENSION_2   VOID    *tx_thread_module_instance_ptr;         \
@@ -2569,9 +2569,9 @@ armlink -d -o sample_threadx_module.axf --elf --ro 0 --first txm_module_preamble
                                 VOID    *tx_thread_module_reserved;
 ```
 
-#### <a name="building-module-manager-for-cortex-m7-using-ac5"></a>Skapa module Manager för cortex-M7 med hjälp av AC5
+#### <a name="building-module-manager-for-cortex-m7-using-ac5"></a>Skapa modulhanteraren för Cortex-M7 med AC5
 
-Ett enkelt kommando rads exempel för att skapa en cortex-M7 module Manager med hjälp av AC5:
+Ett enkelt kommandoradsexempel för att skapa en Cortex-M7-modulhanterare med AC5:
 
 ```dos
 armasm -g --cpu=cortex-m7 --fpu=softvfp --apcs=interwork tx_initialize_low_level.s
@@ -2580,29 +2580,29 @@ armcc -g --cpu=cortex-m7 --fpu=softvfp -c module_code.c
 armlink -d -o demo_threadx_module_manager.axf --elf --ro 0x00000000 --first tx_initialize_low_level.o(RESET) --remove --map --symbols --list demo_threadx_module_manager.map tx_initialize_low_level.o demo_threadx_module_manager.o module_code.o tx.a
 ```
 
-#### <a name="attributes-for-external-memory-enable-api-for-cortex-m7-using-ac5"></a>Attribut för externt minne Aktivera API för cortex-M7 med hjälp av AC5
+#### <a name="attributes-for-external-memory-enable-api-for-cortex-m7-using-ac5"></a>Attribut för externt minne aktiverar API för Cortex-M7 med AC5
 
-### <a name="cortex-m7-using-ac6"></a>Cortex – M7 med hjälp av AC6
+### <a name="cortex-m7-using-ac6"></a>Cortex-M7 med AC6
 
-#### <a name="module-properties-for-cortex-m7-using-ac6"></a>Egenskaper för modulen för cortex-M7 med hjälp av AC6
+#### <a name="module-properties-for-cortex-m7-using-ac6"></a>Modulegenskaper för Cortex-M7 med AC6
 
-| Bitmask | Värde | Innebörd |
+| Bitars | Värde | Innebörd |
 |---|---|---|
 | 0 | 0<br />1 | Körning av privilegierat läge<br />Körning av användarläge |
-| 1 | 0<br />1 | Inget MPU-skydd<br />MPU-skydd (användar läge måste vara valt) |
-| 2 | 0<br />1 | Inaktivera delad/extern minnes åtkomst<br />Aktivera delad/extern minnes åtkomst |
+| 1 | 0<br />1 | Inget MPU-skydd<br />MPU-skydd (användarläge måste vara valt) |
+| 2 | 0<br />1 | Inaktivera åtkomst till delat/externt minne<br />Aktivera åtkomst till delat/externt minne |
 | [23-3] | 0 | Reserverat
-| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />IAR<br />ARM<br />GNU |
+| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />Iar<br />ARM<br />Gnu |
 
-#### <a name="module-linker-for-cortex-m7-using-ac6"></a>Modul Länkar för cortex-M7 med hjälp av AC6
+#### <a name="module-linker-for-cortex-m7-using-ac6"></a>Modullänkare för Cortex-M7 med AC6
 
-Ingen länknings fil används. Se projekt inställningar.
+Ingen länkfil används. Se projektinställningar.
 
-#### <a name="building-modules-for-cortex-m7-using-ac6"></a>Skapa moduler för cortex-M7 med hjälp av AC6
+#### <a name="building-modules-for-cortex-m7-using-ac6"></a>Skapa moduler för Cortex-M7 med AC6
 
-En exempel arbets yta tillhandahålls. Bygg ThreadX-biblioteket, ThreadX modules-biblioteket, projektmodulen och exempel module Manager-projektet.
+Ett exempel på en arbetsyta tillhandahålls. Skapa ThreadX-biblioteket, ThreadX-modulbiblioteket, exempelmodulprojektet och exempelprojekt för modulhanteraren.
 
-#### <a name="thread-extension-definition-for-cortex-m7-using-ac6"></a>Tråd tilläggs definition för cortex-M7 med hjälp av AC6
+#### <a name="thread-extension-definition-for-cortex-m7-using-ac6"></a>Trådtilläggsdefinition för Cortex-M7 med AC6
 
 ```c
 #define TX_THREAD_EXTENSION_2               VOID    *tx_thread_module_instance_ptr;         \
@@ -2620,31 +2620,31 @@ En exempel arbets yta tillhandahålls. Bygg ThreadX-biblioteket, ThreadX modules
                                             VOID    *tx_thread_module_reserved;
 ```
 
-#### <a name="building-module-manager-for-cortex-m7-using-ac6"></a>Skapa module Manager för cortex-M7 med hjälp av AC6
+#### <a name="building-module-manager-for-cortex-m7-using-ac6"></a>Skapa modulhanteraren för Cortex-M7 med AC6
 
-En exempel arbets yta tillhandahålls. Bygg ThreadX-biblioteket, ThreadX modules-biblioteket, projektmodulen och exempel module Manager-projektet.
+Ett exempel på en arbetsyta tillhandahålls. Skapa ThreadX-biblioteket, ThreadX-modulbiblioteket, exempelmodulprojektet och exempelprojekt för modulhanteraren.
 
-#### <a name="attributes-for-external-memory-enable-api-for-cortex-m7-using-ac6"></a>Attribut för externt minne Aktivera API för cortex-M7 med hjälp av AC6
+#### <a name="attributes-for-external-memory-enable-api-for-cortex-m7-using-ac6"></a>Attribut för externt minne aktiverar API för Cortex-M7 med AC6
 
-Modulen har alltid Läs behörighet till delat minne.
+Modulen har alltid läsåtkomst till delat minne.
 
-| Attribute-parameter | Innebörd |
+| Attributparameter | Innebörd |
 |---|---|
 | TXM_MODULE_MANAGER_SHARED_ATTRIBUTE_WRITE | Skrivåtkomst |
 
-### <a name="cortex-m7-using-gnu"></a>Cortex – M7 med hjälp av GNU
+### <a name="cortex-m7-using-gnu"></a>Cortex-M7 med GNU
 
-#### <a name="module-properties-for-cortex-m7-using-gnu"></a>Egenskaper för modulen för cortex-M7 med hjälp av GNU
+#### <a name="module-properties-for-cortex-m7-using-gnu"></a>Modulegenskaper för Cortex-M7 med GNU
 
-| Bitmask | Värde | Innebörd |
+| Bitars | Värde | Innebörd |
 |---|---|---|
 | 0 | 0<br />1 | Körning av privilegierat läge<br />Körning av användarläge |
-| 1 | 0<br />1 | Inget MPU-skydd<br />MPU-skydd (användar läge måste vara valt) |
-| 2 | 0<br />1 | Inaktivera delad/extern minnes åtkomst<br />Aktivera delad/extern minnes åtkomst |
+| 1 | 0<br />1 | Inget MPU-skydd<br />MPU-skydd (användarläge måste vara valt) |
+| 2 | 0<br />1 | Inaktivera åtkomst till delat/externt minne<br />Aktivera åtkomst till delat/externt minne |
 | [23-3] | 0 | Reserverat
-| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />IAR<br />ARM<br />GNU |
+| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />Iar<br />ARM<br />Gnu |
 
-#### <a name="module-linker-for-cortex-m7-using-gnu"></a>Modul Länkar för cortex-M7 med hjälp av GNU
+#### <a name="module-linker-for-cortex-m7-using-gnu"></a>Modullänkare för Cortex-M7 med GNU
 
 ```c
 MEMORY
@@ -2858,7 +2858,7 @@ SECTIONS
 }
 ```
 
-#### <a name="building-modules-for-cortex-m7-using-gnu"></a>Skapa moduler för cortex-M7 med hjälp av GNU
+#### <a name="building-modules-for-cortex-m7-using-gnu"></a>Skapa moduler för Cortex-M7 med GNU
 
 Se build_threadx_module_sample.bat:
 
@@ -2869,7 +2869,7 @@ arm-none-eabi-gcc -c -g -mcpu=cortex-m7 -mfloat-abi=hard -mfpu=fpv5-d16 -fpie -f
 arm-none-eabi-ld -A cortex-m7 -T sample_threadx_module.ld txm_module_preamble.o gcc_setup.o sample_threadx_module.o -e _txm_module_thread_shell_entry txm.a -o sample_threadx_module.axf -M > sample_threadx_module.map
 ```
 
-#### <a name="thread-extension-definition-for-cortex-m7-using-gnu"></a>Tråd tilläggs definition för cortex-M7 med hjälp av GNU
+#### <a name="thread-extension-definition-for-cortex-m7-using-gnu"></a>Definition av trådtillägg för Cortex-M7 med GNU
 
 ```c
 #define TX_THREAD_EXTENSION_2               VOID    *tx_thread_module_instance_ptr;         \
@@ -2887,7 +2887,7 @@ arm-none-eabi-ld -A cortex-m7 -T sample_threadx_module.ld txm_module_preamble.o 
                                             VOID    *tx_thread_module_reserved;
 ```
 
-#### <a name="building-module-manager-for-cortex-m7-using-gnu"></a>Skapa module Manager för cortex-M7 med hjälp av GNU
+#### <a name="building-module-manager-for-cortex-m7-using-gnu"></a>Skapa modulhanteraren för Cortex-M7 med GNU
 
 Se build_threadx_module_manager_sample.bat:
 
@@ -2898,17 +2898,17 @@ arm-none-eabi-gcc -c -g -mcpu=cortex-m7 -mfloat-abi=hard -mfpu=fpv5-d16 -mthumb 
 arm-none-eabi-gcc -g -mcpu=cortex-m7 -mfloat-abi=hard -mfpu=fpv5-d16 -mthumb -nostartfiles -ereset_handler -T sample_threadx.ld tx_simulator_startup.o cortexm_crt0.o sample_threadx_module_manager.o tx.a -o sample_threadx_module_manager.axf -Wl,-Map=sample_threadx_module_manager.map
 ```
 
-#### <a name="attributes-for-external-memory-enable-api-for-cortex-m7-using-gnu"></a>Attribut för externt minne Aktivera API för cortex-M7 med hjälp av GNU
+#### <a name="attributes-for-external-memory-enable-api-for-cortex-m7-using-gnu"></a>Attribut för externt minne aktiverar API för Cortex-M7 med GNU
 
-Modulen har alltid Läs behörighet till delat minne.
+Modulen har alltid läsåtkomst till delat minne.
 
-| Attribute-parameter | Innebörd |
+| Attributparameter | Innebörd |
 |---|---|
 | TXM_MODULE_MANAGER_SHARED_ATTRIBUTE_WRITE | Skrivåtkomst |
 
-### <a name="cortex-m7-using-iar"></a>Cortex – M7 med hjälp av IAR
+### <a name="cortex-m7-using-iar"></a>Cortex-M7 med IAR
 
-#### <a name="module-preamble-for-cortex-m7-using-iar"></a>Modulens inledning för cortex-M7 med hjälp av IAR
+#### <a name="module-preamble-for-cortex-m7-using-iar"></a>Modulens ingress för Cortex-M7 med IAR
 
 ```c
     SECTION .text:CODE
@@ -2984,17 +2984,17 @@ __txm_module_preamble:
     END
 ```
 
-#### <a name="module-properties-for-cortex-m7-using-iar"></a>Egenskaper för modulen för cortex-M7 med hjälp av IAR
+#### <a name="module-properties-for-cortex-m7-using-iar"></a>Modulegenskaper för Cortex-M7 med IAR
 
-| Bitmask | Värde | Innebörd |
+| Bitars | Värde | Innebörd |
 |---|---|---|
 | 0 | 0<br />1 | Körning av privilegierat läge<br />Körning av användarläge |
-| 1 | 0<br />1 | Inget MPU-skydd<br />MPU-skydd (användar läge måste vara valt) |
-| 2 | 0<br />1 | Inaktivera delad/extern minnes åtkomst<br />Aktivera delad/extern minnes åtkomst |
+| 1 | 0<br />1 | Inget MPU-skydd<br />MPU-skydd (användarläge måste vara valt) |
+| 2 | 0<br />1 | Inaktivera åtkomst till delat/externt minne<br />Aktivera åtkomst till delat/externt minne |
 | [23-3] | 0 | Reserverat
-| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />IAR<br />ARM<br />GNU |
+| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />Iar<br />ARM<br />Gnu |
 
-#### <a name="module-linker-for-cortex-m7-using-iar"></a>Modul Länkar för cortex-M7 med hjälp av IAR
+#### <a name="module-linker-for-cortex-m7-using-iar"></a>Modullänkare för Cortex-M7 med IAR
 
 ```c
 /*###ICF### Section handled by ICF editor, don't touch! ****/
@@ -3045,11 +3045,11 @@ place in ROM_region   { block ROPI };
 place in RAM_region   { block RWPI };
 ```
 
-#### <a name="building-modules-for-cortex-m7-using-iar"></a>Skapa moduler för cortex-M7 med hjälp av IAR
+#### <a name="building-modules-for-cortex-m7-using-iar"></a>Skapa moduler för Cortex-M7 med IAR
 
-En exempel arbets yta tillhandahålls. Bygg ThreadX-biblioteket, ThreadX modules-biblioteket, demo module-projektet och demo module Manager-projektet.
+Ett exempel på en arbetsyta tillhandahålls. Skapa ThreadX-biblioteket, ThreadX-modulbiblioteket, demomodulprojektet och demomodulhanterarens projekt.
 
-#### <a name="thread-extension-definition-for-cortex-m7-using-iar"></a>Tråd tilläggs definition för cortex-M7 med hjälp av IAR
+#### <a name="thread-extension-definition-for-cortex-m7-using-iar"></a>Definition av trådtillägg för Cortex-M7 med IAR
 
 ```c
 #define TX_THREAD_EXTENSION_2   VOID    *tx_thread_module_instance_ptr;         \
@@ -3068,23 +3068,23 @@ En exempel arbets yta tillhandahålls. Bygg ThreadX-biblioteket, ThreadX modules
                                 VOID    *tx_thread_iar_tls_pointer;
 ```
 
-#### <a name="building-module-manager-for-cortex-m7-using-iar"></a>Skapa module Manager för cortex-M7 med hjälp av IAR
+#### <a name="building-module-manager-for-cortex-m7-using-iar"></a>Skapa modulhanteraren för Cortex-M7 med hjälp av IAR
 
-En exempel arbets yta tillhandahålls. Bygg ThreadX-biblioteket, ThreadX modules-biblioteket, demo module-projektet och demo module Manager-projektet.
+Ett exempel på en arbetsyta tillhandahålls. Skapa ThreadX-biblioteket, ThreadX-modulbiblioteket, demomodulprojektet och demomodulhanterarens projekt.
 
-#### <a name="attributes-for-external-memory-enable-api-for-cortex-m7-using-iar"></a>Attribut för externt minne Aktivera API för cortex-M7 med hjälp av IAR
+#### <a name="attributes-for-external-memory-enable-api-for-cortex-m7-using-iar"></a>Attribut för externt minne aktiverar API för Cortex-M7 med hjälp av IAR
 
-Modulen har alltid Läs behörighet till delat minne.
+Modulen har alltid läsåtkomst till delat minne.
 
-| Attribute-parameter | Innebörd |
+| Attributparameter | Innebörd |
 |---|---|
 | TXM_MODULE_MANAGER_SHARED_ATTRIBUTE_WRITE | Skrivåtkomst |
 
-## <a name="cortex-r4-processor"></a>Cortex – R4-processor
+## <a name="cortex-r4-processor"></a>Cortex-R4-processor
 
-### <a name="cortex-r4-using-ac6"></a>Cortex – R4 med hjälp av AC6
+### <a name="cortex-r4-using-ac6"></a>Cortex-R4 med AC6
 
-#### <a name="module-preamble-for-cortex-r4-using-ac6"></a>Modulens inledning för cortex-R4 med hjälp av AC6
+#### <a name="module-preamble-for-cortex-r4-using-ac6"></a>Modulens ingress för Cortex-R4 med AC6
 
 ```c
     .text
@@ -3146,21 +3146,21 @@ __txm_module_preamble:
 .word   0                                                   /* Reserved 15  */
 ```
 
-#### <a name="module-properties-for-cortex-r4-using-ac6"></a>Egenskaper för modulen för cortex-R4 med hjälp av AC6
+#### <a name="module-properties-for-cortex-r4-using-ac6"></a>Modulegenskaper för Cortex-R4 med AC6
 
-| Bitmask | Värde | Innebörd |
+| Bitars | Värde | Innebörd |
 |---|---|---|
 | 0 | 0<br />1 | Körning av privilegierat läge<br />Körning av användarläge |
 | [23-1] | 0 | Reserverat
-| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />IAR<br />ARM<br />GNU |
+| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />Iar<br />ARM<br />Gnu |
 
-#### <a name="module-linker-for-cortex-r4-using-ac6"></a>Modul Länkar för cortex-R4 med hjälp av AC6
+#### <a name="module-linker-for-cortex-r4-using-ac6"></a>Modullänkare för Cortex-R4 med AC6
 
-Ett exempel på en länkad fil som bygger på kommando raden.
+Bygger på kommandoraden, inget exempel på länkarfil.
 
-#### <a name="building-modules-for-cortex-r4-using-ac6"></a>Skapa moduler för cortex-R4 med hjälp av AC6
+#### <a name="building-modules-for-cortex-r4-using-ac6"></a>Skapa moduler för Cortex-R4 med AC6
 
-Ett enkelt kommando rads exempel för att skapa en cortex-R4-modul med hjälp av AC6:
+Ett enkelt kommandoradsexempel för att skapa en Cortex-R4-modul med AC6:
 
 ```dos
 armclang -c -g -fropi -frwpi --target=arm-arm-none-eabi -mcpu=cortex-r4 demo_threadx_module.c
@@ -3169,7 +3169,7 @@ armclang -c -g -fropi -frwpi --target=arm-arm-none-eabi -mcpu=cortex-r4 semihost
 armlink -d -o demo_threadx_module.axf --elf --ro 0x00100000 --first txm_module_preamble.o --entry=_txm_module_thread_shell_entry --ropi --rwpi --remove --map --symbols --datacompressor=off --list demo_threadx_module.map txm_module_preamble.o demo_threadx_module.o semihosting.o txm.a
 ```
 
-#### <a name="thread-extension-definition-for-cortex-r4-using-ac6"></a>Tråd tilläggs definition för cortex-R4 med hjälp av AC6
+#### <a name="thread-extension-definition-for-cortex-r4-using-ac6"></a>Trådtilläggsdefinition för Cortex-R4 med AC6
 
 ```c
 #define TX_THREAD_EXTENSION_2   ULONG   tx_thread_vfp_enable;                   \
@@ -3187,9 +3187,9 @@ armlink -d -o demo_threadx_module.axf --elf --ro 0x00100000 --first txm_module_p
                                 VOID    *tx_thread_module_reserved;
 ```
 
-#### <a name="building-module-manager-for-cortex-r4-using-ac6"></a>Skapa module Manager för cortex-R4 med hjälp av AC6
+#### <a name="building-module-manager-for-cortex-r4-using-ac6"></a>Skapa modulhanteraren för Cortex-R4 med AC6
 
-Ett enkelt kommando rads exempel för att skapa en cortex-R4 module Manager med hjälp av AC6:
+Ett enkelt kommandoradsexempel för att skapa en Cortex-R4-modulhanterare med AC6:
 
 ```dos
 armclang -c -g --target=arm-arm-none-eabi -mcpu=cortex-r4 demo_threadx_module_manager.c
@@ -3200,17 +3200,17 @@ armclang -c -g --target=arm-arm-none-eabi -mcpu=cortex-r4 startup.S
 armlink -d -o demo_threadx_module_manager.axf --elf --scatter=demo_threadx.scat --remove --map --symbols --list demo_threadx_module_manager.map startup.o timer.o gic.o demo_threadx_module_manager.o tx_initialize_low_level.o tx.a
 ```
 
-#### <a name="attributes-for-external-memory-enable-api-for-cortex-r4-using-ac6"></a>Attribut för externt minne Aktivera API för cortex-R4 med hjälp av AC6
+#### <a name="attributes-for-external-memory-enable-api-for-cortex-r4-using-ac6"></a>Attribut för externt minne möjliggör API för Cortex-R4 med AC6
 
-Modulen har alltid Läs behörighet till delat minne.
+Modulen har alltid läsåtkomst till delat minne.
 
-| Attribute-parameter | Innebörd |
+| Attributparameter | Innebörd |
 |---|---|
 | TXM_MODULE_MANAGER_SHARED_ATTRIBUTE_WRITE | Skrivåtkomst |
 
-### <a name="cortex-r4-using-iar"></a>Cortex – R4 med hjälp av IAR
+### <a name="cortex-r4-using-iar"></a>Cortex-R4 med IAR
 
-#### <a name="module-preamble-for-cortex-r4-using-iar"></a>Modulens inledning för cortex-R4 med hjälp av IAR
+#### <a name="module-preamble-for-cortex-r4-using-iar"></a>Modulinamble för Cortex-R4 med IAR
 
 ```c
     SECTION .text:CODE
@@ -3275,15 +3275,15 @@ __txm_module_preamble:
     END
 ```
 
-#### <a name="module-properties-for-cortex-r4-using-iar"></a>Egenskaper för modulen för cortex-R4 med hjälp av IAR
+#### <a name="module-properties-for-cortex-r4-using-iar"></a>Modulegenskaper för Cortex-R4 med IAR
 
-| Bitmask | Värde | Innebörd |
+| Bitars | Värde | Innebörd |
 |---|---|---|
 | 0 | 0<br />1 | Körning av privilegierat läge<br />Körning av användarläge |
 | [23-1] | 0 | Reserverat
-| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />IAR<br />ARM<br />GNU |
+| [31-24] | <br />0x00<br />0x01<br />0x02 | **Kompilator-ID**<br />Iar<br />ARM<br />Gnu |
 
-#### <a name="module-linker-for-cortex-r4-using-iar"></a>Modul Länkar för cortex-R4 med hjälp av IAR
+#### <a name="module-linker-for-cortex-r4-using-iar"></a>Modullänkare för Cortex-R4 med IAR
 
 ```c
 /*###ICF### Section handled by ICF editor, don't touch! ****/
@@ -3331,11 +3331,11 @@ place in ROM_region   { block ROPI };
 place in RAM_region   { block RWPI };
 ```
 
-#### <a name="building-modules-for-cortex-r4-using-iar"></a>Skapa moduler för cortex-R4 med hjälp av IAR
+#### <a name="building-modules-for-cortex-r4-using-iar"></a>Skapa moduler för Cortex-R4 med IAR
 
-En exempel arbets yta tillhandahålls. Bygg ThreadX-biblioteket, ThreadX modules-biblioteket, demo module-projektet och demo module Manager-projektet.
+Ett exempel på en arbetsyta tillhandahålls. Skapa ThreadX-biblioteket, ThreadX-modulbiblioteket, demomodulprojektet och demomodulhanterarens projekt.
 
-#### <a name="thread-extension-definition-for-cortex-r4-using-iar"></a>Tråd tilläggs definition för cortex-R4 med hjälp av IAR
+#### <a name="thread-extension-definition-for-cortex-r4-using-iar"></a>Trådtilläggsdefinition för Cortex-R4 med IAR
 
 ```c
 #define TX_THREAD_EXTENSION_2   ULONG   tx_thread_vfp_enable;                   \
@@ -3354,15 +3354,15 @@ En exempel arbets yta tillhandahålls. Bygg ThreadX-biblioteket, ThreadX modules
                                 VOID    *tx_thread_iar_tls_pointer;
 ```
 
-#### <a name="building-module-manager-for-cortex-r4-using-iar"></a>Skapa module Manager för cortex-R4 med hjälp av IAR
+#### <a name="building-module-manager-for-cortex-r4-using-iar"></a>Skapa modulhanteraren för Cortex-R4 med IAR
 
-En exempel arbets yta tillhandahålls. Bygg ThreadX-biblioteket, ThreadX modules-biblioteket, demo module-projektet och demo module Manager-projektet.
+Ett exempel på en arbetsyta tillhandahålls. Skapa ThreadX-biblioteket, ThreadX-modulbiblioteket, demomodulprojektet och demomodulhanterarens projekt.
 
-#### <a name="attributes-for-external-memory-enable-api-for-cortex-r4-using-iar"></a>Attribut för externt minne Aktivera API för cortex-R4 med hjälp av IAR
+#### <a name="attributes-for-external-memory-enable-api-for-cortex-r4-using-iar"></a>Attribut för externt minne aktiverar API:et för Cortex-R4 med IAR
 
-Modulen har alltid Läs behörighet till delat minne.
+Modulen har alltid läsåtkomst till delat minne.
 
-| Attribute-parameter | Innebörd |
+| Attributparameter | Innebörd |
 |---|---|
 | TXM_MODULE_MANAGER_SHARED_ATTRIBUTE_WRITE | Skrivåtkomst |
 
@@ -3370,7 +3370,7 @@ Modulen har alltid Läs behörighet till delat minne.
 
 ### <a name="mcf544xx-using-ghs"></a>MCF544xx med GHS
 
-#### <a name="module-preamble-for-mcf544xx-using-ghs"></a>Modulens inledning för MCF544xx med GHS
+#### <a name="module-preamble-for-mcf544xx-using-ghs"></a>Modulförlopp för MCF544xx med GHS
 
 ```c
     SECT    .preamble, x
@@ -3423,17 +3423,17 @@ __txm_module_preamble:
     END
 ```
 
-#### <a name="module-properties-for-mcf544xx-using-ghs"></a>Egenskaper för MCF544xx med GHS
+#### <a name="module-properties-for-mcf544xx-using-ghs"></a>Modulegenskaper för MCF544xx med GHS
 
-| Bitmask | Värde | Innebörd |
+| Bitars | Värde | Innebörd |
 |---|---|---|
 | 0 | 0<br />1 | Körning av privilegierat läge<br />Körning av användarläge |
-| 1 | 0<br />1 | Inget MMU skydd<br />MMU-skydd (användar läge måste vara valt) |
-| 2 | 0<br />1 | Inaktivera delad/extern minnes åtkomst<br />Aktivera delad/extern minnes åtkomst |
+| 1 | 0<br />1 | Inget MMU-skydd<br />MMU-skydd (måste ha användarläge valt) |
+| 2 | 0<br />1 | Inaktivera åtkomst till delat/externt minne<br />Aktivera åtkomst till delat/externt minne |
 | [23-3] | 0 | Reserverat
-| [31-24] | <br />0x03 | **Kompilator-ID**<br />GHS |
+| [31-24] | <br />0x03 | **Kompilator-ID**<br />Ghs |
 
-#### <a name="module-linker-for-mcf544xx-using-ghs"></a>Modul Länkar för MCF544xx med GHS
+#### <a name="module-linker-for-mcf544xx-using-ghs"></a>Modullänkare för MCF544xx med GHS
 
 ```c
 DEFAULTS {
@@ -3487,9 +3487,9 @@ DEFAULTS {
 
 #### <a name="building-modules-for-mcf544xx-using-ghs"></a>Skapa moduler för MCF544xx med GHS
 
-En exempel arbets yta tillhandahålls. Bygg ThreadX-biblioteket, ThreadX modules-biblioteket, demo module-projektet och demo module Manager-projektet.
+Ett exempel på en arbetsyta tillhandahålls. Skapa ThreadX-biblioteket, ThreadX-modulbiblioteket, demomodulprojektet och demomodulhanterarens projekt.
 
-#### <a name="thread-extension-definition-for-mcf544xx-using-ghs"></a>Tråd tilläggs definition för MCF544xx med GHS
+#### <a name="thread-extension-definition-for-mcf544xx-using-ghs"></a>Trådtilläggsdefinition för MCF544xx med GHS
 
 ```c
 #define TX_THREAD_EXTENSION_2   int     Errno;                                  \
@@ -3509,19 +3509,19 @@ En exempel arbets yta tillhandahålls. Bygg ThreadX-biblioteket, ThreadX modules
                                 VOID    *tx_thread_module_reserved;
 ```
 
-#### <a name="building-module-manager-for-mcf544xx-using-ghs"></a>Skapa module Manager för MCF544xx med GHS
+#### <a name="building-module-manager-for-mcf544xx-using-ghs"></a>Skapa modulhanteraren för MCF544xx med GHS
 
-En exempel arbets yta tillhandahålls. Bygg ThreadX-biblioteket, ThreadX modules-biblioteket, demo module-projektet och demo module Manager-projektet.
+Ett exempel på en arbetsyta tillhandahålls. Skapa ThreadX-biblioteket, ThreadX-modulbiblioteket, demomodulprojektet och demomodulhanterarens projekt.
 
-#### <a name="attributes-for-external-memory-enable-api-for-mcf544xx-using-ghs"></a>Attribut för extern minnes aktivering API för MCF544xx med GHS
+#### <a name="attributes-for-external-memory-enable-api-for-mcf544xx-using-ghs"></a>Attribut för externt minne aktiverar API för MCF544xx med GHS
 
-Den här funktionen är inte aktive rad på MCF544xx.
+Den här funktionen är inte aktiverad på MCF544xx.
 
 ## <a name="rx63-processor"></a>RX63-processor
 
 ### <a name="rx63-using-iar"></a>RX63 med IAR
 
-#### <a name="module-preamble-for-rx63-using-iar"></a>Modulens inledning för RX63 med IAR
+#### <a name="module-preamble-for-rx63-using-iar"></a>Modulinledningen för RX63 med IAR
 
 ```c
     /* Alignment of 4 (16-byte) */
@@ -3587,17 +3587,17 @@ __txm_module_preamble:
     END
 ```
 
-#### <a name="module-properties-for-rx63-using-iar"></a>Egenskaper för RX63 med IAR
+#### <a name="module-properties-for-rx63-using-iar"></a>Modulegenskaper för RX63 med IAR
 
-| Bitmask | Värde | Innebörd |
+| Bitars | Värde | Innebörd |
 |---|---|---|
 | 0 | 0<br />1 | Körning av privilegierat läge<br />Körning av användarläge |
-| 1 | 0<br />1 | Inget MPU-skydd<br />MPU-skydd (användar läge måste vara valt) |
-| 2 | 0<br />1 | Inaktivera delad/extern minnes åtkomst<br />Aktivera delad/extern minnes åtkomst |
+| 1 | 0<br />1 | Inget MPU-skydd<br />MPU-skydd (användarläge måste vara valt) |
+| 2 | 0<br />1 | Inaktivera åtkomst till delat/externt minne<br />Aktivera åtkomst till delat/externt minne |
 | [23-3] | 0 | Reserverat
-| [31-24] | <br />0x00<br />0x02 | **Kompilator-ID**<br />IAR<br />GNU |
+| [31-24] | <br />0x00<br />0x02 | **Kompilator-ID**<br />Iar<br />Gnu |
 
-#### <a name="module-linker-for-rx63-using-iar"></a>Modul Länkar för RX63 med IAR
+#### <a name="module-linker-for-rx63-using-iar"></a>Modullänkare för RX63 med IAR
 
 ```c
 //-----------------------------------------------------------------------------
@@ -3682,9 +3682,9 @@ place in RAM_region16   { block RWPI };
 
 #### <a name="building-modules-for-rx63-using-iar"></a>Skapa moduler för RX63 med IAR
 
-En exempel arbets yta tillhandahålls. Bygg ThreadX-biblioteket, ThreadX modules-biblioteket, demo module-projektet och demo module Manager-projektet.
+Ett exempel på en arbetsyta tillhandahålls. Skapa ThreadX-biblioteket, ThreadX-modulbiblioteket, demomodulprojektet och demomodulhanterarens projekt.
 
-#### <a name="thread-extension-definition-for-rxrx635n-using-iar"></a>Tråd tilläggs definition för RXRX635N med IAR
+#### <a name="thread-extension-definition-for-rxrx635n-using-iar"></a>Definition av trådtillägg för RXRX635N med IAR
 
 ```c
 #define TX_THREAD_EXTENSION_2   VOID    *tx_thread_module_instance_ptr;       \
@@ -3702,15 +3702,15 @@ En exempel arbets yta tillhandahålls. Bygg ThreadX-biblioteket, ThreadX modules
                                 VOID    *tx_thread_iar_tls_pointer;
 ```
 
-#### <a name="building-module-manager-for-rx63-using-iar"></a>Skapa module Manager för RX63 med IAR
+#### <a name="building-module-manager-for-rx63-using-iar"></a>Skapa modulhanteraren för RX63 med IAR
 
-En exempel arbets yta tillhandahålls. Bygg ThreadX-biblioteket, ThreadX modules-biblioteket, demo module-projektet och demo module Manager-projektet.
+Ett exempel på en arbetsyta tillhandahålls. Skapa ThreadX-biblioteket, ThreadX-modulbiblioteket, demomodulprojektet och demomodulhanterarens projekt.
 
-#### <a name="attributes-for-external-memory-enable-api-for-rx63-using-iar"></a>Attribut för extern minnes aktivering API för RX63 med IAR
+#### <a name="attributes-for-external-memory-enable-api-for-rx63-using-iar"></a>Attribut för externt minne aktiverar API för RX63 med IAR
 
-| Attribute-parameter | Innebörd |
+| Attributparameter | Innebörd |
 |---|---|
-| TXM_MODULE_MANAGER_SHARED_ATTRIBUTE_EXECUTE | Kör kod |
+| TXM_MODULE_MANAGER_SHARED_ATTRIBUTE_EXECUTE | Köra kod |
 | TXM_MODULE_MANAGER_SHARED_ATTRIBUTE_WRITE | Skrivåtkomst |
 | TXM_MODULE_MANAGER_SHARED_ATTRIBUTE_READ | Läsbehörighet |
 
@@ -3718,7 +3718,7 @@ En exempel arbets yta tillhandahålls. Bygg ThreadX-biblioteket, ThreadX modules
 
 ### <a name="rx65n-using-iar"></a>RX65N med IAR
 
-#### <a name="module-preamble-for-rx65n-using-iar"></a>Modulens inledning för RX65N med IAR
+#### <a name="module-preamble-for-rx65n-using-iar"></a>Modulens ingress för RX65N med IAR
 
 ```c
     /* Alignment of 4 (16-byte) */
@@ -3784,17 +3784,17 @@ __txm_module_preamble:
     END
 ```
 
-#### <a name="module-properties-for-rx65n-using-iar"></a>Egenskaper för RX65N med IAR
+#### <a name="module-properties-for-rx65n-using-iar"></a>Modulegenskaper för RX65N med IAR
 
-| Bitmask | Värde | Innebörd |
+| Bitars | Värde | Innebörd |
 |---|---|---|
 | 0 | 0<br />1 | Körning av privilegierat läge<br />Körning av användarläge |
-| 1 | 0<br />1 | Inget MPU-skydd<br />MPU-skydd (användar läge måste vara valt) |
-| 2 | 0<br />1 | Inaktivera delad/extern minnes åtkomst<br />Aktivera delad/extern minnes åtkomst |
+| 1 | 0<br />1 | Inget MPU-skydd<br />MPU-skydd (användarläge måste vara valt) |
+| 2 | 0<br />1 | Inaktivera åtkomst till delat/externt minne<br />Aktivera åtkomst till delat/externt minne |
 | [23-3] | 0 | Reserverat
-| [31-24] | <br />0x00<br />0x02 | **Kompilator-ID**<br />IAR<br />GNU |
+| [31-24] | <br />0x00<br />0x02 | **Kompilator-ID**<br />Iar<br />Gnu |
 
-#### <a name="module-linker-for-rx65n-using-iar"></a>Modul Länkar för RX65N med IAR
+#### <a name="module-linker-for-rx65n-using-iar"></a>Modullänkare för RX65N med IAR
 
 ```c
 //-----------------------------------------------------------------------------
@@ -3879,9 +3879,9 @@ place in RAM_region16   { block RWPI };
 
 #### <a name="building-modules-for-rx65n-using-iar"></a>Skapa moduler för RX65N med IAR
 
-En exempel arbets yta tillhandahålls. Bygg ThreadX-biblioteket, ThreadX modules-biblioteket, demo module-projektet och demo module Manager-projektet.
+Ett exempel på en arbetsyta tillhandahålls. Skapa ThreadX-biblioteket, ThreadX-modulbiblioteket, demomodulprojektet och demomodulhanterarens projekt.
 
-#### <a name="thread-extension-definition-for-rx65n-using-iar"></a>Tråd tilläggs definition för RX65N med IAR
+#### <a name="thread-extension-definition-for-rx65n-using-iar"></a>Definition av trådtillägg för RX65N med IAR
 
 ```c
 #define TX_THREAD_EXTENSION_2   VOID    *tx_thread_module_instance_ptr;         \
@@ -3899,14 +3899,14 @@ En exempel arbets yta tillhandahålls. Bygg ThreadX-biblioteket, ThreadX modules
                                 VOID    *tx_thread_iar_tls_pointer;
 ```
 
-#### <a name="building-module-manager-for-rx65n-using-iar"></a>Skapa module Manager för RX65N med IAR
+#### <a name="building-module-manager-for-rx65n-using-iar"></a>Skapa modulhanteraren för RX65N med IAR
 
-En exempel arbets yta tillhandahålls. Bygg ThreadX-biblioteket, ThreadX modules-biblioteket, demo module-projektet och demo module Manager-projektet.
+Ett exempel på en arbetsyta tillhandahålls. Skapa ThreadX-biblioteket, ThreadX-modulbiblioteket, demomodulprojektet och demomodulhanterarens projekt.
 
-#### <a name="attributes-for-external-memory-enable-api-for-rx65n-using-iar"></a>Attribut för extern minnes aktivering API för RX65N med IAR
+#### <a name="attributes-for-external-memory-enable-api-for-rx65n-using-iar"></a>Attribut för externt minne aktiverar API för RX65N med IAR
 
-| Attribute-parameter | Innebörd |
+| Attributparameter | Innebörd |
 |---|---|
-| TXM_MODULE_MANAGER_SHARED_ATTRIBUTE_EXECUTE | Kör kod |
+| TXM_MODULE_MANAGER_SHARED_ATTRIBUTE_EXECUTE | Köra kod |
 | TXM_MODULE_MANAGER_SHARED_ATTRIBUTE_WRITE | Skrivåtkomst |
 | TXM_MODULE_MANAGER_SHARED_ATTRIBUTE_READ | Läsbehörighet |
