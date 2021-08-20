@@ -15,7 +15,7 @@
       href: chapter3.md
     - name: Ch. 4 – Beskrivning av NetX Duo-tjänster
       href: chapter4.md
-    - name: Ch. 5 – NetX Duo-nätverksdrivrutiner
+    - name: Ch. 5 – Nätverksdrivrutiner för NetX Duo
       href: chapter5.md
     - name: App. A – NetX Duo-tjänster
       href: appendix-a.md
@@ -27,7 +27,7 @@
       href: appendix-d.md
     - name: App. E – ASCII-teckenkoder
       href: appendix-e.md
-- name: NetX Duo-addons
+- name: NetX Duo-tillägg
   items:
     - name: Användarhandbok för NetX Duo AutoIP
       items:
@@ -63,7 +63,7 @@
           href: netx-duo-dhcp-client/chapter2.md
         - name: Ch. 3 – Beskrivning av NetX Duo DHCP-klienttjänster
           href: netx-duo-dhcp-client/chapter3.md
-        - name: App. S – Beskrivning av funktionen Återställ tillstånd för NetX Duo DHCP-klienttjänster
+        - name: App. S – Beskrivning av funktionen Återställningstillstånd för NetX Duo DHCP-klienttjänster
           href: netx-duo-dhcp-client/appendixA.md
     - name: Användarhandbok för NetX Duo DHCP-server
       items:
@@ -83,7 +83,7 @@
           href: netx-duo-dhcpv6-client/chapter3.md
         - name: Ch. 4 – NetX Duo DHCPv6-klienttjänster
           href: netx-duo-dhcpv6-client/chapter4.md
-        - name: App. A – Beskrivning av funktionen För återställningstillstånd
+        - name: App. A – Beskrivning av funktionen för återställningstillstånd
           href: netx-duo-dhcpv6-client/appendix-a.md
     - name: Användarhandbok för NetX Duo DHCPv6-server
       items:
@@ -91,7 +91,7 @@
           href: netx-duo-dhcpv6-server/chapter1.md
         - name: Ch. 2 – Installation och användning av NetX Duo DHCPv6-server
           href: netx-duo-dhcpv6-server/chapter2.md
-        - name: Ch. 3 – Konfigurationsalternativ för NetX Duo DHCPv6-server
+        - name: Ch. 3 – NetX Duo DHCPv6-serverkonfigurationsalternativ
           href: netx-duo-dhcpv6-server/chapter3.md
         - name: Ch. 4 – NetX Duo DHCPv6-servertjänster
           href: netx-duo-dhcpv6-server/chapter4.md
@@ -127,6 +127,14 @@
           href: netx-duo-http/chapter2.md
         - name: Kapitel 3 – Beskrivning av NetX HTTP Services
           href: netx-duo-http/chapter3.md
+    - name: Användarhandbok för NetX Duo Iperf
+      items:
+        - name: Kapitel 1 – Introduktion till NetX Duo Iperf
+          href: netx-duo-iperf/chapter1.md
+        - name: Kapitel 2 – Installera och använda Azure NetX Duo Iperf
+          href: netx-duo-iperf/chapter2.md
+        - name: Kapitel 3 – Köra demonstrationen
+          href: netx-duo-iperf/chapter3.md
     - name: Användarhandbok för NetX Duo mDNS/DNS-SD
       items:
         - name: Ch. 1 – Introduktion till NetX Duo mDNS/DNS-SD
@@ -261,13 +269,13 @@
           href: netx-secure-tls/chapter3.md
         - name: Ch. 4 – Beskrivning av NetX Secure-tjänster
           href: netx-secure-tls/chapter4.md
-        - name: App. A – Retur-/felkoder för NetX Secure
+        - name: App. A – Retur/felkoder för NetX Secure
           href: netx-secure-tls/appendix-a.md
 - name: NetX Duo-lagringsplats
   href: 'https://github.com/azure-rtos/netxduo'
 - name: Relaterade tjänster
   items:
-    - name: Defender för IoT – RTOS (förhandsversion)
+    - name: Defender for IoT – RTOS (förhandsversion)
       href: 'https://docs.microsoft.com/azure/defender-for-iot/iot-security-azure-rtos'
 - name: Microsoft Azure RTOS-komponenter
   items:
